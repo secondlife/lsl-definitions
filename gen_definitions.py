@@ -12,7 +12,7 @@ import re
 import stat
 import sys
 import uuid
-from typing import *
+from typing import Iterable, NamedTuple, Dict, List, Set, Sequence, TypeVar, Union, Any
 
 import llsd  # noqa
 import yaml
@@ -137,14 +137,16 @@ class LSLConstant(NamedTuple):
     """Whether this should this be included in the syntax file"""
 
     def to_dict(self) -> dict:
-        return _remove_worthless({
-            "tooltip": self.tooltip,
-            # Will always use a <string> node, but that's fine for our purposes.
-            # That's already the case for vector and hex int constants, anyway.
-            "value": _escape_python(self.value),
-            "type": str(self.type),
-            "deprecated": self.deprecated,
-        })
+        return _remove_worthless(
+            {
+                "tooltip": self.tooltip,
+                # Will always use a <string> node, but that's fine for our purposes.
+                # That's already the case for vector and hex int constants, anyway.
+                "value": _escape_python(self.value),
+                "type": str(self.type),
+                "deprecated": self.deprecated,
+            }
+        )
 
 
 @dataclasses.dataclass
@@ -164,14 +166,21 @@ class LSLEvent:
     deprecated: bool
 
     def to_dict(self) -> dict:
-        return _remove_worthless({
-            "tooltip": self.tooltip,
-            "deprecated": self.deprecated,
-            "arguments": [{a.name: {
-                "type": str(a.type),
-                "tooltip": a.tooltip,
-            }} for a in self.arguments]
-        })
+        return _remove_worthless(
+            {
+                "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
+                "arguments": [
+                    {
+                        a.name: {
+                            "type": str(a.type),
+                            "tooltip": a.tooltip,
+                        }
+                    }
+                    for a in self.arguments
+                ],
+            }
+        )
 
 
 @dataclasses.dataclass
@@ -220,25 +229,36 @@ class LSLFunction:
     """Mono-specific sleep value, only used for legacy functions that had mismatched sleeps"""
 
     def to_dict(self, include_internal: bool = False) -> dict:
-        return _remove_worthless({
-            "deprecated": self.deprecated,
-            "god-mode": self.god_mode,
-            "energy": self.energy,
-            "sleep": self.sleep,
-            "return": str(self.ret_type),
-            "arguments": [{a.name: {
-                "type": str(a.type),
-                "tooltip": a.tooltip,
-            }} for a in self.arguments],
-            "tooltip": self.tooltip,
-            **({} if not include_internal else {
-                "func-id": self.func_id,
-                "private": self.private,
-                "pure": self.pure,
-                "native": self.native,
-                "mono_sleep": self.mono_sleep,
-            })
-        })
+        return _remove_worthless(
+            {
+                "deprecated": self.deprecated,
+                "god-mode": self.god_mode,
+                "energy": self.energy,
+                "sleep": self.sleep,
+                "return": str(self.ret_type),
+                "arguments": [
+                    {
+                        a.name: {
+                            "type": str(a.type),
+                            "tooltip": a.tooltip,
+                        }
+                    }
+                    for a in self.arguments
+                ],
+                "tooltip": self.tooltip,
+                **(
+                    {}
+                    if not include_internal
+                    else {
+                        "func-id": self.func_id,
+                        "private": self.private,
+                        "pure": self.pure,
+                        "native": self.native,
+                        "mono_sleep": self.mono_sleep,
+                    }
+                ),
+            }
+        )
 
 
 class LSLDefinitions(NamedTuple):
@@ -251,7 +271,11 @@ class LSLDefinitions(NamedTuple):
     @property
     def reserved_words(self) -> Set[str]:
         """Words that may not be used as identifiers (case-sensitive)"""
-        return set(self.controls.keys()) | set(self.types.keys()) | {"class", "struct", "typeof", "valuetype"}
+        return (
+            set(self.controls.keys())
+            | set(self.types.keys())
+            | {"class", "struct", "typeof", "valuetype"}
+        )
 
 
 class LSLFunctionRanges(enum.IntEnum):
@@ -298,11 +322,11 @@ class LSLDefinitionParser:
         return self.parse_yaml_file(name)
 
     def parse_yaml_file(self, name: str):
-        with open(name, 'rb') as f:
+        with open(name, "rb") as f:
             return self._parse_dict(yaml.safe_load(f.read()))
 
     def parse_llsd_file(self, name: str) -> LSLDefinitions:
-        with open(name, 'rb') as f:
+        with open(name, "rb") as f:
             return self.parse_llsd_blob(f.read())
 
     def parse_llsd_blob(self, llsd_blob: bytes) -> LSLDefinitions:
@@ -313,18 +337,18 @@ class LSLDefinitionParser:
             raise RuntimeError("Already parsed!")
 
         # Load these first so that we can use them to check reserved words
-        self._definitions.controls.update(def_dict['controls'])
-        self._definitions.types.update(def_dict['types'])
+        self._definitions.controls.update(def_dict["controls"])
+        self._definitions.types.update(def_dict["types"])
 
         seen_func_ids = set()
-        for event_name, event_data in def_dict['events'].items():
+        for event_name, event_data in def_dict["events"].items():
             self._handle_event(event_name, event_data)
-        for func_name, func_data in def_dict['functions'].items():
+        for func_name, func_data in def_dict["functions"].items():
             func = self._handle_function(func_name, func_data)
             if func.func_id in seen_func_ids:
                 raise ValueError(f"Func ID {func.func_id} was re-used by {func!r}")
             seen_func_ids.add(func.func_id)
-        for const_name, const_data in def_dict['constants'].items():
+        for const_name, const_data in def_dict["constants"].items():
             if const_name == "default":
                 # This isn't a real constant, but it's in here for some reason, maybe syntax highlighting?
                 continue
@@ -336,10 +360,13 @@ class LSLDefinitionParser:
         self._validate_identifier(event_name)
         event = LSLEvent(
             name=event_name,
-            tooltip=event_data.get('tooltip', ''),
-            arguments=[self._handle_argument(event_name, arg) for arg in (event_data.get('arguments') or [])],
-            private=event_data.get('private', False),
-            deprecated=event_data.get('deprecated', False),
+            tooltip=event_data.get("tooltip", ""),
+            arguments=[
+                self._handle_argument(event_name, arg)
+                for arg in (event_data.get("arguments") or [])
+            ],
+            private=event_data.get("private", False),
+            deprecated=event_data.get("deprecated", False),
         )
 
         if event.name in self._definitions.events:
@@ -353,31 +380,37 @@ class LSLDefinitionParser:
         self._validate_identifier(func_name)
         func = LSLFunction(
             name=func_name,
-            tooltip=func_data.get('tooltip', ''),
+            tooltip=func_data.get("tooltip", ""),
             # These do actually need to be floats.
-            energy=float(func_data['energy'] or '0.0'),
-            sleep=float(func_data['sleep'] or '0.0'),
+            energy=float(func_data["energy"] or "0.0"),
+            sleep=float(func_data["sleep"] or "0.0"),
             # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
-            mono_sleep=float(func_data.get('mono_sleep', func_data.get('sleep')) or '0.0'),
-            ret_type=LSLType(func_data['return']),
-            arguments=[self._handle_argument(func_name, arg) for arg in (func_data.get('arguments') or [])],
-            private=func_data.get('private', False),
-            god_mode=func_data.get('god-mode', False),
-            deprecated=func_data.get('deprecated', False),
-            func_id=func_data['func-id'],
+            mono_sleep=float(func_data.get("mono_sleep", func_data.get("sleep")) or "0.0"),
+            ret_type=LSLType(func_data["return"]),
+            arguments=[
+                self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
+            ],
+            private=func_data.get("private", False),
+            god_mode=func_data.get("god-mode", False),
+            deprecated=func_data.get("deprecated", False),
+            func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
             native=func_data.get("native", False),
-            index_semantics=bool(func_data.get('index_semantics', False)),
-            bool_semantics=bool(func_data.get('bool_semantics', False)),
+            index_semantics=bool(func_data.get("index_semantics", False)),
+            bool_semantics=bool(func_data.get("bool_semantics", False)),
         )
 
         if func.name in self._definitions.functions:
             raise KeyError(f"{func.name} is already defined")
 
         if func.index_semantics and func.ret_type != LSLType.INTEGER:
-            raise ValueError(f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}")
+            raise ValueError(
+                f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
+            )
         if func.bool_semantics and func.ret_type != LSLType.INTEGER:
-            raise ValueError(f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}")
+            raise ValueError(
+                f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
+            )
 
         if func.bool_semantics and func.index_semantics:
             raise ValueError(f"Can't have both bool and index semantics for {func.name}")
@@ -396,12 +429,14 @@ class LSLDefinitionParser:
         arg_name, arg_data = list(arg_dict.items())[0]
         arg = LSLArgument(
             name=arg_name,
-            type=LSLType(arg_data['type']),
-            index_semantics=bool(arg_data.get('index_semantics', False)),
-            tooltip=arg_data.get('tooltip', ''),
+            type=LSLType(arg_data["type"]),
+            index_semantics=bool(arg_data.get("index_semantics", False)),
+            tooltip=arg_data.get("tooltip", ""),
         )
         if arg.index_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}")
+            raise ValueError(
+                f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"
+            )
         return arg
 
     def _validate_args(self, obj: Union[LSLEvent, LSLFunction]) -> None:
@@ -426,11 +461,11 @@ class LSLDefinitionParser:
         self._validate_identifier(const_name)
         const = LSLConstant(
             name=const_name,
-            type=LSLType(const_data['type']),
-            value=str(self._massage_const_value(const_data['value'])),
-            tooltip=const_data.get('tooltip', ''),
+            type=LSLType(const_data["type"]),
+            value=str(self._massage_const_value(const_data["value"])),
+            tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
-            deprecated=const_data.get('deprecated', False),
+            deprecated=const_data.get("deprecated", False),
         )
         if const.type not in {"float", "integer", "string", "vector", "rotation"}:
             raise ValueError(f"Invalid constant type {const.type}")
@@ -495,7 +530,7 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
     # and a distinct color.
     syntax["constants"]["default"] = {
         "tooltip": "All scripts must have a default state, which is the first state entered when the script starts.\n"
-                   "If another state is defined before the default state, the compiler will report a syntax error."
+        "If another state is defined before the default state, the compiler will report a syntax error."
     }
 
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
@@ -532,7 +567,7 @@ def gen_constant_lsl_script(definitions: LSLDefinitions) -> None:
     This can be done by looking at the bytecode of the compiled script.
     """
     keys = ['"%s"' % x for x in definitions.constants.keys()]
-    joined_names = ', \n'.join(itertools.chain(*zip(keys, definitions.constants.keys())))
+    joined_names = ", \n".join(itertools.chain(*zip(keys, definitions.constants.keys())))
 
     # Generate some stub event handlers as well
     event_handlers = ""
@@ -554,7 +589,9 @@ _LEXER_CONST_COMMENT = "/* GENERATED LEXER CONSTANTS */"
 _LEXER_EVENT_COMMENT = "/* GENERATED LEXER EVENTS */"
 _LEXER_COORD_TEMPLATE = '"%(name)s" { count(); return(%(name)s); }\n'
 _LEXER_NUMERIC_TEMPLATE = '"%s" { count(); yylval.%sval = %s; return(%s); }\n'
-_LEXER_STR_TEMPLATE = '"%s" { yylval.sval = new char[%d]; strcpy(yylval.sval, "%s"); return(STRING_CONSTANT); }\n'
+_LEXER_STR_TEMPLATE = (
+    '"%s" { yylval.sval = new char[%d]; strcpy(yylval.sval, "%s"); return(STRING_CONSTANT); }\n'
+)
 _LEXER_BLACKLIST = {
     # These are special in the lexer for inexplicable reasons.
     "TRUE",
@@ -590,9 +627,19 @@ def gen_lexer_file(definitions: LSLDefinitions, template_file: str, output_file:
             # to pull in their definition from the parser.
             generated_constants += _LEXER_COORD_TEMPLATE % {"name": const.name}
         elif const.type == LSLType.FLOAT:
-            generated_constants += _LEXER_NUMERIC_TEMPLATE % (const.name, "f", const.value + "f", "FP_CONSTANT")
+            generated_constants += _LEXER_NUMERIC_TEMPLATE % (
+                const.name,
+                "f",
+                const.value + "f",
+                "FP_CONSTANT",
+            )
         elif const.type == LSLType.INTEGER:
-            generated_constants += _LEXER_NUMERIC_TEMPLATE % (const.name, "i", const.value, "INTEGER_CONSTANT")
+            generated_constants += _LEXER_NUMERIC_TEMPLATE % (
+                const.name,
+                "i",
+                const.value,
+                "INTEGER_CONSTANT",
+            )
         elif const.type == LSLType.STRING:
             c_str = _to_c_str(const.value)
             c_str_len = len(const.value.encode("utf8")) + 1
@@ -633,7 +680,7 @@ _PARSER_DEFINITIONS_BLACKLIST = {
 
 
 def _event_to_class_name(event: LSLEvent) -> str:
-    return event.name.title().replace('_', '').replace("Http", "HTTP")
+    return event.name.title().replace("_", "").replace("Http", "HTTP")
 
 
 def gen_parser_file(definitions: LSLDefinitions, template_file: str, output_file: str):
@@ -648,14 +695,17 @@ def gen_parser_file(definitions: LSLDefinitions, template_file: str, output_file
 
     for event in definitions.events.values():
         if event.name not in _PARSER_TYPES_BLACKLIST:
-            generated_event_tokens += f'%token    {event.name.upper()}\n'
-            generated_event_types += f'%type<event>    {event.name}\n'
-            generated_event_switch += """
+            generated_event_tokens += f"%token    {event.name.upper()}\n"
+            generated_event_types += f"%type<event>    {event.name}\n"
+            generated_event_switch += (
+                """
     | %s compound_statement {
         $$ = new LLScriptEventHandler(gLine, gColumn, $1, $2);
         gAllocationManager->addAllocation($$);
     }
-""" % event.name
+"""
+                % event.name
+            )
         if event.name not in _PARSER_DEFINITIONS_BLACKLIST:
             generated_event_definitions += f"{event.name}\n"
             generated_event_definitions += f"    : {event.name.upper()} '(' "
@@ -678,7 +728,7 @@ def gen_parser_file(definitions: LSLDefinitions, template_file: str, output_file
             arg_idx = 4
             for i, arg in enumerate(event.arguments):
                 generated_event_definitions += f"""
-        LLScriptIdentifier	*id{i} = new LLScriptIdentifier(gLine, gColumn, ${arg_idx});	
+        LLScriptIdentifier	*id{i} = new LLScriptIdentifier(gLine, gColumn, ${arg_idx});
         gAllocationManager->addAllocation(id{i});
 """
                 arg_idx += 3
@@ -687,21 +737,25 @@ def gen_parser_file(definitions: LSLDefinitions, template_file: str, output_file
             arg_str = ", ".join("id%d" % x for x in range(0, len(event.arguments)))
             if arg_str:
                 arg_str = ", " + arg_str
-            generated_event_definitions += f"        $$ = new LLScript{event_class}Event(gLine, gColumn{arg_str});\n"
+            generated_event_definitions += (
+                f"        $$ = new LLScript{event_class}Event(gLine, gColumn{arg_str});\n"
+            )
 
             generated_event_definitions += "    }\n    ;\n\n"
 
     parser_template = _splice(parser_template, _PARSER_EVENT_TOKENS_COMMENT, generated_event_tokens)
     parser_template = _splice(parser_template, _PARSER_EVENT_TYPES_COMMENT, generated_event_types)
     parser_template = _splice(parser_template, _PARSER_EVENT_SWITCH_COMMENT, generated_event_switch)
-    parser_template = _splice(parser_template, _PARSER_EVENT_DEFINITIONS_COMMENT, generated_event_definitions)
+    parser_template = _splice(
+        parser_template, _PARSER_EVENT_DEFINITIONS_COMMENT, generated_event_definitions
+    )
 
     _write_if_different(output_file, parser_template)
 
 
 def _arg_to_member_name(arg: LSLArgument) -> str:
     if arg.name[0].upper() != arg.name[0]:
-        return "m" + arg.name.title().replace('_', '')
+        return "m" + arg.name.title().replace("_", "")
     # Probably already title case.
     return "m" + arg.name
 
@@ -710,44 +764,44 @@ _TREE_BLACKLIST = {
     # Basically everything, except state_entry() and game_control(),
     # New events are not meant to be in here, this is just meant to reduce
     # a huge diff churn.
-    'link_message',
-    'touch_start',
-    'dataserver',
-    'transaction_result',
-    'at_target',
-    'experience_permissions_denied',
-    'http_response',
-    'not_at_rot_target',
-    'at_rot_target',
-    'remote_data',
-    'path_update',
-    'listen',
-    'money',
-    'email',
-    'run_time_permissions',
-    'not_at_target',
-    'http_request',
-    'collision_start',
-    'land_collision_end',
-    'no_sensor',
-    'state_exit',
-    'object_rez',
-    'experience_permissions',
-    'collision',
-    'linkset_data',
-    'collision_end',
-    'attach',
-    'touch',
-    'timer',
-    'changed',
-    'sensor',
-    'moving_start',
-    'touch_end',
-    'land_collision',
-    'control',
-    'on_rez',
-    'land_collision_start',
-    'moving_end',
+    "link_message",
+    "touch_start",
+    "dataserver",
+    "transaction_result",
+    "at_target",
+    "experience_permissions_denied",
+    "http_response",
+    "not_at_rot_target",
+    "at_rot_target",
+    "remote_data",
+    "path_update",
+    "listen",
+    "money",
+    "email",
+    "run_time_permissions",
+    "not_at_target",
+    "http_request",
+    "collision_start",
+    "land_collision_end",
+    "no_sensor",
+    "state_exit",
+    "object_rez",
+    "experience_permissions",
+    "collision",
+    "linkset_data",
+    "collision_end",
+    "attach",
+    "touch",
+    "timer",
+    "changed",
+    "sensor",
+    "moving_start",
+    "touch_end",
+    "land_collision",
+    "control",
+    "on_rez",
+    "land_collision_start",
+    "moving_end",
 }
 
 
@@ -783,8 +837,12 @@ def gen_tree_header_file(definitions: LSLDefinitions, output_file: str) -> None:
         if event.name in _TREE_BLACKLIST:
             continue
         constructor_args = "".join(f", LLScriptIdentifier *{x.name}" for x in event.arguments)
-        member_initializers = "\n".join(f"        , {_arg_to_member_name(x)}({x.name})" for x in event.arguments)
-        members = "\n".join(f"    LLScriptIdentifier *{_arg_to_member_name(x)};" for x in event.arguments)
+        member_initializers = "\n".join(
+            f"        , {_arg_to_member_name(x)}({x.name})" for x in event.arguments
+        )
+        members = "\n".join(
+            f"    LLScriptIdentifier *{_arg_to_member_name(x)};" for x in event.arguments
+        )
         generated_tree_header += _TREE_CLASS_DECL_TEMPLATE % {
             "class_name": _event_to_class_name(event),
             "event_upper": event.name.upper(),
@@ -854,8 +912,10 @@ S32 LLScript%(class_name)sEvent::getSize()
 }
 """
 
-_RECURSE_BOILERPLATE = ("->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, "
-                        "chunk, heap, stacksize, entry, entrycount, NULL);")
+_RECURSE_BOILERPLATE = (
+    "->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, "
+    "chunk, heap, stacksize, entry, entrycount, NULL);"
+)
 
 
 def gen_tree_source_file(definitions: LSLDefinitions, output_file: str) -> None:
@@ -865,7 +925,9 @@ def gen_tree_source_file(definitions: LSLDefinitions, output_file: str) -> None:
         if event.name in _TREE_BLACKLIST:
             continue
 
-        default_recurse = "\n".join(f"        {_arg_to_member_name(x)}{_RECURSE_BOILERPLATE};" for x in event.arguments)
+        default_recurse = "\n".join(
+            f"        {_arg_to_member_name(x)}{_RECURSE_BOILERPLATE};" for x in event.arguments
+        )
 
         emit_cil = ""
         event_debug_info = ""
@@ -874,22 +936,28 @@ def gen_tree_source_file(definitions: LSLDefinitions, output_file: str) -> None:
         emit_assembly = ""
         first_scope_entry = None
         for arg in event.arguments:
-            emit_cil += f'        fprintf(fp, "{", " if emit_cil else ""}{arg.type.meta.cil_name} ");\n'
-            emit_cil += f'        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n'
+            emit_cil += (
+                f'        fprintf(fp, "{", " if emit_cil else ""}{arg.type.meta.cil_name} ");\n'
+            )
+            emit_cil += f"        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n"
 
-            id_name = f'{_arg_to_member_name(arg)}->mName'
-            event_debug_info += f'            chunk->addBytes({id_name}, strlen({id_name}) + 1);\n'
+            id_name = f"{_arg_to_member_name(arg)}->mName"
+            event_debug_info += f"            chunk->addBytes({id_name}, strlen({id_name}) + 1);\n"
 
-            id_scope_entry = f'{_arg_to_member_name(arg)}->mScopeEntry'
+            id_scope_entry = f"{_arg_to_member_name(arg)}->mScopeEntry"
             if not first_scope_entry:
                 first_scope_entry = id_scope_entry
 
-            resource_scope_entries += f'                {id_scope_entry}->mOffset = (S32)count;\n'
-            resource_scope_entries += f'                {id_scope_entry}->mSize = {arg.type.meta.lso_size};\n'
-            resource_scope_entries += f'                count += {id_scope_entry}->mSize;\n'
+            resource_scope_entries += f"                {id_scope_entry}->mOffset = (S32)count;\n"
+            resource_scope_entries += (
+                f"                {id_scope_entry}->mSize = {arg.type.meta.lso_size};\n"
+            )
+            resource_scope_entries += f"                count += {id_scope_entry}->mSize;\n"
 
-            emit_assembly += f'        fprintf(fp, "{", " if emit_assembly else ""}{arg.type!s} ");\n'
-            emit_assembly += f'        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n'
+            emit_assembly += (
+                f'        fprintf(fp, "{", " if emit_assembly else ""}{arg.type!s} ");\n'
+            )
+            emit_assembly += f"        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n"
 
             member_name = _arg_to_member_name(arg)
             scope_pass1 += f"""
@@ -905,15 +973,15 @@ def gen_tree_source_file(definitions: LSLDefinitions, output_file: str) -> None:
 
         if emit_cil:
             # If we emitted anything for arguments we need to emit a space before and after parens.
-            emit_cil = f'        fprintf(fp, " ");\n' + emit_cil
-            emit_cil += f'        fprintf(fp, " ");\n'
+            emit_cil = '        fprintf(fp, " ");\n' + emit_cil
+            emit_cil += '        fprintf(fp, " ");\n'
 
         generated_tree_source += _TREE_CLASS_DEF_TEMPLATE % {
             "class_name": _event_to_class_name(event),
             "event_name": event.name,
             "default_recurse": default_recurse,
             "event_size": sum(x.type.meta.lso_size for x in event.arguments),
-            "first_scope_entry": first_scope_entry or 'false',
+            "first_scope_entry": first_scope_entry or "false",
             "resource_scope_entries": resource_scope_entries,
             "event_debug_info": event_debug_info,
             "emit_cil": emit_cil,
@@ -968,7 +1036,9 @@ def gen_func_call_scripts(definitions: LSLDefinitions, output_path: str) -> None
                 # Make this an assignment to a local so we can implicitly check the return value
                 func_calls += func.ret_type.meta.library_abbr + " = "
             # Make a function call using locals of the appropriate type for the args
-            func_calls += f"{func.name}({', '.join(x.type.meta.library_abbr for x in func.arguments)});\n"
+            func_calls += (
+                f"{func.name}({', '.join(x.type.meta.library_abbr for x in func.arguments)});\n"
+            )
         # Make a stub script with all the necessary function calls
         call_script = f"""
 default {{
@@ -1004,16 +1074,18 @@ def gen_lscript_library_defs(definitions: LSLDefinitions, library_path: str):
             args_def = '"%s"' % "".join(x.type.meta.library_abbr for x in func.arguments)
         else:
             # Using `nullptr` instead of `""` saves a worthless array alloc inside `runllib_common()`.
-            args_def = 'nullptr'
+            args_def = "nullptr"
 
         if func.ret_type == LSLType.VOID:
             # Using `nullptr` instead of `""` saves a worthless alloc inside `runllib_common()`.
-            ret_def = 'nullptr'
+            ret_def = "nullptr"
         else:
             ret_def = '"%s"' % func.ret_type.meta.library_abbr
 
-        func_defs += (f'dangerousAddFunction({func.func_id}, "{func.name}", {ret_def}, {args_def}, '
-                      f'{func.energy}f, {func.sleep}f, {func.mono_sleep}f, {str(func.god_mode).lower()});\n')
+        func_defs += (
+            f'dangerousAddFunction({func.func_id}, "{func.name}", {ret_def}, {args_def}, '
+            f"{func.energy}f, {func.sleep}f, {func.mono_sleep}f, {str(func.god_mode).lower()});\n"
+        )
 
     _write_if_different(library_path, func_defs)
 
@@ -1024,100 +1096,514 @@ _MONO_CS_LIBRARY_DEFS_COMMENT = "/* GENERATED FUNCTION BINDINGS */"
 # energy / sleep values.) Better to leave them alone and only generate new functions.
 # For testing, we omit from this blacklist `llAxisAngle2Rot` and `llListSortStrided`, and manually verify the output.
 _OLD_FUNC_BLACKLIST = {
-    'llGiveInventory', 'llModPow', 'llDetectedTouchNormal', 'llNavigateTo', 'llAddToLandPassList',
-    'llGetScriptState', 'llGetObjectDesc', 'llPreloadSound', 'llWind', 'llCollisionFilter', 'llGetVel',
-    'llGetOwnerKey', 'llGetNotecardLine', 'llStopHover', 'llGetInventoryName',
-    'llJson2List', 'llSay', 'llGetAgentList', 'llRequestAgentData', 'llGetLinkSitFlags', 'llJsonValueType',
-    'llGetCameraRot', 'llWorldPosToHUD', 'llGetInventoryDesc', 'llLinkSetSoundQueueing', 'llGetEnvironment',
-    'llGetInventoryPermMask', 'llLinksetDataWrite', 'llSetTextureAnim', 'llCSV2List', 'llGetMassMKS',
-    'llAvatarOnSitTarget', 'llCeil', 'llCos', 'llMapDestination', 'llDetectedTouchPos', 'llDetectedLinkNumber',
-    'llReleaseControls', 'llStopLookAt', 'llEscapeURL', 'llTriggerSoundLimited', 'llSetParcelMusicURL',
-    'llSetScriptState', 'llRezObjectWithParams', 'llStopPointAt', 'llGetNumberOfNotecardLines', 'llGetOwner',
-    'llsRGB2Linear', 'llGetGMTclock', 'llGetStaticPath', 'llLoadURL', 'llInsertString', 'llDeleteSubList',
-    'llRot2Left', 'llReturnObjectsByOwner', 'llSubStringIndex', 'llGetStatus', 'llRemoteLoadScript',
-    'llStopMoveToTarget', 'llRound', 'llParticleSystem', 'llSensorRemove', 'llSetContentType', 'llGetAccel',
-    'llLoopSoundMaster', 'llRegionSay', 'llGetSPMaxMemory', 'llListFindStrided', 'llGetRegionAgentCount',
-    'llSetBuoyancy', 'llDetectedType', 'llSetPayPrice', 'llSetRot', 'llSetClickAction', 'llSetLinkPrimitiveParams',
-    'llLinksetDataWriteProtected', 'llGroundNormal', 'llLinkStopSound', 'llList2ListStrided', 'llReturnObjectsByID',
-    'llList2String', 'llWanderWithin', 'llListStatistics', 'llDetectedTouchBinormal', 'llGetTexture',
-    'llSetLinkCamera', 'llEvade', 'llGetRegionTimeDilation', 'llCreateLink', 'llGetCameraFOV', 'llDetectedGrab',
-    'llSameGroup', 'llSetLinkAlpha', 'llLinksetDataDelete', 'llRot2Euler', 'llGetDayOffset', 'llTakeCamera',
-    'llRequestSecureURL', 'llGetAttached', 'llRotateTexture', 'llGetInventoryKey', 'llSetSoundQueueing',
-    'llList2Vector', 'llTeleportAgent', 'llSetExperienceKey', 'llDialog', 'llSetTorque', 'llTargetedEmail',
-    'llGetLinkName', 'llGetParcelMusicURL', 'llSetVehicleType', 'llVecDist', 'llGetPrimitiveParams',
-    'llGetRegionMoonRotation', 'llLinkSetSoundRadius', 'llReplaceEnvironment', 'llLinksetDataCountFound',
-    'llListFindList', 'llRequestDisplayName', 'llGroundContour', 'llGetParcelMaxPrims', 'llClearExperience',
-    'llList2Float', 'llGetFreeURLs', 'llRemoteLoadScriptPin', 'llGetLinkNumber', 'llGetAndResetTime', 'llSleep',
-    'llTransferLindenDollars', 'llGetEnergy', 'llGetKey', 'llRequestUserKey', 'llUnescapeURL', 'llGetFreeMemory',
-    'llFleeFrom', 'llGetSimulatorHostname', 'llGetMoonDirection', 'llClearExperiencePermissions',
-    'llLinksetDataDeleteFound', 'llPassTouches', 'llPursue', 'llUnSit', 'llGetUsername', 'llGetLinkKey',
-    'llApplyImpulse', 'llCreateCharacter', 'llListFindListNext', 'llSetScale', 'llSetAgentEnvironment',
-    'llSetEnvironment', 'llGetTime', 'llGetRegionDayOffset', 'llKey2Name', 'llMoveToTarget', 'llRequestUsername',
-    'llSetText', 'llGetRot', 'llGetDayLength', 'llSetForce', 'llSetVehicleFloatParam', 'llGetRegionTimeOfDay',
-    'llKeyCountKeyValue', 'llSetSoundRadius', 'llCreateKeyValue', 'llGetAgentSize', 'llAxes2Rot', 'llDeleteSubString',
-    'llReplaceSubString', 'llAddToLandBanList', 'llChar', 'llDeleteCharacter', 'llCollisionSound', 'llMakeFire',
-    'llName2Key', 'llParseStringKeepNulls', 'llGetDate', 'llGetNotecardLineSync', 'llGetMoonRotation',
-    'llBase64ToInteger', 'llGetClosestNavPoint', 'llStringToBase64', 'llTeleportAgentHome', 'llLinksetDataListKeys',
-    'llAdjustSoundVolume', 'llMakeFountain', 'llRemoveInventory', 'llDetectedTouchUV', 'llAllowInventoryDrop',
-    'llSetObjectPermMask', 'llXorBase64StringsCorrect', 'llGetNumberOfSides', 'llDetectedTouchFace', 'llTarget',
-    'llAcos', 'llFrand', 'llStopObjectAnimation', 'llSetLinkColor', 'llAbs', 'llSetTimerEvent',
-    'llGetExperienceList', 'llDie', 'llAngleBetween', 'llSetPrimMediaParams', 'llSetLinkMedia', 'llGenerateKey',
-    'llListRandomize', 'llGetSubString', 'llReleaseURL', 'llGetRegionCorner', 'llMakeSmoke', 'llLinksetDataFindKeys',
-    'llSetLinkTextureAnim', 'llOrd', 'llDetectedName', 'llGetLinkMedia', 'llGetAnimation', 'llEjectFromLand',
-    'llTeleportAgentGlobalCoords', 'llTriggerSound', 'llLinksetDataReadProtected', 'llAsin', 'llSqrt',
-    'llGetListEntryType', 'llRot2Up', 'llSetStatus', 'llAttachToAvatar', 'llGetObjectDetails', 'llSetCameraAtOffset',
-    'llGetAlpha', 'llBase64ToString', 'llGetCreator', 'llRequestInventoryData', 'llHTTPResponse', 'llDumpList2String',
-    'llIntegerToBase64', 'llGetRegionDayLength', 'llRezObject', 'llList2List', 'llForceMouselook',
-    'llGetTextureOffset', 'llTargetOmega', 'llDataSizeKeyValue', 'llMD5String', 'llReleaseCamera', 'llGetSimStats',
-    'llGetObjectPermMask', 'llSendRemoteData', 'llGetListLength', 'llShout', 'llStringTrim', 'llAgentInExperience',
-    'llGetExperienceDetails', 'llGetRegionFlags', 'llSetCameraParams', 'llGetUsedMemory', 'llLinksetDataAvailable',
-    'llHash', 'llRotLookAt', 'llFabs', 'llTakeControls', 'llTan', 'llApplyRotationalImpulse', 'llTargetRemove',
-    'llSetObjectDesc', 'llSetSitText', 'llGetAnimationOverride', 'llSetMemoryLimit', 'llClearCameraParams',
-    'llLoopSound', 'llGetPermissions', 'llList2ListSlice', 'llLinksetDataDeleteProtected', 'llSetVehicleRotationParam',
-    'llList2Key', 'llFloor', 'llGetStartParameter', 'llSetPrimURL', 'llLinkAdjustSoundVolume', 'llVerifyRSA',
-    'llRemoveFromLandPassList', 'llSetInventoryPermMask', 'llListSort', 'llResetScript', 'llKeysKeyValue',
-    'llComputeHash', 'llGetMaxScaleFactor', 'llGroundSlope', 'llStartAnimation', 'llResetLandBanList',
-    'llGetRootPosition', 'llSetCameraEyeOffset', 'llSHA256String', 'llPassCollisions', 'llStopAnimation',
-    'llSetKeyframedMotion', 'llLog', 'llUpdateCharacter', 'llGetObjectPrimCount', 'llPlaySound',
-    'llSetAnimationOverride', 'llGetAgentLanguage', 'llSoundPreload', 'llSetHoverHeight', 'llResetTime',
-    'llGetLocalRot', 'llJsonSetValue', 'llSetLocalRot', 'llMinEventDelay', 'llGetParcelDetails', 'llSensor',
-    'llRefreshPrimURL', 'llCloud', 'llStringLength', 'llStopSound', 'llWater', 'llRot2Axis', 'llClearLinkMedia',
-    'llResetAnimationOverride', 'llSetAngularVelocity', 'llSetRemoteScriptAccessPin', 'llPow',
-    'llGetExperienceErrorMessage', 'llParseString2List', 'llDetectedTouchST', 'llList2Integer',
-    'llLinksetDataReset', 'llOwnerSay', 'llGetInventoryType', 'llGetWallclock', 'llDetectedOwner',
-    'llDetectedGroup', 'llGetCameraPos', 'llMakeExplosion', 'llGetScriptName', 'llSignRSA', 'llScriptDanger',
-    'llSetObjectName', 'llRotTargetRemove', 'llSetRenderMaterial', 'llReplaceAgentEnvironment', 'llGetOmega',
-    'llBreakAllLinks', 'llHTTPRequest', 'llReadKeyValue', 'llLinear2sRGB', 'llUpdateKeyValue', 'llSetPhysicsMaterial',
-    'llHMAC', 'llRegionSayTo', 'llRequestSimulatorData', 'llRemoveFromLandBanList', 'llRemoteDataReply',
-    'llVolumeDetect', 'llGetRenderMaterial', 'llGetRegionMoonDirection', 'llLinkSitTarget', 'llManageEstateAccess',
-    'llToUpper', 'llScriptProfiler', 'llEmail', 'llLookAt', 'llJsonGetValue', 'llRotBetween', 'llGetNextEmail',
-    'llLinksetDataRead', 'llLinkParticleSystem', 'llParcelMediaCommandList', 'llCloseRemoteDataChannel', 'llLog10',
-    'llSetLinkRenderMaterial', 'llGetSunDirection', 'llGetRegionSunRotation', 'llGetForce', 'llScaleByFactor',
-    'llExecCharacterCmd', 'llGetBoundingBox', 'llScaleTexture', 'llSetAlpha', 'llTextBox', 'llGetMass', 'llSetTexture',
-    'llSin', 'llGetParcelPrimCount', 'llGetObjectMass', 'llSetPrimitiveParams', 'llGiveMoney', 'llBreakLink',
-    'llSitTarget', 'llGround', 'llDetectedPos', 'llGetUnixTime', 'llDetachFromAvatar', 'llGetSunRotation',
-    'llGetColor', 'llMessageLinked', 'llOpenRemoteDataChannel', 'llGetPos', 'llGetTextureRot', 'llGetLocalPos',
-    'llRot2Fwd', 'llStartObjectAnimation', 'llGetObjectLinkKey', 'llGetRootRotation', 'llList2CSV', 'llAtan2',
-    'llRemoveVehicleFlags', 'llSetRegionPos', 'llGetObjectAnimationNames', 'llRezAtRoot', 'llPointAt', 'llModifyLand',
-    'llListenRemove', 'llGetObjectName', 'llList2Rot', 'llVecNorm', 'llSound', 'llDetectedVel', 'llListen',
-    'llAttachToAvatarTemp', 'llInstantMessage', 'llRotTarget', 'llListenControl', 'llGetPermissionsKey', 'llGetEnv',
-    'llResetOtherScript', 'llLoopSoundSlave', 'llOverMyLand', 'llSetPos', 'llGetTimestamp', 'llGodLikeRezObject',
-    'llGetMinScaleFactor', 'llPlaySoundSlave', 'llSetDamage', 'llRemoteDataSetRegion', 'llEuler2Rot',
-    'llSetLinkTexture', 'llDeleteKeyValue', 'llGetAttachedList', 'llGetLinkNumberOfSides', 'llSetTouchText',
-    'llXorBase64Strings', 'llWhisper', 'llGetRegionFPS', 'llXorBase64', 'llGroundRepel', 'llListInsertList',
-    'llGetMemoryLimit', 'llGetScale', 'llOpenFloater', 'llGetDisplayName', 'llGetNumberOfPrims',
-    'llGetInventoryAcquireTime', 'llSetForceAndTorque', 'llGiveInventoryList', 'llGetTorque', 'llSetColor',
-    'llCollisionSprite', 'llAvatarOnLinkSitTarget', 'llGetAgentInfo', 'llRot2Angle', 'llToLower', 'llGetTextureScale',
-    'llSetLinkPrimitiveParamsFast', 'llRequestPermissions', 'llGetGeometricCenter', 'llResetLandPassList',
-    'llSitOnLink', 'llGetRegionName', 'llSetVelocity', 'llGetLinkPrimitiveParams', 'llOffsetTexture',
-    'llGetInventoryNumber', 'llGetTimeOfDay', 'llLinksetDataCountKeys', 'llGetInventoryCreator', 'llPatrolPoints',
-    'llParcelMediaQuery', 'llVecMag', 'llSetVehicleFlags', 'llSetLinkSitFlags', 'llGetParcelPrimOwners',
-    'llGetRegionSunDirection', 'llLinkPlaySound', 'llGetPrimMediaParams', 'llGetLandOwnerAt', 'llRequestURL',
-    'llSHA1String', 'llEdgeOfWorld', 'llGetPhysicsMaterial', 'llListReplaceList', 'llGetCameraAspect',
-    'llSetVehicleVectorParam', 'llRequestExperiencePermissions', 'llDetectedRot', 'llGetHTTPHeader',
-    'llGetParcelFlags', 'llDetectedKey', 'llList2Json', 'llCastRay', 'llSensorRepeat', 'llGetCenterOfMass',
-    'llPushObject', 'llGetVisualParams', 'llIsFriend', 'llClearPrimMedia', 'llGetAnimationList',
-    'llDamage', 'llDetectedRezzer',
+    "llGiveInventory",
+    "llModPow",
+    "llDetectedTouchNormal",
+    "llNavigateTo",
+    "llAddToLandPassList",
+    "llGetScriptState",
+    "llGetObjectDesc",
+    "llPreloadSound",
+    "llWind",
+    "llCollisionFilter",
+    "llGetVel",
+    "llGetOwnerKey",
+    "llGetNotecardLine",
+    "llStopHover",
+    "llGetInventoryName",
+    "llJson2List",
+    "llSay",
+    "llGetAgentList",
+    "llRequestAgentData",
+    "llGetLinkSitFlags",
+    "llJsonValueType",
+    "llGetCameraRot",
+    "llWorldPosToHUD",
+    "llGetInventoryDesc",
+    "llLinkSetSoundQueueing",
+    "llGetEnvironment",
+    "llGetInventoryPermMask",
+    "llLinksetDataWrite",
+    "llSetTextureAnim",
+    "llCSV2List",
+    "llGetMassMKS",
+    "llAvatarOnSitTarget",
+    "llCeil",
+    "llCos",
+    "llMapDestination",
+    "llDetectedTouchPos",
+    "llDetectedLinkNumber",
+    "llReleaseControls",
+    "llStopLookAt",
+    "llEscapeURL",
+    "llTriggerSoundLimited",
+    "llSetParcelMusicURL",
+    "llSetScriptState",
+    "llRezObjectWithParams",
+    "llStopPointAt",
+    "llGetNumberOfNotecardLines",
+    "llGetOwner",
+    "llsRGB2Linear",
+    "llGetGMTclock",
+    "llGetStaticPath",
+    "llLoadURL",
+    "llInsertString",
+    "llDeleteSubList",
+    "llRot2Left",
+    "llReturnObjectsByOwner",
+    "llSubStringIndex",
+    "llGetStatus",
+    "llRemoteLoadScript",
+    "llStopMoveToTarget",
+    "llRound",
+    "llParticleSystem",
+    "llSensorRemove",
+    "llSetContentType",
+    "llGetAccel",
+    "llLoopSoundMaster",
+    "llRegionSay",
+    "llGetSPMaxMemory",
+    "llListFindStrided",
+    "llGetRegionAgentCount",
+    "llSetBuoyancy",
+    "llDetectedType",
+    "llSetPayPrice",
+    "llSetRot",
+    "llSetClickAction",
+    "llSetLinkPrimitiveParams",
+    "llLinksetDataWriteProtected",
+    "llGroundNormal",
+    "llLinkStopSound",
+    "llList2ListStrided",
+    "llReturnObjectsByID",
+    "llList2String",
+    "llWanderWithin",
+    "llListStatistics",
+    "llDetectedTouchBinormal",
+    "llGetTexture",
+    "llSetLinkCamera",
+    "llEvade",
+    "llGetRegionTimeDilation",
+    "llCreateLink",
+    "llGetCameraFOV",
+    "llDetectedGrab",
+    "llSameGroup",
+    "llSetLinkAlpha",
+    "llLinksetDataDelete",
+    "llRot2Euler",
+    "llGetDayOffset",
+    "llTakeCamera",
+    "llRequestSecureURL",
+    "llGetAttached",
+    "llRotateTexture",
+    "llGetInventoryKey",
+    "llSetSoundQueueing",
+    "llList2Vector",
+    "llTeleportAgent",
+    "llSetExperienceKey",
+    "llDialog",
+    "llSetTorque",
+    "llTargetedEmail",
+    "llGetLinkName",
+    "llGetParcelMusicURL",
+    "llSetVehicleType",
+    "llVecDist",
+    "llGetPrimitiveParams",
+    "llGetRegionMoonRotation",
+    "llLinkSetSoundRadius",
+    "llReplaceEnvironment",
+    "llLinksetDataCountFound",
+    "llListFindList",
+    "llRequestDisplayName",
+    "llGroundContour",
+    "llGetParcelMaxPrims",
+    "llClearExperience",
+    "llList2Float",
+    "llGetFreeURLs",
+    "llRemoteLoadScriptPin",
+    "llGetLinkNumber",
+    "llGetAndResetTime",
+    "llSleep",
+    "llTransferLindenDollars",
+    "llGetEnergy",
+    "llGetKey",
+    "llRequestUserKey",
+    "llUnescapeURL",
+    "llGetFreeMemory",
+    "llFleeFrom",
+    "llGetSimulatorHostname",
+    "llGetMoonDirection",
+    "llClearExperiencePermissions",
+    "llLinksetDataDeleteFound",
+    "llPassTouches",
+    "llPursue",
+    "llUnSit",
+    "llGetUsername",
+    "llGetLinkKey",
+    "llApplyImpulse",
+    "llCreateCharacter",
+    "llListFindListNext",
+    "llSetScale",
+    "llSetAgentEnvironment",
+    "llSetEnvironment",
+    "llGetTime",
+    "llGetRegionDayOffset",
+    "llKey2Name",
+    "llMoveToTarget",
+    "llRequestUsername",
+    "llSetText",
+    "llGetRot",
+    "llGetDayLength",
+    "llSetForce",
+    "llSetVehicleFloatParam",
+    "llGetRegionTimeOfDay",
+    "llKeyCountKeyValue",
+    "llSetSoundRadius",
+    "llCreateKeyValue",
+    "llGetAgentSize",
+    "llAxes2Rot",
+    "llDeleteSubString",
+    "llReplaceSubString",
+    "llAddToLandBanList",
+    "llChar",
+    "llDeleteCharacter",
+    "llCollisionSound",
+    "llMakeFire",
+    "llName2Key",
+    "llParseStringKeepNulls",
+    "llGetDate",
+    "llGetNotecardLineSync",
+    "llGetMoonRotation",
+    "llBase64ToInteger",
+    "llGetClosestNavPoint",
+    "llStringToBase64",
+    "llTeleportAgentHome",
+    "llLinksetDataListKeys",
+    "llAdjustSoundVolume",
+    "llMakeFountain",
+    "llRemoveInventory",
+    "llDetectedTouchUV",
+    "llAllowInventoryDrop",
+    "llSetObjectPermMask",
+    "llXorBase64StringsCorrect",
+    "llGetNumberOfSides",
+    "llDetectedTouchFace",
+    "llTarget",
+    "llAcos",
+    "llFrand",
+    "llStopObjectAnimation",
+    "llSetLinkColor",
+    "llAbs",
+    "llSetTimerEvent",
+    "llGetExperienceList",
+    "llDie",
+    "llAngleBetween",
+    "llSetPrimMediaParams",
+    "llSetLinkMedia",
+    "llGenerateKey",
+    "llListRandomize",
+    "llGetSubString",
+    "llReleaseURL",
+    "llGetRegionCorner",
+    "llMakeSmoke",
+    "llLinksetDataFindKeys",
+    "llSetLinkTextureAnim",
+    "llOrd",
+    "llDetectedName",
+    "llGetLinkMedia",
+    "llGetAnimation",
+    "llEjectFromLand",
+    "llTeleportAgentGlobalCoords",
+    "llTriggerSound",
+    "llLinksetDataReadProtected",
+    "llAsin",
+    "llSqrt",
+    "llGetListEntryType",
+    "llRot2Up",
+    "llSetStatus",
+    "llAttachToAvatar",
+    "llGetObjectDetails",
+    "llSetCameraAtOffset",
+    "llGetAlpha",
+    "llBase64ToString",
+    "llGetCreator",
+    "llRequestInventoryData",
+    "llHTTPResponse",
+    "llDumpList2String",
+    "llIntegerToBase64",
+    "llGetRegionDayLength",
+    "llRezObject",
+    "llList2List",
+    "llForceMouselook",
+    "llGetTextureOffset",
+    "llTargetOmega",
+    "llDataSizeKeyValue",
+    "llMD5String",
+    "llReleaseCamera",
+    "llGetSimStats",
+    "llGetObjectPermMask",
+    "llSendRemoteData",
+    "llGetListLength",
+    "llShout",
+    "llStringTrim",
+    "llAgentInExperience",
+    "llGetExperienceDetails",
+    "llGetRegionFlags",
+    "llSetCameraParams",
+    "llGetUsedMemory",
+    "llLinksetDataAvailable",
+    "llHash",
+    "llRotLookAt",
+    "llFabs",
+    "llTakeControls",
+    "llTan",
+    "llApplyRotationalImpulse",
+    "llTargetRemove",
+    "llSetObjectDesc",
+    "llSetSitText",
+    "llGetAnimationOverride",
+    "llSetMemoryLimit",
+    "llClearCameraParams",
+    "llLoopSound",
+    "llGetPermissions",
+    "llList2ListSlice",
+    "llLinksetDataDeleteProtected",
+    "llSetVehicleRotationParam",
+    "llList2Key",
+    "llFloor",
+    "llGetStartParameter",
+    "llSetPrimURL",
+    "llLinkAdjustSoundVolume",
+    "llVerifyRSA",
+    "llRemoveFromLandPassList",
+    "llSetInventoryPermMask",
+    "llListSort",
+    "llResetScript",
+    "llKeysKeyValue",
+    "llComputeHash",
+    "llGetMaxScaleFactor",
+    "llGroundSlope",
+    "llStartAnimation",
+    "llResetLandBanList",
+    "llGetRootPosition",
+    "llSetCameraEyeOffset",
+    "llSHA256String",
+    "llPassCollisions",
+    "llStopAnimation",
+    "llSetKeyframedMotion",
+    "llLog",
+    "llUpdateCharacter",
+    "llGetObjectPrimCount",
+    "llPlaySound",
+    "llSetAnimationOverride",
+    "llGetAgentLanguage",
+    "llSoundPreload",
+    "llSetHoverHeight",
+    "llResetTime",
+    "llGetLocalRot",
+    "llJsonSetValue",
+    "llSetLocalRot",
+    "llMinEventDelay",
+    "llGetParcelDetails",
+    "llSensor",
+    "llRefreshPrimURL",
+    "llCloud",
+    "llStringLength",
+    "llStopSound",
+    "llWater",
+    "llRot2Axis",
+    "llClearLinkMedia",
+    "llResetAnimationOverride",
+    "llSetAngularVelocity",
+    "llSetRemoteScriptAccessPin",
+    "llPow",
+    "llGetExperienceErrorMessage",
+    "llParseString2List",
+    "llDetectedTouchST",
+    "llList2Integer",
+    "llLinksetDataReset",
+    "llOwnerSay",
+    "llGetInventoryType",
+    "llGetWallclock",
+    "llDetectedOwner",
+    "llDetectedGroup",
+    "llGetCameraPos",
+    "llMakeExplosion",
+    "llGetScriptName",
+    "llSignRSA",
+    "llScriptDanger",
+    "llSetObjectName",
+    "llRotTargetRemove",
+    "llSetRenderMaterial",
+    "llReplaceAgentEnvironment",
+    "llGetOmega",
+    "llBreakAllLinks",
+    "llHTTPRequest",
+    "llReadKeyValue",
+    "llLinear2sRGB",
+    "llUpdateKeyValue",
+    "llSetPhysicsMaterial",
+    "llHMAC",
+    "llRegionSayTo",
+    "llRequestSimulatorData",
+    "llRemoveFromLandBanList",
+    "llRemoteDataReply",
+    "llVolumeDetect",
+    "llGetRenderMaterial",
+    "llGetRegionMoonDirection",
+    "llLinkSitTarget",
+    "llManageEstateAccess",
+    "llToUpper",
+    "llScriptProfiler",
+    "llEmail",
+    "llLookAt",
+    "llJsonGetValue",
+    "llRotBetween",
+    "llGetNextEmail",
+    "llLinksetDataRead",
+    "llLinkParticleSystem",
+    "llParcelMediaCommandList",
+    "llCloseRemoteDataChannel",
+    "llLog10",
+    "llSetLinkRenderMaterial",
+    "llGetSunDirection",
+    "llGetRegionSunRotation",
+    "llGetForce",
+    "llScaleByFactor",
+    "llExecCharacterCmd",
+    "llGetBoundingBox",
+    "llScaleTexture",
+    "llSetAlpha",
+    "llTextBox",
+    "llGetMass",
+    "llSetTexture",
+    "llSin",
+    "llGetParcelPrimCount",
+    "llGetObjectMass",
+    "llSetPrimitiveParams",
+    "llGiveMoney",
+    "llBreakLink",
+    "llSitTarget",
+    "llGround",
+    "llDetectedPos",
+    "llGetUnixTime",
+    "llDetachFromAvatar",
+    "llGetSunRotation",
+    "llGetColor",
+    "llMessageLinked",
+    "llOpenRemoteDataChannel",
+    "llGetPos",
+    "llGetTextureRot",
+    "llGetLocalPos",
+    "llRot2Fwd",
+    "llStartObjectAnimation",
+    "llGetObjectLinkKey",
+    "llGetRootRotation",
+    "llList2CSV",
+    "llAtan2",
+    "llRemoveVehicleFlags",
+    "llSetRegionPos",
+    "llGetObjectAnimationNames",
+    "llRezAtRoot",
+    "llPointAt",
+    "llModifyLand",
+    "llListenRemove",
+    "llGetObjectName",
+    "llList2Rot",
+    "llVecNorm",
+    "llSound",
+    "llDetectedVel",
+    "llListen",
+    "llAttachToAvatarTemp",
+    "llInstantMessage",
+    "llRotTarget",
+    "llListenControl",
+    "llGetPermissionsKey",
+    "llGetEnv",
+    "llResetOtherScript",
+    "llLoopSoundSlave",
+    "llOverMyLand",
+    "llSetPos",
+    "llGetTimestamp",
+    "llGodLikeRezObject",
+    "llGetMinScaleFactor",
+    "llPlaySoundSlave",
+    "llSetDamage",
+    "llRemoteDataSetRegion",
+    "llEuler2Rot",
+    "llSetLinkTexture",
+    "llDeleteKeyValue",
+    "llGetAttachedList",
+    "llGetLinkNumberOfSides",
+    "llSetTouchText",
+    "llXorBase64Strings",
+    "llWhisper",
+    "llGetRegionFPS",
+    "llXorBase64",
+    "llGroundRepel",
+    "llListInsertList",
+    "llGetMemoryLimit",
+    "llGetScale",
+    "llOpenFloater",
+    "llGetDisplayName",
+    "llGetNumberOfPrims",
+    "llGetInventoryAcquireTime",
+    "llSetForceAndTorque",
+    "llGiveInventoryList",
+    "llGetTorque",
+    "llSetColor",
+    "llCollisionSprite",
+    "llAvatarOnLinkSitTarget",
+    "llGetAgentInfo",
+    "llRot2Angle",
+    "llToLower",
+    "llGetTextureScale",
+    "llSetLinkPrimitiveParamsFast",
+    "llRequestPermissions",
+    "llGetGeometricCenter",
+    "llResetLandPassList",
+    "llSitOnLink",
+    "llGetRegionName",
+    "llSetVelocity",
+    "llGetLinkPrimitiveParams",
+    "llOffsetTexture",
+    "llGetInventoryNumber",
+    "llGetTimeOfDay",
+    "llLinksetDataCountKeys",
+    "llGetInventoryCreator",
+    "llPatrolPoints",
+    "llParcelMediaQuery",
+    "llVecMag",
+    "llSetVehicleFlags",
+    "llSetLinkSitFlags",
+    "llGetParcelPrimOwners",
+    "llGetRegionSunDirection",
+    "llLinkPlaySound",
+    "llGetPrimMediaParams",
+    "llGetLandOwnerAt",
+    "llRequestURL",
+    "llSHA1String",
+    "llEdgeOfWorld",
+    "llGetPhysicsMaterial",
+    "llListReplaceList",
+    "llGetCameraAspect",
+    "llSetVehicleVectorParam",
+    "llRequestExperiencePermissions",
+    "llDetectedRot",
+    "llGetHTTPHeader",
+    "llGetParcelFlags",
+    "llDetectedKey",
+    "llList2Json",
+    "llCastRay",
+    "llSensorRepeat",
+    "llGetCenterOfMass",
+    "llPushObject",
+    "llGetVisualParams",
+    "llIsFriend",
+    "llClearPrimMedia",
+    "llGetAnimationList",
+    "llDamage",
+    "llDetectedRezzer",
 }
 
 
@@ -1129,7 +1615,9 @@ def _any_list(func: LSLFunction) -> bool:
     return func.ret_type == LSLType.LIST or _any_arg_list(func)
 
 
-def gen_mono_library_defs(definitions: LSLDefinitions, library_template_path: str, output_path: str) -> None:
+def gen_mono_library_defs(
+    definitions: LSLDefinitions, library_template_path: str, output_path: str
+) -> None:
     """
     Generate CSharp binding code for LslLibrary.cs
 
@@ -1165,11 +1653,15 @@ def gen_mono_library_defs(definitions: LSLDefinitions, library_template_path: st
                     args_strs.append(f"{arg.type.meta.cs_name} {arg.name}")
 
             args_str = ", ".join(args_strs)
-            new_defs += f"        public extern static {ret_str} {func.name}Internal({args_str});\n\n"
+            new_defs += (
+                f"        public extern static {ret_str} {func.name}Internal({args_str});\n\n"
+            )
 
             # Now for the wrapper implementation
             args_str = ", ".join(f"{a.type.meta.cs_name} {a.name}" for a in func.arguments)
-            new_defs += f"        public static {func.ret_type.meta.cs_name} {func.name}({args_str}) {{\n"
+            new_defs += (
+                f"        public static {func.ret_type.meta.cs_name} {func.name}({args_str}) {{\n"
+            )
 
             call_args = []
             for arg in func.arguments:
@@ -1213,7 +1705,7 @@ def _func_name_to_impl_name(name: str) -> str:
     # Base64ToString -> base64_to_string
     # HTTPRequest -> http_request
     pattern = re.compile(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
-    return pattern.sub('_', name).lower() + "_func"
+    return pattern.sub("_", name).lower() + "_func"
 
 
 def gen_mono_bind_interfaces(definitions: LSLDefinitions, mono_bind_interfaces_path: str) -> None:
@@ -1269,23 +1761,31 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions, mono_bind_interfaces_p
             if arg.type == LSLType.LIST:
                 # Lists have both the array _and a length_ when passed as args
                 arg_spec.append(f"S32 p{i}_length")
-                function_stmts.append(f"LLScriptLibDataHelper<{arg_bind_name}>::set(args[{i}], p{i}, p{i}_length);")
+                function_stmts.append(
+                    f"LLScriptLibDataHelper<{arg_bind_name}>::set(args[{i}], p{i}, p{i}_length);"
+                )
             else:
-                function_stmts.append(f"LLScriptLibDataHelper<{arg_bind_name}>::set(args[{i}], p{i});")
+                function_stmts.append(
+                    f"LLScriptLibDataHelper<{arg_bind_name}>::set(args[{i}], p{i});"
+                )
 
         ret_bind_name = func.ret_type.meta.mono_bind_name
-        function_stmts.extend([
-            "LLScriptLibData retval;",
-            f"retval.mType = {func.ret_type.meta.lst_name};",
-            f"call_lib_func({func.func_id}, retval, {len(func.arguments)}, args, {func.energy}, {func.mono_sleep});",
-            f"return LLScriptLibDataHelper<{ret_bind_name}>::get(retval);"
-        ])
+        function_stmts.extend(
+            [
+                "LLScriptLibData retval;",
+                f"retval.mType = {func.ret_type.meta.lst_name};",
+                f"call_lib_func({func.func_id}, retval, {len(func.arguments)}, args, {func.energy}, {func.mono_sleep});",
+                f"return LLScriptLibDataHelper<{ret_bind_name}>::get(retval);",
+            ]
+        )
         function_stmts_str = "\n    ".join(function_stmts)
 
-        functions += f'static {ret_bind_name} _mono_binding_{impl_name}({", ".join(arg_spec)})\n{{\n    {function_stmts_str}\n}}\n\n'
+        functions += f"static {ret_bind_name} _mono_binding_{impl_name}({', '.join(arg_spec)})\n{{\n    {function_stmts_str}\n}}\n\n"
 
-        binding_calls += (f'    mono_add_internal_call("LindenLab.SecondLife.Library::{mono_func_name}",'
-                          f' fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_{impl_name})));\n')
+        binding_calls += (
+            f'    mono_add_internal_call("LindenLab.SecondLife.Library::{mono_func_name}",'
+            f" fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_{impl_name})));\n"
+        )
 
     binding_file_code = """
 extern "C"
@@ -1330,12 +1830,15 @@ def gen_lscript_interface(definitions: LSLDefinitions, lscript_interface_path: s
         # Bind to LSO VM
         assign_execs += f'    gScriptLibrary.assignExec("{func.name}", {impl_name});\n'
 
-    function_code = """
+    function_code = (
+        """
 void task_lscript_init_generated()
 {
 %s
 }
-""" % assign_execs
+"""
+        % assign_execs
+    )
     _write_if_different(lscript_interface_path, function_code)
 
 
@@ -1415,7 +1918,9 @@ def gen_lscript_library_bind_pure(definitions: LSLDefinitions, output_path: str)
 
 
 def quoted_presenter(dumper, data):
-    return dumper.represent_scalar('tag:yaml.org,2002:str', str(data), style='"')
+    return dumper.represent_scalar("tag:yaml.org,2002:str", str(data), style='"')
+
+
 yaml.add_representer(uuid.UUID, quoted_presenter)
 
 
@@ -1459,4 +1964,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
