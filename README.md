@@ -19,10 +19,6 @@ This file is primarily intended for:
 - **Technical users** who need authoritative LSL language reference
 - **Community contributors** improving LSL documentation
 
-## File Format
-
-The definitions are stored in YAML format with structured data describing all aspects of the LSL language specification.
-
 ## Contributing
 
 We welcome contributions that improve documentation, fix errors, and enhance tooltips. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
