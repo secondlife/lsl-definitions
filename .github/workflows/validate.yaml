@@ -1,0 +1,35 @@
+name: Validate LSL Definitions
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: [v*]
+
+jobs:
+  validate-definitions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Check if syntax generation produces valid output
+        run: |
+          # Generate syntax to a temporary file to verify it's valid
+          gen-lsl-definitions ./lsl_definitions.yaml syntax /tmp/syntax_output.llsd
+          # Check that the output file was created and is not empty
+          if [ ! -s /tmp/syntax_output.llsd ]; then
+            echo "Error: Syntax generation produced empty output"
+            exit 1
+          fi
+          echo "✓ Syntax generation successful and produced non-empty output"

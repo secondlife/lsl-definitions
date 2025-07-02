@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lsl-definitions"
+version = "0.1.0"
+description = "LSL (Linden Scripting Language) definitions generator"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Second Life", email = "opensource@lindenlab.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "PyYAML",
+    "llsd",
+]
+
+[project.scripts]
+gen-lsl-definitions = "gen_definitions:main"
+
+[project.urls]
+Homepage = "https://github.com/secondlife/lsl-definitions"
+Repository = "https://github.com/secondlife/lsl-definitions"
+Issues = "https://github.com/secondlife/lsl-definitions/issues"
+
+[tool.setuptools]
+py-modules = ["gen_definitions"]
+
+[tool.ruff]
+line-length = 100

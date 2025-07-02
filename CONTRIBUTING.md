@@ -6,7 +6,7 @@ Thank you for your interest in contributing to the LSL definitions repository! T
 
 ### ✅ Welcome Contributions
 - **Documentation improvements** - clearer explanations, better examples
-- **Tooltip enhancements** - more helpful descriptions for functions and parameters  
+- **Tooltip enhancements** - more helpful descriptions for functions and parameters
 - **Error corrections** - fixing typos, incorrect parameter types, or outdated information
 - **Formatting improvements** - better YAML structure or consistency
 
@@ -27,7 +27,7 @@ Thank you for your interest in contributing to the LSL definitions repository! T
 ## Pull Request Guidelines
 
 - **Be specific** in your PR description about what you're improving
-- **Keep changes focused** - one improvement per PR when possible  
+- **Keep changes focused** - one improvement per PR when possible
 - **Maintain consistency** with existing formatting and style
 - **Include examples** if you're improving documentation
 
