@@ -1,6 +1,6 @@
 # LSL Definitions
 
-This repository contains the canonical `lsl_definitions.yaml` file that serves as the authoritative source of truth for Second Life's LSL (Linden Scripting Language) virtual machine specifications.
+This repository contains the canonical `lsl_definitions.yaml` file that serves as the authoritative source of truth for Second Life's LSL (Linden Scripting Language) library.
 
 ## Purpose
 
