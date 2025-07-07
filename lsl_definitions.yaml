@@ -4713,6 +4713,7 @@ functions:
 #    deprecated: Has this function been deprecated.
 #    pure: Is the function guaranteed to have no side effects.
 #    native: If true, this function must use a native implementation for non-LSO VMs.
+#    god-mode: If true, this function can only be executed in god mode.
   llAbs:
     arguments:
     - Value:
@@ -5132,6 +5133,7 @@ functions:
     - ChannelID:
         tooltip: ''
         type: key
+    deprecated: true
     energy: 10.0
     func-id: 257
     return: void
@@ -5142,6 +5144,7 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
+    deprecated: true
     energy: 10.0
     func-id: 43
     return: float
@@ -9263,6 +9266,7 @@ functions:
       \ key.\n                "
   llRefreshPrimURL:
     arguments: []
+    deprecated: true
     energy: 10.0
     func-id: 306
     return: void
