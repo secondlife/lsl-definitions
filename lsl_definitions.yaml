@@ -5132,6 +5132,7 @@ functions:
     - ChannelID:
         tooltip: ''
         type: key
+    deprecated: true
     energy: 10.0
     func-id: 257
     return: void
@@ -5142,6 +5143,7 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
+    deprecated: true
     energy: 10.0
     func-id: 43
     return: float
@@ -9263,6 +9265,7 @@ functions:
       \ key.\n                "
   llRefreshPrimURL:
     arguments: []
+    deprecated: true
     energy: 10.0
     func-id: 306
     return: void
