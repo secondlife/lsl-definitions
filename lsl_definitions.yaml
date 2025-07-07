@@ -4713,6 +4713,7 @@ functions:
 #    deprecated: Has this function been deprecated.
 #    pure: Is the function guaranteed to have no side effects.
 #    native: If true, this function must use a native implementation for non-LSO VMs.
+#    god-mode: If true, this function can only be executed in god mode.
   llAbs:
     arguments:
     - Value:
