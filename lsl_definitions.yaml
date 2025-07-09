@@ -4714,6 +4714,8 @@ functions:
 #    pure: Is the function guaranteed to have no side effects.
 #    native: If true, this function must use a native implementation for non-LSO VMs.
 #    god-mode: If true, this function can only be executed in god mode.
+#    experience: If true, this function requires an experience to be set for the script to compile.
+#    linden-experience: If true, this function requires a linden-owned experience.
   llAbs:
     arguments:
     - Value:
@@ -4802,6 +4804,7 @@ functions:
         type: key
     bool_semantics: true
     energy: 10.0
+    experience: true
     func-id: 392
     return: integer
     sleep: 0.0
@@ -5240,6 +5243,7 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
+    experience: true
     func-id: 387
     return: key
     sleep: 0.0
@@ -5286,6 +5290,7 @@ functions:
   llDataSizeKeyValue:
     arguments: []
     energy: 10.0
+    experience: true
     func-id: 600
     return: key
     sleep: 0.0
@@ -5312,6 +5317,7 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
+    experience: true
     func-id: 390
     return: key
     sleep: 0.0
@@ -6221,6 +6227,7 @@ functions:
         tooltip: May be NULL_KEY to retrieve the details for the script's Experience
         type: key
     energy: 10.0
+    experience: true
     func-id: 409
     return: list
     sleep: 0.0
@@ -6235,6 +6242,7 @@ functions:
         tooltip: An Experience error code to translate.
         type: integer
     energy: 10.0
+    experience: true
     func-id: 603
     return: string
     sleep: 0.0
@@ -7745,6 +7753,7 @@ functions:
   llKeyCountKeyValue:
     arguments: []
     energy: 10.0
+    experience: true
     func-id: 601
     return: key
     sleep: 0.0
@@ -7766,6 +7775,7 @@ functions:
         tooltip: The number of keys to return.
         type: integer
     energy: 10.0
+    experience: true
     func-id: 602
     return: key
     sleep: 0.0
@@ -8962,6 +8972,7 @@ functions:
         tooltip: Parameters to apply to open floater
         type: list
     energy: 10.0
+    linden-experience: true
     func-id: 604
     mono_sleep: 0.2
     return: integer
@@ -9252,6 +9263,7 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
+    experience: true
     func-id: 388
     return: key
     sleep: 0.0
@@ -9463,6 +9475,7 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
+    experience: true
     func-id: 713
     return: integer
     sleep: 0.0
@@ -9555,6 +9568,7 @@ functions:
         tooltip: Not used, should be ""
         type: string
     energy: 10.0
+    experience: true
     func-id: 384
     return: void
     sleep: 0.0
@@ -10164,6 +10178,7 @@ functions:
         tooltip: List of environment settings to replace for agent.
         type: list
     energy: 10.0
+    experience: true
     func-id: 714
     return: integer
     sleep: 0.0
@@ -11731,6 +11746,7 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
+    experience: true
     func-id: 389
     return: key
     sleep: 0.0
