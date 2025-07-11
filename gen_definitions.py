@@ -12,6 +12,7 @@ import re
 import stat
 import sys
 import uuid
+import os
 from typing import Iterable, NamedTuple, Dict, List, Set, Sequence, TypeVar, Union, Any
 
 import llsd  # noqa
@@ -1026,6 +1027,10 @@ def gen_func_call_scripts(definitions: LSLDefinitions, output_path: str) -> None
 
     Useful for verifying that a compiler agrees with our function definitions
     """
+    
+    # Ensure our output directory exists first
+    os.makedirs(output_path, exist_ok=True)
+    
     # Unfortunately, LSO scripts are the only things that actually use function IDs, which we need to test.
     # They're also limited to 16k. For that reason, we need to chunk the calls up between multiple scripts
     # so that we don't collide heap and stack when compiling.
