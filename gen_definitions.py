@@ -10,7 +10,7 @@ import itertools
 import os.path
 import re
 import stat
-import sys
+import argparse
 import uuid
 import os
 from typing import Iterable, NamedTuple, Dict, List, Set, Sequence, TypeVar, Union, Any
@@ -1930,41 +1930,94 @@ yaml.add_representer(uuid.UUID, quoted_presenter)
 
 
 def main():
+    argparser = argparse.ArgumentParser(description="Process LSL definitions.")
+    argparser.add_argument("definitions", help="Path to the LSL definition yaml")
+
+    subparsers = argparser.add_subparsers(dest="mode", required=True)
+
+    sub = subparsers.add_parser("syntax")
+    sub.add_argument("filename")
+    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs)))
+
+    sub = subparsers.add_parser("gen_constant_lsl_script")
+    sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))
+
+    sub = subparsers.add_parser("gen_lexer_file")
+    sub.add_argument("template_file")
+    sub.add_argument("output_file")
+    sub.set_defaults(
+        func=lambda args, defs: gen_lexer_file(defs, args.template_file, args.output_file)
+    )
+
+    sub = subparsers.add_parser("gen_parser_file")
+    sub.add_argument("template_file")
+    sub.add_argument("output_file")
+    sub.set_defaults(
+        func=lambda args, defs: gen_parser_file(defs, args.template_file, args.output_file)
+    )
+
+    sub = subparsers.add_parser("gen_tree_header_file")
+    sub.add_argument("output_file")
+    sub.set_defaults(func=lambda args, defs: gen_tree_header_file(defs, args.output_file))
+
+    sub = subparsers.add_parser("gen_tree_source_file")
+    sub.add_argument("output_file")
+    sub.set_defaults(func=lambda args, defs: gen_tree_source_file(defs, args.output_file))
+
+    sub = subparsers.add_parser("gen_cpp_constants")
+    sub.add_argument("output_file")
+    sub.set_defaults(func=lambda args, defs: gen_cpp_constants(defs, args.output_file))
+
+    sub = subparsers.add_parser("gen_func_call_scripts")
+    sub.add_argument("output_path")
+    sub.set_defaults(func=lambda args, defs: gen_func_call_scripts(defs, args.output_path))
+
+    sub = subparsers.add_parser("gen_lscript_library_defs")
+    sub.add_argument("library_path")
+    sub.set_defaults(func=lambda args, defs: gen_lscript_library_defs(defs, args.library_path))
+
+    sub = subparsers.add_parser("gen_mono_library_defs")
+    sub.add_argument("library_template_path")
+    sub.add_argument("output_file")
+    sub.set_defaults(
+        func=lambda args, defs: gen_mono_library_defs(
+            defs, args.library_template_path, args.output_file
+        )
+    )
+
+    sub = subparsers.add_parser("gen_lscript_interface")
+    sub.add_argument("lscript_interface_path")
+    sub.set_defaults(
+        func=lambda args, defs: gen_lscript_interface(defs, args.lscript_interface_path)
+    )
+
+    sub = subparsers.add_parser("gen_mono_bind_interfaces")
+    sub.add_argument("mono_bind_interfaces_path")
+    sub.set_defaults(
+        func=lambda args, defs: gen_mono_bind_interfaces(defs, args.mono_bind_interfaces_path)
+    )
+
+    sub = subparsers.add_parser("gen_lscript_library_bind_pure")
+    sub.add_argument("output_path")
+    sub.set_defaults(func=lambda args, defs: gen_lscript_library_bind_pure(defs, args.output_path))
+
+    sub = subparsers.add_parser("gen_builtins_txt")
+    sub.add_argument("output_path")
+    sub.set_defaults(func=lambda args, defs: gen_builtins_txt(defs, args.output_path))
+
+    sub = subparsers.add_parser("gen_lua_registrations")
+    sub.add_argument("pure_only", type=int, help="0 or 1")
+    sub.add_argument("output_path")
+    sub.set_defaults(
+        func=lambda args, defs: gen_lua_registrations(defs, bool(args.pure_only), args.output_path)
+    )
+
+    args = argparser.parse_args()
+
     parser = LSLDefinitionParser()
-    definitions = parser.parse_file(sys.argv[1])
-    mode = sys.argv[2]
-    if mode == "syntax":
-        _write_if_different(sys.argv[3], dump_syntax(definitions))
-    elif mode == "gen_constant_lsl_script":
-        gen_constant_lsl_script(definitions)
-    elif mode == "gen_lexer_file":
-        gen_lexer_file(definitions, sys.argv[3], sys.argv[4])
-    elif mode == "gen_parser_file":
-        gen_parser_file(definitions, sys.argv[3], sys.argv[4])
-    elif mode == "gen_tree_header_file":
-        gen_tree_header_file(definitions, sys.argv[3])
-    elif mode == "gen_tree_source_file":
-        gen_tree_source_file(definitions, sys.argv[3])
-    elif mode == "gen_cpp_constants":
-        gen_cpp_constants(definitions, sys.argv[3])
-    elif mode == "gen_func_call_scripts":
-        gen_func_call_scripts(definitions, sys.argv[3])
-    elif mode == "gen_lscript_library_defs":
-        gen_lscript_library_defs(definitions, sys.argv[3])
-    elif mode == "gen_mono_library_defs":
-        gen_mono_library_defs(definitions, sys.argv[3], sys.argv[4])
-    elif mode == "gen_lscript_interface":
-        gen_lscript_interface(definitions, sys.argv[3])
-    elif mode == "gen_mono_bind_interfaces":
-        gen_mono_bind_interfaces(definitions, sys.argv[3])
-    elif mode == "gen_lscript_library_bind_pure":
-        gen_lscript_library_bind_pure(definitions, sys.argv[3])
-    elif mode == "gen_builtins_txt":
-        gen_builtins_txt(definitions, sys.argv[3])
-    elif mode == "gen_lua_registrations":
-        gen_lua_registrations(definitions, bool(int(sys.argv[3])), sys.argv[4])
-    else:
-        raise ValueError(f"Unknown mode {mode}")
+    definitions = parser.parse_file(args.definitions)
+
+    args.func(args, definitions)
 
 
 if __name__ == "__main__":
