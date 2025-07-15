@@ -1940,12 +1940,16 @@ def main():
     sub = subparsers.add_parser("gen_lexer_file")
     sub.add_argument("template_file")
     sub.add_argument("output_file")
-    sub.set_defaults(func=lambda args, defs: gen_lexer_file(defs, args.template_file, args.output_file))
+    sub.set_defaults(
+        func=lambda args, defs: gen_lexer_file(defs, args.template_file, args.output_file)
+    )
 
     sub = subparsers.add_parser("gen_parser_file")
     sub.add_argument("template_file")
     sub.add_argument("output_file")
-    sub.set_defaults(func=lambda args, defs: gen_parser_file(defs, args.template_file, args.output_file))
+    sub.set_defaults(
+        func=lambda args, defs: gen_parser_file(defs, args.template_file, args.output_file)
+    )
 
     sub = subparsers.add_parser("gen_tree_header_file")
     sub.add_argument("output_file")
@@ -1970,15 +1974,23 @@ def main():
     sub = subparsers.add_parser("gen_mono_library_defs")
     sub.add_argument("library_template_path")
     sub.add_argument("output_file")
-    sub.set_defaults(func=lambda args, defs: gen_mono_library_defs(defs, args.library_template_path, args.output_file))
+    sub.set_defaults(
+        func=lambda args, defs: gen_mono_library_defs(
+            defs, args.library_template_path, args.output_file
+        )
+    )
 
     sub = subparsers.add_parser("gen_lscript_interface")
     sub.add_argument("lscript_interface_path")
-    sub.set_defaults(func=lambda args, defs: gen_lscript_interface(defs, args.lscript_interface_path))
+    sub.set_defaults(
+        func=lambda args, defs: gen_lscript_interface(defs, args.lscript_interface_path)
+    )
 
     sub = subparsers.add_parser("gen_mono_bind_interfaces")
     sub.add_argument("mono_bind_interfaces_path")
-    sub.set_defaults(func=lambda args, defs: gen_mono_bind_interfaces(defs, args.mono_bind_interfaces_path))
+    sub.set_defaults(
+        func=lambda args, defs: gen_mono_bind_interfaces(defs, args.mono_bind_interfaces_path)
+    )
 
     sub = subparsers.add_parser("gen_lscript_library_bind_pure")
     sub.add_argument("output_path")
@@ -1991,13 +2003,15 @@ def main():
     sub = subparsers.add_parser("gen_lua_registrations")
     sub.add_argument("pure_only", type=int, help="0 or 1")
     sub.add_argument("output_path")
-    sub.set_defaults(func=lambda args, defs: gen_lua_registrations(defs, bool(args.pure_only), args.output_path))
+    sub.set_defaults(
+        func=lambda args, defs: gen_lua_registrations(defs, bool(args.pure_only), args.output_path)
+    )
 
     args = argparser.parse_args()
 
     parser = LSLDefinitionParser()
     definitions = parser.parse_file(args.definitions)
-    
+
     args.func(args, definitions)
 
 
