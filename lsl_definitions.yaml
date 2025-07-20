@@ -5191,6 +5191,7 @@ functions:
     - ImpactSprite:
         tooltip: ''
         type: string
+    deprecated: true
     energy: 10.0
     func-id: 161
     return: void
