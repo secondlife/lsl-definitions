@@ -3204,14 +3204,17 @@ constants:
     type: integer
     value: '0x100'
   REMOTE_DATA_CHANNEL:
+    deprecated: true
     tooltip: ''
     type: integer
     value: 1
   REMOTE_DATA_REPLY:
+    deprecated: true
     tooltip: ''
     type: integer
     value: 3
   REMOTE_DATA_REQUEST:
+    deprecated: true
     tooltip: ''
     type: integer
     value: 2
@@ -4627,6 +4630,7 @@ events:
     - SData:
         tooltip: ''
         type: string
+    deprecated: true
     tooltip: This event is deprecated.
   run_time_permissions:
     arguments:
