@@ -11971,6 +11971,7 @@ types:
       surrounding their elements; the elements inside are separated by commas. e.g.
       [0, 1, 2, 3, 4] or ["Yes", "No", "Perhaps"].
   quaternion:
+    private: true
     tooltip: The quaternion type is a left over from way back when LSL was created.
       It was later renamed to <rotation> to make it more user friendly, but it appears
       someone forgot to remove it ;-)
