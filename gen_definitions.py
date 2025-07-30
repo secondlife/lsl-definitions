@@ -2048,9 +2048,7 @@ def main():
 
     sub = subparsers.add_parser("gen_lua_constant_definitions")
     sub.add_argument("output_path")
-    sub.set_defaults(
-        func=lambda args, defs: gen_lua_constant_definitions(defs, args.output_path)
-    )
+    sub.set_defaults(func=lambda args, defs: gen_lua_constant_definitions(defs, args.output_path))
 
     args = argparser.parse_args()
 
