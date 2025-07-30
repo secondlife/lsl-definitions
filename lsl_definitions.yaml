@@ -2287,7 +2287,7 @@ constants:
     type: integer
     value: 24
   PRIM_CLICK_ACTION:
-    tooltip: ''
+    tooltip: '[PRIM_CLICK_ACTION, integer CLICK_ACTION_*]'
     type: integer
     value: 43
   PRIM_COLLISION_SOUND:
@@ -2295,7 +2295,11 @@ constants:
     type: integer
     value: 53
   PRIM_COLOR:
-    tooltip: ''
+    tooltip: '[PRIM_COLOR, integer face, vector color, float alpha]
+
+integer face – face number or ALL_SIDES
+vector color – color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
     type: integer
     value: 18
   PRIM_DAMAGE:
@@ -2303,19 +2307,27 @@ constants:
     type: integer
     value: 51
   PRIM_DESC:
-    tooltip: ''
+    tooltip: '[PRIM_DESC, string description]'
     type: integer
     value: 28
   PRIM_FLEXIBLE:
-    tooltip: ''
+    tooltip: '[ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
++
++integer boolean – TRUE enables, FALSE disables
++integer softness – ranges from 0 to 3
++float gravity – ranges from -10.0 to 10.0
++float friction – ranges from 0.0 to 10.0
++float wind – ranges from 0.0 to 10.0
++float tension – ranges from 0.0 to 10.0
++vector force'
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
-    tooltip: ''
+    tooltip: '[ PRIM_FULLBRIGHT, integer face, integer boolean ]'
     type: integer
     value: 20
   PRIM_GLOW:
-    tooltip: PRIM_GLOW is used to get or set the glow status of the face.
+    tooltip: 'PRIM_GLOW is used to get or set the glow status of the face.\n[ PRIM_GLOW, integer face, float intensity ]'
     type: integer
     value: 25
   PRIM_GLTF_ALPHA_MODE_BLEND:
@@ -2374,11 +2386,13 @@ constants:
     type: integer
     value: '0x30'
   PRIM_LINK_TARGET:
-    tooltip: ''
+    tooltip: '[ PRIM_LINK_TARGET, integer link_target ]
+
+Used to get or set multiple links with a single PrimParameters call.'
     type: integer
     value: 34
   PRIM_MATERIAL:
-    tooltip: ''
+    tooltip: '[ PRIM_MATERIAL, integer PRIM_MATERIAL_* ]'
     type: integer
     value: 2
   PRIM_MATERIAL_DENSITY:
@@ -2555,7 +2569,7 @@ constants:
     type: integer
     value: 9
   PRIM_NAME:
-    tooltip: ''
+    tooltip: '[ PRIM_NAME, string name ]'
     type: integer
     value: 27
   PRIM_NORMAL:
@@ -2564,15 +2578,19 @@ constants:
     type: integer
     value: 37
   PRIM_OMEGA:
-    tooltip: ''
+    tooltip: '[ PRIM_OMEGA, vector axis, float spinrate, float gain ]
+
+vector axis – arbitrary axis to rotate the object around
+float spinrate – rate of rotation in radians per second
+float gain – also modulates the final spinrate and disables the rotation behavior if zero'
     type: integer
     value: 32
   PRIM_PHANTOM:
-    tooltip: ''
+    tooltip: '[ PRIM_PHANTOM, integer boolean ]'
     type: integer
     value: 5
   PRIM_PHYSICS:
-    tooltip: ''
+    tooltip: '[ PRIM_PHYSICS, integer boolean ]'
     type: integer
     value: 3
   PRIM_PHYSICS_SHAPE_CONVEX:
@@ -2596,19 +2614,29 @@ constants:
     type: integer
     value: 30
   PRIM_POINT_LIGHT:
-    tooltip: ''
+    tooltip: '[ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
+
+integer boolean – TRUE enables, FALSE disables
+vector linear_color – linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+float intensity – ranges from 0.0 to 1.0
+float radius – ranges from 0.1 to 20.0
+float falloff – ranges from 0.01 to 2.0'
     type: integer
     value: 23
   PRIM_POSITION:
-    tooltip: ''
+    tooltip: '[ PRIM_POSITION, vector position ]
+
+vector position – position in region or local coordinates depending upon the situation'
     type: integer
     value: 6
   PRIM_POS_LOCAL:
-    tooltip: ''
+    tooltip: 'PRIM_POS_LOCAL, vector position ]
+
+vector position - position in local coordinates'
     type: integer
     value: 33
   PRIM_PROJECTOR:
-    tooltip: ''
+    tooltip: '[ PRIM_PROJECTOR, string texture, float fov, float focus, float ambiance ]'
     type: integer
     value: 42
   PRIM_REFLECTION_PROBE:
@@ -2636,15 +2664,15 @@ constants:
     type: integer
     value: 4
   PRIM_RENDER_MATERIAL:
-    tooltip: ''
+    tooltip: '[ PRIM_RENDER_MATERIAL, integer face, string material ]'
     type: integer
     value: 49
   PRIM_ROTATION:
-    tooltip: ''
+    tooltip: '[ PRIM_ROT_LOCAL, rotation global_rot ]'
     type: integer
     value: 8
   PRIM_ROT_LOCAL:
-    tooltip: ''
+    tooltip: '[ PRIM_ROT_LOCAL, rotation local_rot ]'
     type: integer
     value: 29
   PRIM_SCRIPTED_SIT_ONLY:
@@ -2709,15 +2737,15 @@ constants:
     type: integer
     value: 50
   PRIM_SIT_TARGET:
-    tooltip: ''
+    tooltip: '[ PRIM_SIT_TARGET, integer boolean, vector offset, rotation rot ]'
     type: integer
     value: 41
   PRIM_SIZE:
-    tooltip: ''
+    tooltip: '[ PRIM_SIZE, vector size ]'
     type: integer
     value: 7
   PRIM_SLICE:
-    tooltip: ''
+    tooltip: '[ PRIM_SLICE, vector slice ]'
     type: integer
     value: 35
   PRIM_SPECULAR:
@@ -2731,7 +2759,7 @@ constants:
     type: integer
     value: 4
   PRIM_TEXGEN:
-    tooltip: ''
+    tooltip: '[ PRIM_TEXGEN, integer face, PRIM_TEXGEN_* ]'
     type: integer
     value: 22
   PRIM_TEXGEN_DEFAULT:
@@ -2743,11 +2771,11 @@ constants:
     type: integer
     value: 1
   PRIM_TEXT:
-    tooltip: ''
+    tooltip: '[ PRIM_TEXT, string text, vector color, float alpha ]'
     type: integer
     value: 26
   PRIM_TEXTURE:
-    tooltip: ''
+    tooltip: '[ PRIM_TEXTURE, integer face, string texture, vector repeats, vector offsets, float rotation_in_radians ]'
     type: integer
     value: 17
   PRIM_TYPE:
@@ -5437,6 +5465,7 @@ functions:
     energy: 10.0
     func-id: 39
     return: integer
+    bool_semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if detected object or agent Number has the same user group
       active as this object.\nIt will return FALSE if the object or agent is in the
@@ -7231,6 +7260,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 46
+    bool_semantics: true
     return: integer
     sleep: 0.0
     tooltip: Returns boolean value of the specified status (e.g. STATUS_PHANTOM) of
@@ -7622,6 +7652,7 @@ functions:
         tooltip: ''
         type: string
     - Position:
+        index_semantics: true
         tooltip: ''
         type: integer
     - SourceVariable:
@@ -7683,6 +7714,7 @@ functions:
     energy: 10.0
     func-id: 559
     return: integer
+    bool_semantics: true
     sleep: 0.0
     tooltip: Checks the face for a PBR render material.
   llJson2List:
@@ -7997,6 +8029,7 @@ functions:
     - start:
         tooltip: First entry to return. 0 for start of list.
         type: integer
+        index_semantics: true
     - count:
         tooltip: Number of entries to return. Less than 1 for all keys.
         type: integer
@@ -8011,6 +8044,7 @@ functions:
     - start:
         tooltip: First entry to return. 0 for start of list.
         type: integer
+        index_semantics: true
     - count:
         tooltip: Number of entries to return. Less than 1 for all keys.
         type: integer
@@ -8363,6 +8397,7 @@ functions:
         tooltip: ''
         type: list
     - Position:
+        index_semantics: true
         tooltip: ''
         type: integer
     energy: 10.0
@@ -8401,9 +8436,11 @@ functions:
     - Start:
         tooltip: ''
         type: integer
+        index_semantics: true
     - End:
         tooltip: ''
         type: integer
+        index_semantics: true
     energy: 10.0
     func-id: 296
     native: true
@@ -8445,6 +8482,7 @@ functions:
     - Sortkey:
         tooltip: The zero based element within the stride to use as the sort key
         type: integer
+        index_semantics: true
     - Ascending:
         tooltip: Boolean. TRUE = result in ascending order, FALSE = result in descending
           order.
@@ -8799,6 +8837,7 @@ functions:
     energy: 10.0
     func-id: 393
     return: integer
+    bool_semantics: true
     sleep: 0.0
     tooltip: Adds or removes agents from the estate's agent access or ban lists, or
       groups to the estate's group access list. Action is one of the ESTATE_ACCESS_ALLOWED_*
@@ -8998,9 +9037,9 @@ functions:
         tooltip: The string to convert to Unicode.
         type: string
     - index:
-        # note: This does _not_ have index semantics, this is a Unicode codepoint!
         tooltip: Index of character to convert to unicode.
         type: integer
+        index_semantics: true
     energy: 10.0
     func-id: 527
     pure: true
@@ -10036,6 +10075,7 @@ functions:
     energy: 10.0
     func-id: 592
     return: integer
+    bool_semantics: true
     sleep: 0.0
     tooltip: Attempts to resize the entire object by ScalingFactor, maintaining the
       size-position ratios of the prims.\n\nResizing is subject to prim scale limits
@@ -10855,6 +10895,7 @@ functions:
     energy: 10.0
     func-id: 397
     return: integer
+    bool_semantics: true
     sleep: 0.0
     tooltip: Attempts to move the object so that the root prim is within 0.1m of Position.\nReturns
       an integer boolean, TRUE if the object is successfully placed within 0.1 m of

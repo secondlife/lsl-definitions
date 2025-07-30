@@ -19,6 +19,13 @@ import llsd  # noqa
 import yaml
 
 
+def quoted_presenter(dumper, data):
+    return dumper.represent_scalar("tag:yaml.org,2002:str", str(data), style='"')
+
+
+yaml.add_representer(uuid.UUID, quoted_presenter)
+
+
 class StringEnum(str, enum.Enum):
     def __str__(self):
         return self.value
@@ -1892,7 +1899,7 @@ def gen_lua_registrations(definitions: LSLDefinitions, pure_only: bool, output_p
     const LSCRIPTType types[] = {%(arg_types)s};
     // Convert the arguments to LLScriptLibData, throwing if not possible.
     extract_lua_args(L, %(num_args)d, types, args);
-    return call_lib_func_lua(%(func_id)d, %(num_args)d, args, %(ret_type)s);
+    return call_lib_func_lua(L, %(func_id)d, %(num_args)d, args, %(ret_type)s);
 }}
         """ % {
             "num_args": len(func.arguments),
@@ -1903,6 +1910,40 @@ def gen_lua_registrations(definitions: LSLDefinitions, pure_only: bool, output_p
         }
         bindings.append(binding)
     _write_if_different(output_path, ",".join(bindings))
+
+
+def _is_uuid(val: str) -> bool:
+    return bool(re.match(r"\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z", val))
+
+
+def gen_lua_constant_definitions(definitions: LSLDefinitions, output_path: str) -> None:
+    """Generate lambdas to handle incoming Lua calls that wrap ll*() lscript functions"""
+    # TODO: This would be much better as a constant folding pass in the compiler.
+    #  there are a ton of constants and putting them all in the runtime environment
+    #  is not free.
+    bindings = []
+    for const in definitions.constants.values():
+        binding = "    "
+        if const.type == LSLType.KEY or _is_uuid(const.value):
+            # This is a bit weird. UUID constants don't exist in LSL, but they do in Lua.
+            # Make these an actual UUID if we can to make comparison easier.
+            binding += f'luaSL_pushuuidstring(L, "{_to_c_str(const.value)}");'
+        elif const.type == LSLType.STRING:
+            binding += f'lua_pushstring(L, "{_to_c_str(const.value)}");'
+        elif const.type == LSLType.INTEGER:
+            binding += f"luaSL_pushnativeinteger(L, {const.value});"
+        elif const.type == LSLType.FLOAT:
+            binding += f"lua_pushnumber(L, {const.value});"
+        elif const.type == LSLType.VECTOR:
+            binding += f"lua_pushvector(L, {const.value[1:-1]});"
+        elif const.type == LSLType.ROTATION:
+            binding += f"luaSL_pushquaternion(L, {const.value[1:-1]});"
+        else:
+            raise ValueError(f"Can't generate Lua constant for {const.name} of type {const.type}")
+
+        binding += f'\n    lua_setglobal(L, "{_to_c_str(const.name)}");\n'
+        bindings.append(binding)
+    _write_if_different(output_path, "\n".join(bindings))
 
 
 def gen_lscript_library_bind_pure(definitions: LSLDefinitions, output_path: str) -> None:
@@ -1920,13 +1961,6 @@ def gen_lscript_library_bind_pure(definitions: LSLDefinitions, output_path: str)
         impl_name = _func_name_to_impl_name(func.name)
         assign_execs += f'    library.assignExec("{func.name}", {impl_name});\n'
     _write_if_different(output_path, "".join(assign_execs))
-
-
-def quoted_presenter(dumper, data):
-    return dumper.represent_scalar("tag:yaml.org,2002:str", str(data), style='"')
-
-
-yaml.add_representer(uuid.UUID, quoted_presenter)
 
 
 def main():
@@ -2010,6 +2044,12 @@ def main():
     sub.add_argument("output_path")
     sub.set_defaults(
         func=lambda args, defs: gen_lua_registrations(defs, bool(args.pure_only), args.output_path)
+    )
+
+    sub = subparsers.add_parser("gen_lua_constant_definitions")
+    sub.add_argument("output_path")
+    sub.set_defaults(
+        func=lambda args, defs: gen_lua_constant_definitions(defs, args.output_path)
     )
 
     args = argparser.parse_args()
