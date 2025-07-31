@@ -10451,7 +10451,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 558
-    return: integer
+    return: void
     sleep: 0.0
     tooltip: Changes terrain texture properties in the region.
   llSetHoverHeight:
