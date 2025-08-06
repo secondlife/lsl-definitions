@@ -802,6 +802,10 @@ constants:
       \t5) Positive rated building\n\t\t\t6) Negative rated building"
     type: integer
     value: 4
+  DATA_RESERVED_0:
+    tooltip: "Reserved for Linden use."
+    type: integer
+    value: 9
   DATA_SIM_POS:
     tooltip: ''
     type: integer
