@@ -10611,6 +10611,7 @@ functions:
     - Parameters:
         tooltip: ''
         type: list
+    deprecated: true
     energy: 10.0
     func-id: 328
     return: void
@@ -10881,6 +10882,7 @@ functions:
     - Parameters:
         tooltip: A list of changes.
         type: list
+    deprecated: true
     energy: 10.0
     func-id: 259
     return: void
