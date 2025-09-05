@@ -10616,8 +10616,7 @@ functions:
     func-id: 328
     return: void
     sleep: 0.2
-    tooltip: Set primitive parameters for LinkNumber based on Parameters.\nSets the
-      parameters (or properties) of any linked prim in one step.
+    tooltip: 'Deprecated: Use llSetLinkPrimitiveParamsFast instead.'
   llSetLinkPrimitiveParamsFast:
     arguments:
     - LinkNumber:
@@ -10887,8 +10886,7 @@ functions:
     func-id: 259
     return: void
     sleep: 0.2
-    tooltip: This function changes the many properties (or "parameters") of a prim
-      in one operation. Parameters is a list of changes.
+    tooltip: 'Deprecated: Use llSetLinkPrimitiveParamsFast instead.'
   llSetRegionPos:
     arguments:
     - Position:
