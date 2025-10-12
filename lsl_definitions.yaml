@@ -6428,7 +6428,6 @@ functions:
         type: integer
     energy: 10.0
     func-id: 146
-    index_semantics: true
     return: integer
     sleep: 0.0
     tooltip: Returns the quantity of items of a given type (INVENTORY_* flag) in the
