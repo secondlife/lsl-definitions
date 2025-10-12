@@ -262,7 +262,7 @@ class LSLFunction:
                         "private": self.private,
                         "pure": self.pure,
                         "native": self.native,
-                        "mono_sleep": self.mono_sleep,
+                        "mono-sleep": self.mono_sleep,
                     }
                 ),
             }
@@ -393,7 +393,7 @@ class LSLDefinitionParser:
             energy=float(func_data["energy"] or "0.0"),
             sleep=float(func_data["sleep"] or "0.0"),
             # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
-            mono_sleep=float(func_data.get("mono_sleep", func_data.get("sleep")) or "0.0"),
+            mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
             ret_type=LSLType(func_data["return"]),
             arguments=[
                 self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
@@ -404,8 +404,8 @@ class LSLDefinitionParser:
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
             native=func_data.get("native", False),
-            index_semantics=bool(func_data.get("index_semantics", False)),
-            bool_semantics=bool(func_data.get("bool_semantics", False)),
+            index_semantics=bool(func_data.get("index-semantics", False)),
+            bool_semantics=bool(func_data.get("bool-semantics", False)),
         )
 
         if func.name in self._definitions.functions:
@@ -438,7 +438,7 @@ class LSLDefinitionParser:
         arg = LSLArgument(
             name=arg_name,
             type=LSLType(arg_data["type"]),
-            index_semantics=bool(arg_data.get("index_semantics", False)),
+            index_semantics=bool(arg_data.get("index-semantics", False)),
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.index_semantics and arg.type != LSLType.INTEGER:
@@ -506,10 +506,10 @@ def _remove_worthless(val: dict) -> dict:
         val.pop("pure", None)
     if not val.get("native"):
         val.pop("native", None)
-    if not val.get("bool_semantics"):
-        val.pop("bool_semantics", None)
-    if not val.get("index_semantics"):
-        val.pop("index_semantics", None)
+    if not val.get("bool-semantics"):
+        val.pop("bool-semantics", None)
+    if not val.get("index-semantics"):
+        val.pop("index-semantics", None)
     return val
 
 
