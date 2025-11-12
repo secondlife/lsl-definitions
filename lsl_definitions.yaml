@@ -9850,7 +9850,7 @@ functions:
     - InventoryItem:
         tooltip: ''
         type: string
-    - Parms:
+    - Params:
         tooltip: ''
         type: list
     energy: 200.0
