@@ -2301,7 +2301,7 @@ constants:
 
       integer face – face number or ALL_SIDES
       vector color – color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
-      float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
+      float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)
     type: integer
     value: 18
   PRIM_DAMAGE:
@@ -2392,7 +2392,7 @@ constants:
     tooltip: |
       [ PRIM_LINK_TARGET, integer link_target ]
 
-      Used to get or set multiple links with a single PrimParameters call.'
+      Used to get or set multiple links with a single PrimParameters call.
     type: integer
     value: 34
   PRIM_MATERIAL:
@@ -2587,7 +2587,7 @@ constants:
 
       vector axis – arbitrary axis to rotate the object around
       float spinrate – rate of rotation in radians per second
-      float gain – also modulates the final spinrate and disables the rotation behavior if zero'
+      float gain – also modulates the final spinrate and disables the rotation behavior if zero
     type: integer
     value: 32
   PRIM_PHANTOM:
@@ -2626,21 +2626,21 @@ constants:
       vector linear_color – linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
       float intensity – ranges from 0.0 to 1.0
       float radius – ranges from 0.1 to 20.0
-      float falloff – ranges from 0.01 to 2.0'
+      float falloff – ranges from 0.01 to 2.0
     type: integer
     value: 23
   PRIM_POSITION:
     tooltip: |
       [ PRIM_POSITION, vector position ]
 
-      vector position – position in region or local coordinates depending upon the situation'
+      vector position – position in region or local coordinates depending upon the situation
     type: integer
     value: 6
   PRIM_POS_LOCAL:
     tooltip: |
       [ PRIM_POS_LOCAL, vector position ]
 
-      vector position - position in local coordinates'
+      vector position - position in local coordinates
     type: integer
     value: 33
   PRIM_PROJECTOR:
