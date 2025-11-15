@@ -2296,11 +2296,12 @@ constants:
     type: integer
     value: 53
   PRIM_COLOR:
-    tooltip: '[PRIM_COLOR, integer face, vector color, float alpha]
+    tooltip: |
+      [PRIM_COLOR, integer face, vector color, float alpha]
 
-integer face – face number or ALL_SIDES
-vector color – color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
-float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
+      integer face – face number or ALL_SIDES
+      vector color – color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+      float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
     type: integer
     value: 18
   PRIM_DAMAGE:
@@ -2312,15 +2313,16 @@ float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
     type: integer
     value: 28
   PRIM_FLEXIBLE:
-    tooltip: '[ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
-+
-+integer boolean – TRUE enables, FALSE disables
-+integer softness – ranges from 0 to 3
-+float gravity – ranges from -10.0 to 10.0
-+float friction – ranges from 0.0 to 10.0
-+float wind – ranges from 0.0 to 10.0
-+float tension – ranges from 0.0 to 10.0
-+vector force'
+    tooltip: |
+      [ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
+
+      integer boolean – TRUE enables, FALSE disables
+      integer softness – ranges from 0 to 3
+      float gravity – ranges from -10.0 to 10.0
+      float friction – ranges from 0.0 to 10.0
+      float wind – ranges from 0.0 to 10.0
+      float tension – ranges from 0.0 to 10.0
+      vector force
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
@@ -2387,9 +2389,10 @@ float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)'
     type: integer
     value: '0x30'
   PRIM_LINK_TARGET:
-    tooltip: '[ PRIM_LINK_TARGET, integer link_target ]
+    tooltip: |
+      [ PRIM_LINK_TARGET, integer link_target ]
 
-Used to get or set multiple links with a single PrimParameters call.'
+      Used to get or set multiple links with a single PrimParameters call.'
     type: integer
     value: 34
   PRIM_MATERIAL:
@@ -2579,11 +2582,12 @@ Used to get or set multiple links with a single PrimParameters call.'
     type: integer
     value: 37
   PRIM_OMEGA:
-    tooltip: '[ PRIM_OMEGA, vector axis, float spinrate, float gain ]
+    tooltip: |
+      [ PRIM_OMEGA, vector axis, float spinrate, float gain ]
 
-vector axis – arbitrary axis to rotate the object around
-float spinrate – rate of rotation in radians per second
-float gain – also modulates the final spinrate and disables the rotation behavior if zero'
+      vector axis – arbitrary axis to rotate the object around
+      float spinrate – rate of rotation in radians per second
+      float gain – also modulates the final spinrate and disables the rotation behavior if zero'
     type: integer
     value: 32
   PRIM_PHANTOM:
@@ -2615,25 +2619,28 @@ float gain – also modulates the final spinrate and disables the rotation behav
     type: integer
     value: 30
   PRIM_POINT_LIGHT:
-    tooltip: '[ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
+    tooltip: |
+      [ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
 
-integer boolean – TRUE enables, FALSE disables
-vector linear_color – linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
-float intensity – ranges from 0.0 to 1.0
-float radius – ranges from 0.1 to 20.0
-float falloff – ranges from 0.01 to 2.0'
+      integer boolean – TRUE enables, FALSE disables
+      vector linear_color – linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+      float intensity – ranges from 0.0 to 1.0
+      float radius – ranges from 0.1 to 20.0
+      float falloff – ranges from 0.01 to 2.0'
     type: integer
     value: 23
   PRIM_POSITION:
-    tooltip: '[ PRIM_POSITION, vector position ]
+    tooltip: |
+      [ PRIM_POSITION, vector position ]
 
-vector position – position in region or local coordinates depending upon the situation'
+      vector position – position in region or local coordinates depending upon the situation'
     type: integer
     value: 6
   PRIM_POS_LOCAL:
-    tooltip: 'PRIM_POS_LOCAL, vector position ]
+    tooltip: |
+      [ PRIM_POS_LOCAL, vector position ]
 
-vector position - position in local coordinates'
+      vector position - position in local coordinates'
     type: integer
     value: 33
   PRIM_PROJECTOR:
