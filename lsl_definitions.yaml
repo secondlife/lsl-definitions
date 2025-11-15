@@ -4750,6 +4750,10 @@ functions:
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    must-use: If true or `pure` is true, then the functions return value should not be discarded, as it serves no other purpose
+#    linden-experience: If true use of this function requires a Linden owned experience
+#    mono-sleep: Sleep in the mono script runtime
+#    index-semantics: If true then the returned integer from this function represents 0 based index
+#    bool-semantics: If true then the returned integer represents a boolean 1 or 0
   llAbs:
     arguments:
     - Value:
@@ -7366,7 +7370,7 @@ functions:
       rezzed by an agent, this function returns 0.
     must-use: true
   llGetStartString:
-    arguments: null
+    arguments: []
     energy: 10.0
     func-id: 556
     return: string
