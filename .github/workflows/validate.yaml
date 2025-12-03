@@ -10,7 +10,7 @@ jobs:
   validate-yaml-for-lsl-definitions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Validate YAML's schema
         uses: RomanosTrechlis/actions-validate-yaml@master
