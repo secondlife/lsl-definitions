@@ -1,0 +1,376 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json",
+    "definitions": {
+        "nonNegativeInteger": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "nonNegativeIntegerDefault0": {
+            "allOf": [
+                { "$ref": "#/definitions/nonNegativeInteger" },
+                { "default": 0 }
+            ]
+        },
+        "nonNegativeNumber": {
+            "type": "number",
+            "minimum": 0.0
+        },
+        "positiveInteger": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+        },
+        "zeroToOneNumber": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+        },
+        "stringArray": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true,
+            "default": []
+        }
+    },
+    "properties": {
+        "constants": {
+            "additionalProperties": false,
+            "patternProperties": {
+                "^(?:[A-Z]+(?:_[A-Z]+)*)$": {
+                    "properties": {
+                        "tooltip": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "controls": {
+            "additionalProperties": false,
+            "patternProperties": {
+                "^(?:[a-z]+)$": {
+                    "properties": {
+                        "tooltip": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "events": {
+            "additionalProperties": false,
+            "patternProperties": {
+                "^(?:[a-z]+(?:_[a-z]+)*)$": {
+                    "properties": {
+                        "arguments": {
+                            "type": "array",
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "tooltip": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "float",
+                                                "body": "float"
+                                            },
+                                            {
+                                                "label": "integer",
+                                                "body": "integer"
+                                            },
+                                            {
+                                                "label": "key",
+                                                "body": "key"
+                                            },
+                                            {
+                                                "label": "list",
+                                                "body": "list"
+                                            },
+                                            {
+                                                "label": "quaternion",
+                                                "body": "quaternion"
+                                            },
+                                            {
+                                                "label": "rotation",
+                                                "body": "rotation"
+                                            },
+                                            {
+                                                "label": "string",
+                                                "body": "string"
+                                            },
+                                            {
+                                                "label": "vector",
+                                                "body": "vector"
+                                            }
+                                        ],
+                                        "oneOf": [
+                                            { "const": "float" },
+                                            { "const": "integer" },
+                                            { "const": "key" },
+                                            { "const": "list" },
+                                            {
+                                                "$comment": "quaternion is an alias for rotation",
+                                                "const": "quaternion"
+                                            },
+                                            { "const": "rotation" },
+                                            { "const": "string" },
+                                            { "const": "vector" }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "type"
+                                ],
+                                "type": "object"
+                            },
+                            "minItems": 1,
+                            "uniqueItems": true
+                        },
+                        "deprecated": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "tooltip": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "functions": {
+            "additionalProperties": false,
+            "patternProperties": {
+                "^ll(?:[A-Z]+[a-z]+)+$": {
+                    "properties": {
+                        "arguments": {
+                            "type": "array",
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "tooltip": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "float",
+                                                "body": "float"
+                                            },
+                                            {
+                                                "label": "integer",
+                                                "body": "integer"
+                                            },
+                                            {
+                                                "label": "key",
+                                                "body": "key"
+                                            },
+                                            {
+                                                "label": "list",
+                                                "body": "list"
+                                            },
+                                            {
+                                                "label": "quaternion",
+                                                "body": "quaternion"
+                                            },
+                                            {
+                                                "label": "rotation",
+                                                "body": "rotation"
+                                            },
+                                            {
+                                                "label": "string",
+                                                "body": "string"
+                                            },
+                                            {
+                                                "label": "vector",
+                                                "body": "vector"
+                                            }
+                                        ],
+                                        "oneOf": [
+                                            { "const": "float" },
+                                            { "const": "integer" },
+                                            { "const": "key" },
+                                            { "const": "list" },
+                                            {
+                                                "$comment": "quaternion is an alias for rotation",
+                                                "const": "quaternion"
+                                            },
+                                            { "const": "rotation" },
+                                            { "const": "string" },
+                                            { "const": "vector" }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "tooltip",
+                                    "type"
+                                ]
+                            },
+                            "minItems": 1,
+                            "uniqueItems": true
+                        },
+                        "bool-semantics": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "deprecated": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "energy": {
+                            "$ref": "#definitions/nonNegativeNumber"
+                        },
+                        "experience": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "func-id": {
+                            "$comment": "llSin has 'func-id: 0', so we must include zero",
+                            "$ref": "#definitions/nonNegativeInteger"
+                        },
+                        "god-mode": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "index-semantics": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "linden-expecience": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "mono-sleep": {
+                            "$ref": "#definitions/nonNegativeNumber"
+                        },
+                        "must-use": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "native": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "private": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "pure": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "return": {
+                            "default": "void",
+                            "defaultSnippets": [
+                                {
+                                    "label": "float",
+                                    "body": "float"
+                                },
+                                {
+                                    "label": "integer",
+                                    "body": "integer"
+                                },
+                                {
+                                    "label": "key",
+                                    "body": "key"
+                                },
+                                {
+                                    "label": "list",
+                                    "body": "list"
+                                },
+                                {
+                                    "label": "quaternion",
+                                    "body": "quaternion"
+                                },
+                                {
+                                    "label": "rotation",
+                                    "body": "rotation"
+                                },
+                                {
+                                    "label": "string",
+                                    "body": "string"
+                                },
+                                {
+                                    "label": "vector",
+                                    "body": "vector"
+                                },
+                                {
+                                    "label": "void",
+                                    "body": "void"
+                                }
+                            ],
+                            "oneOf": [
+                                { "const": "float" },
+                                { "const": "integer" },
+                                { "const": "key" },
+                                { "const": "list" },
+                                {
+                                    "$comment": "quaternion is an alias for rotation",
+                                    "const": "quaternion"
+                                },
+                                { "const": "rotation" },
+                                { "const": "string" },
+                                { "const": "vector" },
+                                { "const": "void" }
+                            ]
+                        },
+                        "sleep": {
+                            "$ref": "#definitions/nonNegativeNumber"
+                        },
+                        "tooltip": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "return",
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "llsd-lsl-syntax-version": {
+            "$ref": "#definitions/positiveInteger"
+        },
+        "types": {
+            "properties": {
+                "private": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tooltip"
+            ],
+            "type": "object"
+        }
+    },
+    "required": [
+        "constants",
+        "controls",
+        "events",
+        "functions",
+        "llsd-lsl-syntax-version",
+        "types"
+    ],
+    "title": "Second Life LSL Definitions",
+    "type": "object"
+}
