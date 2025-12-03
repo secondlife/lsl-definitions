@@ -19,6 +19,12 @@ jobs:
           data: |-
             lsl_definitions.yaml
 
+  test-generating-syntax:
+    needs: validate-yaml-for-lsl-definitions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
