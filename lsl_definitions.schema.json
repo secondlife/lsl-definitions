@@ -36,7 +36,7 @@
         "constants": {
             "additionalProperties": false,
             "patternProperties": {
-                "^(?:[A-Z]+(?:_[A-Z]+)*)$": {
+                "^(?:[A-Z]+(?:_(?:[0-9]+|[A-Z]+))*)$": {
                     "properties": {
                         "tooltip": {
                             "type": "string"
