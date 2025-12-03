@@ -36,7 +36,7 @@
         "constants": {
             "additionalProperties": false,
             "patternProperties": {
-                "^(?:[A-Z]+(?:_(?:[0-9]+|[A-Z]+))*)$": {
+                "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
                     "properties": {
                         "tooltip": {
                             "type": "string"
@@ -402,17 +402,7 @@
             ],
             "minItems": 1,
             "type": "array",
-            "uniqueItems": true,
-
-
-            "properties": {
-
-            },
-            "required": [
-                "return",
-                "tooltip"
-            ],
-            "type": "object"
+            "uniqueItems": true
         },
         "llsd-lsl-syntax-version": {
             "$ref": "#definitions/positiveInteger"
