@@ -1,18 +1,22 @@
-#        ************
-#        * IMPORTANT*
-#        ************
-#        * Adding new functions and selecting function ids (for LSO):
+%YAML 1.2
+---
+# yaml-language-server: $schema=http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json
 #
-#        When adding functions it is important to select an available function ID from an open range.
-#        Select a new ID from the open ranges listed below and update the list.
-#        The following ranges are available for use:
 #
-#            561 - 589, 593 - 599,
-#            605 - 649, 663 - 699, 719 - 749, 751 - 759,
-#            763 - 799, 804 - 1023
-#            430 - 499 (appears to be open but use with caution.)
-
-
+#  Important:
+#     Adding new functions and selecting function ids (for LSO):
+#
+#     When adding functions it is important to select an available function ID
+#     from an open range.
+#     Select a new ID from the open ranges listed below and update the list.
+#     The following ranges are available for use:
+#
+#     561 - 589, 593 - 599,
+#     605 - 649, 663 - 699, 719 - 749, 751 - 759,
+#     763 - 799, 804 - 1023
+#     430 - 499 (appears to be open but use with caution.)
+#
+#
 # increment only when the file format changes, not just the content
 # retain the "llsd-" prefix for compatibility...
 llsd-lsl-syntax-version: 2
