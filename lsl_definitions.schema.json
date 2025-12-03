@@ -154,7 +154,7 @@
         "functions": {
             "additionalProperties": false,
             "patternProperties": {
-                "^ll(?:[A-Z]+[a-z]+)+$": {
+                "^ll(?:[A-Z0-9]+[a-z]*)+$": {
                     "additionalProperties": false,
                     "properties": {
                         "arguments": {
@@ -162,7 +162,7 @@
                             "items": {
                                 "additionalProperties": false,
                                 "patternProperties": {
-                                    "^(?:[a-z]+(?:_[a-z]+)*)$": {
+                                    "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
                                         "properties": {
                                             "tooltip": {
                                                 "type": "string"
@@ -390,8 +390,7 @@
                         }
                     },
                     "required": [
-                        "tooltip",
-                        "type"
+                        "tooltip"
                     ]
                 }
             },
