@@ -154,7 +154,7 @@
         "functions": {
             "additionalProperties": false,
             "patternProperties": {
-                "^ll(?:[A-Z0-9]+[a-z]*)+$": {
+                "^ll[A-Zs](?:[A-Z0-9]+[a-z]*)+$": {
                     "additionalProperties": false,
                     "properties": {
                         "arguments": {
@@ -225,7 +225,6 @@
                                 },
                                 "type": "object"
                             },
-                            "minItems": 0,
                             "uniqueItems": true
                         },
                         "bool-semantics": {
