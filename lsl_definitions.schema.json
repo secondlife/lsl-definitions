@@ -400,6 +400,40 @@
         },
         "types": {
             "additionalProperties": false,
+            "defaultSnippets": [
+                {
+                    "label": "float",
+                    "body": "float"
+                },
+                {
+                    "label": "integer",
+                    "body": "integer"
+                },
+                {
+                    "label": "key",
+                    "body": "key"
+                },
+                {
+                    "label": "list",
+                    "body": "list"
+                },
+                {
+                    "label": "quaternion",
+                    "body": "quaternion"
+                },
+                {
+                    "label": "rotation",
+                    "body": "rotation"
+                },
+                {
+                    "label": "string",
+                    "body": "string"
+                },
+                {
+                    "label": "vector",
+                    "body": "vector"
+                }
+            ],
             "patternProperties": {
                 "^(?:float|integer|key|list|quaternion|rotation|string|vector)$": {
                     "properties": {
