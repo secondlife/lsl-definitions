@@ -38,12 +38,70 @@
             "patternProperties": {
                 "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
                     "properties": {
+                        "deprecated": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "private": {
+                            "type": "boolean",
+                            "default": false
+                        },
                         "tooltip": {
                             "type": "string"
+                        },
+                        "type": {
+                            "defaultSnippets": [
+                                {
+                                    "label": "float",
+                                    "body": "float"
+                                },
+                                {
+                                    "label": "integer",
+                                    "body": "integer"
+                                },
+                                {
+                                    "label": "key",
+                                    "body": "key"
+                                },
+                                {
+                                    "label": "list",
+                                    "body": "list"
+                                },
+                                {
+                                    "label": "quaternion",
+                                    "body": "quaternion"
+                                },
+                                {
+                                    "label": "rotation",
+                                    "body": "rotation"
+                                },
+                                {
+                                    "label": "string",
+                                    "body": "string"
+                                },
+                                {
+                                    "label": "vector",
+                                    "body": "vector"
+                                }
+                            ],
+                            "oneOf": [
+                                { "const": "float" },
+                                { "const": "integer" },
+                                { "const": "key" },
+                                { "const": "list" },
+                                {
+                                    "$comment": "quaternion is an alias for rotation",
+                                    "const": "quaternion"
+                                },
+                                { "const": "rotation" },
+                                { "const": "string" },
+                                { "const": "vector" }
+                            ]
                         }
                     },
                     "required": [
-                        "tooltip"
+                        "tooltip",
+                        "type"
                     ],
                     "type": "object"
                 }
@@ -236,7 +294,7 @@
                             "default": false
                         },
                         "energy": {
-                            "$ref": "#definitions/nonNegativeNumber"
+                            "$ref": "#/definitions/nonNegativeNumber"
                         },
                         "experience": {
                             "type": "boolean",
@@ -244,7 +302,7 @@
                         },
                         "func-id": {
                             "$comment": "llSin has 'func-id: 0', so we must include zero",
-                            "$ref": "#definitions/nonNegativeInteger"
+                            "$ref": "#/definitions/nonNegativeInteger"
                         },
                         "god-mode": {
                             "type": "boolean",
@@ -259,7 +317,7 @@
                             "default": false
                         },
                         "mono-sleep": {
-                            "$ref": "#definitions/nonNegativeNumber"
+                            "$ref": "#/definitions/nonNegativeNumber"
                         },
                         "must-use": {
                             "type": "boolean",
@@ -333,7 +391,7 @@
                             ]
                         },
                         "sleep": {
-                            "$ref": "#definitions/nonNegativeNumber"
+                            "$ref": "#/definitions/nonNegativeNumber"
                         },
                         "tooltip": {
                             "type": "string"
@@ -396,7 +454,7 @@
             "type": "object"
         },
         "llsd-lsl-syntax-version": {
-            "$ref": "#definitions/positiveInteger"
+            "$ref": "#/definitions/positiveInteger"
         },
         "types": {
             "additionalProperties": false,
