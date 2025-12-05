@@ -97,11 +97,18 @@
                                 { "const": "string" },
                                 { "const": "vector" }
                             ]
+                        },
+                        "value": {
+                            "type": [
+                                "integer",
+                                "string"
+                            ]
                         }
                     },
                     "required": [
                         "tooltip",
-                        "type"
+                        "type",
+                        "value"
                     ],
                     "type": "object"
                 }
