@@ -1,10 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json",
+    "$comment": "This schema defines keywords for the Linden Scripting Language (LSL) of Second Life.",
     "definitions": {
         "nonNegativeInteger": {
-            "type": "integer",
-            "minimum": 0
+            "minimum": 0,
+            "type": "integer"
         },
         "nonNegativeIntegerDefault0": {
             "allOf": [
@@ -13,23 +14,17 @@
             ]
         },
         "nonNegativeNumber": {
-            "type": "number",
-            "minimum": 0.0
+            "minimum": 0.0,
+            "type": "number"
         },
         "positiveInteger": {
-            "type": "integer",
-            "exclusiveMinimum": 0
+            "exclusiveMinimum": 0,
+            "type": "integer"
         },
         "zeroToOneNumber": {
-            "type": "number",
+            "maximum": 1.0,
             "minimum": 0.0,
-            "maximum": 1.0
-        },
-        "stringArray": {
-            "type": "array",
-            "items": { "type": "string" },
-            "uniqueItems": true,
-            "default": []
+            "type": "number"
         }
     },
     "properties": {
@@ -40,11 +35,11 @@
                     "properties": {
                         "deprecated": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "private": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "tooltip": {
                             "type": "string"
@@ -207,7 +202,7 @@
                 },
                 "deprecated": {
                     "type": "boolean",
-                    "default": false
+                    "const": true
                 },
                 "tooltip": {
                     "type": "string"
@@ -294,18 +289,18 @@
                         },
                         "bool-semantics": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "deprecated": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "energy": {
                             "$ref": "#/definitions/nonNegativeNumber"
                         },
                         "experience": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "func-id": {
                             "$comment": "llSin has 'func-id: 0', so we must include zero",
@@ -313,34 +308,34 @@
                         },
                         "god-mode": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "index-semantics": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "linden-experience": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "mono-sleep": {
                             "$ref": "#/definitions/nonNegativeNumber"
                         },
                         "must-use": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "native": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "private": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "pure": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "return": {
                             "default": "void",
@@ -504,7 +499,7 @@
                     "properties": {
                         "private": {
                             "type": "boolean",
-                            "default": false
+                            "const": true
                         },
                         "tooltip": {
                             "type": "string"
