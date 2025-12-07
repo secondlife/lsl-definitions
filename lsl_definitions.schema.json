@@ -101,7 +101,6 @@
                             "markdownDescription": "The value of the constant.",
                             "type": [
                                 "integer",
-                                "number",
                                 "string"
                             ]
                         }
