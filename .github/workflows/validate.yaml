@@ -24,8 +24,9 @@ jobs:
 
       - name: "Validate YAML file with jsonschema"
         run: |
-          # compare `./validate.py`
+          # Run command to check the lsl_definitions against the schema file, to verify it's valid
           validate-schema
+          echo "✓ Definitions file matches schema"
 
   test-generating-syntax:
     needs: validate-yaml-file-with-jsonschema
