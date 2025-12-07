@@ -1,5 +1,22 @@
+# macOS / General
+
+.DS_Store
+
+# macOS / Thumbnails
+
+._*
+
+# Microsoft Windows / Folder config file
+
+[Dd]esktop.ini
+
+# Python
+
+__pycache__/
+*.py[cod]
+
+# Other
+
 *.egg-info/
-*.pyc
 .ruff_cache/
 .venv/
-__pycache__/
