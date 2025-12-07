@@ -30,6 +30,7 @@ dependencies = [
 
 [project.scripts]
 gen-lsl-definitions = "gen_definitions:main"
+validate-schema = "validate:jsonschema"
 
 [project.urls]
 Homepage = "https://github.com/secondlife/lsl-definitions"
@@ -37,7 +38,10 @@ Repository = "https://github.com/secondlife/lsl-definitions"
 Issues = "https://github.com/secondlife/lsl-definitions/issues"
 
 [tool.setuptools]
-py-modules = ["gen_definitions"]
+py-modules = [
+    "gen_definitions",
+    "validate"
+]
 
 [tool.ruff]
 line-length = 100
