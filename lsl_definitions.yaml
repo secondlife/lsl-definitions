@@ -823,7 +823,7 @@ constants:
     tooltip: "0.017453293 - Number of radians per degree.\n\t\t\tYou can use this\
       \ to convert degrees to radians by multiplying the degrees by this number."
     type: float
-    value: 0.017453293
+    value: '0.017453293'
   DENSITY:
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)
@@ -2168,7 +2168,7 @@ constants:
   PI:
     tooltip: 3.14159265 - The number of radians in a semi-circle.
     type: float
-    value: 3.14159265
+    value: '3.14159265'
   PING_PONG:
     tooltip: Play animation going forwards, then backwards.
     type: integer
@@ -2176,7 +2176,7 @@ constants:
   PI_BY_TWO:
     tooltip: 1.57079633 - The number of radians in a quarter circle.
     type: float
-    value: 1.57079633
+    value: '1.57079633'
   PRIM_ALLOW_UNSIT:
     tooltip: Prim parameter for restricting manual standing for seated avatars in
       an experience.\nIgnored if the avatar was not seated via a call to llSitOnLink.
@@ -3146,7 +3146,7 @@ constants:
     tooltip: 57.2957795 - Number of degrees per radian. You can use this number to
       convert radians to degrees by multiplying the radians by this number.
     type: float
-    value: 57.2957795
+    value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
     tooltip: ''
     type: integer
@@ -3657,7 +3657,7 @@ constants:
   SQRT2:
     tooltip: 1.41421356 - The square root of 2.
     type: float
-    value: 1.41421356
+    value: '1.41421356'
   STATUS_BLOCK_GRAB:
     tooltip: Controls whether the object can be grabbed.\nA grab is the default action
       when in third person, and is available as the hand tool in build mode. This
@@ -3977,7 +3977,7 @@ constants:
   TWO_PI:
     tooltip: 6.28318530 - The radians of a circle.
     type: float
-    value: 6.28318530
+    value: '6.28318530'
   TYPE_FLOAT:
     tooltip: The list entry is a float.
     type: integer
