@@ -7,20 +7,28 @@ on:
     tags: [v*]
 
 jobs:
-  validate-yaml-for-lsl-definitions:
+  validate-yaml-file-with-jsonschema:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
-      - name: Validate YAML's schema
-        uses: RomanosTrechlis/actions-validate-yaml@master
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          schema: lsl_definitions.schema.json
-          data: |-
-            lsl_definitions.yaml
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: "Validate YAML file with jsonschema"
+        run: |
+          # compare `./validate.py`
+          validate-schema
 
   test-generating-syntax:
-    needs: validate-yaml-for-lsl-definitions
+    needs: validate-yaml-file-with-jsonschema
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
