@@ -4861,6 +4861,7 @@ functions:
     - Flag:
         tooltip: Boolean, If TRUE allows anyone to drop inventory on prim, FALSE revokes.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 176
     return: void
@@ -4890,6 +4891,7 @@ functions:
         tooltip: Boolean, if TRUE, force is treated as a local directional vector
           instead of region directional vector.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 72
     return: void
@@ -4905,6 +4907,7 @@ functions:
     - Local:
         tooltip: Boolean, if TRUE, uses local axis, if FALSE, uses region axis.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 73
     return: void
@@ -5215,6 +5218,7 @@ functions:
         tooltip: If TRUE, only accept collisions with ObjectName name AND ObjectID
           (either is optional), otherwise with objects not ObjectName AND ObjectID.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 110
     return: void
@@ -5316,6 +5320,7 @@ functions:
         tooltip: If FALSE, then TargetPrim becomes the root. If TRUE, then the script's
           object becomes the root.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 141
     return: void
@@ -5955,6 +5960,7 @@ functions:
           be forced into mouse-look mode.\nFALSE is the default setting and will undo
           a previously set TRUE or do nothing.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 294
     return: void
@@ -7027,6 +7033,7 @@ functions:
           by the parcel. If TRUE then it is the combined number of prims on all parcels
           in the region owned by the specified parcel's owner.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 326
     return: integer
@@ -7057,6 +7064,7 @@ functions:
           by the parcel. If TRUE then it is the combined number of prims on all parcels
           in the region owned by the specified parcel's owner.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 325
     return: integer
@@ -7732,6 +7740,7 @@ functions:
     - Water:
         tooltip: Boolean, if TRUE then hover above water too.
         type: integer
+        bool-semantics: true
     - Tau:
         tooltip: Seconds to critically damp in.
         type: float
@@ -8089,6 +8098,7 @@ functions:
         tooltip: 'Boolean, sound queuing for the linked prim: TRUE enables, FALSE
           disables (default).'
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 537
     return: void
@@ -8659,6 +8669,7 @@ functions:
         tooltip: Boolean. TRUE = result in ascending order, FALSE = result in descending
           order.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 184
     return: list
@@ -8683,6 +8694,7 @@ functions:
         tooltip: Boolean. TRUE = result in ascending order, FALSE = result in descending
           order.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 802
     return: list
@@ -8741,6 +8753,7 @@ functions:
     - Active:
         tooltip: ''
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 26
     return: void
@@ -9353,6 +9366,7 @@ functions:
     - Pass:
         tooltip: Boolean, if TRUE, collisions are passed from children on to parents.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 166
     return: void
@@ -9366,6 +9380,7 @@ functions:
     - Pass:
         tooltip: Boolean, if TRUE, touches are passed from children on to parents.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 154
     return: void
@@ -9495,6 +9510,7 @@ functions:
     - Local:
         tooltip: ''
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 165
     return: void
@@ -9651,6 +9667,7 @@ functions:
     - Running:
         tooltip: If the script should be set running in the target prim.
         type: integer
+        bool-semantics: true
     - StartParameter:
         tooltip: Integer. Parameter passed to the script if set to be running.
         type: integer
@@ -10473,6 +10490,7 @@ functions:
         tooltip: If TRUE, the AngVel is treated as a local directional vector instead
           of a regional directional vector.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 379
     return: void
@@ -10625,6 +10643,7 @@ functions:
     - Local:
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 64
     return: void
@@ -10642,6 +10661,7 @@ functions:
     - Local:
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 76
     return: void
@@ -10667,6 +10687,7 @@ functions:
     - Water:
         tooltip: Boolean, if TRUE then hover above water too.
         type: integer
+        bool-semantics: true
     - Tau:
         tooltip: Seconds to critically damp in.
         type: float
@@ -11165,6 +11186,7 @@ functions:
     - Running:
         tooltip: ''
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 148
     return: void
@@ -11185,6 +11207,7 @@ functions:
     - QueueEnable:
         tooltip: 'Boolean, sound queuing: TRUE enables, FALSE disables (default).'
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 208
     return: void
@@ -11299,6 +11322,7 @@ functions:
     - Local:
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 74
     return: void
@@ -11491,9 +11515,11 @@ functions:
     - Queue:
         tooltip: ''
         type: integer
+        bool-semantics: true
     - Loop:
         tooltip: ''
         type: integer
+        bool-semantics: true
     deprecated: true
     energy: 10.0
     func-id: 85
@@ -11687,9 +11713,11 @@ functions:
     - Accept:
         tooltip: Boolean, determines whether control events are generated.
         type: integer
+        bool-semantics: true
     - PassOn:
         tooltip: Boolean, determines whether controls are disabled.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 111
     return: void
@@ -11994,6 +12022,7 @@ functions:
     - Checked:
         tooltip: ''
         type: integer
+        bool-semantics: true
     - OriginalValue:
         tooltip: ''
         type: string
@@ -12075,6 +12104,7 @@ functions:
     - DetectEnabled:
         tooltip: TRUE enables, FALSE disables.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 248
     return: void
