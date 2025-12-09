@@ -45,3 +45,4 @@ function-argument:
   tooltip: str()
   type: enum('integer','float','string','key','list','rotation','vector')
   index-semantics: enum(True, required=False, none=False)
+  bool-semantics: enum(True, required=False, none=False)
