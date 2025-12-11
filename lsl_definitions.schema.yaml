@@ -41,6 +41,7 @@ function:
   mono-sleep: num(min=0.0, required=False)
   index-semantics: enum(True, required=False, none=False)
   bool-semantics: enum(True, required=False, none=False)
+  categories: list(enum('asset_permissions', 'attachments', 'avatar', 'avatar_animation', 'avatar_communication', 'avatar_inventory', 'camera', 'chat', 'combat', 'cryptography', 'data_conversion', 'data_storage', 'dataserver', 'detected', 'effects', 'experience', 'experience_data', 'input', 'json', 'land_moderation', 'linkset', 'linkset_data', 'list', 'math', 'math_3d', 'math_trig', 'media', 'money', 'movement', 'notecard', 'object', 'object_animation', 'parcel', 'parcel_appearance', 'parcel_media', 'particles', 'pathfinding', 'permissions', 'physics', 'prim', 'prim_appearance', 'prim_inventory', 'prim_media', 'prim_properties', 'quaternion', 'region', 'region_appearance', 'rez', 'script', 'script_communication', 'sensor', 'sit', 'sound', 'string', 'teleport', 'time', 'touch', 'user_interface', 'uuid', 'vector', 'vehicles', 'web'), required=False)
 function-argument:
   tooltip: str()
   type: enum('integer','float','string','key','list','rotation','vector')

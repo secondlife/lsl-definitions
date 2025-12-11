@@ -4760,6 +4760,15 @@ functions:
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
 #    bool-semantics: If true then the returned integer represents a boolean 1 or 0
+#    categories: An array of categories this function belongs to.
+#        Current available categories are: 
+#            asset_permissions attachments avatar avatar_animation avatar_communication avatar_inventory
+#            camera chat combat cryptography data_conversion data_storage dataserver detected effects 
+#            experience experience_data input json land_moderation linkset linkset_data list math math_3d
+#            math_trig media money movement notecard object object_animation parcel parcel_appearance 
+#            parcel_media particles pathfinding permissions physics prim prim_appearance prim_inventory
+#            prim_media prim_properties quaternion region region_appearance rez script script_communication
+#            sensor sit sound string teleport time touch user_interface uuid vector vehicles web
   llAbs:
     arguments:
     - Value:
@@ -4772,6 +4781,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the absolute (positive) version of Value.
+    categories:
+      - math
   llAcos:
     arguments:
     - Value:
@@ -4783,6 +4794,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the arc-cosine of Value, in radians.
+    categories:
+      - math
+      - math_trig
     must-use: true
     # not pure because it might trigger a math error
   llAddToLandBanList:
@@ -4804,6 +4818,9 @@ functions:
       (Probably 36 second increments, as 0.01 of an hour is 36 seconds).\nResidents
       teleporting to a parcel where they are banned will be redirected to a neighbouring
       parcel.
+    categories:
+      - land_moderation
+      - parcel
   llAddToLandPassList:
     arguments:
     - ID:
@@ -4817,6 +4834,9 @@ functions:
     return: void
     sleep: 0.1
     tooltip: Add avatar ID to the land pass list, for a duration of Hours.
+    categories:
+      - land_moderation
+      - parcel
   llAdjustDamage:
     arguments:
     - Number:
@@ -4831,6 +4851,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Changes the amount of damage to be delivered by this damage event.
+    categories:
+      - combat
+      - detected
   llAdjustSoundVolume:
     arguments:
     - Volume:
@@ -4842,6 +4865,8 @@ functions:
     sleep: 0.1
     tooltip: Adjusts the volume (0.0 - 1.0) of the currently playing attached sound.\nThis
       function has no effect on sounds started with llTriggerSound.
+    categories:
+      - sound
   llAgentInExperience:
     arguments:
     - AgentID:
@@ -4855,6 +4880,9 @@ functions:
     sleep: 0.0
     tooltip: "\n                   Returns TRUE if the agent is in the Experience\
       \ and the Experience can run in the current location.\n                "
+    categories:
+      - avatar
+      - experience
     must-use: true
   llAllowInventoryDrop:
     arguments:
@@ -4867,6 +4895,8 @@ functions:
     sleep: 0.0
     tooltip: If Flag == TRUE, users without object modify permissions can still drop
       inventory items into the object.
+    categories:
+      - prim_inventory
   llAngleBetween:
     arguments:
     - Rot1:
@@ -4881,6 +4911,11 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the angle, in radians, between rotations Rot1 and Rot2.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
   llApplyImpulse:
     arguments:
     - Force:
@@ -4897,6 +4932,9 @@ functions:
     tooltip: Applies impulse to the object.\nIf Local == TRUE, apply the Force in
       local coordinates; otherwise, apply the Force in global coordinates.\nThis function
       only works on physical objects.
+    categories:
+      - movement
+      - physics
   llApplyRotationalImpulse:
     arguments:
     - Force:
@@ -4912,6 +4950,9 @@ functions:
     tooltip: Applies rotational impulse to the object.\nIf Local == TRUE, apply the
       Force in local coordinates; otherwise, apply the Force in global coordinates.\nThis
       function only works on physical objects.
+    categories:
+      - movement
+      - physics
   llAsin:
     arguments:
     - Value:
@@ -4923,6 +4964,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the arc-sine, in radians, of Value.
+    categories:
+      - math
+      - math_trig
     # not pure because it might trigger a math error
   llAtan2:
     arguments:
@@ -4939,6 +4983,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the arc-tangent2 of y, x.
+    categories:
+      - math
+      - math_trig
   llAttachToAvatar:
     arguments:
     - AttachmentPoint:
@@ -4950,6 +4997,9 @@ functions:
     sleep: 0.0
     tooltip: Attach to avatar at point AttachmentPoint.\nRequires the PERMISSION_ATTACH
       runtime permission.
+    categories:
+      - attachments
+      - avatar
   llAttachToAvatarTemp:
     arguments:
     - AttachPoint:
@@ -4962,6 +5012,9 @@ functions:
     tooltip: Follows the same convention as llAttachToAvatar, with the exception that
       the object will not create new inventory for the user, and will disappear on
       detach or disconnect.
+    categories:
+      - attachments
+      - avatar
   llAvatarOnLinkSitTarget:
     arguments:
     - LinkNumber:
@@ -4975,6 +5028,10 @@ functions:
     tooltip: If an avatar is sitting on the link's sit target, return the avatar's
       key, NULL_KEY otherwise.\nReturns a key that is the UUID of the user seated
       on the specified link's prim.
+    categories:
+      - avatar
+      - linkset
+      - sit
     must-use: true
   llAvatarOnSitTarget:
     arguments: []
@@ -4985,6 +5042,10 @@ functions:
     tooltip: If an avatar is seated on the sit target, returns the avatar's key, otherwise
       NULL_KEY.\nThis only will detect avatars sitting on sit targets defined with
       llSitTarget.
+    categories:
+      - avatar
+      - prim
+      - sit
     must-use: true
   llAxes2Rot:
     arguments:
@@ -5004,6 +5065,11 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation represented by coordinate axes Forward, Left, and
       Up.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
   llAxisAngle2Rot:
     arguments:
     - Axis:
@@ -5018,6 +5084,11 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation that is a generated Angle about Axis.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
   llBase64ToInteger:
     arguments:
     - Text:
@@ -5031,6 +5102,8 @@ functions:
     tooltip: Returns an integer that is the Text, Base64 decoded as a big endian integer.\nReturns
       zero if Text is longer then 8 characters. If Text contains fewer then 6 characters,
       the return value is unpredictable.
+    categories:
+      - data_conversion
   llBase64ToString:
     arguments:
     - Text:
@@ -5043,6 +5116,8 @@ functions:
     sleep: 0.0
     tooltip: Converts a Base64 string to a conventional string.\nIf the conversion
       creates any unprintable characters, they are converted to question marks.
+    categories:
+      - data_conversion
   llBreakAllLinks:
     arguments: []
     energy: 10.0
@@ -5051,6 +5126,8 @@ functions:
     sleep: 0.0
     tooltip: De-links all prims in the link set (requires permission PERMISSION_CHANGE_LINKS
       be set).
+    categories:
+      - linkset
   llBreakLink:
     arguments:
     - LinkNumber:
@@ -5062,6 +5139,8 @@ functions:
     sleep: 0.0
     tooltip: De-links the prim with the given link number (requires permission PERMISSION_CHANGE_LINKS
       be set).
+    categories:
+      - linkset
   llCSV2List:
     arguments:
     - Text:
@@ -5073,6 +5152,8 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Create a list from a string of comma separated values specified in Text.
+    categories:
+      - data_conversion
   llCastRay:
     arguments:
     - Start:
@@ -5093,6 +5174,9 @@ functions:
       with objects.\nReturn value: [UUID_1, {link_number_1}, hit_position_1, {hit_normal_1},
       UUID_2, {link_number_2}, hit_position_2, {hit_normal_2}, ... , status_code]
       where {} indicates optional data.'
+    categories:
+      - physics
+      - sensor
     must-use: true
   llCeil:
     arguments:
@@ -5106,6 +5190,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns smallest integer value >= Value.
+    categories:
+      - math
   llChar:
     arguments:
     - value:
@@ -5118,6 +5204,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a single character string that is the representation of the unicode
       value.
+    categories:
+      - string
   llClearCameraParams:
     arguments: []
     energy: 10.0
@@ -5126,6 +5214,10 @@ functions:
     sleep: 0.0
     tooltip: Resets all camera parameters to default values and turns off scripted
       camera control.
+    categories:
+      - avatar
+      - camera
+      - permissions
   llClearExperience:
     arguments:
     - AgentID:
@@ -5141,6 +5233,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: ''
+    categories:
+      - experience
   llClearExperiencePermissions:
     arguments:
     - AgentID:
@@ -5153,6 +5247,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: ''
+    categories:
+      - experience
   llClearLinkMedia:
     arguments:
     - Link:
@@ -5168,6 +5264,10 @@ functions:
     tooltip: Clears (deletes) the media and all parameters from the given Face on
       the linked prim.\nReturns an integer that is a STATUS_* flag, which details
       the success/failure of the operation.
+    categories:
+      - linkset
+      - media
+      - prim_media
   llClearPrimMedia:
     arguments:
     - Face:
@@ -5180,6 +5280,10 @@ functions:
     tooltip: Clears (deletes) the media and all parameters from the given Face.\nReturns
       an integer that is a STATUS_* flag which details the success/failure of the
       operation.
+    categories:
+      - media
+      - prim
+      - prim_media
   llCloseRemoteDataChannel:
     arguments:
     - ChannelID:
@@ -5191,6 +5295,8 @@ functions:
     return: void
     sleep: 1.0
     tooltip: This function is deprecated.
+    categories:
+      - script_communication
   llCloud:
     arguments:
     - Offset:
@@ -5202,6 +5308,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the cloud density at the object's position + Offset.
+    categories:
+      - region
     must-use: true
   llCollisionFilter:
     arguments:
@@ -5221,6 +5329,9 @@ functions:
     sleep: 0.0
     tooltip: Specify an empty string or NULL_KEY for Accept, to not filter on the
       corresponding parameter.
+    categories:
+      - physics
+      - sensor
   llCollisionSound:
     arguments:
     - ImpactSound:
@@ -5236,6 +5347,9 @@ functions:
     tooltip: Suppress default collision sounds, replace default impact sounds with
       ImpactSound.\nThe ImpactSound must be in the object inventory.\nSupply an empty
       string to suppress collision sounds.
+    categories:
+      - physics
+      - sound
   llCollisionSprite:
     arguments:
     - ImpactSprite:
@@ -5248,6 +5362,9 @@ functions:
     sleep: 0.0
     tooltip: Suppress default collision sprites, replace default impact sprite with
       ImpactSprite; found in the object inventory (empty string to just suppress).
+    categories:
+      - effects
+      - sound
   llComputeHash:
     arguments:
     - Message:
@@ -5261,6 +5378,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns hex-encoded Hash string of Message using digest Algorithm.
+    categories:
+      - cryptography
     must-use: true
   llCos:
     arguments:
@@ -5274,6 +5393,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the cosine of Theta (Theta in radians).
+    categories:
+      - math
+      - math_trig
   llCreateCharacter:
     arguments:
     - Options:
@@ -5286,6 +5408,8 @@ functions:
     tooltip: Convert link-set to AI/Physics character.\nCreates a path-finding entity,
       known as a "character", from the object containing the script. Required to activate
       use of path-finding functions.\nOptions is a list of key/value pairs.
+    categories:
+      - pathfinding
   llCreateKeyValue:
     arguments:
     - Key:
@@ -5307,6 +5431,11 @@ functions:
       \ (1) or not (0). In the failure case, the second item will be an integer corresponding\
       \ to one of the XP_ERROR_... constants. In the success case the second item\
       \ will be the value passed to the function.\n                "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llCreateLink:
     arguments:
     - TargetPrim:
@@ -5323,6 +5452,8 @@ functions:
     tooltip: Attempt to link the object the script is in, to target (requires permission
       PERMISSION_CHANGE_LINKS be set).\nRequires permission PERMISSION_CHANGE_LINKS
       be set.
+    categories:
+      - linkset
   llDamage:
     arguments:
     - target:
@@ -5339,6 +5470,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Generates a damage event on the targeted agent or task.
+    categories:
+      - combat
   llDataSizeKeyValue:
     arguments: []
     energy: 10.0
@@ -5355,6 +5488,11 @@ functions:
       \ XP_ERROR_... constants. In the success case the second item will be the the\
       \ amount in use and the third item will be the total available.\n          \
       \      "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llDeleteCharacter:
     arguments: []
     energy: 10.0
@@ -5363,6 +5501,8 @@ functions:
     sleep: 0.0
     tooltip: Convert link-set from AI/Physics character to Physics object.\nConvert
       the current link-set back to a standard object, removing all path-finding properties.
+    categories:
+      - pathfinding
   llDeleteKeyValue:
     arguments:
     - Key:
@@ -5381,6 +5521,11 @@ functions:
       \ integer corresponding to one of the XP_ERROR_... constants. In the success\
       \ case the second item will be the value associated with the key.\n        \
       \        "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llDeleteSubList:
     arguments:
     - Source:
@@ -5406,6 +5551,8 @@ functions:
       to count backwards from the length of the list, so 0, -1 would delete the entire
       list.\nIf Start is larger than End the list deleted is the exclusion of the
       entries; so 6, 4 would delete the entire list except for the 5th list entry.
+    categories:
+      - list
   llDeleteSubString:
     arguments:
     - Source:
@@ -5429,6 +5576,8 @@ functions:
       to count backwards from the length of the string, so 0, -1 would delete the
       entire string.\nIf Start is larger than End, the sub-string is the exclusion
       of the entries; so 6, 4 would delete the entire string except for the 5th character.
+    categories:
+      - string
   llDerezObject:
     arguments:
     - ID:
@@ -5444,6 +5593,9 @@ functions:
     sleep: 0.0
     tooltip: Derezzes an object previously rezzed by a script in this region. Returns
       TRUE on success or FALSE if the object could not be derezzed.
+    categories:
+      - prim_inventory
+      - rez
   llDetachFromAvatar:
     arguments: []
     energy: 10.0
@@ -5451,6 +5603,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Remove the object containing the script from the avatar.
+    categories:
+      - attachments
+      - avatar
   llDetectedDamage:
     arguments:
     - Number:
@@ -5463,6 +5618,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a list containing the current damage for the event, the damage
       type and the original damage delivered.
+    categories:
+      - combat
+      - detected
     must-use: true
   llDetectedGrab:
     arguments:
@@ -5476,6 +5634,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the grab offset of a user touching the object.\nReturns <0.0,
       0.0, 0.0> if Number is not a valid object.
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedGroup:
     arguments:
@@ -5491,6 +5652,8 @@ functions:
     tooltip: Returns TRUE if detected object or agent Number has the same user group
       active as this object.\nIt will return FALSE if the object or agent is in the
       group, but the group is not active.
+    categories:
+      - detected
     must-use: true
   llDetectedKey:
     arguments:
@@ -5504,6 +5667,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of detected object or avatar number.\nReturns NULL_KEY
       if Number is not a valid index.
+    categories:
+      - detected
+      - uuid
     must-use: true
   llDetectedLinkNumber:
     arguments:
@@ -5519,6 +5685,8 @@ functions:
     tooltip: Returns the link position of the triggered event for touches and collisions
       only.\n0 for a non-linked object, 1 for the root of a linked object, 2 for the
       first child, etc.
+    categories:
+      - detected
     must-use: true
   llDetectedName:
     arguments:
@@ -5532,6 +5700,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the name of detected object or avatar number.\nReturns the name
       of detected object number.\nReturns empty string if Number is not a valid index.
+    categories:
+      - detected
     must-use: true
   llDetectedOwner:
     arguments:
@@ -5545,6 +5715,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of detected object's owner.\nReturns invalid key if Number
       is not a valid index.
+    categories:
+      - avatar
+      - detected
     must-use: true
   llDetectedPos:
     arguments:
@@ -5558,6 +5731,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the position of detected object or avatar number.\nReturns <0.0,
       0.0, 0.0> if Number is not a valid index.
+    categories:
+      - detected
     must-use: true
   llDetectedRezzer:
     arguments:
@@ -5570,6 +5745,8 @@ functions:
     return: key
     sleep: 0.0
     tooltip: Returns the key for the rezzer of the detected object.
+    categories:
+      - detected
     must-use: true
   llDetectedRot:
     arguments:
@@ -5583,6 +5760,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation of detected object or avatar number.\nReturns <0.0,
       0.0, 0.0, 1.0> if Number is not a valid offset.
+    categories:
+      - detected
     must-use: true
   llDetectedTouchBinormal:
     arguments:
@@ -5597,6 +5776,9 @@ functions:
     tooltip: Returns the surface bi-normal for a triggered touch event.\nReturns a
       vector that is the surface bi-normal (tangent to the surface) where the touch
       event was triggered.
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedTouchFace:
     arguments:
@@ -5611,6 +5793,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the index of the face where the avatar clicked in a triggered
       touch event.
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedTouchNormal:
     arguments:
@@ -5625,6 +5810,9 @@ functions:
     tooltip: Returns the surface normal for a triggered touch event.\nReturns a vector
       that is the surface normal (perpendicular to the surface) where the touch event
       was triggered.
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedTouchPos:
     arguments:
@@ -5639,6 +5827,9 @@ functions:
     tooltip: Returns the position, in region coordinates, where the object was touched
       in a triggered touch event.\nUnless it is a HUD, in which case it returns the
       position relative to the attach point.
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedTouchST:
     arguments:
@@ -5655,6 +5846,9 @@ functions:
       respectively.\nEach component is in the interval [0.0, 1.0].\nTOUCH_INVALID_TEXCOORD
       is returned if the surface coordinates cannot be determined (e.g. when the viewer
       does not support this function).
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedTouchUV:
     arguments:
@@ -5670,6 +5864,9 @@ functions:
       touched.\nThe X and Y vector positions contain the U and V face coordinates
       respectively.\nTOUCH_INVALID_TEXCOORD is returned if the touch UV coordinates
       cannot be determined (e.g. when the viewer does not support this function).
+    categories:
+      - detected
+      - touch
     must-use: true
   llDetectedType:
     arguments:
@@ -5685,6 +5882,8 @@ functions:
       nReturns 0 if number is not a valid index.\\nNote that number is a bit-field,\
       \ so comparisons need to be a bitwise checked. e.g.:\\ninteger iType = llDetectedType(0);\\\
       n{\\n\t// ...do stuff with the agent\\n}"
+    categories:
+      - detected
     must-use: true
   llDetectedVel:
     arguments:
@@ -5698,6 +5897,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the velocity of the detected object Number.\nReturns<0.0, 0.0,
       0.0> if Number is not a valid offset.
+    categories:
+      - detected
     must-use: true
   llDialog:
     arguments:
@@ -5731,6 +5932,10 @@ functions:
       \ ], -4913);\\n\n                llDialog(who, \"This shows only an OK button.\"\
       , [], -192);\\n\n                llDialog(who, \"This chats so you can 'hear'\
       \ it.\", [\"Hooray\"], 0);"
+    categories:
+      - avatar_communication
+      - chat
+      - user_interface
   llDie:
     arguments: []
     energy: 0.0
@@ -5738,6 +5943,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Delete the object which holds the script.
+    categories:
+      - rez
   llDumpList2String:
     # not pure, because the C++ impl looks at the running script type, which requires context
     arguments:
@@ -5754,6 +5961,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the list as a single string, using Separator between the entries.\nWrite
       the list out as a single string, using Separator between values.
+    categories:
+      - data_conversion
     must-use: true
   llEdgeOfWorld:
     arguments:
@@ -5772,6 +5981,8 @@ functions:
       edge of the world (has no neighboring region).\nReturns TRUE if the line along
       Direction from Position hits the edge of the world in the current simulator,
       returns FALSE if that edge crosses into another simulator.
+    categories:
+      - region
     must-use: true
   llEjectFromLand:
     arguments:
@@ -5784,6 +5995,9 @@ functions:
     sleep: 0.0
     tooltip: Ejects AvatarID from land that you own.\nEjects AvatarID from land that
       the object owner (group or resident) owns.
+    categories:
+      - land_moderation
+      - parcel
   llEmail:
     arguments:
     - Address:
@@ -5801,6 +6015,8 @@ functions:
     sleep: 20.0
     tooltip: Sends email to Address with Subject and Message.\nSends an email to Address
       with Subject and Message.
+    categories:
+      - avatar_communication
   llEscapeURL:
     arguments:
     - URL:
@@ -5815,6 +6031,8 @@ functions:
       \ etc.\\nReturns the string that is the URL-escaped version of URL (replacing\
       \ spaces with %20, etc.).\\n\n                This function returns the UTF-8\
       \ encoded escape codes for selected characters."
+    categories:
+      - web
   llEuler2Rot:
     arguments:
     - Vector:
@@ -5827,6 +6045,10 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation representation of the Euler angles.\nReturns the
       rotation represented by the Euler Angle.
+    categories:
+      - math
+      - math_3d
+      - quaternion
   llEvade:
     arguments:
     - TargetID:
@@ -5844,6 +6066,8 @@ functions:
       means no direct line of sight from the head of the character (centre of the
       top of its physics bounding box) to the head of its pursuer and no direct path
       between the two on the navigation-mesh.
+    categories:
+      - pathfinding
   llExecCharacterCmd:
     arguments:
     - Command:
@@ -5859,6 +6083,8 @@ functions:
     tooltip: Execute a character command.\nSend a command to the path system.\nCurrently
       only supports stopping the current path-finding operation or causing the character
       to jump.
+    categories:
+      - pathfinding
   llFabs:
     arguments:
     - Value:
@@ -5872,6 +6098,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the positive version of Value.\nReturns the absolute value of
       Value.
+    categories:
+      - math
   llFindNotecardTextCount:
     arguments:
     - NotecardName:
@@ -5891,6 +6119,10 @@ functions:
     tooltip: "Searches the text of a cached notecard for lines containing the given\
       \ pattern and returns the \n            number of matches found through a dataserver\
       \ event.\n            "
+    categories:
+      - data_storage
+      - dataserver
+      - notecard
   llFindNotecardTextSync:
     arguments:
     - NotecardName:
@@ -5919,6 +6151,9 @@ functions:
       \ is found. If the notecard is not in\n            the cache it returns a list\
       \ containing a single entry of NAK. If no matches are found an\n           \
       \ empty list is returned."
+    categories:
+      - data_storage
+      - notecard
   llFleeFrom:
     arguments:
     - Source:
@@ -5936,6 +6171,8 @@ functions:
     sleep: 0.0
     tooltip: Flee from a point.\nDirects a character (llCreateCharacter) to keep away
       from a defined position in the region or adjacent regions.
+    categories:
+      - pathfinding
   llFloor:
     arguments:
     - Value:
@@ -5948,6 +6185,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns largest integer value <= Value.
+    categories:
+      - math
   llForceMouselook:
     arguments:
     - Enable:
@@ -5965,6 +6204,10 @@ functions:
       this changes a permanent property of the prim (not the object) and needs to
       be reset by calling this function with Enable set to FALSE in order to disable
       it.
+    categories:
+      - avatar
+      - camera
+      - permissions
   llFrand:
     arguments:
     - Magnitude:
@@ -5976,6 +6219,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a pseudo random number in the range [0, Magnitude] or [Magnitude,
       0].\nReturns a pseudo-random number between [0, Magnitude].
+    categories:
+      - math
     must-use: true
   llGenerateKey:
     arguments: []
@@ -5988,6 +6233,8 @@ functions:
       specific UUID version is an implementation detail that has changed in the past
       and may change again in the future. Do not depend upon the UUID that is returned
       to be version 5 SHA-1 hash.
+    categories:
+      - uuid
     must-use: true
   llGetAccel:
     arguments: []
@@ -5997,6 +6244,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the acceleration of the object relative to the region's axes.\nGets
       the acceleration of the object.
+    categories:
+      - physics
     must-use: true
   llGetAgentInfo:
     arguments:
@@ -6012,6 +6261,8 @@ functions:
       \ AGENT_SITTING, AGENT_ON_OBJECT, AGENT_MOUSELOOK, AGENT_AWAY, AGENT_BUSY, AGENT_TYPING,\
       \ AGENT_CROUCHING, AGENT_ALWAYS_RUN, AGENT_WALKING, AGENT_IN_AIR and/or AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT.\\\
       nReturns information about the given agent ID as a bit-field of agent info constants."
+    categories:
+      - avatar
     must-use: true
   llGetAgentLanguage:
     arguments:
@@ -6025,6 +6276,8 @@ functions:
     tooltip: Returns the language code of the preferred interface language of the
       avatar.\nReturns a string that is the language code of the preferred interface
       language of the resident.
+    categories:
+      - avatar
     must-use: true
   llGetAgentList:
     arguments:
@@ -6042,6 +6295,10 @@ functions:
       parameter.\nReturns a list [key UUID-0, key UUID-1, ..., key UUID-n] or [string
       error_msg] - returns avatar keys for all agents in the region limited to the
       area(s) specified by scope
+    categories:
+      - avatar
+      - parcel
+      - region
     must-use: true
   llGetAgentSize:
     arguments:
@@ -6055,6 +6312,8 @@ functions:
     tooltip: If the avatar is in the same region, returns the size of the bounding
       box of the requested avatar by id, otherwise returns ZERO_VECTOR.\nIf the agent
       is in the same region as the object, returns the size of the avatar.
+    categories:
+      - avatar
     must-use: true
   llGetAlpha:
     arguments:
@@ -6067,6 +6326,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the alpha value of Face.\nReturns the 'alpha' of the given face.
       If face is ALL_SIDES the value returned is the mean average of all faces.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetAndResetTime:
     arguments: []
@@ -6076,6 +6338,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the script time in seconds and then resets the script timer to
       zero.\nGets the time in seconds since starting and resets the time to zero.
+    categories:
+      - script
   llGetAnimation:
     arguments:
     - AvatarID:
@@ -6088,6 +6352,10 @@ functions:
     tooltip: Returns the name of the currently playing locomotion animation for the
       avatar id.\nReturns the currently playing animation for the specified avatar
       ID.
+    categories:
+      - avatar
+      - avatar_animation
+      - permissions
     must-use: true
   llGetAnimationList:
     arguments:
@@ -6100,6 +6368,10 @@ functions:
     sleep: 0.0
     tooltip: Returns a list of keys of playing animations for an avatar.\nReturns
       a list of keys of all playing animations for the specified avatar ID.
+    categories:
+      - avatar
+      - avatar_animation
+      - permissions
     must-use: true
   llGetAnimationOverride:
     arguments:
@@ -6114,6 +6386,10 @@ functions:
       specified animation state\nTo use this function the script must obtain either
       the PERMISSION_OVERRIDE_ANIMATIONS or PERMISSION_TRIGGER_ANIMATION permission
       (automatically granted to attached objects).
+    categories:
+      - avatar
+      - avatar_animation
+      - permissions
     must-use: true
   llGetAttached:
     arguments: []
@@ -6122,6 +6398,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the object's attachment point, or 0 if not attached.
+    categories:
+      - attachments
     must-use: true
   llGetAttachedList:
     arguments:
@@ -6134,6 +6412,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a list of keys of all visible (not HUD) attachments on the avatar
       identified by the ID argument
+    categories:
+      - attachments
+      - avatar
     must-use: true
   llGetAttachedListFiltered:
     arguments:
@@ -6148,6 +6429,9 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Retrieves a list of attachments on an avatar.
+    categories:
+      - attachments
+      - avatar
     must-use: true
   llGetBoundingBox:
     arguments:
@@ -6161,6 +6445,8 @@ functions:
     tooltip: Returns the bounding box around the object (including any linked prims)
       relative to its root prim, as a list in the format [ (vector) min_corner, (vector)
       max_corner ].
+    categories:
+      - object
     must-use: true
   llGetCameraAspect:
     arguments: []
@@ -6171,6 +6457,10 @@ functions:
     tooltip: 'Returns the current camera aspect ratio (width / height) of the agent
       who has granted the scripted object PERMISSION_TRACK_CAMERA permissions. If
       no permissions have been granted: it returns zero.'
+    categories:
+      - avatar
+      - camera
+      - permissions
     must-use: true
   llGetCameraFOV:
     arguments: []
@@ -6181,6 +6471,10 @@ functions:
     tooltip: 'Returns the current camera field of view of the agent who has granted
       the scripted object PERMISSION_TRACK_CAMERA permissions. If no permissions have
       been granted: it returns zero.'
+    categories:
+      - avatar
+      - camera
+      - permissions
     must-use: true
   llGetCameraPos:
     arguments: []
@@ -6191,6 +6485,10 @@ functions:
     tooltip: Returns the current camera position for the agent the task has permissions
       for.\nReturns the position of the camera, of the user that granted the script
       PERMISSION_TRACK_CAMERA. If no user has granted the permission, it returns ZERO_VECTOR.
+    categories:
+      - avatar
+      - camera
+      - permissions
     must-use: true
   llGetCameraRot:
     arguments: []
@@ -6201,6 +6499,10 @@ functions:
     tooltip: Returns the current camera orientation for the agent the task has permissions
       for. If no user has granted the PERMISSION_TRACK_CAMERA permission, returns
       ZERO_ROTATION.
+    categories:
+      - avatar
+      - camera
+      - permissions
     must-use: true
   llGetCenterOfMass:
     arguments: []
@@ -6210,6 +6512,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the prim's centre of mass (unless called from the root prim,
       where it returns the object's centre of mass).
+    categories:
+      - object
+      - physics
     must-use: true
   llGetClosestNavPoint:
     arguments:
@@ -6227,6 +6532,8 @@ functions:
       accepts a point in region-local space (like all the other path-finding methods)
       and returns either an empty list or a list containing a single vector which
       is the closest point on the navigation-mesh to the point provided.
+    categories:
+      - pathfinding
     must-use: true
   llGetColor:
     arguments:
@@ -6240,6 +6547,9 @@ functions:
     tooltip: Returns the color on Face.\nReturns the color of Face as a vector of
       red, green, and blue values between 0 and 1. If face is ALL_SIDES the color
       returned is the mean average of each channel.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetCreator:
     arguments: []
@@ -6249,6 +6559,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a key for the creator of the prim.\nReturns the key of the object's
       original creator. Similar to llGetOwner.
+    categories:
+      - prim
     must-use: true
   llGetDate:
     arguments: []
@@ -6258,6 +6570,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
       the current UTC date as YYYY-MM-DD.
+    categories:
+      - time
     must-use: true
   llGetDayLength:
     arguments: []
@@ -6266,6 +6580,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the number of seconds in a day on this parcel.
+    categories:
+      - time
     must-use: true
   llGetDayOffset:
     arguments: []
@@ -6275,6 +6591,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of seconds in a day is offset from midnight in this
       parcel.
+    categories:
+      - time
     must-use: true
   llGetDisplayName:
     arguments:
@@ -6289,6 +6607,8 @@ functions:
     tooltip: Returns the display name of an avatar, if the avatar is connected to
       the current region, or if the name has been cached.  Otherwise, returns an empty
       string. Use llRequestDisplayName if the avatar may be absent from the region.
+    categories:
+      - avatar
     must-use: true
   llGetEnergy:
     arguments: []
@@ -6297,6 +6617,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns how much energy is in the object as a percentage of maximum.
+    categories:
+      - script
     must-use: true
   llGetEnv:
     arguments:
@@ -6309,6 +6631,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a string with the requested data about the region.
+    categories:
+      - region
     must-use: true
   llGetEnvironment:
     arguments:
@@ -6323,6 +6647,9 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Returns a string with the requested data about the region.
+    categories:
+      - parcel
+      - parcel_appearance
     must-use: true
   llGetExperienceDetails:
     arguments:
@@ -6339,6 +6666,8 @@ functions:
       \ State is an integer corresponding to one of the constants XP_ERROR_... and\
       \ State Message is the string returned by llGetExperienceErrorMessage for that\
       \ integer.\n                "
+    categories:
+      - experience
     must-use: true
   llGetExperienceErrorMessage:
     arguments:
@@ -6353,6 +6682,8 @@ functions:
     tooltip: "\n                   Returns a string describing the error code passed\
       \ or the string corresponding with XP_ERROR_UNKNOWN_ERROR if the value is not\
       \ a valid Experience error code.\n                "
+    categories:
+      - experience
     must-use: true
   llGetExperienceList:
     arguments:
@@ -6366,6 +6697,8 @@ functions:
     return: list
     sleep: 0.0
     tooltip: ''
+    categories:
+      - experience
     must-use: true
   llGetForce:
     arguments: []
@@ -6375,6 +6708,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the force (if the script is physical).\nReturns the current force
       if the script is physical.
+    categories:
+      - physics
     must-use: true
   llGetFreeMemory:
     arguments: []
@@ -6384,6 +6719,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of free bytes of memory the script can use.\nReturns
       the available free space for the current script. This is inaccurate with LSO.
+    categories:
+      - script
     must-use: true
   llGetFreeURLs:
     arguments: []
@@ -6393,6 +6730,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of available URLs for the current script.\nReturns
       an integer that is the number of available URLs.
+    categories:
+      - script
+      - web
     must-use: true
   llGetGMTclock:
     arguments: []
@@ -6402,6 +6742,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the time in seconds since midnight GMT.\nGets the time in seconds
       since midnight in GMT/UTC.
+    categories:
+      - time
     must-use: true
   llGetGeometricCenter:
     arguments: []
@@ -6411,6 +6753,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the vector that is the geometric center of the object relative
       to the root prim.
+    categories:
+      - physics
     must-use: true
   llGetHTTPHeader:
     arguments:
@@ -6426,6 +6770,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the value for header for request_id.\nReturns a string that is
       the value of the Header for HTTPRequestID.
+    categories:
+      - web
     must-use: true
   llGetHealth:
     arguments:
@@ -6437,6 +6783,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the current health of an avatar or object in the region.
+    categories:
+      - combat
     must-use: true
   llGetInventoryAcquireTime:
     arguments:
@@ -6449,6 +6797,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the time at which the item was placed into this prim's inventory
       as a timestamp.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryCreator:
     arguments:
@@ -6462,6 +6812,8 @@ functions:
     tooltip: Returns a key for the creator of the inventory item.\nThis function returns
       the UUID of the creator of item. If item is not found in inventory, the object
       says "No item named 'name'".
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryDesc:
     arguments:
@@ -6475,6 +6827,8 @@ functions:
     tooltip: Returns the item description of the item in inventory. If item is not
       found in inventory, the object says "No item named 'name'" to the debug channel
       and returns an empty string.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryKey:
     arguments:
@@ -6487,6 +6841,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the key that is the UUID of the inventory named.\nReturns the
       key of the inventory named.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryName:
     arguments:
@@ -6503,6 +6859,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the name of the inventory item of a given type, specified by
       index number.\nUse the inventory constants INVENTORY_* to specify the type.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryNumber:
     arguments:
@@ -6515,6 +6873,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the quantity of items of a given type (INVENTORY_* flag) in the
       prim's inventory.\nUse the inventory constants INVENTORY_* to specify the type.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryPermMask:
     arguments:
@@ -6532,6 +6892,8 @@ functions:
       the requested permission mask for the inventory item defined by InventoryItem.
       If item is not in the object's inventory, llGetInventoryPermMask returns FALSE
       and causes the object to say "No item named '<item>'", where "<item>" is item.
+    categories:
+      - prim_inventory
     must-use: true
   llGetInventoryType:
     arguments:
@@ -6544,6 +6906,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the type of the named inventory item.\nLike all inventory functions,
       llGetInventoryType is case-sensitive.
+    categories:
+      - prim_inventory
     must-use: true
   llGetKey:
     arguments: []
@@ -6553,6 +6917,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of the prim the script is attached to.\nGet the key for
       the object which has this script.
+    categories:
+      - prim
+      - uuid
     must-use: true
   llGetLandOwnerAt:
     arguments:
@@ -6565,6 +6932,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of the land owner, returns NULL_KEY if public.\nReturns
       the key of the land owner at Position, or NULL_KEY if public.
+    categories:
+      - parcel
     must-use: true
   llGetLinkKey:
     arguments:
@@ -6577,6 +6946,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of the linked prim LinkNumber.\nReturns the key of LinkNumber
       in the link set.
+    categories:
+      - linkset
     must-use: true
   llGetLinkMedia:
     arguments:
@@ -6597,6 +6968,10 @@ functions:
     tooltip: "Get the media parameters for a particular face on linked prim, given\
       \ the desired list of parameter names. Returns a list of values in the order\
       \ requested.\tReturns an empty list if no media exists on the face."
+    categories:
+      - linkset
+      - media
+      - prim_media
     must-use: true
   llGetLinkName:
     arguments:
@@ -6609,6 +6984,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the name of LinkNumber in a link set.\nReturns the name of LinkNumber
       the link set.
+    categories:
+      - linkset
     must-use: true
   llGetLinkNumber:
     arguments: []
@@ -6620,6 +6997,8 @@ functions:
       linked, 1 the prim is the root, 2 the prim is the first child, etc.).\nReturns
       the link number of the prim containing the script. 0 means no link, 1 the root,
       2 for first child, etc.
+    categories:
+      - prim
     must-use: true
   llGetLinkNumberOfSides:
     arguments:
@@ -6633,6 +7012,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of sides of the specified linked prim.\nReturns an
       integer that is the number of faces (or sides) of the prim link.
+    categories:
+      - linkset
+      - prim_appearance
     must-use: true
   llGetLinkPrimitiveParams:
     arguments:
@@ -6652,6 +7034,9 @@ functions:
       flags, prim flags, and object flags.\n* Supplying a prim or object flag will
       return that flag's attributes.\n* Face flags require the user to also supply
       a face index parameter.
+    categories:
+      - linkset
+      - prim_appearance
     must-use: true
   llGetLinkSitFlags:
     arguments:
@@ -6664,6 +7049,9 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the sit flags set on the specified prim in a linkset.
+    categories:
+      - linkset
+      - sit
     must-use: true
   llGetListEntryType:
     arguments:
@@ -6683,6 +7071,8 @@ functions:
     tooltip: Returns the type of the index entry in the list (TYPE_INTEGER, TYPE_FLOAT,
       TYPE_STRING, TYPE_KEY, TYPE_VECTOR, TYPE_ROTATION, or TYPE_INVALID if index
       is off list).\nReturns the type of the variable at Index in ListVariable.
+    categories:
+      - list
   llGetListLength:
     arguments:
     - ListVariable:
@@ -6696,6 +7086,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of elements in the list.\nReturns the number of elements
       in ListVariable.
+    categories:
+      - list
   llGetLocalPos:
     arguments: []
     energy: 10.0
@@ -6704,6 +7096,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the position relative to the root.\nReturns the local position
       of a child object relative to the root.
+    categories:
+      - prim
     must-use: true
   llGetLocalRot:
     arguments: []
@@ -6713,6 +7107,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation local to the root.\nReturns the local rotation of
       a child object relative to the root.
+    categories:
+      - prim
     must-use: true
   llGetMass:
     arguments: []
@@ -6725,6 +7121,9 @@ functions:
       will return the sum of the link-set weights, while a child will return just
       its own mass. When called from a script inside an attachment, this function
       will return the mass of the avatar it's attached to, not its own.
+    categories:
+      - linkset
+      - physics
     must-use: true
   llGetMassMKS:
     arguments: []
@@ -6734,6 +7133,9 @@ functions:
     sleep: 0.0
     tooltip: Acts as llGetMass(), except that the units of the value returned are
       Kg.
+    categories:
+      - linkset
+      - physics
     must-use: true
   llGetMaxScaleFactor:
     arguments: []
@@ -6744,6 +7146,9 @@ functions:
     tooltip: Returns the largest multiplicative uniform scale factor that can be successfully
       applied (via llScaleByFactor()) to the object without violating prim size or
       linkability rules.
+    categories:
+      - linkset
+      - prim_appearance
     must-use: true
   llGetMemoryLimit:
     arguments: []
@@ -6752,6 +7157,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Get the maximum memory a script can use, in bytes.
+    categories:
+      - script
     must-use: true
   llGetMinScaleFactor:
     arguments: []
@@ -6762,6 +7169,9 @@ functions:
     tooltip: Returns the smallest multiplicative uniform scale factor that can be
       successfully applied (via llScaleByFactor()) to the object without violating
       prim size or linkability rules.
+    categories:
+      - linkset
+      - prim_appearance
     must-use: true
   llGetMoonDirection:
     arguments: []
@@ -6771,6 +7181,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a normalized vector of the direction of the moon in the parcel.\nReturns
       the moon's direction on the simulator in the parcel.
+    categories:
+      - parcel
+      - parcel_appearance
     must-use: true
   llGetMoonRotation:
     arguments: []
@@ -6779,6 +7192,9 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation applied to the moon in the parcel.
+    categories:
+      - parcel
+      - parcel_appearance
     must-use: true
   llGetNextEmail:
     arguments:
@@ -6795,6 +7211,8 @@ functions:
     tooltip: Fetch the next queued email with that matches the given address and/or
       subject, via the email event.\nIf the parameters are blank, they are not used
       for filtering.
+    categories:
+      - script_communication
   llGetNotecardLine:
     arguments:
     - NotecardName:
@@ -6813,6 +7231,10 @@ functions:
       end of the note-card the dataserver event will return the constant EOF string.\nThe
       key returned by this function is a unique identifier which will be supplied
       to the dataserver event in the requested parameter.
+    categories:
+      - data_storage
+      - dataserver
+      - notecard
   llGetNotecardLineSync:
     arguments:
     - NotecardName:
@@ -6830,6 +7252,9 @@ functions:
       LSL, one in Lua.\nIf the requested line is past the end of the note-card the
       return value will be set to the constant EOF string.\nIf the note-card is not
       cached on the simulator the return value is the NAK string.
+    categories:
+      - data_storage
+      - notecard
     must-use: true
   llGetNumberOfNotecardLines:
     arguments:
@@ -6843,6 +7268,10 @@ functions:
     tooltip: Returns the number of lines contained within a notecard via the dataserver
       event.\nThe key returned by this function is a query ID for identifying the
       dataserver reply.
+    categories:
+      - data_storage
+      - dataserver
+      - notecard
   llGetNumberOfPrims:
     arguments: []
     energy: 10.0
@@ -6851,6 +7280,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of prims in a link set the script is attached to.\nReturns
       the number of prims in (and avatars seated on) the object the script is in.
+    categories:
+      - linkset
     must-use: true
   llGetNumberOfSides:
     arguments: []
@@ -6860,6 +7291,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of faces (or sides) of the prim.\nReturns the number
       of sides of the prim which has the script.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetObjectAnimationNames:
     arguments: []
@@ -6869,6 +7303,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a list of names of playing animations for an object.\nReturns
       a list of names of all playing animations for the current object.
+    categories:
+      - object_animation
     must-use: true
   llGetObjectDesc:
     arguments: []
@@ -6879,6 +7315,9 @@ functions:
     tooltip: Returns the description of the prim the script is attached to.\nReturns
       the description of the scripted object/prim. You can set the description using
       llSetObjectDesc.
+    categories:
+      - prim
+      - prim_properties
     must-use: true
   llGetObjectDetails:
     arguments:
@@ -6895,6 +7334,9 @@ functions:
     tooltip: Returns a list of object details specified in the Parameters list for
       the object or avatar in the region with key ID.\nParameters are specified by
       the OBJECT_* constants.
+    categories:
+      - object
+      - prim_properties
     must-use: true
   llGetObjectLinkKey:
     arguments:
@@ -6910,6 +7352,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of the linked prim link_no in a linkset.\nReturns the
       key of link_no in the link set specified by id.
+    categories:
+      - object
+      - uuid
     must-use: true
   llGetObjectMass:
     arguments:
@@ -6922,6 +7367,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the mass of the avatar or object in the region.\nGets the mass
       of the object or avatar corresponding to ID.
+    categories:
+      - object
+      - physics
     must-use: true
   llGetObjectName:
     arguments: []
@@ -6931,6 +7379,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the name of the prim which the script is attached to.\nReturns
       the name of the prim (not object) which contains the script.
+    categories:
+      - prim
+      - prim_properties
     must-use: true
   llGetObjectPermMask:
     arguments:
@@ -6943,6 +7394,9 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the permission mask of the requested category for the object.
+    categories:
+      - asset_permissions
+      - linkset
     must-use: true
   llGetObjectPrimCount:
     arguments:
@@ -6955,6 +7409,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the total number of prims for an object in the region.\nReturns
       the prim count for any object id in the same region.
+    categories:
+      - object
     must-use: true
   llGetOmega:
     arguments: []
@@ -6964,6 +7420,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation velocity in radians per second.\nReturns a vector
       that is the rotation velocity of the object in radians per second.
+    categories:
+      - movement
+      - physics
     must-use: true
   llGetOwner:
     arguments: []
@@ -6973,6 +7432,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the object owner's UUID.\nReturns the key for the owner of the
       object.
+    categories:
+      - linkset
+      - uuid
     must-use: true
   llGetOwnerKey:
     arguments:
@@ -6985,6 +7447,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the owner of ObjectID.\nReturns the key for the owner of object
       ObjectID.
+    categories:
+      - object
+      - uuid
     must-use: true
   llGetParcelDetails:
     arguments:
@@ -7003,6 +7468,8 @@ functions:
       _DESC, _OWNER, _GROUP, _AREA, _ID, _SEE_AVATARS.\nReturns a list that is the
       parcel details specified in ParcelDetails (in the same order) for the parcel
       at Position.'
+    categories:
+      - parcel
     must-use: true
   llGetParcelFlags:
     arguments:
@@ -7016,6 +7483,8 @@ functions:
     tooltip: Returns a mask of the parcel flags (PARCEL_FLAG_*) for the parcel that
       includes the point Position.\nReturns a bit-field specifying the parcel flags
       (PARCEL_FLAG_*) for the parcel at Position.
+    categories:
+      - parcel
     must-use: true
   llGetParcelMaxPrims:
     arguments:
@@ -7034,6 +7503,8 @@ functions:
     tooltip: Returns the maximum number of prims allowed on the parcel at Position
       for a given scope.\nThe scope may be set to an individual parcel or the combined
       resources of all parcels with the same ownership in the region.
+    categories:
+      - parcel
     must-use: true
   llGetParcelMusicURL:
     arguments: []
@@ -7043,6 +7514,8 @@ functions:
     sleep: 0.0
     tooltip: Gets the streaming audio URL for the parcel object is on.\nThe object
       owner, avatar or group, must also be the land owner.
+    categories:
+      - parcel
     must-use: true
   llGetParcelPrimCount:
     arguments:
@@ -7067,6 +7540,8 @@ functions:
       TRUE, it returns the total number of objects for all parcels with matching ownership
       in the category specified.\nIf SimWide is FALSE, it returns the number of objects
       on this specific parcel in the category specified'
+    categories:
+      - parcel
     must-use: true
   llGetParcelPrimOwners:
     arguments:
@@ -7083,6 +7558,8 @@ functions:
       is formatted as [ key agentKey1, integer agentLI1, key agentKey2, integer agentLI2,
       ... ], sorted by agent key.\nThe integers are the combined land impacts of the
       objects owned by the corresponding agents.
+    categories:
+      - parcel
     must-use: true
   llGetPermissions:
     arguments: []
@@ -7093,6 +7570,8 @@ functions:
     tooltip: Returns an integer bitmask of the permissions that have been granted
       to the script.  Individual permissions can be determined using a bit-wise "and"
       operation against the PERMISSION_* constants
+    categories:
+      - permissions
     must-use: true
   llGetPermissionsKey:
     arguments: []
@@ -7102,6 +7581,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the key of the avatar that last granted or declined permissions
       to the script.\nReturns NULL_KEY if permissions were never granted or declined.
+    categories:
+      - avatar
+      - permissions
     must-use: true
   llGetPhysicsMaterial:
     arguments: []
@@ -7111,6 +7593,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a list of the form [float gravity_multiplier, float restitution,
       float friction, float density].
+    categories:
+      - physics
+      - prim
     must-use: true
   llGetPos:
     arguments: []
@@ -7120,6 +7605,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the position of the task in region coordinates.\nReturns the
       vector position of the task in region coordinates.
+    categories:
+      - prim
     must-use: true
   llGetPrimMediaParams:
     arguments:
@@ -7136,6 +7623,10 @@ functions:
     tooltip: Returns the media parameters for a particular face on an object, given
       the desired list of parameter names, in the order requested. Returns an empty
       list if no media exists on the face.
+    categories:
+      - media
+      - prim
+      - prim_media
     must-use: true
   llGetPrimitiveParams:
     arguments:
@@ -7148,6 +7639,10 @@ functions:
     sleep: 0.2
     tooltip: Returns the primitive parameters specified in the parameters list.\nReturns
       primitive parameters specified in the Parameters list.
+    categories:
+      - prim
+      - prim_appearance
+      - prim_properties
     must-use: true
   llGetRegionAgentCount:
     arguments: []
@@ -7157,6 +7652,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of avatars in the region.\nReturns an integer that
       is the number of avatars in the region.
+    categories:
+      - region
     must-use: true
   llGetRegionCorner:
     arguments: []
@@ -7168,6 +7665,8 @@ functions:
       corner of the region which the object is in.\nReturns the Region-Corner of the
       simulator containing the task. The region-corner is a vector (values in meters)
       representing distance from the first region.
+    categories:
+      - region
     must-use: true
   llGetRegionDayLength:
     arguments: []
@@ -7176,6 +7675,9 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the number of seconds in a day in this region.
+    categories:
+      - region
+      - time
     must-use: true
   llGetRegionDayOffset:
     arguments: []
@@ -7185,6 +7687,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of seconds in a day is offset from midnight in this
       parcel.
+    categories:
+      - region
+      - time
     must-use: true
   llGetRegionFPS:
     arguments: []
@@ -7193,6 +7698,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the mean region frames per second.
+    categories:
+      - region
     must-use: true
   llGetRegionFlags:
     arguments: []
@@ -7203,6 +7710,8 @@ functions:
     tooltip: Returns the region flags (REGION_FLAG_*) for the region the object is
       in.\nReturns a bit-field specifying the region flags (REGION_FLAG_*) for the
       region the object is in.
+    categories:
+      - region
     must-use: true
   llGetRegionMoonDirection:
     arguments: []
@@ -7212,6 +7721,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a normalized vector of the direction of the moon in the region.\nReturns
       the moon's direction on the simulator.
+    categories:
+      - region
+      - region_appearance
     must-use: true
   llGetRegionMoonRotation:
     arguments: []
@@ -7220,6 +7732,9 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation applied to the moon in the region.
+    categories:
+      - region
+      - region_appearance
     must-use: true
   llGetRegionName:
     arguments: []
@@ -7228,6 +7743,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the current region name.
+    categories:
+      - region
     must-use: true
   llGetRegionSunDirection:
     arguments: []
@@ -7237,6 +7754,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a normalized vector of the direction of the sun in the region.\nReturns
       the sun's direction on the simulator.
+    categories:
+      - region
+      - region_appearance
     must-use: true
   llGetRegionSunRotation:
     arguments: []
@@ -7245,6 +7765,9 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation applied to the sun in the region.
+    categories:
+      - region
+      - region_appearance
   llGetRegionTimeDilation:
     arguments: []
     energy: 10.0
@@ -7254,6 +7777,8 @@ functions:
     tooltip: Returns the current time dilation as a float between 0.0 (full dilation)
       and 1.0 (no dilation).\nReturns the current time dilation as a float between
       0.0 and 1.0.
+    categories:
+      - region
     must-use: true
   llGetRegionTimeOfDay:
     arguments: []
@@ -7263,6 +7788,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the time in seconds since environmental midnight for the entire
       region.
+    categories:
+      - region
+      - time
     must-use: true
   llGetRenderMaterial:
     arguments:
@@ -7276,6 +7804,9 @@ functions:
     tooltip: Returns a string that is the render material on face (the inventory name
       if it is a material in the prim's inventory, otherwise the key).\nReturns the
       render material of a face, if it is found in object inventory, its key otherwise.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetRootPosition:
     arguments: []
@@ -7286,6 +7817,8 @@ functions:
     tooltip: Returns the position (in region coordinates) of the root prim of the
       object which the script is attached to.\nThis is used to allow a child prim
       to determine where the root is.
+    categories:
+      - linkset
     must-use: true
   llGetRootRotation:
     arguments: []
@@ -7296,6 +7829,8 @@ functions:
     tooltip: Returns the rotation (relative to the region) of the root prim of the
       object which the script is attached to.\nGets the global rotation of the root
       object of the object script is attached to.
+    categories:
+      - linkset
     must-use: true
   llGetRot:
     arguments: []
@@ -7304,6 +7839,8 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation relative to the region's axes.\nReturns the rotation.
+    categories:
+      - prim
     must-use: true
   llGetSPMaxMemory:
     arguments: []
@@ -7314,6 +7851,8 @@ functions:
     tooltip: Returns the maximum used memory for the current script. Only valid after
       using PROFILE_SCRIPT_MEMORY. Non-mono scripts always use 16k.\nReturns the integer
       of the most bytes used while llScriptProfiler was last active.
+    categories:
+      - script
     must-use: true
   llGetScale:
     arguments: []
@@ -7323,6 +7862,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the scale of the prim.\nReturns a vector that is the scale (dimensions)
       of the prim.
+    categories:
+      - prim
     must-use: true
   llGetScriptName:
     arguments: []
@@ -7332,6 +7873,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the name of the script that this function is used in.\nReturns
       the name of this script.
+    categories:
+      - prim_inventory
+      - script
     must-use: true
   llGetScriptState:
     arguments:
@@ -7345,6 +7889,9 @@ functions:
     sleep: 0.0
     tooltip: Returns TRUE if the script named is running.\nReturns TRUE if ScriptName
       is running.
+    categories:
+      - prim_inventory
+      - script
     must-use: true
   llGetSimStats:
     arguments:
@@ -7356,6 +7903,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns a float that is the requested statistic.
+    categories:
+      - region
     must-use: true
   llGetSimulatorHostname:
     arguments: []
@@ -7365,6 +7914,8 @@ functions:
     sleep: 10.0
     tooltip: Returns the host-name of the machine which the script is running on.\nFor
       example, "sim225.agni.lindenlab.com".
+    categories:
+      - region
     must-use: true
   llGetStartParameter:
     arguments: []
@@ -7374,6 +7925,9 @@ functions:
     sleep: 0.0
     tooltip: Returns an integer that is the script rez parameter.\nIf the object was
       rezzed by an agent, this function returns 0.
+    categories:
+      - rez
+      - script
     must-use: true
   llGetStartString:
     arguments: []
@@ -7384,6 +7938,9 @@ functions:
     tooltip: Returns a string that is the value passed to llRezObjectWithParams with
       REZ_PARAM_STRING.\nIf the object was rezzed by an agent, this function returns
       an empty string.
+    categories:
+      - rez
+      - script
     must-use: true
   llGetStaticPath:
     arguments:
@@ -7407,6 +7964,8 @@ functions:
     return: list
     sleep: 0.0
     tooltip: ''
+    categories:
+      - pathfinding
     must-use: true
   llGetStatus:
     arguments:
@@ -7420,6 +7979,9 @@ functions:
     sleep: 0.0
     tooltip: Returns boolean value of the specified status (e.g. STATUS_PHANTOM) of
       the object the script is attached to.
+    categories:
+      - linkset
+      - physics
     must-use: true
   llGetSubString:
     arguments:
@@ -7444,6 +8006,8 @@ functions:
       the index to count backwards from the length of the string, so 0, -1 would capture
       the entire string.\nIf Start is greater than End, the sub string is the exclusion
       of the entries.
+    categories:
+      - string
   llGetSunDirection:
     arguments: []
     energy: 10.0
@@ -7452,6 +8016,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a normalized vector of the direction of the sun in the parcel.\nReturns
       the sun's direction on the simulator in the parcel.
+    categories:
+      - parcel
+      - parcel_appearance
     must-use: true
   llGetSunRotation:
     arguments: []
@@ -7460,6 +8027,9 @@ functions:
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation applied to the sun in the parcel.
+    categories:
+      - parcel
+      - parcel_appearance
     must-use: true
   llGetTexture:
     arguments:
@@ -7473,6 +8043,9 @@ functions:
     tooltip: Returns a string that is the texture on face (the inventory name if it
       is a texture in the prim's inventory, otherwise the key).\nReturns the texture
       of a face, if it is found in object inventory, its key otherwise.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetTextureOffset:
     arguments:
@@ -7484,6 +8057,9 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the texture offset of face in the x and y components of a vector.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetTextureRot:
     arguments:
@@ -7495,6 +8071,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the texture rotation of side.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetTextureScale:
     arguments:
@@ -7507,6 +8086,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the texture scale of side in the x and y components of a vector.\nReturns
       the texture scale of a side in the x and y components of a vector.
+    categories:
+      - prim
+      - prim_appearance
     must-use: true
   llGetTime:
     arguments: []
@@ -7516,6 +8098,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the time in seconds since the last region reset, script reset,
       or call to either llResetTime or llGetAndResetTime.
+    categories:
+      - script
     must-use: true
   llGetTimeOfDay:
     arguments: []
@@ -7524,6 +8108,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the time in seconds since environmental midnight on the parcel.
+    categories:
+      - time
     must-use: true
   llGetTimestamp:
     arguments: []
@@ -7532,6 +8118,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+    categories:
+      - time
     must-use: true
   llGetTorque:
     arguments: []
@@ -7541,6 +8129,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the torque (if the script is physical).\nReturns a vector that
       is the torque (if the script is physical).
+    categories:
+      - movement
+      - physics
     must-use: true
   llGetUnixTime:
     arguments: []
@@ -7550,6 +8141,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of seconds elapsed since 00:00 hours, Jan 1, 1970
       UTC from the system clock.
+    categories:
+      - time
     must-use: true
   llGetUsedMemory:
     arguments: []
@@ -7560,6 +8153,8 @@ functions:
     tooltip: Returns the current used memory for the current script. Non-mono scripts
       always use 16K.\nReturns the integer of the number of bytes of memory currently
       in use by the script. Non-mono scripts always use 16K.
+    categories:
+      - script
     must-use: true
   llGetUsername:
     arguments:
@@ -7573,6 +8168,8 @@ functions:
     tooltip: Returns the username of an avatar, if the avatar is connected to the
       current region, or if the name has been cached.  Otherwise, returns an empty
       string. Use llRequestUsername if the avatar may be absent from the region.
+    categories:
+      - avatar
     must-use: true
   llGetVel:
     arguments: []
@@ -7582,6 +8179,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the velocity of the object.\nReturns a vector that is the velocity
       of the object.
+    categories:
+      - movement
+      - physics
     must-use: true
   llGetVisualParams:
     arguments:
@@ -7596,6 +8196,8 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Returns a list of the current value for each requested visual parameter.
+    categories:
+      - avatar
     must-use: true
   llGetWallclock:
     arguments: []
@@ -7605,6 +8207,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the time in seconds since midnight California Pacific time (PST/PDT).\nReturns
       the time in seconds since simulator's time-zone midnight (Pacific Time).
+    categories:
+      - time
     must-use: true
   llGiveAgentInventory:
     arguments:
@@ -7626,6 +8230,8 @@ functions:
     sleep: 3.0
     tooltip: Give InventoryItems to the specified agent as a new folder of items,
       as permitted by the permissions system. The target must be an agent.
+    categories:
+      - avatar_inventory
   llGiveInventory:
     arguments:
     - TargetID:
@@ -7641,6 +8247,9 @@ functions:
     tooltip: Give InventoryItem to destination represented by TargetID, as permitted
       by the permissions system.\nTargetID may be any agent or an object in the same
       region.
+    categories:
+      - avatar_inventory
+      - prim_inventory
   llGiveInventoryList:
     arguments:
     - TargetID:
@@ -7660,6 +8269,9 @@ functions:
       folder of items, as permitted by the permissions system.\nTargetID may be any
       agent or an object in the same region. If TargetID is an object, the items are
       passed directly to the object inventory (no folder is created).
+    categories:
+      - avatar_inventory
+      - prim_inventory
   llGiveMoney:
     arguments:
     - AvatarID:
@@ -7674,6 +8286,10 @@ functions:
     sleep: 0.0
     tooltip: Transfers Amount of L$ from script owner to AvatarID.\nThis call will
       silently fail if PERMISSION_DEBIT has not been granted.
+    categories:
+      - avatar
+      - money
+      - permissions
   llGodLikeRezObject:
     arguments:
     - InventoryItemID:
@@ -7688,6 +8304,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Rez directly off of a UUID if owner has god-bit set.
+    categories:
+      - prim_inventory
+      - rez
   llGround:
     arguments:
     - Offset:
@@ -7699,6 +8318,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the ground height at the object position + offset.\nReturns the
       ground height at the object's position + Offset.
+    categories:
+      - region
     must-use: true
   llGroundContour:
     arguments:
@@ -7711,6 +8332,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the ground contour direction below the object position + Offset.\nReturns
       the ground contour at the object's position + Offset.
+    categories:
+      - region
     must-use: true
   llGroundNormal:
     arguments:
@@ -7723,6 +8346,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the ground normal below the object position + offset.\nReturns
       the ground contour at the object's position + Offset.
+    categories:
+      - region
     must-use: true
   llGroundRepel:
     arguments:
@@ -7745,6 +8370,8 @@ functions:
       \                  The height is above ground level if iWater is FALSE or above\
       \ the higher of land and water if iWater is TRUE.\\n\n                    Do\
       \ not use with vehicles. Only works in physics-enabled objects."
+    categories:
+      - region
   llGroundSlope:
     arguments:
     - Offset:
@@ -7756,6 +8383,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the ground slope below the object position + Offset.\nReturns
       the ground slope at the object position + Offset.
+    categories:
+      - region
     must-use: true
   llHMAC:
     arguments:
@@ -7775,6 +8404,8 @@ functions:
     tooltip: Returns the base64-encoded hashed message authentication code (HMAC),
       of Message using PEM-formatted Key and digest Algorithm (md5, sha1, sha224,
       sha256, sha384, sha512).
+    categories:
+      - cryptography
     must-use: true
   llHTTPRequest:
     arguments:
@@ -7794,6 +8425,9 @@ functions:
     tooltip: Sends an HTTP request to the specified URL with the Body of the request
       and Parameters.\nReturns a key that is a handle identifying the HTTP request
       made.
+    categories:
+      - script_communication
+      - web
   llHTTPResponse:
     arguments:
     - HTTPRequestID:
@@ -7813,6 +8447,11 @@ functions:
       event within the script. HTTPRequestID specifies the request to respond to (this
       ID is supplied in the http_request event handler).  Status and Body specify
       the status code and message to respond with.
+    categories:
+      - media
+      - prim_media
+      - script_communication
+      - web
   llHash:
     arguments:
     - value:
@@ -7823,6 +8462,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Calculates the 32bit hash value for the provided string.
+    categories:
+      - cryptography
     must-use: true
   llInsertString:
     arguments:
@@ -7844,6 +8485,8 @@ functions:
     tooltip: Inserts SourceVariable into TargetVariable at Position, and returns the
       result.\nInserts SourceVariable into TargetVariable at Position and returns
       the result. Note this does not alter TargetVariable.
+    categories:
+      - string
   llInstantMessage:
     arguments:
     - AvatarID:
@@ -7858,6 +8501,8 @@ functions:
     sleep: 2.0
     tooltip: IMs Text to the user identified.\nSend Text to the user as an instant
       message.
+    categories:
+      - avatar_communication
   llIntegerToBase64:
     arguments:
     - Value:
@@ -7870,6 +8515,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a string that is a Base64 big endian encode of Value.\nEncodes
       the Value as an 8-character Base64 string.
+    categories:
+      - data_conversion
   llIsFriend:
     arguments:
     - agent_id:
@@ -7881,6 +8528,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns TRUE if avatar ID is a friend of the script owner.
+    categories:
+      - avatar
     must-use: true
   llIsLinkGLTFMaterial:
     arguments:
@@ -7896,6 +8545,9 @@ functions:
     bool-semantics: true
     sleep: 0.0
     tooltip: Checks the face for a PBR render material.
+    categories:
+      - linkset
+      - prim_appearance
     must-use: true
   llJson2List:
     arguments:
@@ -7908,6 +8560,9 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Converts the top level of the JSON string to a list.
+    categories:
+      - data_conversion
+      - json
   llJsonGetValue:
     arguments:
     - JSON:
@@ -7922,6 +8577,9 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Gets the value indicated by Specifiers from the JSON string.
+    categories:
+      - data_conversion
+      - json
   llJsonSetValue:
     arguments:
     - JSON:
@@ -7940,6 +8598,9 @@ functions:
     sleep: 0.0
     tooltip: Returns a new JSON string that is the JSON given with the Value indicated
       by Specifiers set to Value.
+    categories:
+      - data_conversion
+      - json
   llJsonValueType:
     arguments:
     - JSON:
@@ -7955,6 +8616,9 @@ functions:
     sleep: 0.0
     tooltip: Returns the type constant (JSON_*) for the value in JSON indicated by
       Specifiers.
+    categories:
+      - data_conversion
+      - json
   llKey2Name:
     arguments:
     - ID:
@@ -7967,6 +8631,8 @@ functions:
     tooltip: Returns the name of the prim or avatar specified by ID. The ID must be
       a valid rezzed prim or avatar key in the current simulator, otherwise an empty
       string is returned.\nFor avatars, the returned name is the legacy name
+    categories:
+      - object
     must-use: true
   llKeyCountKeyValue:
     arguments: []
@@ -7983,6 +8649,11 @@ functions:
       \ item will be an integer corresponding to one of the XP_ERROR_... constants.\
       \ In the success case the second item will the the number of keys in the system.\n\
       \                "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llKeysKeyValue:
     arguments:
     - First:
@@ -8011,6 +8682,11 @@ functions:
       \ between subsequent calls as long as no keys are added or removed. Because\
       \ the keys are returned in a comma-delimited list it is not recommended to use\
       \ commas in key names if this function is used.\n                "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llLinear2sRGB:
     arguments:
     - color:
@@ -8021,6 +8697,10 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Converts a color from the linear colorspace to sRGB.
+    categories:
+      - data_conversion
+      - math
+      - prim_appearance
     must-use: true
   llLinkAdjustSoundVolume:
     arguments:
@@ -8037,6 +8717,8 @@ functions:
     sleep: 0.0
     tooltip: Adjusts the volume (0.0 - 1.0) of the currently playing sound attached
       to the link.\nThis function has no effect on sounds started with llTriggerSound.
+    categories:
+      - sound
   llLinkParticleSystem:
     arguments:
     - LinkNumber:
@@ -8056,6 +8738,9 @@ functions:
       rule-2, data-2 ... rule-n, data-n ].\nThis is identical to llParticleSystem
       except that it applies to a specified linked prim and not just the prim the
       script is in.
+    categories:
+      - effects
+      - particles
   llLinkPlaySound:
     arguments:
     - LinkNumber:
@@ -8079,6 +8764,8 @@ functions:
       attached to the link or triggered at its location.\nOnly one sound may be attached
       to an object at a time, and attaching a new sound or calling llStopSound will
       stop the previously attached sound.
+    categories:
+      - sound
   llLinkSetSoundQueueing:
     arguments:
     - LinkNumber:
@@ -8095,6 +8782,8 @@ functions:
     sleep: 0.0
     tooltip: Limits radius for audibility of scripted sounds (both attached and triggered)
       to distance Radius around the link.
+    categories:
+      - sound
   llLinkSetSoundRadius:
     arguments:
     - LinkNumber:
@@ -8110,6 +8799,8 @@ functions:
     sleep: 0.0
     tooltip: Limits radius for audibility of scripted sounds (both attached and triggered)
       to distance Radius around the link.
+    categories:
+      - sound
   llLinkSitTarget:
     arguments:
     - LinkNumber:
@@ -8129,6 +8820,9 @@ functions:
     tooltip: Set the sit location for the linked prim(s). If Offset == <0,0,0> clear
       it.\nSet the sit location for the linked prim(s). The sit location is relative
       to the prim's position and rotation.
+    categories:
+      - linkset
+      - sit
   llLinkStopSound:
     arguments:
     - LinkNumber:
@@ -8140,6 +8834,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stops playback of the currently attached sound on a link.
+    categories:
+      - sound
   llLinksetDataAvailable:
     arguments: []
     energy: 10.0
@@ -8147,6 +8843,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the number of bytes remaining in the linkset's datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataCountFound:
     arguments:
@@ -8159,6 +8859,10 @@ functions:
     sleep: 0.0
     tooltip: Returns the number of keys matching the regular expression passed in
       the search parameter.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataCountKeys:
     arguments: []
@@ -8167,6 +8871,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the number of keys in the linkset's datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataDelete:
     arguments:
@@ -8178,6 +8886,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Deletes a name:value pair from the linkset's datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llLinksetDataDeleteFound:
     arguments:
     - search:
@@ -8193,6 +8905,10 @@ functions:
     tooltip: 'Deletes all key value pairs in the linkset data where the key matches
       the regular expression in search. Returns a list consisting of [ #deleted, #not
       deleted ].'
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llLinksetDataDeleteProtected:
     arguments:
     - name:
@@ -8206,6 +8922,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Deletes a name:value pair from the linkset's datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llLinksetDataFindKeys:
     arguments:
     - search:
@@ -8224,6 +8944,10 @@ functions:
     sleep: 0.0
     tooltip: Returns a list of keys from the linkset's data store matching the search
       parameter.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataListKeys:
     arguments:
@@ -8239,6 +8963,10 @@ functions:
     return: list
     sleep: 0.0
     tooltip: Returns a list of all keys in the linkset datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataRead:
     arguments:
@@ -8250,6 +8978,10 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the value stored for a key in the linkset.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataReadProtected:
     arguments:
@@ -8264,6 +8996,10 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the value stored for a key in the linkset.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
     must-use: true
   llLinksetDataReset:
     arguments: []
@@ -8272,6 +9008,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Resets the linkset's data store, erasing all key-value pairs.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llLinksetDataWrite:
     arguments:
     - name:
@@ -8285,6 +9025,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Sets a name:value pair in the linkset's datastore
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llLinksetDataWriteProtected:
     arguments:
     - name:
@@ -8301,6 +9045,10 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Sets a name:value pair in the linkset's datastore
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   llList2CSV:
     arguments:
     - ListVariable:
@@ -8313,6 +9061,9 @@ functions:
     sleep: 0.0
     tooltip: Creates a string of comma separated values from the list.\nCreate a string
       of comma separated values from the specified list.
+    categories:
+      - data_conversion
+      - list
   llList2Float:
     arguments:
     - ListVariable:
@@ -8331,6 +9082,9 @@ functions:
     tooltip: Copies the float at Index in the list.\nReturns the value at Index in
       the specified list. If Index describes a location not in the list, or the value
       cannot be type-cast to a float, then zero is returned.
+    categories:
+      - data_conversion
+      - list
   llList2Integer:
     arguments:
     - ListVariable:
@@ -8349,6 +9103,9 @@ functions:
     tooltip: Copies the integer at Index in the list.\nReturns the value at Index
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to an integer, then zero is returned.
+    categories:
+      - data_conversion
+      - list
   llList2Json:
     arguments:
     - JsonType:
@@ -8364,6 +9121,10 @@ functions:
     sleep: 0.0
     tooltip: Converts either a strided list of key:value pairs to a JSON_OBJECT, or
       a list of values to a JSON_ARRAY.
+    categories:
+      - data_conversion
+      - json
+      - list
   llList2Key:
     arguments:
     - ListVariable:
@@ -8382,6 +9143,9 @@ functions:
     tooltip: Copies the key at Index in the list.\nReturns the value at Index in the
       specified list. If Index describes a location not in the list, or the value
       cannot be type-cast to a key, then null string is returned.
+    categories:
+      - data_conversion
+      - list
   llList2List:
     arguments:
     - ListVariable:
@@ -8406,6 +9170,8 @@ functions:
       End causes the index to count backwards from the length of the string, so 0,
       -1 would capture the entire string.\nIf Start is greater than End, the sub string
       is the exclusion of the entries.
+    categories:
+      - list
   llList2ListSlice:
     arguments:
     - ListVariable:
@@ -8438,6 +9204,8 @@ functions:
       must be a positive integer > 0 or an empy list is returned.  If slice_index
       falls outside range of stride, an empty list is returned. slice_index is zero-based.
       (e.g. A stride of 2 has valid indices 0,1)
+    categories:
+      - list
     must-use: true
   llList2ListStrided:
     arguments:
@@ -8461,6 +9229,8 @@ functions:
     sleep: 0.0
     tooltip: Copies the strided slice of the list from Start to End.\nReturns a copy
       of the strided slice of the specified list from Start to End.
+    categories:
+      - list
     must-use: true
   llList2Rot:
     arguments:
@@ -8480,6 +9250,9 @@ functions:
     tooltip: Copies the rotation at Index in the list.\nReturns the value at Index
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to rotation, thenZERO_ROTATION is returned.
+    categories:
+      - data_conversion
+      - list
   llList2String:
     arguments:
     - ListVariable:
@@ -8498,6 +9271,9 @@ functions:
     tooltip: Copies the string at Index in the list.\nReturns the value at Index in
       the specified list as a string. If Index describes a location not in the list
       then null string is returned.
+    categories:
+      - data_conversion
+      - list
   llList2Vector:
     arguments:
     - ListVariable:
@@ -8516,6 +9292,9 @@ functions:
     tooltip: Copies the vector at Index in the list.\nReturns the value at Index in
       the specified list. If Index describes a location not in the list, or the value
       cannot be type-cast to a vector, then ZERO_VECTOR is returned.
+    categories:
+      - data_conversion
+      - list
   llListFindList:
     arguments:
     - ListVariable:
@@ -8532,6 +9311,8 @@ functions:
     tooltip: Returns the index of the first instance of Find in ListVariable. Returns
       -1 if not found.\nReturns the position of the first instance of the Find list
       in the ListVariable. Returns -1 if not found.
+    categories:
+      - list
     must-use: true
   llListFindListNext:
     arguments:
@@ -8552,6 +9333,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the index of the nth instance of Find in ListVariable. Returns
       -1 if not found.
+    categories:
+      - list
     must-use: true
   llListFindStrided:
     arguments:
@@ -8581,6 +9364,8 @@ functions:
       -1 if not found.\nReturns the position of the first instance of the Find list
       in the ListVariable after the start index and before the end index. Steps through
       ListVariable by stride.  Returns -1 if not found.
+    categories:
+      - list
     must-use: true
   llListInsertList:
     arguments:
@@ -8604,6 +9389,8 @@ functions:
       elements from ListVariable inserted at Position start.\nReturns a new list,
       created by inserting ListVariable into the Target list at Position. Note this
       does not alter the Target.
+    categories:
+      - list
   llListRandomize:
     arguments:
     - ListVariable:
@@ -8619,6 +9406,8 @@ functions:
     tooltip: Returns a version of the input ListVariable which has been randomized
       by blocks of size Stride.\nIf the remainder from the length of the list, divided
       by the stride is non-zero, this function does not randomize the list.
+    categories:
+      - list
     must-use: true
   llListReplaceList:
     arguments:
@@ -8647,6 +9436,8 @@ functions:
       Start to End with the specified ListVariable. Start and End are inclusive, so
       0, 1 would replace the first two entries and 0, 0 would replace only the first
       list entry.
+    categories:
+      - list
   llListSort:
     arguments:
     - ListVariable:
@@ -8666,6 +9457,8 @@ functions:
     tooltip: Returns the specified list, sorted into blocks of stride in ascending
       order (if Ascending is TRUE, otherwise descending). Note that sort only works
       if the first entry of each block is the same datatype.
+    categories:
+      - list
     must-use: true
   llListSortStrided:
     arguments:
@@ -8690,6 +9483,8 @@ functions:
     tooltip: Returns the specified list, sorted by the specified element into blocks
       of stride in ascending order (if Ascending is TRUE, otherwise descending). Note
       that sort only works if the first entry of each block is the same datatype.
+    categories:
+      - list
     must-use: true
   llListStatistics:
     arguments:
@@ -8706,6 +9501,9 @@ functions:
     tooltip: Performs a statistical aggregate function, specified by a LIST_STAT_*
       constant, on ListVariables.\nThis function allows a script to perform a statistical
       operation as defined by operation on a list composed of integers and floats.
+    categories:
+      - list
+      - math
     must-use: true
   llListen:
     arguments:
@@ -8733,6 +9531,10 @@ functions:
       is the public chat channel that all avatars see as chat text. DEBUG_CHANNEL
       is the script debug channel, and is also visible to nearby avatars. All other
       channels are are not sent to avatars, but may be used to communicate with scripts.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llListenControl:
     arguments:
     - ChannelHandle:
@@ -8748,6 +9550,10 @@ functions:
     tooltip: Makes a listen event callback active or inactive. Pass in the value returned
       from llListen to the iChannelHandle parameter to specify which listener you
       are controlling.\nUse boolean values to specify Active
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llListenRemove:
     arguments:
     - ChannelHandle:
@@ -8759,6 +9565,10 @@ functions:
     sleep: 0.0
     tooltip: Removes a listen event callback. Pass in the value returned from llListen
       to the iChannelHandle parameter to specify which listener to remove.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llLoadURL:
     arguments:
     - AvatarID:
@@ -8778,6 +9588,10 @@ functions:
       If user clicks yes, launches their web browser.\\nllLoadURL displays a dialogue\
       \ box to the user, offering to load the specified web page using the default\
       \ web browser."
+    categories:
+      - avatar_communication
+      - user_interface
+      - web
   llLog:
     arguments:
     - Value:
@@ -8791,6 +9605,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the natural logarithm of Value. Returns zero if Value <= 0.\nReturns
       the base e (natural) logarithm of the specified Value.
+    categories:
+      - math
   llLog10:
     arguments:
     - Value:
@@ -8804,6 +9620,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the base 10 logarithm of Value. Returns zero if Value <= 0.\nReturns
       the base 10 (common) logarithm of the specified Value.
+    categories:
+      - math
   llLookAt:
     arguments:
     - Target:
@@ -8823,6 +9641,9 @@ functions:
       controlled by Strength and Damping.\nGood Strength values are around half the
       mass of the object and good Damping values are less than 1/10th of the Strength.\nAsymmetrical
       shapes require smaller Damping. A Strength of 0.0 cancels the look at.
+    categories:
+      - movement
+      - physics
   llLoopSound:
     arguments:
     - Sound:
@@ -8842,6 +9663,8 @@ functions:
       volume to 0 is not the same as calling llStopSound; a sound with 0 volume will
       continue to loop.\nTo restart the sound from the beginning, call llStopSound
       before calling llLoopSound again.
+    categories:
+      - sound
   llLoopSoundMaster:
     arguments:
     - Sound:
@@ -8861,6 +9684,8 @@ functions:
       one (a function of both distance and volume) will win out as the master.\nThe
       use of multiple masters within a small area is unlikely to produce the desired
       effect.
+    categories:
+      - sound
   llLoopSoundSlave:
     arguments:
     - Sound:
@@ -8879,6 +9704,8 @@ functions:
       playing from the same point the master is in its loop synchronizing the loop
       points of both sounds.\nIf a Sync Master is started when the Slave is already
       playing, the Slave will skip to the correct position to sync with the Master.
+    categories:
+      - sound
   llMD5String:
     arguments:
     - Text:
@@ -8894,6 +9721,8 @@ functions:
     tooltip: Returns a string of 32 hex characters that is an RSA Data Security Inc.,
       MD5 Message-Digest Algorithm of Text with Nonce used as the salt.\nReturns a
       32-character hex string. (128-bit in binary.)
+    categories:
+      - cryptography
     must-use: true
   llMakeExplosion:
     arguments:
@@ -8926,6 +9755,8 @@ functions:
     tooltip: 'Make a round explosion of particles. Deprecated: Use llParticleSystem
       instead.\nMake a round explosion of particles using texture from the objects
       inventory. Deprecated: Use llParticleSystem instead.'
+    categories:
+      - effects
   llMakeFire:
     arguments:
     - Particles:
@@ -8957,6 +9788,8 @@ functions:
     tooltip: 'Make fire like particles. Deprecated: Use llParticleSystem instead.\nMake
       fire particles using texture from the objects inventory. Deprecated: Use llParticleSystem
       instead.'
+    categories:
+      - effects
   llMakeFountain:
     arguments:
     - Particles:
@@ -8994,6 +9827,8 @@ functions:
     tooltip: 'Make a fountain of particles. Deprecated: Use llParticleSystem instead.\nMake
       a fountain of particles using texture from the objects inventory. Deprecated:
       Use llParticleSystem instead.'
+    categories:
+      - effects
   llMakeSmoke:
     arguments:
     - Particles:
@@ -9025,6 +9860,8 @@ functions:
     tooltip: 'Make smoke like particles. Deprecated: Use llParticleSystem instead.\nMake
       smoky particles using texture from the objects inventory. Deprecated: Use llParticleSystem
       instead.'
+    categories:
+      - effects
   llManageEstateAccess:
     arguments:
     - Action:
@@ -9045,6 +9882,8 @@ functions:
       or object owner is not allowed to manage the estate.\nThe object owner is notified
       of any changes, unless PERMISSION_SILENT_ESTATE_MANAGEMENT has been granted
       to the script.
+    categories:
+      - land_moderation
   llMapBeacon:
     arguments:
     - RegionName:
@@ -9064,6 +9903,9 @@ functions:
       who touched the object or is wearing the script, centered on RegionName with
       Position highlighted. Only works for scripts attached to avatar, or during touch
       events.
+    categories:
+      - avatar_communication
+      - user_interface
   llMapDestination:
     arguments:
     - RegionName:
@@ -9082,6 +9924,9 @@ functions:
     tooltip: Opens world map for avatar who touched it or is wearing the script, centred
       on RegionName with Position highlighted. Only works for scripts attached to
       avatar, or during touch events.\nDirection currently has no effect.
+    categories:
+      - avatar_communication
+      - user_interface
   llMessageLinked:
     arguments:
     - LinkNumber:
@@ -9102,6 +9947,8 @@ functions:
     sleep: 0.0
     tooltip: Sends Number, Text, and ID to members of the link set identified by LinkNumber.\nLinkNumber
       is either a linked number (available through llGetLinkNumber) or a LINK_* constant.
+    categories:
+      - script_communication
   llMinEventDelay:
     arguments:
     - Delay:
@@ -9112,6 +9959,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Set the minimum time between events being handled.
+    categories:
+      - script
   llModPow:
     arguments:
     - Value:
@@ -9131,6 +9980,8 @@ functions:
     tooltip: Returns a Value raised to the Power, mod Modulus. ((a**b)%c) b is capped
       at 0xFFFF (16 bits).\nReturns (Value ^ Power) % Modulus. (Value raised to the
       Power, Modulus). Value is capped at 0xFFFF (16 bits).
+    categories:
+      - math
   llModifyLand:
     arguments:
     - Action:
@@ -9146,6 +9997,8 @@ functions:
     tooltip: Modify land with action (LAND_LEVEL, LAND_RAISE, LAND_LOWER, LAND_SMOOTH,
       LAND_NOISE, LAND_REVERT) on size (0, 1, 2, corresponding to 2m x 2m, 4m x 4m,
       8m x 8m).
+    categories:
+      - region
   llMoveToTarget:
     arguments:
     - Target:
@@ -9161,6 +10014,9 @@ functions:
     tooltip: Critically damp to Target in Tau seconds (if the script is physical).\nCritically
       damp to position target in tau-seconds if the script is physical. Good tau-values
       are greater than 0.2. A tau of 0.0 stops the critical damping.
+    categories:
+      - movement
+      - physics
   llName2Key:
     arguments:
     - Name:
@@ -9171,6 +10027,8 @@ functions:
     return: key
     sleep: 0.0
     tooltip: Look up Agent ID for the named agent in the region.
+    categories:
+      - avatar
     must-use: true
   llNavigateTo:
     arguments:
@@ -9187,6 +10045,8 @@ functions:
     sleep: 0.0
     tooltip: Navigate to destination.\nDirects an object to travel to a defined position
       in the region or adjacent regions.
+    categories:
+      - pathfinding
   llOffsetTexture:
     arguments:
     - OffsetS:
@@ -9204,6 +10064,9 @@ functions:
     sleep: 0.2
     tooltip: Sets the texture S and T offsets for the chosen Face.\nIf Face is ALL_SIDES
       this function sets the texture offsets for all faces.
+    categories:
+      - prim
+      - prim_appearance
   llOpenFloater:
     arguments:
     - floater_name:
@@ -9223,6 +10086,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the value for header for request_id.\nReturns a string that is
       the value of the Header for HTTPRequestID.
+    categories:
+      - avatar_communication
   llOpenRemoteDataChannel:
     arguments: []
     deprecated: true
@@ -9231,6 +10096,8 @@ functions:
     return: void
     sleep: 1.0
     tooltip: This function is deprecated.
+    categories:
+      - script_communication
   llOrd:
     arguments:
     - value:
@@ -9246,6 +10113,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns the unicode value of the indicated character in the string.
+    categories:
+      - string
   llOverMyLand:
     arguments:
     - ID:
@@ -9259,6 +10128,8 @@ functions:
     tooltip: Returns TRUE if id ID over land owned by the script owner, otherwise
       FALSE.\nReturns TRUE if key ID is over land owned by the object owner, FALSE
       otherwise.
+    categories:
+      - parcel
   llOwnerSay:
     arguments:
     - Text:
@@ -9271,6 +10142,8 @@ functions:
     tooltip: says Text to owner only (if owner is in region).\nSays Text to the owner
       of the object running the script, if the owner has been within the object's
       simulator since logging into Second Life, regardless of where they may be in-world.
+    categories:
+      - avatar_communication
   llParcelMediaCommandList:
     arguments:
     - CommandList:
@@ -9282,6 +10155,10 @@ functions:
     sleep: 2.0
     tooltip: Controls the playback of multimedia resources on a parcel or for an agent,
       via one or more PARCEL_MEDIA_COMMAND_* arguments specified in CommandList.
+    categories:
+      - media
+      - parcel
+      - parcel_media
   llParcelMediaQuery:
     arguments:
     - QueryList:
@@ -9296,6 +10173,10 @@ functions:
       function will only work if the script is contained within an object owned by
       the land-owner (or if the land is owned by a group, only if the object has been
       deeded to the group).
+    categories:
+      - media
+      - parcel
+      - parcel_media
   llParseString2List:
     arguments:
     - Text:
@@ -9315,6 +10196,8 @@ functions:
     tooltip: Converts Text into a list, discarding Separators, keeping Spacers (Separators
       and Spacers must be lists of strings, maximum of 8 each).\nSeparators and Spacers
       are lists of strings with a maximum of 8 entries each.
+    categories:
+      - data_conversion
   llParseStringKeepNulls:
     arguments:
     - Text:
@@ -9336,6 +10219,8 @@ functions:
       maximum of 8 each).\nllParseStringKeepNulls works almost exactly like llParseString2List,
       except that if a null is found it will add a null-string instead of discarding
       it like llParseString2List does.
+    categories:
+      - data_conversion
   llParticleSystem:
     arguments:
     - Parameters:
@@ -9348,6 +10233,9 @@ functions:
     tooltip: Creates a particle system in the prim the script is attached to, based
       on Parameters. An empty list removes a particle system from object.\nList format
       is [ rule-1, data-1, rule-2, data-2 ... rule-n, data-n ].
+    categories:
+      - effects
+      - particles
   llPassCollisions:
     arguments:
     - Pass:
@@ -9361,6 +10249,9 @@ functions:
       Pass == TRUE, collisions involving collision-handling scripted child prims are
       also passed on to the root prim. If Pass == FALSE (default behavior), such collisions
       will only trigger events in the affected child prim.
+    categories:
+      - physics
+      - sensor
   llPassTouches:
     arguments:
     - Pass:
@@ -9374,6 +10265,8 @@ functions:
       Pass == TRUE, touches involving touch-handling scripted child prims are also
       passed on to the root prim. If Pass == FALSE (default behavior), such touches
       will only trigger events in the affected child prim.
+    categories:
+      - touch
   llPatrolPoints:
     arguments:
     - Points:
@@ -9389,6 +10282,8 @@ functions:
     sleep: 0.0
     tooltip: Patrol a list of points.\nSets the points for a character (llCreateCharacter)
       to patrol along.
+    categories:
+      - pathfinding
   llPlaySound:
     arguments:
     - Sound:
@@ -9408,6 +10303,8 @@ functions:
       will be used, which allows control over the volume of already playing sounds.\nTo
       restart the sound from the beginning, call llStopSound before calling llPlaySound
       again.
+    categories:
+      - sound
   llPlaySoundSlave:
     arguments:
     - Sound:
@@ -9428,6 +10325,8 @@ functions:
       desired to have the sound play every time the Master loops, either use llLoopSoundSlave
       with extra silence padded on the end of the sound or ensure that llPlaySoundSlave
       is called at least once per loop of the Master.
+    categories:
+      - sound
   llPointAt:
     arguments:
     - Point:
@@ -9440,6 +10339,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: ''
+    categories:
+      - movement
+      - physics
   llPow:
     arguments:
     - Value:
@@ -9456,6 +10358,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the Value raised to the power Exponent, or returns 0 and triggers
       Math Error for imaginary results.\nReturns the Value raised to the Exponent.
+    categories:
+      - math
   llPreloadSound:
     arguments:
     - Sound:
@@ -9467,6 +10371,8 @@ functions:
     sleep: 1.0
     tooltip: Causes nearby viewers to preload the Sound from the object's inventory.\nThis
       is intended to prevent delays in starting new sounds when called upon.
+    categories:
+      - sound
   llPursue:
     arguments:
     - TargetID:
@@ -9481,6 +10387,8 @@ functions:
     sleep: 0.0
     tooltip: Chase after a target.\nCauses the character (llCharacter) to pursue the
       target defined by TargetID.
+    categories:
+      - pathfinding
   llPushObject:
     arguments:
     - ObjectID:
@@ -9501,6 +10409,9 @@ functions:
     sleep: 0.0
     tooltip: Applies Impulse and AngularImpulse to ObjectID.\nApplies the supplied
       impulse and angular impulse to the object specified.
+    categories:
+      - movement
+      - physics
   llReadKeyValue:
     arguments:
     - Key:
@@ -9520,6 +10431,11 @@ functions:
       \ item will be an integer corresponding to one of the XP_ERROR_... constants.\
       \ In the success case the second item will be the value associated with the\
       \ key.\n                "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llRefreshPrimURL:
     arguments: []
     deprecated: true
@@ -9528,6 +10444,10 @@ functions:
     return: void
     sleep: 20.0
     tooltip: Reloads the web page shown on the sides of the object.
+    categories:
+      - media
+      - prim_media
+      - web
   llRegionSay:
     arguments:
     - Channel:
@@ -9541,6 +10461,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Broadcasts Text to entire region on Channel (except for channel 0).
+    categories:
+      - chat
+      - script_communication
   llRegionSayTo:
     arguments:
     - TargetID:
@@ -9559,6 +10482,10 @@ functions:
     tooltip: Says Text, on Channel, to avatar or object indicated by TargetID (if
       within region).\nIf TargetID is an avatar and Channel is nonzero, Text can be
       heard by any attachment on the avatar.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llReleaseCamera:
     arguments:
     - AvatarID:
@@ -9570,6 +10497,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: 'Return camera to agent.\nDeprecated: Use llClearCameraParams instead.'
+    categories:
+      - avatar
+      - camera
+      - permissions
   llReleaseControls:
     arguments: []
     energy: 10.0
@@ -9577,6 +10508,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stop taking inputs.\nStop taking inputs from the avatar.
+    categories:
+      - avatar
+      - input
+      - permissions
   llReleaseURL:
     arguments:
     - URL:
@@ -9588,6 +10523,9 @@ functions:
     sleep: 0.0
     tooltip: Releases the specified URL, which was previously obtained using llRequestURL.  Once
       released, the URL will no longer be usable.
+    categories:
+      - media
+      - web
   llRemoteDataReply:
     arguments:
     - ChannelID:
@@ -9608,6 +10546,8 @@ functions:
     return: void
     sleep: 3.0
     tooltip: This function is deprecated.
+    categories:
+      - script_communication
   llRemoteDataSetRegion:
     arguments: []
     deprecated: true
@@ -9616,6 +10556,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: This function is deprecated.
+    categories:
+      - script_communication
   llRemoteLoadScript:
     arguments:
     - Target:
@@ -9637,6 +10579,9 @@ functions:
     return: void
     sleep: 3.0
     tooltip: ''
+    categories:
+      - prim_inventory
+      - script
   llRemoteLoadScriptPin:
     arguments:
     - ObjectID:
@@ -9663,6 +10608,10 @@ functions:
       set using llSetRemoteScriptAccessPin (on the target prim), then the script will
       be copied into target. Running is a boolean specifying whether the script should
       be enabled once copied into the target object.
+    categories:
+      - prim
+      - prim_inventory
+      - script
   llRemoveFromLandBanList:
     arguments:
     - AvatarID:
@@ -9674,6 +10623,9 @@ functions:
     sleep: 0.1
     tooltip: Remove avatar from the land ban list.\nRemove specified avatar from the
       land parcel ban list.
+    categories:
+      - land_moderation
+      - parcel
   llRemoveFromLandPassList:
     arguments:
     - AvatarID:
@@ -9685,6 +10637,9 @@ functions:
     sleep: 0.1
     tooltip: Remove avatar from the land pass list.\nRemove specified avatar from
       the land parcel pass list.
+    categories:
+      - land_moderation
+      - parcel
   llRemoveInventory:
     arguments:
     - InventoryItem:
@@ -9696,6 +10651,8 @@ functions:
     sleep: 0.0
     tooltip: Remove the named inventory item.\nRemove the named inventory item from
       the object inventory.
+    categories:
+      - prim_inventory
   llRemoveVehicleFlags:
     arguments:
     - Vehiclelags:
@@ -9707,6 +10664,9 @@ functions:
     sleep: 0.0
     tooltip: Removes the enabled bits in 'flags'.\nSets the vehicle flags to FALSE.
       Valid parameters can be found in the vehicle flags constants section.
+    categories:
+      - physics
+      - vehicles
   llReplaceAgentEnvironment:
     arguments:
     - agent_id:
@@ -9725,6 +10685,11 @@ functions:
     sleep: 0.0
     tooltip: Replaces the entire environment for an agent. Must be used as part of
       an experience.
+    categories:
+      - avatar
+      - experience
+      - parcel_appearance
+      - region_appearance
   llReplaceEnvironment:
     arguments:
     - position:
@@ -9749,6 +10714,9 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Replaces the environment for a parcel or region.
+    categories:
+      - parcel
+      - parcel_appearance
   llReplaceSubString:
     arguments:
     - InitialString:
@@ -9772,6 +10740,8 @@ functions:
     tooltip: Searches InitialString and replaces instances of SubString with NewSubString.
       Zero Count means "replace all". Positive Count moves left to right. Negative
       moves right to left.
+    categories:
+      - string
   llRequestAgentData:
     arguments:
     - AvatarID:
@@ -9790,6 +10760,9 @@ functions:
       from this function passed in the requested parameter. See the agent data constants
       (DATA_*) for details about valid values of data and what each will return in
       the dataserver event.
+    categories:
+      - avatar
+      - dataserver
   llRequestDisplayName:
     arguments:
     - AvatarID:
@@ -9803,6 +10776,9 @@ functions:
       the dataserver event will be raised.\nThe avatar identified does not need to
       be in the same region or online at the time of the request.\nReturns a key that
       is used to identify the dataserver event when it is raised.
+    categories:
+      - avatar
+      - dataserver
   llRequestExperiencePermissions:
     arguments:
     - AgentID:
@@ -9827,6 +10803,10 @@ functions:
       \ or experience_permissions_denied will be generated in response to this call.\
       \ Outstanding permission requests will be lost if the script is derezzed, moved\
       \ to another region or reset.\n                "
+    categories:
+      - avatar
+      - experience
+      - permissions
   llRequestInventoryData:
     arguments:
     - InventoryItem:
@@ -9841,6 +10821,9 @@ functions:
       the requested parameter.\nThe only request currently implemented is to request
       data from landmarks, where the data returned is in the form "<float, float,
       float>" which can be cast to a vector. This position is in region local coordinates.
+    categories:
+      - dataserver
+      - prim_inventory
   llRequestPermissions:
     arguments:
     - AvatarID:
@@ -9859,6 +10842,8 @@ functions:
       constants together. Many of the permissions requests can only go to object owner.\nThis
       call will not stop script execution. If the avatar grants the requested permissions,
       the run_time_permissions event will be called.
+    categories:
+      - permissions
   llRequestSecureURL:
     arguments: []
     energy: 10.0
@@ -9868,6 +10853,10 @@ functions:
     tooltip: Requests one HTTPS:// (SSL) URL for use by this object. The http_request
       event is triggered with results.\nReturns a key that is the handle used for
       identifying the request in the http_request event.
+    categories:
+      - media
+      - script_communication
+      - web
   llRequestSimulatorData:
     arguments:
     - RegionName:
@@ -9884,6 +10873,9 @@ functions:
       is available, the dataserver event is raised.\nData should use one of the DATA_SIM_*
       constants.\nReturns a dataserver query ID and triggers the dataserver event
       when data is found.
+    categories:
+      - dataserver
+      - region
   llRequestURL:
     arguments: []
     energy: 10.0
@@ -9893,6 +10885,10 @@ functions:
     tooltip: Requests one HTTP:// URL for use by this script. The http_request event
       is triggered with the result of the request.\nReturns a key that is the handle
       used for identifying the result in the http_request event.
+    categories:
+      - media
+      - script_communication
+      - web
   llRequestUserKey:
     arguments:
     - Name:
@@ -9903,6 +10899,10 @@ functions:
     return: key
     sleep: 0.0
     tooltip: Look up Agent ID for the named agent using a historical name.
+    categories:
+      - avatar
+      - dataserver
+      - uuid
   llRequestUsername:
     arguments:
     - AvatarID:
@@ -9917,6 +10917,9 @@ functions:
       When the user-name is available the dataserver event is raised.\nThe agent identified
       does not need to be in the same region or online at the time of the request.\nReturns
       a key that is used to identify the dataserver event when it is raised.
+    categories:
+      - avatar
+      - dataserver
   llResetAnimationOverride:
     arguments:
     - AnimationState:
@@ -9928,6 +10931,9 @@ functions:
     sleep: 0.0
     tooltip: Resets the animation of the specified animation state to the default
       value.\nIf animation state equals "ALL", then all animation states are reset.
+    categories:
+      - avatar_animation
+      - permissions
   llResetLandBanList:
     arguments: []
     energy: 10.0
@@ -9935,6 +10941,9 @@ functions:
     return: void
     sleep: 0.1
     tooltip: Removes all residents from the land ban list.
+    categories:
+      - land_moderation
+      - parcel
   llResetLandPassList:
     arguments: []
     energy: 10.0
@@ -9942,6 +10951,9 @@ functions:
     return: void
     sleep: 0.1
     tooltip: Removes all residents from the land access/pass list.
+    categories:
+      - land_moderation
+      - parcel
   llResetOtherScript:
     arguments:
     - ScriptName:
@@ -9952,6 +10964,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Resets the named script.
+    categories:
+      - prim_inventory
+      - script
   llResetScript:
     arguments: []
     energy: 10.0
@@ -9959,6 +10974,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Resets the script.
+    categories:
+      - script
   llResetTime:
     arguments: []
     energy: 10.0
@@ -9966,6 +10983,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the time to zero.\nSets the internal timer to zero.
+    categories:
+      - script
   llReturnObjectsByID:
     arguments:
     - ObjectIDs:
@@ -9978,6 +10997,9 @@ functions:
     tooltip: Return objects using their UUIDs.\nRequires the PERMISSION_RETURN_OBJECTS
       permission and that the script owner owns the parcel the returned objects are
       in, or is an estate manager or region owner.
+    categories:
+      - land_moderation
+      - rez
   llReturnObjectsByOwner:
     arguments:
     - ID:
@@ -9994,6 +11016,9 @@ functions:
       or region.\nRequires the PERMISSION_RETURN_OBJECTS permission and that the script
       owner owns the parcel the returned objects are in, or is an estate manager or
       region owner.
+    categories:
+      - land_moderation
+      - rez
   llRezAtRoot:
     arguments:
     - InventoryItem:
@@ -10019,6 +11044,9 @@ functions:
       and with StartParameter. The last selected root object's location will be set
       to Position.\nCreates object's inventory item at the given Position, with Velocity,
       Rotation, and StartParameter.
+    categories:
+      - prim_inventory
+      - rez
   llRezObject:
     arguments:
     - InventoryItem:
@@ -10045,6 +11073,9 @@ functions:
       with Velocity and Rotation supplied. The StartParameter value will be available
       to the newly created object in the on_rez event or through the llGetStartParameter
       function.\nThe Velocity parameter is ignored if the rezzed object is not physical.
+    categories:
+      - prim_inventory
+      - rez
   llRezObjectWithParams:
     arguments:
     - InventoryItem:
@@ -10058,6 +11089,10 @@ functions:
     return: key
     sleep: 0.1
     tooltip: Instantiate owner's InventoryItem with the given parameters.
+    categories:
+      - combat
+      - prim_inventory
+      - rez
   llRot2Angle:
     arguments:
     - Rotation:
@@ -10070,6 +11105,11 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation angle represented by Rotation.\nReturns the angle
       represented by the Rotation.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
   llRot2Axis:
     arguments:
     - Rotation:
@@ -10082,6 +11122,12 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation axis represented by Rotation.\nReturns the axis
       represented by the Rotation.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
+      - vector
   llRot2Euler:
     arguments:
     - Rotation:
@@ -10094,6 +11140,10 @@ functions:
     sleep: 0.0
     tooltip: Returns the Euler representation (roll, pitch, yaw) of Rotation.\nReturns
       the Euler Angle representation of the Rotation.
+    categories:
+      - math
+      - math_3d
+      - quaternion
   llRot2Fwd:
     arguments:
     - Rotation:
@@ -10106,6 +11156,12 @@ functions:
     sleep: 0.0
     tooltip: Returns the forward vector defined by Rotation.\nReturns the forward
       axis represented by the Rotation.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
+      - vector
   llRot2Left:
     arguments:
     - Rotation:
@@ -10118,6 +11174,12 @@ functions:
     sleep: 0.0
     tooltip: Returns the left vector defined by Rotation.\nReturns the left axis represented
       by the Rotation.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
+      - vector
   llRot2Up:
     arguments:
     - Rotation:
@@ -10130,6 +11192,12 @@ functions:
     sleep: 0.0
     tooltip: Returns the up vector defined by Rotation.\nReturns the up axis represented
       by the Rotation.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
+      - vector
   llRotBetween:
     arguments:
     - Vector1:
@@ -10145,6 +11213,11 @@ functions:
     sleep: 0.0
     tooltip: Returns the rotation to rotate Vector1 to Vector2.\nReturns the rotation
       needed to rotate Vector1 to Vector2.
+    categories:
+      - math
+      - math_3d
+      - math_trig
+      - quaternion
   llRotLookAt:
     arguments:
     - Rotation:
@@ -10164,6 +11237,9 @@ functions:
       Strength and Damping parameters. Good strength values are around half the mass
       of the object and good damping values are less than 1/10th of the strength.\nAsymmetrical
       shapes require smaller damping.\nA strength of 0.0 cancels the look at.
+    categories:
+      - movement
+      - physics
   llRotTarget:
     arguments:
     - Rotation:
@@ -10179,6 +11255,9 @@ functions:
     tooltip: Set rotations with error of LeeWay radians as a rotational target, and
       return an ID for the rotational target.\nThe returned number is a handle that
       can be used in at_rot_target and llRotTargetRemove.
+    categories:
+      - movement
+      - physics
   llRotTargetRemove:
     arguments:
     - Handle:
@@ -10190,6 +11269,9 @@ functions:
     sleep: 0.0
     tooltip: Removes rotational target number.\nRemove rotational target indicated
       by the handle.
+    categories:
+      - movement
+      - physics
   llRotateTexture:
     arguments:
     - Radians:
@@ -10204,6 +11286,9 @@ functions:
     sleep: 0.2
     tooltip: Sets the texture rotation for the specified Face to angle Radians.\nIf
       Face is ALL_SIDES, rotates the texture of all sides.
+    categories:
+      - prim
+      - prim_appearance
   llRound:
     arguments:
     - Value:
@@ -10215,6 +11300,8 @@ functions:
     sleep: 0.0
     tooltip: Returns Value rounded to the nearest integer.\nReturns the Value rounded
       to the nearest integer.
+    categories:
+      - math
     must-use: true
   llSHA1String:
     arguments:
@@ -10227,6 +11314,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a string of 40 hex characters that is the SHA1 security hash
       of text.
+    categories:
+      - cryptography
     must-use: true
   llSHA256String:
     arguments:
@@ -10239,6 +11328,8 @@ functions:
     sleep: 0.0
     tooltip: Returns a string of 64 hex characters that is the SHA256 security hash
       of text.
+    categories:
+      - cryptography
     must-use: true
   llSameGroup:
     arguments:
@@ -10254,6 +11345,8 @@ functions:
       group, otherwise FALSE.\nReturns TRUE if the object or agent identified is in
       the same simulator and has the same active group as this object. Otherwise,
       returns FALSE.
+    categories:
+      - object
     must-use: true
   llSay:
     arguments:
@@ -10271,6 +11364,10 @@ functions:
       is the public chat channel that all avatars see as chat text. DEBUG_CHANNEL
       is the script debug channel, and is also visible to nearby avatars. All other
       channels are are not sent to avatars, but may be used to communicate with scripts.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llScaleByFactor:
     arguments:
     - ScalingFactor:
@@ -10287,6 +11384,9 @@ functions:
       is physical, a pathfinding character, in a keyframed motion, or if resizing
       would cause the parcel to overflow.\nReturns a boolean (an integer) TRUE if
       it succeeds, FALSE if it fails.
+    categories:
+      - linkset
+      - prim_appearance
   llScaleTexture:
     arguments:
     - Horizontal:
@@ -10305,6 +11405,9 @@ functions:
     tooltip: Sets the diffuse texture Horizontal and Vertical repeats on Face of the
       prim the script is attached to.\nIf Face == ALL_SIDES, all sides are set in
       one call.\nNegative values for horizontal and vertical will flip the texture.
+    categories:
+      - prim
+      - prim_appearance
   llScriptDanger:
     arguments:
     - Position:
@@ -10319,6 +11422,9 @@ functions:
       doesn't allow everyone to edit and build, or land that doesn't allow outside
       scripts.\nReturns true if the position is over public land, land that doesn't
       allow everyone to edit and build, or land that doesn't allow outside scripts.
+    categories:
+      - parcel
+      - script
     must-use: true
   llScriptProfiler:
     arguments:
@@ -10332,6 +11438,8 @@ functions:
     tooltip: Enables or disables script profiling options. Currently only supports
       PROFILE_SCRIPT_MEMORY (Mono only) and PROFILE_NONE.\nMay significantly reduce
       script performance.
+    categories:
+      - script
   llSendRemoteData:
     arguments:
     - ChannelID:
@@ -10352,6 +11460,8 @@ functions:
     return: key
     sleep: 3.0
     tooltip: This function is deprecated.
+    categories:
+      - script_communication
   llSensor:
     arguments:
     - Name:
@@ -10379,6 +11489,8 @@ functions:
       a blank Name, 0 Type, or NULL_KEY ID will prevent filtering results based on
       that parameter. A range of 0.0 does not perform a scan.\nResults are returned
       in the sensor and no_sensor events.
+    categories:
+      - sensor
   llSensorRemove:
     arguments: []
     energy: 10.0
@@ -10386,6 +11498,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: removes sensor.\nRemoves the sensor set by llSensorRepeat.
+    categories:
+      - sensor
   llSensorRepeat:
     arguments:
     - Name:
@@ -10416,6 +11530,8 @@ functions:
       of forward vector.\nSpecifying a blank Name, 0 Type, or NULL_KEY ID will prevent
       filtering results based on that parameter. A range of 0.0 does not perform a
       scan.\nResults are returned in the sensor and no_sensor events.
+    categories:
+      - sensor
   llSetAgentEnvironment:
     arguments:
     - agent_id:
@@ -10434,6 +11550,11 @@ functions:
     sleep: 0.0
     tooltip: Sets an agent's environmental values to the specified values. Must be
       used as part of an experience.
+    categories:
+      - avatar
+      - experience
+      - parcel_appearance
+      - region_appearance
   llSetAgentRot:
     arguments:
     - rot:
@@ -10447,6 +11568,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the avatar rotation to the given value.
+    categories:
+      - avatar
+      - movement
+      - physics
   llSetAlpha:
     arguments:
     - Opacity:
@@ -10464,6 +11589,9 @@ functions:
       interpreted as an opacity percentage (1.0 is fully opaque, and 0.2 is mostly
       transparent). This function will clamp alpha values less than 0.1 to 0.1 and
       greater than 1.0 to 1.
+    categories:
+      - prim
+      - prim_appearance
   llSetAngularVelocity:
     arguments:
     - AngVel:
@@ -10479,6 +11607,9 @@ functions:
     sleep: 0.0
     tooltip: Sets an object's angular velocity to AngVel, in local coordinates if
       Local == TRUE (if the script is physical).\nHas no effect on non-physical objects.
+    categories:
+      - movement
+      - physics
   llSetAnimationOverride:
     arguments:
     - AnimationState:
@@ -10494,6 +11625,9 @@ functions:
     tooltip: Sets the animation (in object inventory) that will play for the given
       animation state.\nTo use this function the script must obtain the PERMISSION_OVERRIDE_ANIMATIONS
       permission.
+    categories:
+      - avatar_animation
+      - permissions
   llSetBuoyancy:
     arguments:
     - Buoyancy:
@@ -10506,6 +11640,8 @@ functions:
     tooltip: Set the tasks buoyancy (0 is none, < 1.0 sinks, 1.0 floats, > 1.0 rises).\nSet
       the object buoyancy. A value of 0 is none, less than 1.0 sinks, 1.0 floats,
       and greater than 1.0 rises.
+    categories:
+      - physics
   llSetCameraAtOffset:
     arguments:
     - Offset:
@@ -10518,6 +11654,8 @@ functions:
     tooltip: Sets the camera used in this object, at offset, if an avatar sits on
       it.\nSets the offset that an avatar's camera will be moved to if the avatar
       sits on the object.
+    categories:
+      - camera
   llSetCameraEyeOffset:
     arguments:
     - Offset:
@@ -10528,6 +11666,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the camera eye offset used in this object if an avatar sits on it.
+    categories:
+      - camera
   llSetCameraParams:
     arguments:
     - Parameters:
@@ -10539,6 +11679,10 @@ functions:
     sleep: 0.0
     tooltip: Sets multiple camera parameters at once. List format is [ rule-1, data-1,
       rule-2, data-2 . . . rule-n, data-n ].
+    categories:
+      - avatar
+      - camera
+      - permissions
   llSetClickAction:
     arguments:
     - Action:
@@ -10549,6 +11693,12 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the action performed when a prim is clicked upon.
+    categories:
+      - input
+      - money
+      - prim_properties
+      - touch
+      - user_interface
   llSetColor:
     arguments:
     - Color:
@@ -10563,6 +11713,9 @@ functions:
     sleep: 0.0
     tooltip: Sets the color, for the face.\nSets the color of the side specified.
       If Face is ALL_SIDES, sets the color on all faces.
+    categories:
+      - prim
+      - prim_appearance
   llSetContentType:
     arguments:
     - HTTPRequestID:
@@ -10579,6 +11732,10 @@ functions:
     tooltip: Set the media type of an LSL HTTP server response to ContentType.\nHTTPRequestID
       must be a valid http_request ID. ContentType must be one of the CONTENT_TYPE_*
       constants.
+    categories:
+      - media
+      - prim_media
+      - web
   llSetDamage:
     arguments:
     - Damage:
@@ -10592,6 +11749,8 @@ functions:
       \ hits.\tTask will be killed.\\nSets the amount of damage that will be done\
       \ to an avatar that this object hits. This object will be destroyed on damaging\
       \ an avatar, and no collision event is triggered."
+    categories:
+      - combat
   llSetEnvironment:
     arguments:
     - Position:
@@ -10605,6 +11764,9 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Returns a string with the requested data about the region.
+    categories:
+      - parcel
+      - parcel_appearance
   llSetExperienceKey:
     arguments:
     - ExperienceID:
@@ -10617,6 +11779,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: ''
+    categories:
+      - experience
   llSetForce:
     arguments:
     - Force:
@@ -10631,6 +11795,9 @@ functions:
     sleep: 0.0
     tooltip: Sets Force on object, in object-local coordinates if Local == TRUE (otherwise,
       the region reference frame is used).\nOnly works on physical objects.
+    categories:
+      - movement
+      - physics
   llSetForceAndTorque:
     arguments:
     - Force:
@@ -10649,6 +11816,9 @@ functions:
     tooltip: Sets the Force and Torque of object, in object-local coordinates if Local
       == TRUE (otherwise, the region reference frame is used).\nOnly works on physical
       objects.
+    categories:
+      - movement
+      - physics
   llSetGroundTexture:
     arguments:
     - Changes:
@@ -10659,6 +11829,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Changes terrain texture properties in the region.
+    categories:
+      - region
   llSetHoverHeight:
     arguments:
     - Height:
@@ -10677,6 +11849,9 @@ functions:
     tooltip: Critically damps a physical object to a Height (either above ground level
       or above the higher of land and water if water == TRUE).\nDo not use with vehicles.
       Use llStopHover to stop hovering.
+    categories:
+      - movement
+      - physics
   llSetInventoryPermMask:
     arguments:
     - InventoryItem:
@@ -10694,6 +11869,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the given permission mask to the new value on the inventory item.
+    categories:
+      - asset_permissions
+      - prim_inventory
   llSetKeyframedMotion:
     arguments:
     - Keyframes:
@@ -10716,6 +11894,9 @@ functions:
       will be unaffected by those collisions.\nKeyframes is a strided list containing
       positional, rotational, and time data for each step in the motion.  Options
       is a list containing optional arguments and parameters (specified by KFM_* constants).
+    categories:
+      - movement
+      - physics
   llSetLinkAlpha:
     arguments:
     - LinkNumber:
@@ -10733,6 +11914,9 @@ functions:
     sleep: 0.0
     tooltip: If a prim exists in the link chain at LinkNumber, set Face to Opacity.\nSets
       the Face, on the linked prim specified, to the Opacity.
+    categories:
+      - linkset
+      - prim_appearance
   llSetLinkCamera:
     arguments:
     - LinkNumber:
@@ -10753,6 +11937,9 @@ functions:
     sleep: 0.0
     tooltip: Sets the camera eye offset, and the offset that camera is looking at,
       for avatars that sit on the linked prim.
+    categories:
+      - camera
+      - sit
   llSetLinkColor:
     arguments:
     - LinkNumber:
@@ -10771,6 +11958,9 @@ functions:
     sleep: 0.0
     tooltip: If a task exists in the link chain at LinkNumber, set the Face to color.\nSets
       the color of the linked child's side, specified by LinkNumber.
+    categories:
+      - linkset
+      - prim_appearance
   llSetLinkGLTFOverrides:
     arguments:
     - link:
@@ -10787,6 +11977,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets or changes GLTF Overrides set on the selected faces.
+    categories:
+      - linkset
+      - prim_appearance
   llSetLinkMedia:
     arguments:
     - Link:
@@ -10807,6 +12000,11 @@ functions:
       of the operation(s).\nMediaParameters is a set of name/value pairs in no particular
       order. Parameters not specified are unchanged, or if new media is added then
       set to the default specified.
+    categories:
+      - linkset
+      - media
+      - prim_media
+      - web
   llSetLinkPrimitiveParams:
     arguments:
     - LinkNumber:
@@ -10822,6 +12020,10 @@ functions:
     return: void
     sleep: 0.2
     tooltip: 'Deprecated: Use llSetLinkPrimitiveParamsFast instead.'
+    categories:
+      - linkset
+      - prim_appearance
+      - prim_properties
   llSetLinkPrimitiveParamsFast:
     arguments:
     - LinkNumber:
@@ -10839,6 +12041,10 @@ functions:
       a delay.\nSet parameters for link number, from the list of Parameters, with
       no built-in script sleep. This function is identical to llSetLinkPrimitiveParams,
       except without the delay.
+    categories:
+      - linkset
+      - prim_appearance
+      - prim_properties
   llSetLinkRenderMaterial:
     arguments:
     - LinkNumber:
@@ -10856,6 +12062,9 @@ functions:
     sleep: 0.2
     tooltip: Sets the Render Material of Face on a linked prim, specified by LinkNumber.
       Render Material may be a UUID or name of a material in prim inventory.
+    categories:
+      - linkset
+      - prim_appearance
   llSetLinkSitFlags:
     arguments:
     - LinkNumber:
@@ -10871,6 +12080,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the sit flags for the specified prim in a linkset.
+    categories:
+      - linkset
+      - sit
   llSetLinkTexture:
     arguments:
     - LinkNumber:
@@ -10888,6 +12100,9 @@ functions:
     sleep: 0.2
     tooltip: Sets the Texture of Face on a linked prim, specified by LinkNumber. Texture
       may be a UUID or name of a texture in prim inventory.
+    categories:
+      - linkset
+      - prim_appearance
   llSetLinkTextureAnim:
     arguments:
     - LinkNumber:
@@ -10925,6 +12140,10 @@ functions:
       which object face to animate.\nSizeX and SizeY specify the number of horizontal
       and vertical frames.Start specifes the animation start point.\nLength specifies
       the animation duration.\nRate specifies the animation playback rate.
+    categories:
+      - effects
+      - linkset
+      - prim_appearance
   llSetLocalRot:
     arguments:
     - Rotation:
@@ -10935,6 +12154,9 @@ functions:
     return: void
     sleep: 0.2
     tooltip: Sets the rotation of a child prim relative to the root prim.
+    categories:
+      - movement
+      - prim
   llSetMemoryLimit:
     arguments:
     - Limit:
@@ -10949,6 +12171,8 @@ functions:
     tooltip: Requests Limit bytes to be reserved for this script.\nReturns TRUE or
       FALSE indicating whether the limit was set successfully.\nThis function has
       no effect if the script is running in the LSO VM.
+    categories:
+      - script
   llSetObjectDesc:
     arguments:
     - Description:
@@ -10960,6 +12184,9 @@ functions:
     sleep: 0.0
     tooltip: Sets the description of the prim to Description.\nThe description field
       is limited to 127 characters.
+    categories:
+      - prim
+      - prim_properties
   llSetObjectName:
     arguments:
     - Name:
@@ -10970,6 +12197,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the prim's name to Name.
+    categories:
+      - prim
+      - prim_properties
   llSetObjectPermMask:
     arguments:
     - PermissionFlag:
@@ -10985,6 +12215,9 @@ functions:
     sleep: 0.0
     tooltip: Sets the specified PermissionFlag permission to the value specified by
       PermissionMask on the object the script is attached to.
+    categories:
+      - asset_permissions
+      - linkset
   llSetParcelMusicURL:
     arguments:
     - URL:
@@ -10997,6 +12230,10 @@ functions:
     tooltip: Sets the streaming audio URL for the parcel the object is on.\nThe object
       must be owned by the owner of the parcel; if the parcel is group owned the object
       must be owned by that group.
+    categories:
+      - media
+      - parcel
+      - parcel_media
   llSetPayPrice:
     arguments:
     - Price:
@@ -11015,6 +12252,10 @@ functions:
       the 4 payment values shown in the payment dialog's buttons.\nInput field and
       buttons may be hidden with PAY_HIDE constant, and may be set to their default
       values using PAY_DEFAULT.
+    categories:
+      - money
+      - prim_properties
+      - user_interface
   llSetPhysicsMaterial:
     arguments:
     - MaterialBits:
@@ -11041,6 +12282,10 @@ functions:
       is a bitmask specifying which of the parameters in the other arguments should
       be applied to the object. GravityMultiplier, Restitution, Friction, and Density
       are the possible parameters to manipulate.
+    categories:
+      - physics
+      - prim
+      - prim_properties
   llSetPos:
     arguments:
     - Position:
@@ -11054,6 +12299,9 @@ functions:
       prim.\nIf the script is in a child prim, Position is treated as root relative
       and the link-set is adjusted.\nIf the prim is the root prim, the entire object
       is moved (up to 10m) to Position in region coordinates.
+    categories:
+      - movement
+      - prim
   llSetPrimMediaParams:
     arguments:
     - Face:
@@ -11070,6 +12318,11 @@ functions:
       integer that is a STATUS_* flag which details the success/failure of the operation(s).\nMediaParameters
       is a set of name/value pairs in no particular order. Parameters not specified
       are unchanged, or if new media is added then set to the default specified.
+    categories:
+      - media
+      - prim
+      - prim_media
+      - web
   llSetPrimURL:
     arguments:
     - URL:
@@ -11081,6 +12334,11 @@ functions:
     return: void
     sleep: 20.0
     tooltip: 'Deprecated: Use llSetPrimMediaParams instead.'
+    categories:
+      - media
+      - prim
+      - prim_media
+      - web
   llSetPrimitiveParams:
     arguments:
     - Parameters:
@@ -11092,6 +12350,10 @@ functions:
     return: void
     sleep: 0.2
     tooltip: 'Deprecated: Use llSetLinkPrimitiveParamsFast instead.'
+    categories:
+      - prim
+      - prim_appearance
+      - prim_properties
   llSetRegionPos:
     arguments:
     - Position:
@@ -11107,6 +12369,9 @@ functions:
       Position, FALSE otherwise.\nPosition may be any location within the region or
       up to 10m across a region border.\nIf the position is below ground, it will
       be set to the ground level at that x,y location.
+    categories:
+      - movement
+      - prim
   llSetRemoteScriptAccessPin:
     arguments:
     - PIN:
@@ -11119,6 +12384,9 @@ functions:
     tooltip: If PIN is set to a non-zero number, the task will accept remote script
       loads via llRemoteLoadScriptPin() if it passes in the correct PIN. Othersise,
       llRemoteLoadScriptPin() is ignored.
+    categories:
+      - prim_inventory
+      - script
   llSetRenderMaterial:
     arguments:
     - Material:
@@ -11134,6 +12402,9 @@ functions:
     tooltip: Applies Render Material to Face of prim.\nRender Material may be a UUID
       or name of a material in prim inventory.\nIf Face is ALL_SIDES, set the render
       material on all faces.
+    categories:
+      - prim
+      - prim_appearance
   llSetRot:
     arguments:
     - Rotation:
@@ -11147,6 +12418,9 @@ functions:
       prim.\nIf the script is in a child prim, Rotation is treated as root relative
       and the link-set is adjusted.\nIf the prim is the root prim, the entire object
       is rotated to Rotation in the global reference frame.
+    categories:
+      - movement
+      - prim
   llSetScale:
     arguments:
     - Scale:
@@ -11157,6 +12431,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Sets the prim's scale (size) to Scale.
+    categories:
+      - prim
+      - prim_appearance
   llSetScriptState:
     arguments:
     - ScriptName:
@@ -11170,6 +12447,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Enable or disable the script Running state of Script in the prim.
+    categories:
+      - prim_inventory
+      - script
   llSetSitText:
     arguments:
     - Text:
@@ -11180,6 +12460,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Displays Text rather than 'Sit' in the viewer's context menu.
+    categories:
+      - prim
+      - sit
+      - user_interface
   llSetSoundQueueing:
     arguments:
     - QueueEnable:
@@ -11193,6 +12477,8 @@ functions:
       sounds) interrupt the currently playing sound.\nThe default for objects is FALSE.
       Setting this value to TRUE will make the sound wait until the current playing
       sound reaches its end. The queue is one level deep.
+    categories:
+      - sound
   llSetSoundRadius:
     arguments:
     - Radius:
@@ -11204,6 +12490,8 @@ functions:
     sleep: 0.0
     tooltip: Limits radius for audibility of scripted sounds (both attached and triggered)
       to distance Radius.
+    categories:
+      - sound
   llSetStatus:
     arguments:
     - Status:
@@ -11218,6 +12506,10 @@ functions:
     sleep: 0.0
     tooltip: Sets object status specified in Status bitmask (e.g. STATUS_PHYSICS|STATUS_PHANTOM)
       to boolean Value.\nFor a full list of STATUS_* constants, see wiki documentation.
+    categories:
+      - linkset
+      - physics
+      - prim_properties
   llSetText:
     arguments:
     - Text:
@@ -11234,6 +12526,11 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Causes Text to float above the prim, using the specified Color and Opacity.
+    categories:
+      - avatar_communication
+      - effects
+      - prim_appearance
+      - prim_properties
   llSetTexture:
     arguments:
     - Texture:
@@ -11248,6 +12545,9 @@ functions:
     sleep: 0.2
     tooltip: Applies Texture to Face of prim.\nTexture may be a UUID or name of a
       texture in prim inventory.\nIf Face is ALL_SIDES, set the texture on all faces.
+    categories:
+      - prim
+      - prim_appearance
   llSetTextureAnim:
     arguments:
     - Mode:
@@ -11280,6 +12580,10 @@ functions:
       and SizeY specify the number of horizontal and vertical frames.Start specifes
       the animation start point.\nLength specifies the animation duration.\nRate specifies
       the animation playback rate.
+    categories:
+      - effects
+      - prim
+      - prim_appearance
   llSetTimerEvent:
     arguments:
     - Rate:
@@ -11291,6 +12595,9 @@ functions:
     sleep: 0.0
     tooltip: Causes the timer event to be triggered every Rate seconds.\n Passing
       in 0.0 stops further timer events.
+    categories:
+      - script
+      - time
   llSetTorque:
     arguments:
     - Torque:
@@ -11306,6 +12613,9 @@ functions:
     tooltip: Sets the Torque acting on the script's object, in object-local coordinates
       if Local == TRUE (otherwise, the region reference frame is used).\nOnly works
       on physical objects.
+    categories:
+      - movement
+      - physics
   llSetTouchText:
     arguments:
     - Text:
@@ -11316,6 +12626,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Displays Text in the viewer context menu that acts on a touch.
+    categories:
+      - prim_properties
+      - touch
+      - user_interface
   llSetVehicleFlags:
     arguments:
     - Flags:
@@ -11327,6 +12641,8 @@ functions:
     sleep: 0.0
     tooltip: Enables the vehicle flags specified in the Flags bitmask.\nValid parameters
       can be found in the wiki documentation.
+    categories:
+      - vehicles
   llSetVehicleFloatParam:
     arguments:
     - ParameterName:
@@ -11341,6 +12657,8 @@ functions:
     sleep: 0.0
     tooltip: Sets a vehicle float parameter.\nValid parameters can be found in the
       wiki documentation.
+    categories:
+      - vehicles
   llSetVehicleRotationParam:
     arguments:
     - ParameterName:
@@ -11355,6 +12673,8 @@ functions:
     sleep: 0.0
     tooltip: Sets a vehicle rotation parameter.\nValid parameters can be found in
       the wiki documentation.
+    categories:
+      - vehicles
   llSetVehicleType:
     arguments:
     - Type:
@@ -11366,6 +12686,8 @@ functions:
     sleep: 0.0
     tooltip: Activates the vehicle action on the object with vehicle preset Type.\nValid
       Types and an explanation of their characteristics can be found in wiki documentation.
+    categories:
+      - vehicles
   llSetVehicleVectorParam:
     arguments:
     - ParameterName:
@@ -11380,6 +12702,8 @@ functions:
     sleep: 0.0
     tooltip: Sets a vehicle vector parameter.\nValid parameters can be found in the
       wiki documentation.
+    categories:
+      - vehicles
   llSetVelocity:
     arguments:
     - Velocity:
@@ -11396,6 +12720,9 @@ functions:
     tooltip: If the object is physics-enabled, sets the object's linear velocity to
       Velocity.\nIf Local==TRUE, Velocity is treated as a local directional vector;
       otherwise, Velocity is treated as a global directional vector.
+    categories:
+      - movement
+      - physics
   llShout:
     arguments:
     - Channel:
@@ -11412,6 +12739,10 @@ functions:
       is the public chat channel that all avatars see as chat text. DEBUG_CHANNEL
       is the script debug channel, and is also visible to nearby avatars. All other
       channels are are not sent to avatars, but may be used to communicate with scripts.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llSignRSA:
     arguments:
     - PrivateKey:
@@ -11429,6 +12760,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the base64-encoded RSA signature of Message using PEM-formatted
       PrivateKey and digest Algorithm (sha1, sha224, sha256, sha384, sha512).
+    categories:
+      - cryptography
     must-use: true
   llSin:
     arguments:
@@ -11442,6 +12775,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the sine of Theta (Theta in radians).
+    categories:
+      - math
+      - math_trig
   llSitOnLink:
     arguments:
     - AvatarID:
@@ -11456,6 +12792,9 @@ functions:
     sleep: 0.0
     tooltip: If agent identified by AvatarID is participating in the experience, sit
       them on the specified link's sit target.
+    categories:
+      - experience
+      - sit
   llSitTarget:
     arguments:
     - Offset:
@@ -11470,6 +12809,9 @@ functions:
     sleep: 0.0
     tooltip: Set the sit location for this object. If offset == ZERO_VECTOR, clears
       the sit target.
+    categories:
+      - prim
+      - sit
   llSleep:
     arguments:
     - Time:
@@ -11480,6 +12822,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Put script to sleep for Time seconds.
+    categories:
+      - script
+      - time
   llSound:
     arguments:
     - Sound:
@@ -11501,6 +12846,8 @@ functions:
     sleep: 0.0
     tooltip: 'Deprecated: Use llPlaySound instead.\nPlays Sound at Volume and specifies
       whether the sound should loop and/or be enqueued.'
+    categories:
+      - sound
   llSoundPreload:
     arguments:
     - Sound:
@@ -11513,6 +12860,8 @@ functions:
     sleep: 0.0
     tooltip: 'Deprecated: Use llPreloadSound instead.\nPreloads a sound on viewers
       within range.'
+    categories:
+      - sound
   llSqrt:
     arguments:
     - Value:
@@ -11526,6 +12875,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the square root of Value.\nTriggers a math runtime error for
       imaginary results (if Value < 0.0).
+    categories:
+      - math
   llStartAnimation:
     arguments:
     - Animation:
@@ -11538,6 +12889,10 @@ functions:
     tooltip: This function plays the specified animation from playing on the avatar
       who received the script's most recent permissions request.\nAnimation may be
       an animation in task inventory or a built-in animation.\nRequires PERMISSION_TRIGGER_ANIMATION.
+    categories:
+      - avatar
+      - avatar_animation
+      - permissions
   llStartObjectAnimation:
     arguments:
     - Animation:
@@ -11550,6 +12905,8 @@ functions:
     tooltip: This function plays the specified animation on the rigged mesh object
       associated with the current script.\nAnimation may be an animation in task inventory
       or a built-in animation.\n
+    categories:
+      - object_animation
   llStopAnimation:
     arguments:
     - Animation:
@@ -11563,6 +12920,10 @@ functions:
       the script's most recent permissions request.\nAnimation may be an animation
       in task inventory, a built-in animation, or the uuid of an animation.\nRequires
       PERMISSION_TRIGGER_ANIMATION.
+    categories:
+      - avatar
+      - avatar_animation
+      - permissions
   llStopHover:
     arguments: []
     energy: 10.0
@@ -11570,6 +12931,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stop hovering to a height (due to llSetHoverHeight()).
+    categories:
+      - movement
+      - physics
   llStopLookAt:
     arguments: []
     energy: 10.0
@@ -11577,6 +12941,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stop causing object to point at a target (due to llLookAt() or llRotLookAt()).
+    categories:
+      - movement
+      - physics
   llStopMoveToTarget:
     arguments: []
     energy: 10.0
@@ -11584,6 +12951,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stops critically damped motion (due to llMoveToTarget()).
+    categories:
+      - movement
+      - physics
   llStopObjectAnimation:
     arguments:
     - Animation:
@@ -11596,6 +12966,8 @@ functions:
     tooltip: This function stops the specified animation on the rigged mesh object
       associated with the current script.\nAnimation may be an animation in task inventory,
       a built-in animation, or the uuid of an animation.\n
+    categories:
+      - object_animation
   llStopPointAt:
     arguments: []
     deprecated: true
@@ -11605,6 +12977,9 @@ functions:
     return: void
     sleep: 0.0
     tooltip: ''
+    categories:
+      - movement
+      - physics
   llStopSound:
     arguments: []
     energy: 10.0
@@ -11612,6 +12987,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Stops playback of the currently attached sound.
+    categories:
+      - sound
   llStringLength:
     arguments:
     - Text:
@@ -11624,6 +13001,8 @@ functions:
     sleep: 0.0
     tooltip: Returns an integer that is the number of characters in Text (not counting
       the null).
+    categories:
+      - string
   llStringToBase64:
     arguments:
     - Text:
@@ -11635,6 +13014,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the string Base64 representation of the input string.
+    categories:
+      - data_conversion
   llStringTrim:
     arguments:
     - Text:
@@ -11652,6 +13033,8 @@ functions:
       of the input string Text.\nValid options for TrimType:\nSTRING_TRIM_HEAD: trim
       all leading spaces in Text\nSTRING_TRIM_TAIL: trim all trailing spaces in Text\nSTRING_TRIM:
       trim all leading and trailing spaces in Text.'
+    categories:
+      - string
   llSubStringIndex:
     arguments:
     - Text:
@@ -11668,6 +13051,8 @@ functions:
     sleep: 0.0
     tooltip: Returns an integer that is the index in Text where string pattern Sequence
       first appears. Returns -1 if not found.
+    categories:
+      - string
   llTakeCamera:
     arguments:
     - AvatarID:
@@ -11679,6 +13064,10 @@ functions:
     return: void
     sleep: 0.0
     tooltip: 'Deprecated: Use llSetCameraParams instead.'
+    categories:
+      - avatar
+      - camera
+      - permissions
   llTakeControls:
     arguments:
     - Controls:
@@ -11698,6 +13087,10 @@ functions:
       == (Controls & input)), send input to the script.  PassOn determines whether
       Controls also perform their normal functions.\nRequires the PERMISSION_TAKE_CONTROLS
       permission to run.
+    categories:
+      - avatar
+      - input
+      - permissions
   llTan:
     arguments:
     - Theta:
@@ -11710,6 +13103,9 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the tangent of Theta (Theta in radians).
+    categories:
+      - math
+      - math_trig
   llTarget:
     arguments:
     - Position:
@@ -11725,6 +13121,8 @@ functions:
     tooltip: This function is to have the script know when it has reached a position.\nIt
       registers a Position with a Range that triggers at_target and not_at_target
       events continuously until unregistered.
+    categories:
+      - movement
   llTargetOmega:
     arguments:
     - Axis:
@@ -11742,6 +13140,9 @@ functions:
     sleep: 0.0
     tooltip: Attempt to spin at SpinRate with strength Gain on Axis.\nA spin rate
       of 0.0 cancels the spin. This function always works in object-local coordinates.
+    categories:
+      - movement
+      - physics
   llTargetRemove:
     arguments:
     - Target:
@@ -11752,6 +13153,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Removes positional target Handle registered with llTarget.
+    categories:
+      - movement
   llTargetedEmail:
     arguments:
     - Target:
@@ -11769,6 +13172,8 @@ functions:
     sleep: 20.0
     tooltip: Sends an email with Subject and Message to the owner or creator of an
       object.
+    categories:
+      - avatar_communication
   llTeleportAgent:
     arguments:
     - AvatarID:
@@ -11794,6 +13199,10 @@ functions:
       location position in the current region. In either case, the avatar is turned
       to face the position given by look_at in local coordinates.\nRequires the PERMISSION_TELEPORT
       permission. This function can only teleport the owner of the object.
+    categories:
+      - avatar
+      - permissions
+      - teleport
   llTeleportAgentGlobalCoords:
     arguments:
     - AvatarID:
@@ -11820,6 +13229,10 @@ functions:
       facing the position defined by LookAtPoint local coordinates.\nRequires the
       PERMISSION_TELEPORT permission. This function can only teleport the owner of
       the object.
+    categories:
+      - avatar
+      - permissions
+      - teleport
   llTeleportAgentHome:
     arguments:
     - AvatarID:
@@ -11830,6 +13243,10 @@ functions:
     return: void
     sleep: 5.0
     tooltip: Teleport agent over the owner's land to agent's home location.
+    categories:
+      - avatar
+      - land_moderation
+      - teleport
   llTextBox:
     arguments:
     - AvatarID:
@@ -11849,6 +13266,10 @@ functions:
     tooltip: Opens a dialog for the specified avatar with message Text, which contains
       a text box for input. Any text that is entered is said on the specified Channel
       (as if by the avatar) when the "OK" button is clicked.
+    categories:
+      - avatar_communication
+      - chat
+      - user_interface
   llToLower:
     arguments:
     - Text:
@@ -11861,6 +13282,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a string that is Text with all lower-case characters.
+    categories:
+      - string
   llToUpper:
     arguments:
     - Text:
@@ -11873,6 +13296,8 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a string that is Text with all upper-case characters.
+    categories:
+      - string
   llTransferLindenDollars:
     arguments:
     - AvatarID:
@@ -11889,6 +13314,9 @@ functions:
       Returns a key to a corresponding transaction_result event for the success of
       the transfer.\nAttempts to send the amount of money to the specified avatar,
       and trigger a transaction_result event identified by the returned key.
+    categories:
+      - money
+      - permissions
   llTransferOwnership:
     arguments:
     - AgentID:
@@ -11906,6 +13334,8 @@ functions:
     return: integer
     sleep: 0.0
     tooltip: Transfers ownership of an object, or a copy of the object to a new agent.
+    categories:
+      - asset_permissions
   llTriggerSound:
     arguments:
     - Sound:
@@ -11924,6 +13354,8 @@ functions:
       and llLoopSound. This is very useful for things like collision noises, explosions,
       etc. There is no way to stop or alter the volume of a sound triggered by this
       function.
+    categories:
+      - sound
   llTriggerSoundLimited:
     arguments:
     - Sound:
@@ -11949,6 +13381,8 @@ functions:
       the attached sounds created by llPlaySound and llLoopSound. This is very useful
       for things like collision noises, explosions, etc. There is no way to stop or
       alter the volume of a sound triggered by this function.
+    categories:
+      - sound
   llUnSit:
     arguments:
     - AvatarID:
@@ -11961,6 +13395,9 @@ functions:
     tooltip: If agent identified by AvatarID is sitting on the object the script is
       attached to or is over land owned by the object's owner, the agent is forced
       to stand up.
+    categories:
+      - avatar
+      - sit
   llUnescapeURL:
     arguments:
     - URL:
@@ -11973,6 +13410,8 @@ functions:
     sleep: 0.0
     tooltip: Returns the string that is the URL unescaped, replacing "%20" with spaces,
       etc., version of URL.\nThis function can output raw UTF-8 strings.
+    categories:
+      - web
   llUpdateCharacter:
     arguments:
     - Options:
@@ -11983,6 +13422,8 @@ functions:
     return: void
     sleep: 0.0
     tooltip: Updates settings for a pathfinding character.
+    categories:
+      - pathfinding
   llUpdateKeyValue:
     arguments:
     - Key:
@@ -12012,6 +13453,11 @@ functions:
       \ with the key. If Checked is 1 the existing value in the data store must match\
       \ the OriginalValue passed or XP_ERROR_RETRY_UPDATE will be returned. If Checked\
       \ is 0 the key will be created if necessary.\n                "
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llVecDist:
     arguments:
     - Location1:
@@ -12026,6 +13472,10 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the distance between Location1 and Location2.
+    categories:
+      - math
+      - math_3d
+      - vector
   llVecMag:
     arguments:
     - Vector:
@@ -12037,6 +13487,10 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the magnitude of the vector.
+    categories:
+      - math
+      - math_3d
+      - vector
   llVecNorm:
     arguments:
     - Vector:
@@ -12048,6 +13502,10 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns normalized vector.
+    categories:
+      - math
+      - math_3d
+      - vector
   llVerifyRSA:
     arguments:
     - PublicKey:
@@ -12069,6 +13527,8 @@ functions:
     sleep: 0.0
     tooltip: Returns TRUE if PublicKey, Message, and Algorithm produce the same base64-formatted
       Signature.
+    categories:
+      - cryptography
     must-use: true
   llVolumeDetect:
     arguments:
@@ -12084,6 +13544,9 @@ functions:
       another object (including avatars) interpenetrates it, it will get a collision_start
       event.\nWhen an object stops interpenetrating, a collision_end event is generated.
       While the other is inter-penetrating, collision events are NOT generated.
+    categories:
+      - physics
+      - sensor
   llWanderWithin:
     arguments:
     - Origin:
@@ -12103,6 +13566,8 @@ functions:
     sleep: 0.0
     tooltip: Wander within a specified volume.\nSets a character to wander about a
       central spot within a specified area.
+    categories:
+      - pathfinding
   llWater:
     arguments:
     - Offset:
@@ -12113,6 +13578,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the water height below the object position + Offset.
+    categories:
+      - region
     must-use: true
   llWhisper:
     arguments:
@@ -12130,6 +13597,10 @@ functions:
       is the public chat channel that all avatars see as chat text. DEBUG_CHANNEL
       is the script debug channel, and is also visible to nearby avatars. All other
       channels are are not sent to avatars, but may be used to communicate with scripts.
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   llWind:
     arguments:
     - Offset:
@@ -12140,6 +13611,8 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the wind velocity at the object position + Offset.
+    categories:
+      - region
     must-use: true
   llWorldPosToHUD:
     arguments:
@@ -12152,6 +13625,11 @@ functions:
     sleep: 0.0
     tooltip: Returns the local position that would put the origin of a HUD object
       directly over world_pos as viewed by the current camera.
+    categories:
+      - avatar
+      - camera
+      - permissions
+      - user_interface
     must-use: true
   llXorBase64:
     arguments:
@@ -12168,6 +13646,8 @@ functions:
     sleep: 0.0
     tooltip: Performs an exclusive OR on two Base64 strings and returns a Base64 string.
       Text2 repeats if it is shorter than Text1.
+    categories:
+      - data_conversion
   llXorBase64Strings:
     arguments:
     - Text1:
@@ -12185,6 +13665,8 @@ functions:
     tooltip: 'Deprecated: Please use llXorBase64 instead.\nIncorrectly performs an
       exclusive OR on two Base64 strings and returns a Base64 string. Text2 repeats
       if it is shorter than Text1.\nRetained for backwards compatibility.'
+    categories:
+      - data_conversion
   llXorBase64StringsCorrect:
     arguments:
     - Text1:
@@ -12202,6 +13684,8 @@ functions:
     tooltip: 'Deprecated: Please use llXorBase64 instead.\nCorrectly (unless nulls
       are present) performs an exclusive OR on two Base64 strings and returns a Base64
       string.\nText2 repeats if it is shorter than Text1.'
+    categories:
+      - data_conversion
   llsRGB2Linear:
     arguments:
     - srgb:
@@ -12212,6 +13696,9 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Converts a color from the sRGB to the linear colorspace.
+    categories:
+      - math
+      - prim_appearance
     must-use: true
 types:
   float:
