@@ -7,7 +7,7 @@ on:
     tags: [v*]
 
 jobs:
-  validate-yaml-file-with-jsonschema:
+  validate-lsl-definitions-via-jsonschema:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -25,11 +25,11 @@ jobs:
       - name: "Validate YAML file with jsonschema"
         run: |
           # Run command to check the lsl_definitions against the schema file, to verify it's valid
-          validate-schema
+          validate-lsl-definitions-via-jsonschema
           echo "✓ Definitions file matches schema"
 
   test-generating-syntax:
-    needs: validate-yaml-file-with-jsonschema
+    needs: validate-lsl-definitions-via-jsonschema
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
