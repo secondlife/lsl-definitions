@@ -1,4 +1,4 @@
-name: Validate YAML for LSL Definitions
+name: Validate LSL definitions via jsonschema and test syntax generation
 
 on:
   pull_request:
@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: "Validate YAML file with jsonschema"
+      - name: Validate LSL definitions via jsonschema
         run: |
           # Run command to check the lsl_definitions against the schema file, to verify it's valid
           validate-lsl-definitions-via-jsonschema
