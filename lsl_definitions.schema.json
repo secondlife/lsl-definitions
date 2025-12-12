@@ -234,6 +234,11 @@
                                 "patternProperties": {
                                     "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
                                         "properties": {
+                                            "bool-semantics": {
+                                                "const": true,
+                                                "markdownDescription": "The function arguments integer value represents a boolean value.",
+                                                "type": "boolean"
+                                            },
                                             "tooltip": {
                                                 "markdownDescription": "A brief description of this function argument.",
                                                 "type": "string"
