@@ -12,7 +12,7 @@ import jsonschema
 def validate_lsl_definitions_via_jsonschema() -> bool:
     with open("lsl_definitions.schema.json", "r", encoding="utf-8") as schema_file:
         schemadata = json.load(schema_file)
-    with open("lsl_definitions.yaml", "r", encoding="utf-8) as yaml_file:
+    with open("lsl_definitions.yaml", "r", encoding="utf-8") as yaml_file:
         yamldata = yaml.safe_load(yaml_file)
 
     try:
