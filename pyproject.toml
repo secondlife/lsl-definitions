@@ -27,19 +27,15 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 dependencies = [
+    "jsonschema",
     "PyYAML",
     "llsd"
 ]
 keywords = ["Linden Scripting Language", "Second Life"]
 
-[project.optional-dependencies]
-cli = [
-    "jsonschema"
-]
-
 [project.scripts]
 gen-lsl-definitions = "gen_definitions:main"
-validate-lsl-definitions-via-jsonschema = "validate:jsonschema"
+validate-lsl-definitions-via-jsonschema = "validate:validate_lsl_definitions_via_jsonschema"
 
 [project.urls]
 Homepage = "https://github.com/secondlife/lsl-definitions"
