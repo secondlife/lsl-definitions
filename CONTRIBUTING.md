@@ -17,12 +17,27 @@ Thank you for your interest in contributing to the LSL definitions repository! T
 
 ## How to Contribute
 
-1. **Fork** this repository
-2. **Create a branch** for your changes (`git checkout -b improve-documentation`)
-3. **Make your changes** to `lsl_definitions.yaml`
-4. **Test** that your YAML is valid
-5. **Commit** your changes with a clear message
-6. **Push** to your fork and **submit a pull request**
+ 1. **Fork** this repository
+ 2. **Create a branch** for your changes (`git checkout -b improve-documentation`)
+ 3. **Make your changes** to `lsl_definitions.yaml`
+ 4. **Test** that your YAML is valid (See [Running validation locally](#running-validation-locally))
+ 5. **Commit** your changes with a clear message
+ 6. **Push** to your fork and **submit a pull request**
+
+## Running validation locally
+
+Validation is done with python and the validate.py script you will need to setup a python virtual environment and install the dependancies
+
+### Setup
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install ".[validate]"
+```
+Now you should be able to run the validation script as specified in the `pyproject.toml`
+```bash
+validate-lsl-definitions-via-jsonschema
+```
 
 ## Pull Request Guidelines
 
