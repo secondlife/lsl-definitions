@@ -9,15 +9,12 @@ description = "LSL (Linden Scripting Language) definitions generator"
 readme = "README.md"
 license-files = ["LICENSE"]
 authors = [
-    {name = "Second Life", email = "opensource@lindenlab.com"},
-    {name= "Builder's Brewery", email = "buildersbrewery@gmail.com"}
+    {name = "Second Life", email = "opensource@lindenlab.com"}
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Build Tools",
-
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
