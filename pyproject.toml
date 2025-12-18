@@ -24,7 +24,6 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 dependencies = [
-    "jsonschema",
     "PyYAML",
     "llsd"
 ]
@@ -38,6 +37,11 @@ validate-lsl-definitions-via-jsonschema = "validate:validate_lsl_definitions_via
 Homepage = "https://github.com/secondlife/lsl-definitions"
 Repository = "https://github.com/secondlife/lsl-definitions"
 Issues = "https://github.com/secondlife/lsl-definitions/issues"
+
+[project.optional-dependencies]
+validate = [
+    "jsonschema",
+]
 
 [tool.setuptools]
 py-modules = [
