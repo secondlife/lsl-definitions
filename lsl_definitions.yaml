@@ -1513,7 +1513,7 @@ constants:
     value: 2
   NULL_KEY:
     tooltip: ''
-    type: string
+    type: uuid
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
     tooltip: Retrieves the account level of an avatar.\nReturns 0 when the avatar
