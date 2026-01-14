@@ -4882,9 +4882,9 @@ functions:
   llAdjustDamage:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: Damage event index to modify.
         type: integer
+        index-semantics: true
     - Damage:
         tooltip: New damage amount to apply on this event.
         type: float
@@ -4909,11 +4909,11 @@ functions:
     - AgentID:
         tooltip: ''
         type: key
-    bool-semantics: true
     energy: 10.0
     experience: true
     func-id: 392
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: "\n                   Returns TRUE if the agent is in the Experience\
       \ and the Experience can run in the current location.\n                "
@@ -5457,13 +5457,13 @@ functions:
         type: list
         slua-type: '{T}'
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 193
     native: true
@@ -5483,13 +5483,13 @@ functions:
         tooltip: ''
         type: string
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 95
     pure: true
@@ -5508,10 +5508,10 @@ functions:
     - flags:
         tooltip: Flags for derez behavior.
         type: integer
-    bool-semantics: true
     energy: 10.0
     func-id: 509
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Derezzes an object previously rezzed by a script in this region. Returns
       TRUE on success or FALSE if the object could not be derezzed.
@@ -5525,9 +5525,9 @@ functions:
   llDetectedDamage:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 554
     return: list
@@ -5538,9 +5538,9 @@ functions:
   llDetectedGrab:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 37
     return: vector
@@ -5551,9 +5551,9 @@ functions:
   llDetectedGroup:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 39
     return: integer
@@ -5566,9 +5566,9 @@ functions:
   llDetectedKey:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 32
     return: key
@@ -5579,9 +5579,9 @@ functions:
   llDetectedLinkNumber:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 40
     # Note that the return does NOT have index semantics, link numbers are already one-indexed (sort of)
@@ -5594,9 +5594,9 @@ functions:
   llDetectedName:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 31
     return: string
@@ -5607,9 +5607,9 @@ functions:
   llDetectedOwner:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 33
     return: key
@@ -5620,9 +5620,9 @@ functions:
   llDetectedPos:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 35
     return: vector
@@ -5633,9 +5633,9 @@ functions:
   llDetectedRezzer:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 553
     return: key
@@ -5645,9 +5645,9 @@ functions:
   llDetectedRot:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 38
     return: rotation
@@ -5658,9 +5658,9 @@ functions:
   llDetectedTouchBinormal:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detection information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 341
     return: vector
@@ -5672,9 +5672,9 @@ functions:
   llDetectedTouchFace:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detection information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 338
     # NOTE: We can't change face number indexing easily because it's part of the viewer, so no index semantics for ret...
@@ -5686,9 +5686,9 @@ functions:
   llDetectedTouchNormal:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detection information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 340
     return: vector
@@ -5700,9 +5700,9 @@ functions:
   llDetectedTouchPos:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detected information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 339
     return: vector
@@ -5714,9 +5714,9 @@ functions:
   llDetectedTouchST:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detection information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 342
     return: vector
@@ -5730,9 +5730,9 @@ functions:
   llDetectedTouchUV:
     arguments:
     - Index:
-        index-semantics: true
         tooltip: Index of detection information
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 337
     return: vector
@@ -5745,9 +5745,9 @@ functions:
   llDetectedType:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 34
     return: integer
@@ -5760,9 +5760,9 @@ functions:
   llDetectedVel:
     arguments:
     - Number:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 36
     return: vector
@@ -5834,10 +5834,10 @@ functions:
     - Direction:
         tooltip: ''
         type: vector
-    bool-semantics: true
     energy: 10.0
     func-id: 205
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Checks to see whether the border hit by Direction from Position is the
       edge of the world (has no neighboring region).\nReturns TRUE if the line along
@@ -6569,9 +6569,9 @@ functions:
         tooltip: Inventory item type
         type: integer
     - Index:
-        index-semantics: true
         tooltip: Index number of inventory item.
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 147
     return: string
@@ -6746,9 +6746,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 194
     native: true
@@ -6876,9 +6876,9 @@ functions:
         tooltip: ''
         type: string
     - LineNumber:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 217
     return: key
@@ -6894,9 +6894,9 @@ functions:
         tooltip: ''
         type: string
     - LineNumber:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 549
     return: string
@@ -7415,10 +7415,10 @@ functions:
     - ScriptName:
         tooltip: ''
         type: string
-    bool-semantics: true
     energy: 10.0
     func-id: 250
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if the script named is running.\nReturns TRUE if ScriptName
       is running.
@@ -7492,8 +7492,8 @@ functions:
         type: integer
     energy: 10.0
     func-id: 46
-    bool-semantics: true
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns boolean value of the specified status (e.g. STATUS_PHANTOM) of
       the object the script is attached to.
@@ -7504,13 +7504,13 @@ functions:
         tooltip: ''
         type: string
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 94
     pure: true
@@ -7908,9 +7908,9 @@ functions:
         tooltip: ''
         type: string
     - Position:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - SourceVariable:
         tooltip: ''
         type: string
@@ -7953,10 +7953,10 @@ functions:
     - agent_id:
         tooltip: Agent ID of another agent in the region.
         type: key
-    bool-semantics: true
     energy: 10.0
     func-id: 542
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if avatar ID is a friend of the script owner.
     must-use: true
@@ -8064,9 +8064,9 @@ functions:
   llKeysKeyValue:
     arguments:
     - First:
-        index-semantics: true
         tooltip: Index of the first key to return.
         type: integer
+        index-semantics: true
     - Count:
         tooltip: The number of keys to return.
         type: integer
@@ -8398,9 +8398,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 187
     native: true
@@ -8416,9 +8416,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 186
     native: true
@@ -8449,9 +8449,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 189
     native: true
@@ -8469,13 +8469,13 @@ functions:
         type: list
         slua-type: '{T}'
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 192
     native: true
@@ -8496,20 +8496,20 @@ functions:
         type: list
         slua-type: '{T}'
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - Stride:
         tooltip: ''
         type: integer
     - slice_index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 801
     return: list
@@ -8532,13 +8532,13 @@ functions:
         type: list
         slua-type: '{T}'
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - Stride:
         tooltip: ''
         type: integer
@@ -8556,9 +8556,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 191
     native: true
@@ -8574,9 +8574,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 188
     native: true
@@ -8592,9 +8592,9 @@ functions:
         tooltip: ''
         type: list
     - Index:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 190
     native: true
@@ -8614,8 +8614,8 @@ functions:
         type: list
     energy: 10.0
     func-id: 201
-    index-semantics: true
     return: integer
+    index-semantics: true
     sleep: 0.0
     tooltip: Returns the index of the first instance of Find in ListVariable. Returns
       -1 if not found.\nReturns the position of the first instance of the Find list
@@ -8630,13 +8630,13 @@ functions:
         tooltip: ''
         type: list
     - Instance:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 803
-    index-semantics: true
     return: integer
+    index-semantics: true
     sleep: 0.0
     tooltip: Returns the index of the nth instance of Find in ListVariable. Returns
       -1 if not found.
@@ -8650,20 +8650,20 @@ functions:
         tooltip: ''
         type: list
     - Start:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - End:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     - Stride:
         tooltip: ''
         type: integer
     energy: 10.0
     func-id: 800
-    index-semantics: true
     return: integer
+    index-semantics: true
     sleep: 0.0
     tooltip: Returns the index of the first instance of Find in ListVariable. Returns
       -1 if not found.\nReturns the position of the first instance of the Find list
@@ -8682,9 +8682,9 @@ functions:
         type: list
         slua-type: '{T}'
     - Position:
-        index-semantics: true
         tooltip: ''
         type: integer
+        index-semantics: true
     energy: 10.0
     func-id: 200
     native: true
@@ -9361,10 +9361,10 @@ functions:
     - ID:
         tooltip: ''
         type: key
-    bool-semantics: true
     energy: 10.0
     func-id: 215
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if id ID over land owned by the script owner, otherwise
       FALSE.\nReturns TRUE if key ID is over land owned by the object owner, FALSE
@@ -10365,10 +10365,10 @@ functions:
     - ID:
         tooltip: ''
         type: key
-    bool-semantics: true
     energy: 10.0
     func-id: 219
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if avatar ID is in the same region and has the same active
       group, otherwise FALSE.\nReturns TRUE if the object or agent identified is in
@@ -10430,10 +10430,10 @@ functions:
     - Position:
         tooltip: ''
         type: vector
-    bool-semantics: true
     energy: 10.0
     func-id: 246
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if Position is over public land, sandbox land, land that
       doesn't allow everyone to edit and build, or land that doesn't allow outside
@@ -11065,10 +11065,10 @@ functions:
         tooltip: The amount to reserve, which must be less than the allowed maximum
           (currently 64KB) and not already have been exceeded.
         type: integer
-    bool-semantics: true
     energy: 10.0
     func-id: 369
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Requests Limit bytes to be reserved for this script.\nReturns TRUE or
       FALSE indicating whether the limit was set successfully.\nThis function has
@@ -11118,9 +11118,9 @@ functions:
     - Options:
         tooltip: A list of options to set for the sale.
         type: list
-    bool-semantics: true
     energy: 10.0
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if
       TRUE the parcel is put up for sale. Options is a list of options to set for
@@ -11810,9 +11810,9 @@ functions:
         type: string
     energy: 10.0
     func-id: 181
-    index-semantics: true
     pure: true
     return: integer
+    index-semantics: true
     sleep: 0.0
     tooltip: Returns an integer that is the index in Text where string pattern Sequence
       first appears. Returns -1 if not found.
@@ -12213,10 +12213,10 @@ functions:
     - Algorithm:
         tooltip: 'The digest algorithm: sha1, sha224, sha256, sha384, sha512.'
         type: string
-    bool-semantics: true
     energy: 10.0
     func-id: 540
     return: integer
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if PublicKey, Message, and Algorithm produce the same base64-formatted
       Signature.
