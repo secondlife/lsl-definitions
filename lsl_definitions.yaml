@@ -2056,6 +2056,44 @@ constants:
     tooltip: ''
     type: integer
     value: 5
+  PARCEL_SALE_AGENT:
+    tooltip: The agent authorized to purchase the parcel.
+    type: integer
+    value: '2'
+  PARCEL_SALE_ERROR_BAD_PARAMS:
+    tooltip: The parameters provided to set the sale information are invalid.
+    type: integer
+    value: '5'
+  PARCEL_SALE_ERROR_INVALID_PRICE:
+    tooltip: The price set for the parcel is invalid (e.g., less than or equal to
+      0).
+    type: integer
+    value: '4'
+  PARCEL_SALE_ERROR_IN_ESCROW:
+    tooltip: The parcel is currently in escrow and cannot be set for sale.
+    type: integer
+    value: '3'
+  PARCEL_SALE_ERROR_NO_PARCEL:
+    tooltip: The parcel could not be found.
+    type: integer
+    value: '1'
+  PARCEL_SALE_ERROR_NO_PERMISSIONS:
+    tooltip: The script does not have the required permissions to set the sale information.
+    type: integer
+    value: '2'
+  PARCEL_SALE_OBJECTS:
+    tooltip: Are the objects on the parcel included in the sale?
+    type: integer
+    value: '3'
+  PARCEL_SALE_OK:
+    tooltip: The sale information was successfully set.
+    type: integer
+    value: '0'
+  PARCEL_SALE_PRICE:
+    tooltip: The price of the parcel. If no authorized agent is set, must be greater
+      than 0.
+    type: integer
+    value: '1'
   PASSIVE:
     tooltip: Static in-world objects.
     type: integer
@@ -11098,6 +11136,25 @@ functions:
     sleep: 0.0
     tooltip: Sets the specified PermissionFlag permission to the value specified by
       PermissionMask on the object the script is attached to.
+  llSetParcelForSale:
+    arguments:
+    - ForSale:
+        luaType: numeric
+        tooltip: If TRUE, the parcel is put up for sale.
+        type: integer
+        bool-semantics: true
+    - Options:
+        tooltip: A list of options to set for the sale.
+        type: list
+    bool-semantics: true
+    energy: 10.0
+    return: integer
+    sleep: 0.0
+    tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if
+      TRUE the parcel is put up for sale. Options is a list of options to set for
+      the sale, such as price, authorized buyer, and whether to include objects
+      on the parcel.\n Setting ForSale to FALSE will remove the parcel from sale
+      and clear any options that were set.
   llSetParcelMusicURL:
     arguments:
     - URL:
