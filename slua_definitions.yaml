@@ -349,10 +349,10 @@ globalVariables:
   type:
     kind: table
     properties:
-    - comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+    - name: create
+      comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
         nil if the string is not a valid UUID. Throws an error if the buffer is
         shorter than 16 bytes.
-      name: create
       type:
         kind: function
         parameters:
@@ -364,8 +364,8 @@ globalVariables:
             - buffer
             - uuid
         returnType: uuid?
-    - comment: Allows calling uuid() as a constructor
-      name: __call
+    - name: __call
+      comment: Allows calling uuid() as a constructor
       type:
         kind: function
         parameters:
@@ -384,8 +384,8 @@ globalVariables:
   type:
     kind: table
     properties:
-    - comment: Creates a new vector with the given component values
-      name: create
+    - name: create
+      comment: Creates a new vector with the given component values
       type:
         kind: function
         parameters:
@@ -397,24 +397,24 @@ globalVariables:
           optional: true
           type: number
         returnType: vector
-    - comment: Calculates the magnitude of a given vector
-      name: magnitude
+    - name: magnitude
+      comment: Calculates the magnitude of a given vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: number
-    - comment: Computes the normalized version (unit vector) of a given vector
-      name: normalize
+    - name: normalize
+      comment: Computes the normalized version (unit vector) of a given vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: vector
-    - comment: Computes the cross product of two vectors
-      name: cross
+    - name: cross
+      comment: Computes the cross product of two vectors
       type:
         kind: function
         parameters:
@@ -423,8 +423,8 @@ globalVariables:
         - name: b
           type: vector
         returnType: vector
-    - comment: Computes the dot product of two vectors
-      name: dot
+    - name: dot
+      comment: Computes the dot product of two vectors
       type:
         kind: function
         parameters:
@@ -433,9 +433,9 @@ globalVariables:
         - name: b
           type: vector
         returnType: number
-    - comment: Computes the angle between two vectors in radians. The axis, if specified,
+    - name: angle
+      comment: Computes the angle between two vectors in radians. The axis, if specified,
         is used to determine the sign of the angle.
-      name: angle
       type:
         kind: function
         parameters:
@@ -447,40 +447,40 @@ globalVariables:
           optional: true
           type: vector
         returnType: number
-    - comment: Applies math.floor to every component of the input vector
-      name: floor
+    - name: floor
+      comment: Applies math.floor to every component of the input vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: vector
-    - comment: Applies math.ceil to every component of the input vector
-      name: ceil
+    - name: ceil
+      comment: Applies math.ceil to every component of the input vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: vector
-    - comment: Applies math.abs to every component of the input vector
-      name: abs
+    - name: abs
+      comment: Applies math.abs to every component of the input vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: vector
-    - comment: Applies math.sign to every component of the input vector
-      name: sign
+    - name: sign
+      comment: Applies math.sign to every component of the input vector
       type:
         kind: function
         parameters:
         - name: v
           type: vector
         returnType: vector
-    - comment: Applies math.clamp to every component of the input vector
-      name: clamp
+    - name: clamp
+      comment: Applies math.clamp to every component of the input vector
       type:
         kind: function
         parameters:
@@ -491,8 +491,8 @@ globalVariables:
         - name: max
           type: vector
         returnType: vector
-    - comment: Applies math.max to the corresponding components of the input vectors
-      name: max
+    - name: max
+      comment: Applies math.max to the corresponding components of the input vectors
       type:
         kind: function
         parameters:
@@ -501,8 +501,8 @@ globalVariables:
         - type: vector
           variadic: true
         returnType: vector
-    - comment: Applies math.min to the corresponding components of the input vectors
-      name: min
+    - name: min
+      comment: Applies math.min to the corresponding components of the input vectors
       type:
         kind: function
         parameters:
@@ -511,8 +511,8 @@ globalVariables:
         - type: vector
           variadic: true
         returnType: vector
-    - comment: Linear interpolation between two vectors
-      name: lerp
+    - name: lerp
+      comment: Linear interpolation between two vectors
       type:
         kind: function
         parameters:
@@ -523,14 +523,14 @@ globalVariables:
         - name: t
           type: number
         returnType: vector
-    - comment: A zero vector <0,0,0>
-      name: zero
+    - name: zero
+      comment: A zero vector <0,0,0>
       type: vector
-    - comment: A one vector <1,1,1>
-      name: one
+    - name: one
+      comment: A one vector <1,1,1>
       type: vector
-    - comment: 'Constructor call: vector(x, y, z)'
-      name: __call
+    - name: __call
+      comment: 'Constructor call: vector(x, y, z)'
       type:
         kind: function
         parameters:
