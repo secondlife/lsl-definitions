@@ -252,8 +252,8 @@ globalVariables:
     kind: callable-table
     tableType:
       properties:
-      - comment: Constructor
-        name: create
+      - name: create
+        comment: Constructor
         type:
           kind: function
           parameters:
@@ -266,27 +266,27 @@ globalVariables:
           - name: s
             type: number
           returnType: quaternion
-      - comment: Identity quaternion constant
-        name: identity
+      - name: identity
+        comment: Identity quaternion constant
         type: quaternion
-      - comment: Returns normalized quaternion
-        name: normalize
+      - name: normalize
+        comment: Returns normalized quaternion
         type:
           kind: function
           parameters:
           - name: q
             type: quaternion
           returnType: quaternion
-      - comment: Returns magnitude of quaternion
-        name: magnitude
+      - name: magnitude
+        comment: Returns magnitude of quaternion
         type:
           kind: function
           parameters:
           - name: q
             type: quaternion
           returnType: number
-      - comment: Dot product of two quaternions
-        name: dot
+      - name: dot
+        comment: Dot product of two quaternions
         type:
           kind: function
           parameters:
@@ -295,8 +295,8 @@ globalVariables:
           - name: b
             type: quaternion
           returnType: number
-      - comment: Spherical linear interpolation
-        name: slerp
+      - name: slerp
+        comment: Spherical linear interpolation
         type:
           kind: function
           parameters:
@@ -307,32 +307,32 @@ globalVariables:
           - name: t
             type: number
           returnType: quaternion
-      - comment: Returns conjugate of quaternion
-        name: conjugate
+      - name: conjugate
+        comment: Returns conjugate of quaternion
         type:
           kind: function
           parameters:
           - name: q
             type: quaternion
           returnType: quaternion
-      - comment: Returns forward vector from quaternion rotation
-        name: tofwd
+      - name: tofwd
+        comment: Returns forward vector from quaternion rotation
         type:
           kind: function
           parameters:
           - name: q
             type: quaternion
           returnType: vector
-      - comment: Returns left vector from quaternion rotation
-        name: toleft
+      - name: toleft
+        comment: Returns left vector from quaternion rotation
         type:
           kind: function
           parameters:
           - name: q
             type: quaternion
           returnType: vector
-      - comment: Returns up vector from quaternion rotation
-        name: toup
+      - name: toup
+        comment: Returns up vector from quaternion rotation
         type:
           kind: function
           parameters:
