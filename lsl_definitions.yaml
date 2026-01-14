@@ -2065,8 +2065,7 @@ constants:
     type: integer
     value: '5'
   PARCEL_SALE_ERROR_INVALID_PRICE:
-    tooltip: The price set for the parcel is invalid (e.g., less than or equal to
-      0).
+    tooltip: The price set for the parcel is invalid (e.g., less than or equal to 0).
     type: integer
     value: '4'
   PARCEL_SALE_ERROR_IN_ESCROW:
@@ -2090,8 +2089,7 @@ constants:
     type: integer
     value: '0'
   PARCEL_SALE_PRICE:
-    tooltip: The price of the parcel. If no authorized agent is set, must be greater
-      than 0.
+    tooltip: The price of the parcel. If no authorized agent is set, must be greater than 0.
     type: integer
     value: '1'
   PASSIVE:
