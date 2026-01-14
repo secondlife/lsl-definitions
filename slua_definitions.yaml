@@ -1,5 +1,6 @@
 classes:
-- comment: 'Luau Type Definition for LSL UserData Type: quaternion'
+- name: quaternion
+  comment: 'Luau Type Definition for LSL UserData Type: quaternion'
   methods:
   - name: __add
     parameters:
@@ -39,7 +40,6 @@ classes:
     parameters:
     - name: self
     returnType: string
-  name: quaternion
   properties:
   - name: x
     type: number
@@ -49,13 +49,13 @@ classes:
     type: number
   - name: s
     type: number
-- comment: 'Luau Type Definition for LSL UserData Type: uuid'
+- name: uuid
+  comment: 'Luau Type Definition for LSL UserData Type: uuid'
   methods:
   - name: __tostring
     parameters:
     - name: self
     returnType: string
-  name: uuid
   properties:
   - comment: Returns true if the UUID is not the null UUID (all zeros)
     name: istruthy
@@ -64,7 +64,8 @@ classes:
       is not in a compressed state
     name: bytes
     type: string?
-- comment: 'Luau Type Definition for LSL UserData Type: vector'
+- name: vector
+  comment: 'Luau Type Definition for LSL UserData Type: vector'
   methods:
   - comment: Native component-wise addition
     name: __add
@@ -113,7 +114,6 @@ classes:
     parameters:
     - name: self
     returnType: string
-  name: vector
   properties:
   - name: x
     type: number
@@ -121,9 +121,9 @@ classes:
     type: number
   - name: z
     type: number
-- comment: Event detection class providing access to detected object/avatar information
+- name: LLDetectedEvent
+  comment: Event detection class providing access to detected object/avatar information
   methods: []
-  name: LLDetectedEvent
   properties:
   - name: index
     type: number
@@ -131,7 +131,8 @@ classes:
     type: boolean
   - name: canAdjustDamage
     type: boolean
-- comment: Event registration and management class for Second Life events
+- name: LLEvents
+  comment: Event registration and management class for Second Life events
   methods:
   - comment: Registers a callback for an event. Returns the callback.
     name: 'on'
@@ -172,8 +173,8 @@ classes:
     parameters:
     - name: self
     returnType: '{string}'
-  name: LLEvents
-- comment: Timer management class for scheduling periodic and one-time callbacks
+- name: LLTimers
+  comment: Timer management class for scheduling periodic and one-time callbacks
   methods:
   - comment: Registers a callback to be called every N seconds. Returns the callback.
     name: every
@@ -201,42 +202,41 @@ classes:
     - name: callback
       type: LLTimerCallback
     returnType: boolean
-  name: LLTimers
 constants: []
 globalFunctions:
-- comment: Dangerously executes a required module function
-  name: dangerouslyexecuterequiredmodule
+- name: dangerouslyexecuterequiredmodule
+  comment: Dangerously executes a required module function
   parameters:
   - name: f
     type: (...any) -> ...any
   returnType: '...any'
-- comment: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
-  name: touuid
+- name: touuid
+  comment: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
   parameters:
   - name: val
     type: string | buffer | uuid
   returnType: uuid?
-- comment: Converts a value to a vector, returns nil if invalid
-  name: tovector
+- name: tovector
+  comment: Converts a value to a vector, returns nil if invalid
   parameters:
   - name: val
     type: any
   returnType: vector?
-- comment: Converts a value to a quaternion, returns nil if invalid
-  name: toquaternion
+- name: toquaternion
+  comment: Converts a value to a quaternion, returns nil if invalid
   parameters:
   - name: val
     type: any
   returnType: quaternion?
-- comment: Converts a value to a rotation (quaternion), returns nil if invalid
-  name: torotation
+- name: torotation
+  comment: Converts a value to a rotation (quaternion), returns nil if invalid
   parameters:
   - name: val
     type: any
   returnType: quaternion?
 globalVariables:
-- comment: Global 'quaternion' library table with callable metatable
-  name: quaternion
+- name: quaternion
+  comment: Global 'quaternion' library table with callable metatable
   type:
     callSignature:
       parameters:
@@ -339,13 +339,13 @@ globalVariables:
           - name: q
             type: quaternion
           returnType: vector
-- comment: '''rotation'' global is an alias to the ''quaternion'' library'
-  name: rotation
+- name: rotation
+  comment: '''rotation'' global is an alias to the ''quaternion'' library'
   type:
     kind: typeof
     target: quaternion
-- comment: Global 'uuid' library table
-  name: uuid
+- name: uuid
+  comment: Global 'uuid' library table
   type:
     kind: table
     properties:
@@ -379,8 +379,8 @@ globalVariables:
             - buffer
             - uuid
         returnType: uuid?
-- comment: Global 'vector' library table
-  name: vector
+- name: vector
+  comment: Global 'vector' library table
   type:
     kind: table
     properties:
@@ -544,17 +544,18 @@ globalVariables:
           optional: true
           type: number
         returnType: vector
-- comment: loadstring is removed in SLua
-  name: loadstring
+- name: loadstring
+  comment: loadstring is removed in SLua
   type: nil
-- comment: getfenv is removed in SLua
-  name: getfenv
+- name: getfenv
+  comment: getfenv is removed in SLua
   type: nil
-- comment: setfenv is removed in SLua
-  name: setfenv
+- name: setfenv
+  comment: setfenv is removed in SLua
   type: nil
 modules:
-- comment: Bitwise operations library
+- name: bit32
+  comment: Bitwise operations library
   functions:
   - comment: Arithmetic right shift
     name: arshift
@@ -668,8 +669,8 @@ modules:
     - name: n
       type: number
     returnType: number
-  name: bit32
-- comment: Buffer manipulation library for binary data
+- name: buffer
+  comment: Buffer manipulation library for binary data
   functions:
   - comment: Creates a new buffer of the specified size
     name: create
@@ -913,8 +914,8 @@ modules:
     - name: value
       type: number
     returnType: ()
-  name: buffer
-- comment: Coroutine manipulation library
+- name: coroutine
+  comment: Coroutine manipulation library
   functions:
   - comment: Creates a new coroutine from a function
     name: create
@@ -962,8 +963,8 @@ modules:
     - name: co
       type: thread
     returnType: (boolean, string?)
-  name: coroutine
-- comment: Debug library for introspection
+- name: debug
+  comment: Debug library for introspection
   functions:
   - comment: Returns information about a function or stack level
     name: info
@@ -1012,8 +1013,8 @@ modules:
       optional: true
       type: number
     returnType: string
-  name: debug
-- comment: Base64 encoding/decoding library
+- name: llbase64
+  comment: Base64 encoding/decoding library
   functions:
   - comment: Encodes a string or buffer to base64
     name: encode
@@ -1036,8 +1037,8 @@ modules:
     - name: data
       type: string
     returnType: string
-  name: llbase64
-- comment: JSON encoding/decoding library for Second Life
+- name: lljson
+  comment: JSON encoding/decoding library for Second Life
   functions:
   - comment: Encodes a Lua value as JSON
     name: encode
@@ -1067,7 +1068,6 @@ modules:
     - name: json
       type: string
     returnType: any
-  name: lljson
   properties:
   - comment: A constant to pass for null to json encode
     name: 'null'
@@ -1087,7 +1087,8 @@ modules:
   - comment: Version of the lljson library
     name: _VERSION
     type: string
-- comment: Mathematical functions library
+- name: math
+  comment: Mathematical functions library
   functions:
   - comment: Returns the absolute value of x
     name: abs
@@ -1353,7 +1354,6 @@ modules:
     - name: x
       type: number
     returnType: boolean
-  name: math
   properties:
   - comment: The value of pi
     name: pi
@@ -1361,7 +1361,8 @@ modules:
   - comment: A value larger than any other numeric value (infinity)
     name: huge
     type: number
-- comment: Operating system facilities library
+- name: os
+  comment: Operating system facilities library
   functions:
   - comment: Returns CPU time used by the program in seconds
     name: clock
@@ -1393,8 +1394,8 @@ modules:
       optional: true
       type: OsDateTime
     returnType: number?
-  name: os
-- comment: String manipulation library
+- name: string
+  comment: String manipulation library
   functions:
   - comment: Returns the internal numeric codes of the characters
     name: byte
@@ -1545,8 +1546,8 @@ modules:
     - name: s
       type: string
     returnType: string
-  name: string
-- comment: Table manipulation library
+- name: table
+  comment: Table manipulation library
   functions:
   - comment: Concatenates table elements into a string
     name: concat
@@ -1717,8 +1718,8 @@ modules:
     - name: t
       type: '{[T]: U}'
     returnType: '{[T]: U}'
-  name: table
-- comment: UTF-8 support library
+- name: utf8
+  comment: UTF-8 support library
   functions:
   - comment: Returns a string from UTF-8 codepoints
     name: char
@@ -1768,24 +1769,24 @@ modules:
       optional: true
       type: number
     returnType: number?
-  name: utf8
   properties:
   - comment: Pattern that matches exactly one UTF-8 byte sequence
     name: charpattern
     type: string
 typeAliases:
-- comment: '''rotation'' is an alias for ''quaternion'''
+- name: rotation
+  comment: '''rotation'' is an alias for ''quaternion'''
   definition:
     kind: reference
     name: quaternion
-  name: rotation
-- definition:
+- name: numeric
+  definition:
     kind: union
     types:
     - boolean
     - number
-  name: numeric
-- definition:
+- name: list
+  definition:
     elementType:
       kind: union
       types:
@@ -1796,28 +1797,27 @@ typeAliases:
       - quaternion
       - boolean
     kind: array
-  name: list
-- definition:
+- name: LLDetectedEventName
+  definition:
     kind: literal-union
     values: []
-  name: LLDetectedEventName
-- definition:
+- name: LLNonDetectedEventName
+  definition:
     kind: literal-union
     values: []
-  name: LLNonDetectedEventName
-- definition:
+- name: LLEventName
+  definition:
     kind: union
     types:
     - LLDetectedEventName
     - LLNonDetectedEventName
-  name: LLEventName
-- definition:
+- name: LLEventHandler
+  definition:
     kind: function
     parameters:
     - type: any
       variadic: true
     returnType: ()
-  name: LLEventHandler
 - definition:
     kind: function
     parameters:
@@ -1827,7 +1827,8 @@ typeAliases:
         kind: array
     returnType: ()
   name: LLDetectedEventHandler
-- comment: Callback type for LLTimers.every() - receives scheduled time and interval
+- name: LLTimerEveryCallback
+  comment: Callback type for LLTimers.every() - receives scheduled time and interval
   definition:
     kind: function
     parameters:
@@ -1836,24 +1837,24 @@ typeAliases:
     - name: interval
       type: number
     returnType: ()
-  name: LLTimerEveryCallback
-- comment: Callback type for LLTimers.once() - receives scheduled time
+- name: LLTimerOnceCallback
+  comment: Callback type for LLTimers.once() - receives scheduled time
   definition:
     kind: function
     parameters:
     - name: scheduled
       type: number
     returnType: ()
-  name: LLTimerOnceCallback
-- comment: Union of timer callback types
+- name: LLTimerCallback
+  comment: Union of timer callback types
   definition:
     kind: union
     types:
     - LLTimerEveryCallback
     - LLTimerOnceCallback
     - (...any) -> ...any
-  name: LLTimerCallback
-- comment: Date/time table structure used by os.date and os.time
+- name: OsDateTime
+  comment: Date/time table structure used by os.date and os.time
   definition:
     kind: table
     properties:
@@ -1881,5 +1882,4 @@ typeAliases:
     - name: isdst
       optional: true
       type: boolean
-  name: OsDateTime
 version: 1.0.0
