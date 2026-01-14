@@ -1565,25 +1565,22 @@ modules:
     returnType: string
   - comment: Iterates over table key-value pairs (deprecated)
     name: foreach
+    typeParameters: [T, U]
     parameters:
     - name: t
       type: '{[T]: U}'
     - name: f
       type: '(key: T, value: T) -> any'
     returnType: any?
-    typeParameters:
-    - T
-    - U
   - comment: Iterates over array indices (deprecated)
     name: foreachi
+    typeParameters: [T]
     parameters:
     - name: t
       type: '{T}'
     - name: f
       type: '(index: number, value: T) -> any'
     returnType: any?
-    typeParameters:
-    - T
   - comment: 'Returns the length of a table (deprecated, use # operator)'
     name: getn
     parameters:
@@ -1600,6 +1597,7 @@ modules:
     name: insert
     overloads:
     - comment: Inserts an element at a specific position
+      typeParameters: [T]
       parameters:
       - name: list
         type: '{T}'
@@ -1608,18 +1606,16 @@ modules:
       - name: value
         type: T
       returnType: ()
-      typeParameters:
-      - T
+    typeParameters: [T]
     parameters:
     - name: list
       type: '{T}'
     - name: value
       type: T
     returnType: ()
-    typeParameters:
-    - T
   - comment: Removes and returns an element from a list
     name: remove
+    typeParameters: [T]
     parameters:
     - name: list
       type: '{T}'
@@ -1627,10 +1623,9 @@ modules:
       optional: true
       type: number
     returnType: T?
-    typeParameters:
-    - T
   - comment: Sorts list elements in place
     name: sort
+    typeParameters: [T]
     parameters:
     - name: list
       type: '{T}'
@@ -1638,18 +1633,16 @@ modules:
       optional: true
       type: '(a: T, b: T) -> boolean'
     returnType: ()
-    typeParameters:
-    - T
   - comment: Packs arguments into a table with length field n
     name: pack
+    typeParameters: [T]
     parameters:
     - type: T
       variadic: true
     returnType: '{ n: number, [number]: T }'
-    typeParameters:
-    - T
   - comment: Unpacks table elements as multiple return values
     name: unpack
+    typeParameters: [T]
     parameters:
     - name: list
       type: '{T}'
@@ -1660,10 +1653,9 @@ modules:
       optional: true
       type: number
     returnType: '...T'
-    typeParameters:
-    - T
   - comment: Moves elements from one table to another
     name: move
+    typeParameters: [T]
     parameters:
     - name: a1
       type: '{T}'
@@ -1677,10 +1669,9 @@ modules:
       optional: true
       type: '{T}'
     returnType: '{T}'
-    typeParameters:
-    - T
   - comment: Creates a new table with pre-allocated array slots
     name: create
+    typeParameters: [T]
     parameters:
     - name: count
       type: number
@@ -1688,10 +1679,9 @@ modules:
       optional: true
       type: T
     returnType: '{T}'
-    typeParameters:
-    - T
   - comment: Finds the index of a value in an array
     name: find
+    typeParameters: [T]
     parameters:
     - name: t
       type: '{T}'
@@ -1701,8 +1691,6 @@ modules:
       optional: true
       type: number
     returnType: number?
-    typeParameters:
-    - T
   - comment: Removes all elements from a table
     name: clear
     parameters:
@@ -1711,13 +1699,11 @@ modules:
     returnType: ()
   - comment: Makes a table read-only
     name: freeze
+    typeParameters: [T, U]
     parameters:
     - name: t
       type: '{[T]: U}'
     returnType: '{[T]: U}'
-    typeParameters:
-    - T
-    - U
   - comment: Returns true if a table is frozen
     name: isfrozen
     parameters:
@@ -1726,13 +1712,11 @@ modules:
     returnType: boolean
   - comment: Creates a shallow copy of a table
     name: clone
+    typeParameters: [T, U]
     parameters:
     - name: t
       type: '{[T]: U}'
     returnType: '{[T]: U}'
-    typeParameters:
-    - T
-    - U
   name: table
 - comment: UTF-8 support library
   functions:

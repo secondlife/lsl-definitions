@@ -629,10 +629,10 @@ constants:
     type: integer
     value: 2147483646
   COMBAT_LOG_ID:
-    luaType: uuid
     tooltip: Messages from the region to the COMBAT_CHANNEL will all be from this ID.\n
       Scripts may filter llListen calls on this ID to receive only system generated combat log messages.
     type: string
+    luaType: uuid
     value: "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
   CONTENT_TYPE_ATOM:
     tooltip: '"application/atom+xml"'
@@ -1140,59 +1140,59 @@ constants:
     type: integer
     value: 3
   IMG_USE_BAKED_AUX1:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "9742065b-19b5-297c-858a-29711d539043"
   IMG_USE_BAKED_AUX2:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
   IMG_USE_BAKED_AUX3:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"
   IMG_USE_BAKED_EYES:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"
   IMG_USE_BAKED_HAIR:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"
   IMG_USE_BAKED_HEAD:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "5a9f4a74-30f2-821c-b88d-70499d3e7183"
   IMG_USE_BAKED_LEFTARM:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "ff62763f-d60a-9855-890b-0c96f8f8cd98"
   IMG_USE_BAKED_LEFTLEG:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "8e915e25-31d1-cc95-ae08-d58a47488251"
   IMG_USE_BAKED_LOWER:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "24daea5f-0539-cfcf-047f-fbc40b2786ba"
   IMG_USE_BAKED_SKIRT:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "43529ce8-7faa-ad92-165a-bc4078371687"
   IMG_USE_BAKED_UPPER:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
   INVENTORY_ALL:
     tooltip: ''
@@ -1524,9 +1524,9 @@ constants:
     type: integer
     value: 2
   NULL_KEY:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
     tooltip: Retrieves the account level of an avatar.\nReturns 0 when the avatar
@@ -3907,29 +3907,29 @@ constants:
     type: integer
     value: 11
   TEXTURE_BLANK:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "5748decc-f629-461c-9a36-a35a221fe21f"
   TEXTURE_DEFAULT:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_MEDIA:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"
   TEXTURE_PLYWOOD:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_TRANSPARENT:
-    luaType: uuid
     tooltip: ''
     type: string
+    luaType: uuid
     value: "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
   TOUCH_INVALID_FACE:
     tooltip: ''
@@ -4921,9 +4921,9 @@ functions:
   llAllowInventoryDrop:
     arguments:
     - Flag:
-        luaType: numeric
         tooltip: Boolean, If TRUE allows anyone to drop inventory on prim, FALSE revokes.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 176
@@ -4951,10 +4951,10 @@ functions:
         tooltip: Amount of impulse force to apply.
         type: vector
     - Local:
-        luaType: numeric
         tooltip: Boolean, if TRUE, force is treated as a local directional vector
           instead of region directional vector.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 72
@@ -4969,9 +4969,9 @@ functions:
         tooltip: Amount of impulse force to apply.
         type: vector
     - Local:
-        luaType: numeric
         tooltip: Boolean, if TRUE, uses local axis, if FALSE, uses region axis.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 73
@@ -5136,10 +5136,10 @@ functions:
         tooltip: ''
         type: string
     energy: 10.0
-    luaReturn: '{string}'
     func-id: 196
     pure: true
     return: list
+    luaReturn: '{string}'
     sleep: 0.0
     tooltip: Create a list from a string of comma separated values specified in Text.
   llCastRay:
@@ -5453,11 +5453,12 @@ functions:
       \ case the second item will be the value associated with the key.\n        \
       \        "
   llDeleteSubList:
+    typeParameters: [T]
     arguments:
     - Source:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Start:
         index-semantics: true
         tooltip: ''
@@ -5467,11 +5468,11 @@ functions:
         tooltip: ''
         type: integer
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 193
     native: true
     pure: true
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Removes the slice from start to end and returns the remainder of the
       list.\nRemove a slice from the list and return the remainder, start and end
@@ -5479,8 +5480,6 @@ functions:
       to count backwards from the length of the list, so 0, -1 would delete the entire
       list.\nIf Start is larger than End the list deleted is the exclusion of the
       entries; so 6, 4 would delete the entire list except for the 5th list entry.
-    typeParameters:
-    - T
   llDeleteSubString:
     arguments:
     - Source:
@@ -6026,11 +6025,11 @@ functions:
   llForceMouselook:
     arguments:
     - Enable:
-        luaType: numeric
         tooltip: Boolean, if TRUE when an avatar sits on the prim, the avatar will
           be forced into mouse-look mode.\nFALSE is the default setting and will undo
           a previously set TRUE or do nothing.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 294
@@ -6223,8 +6222,8 @@ functions:
         type: list
     energy: 10.0
     func-id: 518
-    luaReturn: '{uuid}'
     return: list
+    luaReturn: '{uuid}'
     sleep: 0.0
     tooltip: Retrieves a list of attachments on an avatar.
     must-use: true
@@ -6235,8 +6234,8 @@ functions:
         type: key
     energy: 10.0
     func-id: 277
-    luaReturn: '{vector}'
     return: list
+    luaReturn: '{vector}'
     sleep: 0.0
     tooltip: Returns the bounding box around the object (including any linked prims)
       relative to its root prim, as a list in the format [ (vector) min_corner, (vector)
@@ -7103,11 +7102,11 @@ functions:
         tooltip: Region coordinates (z is ignored) of parcel.
         type: vector
     - SimWide:
-        luaType: numeric
         tooltip: Boolean. If FALSE then the return is the maximum prims supported
           by the parcel. If TRUE then it is the combined number of prims on all parcels
           in the region owned by the specified parcel's owner.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 326
@@ -7135,11 +7134,11 @@ functions:
         tooltip: A PARCEL_COUNT_* flag.
         type: integer
     - SimWide:
-        luaType: numeric
         tooltip: Boolean. If FALSE then the return is the maximum prims supported
           by the parcel. If TRUE then it is the combined number of prims on all parcels
           in the region owned by the specified parcel's owner.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 325
@@ -7814,9 +7813,9 @@ functions:
         tooltip: Distance above the ground.
         type: float
     - Water:
-        luaType: numeric
         tooltip: Boolean, if TRUE then hover above water too.
         type: integer
+        luaType: numeric
         bool-semantics: true
     - Tau:
         tooltip: Seconds to critically damp in.
@@ -8172,10 +8171,10 @@ functions:
           flag'
         type: integer
     - QueueEnable:
-        luaType: numeric
         tooltip: 'Boolean, sound queuing for the linked prim: TRUE enables, FALSE
           disables (default).'
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 537
@@ -8471,11 +8470,12 @@ functions:
       specified list. If Index describes a location not in the list, or the value
       cannot be type-cast to a key, then null string is returned.
   llList2List:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Start:
         index-semantics: true
         tooltip: ''
@@ -8485,25 +8485,24 @@ functions:
         tooltip: ''
         type: integer
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 192
     native: true
     pure: true
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns a subset of entries from ListVariable, in a range specified by
       the Start and End indicies (inclusive).\nUsing negative numbers for Start and/or
       End causes the index to count backwards from the length of the string, so 0,
       -1 would capture the entire string.\nIf Start is greater than End, the sub string
       is the exclusion of the entries.
-    typeParameters:
-    - T
   llList2ListSlice:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Start:
         index-semantics: true
         tooltip: ''
@@ -8521,8 +8520,8 @@ functions:
         type: integer
     energy: 10.0
     func-id: 801
-    luaReturn: '{T}'
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns a subset of entries from ListVariable, in a range specified by
       Start and End indices (inclusive) return the slice_index element of each stride.\n
@@ -8533,14 +8532,13 @@ functions:
       falls outside range of stride, an empty list is returned. slice_index is zero-based.
       (e.g. A stride of 2 has valid indices 0,1)
     must-use: true
-    typeParameters:
-    - T
   llList2ListStrided:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Start:
         index-semantics: true
         tooltip: ''
@@ -8553,15 +8551,13 @@ functions:
         tooltip: ''
         type: integer
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 198
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Copies the strided slice of the list from Start to End.\nReturns a copy
       of the strided slice of the specified list from Start to End.
     must-use: true
-    typeParameters:
-    - T
   llList2Rot:
     arguments:
     - ListVariable:
@@ -8683,62 +8679,61 @@ functions:
       ListVariable by stride.  Returns -1 if not found.
     must-use: true
   llListInsertList:
+    typeParameters: [T]
     arguments:
     - Target:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Position:
         index-semantics: true
         tooltip: ''
         type: integer
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 200
     native: true
     pure: true
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns a list that contains all the elements from Target but with the
       elements from ListVariable inserted at Position start.\nReturns a new list,
       created by inserting ListVariable into the Target list at Position. Note this
       does not alter the Target.
-    typeParameters:
-    - T
   llListRandomize:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Stride:
         tooltip: ''
         type: integer
     energy: 10.0
     func-id: 197
-    luaReturn: '{T}'
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns a version of the input ListVariable which has been randomized
       by blocks of size Stride.\nIf the remainder from the length of the list, divided
       by the stride is non-zero, this function does not randomize the list.
     must-use: true
-    typeParameters:
-    - T
   llListReplaceList:
+    typeParameters: [T]
     arguments:
     - Target:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - ListVariable:
-        luaType: '{T}'
         tooltip: ''
         type: list
+        luaType: '{T}'
     - Start:
         tooltip: ''
         type: integer
@@ -8748,51 +8743,49 @@ functions:
         type: integer
         index-semantics: true
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 296
     native: true
     pure: true
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns a list that is Target with Start through End removed and ListVariable
       inserted at Start.\nReturns a list replacing the slice of the Target list from
       Start to End with the specified ListVariable. Start and End are inclusive, so
       0, 1 would replace the first two entries and 0, 0 would replace only the first
       list entry.
-    typeParameters:
-    - T
   llListSort:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: List to sort.
         type: list
+        luaType: '{T}'
     - Stride:
         tooltip: Stride length.
         type: integer
     - Ascending:
-        luaType: numeric
         tooltip: Boolean. TRUE = result in ascending order, FALSE = result in descending
           order.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 184
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns the specified list, sorted into blocks of stride in ascending
       order (if Ascending is TRUE, otherwise descending). Note that sort only works
       if the first entry of each block is the same datatype.
     must-use: true
-    typeParameters:
-    - T
   llListSortStrided:
+    typeParameters: [T]
     arguments:
     - ListVariable:
-        luaType: '{T}'
         tooltip: List to sort.
         type: list
+        luaType: '{T}'
     - Stride:
         tooltip: Stride length.
         type: integer
@@ -8801,22 +8794,20 @@ functions:
         type: integer
         index-semantics: true
     - Ascending:
-        luaType: numeric
         tooltip: Boolean. TRUE = result in ascending order, FALSE = result in descending
           order.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
-    luaReturn: '{T}'
     func-id: 802
     return: list
+    luaReturn: '{T}'
     sleep: 0.0
     tooltip: Returns the specified list, sorted by the specified element into blocks
       of stride in ascending order (if Ascending is TRUE, otherwise descending). Note
       that sort only works if the first entry of each block is the same datatype.
     must-use: true
-    typeParameters:
-    - T
   llListStatistics:
     arguments:
     - Operation:
@@ -9218,13 +9209,13 @@ functions:
         tooltip: ''
         type: integer
     - Text:
-        luaType: string | uuid
         tooltip: ''
         type: string
-    - ID:
         luaType: string | uuid
+    - ID:
         tooltip: ''
         type: key
+        luaType: string | uuid
     energy: 10.0
     func-id: 164
     return: void
@@ -9431,18 +9422,18 @@ functions:
         tooltip: ''
         type: string
     - Separators:
-        luaType: '{string}'
         tooltip: ''
         type: list
+        luaType: '{string}'
     - Spacers:
-        luaType: '{string}'
         tooltip: ''
         type: list
+        luaType: '{string}'
     energy: 10.0
-    luaReturn: '{string}'
     func-id: 214
     pure: true
     return: list
+    luaReturn: '{string}'
     sleep: 0.0
     tooltip: Converts Text into a list, discarding Separators, keeping Spacers (Separators
       and Spacers must be lists of strings, maximum of 8 each).\nSeparators and Spacers
@@ -9453,18 +9444,18 @@ functions:
         tooltip: ''
         type: string
     - Separators:
-        luaType: '{string}'
         tooltip: ''
         type: list
+        luaType: '{string}'
     - Spacers:
-        luaType: '{string}'
         tooltip: ''
         type: list
+        luaType: '{string}'
     energy: 10.0
-    luaReturn: '{string}'
     func-id: 285
     pure: true
     return: list
+    luaReturn: '{string}'
     sleep: 0.0
     tooltip: Breaks Text into a list, discarding separators, keeping spacers, keeping
       any null values generated. (separators and spacers must be lists of strings,
@@ -9486,9 +9477,9 @@ functions:
   llPassCollisions:
     arguments:
     - Pass:
-        luaType: numeric
         tooltip: Boolean, if TRUE, collisions are passed from children on to parents.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 166
@@ -9501,9 +9492,9 @@ functions:
   llPassTouches:
     arguments:
     - Pass:
-        luaType: numeric
         tooltip: Boolean, if TRUE, touches are passed from children on to parents.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 154
@@ -9789,9 +9780,9 @@ functions:
         tooltip: Integer set on target prim as a Personal Information Number code.
         type: integer
     - Running:
-        luaType: numeric
         tooltip: If the script should be set running in the target prim.
         type: integer
+        luaType: numeric
         bool-semantics: true
     - StartParameter:
         tooltip: Integer. Parameter passed to the script if set to be running.
@@ -10766,9 +10757,9 @@ functions:
         tooltip: Directional force.
         type: vector
     - Local:
-        luaType: numeric
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 64
@@ -10785,9 +10776,9 @@ functions:
         tooltip: Torque force.
         type: vector
     - Local:
-        luaType: numeric
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 76
@@ -10812,9 +10803,9 @@ functions:
         tooltip: Distance above the ground.
         type: float
     - Water:
-        luaType: numeric
         tooltip: Boolean, if TRUE then hover above water too.
         type: integer
+        luaType: numeric
         bool-semantics: true
     - Tau:
         tooltip: Seconds to critically damp in.
@@ -11137,9 +11128,9 @@ functions:
   llSetParcelForSale:
     arguments:
     - ForSale:
-        luaType: numeric
         tooltip: If TRUE, the parcel is put up for sale.
         type: integer
+        luaType: numeric
         bool-semantics: true
     - Options:
         tooltip: A list of options to set for the sale.
@@ -11331,9 +11322,9 @@ functions:
         tooltip: ''
         type: string
     - Running:
-        luaType: numeric
         tooltip: ''
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 148
@@ -11353,9 +11344,9 @@ functions:
   llSetSoundQueueing:
     arguments:
     - QueueEnable:
-        luaType: numeric
         tooltip: 'Boolean, sound queuing: TRUE enables, FALSE disables (default).'
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 208
@@ -11382,10 +11373,10 @@ functions:
         tooltip: ''
         type: integer
     - Value:
-        luaType: numeric
         tooltip: ''
         type: integer
-        boolean-semantics: true
+        luaType: numeric
+        bool-semantics: true
     energy: 10.0
     func-id: 45
     return: void
@@ -11471,9 +11462,9 @@ functions:
         tooltip: Torque force.
         type: vector
     - Local:
-        luaType: numeric
         tooltip: Boolean, if TRUE uses local axis, if FALSE uses region axis.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 74
@@ -11863,14 +11854,14 @@ functions:
         tooltip: Bit-field of CONTROL_* flags.
         type: integer
     - Accept:
-        luaType: numeric
         tooltip: Boolean, determines whether control events are generated.
         type: integer
+        luaType: numeric
         bool-semantics: true
     - PassOn:
-        luaType: numeric
         tooltip: Boolean, determines whether controls are disabled.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 111
@@ -12256,9 +12247,9 @@ functions:
   llVolumeDetect:
     arguments:
     - DetectEnabled:
-        luaType: numeric
         tooltip: TRUE enables, FALSE disables.
         type: integer
+        luaType: numeric
         bool-semantics: true
     energy: 10.0
     func-id: 248
