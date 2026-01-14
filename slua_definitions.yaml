@@ -394,8 +394,8 @@ globalVariables:
         - name: y
           type: number
         - name: z
-          optional: true
           type: number
+          optional: true
         returnType: vector
     - name: magnitude
       comment: Calculates the magnitude of a given vector
@@ -444,8 +444,8 @@ globalVariables:
         - name: b
           type: vector
         - name: axis
-          optional: true
           type: vector
+          optional: true
         returnType: number
     - name: floor
       comment: Applies math.floor to every component of the input vector
@@ -541,8 +541,8 @@ globalVariables:
         - name: y
           type: number
         - name: z
-          optional: true
           type: number
+          optional: true
         returnType: vector
 - name: loadstring
   comment: loadstring is removed in SLua
@@ -603,8 +603,8 @@ modules:
     - name: field
       type: number
     - name: width
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: lrotate
     comment: Left rotate
@@ -632,8 +632,8 @@ modules:
     - name: field
       type: number
     - name: width
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: rrotate
     comment: Right rotate
@@ -854,8 +854,8 @@ modules:
     - name: value
       type: string
     - name: count
-      optional: true
       type: number
+      optional: true
     returnType: ()
   - name: len
     comment: Returns the length of the buffer
@@ -873,11 +873,11 @@ modules:
     - name: source
       type: buffer
     - name: sourceOffset
-      optional: true
       type: number
+      optional: true
     - name: count
-      optional: true
       type: number
+      optional: true
     returnType: ()
   - name: fill
     comment: Fill buffer with a value
@@ -889,8 +889,8 @@ modules:
     - name: value
       type: number
     - name: count
-      optional: true
       type: number
+      optional: true
     returnType: ()
   - name: readbits
     comment: Read bits from buffer
@@ -997,21 +997,21 @@ modules:
     - comment: Returns a string with a traceback of the current call stack
       parameters:
       - name: message
-        optional: true
         type: string
-      - name: level
         optional: true
+      - name: level
         type: number
+        optional: true
       returnType: string
     parameters:
     - name: thread
       type: thread
     - name: message
-      optional: true
       type: string
-    - name: level
       optional: true
+    - name: level
       type: number
+      optional: true
     returnType: string
 - name: llbase64
   comment: Base64 encoding/decoding library
@@ -1030,8 +1030,8 @@ modules:
       - name: data
         type: string
       - name: asBuffer
-        optional: true
         type: boolean
+        optional: true
       returnType: string | buffer
     parameters:
     - name: data
@@ -1059,8 +1059,8 @@ modules:
     - name: value
       type: any
     - name: tight
-      optional: true
       type: boolean
+      optional: true
     returnType: string
   - name: sldecode
     comment: Decodes a JSON string to a Lua value preserving SL types
@@ -1207,8 +1207,8 @@ modules:
     - name: x
       type: number
     - name: base
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: log10
     comment: Returns the base-10 logarithm of x
@@ -1258,11 +1258,11 @@ modules:
     - name: x
       type: number
     - name: y
-      optional: true
       type: number
+      optional: true
     - name: z
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: pow
     comment: Returns base^exponent
@@ -1282,11 +1282,11 @@ modules:
     comment: Returns a pseudo-random number
     parameters:
     - name: m
-      optional: true
       type: number
+      optional: true
     - name: n
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: randomseed
     comment: Sets the seed for the pseudo-random generator
@@ -1372,11 +1372,11 @@ modules:
     comment: Returns a string or table containing date and time
     parameters:
     - name: format
-      optional: true
       type: string
-    - name: time
       optional: true
+    - name: time
       type: number
+      optional: true
     returnType: string | OsDateTime | nil
   - name: difftime
     comment: Returns the difference in seconds between two times
@@ -1384,15 +1384,15 @@ modules:
     - name: t2
       type: number
     - name: t1
-      optional: true
       type: number
+      optional: true
     returnType: number
   - name: time
     comment: Returns the current time or converts a table to time
     parameters:
     - name: time
-      optional: true
       type: OsDateTime
+      optional: true
     returnType: number?
 - name: string
   comment: String manipulation library
@@ -1403,11 +1403,11 @@ modules:
     - name: s
       type: string
     - name: i
-      optional: true
       type: number
+      optional: true
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: '...number'
   - name: char
     comment: Returns a string from character codes
@@ -1423,11 +1423,11 @@ modules:
     - name: pattern
       type: string
     - name: init
-      optional: true
       type: number
-    - name: plain
       optional: true
+    - name: plain
       type: boolean
+      optional: true
     returnType: (number?, number?, ...string)
   - name: format
     comment: Returns a formatted string
@@ -1455,8 +1455,8 @@ modules:
     - name: repl
       type: 'string | { [string]: string } | (...string) -> string'
     - name: n
-      optional: true
       type: number
+      optional: true
     returnType: (string, number)
   - name: len
     comment: Returns the length of the string
@@ -1478,8 +1478,8 @@ modules:
     - name: pattern
       type: string
     - name: init
-      optional: true
       type: number
+      optional: true
     returnType: '...string'
   - name: pack
     comment: Packs values into a binary string
@@ -1515,8 +1515,8 @@ modules:
     - name: s
       type: string
     - name: separator
-      optional: true
       type: string
+      optional: true
     returnType: '{string}'
   - name: sub
     comment: Returns a substring
@@ -1526,8 +1526,8 @@ modules:
     - name: i
       type: number
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: string
   - name: unpack
     comment: Unpacks values from a binary string
@@ -1537,8 +1537,8 @@ modules:
     - name: s
       type: string
     - name: pos
-      optional: true
       type: number
+      optional: true
     returnType: '...any'
   - name: upper
     comment: Converts string to uppercase
@@ -1555,14 +1555,14 @@ modules:
     - name: list
       type: '{string}'
     - name: sep
-      optional: true
       type: string
+      optional: true
     - name: i
-      optional: true
       type: number
+      optional: true
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: string
   - name: foreach
     comment: Iterates over table key-value pairs (deprecated)
@@ -1621,8 +1621,8 @@ modules:
     - name: list
       type: '{T}'
     - name: pos
-      optional: true
       type: number
+      optional: true
     returnType: T?
   - name: sort
     comment: Sorts list elements in place
@@ -1631,8 +1631,8 @@ modules:
     - name: list
       type: '{T}'
     - name: comp
-      optional: true
       type: '(a: T, b: T) -> boolean'
+      optional: true
     returnType: ()
   - name: pack
     comment: Packs arguments into a table with length field n
@@ -1648,11 +1648,11 @@ modules:
     - name: list
       type: '{T}'
     - name: i
-      optional: true
       type: number
+      optional: true
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: '...T'
   - name: move
     comment: Moves elements from one table to another
@@ -1667,8 +1667,8 @@ modules:
     - name: t
       type: number
     - name: a2
-      optional: true
       type: '{T}'
+      optional: true
     returnType: '{T}'
   - name: create
     comment: Creates a new table with pre-allocated array slots
@@ -1677,8 +1677,8 @@ modules:
     - name: count
       type: number
     - name: value
-      optional: true
       type: T
+      optional: true
     returnType: '{T}'
   - name: find
     comment: Finds the index of a value in an array
@@ -1689,8 +1689,8 @@ modules:
     - name: value
       type: T
     - name: init
-      optional: true
       type: number
+      optional: true
     returnType: number?
   - name: clear
     comment: Removes all elements from a table
@@ -1739,11 +1739,11 @@ modules:
     - name: s
       type: string
     - name: i
-      optional: true
       type: number
+      optional: true
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: '...number'
   - name: len
     comment: Returns the number of UTF-8 characters in a string, or nil and error
@@ -1752,11 +1752,11 @@ modules:
     - name: s
       type: string
     - name: i
-      optional: true
       type: number
+      optional: true
     - name: j
-      optional: true
       type: number
+      optional: true
     returnType: (number?, number?)
   - name: offset
     comment: Returns the byte position of the n-th character
@@ -1766,8 +1766,8 @@ modules:
     - name: n
       type: number
     - name: i
-      optional: true
       type: number
+      optional: true
     returnType: number?
   properties:
   - name: charpattern
@@ -1865,21 +1865,21 @@ typeAliases:
     - name: day
       type: number
     - name: hour
-      optional: true
       type: number
+      optional: true
     - name: min
-      optional: true
       type: number
+      optional: true
     - name: sec
-      optional: true
       type: number
+      optional: true
     - name: wday
-      optional: true
       type: number
+      optional: true
     - name: yday
-      optional: true
       type: number
-    - name: isdst
       optional: true
+    - name: isdst
       type: boolean
+      optional: true
 version: 1.0.0
