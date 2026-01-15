@@ -228,15 +228,35 @@
                 "^ll[A-Zs](?:[A-Z0-9]*[a-z]*)+$": {
                     "additionalProperties": false,
                     "properties": {
+                        "type-arguments": {
+                            "items": {
+                                "additionalProperties": false,
+                                "patternProperties": {
+                                    "^(?:[A-Za-z]+)$": {
+                                        "markdownDescription": "A type variable name for slua typechecking."
+                                    }
+                                },
+                                "type": "string"
+                            },
+                            "markdownDescription": "An array of type variable names for slua typechecking.",
+                            "type": "array",
+                            "uniqueItems": true
+                        },
                         "arguments": {
                             "items": {
                                 "additionalProperties": false,
                                 "patternProperties": {
                                     "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
+                                        "additionalProperties": false,
                                         "properties": {
                                             "bool-semantics": {
                                                 "const": true,
-                                                "markdownDescription": "The function arguments integer value represents a boolean value.",
+                                                "markdownDescription": "This function argument's integer value represents a boolean value.",
+                                                "type": "boolean"
+                                            },
+                                            "index-semantics": {
+                                                "const": true,
+                                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
                                                 "type": "boolean"
                                             },
                                             "tooltip": {
@@ -292,6 +312,10 @@
                                                     { "const": "string" },
                                                     { "const": "vector" }
                                                 ]
+                                            },
+                                            "slua-type": {
+                                                "markdownDescription": "A more specific argument type for slua type-checking.",
+                                                "type": "string"
                                             }
                                         },
                                         "required": [
@@ -424,6 +448,10 @@
                                 { "const": "vector" },
                                 { "const": "void" }
                             ]
+                        },
+                        "slua-return": {
+                            "markdownDescription": "A more specific return type for slua type-checking.",
+                            "type": "string"
                         },
                         "sleep": {
                             "$ref": "#/definitions/nonNegativeNumber",
