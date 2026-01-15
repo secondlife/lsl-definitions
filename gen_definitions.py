@@ -147,11 +147,11 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
                 "value": _escape_python(self.value),
                 "type": str(self.type),
+                "tooltip": self.tooltip,
                 "deprecated": self.deprecated,
             }
         )
@@ -176,8 +176,6 @@ class LSLEvent:
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
-                "deprecated": self.deprecated,
                 "arguments": [
                     {
                         a.name: {
@@ -187,6 +185,8 @@ class LSLEvent:
                     }
                     for a in self.arguments
                 ],
+                "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
             }
         )
 
@@ -239,11 +239,8 @@ class LSLFunction:
     def to_dict(self, include_internal: bool = False) -> dict:
         return _remove_worthless(
             {
-                "deprecated": self.deprecated,
-                "god-mode": self.god_mode,
                 "energy": self.energy,
-                "sleep": self.sleep,
-                "return": str(self.ret_type),
+                "bool_semantics": self.bool_semantics,
                 "arguments": [
                     {
                         a.name: {
@@ -253,7 +250,11 @@ class LSLFunction:
                     }
                     for a in self.arguments
                 ],
+                "return": str(self.ret_type),
+                "god-mode": self.god_mode,
                 "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
+                "sleep": self.sleep,
                 **(
                     {}
                     if not include_internal
@@ -533,6 +534,11 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
             continue
         syntax["functions"][func.name] = func.to_dict()
 
+    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+        if const.private:
+            continue
+        syntax["constants"][const.name] = const.to_dict()
+
     # This one's a little weird because it's not a "real" constant, but it's expected to be in the
     # constants section even though it has no value or type. It allows default to have a tooltip
     # and a distinct color.
@@ -541,12 +547,18 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
         "If another state is defined before the default state, the compiler will report a syntax error."
     }
 
-    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
-        if const.private:
-            continue
-        syntax["constants"][const.name] = const.to_dict()
+    class KeywordsXMLFormatter(llsd.LLSDXMLFormatter):
+        """ customized to be bit-identical to the sim capability """
+        def _BOOLEAN(self, v):
+            self.stream.writelines([b'<boolean>', str(int(v)).encode('utf-8'), b'</boolean>', self._eol])
+        def _REAL(self, v):
+            if int(v) == v:
+                s = str(int(v))
+            else:
+                s = f"{v:.25g}"
+            self.stream.writelines([b'<real>', s.encode('utf-8'), b'</real>', self._eol])
 
-    return llsd.format_xml(syntax)
+    return KeywordsXMLFormatter().format(syntax)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
