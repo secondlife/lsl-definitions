@@ -11088,7 +11088,6 @@ functions:
     energy: 10.0
     func-id: 561
     return: integer
-    bool-semantics: true
     sleep: 0.0
     tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if TRUE
       the parcel is put up for sale. Options is a list of options to set for the sale,
