@@ -933,6 +933,7 @@ constants:
   'FALSE':
     tooltip: An integer constant for boolean comparisons. Has the value '0'.
     type: integer
+    slua-removed: true
     value: 0
   FILTER_FLAGS:
     tooltip: Flags to control returned attachments.
@@ -4027,6 +4028,7 @@ constants:
   'TRUE':
     tooltip: An integer constant for boolean comparisons. Has the value '1'.
     type: integer
+    slua-removed: true
     value: 1
   TWO_PI:
     tooltip: 6.28318530 - The radians of a circle.

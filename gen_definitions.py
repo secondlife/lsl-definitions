@@ -13,7 +13,7 @@ import stat
 import argparse
 import uuid
 import os
-from typing import Iterable, NamedTuple, Dict, List, Set, Sequence, TypeVar, Union, Any
+from typing import Iterable, NamedTuple, Dict, List, Optional, Set, Sequence, TypeVar, Union, Any
 
 import llsd  # noqa
 import yaml
@@ -54,6 +54,7 @@ class LSLTypeMeta(NamedTuple):
     library_abbr: str
     cs_name: str
     mono_bind_name: str
+    slua_name: str
 
 
 _CS_TYPE_MODULE = "[ScriptTypes]LindenLab.SecondLife"
@@ -68,6 +69,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="",
         cs_name="void",
         mono_bind_name="void",
+        slua_name="void",
     ),
     LSLType.INTEGER: LSLTypeMeta(
         cil_name="int32",
@@ -77,6 +79,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="i",
         cs_name="int",
         mono_bind_name="S32",
+        slua_name="number",
     ),
     LSLType.FLOAT: LSLTypeMeta(
         cil_name="float",
@@ -86,6 +89,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="f",
         cs_name="float",
         mono_bind_name="F32",
+        slua_name="number",
     ),
     LSLType.STRING: LSLTypeMeta(
         cil_name="string",
@@ -95,6 +99,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="s",
         cs_name="string",
         mono_bind_name="MonoStringType",
+        slua_name="string",
     ),
     LSLType.KEY: LSLTypeMeta(
         cil_name=f"valuetype {_CS_TYPE_MODULE}.Key",
@@ -104,6 +109,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="k",
         cs_name="Key",
         mono_bind_name="MonoKeyType",
+        slua_name="uuid",
     ),
     LSLType.VECTOR: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Vector",
@@ -113,6 +119,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="v",
         cs_name="Vector",
         mono_bind_name="MonoVectorType",
+        slua_name="vector",
     ),
     LSLType.ROTATION: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Quaternion",
@@ -122,6 +129,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="q",
         cs_name="Quaternion",
         mono_bind_name="MonoQuaternionType",
+        slua_name="rotation",
     ),
     LSLType.LIST: LSLTypeMeta(
         cil_name="class [mscorlib]System.Collections.ArrayList",
@@ -131,6 +139,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="l",
         cs_name="ArrayList",
         mono_bind_name="MonoListType",
+        slua_name="list",
     ),
 }
 
@@ -138,6 +147,8 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 class LSLConstant(NamedTuple):
     name: str
     type: LSLType
+    slua_type: Optional[str]
+    slua_removed: bool
     value: str
     tooltip: str
     deprecated: bool
@@ -155,14 +166,35 @@ class LSLConstant(NamedTuple):
                 "value": _escape_python(self.value),
             }
         )
+    
+    def to_slua_dict(self) -> dict:
+        return _remove_worthless(
+            {
+                "deprecated": self.deprecated,
+                # Will always use a <string> node, but that's fine for our purposes.
+                # That's already the case for vector and hex int constants, anyway.
+                "tooltip": self.tooltip,
+                "type": self.slua_type or str(self.type),
+                "value": _escape_python(self.value),
+            }
+        )
 
 
 @dataclasses.dataclass
 class LSLArgument:
     name: str
     type: LSLType
+    slua_type: Optional[str]
     tooltip: str
     index_semantics: bool
+    bool_semantics: bool
+
+    def compute_slua_type(self) -> str:
+        if self.slua_type is not None:
+            return self.slua_type
+        if self.bool_semantics and self.type == LSLType.INTEGER:
+            return "boolean | number"
+        return self.type.meta.slua_name
 
 
 @dataclasses.dataclass
@@ -190,6 +222,23 @@ class LSLEvent:
             }
         )
 
+    def to_slua_dict(self) -> dict:
+        return _remove_worthless(
+            {
+                "deprecated": self.deprecated,
+                "arguments": [
+                    {
+                        a.name: {
+                            "tooltip": a.tooltip,
+                            "type": a.compute_slua_type(),
+                        }
+                    }
+                    for a in self.arguments
+                ],
+                "tooltip": self.tooltip,
+            }
+        )
+
 
 @dataclasses.dataclass
 class LSLFunction:
@@ -197,9 +246,11 @@ class LSLFunction:
     energy: float
     sleep: float
     ret_type: LSLType
+    slua_type: Optional[str]
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
+    type_arguments: List[str]
     arguments: List[LSLArgument]
     tooltip: str
     private: bool
@@ -265,6 +316,40 @@ class LSLFunction:
                         "mono-sleep": self.mono_sleep,
                     }
                 ),
+            }
+        )
+
+    def compute_slua_name(self) -> str:
+        if self.name.startswith("ll"):
+            return self.name[:2] + "." + self.name[2:]
+        return self.name
+
+    def compute_slua_type(self) -> str:
+        if self.slua_type is not None:
+            return self.slua_type
+        if self.bool_semantics and self.ret_type == LSLType.INTEGER:
+            return "boolean"
+        return self.ret_type.meta.slua_name
+
+    def to_slua_dict(self) -> dict:
+        return _remove_worthless(
+            {
+                "type-arguments": self.type_arguments,
+                "arguments": [
+                    {
+                        a.name: {
+                            "tooltip": a.tooltip,
+                            "type": a.compute_slua_type(),
+                        }
+                    }
+                    for a in self.arguments
+                ],
+                "deprecated": self.deprecated,
+                "energy": self.energy,
+                "god-mode": self.god_mode,
+                "return": self.compute_slua_type(),
+                "sleep": self.sleep,
+                "tooltip": self.tooltip,
             }
         )
 
@@ -395,6 +480,8 @@ class LSLDefinitionParser:
             # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
             mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
             ret_type=LSLType(func_data["return"]),
+            slua_type=func_data.get("slua-return", None),
+            type_arguments=func_data.get("type-arguments", []),
             arguments=[
                 self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
             ],
@@ -438,7 +525,9 @@ class LSLDefinitionParser:
         arg = LSLArgument(
             name=arg_name,
             type=LSLType(arg_data["type"]),
+            slua_type=arg_data.get("slua-type", None),
             index_semantics=bool(arg_data.get("index-semantics", False)),
+            bool_semantics=bool(arg_data.get("bool-semantics", False)),
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.index_semantics and arg.type != LSLType.INTEGER:
@@ -470,6 +559,8 @@ class LSLDefinitionParser:
         const = LSLConstant(
             name=const_name,
             type=LSLType(const_data["type"]),
+            slua_type=const_data.get("slua-type", None),
+            slua_removed=const_data.get("slua-removed", False),
             value=str(self._massage_const_value(const_data["value"])),
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
@@ -510,6 +601,8 @@ def _remove_worthless(val: dict) -> dict:
         val.pop("bool-semantics", None)
     if not val.get("index-semantics"):
         val.pop("index-semantics", None)
+    if not val.get("type-arguments"):
+        val.pop("type-arguments", None)
     return val
 
 
@@ -545,6 +638,39 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
         "tooltip": "All scripts must have a default state, which is the first state entered when the script starts.\n"
         "If another state is defined before the default state, the compiler will report a syntax error."
     }
+
+    if pretty:
+        return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
+    else:
+        return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
+
+
+def dump_slua_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
+    """Write a syntax file for use by viewers"""
+    syntax = {
+        "controls": definitions.controls.copy(),
+        "types": definitions.types.copy(),
+        "constants": {},
+        "events": {},
+        "functions": {},
+        "llsd-lsl-syntax-version": 2,
+    }
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+        if event.private:
+            continue
+        syntax["events"][event.name] = event.to_slua_dict()
+
+    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+        if func.private:
+            continue
+        syntax["functions"][func.compute_slua_name()] = func.to_slua_dict()
+
+    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+        if const.private:
+            continue
+        if const.slua_removed:
+            continue
+        syntax["constants"][const.name] = const.to_slua_dict()
 
     if pretty:
         return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
@@ -1976,6 +2102,11 @@ def main():
     sub.add_argument("filename")
     sub.add_argument("--pretty", action="store_true", help="Pretty-print the output")
     sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty)))
+
+    sub = subparsers.add_parser("slua_syntax")
+    sub.add_argument("filename")
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the output")
+    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_slua_syntax(defs, args.pretty)))
 
     sub = subparsers.add_parser("gen_constant_lsl_script")
     sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))

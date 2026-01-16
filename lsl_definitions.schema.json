@@ -33,9 +33,15 @@
             "patternProperties": {
                 "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
                     "properties": {
+                        "additionalProperties": false,
                         "deprecated": {
                             "const": true,
                             "markdownDescription": "This constant has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "This constant is only present in LSL, not SLua.",
                             "type": "boolean"
                         },
                         "private": {
