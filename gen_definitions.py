@@ -147,12 +147,12 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
-                "value": _escape_python(self.value),
+                "tooltip": self.tooltip,
                 "type": str(self.type),
-                "deprecated": self.deprecated,
+                "value": _escape_python(self.value),
             }
         )
 
@@ -176,17 +176,17 @@ class LSLEvent:
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
                 "deprecated": self.deprecated,
                 "arguments": [
                     {
                         a.name: {
-                            "type": str(a.type),
                             "tooltip": a.tooltip,
+                            "type": str(a.type),
                         }
                     }
                     for a in self.arguments
                 ],
+                "tooltip": self.tooltip,
             }
         )
 
@@ -239,20 +239,20 @@ class LSLFunction:
     def to_dict(self, include_internal: bool = False) -> dict:
         return _remove_worthless(
             {
-                "deprecated": self.deprecated,
-                "god-mode": self.god_mode,
-                "energy": self.energy,
-                "sleep": self.sleep,
-                "return": str(self.ret_type),
                 "arguments": [
                     {
                         a.name: {
-                            "type": str(a.type),
                             "tooltip": a.tooltip,
+                            "type": str(a.type),
                         }
                     }
                     for a in self.arguments
                 ],
+                "deprecated": self.deprecated,
+                "energy": self.energy,
+                "god-mode": self.god_mode,
+                "return": str(self.ret_type),
+                "sleep": self.sleep,
                 "tooltip": self.tooltip,
                 **(
                     {}
@@ -513,15 +513,15 @@ def _remove_worthless(val: dict) -> dict:
     return val
 
 
-def dump_syntax(definitions: LSLDefinitions) -> bytes:
+def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
     syntax = {
-        "llsd-lsl-syntax-version": 2,
         "controls": definitions.controls.copy(),
         "types": definitions.types.copy(),
         "constants": {},
         "events": {},
         "functions": {},
+        "llsd-lsl-syntax-version": 2,
     }
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.private:
@@ -533,6 +533,11 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
             continue
         syntax["functions"][func.name] = func.to_dict()
 
+    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+        if const.private:
+            continue
+        syntax["constants"][const.name] = const.to_dict()
+
     # This one's a little weird because it's not a "real" constant, but it's expected to be in the
     # constants section even though it has no value or type. It allows default to have a tooltip
     # and a distinct color.
@@ -541,12 +546,10 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
         "If another state is defined before the default state, the compiler will report a syntax error."
     }
 
-    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
-        if const.private:
-            continue
-        syntax["constants"][const.name] = const.to_dict()
-
-    return llsd.format_xml(syntax)
+    if pretty:
+        return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
+    else:
+        return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
@@ -1971,7 +1974,8 @@ def main():
 
     sub = subparsers.add_parser("syntax")
     sub.add_argument("filename")
-    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs)))
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the output")
+    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty)))
 
     sub = subparsers.add_parser("gen_constant_lsl_script")
     sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))
