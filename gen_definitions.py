@@ -147,12 +147,12 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "deprecated": self.deprecated,
+                "value": _escape_python(self.value),
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
-                "tooltip": self.tooltip,
                 "type": str(self.type),
-                "value": _escape_python(self.value),
+                "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
             }
         )
 
@@ -176,17 +176,17 @@ class LSLEvent:
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "deprecated": self.deprecated,
                 "arguments": [
                     {
                         a.name: {
-                            "tooltip": a.tooltip,
                             "type": str(a.type),
+                            "tooltip": a.tooltip,
                         }
                     }
                     for a in self.arguments
                 ],
                 "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
             }
         )
 
@@ -239,21 +239,22 @@ class LSLFunction:
     def to_dict(self, include_internal: bool = False) -> dict:
         return _remove_worthless(
             {
+                "energy": self.energy,
+                "bool_semantics": self.bool_semantics or False,
                 "arguments": [
                     {
                         a.name: {
-                            "tooltip": a.tooltip,
                             "type": str(a.type),
+                            "tooltip": a.tooltip,
                         }
                     }
                     for a in self.arguments
                 ],
-                "deprecated": self.deprecated,
-                "energy": self.energy,
-                "god-mode": self.god_mode,
                 "return": str(self.ret_type),
-                "sleep": self.sleep,
+                "god-mode": self.god_mode,
                 "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
+                "sleep": self.sleep,
                 **(
                     {}
                     if not include_internal
@@ -549,7 +550,7 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     if pretty:
         return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
     else:
-        return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
+        return llsd.format_xml(syntax, c_compat=True, sort_maps=False)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
