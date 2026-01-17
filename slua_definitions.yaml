@@ -1982,13 +1982,6 @@ builtinFunctions:
 - name: gcinfo
   comment: Returns the total heap size in kilobytes.
   returnType: number
-- name: getfenv
-  comment: Returns the environment table for the specified function or stack index.
-  parameters:
-  - name: target
-    tooltip: Optional function or stack index to get the environment table for.
-    type: (function | number)?
-  returnType: table
 - name: getmetatable
   comment: Returns the metatable for the specified object.
   parameters:
@@ -2063,16 +2056,6 @@ builtinFunctions:
     tooltip: The arguments to select from.
     type: ...any
   returnType: any
-- name: setfenv
-  comment: Changes the environment table for the specified function or stack index.
-  parameters:
-  - name: target
-    tooltip: The function or stack index to set the environment for.
-    type: function | number
-  - name: env
-    tooltip: The environment table to set.
-    type: table
-  returnType: void
 - name: setmetatable
   comment: Changes the metatable for the given table.
   parameters:
