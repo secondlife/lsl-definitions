@@ -1890,5 +1890,71 @@ modules:
     comment: Pattern that matches exactly one UTF-8 byte sequence
     type: string
 constants: []
-builtinConstants: []
-controls: []
+
+# Everything below here is only for keywords.xml generation, not typechecking
+controls:
+  do:
+    tooltip: "Lua do block: do ... end"
+  if:
+    tooltip: "Lua if statement: if condition then ... end"
+  then:
+    tooltip: "Lua then keyword: introduces the block executed when an if condition is true."
+  else:
+    tooltip: "Lua else keyword: specifies the alternative block in an if/else statement."
+  elseif:
+    tooltip: "Lua elseif keyword: provides an additional conditional branch in an if statement."
+  end:
+    tooltip: "Lua end keyword: closes control structures like if, do, while, for, and function."
+  for:
+    tooltip: "Lua for loop: for var = start, end, step do ... end"
+  goto:
+    tooltip: "Lua goto statement: jumps to a specified label."
+  return:
+    tooltip: "Lua return statement: returns a value from a function."
+  while:
+    tooltip: "Lua while loop: while condition do ... end"
+  repeat:
+    tooltip: "Lua repeat loop: repeat ... until condition"
+  until:
+    tooltip: "Lua until keyword: ends a repeat loop by testing a condition."
+  function:
+    tooltip: "Lua function keyword: begins a function definition."
+  break:
+    tooltip: "Lua break statement: exits the nearest loop."
+  local:
+    tooltip: "Lua local keyword: declares a local variable or function."
+  in:
+    tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
+  not:
+    tooltip: "Lua not operator: performs logical negation."
+  and:
+    tooltip: "Lua and operator: performs logical conjunction."
+  or:
+    tooltip: "Lua or operator: performs logical disjunction."
+builtinTypes:
+  boolean:
+    tooltip: "Boolean: represents a true or false value."
+  number:
+    tooltip: Double‑precision floating point number.
+  string:
+    tooltip: Text data (UTF‑8).
+  table:
+    tooltip: Collection of key‑value pairs.
+  thread:
+    tooltip: Represents a coroutine.
+  userdata:
+    tooltip: Opaque external data.
+  vector:
+    tooltip: A vector is a data type that contains a set of three float values.\nVectors are used to represent colors (RGB), positions, and directions/velocities.
+  uuid:
+    tooltip: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
+builtinConstants:
+  nil:
+    tooltip: "Lua nil: represents the absence of a useful value."
+    type: nil
+  'true':
+    tooltip: "Lua true: Boolean true value."
+    type: boolean
+  'false':
+    tooltip: "Lua false: Boolean false value."
+    type: boolean

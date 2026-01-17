@@ -384,6 +384,13 @@ class LSLFunctionRanges(enum.IntEnum):
     SCRIPT_ID_LIST_ADDITIONS = 800
 
 
+class SLuaDefinitions(NamedTuple):
+    definitionSections: Dict[str, Any]
+    builtinConstants: Dict[str, LSLConstant]
+    controls: dict
+    builtinTypes: dict
+
+
 def _escape_python(val: str) -> str:
     """Encode a string with escapes according to repr() rules"""
     # Syntax files have double-encoded values :(
@@ -555,7 +562,6 @@ class LSLDefinitionParser:
             raise KeyError(f"{name!r} is a reserved name")
 
     def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
-        self._validate_identifier(const_name)
         const = LSLConstant(
             name=const_name,
             type=LSLType(const_data["type"]),
@@ -579,6 +585,175 @@ class LSLDefinitionParser:
             return val
         # Unescape any Python-like string escapes in the code
         return _unescape_python(val)
+
+
+class SLuaDefinitionParser:
+    def __init__(self):
+        self._definitions = SLuaDefinitions({}, {}, {}, {})
+
+    def parse_file(self, name: str) -> SLuaDefinitions:
+        if name.endswith(".llsd"):
+            return self.parse_llsd_file(name)
+        return self.parse_yaml_file(name)
+
+    def parse_yaml_file(self, name: str):
+        with open(name, "rb") as f:
+            return self._parse_dict(yaml.safe_load(f.read()))
+
+    def parse_llsd_file(self, name: str) -> SLuaDefinitions:
+        with open(name, "rb") as f:
+            return self.parse_llsd_blob(f.read())
+
+    def parse_llsd_blob(self, llsd_blob: bytes) -> SLuaDefinitions:
+        return self._parse_dict(llsd.parse_xml(llsd_blob))
+
+    def _parse_dict(self, def_dict: dict) -> SLuaDefinitions:
+        if any(x for x in self._definitions):
+            raise RuntimeError("Already parsed!")
+
+        # keywords-lua.xml stuff
+        self._definitions.controls.update(def_dict["controls"])
+        self._definitions.builtinTypes.update(def_dict["builtinTypes"])
+        for const_name, const_data in def_dict["builtinConstants"].items():
+            self._handle_constant(const_name, const_data)
+
+        # slua.d.luau stuff
+#        for event_name, event_data in def_dict["events"].items():
+#            self._handle_event(event_name, event_data)
+#        for func_name, func_data in def_dict["functions"].items():
+#            func = self._handle_function(func_name, func_data)
+#            if func.func_id in seen_func_ids:
+#                raise ValueError(f"Func ID {func.func_id} was re-used by {func!r}")
+#            seen_func_ids.add(func.func_id)
+
+        return self._definitions
+
+    def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
+        self._validate_identifier(const_name)
+        const = LSLConstant(
+            name=const_name,
+            tooltip=const_data.get("tooltip", ""),
+            slua_type=const_data["type"],
+            value=const_name,
+            type=None,
+            slua_removed=False,
+            private=False,
+            deprecated=False,
+        )
+        self._definitions.builtinConstants[const.name] = const
+        return const
+
+    def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
+        self._validate_identifier(event_name)
+        event = LSLEvent(
+            name=event_name,
+            tooltip=event_data.get("tooltip", ""),
+            arguments=[
+                self._handle_argument(event_name, arg)
+                for arg in (event_data.get("arguments") or [])
+            ],
+            private=event_data.get("private", False),
+            deprecated=event_data.get("deprecated", False),
+        )
+
+        if event.name in self._definitions.events:
+            raise KeyError(f"{event.name} is already defined")
+        self._validate_args(event)
+
+        self._definitions.events[event.name] = event
+        return event
+
+    def _handle_function(self, func_name: str, func_data: dict) -> LSLFunction:
+        self._validate_identifier(func_name)
+        func = LSLFunction(
+            name=func_name,
+            tooltip=func_data.get("tooltip", ""),
+            # These do actually need to be floats.
+            energy=float(func_data["energy"] or "0.0"),
+            sleep=float(func_data["sleep"] or "0.0"),
+            # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
+            mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
+            ret_type=LSLType(func_data["return"]),
+            slua_type=func_data.get("slua-return", None),
+            type_arguments=func_data.get("type-arguments", []),
+            arguments=[
+                self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
+            ],
+            private=func_data.get("private", False),
+            god_mode=func_data.get("god-mode", False),
+            deprecated=func_data.get("deprecated", False),
+            func_id=func_data["func-id"],
+            pure=func_data.get("pure", False),
+            native=func_data.get("native", False),
+            index_semantics=bool(func_data.get("index-semantics", False)),
+            bool_semantics=bool(func_data.get("bool-semantics", False)),
+        )
+
+        if func.name in self._definitions.functions:
+            raise KeyError(f"{func.name} is already defined")
+
+        if func.index_semantics and func.ret_type != LSLType.INTEGER:
+            raise ValueError(
+                f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
+            )
+        if func.bool_semantics and func.ret_type != LSLType.INTEGER:
+            raise ValueError(
+                f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
+            )
+
+        if func.bool_semantics and func.index_semantics:
+            raise ValueError(f"Can't have both bool and index semantics for {func.name}")
+
+        self._validate_args(func)
+
+        self._definitions.functions[func.name] = func
+        return func
+
+    @staticmethod
+    def _handle_argument(func_name: str, arg_dict: dict) -> LSLArgument:
+        if len(arg_dict) != 1:
+            # Arguments are meant to be an array of single-element dicts to keep order.
+            raise ValueError(f"Expected {func_name}'s {arg_dict!r} to only have one element")
+
+        arg_name, arg_data = list(arg_dict.items())[0]
+        arg = LSLArgument(
+            name=arg_name,
+            type=LSLType(arg_data["type"]),
+            slua_type=arg_data.get("slua-type", None),
+            index_semantics=bool(arg_data.get("index-semantics", False)),
+            bool_semantics=bool(arg_data.get("bool-semantics", False)),
+            tooltip=arg_data.get("tooltip", ""),
+        )
+        if arg.index_semantics and arg.type != LSLType.INTEGER:
+            raise ValueError(
+                f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"
+            )
+        return arg
+
+    def _validate_args(self, obj: Union[LSLEvent, LSLFunction]) -> None:
+        unique_arg_names = set(a.name for a in obj.arguments)
+        if len(unique_arg_names) != len(obj.arguments):
+            raise KeyError(f"Duplicate argument names in {obj.name}")
+        for name in unique_arg_names:
+            self._validate_identifier(name)
+        if obj.name.startswith("llDetected"):
+            if not all(x.index_semantics for x in obj.arguments):
+                raise ValueError(f"{obj.name} had argument without index semantics")
+
+    _IDENTIFIER_RE = re.compile(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z")
+
+    def _validate_identifier(self, name: str) -> None:
+        if not re.match(self._IDENTIFIER_RE, name):
+            raise KeyError(f"{name!r} is not a valid identifier")
+
+    @staticmethod
+    def _massage_const_value(val: Any) -> Any:
+        if not isinstance(val, str):
+            return val
+        # Unescape any Python-like string escapes in the code
+        return _unescape_python(val)
+
+
 
 
 def _to_f32(val: float) -> float:
@@ -645,19 +820,19 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
         return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
 
 
-def dump_slua_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
+def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
     syntax = {
-        "controls": definitions.controls.copy(),
-        "types": definitions.types.copy(),
+        "controls": slua_definitions.controls.copy(),
+        "types": slua_definitions.builtinTypes.copy(),
         "constants": {},
         "events": {},
         "functions": {},
         "llsd-lsl-syntax-version": 2,
     }
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
-        if event.private:
-            continue
         syntax["events"][event.name] = event.to_slua_dict()
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
@@ -665,6 +840,8 @@ def dump_slua_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes
             continue
         syntax["functions"][func.compute_slua_name()] = func.to_slua_dict()
 
+    for const in slua_definitions.builtinConstants.values():
+        syntax["constants"][const.name] = const.to_slua_dict()
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
         if const.private:
             continue
@@ -2100,13 +2277,14 @@ def main():
 
     sub = subparsers.add_parser("syntax")
     sub.add_argument("filename")
-    sub.add_argument("--pretty", action="store_true", help="Pretty-print the output")
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
     sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty)))
 
     sub = subparsers.add_parser("slua_syntax")
+    sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
     sub.add_argument("filename")
-    sub.add_argument("--pretty", action="store_true", help="Pretty-print the output")
-    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_slua_syntax(defs, args.pretty)))
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
+    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)))
 
     sub = subparsers.add_parser("gen_constant_lsl_script")
     sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))
