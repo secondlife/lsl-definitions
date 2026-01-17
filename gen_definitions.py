@@ -383,12 +383,119 @@ class LSLFunctionRanges(enum.IntEnum):
     SCRIPT_ID_GLTF_MATERIALS = 760
     SCRIPT_ID_LIST_ADDITIONS = 800
 
+@dataclasses.dataclass
+class SLuaParameter:
+    """
+    Function/method parameter
+    - Regular parameters require both name and type
+    - Self parameters only need name (type is implicit)
+    - Variadic parameters only need type (no name)
+    """
+    name: Optional[str] = None
+    type: Optional[str] = None
+    optional: bool = False
+    variadic: bool = False
+    tooltip: str = ""
+
+    @classmethod
+    def from_defs_dict(cls, data: dict) -> "SLuaParameter":
+        return cls(**data)
+
+
+@dataclasses.dataclass
+class SLuaFunctionOverload:
+    """Function overload signature"""
+    parameters: List[SLuaParameter]
+    returnType: str
+    comment: Optional[str] = None
+
+@dataclasses.dataclass
+class SLuaFunctionSignature:
+    """Function or method signature with optional overloads"""
+    name: str
+    parameters: List[SLuaParameter]
+    returnType: str
+    typeParameters: Optional[List[str]] = None
+    comment: Optional[str] = None
+    overloads: Optional[List[SLuaFunctionOverload]] = None
+
+    @classmethod
+    def from_defs_dict(cls, data: dict) -> "SLuaFunctionSignature":
+        return cls(
+            name=data["name"],
+            typeParameters=data.get("typeParameters", []),
+            parameters=[SLuaParameter.from_defs_dict(p) for p in data.get("parameters", [])],
+            returnType=data.get("returnType", "void"),
+            comment=data.get("comment"),
+        )
+
+    def to_keywords_dict(self) -> dict:
+        return _remove_worthless(
+            {
+                "type-arguments": self.typeParameters,
+                "arguments": [
+                    {
+                        a.name: {
+                            "tooltip": a.tooltip,
+                            "type": a.type,
+                        }
+                    }
+                    for a in self.parameters
+                ],
+                "energy": 10.0,
+                "return": self.returnType,
+                "sleep": 0.0,
+                "tooltip": self.comment,
+            }
+        )
+
+
+@dataclasses.dataclass
+class SLuaTypeAlias:
+    """Type alias definition"""
+    name: str
+    definition: str
+    comment: Optional[str] = None
+
+
+@dataclasses.dataclass
+class SLuaClassProperty:
+    """Class property definition"""
+    name: str
+    type: str
+    comment: Optional[str] = None
+
+
+@dataclasses.dataclass
+class SLuaClassDeclaration:
+    """Class declaration with properties and methods"""
+    name: str
+    properties: Optional[List[SLuaClassProperty]] = None
+    methods: Optional[List[SLuaFunctionSignature]] = None
+    comment: Optional[str] = None
+
+
+@dataclasses.dataclass
+class SLuaGlobalVariable:
+    """Global variable declaration"""
+    name: str
+    type: str
+    comment: Optional[str] = None
+
 
 class SLuaDefinitions(NamedTuple):
-    definitionSections: Dict[str, Any]
+    # for typechecking and keywords
+    baseClasses: List[SLuaClassDeclaration]
+    typeAliases: List[SLuaTypeAlias]
+    classes: List[SLuaClassDeclaration]
+    globalVariables: List[SLuaGlobalVariable]
+    globalFunctions: List[SLuaFunctionSignature]
+
+    # for keywords only
     builtinConstants: Dict[str, LSLConstant]
     controls: dict
     builtinTypes: dict
+    builtinFunctions: List[SLuaFunctionSignature]
 
 
 def _escape_python(val: str) -> str:
@@ -589,7 +696,7 @@ class LSLDefinitionParser:
 
 class SLuaDefinitionParser:
     def __init__(self):
-        self._definitions = SLuaDefinitions({}, {}, {}, {})
+        self._definitions = SLuaDefinitions([], [], [], [], [], {}, {}, {}, [])
 
     def parse_file(self, name: str) -> SLuaDefinitions:
         if name.endswith(".llsd"):
@@ -618,6 +725,10 @@ class SLuaDefinitionParser:
             self._handle_constant(const_name, const_data)
 
         # slua.d.luau stuff
+        for func in def_dict["builtinFunctions"]:
+            self._definitions.builtinFunctions.append(SLuaFunctionSignature.from_defs_dict(func))
+        for func in def_dict["globalFunctions"]:
+            self._definitions.globalFunctions.append(SLuaFunctionSignature.from_defs_dict(func))
 #        for event_name, event_data in def_dict["events"].items():
 #            self._handle_event(event_name, event_data)
 #        for func_name, func_data in def_dict["functions"].items():
@@ -778,6 +889,8 @@ def _remove_worthless(val: dict) -> dict:
         val.pop("index-semantics", None)
     if not val.get("type-arguments"):
         val.pop("type-arguments", None)
+    if not val.get("tooltip"):
+        val.pop("ooltip", None)
     return val
 
 
@@ -835,6 +948,11 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         syntax["events"][event.name] = event.to_slua_dict()
 
+    #for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
+    for func in slua_definitions.builtinFunctions:
+        syntax["functions"][func.name] = func.to_keywords_dict()
+    for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
+        syntax["functions"][func.name] = func.to_keywords_dict()
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         if func.private:
             continue

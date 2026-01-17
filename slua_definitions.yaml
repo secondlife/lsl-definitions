@@ -1958,3 +1958,209 @@ builtinConstants:
   'false':
     tooltip: "Lua false: Boolean false value."
     type: boolean
+builtinFunctions:
+- name: assert
+  comment: Checks if the value is truthy; if not, raises an error with the optional message.
+  parameters:
+  - name: value
+    tooltip: The value to check for truthiness.
+    type: any
+  - name: message
+    tooltip: Optional error message to display if the value is not truthy.
+    type: string?
+  returnType: any
+- name: error
+  comment: Raises an error with the specified object and optional call stack level.
+  parameters:
+  - name: obj
+    tooltip: The error object to raise.
+    type: any
+  - name: level
+    tooltip: Optional level to attribute the error to in the call stack.
+    type: number?
+  returnType: void
+- name: gcinfo
+  comment: Returns the total heap size in kilobytes.
+  returnType: number
+- name: getfenv
+  comment: Returns the environment table for the specified function or stack index.
+  parameters:
+  - name: target
+    tooltip: Optional function or stack index to get the environment table for.
+    type: (function | number)?
+  returnType: table
+- name: getmetatable
+  comment: Returns the metatable for the specified object.
+  parameters:
+  - name: obj
+    tooltip: The object to get the metatable for.
+    type: any
+  returnType: table?
+- name: next
+  comment: Returns the next key-value pair in the table traversal order.
+  parameters:
+  - name: t
+    tooltip: The table to traverse.
+    type: table
+  - name: i
+    tooltip: Optional key to start traversal after.
+    type: any?
+  returnType: (any, any)?
+- name: newproxy
+  comment: Creates a new untyped userdata object with an optional metatable.
+  parameters:
+  - name: mt
+    tooltip: Optional boolean to create a modifiable metatable.
+    type: boolean?
+  returnType: userdata
+- name: print
+  comment: Prints all arguments to standard output using Tab as a separator.
+  parameters:
+  - name: args
+    tooltip: Arguments to print to standard output.
+    type: ...any
+  returnType: void
+- name: rawequal
+  comment: Returns true if a and b have the same type and value.
+  parameters:
+  - name: a
+    tooltip: First object to compare.
+    type: any
+  - name: b
+    tooltip: Second object to compare.
+    type: any
+  returnType: boolean
+- name: rawget
+  comment: Performs a table lookup bypassing metatables.
+  parameters:
+  - name: t
+    tooltip: The table to perform the lookup on.
+    type: table
+  - name: k
+    tooltip: The key to look up in the table.
+    type: any
+  returnType: any?
+- name: rawset
+  comment: Assigns a value to a table field bypassing metatables.
+  parameters:
+  - name: t
+    tooltip: The table to assign the value to.
+    type: table
+  - name: k
+    tooltip: The key to assign the value to.
+    type: any
+  - name: v
+    tooltip: The value to assign.
+    type: any
+  returnType: void
+- name: select
+  comment: Returns a subset of arguments or the number of arguments.
+  parameters:
+  - name: i
+    tooltip: The index or '#' to count arguments.
+    type: string | number
+  - name: args
+    tooltip: The arguments to select from.
+    type: ...any
+  returnType: any
+- name: setfenv
+  comment: Changes the environment table for the specified function or stack index.
+  parameters:
+  - name: target
+    tooltip: The function or stack index to set the environment for.
+    type: function | number
+  - name: env
+    tooltip: The environment table to set.
+    type: table
+  returnType: void
+- name: setmetatable
+  comment: Changes the metatable for the given table.
+  parameters:
+  - name: t
+    tooltip: The table to set the metatable for.
+    type: table
+  - name: mt
+    tooltip: The metatable to set.
+    type: table?
+  returnType: void
+- name: tonumber
+  comment: Converts the input string to a number in the specified base.
+  parameters:
+  - name: s
+    tooltip: The string to convert to a number.
+    type: string
+  - name: base
+    tooltip: Optional base for the conversion.
+    type: number?
+  returnType: number?
+- name: tostring
+  comment: Converts the input object to a string.
+  parameters:
+  - name: obj
+    tooltip: The object to convert to a string.
+    type: any
+  returnType: string
+- name: type
+  comment: Returns the type of the object as a string.
+  parameters:
+  - name: obj
+    tooltip: The object to get the type of.
+    type: any
+  returnType: string
+- name: typeof
+  comment: Returns the type of the object, including custom userdata types.
+  parameters:
+  - name: obj
+    tooltip: The object to get the type of.
+    type: any
+  returnType: string
+- name: ipairs
+  comment: Returns an iterator for numeric key-value pairs in the table.
+  parameters:
+  - name: t
+    tooltip: The table to iterate over.
+    type: table
+  returnType: iterator
+- name: pairs
+  comment: Returns an iterator for all key-value pairs in the table.
+  parameters:
+  - name: t
+    tooltip: The table to iterate over.
+    type: table
+  returnType: iterator
+- name: pcall
+  comment: Calls function f with parameters args, returning success and function results or an error.
+  parameters:
+  - name: f
+    tooltip: A function to be called.
+    type: function
+  - name: args
+    tooltip: Arguments to pass to the function.
+    type: variadic
+  returnType: boolean, variadic
+- name: xpcall
+  comment: Calls function f with parameters args, handling errors with e if they occur.
+  parameters:
+  - name: f
+    tooltip: A function to be called.
+    type: function
+  - name: e
+    tooltip: Error handler function.
+    type: function
+  - name: args
+    tooltip: Arguments to pass to the function.
+    type: variadic
+  returnType: boolean, variadic
+- name: unpack
+  comment: Returns values from an array in the specified index range.
+  parameters:
+  - name: a
+    tooltip: Array from which to extract values.
+    type: array
+  - name: f
+    tooltip: Starting index (optional, defaults to 1).
+    type: number
+  - name: t
+    tooltip: "Ending index (optional, defaults to #a)."
+    type: number
+  returnType: variadic
