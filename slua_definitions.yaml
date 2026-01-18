@@ -1932,8 +1932,12 @@ controls:
   or:
     tooltip: "Lua or operator: performs logical disjunction."
 builtinTypes:
+  any:
+    tooltip: The unspecified type. Disables type-checking. Use unknown instead to use type-checking.
   boolean:
     tooltip: "Boolean: represents a true or false value."
+  never:
+    tooltip: The empty type that contains no values.
   number:
     tooltip: Double‑precision floating point number.
   string:
@@ -1946,39 +1950,45 @@ builtinTypes:
     tooltip: Opaque external data.
   vector:
     tooltip: A vector is a data type that contains a set of three float values.\nVectors are used to represent colors (RGB), positions, and directions/velocities.
+  unknown:
+    tooltip: The union of every type. Similar to any without disabling type-checking.
   uuid:
     tooltip: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
 builtinConstants:
-  nil:
-    tooltip: "Lua nil: represents the absence of a useful value."
+  - name: nil
+    comment: "Lua nil: represents the absence of a useful value."
     type: nil
-  'true':
-    tooltip: "Lua true: Boolean true value."
+    value: nil
+  - name: 'true'
+    comment: "Lua true: Boolean true value."
     type: boolean
-  'false':
-    tooltip: "Lua false: Boolean false value."
+    value: 'true'
+  - name: 'false'
+    comment: "Lua false: Boolean false value."
     type: boolean
+    value: 'false'
 builtinFunctions:
 - name: assert
   comment: Checks if the value is truthy; if not, raises an error with the optional message.
+  typeParameters: [T]
   parameters:
   - name: value
-    tooltip: The value to check for truthiness.
-    type: any
+    comment: The value to check for truthiness.
+    type: T?
   - name: message
-    tooltip: Optional error message to display if the value is not truthy.
+    comment: Optional error message to display if the value is not truthy.
     type: string?
-  returnType: any
+  returnType: T
 - name: error
   comment: Raises an error with the specified object and optional call stack level.
   parameters:
   - name: obj
-    tooltip: The error object to raise.
+    comment: The error object to raise.
     type: any
   - name: level
-    tooltip: Optional level to attribute the error to in the call stack.
+    comment: Optional level to attribute the error to in the call stack.
     type: number?
-  returnType: void
+  returnType: never
 - name: gcinfo
   comment: Returns the total heap size in kilobytes.
   returnType: number
@@ -1986,164 +1996,187 @@ builtinFunctions:
   comment: Returns the metatable for the specified object.
   parameters:
   - name: obj
-    tooltip: The object to get the metatable for.
+    comment: The object to get the metatable for.
     type: any
-  returnType: table?
+  returnType: "{any}?"
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
+  typeParameters: [K, V]
   parameters:
   - name: t
-    tooltip: The table to traverse.
-    type: table
+    comment: The table to traverse.
+    type: "{[K]: V}"
   - name: i
-    tooltip: Optional key to start traversal after.
-    type: any?
-  returnType: (any, any)?
+    comment: Optional key to start traversal after.
+    type: K?
+  returnType: (K, V)?
 - name: newproxy
   comment: Creates a new untyped userdata object with an optional metatable.
   parameters:
   - name: mt
-    tooltip: Optional boolean to create a modifiable metatable.
+    comment: Optional boolean to create a modifiable metatable.
     type: boolean?
   returnType: userdata
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
   parameters:
   - name: args
-    tooltip: Arguments to print to standard output.
+    comment: Arguments to print to standard output.
     type: ...any
   returnType: void
 - name: rawequal
   comment: Returns true if a and b have the same type and value.
   parameters:
   - name: a
-    tooltip: First object to compare.
+    comment: First object to compare.
     type: any
   - name: b
-    tooltip: Second object to compare.
+    comment: Second object to compare.
     type: any
   returnType: boolean
 - name: rawget
   comment: Performs a table lookup bypassing metatables.
+  typeParameters: [K, V]
   parameters:
   - name: t
-    tooltip: The table to perform the lookup on.
-    type: table
+    comment: The table to perform the lookup on.
+    type: "{[K]: V}"
   - name: k
-    tooltip: The key to look up in the table.
-    type: any
-  returnType: any?
+    comment: The key to look up in the table.
+    type: K
+  returnType: V?
 - name: rawset
   comment: Assigns a value to a table field bypassing metatables.
+  typeParameters: [K, V]
   parameters:
   - name: t
-    tooltip: The table to assign the value to.
-    type: table
+    comment: The table to assign the value to.
+    type: "{[K]: V}"
   - name: k
-    tooltip: The key to assign the value to.
-    type: any
+    comment: The key to assign the value to.
+    type: K
   - name: v
-    tooltip: The value to assign.
-    type: any
-  returnType: void
+    comment: The value to assign.
+    type: V
+  returnType: "{[K]: V}"
+- name: rawlen
+  comment: Returns the length of a table or string bypassing metatables.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to assign the value to.
+    type: "{[any]: any} | string"
+  returnType: number
 - name: select
   comment: Returns a subset of arguments or the number of arguments.
   parameters:
   - name: i
-    tooltip: The index or '#' to count arguments.
+    comment: The index or '#' to count arguments.
     type: string | number
-  - name: args
-    tooltip: The arguments to select from.
+  - name: ...
+    comment: The arguments to select from.
     type: ...any
   returnType: any
 - name: setmetatable
   comment: Changes the metatable for the given table.
   parameters:
   - name: t
-    tooltip: The table to set the metatable for.
+    comment: The table to set the metatable for.
     type: table
   - name: mt
-    tooltip: The metatable to set.
+    comment: The metatable to set.
     type: table?
   returnType: void
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
   - name: s
-    tooltip: The string to convert to a number.
+    comment: The string to convert to a number.
     type: string
   - name: base
-    tooltip: Optional base for the conversion.
+    comment: Optional base for the conversion.
     type: number?
   returnType: number?
 - name: tostring
   comment: Converts the input object to a string.
   parameters:
   - name: obj
-    tooltip: The object to convert to a string.
+    comment: The object to convert to a string.
     type: any
   returnType: string
 - name: type
   comment: Returns the type of the object as a string.
   parameters:
   - name: obj
-    tooltip: The object to get the type of.
+    comment: The object to get the type of.
     type: any
   returnType: string
 - name: typeof
   comment: Returns the type of the object, including custom userdata types.
   parameters:
   - name: obj
-    tooltip: The object to get the type of.
+    comment: The object to get the type of.
     type: any
   returnType: string
 - name: ipairs
   comment: Returns an iterator for numeric key-value pairs in the table.
+  typeParameters: [V]
   parameters:
   - name: t
-    tooltip: The table to iterate over.
-    type: table
-  returnType: iterator
+    comment: The table to iterate over.
+    type: "{V}"
+  returnType: "(({V}, number) -> (number?, V), {V}, number)"
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
+  typeParameters: [K, V]
   parameters:
   - name: t
-    tooltip: The table to iterate over.
-    type: table
-  returnType: iterator
+    comment: The table to iterate over.
+    type: "{[K]: V}"
+  returnType: "(({[K], V}, K) -> (K?, V), {[K], V}, K)"
 - name: pcall
   comment: Calls function f with parameters args, returning success and function results or an error.
+  typeParameters: [A..., R...]
   parameters:
   - name: f
-    tooltip: A function to be called.
-    type: function
-  - name: args
-    tooltip: Arguments to pass to the function.
-    type: variadic
-  returnType: boolean, variadic
+    comment: A function to be called.
+    type: (A...) -> R...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  returnType: (boolean, R...)
 - name: xpcall
   comment: Calls function f with parameters args, handling errors with e if they occur.
+  typeParameters: [E, A..., R1..., R2...]
   parameters:
   - name: f
-    tooltip: A function to be called.
-    type: function
+    comment: A function to be called.
+    type: (A...) -> R...
   - name: e
-    tooltip: Error handler function.
-    type: function
-  - name: args
-    tooltip: Arguments to pass to the function.
-    type: variadic
-  returnType: boolean, variadic
+    comment: Error handler function.
+    type: (E) -> R2...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  returnType: (boolean, R1...)
+- name: require
+  comment: Execute the named external module.
+  parameters:
+  - name: target
+    comment: The name of the external module.
+    type: string
+  returnType: any
 - name: unpack
   comment: Returns values from an array in the specified index range.
+  typeParameters: [V]
   parameters:
   - name: a
-    tooltip: Array from which to extract values.
-    type: array
+    comment: Array from which to extract values.
+    type: {V}
   - name: f
-    tooltip: Starting index (optional, defaults to 1).
-    type: number
+    comment: Starting index (optional, defaults to 1).
+    type: number?
   - name: t
-    tooltip: "Ending index (optional, defaults to #a)."
-    type: number
-  returnType: variadic
+    comment: "Ending index (optional, defaults to #a)."
+    type: number?
+  returnType: ...V
