@@ -131,112 +131,47 @@ baseClasses:
 typeAliases:
 - name: rotation
   comment: '''rotation'' is an alias for ''quaternion'''
-  definition:
-    name: quaternion
-    kind: reference
+  definition: quaternion
 - name: numeric
-  definition:
-    kind: union
-    types:
-    - boolean
-    - number
+  definition: boolean | number
 - name: list
-  definition:
-    elementType:
-      kind: union
-      types:
-      - string
-      - number
-      - vector
-      - uuid
-      - quaternion
-      - boolean
-    kind: array
+  definition: "{string | number | vector | uuid | quaternion | boolean}"
 - name: LLDetectedEventName
-  definition:
-    kind: literal-union
-    values: []
+  # auto-generated from lsl_definitions.yaml
+  definition: "{}"
 - name: LLNonDetectedEventName
-  definition:
-    kind: literal-union
-    values: []
+  # auto-generated from lsl_definitions.yaml
+  definition: "{}"
 - name: LLEventName
-  definition:
-    kind: union
-    types:
-    - LLDetectedEventName
-    - LLNonDetectedEventName
+  definition: LLDetectedEventName | LLNonDetectedEventName
 - name: LLEventHandler
-  definition:
-    kind: function
-    parameters:
-    - type: any
-      variadic: true
-    returnType: ()
+  # auto-generated from lsl_definitions.yaml
+  definition: (...any) -> ()
 - name: LLDetectedEventHandler
-  definition:
-    kind: function
-    parameters:
-    - name: detected
-      type:
-        elementType: LLDetectedEvent
-        kind: array
-    returnType: ()
+  definition: "(detected: {LLDetectedEvent}) -> ()"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
-  definition:
-    kind: function
-    parameters:
-    - name: scheduled
-      type: number
-    - name: interval
-      type: number
-    returnType: ()
+  definition: "(scheduled: number, interval: number) -> ()"
 - name: LLTimerOnceCallback
   comment: Callback type for LLTimers.once() - receives scheduled time
-  definition:
-    kind: function
-    parameters:
-    - name: scheduled
-      type: number
-    returnType: ()
+  definition: "(scheduled: number) -> ()"
 - name: LLTimerCallback
   comment: Union of timer callback types
-  definition:
-    kind: union
-    types:
-    - LLTimerEveryCallback
-    - LLTimerOnceCallback
-    - (...any) -> ...any
+  definition: LLTimerEveryCallback | LLTimerOnceCallback
 - name: OsDateTime
   comment: Date/time table structure used by os.date and os.time
-  definition:
-    kind: table
-    properties:
-    - name: year
-      type: number
-    - name: month
-      type: number
-    - name: day
-      type: number
-    - name: hour
-      type: number
-      optional: true
-    - name: min
-      type: number
-      optional: true
-    - name: sec
-      type: number
-      optional: true
-    - name: wday
-      type: number
-      optional: true
-    - name: yday
-      type: number
-      optional: true
-    - name: isdst
-      type: boolean
-      optional: true
+  definition: |-
+    {
+      year: number,
+      month: number,
+      day: number,
+      hour: number?,
+      min: number?,
+      sec: number?,
+      wday: number?,
+      yday: number?,
+      isdst: boolean?,
+    }
 classes:
 - name: LLDetectedEvent
   comment: Event detection class providing access to detected object/avatar information
