@@ -450,7 +450,7 @@ class SLuaFunctionSignature:
                 "arguments": [
                     {
                         a.name: {
-                            "tooltip": a.tooltip,
+                            "tooltip": a.comment,
                             "type": a.type,
                         }
                     }
@@ -481,9 +481,15 @@ class SLuaTypeAlias:
     comment: str = ""
 
     def to_keywords_dict(self) -> dict:
+        definition = self.to_luau_def()
+        if len(definition) > 200:
+            definition = ""
         return {
-            "tooltip": self.comment + "\n" + self.definition,
+            "tooltip": f"{self.comment}\n{definition}".strip(),
         }
+    
+    def to_luau_def(self) -> str:
+        return f"type {self.name} = {self.definition}"
 
 
 @dataclasses.dataclass
@@ -824,11 +830,13 @@ class SLuaDefinitionParser:
 
     def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
         alias = SLuaTypeAlias(**data)
-        self._validate_identifier(alias.name)
-        self.validate_type(alias.definition)
-        # add it to scope only after validating type, to ensure it isn't recursive
-        self._validate_scope(alias.name, self.type_names)
-        self._validate_scope(alias.name, self.global_scope)
+        try:
+            self._validate_identifier(alias.name)
+            self.validate_type(alias.definition)
+            # add it to scope only after validating type, to ensure it isn't recursive
+            self._validate_scope(alias.name, self.type_names)
+        except Exception as e:
+            raise ValueError(f"In type alias {alias.name}: {e}") from e
         return alias
 
     def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> SLuaProperty:
@@ -850,7 +858,7 @@ class SLuaDefinitionParser:
             self._validate_scope(type_param, known_types)
         return known_types
 
-    _TYPE_SEPERATORS_RE = re.compile(r"[ ?&|:,{}\[\]()]|\.\.\.|->")
+    _TYPE_SEPERATORS_RE = re.compile(r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:")
 
     def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
         if not type:
@@ -957,7 +965,7 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         "functions": {},
         "llsd-lsl-syntax-version": 2,
     }
-    for alias in sorted(slua_definitions.typeAliases):
+    for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
         syntax["types"][alias.name] = alias.to_keywords_dict()
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         syntax["events"][event.name] = event.to_slua_dict(parser)
@@ -970,10 +978,10 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         if func.private:
             continue
-        syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(slua_definitions)
+        syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
 
-    for const in slua_definitions.builtinConstants.values():
-        syntax["constants"][const.name] = const.to_slua_dict(parser)
+    for const in slua_definitions.builtinConstants:
+        syntax["constants"][const.name] = const.to_keywords_dict()
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
         if const.private:
             continue
