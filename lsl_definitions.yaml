@@ -2060,39 +2060,39 @@ constants:
   PARCEL_SALE_AGENT:
     tooltip: The agent authorized to purchase the parcel.
     type: integer
-    value: '2'
-  PARCEL_SALE_ERROR_BAD_PARAMS:
-    tooltip: The parameters provided to set the sale information are invalid.
-    type: integer
-    value: '5'
-  PARCEL_SALE_ERROR_INVALID_PRICE:
-    tooltip: The price set for the parcel is invalid (e.g., less than or equal to 0).
-    type: integer
-    value: '4'
-  PARCEL_SALE_ERROR_IN_ESCROW:
-    tooltip: The parcel is currently in escrow and cannot be set for sale.
-    type: integer
-    value: '3'
-  PARCEL_SALE_ERROR_NO_PARCEL:
-    tooltip: The parcel could not be found.
-    type: integer
-    value: '1'
-  PARCEL_SALE_ERROR_NO_PERMISSIONS:
-    tooltip: The script does not have the required permissions to set the sale information.
-    type: integer
-    value: '2'
+    value: 2
   PARCEL_SALE_OBJECTS:
     tooltip: Are the objects on the parcel included in the sale?
     type: integer
-    value: '3'
-  PARCEL_SALE_OK:
-    tooltip: The sale information was successfully set.
-    type: integer
-    value: '0'
+    value: 3
   PARCEL_SALE_PRICE:
     tooltip: The price of the parcel. If no authorized agent is set, must be greater than 0.
     type: integer
-    value: '1'
+    value: 1
+  PARCEL_SALE_OK:
+    tooltip: The sale information was successfully set.
+    type: integer
+    value: 0
+  PARCEL_SALE_ERROR_NO_PARCEL:
+    tooltip: The parcel could not be found.
+    type: integer
+    value: 1
+  PARCEL_SALE_ERROR_NO_PERMISSIONS:
+    tooltip: The script does not have the required permissions to set the sale information.
+    type: integer
+    value: 2
+  PARCEL_SALE_ERROR_IN_ESCROW:
+    tooltip: The parcel is currently in escrow and cannot be set for sale.
+    type: integer
+    value: 3
+  PARCEL_SALE_ERROR_INVALID_PRICE:
+    tooltip: The price set for the parcel is invalid (e.g., less than or equal to 0).
+    type: integer
+    value: 4
+  PARCEL_SALE_ERROR_BAD_PARAMS:
+    tooltip: The parameters provided to set the sale information are invalid.
+    type: integer
+    value: 5
   PASSIVE:
     tooltip: Static in-world objects.
     type: integer
@@ -2129,72 +2129,76 @@ constants:
     tooltip: ''
     type: integer
     value: -1
-  PERMISSION_ATTACH:
-    tooltip: If this permission is enabled, the object can successfully call llAttachToAvatar
-      to attach to the given avatar.
-    type: integer
-    value: '0x20'
-  PERMISSION_CHANGE_JOINTS:
-    tooltip: (not yet implemented)
-    type: integer
-    value: '0x100'
-  PERMISSION_CHANGE_LINKS:
-    tooltip: If this permission is enabled, the object can successfully call llCreateLink,
-      llBreakLink, and llBreakAllLinks to change links to other objects.
-    type: integer
-    value: '0x80'
-  PERMISSION_CHANGE_PERMISSIONS:
-    tooltip: (not yet implemented)
-    type: integer
-    value: '0x200'
-  PERMISSION_CONTROL_CAMERA:
-    tooltip: ''
-    type: integer
-    value: '0x800'
   PERMISSION_DEBIT:
     tooltip: If this permission is enabled, the object can successfully call llGiveMoney
       or llTransferLindenDollars to debit the owners account.
     type: integer
-    value: '0x2'
-  PERMISSION_OVERRIDE_ANIMATIONS:
-    tooltip: Permission to override default animations.
+    value: '0x00002'
+  PERMISSION_TAKE_CONTROLS:
+    tooltip: If this permission enabled, the object can successfully call the llTakeControls
+      library call.
     type: integer
-    value: '0x8000'
-  PERMISSION_RELEASE_OWNERSHIP:
-    tooltip: (not yet implemented)
-    type: integer
-    value: '0x40'
+    value: '0x00004'
   PERMISSION_REMAP_CONTROLS:
     tooltip: (not yet implemented)
     type: integer
-    value: '0x8'
-  PERMISSION_RETURN_OBJECTS:
-    tooltip: ''
-    type: integer
-    value: 65536
-  PERMISSION_SILENT_ESTATE_MANAGEMENT:
-    tooltip: A script with this permission does not notify the object owner when it
-      modifies estate access rules via llManageEstateAccess.
-    type: integer
-    value: '0x4000'
-  PERMISSION_TAKE_CONTROLS:
-    tooltip: If this permission enabled, the object can successfully call the llTakeControls
-      libray call.
-    type: integer
-    value: '0x4'
-  PERMISSION_TELEPORT:
-    tooltip: ''
-    type: integer
-    value: '0x1000'
-  PERMISSION_TRACK_CAMERA:
-    tooltip: ''
-    type: integer
-    value: '0x400'
+    value: '0x00008'
   PERMISSION_TRIGGER_ANIMATION:
     tooltip: If this permission is enabled, the object can successfully call llStartAnimation
       for the avatar that owns this.
     type: integer
-    value: '0x10'
+    value: '0x00010'
+  PERMISSION_ATTACH:
+    tooltip: If this permission is enabled, the object can successfully call llAttachToAvatar
+      to attach to the given avatar.
+    type: integer
+    value: '0x00020'
+  PERMISSION_RELEASE_OWNERSHIP:
+    tooltip: (not yet implemented)
+    type: integer
+    value: '0x00040'
+  PERMISSION_CHANGE_LINKS:
+    tooltip: If this permission is enabled, the object can successfully call llCreateLink,
+      llBreakLink, and llBreakAllLinks to change links to other objects.
+    type: integer
+    value: '0x00080'
+  PERMISSION_CHANGE_JOINTS:
+    tooltip: (not yet implemented)
+    type: integer
+    value: '0x00100'
+  PERMISSION_CHANGE_PERMISSIONS:
+    tooltip: (not yet implemented)
+    type: integer
+    value: '0x00200'
+  PERMISSION_TRACK_CAMERA:
+    tooltip: ''
+    type: integer
+    value: '0x00400'
+  PERMISSION_CONTROL_CAMERA:
+    tooltip: ''
+    type: integer
+    value: '0x00800'
+  PERMISSION_TELEPORT:
+    tooltip: ''
+    type: integer
+    value: '0x01000'
+  PERMISSION_SILENT_ESTATE_MANAGEMENT:
+    tooltip: A script with this permission does not notify the object owner when it
+      modifies estate access rules via llManageEstateAccess.
+    type: integer
+    value: '0x04000'
+  PERMISSION_OVERRIDE_ANIMATIONS:
+    tooltip: Permission to override default animations.
+    type: integer
+    value: '0x08000'
+  PERMISSION_RETURN_OBJECTS:
+    tooltip: ''
+    type: integer
+    value: '0x10000'
+  PERMISSION_PRIVILEGED_LAND_ACCESS:
+    tooltip: Grants the script privileged access to land parcel functions, such as parcel sale.
+    type: integer
+    value: '0x80000'
   PERM_ALL:
     tooltip: ''
     type: integer
@@ -5986,6 +5990,8 @@ functions:
     energy: 10.0
     func-id: 508
     return: list
+    # There are list indices in the return value!
+    index-semantics: true
     sleep: 0.0
     tooltip: "Searches the text of a cached notecard for lines containing the given\
       \ pattern. \n            Returns a list of line numbers and column where a match\
@@ -6398,6 +6404,8 @@ functions:
     energy: 10.0
     func-id: 711
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns a string with the requested data about the region.
     must-use: true
@@ -6670,6 +6678,8 @@ functions:
     energy: 10.0
     func-id: 372
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 0.0
     tooltip: "Get the media parameters for a particular face on linked prim, given\
       \ the desired list of parameter names. Returns a list of values in the order\
@@ -6723,6 +6733,8 @@ functions:
     energy: 10.0
     func-id: 354
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 0.0
     tooltip: Returns the list of primitive attributes requested in the Parameters
       list for LinkNumber.\nPRIM_* flags can be broken into three categories, face
@@ -6969,6 +6981,8 @@ functions:
     func-id: 332
     return: list
     sleep: 0.0
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     tooltip: Returns a list of object details specified in the Parameters list for
       the object or avatar in the region with key ID.\nParameters are specified by
       the OBJECT_* constants.
@@ -7074,6 +7088,8 @@ functions:
     energy: 10.0
     func-id: 327
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 0.0
     tooltip: 'Returns a list of parcel details specified in the ParcelDetails list
       for the parcel at Position.\nParameters is one or more of: PARCEL_DETAILS_NAME,
@@ -7211,6 +7227,8 @@ functions:
     energy: 10.0
     func-id: 351
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 1.0
     tooltip: Returns the media parameters for a particular face on an object, given
       the desired list of parameter names, in the order requested. Returns an empty
@@ -7224,6 +7242,8 @@ functions:
     energy: 10.0
     func-id: 279
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 0.2
     tooltip: Returns the primitive parameters specified in the parameters list.\nReturns
       primitive parameters specified in the Parameters list.
@@ -7995,6 +8015,9 @@ functions:
         type: string
     - Specifiers:
         tooltip: ''
+          # TODO: The specifiers can contain integers, which should be array indices
+          # But we don't support that in the bindgen yet.
+          # index-semantics: true
         type: list
     energy: 10.0
     func-id: 511
@@ -8010,6 +8033,9 @@ functions:
     - Specifiers:
         tooltip: ''
         type: list
+          # TODO: The specifiers can contain integers, which should be array indices
+          # But we don't support that in the bindgen yet.
+          # index-semantics: true
     - Value:
         tooltip: ''
         type: string
@@ -8027,6 +8053,9 @@ functions:
         type: string
     - Specifiers:
         tooltip: ''
+          # TODO: The specifiers can contain integers, which should be array indices
+          # But we don't support that in the bindgen yet.
+          # index-semantics: true
         type: list
     energy: 10.0
     func-id: 512
@@ -9402,6 +9431,8 @@ functions:
     energy: 10.0
     func-id: 299
     return: list
+    # There may be some bool-like entries in the list we need to convert
+    bool-semantics: true
     sleep: 2.0
     tooltip: Queries the media properties of the parcel containing the script, via
       one or more PARCEL_MEDIA_COMMAND_* arguments specified in CommandList.\nThis
@@ -11124,11 +11155,11 @@ functions:
     func-id: 561
     return: integer
     sleep: 0.0
-    tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if
-      TRUE the parcel is put up for sale. Options is a list of options to set for
-      the sale, such as price, authorized buyer, and whether to include objects
-      on the parcel.\n Setting ForSale to FALSE will remove the parcel from sale
-      and clear any options that were set.
+    tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if TRUE
+      the parcel is put up for sale. Options is a list of options to set for the sale,
+      such as price, authorized buyer, and whether to include objects on the parcel.\n
+      Setting ForSale to FALSE will remove the parcel from sale and clear any options
+      that were set.
   llSetParcelMusicURL:
     arguments:
     - URL:

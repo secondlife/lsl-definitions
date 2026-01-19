@@ -311,6 +311,7 @@ class LSLFunction:
                 "return": str(self.ret_type),
                 "sleep": self.sleep,
                 "tooltip": self.tooltip,
+                "bool_semantics": self.bool_semantics,
                 **(
                     {}
                     if not include_internal
@@ -639,11 +640,11 @@ class LSLDefinitionParser:
         if func.name in self._definitions.functions:
             raise KeyError(f"{func.name} is already defined")
 
-        if func.index_semantics and func.ret_type != LSLType.INTEGER:
+        if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
             raise ValueError(
                 f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
             )
-        if func.bool_semantics and func.ret_type != LSLType.INTEGER:
+        if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
             raise ValueError(
                 f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
             )
