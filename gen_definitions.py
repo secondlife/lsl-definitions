@@ -470,8 +470,7 @@ class SLuaModuleDeclaration:
     name: str
     properties: List[SLuaProperty]
     functions: List[SLuaFunctionSignature]
-    comment: str
-
+    comment: str = ""
 
 
 @dataclasses.dataclass
@@ -479,32 +478,21 @@ class SLuaTypeAlias:
     """Type alias definition"""
     name: str
     definition: str
-    comment: Optional[str] = None
+    comment: str = ""
 
-
-@dataclasses.dataclass
-class SLuaClassProperty:
-    """Class property definition"""
-    name: str
-    type: str
-    comment: Optional[str] = None
+    def to_keywords_dict(self) -> dict:
+        return {
+            "tooltip": self.comment + "\n" + self.definition,
+        }
 
 
 @dataclasses.dataclass
 class SLuaClassDeclaration:
     """Class declaration with properties and methods"""
     name: str
-    properties: Optional[List[SLuaClassProperty]] = None
+    properties: Optional[List[SLuaProperty]] = None
     methods: Optional[List[SLuaFunctionSignature]] = None
-    comment: Optional[str] = None
-
-
-@dataclasses.dataclass
-class SLuaGlobalVariable:
-    """Global variable declaration"""
-    name: str
-    type: str
-    comment: Optional[str] = None
+    comment: str = ""
 
 
 class SLuaDefinitions(NamedTuple):
@@ -523,7 +511,7 @@ class SLuaDefinitions(NamedTuple):
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
     globalFunctions: List[SLuaFunctionSignature]
-    globalVariables: List[SLuaGlobalVariable]
+    globalVariables: List[SLuaProperty]
 
 
 def _escape_python(val: str) -> str:
@@ -763,6 +751,10 @@ class SLuaDefinitionParser:
             for func in def_dict["builtinFunctions"]
         )
         # 2. SLua base classes. These only depend on Luau builtins
+        self.definitions.typeAliases.extend(
+            self._validate_type_alias(alias)
+            for alias in def_dict["typeAliases"]
+        )
 
         # 3. SLua standard library. Depends on base classes
         self.definitions.globalFunctions.extend(
@@ -830,7 +822,16 @@ class SLuaDefinitionParser:
             raise ValueError(f"In function {func.name}: {e}") from e
         return func
 
-    def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> LSLConstant:
+    def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
+        alias = SLuaTypeAlias(**data)
+        self._validate_identifier(alias.name)
+        self.validate_type(alias.definition)
+        # add it to scope only after validating type, to ensure it isn't recursive
+        self._validate_scope(alias.name, self.type_names)
+        self._validate_scope(alias.name, self.global_scope)
+        return alias
+
+    def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> SLuaProperty:
         prop = SLuaProperty(**data)
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
@@ -840,7 +841,7 @@ class SLuaDefinitionParser:
             return prop  # only nil is allowed to be nil
         self.validate_type(prop.type)
         return prop
-    
+
     def validate_type_params(self, type_params: List[str]) -> set[str]:
         known_types = set(self.type_names)
         for type_param in type_params:
@@ -865,7 +866,7 @@ class SLuaDefinitionParser:
         raise ValueError(f"Unknown types {unknown_subtypes} in definition {type!r}")
 
     def validate_return_type(self, type: str, known_types: set[str] | None = None) -> str:
-        if type == "void":
+        if type == LSLType.VOID.meta.slua_name:
             return type
         return self.validate_type(type, known_types)
     
@@ -956,6 +957,8 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         "functions": {},
         "llsd-lsl-syntax-version": 2,
     }
+    for alias in sorted(slua_definitions.typeAliases):
+        syntax["types"][alias.name] = alias.to_keywords_dict()
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         syntax["events"][event.name] = event.to_slua_dict(parser)
 
