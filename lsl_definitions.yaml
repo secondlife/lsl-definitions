@@ -11082,6 +11082,7 @@ functions:
       - ForSale:
           tooltip: If TRUE, the parcel is put up for sale.
           type: integer
+          bool-semantics: true
       - Options:
           tooltip: A list of options to set for the sale.
           type: list
@@ -11324,6 +11325,7 @@ functions:
     - Value:
         tooltip: ''
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 45
     return: void
