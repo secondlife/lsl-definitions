@@ -129,7 +129,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="q",
         cs_name="Quaternion",
         mono_bind_name="MonoQuaternionType",
-        slua_name="rotation",
+        slua_name="quaternion",
     ),
     LSLType.LIST: LSLTypeMeta(
         cil_name="class [mscorlib]System.Collections.ArrayList",
@@ -179,7 +179,7 @@ class LSLConstant(NamedTuple):
                     "value": _escape_python(self.value),
                 }
             )
-        except ValueError as e:
+        except Exception as e:
             raise ValueError(f"In constant {self.name}: {e}") from e
 
 
@@ -242,7 +242,7 @@ class LSLEvent:
                     "tooltip": self.tooltip,
                 }
             )
-        except ValueError as e:
+        except Exception as e:
             raise ValueError(f"In event {self.name}: {e}") from e
 
 
@@ -339,6 +339,7 @@ class LSLFunction:
 
     def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
         try:
+            known_types = slua.validate_type_params(self.type_arguments)
             return _remove_worthless(
                 {
                     "type-arguments": self.type_arguments,
@@ -346,7 +347,7 @@ class LSLFunction:
                         {
                             a.name: {
                                 "tooltip": a.tooltip,
-                                "type": slua.validate_type(a.compute_slua_type()),
+                                "type": slua.validate_type(a.compute_slua_type(), known_types),
                             }
                         }
                         for a in self.arguments
@@ -354,12 +355,12 @@ class LSLFunction:
                     "deprecated": self.deprecated,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
-                    "return": slua.validate_return_type(self.compute_slua_type()),
+                    "return": slua.validate_return_type(self.compute_slua_type(), known_types),
                     "sleep": self.sleep,
                     "tooltip": self.tooltip,
                 }
             )
-        except ValueError as e:
+        except Exception as e:
             raise ValueError(f"In function {self.name}: {e}") from e
 
 
@@ -806,10 +807,10 @@ class SLuaDefinitionParser:
             comment=data.get("comment"),
         )
         try:
-            type_params = set(func.typeParameters)
+            known_types = self.validate_type_params(func.typeParameters)
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
-            self.validate_return_type(func.returnType, type_params)
+            self.validate_return_type(func.returnType, known_types)
             params = func.parameters
             params_scope = set()
             if method:
@@ -818,13 +819,13 @@ class SLuaDefinitionParser:
                 params_scope.add("self")
                 params = params[1:]
             if params and params[-1].name == "...":
-                self.validate_type(params[-1].type, type_params)
+                self.validate_type(params[-1].type, known_types)
                 params = params[:-1]
             for param in params:
                 self._validate_identifier(param.name)
                 self._validate_scope(param.name, params_scope)
-                self.validate_type(param.type, type_params)
-        except ValueError as e:
+                self.validate_type(param.type, known_types)
+        except Exception as e:
             raise ValueError(f"In function {func.name}: {e}") from e
         return func
 
@@ -838,25 +839,34 @@ class SLuaDefinitionParser:
             return prop  # only nil is allowed to be nil
         self.validate_type(prop.type)
         return prop
+    
+    def validate_type_params(self, type_params: List[str]) -> set[str]:
+        known_types = set(self.type_names)
+        for type_param in type_params:
+            type_param = type_param.replace("...", "", 1)
+            self._validate_identifier(type_param)
+            self._validate_scope(type_param, known_types)
+        return known_types
 
-    _TYPE_OPERATORS_RE = re.compile(r"[ ?&|{}:\[\]]|\.\.\.")
+    _TYPE_SEPERATORS_RE = re.compile(r"[ ?&|:,{}\[\]()]|\.\.\.|->")
 
-    def validate_type(self, type: str, type_params: set[str] | None = None) -> str:
+    def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
         if not type:
             raise ValueError("Type may not be empty")
-        known_type_names = self.type_names | (type_params or set())
+        if known_type_names is None:
+            known_type_names = self.type_names
         if type in known_type_names:
             return type
-        subtypes = self._TYPE_OPERATORS_RE.split(type)
-        unknown_subtypes = set(subtypes) - (known_type_names | {''})
+        subtypes = self._TYPE_SEPERATORS_RE.split(type)
+        unknown_subtypes = set(subtypes) - known_type_names - {''}
         if not unknown_subtypes:
-            return
-        raise ValueError(f"Unknown types: {unknown_subtypes}")
+            return type
+        raise ValueError(f"Unknown types {unknown_subtypes} in definition {type!r}")
 
-    def validate_return_type(self, type: str, type_params: set[str] | None = None) -> str:
+    def validate_return_type(self, type: str, known_types: set[str] | None = None) -> str:
         if type == "void":
             return type
-        return self.validate_type(type, type_params)
+        return self.validate_type(type, known_types)
     
     def _validate_scope(self, name: str, scope: Set[str]) -> None:
         if name in scope:
@@ -946,7 +956,7 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         "llsd-lsl-syntax-version": 2,
     }
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
-        syntax["events"][event.name] = event.to_slua_dict(slua_definitions)
+        syntax["events"][event.name] = event.to_slua_dict(parser)
 
     #for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
     for func in slua_definitions.builtinFunctions:
@@ -959,13 +969,13 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(slua_definitions)
 
     for const in slua_definitions.builtinConstants.values():
-        syntax["constants"][const.name] = const.to_slua_dict(slua_definitions)
+        syntax["constants"][const.name] = const.to_slua_dict(parser)
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
         if const.private:
             continue
         if const.slua_removed:
             continue
-        syntax["constants"][const.name] = const.to_slua_dict(slua_definitions)
+        syntax["constants"][const.name] = const.to_slua_dict(parser)
 
     if pretty:
         return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)

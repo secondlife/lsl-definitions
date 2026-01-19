@@ -1936,12 +1936,16 @@ builtinTypes:
     tooltip: The unspecified type. Disables type-checking. Use unknown instead to use type-checking.
   boolean:
     tooltip: "Boolean: represents a true or false value."
+  buffer:
+    tooltip: Read-write binary data.
   never:
     tooltip: The empty type that contains no values.
   number:
     tooltip: Double‑precision floating point number.
+  quaternion:
+    tooltip: A set of four float values. Used to represent rotations and orientations.
   string:
-    tooltip: Text data (UTF‑8).
+    tooltip: Read-only binary data. Usually UTF-8-encoded text.
   table:
     tooltip: Collection of key‑value pairs.
   thread:
@@ -1949,7 +1953,7 @@ builtinTypes:
   userdata:
     tooltip: Opaque external data.
   vector:
-    tooltip: A vector is a data type that contains a set of three float values.\nVectors are used to represent colors (RGB), positions, and directions/velocities.
+    tooltip: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
   unknown:
     tooltip: The union of every type. Similar to any without disabling type-checking.
   uuid:
@@ -2151,7 +2155,7 @@ builtinFunctions:
   parameters:
   - name: f
     comment: A function to be called.
-    type: (A...) -> R...
+    type: (A...) -> R1...
   - name: e
     comment: Error handler function.
     type: (E) -> R2...
@@ -2172,7 +2176,7 @@ builtinFunctions:
   parameters:
   - name: a
     comment: Array from which to extract values.
-    type: {V}
+    type: "{V}"
   - name: f
     comment: Starting index (optional, defaults to 1).
     type: number?
