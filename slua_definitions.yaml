@@ -418,241 +418,308 @@ modules:
   comment: Buffer manipulation library for binary data
   functions:
   - name: create
-    comment: Creates a new buffer of the specified size
+    comment: Creates a buffer of the requested size with all bytes initialized to 0.
     parameters:
     - name: size
+      comment: Size of the buffer to create.
       type: number
     returnType: buffer
   - name: fromstring
-    comment: Creates a buffer from a string
+    comment: Creates a buffer initialized to the contents of the string.
     parameters:
     - name: str
+      comment: String to initialize the buffer with.
       type: string
     returnType: buffer
   - name: tostring
-    comment: Converts buffer to string
+    comment: Returns the buffer data as a string.
     parameters:
     - name: b
+      comment: Buffer to convert to a string.
       type: buffer
     returnType: string
   - name: readi8
-    comment: Read signed 8-bit integer
+    comment: Reads a signed 8-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readu8
-    comment: Read unsigned 8-bit integer
+    comment: Reads an unsigned 8-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readi16
-    comment: Read signed 16-bit integer
+    comment: Reads a signed 16-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readu16
-    comment: Read unsigned 16-bit integer
+    comment: Reads an unsigned 16-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readi32
-    comment: Read signed 32-bit integer
+    comment: Reads a signed 32-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readu32
-    comment: Read unsigned 32-bit integer
+    comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readf32
-    comment: Read 32-bit float
+    comment: Reads a 32-bit floating-point number from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: readf64
-    comment: Read 64-bit float
+    comment: Reads a 64-bit floating-point number from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to read from.
       type: number
     returnType: number
   - name: writei8
-    comment: Write signed 8-bit integer
+    comment: Writes a signed 8-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writeu8
-    comment: Write unsigned 8-bit integer
+    comment: Writes an unsigned 8-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writei16
-    comment: Write signed 16-bit integer
+    comment: Writes a signed 16-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writeu16
-    comment: Write unsigned 16-bit integer
+    comment: Writes an unsigned 16-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writei32
-    comment: Write signed 32-bit integer
+    comment: Writes a signed 32-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writeu32
-    comment: Write unsigned 32-bit integer
+    comment: Writes an unsigned 32-bit integer to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writef32
-    comment: Write 32-bit float
+    comment: Writes a 32-bit floating-point number to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: writef64
-    comment: Write 64-bit float
+    comment: Writes a 64-bit floating-point number to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: Value to write.
       type: number
     returnType: ()
   - name: readstring
-    comment: Read string from buffer
+    comment: Reads a string of the given length from the buffer at the specified offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: offset
+      comment: Byte offset to start reading.
       type: number
     - name: count
+      comment: Number of bytes to read.
       type: number
     returnType: string
   - name: writestring
-    comment: Write string to buffer
+    comment: Writes data from a string into the buffer at the specified offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: offset
+      comment: Byte offset to write at.
       type: number
     - name: value
+      comment: String to write.
       type: string
     - name: count
+      comment: Number of bytes to write (optional).
       type: number?
     returnType: ()
   - name: len
-    comment: Returns the length of the buffer
+    comment: Returns the size of the buffer in bytes.
     parameters:
     - name: b
+      comment: Buffer to get the size of.
       type: buffer
     returnType: number
   - name: copy
-    comment: Copy data from source buffer to target buffer
+    comment: Copies bytes from the source buffer into the target buffer.
     parameters:
     - name: target
+      comment: Target buffer to copy into.
       type: buffer
     - name: targetOffset
+      comment: Offset in target buffer.
       type: number
     - name: source
+      comment: Source buffer to copy from.
       type: buffer
     - name: sourceOffset
+      comment: Offset in source buffer (optional).
       type: number?
     - name: count
+      comment: Number of bytes to copy (optional).
       type: number?
     returnType: ()
   - name: fill
-    comment: Fill buffer with a value
+    comment: Fills the buffer with the specified value starting at the given offset.
     parameters:
     - name: b
+      comment: Buffer to fill.
       type: buffer
     - name: offset
+      comment: Byte offset to start filling.
       type: number
     - name: value
+      comment: Value to fill with.
       type: number
     - name: count
+      comment: Number of bytes to fill (optional).
       type: number?
     returnType: ()
   - name: readbits
-    comment: Read bits from buffer
+    comment: Reads up to 32 bits from the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to read from.
       type: buffer
     - name: bitOffset
+      comment: Bit offset to read at.
       type: number
     - name: bitCount
+      comment: Number of bits to read. Must be in [0, 32] range.
       type: number
     returnType: number
   - name: writebits
-    comment: Write bits to buffer
+    comment: Writes up to 32 bits to the buffer at the given offset.
     parameters:
     - name: b
+      comment: Buffer to write to.
       type: buffer
     - name: bitOffset
+      comment: Bit offset to write at.
       type: number
     - name: bitCount
+      comment: Number of bits to write. Must be in [0, 32] range.
       type: number
     - name: value
+      comment: Source of bits to write.
       type: number
     returnType: ()
 - name: coroutine
