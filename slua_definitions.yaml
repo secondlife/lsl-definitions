@@ -782,48 +782,143 @@ modules:
   comment: Debug library for introspection
   functions:
   - name: info
-    comment: Returns information about a function or stack level
+    comment: Returns information about a stack frame or function based on specified format.
     overloads:
     - comment: Returns information about a stack level
       parameters:
       - name: level
+        comment: Stack level or function reference for inspection.
         type: number
-      - name: options
+      - name: s
+        comment: String specifying requested information.
         type: string
       returnType: '...any'
     - comment: Returns information about a function
       parameters:
       - name: func
+        comment: Function reference.
         type: (...any) -> ...any
-      - name: options
+      - name: s
+        comment: String specifying requested information.
         type: string
       returnType: '...any'
     parameters:
-    - name: thread
-      type: thread
+    - name: co
+      comment: Optional thread or function reference.
+      type: thread | ((...any) -> ...any) | number
     - name: level
+      comment: Stack level or function reference for inspection.
       type: number
-    - name: options
+    - name: s
+      comment: String specifying requested information.
       type: string
     returnType: '...any'
   - name: traceback
-    comment: Returns a string with a traceback of the call stack
+    comment: Returns a human-readable call stack starting from the specified level.
     overloads:
     - comment: Returns a string with a traceback of the current call stack
       parameters:
       - name: message
+        comment: Optional message prepended to the traceback.
         type: string?
       - name: level
+        comment: Optional stack level to start traceback.
         type: number?
       returnType: string
     parameters:
-    - name: thread
+    - name: co
+      comment: Optional thread reference for traceback.
       type: thread
-    - name: message
+    - name: msg
+      comment: Optional message prepended to the traceback.
       type: string?
     - name: level
+      comment: Optional stack level to start traceback.
       type: number?
     returnType: string
+  - name: getinfo
+    comment: Returns a table containing debug information about a function or stack frame.
+    parameters:
+    - name: thread
+      comment: Optional thread whose stack frame is being inspected.
+      type: thread
+    - name: function
+      comment: Function reference or stack level number.
+      type: ((...any) -> ...any) | number
+    - name: what
+      comment: String specifying which fields to retrieve.
+      type: string
+    private: true
+    returnType: "{[any]: any}"
+  - name: getlocal
+    comment: Returns the name and value of a local variable at the specified stack level.
+    parameters:
+    - name: level
+      comment: Stack level number.
+      type: number
+    - name: index
+      comment: Index of the local variable.
+      type: number
+    private: true
+    returnType: string | any
+  - name: setlocal
+    comment: Sets the value of a local variable at the specified stack level.
+    parameters:
+    - name: level
+      comment: Stack level number.
+      type: number
+    - name: index
+      comment: Index of the local variable.
+      type: number
+    - name: value
+      comment: New value for the local variable.
+      type: any
+    private: true
+    returnType: boolean
+  - name: getupvalue
+    comment: Returns the name and value of an upvalue for a given function.
+    parameters:
+    - name: function
+      comment: Function whose upvalues are being retrieved.
+      type: (...any) -> ...any
+    - name: index
+      comment: Index of the upvalue.
+      type: number
+    private: true
+    returnType: string | any
+  - name: setupvalue
+    comment: Sets the value of an upvalue for a given function.
+    parameters:
+    - name: function
+      comment: Function whose upvalues are being modified.
+      type: (...any) -> ...any
+    - name: index
+      comment: Index of the upvalue.
+      type: number
+    - name: value
+      comment: New value for the upvalue.
+      type: any
+    private: true
+    returnType: string
+  - name: getmetatable
+    comment: Returns the metatable of the given value, if any.
+    parameters:
+    - name: value
+      comment: Value whose metatable is retrieved.
+      type: any
+    private: true
+    returnType: "{[any]: any}?"
+  - name: setmetatable
+    comment: Sets the metatable for a given value.
+    parameters:
+    - name: value
+      comment: Value whose metatable is to be set.
+      type: any
+    - name: metatable
+      comment: Table to be set as the new metatable.
+      type: "{[any]: any}?"
+    private: true
+    returnType: any
 - name: llbase64
   comment: Base64 encoding/decoding library
   functions:
@@ -1903,7 +1998,7 @@ builtinFunctions:
   - name: obj
     comment: The object to get the metatable for.
     type: any
-  returnType: "{any}?"
+  returnType: "{[any]: any}?"
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
   typeParameters: [K, V]
