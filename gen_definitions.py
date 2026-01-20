@@ -903,14 +903,14 @@ def _remove_worthless(val: dict) -> dict:
         val.pop("pure", None)
     if not val.get("native"):
         val.pop("native", None)
+    if not val.get("bool_semantics"):
+        val.pop("bool_semantics", None)
     if not val.get("bool-semantics"):
         val.pop("bool-semantics", None)
     if not val.get("index-semantics"):
         val.pop("index-semantics", None)
     if not val.get("type-arguments"):
         val.pop("type-arguments", None)
-    if not val.get("tooltip"):
-        val.pop("tooltip", None)
     return val
 
 
