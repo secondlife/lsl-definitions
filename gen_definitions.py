@@ -500,6 +500,9 @@ class SLuaClassDeclaration:
     methods: List[SLuaFunctionSignature]
     comment: str = ""
 
+    def to_keywords_dict(self) -> dict:
+        return { "tooltip": self.comment }
+    
 
 class SLuaDefinitions(NamedTuple):
     # for best results, load/generate in the same order defined here
@@ -969,8 +972,14 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         "functions": {},
         "llsd-lsl-syntax-version": 2,
     }
+
+    for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
+        syntax["types"][class_.name] = class_.to_keywords_dict()
     for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
         syntax["types"][alias.name] = alias.to_keywords_dict()
+    for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
+        syntax["types"][class_.name] = class_.to_keywords_dict()
+
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         syntax["events"][event.name] = event.to_slua_dict(parser)
 
