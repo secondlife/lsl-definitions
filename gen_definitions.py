@@ -508,6 +508,8 @@ class SLuaModuleDeclaration:
         functions = {}
         if self.callable:
             functions[self.name] = self.callable.to_keywords_dict()
+        else: 
+            functions[self.name] = {"energy": -1.0, "tooltip": self.comment}
         functions.update({
             f"{self.name}.{func.name}": func.to_keywords_dict()
             for func in sorted(self.functions, key=lambda x: x.name)
