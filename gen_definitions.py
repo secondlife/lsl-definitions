@@ -496,8 +496,8 @@ class SLuaTypeAlias:
 class SLuaClassDeclaration:
     """Class declaration with properties and methods"""
     name: str
-    properties: Optional[List[SLuaProperty]] = None
-    methods: Optional[List[SLuaFunctionSignature]] = None
+    properties: List[SLuaProperty]
+    methods: List[SLuaFunctionSignature]
     comment: str = ""
 
 
@@ -757,45 +757,49 @@ class SLuaDefinitionParser:
             for func in def_dict["builtinFunctions"]
         )
         # 2. SLua base classes. These only depend on Luau builtins
+        self.definitions.baseClasses.extend(
+            self._validate_class(class_, self.global_scope)
+            for class_ in def_dict["baseClasses"]
+        )
         self.definitions.typeAliases.extend(
             self._validate_type_alias(alias)
             for alias in def_dict["typeAliases"]
         )
 
         # 3. SLua standard library. Depends on base classes
+        self.definitions.classes.extend(
+            self._validate_class(class_, self.global_scope)
+            for class_ in def_dict["classes"]
+        )
         self.definitions.globalFunctions.extend(
             self._validate_function(func, self.global_scope)
             for func in def_dict["globalFunctions"]
         )
-#        for event_name, event_data in def_dict["events"].items():
-#            self._handle_event(event_name, event_data)
-#        for func_name, func_data in def_dict["functions"].items():
-#            func = self._handle_function(func_name, func_data)
-#            if func.func_id in seen_func_ids:
-#                raise ValueError(f"Func ID {func.func_id} was re-used by {func!r}")
-#            seen_func_ids.add(func.func_id)
 
         return self.definitions
 
-    def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
-        self._validate_identifier(event_name)
-        event = LSLEvent(
-            name=event_name,
-            tooltip=event_data.get("tooltip", ""),
-            arguments=[
-                self._handle_argument(event_name, arg)
-                for arg in (event_data.get("arguments") or [])
-            ],
-            private=event_data.get("private", False),
-            deprecated=event_data.get("deprecated", False),
+    def _validate_class(self, data: any) -> SLuaClassDeclaration:
+        class_ = SLuaClassDeclaration(
+            name=data["name"],
+            comment=data.get("comment", ""),
+            properties=[],
+            methods=[],
         )
-
-        if event.name in self._definitions.events:
-            raise KeyError(f"{event.name} is already defined")
-        self._validate_args(event)
-
-        self._definitions.events[event.name] = event
-        return event
+        try:
+            self._validate_identifier(class_.name)
+            self._validate_scope(class_.name, self.type_names)
+            class_scope: Set[str] = set()
+            class_.properties = [
+                self._validate_property(prop, class_scope)
+                for prop in data.get("properties", [])
+            ]
+            class_.methods = [
+                self._validate_function(method, class_scope, method=True)
+                for method in data.get("methods", [])
+            ]
+        except Exception as e:
+            raise ValueError(f"In class {class_.name}: {e}") from e
+        return class_
 
     def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunctionSignature:
         func = SLuaFunctionSignature(
@@ -803,12 +807,12 @@ class SLuaDefinitionParser:
             typeParameters=data.get("typeParameters", []),
             parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
             returnType=data.get("returnType", "void"),
-            comment=data.get("comment"),
+            comment=data.get("comment", ""),
         )
         try:
-            known_types = self.validate_type_params(func.typeParameters)
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
+            known_types = self.validate_type_params(func.typeParameters)
             self.validate_return_type(func.returnType, known_types)
             params = func.parameters
             params_scope = set()
