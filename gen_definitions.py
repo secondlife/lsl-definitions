@@ -761,7 +761,7 @@ class SLuaDefinitionParser:
         )
         # 2. SLua base classes. These only depend on Luau builtins
         self.definitions.baseClasses.extend(
-            self._validate_class(class_, self.global_scope)
+            self._validate_class(class_)
             for class_ in def_dict["baseClasses"]
         )
         self.definitions.typeAliases.extend(
@@ -771,7 +771,7 @@ class SLuaDefinitionParser:
 
         # 3. SLua standard library. Depends on base classes
         self.definitions.classes.extend(
-            self._validate_class(class_, self.global_scope)
+            self._validate_class(class_)
             for class_ in def_dict["classes"]
         )
         self.definitions.globalFunctions.extend(
