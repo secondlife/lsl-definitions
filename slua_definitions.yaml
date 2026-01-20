@@ -350,8 +350,7 @@ modules:
     - name: field
       type: number
     - name: width
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: lrotate
     comment: Left rotate
@@ -379,8 +378,7 @@ modules:
     - name: field
       type: number
     - name: width
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: rrotate
     comment: Right rotate
@@ -601,8 +599,7 @@ modules:
     - name: value
       type: string
     - name: count
-      type: number
-      optional: true
+      type: number?
     returnType: ()
   - name: len
     comment: Returns the length of the buffer
@@ -620,11 +617,9 @@ modules:
     - name: source
       type: buffer
     - name: sourceOffset
-      type: number
-      optional: true
+      type: number?
     - name: count
-      type: number
-      optional: true
+      type: number?
     returnType: ()
   - name: fill
     comment: Fill buffer with a value
@@ -636,8 +631,7 @@ modules:
     - name: value
       type: number
     - name: count
-      type: number
-      optional: true
+      type: number?
     returnType: ()
   - name: readbits
     comment: Read bits from buffer
@@ -744,21 +738,17 @@ modules:
     - comment: Returns a string with a traceback of the current call stack
       parameters:
       - name: message
-        type: string
-        optional: true
+        type: string?
       - name: level
-        type: number
-        optional: true
+        type: number?
       returnType: string
     parameters:
     - name: thread
       type: thread
     - name: message
-      type: string
-      optional: true
+      type: string?
     - name: level
-      type: number
-      optional: true
+      type: number?
     returnType: string
 - name: llbase64
   comment: Base64 encoding/decoding library
@@ -777,8 +767,7 @@ modules:
       - name: data
         type: string
       - name: asBuffer
-        type: boolean
-        optional: true
+        type: boolean?
       returnType: string | buffer
     parameters:
     - name: data
@@ -806,8 +795,7 @@ modules:
     - name: value
       type: any
     - name: tight
-      type: boolean
-      optional: true
+      type: boolean?
     returnType: string
   - name: sldecode
     comment: Decodes a JSON string to a Lua value preserving SL types
@@ -954,8 +942,7 @@ modules:
     - name: x
       type: number
     - name: base
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: log10
     comment: Returns the base-10 logarithm of x
@@ -1005,11 +992,9 @@ modules:
     - name: x
       type: number
     - name: y
-      type: number
-      optional: true
+      type: number?
     - name: z
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: pow
     comment: Returns base^exponent
@@ -1029,11 +1014,9 @@ modules:
     comment: Returns a pseudo-random number
     parameters:
     - name: m
-      type: number
-      optional: true
+      type: number?
     - name: n
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: randomseed
     comment: Sets the seed for the pseudo-random generator
@@ -1119,11 +1102,9 @@ modules:
     comment: Returns a string or table containing date and time
     parameters:
     - name: format
-      type: string
-      optional: true
+      type: string?
     - name: time
-      type: number
-      optional: true
+      type: number?
     returnType: string | OsDateTime | nil
   - name: difftime
     comment: Returns the difference in seconds between two times
@@ -1131,15 +1112,13 @@ modules:
     - name: t2
       type: number
     - name: t1
-      type: number
-      optional: true
+      type: number?
     returnType: number
   - name: time
     comment: Returns the current time or converts a table to time
     parameters:
     - name: time
-      type: OsDateTime
-      optional: true
+      type: OsDateTime?
     returnType: number?
 - name: quaternion
   comment: Global 'quaternion' library table with callable metatable
@@ -1254,11 +1233,9 @@ modules:
     - name: s
       type: string
     - name: i
-      type: number
-      optional: true
+      type: number?
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: '...number'
   - name: char
     comment: Returns a string from character codes
@@ -1274,11 +1251,9 @@ modules:
     - name: pattern
       type: string
     - name: init
-      type: number
-      optional: true
+      type: number?
     - name: plain
-      type: boolean
-      optional: true
+      type: boolean?
     returnType: (number?, number?, ...string)
   - name: format
     comment: Returns a formatted string
@@ -1306,8 +1281,7 @@ modules:
     - name: repl
       type: 'string | { [string]: string } | (...string) -> string'
     - name: n
-      type: number
-      optional: true
+      type: number?
     returnType: (string, number)
   - name: len
     comment: Returns the length of the string
@@ -1329,8 +1303,7 @@ modules:
     - name: pattern
       type: string
     - name: init
-      type: number
-      optional: true
+      type: number?
     returnType: '...string'
   - name: pack
     comment: Packs values into a binary string
@@ -1366,8 +1339,7 @@ modules:
     - name: s
       type: string
     - name: separator
-      type: string
-      optional: true
+      type: string?
     returnType: '{string}'
   - name: sub
     comment: Returns a substring
@@ -1377,8 +1349,7 @@ modules:
     - name: i
       type: number
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: string
   - name: unpack
     comment: Unpacks values from a binary string
@@ -1388,8 +1359,7 @@ modules:
     - name: s
       type: string
     - name: pos
-      type: number
-      optional: true
+      type: number?
     returnType: '...any'
   - name: upper
     comment: Converts string to uppercase
@@ -1406,14 +1376,11 @@ modules:
     - name: list
       type: '{string}'
     - name: sep
-      type: string
-      optional: true
+      type: string?
     - name: i
-      type: number
-      optional: true
+      type: number?
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: string
   - name: foreach
     comment: Iterates over table key-value pairs (deprecated)
@@ -1472,8 +1439,7 @@ modules:
     - name: list
       type: '{T}'
     - name: pos
-      type: number
-      optional: true
+      type: number?
     returnType: T?
   - name: sort
     comment: Sorts list elements in place
@@ -1482,8 +1448,7 @@ modules:
     - name: list
       type: '{T}'
     - name: comp
-      type: '(a: T, b: T) -> boolean'
-      optional: true
+      type: '((a: T, b: T) -> boolean)?'
     returnType: ()
   - name: pack
     comment: Packs arguments into a table with length field n
@@ -1499,11 +1464,9 @@ modules:
     - name: list
       type: '{T}'
     - name: i
-      type: number
-      optional: true
+      type: number?
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: '...T'
   - name: move
     comment: Moves elements from one table to another
@@ -1518,8 +1481,7 @@ modules:
     - name: t
       type: number
     - name: a2
-      type: '{T}'
-      optional: true
+      type: '{T}?'
     returnType: '{T}'
   - name: create
     comment: Creates a new table with pre-allocated array slots
@@ -1528,8 +1490,7 @@ modules:
     - name: count
       type: number
     - name: value
-      type: T
-      optional: true
+      type: T?
     returnType: '{T}'
   - name: find
     comment: Finds the index of a value in an array
@@ -1540,8 +1501,7 @@ modules:
     - name: value
       type: T
     - name: init
-      type: number
-      optional: true
+      type: number?
     returnType: number?
   - name: clear
     comment: Removes all elements from a table
@@ -1590,11 +1550,9 @@ modules:
     - name: s
       type: string
     - name: i
-      type: number
-      optional: true
+      type: number?
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: '...number'
   - name: len
     comment: Returns the number of UTF-8 characters in a string, or nil and error
@@ -1603,11 +1561,9 @@ modules:
     - name: s
       type: string
     - name: i
-      type: number
-      optional: true
+      type: number?
     - name: j
-      type: number
-      optional: true
+      type: number?
     returnType: (number?, number?)
   - name: offset
     comment: Returns the byte position of the n-th character
@@ -1617,8 +1573,7 @@ modules:
     - name: n
       type: number
     - name: i
-      type: number
-      optional: true
+      type: number?
     returnType: number?
   properties:
   - name: charpattern
@@ -1674,8 +1629,7 @@ modules:
         - name: y
           type: number
         - name: z
-          type: number
-          optional: true
+          type: number?
         returnType: vector
     - name: magnitude
       comment: Calculates the magnitude of a given vector
@@ -1724,8 +1678,7 @@ modules:
         - name: b
           type: vector
         - name: axis
-          type: vector
-          optional: true
+          type: vector?
         returnType: number
     - name: floor
       comment: Applies math.floor to every component of the input vector
@@ -1821,8 +1774,7 @@ modules:
         - name: y
           type: number
         - name: z
-          type: number
-          optional: true
+          type: number?
         returnType: vector
 constants: []
 
