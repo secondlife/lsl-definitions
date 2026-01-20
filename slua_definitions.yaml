@@ -315,8 +315,8 @@ modules:
   - name: band
     comment: Bitwise AND of all arguments
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: number
   - name: bnot
     comment: Bitwise NOT
@@ -327,20 +327,20 @@ modules:
   - name: bor
     comment: Bitwise OR of all arguments
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: number
   - name: bxor
     comment: Bitwise XOR of all arguments
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: number
   - name: btest
     comment: Returns true if bitwise AND of all arguments is not zero
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: boolean
   - name: extract
     comment: Extracts bits from n at position field with width
@@ -675,8 +675,8 @@ modules:
     parameters:
     - name: co
       type: thread
-    - type: any
-      variadic: true
+    - name: ...
+      type: ...any
     returnType: (boolean, ...any)
   - name: running
     comment: Returns the running coroutine, or nil if called from main thread
@@ -697,8 +697,8 @@ modules:
   - name: yield
     comment: Suspends the coroutine and returns values to resume
     parameters:
-    - type: any
-      variadic: true
+    - name: ...
+      type: ...any
     returnType: '...any'
   - name: isyieldable
     comment: Returns true if the coroutine can yield
@@ -982,16 +982,16 @@ modules:
     parameters:
     - name: x
       type: number
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: number
   - name: min
     comment: Returns the minimum value among the arguments
     parameters:
     - name: x
       type: number
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: number
   - name: modf
     comment: Returns the integer and fractional parts of x
@@ -1263,8 +1263,8 @@ modules:
   - name: char
     comment: Returns a string from character codes
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: string
   - name: find
     comment: Finds first match of pattern in string
@@ -1285,8 +1285,8 @@ modules:
     parameters:
     - name: formatstring
       type: string
-    - type: any
-      variadic: true
+    - name: ...
+      type: ...any
     returnType: string
   - name: gmatch
     comment: Returns an iterator function for pattern matches
@@ -1337,8 +1337,8 @@ modules:
     parameters:
     - name: fmt
       type: string
-    - type: any
-      variadic: true
+    - name: ...
+      type: ...any
     returnType: string
   - name: packsize
     comment: Returns the size of a packed string for the given format
@@ -1489,8 +1489,8 @@ modules:
     comment: Packs arguments into a table with length field n
     typeParameters: [T]
     parameters:
-    - type: T
-      variadic: true
+    - name: ...
+      type...: T
     returnType: '{ n: number, [number]: T }'
   - name: unpack
     comment: Unpacks table elements as multiple return values
@@ -1575,8 +1575,8 @@ modules:
   - name: char
     comment: Returns a string from UTF-8 codepoints
     parameters:
-    - type: number
-      variadic: true
+    - name: ...
+      type: ...number
     returnType: string
   - name: codes
     comment: Returns an iterator for UTF-8 codepoints in a string
@@ -1778,8 +1778,8 @@ modules:
         parameters:
         - name: v
           type: vector
-        - type: vector
-          variadic: true
+        - name: ...
+          type: ...vector
         returnType: vector
     - name: min
       comment: Applies math.min to the corresponding components of the input vectors
@@ -1788,8 +1788,8 @@ modules:
         parameters:
         - name: v
           type: vector
-        - type: vector
-          variadic: true
+        - name: ...
+          type: ...vector
         returnType: vector
     - name: lerp
       comment: Linear interpolation between two vectors
@@ -1953,7 +1953,7 @@ builtinFunctions:
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
   parameters:
-  - name: args
+  - name: ...
     comment: Arguments to print to standard output.
     type: ...any
   returnType: void
