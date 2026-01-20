@@ -806,22 +806,26 @@ modules:
   properties:
   - name: 'null'
     comment: A constant to pass for null to json encode
-    type: any
+    type: userdata
   - name: empty_array_mt
     comment: Metatable for declaring table as an empty array for json encode
     type: '{ [any]: any }'
+    value: '{}'
   - name: array_mt
     comment: Metatable for declaring table as an array for json encode
     type: '{ [any]: any }'
+    value: '{}'
   - name: empty_array
     comment: A constant to pass for an empty array to json encode
-    type: any
+    type: userdata
   - name: _NAME
     comment: Name of the lljson library
     type: string
+    value: lljson
   - name: _VERSION
     comment: Version of the lljson library
     type: string
+    value: "2.1.0.11"
 - name: math
   comment: Mathematical functions library
   functions:
@@ -1088,9 +1092,11 @@ modules:
   - name: pi
     comment: The value of pi
     type: number
+    value: 3.141592653589793
   - name: huge
     comment: A value larger than any other numeric value (infinity)
     type: number
+    value: inf
 - name: os
   comment: Operating system facilities library
   functions:
@@ -1105,7 +1111,7 @@ modules:
       type: string?
     - name: time
       type: number?
-    returnType: string | OsDateTime | nil
+    returnType: (string | OsDateTime)?
   - name: difftime
     comment: Returns the difference in seconds between two times
     parameters:
@@ -1455,7 +1461,7 @@ modules:
     typeParameters: [T]
     parameters:
     - name: ...
-      type...: T
+      type: ...T
     returnType: '{ n: number, [number]: T }'
   - name: unpack
     comment: Unpacks table elements as multiple return values
@@ -1579,6 +1585,7 @@ modules:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
     type: string
+    value: "[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*"
 - name: uuid
   comment: Global 'uuid' library table
   type:
