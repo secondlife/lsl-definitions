@@ -726,49 +726,56 @@ modules:
   comment: Coroutine manipulation library
   functions:
   - name: create
-    comment: Creates a new coroutine from a function
+    comment: Returns a new coroutine that, when resumed, will run function f.
     parameters:
     - name: f
+      comment: A function to be executed by the new coroutine.
       type: (...any) -> ...any
     returnType: thread
   - name: resume
-    comment: Resumes a coroutine, returns success and results
+    comment: Resumes a coroutine, returning true and results if successful, or false and an error.
     parameters:
     - name: co
+      comment: The coroutine to resume.
       type: thread
     - name: ...
+      comment: Arguments to pass to the coroutine.
       type: ...any
     returnType: (boolean, ...any)
   - name: running
-    comment: Returns the running coroutine, or nil if called from main thread
+    comment: Returns the currently running coroutine, or nil if called from in the main coroutine.
     parameters: []
     returnType: thread?
   - name: status
-    comment: Returns the status of a coroutine
+    comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
     parameters:
     - name: co
+      comment: The coroutine to check status of.
       type: thread
     returnType: '"running" | "suspended" | "normal" | "dead"'
   - name: wrap
-    comment: Creates a coroutine and returns a function that resumes it
+    comment: Creates a coroutine and returns a function that resumes it.
     parameters:
     - name: f
+      comment: A function to execute in a coroutine.
       type: (...any) -> ...any
     returnType: (...any) -> ...any
   - name: yield
-    comment: Suspends the coroutine and returns values to resume
+    comment: Yields the current coroutine, passing arguments to the resuming code.
     parameters:
     - name: ...
+      comment: Values to pass to the resuming code.
       type: ...any
     returnType: '...any'
   - name: isyieldable
-    comment: Returns true if the coroutine can yield
+    comment: Returns true if the currently running coroutine can yield.
     parameters: []
     returnType: boolean
   - name: close
-    comment: Closes a coroutine, returns success and optional error message
+    comment: Closes a coroutine, returning true if successful or false and an error.
     parameters:
     - name: co
+      comment: The coroutine to close.
       type: thread
     returnType: (boolean, string?)
 - name: debug
