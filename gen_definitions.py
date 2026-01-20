@@ -514,7 +514,7 @@ class SLuaModuleDeclaration:
         })
         return functions
    
-    def to_keywords_properties_dict(self) -> dict:
+    def to_keywords_constants_dict(self) -> dict:
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
             for prop in sorted(self.properties, key=lambda x: x.name)
@@ -766,7 +766,6 @@ class SLuaDefinitionParser:
         # 1. Luau builtins. Typecheckers already know about these
         self.definitions.builtinTypes.update(def_dict["builtinTypes"])
         self.type_names.update(self.definitions.builtinTypes.keys())
-        self.global_scope.update(self.definitions.builtinTypes.keys())
         self.definitions.controls.update(def_dict["controls"])
         self.global_scope.update(self.definitions.controls.keys())
         self.definitions.builtinConstants.extend(
@@ -813,7 +812,7 @@ class SLuaDefinitionParser:
         )
         try:
             self._validate_identifier(module.name)
-            self._validate_scope(module.name, self.type_names)
+            self._validate_scope(module.name, self.global_scope)
             module_scope: Set[str] = set()
             callable = data.get("callable")
             if callable is not None:
@@ -857,14 +856,14 @@ class SLuaDefinitionParser:
         return class_
 
     def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunctionSignature:
-        func = SLuaFunctionSignature(
-            name=data["name"],
-            typeParameters=data.get("typeParameters", []),
-            parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
-            returnType=data.get("returnType", "void"),
-            comment=data.get("comment", ""),
-        )
         try:
+            func = SLuaFunctionSignature(
+                name=data["name"],
+                typeParameters=data.get("typeParameters", []),
+                parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
+                returnType=data.get("returnType", "void"),
+                comment=data.get("comment", ""),
+            )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
             known_types = self.validate_type_params(func.typeParameters)
@@ -883,9 +882,9 @@ class SLuaDefinitionParser:
                 self._validate_identifier(param.name)
                 self._validate_scope(param.name, params_scope)
                 self.validate_type(param.type, known_types)
+            return func
         except Exception as e:
-            raise ValueError(f"In function {func.name}: {e}") from e
-        return func
+            raise ValueError(f"In function {data["name"]}: {e}") from e
 
     def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
         alias = SLuaTypeAlias(**data)
@@ -902,7 +901,7 @@ class SLuaDefinitionParser:
         prop = SLuaProperty(**data)
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
-        if const and prop.value is None:
+        if const and prop.type != "userdata" and prop.value is None:
             raise ValueError(f"Constant {prop.name} must have a value")
         if prop.name == "nil" and prop.type == "nil" and scope is self.global_scope:
             return prop  # only nil is allowed to be nil
@@ -917,7 +916,7 @@ class SLuaDefinitionParser:
             self._validate_scope(type_param, known_types)
         return known_types
 
-    _TYPE_SEPERATORS_RE = re.compile(r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:")
+    _TYPE_SEPERATORS_RE = re.compile(r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\"")
 
     def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
         if not type:
