@@ -465,15 +465,6 @@ class SLuaFunctionSignature:
 
 
 @dataclasses.dataclass
-class SLuaModuleDeclaration:
-    """ Module declaration with properties and functions """
-    name: str
-    properties: List[SLuaProperty]
-    functions: List[SLuaFunctionSignature]
-    comment: str = ""
-
-
-@dataclasses.dataclass
 class SLuaTypeAlias:
     """Type alias definition"""
     name: str
@@ -504,6 +495,32 @@ class SLuaClassDeclaration:
         return { "tooltip": self.comment }
     
 
+@dataclasses.dataclass
+class SLuaModuleDeclaration:
+    """ Module declaration with properties and functions """
+    name: str
+    callable: Optional[SLuaFunctionSignature]
+    properties: List[SLuaProperty]
+    functions: List[SLuaFunctionSignature]
+    comment: str = ""
+
+    def to_keywords_functions_dict(self) -> dict:
+        functions = {}
+        if self.callable:
+            functions[self.name] = self.callable.to_keywords_dict()
+        functions.update({
+            f"{self.name}.{func.name}": func.to_keywords_dict()
+            for func in sorted(self.functions, key=lambda x: x.name)
+        })
+        return functions
+   
+    def to_keywords_properties_dict(self) -> dict:
+        return {
+            f"{self.name}.{prop.name}": prop.to_keywords_dict()
+            for prop in sorted(self.properties, key=lambda x: x.name)
+        }
+   
+
 class SLuaDefinitions(NamedTuple):
     # for best results, load/generate in the same order defined here
     
@@ -520,6 +537,7 @@ class SLuaDefinitions(NamedTuple):
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
     globalFunctions: List[SLuaFunctionSignature]
+    modules: List[SLuaModuleDeclaration]
     globalVariables: List[SLuaProperty]
 
 
@@ -721,7 +739,7 @@ class LSLDefinitionParser:
 
 class SLuaDefinitionParser:
     def __init__(self):
-        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [])
+        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [])
         self.type_names: Set[str] = set()
         self.global_scope: Set[str] = set()
 
@@ -778,8 +796,42 @@ class SLuaDefinitionParser:
             self._validate_function(func, self.global_scope)
             for func in def_dict["globalFunctions"]
         )
+        self.definitions.modules.extend(
+            self._validate_module(module)
+            for module in def_dict["modules"]
+        )
 
         return self.definitions
+
+    def _validate_module(self, data: any) -> SLuaModuleDeclaration:
+        module = SLuaModuleDeclaration(
+            name=data["name"],
+            comment=data.get("comment", ""),
+            callable=None,
+            properties=[],
+            functions=[],
+        )
+        try:
+            self._validate_identifier(module.name)
+            self._validate_scope(module.name, self.type_names)
+            module_scope: Set[str] = set()
+            callable = data.get("callable")
+            if callable is not None:
+                module.callable = self._validate_function(callable, module_scope)
+                if module.callable.name != module.name:
+                    raise ValueError("module.callable.name must match module.name")
+                module_scope.clear()
+            module.properties = [
+                self._validate_property(prop, module_scope, const=True)
+                for prop in data.get("properties", [])
+            ]
+            module.functions = [
+                self._validate_function(function, module_scope)
+                for function in data.get("functions", [])
+            ]
+        except Exception as e:
+            raise ValueError(f"In module {module.name}: {e}") from e
+        return module
 
     def _validate_class(self, data: any) -> SLuaClassDeclaration:
         class_ = SLuaClassDeclaration(
@@ -960,7 +1012,7 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
         return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
 
 
-def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False) -> bytes:
+def dump_slua_syntax(lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
@@ -973,6 +1025,7 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
         "llsd-lsl-syntax-version": 2,
     }
 
+    # types
     for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
         syntax["types"][class_.name] = class_.to_keywords_dict()
     for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
@@ -980,22 +1033,28 @@ def dump_slua_syntax(definitions: LSLDefinitions, slua_definitions_file: str, pr
     for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
         syntax["types"][class_.name] = class_.to_keywords_dict()
 
-    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+    # events
+    for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
         syntax["events"][event.name] = event.to_slua_dict(parser)
 
-    #for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
+    # functions
     for func in slua_definitions.builtinFunctions:
         syntax["functions"][func.name] = func.to_keywords_dict()
     for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
         syntax["functions"][func.name] = func.to_keywords_dict()
-    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        syntax["functions"].update(module.to_keywords_functions_dict())
+    for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
         if func.private:
             continue
         syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
 
+    # constants
     for const in slua_definitions.builtinConstants:
         syntax["constants"][const.name] = const.to_keywords_dict()
-    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        syntax["constants"].update(module.to_keywords_constants_dict())
+    for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
         if const.private:
             continue
         if const.slua_removed:
