@@ -255,315 +255,11 @@ classes:
       type: LLTimerCallback
     returnType: boolean
 globalVariables:
-- name: quaternion
-  comment: Global 'quaternion' library table with callable metatable
-  type:
-    callSignature:
-      parameters:
-      - name: x
-        type: number
-      - name: y
-        type: number
-      - name: z
-        type: number
-      - name: s
-        type: number
-      returnType: quaternion
-    kind: callable-table
-    tableType:
-      properties:
-      - name: create
-        comment: Constructor
-        type:
-          kind: function
-          parameters:
-          - name: x
-            type: number
-          - name: y
-            type: number
-          - name: z
-            type: number
-          - name: s
-            type: number
-          returnType: quaternion
-      - name: identity
-        comment: Identity quaternion constant
-        type: quaternion
-      - name: normalize
-        comment: Returns normalized quaternion
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: quaternion
-      - name: magnitude
-        comment: Returns magnitude of quaternion
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: number
-      - name: dot
-        comment: Dot product of two quaternions
-        type:
-          kind: function
-          parameters:
-          - name: a
-            type: quaternion
-          - name: b
-            type: quaternion
-          returnType: number
-      - name: slerp
-        comment: Spherical linear interpolation
-        type:
-          kind: function
-          parameters:
-          - name: a
-            type: quaternion
-          - name: b
-            type: quaternion
-          - name: t
-            type: number
-          returnType: quaternion
-      - name: conjugate
-        comment: Returns conjugate of quaternion
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: quaternion
-      - name: tofwd
-        comment: Returns forward vector from quaternion rotation
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: vector
-      - name: toleft
-        comment: Returns left vector from quaternion rotation
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: vector
-      - name: toup
-        comment: Returns up vector from quaternion rotation
-        type:
-          kind: function
-          parameters:
-          - name: q
-            type: quaternion
-          returnType: vector
 - name: rotation
   comment: '''rotation'' global is an alias to the ''quaternion'' library'
   type:
     kind: typeof
     target: quaternion
-- name: uuid
-  comment: Global 'uuid' library table
-  type:
-    kind: table
-    properties:
-    - name: create
-      comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-        nil if the string is not a valid UUID. Throws an error if the buffer is
-        shorter than 16 bytes.
-      type:
-        kind: function
-        parameters:
-        - name: value
-          type:
-            kind: union
-            types:
-            - string
-            - buffer
-            - uuid
-        returnType: uuid?
-    - name: __call
-      comment: Allows calling uuid() as a constructor
-      type:
-        kind: function
-        parameters:
-        - name: self
-          type: any
-        - name: value
-          type:
-            kind: union
-            types:
-            - string
-            - buffer
-            - uuid
-        returnType: uuid?
-- name: vector
-  comment: Global 'vector' library table
-  type:
-    kind: table
-    properties:
-    - name: create
-      comment: Creates a new vector with the given component values
-      type:
-        kind: function
-        parameters:
-        - name: x
-          type: number
-        - name: y
-          type: number
-        - name: z
-          type: number
-          optional: true
-        returnType: vector
-    - name: magnitude
-      comment: Calculates the magnitude of a given vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: number
-    - name: normalize
-      comment: Computes the normalized version (unit vector) of a given vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: vector
-    - name: cross
-      comment: Computes the cross product of two vectors
-      type:
-        kind: function
-        parameters:
-        - name: a
-          type: vector
-        - name: b
-          type: vector
-        returnType: vector
-    - name: dot
-      comment: Computes the dot product of two vectors
-      type:
-        kind: function
-        parameters:
-        - name: a
-          type: vector
-        - name: b
-          type: vector
-        returnType: number
-    - name: angle
-      comment: Computes the angle between two vectors in radians. The axis, if specified,
-        is used to determine the sign of the angle.
-      type:
-        kind: function
-        parameters:
-        - name: a
-          type: vector
-        - name: b
-          type: vector
-        - name: axis
-          type: vector
-          optional: true
-        returnType: number
-    - name: floor
-      comment: Applies math.floor to every component of the input vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: vector
-    - name: ceil
-      comment: Applies math.ceil to every component of the input vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: vector
-    - name: abs
-      comment: Applies math.abs to every component of the input vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: vector
-    - name: sign
-      comment: Applies math.sign to every component of the input vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        returnType: vector
-    - name: clamp
-      comment: Applies math.clamp to every component of the input vector
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        - name: min
-          type: vector
-        - name: max
-          type: vector
-        returnType: vector
-    - name: max
-      comment: Applies math.max to the corresponding components of the input vectors
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        - type: vector
-          variadic: true
-        returnType: vector
-    - name: min
-      comment: Applies math.min to the corresponding components of the input vectors
-      type:
-        kind: function
-        parameters:
-        - name: v
-          type: vector
-        - type: vector
-          variadic: true
-        returnType: vector
-    - name: lerp
-      comment: Linear interpolation between two vectors
-      type:
-        kind: function
-        parameters:
-        - name: a
-          type: vector
-        - name: b
-          type: vector
-        - name: t
-          type: number
-        returnType: vector
-    - name: zero
-      comment: A zero vector <0,0,0>
-      type: vector
-    - name: one
-      comment: A one vector <1,1,1>
-      type: vector
-    - name: __call
-      comment: 'Constructor call: vector(x, y, z)'
-      type:
-        kind: function
-        parameters:
-        - name: self
-          type: any
-        - name: x
-          type: number
-        - name: y
-          type: number
-        - name: z
-          type: number
-          optional: true
-        returnType: vector
 - name: loadstring
   comment: loadstring is removed in SLua
   type: nil
@@ -1445,6 +1141,110 @@ modules:
       type: OsDateTime
       optional: true
     returnType: number?
+- name: quaternion
+  comment: Global 'quaternion' library table with callable metatable
+  type:
+    callSignature:
+      parameters:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      - name: z
+        type: number
+      - name: s
+        type: number
+      returnType: quaternion
+    kind: callable-table
+    tableType:
+      properties:
+      - name: create
+        comment: Constructor
+        type:
+          kind: function
+          parameters:
+          - name: x
+            type: number
+          - name: y
+            type: number
+          - name: z
+            type: number
+          - name: s
+            type: number
+          returnType: quaternion
+      - name: identity
+        comment: Identity quaternion constant
+        type: quaternion
+      - name: normalize
+        comment: Returns normalized quaternion
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: quaternion
+      - name: magnitude
+        comment: Returns magnitude of quaternion
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: number
+      - name: dot
+        comment: Dot product of two quaternions
+        type:
+          kind: function
+          parameters:
+          - name: a
+            type: quaternion
+          - name: b
+            type: quaternion
+          returnType: number
+      - name: slerp
+        comment: Spherical linear interpolation
+        type:
+          kind: function
+          parameters:
+          - name: a
+            type: quaternion
+          - name: b
+            type: quaternion
+          - name: t
+            type: number
+          returnType: quaternion
+      - name: conjugate
+        comment: Returns conjugate of quaternion
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: quaternion
+      - name: tofwd
+        comment: Returns forward vector from quaternion rotation
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: vector
+      - name: toleft
+        comment: Returns left vector from quaternion rotation
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: vector
+      - name: toup
+        comment: Returns up vector from quaternion rotation
+        type:
+          kind: function
+          parameters:
+          - name: q
+            type: quaternion
+          returnType: vector
 - name: string
   comment: String manipulation library
   functions:
@@ -1824,6 +1624,206 @@ modules:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
     type: string
+- name: uuid
+  comment: Global 'uuid' library table
+  type:
+    kind: table
+    properties:
+    - name: create
+      comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+        nil if the string is not a valid UUID. Throws an error if the buffer is
+        shorter than 16 bytes.
+      type:
+        kind: function
+        parameters:
+        - name: value
+          type:
+            kind: union
+            types:
+            - string
+            - buffer
+            - uuid
+        returnType: uuid?
+    - name: __call
+      comment: Allows calling uuid() as a constructor
+      type:
+        kind: function
+        parameters:
+        - name: self
+          type: any
+        - name: value
+          type:
+            kind: union
+            types:
+            - string
+            - buffer
+            - uuid
+        returnType: uuid?
+- name: vector
+  comment: Global 'vector' library table
+  type:
+    kind: table
+    properties:
+    - name: create
+      comment: Creates a new vector with the given component values
+      type:
+        kind: function
+        parameters:
+        - name: x
+          type: number
+        - name: y
+          type: number
+        - name: z
+          type: number
+          optional: true
+        returnType: vector
+    - name: magnitude
+      comment: Calculates the magnitude of a given vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: number
+    - name: normalize
+      comment: Computes the normalized version (unit vector) of a given vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: vector
+    - name: cross
+      comment: Computes the cross product of two vectors
+      type:
+        kind: function
+        parameters:
+        - name: a
+          type: vector
+        - name: b
+          type: vector
+        returnType: vector
+    - name: dot
+      comment: Computes the dot product of two vectors
+      type:
+        kind: function
+        parameters:
+        - name: a
+          type: vector
+        - name: b
+          type: vector
+        returnType: number
+    - name: angle
+      comment: Computes the angle between two vectors in radians. The axis, if specified,
+        is used to determine the sign of the angle.
+      type:
+        kind: function
+        parameters:
+        - name: a
+          type: vector
+        - name: b
+          type: vector
+        - name: axis
+          type: vector
+          optional: true
+        returnType: number
+    - name: floor
+      comment: Applies math.floor to every component of the input vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: vector
+    - name: ceil
+      comment: Applies math.ceil to every component of the input vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: vector
+    - name: abs
+      comment: Applies math.abs to every component of the input vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: vector
+    - name: sign
+      comment: Applies math.sign to every component of the input vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        returnType: vector
+    - name: clamp
+      comment: Applies math.clamp to every component of the input vector
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        - name: min
+          type: vector
+        - name: max
+          type: vector
+        returnType: vector
+    - name: max
+      comment: Applies math.max to the corresponding components of the input vectors
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        - type: vector
+          variadic: true
+        returnType: vector
+    - name: min
+      comment: Applies math.min to the corresponding components of the input vectors
+      type:
+        kind: function
+        parameters:
+        - name: v
+          type: vector
+        - type: vector
+          variadic: true
+        returnType: vector
+    - name: lerp
+      comment: Linear interpolation between two vectors
+      type:
+        kind: function
+        parameters:
+        - name: a
+          type: vector
+        - name: b
+          type: vector
+        - name: t
+          type: number
+        returnType: vector
+    - name: zero
+      comment: A zero vector <0,0,0>
+      type: vector
+    - name: one
+      comment: A one vector <1,1,1>
+      type: vector
+    - name: __call
+      comment: 'Constructor call: vector(x, y, z)'
+      type:
+        kind: function
+        parameters:
+        - name: self
+          type: any
+        - name: x
+          type: number
+        - name: y
+          type: number
+        - name: z
+          type: number
+          optional: true
+        returnType: vector
 constants: []
 
 # Everything below here is only for keywords.xml generation, not typechecking
