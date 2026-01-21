@@ -140,6 +140,7 @@
             "type": "object"
         },
         "events": {
+            "additionalProperties": false,
             "patternProperties": {
                 "^[a-z_]+$": {
                     "additionalProperties": false,
@@ -218,9 +219,19 @@
                             "type": "array",
                             "uniqueItems": true
                         },
+                        "detected-semantics": {
+                            "const": true,
+                            "markdownDescription": "Uses llDetected* in LSL and {LLDetectedEvent} in SLua.",
+                            "type": "boolean"
+                        },
                         "deprecated": {
                             "const": true,
                             "markdownDescription": "This event has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "This event has been removed in SLua.",
                             "type": "boolean"
                         },
                         "tooltip": {
@@ -230,7 +241,6 @@
                     }
                 }
             },
-            "required": [],
             "type": "object"
         },
         "functions": {

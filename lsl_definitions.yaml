@@ -4448,6 +4448,7 @@ events:
     - NumberOfCollisions:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised while another object, or avatar, is colliding with\
       \ the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
@@ -4457,6 +4458,7 @@ events:
     - NumberOfCollisions:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised when another object, or avatar, stops colliding\
       \ with the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
@@ -4466,6 +4468,7 @@ events:
     - NumberOfCollisions:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised when another object, or avatar, starts colliding\
       \ with the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
@@ -4536,6 +4539,7 @@ events:
     - count:
         tooltip: The number of damage events queued.
         type: integer
+    detected-semantics: true
     tooltip: Triggered as damage is applied to an avatar or task, after all on_damage
       events have been processed.
   game_control:
@@ -4689,6 +4693,7 @@ events:
     - count:
         tooltip: The number of damage events queued.
         type: integer
+    detected-semantics: true
     tooltip: Triggered when an avatar or object receives damage.
   on_death:
     arguments: []
@@ -4750,6 +4755,7 @@ events:
     - NumberDetected:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised whenever objects matching the constraints of the\
       \ llSensor command are detected.\n\t\t\tThe number of detected objects is passed\
       \ to the script in the parameter. Information on those objects may be gathered\
@@ -4758,8 +4764,10 @@ events:
     arguments: []
     tooltip: The state_entry event occurs whenever a new state is entered, including
       at program start, and is always the first event handled.
+    slua-removed: true
   state_exit:
     arguments: []
+    slua-removed: true
     tooltip: The state_exit event occurs whenever the state command is used to transition
       to another state. It is handled before the new states state_entry event.
   timer:
@@ -4771,6 +4779,7 @@ events:
     - NumberOfTouches:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised while a user is touching the object the script\
       \ is attached to.\n\t\t\tThe number of touching objects is passed to the script\
       \ in the parameter.\n\t\t\tInformation on those objects may be gathered via\
@@ -4780,6 +4789,7 @@ events:
     - NumberOfTouches:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised when a user stops touching the object the script\
       \ is attached to. The number of touches is passed to the script in the parameter.\n\
       \t\t\tInformation on those objects may be gathered via the llDetected* library\
@@ -4789,6 +4799,7 @@ events:
     - NumberOfTouches:
         tooltip: ''
         type: integer
+    detected-semantics: true
     tooltip: "This event is raised when a user first touches the object the script\
       \ is attached to. The number of touches is passed to the script in the parameter.\n\
       \t\t\tInformation on those objects may be gathered via the llDetected() library\

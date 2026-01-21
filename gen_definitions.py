@@ -207,6 +207,8 @@ class LSLEvent:
     tooltip: str
     private: bool
     deprecated: bool
+    slua_removed: bool
+    detected_semantics: bool
 
     def to_dict(self) -> dict:
         return _remove_worthless(
@@ -227,18 +229,29 @@ class LSLEvent:
 
     def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
         try:
+            if self.detected_semantics:
+                arguments = [
+                    {
+                        "detected": {
+                            "tooltip": "Array of detected events.",
+                            "type": slua.validate_type("{LLDetectedEvent}"),
+                        }
+                    }
+                ]
+            else:
+                arguments = [
+                    {
+                        a.name: {
+                            "tooltip": a.tooltip,
+                            "type": slua.validate_type(a.compute_slua_type()),
+                        }
+                    }
+                    for a in self.arguments
+                ]
             return _remove_worthless(
                 {
                     "deprecated": self.deprecated,
-                    "arguments": [
-                        {
-                            a.name: {
-                                "tooltip": a.tooltip,
-                                "type": slua.validate_type(a.compute_slua_type()),
-                            }
-                        }
-                        for a in self.arguments
-                    ],
+                    "arguments": arguments,
                     "tooltip": self.tooltip,
                 }
             )
@@ -621,6 +634,8 @@ class LSLDefinitionParser:
             ],
             private=event_data.get("private", False),
             deprecated=event_data.get("deprecated", False),
+            slua_removed=event_data.get("slua-removed", False),
+            detected_semantics=event_data.get("detected-semantics", False),
         )
 
         if event.name in self._definitions.events:
@@ -1040,6 +1055,8 @@ def dump_slua_syntax(lsl_definitions: LSLDefinitions, slua_definitions_file: str
 
     # events
     for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
+        if event.slua_removed:
+            continue
         syntax["events"][event.name] = event.to_slua_dict(parser)
 
     # functions
