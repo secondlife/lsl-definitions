@@ -305,47 +305,58 @@ modules:
   comment: Bitwise operations library
   functions:
   - name: arshift
-    comment: Arithmetic right shift
+    comment: |-
+      Shifts n by i bits to the right. If i is negative, a left shift is performed.
+      Does an arithmetic shift: The most significant bit of n is propagated during the shift.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to shift.
       type: number
-    - name: disp
+    - name: i
+      comment: Number of bits to shift.
       type: number
     returnType: number
   - name: band
-    comment: Bitwise AND of all arguments
+    comment: Performs a bitwise AND operation on input numbers.
     parameters:
     - name: ...
+      comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: number
   - name: bnot
-    comment: Bitwise NOT
+    comment: Returns the bitwise negation of the input number.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to negate.
       type: number
     returnType: number
   - name: bor
-    comment: Bitwise OR of all arguments
+    comment: Performs a bitwise OR operation on input numbers.
     parameters:
     - name: ...
+      comment: Numbers to perform bitwise OR on.
       type: ...number
     returnType: number
   - name: bxor
-    comment: Bitwise XOR of all arguments
+    comment: Performs a bitwise XOR operation on input numbers.
     parameters:
     - name: ...
+      comment: Numbers to perform bitwise XOR on.
       type: ...number
     returnType: number
   - name: btest
-    comment: Returns true if bitwise AND of all arguments is not zero
+    comment: |-
+      Performs a bitwise AND operation on input numbers.
+      Returns true if result is non-zero.
     parameters:
     - name: ...
+      comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: boolean
   - name: extract
     comment: Extracts bits from n at position field with width
     parameters:
-    - name: n
+    - name: "n"
       type: number
     - name: field
       type: number
@@ -353,25 +364,29 @@ modules:
       type: number?
     returnType: number
   - name: lrotate
-    comment: Left rotate
+    comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to rotate.
       type: number
-    - name: disp
+    - name: i
+      comment: Number of bits to rotate.
       type: number
     returnType: number
   - name: lshift
-    comment: Left shift
+    comment: Shifts n by i bits to the left. If i is negative, a right shift is performed.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to shift.
       type: number
-    - name: disp
+    - name: i
+      comment: Number of bits to shift.
       type: number
     returnType: number
   - name: replace
     comment: Replaces bits in n at position field with width using value v
     parameters:
-    - name: n
+    - name: "n"
       type: number
     - name: v
       type: number
@@ -381,37 +396,41 @@ modules:
       type: number?
     returnType: number
   - name: rrotate
-    comment: Right rotate
+    comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to rotate.
       type: number
-    - name: disp
+    - name: i
+      comment: Number of bits to rotate.
       type: number
     returnType: number
   - name: rshift
-    comment: Right shift
+    comment: Shifts n by i bits to the right. If i is negative, a left shift is performed.
     parameters:
-    - name: x
+    - name: "n"
+      comment: Number to shift.
       type: number
-    - name: disp
+    - name: i
+      comment: Number of bits to shift.
       type: number
     returnType: number
   - name: countlz
     comment: Count leading zeros
     parameters:
-    - name: n
+    - name: "n"
       type: number
     returnType: number
   - name: countrz
     comment: Count trailing zeros
     parameters:
-    - name: n
+    - name: "n"
       type: number
     returnType: number
   - name: byteswap
     comment: Swap byte order
     parameters:
-    - name: n
+    - name: "n"
       type: number
     returnType: number
 - name: buffer
