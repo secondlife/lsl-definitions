@@ -1188,23 +1188,23 @@ modules:
       type: number
     returnType: number
   - name: max
-    comment: Returns the maximum value in the given list.
+    comment: Returns the maximum value from the given numbers.
     parameters:
     - name: "n"
       comment: A number.
       type: number
     - name: ...
-      comment: A list of numbers to find the maximum from.
+      comment: Numbers to find the maximum from.
       type: ...number
     returnType: number
   - name: min
-    comment: Returns the minimum value in the given list.
+    comment: Returns the minimum value from the given numbers.
     parameters:
     - name: "n"
       comment: A number.
       type: number
     - name: ...
-      comment: A list of numbers to find the minimum from.
+      comment: Numbers to find the minimum from.
       type: ...number
     returnType: number
   - name: modf
@@ -1927,134 +1927,162 @@ modules:
   comment: Global 'vector' library table
   callable:
     name: vector
-    comment: 'Constructor call: vector(x, y, z)'
+    comment: Creates a new vector with the given component values.
+      Alias of vector.create.
     parameters:
-    - name: self
-      type: any
     - name: x
+      comment: X component of the vector.
       type: number
     - name: "y"
+      comment: Y component of the vector.
       type: number
     - name: z
+      comment: Z component of the vector (optional).
       type: number?
     returnType: vector
   functions:
   - name: create
-    comment: Creates a new vector with the given component values
+    comment: Creates a new vector with the given component values.
     parameters:
     - name: x
+      comment: X component of the vector.
       type: number
     - name: "y"
+      comment: Y component of the vector.
       type: number
     - name: z
+      comment: Z component of the vector (optional).
       type: number?
     returnType: vector
   - name: magnitude
-    comment: Calculates the magnitude of a given vector
+    comment: Computes the magnitude of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: number
   - name: normalize
-    comment: Computes the normalized version (unit vector) of a given vector
+    comment: Computes the normalized version (unit vector) of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: vector
   - name: cross
-    comment: Computes the cross product of two vectors
+    comment: Computes the cross product of two vectors.
     parameters:
     - name: a
+      comment: Left input vector.
       type: vector
     - name: b
+      comment: Right input vector.
       type: vector
     returnType: vector
   - name: dot
-    comment: Computes the dot product of two vectors
+    comment: Computes the dot product of two vectors.
     parameters:
     - name: a
+      comment: Left input vector.
       type: vector
     - name: b
+      comment: Right input vector.
       type: vector
     returnType: number
   - name: angle
-    comment: Computes the angle between two vectors in radians. The axis, if specified,
-      is used to determine the sign of the angle.
+    comment: Computes the angle between two vectors in radians.
+      The axis, if specified, is used to determine the sign of the angle.
     parameters:
     - name: a
       type: vector
+      comment: Left input vector.
     - name: b
+      comment: Right input vector.
       type: vector
     - name: axis
+      comment: Axis to determine the sign of the angle (optional).
       type: vector?
     returnType: number
   - name: floor
-    comment: Applies math.floor to every component of the input vector
+    comment: Applies math.floor to each component of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: vector
   - name: ceil
-    comment: Applies math.ceil to every component of the input vector
+    comment: Applies math.ceil to each component of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: vector
   - name: abs
-    comment: Applies math.abs to every component of the input vector
+    comment: Applies math.abs to each component of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: vector
   - name: sign
-    comment: Applies math.sign to every component of the input vector
+    comment: Applies math.sign to each component of the vector.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     returnType: vector
   - name: clamp
-    comment: Applies math.clamp to every component of the input vector
+    comment: Clamps each component of the vector between min and max values.
     parameters:
     - name: v
+      comment: Input vector to be clamped.
       type: vector
     - name: min
+      comment: Minimum vector value.
       type: vector
     - name: max
+      comment: Maximum vector value.
       type: vector
     returnType: vector
   - name: max
-    comment: Applies math.max to the corresponding components of the input vectors
+    comment: Applies math.max to each component of the vectors.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     - name: ...
+      comment: Vectors to find the maximum from.
       type: ...vector
     returnType: vector
   - name: min
-    comment: Applies math.min to the corresponding components of the input vectors
+    comment: Applies math.max to each component of the vectors.
     parameters:
     - name: v
+      comment: Input vector.
       type: vector
     - name: ...
+      comment: Vectors to find the minimum from.
       type: ...vector
     returnType: vector
   - name: lerp
-    comment: Linear interpolation between two vectors
+    comment: Linearly interpolates between a and b using factor t.
     parameters:
     - name: a
+      comment: Start vector.
       type: vector
     - name: b
+      comment: End vector.
       type: vector
     - name: t
+      comment: Interpolation factor.
       type: number
     returnType: vector
   properties:
   - name: zero
-    comment: A zero vector
+    comment: Constant vector with all components set to 0.
     type: vector
     value: <0,0,0>
   - name: one
-    comment: A one vector
+    comment: Constant vector with all components set to 1.
     type: vector
     value: <1,1,1>
 constants: []
