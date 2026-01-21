@@ -1464,143 +1464,179 @@ modules:
   comment: String manipulation library
   functions:
   - name: byte
-    comment: Returns the internal numeric codes of the characters
+    comment: Returns the numeric code of every byte in the input string within the given range.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: i
+      comment: Starting index (optional).
       type: number?
     - name: j
+      comment: Ending index (optional).
       type: number?
     returnType: '...number'
   - name: char
-    comment: Returns a string from character codes
+    comment: Returns a string containing characters for the given byte values.
     parameters:
     - name: ...
+      comment: Byte values to convert to string.
       type: ...number
     returnType: string
   - name: find
-    comment: Finds first match of pattern in string
+    comment: Finds the first instance of the pattern in the string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: pattern
+      comment: Pattern to search for.
       type: string
     - name: init
+      comment: Starting index (optional).
       type: number?
     - name: plain
+      comment: Perform raw search (optional).
       type: boolean?
     returnType: (number?, number?, ...string)
   - name: format
-    comment: Returns a formatted string
+    comment: Formats input values into a string using printf-style format specifiers.
     parameters:
     - name: formatstring
+      comment: Format string.
       type: string
     - name: ...
+      comment: Values to format.
       type: ...any
     returnType: string
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: pattern
+      comment: Pattern to search for.
       type: string
     returnType: () -> ...string
   - name: gsub
-    comment: Global substitution of pattern matches
+    comment: Performs pattern-based substitution in a string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: pattern
+      comment: Pattern to replace.
       type: string
     - name: repl
+      comment: Replacement string, function, or table.
       type: 'string | { [string]: string } | (...string) -> string'
-    - name: n
+    - name: maxn
+      comment: Maximum replacements (optional).
       type: number?
     returnType: (string, number)
   - name: len
-    comment: Returns the length of the string
+    comment: "Returns the number of bytes in the string. Identical to #s"
     parameters:
     - name: s
+      comment: Input string.
       type: string
     returnType: number
   - name: lower
-    comment: Converts string to lowercase
+    comment: Returns a lowercase version of the input string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     returnType: string
   - name: match
-    comment: Returns captures from pattern match
+    comment: Finds and returns matches for a pattern in the input string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: pattern
+      comment: Pattern to match.
       type: string
     - name: init
+      comment: Starting index (optional).
       type: number?
     returnType: '...string'
   - name: pack
-    comment: Packs values into a binary string
+    comment: Packs values into a binary string.
     parameters:
     - name: fmt
+      comment: Pack format string.
       type: string
     - name: ...
+      comment: Values to encode.
       type: ...any
     returnType: string
   - name: packsize
-    comment: Returns the size of a packed string for the given format
+    comment: Returns the size of a packed string for the given format.
     parameters:
     - name: fmt
+      comment: Pack format string.
       type: string
     returnType: number
   - name: rep
-    comment: Returns a string repeated n times
+    comment: Returns the input string repeated a given number of times.
     parameters:
     - name: s
+      comment: Input string.
       type: string
-    - name: n
+    - name: "n"
+      comment: Number of times to repeat the string.
       type: number
     returnType: string
   - name: reverse
-    comment: Reverses a string
+    comment: Returns the input string with bytes in reverse order.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     returnType: string
   - name: split
-    comment: Splits a string by separator
+    comment: Splits a string by separator. Returns a list of substrings.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: separator
+      comment: Seperator to split on. Default is ","
       type: string?
     returnType: '{string}'
   - name: sub
-    comment: Returns a substring
+    comment: Returns a substring from the given range.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: i
+      comment: Starting index.
       type: number
     - name: j
+      comment: Ending index (optional).
       type: number?
     returnType: string
   - name: unpack
-    comment: Unpacks values from a binary string
+    comment: Decodes a binary string using a pack format.
     parameters:
     - name: fmt
+      comment: Pack format string.
       type: string
     - name: s
+      comment: Encoded string.
       type: string
-    - name: pos
+    - name: init
+      comment: Starting index (optional).
       type: number?
     returnType: '...any'
   - name: upper
-    comment: Converts string to uppercase
+    comment: Returns an uppercase version of the input string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     returnType: string
 - name: table
