@@ -1344,29 +1344,34 @@ modules:
   comment: Operating system facilities library
   functions:
   - name: clock
-    comment: Returns CPU time used by the program in seconds
+    comment: Returns a high-precision timestamp in seconds for measuring durations.
     parameters: []
     returnType: number
   - name: date
-    comment: Returns a string or table containing date and time
+    comment: Returns a table or string representation of the time based on the provided format.
     parameters:
-    - name: format
+    - name: s
+      comment: Optional format string for the date representation.
       type: string?
-    - name: time
+    - name: t
+      comment: Optional timestamp to format; defaults to the current time.
       type: number?
     returnType: (string | OsDateTime)?
   - name: difftime
-    comment: Returns the difference in seconds between two times
+    comment: Returns the difference in seconds between two timestamps.
     parameters:
-    - name: t2
+    - name: a
+      comment: First timestamp value.
       type: number
-    - name: t1
+    - name: b
+      comment: Second timestamp value.
       type: number?
     returnType: number
   - name: time
-    comment: Returns the current time or converts a table to time
+    comment: Returns the current Unix timestamp or the timestamp of the given date.
     parameters:
-    - name: time
+    - name: t
+      comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
       type: OsDateTime?
     returnType: number?
 - name: quaternion
