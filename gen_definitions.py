@@ -3,7 +3,6 @@
 # deciding that this script is Python 2. It is not.
 
 import ast
-import ctypes
 import dataclasses
 import enum
 import itertools
@@ -166,7 +165,7 @@ class LSLConstant(NamedTuple):
                 "value": _escape_python(self.value),
             }
         )
-    
+
     def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
         try:
             return _remove_worthless(
@@ -410,7 +409,8 @@ class LSLFunctionRanges(enum.IntEnum):
 
 @dataclasses.dataclass
 class SLuaProperty:
-    """ Property definition """
+    """Property definition"""
+
     name: str
     type: str
     value: str | None = None
@@ -420,8 +420,7 @@ class SLuaProperty:
         return {
             "tooltip": self.comment,
             "type": self.type,
-            **({"value": _escape_python(self.value)}
-                if self.value is not None else {}),
+            **({"value": _escape_python(self.value)} if self.value is not None else {}),
         }
 
 
@@ -433,6 +432,7 @@ class SLuaParameter:
     - Self parameters only need name (type is implicit)
     - Variadic parameters need name "..." and type
     """
+
     name: str
     type: Optional[str] = None
     comment: str = ""
@@ -441,6 +441,7 @@ class SLuaParameter:
 @dataclasses.dataclass
 class SLuaFunctionOverload:
     """Function overload signature"""
+
     parameters: List[SLuaParameter]
     returnType: str
     comment: Optional[str] = None
@@ -449,6 +450,7 @@ class SLuaFunctionOverload:
 @dataclasses.dataclass
 class SLuaFunctionSignature:
     """Function or method signature with optional overloads"""
+
     name: str
     parameters: List[SLuaParameter]
     returnType: str
@@ -481,6 +483,7 @@ class SLuaFunctionSignature:
 @dataclasses.dataclass
 class SLuaTypeAlias:
     """Type alias definition"""
+
     name: str
     definition: str
     comment: str = ""
@@ -492,7 +495,7 @@ class SLuaTypeAlias:
         return {
             "tooltip": f"{self.comment}\n{definition}".strip(),
         }
-    
+
     def to_luau_def(self) -> str:
         return f"type {self.name} = {self.definition}"
 
@@ -500,18 +503,20 @@ class SLuaTypeAlias:
 @dataclasses.dataclass
 class SLuaClassDeclaration:
     """Class declaration with properties and methods"""
+
     name: str
     properties: List[SLuaProperty]
     methods: List[SLuaFunctionSignature]
     comment: str = ""
 
     def to_keywords_dict(self) -> dict:
-        return { "tooltip": self.comment }
-    
+        return {"tooltip": self.comment}
+
 
 @dataclasses.dataclass
 class SLuaModuleDeclaration:
-    """ Module declaration with properties and functions """
+    """Module declaration with properties and functions"""
+
     name: str
     callable: Optional[SLuaFunctionSignature]
     properties: List[SLuaProperty]
@@ -522,27 +527,29 @@ class SLuaModuleDeclaration:
         functions = {}
         if self.callable:
             functions[self.name] = self.callable.to_keywords_dict()
-        else: 
+        else:
             functions[self.name] = {"energy": -1.0, "tooltip": self.comment}
-        functions.update({
-            f"{self.name}.{func.name}": func.to_keywords_dict()
-            for func in sorted(self.functions, key=lambda x: x.name)
-            if not func.private
-        })
+        functions.update(
+            {
+                f"{self.name}.{func.name}": func.to_keywords_dict()
+                for func in sorted(self.functions, key=lambda x: x.name)
+                if not func.private
+            }
+        )
         return functions
-   
+
     def to_keywords_constants_dict(self) -> dict:
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
             for prop in sorted(self.properties, key=lambda x: x.name)
         }
-   
+
 
 class SLuaDefinitions(NamedTuple):
     # for best results, load/generate in the same order defined here
-    
+
     # 1. Luau builtins. Typecheckers already know about these
-    controls: dict      # same structure as LSLDefinitions.controls
+    controls: dict  # same structure as LSLDefinitions.controls
     builtinTypes: dict  # same structure as LSLDefinitions.types
     builtinConstants: List[SLuaProperty]
     builtinFunctions: List[SLuaFunctionSignature]
@@ -797,26 +804,21 @@ class SLuaDefinitionParser:
         )
         # 2. SLua base classes. These only depend on Luau builtins
         self.definitions.baseClasses.extend(
-            self._validate_class(class_)
-            for class_ in def_dict["baseClasses"]
+            self._validate_class(class_) for class_ in def_dict["baseClasses"]
         )
         self.definitions.typeAliases.extend(
-            self._validate_type_alias(alias)
-            for alias in def_dict["typeAliases"]
+            self._validate_type_alias(alias) for alias in def_dict["typeAliases"]
         )
 
         # 3. SLua standard library. Depends on base classes
         self.definitions.classes.extend(
-            self._validate_class(class_)
-            for class_ in def_dict["classes"]
+            self._validate_class(class_) for class_ in def_dict["classes"]
         )
         self.definitions.globalFunctions.extend(
-            self._validate_function(func, self.global_scope)
-            for func in def_dict["globalFunctions"]
+            self._validate_function(func, self.global_scope) for func in def_dict["globalFunctions"]
         )
         self.definitions.modules.extend(
-            self._validate_module(module)
-            for module in def_dict["modules"]
+            self._validate_module(module) for module in def_dict["modules"]
         )
 
         return self.definitions
@@ -863,8 +865,7 @@ class SLuaDefinitionParser:
             self._validate_scope(class_.name, self.type_names)
             class_scope: Set[str] = set()
             class_.properties = [
-                self._validate_property(prop, class_scope)
-                for prop in data.get("properties", [])
+                self._validate_property(prop, class_scope) for prop in data.get("properties", [])
             ]
             class_.methods = [
                 self._validate_function(method, class_scope, method=True)
@@ -874,7 +875,9 @@ class SLuaDefinitionParser:
             raise ValueError(f"In class {class_.name}: {e}") from e
         return class_
 
-    def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunctionSignature:
+    def _validate_function(
+        self, data: any, scope: Set[str], method: bool = False
+    ) -> SLuaFunctionSignature:
         try:
             func = SLuaFunctionSignature(
                 name=data["name"],
@@ -904,7 +907,7 @@ class SLuaDefinitionParser:
                 self.validate_type(param.type, known_types)
             return func
         except Exception as e:
-            raise ValueError(f"In function {data["name"]}: {e}") from e
+            raise ValueError(f"In function {data['name']}: {e}") from e
 
     def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
         alias = SLuaTypeAlias(**data)
@@ -936,7 +939,9 @@ class SLuaDefinitionParser:
             self._validate_scope(type_param, known_types)
         return known_types
 
-    _TYPE_SEPERATORS_RE = re.compile(r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\"")
+    _TYPE_SEPERATORS_RE = re.compile(
+        r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
+    )
 
     def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
         if not type:
@@ -946,11 +951,11 @@ class SLuaDefinitionParser:
         if type in known_type_names:
             return type
         subtypes = self._TYPE_SEPERATORS_RE.split(type)
-        unknown_subtypes = set(subtypes) - known_type_names - {''}
+        unknown_subtypes = set(subtypes) - known_type_names - {""}
         if not unknown_subtypes:
             return type
         raise ValueError(f"Unknown types {unknown_subtypes} in definition {type!r}")
-    
+
     def _validate_scope(self, name: str, scope: Set[str]) -> None:
         if name in scope:
             raise ValueError(f"{name!r} is already defined in this scope")
@@ -1025,7 +1030,9 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
         return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
 
 
-def dump_slua_syntax(lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False) -> bytes:
+def dump_slua_syntax(
+    lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False
+) -> bytes:
     """Write a syntax file for use by viewers"""
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
@@ -2509,13 +2516,19 @@ def main():
     sub = subparsers.add_parser("syntax")
     sub.add_argument("filename")
     sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
-    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty)))
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty))
+    )
 
     sub = subparsers.add_parser("slua_syntax")
     sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
     sub.add_argument("filename")
     sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
-    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)))
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(
+            args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)
+        )
+    )
 
     sub = subparsers.add_parser("gen_constant_lsl_script")
     sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))

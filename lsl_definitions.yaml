@@ -4823,9 +4823,9 @@ functions:
 #    sleep: Additional sleep time imposed by the script after this function completes.
 #    mono-sleep: Sleep in the mono script runtime
 #    return: Return type of the function.
-#    slua-return: More specific return type for slua type-checking. 
-#    slua-type: More specific argument type for slua type-checking. 
-#    type-arguments: An array of strings naming the type variables used for generic type-checking this slua function. 
+#    slua-return: More specific return type for slua type-checking.
+#    slua-type: More specific argument type for slua type-checking.
+#    type-arguments: An array of strings naming the type variables used for generic type-checking this slua function.
 #    arguments: An array of maps of maps describing the parameters to this function.
 #    tooltip: A brief description of this function. Map of maps is used to retain ordering.
 #    func-id: The LSO function identifier, (See comment at the top of this file.)
