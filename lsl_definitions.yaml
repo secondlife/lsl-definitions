@@ -4659,21 +4659,21 @@ events:
     tooltip: This event is triggered when a resident has given an amount of Linden
       dollars to the object.
   moving_end:
-    arguments: null
+    arguments: []
     tooltip: Triggered whenever an object with this script stops moving.
   moving_start:
-    arguments: null
+    arguments: []
     tooltip: Triggered whenever an object with this script starts moving.
   no_sensor:
-    arguments: null
+    arguments: []
     tooltip: This event is raised when sensors are active, via the llSensor function
       call, but are not sensing anything.
   not_at_rot_target:
-    arguments: null
+    arguments: []
     tooltip: When a target is set via the llRotTarget function call, but the script
       is outside the specified angle this event is raised.
   not_at_target:
-    arguments: null
+    arguments: []
     tooltip: When a target is set via the llTarget library call, but the script is
       outside the specified range this event is raised.
   object_rez:
@@ -4755,15 +4755,15 @@ events:
       \ to the script in the parameter. Information on those objects may be gathered\
       \ via the llDetected* functions."
   state_entry:
-    arguments: null
+    arguments: []
     tooltip: The state_entry event occurs whenever a new state is entered, including
       at program start, and is always the first event handled.
   state_exit:
-    arguments: null
+    arguments: []
     tooltip: The state_exit event occurs whenever the state command is used to transition
       to another state. It is handled before the new states state_entry event.
   timer:
-    arguments: null
+    arguments: []
     tooltip: This event is raised at regular intervals set by the llSetTimerEvent
       library function.
   touch:
