@@ -1375,10 +1375,11 @@ modules:
       type: OsDateTime?
     returnType: number?
 - name: quaternion
-  comment: Creates a new quaternion with the given component values.
-      Alias of quaternion.create.
+  comment: Quaternion manipulation library
   callable:
     name: quaternion
+    comment: Creates a new quaternion with the given component values.
+      Alias of quaternion.create.
     parameters:
     - name: x
       comment: X component of the quaternion.
@@ -1935,13 +1936,13 @@ modules:
     type: string
     value: "[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*"
 - name: uuid
-  comment: Global 'uuid' library table
+  comment: uuid library
   callable:
     name: uuid
-    comment: Allows calling uuid() as a constructor
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+      nil if the string is not a valid UUID. Throws an error if the buffer is
+      shorter than 16 bytes. Alias of uuid.create
     parameters:
-    - name: self
-      type: any
     - name: value
       type: string | buffer | uuid
     returnType: uuid?
@@ -1955,7 +1956,7 @@ modules:
       type: string | buffer | uuid
     returnType: uuid?
 - name: vector
-  comment: Global 'vector' library table
+  comment: Vector manipulation library
   callable:
     name: vector
     comment: Creates a new vector with the given component values.
