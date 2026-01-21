@@ -440,7 +440,8 @@ class SLuaFunctionSignature:
     parameters: List[SLuaParameter]
     returnType: str
     typeParameters: Optional[List[str]] = None
-    comment: Optional[str] = None
+    comment: str = ""
+    private: bool = False
     overloads: Optional[List[SLuaFunctionOverload]] = None
 
     def to_keywords_dict(self) -> dict:
@@ -513,6 +514,7 @@ class SLuaModuleDeclaration:
         functions.update({
             f"{self.name}.{func.name}": func.to_keywords_dict()
             for func in sorted(self.functions, key=lambda x: x.name)
+            if not func.private
         })
         return functions
    
@@ -865,6 +867,7 @@ class SLuaDefinitionParser:
                 parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
                 returnType=data.get("returnType", "void"),
                 comment=data.get("comment", ""),
+                private=data.get("private", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
