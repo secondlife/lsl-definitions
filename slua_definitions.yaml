@@ -50,7 +50,7 @@ baseClasses:
   properties:
   - name: x
     type: number
-  - name: y
+  - name: "y"
     type: number
   - name: z
     type: number
@@ -124,7 +124,7 @@ baseClasses:
   properties:
   - name: x
     type: number
-  - name: y
+  - name: "y"
     type: number
   - name: z
     type: number
@@ -1018,262 +1018,317 @@ modules:
   comment: Mathematical functions library
   functions:
   - name: abs
-    comment: Returns the absolute value of x
+    comment: Returns the absolute value of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     returnType: number
   - name: acos
-    comment: Returns the arc cosine of x (in radians)
+    comment: Returns the arc cosine of n in radians.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number in the range [-1, 1].
       type: number
     returnType: number
   - name: asin
-    comment: Returns the arc sine of x (in radians)
+    comment: Returns the arc sine of n in radians.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number in the range [-1, 1].
       type: number
     returnType: number
   - name: atan
-    comment: Returns the arc tangent of x (in radians)
+    comment: Returns the arc tangent of n in radians.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     returnType: number
   - name: atan2
-    comment: Returns the arc tangent of y/x (in radians), using the signs to determine
-      the quadrant
+    comment: Returns the arc tangent of y/x in radians, using the signs to determine
+      the quadrant.
     parameters:
-    - name: y
+    - name: "y"
+      comment: The y-coordinate.
       type: number
     - name: x
+      comment: The x-coordinate.
       type: number
     returnType: number
   - name: ceil
-    comment: Returns the smallest integer larger than or equal to x
+    comment: Returns the smallest integer larger than or equal to n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to round up.
       type: number
     returnType: number
   - name: clamp
-    comment: Returns n clamped between min and max
+    comment: Returns n clamped between min and max.
     parameters:
-    - name: n
+    - name: "n"
+      comment: The value to be clamped.
       type: number
     - name: min
+      comment: Minimum allowable value.
       type: number
     - name: max
+      comment: Maximum allowable value.
       type: number
     returnType: number
   - name: cos
-    comment: Returns the cosine of x (x in radians)
+    comment: Returns the cosine of n (n is in radians).
     parameters:
-    - name: x
+    - name: "n"
+      comment: An angle in radians.
       type: number
     returnType: number
   - name: cosh
-    comment: Returns the hyperbolic cosine of x
+    comment: Returns the hyperbolic cosine of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute the hyperbolic cosine of.
       type: number
     returnType: number
   - name: deg
-    comment: Converts x from radians to degrees
+    comment: Converts n from radians to degrees.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A value in radians.
       type: number
     returnType: number
   - name: exp
-    comment: Returns e^x
+    comment: Returns the base-e exponent of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute e^n.
       type: number
     returnType: number
   - name: floor
-    comment: Returns the largest integer smaller than or equal to x
+    comment: Returns the largest integer smaller than or equal to n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to round down.
       type: number
     returnType: number
   - name: fmod
-    comment: Returns the remainder of x/y that rounds towards zero
+    comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
     - name: x
+      comment: The dividend.
       type: number
-    - name: y
+    - name: "y"
+      comment: The divisor.
       type: number
     returnType: number
   - name: frexp
-    comment: Returns m and e such that x = m * 2^e
+    comment: Returns m and e such that n = m * 2^e.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to split into significand and exponent.
       type: number
     returnType: (number, number)
   - name: ldexp
-    comment: Returns m * 2^e
+    comment: Returns s * 2^e.
     parameters:
-    - name: m
+    - name: s
+      comment: The significand.
       type: number
     - name: e
+      comment: The exponent.
       type: number
     returnType: number
   - name: lerp
-    comment: Linear interpolation between a and b by t
+    comment: Linearly interpolates between a and b using factor t.
     parameters:
     - name: a
+      comment: Start value.
       type: number
     - name: b
+      comment: End value.
       type: number
     - name: t
+      comment: Interpolation factor.
       type: number
     returnType: number
   - name: log
-    comment: Returns the logarithm of x in the given base (default e)
+    comment: Returns the logarithm of n in the given base (default e).
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute logarithm.
       type: number
     - name: base
+      comment: Base of the logarithm (default is e).
       type: number?
     returnType: number
   - name: log10
-    comment: Returns the base-10 logarithm of x
+    comment: Returns the base-10 logarithm of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute base-10 logarithm.
       type: number
     returnType: number
   - name: map
-    comment: Maps x from input range to output range
+    comment: Maps n from input range to output range.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     - name: inMin
+      comment: A number.
       type: number
     - name: inMax
+      comment: A number.
       type: number
     - name: outMin
+      comment: A number.
       type: number
     - name: outMax
+      comment: A number.
       type: number
     returnType: number
   - name: max
-    comment: Returns the maximum value among the arguments
+    comment: Returns the maximum value in the given list.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     - name: ...
+      comment: A list of numbers to find the maximum from.
       type: ...number
     returnType: number
   - name: min
-    comment: Returns the minimum value among the arguments
+    comment: Returns the minimum value in the given list.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     - name: ...
+      comment: A list of numbers to find the minimum from.
       type: ...number
     returnType: number
   - name: modf
-    comment: Returns the integer and fractional parts of x
+    comment: Returns the integer and fractional parts of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to split into integer and fractional parts.
       type: number
     returnType: (number, number)
   - name: noise
-    comment: Returns Perlin noise value for the given coordinates
+    comment: Returns Perlin noise value for the point (x, y, z).
     parameters:
     - name: x
+      comment: X coordinate for the noise function.
       type: number
-    - name: y
+    - name: "y"
+      comment: Y coordinate for the noise function (default is 0).
       type: number?
     - name: z
+      comment: Z coordinate for the noise function (default is 0).
       type: number?
     returnType: number
   - name: pow
-    comment: Returns base^exponent
+    comment: Returns base to the power of exponent.
     parameters:
     - name: base
+      comment: Base value.
       type: number
     - name: exponent
+      comment: Exponent value.
       type: number
     returnType: number
   - name: rad
-    comment: Converts x from degrees to radians
+    comment: Converts n from degrees to radians.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A value in degrees.
       type: number
     returnType: number
   - name: random
-    comment: Returns a pseudo-random number
+    comment: Returns a random number within the given range.
     parameters:
-    - name: m
+    - name: min
+      comment: Minimum value of the range (optional).
       type: number?
-    - name: n
+    - name: max
+      comment: Maximum value of the range (optional).
       type: number?
     returnType: number
   - name: randomseed
-    comment: Sets the seed for the pseudo-random generator
+    comment: Sets the seed for the random number generator.
     parameters:
     - name: seed
+      comment: Seed for the random number generator.
       type: number
     returnType: ()
   - name: round
-    comment: Returns x rounded to the nearest integer
+    comment: Rounds n to the nearest integer.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to round to the nearest integer.
       type: number
     returnType: number
   - name: sign
-    comment: Returns -1, 0, or 1 depending on the sign of x
+    comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to get the sign of.
       type: number
     returnType: number
   - name: sin
-    comment: Returns the sine of x (x in radians)
+    comment: Returns the sine of n (n is in radians).
     parameters:
-    - name: x
+    - name: "n"
+      comment: An angle in radians.
       type: number
     returnType: number
   - name: sinh
-    comment: Returns the hyperbolic sine of x
+    comment: Returns the hyperbolic sine of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute the hyperbolic sine of.
       type: number
     returnType: number
   - name: sqrt
-    comment: Returns the square root of x
+    comment: Returns the square root of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute the square root of.
       type: number
     returnType: number
   - name: tan
-    comment: Returns the tangent of x (x in radians)
+    comment: Returns the tangent of n (n is in radians).
     parameters:
-    - name: x
+    - name: "n"
+      comment: An angle in radians.
       type: number
     returnType: number
   - name: tanh
-    comment: Returns the hyperbolic tangent of x
+    comment: Returns the hyperbolic tangent of n.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number to compute the hyperbolic tangent of.
       type: number
     returnType: number
   - name: isnan
-    comment: Returns true if x is NaN
+    comment: Returns true if n is NaN.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     returnType: boolean
   - name: isinf
-    comment: Returns true if x is infinite
+    comment: Returns true if n is infinite.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     returnType: boolean
   - name: isfinite
-    comment: Returns true if x is finite
+    comment: Returns true if n is finite.
     parameters:
-    - name: x
+    - name: "n"
+      comment: A number.
       type: number
     returnType: boolean
   properties:
@@ -1321,7 +1376,7 @@ modules:
     parameters:
     - name: x
       type: number
-    - name: y
+    - name: "y"
       type: number
     - name: z
       type: number
@@ -1334,7 +1389,7 @@ modules:
     parameters:
     - name: x
       type: number
-    - name: y
+    - name: "y"
       type: number
     - name: z
       type: number
@@ -1786,7 +1841,7 @@ modules:
       type: any
     - name: x
       type: number
-    - name: y
+    - name: "y"
       type: number
     - name: z
       type: number?
@@ -1797,7 +1852,7 @@ modules:
     parameters:
     - name: x
       type: number
-    - name: y
+    - name: "y"
       type: number
     - name: z
       type: number?
