@@ -1603,7 +1603,7 @@ modules:
       comment: Input string.
       type: string
     - name: separator
-      comment: Seperator to split on. Default is ","
+      comment: Separator to split on. Default is ","
       type: string?
     returnType: '{string}'
   - name: sub
@@ -1643,164 +1643,203 @@ modules:
   comment: Table manipulation library
   functions:
   - name: concat
-    comment: Concatenates table elements into a string
+    comment: Joins an array of strings into one string, with an optional separator.
     parameters:
-    - name: list
-      type: '{string}'
+    - name: a
+      comment: Array of strings.
+      type: '{string | number}'
     - name: sep
+      comment: Separator string (optional).
       type: string?
     - name: i
+      comment: Starting index (optional).
       type: number?
     - name: j
+      comment: Ending index (optional).
       type: number?
     returnType: string
   - name: foreach
-    comment: Iterates over table key-value pairs (deprecated)
-    typeParameters: [T, U]
+    comment: Iterates over all key-value pairs in the table (deprecated).
+    typeParameters: [K, V, R]
     parameters:
     - name: t
-      type: '{[T]: U}'
+      comment: Table to iterate over.
+      type: '{[K]: V}'
     - name: f
-      type: '(key: T, value: T) -> any'
-    returnType: any?
+      comment: Function applied to each key-value pair.
+      type: '(key: K, value: V) -> R?'
+    returnType: R?
   - name: foreachi
-    comment: Iterates over array indices (deprecated)
-    typeParameters: [T]
+    comment: Iterates over all index-value pairs in the array (deprecated).
+    typeParameters: [V, R]
     parameters:
-    - name: t
-      type: '{T}'
+    - name: a
+      comment: Array to iterate over.
+      type: '{V}'
     - name: f
-      type: '(index: number, value: T) -> any'
-    returnType: any?
+      comment: Function applied to each index-value pair.
+      type: '(index: number, value: V) -> R?'
+    returnType: R?
   - name: getn
-    comment: 'Returns the length of a table (deprecated, use # operator)'
+    comment: 'Returns the length of an array (deprecated; use # instead).'
     parameters:
-    - name: t
+    - name: a
+      comment: Array to check.
       type: '{any}'
     returnType: number
   - name: maxn
-    comment: Returns the largest positive numeric index
+    comment: Returns the highest numeric key in the table.
     parameters:
     - name: t
+      comment: Table to check.
       type: '{any}'
     returnType: number
   - name: insert
-    comment: Inserts an element at the end of a list
+    comment: Inserts an element at the specified index,
+      or at the end of the array.
     overloads:
-    - comment: Inserts an element at a specific position
-      typeParameters: [T]
+    - comment: Inserts an element at the end of a list
+      typeParameters: [V]
       parameters:
-      - name: list
-        type: '{T}'
-      - name: pos
-        type: number
+      - name: a
+        comment: Array to insert into.
+        type: '{V}'
       - name: value
-        type: T
+        comment: Value to insert.
+        type: V
       returnType: ()
-    typeParameters: [T]
+    typeParameters: [V]
     parameters:
-    - name: list
-      type: '{T}'
-    - name: value
-      type: T
+    - name: a
+      comment: Array to insert into.
+      type: '{V}'
+    - name: i
+      comment: "Index to insert at (default: at the end)."
+      type: number
+    - name: v
+      comment: Value to insert.
+      type: V
     returnType: ()
   - name: remove
-    comment: Removes and returns an element from a list
-    typeParameters: [T]
+    comment: Removes and returns the element at the specified index from the array,
+      or from the end of the array.
+    typeParameters: [V]
     parameters:
-    - name: list
-      type: '{T}'
-    - name: pos
+    - name: a
+      comment: Array to remove from.
+      type: '{V}'
+    - name: i
+      comment: "Index to remove (default: the last one)."
       type: number?
-    returnType: T?
+    returnType: V?
   - name: sort
-    comment: Sorts list elements in place
-    typeParameters: [T]
+    comment: Sorts an array in place.
+    typeParameters: [V]
     parameters:
-    - name: list
-      type: '{T}'
-    - name: comp
-      type: '((a: T, b: T) -> boolean)?'
+    - name: a
+      comment: Array to be sorted.
+      type: '{V}'
+    - name: f
+      comment: Comparison function.
+      type: '((a: V, b: V) -> boolean)?'
     returnType: ()
   - name: pack
-    comment: Packs arguments into a table with length field n
-    typeParameters: [T]
+    comment: Packs multiple arguments into a new array with length field n.
+    typeParameters: [V]
     parameters:
     - name: ...
-      type: ...T
-    returnType: '{ n: number, [number]: T }'
+      comment: Array elements.
+      type: ...V
+    returnType: '{ n: number, [number]: V }'
   - name: unpack
-    comment: Unpacks table elements as multiple return values
-    typeParameters: [T]
+    comment: Unpacks array elements into multiple return values.
+    typeParameters: [V]
     parameters:
-    - name: list
-      type: '{T}'
+    - name: a
+      comment: Array to unpack.
+      type: '{V}'
     - name: i
+      comment: Starting index (optional).
       type: number?
     - name: j
+      comment: Ending index (optional).
       type: number?
-    returnType: '...T'
+    returnType: '...V'
   - name: move
-    comment: Moves elements from one table to another
-    typeParameters: [T]
+    comment: Inserts elements [i..j] from src array into dest array at [d].
+    typeParameters: [V]
     parameters:
-    - name: a1
-      type: '{T}'
-    - name: f
+    - name: src
+      comment: Source array.
+      type: '{V}'
+    - name: i
+      comment: Starting index.
       type: number
-    - name: e
+    - name: j
+      comment: Ending index.
       type: number
-    - name: t
+    - name: d
+      comment: Destination index.
       type: number
-    - name: a2
-      type: '{T}?'
-    returnType: '{T}'
+    - name: dest
+      comment: Destination array (optional).
+      type: '{V}?'
+    returnType: '{V}'
   - name: create
-    comment: Creates a new table with pre-allocated array slots
-    typeParameters: [T]
+    comment: Creates a new table with pre-allocated array capacity, optionally filled.
+    typeParameters: [V]
     parameters:
-    - name: count
+    - name: "n"
+      comment: Number of elements to allocate.
       type: number
-    - name: value
-      type: T?
-    returnType: '{T}'
+    - name: v
+      comment: Value to prefill elements with (optional).
+      type: V?
+    returnType: '{V}'
   - name: find
-    comment: Finds the index of a value in an array
-    typeParameters: [T]
+    comment: Finds the first occurrence of a value in the array and returns its index.
+    typeParameters: [V]
     parameters:
     - name: t
-      type: '{T}'
-    - name: value
-      type: T
-    - name: init
+      comment: Table to search in.
+      type: '{V}'
+    - name: v
+      comment: Value to search for.
+      type: V
+    - name: i
+      comment: Starting index (optional).
       type: number?
     returnType: number?
   - name: clear
-    comment: Removes all elements from a table
+    comment: Clears all elements from a table while keeping its capacity.
     parameters:
     - name: t
+      comment: Table to clear.
       type: '{[any]: any}'
     returnType: ()
   - name: freeze
-    comment: Makes a table read-only
-    typeParameters: [T, U]
+    comment: Freezes a table, making it read-only.
+    typeParameters: [K, V]
     parameters:
     - name: t
-      type: '{[T]: U}'
-    returnType: '{[T]: U}'
+      comment: Table to freeze.
+      type: '{[K]: V}'
+    returnType: '{[K]: V}'
   - name: isfrozen
-    comment: Returns true if a table is frozen
+    comment: Returns true if a table is frozen.
     parameters:
     - name: t
+      comment: Table to check.
       type: '{[any]: any}'
     returnType: boolean
   - name: clone
-    comment: Creates a shallow copy of a table
-    typeParameters: [T, U]
+    comment: Creates a shallow copy of the table.
+    typeParameters: [K, V]
     parameters:
     - name: t
-      type: '{[T]: U}'
-    returnType: '{[T]: U}'
+      comment: Table to clone.
+      type: '{[K]: V}'
+    returnType: '{[K]: V}'
 - name: utf8
   comment: UTF-8 support library
   functions:
