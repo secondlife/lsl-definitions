@@ -425,7 +425,6 @@ class SLuaProperty:
         }
 
 
-
 @dataclasses.dataclass
 class SLuaParameter:
     """
@@ -445,6 +444,7 @@ class SLuaFunctionOverload:
     parameters: List[SLuaParameter]
     returnType: str
     comment: Optional[str] = None
+
 
 @dataclasses.dataclass
 class SLuaFunctionSignature:
@@ -961,7 +961,6 @@ class SLuaDefinitionParser:
     def _validate_identifier(self, name: str) -> None:
         if not re.match(self._IDENTIFIER_RE, name):
             raise ValueError(f"{name!r} is not a valid identifier")
-
 
 
 def _remove_worthless(val: dict) -> dict:
