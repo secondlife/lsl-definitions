@@ -2085,6 +2085,12 @@ modules:
     comment: Constant vector with all components set to 1.
     type: vector
     value: <1,1,1>
+- name: ll
+  # auto-generated from lsl_definitions.yaml
+  comment: Library for functions shared between LSL and SLua
+- name: llcompat
+  # auto-generated from lsl_definitions.yaml
+  comment: Like ll, but exactly matches LSL semantics
 constants: []
 
 # Everything below here is only for keywords.xml generation, not typechecking

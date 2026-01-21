@@ -1020,6 +1020,7 @@ def dump_slua_syntax(lsl_definitions: LSLDefinitions, slua_definitions_file: str
     """Write a syntax file for use by viewers"""
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
+    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     syntax = {
         "controls": slua_definitions.controls.copy(),
         "types": slua_definitions.builtinTypes.copy(),
@@ -1047,7 +1048,10 @@ def dump_slua_syntax(lsl_definitions: LSLDefinitions, slua_definitions_file: str
     for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
         syntax["functions"][func.name] = func.to_keywords_dict()
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        if module.name in {"ll", "llcompat"}:
+            continue
         syntax["functions"].update(module.to_keywords_functions_dict())
+    syntax["functions"].update(ll_module.to_keywords_functions_dict())
     for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
         if func.private:
             continue
