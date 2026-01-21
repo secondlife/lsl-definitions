@@ -1817,6 +1817,17 @@ modules:
       comment: Table to clear.
       type: '{[any]: any}'
     returnType: ()
+  - name: shrink
+    comment: Reduces the memory usage of the table to the minimum necessary.
+    typeParameters: [K, V]
+    parameters:
+    - name: t
+      comment: Table to shrink.
+      type: '{[K]: V}'
+    - name: reorder
+      comment: Allow moving sparse array elements to hash table storage.
+      type: boolean?
+    returnType: '{[K]: V}'
   - name: freeze
     comment: Freezes a table, making it read-only.
     typeParameters: [K, V]
