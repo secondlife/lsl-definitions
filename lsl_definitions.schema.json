@@ -140,89 +140,94 @@
             "type": "object"
         },
         "events": {
-            "properties": {
-                "arguments": {
-                    "items": {
-                        "additionalProperties": false,
-                        "patternProperties": {
-                            "^(?:[a-z]+(?:_[a-z]+)*)$": {
-                                "properties": {
-                                    "tooltip": {
-                                        "markdownDescription": "A brief description of this event argument.",
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "defaultSnippets": [
-                                            {
-                                                "label": "float",
-                                                "body": "float"
+            "patternProperties": {
+                "^[a-z_]+$": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "arguments": {
+                            "items": {
+                                "additionalProperties": false,
+                                "patternProperties": {
+                                    "^(?:[A-Za-z]+(?:_[A-Za-z]+)*)$": {
+                                        "properties": {
+                                            "tooltip": {
+                                                "markdownDescription": "A brief description of this event argument.",
+                                                "type": "string"
                                             },
-                                            {
-                                                "label": "integer",
-                                                "body": "integer"
-                                            },
-                                            {
-                                                "label": "key",
-                                                "body": "key"
-                                            },
-                                            {
-                                                "label": "list",
-                                                "body": "list"
-                                            },
-                                            {
-                                                "label": "quaternion",
-                                                "body": "quaternion"
-                                            },
-                                            {
-                                                "label": "rotation",
-                                                "body": "rotation"
-                                            },
-                                            {
-                                                "label": "string",
-                                                "body": "string"
-                                            },
-                                            {
-                                                "label": "vector",
-                                                "body": "vector"
+                                            "type": {
+                                                "defaultSnippets": [
+                                                    {
+                                                        "label": "float",
+                                                        "body": "float"
+                                                    },
+                                                    {
+                                                        "label": "integer",
+                                                        "body": "integer"
+                                                    },
+                                                    {
+                                                        "label": "key",
+                                                        "body": "key"
+                                                    },
+                                                    {
+                                                        "label": "list",
+                                                        "body": "list"
+                                                    },
+                                                    {
+                                                        "label": "quaternion",
+                                                        "body": "quaternion"
+                                                    },
+                                                    {
+                                                        "label": "rotation",
+                                                        "body": "rotation"
+                                                    },
+                                                    {
+                                                        "label": "string",
+                                                        "body": "string"
+                                                    },
+                                                    {
+                                                        "label": "vector",
+                                                        "body": "vector"
+                                                    }
+                                                ],
+                                                "markdownDescription": "One of the valid types for this event argument: [float, integer, key, list, rotation, string, vector].",
+                                                "oneOf": [
+                                                    { "const": "float" },
+                                                    { "const": "integer" },
+                                                    { "const": "key" },
+                                                    { "const": "list" },
+                                                    {
+                                                        "$comment": "quaternion is an alias for rotation",
+                                                        "const": "quaternion"
+                                                    },
+                                                    { "const": "rotation" },
+                                                    { "const": "string" },
+                                                    { "const": "vector" }
+                                                ]
                                             }
+                                        },
+                                        "required": [
+                                            "type"
                                         ],
-                                        "markdownDescription": "One of the valid types for this event argument: [float, integer, key, list, rotation, string, vector].",
-                                        "oneOf": [
-                                            { "const": "float" },
-                                            { "const": "integer" },
-                                            { "const": "key" },
-                                            { "const": "list" },
-                                            {
-                                                "$comment": "quaternion is an alias for rotation",
-                                                "const": "quaternion"
-                                            },
-                                            { "const": "rotation" },
-                                            { "const": "string" },
-                                            { "const": "vector" }
-                                        ]
+                                        "type": "object"
                                     }
                                 },
-                                "required": [
-                                    "type"
-                                ],
                                 "type": "object"
-                            }
+                            },
+                            "markdownDescription": "An array of event arguments.",
+                            "minItems": 0,
+                            "type": "array",
+                            "uniqueItems": true
                         },
-                        "type": "object"
-                    },
-                    "markdownDescription": "An array of event arguments.",
-                    "minItems": 1,
-                    "type": "array",
-                    "uniqueItems": true
-                },
-                "deprecated": {
-                    "const": true,
-                    "markdownDescription": "This event has been deprecated.",
-                    "type": "boolean"
-                },
-                "tooltip": {
-                    "markdownDescription": "A brief description of this event.",
-                    "type": "string"
+                        "deprecated": {
+                            "const": true,
+                            "markdownDescription": "This event has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this event.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "required": [],
