@@ -1844,46 +1844,58 @@ modules:
   comment: UTF-8 support library
   functions:
   - name: char
-    comment: Returns a string from UTF-8 codepoints
+    comment: Creates a string from Unicode codepoints.
     parameters:
     - name: ...
+      comment: Unicode codepoints.
       type: ...number
     returnType: string
   - name: codes
-    comment: Returns an iterator for UTF-8 codepoints in a string
+    comment: Returns an iterator that produces
+      the byte offset and Unicode codepoint for each character in the string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     returnType: ((string, number) -> (number, number), string, number)
   - name: codepoint
-    comment: Returns the codepoints of characters in a string
+    comment: Returns the Unicode codepoints in the specified range of the string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: i
+      comment: Starting index (optional).
       type: number?
     - name: j
+      comment: Ending index (optional).
       type: number?
     returnType: '...number'
   - name: len
-    comment: Returns the number of UTF-8 characters in a string, or nil and error
-      position
+    comment: Returns the number of Unicode codepoints in the specified range of the string,
+      or nil and error index.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: i
+      comment: Starting index (optional).
       type: number?
     - name: j
+      comment: Ending index (optional).
       type: number?
     returnType: (number?, number?)
   - name: offset
-    comment: Returns the byte position of the n-th character
+    comment: Returns the byte offset of the nth Unicode codepoint in the string.
     parameters:
     - name: s
+      comment: Input string.
       type: string
     - name: n
+      comment: Character position.
       type: number
     - name: i
+      comment: Starting index (optional).
       type: number?
     returnType: number?
   properties:
