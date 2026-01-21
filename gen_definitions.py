@@ -369,7 +369,7 @@ class LSLFunction:
                     "deprecated": self.deprecated,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
-                    "return": slua.validate_return_type(self.compute_slua_type(), known_types),
+                    "return": slua.validate_type(self.compute_slua_type(), known_types),
                     "sleep": self.sleep,
                     "tooltip": self.tooltip,
                 }
@@ -880,14 +880,14 @@ class SLuaDefinitionParser:
                 name=data["name"],
                 typeParameters=data.get("typeParameters", []),
                 parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
-                returnType=data.get("returnType", "void"),
+                returnType=data.get("returnType", LSLType.VOID.meta.slua_name),
                 comment=data.get("comment", ""),
                 private=data.get("private", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
             known_types = self.validate_type_params(func.typeParameters)
-            self.validate_return_type(func.returnType, known_types)
+            self.validate_type(func.returnType, known_types)
             params = func.parameters
             params_scope = set()
             if method:
@@ -950,11 +950,6 @@ class SLuaDefinitionParser:
         if not unknown_subtypes:
             return type
         raise ValueError(f"Unknown types {unknown_subtypes} in definition {type!r}")
-
-    def validate_return_type(self, type: str, known_types: set[str] | None = None) -> str:
-        if type == LSLType.VOID.meta.slua_name:
-            return type
-        return self.validate_type(type, known_types)
     
     def _validate_scope(self, name: str, scope: Set[str]) -> None:
         if name in scope:
