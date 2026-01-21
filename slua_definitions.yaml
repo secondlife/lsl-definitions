@@ -2255,7 +2255,7 @@ builtinFunctions:
   - name: ...
     comment: Arguments to print to standard output.
     type: ...any
-  returnType: void
+  returnType: ()
 - name: rawequal
   comment: Returns true if a and b have the same type and value.
   parameters:
@@ -2318,7 +2318,7 @@ builtinFunctions:
   - name: mt
     comment: The metatable to set.
     type: table?
-  returnType: void
+  returnType: ()
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:

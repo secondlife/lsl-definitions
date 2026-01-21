@@ -69,7 +69,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="",
         cs_name="void",
         mono_bind_name="void",
-        slua_name="void",
+        slua_name="()",
     ),
     LSLType.INTEGER: LSLTypeMeta(
         cil_name="int32",
