@@ -415,6 +415,7 @@ class SLuaProperty:
     type: str
     value: str | None = None
     comment: str = ""
+    slua_removed: bool = False
 
     def to_keywords_dict(self) -> dict:
         return {
@@ -790,6 +791,8 @@ class SLuaDefinitionParser:
             raise RuntimeError("Already parsed!")
 
         # 1. Luau builtins. Typecheckers already know about these
+        # nil is hardcoded because it should highlight as a constant, not a type
+        self.type_names.add("nil")
         self.definitions.builtinTypes.update(def_dict["builtinTypes"])
         self.type_names.update(self.definitions.builtinTypes.keys())
         self.definitions.controls.update(def_dict["controls"])
@@ -819,6 +822,10 @@ class SLuaDefinitionParser:
         )
         self.definitions.modules.extend(
             self._validate_module(module) for module in def_dict["modules"]
+        )
+        self.definitions.globalVariables.extend(
+            self._validate_property(const, self.global_scope)
+            for const in def_dict["globalVariables"]
         )
 
         return self.definitions
@@ -921,13 +928,11 @@ class SLuaDefinitionParser:
         return alias
 
     def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> SLuaProperty:
-        prop = SLuaProperty(**data)
+        prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
         if const and prop.type != "userdata" and prop.value is None:
             raise ValueError(f"Constant {prop.name} must have a value")
-        if prop.name == "nil" and prop.type == "nil" and scope is self.global_scope:
-            return prop  # only nil is allowed to be nil
         self.validate_type(prop.type)
         return prop
 
@@ -940,7 +945,7 @@ class SLuaDefinitionParser:
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()]|\.\.\.|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
+        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
     )
 
     def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
