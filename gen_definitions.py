@@ -206,6 +206,7 @@ class LSLEvent:
     tooltip: str
     private: bool
     deprecated: bool
+    slua_deprecated: bool
     slua_removed: bool
     detected_semantics: bool
 
@@ -233,7 +234,7 @@ class LSLEvent:
                     {
                         "detected": {
                             "tooltip": "Array of detected events.",
-                            "type": slua.validate_type("{LLDetectedEvent}"),
+                            "type": slua.validate_type("{DetectedEvent}"),
                         }
                     }
                 ]
@@ -249,7 +250,7 @@ class LSLEvent:
                 ]
             return _remove_worthless(
                 {
-                    "deprecated": self.deprecated,
+                    "deprecated": self.deprecated or self.slua_deprecated,
                     "arguments": arguments,
                     "tooltip": self.tooltip,
                 }
@@ -268,6 +269,7 @@ class LSLFunction:
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
+    detected_semantics: bool
     type_arguments: List[str]
     arguments: List[LSLArgument]
     tooltip: str
@@ -279,6 +281,8 @@ class LSLFunction:
     implementation to Agni and don't want people to use it yet.
     """
     deprecated: bool
+    slua_deprecated: bool
+    """Only exists in llcompat"""
     func_id: int
     pure: bool
     """
@@ -365,7 +369,7 @@ class LSLFunction:
                         }
                         for a in self.arguments
                     ],
-                    "deprecated": self.deprecated,
+                    "deprecated": self.deprecated or self.slua_deprecated,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
                     "return": slua.validate_type(self.compute_slua_type(), known_types),
@@ -642,6 +646,7 @@ class LSLDefinitionParser:
             ],
             private=event_data.get("private", False),
             deprecated=event_data.get("deprecated", False),
+            slua_deprecated=event_data.get("slua-deprecated", False),
             slua_removed=event_data.get("slua-removed", False),
             detected_semantics=event_data.get("detected-semantics", False),
         )
@@ -672,11 +677,13 @@ class LSLDefinitionParser:
             private=func_data.get("private", False),
             god_mode=func_data.get("god-mode", False),
             deprecated=func_data.get("deprecated", False),
+            slua_deprecated=func_data.get("slua-deprecated", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
+            detected_semantics=bool(func_data.get("detected-semantics", False)),
         )
 
         if func.name in self._definitions.functions:

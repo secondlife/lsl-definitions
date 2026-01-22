@@ -128,8 +128,9 @@ baseClasses:
     type: number
   - name: z
     type: number
-- name: LLDetectedEvent
+- name: DetectedEvent
   comment: Event detection class providing access to detected object/avatar information
+  # auto-generated from lsl_definitions.yaml
   methods: []
   properties:
   - name: index
@@ -158,7 +159,7 @@ typeAliases:
   # auto-generated from lsl_definitions.yaml
   definition: (...any) -> ()
 - name: LLDetectedEventHandler
-  definition: "(detected: {LLDetectedEvent}) -> ()"
+  definition: "(detected: {DetectedEvent}) -> ()"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
   definition: "(scheduled: number, interval: number) -> ()"

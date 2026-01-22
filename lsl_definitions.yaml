@@ -4772,6 +4772,7 @@ events:
       to another state. It is handled before the new states state_entry event.
   timer:
     arguments: []
+    slua-deprecated: true
     tooltip: This event is raised at regular intervals set by the llSetTimerEvent
       library function.
   touch:
@@ -4831,6 +4832,7 @@ functions:
 #    func-id: The LSO function identifier, (See comment at the top of this file.)
 #    private: Should this function be omitted from the generated documentation.
 #    deprecated: Has this function been deprecated.
+#    slua-deprecated: Has this function or event been deprecated in SLua.
 #    pure: Is the function guaranteed to have no side effects.
 #    must-use: If true or `pure` is true, then the functions return value should not be discarded, as it serves no other purpose
 #    native: If true, this function must use a native implementation for non-LSO VMs.
@@ -4839,6 +4841,7 @@ functions:
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
 #    bool-semantics: If true then the returned integer represents a boolean 1 or 0
+#    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
   llAbs:
     arguments:
     - Value:
@@ -4908,6 +4911,7 @@ functions:
     energy: 10.0
     func-id: 555
     return: void
+    detected-semantics: true
     sleep: 0.0
     tooltip: Changes the amount of damage to be delivered by this damage event.
   llAdjustSoundVolume:
@@ -5548,6 +5552,7 @@ functions:
     energy: 10.0
     func-id: 554
     return: list
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns a list containing the current damage for the event, the damage
       type and the original damage delivered.
@@ -5561,6 +5566,7 @@ functions:
     energy: 10.0
     func-id: 37
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the grab offset of a user touching the object.\nReturns <0.0,
       0.0, 0.0> if Number is not a valid object.
@@ -5575,6 +5581,7 @@ functions:
     func-id: 39
     return: integer
     bool-semantics: true
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if detected object or agent Number has the same user group
       active as this object.\nIt will return FALSE if the object or agent is in the
@@ -5589,6 +5596,7 @@ functions:
     energy: 10.0
     func-id: 32
     return: key
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the key of detected object or avatar number.\nReturns NULL_KEY
       if Number is not a valid index.
@@ -5603,6 +5611,7 @@ functions:
     func-id: 40
     # Note that the return does NOT have index semantics, link numbers are already one-indexed (sort of)
     return: integer
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the link position of the triggered event for touches and collisions
       only.\n0 for a non-linked object, 1 for the root of a linked object, 2 for the
@@ -5617,6 +5626,7 @@ functions:
     energy: 10.0
     func-id: 31
     return: string
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the name of detected object or avatar number.\nReturns the name
       of detected object number.\nReturns empty string if Number is not a valid index.
@@ -5643,6 +5653,7 @@ functions:
     energy: 10.0
     func-id: 35
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the position of detected object or avatar number.\nReturns <0.0,
       0.0, 0.0> if Number is not a valid index.
@@ -5656,6 +5667,7 @@ functions:
     energy: 10.0
     func-id: 553
     return: key
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the key for the rezzer of the detected object.
     must-use: true
@@ -5668,6 +5680,7 @@ functions:
     energy: 10.0
     func-id: 38
     return: rotation
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the rotation of detected object or avatar number.\nReturns <0.0,
       0.0, 0.0, 1.0> if Number is not a valid offset.
@@ -5681,6 +5694,7 @@ functions:
     energy: 10.0
     func-id: 341
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the surface bi-normal for a triggered touch event.\nReturns a
       vector that is the surface bi-normal (tangent to the surface) where the touch
@@ -5696,6 +5710,7 @@ functions:
     func-id: 338
     # NOTE: We can't change face number indexing easily because it's part of the viewer, so no index semantics for ret...
     return: integer
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the index of the face where the avatar clicked in a triggered
       touch event.
@@ -5709,6 +5724,7 @@ functions:
     energy: 10.0
     func-id: 340
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the surface normal for a triggered touch event.\nReturns a vector
       that is the surface normal (perpendicular to the surface) where the touch event
@@ -5723,6 +5739,7 @@ functions:
     energy: 10.0
     func-id: 339
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the position, in region coordinates, where the object was touched
       in a triggered touch event.\nUnless it is a HUD, in which case it returns the
@@ -5753,6 +5770,7 @@ functions:
     energy: 10.0
     func-id: 337
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns a vector that is the texture coordinates for where the prim was
       touched.\nThe X and Y vector positions contain the U and V face coordinates
@@ -5768,6 +5786,7 @@ functions:
     energy: 10.0
     func-id: 34
     return: integer
+    detected-semantics: true
     sleep: 0.0
     tooltip: "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object.\\\
       nReturns 0 if number is not a valid index.\\nNote that number is a bit-field,\
@@ -5783,6 +5802,7 @@ functions:
     energy: 10.0
     func-id: 36
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the velocity of the detected object Number.\nReturns<0.0, 0.0,
       0.0> if Number is not a valid offset.
@@ -6164,6 +6184,7 @@ functions:
     energy: 10.0
     func-id: 84
     return: float
+    slua-deprecated: true
     sleep: 0.0
     tooltip: Returns the script time in seconds and then resets the script timer to
       zero.\nGets the time in seconds since starting and resets the time to zero.
@@ -10128,6 +10149,7 @@ functions:
     energy: 10.0
     func-id: 83
     return: void
+    slua-deprecated: true
     sleep: 0.0
     tooltip: Sets the time to zero.\nSets the internal timer to zero.
   llReturnObjectsByID:
@@ -11113,6 +11135,7 @@ functions:
     func-id: 369
     return: integer
     bool-semantics: true
+    slua-deprecated: true
     sleep: 0.0
     tooltip: Requests Limit bytes to be reserved for this script.\nReturns TRUE or
       FALSE indicating whether the limit was set successfully.\nThis function has
@@ -11477,6 +11500,7 @@ functions:
     energy: 10.0
     func-id: 107
     return: void
+    slua-deprecated: true
     sleep: 0.0
     tooltip: Causes the timer event to be triggered every Rate seconds.\n Passing
       in 0.0 stops further timer events.

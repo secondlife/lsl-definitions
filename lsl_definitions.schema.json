@@ -221,12 +221,17 @@
                         },
                         "detected-semantics": {
                             "const": true,
-                            "markdownDescription": "Uses llDetected* in LSL and {LLDetectedEvent} in SLua.",
+                            "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
                             "type": "boolean"
                         },
                         "deprecated": {
                             "const": true,
                             "markdownDescription": "This event has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "slua-deprecated": {
+                            "const": true,
+                            "markdownDescription": "This event has been deprecated in SLua.",
                             "type": "boolean"
                         },
                         "slua-removed": {
@@ -359,6 +364,16 @@
                         "deprecated": {
                             "const": true,
                             "markdownDescription": "This function has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "detected-semantics": {
+                            "const": true,
+                            "markdownDescription": "This function is wrapped in the DetectedEvent class.",
+                            "type": "boolean"
+                        },
+                        "slua-deprecated": {
+                            "const": true,
+                            "markdownDescription": "This function only exists in llcompat, not ll.",
                             "type": "boolean"
                         },
                         "energy": {
