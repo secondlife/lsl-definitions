@@ -2155,8 +2155,12 @@ controls:
     tooltip: "Lua function keyword: begins a function definition."
   break:
     tooltip: "Lua break statement: exits the nearest loop."
+  continue:
+    tooltip: "Luau continue statement: skip to the next loop iteration."
   local:
     tooltip: "Lua local keyword: declares a local variable or function."
+  export:
+    tooltip: "Luau export keyword: declares a type that can be used in outside this module."
   in:
     tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
   not:
