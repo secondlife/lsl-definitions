@@ -2143,8 +2143,6 @@ controls:
     tooltip: "Lua end keyword: closes control structures like if, do, while, for, and function."
   for:
     tooltip: "Lua for loop: for var = start, end, step do ... end"
-  goto:
-    tooltip: "Lua goto statement: jumps to a specified label."
   return:
     tooltip: "Lua return statement: returns a value from a function."
   while:
