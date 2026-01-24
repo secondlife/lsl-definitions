@@ -6,6 +6,7 @@ import ast
 import dataclasses
 import enum
 import itertools
+import io
 import os.path
 import re
 import stat
@@ -1108,6 +1109,85 @@ def dump_slua_syntax(
         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
     else:
         return llsd.format_xml(syntax)
+
+
+def gen_luau_lsp_defs(
+    lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False
+) -> str:
+    """Write a definitions file for use by the Luau Language Server"""
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
+    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+
+    defs = io.StringIO()
+    defs.write("""
+----------------------------------
+---------- LSL LUAU DEFS ---------
+----------------------------------
+
+""")
+    syntax = {
+        "controls": slua_definitions.controls.copy(),
+        "types": slua_definitions.builtinTypes.copy(),
+        "constants": {},
+        "events": {},
+        "functions": {},
+        "llsd-lsl-syntax-version": 2,
+    }
+
+    # 1. Luau builtins unneeded. Luau-lsp already know about these
+    # 2. SLua base classes. These only depend on Luau builtins
+    baseClasses: List[SLuaClassDeclaration]
+    typeAliases: List[SLuaTypeAlias]
+
+    # 3. SLua standard library. Depends on base classes
+    classes: List[SLuaClassDeclaration]
+    globalFunctions: List[SLuaFunctionSignature]
+    modules: List[SLuaModuleDeclaration]
+    globalVariables: List[SLuaProperty]
+
+    # # types
+    # for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
+    #     syntax["types"][class_.name] = class_.to_keywords_dict()
+    # for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
+    #     syntax["types"][alias.name] = alias.to_keywords_dict()
+    # for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
+    #     syntax["types"][class_.name] = class_.to_keywords_dict()
+
+    # # events
+    # for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
+    #     if event.slua_removed:
+    #         continue
+    #     syntax["events"][event.name] = event.to_slua_dict(parser)
+
+    # # functions
+    # for func in slua_definitions.builtinFunctions:
+    #     syntax["functions"][func.name] = func.to_keywords_dict()
+    # for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
+    #     syntax["functions"][func.name] = func.to_keywords_dict()
+    # for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+    #     if module.name in {"ll", "llcompat"}:
+    #         continue
+    #     syntax["functions"].update(module.to_keywords_functions_dict())
+    # syntax["functions"].update(ll_module.to_keywords_functions_dict())
+    # for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
+    #     if func.private:
+    #         continue
+    #     syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
+
+    # # constants
+    # for const in slua_definitions.builtinConstants:
+    #     syntax["constants"][const.name] = const.to_keywords_dict()
+    # for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+    #     syntax["constants"].update(module.to_keywords_constants_dict())
+    # for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
+    #     if const.private:
+    #         continue
+    #     if const.slua_removed:
+    #         continue
+    #     syntax["constants"][const.name] = const.to_slua_dict(parser)
+
+    return defs.getvalue()
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
@@ -2544,6 +2624,15 @@ def main():
     sub.set_defaults(
         func=lambda args, defs: _write_if_different(
             args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)
+        )
+    )
+
+    sub = subparsers.add_parser("slua_lsp_defs")
+    sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
+    sub.add_argument("filename")
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(
+            args.filename, gen_luau_lsp_defs(defs, args.slua_definitions)
         )
     )
 
