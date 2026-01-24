@@ -526,6 +526,10 @@ class SLuaClassDeclaration:
 
     def to_keywords_dict(self) -> dict:
         return {"tooltip": self.comment}
+    
+    def write_luau_def(self, f: io.StringIO) -> None:
+        f.write(f"declare extern type {self.name} with\n")
+        f.write("end\n\n")
 
 
 @dataclasses.dataclass
@@ -1137,11 +1141,15 @@ def gen_luau_lsp_defs(
 
     # 1. Luau builtins unneeded. Luau-lsp already know about these
     # 2. SLua base classes. These only depend on Luau builtins
-    baseClasses: List[SLuaClassDeclaration]
+    classes = slua_definitions.baseClasses + slua_definitions.classes
+    classes.sort(key=lambda x: x.name)
+    for class_ in (class_ for class_ in classes if class_.name[0].islower()):
+        class_.write_luau_def(defs)
     typeAliases: List[SLuaTypeAlias]
 
     # 3. SLua standard library. Depends on base classes
-    classes: List[SLuaClassDeclaration]
+    for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
+        class_.write_luau_def(defs)
     globalFunctions: List[SLuaFunctionSignature]
     modules: List[SLuaModuleDeclaration]
     globalVariables: List[SLuaProperty]
