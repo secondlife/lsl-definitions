@@ -487,7 +487,7 @@ class SLuaFunction(SLuaFunctionAnon):
     name: str = ""
     private: bool = False
     deprecated: bool = False
-    overloads: Optional[List[SLuaFunctionAnon]] = None
+    overloads: List[SLuaFunctionAnon] = dataclasses.field(default_factory=list)
 
     def to_keywords_dict(self) -> dict:
         return _remove_worthless(
@@ -518,7 +518,15 @@ class SLuaFunction(SLuaFunctionAnon):
 
     def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
         f.write(f"{'  '*indent}{self.name}: ")
-        f.write(self.type_def_string())
+        if not self.overloads:
+            f.write(self.type_def_string())
+        else:
+            f.write("(")
+            f.write(self.type_def_string())
+            for overload in self.overloads:
+                f.write(") & (")
+                f.write(overload.type_def_string())
+            f.write(")")
         f.write(",\n")
 
 
@@ -971,22 +979,18 @@ class SLuaDefinitionParser:
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
+            self._validate_function_signature(func, method)
             known_types = self.validate_type_params(func.typeParameters)
             self.validate_type(func.returnType, known_types)
-            params = func.parameters
-            params_scope = set()
-            if method:
-                if not params or params[0].name != "self" or params[0].type is not None:
-                    raise ValueError(f"Method {func.name} missing self parameter")
-                params_scope.add("self")
-                params = params[1:]
-            if params and params[-1].name == "...":
-                self.validate_type(params[-1].type, known_types)
-                params = params[:-1]
-            for param in params:
-                self._validate_identifier(param.name)
-                self._validate_scope(param.name, params_scope)
-                self.validate_type(param.type, known_types)
+            for overload_data in data.get("overloads", []):
+                overload = SLuaFunctionSignature(
+                    typeParameters=overload_data.get("typeParameters", []),
+                    parameters=[SLuaParameter(**p) for p in overload_data.get("parameters", [])],
+                    returnType=overload_data.get("returnType", LSLType.VOID.meta.slua_name),
+                    comment=overload_data.get("comment", ""),
+                )
+                self._validate_function_signature(overload)
+                func.overloads.append(overload)
             return func
         except Exception as e:
             raise ValueError(f"In function {data['name']}: {e}") from e
@@ -1010,6 +1014,26 @@ class SLuaDefinitionParser:
             raise ValueError(f"Constant {prop.name} must have a value")
         self.validate_type(prop.type)
         return prop
+
+    def _validate_function_signature(
+        self, func: SLuaFunctionOverload, method: bool = False
+    ) -> None:
+        known_types = self.validate_type_params(func.typeParameters)
+        self.validate_type(func.returnType, known_types)
+        params = func.parameters
+        params_scope = set()
+        if method:
+            if not params or params[0].name != "self" or params[0].type is not None:
+                raise ValueError(f"Method {func.name} missing self parameter")
+            params_scope.add("self")
+            params = params[1:]
+        if params and params[-1].name == "...":
+            self.validate_type(params[-1].type, known_types)
+            params = params[:-1]
+        for param in params:
+            self._validate_identifier(param.name)
+            self._validate_scope(param.name, params_scope)
+            self.validate_type(param.type, known_types)
 
     def validate_type_params(self, type_params: List[str]) -> set[str]:
         known_types = set(self.type_names)
