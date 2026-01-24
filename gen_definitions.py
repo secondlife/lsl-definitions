@@ -463,20 +463,28 @@ class SLuaParameter:
 class SLuaFunctionAnon:
     """Annonymous function signature"""
 
-    parameters: List[SLuaParameter]
-    returnType: str
-    comment: Optional[str] = None
+    typeParameters: List[str] = dataclasses.field(default_factory=list)
+    parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
+    returnType: str = "()"
+    comment: str = ""
+
+    def type_parameters_string(self) -> str:
+        if not self.typeParameters:
+            return ""
+        return "<" + ", ".join(self.typeParameters) + ">"
+            
+    def parameters_string(self) -> str:
+        return "(" + ", ".join(p.to_luau_def() for p in self.parameters) + ")"
+
+    def type_def_string(self) -> str:
+        return self.type_parameters_string() + self.parameters_string() + " -> " + self.returnType
 
 
 @dataclasses.dataclass
-class SLuaFunction:
+class SLuaFunction(SLuaFunctionAnon):
     """Full function or method signature with optional overloads"""
 
-    name: str
-    parameters: List[SLuaParameter]
-    returnType: str
-    typeParameters: Optional[List[str]] = None
-    comment: str = ""
+    name: str = ""
     private: bool = False
     deprecated: bool = False
     overloads: Optional[List[SLuaFunctionAnon]] = None
@@ -503,14 +511,15 @@ class SLuaFunction:
         )
 
     def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  '*indent}function {self.name}(")
-        f.write(", ".join(p.to_luau_def() for p in self.parameters))
-        f.write(f"): {self.returnType}\n")
+        f.write(f"{'  '*indent}function {self.name}")
+        f.write(self.type_parameters_string())
+        f.write(self.parameters_string())
+        f.write(f": {self.returnType}\n")
 
     def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  '*indent}function {self.name}(")
-        f.write(", ".join(p.to_luau_def() for p in self.parameters))
-        f.write(f") -> {self.returnType}\n")
+        f.write(f"{'  '*indent}{self.name}: ")
+        f.write(self.type_def_string())
+        f.write(",\n")
 
 
 @dataclasses.dataclass
@@ -547,7 +556,7 @@ class SLuaClassDeclaration:
 
     def to_keywords_dict(self) -> dict:
         return {"tooltip": self.comment}
-    
+
     def write_luau_def(self, f: io.StringIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
@@ -587,6 +596,26 @@ class SLuaModule:
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
+
+    def write_luau_def(self, f: io.StringIO) -> None:
+        f.write(f"""
+---------------------------
+-- Global Table: {self.name}
+---------------------------
+
+declare {self.name}: """)
+        if self.callable:
+            f.write("(")
+            f.write(self.callable.type_def_string())
+            f.write(") & ")
+        f.write("{\n")
+        for prop in self.properties:
+            f.write(f'  {prop.to_luau_def()},\n')
+        for func in self.functions:
+            if func.private:
+                continue
+            func.write_luau_type_def(f, indent=1)
+        f.write("}\n\n")
 
 
 class SLuaDefinitions(NamedTuple):
@@ -1147,6 +1176,7 @@ def gen_luau_lsp_defs(
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
     ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+    llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
     defs = io.StringIO()
     defs.write("""
@@ -1176,8 +1206,13 @@ def gen_luau_lsp_defs(
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
     globalFunctions: List[SLuaFunctionSignature]
-    modules: List[SLuaModuleDeclaration]
     globalVariables: List[SLuaProperty]
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        if module.name in {"ll", "llcompat"}:
+            continue
+        module.write_luau_def(defs)
+    ll_module.write_luau_def(defs)
+    llcompat_module.write_luau_def(defs)
 
     # # types
     # for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
