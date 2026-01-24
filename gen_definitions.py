@@ -433,6 +433,9 @@ class SLuaProperty:
             **({"value": _escape_python(self.value)} if self.value is not None else {}),
         }
 
+    def to_luau_def(self) -> str:
+        return f"{self.name}: {self.type}"
+
 
 @dataclasses.dataclass
 class SLuaParameter:
@@ -446,6 +449,14 @@ class SLuaParameter:
     name: str
     type: Optional[str] = None
     comment: str = ""
+
+    def to_luau_def(self) -> str:
+        if self.type is None:
+            return self.name
+        elif self.name == "...":
+            return self.type
+        else:
+            return f"{self.name}: {self.type}"
 
 
 @dataclasses.dataclass
@@ -491,6 +502,16 @@ class SLuaFunction:
             }
         )
 
+    def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
+        f.write(f"{'  '*indent}function {self.name}(")
+        f.write(", ".join(p.to_luau_def() for p in self.parameters))
+        f.write(f"): {self.returnType}\n")
+
+    def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
+        f.write(f"{'  '*indent}function {self.name}(")
+        f.write(", ".join(p.to_luau_def() for p in self.parameters))
+        f.write(f") -> {self.returnType}\n")
+
 
 @dataclasses.dataclass
 class SLuaTypeAlias:
@@ -529,6 +550,10 @@ class SLuaClassDeclaration:
     
     def write_luau_def(self, f: io.StringIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
+        for prop in self.properties:
+            f.write(f'  {prop.to_luau_def()}\n')
+        for func in self.methods:
+            func.write_luau_function_def(f, indent=1)
         f.write("end\n\n")
 
 
