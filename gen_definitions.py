@@ -282,6 +282,7 @@ class LSLFunction:
     """
     deprecated: bool
     slua_deprecated: bool
+    slua_removed: bool
     """Only exists in llcompat"""
     func_id: int
     pure: bool
@@ -369,7 +370,10 @@ class LSLFunction:
                         }
                         for a in self.arguments
                     ],
-                    "deprecated": self.deprecated or self.slua_deprecated,
+                    "deprecated": self.deprecated
+                    or self.slua_deprecated
+                    or self.slua_removed
+                    or self.detected_semantics,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
                     "return": slua.validate_type(self.compute_slua_type(), known_types),
@@ -680,6 +684,7 @@ class LSLDefinitionParser:
             god_mode=func_data.get("god-mode", False),
             deprecated=func_data.get("deprecated", False),
             slua_deprecated=func_data.get("slua-deprecated", False),
+            slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
             native=func_data.get("native", False),

@@ -371,11 +371,6 @@
                             "markdownDescription": "This function is wrapped in the DetectedEvent class.",
                             "type": "boolean"
                         },
-                        "slua-deprecated": {
-                            "const": true,
-                            "markdownDescription": "This function only exists in llcompat, not ll.",
-                            "type": "boolean"
-                        },
                         "energy": {
                             "$ref": "#/definitions/nonNegativeNumber",
                             "markdownDescription": "The script energy consumed by this function."
@@ -484,6 +479,16 @@
                                 { "const": "vector" },
                                 { "const": "void" }
                             ]
+                        },
+                        "slua-deprecated": {
+                            "const": true,
+                            "markdownDescription": "This function is deprecated in SLua.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "In SLua, this function has been removed from ll module and only exists in llcompat.",
+                            "type": "boolean"
                         },
                         "slua-return": {
                             "markdownDescription": "A more specific return type for slua type-checking.",

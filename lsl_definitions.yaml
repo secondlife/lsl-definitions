@@ -4833,6 +4833,7 @@ functions:
 #    private: Should this function be omitted from the generated documentation.
 #    deprecated: Has this function been deprecated.
 #    slua-deprecated: Has this function or event been deprecated in SLua.
+#    slua-removed: Has this function or event been removed in SLua.
 #    pure: Is the function guaranteed to have no side effects.
 #    must-use: If true or `pure` is true, then the functions return value should not be discarded, as it serves no other purpose
 #    native: If true, this function must use a native implementation for non-LSO VMs.
@@ -10150,7 +10151,7 @@ functions:
     energy: 10.0
     func-id: 83
     return: void
-    slua-deprecated: true
+    slua-removed: true
     sleep: 0.0
     tooltip: Sets the time to zero.\nSets the internal timer to zero.
   llReturnObjectsByID:
@@ -11136,7 +11137,7 @@ functions:
     func-id: 369
     return: integer
     bool-semantics: true
-    slua-deprecated: true
+    slua-removed: true
     sleep: 0.0
     tooltip: Requests Limit bytes to be reserved for this script.\nReturns TRUE or
       FALSE indicating whether the limit was set successfully.\nThis function has
@@ -11501,7 +11502,7 @@ functions:
     energy: 10.0
     func-id: 107
     return: void
-    slua-deprecated: true
+    slua-removed: true
     sleep: 0.0
     tooltip: Causes the timer event to be triggered every Rate seconds.\n Passing
       in 0.0 stops further timer events.
