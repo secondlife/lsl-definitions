@@ -495,6 +495,11 @@ class SLuaFunction(SLuaFunctionAnon):
     deprecated: bool = False
     overloads: List[SLuaFunctionAnon] = dataclasses.field(default_factory=list)
 
+    def deprecated_string(self):
+        if not self.deprecated:
+            return ""
+        return "@deprecated "
+
     def to_keywords_dict(self) -> dict:
         return _remove_worthless(
             {
@@ -518,7 +523,7 @@ class SLuaFunction(SLuaFunctionAnon):
 
     def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
         f.write(f"{'  ' * indent}")
-        f.write("@deprecated " if self.deprecated else "")
+        f.write(self.deprecated_string())
         f.write(f"function {self.name}")
         f.write(self.type_parameters_string())
         f.write(self.parameters_string())
@@ -526,7 +531,7 @@ class SLuaFunction(SLuaFunctionAnon):
 
     def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
         f.write(f"{'  ' * indent}{self.name}: ")
-        f.write("@deprecated " if self.deprecated else "")
+        f.write(self.deprecated_string())
         if not self.overloads:
             f.write(self.type_def_string())
         else:
@@ -934,7 +939,7 @@ class SLuaDefinitionParser:
             slua_func = SLuaFunctionSignature(
                 name=func.compute_slua_name(with_module=False),
                 comment=func.tooltip,
-                # deprecated = func.deprecated or func.slua_deprecated,
+                deprecated=func.deprecated or func.detected_semantics,
                 typeParameters=func.type_arguments,
                 parameters=[
                     SLuaParameter(
