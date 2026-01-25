@@ -1681,6 +1681,7 @@ modules:
     returnType: string
   - name: foreach
     comment: Iterates over all key-value pairs in the table (deprecated).
+    deprecated: true
     typeParameters: [K, V, R]
     parameters:
     - name: t
@@ -1692,6 +1693,7 @@ modules:
     returnType: R?
   - name: foreachi
     comment: Iterates over all index-value pairs in the array (deprecated).
+    deprecated: true
     typeParameters: [V, R]
     parameters:
     - name: a
@@ -1703,6 +1705,7 @@ modules:
     returnType: R?
   - name: getn
     comment: 'Returns the length of an array (deprecated; use # instead).'
+    deprecated: true
     parameters:
     - name: a
       comment: Array to check.

@@ -478,6 +478,7 @@ class SLuaFunctionSignature:
                     }
                     for a in self.parameters
                 ],
+                "deprecated": self.deprecated,
                 "energy": 10.0,
                 "return": self.returnType,
                 "sleep": 0.0,
@@ -900,6 +901,7 @@ class SLuaDefinitionParser:
                 parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
                 returnType=data.get("returnType", LSLType.VOID.meta.slua_name),
                 comment=data.get("comment", ""),
+                deprecated=data.get("deprecated", False),
                 private=data.get("private", False),
             )
             self._validate_identifier(func.name)
