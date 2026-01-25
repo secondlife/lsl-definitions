@@ -922,6 +922,8 @@ class SLuaDefinitionParser:
         ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
         # llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
         for func in lsl.functions.values():
+            if func.private:
+                continue
             known_types = self.validate_type_params(func.type_arguments)
             slua_func = SLuaFunctionSignature(
                 name=func.compute_slua_name(with_module=False),
