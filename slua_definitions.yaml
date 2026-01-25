@@ -1663,7 +1663,7 @@ modules:
       type: string
     returnType: string
 - name: table
-  comment: Table manipulation library
+  comment: Table manipulation library. Tables are collections of key-value pairs.
   functions:
   - name: concat
     comment: Joins an array of strings into one string, with an optional separator.
@@ -2182,8 +2182,6 @@ builtinTypes:
     tooltip: Double‑precision floating point number.
   string:
     tooltip: Read-only binary data. Usually UTF-8-encoded text.
-  table:
-    tooltip: Collection of key‑value pairs.
   thread:
     tooltip: Represents a coroutine.
   unknown:
@@ -2316,10 +2314,10 @@ builtinFunctions:
   parameters:
   - name: t
     comment: The table to set the metatable for.
-    type: table
+    type: "{ [any]: any }"
   - name: mt
     comment: The metatable to set.
-    type: table?
+    type: "{ [any]: any }?"
   returnType: ()
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
