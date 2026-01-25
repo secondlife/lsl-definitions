@@ -428,6 +428,9 @@ class SLuaProperty:
     value: str | None = None
     comment: str = ""
     slua_removed: bool = False
+    """This property is in Luau but not SLua"""
+    private: bool = False
+    """Whether this should this be included in the syntax file"""
 
     def to_keywords_dict(self) -> dict:
         return {
@@ -950,6 +953,7 @@ class SLuaDefinitionParser:
                 comment=const.tooltip,
                 type=self.validate_type(const.slua_type or const.type.meta.slua_name),
                 value=const.value,
+                private=const.private,
             )
             self.definitions.globalConstants.append(prop)
 
@@ -1279,9 +1283,11 @@ def gen_luau_lsp_defs(
         defs.write("\n")
     ll_module.write_luau_def(defs)
     llcompat_module.write_luau_def(defs)
-    for var in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        if const.private:
+            continue
         defs.write("declare ")
-        defs.write(var.to_luau_def())
+        defs.write(const.to_luau_def())
         defs.write("\n")
 
     return defs.getvalue()
