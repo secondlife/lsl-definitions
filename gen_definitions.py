@@ -943,7 +943,8 @@ class SLuaDefinitionParser:
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
             )
-            ll_module.functions.append(slua_func)
+            if not func.slua_deprecated:
+                ll_module.functions.append(slua_func)
             # llcompat_module.functions.append(slua_func)
         for const in lsl.constants.values():
             if const.slua_removed:
