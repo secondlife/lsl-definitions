@@ -6185,7 +6185,7 @@ functions:
     energy: 10.0
     func-id: 84
     return: float
-    slua-deprecated: true
+    slua-removed: true
     sleep: 0.0
     tooltip: Returns the script time in seconds and then resets the script timer to
       zero.\nGets the time in seconds since starting and resets the time to zero.
