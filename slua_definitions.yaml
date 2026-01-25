@@ -143,8 +143,6 @@ typeAliases:
 - name: rotation
   comment: '''rotation'' is an alias for ''quaternion'''
   definition: quaternion
-- name: numeric
-  definition: boolean | number
 - name: list
   definition: "{string | number | vector | uuid | quaternion | boolean}"
 - name: LLDetectedEventName
