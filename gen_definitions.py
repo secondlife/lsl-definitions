@@ -938,7 +938,7 @@ class SLuaDefinitionParser:
         prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
-        if const and prop.type != "userdata" and prop.value is None:
+        if const and prop.type != "any" and prop.value is None:
             raise ValueError(f"Constant {prop.name} must have a value")
         self.validate_type(prop.type)
         return prop

@@ -996,7 +996,7 @@ modules:
   properties:
   - name: 'null'
     comment: A constant to pass for null to json encode
-    type: userdata
+    type: any
   - name: empty_array_mt
     comment: Metatable for declaring table as an empty array for json encode
     type: '{ [any]: any }'
@@ -1007,7 +1007,7 @@ modules:
     value: '{}'
   - name: empty_array
     comment: A constant to pass for an empty array to json encode
-    type: userdata
+    type: any
   - name: _NAME
     comment: Name of the lljson library
     type: string
@@ -2186,8 +2186,6 @@ builtinTypes:
     tooltip: Collection of key‑value pairs.
   thread:
     tooltip: Represents a coroutine.
-  userdata:
-    tooltip: Opaque external data.
   unknown:
     tooltip: The union of every type. Similar to any without disabling type-checking.
 builtinConstants:
@@ -2252,7 +2250,7 @@ builtinFunctions:
   - name: mt
     comment: Optional boolean to create a modifiable metatable.
     type: boolean?
-  returnType: userdata
+  returnType: any
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
   parameters:
