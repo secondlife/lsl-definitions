@@ -472,7 +472,7 @@ class SLuaFunctionAnon:
         if not self.typeParameters:
             return ""
         return "<" + ", ".join(self.typeParameters) + ">"
-            
+
     def parameters_string(self) -> str:
         return "(" + ", ".join(p.to_luau_def() for p in self.parameters) + ")"
 
@@ -511,13 +511,13 @@ class SLuaFunction(SLuaFunctionAnon):
         )
 
     def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  '*indent}function {self.name}")
+        f.write(f"{'  ' * indent}function {self.name}")
         f.write(self.type_parameters_string())
         f.write(self.parameters_string())
         f.write(f": {self.returnType}\n")
 
     def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  '*indent}{self.name}: ")
+        f.write(f"{'  ' * indent}{self.name}: ")
         if not self.overloads:
             f.write(self.type_def_string())
         else:
@@ -568,7 +568,7 @@ class SLuaClassDeclaration:
     def write_luau_def(self, f: io.StringIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
-            f.write(f'  {prop.to_luau_def()}\n')
+            f.write(f"  {prop.to_luau_def()}\n")
         for func in self.methods:
             func.write_luau_function_def(f, indent=1)
         f.write("end\n\n")
@@ -618,7 +618,7 @@ declare {self.name}: """)
             f.write(") & ")
         f.write("{\n")
         for prop in self.properties:
-            f.write(f'  {prop.to_luau_def()},\n')
+            f.write(f"  {prop.to_luau_def()},\n")
         for func in self.functions:
             if func.private:
                 continue
@@ -1209,14 +1209,6 @@ def gen_luau_lsp_defs(
 ----------------------------------
 
 """)
-    syntax = {
-        "controls": slua_definitions.controls.copy(),
-        "types": slua_definitions.builtinTypes.copy(),
-        "constants": {},
-        "events": {},
-        "functions": {},
-        "llsd-lsl-syntax-version": 2,
-    }
 
     # 1. Luau builtins unneeded. Luau-lsp already know about these
     # 2. SLua base classes. These only depend on Luau builtins
@@ -1224,13 +1216,23 @@ def gen_luau_lsp_defs(
     classes.sort(key=lambda x: x.name)
     for class_ in (class_ for class_ in classes if class_.name[0].islower()):
         class_.write_luau_def(defs)
-    typeAliases: List[SLuaTypeAlias]
+    defs.write("\n")
+    for alias in slua_definitions.typeAliases:
+        defs.write(alias.to_luau_def())
+        defs.write("\n")
+    defs.write("\n")
 
     # 3. SLua standard library. Depends on base classes
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
-    globalFunctions: List[SLuaFunctionSignature]
-    globalVariables: List[SLuaProperty]
+    defs.write("\n")
+    for var in slua_definitions.globalVariables:
+        defs.write("declare ")
+        defs.write(var.to_luau_def())
+        defs.write("\n")
+    for func in slua_definitions.globalFunctions:
+        defs.write("declare ")
+        func.write_luau_function_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue

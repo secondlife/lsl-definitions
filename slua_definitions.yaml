@@ -257,18 +257,24 @@ classes:
     returnType: boolean
 globalVariables:
 - name: rotation
-  comment: rotation is an alias for quaternion
+  comment: rotation is an alias for quaternion.
   type: typeof(quaternion)
+- name: LLEvents
+  comment: The instance of the LLEvents singleton.
+  type: LLEvents
+- name: LLTimers
+  comment: The instance of the LLTimers singleton.
+  type: LLTimers
 - name: loadstring
-  comment: loadstring is removed in SLua
+  comment: loadstring is removed in SLua.
   slua-removed: true
   type: nil
 - name: getfenv
-  comment: getfenv is removed in SLua
+  comment: getfenv is removed in SLua.
   slua-removed: true
   type: nil
 - name: setfenv
-  comment: setfenv is removed in SLua
+  comment: setfenv is removed in SLua.
   slua-removed: true
   type: nil
 globalFunctions:
