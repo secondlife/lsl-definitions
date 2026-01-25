@@ -344,10 +344,13 @@ class LSLFunction:
             }
         )
 
-    def compute_slua_name(self) -> str:
-        if self.name.startswith("ll"):
+    def compute_slua_name(self, with_module=True) -> str:
+        if not self.name.startswith("ll"):
+            raise ValueError(f"invalid function name: {self.name}")
+        if with_module:
             return self.name[:2] + "." + self.name[2:]
-        return self.name
+        else:
+            return self.name[2:]
 
     def compute_slua_type(self) -> str:
         if self.slua_type is not None:
@@ -916,6 +919,27 @@ class SLuaDefinitionParser:
         return self.definitions
 
     def generate_ll_modules(self, lsl: LSLDefinitions):
+        ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
+        # llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
+        for func in lsl.functions.values():
+            known_types = self.validate_type_params(func.type_arguments)
+            slua_func = SLuaFunctionSignature(
+                name=func.compute_slua_name(with_module=False),
+                comment=func.tooltip,
+                # deprecated = func.deprecated or func.slua_deprecated,
+                typeParameters=func.type_arguments,
+                parameters=[
+                    SLuaParameter(
+                        name=a.name,
+                        comment=a.tooltip,
+                        type=self.validate_type(a.compute_slua_type(), known_types),
+                    )
+                    for a in func.arguments
+                ],
+                returnType=self.validate_type(func.compute_slua_type(), known_types),
+            )
+            ll_module.functions.append(slua_func)
+            # llcompat_module.functions.append(slua_func)
         for const in lsl.constants.values():
             if const.slua_removed:
                 continue
