@@ -1240,10 +1240,6 @@ def gen_luau_lsp_defs(
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for var in slua_definitions.globalVariables:
-        defs.write("declare ")
-        defs.write(var.to_luau_def())
-        defs.write("\n")
     for func in slua_definitions.globalFunctions:
         defs.write("declare ")
         func.write_luau_function_def(defs)
@@ -1251,6 +1247,10 @@ def gen_luau_lsp_defs(
         if module.name in {"ll", "llcompat"}:
             continue
         module.write_luau_def(defs)
+    for var in slua_definitions.globalVariables:
+        defs.write("declare ")
+        defs.write(var.to_luau_def())
+        defs.write("\n")
     ll_module.write_luau_def(defs)
     llcompat_module.write_luau_def(defs)
     for var in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
