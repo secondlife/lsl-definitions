@@ -352,10 +352,10 @@ class LSLFunction:
         else:
             return self.name[2:]
 
-    def compute_slua_type(self) -> str:
+    def compute_slua_type(self, llcompat=False) -> str:
         if self.slua_type is not None:
             return self.slua_type
-        if self.bool_semantics and self.ret_type == LSLType.INTEGER:
+        if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
             return "boolean"
         return self.ret_type.meta.slua_name
 
@@ -957,7 +957,7 @@ class SLuaDefinitionParser:
                 deprecated=True,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
-                returnType=ll_func.returnType,
+                returnType=self.validate_type(func.compute_slua_type(llcompat=True), known_types),
             )
             if not func.slua_removed:
                 ll_module.functions.append(ll_func)
