@@ -6481,6 +6481,7 @@ functions:
     func-id: 410
     private: true
     return: list
+    slua-return: '{uuid}'
     sleep: 0.0
     tooltip: ''
     must-use: true
