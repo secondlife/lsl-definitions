@@ -931,12 +931,12 @@ class SLuaDefinitionParser:
 
     def generate_ll_modules(self, lsl: LSLDefinitions):
         ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
-        # llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
+        llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
         for func in lsl.functions.values():
             if func.private:
                 continue
             known_types = self.validate_type_params(func.type_arguments)
-            slua_func = SLuaFunctionSignature(
+            ll_func = SLuaFunctionSignature(
                 name=func.compute_slua_name(with_module=False),
                 comment=func.tooltip,
                 deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
@@ -951,9 +951,17 @@ class SLuaDefinitionParser:
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
             )
+            llcompat_func = SLuaFunctionSignature(
+                name=ll_func.name,
+                comment=ll_func.comment,
+                deprecated=True,
+                typeParameters=ll_func.typeParameters,
+                parameters=ll_func.parameters,
+                returnType=ll_func.returnType,
+            )
             if not func.slua_removed:
-                ll_module.functions.append(slua_func)
-            # llcompat_module.functions.append(slua_func)
+                ll_module.functions.append(ll_func)
+            llcompat_module.functions.append(llcompat_func)
         for const in lsl.constants.values():
             if const.slua_removed:
                 continue
