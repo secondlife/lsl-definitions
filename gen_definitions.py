@@ -939,7 +939,7 @@ class SLuaDefinitionParser:
             slua_func = SLuaFunctionSignature(
                 name=func.compute_slua_name(with_module=False),
                 comment=func.tooltip,
-                deprecated=func.deprecated or func.detected_semantics,
+                deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
                 typeParameters=func.type_arguments,
                 parameters=[
                     SLuaParameter(
@@ -951,7 +951,7 @@ class SLuaDefinitionParser:
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
             )
-            if not func.slua_deprecated:
+            if not func.slua_removed:
                 ll_module.functions.append(slua_func)
             # llcompat_module.functions.append(slua_func)
         for const in lsl.constants.values():
