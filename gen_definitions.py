@@ -644,6 +644,7 @@ class SLuaDefinitions(NamedTuple):
     globalFunctions: List[SLuaFunction]
     modules: List[SLuaModule]
     globalVariables: List[SLuaProperty]
+    globalConstants: List[SLuaProperty]
 
 
 def _escape_python(val: str) -> str:
@@ -850,7 +851,7 @@ class LSLDefinitionParser:
 
 class SLuaDefinitionParser:
     def __init__(self):
-        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [])
+        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [], [])
         self.type_names: Set[str] = set()
         self.global_scope: Set[str] = set()
 
@@ -913,6 +914,18 @@ class SLuaDefinitionParser:
         )
 
         return self.definitions
+
+    def generate_ll_modules(self, lsl: LSLDefinitions):
+        for const in lsl.constants.values():
+            if const.slua_removed:
+                continue
+            prop = SLuaProperty(
+                name=const.name,
+                comment=const.tooltip,
+                type=self.validate_type(const.slua_type or const.type.meta.slua_name),
+                value=const.value,
+            )
+            self.definitions.globalConstants.append(prop)
 
     def _validate_module(self, data: any) -> SLuaModule:
         module = SLuaModule(
@@ -1199,6 +1212,7 @@ def gen_luau_lsp_defs(
     """Write a definitions file for use by the Luau Language Server"""
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
+    parser.generate_ll_modules(lsl_definitions)
     ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
@@ -1239,47 +1253,10 @@ def gen_luau_lsp_defs(
         module.write_luau_def(defs)
     ll_module.write_luau_def(defs)
     llcompat_module.write_luau_def(defs)
-
-    # # types
-    # for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
-    #     syntax["types"][class_.name] = class_.to_keywords_dict()
-    # for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
-    #     syntax["types"][alias.name] = alias.to_keywords_dict()
-    # for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
-    #     syntax["types"][class_.name] = class_.to_keywords_dict()
-
-    # # events
-    # for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
-    #     if event.slua_removed:
-    #         continue
-    #     syntax["events"][event.name] = event.to_slua_dict(parser)
-
-    # # functions
-    # for func in slua_definitions.builtinFunctions:
-    #     syntax["functions"][func.name] = func.to_keywords_dict()
-    # for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
-    #     syntax["functions"][func.name] = func.to_keywords_dict()
-    # for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-    #     if module.name in {"ll", "llcompat"}:
-    #         continue
-    #     syntax["functions"].update(module.to_keywords_functions_dict())
-    # syntax["functions"].update(ll_module.to_keywords_functions_dict())
-    # for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
-    #     if func.private:
-    #         continue
-    #     syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
-
-    # # constants
-    # for const in slua_definitions.builtinConstants:
-    #     syntax["constants"][const.name] = const.to_keywords_dict()
-    # for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-    #     syntax["constants"].update(module.to_keywords_constants_dict())
-    # for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
-    #     if const.private:
-    #         continue
-    #     if const.slua_removed:
-    #         continue
-    #     syntax["constants"][const.name] = const.to_slua_dict(parser)
+    for var in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        defs.write("declare ")
+        defs.write(var.to_luau_def())
+        defs.write("\n")
 
     return defs.getvalue()
 
