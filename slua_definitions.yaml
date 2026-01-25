@@ -304,7 +304,7 @@ globalFunctions:
   returnType: quaternion?
 modules:
 - name: bit32
-  comment: Bitwise operations library
+  comment: Bitwise operations library.
   functions:
   - name: arshift
     comment: |-
@@ -436,7 +436,7 @@ modules:
       type: number
     returnType: number
 - name: buffer
-  comment: Buffer manipulation library for binary data
+  comment: Buffer manipulation library for binary data.
   functions:
   - name: create
     comment: Creates a buffer of the requested size with all bytes initialized to 0.
@@ -744,7 +744,7 @@ modules:
       type: number
     returnType: ()
 - name: coroutine
-  comment: Coroutine manipulation library
+  comment: Coroutine manipulation library.
   functions:
   - name: create
     comment: Returns a new coroutine that, when resumed, will run function f.
@@ -800,7 +800,7 @@ modules:
       type: thread
     returnType: (boolean, string?)
 - name: debug
-  comment: Debug library for introspection
+  comment: Debug library for introspection.
   functions:
   - name: info
     comment: Returns information about a stack frame or function based on specified format.
@@ -941,7 +941,7 @@ modules:
     private: true
     returnType: any
 - name: llbase64
-  comment: Base64 encoding/decoding library
+  comment: Base64 encoding/decoding library.
   functions:
   - name: encode
     comment: Encodes a string or buffer to base64
@@ -964,7 +964,7 @@ modules:
       type: string
     returnType: string
 - name: lljson
-  comment: JSON encoding/decoding library for Second Life
+  comment: JSON encoding/decoding library for Second Life.
   functions:
   - name: encode
     comment: Encodes a Lua value as JSON
@@ -1017,7 +1017,7 @@ modules:
     type: string
     value: "2.1.0.11"
 - name: math
-  comment: Mathematical functions library
+  comment: Mathematical functions library.
   functions:
   - name: abs
     comment: Returns the absolute value of n.
@@ -1343,7 +1343,7 @@ modules:
     type: number
     value: inf
 - name: os
-  comment: Operating system facilities library
+  comment: Operating system facilities library.
   functions:
   - name: clock
     comment: Returns a high-precision timestamp in seconds for measuring durations.
@@ -1377,7 +1377,7 @@ modules:
       type: OsDateTime?
     returnType: number?
 - name: quaternion
-  comment: Quaternion manipulation library
+  comment: Quaternion manipulation library.
   callable:
     name: quaternion
     comment: Creates a new quaternion with the given component values.
@@ -1484,7 +1484,7 @@ modules:
     type: quaternion
     value: <0, 0, 0, 1>
 - name: string
-  comment: String manipulation library
+  comment: String manipulation library.
   functions:
   - name: byte
     comment: Returns the numeric code of every byte in the input string within the given range.
@@ -1875,7 +1875,7 @@ modules:
       type: '{[K]: V}'
     returnType: '{[K]: V}'
 - name: utf8
-  comment: UTF-8 support library
+  comment: UTF-8 support library.
   functions:
   - name: char
     comment: Creates a string from Unicode codepoints.
@@ -1938,7 +1938,7 @@ modules:
     type: string
     value: "[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*"
 - name: uuid
-  comment: uuid library
+  comment: UUID library.
   callable:
     name: uuid
     comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
@@ -1958,7 +1958,7 @@ modules:
       type: string | buffer | uuid
     returnType: uuid?
 - name: vector
-  comment: Vector manipulation library
+  comment: Vector manipuluation library.
   callable:
     name: vector
     comment: Creates a new vector with the given component values.
@@ -2121,10 +2121,11 @@ modules:
     value: <1,1,1>
 - name: ll
   # auto-generated from lsl_definitions.yaml
-  comment: Library for functions shared between LSL and SLua
+  comment: Library for functions shared between LSL and SLua.
 - name: llcompat
   # auto-generated from lsl_definitions.yaml
-  comment: Like ll, but exactly matches LSL semantics
+  comment: Like ll, but exactly matches LSL semantics.
+# auto-generated from lsl_definitions.yaml
 constants: []
 
 # Everything below here is only for keywords.xml generation, not typechecking
