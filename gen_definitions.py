@@ -462,6 +462,7 @@ class SLuaFunctionSignature:
     typeParameters: Optional[List[str]] = None
     comment: str = ""
     private: bool = False
+    deprecated: bool = False
     overloads: Optional[List[SLuaFunctionOverload]] = None
 
     def to_keywords_dict(self) -> dict:
