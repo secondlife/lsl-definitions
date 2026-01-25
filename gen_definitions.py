@@ -517,13 +517,16 @@ class SLuaFunction(SLuaFunctionAnon):
         )
 
     def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  ' * indent}function {self.name}")
+        f.write(f"{'  ' * indent}")
+        f.write("@deprecated " if self.deprecated else "")
+        f.write(f"function {self.name}")
         f.write(self.type_parameters_string())
         f.write(self.parameters_string())
         f.write(f": {self.returnType}\n")
 
     def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
         f.write(f"{'  ' * indent}{self.name}: ")
+        f.write("@deprecated " if self.deprecated else "")
         if not self.overloads:
             f.write(self.type_def_string())
         else:
