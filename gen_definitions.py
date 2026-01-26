@@ -1003,6 +1003,15 @@ class SLuaDefinitionParser:
         LLNonDetectedEventName_alias.definition = " | ".join(
             f'"{name}"' for name in non_detected_event_names
         )
+        for register_func in LLEvents_class.methods:
+            if register_func.name in {"off", "on", "once"}:
+                register_func.parameters = [
+                    SLuaParameter("self", type="LLEvents"),
+                    SLuaParameter("event", type="LLDetectedEventName"),
+                    SLuaParameter("callback", type="LLDetectedEventHandler"),
+                ]
+            if register_func.name in {"on", "once"}:
+                register_func.returnType = "LLDetectedEventHandler"
 
         ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
         llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]

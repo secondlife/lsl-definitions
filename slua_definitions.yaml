@@ -194,23 +194,21 @@ classes:
     overloads: []
     parameters:
     - name: self
-      type: LLEvents
     - name: event
-      type: LLDetectedEventName
+      type: LLEventName
     - name: callback
-      type: LLDetectedEventHandler
-    returnType: LLDetectedEventHandler
+      type: LLEventHandler
+    returnType: LLEventHandler
   - name: 'off'
     comment: Unregisters a callback. Returns true if found and removed.
     # auto-generated from lsl_definitions.yaml
     overloads: []
     parameters:
     - name: self
-      type: LLEvents
     - name: event
-      type: LLDetectedEventName
+      type: LLEventName
     - name: callback
-      type: LLDetectedEventHandler
+      type: LLEventHandler
     returnType: boolean
   - name: once
     comment: Registers a one-time callback. Returns the wrapper function.
@@ -218,12 +216,11 @@ classes:
     overloads: []
     parameters:
     - name: self
-      type: LLEvents
     - name: event
-      type: LLDetectedEventName
+      type: LLEventName
     - name: callback
-      type: LLDetectedEventHandler
-    returnType: LLDetectedEventHandler
+      type: LLEventHandler
+    returnType: LLEventHandler
   - name: listeners
     comment: Returns a list of all listeners for a specific event.
     parameters:
