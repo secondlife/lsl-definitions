@@ -142,8 +142,10 @@ baseClasses:
 typeAliases:
 - name: rotation
   comment: '''rotation'' is an alias for ''quaternion'''
+  export: true
   definition: quaternion
 - name: list
+  export: true
   definition: "{string | number | vector | uuid | quaternion | boolean}"
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml
@@ -169,6 +171,7 @@ typeAliases:
   definition: LLTimerEveryCallback | LLTimerOnceCallback
 - name: OsDateTime
   comment: Date/time table structure used by os.date and os.time
+  export: true
   definition: |-
     {
       year: number,

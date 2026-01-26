@@ -498,6 +498,7 @@ class SLuaTypeAlias:
     name: str
     definition: str
     comment: str = ""
+    export: bool = False
 
     def to_keywords_dict(self) -> dict:
         definition = self.to_luau_def()
@@ -508,7 +509,8 @@ class SLuaTypeAlias:
         }
 
     def to_luau_def(self) -> str:
-        return f"type {self.name} = {self.definition}"
+        export_str = "export " if self.export else ""
+        return f"{export_str}type {self.name} = {self.definition}"
 
 
 @dataclasses.dataclass
@@ -1070,7 +1072,8 @@ def dump_slua_syntax(
     for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
         syntax["types"][class_.name] = class_.to_keywords_dict()
     for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
-        syntax["types"][alias.name] = alias.to_keywords_dict()
+        if alias.export:
+            syntax["types"][alias.name] = alias.to_keywords_dict()
     for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
         syntax["types"][class_.name] = class_.to_keywords_dict()
 
@@ -1086,14 +1089,12 @@ def dump_slua_syntax(
     for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
         syntax["functions"][func.name] = func.to_keywords_dict()
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-        if module.name in {"ll", "llcompat"}:
-            continue
-        syntax["functions"].update(module.to_keywords_functions_dict())
+        if module.name not in {"ll", "llcompat"}:
+            syntax["functions"].update(module.to_keywords_functions_dict())
     syntax["functions"].update(ll_module.to_keywords_functions_dict())
     for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
-        if func.private:
-            continue
-        syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
+        if not func.private:
+            syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
 
     # constants
     for const in slua_definitions.builtinConstants:
@@ -1101,11 +1102,8 @@ def dump_slua_syntax(
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         syntax["constants"].update(module.to_keywords_constants_dict())
     for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
-        if const.private:
-            continue
-        if const.slua_removed:
-            continue
-        syntax["constants"][const.name] = const.to_slua_dict(parser)
+        if not const.private and not const.slua_removed:
+            syntax["constants"][const.name] = const.to_slua_dict(parser)
 
     if pretty:
         return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
