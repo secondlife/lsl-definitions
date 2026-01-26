@@ -199,15 +199,18 @@ classes:
       type: LLDetectedEventName
     - name: callback
       type: LLDetectedEventHandler
-    returnType: LLEventHandler
+    returnType: LLDetectedEventHandler
   - name: 'off'
     comment: Unregisters a callback. Returns true if found and removed.
+    # auto-generated from lsl_definitions.yaml
+    overloads: []
     parameters:
     - name: self
+      type: LLEvents
     - name: event
-      type: LLEventName
+      type: LLDetectedEventName
     - name: callback
-      type: LLEventHandler
+      type: LLDetectedEventHandler
     returnType: boolean
   - name: once
     comment: Registers a one-time callback. Returns the wrapper function.
@@ -220,7 +223,7 @@ classes:
       type: LLDetectedEventName
     - name: callback
       type: LLDetectedEventHandler
-    returnType: LLEventHandler
+    returnType: LLDetectedEventHandler
   - name: listeners
     comment: Returns a list of all listeners for a specific event.
     parameters:
