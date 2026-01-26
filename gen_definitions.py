@@ -969,6 +969,20 @@ class SLuaDefinitionParser:
                 non_detected_event_names.append(event.name)
                 # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
                 type_def = event_func.type_def_string()
+                overload_parameters = [
+                    SLuaParameter("self", type="LLEvents"),
+                    SLuaParameter("event", type=f'"{event.name}"'),
+                    SLuaParameter("callback", type=type_def),
+                ]
+                for register_func in LLEvents_class.methods:
+                    if register_func.name in {"on", "once", "off"}:
+                        register_func.overloads.append(
+                            SLuaFunctionAnon(
+                                comment=event.tooltip,
+                                parameters=overload_parameters,
+                                returnType=register_func.returnType,
+                            )
+                        )
             event_prop = SLuaProperty(
                 name=event.name,
                 comment=event.tooltip,
@@ -1088,14 +1102,16 @@ class SLuaDefinitionParser:
                 self._validate_property(prop, class_scope) for prop in data.get("properties", [])
             ]
             class_.methods = [
-                self._validate_function(method, class_scope, method=True)
+                self._validate_function(method, class_scope, class_name=class_.name)
                 for method in data.get("methods", [])
             ]
         except Exception as e:
             raise ValueError(f"In class {class_.name}: {e}") from e
         return class_
 
-    def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunction:
+    def _validate_function(
+        self, data: any, scope: Set[str], class_name: str | None = None
+    ) -> SLuaFunction:
         try:
             func = SLuaFunction(
                 name=data["name"],
@@ -1108,7 +1124,7 @@ class SLuaDefinitionParser:
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
-            self._validate_function_signature(func, method)
+            self._validate_function_signature(func, class_name)
             known_types = self.validate_type_params(func.typeParameters)
             self.validate_type(func.returnType, known_types)
             for overload_data in data.get("overloads", []):
@@ -1145,14 +1161,18 @@ class SLuaDefinitionParser:
         return prop
 
     def _validate_function_signature(
-        self, func: SLuaFunctionOverload, method: bool = False
+        self, func: SLuaFunctionAnon, class_name: str | None = None
     ) -> None:
         known_types = self.validate_type_params(func.typeParameters)
         self.validate_type(func.returnType, known_types)
         params = func.parameters
         params_scope = set()
-        if method:
-            if not params or params[0].name != "self" or params[0].type is not None:
+        if class_name is not None:
+            if not (
+                params
+                and params[0].name == "self"
+                and (params[0].type is None or params[0].type == class_name)
+            ):
                 raise ValueError(f"Method {func.name} missing self parameter")
             params_scope.add("self")
             params = params[1:]
