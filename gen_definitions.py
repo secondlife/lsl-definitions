@@ -969,20 +969,18 @@ class SLuaDefinitionParser:
                 non_detected_event_names.append(event.name)
                 # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
                 type_def = event_func.type_def_string()
-                overload_parameters = [
-                    SLuaParameter("self", type="LLEvents"),
-                    SLuaParameter("event", type=f'"{event.name}"'),
-                    SLuaParameter("callback", type=type_def),
-                ]
+                overload = SLuaFunctionAnon(
+                    comment=event.tooltip,
+                    parameters=[
+                        SLuaParameter("self", type="LLEvents"),
+                        SLuaParameter("event", type=f'"{event.name}"'),
+                        SLuaParameter("callback", type=type_def),
+                    ],
+                    returnType="LLEventHandler",
+                )
                 for register_func in LLEvents_class.methods:
-                    if register_func.name in {"on", "once", "off"}:
-                        register_func.overloads.append(
-                            SLuaFunctionAnon(
-                                comment=event.tooltip,
-                                parameters=overload_parameters,
-                                returnType=register_func.returnType,
-                            )
-                        )
+                    if register_func.name in {"on", "once"}:
+                        register_func.overloads.append(overload)
             event_prop = SLuaProperty(
                 name=event.name,
                 comment=event.tooltip,
