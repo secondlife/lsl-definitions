@@ -140,6 +140,28 @@
             },
             "required": ["name"],
             "type": "object"
+        },
+        "module": {
+            "markdownDescription": "A table with constants and functions.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "callable": { "$ref": "#/$defs/function" },
+                "constants": {
+                    "items": { "$ref": "#/$defs/property" },
+                    "type": "array"
+                },
+                "functions": {
+                    "items": { "$ref": "#/$defs/function" },
+                    "type": "array"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this type.",
+                    "type": "string"
+                }
+            },
+            "required": ["name", "comment"],
+            "type": "object"
         }
     },
     "additionalProperties": false,
@@ -167,6 +189,10 @@
         },
         "globalFunctions": {
             "items": { "$ref": "#/$defs/function" },
+            "type": "array"
+        },
+        "modules": {
+            "items": { "$ref": "#/$defs/module" },
             "type": "array"
         },
         "constants": {
