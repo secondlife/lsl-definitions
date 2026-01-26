@@ -448,8 +448,8 @@ class SLuaParameter:
 
 
 @dataclasses.dataclass
-class SLuaFunctionOverload:
-    """Function overload signature"""
+class SLuaFunctionAnon:
+    """Annonymous function signature"""
 
     parameters: List[SLuaParameter]
     returnType: str
@@ -457,8 +457,8 @@ class SLuaFunctionOverload:
 
 
 @dataclasses.dataclass
-class SLuaFunctionSignature:
-    """Function or method signature with optional overloads"""
+class SLuaFunction:
+    """Full function or method signature with optional overloads"""
 
     name: str
     parameters: List[SLuaParameter]
@@ -467,7 +467,7 @@ class SLuaFunctionSignature:
     comment: str = ""
     private: bool = False
     deprecated: bool = False
-    overloads: Optional[List[SLuaFunctionOverload]] = None
+    overloads: Optional[List[SLuaFunctionAnon]] = None
 
     def to_keywords_dict(self) -> dict:
         return _remove_worthless(
@@ -519,7 +519,7 @@ class SLuaClassDeclaration:
 
     name: str
     properties: List[SLuaProperty]
-    methods: List[SLuaFunctionSignature]
+    methods: List[SLuaFunction]
     comment: str = ""
 
     def to_keywords_dict(self) -> dict:
@@ -531,9 +531,9 @@ class SLuaModuleDeclaration:
     """Module declaration with properties and functions"""
 
     name: str
-    callable: Optional[SLuaFunctionSignature]
+    callable: Optional[SLuaFunction]
     properties: List[SLuaProperty]
-    functions: List[SLuaFunctionSignature]
+    functions: List[SLuaFunction]
     comment: str = ""
 
     def to_keywords_functions_dict(self) -> dict:
@@ -565,7 +565,7 @@ class SLuaDefinitions(NamedTuple):
     controls: dict  # same structure as LSLDefinitions.controls
     builtinTypes: dict  # same structure as LSLDefinitions.types
     builtinConstants: List[SLuaProperty]
-    builtinFunctions: List[SLuaFunctionSignature]
+    builtinFunctions: List[SLuaFunction]
 
     # 2. SLua base classes. These only depend on Luau builtins
     baseClasses: List[SLuaClassDeclaration]
@@ -573,7 +573,7 @@ class SLuaDefinitions(NamedTuple):
 
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
-    globalFunctions: List[SLuaFunctionSignature]
+    globalFunctions: List[SLuaFunction]
     modules: List[SLuaModuleDeclaration]
     globalVariables: List[SLuaProperty]
 
@@ -898,11 +898,9 @@ class SLuaDefinitionParser:
             raise ValueError(f"In class {class_.name}: {e}") from e
         return class_
 
-    def _validate_function(
-        self, data: any, scope: Set[str], method: bool = False
-    ) -> SLuaFunctionSignature:
+    def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunction:
         try:
-            func = SLuaFunctionSignature(
+            func = SLuaFunction(
                 name=data["name"],
                 typeParameters=data.get("typeParameters", []),
                 parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
