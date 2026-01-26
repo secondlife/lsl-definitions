@@ -499,6 +499,7 @@ class SLuaTypeAlias:
     definition: str
     comment: str = ""
     export: bool = False
+    """Whether this type is available to users"""
 
     def to_keywords_dict(self) -> dict:
         definition = self.to_luau_def()
@@ -532,7 +533,7 @@ class SLuaModuleDeclaration:
 
     name: str
     callable: Optional[SLuaFunction]
-    properties: List[SLuaProperty]
+    constants: List[SLuaProperty]
     functions: List[SLuaFunction]
     comment: str = ""
 
@@ -554,7 +555,7 @@ class SLuaModuleDeclaration:
     def to_keywords_constants_dict(self) -> dict:
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
-            for prop in sorted(self.properties, key=lambda x: x.name)
+            for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
 
@@ -851,7 +852,7 @@ class SLuaDefinitionParser:
             name=data["name"],
             comment=data.get("comment", ""),
             callable=None,
-            properties=[],
+            constants=[],
             functions=[],
         )
         try:
@@ -864,9 +865,9 @@ class SLuaDefinitionParser:
                 if module.callable.name != module.name:
                     raise ValueError("module.callable.name must match module.name")
                 module_scope.clear()
-            module.properties = [
+            module.constants = [
                 self._validate_property(prop, module_scope, const=True)
-                for prop in data.get("properties", [])
+                for prop in data.get("constants", [])
             ]
             module.functions = [
                 self._validate_function(function, module_scope)

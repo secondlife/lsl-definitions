@@ -994,7 +994,7 @@ modules:
     - name: json
       type: string
     returnType: any
-  properties:
+  constants:
   - name: 'null'
     comment: A constant to pass for null to json encode
     type: any
@@ -1334,7 +1334,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
-  properties:
+  constants:
   - name: pi
     comment: The value of pi
     type: number
@@ -1479,7 +1479,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
-  properties:
+  constants:
   - name: identity
     comment: Identity quaternion constant.
     type: quaternion
@@ -1936,7 +1936,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: number?
-  properties:
+  constants:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
     type: string
@@ -2114,7 +2114,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: vector
-  properties:
+  constants:
   - name: zero
     comment: Constant vector with all components set to 0.
     type: vector
