@@ -35,6 +35,25 @@
             "required": ["name", "type"],
             "type": "object"
         },
+        "type-alias": {
+            "markdownDescription": "A type alias.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "definition": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this alias.",
+                    "type": "string"
+                },
+                "export": {
+                    "const": true,
+                    "markdownDescription": "Whether this type is available to users.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["name", "definition"],
+            "type": "object"
+        },
         "function-parameter": {
             "markdownDescription": "A function parameter.",
             "additionalProperties": false,
@@ -132,6 +151,10 @@
         },
         "baseClasses": {
             "items": { "$ref": "#/$defs/class" },
+            "type": "array"
+        },
+        "typeAliases": {
+            "items": { "$ref": "#/$defs/type-alias" },
             "type": "array"
         },
         "classes": {
