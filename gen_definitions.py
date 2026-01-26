@@ -1046,9 +1046,9 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     }
 
     if pretty:
-        return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
+        return llsd.format_pretty_xml(syntax, indent=3, sort_maps=False)
     else:
-        return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
+        return llsd.format_xml(syntax, sort_maps=True)
 
 
 def dump_slua_syntax(
@@ -1105,9 +1105,9 @@ def dump_slua_syntax(
             syntax["constants"][const.name] = const.to_slua_dict(parser)
 
     if pretty:
-        return llsd.format_pretty_xml(syntax, indent=3, c_compat=True, sort_maps=False)
+        return llsd.format_pretty_xml(syntax, indent=3, sort_maps=False)
     else:
-        return llsd.format_xml(syntax, c_compat=True, sort_maps=True)
+        return llsd.format_xml(syntax, sort_maps=True)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
