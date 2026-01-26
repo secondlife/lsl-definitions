@@ -528,8 +528,8 @@ class SLuaClassDeclaration:
 
 
 @dataclasses.dataclass
-class SLuaModuleDeclaration:
-    """Module declaration with properties and functions"""
+class SLuaModule:
+    """Module declaration with constants and functions"""
 
     name: str
     callable: Optional[SLuaFunction]
@@ -575,7 +575,7 @@ class SLuaDefinitions(NamedTuple):
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
     globalFunctions: List[SLuaFunction]
-    modules: List[SLuaModuleDeclaration]
+    modules: List[SLuaModule]
     globalVariables: List[SLuaProperty]
 
 
@@ -847,8 +847,8 @@ class SLuaDefinitionParser:
 
         return self.definitions
 
-    def _validate_module(self, data: any) -> SLuaModuleDeclaration:
-        module = SLuaModuleDeclaration(
+    def _validate_module(self, data: any) -> SLuaModule:
+        module = SLuaModule(
             name=data["name"],
             comment=data.get("comment", ""),
             callable=None,
