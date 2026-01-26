@@ -100,6 +100,27 @@
             },
             "required": ["name"],
             "type": "object"
+        },
+        "class": {
+            "markdownDescription": "A type with properties and methods.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "properties": {
+                    "items": { "$ref": "#/$defs/property" },
+                    "type": "array"
+                },
+                "methods": {
+                    "items": { "$ref": "#/$defs/function" },
+                    "type": "array"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this type.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
         }
     },
     "additionalProperties": false,
@@ -108,6 +129,14 @@
             "markdownDescription": "Only increment with file format changes.",
             "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "type": "string"
+        },
+        "baseClasses": {
+            "items": { "$ref": "#/$defs/class" },
+            "type": "array"
+        },
+        "classes": {
+            "items": { "$ref": "#/$defs/class" },
+            "type": "array"
         },
         "globalVariables": {
             "items": { "$ref": "#/$defs/property" },
