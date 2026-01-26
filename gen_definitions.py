@@ -471,7 +471,7 @@ class SLuaFunctionAnon:
 
     typeParameters: List[str] = dataclasses.field(default_factory=list)
     parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
-    returnType: str = (LSLType.VOID.meta.slua_name,)
+    returnType: str = LSLType.VOID.meta.slua_name
     comment: str = ""
 
     def type_parameters_string(self) -> str:
@@ -961,11 +961,10 @@ class SLuaDefinitionParser:
                     )
                     for a in event.arguments
                 ],
-                returnType="() | nil",
             )
             if event.detected_semantics:
                 detected_event_names.append(event.name)
-                type_def = "(LLDetectedEventHandler)?"
+                type_def = "LLDetectedEventHandler"
             else:
                 non_detected_event_names.append(event.name)
                 # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
@@ -973,7 +972,7 @@ class SLuaDefinitionParser:
             event_prop = SLuaProperty(
                 name=event.name,
                 comment=event.tooltip,
-                type=type_def,
+                type=f"({type_def})?",
             )
             LLEvents_class.properties.append(event_prop)
         LLDetectedEventName_alias.definition = " | ".join(
