@@ -521,15 +521,21 @@ class SLuaFunction(SLuaFunctionAnon):
             }
         )
 
-    def write_luau_function_def(self, f: io.StringIO, indent: int = 0) -> None:
-        f.write(f"{'  ' * indent}")
-        f.write(self.deprecated_string())
-        f.write(f"function {self.name}")
-        f.write(self.type_parameters_string())
-        f.write(self.parameters_string())
-        f.write(f": {self.returnType}\n")
+    def write_luau_global_def(self, f: io.StringIO, indent: int = 0) -> None:
+        """For declaring global functions and class/extern type methods"""
+        if self.overloads:
+            # the function format can't handle overloads
+            self.write_luau_table_def(f, indent, suffix="")
+        else:
+            f.write(f"{'  ' * indent}")
+            f.write(self.deprecated_string())
+            f.write(f"function {self.name}")
+            f.write(self.type_parameters_string())
+            f.write(self.parameters_string())
+            f.write(f": {self.returnType}\n")
 
-    def write_luau_type_def(self, f: io.StringIO, indent: int = 0) -> None:
+    def write_luau_table_def(self, f: io.StringIO, indent: int = 0, suffix=",") -> None:
+        """For declaring functions within a table/module"""
         f.write(f"{'  ' * indent}{self.name}: ")
         f.write(self.deprecated_string())
         if not self.overloads:
@@ -538,10 +544,11 @@ class SLuaFunction(SLuaFunctionAnon):
             f.write("(")
             f.write(self.type_def_string())
             for overload in self.overloads:
-                f.write(") & (")
+                f.write(f")\n{'  ' * (indent + 1)}& (")
                 f.write(overload.type_def_string())
             f.write(")")
-        f.write(",\n")
+        f.write(suffix)
+        f.write("\n")
 
 
 @dataclasses.dataclass
@@ -584,7 +591,7 @@ class SLuaClassDeclaration:
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()}\n")
         for func in self.methods:
-            func.write_luau_function_def(f, indent=1)
+            func.write_luau_global_def(f, indent=1)
         f.write("end\n\n")
 
 
@@ -636,7 +643,7 @@ declare {self.name}: """)
         for func in self.functions:
             if func.private:
                 continue
-            func.write_luau_type_def(f, indent=1)
+            func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")
 
 
@@ -1352,7 +1359,7 @@ def gen_luau_lsp_defs(
     defs.write("\n")
     for func in slua_definitions.globalFunctions:
         defs.write("declare ")
-        func.write_luau_function_def(defs)
+        func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue
