@@ -58,7 +58,7 @@ jobs:
       - name: Check if SLua syntax generation produces valid output
         run: |
           # Generate syntax to a temporary file to verify it's valid
-          gen-lsl-definitions ./lsl_definitions.yaml slua-syntax ./slua_definitions.yaml /tmp/slua_syntax_output.llsd
+          gen-lsl-definitions ./lsl_definitions.yaml slua_syntax ./slua_definitions.yaml /tmp/slua_syntax_output.llsd
           # Check that the output file was created and is not empty
           if [ ! -s /tmp/slua_syntax_output.llsd ]; then
             echo "Error: SLua Syntax generation produced empty output"
