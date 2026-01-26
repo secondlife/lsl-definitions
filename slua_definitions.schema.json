@@ -31,12 +31,12 @@
             "type": "string"
         },
         "type": {
-            "markdownDescription": "A luau-format type definition",
+            "markdownDescription": "A luau-format type definition.",
             "pattern": "^([ \n?&|,{}\\[\\]()\":a-zA-Z0-9_]|\\.\\.\\.|->)*$",
             "type": "string"
         },
         "property": {
-            "markdownDescription": "A property or constant",
+            "markdownDescription": "A property or constant.",
             "additionalProperties": false,
             "properties": {
                 "name": { "$ref": "#/$defs/identifier" },
@@ -57,13 +57,82 @@
             },
             "required": ["name", "type"],
             "type": "object"
+        },
+        "function-parameter": {
+            "markdownDescription": "A function parameter.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "oneOf": [
+                    { "$ref": "#/$defs/identifier" },
+                    { "const": "...", "type": "string" }
+                ]},
+                "type": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this parameter.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
+        },
+        "function-anon": {
+            "markdownDescription": "A plain function signature; no name or overloads.",
+            "additionalProperties": false,
+            "properties": {
+                "typeParameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "returnType": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this function.",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "type": "object"
+        },
+        "function": {
+            "markdownDescription": "A full function signature.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "typeParameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "returnType": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this function.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
         }
-
     },
     "additionalProperties": false,
     "properties": {
         "globalVariables": {
             "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "globalFunctions": {
+            "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
         "constants": {
@@ -72,6 +141,10 @@
         },
         "builtinConstants": {
             "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "builtinFunctions": {
+            "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
         "controls": {
