@@ -10,9 +10,9 @@ import jsonschema
 
 
 def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
-    with open("lsl_definitions.schema.json", "r", encoding="utf-8") as schema_file:
+    with open(schema_filename, "r", encoding="utf-8") as schema_file:
         schemadata = json.load(schema_file)
-    with open("lsl_definitions.yaml", "r", encoding="utf-8") as yaml_file:
+    with open(yaml_filename, "r", encoding="utf-8") as yaml_file:
         yamldata = yaml.safe_load(yaml_file)
 
     try:
@@ -36,3 +36,7 @@ def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
 def main():
     validate_definitions_via_jsonschema("lsl_definitions.schema.json", "lsl_definitions.yaml")
     validate_definitions_via_jsonschema("slua_definitions.schema.json", "slua_definitions.yaml")
+
+
+if __name__ == "__main__":
+    main()
