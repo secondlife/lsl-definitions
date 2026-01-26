@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
     "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json",
     "$comment": "This schema defines keywords for the Linden Scripting Language (LSL) of Second Life.",
     "$defs": {
