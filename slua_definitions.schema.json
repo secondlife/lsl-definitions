@@ -27,105 +27,52 @@
             "type": "number"
         },
         "identifier": {
-            "maximum": 1.0,
-            "minimum": 0.0,
+            "pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$",
             "type": "string"
+        },
+        "type": {
+            "markdownDescription": "A luau-format type definition",
+            "pattern": "^([ \n?&|,{}\\[\\]()\":a-zA-Z0-9_]|\\.\\.\\.|->)*$",
+            "type": "string"
+        },
+        "property": {
+            "markdownDescription": "A property or constant",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "type": { "$ref": "#/$defs/type" },
+                "value": {
+                    "markdownDescription": "The value of the constant.",
+                    "type": ["integer", "string"]
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this constant.",
+                    "type": "string"
+                },
+                "slua-removed": {
+                    "const": true,
+                    "markdownDescription": "This property is only present in Luau, not SLua.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["name", "type"],
+            "type": "object"
         }
 
     },
+    "additionalProperties": false,
     "properties": {
+        "globalVariables": {
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
         "constants": {
-            "additionalProperties": false,
-            "patternProperties": {
-                "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
-                    "properties": {
-                        "additionalProperties": false,
-                        "deprecated": {
-                            "const": true,
-                            "markdownDescription": "This constant has been deprecated.",
-                            "type": "boolean"
-                        },
-                        "slua-removed": {
-                            "const": true,
-                            "markdownDescription": "This constant is only present in LSL, not SLua.",
-                            "type": "boolean"
-                        },
-                        "private": {
-                            "const": true,
-                            "markdownDescription": "This constant should be omitted from the generated documentation.",
-                            "type": "boolean"
-                        },
-                        "tooltip": {
-                            "markdownDescription": "A brief description of this constant.",
-                            "type": "string"
-                        },
-                        "type": {
-                            "defaultSnippets": [
-                                {
-                                    "label": "float",
-                                    "body": "float"
-                                },
-                                {
-                                    "label": "integer",
-                                    "body": "integer"
-                                },
-                                {
-                                    "label": "key",
-                                    "body": "key"
-                                },
-                                {
-                                    "label": "list",
-                                    "body": "list"
-                                },
-                                {
-                                    "label": "quaternion",
-                                    "body": "quaternion"
-                                },
-                                {
-                                    "label": "rotation",
-                                    "body": "rotation"
-                                },
-                                {
-                                    "label": "string",
-                                    "body": "string"
-                                },
-                                {
-                                    "label": "vector",
-                                    "body": "vector"
-                                }
-                            ],
-                            "markdownDescription": "One of the valid types for this constant: [float, integer, key, list, rotation, string, vector].",
-                            "oneOf": [
-                                { "const": "float" },
-                                { "const": "integer" },
-                                { "const": "key" },
-                                { "const": "list" },
-                                {
-                                    "$comment": "quaternion is an alias for rotation",
-                                    "const": "quaternion"
-                                },
-                                { "const": "rotation" },
-                                { "const": "string" },
-                                { "const": "vector" }
-                            ]
-                        },
-                        "value": {
-                            "markdownDescription": "The value of the constant.",
-                            "type": [
-                                "integer",
-                                "string"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "tooltip",
-                        "type",
-                        "value"
-                    ],
-                    "type": "object"
-                }
-            },
-            "type": "object"
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "builtinConstants": {
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
         },
         "controls": {
             "additionalProperties": false,
@@ -580,12 +527,17 @@
         }
     },
     "required": [
+        "version",
+        "baseClasses",
+        "typeAliases",
+        "classes",
+        "globalFunctions",
+        "modules",
         "constants",
         "controls",
-        "events",
-        "functions",
-        "llsd-lsl-syntax-version",
-        "types"
+        "builtinTypes",
+        "builtinConstants",
+        "builtinFunctions"
     ],
     "title": "Second Life SLua Definitions",
     "type": "object"
