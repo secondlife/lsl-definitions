@@ -1,15 +1,15 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json",
-    "$comment": "This schema defines keywords for the Linden Scripting Language (LSL) of Second Life.",
-    "definitions": {
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/slua_definitions.schema.json",
+    "$comment": "This schema defines keywords for the Server Lua Language (SLua) of Second Life.",
+    "$defs": {
         "nonNegativeInteger": {
             "minimum": 0,
             "type": "integer"
         },
         "nonNegativeIntegerDefault0": {
             "allOf": [
-                { "$ref": "#/definitions/nonNegativeInteger" },
+                { "$ref": "#/$defs/nonNegativeInteger" },
                 { "default": 0 }
             ]
         },
@@ -25,7 +25,13 @@
             "maximum": 1.0,
             "minimum": 0.0,
             "type": "number"
+        },
+        "identifier": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "type": "string"
         }
+
     },
     "properties": {
         "constants": {
@@ -372,7 +378,7 @@
                             "type": "boolean"
                         },
                         "energy": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "The script energy consumed by this function."
                         },
                         "experience": {
@@ -382,7 +388,7 @@
                         },
                         "func-id": {
                             "$comment": "llSin has 'func-id: 0', so we must include zero",
-                            "$ref": "#/definitions/nonNegativeInteger",
+                            "$ref": "#/$defs/nonNegativeInteger",
                             "markdownDescription": "The LSO function identifier."
                         },
                         "god-mode": {
@@ -401,7 +407,7 @@
                             "type": "boolean"
                         },
                         "mono-sleep": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "Sleep in the mono-script runtime."
                         },
                         "must-use": {
@@ -495,7 +501,7 @@
                             "type": "string"
                         },
                         "sleep": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "Additional sleep time imposed by the script after this function completes."
                         },
                         "tooltip": {
@@ -511,7 +517,7 @@
             "type": "object"
         },
         "llsd-lsl-syntax-version": {
-            "$ref": "#/definitions/positiveInteger",
+            "$ref": "#/$defs/positiveInteger",
             "markdownDescription": "Only increment with file format changes."
         },
         "types": {
@@ -581,6 +587,6 @@
         "llsd-lsl-syntax-version",
         "types"
     ],
-    "title": "Second Life LSL Definitions",
+    "title": "Second Life SLua Definitions",
     "type": "object"
 }
