@@ -930,7 +930,6 @@ class SLuaDefinitionParser:
         return self.definitions
 
     def generate_ll_modules(self, lsl: LSLDefinitions):
-        # DetectedEvent_class = [m for m in self.definitions.classes if m.name == "DetectedEvent"][0]
         LLDetectedEventName_alias = [
             m for m in self.definitions.typeAliases if m.name == "LLDetectedEventName"
         ][0]
@@ -979,6 +978,9 @@ class SLuaDefinitionParser:
 
         ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
         llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
+        DetectedEvent_class = [
+            m for m in self.definitions.baseClasses if m.name == "DetectedEvent"
+        ][0]
         for func in lsl.functions.values():
             if func.private:
                 continue
@@ -1009,6 +1011,19 @@ class SLuaDefinitionParser:
             if not func.slua_removed:
                 ll_module.functions.append(ll_func)
             llcompat_module.functions.append(llcompat_func)
+            if func.detected_semantics:
+                name = ll_func.name.replace("Detected", "Get")
+                name = name[0].lower() + name[1:]
+                detected_func = SLuaFunctionSignature(
+                    name=name,
+                    comment=ll_func.comment,
+                    deprecated=False,
+                    typeParameters=ll_func.typeParameters,
+                    parameters=ll_func.parameters[:],
+                    returnType=ll_func.returnType,
+                )
+                detected_func.parameters[0] = SLuaParameter(name="self")
+                DetectedEvent_class.methods.append(detected_func)
 
         for const in lsl.constants.values():
             if const.slua_removed:
