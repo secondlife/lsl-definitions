@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# yaml-language-server: $schema=http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json
+# yaml-language-server: $schema=http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/slua_definitions.schema.json
 #
 # increment only when the file format changes, not just the content
 version: 1.0.0
