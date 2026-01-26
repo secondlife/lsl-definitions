@@ -20,7 +20,7 @@
                 "type": { "$ref": "#/$defs/type" },
                 "value": {
                     "markdownDescription": "The value of the constant.",
-                    "type": ["integer", "string"]
+                    "type": ["number", "string"]
                 },
                 "comment": {
                     "markdownDescription": "A brief description of this constant.",
@@ -112,6 +112,20 @@
                     "type": "array"
                 },
                 "returnType": { "$ref": "#/$defs/type" },
+                "overloads": {
+                    "items": { "$ref": "#/$defs/function-anon" },
+                    "type": "array"
+                },
+                "deprecated": {
+                    "const": true,
+                    "markdownDescription": "Function is deprecated.",
+                    "type": "boolean"
+                },
+                "private": {
+                    "const": true,
+                    "markdownDescription": "Don't include in documentation.",
+                    "type": "boolean"
+                },
                 "comment": {
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"

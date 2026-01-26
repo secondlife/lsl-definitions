@@ -96,7 +96,6 @@ baseClasses:
   - name: __mul
     comment: 'Multiplication: vector * vector / number -> vector (Scale), vector
       * quaternion -> vector (Rotation)'
-    luaReturnType: vector
     parameters:
     - name: self
     - name: other
