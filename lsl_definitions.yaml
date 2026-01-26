@@ -5641,6 +5641,7 @@ functions:
     energy: 10.0
     func-id: 33
     return: key
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns the key of detected object's owner.\nReturns invalid key if Number
       is not a valid index.
@@ -5755,6 +5756,7 @@ functions:
     energy: 10.0
     func-id: 342
     return: vector
+    detected-semantics: true
     sleep: 0.0
     tooltip: Returns a vector that is the surface coordinates where the prim was touched.\nThe
       X and Y vector positions contain the horizontal (S) and vertical (T) face coordinates
