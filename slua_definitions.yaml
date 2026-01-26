@@ -155,7 +155,6 @@ typeAliases:
 - name: LLEventName
   definition: LLDetectedEventName | LLNonDetectedEventName
 - name: LLEventHandler
-  # auto-generated from lsl_definitions.yaml
   definition: (...any) -> ()
 - name: LLDetectedEventHandler
   definition: "(detected: {DetectedEvent}) -> ()"
@@ -186,6 +185,8 @@ typeAliases:
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
+  # auto-generated from lsl_definitions.yaml
+  properties: []
   methods:
   - name: 'on'
     comment: Registers a callback for an event. Returns the callback.

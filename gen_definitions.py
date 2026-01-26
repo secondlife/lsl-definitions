@@ -471,7 +471,7 @@ class SLuaFunctionAnon:
 
     typeParameters: List[str] = dataclasses.field(default_factory=list)
     parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
-    returnType: str = "()"
+    returnType: str = (LSLType.VOID.meta.slua_name,)
     comment: str = ""
 
     def type_parameters_string(self) -> str:
@@ -930,6 +930,53 @@ class SLuaDefinitionParser:
         return self.definitions
 
     def generate_ll_modules(self, lsl: LSLDefinitions):
+        # DetectedEvent_class = [m for m in self.definitions.classes if m.name == "DetectedEvent"][0]
+        LLDetectedEventName_alias = [
+            m for m in self.definitions.typeAliases if m.name == "LLDetectedEventName"
+        ][0]
+        LLNonDetectedEventName_alias = [
+            m for m in self.definitions.typeAliases if m.name == "LLNonDetectedEventName"
+        ][0]
+        LLEvents_class = [m for m in self.definitions.classes if m.name == "LLEvents"][0]
+        detected_event_names: List[str] = []
+        non_detected_event_names: List[str] = []
+        for event in lsl.events.values():
+            if event.slua_removed:
+                continue
+            event_func = SLuaFunctionSignature(
+                name=event.name,
+                comment=event.tooltip,
+                deprecated=event.deprecated or event.slua_deprecated,
+                parameters=[
+                    SLuaParameter(
+                        name=a.name,
+                        comment=a.tooltip,
+                        type=self.validate_type(a.compute_slua_type()),
+                    )
+                    for a in event.arguments
+                ],
+                returnType="() | nil",
+            )
+            if event.detected_semantics:
+                detected_event_names.append(event.name)
+                type_def = "(LLDetectedEventHandler)?"
+            else:
+                non_detected_event_names.append(event.name)
+                # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
+                type_def = event_func.type_def_string()
+            event_prop = SLuaProperty(
+                name=event.name,
+                comment=event.tooltip,
+                type=type_def,
+            )
+            LLEvents_class.properties.append(event_prop)
+        LLDetectedEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in detected_event_names
+        )
+        LLNonDetectedEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in non_detected_event_names
+        )
+
         ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
         llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
         for func in lsl.functions.values():
@@ -962,6 +1009,7 @@ class SLuaDefinitionParser:
             if not func.slua_removed:
                 ll_module.functions.append(ll_func)
             llcompat_module.functions.append(llcompat_func)
+
         for const in lsl.constants.values():
             if const.slua_removed:
                 continue
