@@ -638,7 +638,7 @@ declare {self.name}: """)
             f.write(self.callable.type_def_string())
             f.write(") & ")
         f.write("{\n")
-        for prop in self.properties:
+        for prop in self.constants:
             f.write(f"  {prop.to_luau_def()},\n")
         for func in self.functions:
             if func.private:
@@ -949,7 +949,7 @@ class SLuaDefinitionParser:
         for event in lsl.events.values():
             if event.slua_removed:
                 continue
-            event_func = SLuaFunctionSignature(
+            event_func = SLuaFunction(
                 name=event.name,
                 comment=event.tooltip,
                 deprecated=event.deprecated or event.slua_deprecated,
@@ -1022,7 +1022,7 @@ class SLuaDefinitionParser:
             if func.private:
                 continue
             known_types = self.validate_type_params(func.type_arguments)
-            ll_func = SLuaFunctionSignature(
+            ll_func = SLuaFunction(
                 name=func.compute_slua_name(with_module=False),
                 comment=func.tooltip,
                 deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
@@ -1037,7 +1037,7 @@ class SLuaDefinitionParser:
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
             )
-            llcompat_func = SLuaFunctionSignature(
+            llcompat_func = SLuaFunction(
                 name=ll_func.name,
                 comment=ll_func.comment,
                 deprecated=True,
@@ -1051,7 +1051,7 @@ class SLuaDefinitionParser:
             if func.detected_semantics:
                 name = ll_func.name.replace("Detected", "Get")
                 name = name[0].lower() + name[1:]
-                detected_func = SLuaFunctionSignature(
+                detected_func = SLuaFunction(
                     name=name,
                     comment=ll_func.comment,
                     deprecated=False,
@@ -1145,7 +1145,7 @@ class SLuaDefinitionParser:
             known_types = self.validate_type_params(func.typeParameters)
             self.validate_type(func.returnType, known_types)
             for overload_data in data.get("overloads", []):
-                overload = SLuaFunctionSignature(
+                overload = SLuaFunctionAnon(
                     typeParameters=overload_data.get("typeParameters", []),
                     parameters=[SLuaParameter(**p) for p in overload_data.get("parameters", [])],
                     returnType=overload_data.get("returnType", LSLType.VOID.meta.slua_name),
