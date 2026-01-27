@@ -31,7 +31,7 @@ keywords = ["Linden Scripting Language", "Second Life"]
 
 [project.scripts]
 gen-lsl-definitions = "gen_definitions:main"
-validate-lsl-definitions-via-jsonschema = "validate:validate_lsl_definitions_via_jsonschema"
+validate-lsl-definitions-via-jsonschema = "validate:main"
 
 [project.urls]
 Homepage = "https://github.com/secondlife/lsl-definitions"

@@ -1,0 +1,276 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/slua_definitions.schema.json",
+    "$comment": "This schema defines keywords for the Server Lua Language (SLua) of Second Life.",
+    "$defs": {
+        "identifier": {
+            "pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$",
+            "type": "string"
+        },
+        "type": {
+            "markdownDescription": "A luau-format type definition.",
+            "pattern": "^([ \n?&|,{}\\[\\]()\":a-zA-Z0-9_]|\\.\\.\\.|->)*$",
+            "type": "string"
+        },
+        "property": {
+            "markdownDescription": "A property or constant.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "type": { "$ref": "#/$defs/type" },
+                "value": {
+                    "markdownDescription": "The value of the constant.",
+                    "type": ["number", "string"]
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this constant.",
+                    "type": "string"
+                },
+                "slua-removed": {
+                    "const": true,
+                    "markdownDescription": "This property is only present in Luau, not SLua.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["name", "type"],
+            "type": "object"
+        },
+        "type-alias": {
+            "markdownDescription": "A type alias.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "definition": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this alias.",
+                    "type": "string"
+                },
+                "export": {
+                    "const": true,
+                    "markdownDescription": "Whether this type is available to users.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["name", "definition"],
+            "type": "object"
+        },
+        "function-parameter": {
+            "markdownDescription": "A function parameter.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "oneOf": [
+                    { "$ref": "#/$defs/identifier" },
+                    { "const": "...", "type": "string" }
+                ]},
+                "type": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this parameter.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
+        },
+        "function-anon": {
+            "markdownDescription": "A plain function signature; no name or overloads.",
+            "additionalProperties": false,
+            "properties": {
+                "typeParameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "returnType": { "$ref": "#/$defs/type" },
+                "comment": {
+                    "markdownDescription": "A brief description of this function.",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "type": "object"
+        },
+        "function": {
+            "markdownDescription": "A full function signature.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "typeParameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "returnType": { "$ref": "#/$defs/type" },
+                "overloads": {
+                    "items": { "$ref": "#/$defs/function-anon" },
+                    "type": "array"
+                },
+                "deprecated": {
+                    "const": true,
+                    "markdownDescription": "Function is deprecated.",
+                    "type": "boolean"
+                },
+                "private": {
+                    "const": true,
+                    "markdownDescription": "Don't include in documentation.",
+                    "type": "boolean"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this function.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
+        },
+        "class": {
+            "markdownDescription": "A type with properties and methods.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "properties": {
+                    "items": { "$ref": "#/$defs/property" },
+                    "type": "array"
+                },
+                "methods": {
+                    "items": { "$ref": "#/$defs/function" },
+                    "type": "array"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this type.",
+                    "type": "string"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
+        },
+        "module": {
+            "markdownDescription": "A table with constants and functions.",
+            "additionalProperties": false,
+            "properties": {
+                "name": { "$ref": "#/$defs/identifier" },
+                "callable": { "$ref": "#/$defs/function" },
+                "constants": {
+                    "items": { "$ref": "#/$defs/property" },
+                    "type": "array"
+                },
+                "functions": {
+                    "items": { "$ref": "#/$defs/function" },
+                    "type": "array"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this type.",
+                    "type": "string"
+                }
+            },
+            "required": ["name", "comment"],
+            "type": "object"
+        }
+    },
+    "additionalProperties": false,
+    "properties": {
+        "version": {
+            "markdownDescription": "Only increment with file format changes.",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+            "type": "string"
+        },
+        "baseClasses": {
+            "items": { "$ref": "#/$defs/class" },
+            "type": "array"
+        },
+        "typeAliases": {
+            "items": { "$ref": "#/$defs/type-alias" },
+            "type": "array"
+        },
+        "classes": {
+            "items": { "$ref": "#/$defs/class" },
+            "type": "array"
+        },
+        "globalVariables": {
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "globalFunctions": {
+            "items": { "$ref": "#/$defs/function" },
+            "type": "array"
+        },
+        "modules": {
+            "items": { "$ref": "#/$defs/module" },
+            "type": "array"
+        },
+        "constants": {
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "builtinConstants": {
+            "items": { "$ref": "#/$defs/property" },
+            "type": "array"
+        },
+        "builtinFunctions": {
+            "items": { "$ref": "#/$defs/function" },
+            "type": "array"
+        },
+        "controls": {
+            "markdownDescription": "The Luau keywords.",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^(?:[a-z]+)$": {
+                    "properties": {
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this keyword.",
+                            "type": "string"
+                        }
+                    },
+                    "required": ["tooltip"],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "builtinTypes": {
+            "markdownDescription": "The Luau builtin types.",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[a-z]*": {
+                    "properties": {
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this type.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "required": [
+        "version",
+        "baseClasses",
+        "typeAliases",
+        "classes",
+        "globalFunctions",
+        "modules",
+        "constants",
+        "controls",
+        "builtinTypes",
+        "builtinConstants",
+        "builtinFunctions"
+    ],
+    "title": "Second Life SLua Definitions",
+    "type": "object"
+}

@@ -3,7 +3,6 @@
 # deciding that this script is Python 2. It is not.
 
 import ast
-import ctypes
 import dataclasses
 import enum
 import itertools
@@ -13,7 +12,7 @@ import stat
 import argparse
 import uuid
 import os
-from typing import Iterable, NamedTuple, Dict, List, Set, Sequence, TypeVar, Union, Any
+from typing import Iterable, NamedTuple, Dict, List, Optional, Set, Sequence, TypeVar, Union, Any
 
 import llsd  # noqa
 import yaml
@@ -54,6 +53,7 @@ class LSLTypeMeta(NamedTuple):
     library_abbr: str
     cs_name: str
     mono_bind_name: str
+    slua_name: str
 
 
 _CS_TYPE_MODULE = "[ScriptTypes]LindenLab.SecondLife"
@@ -68,6 +68,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="",
         cs_name="void",
         mono_bind_name="void",
+        slua_name="()",
     ),
     LSLType.INTEGER: LSLTypeMeta(
         cil_name="int32",
@@ -77,6 +78,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="i",
         cs_name="int",
         mono_bind_name="S32",
+        slua_name="number",
     ),
     LSLType.FLOAT: LSLTypeMeta(
         cil_name="float",
@@ -86,6 +88,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="f",
         cs_name="float",
         mono_bind_name="F32",
+        slua_name="number",
     ),
     LSLType.STRING: LSLTypeMeta(
         cil_name="string",
@@ -95,6 +98,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="s",
         cs_name="string",
         mono_bind_name="MonoStringType",
+        slua_name="string",
     ),
     LSLType.KEY: LSLTypeMeta(
         cil_name=f"valuetype {_CS_TYPE_MODULE}.Key",
@@ -104,6 +108,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="k",
         cs_name="Key",
         mono_bind_name="MonoKeyType",
+        slua_name="uuid",
     ),
     LSLType.VECTOR: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Vector",
@@ -113,6 +118,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="v",
         cs_name="Vector",
         mono_bind_name="MonoVectorType",
+        slua_name="vector",
     ),
     LSLType.ROTATION: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Quaternion",
@@ -122,6 +128,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="q",
         cs_name="Quaternion",
         mono_bind_name="MonoQuaternionType",
+        slua_name="quaternion",
     ),
     LSLType.LIST: LSLTypeMeta(
         cil_name="class [mscorlib]System.Collections.ArrayList",
@@ -131,6 +138,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
         library_abbr="l",
         cs_name="ArrayList",
         mono_bind_name="MonoListType",
+        slua_name="list",
     ),
 }
 
@@ -138,6 +146,8 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 class LSLConstant(NamedTuple):
     name: str
     type: LSLType
+    slua_type: Optional[str]
+    slua_removed: bool
     value: str
     tooltip: str
     deprecated: bool
@@ -147,22 +157,46 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
+                "deprecated": self.deprecated,
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
-                "value": _escape_python(self.value),
+                "tooltip": self.tooltip,
                 "type": str(self.type),
-                "deprecated": self.deprecated,
+                "value": _escape_python(self.value),
             }
         )
+
+    def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
+        try:
+            return _remove_worthless(
+                {
+                    "deprecated": self.deprecated,
+                    # Will always use a <string> node, but that's fine for our purposes.
+                    # That's already the case for vector and hex int constants, anyway.
+                    "tooltip": self.tooltip,
+                    "type": slua.validate_type(self.slua_type or self.type.meta.slua_name),
+                    "value": _escape_python(self.value),
+                }
+            )
+        except Exception as e:
+            raise ValueError(f"In constant {self.name}: {e}") from e
 
 
 @dataclasses.dataclass
 class LSLArgument:
     name: str
     type: LSLType
+    slua_type: Optional[str]
     tooltip: str
     index_semantics: bool
+    bool_semantics: bool
+
+    def compute_slua_type(self) -> str:
+        if self.slua_type is not None:
+            return self.slua_type
+        if self.bool_semantics and self.type == LSLType.INTEGER:
+            return "boolean | number"
+        return self.type.meta.slua_name
 
 
 @dataclasses.dataclass
@@ -172,23 +206,57 @@ class LSLEvent:
     tooltip: str
     private: bool
     deprecated: bool
+    slua_deprecated: bool
+    slua_removed: bool
+    detected_semantics: bool
 
     def to_dict(self) -> dict:
         return _remove_worthless(
             {
-                "tooltip": self.tooltip,
                 "deprecated": self.deprecated,
                 "arguments": [
                     {
                         a.name: {
-                            "type": str(a.type),
                             "tooltip": a.tooltip,
+                            "type": str(a.type),
                         }
                     }
                     for a in self.arguments
                 ],
+                "tooltip": self.tooltip,
             }
         )
+
+    def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
+        try:
+            if self.detected_semantics:
+                arguments = [
+                    {
+                        "detected": {
+                            "tooltip": "Array of detected events.",
+                            "type": slua.validate_type("{DetectedEvent}"),
+                        }
+                    }
+                ]
+            else:
+                arguments = [
+                    {
+                        a.name: {
+                            "tooltip": a.tooltip,
+                            "type": slua.validate_type(a.compute_slua_type()),
+                        }
+                    }
+                    for a in self.arguments
+                ]
+            return _remove_worthless(
+                {
+                    "deprecated": self.deprecated or self.slua_deprecated,
+                    "arguments": arguments,
+                    "tooltip": self.tooltip,
+                }
+            )
+        except Exception as e:
+            raise ValueError(f"In event {self.name}: {e}") from e
 
 
 @dataclasses.dataclass
@@ -197,9 +265,12 @@ class LSLFunction:
     energy: float
     sleep: float
     ret_type: LSLType
+    slua_type: Optional[str]
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
+    detected_semantics: bool
+    type_arguments: List[str]
     arguments: List[LSLArgument]
     tooltip: str
     private: bool
@@ -210,6 +281,9 @@ class LSLFunction:
     implementation to Agni and don't want people to use it yet.
     """
     deprecated: bool
+    slua_deprecated: bool
+    slua_removed: bool
+    """Only exists in llcompat"""
     func_id: int
     pure: bool
     """
@@ -239,20 +313,20 @@ class LSLFunction:
     def to_dict(self, include_internal: bool = False) -> dict:
         return _remove_worthless(
             {
-                "deprecated": self.deprecated,
-                "god-mode": self.god_mode,
-                "energy": self.energy,
-                "sleep": self.sleep,
-                "return": str(self.ret_type),
                 "arguments": [
                     {
                         a.name: {
-                            "type": str(a.type),
                             "tooltip": a.tooltip,
+                            "type": str(a.type),
                         }
                     }
                     for a in self.arguments
                 ],
+                "deprecated": self.deprecated,
+                "energy": self.energy,
+                "god-mode": self.god_mode,
+                "return": str(self.ret_type),
+                "sleep": self.sleep,
                 "tooltip": self.tooltip,
                 "bool_semantics": self.bool_semantics,
                 **(
@@ -268,6 +342,47 @@ class LSLFunction:
                 ),
             }
         )
+
+    def compute_slua_name(self) -> str:
+        if self.name.startswith("ll"):
+            return self.name[:2] + "." + self.name[2:]
+        return self.name
+
+    def compute_slua_type(self) -> str:
+        if self.slua_type is not None:
+            return self.slua_type
+        if self.bool_semantics and self.ret_type == LSLType.INTEGER:
+            return "boolean"
+        return self.ret_type.meta.slua_name
+
+    def to_slua_dict(self, slua: "SLuaDefinitionParser") -> dict:
+        try:
+            known_types = slua.validate_type_params(self.type_arguments)
+            return _remove_worthless(
+                {
+                    "type-arguments": self.type_arguments,
+                    "arguments": [
+                        {
+                            a.name: {
+                                "tooltip": a.tooltip,
+                                "type": slua.validate_type(a.compute_slua_type(), known_types),
+                            }
+                        }
+                        for a in self.arguments
+                    ],
+                    "deprecated": self.deprecated
+                    or self.slua_deprecated
+                    or self.slua_removed
+                    or self.detected_semantics,
+                    "energy": self.energy,
+                    "god-mode": self.god_mode,
+                    "return": slua.validate_type(self.compute_slua_type(), known_types),
+                    "sleep": self.sleep,
+                    "tooltip": self.tooltip,
+                }
+            )
+        except Exception as e:
+            raise ValueError(f"In function {self.name}: {e}") from e
 
 
 class LSLDefinitions(NamedTuple):
@@ -298,6 +413,170 @@ class LSLFunctionRanges(enum.IntEnum):
     SCRIPT_ID_EMAIL_ADDITIONS = 750
     SCRIPT_ID_GLTF_MATERIALS = 760
     SCRIPT_ID_LIST_ADDITIONS = 800
+
+
+@dataclasses.dataclass
+class SLuaProperty:
+    """Property definition"""
+
+    name: str
+    type: str
+    value: str | None = None
+    comment: str = ""
+    slua_removed: bool = False
+
+    def to_keywords_dict(self) -> dict:
+        return {
+            "tooltip": self.comment,
+            "type": self.type,
+            **({"value": _escape_python(self.value)} if self.value is not None else {}),
+        }
+
+
+@dataclasses.dataclass
+class SLuaParameter:
+    """
+    Function/method parameter
+    - Regular parameters require both name and type
+    - Self parameters only need name (type is implicit)
+    - Variadic parameters need name "..." and type
+    """
+
+    name: str
+    type: Optional[str] = None
+    comment: str = ""
+
+
+@dataclasses.dataclass
+class SLuaFunctionAnon:
+    """Annonymous function signature"""
+
+    parameters: List[SLuaParameter]
+    returnType: str
+    comment: Optional[str] = None
+
+
+@dataclasses.dataclass
+class SLuaFunction:
+    """Full function or method signature with optional overloads"""
+
+    name: str
+    parameters: List[SLuaParameter]
+    returnType: str
+    typeParameters: Optional[List[str]] = None
+    comment: str = ""
+    private: bool = False
+    deprecated: bool = False
+    overloads: Optional[List[SLuaFunctionAnon]] = None
+
+    def to_keywords_dict(self) -> dict:
+        return _remove_worthless(
+            {
+                "type-arguments": self.typeParameters,
+                "arguments": [
+                    {
+                        a.name: {
+                            "tooltip": a.comment,
+                            "type": a.type,
+                        }
+                    }
+                    for a in self.parameters
+                ],
+                "deprecated": self.deprecated,
+                "energy": 10.0,
+                "return": self.returnType,
+                "sleep": 0.0,
+                "tooltip": self.comment,
+            }
+        )
+
+
+@dataclasses.dataclass
+class SLuaTypeAlias:
+    """Type alias definition"""
+
+    name: str
+    definition: str
+    comment: str = ""
+    export: bool = False
+    """Whether this type is available to users"""
+
+    def to_keywords_dict(self) -> dict:
+        definition = self.to_luau_def()
+        if len(definition) > 200:
+            definition = ""
+        return {
+            "tooltip": f"{self.comment}\n{definition}".strip(),
+        }
+
+    def to_luau_def(self) -> str:
+        export_str = "export " if self.export else ""
+        return f"{export_str}type {self.name} = {self.definition}"
+
+
+@dataclasses.dataclass
+class SLuaClassDeclaration:
+    """Class declaration with properties and methods"""
+
+    name: str
+    properties: List[SLuaProperty]
+    methods: List[SLuaFunction]
+    comment: str = ""
+
+    def to_keywords_dict(self) -> dict:
+        return {"tooltip": self.comment}
+
+
+@dataclasses.dataclass
+class SLuaModule:
+    """Module declaration with constants and functions"""
+
+    name: str
+    callable: Optional[SLuaFunction]
+    constants: List[SLuaProperty]
+    functions: List[SLuaFunction]
+    comment: str = ""
+
+    def to_keywords_functions_dict(self) -> dict:
+        functions = {}
+        if self.callable:
+            functions[self.name] = self.callable.to_keywords_dict()
+        else:
+            functions[self.name] = {"energy": -1.0, "tooltip": self.comment}
+        functions.update(
+            {
+                f"{self.name}.{func.name}": func.to_keywords_dict()
+                for func in sorted(self.functions, key=lambda x: x.name)
+                if not func.private
+            }
+        )
+        return functions
+
+    def to_keywords_constants_dict(self) -> dict:
+        return {
+            f"{self.name}.{prop.name}": prop.to_keywords_dict()
+            for prop in sorted(self.constants, key=lambda x: x.name)
+        }
+
+
+class SLuaDefinitions(NamedTuple):
+    # for best results, load/generate in the same order defined here
+
+    # 1. Luau builtins. Typecheckers already know about these
+    controls: dict  # same structure as LSLDefinitions.controls
+    builtinTypes: dict  # same structure as LSLDefinitions.types
+    builtinConstants: List[SLuaProperty]
+    builtinFunctions: List[SLuaFunction]
+
+    # 2. SLua base classes. These only depend on Luau builtins
+    baseClasses: List[SLuaClassDeclaration]
+    typeAliases: List[SLuaTypeAlias]
+
+    # 3. SLua standard library. Depends on base classes
+    classes: List[SLuaClassDeclaration]
+    globalFunctions: List[SLuaFunction]
+    modules: List[SLuaModule]
+    globalVariables: List[SLuaProperty]
 
 
 def _escape_python(val: str) -> str:
@@ -376,6 +655,9 @@ class LSLDefinitionParser:
             ],
             private=event_data.get("private", False),
             deprecated=event_data.get("deprecated", False),
+            slua_deprecated=event_data.get("slua-deprecated", False),
+            slua_removed=event_data.get("slua-removed", False),
+            detected_semantics=event_data.get("detected-semantics", False),
         )
 
         if event.name in self._definitions.events:
@@ -396,17 +678,22 @@ class LSLDefinitionParser:
             # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
             mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
             ret_type=LSLType(func_data["return"]),
+            slua_type=func_data.get("slua-return", None),
+            type_arguments=func_data.get("type-arguments", []),
             arguments=[
                 self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
             ],
             private=func_data.get("private", False),
             god_mode=func_data.get("god-mode", False),
             deprecated=func_data.get("deprecated", False),
+            slua_deprecated=func_data.get("slua-deprecated", False),
+            slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
+            detected_semantics=bool(func_data.get("detected-semantics", False)),
         )
 
         if func.name in self._definitions.functions:
@@ -439,7 +726,9 @@ class LSLDefinitionParser:
         arg = LSLArgument(
             name=arg_name,
             type=LSLType(arg_data["type"]),
+            slua_type=arg_data.get("slua-type", None),
             index_semantics=bool(arg_data.get("index-semantics", False)),
+            bool_semantics=bool(arg_data.get("bool-semantics", False)),
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.index_semantics and arg.type != LSLType.INTEGER:
@@ -467,10 +756,11 @@ class LSLDefinitionParser:
             raise KeyError(f"{name!r} is a reserved name")
 
     def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
-        self._validate_identifier(const_name)
         const = LSLConstant(
             name=const_name,
             type=LSLType(const_data["type"]),
+            slua_type=const_data.get("slua-type", None),
+            slua_removed=const_data.get("slua-removed", False),
             value=str(self._massage_const_value(const_data["value"])),
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
@@ -491,8 +781,212 @@ class LSLDefinitionParser:
         return _unescape_python(val)
 
 
-def _to_f32(val: float) -> float:
-    return ctypes.c_float(val).value
+class SLuaDefinitionParser:
+    def __init__(self):
+        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [])
+        self.type_names: Set[str] = set()
+        self.global_scope: Set[str] = set()
+
+    def parse_file(self, name: str) -> SLuaDefinitions:
+        if name.endswith(".llsd"):
+            return self.parse_llsd_file(name)
+        return self.parse_yaml_file(name)
+
+    def parse_yaml_file(self, name: str):
+        with open(name, "rb") as f:
+            return self._parse_dict(yaml.safe_load(f.read()))
+
+    def parse_llsd_file(self, name: str) -> SLuaDefinitions:
+        with open(name, "rb") as f:
+            return self.parse_llsd_blob(f.read())
+
+    def parse_llsd_blob(self, llsd_blob: bytes) -> SLuaDefinitions:
+        return self._parse_dict(llsd.parse_xml(llsd_blob))
+
+    def _parse_dict(self, def_dict: dict) -> SLuaDefinitions:
+        if any(x for x in self.definitions):
+            raise RuntimeError("Already parsed!")
+
+        # 1. Luau builtins. Typecheckers already know about these
+        # nil is hardcoded because it should highlight as a constant, not a type
+        self.type_names.add("nil")
+        self.definitions.builtinTypes.update(def_dict["builtinTypes"])
+        self.type_names.update(self.definitions.builtinTypes.keys())
+        self.definitions.controls.update(def_dict["controls"])
+        self.global_scope.update(self.definitions.controls.keys())
+        self.definitions.builtinConstants.extend(
+            self._validate_property(const, self.global_scope, const=True)
+            for const in def_dict["builtinConstants"]
+        )
+        self.definitions.builtinFunctions.extend(
+            self._validate_function(func, self.global_scope)
+            for func in def_dict["builtinFunctions"]
+        )
+        # 2. SLua base classes. These only depend on Luau builtins
+        self.definitions.baseClasses.extend(
+            self._validate_class(class_) for class_ in def_dict["baseClasses"]
+        )
+        self.definitions.typeAliases.extend(
+            self._validate_type_alias(alias) for alias in def_dict["typeAliases"]
+        )
+
+        # 3. SLua standard library. Depends on base classes
+        self.definitions.classes.extend(
+            self._validate_class(class_) for class_ in def_dict["classes"]
+        )
+        self.definitions.globalFunctions.extend(
+            self._validate_function(func, self.global_scope) for func in def_dict["globalFunctions"]
+        )
+        self.definitions.modules.extend(
+            self._validate_module(module) for module in def_dict["modules"]
+        )
+        self.definitions.globalVariables.extend(
+            self._validate_property(const, self.global_scope)
+            for const in def_dict["globalVariables"]
+        )
+
+        return self.definitions
+
+    def _validate_module(self, data: any) -> SLuaModule:
+        module = SLuaModule(
+            name=data["name"],
+            comment=data.get("comment", ""),
+            callable=None,
+            constants=[],
+            functions=[],
+        )
+        try:
+            self._validate_identifier(module.name)
+            self._validate_scope(module.name, self.global_scope)
+            module_scope: Set[str] = set()
+            callable = data.get("callable")
+            if callable is not None:
+                module.callable = self._validate_function(callable, module_scope)
+                if module.callable.name != module.name:
+                    raise ValueError("module.callable.name must match module.name")
+                module_scope.clear()
+            module.constants = [
+                self._validate_property(prop, module_scope, const=True)
+                for prop in data.get("constants", [])
+            ]
+            module.functions = [
+                self._validate_function(function, module_scope)
+                for function in data.get("functions", [])
+            ]
+        except Exception as e:
+            raise ValueError(f"In module {module.name}: {e}") from e
+        return module
+
+    def _validate_class(self, data: any) -> SLuaClassDeclaration:
+        class_ = SLuaClassDeclaration(
+            name=data["name"],
+            comment=data.get("comment", ""),
+            properties=[],
+            methods=[],
+        )
+        try:
+            self._validate_identifier(class_.name)
+            self._validate_scope(class_.name, self.type_names)
+            class_scope: Set[str] = set()
+            class_.properties = [
+                self._validate_property(prop, class_scope) for prop in data.get("properties", [])
+            ]
+            class_.methods = [
+                self._validate_function(method, class_scope, method=True)
+                for method in data.get("methods", [])
+            ]
+        except Exception as e:
+            raise ValueError(f"In class {class_.name}: {e}") from e
+        return class_
+
+    def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunction:
+        try:
+            func = SLuaFunction(
+                name=data["name"],
+                typeParameters=data.get("typeParameters", []),
+                parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
+                returnType=data.get("returnType", LSLType.VOID.meta.slua_name),
+                comment=data.get("comment", ""),
+                deprecated=data.get("deprecated", False),
+                private=data.get("private", False),
+            )
+            self._validate_identifier(func.name)
+            self._validate_scope(func.name, scope)
+            known_types = self.validate_type_params(func.typeParameters)
+            self.validate_type(func.returnType, known_types)
+            params = func.parameters
+            params_scope = set()
+            if method:
+                if not params or params[0].name != "self" or params[0].type is not None:
+                    raise ValueError(f"Method {func.name} missing self parameter")
+                params_scope.add("self")
+                params = params[1:]
+            if params and params[-1].name == "...":
+                self.validate_type(params[-1].type, known_types)
+                params = params[:-1]
+            for param in params:
+                self._validate_identifier(param.name)
+                self._validate_scope(param.name, params_scope)
+                self.validate_type(param.type, known_types)
+            return func
+        except Exception as e:
+            raise ValueError(f"In function {data['name']}: {e}") from e
+
+    def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
+        alias = SLuaTypeAlias(**data)
+        try:
+            self._validate_identifier(alias.name)
+            self.validate_type(alias.definition)
+            # add it to scope only after validating type, to ensure it isn't recursive
+            self._validate_scope(alias.name, self.type_names)
+        except Exception as e:
+            raise ValueError(f"In type alias {alias.name}: {e}") from e
+        return alias
+
+    def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> SLuaProperty:
+        prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
+        self._validate_identifier(prop.name)
+        self._validate_scope(prop.name, scope)
+        if const and prop.type != "any" and prop.value is None:
+            raise ValueError(f"Constant {prop.name} must have a value")
+        self.validate_type(prop.type)
+        return prop
+
+    def validate_type_params(self, type_params: List[str]) -> set[str]:
+        known_types = set(self.type_names)
+        for type_param in type_params:
+            type_param = type_param.replace("...", "", 1)
+            self._validate_identifier(type_param)
+            self._validate_scope(type_param, known_types)
+        return known_types
+
+    _TYPE_SEPERATORS_RE = re.compile(
+        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
+    )
+
+    def validate_type(self, type: str, known_type_names: set[str] | None = None) -> str:
+        if not type:
+            raise ValueError("Type may not be empty")
+        if known_type_names is None:
+            known_type_names = self.type_names
+        if type in known_type_names:
+            return type
+        subtypes = self._TYPE_SEPERATORS_RE.split(type)
+        unknown_subtypes = set(subtypes) - known_type_names - {""}
+        if not unknown_subtypes:
+            return type
+        raise ValueError(f"Unknown types {unknown_subtypes} in definition {type!r}")
+
+    def _validate_scope(self, name: str, scope: Set[str]) -> None:
+        if name in scope:
+            raise ValueError(f"{name!r} is already defined in this scope")
+        scope.add(name)
+
+    _IDENTIFIER_RE = re.compile(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z")
+
+    def _validate_identifier(self, name: str) -> None:
+        if not re.match(self._IDENTIFIER_RE, name):
+            raise ValueError(f"{name!r} is not a valid identifier")
 
 
 def _remove_worthless(val: dict) -> dict:
@@ -507,22 +1001,26 @@ def _remove_worthless(val: dict) -> dict:
         val.pop("pure", None)
     if not val.get("native"):
         val.pop("native", None)
+    if not val.get("bool_semantics"):
+        val.pop("bool_semantics", None)
     if not val.get("bool-semantics"):
         val.pop("bool-semantics", None)
     if not val.get("index-semantics"):
         val.pop("index-semantics", None)
+    if not val.get("type-arguments"):
+        val.pop("type-arguments", None)
     return val
 
 
-def dump_syntax(definitions: LSLDefinitions) -> bytes:
+def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
     syntax = {
-        "llsd-lsl-syntax-version": 2,
         "controls": definitions.controls.copy(),
         "types": definitions.types.copy(),
         "constants": {},
         "events": {},
         "functions": {},
+        "llsd-lsl-syntax-version": 2,
     }
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.private:
@@ -534,6 +1032,11 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
             continue
         syntax["functions"][func.name] = func.to_dict()
 
+    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+        if const.private:
+            continue
+        syntax["constants"][const.name] = const.to_dict()
+
     # This one's a little weird because it's not a "real" constant, but it's expected to be in the
     # constants section even though it has no value or type. It allows default to have a tooltip
     # and a distinct color.
@@ -542,12 +1045,69 @@ def dump_syntax(definitions: LSLDefinitions) -> bytes:
         "If another state is defined before the default state, the compiler will report a syntax error."
     }
 
-    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
-        if const.private:
-            continue
-        syntax["constants"][const.name] = const.to_dict()
+    if pretty:
+        return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+    else:
+        return llsd.format_xml(syntax)
 
-    return llsd.format_xml(syntax)
+
+def dump_slua_syntax(
+    lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False
+) -> bytes:
+    """Write a syntax file for use by viewers"""
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
+    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+    syntax = {
+        "controls": slua_definitions.controls.copy(),
+        "types": slua_definitions.builtinTypes.copy(),
+        "constants": {},
+        "events": {},
+        "functions": {},
+        "llsd-lsl-syntax-version": 2,
+    }
+
+    # types
+    for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
+        syntax["types"][class_.name] = class_.to_keywords_dict()
+    for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
+        if alias.export:
+            syntax["types"][alias.name] = alias.to_keywords_dict()
+    for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
+        syntax["types"][class_.name] = class_.to_keywords_dict()
+
+    # events
+    for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
+        if event.slua_removed:
+            continue
+        syntax["events"][event.name] = event.to_slua_dict(parser)
+
+    # functions
+    for func in slua_definitions.builtinFunctions:
+        syntax["functions"][func.name] = func.to_keywords_dict()
+    for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
+        syntax["functions"][func.name] = func.to_keywords_dict()
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        if module.name not in {"ll", "llcompat"}:
+            syntax["functions"].update(module.to_keywords_functions_dict())
+    syntax["functions"].update(ll_module.to_keywords_functions_dict())
+    for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
+        if not func.private:
+            syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
+
+    # constants
+    for const in slua_definitions.builtinConstants:
+        syntax["constants"][const.name] = const.to_keywords_dict()
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        syntax["constants"].update(module.to_keywords_constants_dict())
+    for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
+        if not const.private and not const.slua_removed:
+            syntax["constants"][const.name] = const.to_slua_dict(parser)
+
+    if pretty:
+        return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+    else:
+        return llsd.format_xml(syntax)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
@@ -1972,7 +2532,20 @@ def main():
 
     sub = subparsers.add_parser("syntax")
     sub.add_argument("filename")
-    sub.set_defaults(func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs)))
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(args.filename, dump_syntax(defs, args.pretty))
+    )
+
+    sub = subparsers.add_parser("slua_syntax")
+    sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
+    sub.add_argument("filename")
+    sub.add_argument("--pretty", action="store_true", help="Pretty-print the XML output")
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(
+            args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)
+        )
+    )
 
     sub = subparsers.add_parser("gen_constant_lsl_script")
     sub.set_defaults(func=lambda args, defs: gen_constant_lsl_script(defs))

@@ -1,15 +1,15 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
     "$id": "http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/lsl_definitions.schema.json",
     "$comment": "This schema defines keywords for the Linden Scripting Language (LSL) of Second Life.",
-    "definitions": {
+    "$defs": {
         "nonNegativeInteger": {
             "minimum": 0,
             "type": "integer"
         },
         "nonNegativeIntegerDefault0": {
             "allOf": [
-                { "$ref": "#/definitions/nonNegativeInteger" },
+                { "$ref": "#/$defs/nonNegativeInteger" },
                 { "default": 0 }
             ]
         },
@@ -33,9 +33,15 @@
             "patternProperties": {
                 "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
                     "properties": {
+                        "additionalProperties": false,
                         "deprecated": {
                             "const": true,
                             "markdownDescription": "This constant has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "This constant is only present in LSL, not SLua.",
                             "type": "boolean"
                         },
                         "private": {
@@ -134,92 +140,112 @@
             "type": "object"
         },
         "events": {
-            "properties": {
-                "arguments": {
-                    "items": {
-                        "additionalProperties": false,
-                        "patternProperties": {
-                            "^(?:[a-z]+(?:_[a-z]+)*)$": {
-                                "properties": {
-                                    "tooltip": {
-                                        "markdownDescription": "A brief description of this event argument.",
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "defaultSnippets": [
-                                            {
-                                                "label": "float",
-                                                "body": "float"
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[a-z_]+$": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "arguments": {
+                            "items": {
+                                "additionalProperties": false,
+                                "patternProperties": {
+                                    "^(?:[A-Za-z]+(?:_[A-Za-z]+)*)$": {
+                                        "properties": {
+                                            "tooltip": {
+                                                "markdownDescription": "A brief description of this event argument.",
+                                                "type": "string"
                                             },
-                                            {
-                                                "label": "integer",
-                                                "body": "integer"
-                                            },
-                                            {
-                                                "label": "key",
-                                                "body": "key"
-                                            },
-                                            {
-                                                "label": "list",
-                                                "body": "list"
-                                            },
-                                            {
-                                                "label": "quaternion",
-                                                "body": "quaternion"
-                                            },
-                                            {
-                                                "label": "rotation",
-                                                "body": "rotation"
-                                            },
-                                            {
-                                                "label": "string",
-                                                "body": "string"
-                                            },
-                                            {
-                                                "label": "vector",
-                                                "body": "vector"
+                                            "type": {
+                                                "defaultSnippets": [
+                                                    {
+                                                        "label": "float",
+                                                        "body": "float"
+                                                    },
+                                                    {
+                                                        "label": "integer",
+                                                        "body": "integer"
+                                                    },
+                                                    {
+                                                        "label": "key",
+                                                        "body": "key"
+                                                    },
+                                                    {
+                                                        "label": "list",
+                                                        "body": "list"
+                                                    },
+                                                    {
+                                                        "label": "quaternion",
+                                                        "body": "quaternion"
+                                                    },
+                                                    {
+                                                        "label": "rotation",
+                                                        "body": "rotation"
+                                                    },
+                                                    {
+                                                        "label": "string",
+                                                        "body": "string"
+                                                    },
+                                                    {
+                                                        "label": "vector",
+                                                        "body": "vector"
+                                                    }
+                                                ],
+                                                "markdownDescription": "One of the valid types for this event argument: [float, integer, key, list, rotation, string, vector].",
+                                                "oneOf": [
+                                                    { "const": "float" },
+                                                    { "const": "integer" },
+                                                    { "const": "key" },
+                                                    { "const": "list" },
+                                                    {
+                                                        "$comment": "quaternion is an alias for rotation",
+                                                        "const": "quaternion"
+                                                    },
+                                                    { "const": "rotation" },
+                                                    { "const": "string" },
+                                                    { "const": "vector" }
+                                                ]
                                             }
+                                        },
+                                        "required": [
+                                            "type"
                                         ],
-                                        "markdownDescription": "One of the valid types for this event argument: [float, integer, key, list, rotation, string, vector].",
-                                        "oneOf": [
-                                            { "const": "float" },
-                                            { "const": "integer" },
-                                            { "const": "key" },
-                                            { "const": "list" },
-                                            {
-                                                "$comment": "quaternion is an alias for rotation",
-                                                "const": "quaternion"
-                                            },
-                                            { "const": "rotation" },
-                                            { "const": "string" },
-                                            { "const": "vector" }
-                                        ]
+                                        "type": "object"
                                     }
                                 },
-                                "required": [
-                                    "type"
-                                ],
                                 "type": "object"
-                            }
+                            },
+                            "markdownDescription": "An array of event arguments.",
+                            "minItems": 0,
+                            "type": "array",
+                            "uniqueItems": true
                         },
-                        "type": "object"
-                    },
-                    "markdownDescription": "An array of event arguments.",
-                    "minItems": 1,
-                    "type": "array",
-                    "uniqueItems": true
-                },
-                "deprecated": {
-                    "const": true,
-                    "markdownDescription": "This event has been deprecated.",
-                    "type": "boolean"
-                },
-                "tooltip": {
-                    "markdownDescription": "A brief description of this event.",
-                    "type": "string"
+                        "detected-semantics": {
+                            "const": true,
+                            "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
+                            "type": "boolean"
+                        },
+                        "deprecated": {
+                            "const": true,
+                            "markdownDescription": "This event has been deprecated.",
+                            "type": "boolean"
+                        },
+                        "slua-deprecated": {
+                            "const": true,
+                            "markdownDescription": "This event has been deprecated in SLua.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "This event has been removed in SLua.",
+                            "type": "boolean"
+                        },
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this event.",
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "required": [],
             "type": "object"
         },
         "functions": {
@@ -228,15 +254,35 @@
                 "^ll[A-Zs](?:[A-Z0-9]*[a-z]*)+$": {
                     "additionalProperties": false,
                     "properties": {
+                        "type-arguments": {
+                            "items": {
+                                "additionalProperties": false,
+                                "patternProperties": {
+                                    "^(?:[A-Za-z]+)$": {
+                                        "markdownDescription": "A type variable name for slua typechecking."
+                                    }
+                                },
+                                "type": "string"
+                            },
+                            "markdownDescription": "An array of type variable names for slua typechecking.",
+                            "type": "array",
+                            "uniqueItems": true
+                        },
                         "arguments": {
                             "items": {
                                 "additionalProperties": false,
                                 "patternProperties": {
                                     "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
+                                        "additionalProperties": false,
                                         "properties": {
                                             "bool-semantics": {
                                                 "const": true,
-                                                "markdownDescription": "The function arguments integer value represents a boolean value.",
+                                                "markdownDescription": "This function argument's integer value represents a boolean value.",
+                                                "type": "boolean"
+                                            },
+                                            "index-semantics": {
+                                                "const": true,
+                                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
                                                 "type": "boolean"
                                             },
                                             "tooltip": {
@@ -292,6 +338,10 @@
                                                     { "const": "string" },
                                                     { "const": "vector" }
                                                 ]
+                                            },
+                                            "slua-type": {
+                                                "markdownDescription": "A more specific argument type for slua type-checking.",
+                                                "type": "string"
                                             }
                                         },
                                         "required": [
@@ -316,8 +366,13 @@
                             "markdownDescription": "This function has been deprecated.",
                             "type": "boolean"
                         },
+                        "detected-semantics": {
+                            "const": true,
+                            "markdownDescription": "This function is wrapped in the DetectedEvent class.",
+                            "type": "boolean"
+                        },
                         "energy": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "The script energy consumed by this function."
                         },
                         "experience": {
@@ -327,7 +382,7 @@
                         },
                         "func-id": {
                             "$comment": "llSin has 'func-id: 0', so we must include zero",
-                            "$ref": "#/definitions/nonNegativeInteger",
+                            "$ref": "#/$defs/nonNegativeInteger",
                             "markdownDescription": "The LSO function identifier."
                         },
                         "god-mode": {
@@ -346,7 +401,7 @@
                             "type": "boolean"
                         },
                         "mono-sleep": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "Sleep in the mono-script runtime."
                         },
                         "must-use": {
@@ -425,8 +480,22 @@
                                 { "const": "void" }
                             ]
                         },
+                        "slua-deprecated": {
+                            "const": true,
+                            "markdownDescription": "This function is deprecated in SLua.",
+                            "type": "boolean"
+                        },
+                        "slua-removed": {
+                            "const": true,
+                            "markdownDescription": "In SLua, this function has been removed from ll module and only exists in llcompat.",
+                            "type": "boolean"
+                        },
+                        "slua-return": {
+                            "markdownDescription": "A more specific return type for slua type-checking.",
+                            "type": "string"
+                        },
                         "sleep": {
-                            "$ref": "#/definitions/nonNegativeNumber",
+                            "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "Additional sleep time imposed by the script after this function completes."
                         },
                         "tooltip": {
@@ -442,7 +511,7 @@
             "type": "object"
         },
         "llsd-lsl-syntax-version": {
-            "$ref": "#/definitions/positiveInteger",
+            "$ref": "#/$defs/positiveInteger",
             "markdownDescription": "Only increment with file format changes."
         },
         "types": {

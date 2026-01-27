@@ -44,13 +44,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: Check if syntax generation produces valid output
+      - name: Check if LSL syntax generation produces valid output
         run: |
           # Generate syntax to a temporary file to verify it's valid
-          gen-lsl-definitions ./lsl_definitions.yaml syntax /tmp/syntax_output.llsd
+          gen-lsl-definitions ./lsl_definitions.yaml syntax /tmp/lsl_syntax_output.llsd
           # Check that the output file was created and is not empty
-          if [ ! -s /tmp/syntax_output.llsd ]; then
-            echo "Error: Syntax generation produced empty output"
+          if [ ! -s /tmp/lsl_syntax_output.llsd ]; then
+            echo "Error: LSL Syntax generation produced empty output"
             exit 1
           fi
-          echo "✓ Syntax generation successful and produced non-empty output"
+          echo "✓ LSL Syntax generation successful and produced non-empty output"
+
+      - name: Check if SLua syntax generation produces valid output
+        run: |
+          # Generate syntax to a temporary file to verify it's valid
+          gen-lsl-definitions ./lsl_definitions.yaml slua_syntax ./slua_definitions.yaml /tmp/slua_syntax_output.llsd
+          # Check that the output file was created and is not empty
+          if [ ! -s /tmp/slua_syntax_output.llsd ]; then
+            echo "Error: SLua Syntax generation produced empty output"
+            exit 1
+          fi
+          echo "✓ SLua Syntax generation successful and produced non-empty output"

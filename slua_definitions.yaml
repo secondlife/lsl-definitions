@@ -1,0 +1,2418 @@
+%YAML 1.2
+---
+# yaml-language-server: $schema=http://raw.githubusercontent.com/secondlife/lsl-definitions/refs/heads/main/slua_definitions.schema.json
+#
+# increment only when the file format changes, not just the content
+version: 1.0.0
+# baseClasses must not depend on anything else in this file (not typeAliases, not classes)
+baseClasses:
+- name: quaternion
+  comment: A set of four float values. Used to represent rotations and orientations.
+  methods:
+  - name: __add
+    parameters:
+    - name: self
+    - name: other
+      type: quaternion
+    returnType: quaternion
+  - name: __sub
+    parameters:
+    - name: self
+    - name: other
+      type: quaternion
+    returnType: quaternion
+  - name: __mul
+    parameters:
+    - name: self
+    - name: other
+      type: quaternion
+    returnType: quaternion
+  - name: __div
+    parameters:
+    - name: self
+    - name: other
+      type: quaternion
+    returnType: quaternion
+  - name: __unm
+    parameters:
+    - name: self
+    returnType: quaternion
+  - name: __eq
+    parameters:
+    - name: self
+    - name: other
+      type: quaternion
+    returnType: boolean
+  - name: __tostring
+    parameters:
+    - name: self
+    returnType: string
+  properties:
+  - name: x
+    type: number
+  - name: "y"
+    type: number
+  - name: z
+    type: number
+  - name: s
+    type: number
+- name: uuid
+  comment: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
+  methods:
+  - name: __tostring
+    parameters:
+    - name: self
+    returnType: string
+  properties:
+  - name: istruthy
+    comment: Returns true if the UUID is not the null UUID (all zeros)
+    type: boolean
+  - name: bytes
+    comment: Returns the raw 16-byte binary string of the UUID, or nil if the UUID
+      is not in a compressed state
+    type: string?
+- name: vector
+  comment: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
+  methods:
+  - name: __add
+    comment: Native component-wise addition
+    parameters:
+    - name: self
+    - name: other
+      type: vector
+    returnType: vector
+  - name: __sub
+    comment: Native component-wise subtraction
+    parameters:
+    - name: self
+    - name: other
+      type: vector
+    returnType: vector
+  - name: __unm
+    comment: Unary negation
+    parameters:
+    - name: self
+    returnType: vector
+  - name: __mul
+    comment: 'Multiplication: vector * vector / number -> vector (Scale), vector
+      * quaternion -> vector (Rotation)'
+    parameters:
+    - name: self
+    - name: other
+      type: number | vector | quaternion
+    returnType: vector
+  - name: __div
+    comment: 'Division: vector / number -> vector (Scale), vector / quaternion ->
+      vector (Rotation by inverse)'
+    parameters:
+    - name: self
+    - name: other
+      type: number | vector | quaternion
+    returnType: vector
+  - name: __mod
+    comment: 'LSL-style modulo: vector % vector -> vector (Cross Product)'
+    parameters:
+    - name: self
+    - name: other
+      type: vector
+    returnType: vector
+  - name: __tostring
+    parameters:
+    - name: self
+    returnType: string
+  properties:
+  - name: x
+    type: number
+  - name: "y"
+    type: number
+  - name: z
+    type: number
+- name: DetectedEvent
+  comment: Event detection class providing access to detected object/avatar information
+  # auto-generated from lsl_definitions.yaml
+  methods: []
+  properties:
+  - name: index
+    type: number
+  - name: valid
+    type: boolean
+  - name: canAdjustDamage
+    type: boolean
+typeAliases:
+- name: rotation
+  comment: '''rotation'' is an alias for ''quaternion'''
+  export: true
+  definition: quaternion
+- name: list
+  export: true
+  definition: "{string | number | vector | uuid | quaternion | boolean}"
+- name: LLDetectedEventName
+  # auto-generated from lsl_definitions.yaml
+  definition: "{}"
+- name: LLNonDetectedEventName
+  # auto-generated from lsl_definitions.yaml
+  definition: "{}"
+- name: LLEventName
+  definition: LLDetectedEventName | LLNonDetectedEventName
+- name: LLEventHandler
+  # auto-generated from lsl_definitions.yaml
+  definition: (...any) -> ()
+- name: LLDetectedEventHandler
+  definition: "(detected: {DetectedEvent}) -> ()"
+- name: LLTimerEveryCallback
+  comment: Callback type for LLTimers.every() - receives scheduled time and interval
+  definition: "(scheduled: number, interval: number) -> ()"
+- name: LLTimerOnceCallback
+  comment: Callback type for LLTimers.once() - receives scheduled time
+  definition: "(scheduled: number) -> ()"
+- name: LLTimerCallback
+  comment: Union of timer callback types
+  definition: LLTimerEveryCallback | LLTimerOnceCallback
+- name: OsDateTime
+  comment: Date/time table structure used by os.date and os.time
+  export: true
+  definition: |-
+    {
+      year: number,
+      month: number,
+      day: number,
+      hour: number?,
+      min: number?,
+      sec: number?,
+      wday: number?,
+      yday: number?,
+      isdst: boolean?,
+    }
+classes:
+- name: LLEvents
+  comment: Event registration and management class for Second Life events
+  methods:
+  - name: 'on'
+    comment: Registers a callback for an event. Returns the callback.
+    parameters:
+    - name: self
+    - name: event
+      type: LLEventName
+    - name: callback
+      type: LLEventHandler
+    returnType: LLEventHandler
+  - name: 'off'
+    comment: Unregisters a callback. Returns true if found and removed.
+    parameters:
+    - name: self
+    - name: event
+      type: LLEventName
+    - name: callback
+      type: LLEventHandler
+    returnType: boolean
+  - name: once
+    comment: Registers a one-time callback. Returns the wrapper function.
+    parameters:
+    - name: self
+    - name: event
+      type: LLEventName
+    - name: callback
+      type: LLEventHandler
+    returnType: LLEventHandler
+  - name: listeners
+    comment: Returns a list of all listeners for a specific event.
+    parameters:
+    - name: self
+    - name: event
+      type: LLEventName
+    returnType: '{LLEventHandler}'
+  - name: eventNames
+    comment: Returns a list of all event names that have listeners.
+    parameters:
+    - name: self
+    returnType: '{string}'
+- name: LLTimers
+  comment: Timer management class for scheduling periodic and one-time callbacks
+  methods:
+  - name: every
+    comment: Registers a callback to be called every N seconds. Returns the callback.
+    parameters:
+    - name: self
+    - name: seconds
+      type: number
+    - name: callback
+      type: LLTimerEveryCallback
+    returnType: LLTimerCallback
+  - name: once
+    comment: Registers a callback to be called once after N seconds. Returns the
+      callback.
+    parameters:
+    - name: self
+    - name: seconds
+      type: number
+    - name: callback
+      type: LLTimerOnceCallback
+    returnType: LLTimerCallback
+  - name: 'off'
+    comment: Unregisters a timer callback. Returns true if found and removed.
+    parameters:
+    - name: self
+    - name: callback
+      type: LLTimerCallback
+    returnType: boolean
+globalVariables:
+- name: rotation
+  comment: rotation is an alias for quaternion
+  type: typeof(quaternion)
+- name: loadstring
+  comment: loadstring is removed in SLua
+  slua-removed: true
+  type: nil
+- name: getfenv
+  comment: getfenv is removed in SLua
+  slua-removed: true
+  type: nil
+- name: setfenv
+  comment: setfenv is removed in SLua
+  slua-removed: true
+  type: nil
+globalFunctions:
+- name: dangerouslyexecuterequiredmodule
+  comment: Dangerously executes a required module function
+  parameters:
+  - name: f
+    type: (...any) -> ...any
+  returnType: '...any'
+- name: touuid
+  comment: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
+  parameters:
+  - name: val
+    type: string | buffer | uuid
+  returnType: uuid?
+- name: tovector
+  comment: Converts a value to a vector, returns nil if invalid
+  parameters:
+  - name: val
+    type: any
+  returnType: vector?
+- name: toquaternion
+  comment: Converts a value to a quaternion, returns nil if invalid
+  parameters:
+  - name: val
+    type: any
+  returnType: quaternion?
+- name: torotation
+  comment: Converts a value to a rotation (quaternion), returns nil if invalid
+  parameters:
+  - name: val
+    type: any
+  returnType: quaternion?
+modules:
+- name: bit32
+  comment: Bitwise operations library.
+  functions:
+  - name: arshift
+    comment: |-
+      Shifts n by i bits to the right. If i is negative, a left shift is performed.
+      Does an arithmetic shift: The most significant bit of n is propagated during the shift.
+    parameters:
+    - name: "n"
+      comment: Number to shift.
+      type: number
+    - name: i
+      comment: Number of bits to shift.
+      type: number
+    returnType: number
+  - name: band
+    comment: Performs a bitwise AND operation on input numbers.
+    parameters:
+    - name: ...
+      comment: Numbers to perform bitwise AND on.
+      type: ...number
+    returnType: number
+  - name: bnot
+    comment: Returns the bitwise negation of the input number.
+    parameters:
+    - name: "n"
+      comment: Number to negate.
+      type: number
+    returnType: number
+  - name: bor
+    comment: Performs a bitwise OR operation on input numbers.
+    parameters:
+    - name: ...
+      comment: Numbers to perform bitwise OR on.
+      type: ...number
+    returnType: number
+  - name: bxor
+    comment: Performs a bitwise XOR operation on input numbers.
+    parameters:
+    - name: ...
+      comment: Numbers to perform bitwise XOR on.
+      type: ...number
+    returnType: number
+  - name: btest
+    comment: |-
+      Performs a bitwise AND operation on input numbers.
+      Returns true if result is non-zero.
+    parameters:
+    - name: ...
+      comment: Numbers to perform bitwise AND on.
+      type: ...number
+    returnType: boolean
+  - name: extract
+    comment: Extracts bits from n at position field with width
+    parameters:
+    - name: "n"
+      type: number
+    - name: field
+      type: number
+    - name: width
+      type: number?
+    returnType: number
+  - name: lrotate
+    comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
+    parameters:
+    - name: "n"
+      comment: Number to rotate.
+      type: number
+    - name: i
+      comment: Number of bits to rotate.
+      type: number
+    returnType: number
+  - name: lshift
+    comment: Shifts n by i bits to the left. If i is negative, a right shift is performed.
+    parameters:
+    - name: "n"
+      comment: Number to shift.
+      type: number
+    - name: i
+      comment: Number of bits to shift.
+      type: number
+    returnType: number
+  - name: replace
+    comment: Replaces bits in n at position field with width using value v
+    parameters:
+    - name: "n"
+      type: number
+    - name: v
+      type: number
+    - name: field
+      type: number
+    - name: width
+      type: number?
+    returnType: number
+  - name: rrotate
+    comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
+    parameters:
+    - name: "n"
+      comment: Number to rotate.
+      type: number
+    - name: i
+      comment: Number of bits to rotate.
+      type: number
+    returnType: number
+  - name: rshift
+    comment: Shifts n by i bits to the right. If i is negative, a left shift is performed.
+    parameters:
+    - name: "n"
+      comment: Number to shift.
+      type: number
+    - name: i
+      comment: Number of bits to shift.
+      type: number
+    returnType: number
+  - name: countlz
+    comment: Count leading zeros
+    parameters:
+    - name: "n"
+      type: number
+    returnType: number
+  - name: countrz
+    comment: Count trailing zeros
+    parameters:
+    - name: "n"
+      type: number
+    returnType: number
+  - name: byteswap
+    comment: Swap byte order
+    parameters:
+    - name: "n"
+      type: number
+    returnType: number
+- name: buffer
+  comment: Buffer manipulation library for binary data.
+  functions:
+  - name: create
+    comment: Creates a buffer of the requested size with all bytes initialized to 0.
+    parameters:
+    - name: size
+      comment: Size of the buffer to create.
+      type: number
+    returnType: buffer
+  - name: fromstring
+    comment: Creates a buffer initialized to the contents of the string.
+    parameters:
+    - name: str
+      comment: String to initialize the buffer with.
+      type: string
+    returnType: buffer
+  - name: tostring
+    comment: Returns the buffer data as a string.
+    parameters:
+    - name: b
+      comment: Buffer to convert to a string.
+      type: buffer
+    returnType: string
+  - name: readi8
+    comment: Reads a signed 8-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readu8
+    comment: Reads an unsigned 8-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readi16
+    comment: Reads a signed 16-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readu16
+    comment: Reads an unsigned 16-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readi32
+    comment: Reads a signed 32-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readu32
+    comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readf32
+    comment: Reads a 32-bit floating-point number from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: readf64
+    comment: Reads a 64-bit floating-point number from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    returnType: number
+  - name: writei8
+    comment: Writes a signed 8-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writeu8
+    comment: Writes an unsigned 8-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writei16
+    comment: Writes a signed 16-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writeu16
+    comment: Writes an unsigned 16-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writei32
+    comment: Writes a signed 32-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writeu32
+    comment: Writes an unsigned 32-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writef32
+    comment: Writes a 32-bit floating-point number to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: writef64
+    comment: Writes a 64-bit floating-point number to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: number
+    returnType: ()
+  - name: readstring
+    comment: Reads a string of the given length from the buffer at the specified offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to start reading.
+      type: number
+    - name: count
+      comment: Number of bytes to read.
+      type: number
+    returnType: string
+  - name: writestring
+    comment: Writes data from a string into the buffer at the specified offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: String to write.
+      type: string
+    - name: count
+      comment: Number of bytes to write (optional).
+      type: number?
+    returnType: ()
+  - name: len
+    comment: Returns the size of the buffer in bytes.
+    parameters:
+    - name: b
+      comment: Buffer to get the size of.
+      type: buffer
+    returnType: number
+  - name: copy
+    comment: Copies bytes from the source buffer into the target buffer.
+    parameters:
+    - name: target
+      comment: Target buffer to copy into.
+      type: buffer
+    - name: targetOffset
+      comment: Offset in target buffer.
+      type: number
+    - name: source
+      comment: Source buffer to copy from.
+      type: buffer
+    - name: sourceOffset
+      comment: Offset in source buffer (optional).
+      type: number?
+    - name: count
+      comment: Number of bytes to copy (optional).
+      type: number?
+    returnType: ()
+  - name: fill
+    comment: Fills the buffer with the specified value starting at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to fill.
+      type: buffer
+    - name: offset
+      comment: Byte offset to start filling.
+      type: number
+    - name: value
+      comment: Value to fill with.
+      type: number
+    - name: count
+      comment: Number of bytes to fill (optional).
+      type: number?
+    returnType: ()
+  - name: readbits
+    comment: Reads up to 32 bits from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: bitOffset
+      comment: Bit offset to read at.
+      type: number
+    - name: bitCount
+      comment: Number of bits to read. Must be in [0, 32] range.
+      type: number
+    returnType: number
+  - name: writebits
+    comment: Writes up to 32 bits to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+    - name: bitOffset
+      comment: Bit offset to write at.
+      type: number
+    - name: bitCount
+      comment: Number of bits to write. Must be in [0, 32] range.
+      type: number
+    - name: value
+      comment: Source of bits to write.
+      type: number
+    returnType: ()
+- name: coroutine
+  comment: Coroutine manipulation library.
+  functions:
+  - name: create
+    comment: Returns a new coroutine that, when resumed, will run function f.
+    parameters:
+    - name: f
+      comment: A function to be executed by the new coroutine.
+      type: (...any) -> ...any
+    returnType: thread
+  - name: resume
+    comment: Resumes a coroutine, returning true and results if successful, or false and an error.
+    parameters:
+    - name: co
+      comment: The coroutine to resume.
+      type: thread
+    - name: ...
+      comment: Arguments to pass to the coroutine.
+      type: ...any
+    returnType: (boolean, ...any)
+  - name: running
+    comment: Returns the currently running coroutine, or nil if called from in the main coroutine.
+    parameters: []
+    returnType: thread?
+  - name: status
+    comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
+    parameters:
+    - name: co
+      comment: The coroutine to check status of.
+      type: thread
+    returnType: '"running" | "suspended" | "normal" | "dead"'
+  - name: wrap
+    comment: Creates a coroutine and returns a function that resumes it.
+    parameters:
+    - name: f
+      comment: A function to execute in a coroutine.
+      type: (...any) -> ...any
+    returnType: (...any) -> ...any
+  - name: yield
+    comment: Yields the current coroutine, passing arguments to the resuming code.
+    parameters:
+    - name: ...
+      comment: Values to pass to the resuming code.
+      type: ...any
+    returnType: '...any'
+  - name: isyieldable
+    comment: Returns true if the currently running coroutine can yield.
+    parameters: []
+    returnType: boolean
+  - name: close
+    comment: Closes a coroutine, returning true if successful or false and an error.
+    parameters:
+    - name: co
+      comment: The coroutine to close.
+      type: thread
+    returnType: (boolean, string?)
+- name: debug
+  comment: Debug library for introspection.
+  functions:
+  - name: info
+    comment: Returns information about a stack frame or function based on specified format.
+    overloads:
+    - comment: Returns information about a stack level
+      parameters:
+      - name: level
+        comment: Stack level or function reference for inspection.
+        type: number
+      - name: s
+        comment: String specifying requested information.
+        type: string
+      returnType: '...any'
+    - comment: Returns information about a function
+      parameters:
+      - name: func
+        comment: Function reference.
+        type: (...any) -> ...any
+      - name: s
+        comment: String specifying requested information.
+        type: string
+      returnType: '...any'
+    parameters:
+    - name: co
+      comment: Optional thread or function reference.
+      type: thread | ((...any) -> ...any) | number
+    - name: level
+      comment: Stack level or function reference for inspection.
+      type: number
+    - name: s
+      comment: String specifying requested information.
+      type: string
+    returnType: '...any'
+  - name: traceback
+    comment: Returns a human-readable call stack starting from the specified level.
+    overloads:
+    - comment: Returns a string with a traceback of the current call stack
+      parameters:
+      - name: message
+        comment: Optional message prepended to the traceback.
+        type: string?
+      - name: level
+        comment: Optional stack level to start traceback.
+        type: number?
+      returnType: string
+    parameters:
+    - name: co
+      comment: Optional thread reference for traceback.
+      type: thread
+    - name: msg
+      comment: Optional message prepended to the traceback.
+      type: string?
+    - name: level
+      comment: Optional stack level to start traceback.
+      type: number?
+    returnType: string
+  - name: getinfo
+    comment: Returns a table containing debug information about a function or stack frame.
+    parameters:
+    - name: thread
+      comment: Optional thread whose stack frame is being inspected.
+      type: thread
+    - name: function
+      comment: Function reference or stack level number.
+      type: ((...any) -> ...any) | number
+    - name: what
+      comment: String specifying which fields to retrieve.
+      type: string
+    private: true
+    returnType: "{[any]: any}"
+  - name: getlocal
+    comment: Returns the name and value of a local variable at the specified stack level.
+    parameters:
+    - name: level
+      comment: Stack level number.
+      type: number
+    - name: index
+      comment: Index of the local variable.
+      type: number
+    private: true
+    returnType: string | any
+  - name: setlocal
+    comment: Sets the value of a local variable at the specified stack level.
+    parameters:
+    - name: level
+      comment: Stack level number.
+      type: number
+    - name: index
+      comment: Index of the local variable.
+      type: number
+    - name: value
+      comment: New value for the local variable.
+      type: any
+    private: true
+    returnType: boolean
+  - name: getupvalue
+    comment: Returns the name and value of an upvalue for a given function.
+    parameters:
+    - name: function
+      comment: Function whose upvalues are being retrieved.
+      type: (...any) -> ...any
+    - name: index
+      comment: Index of the upvalue.
+      type: number
+    private: true
+    returnType: string | any
+  - name: setupvalue
+    comment: Sets the value of an upvalue for a given function.
+    parameters:
+    - name: function
+      comment: Function whose upvalues are being modified.
+      type: (...any) -> ...any
+    - name: index
+      comment: Index of the upvalue.
+      type: number
+    - name: value
+      comment: New value for the upvalue.
+      type: any
+    private: true
+    returnType: string
+  - name: getmetatable
+    comment: Returns the metatable of the given value, if any.
+    parameters:
+    - name: value
+      comment: Value whose metatable is retrieved.
+      type: any
+    private: true
+    returnType: "{[any]: any}?"
+  - name: setmetatable
+    comment: Sets the metatable for a given value.
+    parameters:
+    - name: value
+      comment: Value whose metatable is to be set.
+      type: any
+    - name: metatable
+      comment: Table to be set as the new metatable.
+      type: "{[any]: any}?"
+    private: true
+    returnType: any
+- name: llbase64
+  comment: Base64 encoding/decoding library.
+  functions:
+  - name: encode
+    comment: Encodes a string or buffer to base64
+    parameters:
+    - name: data
+      type: string | buffer
+    returnType: string
+  - name: decode
+    comment: Decodes a base64 string to a string
+    overloads:
+    - comment: Decodes a base64 string to a string or buffer
+      parameters:
+      - name: data
+        type: string
+      - name: asBuffer
+        type: boolean?
+      returnType: string | buffer
+    parameters:
+    - name: data
+      type: string
+    returnType: string
+- name: lljson
+  comment: JSON encoding/decoding library for Second Life.
+  functions:
+  - name: encode
+    comment: Encodes a Lua value as JSON
+    parameters:
+    - name: value
+      type: any
+    returnType: string
+  - name: decode
+    comment: Decodes a JSON string to a Lua value
+    parameters:
+    - name: json
+      type: string
+    returnType: any
+  - name: slencode
+    comment: Encodes a Lua value as JSON preserving SL types. Use tight to encode
+      more compactly.
+    parameters:
+    - name: value
+      type: any
+    - name: tight
+      type: boolean?
+    returnType: string
+  - name: sldecode
+    comment: Decodes a JSON string to a Lua value preserving SL types
+    parameters:
+    - name: json
+      type: string
+    returnType: any
+  constants:
+  - name: 'null'
+    comment: A constant to pass for null to json encode
+    type: any
+  - name: empty_array_mt
+    comment: Metatable for declaring table as an empty array for json encode
+    type: '{ [any]: any }'
+    value: '{}'
+  - name: array_mt
+    comment: Metatable for declaring table as an array for json encode
+    type: '{ [any]: any }'
+    value: '{}'
+  - name: empty_array
+    comment: A constant to pass for an empty array to json encode
+    type: any
+  - name: _NAME
+    comment: Name of the lljson library
+    type: string
+    value: lljson
+  - name: _VERSION
+    comment: Version of the lljson library
+    type: string
+    value: "2.1.0.11"
+- name: math
+  comment: Mathematical functions library.
+  functions:
+  - name: abs
+    comment: Returns the absolute value of n.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    returnType: number
+  - name: acos
+    comment: Returns the arc cosine of n in radians.
+    parameters:
+    - name: "n"
+      comment: A number in the range [-1, 1].
+      type: number
+    returnType: number
+  - name: asin
+    comment: Returns the arc sine of n in radians.
+    parameters:
+    - name: "n"
+      comment: A number in the range [-1, 1].
+      type: number
+    returnType: number
+  - name: atan
+    comment: Returns the arc tangent of n in radians.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    returnType: number
+  - name: atan2
+    comment: Returns the arc tangent of y/x in radians, using the signs to determine
+      the quadrant.
+    parameters:
+    - name: "y"
+      comment: The y-coordinate.
+      type: number
+    - name: x
+      comment: The x-coordinate.
+      type: number
+    returnType: number
+  - name: ceil
+    comment: Returns the smallest integer larger than or equal to n.
+    parameters:
+    - name: "n"
+      comment: A number to round up.
+      type: number
+    returnType: number
+  - name: clamp
+    comment: Returns n clamped between min and max.
+    parameters:
+    - name: "n"
+      comment: The value to be clamped.
+      type: number
+    - name: min
+      comment: Minimum allowable value.
+      type: number
+    - name: max
+      comment: Maximum allowable value.
+      type: number
+    returnType: number
+  - name: cos
+    comment: Returns the cosine of n (n is in radians).
+    parameters:
+    - name: "n"
+      comment: An angle in radians.
+      type: number
+    returnType: number
+  - name: cosh
+    comment: Returns the hyperbolic cosine of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute the hyperbolic cosine of.
+      type: number
+    returnType: number
+  - name: deg
+    comment: Converts n from radians to degrees.
+    parameters:
+    - name: "n"
+      comment: A value in radians.
+      type: number
+    returnType: number
+  - name: exp
+    comment: Returns the base-e exponent of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute e^n.
+      type: number
+    returnType: number
+  - name: floor
+    comment: Returns the largest integer smaller than or equal to n.
+    parameters:
+    - name: "n"
+      comment: A number to round down.
+      type: number
+    returnType: number
+  - name: fmod
+    comment: Returns the remainder of x modulo y, rounded towards zero.
+    parameters:
+    - name: x
+      comment: The dividend.
+      type: number
+    - name: "y"
+      comment: The divisor.
+      type: number
+    returnType: number
+  - name: frexp
+    comment: Returns m and e such that n = m * 2^e.
+    parameters:
+    - name: "n"
+      comment: A number to split into significand and exponent.
+      type: number
+    returnType: (number, number)
+  - name: ldexp
+    comment: Returns s * 2^e.
+    parameters:
+    - name: s
+      comment: The significand.
+      type: number
+    - name: e
+      comment: The exponent.
+      type: number
+    returnType: number
+  - name: lerp
+    comment: Linearly interpolates between a and b using factor t.
+    parameters:
+    - name: a
+      comment: Start value.
+      type: number
+    - name: b
+      comment: End value.
+      type: number
+    - name: t
+      comment: Interpolation factor.
+      type: number
+    returnType: number
+  - name: log
+    comment: Returns the logarithm of n in the given base (default e).
+    parameters:
+    - name: "n"
+      comment: A number to compute logarithm.
+      type: number
+    - name: base
+      comment: Base of the logarithm (default is e).
+      type: number?
+    returnType: number
+  - name: log10
+    comment: Returns the base-10 logarithm of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute base-10 logarithm.
+      type: number
+    returnType: number
+  - name: map
+    comment: Maps n from input range to output range.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    - name: inMin
+      comment: A number.
+      type: number
+    - name: inMax
+      comment: A number.
+      type: number
+    - name: outMin
+      comment: A number.
+      type: number
+    - name: outMax
+      comment: A number.
+      type: number
+    returnType: number
+  - name: max
+    comment: Returns the maximum value from the given numbers.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    - name: ...
+      comment: Numbers to find the maximum from.
+      type: ...number
+    returnType: number
+  - name: min
+    comment: Returns the minimum value from the given numbers.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    - name: ...
+      comment: Numbers to find the minimum from.
+      type: ...number
+    returnType: number
+  - name: modf
+    comment: Returns the integer and fractional parts of n.
+    parameters:
+    - name: "n"
+      comment: A number to split into integer and fractional parts.
+      type: number
+    returnType: (number, number)
+  - name: noise
+    comment: Returns Perlin noise value for the point (x, y, z).
+    parameters:
+    - name: x
+      comment: X coordinate for the noise function.
+      type: number
+    - name: "y"
+      comment: Y coordinate for the noise function (default is 0).
+      type: number?
+    - name: z
+      comment: Z coordinate for the noise function (default is 0).
+      type: number?
+    returnType: number
+  - name: pow
+    comment: Returns base to the power of exponent.
+    parameters:
+    - name: base
+      comment: Base value.
+      type: number
+    - name: exponent
+      comment: Exponent value.
+      type: number
+    returnType: number
+  - name: rad
+    comment: Converts n from degrees to radians.
+    parameters:
+    - name: "n"
+      comment: A value in degrees.
+      type: number
+    returnType: number
+  - name: random
+    comment: Returns a random number within the given range.
+    parameters:
+    - name: min
+      comment: Minimum value of the range (optional).
+      type: number?
+    - name: max
+      comment: Maximum value of the range (optional).
+      type: number?
+    returnType: number
+  - name: randomseed
+    comment: Sets the seed for the random number generator.
+    parameters:
+    - name: seed
+      comment: Seed for the random number generator.
+      type: number
+    returnType: ()
+  - name: round
+    comment: Rounds n to the nearest integer.
+    parameters:
+    - name: "n"
+      comment: A number to round to the nearest integer.
+      type: number
+    returnType: number
+  - name: sign
+    comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
+    parameters:
+    - name: "n"
+      comment: A number to get the sign of.
+      type: number
+    returnType: number
+  - name: sin
+    comment: Returns the sine of n (n is in radians).
+    parameters:
+    - name: "n"
+      comment: An angle in radians.
+      type: number
+    returnType: number
+  - name: sinh
+    comment: Returns the hyperbolic sine of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute the hyperbolic sine of.
+      type: number
+    returnType: number
+  - name: sqrt
+    comment: Returns the square root of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute the square root of.
+      type: number
+    returnType: number
+  - name: tan
+    comment: Returns the tangent of n (n is in radians).
+    parameters:
+    - name: "n"
+      comment: An angle in radians.
+      type: number
+    returnType: number
+  - name: tanh
+    comment: Returns the hyperbolic tangent of n.
+    parameters:
+    - name: "n"
+      comment: A number to compute the hyperbolic tangent of.
+      type: number
+    returnType: number
+  - name: isnan
+    comment: Returns true if n is NaN.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    returnType: boolean
+  - name: isinf
+    comment: Returns true if n is infinite.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    returnType: boolean
+  - name: isfinite
+    comment: Returns true if n is finite.
+    parameters:
+    - name: "n"
+      comment: A number.
+      type: number
+    returnType: boolean
+  constants:
+  - name: pi
+    comment: The value of pi
+    type: number
+    value: 3.141592653589793
+  - name: huge
+    comment: A value larger than any other numeric value (infinity)
+    type: number
+    value: inf
+- name: os
+  comment: Operating system facilities library.
+  functions:
+  - name: clock
+    comment: Returns a high-precision timestamp in seconds for measuring durations.
+    parameters: []
+    returnType: number
+  - name: date
+    comment: Returns a table or string representation of the time based on the provided format.
+    parameters:
+    - name: s
+      comment: Optional format string for the date representation.
+      type: string?
+    - name: t
+      comment: Optional timestamp to format; defaults to the current time.
+      type: number?
+    returnType: (string | OsDateTime)?
+  - name: difftime
+    comment: Returns the difference in seconds between two timestamps.
+    parameters:
+    - name: a
+      comment: First timestamp value.
+      type: number
+    - name: b
+      comment: Second timestamp value.
+      type: number?
+    returnType: number
+  - name: time
+    comment: Returns the current Unix timestamp or the timestamp of the given date.
+    parameters:
+    - name: t
+      comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
+      type: OsDateTime?
+    returnType: number?
+- name: quaternion
+  comment: Quaternion manipulation library.
+  callable:
+    name: quaternion
+    comment: Creates a new quaternion with the given component values.
+      Alias of quaternion.create.
+    parameters:
+    - name: x
+      comment: X component of the quaternion.
+      type: number
+    - name: "y"
+      comment: Y component of the quaternion.
+      type: number
+    - name: z
+      comment: Z component of the quaternion.
+      type: number
+    - name: s
+      comment: S component of the quaternion.
+      type: number
+    returnType: quaternion
+  functions:
+  - name: create
+    comment: Creates a new quaternion with the given component values.
+    parameters:
+    - name: x
+      comment: X component of the quaternion.
+      type: number
+    - name: "y"
+      comment: Y component of the quaternion.
+      type: number
+    - name: z
+      comment: Z component of the quaternion.
+      type: number
+    - name: s
+      comment: S component of the quaternion.
+      type: number
+    returnType: quaternion
+  - name: normalize
+    comment: Computes the normalized version (unit quaternion) of the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: quaternion
+  - name: magnitude
+    comment: Computes the magnitude of the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: number
+  - name: dot
+    comment: Computes the dot product of two quaternions.
+    parameters:
+    - name: a
+      comment: Left input quaternion.
+      type: quaternion
+    - name: b
+      comment: Right input quaternion.
+      type: quaternion
+    returnType: number
+  - name: slerp
+    comment: Spherical linear interpolation from a to b using factor t.
+    parameters:
+    - name: a
+      comment: Start quaternion.
+      type: quaternion
+    - name: b
+      comment: End quaternion.
+      type: quaternion
+    - name: t
+      comment: Interpolation factor.
+      type: number
+    returnType: quaternion
+  - name: conjugate
+    comment: Computes the conjugate of the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: quaternion
+  - name: tofwd
+    comment: Computes the forward vector from the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: vector
+  - name: toleft
+    comment: Computes the left vector from the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: vector
+  - name: toup
+    comment: Computes the up vector from the quaternion.
+    parameters:
+    - name: q
+      comment: Input quaternion.
+      type: quaternion
+    returnType: vector
+  constants:
+  - name: identity
+    comment: Identity quaternion constant.
+    type: quaternion
+    value: <0, 0, 0, 1>
+- name: string
+  comment: String manipulation library.
+  functions:
+  - name: byte
+    comment: Returns the numeric code of every byte in the input string within the given range.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: '...number'
+  - name: char
+    comment: Returns a string containing characters for the given byte values.
+    parameters:
+    - name: ...
+      comment: Byte values to convert to string.
+      type: ...number
+    returnType: string
+  - name: find
+    comment: Finds the first instance of the pattern in the string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: pattern
+      comment: Pattern to search for.
+      type: string
+    - name: init
+      comment: Starting index (optional).
+      type: number?
+    - name: plain
+      comment: Perform raw search (optional).
+      type: boolean?
+    returnType: (number?, number?, ...string)
+  - name: format
+    comment: Formats input values into a string using printf-style format specifiers.
+    parameters:
+    - name: formatstring
+      comment: Format string.
+      type: string
+    - name: ...
+      comment: Values to format.
+      type: ...any
+    returnType: string
+  - name: gmatch
+    comment: Returns an iterator function for pattern matches
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: pattern
+      comment: Pattern to search for.
+      type: string
+    returnType: () -> ...string
+  - name: gsub
+    comment: Performs pattern-based substitution in a string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: pattern
+      comment: Pattern to replace.
+      type: string
+    - name: repl
+      comment: Replacement string, function, or table.
+      type: 'string | { [string]: string } | (...string) -> string'
+    - name: maxn
+      comment: Maximum replacements (optional).
+      type: number?
+    returnType: (string, number)
+  - name: len
+    comment: "Returns the number of bytes in the string. Identical to #s"
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    returnType: number
+  - name: lower
+    comment: Returns a lowercase version of the input string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    returnType: string
+  - name: match
+    comment: Finds and returns matches for a pattern in the input string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: pattern
+      comment: Pattern to match.
+      type: string
+    - name: init
+      comment: Starting index (optional).
+      type: number?
+    returnType: '...string'
+  - name: pack
+    comment: Packs values into a binary string.
+    parameters:
+    - name: fmt
+      comment: Pack format string.
+      type: string
+    - name: ...
+      comment: Values to encode.
+      type: ...any
+    returnType: string
+  - name: packsize
+    comment: Returns the size of a packed string for the given format.
+    parameters:
+    - name: fmt
+      comment: Pack format string.
+      type: string
+    returnType: number
+  - name: rep
+    comment: Returns the input string repeated a given number of times.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: "n"
+      comment: Number of times to repeat the string.
+      type: number
+    returnType: string
+  - name: reverse
+    comment: Returns the input string with bytes in reverse order.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    returnType: string
+  - name: split
+    comment: Splits a string by separator. Returns a list of substrings.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: separator
+      comment: Separator to split on. Default is ","
+      type: string?
+    returnType: '{string}'
+  - name: sub
+    comment: Returns a substring from the given range.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: i
+      comment: Starting index.
+      type: number
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: string
+  - name: unpack
+    comment: Decodes a binary string using a pack format.
+    parameters:
+    - name: fmt
+      comment: Pack format string.
+      type: string
+    - name: s
+      comment: Encoded string.
+      type: string
+    - name: init
+      comment: Starting index (optional).
+      type: number?
+    returnType: '...any'
+  - name: upper
+    comment: Returns an uppercase version of the input string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    returnType: string
+- name: table
+  comment: Table manipulation library. Tables are collections of key-value pairs.
+  functions:
+  - name: concat
+    comment: Joins an array of strings into one string, with an optional separator.
+    parameters:
+    - name: a
+      comment: Array of strings.
+      type: '{string | number}'
+    - name: sep
+      comment: Separator string (optional).
+      type: string?
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: string
+  - name: foreach
+    comment: Iterates over all key-value pairs in the table (deprecated).
+    deprecated: true
+    typeParameters: [K, V, R]
+    parameters:
+    - name: t
+      comment: Table to iterate over.
+      type: '{[K]: V}'
+    - name: f
+      comment: Function applied to each key-value pair.
+      type: '(key: K, value: V) -> R?'
+    returnType: R?
+  - name: foreachi
+    comment: Iterates over all index-value pairs in the array (deprecated).
+    deprecated: true
+    typeParameters: [V, R]
+    parameters:
+    - name: a
+      comment: Array to iterate over.
+      type: '{V}'
+    - name: f
+      comment: Function applied to each index-value pair.
+      type: '(index: number, value: V) -> R?'
+    returnType: R?
+  - name: getn
+    comment: 'Returns the length of an array (deprecated; use # instead).'
+    deprecated: true
+    parameters:
+    - name: a
+      comment: Array to check.
+      type: '{any}'
+    returnType: number
+  - name: maxn
+    comment: Returns the highest numeric key in the table.
+    parameters:
+    - name: t
+      comment: Table to check.
+      type: '{any}'
+    returnType: number
+  - name: insert
+    comment: Inserts an element at the specified index,
+      or at the end of the array.
+    overloads:
+    - comment: Inserts an element at the end of a list
+      typeParameters: [V]
+      parameters:
+      - name: a
+        comment: Array to insert into.
+        type: '{V}'
+      - name: value
+        comment: Value to insert.
+        type: V
+      returnType: ()
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to insert into.
+      type: '{V}'
+    - name: i
+      comment: "Index to insert at (default: at the end)."
+      type: number
+    - name: v
+      comment: Value to insert.
+      type: V
+    returnType: ()
+  - name: remove
+    comment: Removes and returns the element at the specified index from the array,
+      or from the end of the array.
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to remove from.
+      type: '{V}'
+    - name: i
+      comment: "Index to remove (default: the last one)."
+      type: number?
+    returnType: V?
+  - name: sort
+    comment: Sorts an array in place.
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to be sorted.
+      type: '{V}'
+    - name: f
+      comment: Comparison function.
+      type: '((a: V, b: V) -> boolean)?'
+    returnType: ()
+  - name: pack
+    comment: Packs multiple arguments into a new array with length field n.
+    typeParameters: [V]
+    parameters:
+    - name: ...
+      comment: Array elements.
+      type: ...V
+    returnType: '{ n: number, [number]: V }'
+  - name: unpack
+    comment: Unpacks array elements into multiple return values.
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to unpack.
+      type: '{V}'
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: '...V'
+  - name: move
+    comment: Inserts elements [i..j] from src array into dest array at [d].
+    typeParameters: [V]
+    parameters:
+    - name: src
+      comment: Source array.
+      type: '{V}'
+    - name: i
+      comment: Starting index.
+      type: number
+    - name: j
+      comment: Ending index.
+      type: number
+    - name: d
+      comment: Destination index.
+      type: number
+    - name: dest
+      comment: Destination array (optional).
+      type: '{V}?'
+    returnType: '{V}'
+  - name: create
+    comment: Creates a new table with pre-allocated array capacity, optionally filled.
+    typeParameters: [V]
+    parameters:
+    - name: "n"
+      comment: Number of elements to allocate.
+      type: number
+    - name: v
+      comment: Value to prefill elements with (optional).
+      type: V?
+    returnType: '{V}'
+  - name: find
+    comment: Finds the first occurrence of a value in the array and returns its index.
+    typeParameters: [V]
+    parameters:
+    - name: t
+      comment: Table to search in.
+      type: '{V}'
+    - name: v
+      comment: Value to search for.
+      type: V
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    returnType: number?
+  - name: clear
+    comment: Clears all elements from a table while keeping its capacity.
+    parameters:
+    - name: t
+      comment: Table to clear.
+      type: '{[any]: any}'
+    returnType: ()
+  - name: shrink
+    comment: Reduces the memory usage of the table to the minimum necessary.
+    typeParameters: [K, V]
+    parameters:
+    - name: t
+      comment: Table to shrink.
+      type: '{[K]: V}'
+    - name: reorder
+      comment: Allow moving sparse array elements to hash table storage.
+      type: boolean?
+    returnType: '{[K]: V}'
+  - name: freeze
+    comment: Freezes a table, making it read-only.
+    typeParameters: [K, V]
+    parameters:
+    - name: t
+      comment: Table to freeze.
+      type: '{[K]: V}'
+    returnType: '{[K]: V}'
+  - name: isfrozen
+    comment: Returns true if a table is frozen.
+    parameters:
+    - name: t
+      comment: Table to check.
+      type: '{[any]: any}'
+    returnType: boolean
+  - name: clone
+    comment: Creates a shallow copy of the table.
+    typeParameters: [K, V]
+    parameters:
+    - name: t
+      comment: Table to clone.
+      type: '{[K]: V}'
+    returnType: '{[K]: V}'
+- name: utf8
+  comment: UTF-8 support library.
+  functions:
+  - name: char
+    comment: Creates a string from Unicode codepoints.
+    parameters:
+    - name: ...
+      comment: Unicode codepoints.
+      type: ...number
+    returnType: string
+  - name: codes
+    comment: Returns an iterator that produces
+      the byte offset and Unicode codepoint for each character in the string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    returnType: ((string, number) -> (number, number), string, number)
+  - name: codepoint
+    comment: Returns the Unicode codepoints in the specified range of the string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: '...number'
+  - name: len
+    comment: Returns the number of Unicode codepoints in the specified range of the string,
+      or nil and error index.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    - name: j
+      comment: Ending index (optional).
+      type: number?
+    returnType: (number?, number?)
+  - name: offset
+    comment: Returns the byte offset of the nth Unicode codepoint in the string.
+    parameters:
+    - name: s
+      comment: Input string.
+      type: string
+    - name: n
+      comment: Character position.
+      type: number
+    - name: i
+      comment: Starting index (optional).
+      type: number?
+    returnType: number?
+  constants:
+  - name: charpattern
+    comment: Pattern that matches exactly one UTF-8 byte sequence
+    type: string
+    value: "[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*"
+- name: uuid
+  comment: UUID library.
+  callable:
+    name: uuid
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+      nil if the string is not a valid UUID. Throws an error if the buffer is
+      shorter than 16 bytes. Alias of uuid.create
+    parameters:
+    - name: value
+      type: string | buffer | uuid
+    returnType: uuid?
+  functions:
+  - name: create
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+      nil if the string is not a valid UUID. Throws an error if the buffer is
+      shorter than 16 bytes.
+    parameters:
+    - name: value
+      type: string | buffer | uuid
+    returnType: uuid?
+- name: vector
+  comment: Vector manipuluation library.
+  callable:
+    name: vector
+    comment: Creates a new vector with the given component values.
+      Alias of vector.create.
+    parameters:
+    - name: x
+      comment: X component of the vector.
+      type: number
+    - name: "y"
+      comment: Y component of the vector.
+      type: number
+    - name: z
+      comment: Z component of the vector (optional).
+      type: number?
+    returnType: vector
+  functions:
+  - name: create
+    comment: Creates a new vector with the given component values.
+    parameters:
+    - name: x
+      comment: X component of the vector.
+      type: number
+    - name: "y"
+      comment: Y component of the vector.
+      type: number
+    - name: z
+      comment: Z component of the vector (optional).
+      type: number?
+    returnType: vector
+  - name: magnitude
+    comment: Computes the magnitude of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: number
+  - name: normalize
+    comment: Computes the normalized version (unit vector) of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: vector
+  - name: cross
+    comment: Computes the cross product of two vectors.
+    parameters:
+    - name: a
+      comment: Left input vector.
+      type: vector
+    - name: b
+      comment: Right input vector.
+      type: vector
+    returnType: vector
+  - name: dot
+    comment: Computes the dot product of two vectors.
+    parameters:
+    - name: a
+      comment: Left input vector.
+      type: vector
+    - name: b
+      comment: Right input vector.
+      type: vector
+    returnType: number
+  - name: angle
+    comment: Computes the angle between two vectors in radians.
+      The axis, if specified, is used to determine the sign of the angle.
+    parameters:
+    - name: a
+      type: vector
+      comment: Left input vector.
+    - name: b
+      comment: Right input vector.
+      type: vector
+    - name: axis
+      comment: Axis to determine the sign of the angle (optional).
+      type: vector?
+    returnType: number
+  - name: floor
+    comment: Applies math.floor to each component of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: vector
+  - name: ceil
+    comment: Applies math.ceil to each component of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: vector
+  - name: abs
+    comment: Applies math.abs to each component of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: vector
+  - name: sign
+    comment: Applies math.sign to each component of the vector.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    returnType: vector
+  - name: clamp
+    comment: Clamps each component of the vector between min and max values.
+    parameters:
+    - name: v
+      comment: Input vector to be clamped.
+      type: vector
+    - name: min
+      comment: Minimum vector value.
+      type: vector
+    - name: max
+      comment: Maximum vector value.
+      type: vector
+    returnType: vector
+  - name: max
+    comment: Applies math.max to each component of the vectors.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    - name: ...
+      comment: Vectors to find the maximum from.
+      type: ...vector
+    returnType: vector
+  - name: min
+    comment: Applies math.max to each component of the vectors.
+    parameters:
+    - name: v
+      comment: Input vector.
+      type: vector
+    - name: ...
+      comment: Vectors to find the minimum from.
+      type: ...vector
+    returnType: vector
+  - name: lerp
+    comment: Linearly interpolates between a and b using factor t.
+    parameters:
+    - name: a
+      comment: Start vector.
+      type: vector
+    - name: b
+      comment: End vector.
+      type: vector
+    - name: t
+      comment: Interpolation factor.
+      type: number
+    returnType: vector
+  constants:
+  - name: zero
+    comment: Constant vector with all components set to 0.
+    type: vector
+    value: <0,0,0>
+  - name: one
+    comment: Constant vector with all components set to 1.
+    type: vector
+    value: <1,1,1>
+- name: ll
+  # auto-generated from lsl_definitions.yaml
+  comment: Library for functions shared between LSL and SLua.
+- name: llcompat
+  # auto-generated from lsl_definitions.yaml
+  comment: Like ll, but exactly matches LSL semantics.
+# auto-generated from lsl_definitions.yaml
+constants: []
+
+# Everything below here is only for keywords.xml generation, not typechecking
+controls:
+  do:
+    tooltip: "Lua do block: do ... end"
+  if:
+    tooltip: "Lua if statement: if condition then ... end"
+  then:
+    tooltip: "Lua then keyword: introduces the block executed when an if condition is true."
+  else:
+    tooltip: "Lua else keyword: specifies the alternative block in an if/else statement."
+  elseif:
+    tooltip: "Lua elseif keyword: provides an additional conditional branch in an if statement."
+  end:
+    tooltip: "Lua end keyword: closes control structures like if, do, while, for, and function."
+  for:
+    tooltip: "Lua for loop: for var = start, end, step do ... end"
+  return:
+    tooltip: "Lua return statement: returns a value from a function."
+  while:
+    tooltip: "Lua while loop: while condition do ... end"
+  repeat:
+    tooltip: "Lua repeat loop: repeat ... until condition"
+  until:
+    tooltip: "Lua until keyword: ends a repeat loop by testing a condition."
+  function:
+    tooltip: "Lua function keyword: begins a function definition."
+  break:
+    tooltip: "Lua break statement: exits the nearest loop."
+  continue:
+    tooltip: "Luau continue statement: skip to the next loop iteration."
+  local:
+    tooltip: "Lua local keyword: declares a local variable or function."
+  export:
+    tooltip: "Luau export keyword: declares a type that can be used in outside this module."
+  in:
+    tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
+  not:
+    tooltip: "Lua not operator: performs logical negation."
+  and:
+    tooltip: "Lua and operator: performs logical conjunction."
+  or:
+    tooltip: "Lua or operator: performs logical disjunction."
+builtinTypes:
+  any:
+    tooltip: The unspecified type. Disables type-checking. Use unknown instead to use type-checking.
+  boolean:
+    tooltip: "Boolean: represents a true or false value."
+  buffer:
+    tooltip: Read-write binary data.
+  never:
+    tooltip: The empty type that contains no values.
+  number:
+    tooltip: Double‑precision floating point number.
+  string:
+    tooltip: Read-only binary data. Usually UTF-8-encoded text.
+  thread:
+    tooltip: Represents a coroutine.
+  unknown:
+    tooltip: The union of every type. Similar to any without disabling type-checking.
+builtinConstants:
+  - name: nil
+    comment: "Lua nil: represents the absence of a useful value."
+    type: nil
+    value: nil
+  - name: 'true'
+    comment: "Lua true: Boolean true value."
+    type: boolean
+    value: 'true'
+  - name: 'false'
+    comment: "Lua false: Boolean false value."
+    type: boolean
+    value: 'false'
+builtinFunctions:
+- name: assert
+  comment: Checks if the value is truthy; if not, raises an error with the optional message.
+  typeParameters: [T]
+  parameters:
+  - name: value
+    comment: The value to check for truthiness.
+    type: T?
+  - name: message
+    comment: Optional error message to display if the value is not truthy.
+    type: string?
+  returnType: T
+- name: error
+  comment: Raises an error with the specified object and optional call stack level.
+  parameters:
+  - name: obj
+    comment: The error object to raise.
+    type: any
+  - name: level
+    comment: Optional level to attribute the error to in the call stack.
+    type: number?
+  returnType: never
+- name: gcinfo
+  comment: Returns the total heap size in kilobytes.
+  returnType: number
+- name: getmetatable
+  comment: Returns the metatable for the specified object.
+  parameters:
+  - name: obj
+    comment: The object to get the metatable for.
+    type: any
+  returnType: "{[any]: any}?"
+- name: next
+  comment: Returns the next key-value pair in the table traversal order.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to traverse.
+    type: "{[K]: V}"
+  - name: i
+    comment: Optional key to start traversal after.
+    type: K?
+  returnType: (K, V)?
+- name: newproxy
+  comment: Creates a new untyped userdata object with an optional metatable.
+  parameters:
+  - name: mt
+    comment: Optional boolean to create a modifiable metatable.
+    type: boolean?
+  returnType: any
+- name: print
+  comment: Prints all arguments to standard output using Tab as a separator.
+  parameters:
+  - name: ...
+    comment: Arguments to print to standard output.
+    type: ...any
+  returnType: ()
+- name: rawequal
+  comment: Returns true if a and b have the same type and value.
+  parameters:
+  - name: a
+    comment: First object to compare.
+    type: any
+  - name: b
+    comment: Second object to compare.
+    type: any
+  returnType: boolean
+- name: rawget
+  comment: Performs a table lookup bypassing metatables.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to perform the lookup on.
+    type: "{[K]: V}"
+  - name: k
+    comment: The key to look up in the table.
+    type: K
+  returnType: V?
+- name: rawset
+  comment: Assigns a value to a table field bypassing metatables.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to assign the value to.
+    type: "{[K]: V}"
+  - name: k
+    comment: The key to assign the value to.
+    type: K
+  - name: v
+    comment: The value to assign.
+    type: V
+  returnType: "{[K]: V}"
+- name: rawlen
+  comment: Returns the length of a table or string bypassing metatables.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to assign the value to.
+    type: "{[any]: any} | string"
+  returnType: number
+- name: select
+  comment: Returns a subset of arguments or the number of arguments.
+  parameters:
+  - name: i
+    comment: The index or '#' to count arguments.
+    type: string | number
+  - name: ...
+    comment: The arguments to select from.
+    type: ...any
+  returnType: any
+- name: setmetatable
+  comment: Changes the metatable for the given table.
+  parameters:
+  - name: t
+    comment: The table to set the metatable for.
+    type: "{ [any]: any }"
+  - name: mt
+    comment: The metatable to set.
+    type: "{ [any]: any }?"
+  returnType: ()
+- name: tonumber
+  comment: Converts the input string to a number in the specified base.
+  parameters:
+  - name: s
+    comment: The string to convert to a number.
+    type: string
+  - name: base
+    comment: Optional base for the conversion.
+    type: number?
+  returnType: number?
+- name: tostring
+  comment: Converts the input object to a string.
+  parameters:
+  - name: obj
+    comment: The object to convert to a string.
+    type: any
+  returnType: string
+- name: type
+  comment: Returns the type of the object as a string.
+  parameters:
+  - name: obj
+    comment: The object to get the type of.
+    type: any
+  returnType: string
+- name: typeof
+  comment: Returns the type of the object, including custom userdata types.
+  parameters:
+  - name: obj
+    comment: The object to get the type of.
+    type: any
+  returnType: string
+- name: ipairs
+  comment: Returns an iterator for numeric key-value pairs in the table.
+  typeParameters: [V]
+  parameters:
+  - name: t
+    comment: The table to iterate over.
+    type: "{V}"
+  returnType: "(({V}, number) -> (number?, V), {V}, number)"
+- name: pairs
+  comment: Returns an iterator for all key-value pairs in the table.
+  typeParameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to iterate over.
+    type: "{[K]: V}"
+  returnType: "(({[K], V}, K) -> (K?, V), {[K], V}, K)"
+- name: pcall
+  comment: Calls function f with parameters args, returning success and function results or an error.
+  typeParameters: [A..., R...]
+  parameters:
+  - name: f
+    comment: A function to be called.
+    type: (A...) -> R...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  returnType: (boolean, R...)
+- name: xpcall
+  comment: Calls function f with parameters args, handling errors with e if they occur.
+  typeParameters: [E, A..., R1..., R2...]
+  parameters:
+  - name: f
+    comment: A function to be called.
+    type: (A...) -> R1...
+  - name: e
+    comment: Error handler function.
+    type: (E) -> R2...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  returnType: (boolean, R1...)
+- name: require
+  comment: Execute the named external module.
+  parameters:
+  - name: target
+    comment: The name of the external module.
+    type: string
+  returnType: any
+- name: unpack
+  comment: Returns values from an array in the specified index range.
+  typeParameters: [V]
+  parameters:
+  - name: a
+    comment: Array from which to extract values.
+    type: "{V}"
+  - name: f
+    comment: Starting index (optional, defaults to 1).
+    type: number?
+  - name: t
+    comment: "Ending index (optional, defaults to #a)."
+    type: number?
+  returnType: ...V
