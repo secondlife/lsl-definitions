@@ -155,7 +155,6 @@ typeAliases:
 - name: LLEventName
   definition: LLDetectedEventName | LLNonDetectedEventName
 - name: LLEventHandler
-  # auto-generated from lsl_definitions.yaml
   definition: (...any) -> ()
 - name: LLDetectedEventHandler
   definition: "(detected: {DetectedEvent}) -> ()"
@@ -186,9 +185,13 @@ typeAliases:
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
+  # auto-generated from lsl_definitions.yaml
+  properties: []
   methods:
   - name: 'on'
     comment: Registers a callback for an event. Returns the callback.
+    # auto-generated from lsl_definitions.yaml
+    overloads: []
     parameters:
     - name: self
     - name: event
@@ -198,6 +201,8 @@ classes:
     returnType: LLEventHandler
   - name: 'off'
     comment: Unregisters a callback. Returns true if found and removed.
+    # auto-generated from lsl_definitions.yaml
+    overloads: []
     parameters:
     - name: self
     - name: event
@@ -207,6 +212,8 @@ classes:
     returnType: boolean
   - name: once
     comment: Registers a one-time callback. Returns the wrapper function.
+    # auto-generated from lsl_definitions.yaml
+    overloads: []
     parameters:
     - name: self
     - name: event
@@ -257,18 +264,24 @@ classes:
     returnType: boolean
 globalVariables:
 - name: rotation
-  comment: rotation is an alias for quaternion
+  comment: rotation is an alias for quaternion.
   type: typeof(quaternion)
+- name: LLEvents
+  comment: The instance of the LLEvents singleton.
+  type: LLEvents
+- name: LLTimers
+  comment: The instance of the LLTimers singleton.
+  type: LLTimers
 - name: loadstring
-  comment: loadstring is removed in SLua
+  comment: loadstring is removed in SLua.
   slua-removed: true
   type: nil
 - name: getfenv
-  comment: getfenv is removed in SLua
+  comment: getfenv is removed in SLua.
   slua-removed: true
   type: nil
 - name: setfenv
-  comment: setfenv is removed in SLua
+  comment: setfenv is removed in SLua.
   slua-removed: true
   type: nil
 globalFunctions:

@@ -6,6 +6,7 @@ import ast
 import dataclasses
 import enum
 import itertools
+import io
 import os.path
 import re
 import stat
@@ -343,15 +344,18 @@ class LSLFunction:
             }
         )
 
-    def compute_slua_name(self) -> str:
-        if self.name.startswith("ll"):
+    def compute_slua_name(self, with_module=True) -> str:
+        if not self.name.startswith("ll"):
+            raise ValueError(f"invalid function name: {self.name}")
+        if with_module:
             return self.name[:2] + "." + self.name[2:]
-        return self.name
+        else:
+            return self.name[2:]
 
-    def compute_slua_type(self) -> str:
+    def compute_slua_type(self, llcompat=False) -> str:
         if self.slua_type is not None:
             return self.slua_type
-        if self.bool_semantics and self.ret_type == LSLType.INTEGER:
+        if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
             return "boolean"
         return self.ret_type.meta.slua_name
 
@@ -424,6 +428,9 @@ class SLuaProperty:
     value: str | None = None
     comment: str = ""
     slua_removed: bool = False
+    """This property is in Luau but not SLua"""
+    private: bool = False
+    """Whether this should this be included in the syntax file"""
 
     def to_keywords_dict(self) -> dict:
         return {
@@ -431,6 +438,9 @@ class SLuaProperty:
             "type": self.type,
             **({"value": _escape_python(self.value)} if self.value is not None else {}),
         }
+
+    def to_luau_def(self) -> str:
+        return f"{self.name}: {self.type}"
 
 
 @dataclasses.dataclass
@@ -446,28 +456,49 @@ class SLuaParameter:
     type: Optional[str] = None
     comment: str = ""
 
+    def to_luau_def(self) -> str:
+        if self.type is None:
+            return self.name
+        elif self.name == "...":
+            return self.type
+        else:
+            return f"{self.name}: {self.type}"
+
 
 @dataclasses.dataclass
 class SLuaFunctionAnon:
     """Annonymous function signature"""
 
-    parameters: List[SLuaParameter]
-    returnType: str
-    comment: Optional[str] = None
+    typeParameters: List[str] = dataclasses.field(default_factory=list)
+    parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
+    returnType: str = LSLType.VOID.meta.slua_name
+    comment: str = ""
+
+    def type_parameters_string(self) -> str:
+        if not self.typeParameters:
+            return ""
+        return "<" + ", ".join(self.typeParameters) + ">"
+
+    def parameters_string(self) -> str:
+        return "(" + ", ".join(p.to_luau_def() for p in self.parameters) + ")"
+
+    def type_def_string(self) -> str:
+        return self.type_parameters_string() + self.parameters_string() + " -> " + self.returnType
 
 
 @dataclasses.dataclass
-class SLuaFunction:
+class SLuaFunction(SLuaFunctionAnon):
     """Full function or method signature with optional overloads"""
 
-    name: str
-    parameters: List[SLuaParameter]
-    returnType: str
-    typeParameters: Optional[List[str]] = None
-    comment: str = ""
+    name: str = ""
     private: bool = False
     deprecated: bool = False
-    overloads: Optional[List[SLuaFunctionAnon]] = None
+    overloads: List[SLuaFunctionAnon] = dataclasses.field(default_factory=list)
+
+    def deprecated_string(self):
+        if not self.deprecated:
+            return ""
+        return "@deprecated "
 
     def to_keywords_dict(self) -> dict:
         return _remove_worthless(
@@ -489,6 +520,35 @@ class SLuaFunction:
                 "tooltip": self.comment,
             }
         )
+
+    def write_luau_global_def(self, f: io.StringIO, indent: int = 0) -> None:
+        """For declaring global functions and class/extern type methods"""
+        if self.overloads:
+            # the function format can't handle overloads
+            self.write_luau_table_def(f, indent, suffix="")
+        else:
+            f.write(f"{'  ' * indent}")
+            f.write(self.deprecated_string())
+            f.write(f"function {self.name}")
+            f.write(self.type_parameters_string())
+            f.write(self.parameters_string())
+            f.write(f": {self.returnType}\n")
+
+    def write_luau_table_def(self, f: io.StringIO, indent: int = 0, suffix=",") -> None:
+        """For declaring functions within a table/module"""
+        f.write(f"{'  ' * indent}{self.name}: ")
+        f.write(self.deprecated_string())
+        if not self.overloads:
+            f.write(self.type_def_string())
+        else:
+            f.write("(")
+            f.write(self.type_def_string())
+            for overload in self.overloads:
+                f.write(f")\n{'  ' * (indent + 1)}& (")
+                f.write(overload.type_def_string())
+            f.write(")")
+        f.write(suffix)
+        f.write("\n")
 
 
 @dataclasses.dataclass
@@ -526,6 +586,14 @@ class SLuaClassDeclaration:
     def to_keywords_dict(self) -> dict:
         return {"tooltip": self.comment}
 
+    def write_luau_def(self, f: io.StringIO) -> None:
+        f.write(f"declare extern type {self.name} with\n")
+        for prop in self.properties:
+            f.write(f"  {prop.to_luau_def()}\n")
+        for func in self.methods:
+            func.write_luau_global_def(f, indent=1)
+        f.write("end\n\n")
+
 
 @dataclasses.dataclass
 class SLuaModule:
@@ -558,6 +626,26 @@ class SLuaModule:
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
+    def write_luau_def(self, f: io.StringIO) -> None:
+        f.write(f"""
+---------------------------
+-- Global Table: {self.name}
+---------------------------
+
+declare {self.name}: """)
+        if self.callable:
+            f.write("(")
+            f.write(self.callable.type_def_string())
+            f.write(") & ")
+        f.write("{\n")
+        for prop in self.constants:
+            f.write(f"  {prop.to_luau_def()},\n")
+        for func in self.functions:
+            if func.private:
+                continue
+            func.write_luau_table_def(f, indent=1)
+        f.write("}\n\n")
+
 
 class SLuaDefinitions(NamedTuple):
     # for best results, load/generate in the same order defined here
@@ -577,6 +665,7 @@ class SLuaDefinitions(NamedTuple):
     globalFunctions: List[SLuaFunction]
     modules: List[SLuaModule]
     globalVariables: List[SLuaProperty]
+    globalConstants: List[SLuaProperty]
 
 
 def _escape_python(val: str) -> str:
@@ -783,7 +872,7 @@ class LSLDefinitionParser:
 
 class SLuaDefinitionParser:
     def __init__(self):
-        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [])
+        self.definitions = SLuaDefinitions({}, {}, [], [], [], [], [], [], [], [], [])
         self.type_names: Set[str] = set()
         self.global_scope: Set[str] = set()
 
@@ -847,6 +936,144 @@ class SLuaDefinitionParser:
 
         return self.definitions
 
+    def generate_ll_modules(self, lsl: LSLDefinitions):
+        LLDetectedEventName_alias = [
+            m for m in self.definitions.typeAliases if m.name == "LLDetectedEventName"
+        ][0]
+        LLNonDetectedEventName_alias = [
+            m for m in self.definitions.typeAliases if m.name == "LLNonDetectedEventName"
+        ][0]
+        LLEvents_class = [m for m in self.definitions.classes if m.name == "LLEvents"][0]
+        detected_event_names: List[str] = []
+        non_detected_event_names: List[str] = []
+        for event in lsl.events.values():
+            if event.slua_removed:
+                continue
+            event_func = SLuaFunction(
+                name=event.name,
+                comment=event.tooltip,
+                deprecated=event.deprecated or event.slua_deprecated,
+                parameters=[
+                    SLuaParameter(
+                        name=a.name,
+                        comment=a.tooltip,
+                        type=self.validate_type(a.compute_slua_type()),
+                    )
+                    for a in event.arguments
+                ],
+            )
+            if event.detected_semantics:
+                detected_event_names.append(event.name)
+                type_def = "LLDetectedEventHandler"
+            else:
+                non_detected_event_names.append(event.name)
+                # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
+                type_def = event_func.type_def_string()
+                overload_parameters = [
+                    SLuaParameter("self", type="LLEvents"),
+                    SLuaParameter("event", type=f'"{event.name}"'),
+                    SLuaParameter("callback", type=type_def),
+                ]
+                for register_func in LLEvents_class.methods:
+                    if register_func.name in {"on", "once"}:
+                        register_func.overloads.append(
+                            SLuaFunctionAnon(
+                                comment=event.tooltip,
+                                parameters=overload_parameters,
+                                returnType=type_def,
+                            )
+                        )
+                    elif register_func.name == "off":
+                        register_func.overloads.append(
+                            SLuaFunctionAnon(
+                                comment=event.tooltip,
+                                parameters=overload_parameters,
+                                returnType=register_func.returnType,
+                            )
+                        )
+            event_prop = SLuaProperty(
+                name=event.name,
+                comment=event.tooltip,
+                type=f"({type_def})?",
+            )
+            LLEvents_class.properties.append(event_prop)
+        LLDetectedEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in detected_event_names
+        )
+        LLNonDetectedEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in non_detected_event_names
+        )
+        for register_func in LLEvents_class.methods:
+            if register_func.name in {"off", "on", "once"}:
+                register_func.parameters = [
+                    SLuaParameter("self", type="LLEvents"),
+                    SLuaParameter("event", type="LLDetectedEventName"),
+                    SLuaParameter("callback", type="LLDetectedEventHandler"),
+                ]
+            if register_func.name in {"on", "once"}:
+                register_func.returnType = "LLDetectedEventHandler"
+
+        ll_module = [m for m in self.definitions.modules if m.name == "ll"][0]
+        llcompat_module = [m for m in self.definitions.modules if m.name == "llcompat"][0]
+        DetectedEvent_class = [
+            m for m in self.definitions.baseClasses if m.name == "DetectedEvent"
+        ][0]
+        for func in lsl.functions.values():
+            if func.private:
+                continue
+            known_types = self.validate_type_params(func.type_arguments)
+            ll_func = SLuaFunction(
+                name=func.compute_slua_name(with_module=False),
+                comment=func.tooltip,
+                deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
+                typeParameters=func.type_arguments,
+                parameters=[
+                    SLuaParameter(
+                        name=a.name,
+                        comment=a.tooltip,
+                        type=self.validate_type(a.compute_slua_type(), known_types),
+                    )
+                    for a in func.arguments
+                ],
+                returnType=self.validate_type(func.compute_slua_type(), known_types),
+            )
+            llcompat_func = SLuaFunction(
+                name=ll_func.name,
+                comment=ll_func.comment,
+                deprecated=True,
+                typeParameters=ll_func.typeParameters,
+                parameters=ll_func.parameters,
+                returnType=self.validate_type(func.compute_slua_type(llcompat=True), known_types),
+            )
+            if not func.slua_removed:
+                ll_module.functions.append(ll_func)
+            llcompat_module.functions.append(llcompat_func)
+            if func.detected_semantics:
+                name = ll_func.name.replace("Detected", "Get")
+                name = name[0].lower() + name[1:]
+                detected_func = SLuaFunction(
+                    name=name,
+                    comment=ll_func.comment,
+                    deprecated=False,
+                    typeParameters=ll_func.typeParameters,
+                    parameters=ll_func.parameters[:],
+                    returnType=ll_func.returnType,
+                )
+                detected_func.parameters[0] = SLuaParameter(name="self")
+                DetectedEvent_class.methods.append(detected_func)
+
+        for const in lsl.constants.values():
+            if const.slua_removed:
+                continue
+            prop = SLuaProperty(
+                name=const.name,
+                comment=const.tooltip,
+                type=self.validate_type(const.slua_type or const.type.meta.slua_name),
+                value=const.value,
+                private=const.private,
+            )
+            self.definitions.globalConstants.append(prop)
+
     def _validate_module(self, data: any) -> SLuaModule:
         module = SLuaModule(
             name=data["name"],
@@ -892,14 +1119,16 @@ class SLuaDefinitionParser:
                 self._validate_property(prop, class_scope) for prop in data.get("properties", [])
             ]
             class_.methods = [
-                self._validate_function(method, class_scope, method=True)
+                self._validate_function(method, class_scope, class_name=class_.name)
                 for method in data.get("methods", [])
             ]
         except Exception as e:
             raise ValueError(f"In class {class_.name}: {e}") from e
         return class_
 
-    def _validate_function(self, data: any, scope: Set[str], method: bool = False) -> SLuaFunction:
+    def _validate_function(
+        self, data: any, scope: Set[str], class_name: str | None = None
+    ) -> SLuaFunction:
         try:
             func = SLuaFunction(
                 name=data["name"],
@@ -912,22 +1141,18 @@ class SLuaDefinitionParser:
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
+            self._validate_function_signature(func, class_name)
             known_types = self.validate_type_params(func.typeParameters)
             self.validate_type(func.returnType, known_types)
-            params = func.parameters
-            params_scope = set()
-            if method:
-                if not params or params[0].name != "self" or params[0].type is not None:
-                    raise ValueError(f"Method {func.name} missing self parameter")
-                params_scope.add("self")
-                params = params[1:]
-            if params and params[-1].name == "...":
-                self.validate_type(params[-1].type, known_types)
-                params = params[:-1]
-            for param in params:
-                self._validate_identifier(param.name)
-                self._validate_scope(param.name, params_scope)
-                self.validate_type(param.type, known_types)
+            for overload_data in data.get("overloads", []):
+                overload = SLuaFunctionAnon(
+                    typeParameters=overload_data.get("typeParameters", []),
+                    parameters=[SLuaParameter(**p) for p in overload_data.get("parameters", [])],
+                    returnType=overload_data.get("returnType", LSLType.VOID.meta.slua_name),
+                    comment=overload_data.get("comment", ""),
+                )
+                self._validate_function_signature(overload)
+                func.overloads.append(overload)
             return func
         except Exception as e:
             raise ValueError(f"In function {data['name']}: {e}") from e
@@ -951,6 +1176,30 @@ class SLuaDefinitionParser:
             raise ValueError(f"Constant {prop.name} must have a value")
         self.validate_type(prop.type)
         return prop
+
+    def _validate_function_signature(
+        self, func: SLuaFunctionAnon, class_name: str | None = None
+    ) -> None:
+        known_types = self.validate_type_params(func.typeParameters)
+        self.validate_type(func.returnType, known_types)
+        params = func.parameters
+        params_scope = set()
+        if class_name is not None:
+            if not (
+                params
+                and params[0].name == "self"
+                and (params[0].type is None or params[0].type == class_name)
+            ):
+                raise ValueError(f"Method {func.name} missing self parameter")
+            params_scope.add("self")
+            params = params[1:]
+        if params and params[-1].name == "...":
+            self.validate_type(params[-1].type, known_types)
+            params = params[:-1]
+        for param in params:
+            self._validate_identifier(param.name)
+            self._validate_scope(param.name, params_scope)
+            self.validate_type(param.type, known_types)
 
     def validate_type_params(self, type_params: List[str]) -> set[str]:
         known_types = set(self.type_names)
@@ -1108,6 +1357,63 @@ def dump_slua_syntax(
         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
     else:
         return llsd.format_xml(syntax)
+
+
+def gen_luau_lsp_defs(
+    lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False
+) -> str:
+    """Write a definitions file for use by the Luau Language Server"""
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
+    parser.generate_ll_modules(lsl_definitions)
+    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+    llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
+
+    defs = io.StringIO()
+    defs.write("""
+----------------------------------
+---------- LSL LUAU DEFS ---------
+----------------------------------
+
+""")
+
+    # 1. Luau builtins unneeded. Luau-lsp already know about these
+    # 2. SLua base classes. These only depend on Luau builtins
+    classes = slua_definitions.baseClasses + slua_definitions.classes
+    classes.sort(key=lambda x: x.name)
+    for class_ in (class_ for class_ in classes if class_.name[0].islower()):
+        class_.write_luau_def(defs)
+    defs.write("\n")
+    for alias in slua_definitions.typeAliases:
+        defs.write(alias.to_luau_def())
+        defs.write("\n")
+    defs.write("\n")
+
+    # 3. SLua standard library. Depends on base classes
+    for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
+        class_.write_luau_def(defs)
+    defs.write("\n")
+    for func in slua_definitions.globalFunctions:
+        defs.write("declare ")
+        func.write_luau_global_def(defs)
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        if module.name in {"ll", "llcompat"}:
+            continue
+        module.write_luau_def(defs)
+    for var in slua_definitions.globalVariables:
+        defs.write("declare ")
+        defs.write(var.to_luau_def())
+        defs.write("\n")
+    ll_module.write_luau_def(defs)
+    llcompat_module.write_luau_def(defs)
+    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        if const.private:
+            continue
+        defs.write("declare ")
+        defs.write(const.to_luau_def())
+        defs.write("\n")
+
+    return defs.getvalue()
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
@@ -2544,6 +2850,15 @@ def main():
     sub.set_defaults(
         func=lambda args, defs: _write_if_different(
             args.filename, dump_slua_syntax(defs, args.slua_definitions, args.pretty)
+        )
+    )
+
+    sub = subparsers.add_parser("slua_lsp_defs")
+    sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
+    sub.add_argument("filename")
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(
+            args.filename, gen_luau_lsp_defs(defs, args.slua_definitions)
         )
     )
 
