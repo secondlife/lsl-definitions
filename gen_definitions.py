@@ -439,18 +439,6 @@ class SLuaProperty:
             **({"value": _escape_python(self.value)} if self.value is not None else {}),
         }
 
-    def to_selene_dict(self, read_only=False) -> dict:
-        selene = {}
-        if read_only:
-            selene["property"] = "read-only"
-        if self.type in {"number", "string"}:
-            selene["type"] = self.type
-        else:
-            selene["type"] = {"display": self.type}
-        if self.comment:
-            selene["description"] = self.comment
-        return selene
-
     def to_luau_def(self) -> str:
         return f"{self.name}: {self.type}"
 
@@ -467,22 +455,6 @@ class SLuaParameter:
     name: str
     type: Optional[str] = None
     comment: str = ""
-
-    def to_selene_dict(self) -> dict | None:
-        if self.type is None:
-            return None
-        type = self.type
-        optional = type.endswith("?")
-        if optional:
-            type = type[:-1]
-        if type not in {"number", "string"}:
-            type = "any"
-        if self.name == "...":
-            type = "..."
-        selene = {"type": type}
-        if optional:
-            selene["required"] = False
-        return selene
 
     def to_luau_def(self) -> str:
         if self.type is None:
@@ -548,12 +520,6 @@ class SLuaFunction(SLuaFunctionAnon):
                 "tooltip": self.comment,
             }
         )
-
-    def to_selene_dict(self) -> dict:
-        return {
-            "args": [a.to_selene_dict() for a in self.parameters if a.to_selene_dict() is not None],
-            "description": self.comment,
-        }
 
     def write_luau_global_def(self, f: io.StringIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
@@ -658,14 +624,6 @@ class SLuaModule:
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
             for prop in sorted(self.constants, key=lambda x: x.name)
-        }
-
-    def to_selene_dict(self) -> dict:
-        return {
-            f"{self.name}.{func.name}": func.to_selene_dict()
-            # for func in sorted(self.functions, key=lambda x: x.name)
-            for func in self.functions
-            if not func.private
         }
 
     def write_luau_def(self, f: io.StringIO) -> None:
@@ -1473,6 +1431,47 @@ def gen_selene_yml(
     # ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
+    def selene_property(prop: SLuaProperty, read_only=False) -> dict:
+        if prop.type in {"number", "string"}:
+            type = prop.type
+        else:
+            type = {"display": prop.type}
+        return _remove_nones(
+            property="read-only" if read_only else None,
+            type=type,
+            description=prop.comment or None,
+        )
+
+    def selene_param(param: SLuaParameter) -> dict | None:
+        if param.type is None:
+            return None
+        type = param.type
+        optional = type.endswith("?")
+        if optional:
+            type = type[:-1]
+        if type not in {"number", "string"}:
+            type = "any"
+        if param.name == "...":
+            type = "..."
+        selene = {"type": type}
+        if optional:
+            selene["required"] = False
+        return selene
+
+    def selene_function(func: SLuaFunction) -> dict:
+        return {
+            "args": [selene_param(a) for a in func.parameters if a.type],
+            "description": func.comment,
+        }
+
+    def selene_module(module: SLuaModule) -> dict:
+        return {
+            f"{module.name}.{func.name}": selene_function(func)
+            # for func in sorted(self.functions, key=lambda x: x.name)
+            for func in module.functions
+            if not func.private
+        }
+
     selene = {
         "base": "luau",
         "name": "SLua LSL language support",
@@ -1525,14 +1524,14 @@ def gen_selene_yml(
     #         syntax["constants"].update(module.to_keywords_constants_dict())
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
         if not const.private and not const.slua_removed:
-            selene["globals"][const.name] = const.to_selene_dict(read_only=True)
+            selene["globals"][const.name] = selene_property(const, read_only=True)
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
-        selene["globals"][func.name] = func.to_selene_dict()
+        selene["globals"][func.name] = selene_function(func)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
-            selene["globals"].update(module.to_selene_dict())
+            selene["globals"].update(selene_module(module))
     # selene["globals"].update(ll_module.to_selene_dict())
 
     #     if pretty:
