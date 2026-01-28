@@ -1425,9 +1425,9 @@ def gen_selene_yml(
     lsl_definitions: LSLDefinitions, slua_definitions_file: str, version: str | None = None
 ) -> str:
     """Write a standard library file for use by the Selene Lua Linter"""
-    parser = SLuaDefinitionParser()
-    slua_definitions = parser.parse_file(slua_definitions_file)
-    parser.generate_ll_modules(lsl_definitions)
+    # parser = SLuaDefinitionParser()
+    # slua_definitions = parser.parse_file(slua_definitions_file)
+    # parser.generate_ll_modules(lsl_definitions)
     # ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
@@ -1481,13 +1481,13 @@ def gen_selene_yml(
     #         syntax["constants"][const.name] = const.to_keywords_dict()
     #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
     #         syntax["constants"].update(module.to_keywords_constants_dict())
-    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-        if not const.private and not const.slua_removed:
-            selene["globals"][const.name] = _remove_nones(
-                property="read-only",
-                type=const.type,
-                description=const.comment or None,
-            )
+    # for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+    #     if not const.private and not const.slua_removed:
+    #         selene["globals"][const.name] = _remove_nones(
+    #             property="read-only",
+    #             type=const.type,
+    #             description=const.comment or None,
+    #         )
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
@@ -1539,11 +1539,38 @@ def gen_selene_yml(
     #         defs.write("\n")
 
     #     return defs.getvalue()
+
+    selene = {
+        "globals": {
+            "BEACON_MAP": {
+                "property": "read-only",
+                "type": "number",
+                "description": "Cause llMapBeacon to optionally display and focus the world map on the avatar's viewer.",
+            }
+        },
+    }
+    # stream = io.StringIO()
+    # dumper = yaml.Dumper(stream,
+    #     sort_keys=False,
+    #     indent=2,
+    #     width=80,
+    #     default_style=None,
+    #                      )
+    # def represent_str(self, data):
+    #     return self.represent_scalar('tag:yaml.org,2002:str', data)
+
+    class JSDumper(yaml.Dumper):
+        def represent_str(self, data):
+            long = "\n" in data or len(data) > 40
+            return self.represent_scalar("tag:yaml.org,2002:str", data, style=">" if long else None)
+
+    JSDumper.add_representer(str, JSDumper.represent_str)
     return yaml.dump(
         selene,
+        Dumper=JSDumper,
         sort_keys=False,
         indent=2,
-        width=80,
+        width=72,
         default_style=None,
     )
 
