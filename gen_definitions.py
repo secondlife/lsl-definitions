@@ -477,9 +477,11 @@ class SLuaParameter:
             type = type[:-1]
         if type not in {"number", "string"}:
             type = "any"
+        if self.name == "...":
+            type = "..."
         selene = {"type": type}
         if optional:
-            selene["optional"] = True
+            selene["required"] = False
         return selene
 
     def to_luau_def(self) -> str:
@@ -660,8 +662,10 @@ class SLuaModule:
 
     def to_selene_dict(self) -> dict:
         return {
-            f"{self.name}.{func.name}": func.to_keywords_dict()
-            for func in sorted(self.functions, key=lambda x: x.name)
+            f"{self.name}.{func.name}": func.to_selene_dict()
+            # for func in sorted(self.functions, key=lambda x: x.name)
+            for func in self.functions
+            if not func.private
         }
 
     def write_luau_def(self, f: io.StringIO) -> None:
@@ -1526,6 +1530,10 @@ def gen_selene_yml(
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
         selene["globals"][func.name] = func.to_selene_dict()
+    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+        if module.name not in {"ll", "llcompat"}:
+            selene["globals"].update(module.to_selene_dict())
+    # selene["globals"].update(ll_module.to_selene_dict())
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
