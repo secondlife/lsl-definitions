@@ -1261,6 +1261,11 @@ def _remove_worthless(val: dict) -> dict:
     return val
 
 
+def _remove_nones(**kwargs) -> dict:
+    """Remove any None values from a dict"""
+    return {k: v for k, v in kwargs.items() if v is not None}
+
+
 def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
     syntax = {
@@ -1420,9 +1425,9 @@ def gen_selene_yml(
     lsl_definitions: LSLDefinitions, slua_definitions_file: str, version: str | None = None
 ) -> str:
     """Write a standard library file for use by the Selene Lua Linter"""
-    # parser = SLuaDefinitionParser()
-    # slua_definitions = parser.parse_file(slua_definitions_file)
-    # parser.generate_ll_modules(lsl_definitions)
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
+    parser.generate_ll_modules(lsl_definitions)
     # ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
@@ -1431,6 +1436,7 @@ def gen_selene_yml(
         "name": "SLua LSL language support",
         "lua_versions": ["luau", "lua51"],
         "last_updated": 1763572449,
+        "globals": {},
     }
 
     #     syntax = {
@@ -1475,9 +1481,13 @@ def gen_selene_yml(
     #         syntax["constants"][const.name] = const.to_keywords_dict()
     #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
     #         syntax["constants"].update(module.to_keywords_constants_dict())
-    #     for const in sorted(lsl_definitions.constants.values(), key=lambda x: x.name):
-    #         if not const.private and not const.slua_removed:
-    #             syntax["constants"][const.name] = const.to_slua_dict(parser)
+    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        if not const.private and not const.slua_removed:
+            selene["globals"][const.name] = _remove_nones(
+                property="read-only",
+                type=const.type,
+                description=const.comment or None,
+            )
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
@@ -1529,7 +1539,13 @@ def gen_selene_yml(
     #         defs.write("\n")
 
     #     return defs.getvalue()
-    return yaml.dump(selene, sort_keys=False, indent=4)
+    return yaml.dump(
+        selene,
+        sort_keys=False,
+        indent=2,
+        width=80,
+        default_style=None,
+    )
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
