@@ -1428,32 +1428,39 @@ def gen_selene_yml(
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
     parser.generate_ll_modules(lsl_definitions)
-    # ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
+    def selene_type(type_str: str) -> str | dict:
+        if type_str.startswith("{"):
+            return "table"
+        if "..." in type_str:
+            return "..."
+        if "->" in type_str:
+            return "function"
+        if type_str.endswith("?"):
+            type_str = type_str[:-1]
+        return {
+            "boolean": "bool",
+            "boolean | number": "bool",
+            "number": "number",
+            "string": "string",
+            "uuid": {"display": "uuid"},
+            "vector": {"display": "vector"},
+            "quaternion": {"display": "quaternion"},
+            "list": "table",
+        }.get(type_str, "any")
+
     def selene_property(prop: SLuaProperty, read_only=False) -> dict:
-        if prop.type in {"number", "string"}:
-            type = prop.type
-        else:
-            type = {"display": prop.type}
         return _remove_nones(
             property="read-only" if read_only else None,
-            type=type,
+            type=selene_type(prop.type),
             description=prop.comment or None,
         )
 
-    def selene_param(param: SLuaParameter) -> dict | None:
-        if param.type is None:
-            return None
-        type = param.type
-        optional = type.endswith("?")
-        if optional:
-            type = type[:-1]
-        if type not in {"number", "string"}:
-            type = "any"
-        if param.name == "...":
-            type = "..."
-        selene = {"type": type}
+    def selene_param(param: SLuaParameter) -> dict:
+        optional = param.type.endswith("?")
+        selene = {"type": selene_type(param.type)}
         if optional:
             selene["required"] = False
         return selene
@@ -1532,7 +1539,7 @@ def gen_selene_yml(
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
-    # selene["globals"].update(ll_module.to_selene_dict())
+    selene["globals"].update(selene_module(ll_module))
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
@@ -1595,7 +1602,7 @@ def gen_selene_yml(
     #     },
     # }
 
-    return yaml.dump(selene, sort_keys=False)
+    return yaml.safe_dump(selene, sort_keys=False)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
