@@ -1455,7 +1455,7 @@ def gen_selene_yml(
         if prop.slua_removed:
             return {"removed": True}
         return _remove_nones(
-            property="read-only" if read_only else None,
+            property="read-only" if read_only else "override-fields",
             type=selene_type(prop.type, default=None),
             description=prop.comment or None,
         )
@@ -1467,11 +1467,20 @@ def gen_selene_yml(
             selene["required"] = False
         return selene
 
-    def selene_function(func: SLuaFunction) -> dict:
-        return {
-            "args": [selene_param(a) for a in func.parameters if a.type],
-            "description": func.comment,
-        }
+    def selene_function(func: SLuaFunction, method=False) -> dict:
+        return _remove_nones(
+            method=method or None,
+            args=[selene_param(a) for a in func.parameters if a.type],
+            description=func.comment or None,
+        )
+
+    def selene_class(class_: SLuaClassDeclaration) -> dict:
+        fields = {}
+        for prop in class_.properties:
+            fields[prop.name] = selene_property(prop)
+        for method in class_.methods:
+            fields[method.name] = selene_function(method, method=True)
+        return fields
 
     def selene_module(module: SLuaModule) -> dict:
         globals = {}
@@ -1557,6 +1566,8 @@ def gen_selene_yml(
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
     selene["globals"].update(selene_module(ll_module))
+    for class_ in slua_definitions.classes:
+        selene["structs"][class_.name] = selene_class(class_)
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
