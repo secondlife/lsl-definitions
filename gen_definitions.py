@@ -1431,7 +1431,7 @@ def gen_selene_yml(
     ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
-    def selene_type(type_str: str) -> str | dict:
+    def selene_type(type_str: str, default="any") -> str | dict | None:
         if type_str.startswith("{"):
             return "table"
         if "..." in type_str:
@@ -1449,12 +1449,14 @@ def gen_selene_yml(
             "vector": {"display": "vector"},
             "quaternion": {"display": "quaternion"},
             "list": "table",
-        }.get(type_str, "any")
+        }.get(type_str, default)
 
     def selene_property(prop: SLuaProperty, read_only=False) -> dict:
+        if prop.slua_removed:
+            return {"removed": True}
         return _remove_nones(
             property="read-only" if read_only else None,
-            type=selene_type(prop.type),
+            type=selene_type(prop.type, default=None),
             description=prop.comment or None,
         )
 
@@ -1472,12 +1474,26 @@ def gen_selene_yml(
         }
 
     def selene_module(module: SLuaModule) -> dict:
-        return {
-            f"{module.name}.{func.name}": selene_function(func)
-            # for func in sorted(self.functions, key=lambda x: x.name)
-            for func in module.functions
-            if not func.private
-        }
+        globals = {}
+        if module.callable:
+            globals[module.name] = selene_function(module.callable)
+        globals.update(
+            {
+                f"{module.name}.{const.name}": selene_property(const, read_only=True)
+                # for func in sorted(self.functions, key=lambda x: x.name)
+                for const in module.constants
+                if not const.private
+            }
+        )
+        globals.update(
+            {
+                f"{module.name}.{func.name}": selene_function(func)
+                # for func in sorted(self.functions, key=lambda x: x.name)
+                for func in module.functions
+                if not func.private
+            }
+        )
+        return globals
 
     selene = {
         "base": "luau",
@@ -1485,6 +1501,7 @@ def gen_selene_yml(
         "lua_versions": ["luau", "lua51"],
         "last_updated": 1763572449,
         "globals": {},
+        "structs": {},
     }
 
     #     syntax = {
