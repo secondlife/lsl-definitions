@@ -1474,10 +1474,12 @@ def gen_selene_yml(
             "boolean | number": "bool",
             "number": "number",
             "string": "string",
+            "buffer": {"display": "buffer"},
             "uuid": {"display": "uuid"},
             "vector": {"display": "vector"},
             "quaternion": {"display": "quaternion"},
             "list": "table",
+            "thread": {"display": "thread"},
         }.get(type_str, default)
 
     def selene_property(prop: SLuaProperty) -> dict:
@@ -1505,6 +1507,7 @@ def gen_selene_yml(
         return _remove_nones(
             method=method or None,
             args=[selene_param(a) for a in parameters],
+            must_use=func.must_use or None,
             description=func.comment or None,
         )
 

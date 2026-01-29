@@ -342,6 +342,7 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: band
     comment: Performs a bitwise AND operation on input numbers.
     parameters:
@@ -349,6 +350,7 @@ modules:
       comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: number
+    must-use: true
   - name: bnot
     comment: Returns the bitwise negation of the input number.
     parameters:
@@ -356,6 +358,7 @@ modules:
       comment: Number to negate.
       type: number
     returnType: number
+    must-use: true
   - name: bor
     comment: Performs a bitwise OR operation on input numbers.
     parameters:
@@ -363,6 +366,7 @@ modules:
       comment: Numbers to perform bitwise OR on.
       type: ...number
     returnType: number
+    must-use: true
   - name: bxor
     comment: Performs a bitwise XOR operation on input numbers.
     parameters:
@@ -370,6 +374,7 @@ modules:
       comment: Numbers to perform bitwise XOR on.
       type: ...number
     returnType: number
+    must-use: true
   - name: btest
     comment: |-
       Performs a bitwise AND operation on input numbers.
@@ -379,6 +384,7 @@ modules:
       comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: boolean
+    must-use: true
   - name: extract
     comment: Extracts bits from n at position field with width
     parameters:
@@ -389,6 +395,7 @@ modules:
     - name: width
       type: number?
     returnType: number
+    must-use: true
   - name: lrotate
     comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
@@ -399,6 +406,7 @@ modules:
       comment: Number of bits to rotate.
       type: number
     returnType: number
+    must-use: true
   - name: lshift
     comment: Shifts n by i bits to the left. If i is negative, a right shift is performed.
     parameters:
@@ -409,6 +417,7 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: replace
     comment: Replaces bits in n at position field with width using value v
     parameters:
@@ -421,6 +430,7 @@ modules:
     - name: width
       type: number?
     returnType: number
+    must-use: true
   - name: rrotate
     comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
     parameters:
@@ -431,6 +441,7 @@ modules:
       comment: Number of bits to rotate.
       type: number
     returnType: number
+    must-use: true
   - name: rshift
     comment: Shifts n by i bits to the right. If i is negative, a left shift is performed.
     parameters:
@@ -441,24 +452,28 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: countlz
     comment: Count leading zeros
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
   - name: countrz
     comment: Count trailing zeros
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
   - name: byteswap
     comment: Swap byte order
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
 - name: buffer
   comment: Buffer manipulation library for binary data.
   functions:
@@ -469,6 +484,7 @@ modules:
       comment: Size of the buffer to create.
       type: number
     returnType: buffer
+    must-use: true
   - name: fromstring
     comment: Creates a buffer initialized to the contents of the string.
     parameters:
@@ -476,6 +492,7 @@ modules:
       comment: String to initialize the buffer with.
       type: string
     returnType: buffer
+    must-use: true
   - name: tostring
     comment: Returns the buffer data as a string.
     parameters:
@@ -483,6 +500,7 @@ modules:
       comment: Buffer to convert to a string.
       type: buffer
     returnType: string
+    must-use: true
   - name: readi8
     comment: Reads a signed 8-bit integer from the buffer at the given offset.
     parameters:
@@ -493,6 +511,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu8
     comment: Reads an unsigned 8-bit integer from the buffer at the given offset.
     parameters:
@@ -503,6 +522,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readi16
     comment: Reads a signed 16-bit integer from the buffer at the given offset.
     parameters:
@@ -513,6 +533,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu16
     comment: Reads an unsigned 16-bit integer from the buffer at the given offset.
     parameters:
@@ -523,6 +544,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readi32
     comment: Reads a signed 32-bit integer from the buffer at the given offset.
     parameters:
@@ -533,6 +555,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -543,6 +566,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readf32
     comment: Reads a 32-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -553,6 +577,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readf64
     comment: Reads a 64-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -563,12 +588,14 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: writei8
     comment: Writes a signed 8-bit integer to the buffer at the given offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -582,6 +609,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -595,6 +623,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -608,6 +637,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -621,6 +651,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -634,6 +665,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -647,6 +679,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -660,6 +693,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -680,12 +714,14 @@ modules:
       comment: Number of bytes to read.
       type: number
     returnType: string
+    must-use: true
   - name: writestring
     comment: Writes data from a string into the buffer at the specified offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -703,6 +739,7 @@ modules:
       comment: Buffer to get the size of.
       type: buffer
     returnType: number
+    must-use: true
   - name: copy
     comment: Copies bytes from the source buffer into the target buffer.
     parameters:
@@ -715,6 +752,7 @@ modules:
     - name: source
       comment: Source buffer to copy from.
       type: buffer
+      observes: write
     - name: sourceOffset
       comment: Offset in source buffer (optional).
       type: number?
@@ -728,6 +766,7 @@ modules:
     - name: b
       comment: Buffer to fill.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to start filling.
       type: number
@@ -751,12 +790,14 @@ modules:
       comment: Number of bits to read. Must be in [0, 32] range.
       type: number
     returnType: number
+    must-use: true
   - name: writebits
     comment: Writes up to 32 bits to the buffer at the given offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: bitOffset
       comment: Bit offset to write at.
       type: number
