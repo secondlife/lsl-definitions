@@ -1506,6 +1506,7 @@ modules:
       comment: S component of the quaternion.
       type: number
     returnType: quaternion
+    must-use: true
   functions:
   - name: create
     comment: Creates a new quaternion with the given component values.
@@ -1523,6 +1524,7 @@ modules:
       comment: S component of the quaternion.
       type: number
     returnType: quaternion
+    must-use: true
   - name: normalize
     comment: Computes the normalized version (unit quaternion) of the quaternion.
     parameters:
@@ -1530,6 +1532,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: quaternion
+    must-use: true
   - name: magnitude
     comment: Computes the magnitude of the quaternion.
     parameters:
@@ -1537,6 +1540,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: number
+    must-use: true
   - name: dot
     comment: Computes the dot product of two quaternions.
     parameters:
@@ -1547,6 +1551,7 @@ modules:
       comment: Right input quaternion.
       type: quaternion
     returnType: number
+    must-use: true
   - name: slerp
     comment: Spherical linear interpolation from a to b using factor t.
     parameters:
@@ -1560,6 +1565,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: quaternion
+    must-use: true
   - name: conjugate
     comment: Computes the conjugate of the quaternion.
     parameters:
@@ -1567,6 +1573,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: quaternion
+    must-use: true
   - name: tofwd
     comment: Computes the forward vector from the quaternion.
     parameters:
@@ -1574,6 +1581,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   - name: toleft
     comment: Computes the left vector from the quaternion.
     parameters:
@@ -1581,6 +1589,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   - name: toup
     comment: Computes the up vector from the quaternion.
     parameters:
@@ -1588,6 +1597,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   constants:
   - name: identity
     comment: Identity quaternion constant.
@@ -2100,6 +2110,7 @@ modules:
     - name: value
       type: string | buffer | uuid
     returnType: uuid?
+    must-use: true
   functions:
   - name: create
     comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
@@ -2109,6 +2120,7 @@ modules:
     - name: value
       type: string | buffer | uuid
     returnType: uuid?
+    must-use: true
 - name: vector
   comment: Vector manipuluation library.
   callable:
@@ -2126,6 +2138,7 @@ modules:
       comment: Z component of the vector (optional).
       type: number?
     returnType: vector
+    must-use: true
   functions:
   - name: create
     comment: Creates a new vector with the given component values.
@@ -2140,6 +2153,7 @@ modules:
       comment: Z component of the vector (optional).
       type: number?
     returnType: vector
+    must-use: true
   - name: magnitude
     comment: Computes the magnitude of the vector.
     parameters:
@@ -2147,6 +2161,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: number
+    must-use: true
   - name: normalize
     comment: Computes the normalized version (unit vector) of the vector.
     parameters:
@@ -2154,6 +2169,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: cross
     comment: Computes the cross product of two vectors.
     parameters:
@@ -2164,6 +2180,7 @@ modules:
       comment: Right input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: dot
     comment: Computes the dot product of two vectors.
     parameters:
@@ -2174,6 +2191,7 @@ modules:
       comment: Right input vector.
       type: vector
     returnType: number
+    must-use: true
   - name: angle
     comment: Computes the angle between two vectors in radians.
       The axis, if specified, is used to determine the sign of the angle.
@@ -2188,6 +2206,7 @@ modules:
       comment: Axis to determine the sign of the angle (optional).
       type: vector?
     returnType: number
+    must-use: true
   - name: floor
     comment: Applies math.floor to each component of the vector.
     parameters:
@@ -2195,6 +2214,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: ceil
     comment: Applies math.ceil to each component of the vector.
     parameters:
@@ -2202,6 +2222,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: abs
     comment: Applies math.abs to each component of the vector.
     parameters:
@@ -2209,6 +2230,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: sign
     comment: Applies math.sign to each component of the vector.
     parameters:
@@ -2216,6 +2238,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: clamp
     comment: Clamps each component of the vector between min and max values.
     parameters:
@@ -2229,6 +2252,7 @@ modules:
       comment: Maximum vector value.
       type: vector
     returnType: vector
+    must-use: true
   - name: max
     comment: Applies math.max to each component of the vectors.
     parameters:
@@ -2239,6 +2263,7 @@ modules:
       comment: Vectors to find the maximum from.
       type: ...vector
     returnType: vector
+    must-use: true
   - name: min
     comment: Applies math.max to each component of the vectors.
     parameters:
@@ -2249,6 +2274,7 @@ modules:
       comment: Vectors to find the minimum from.
       type: ...vector
     returnType: vector
+    must-use: true
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -2262,6 +2288,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: vector
+    must-use: true
   constants:
   - name: zero
     comment: Constant vector with all components set to 0.
