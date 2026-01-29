@@ -1481,11 +1481,7 @@ def gen_selene_yml(
         if prop.slua_removed:
             return _remove_nones(removed=True, description=prop.comment or None)
         elif prop.type in classes:
-            return _remove_nones(
-                property=prop.modifiable,
-                struct=prop.type,
-                description=prop.comment or None,
-            )
+            return _remove_nones(struct=prop.type, description=prop.comment or None)
         else:
             return _remove_nones(
                 property=prop.modifiable,
@@ -1502,18 +1498,19 @@ def gen_selene_yml(
         )
 
     def selene_function(func: SLuaFunction, method=False) -> dict:
+        parameters = func.parameters[1:] if method else func.parameters
         return _remove_nones(
             method=method or None,
-            args=[selene_param(a) for a in func.parameters if a.type],
+            args=[selene_param(a) for a in parameters],
             description=func.comment or None,
         )
 
     def selene_class(class_: SLuaClassDeclaration) -> dict:
         fields = {}
-        for prop in class_.properties:
-            fields[prop.name] = selene_property(prop)
         for method in class_.methods:
             fields[method.name] = selene_function(method, method=True)
+        for prop in class_.properties:
+            fields[prop.name] = selene_property(prop)
         return fields
 
     def selene_module(module: SLuaModule) -> dict:
@@ -1667,7 +1664,9 @@ def gen_selene_yml(
     #     },
     # }
 
-    return yaml.safe_dump(selene, sort_keys=False)
+    noalias_dumper = yaml.dumper.SafeDumper
+    noalias_dumper.ignore_aliases = lambda self, data: True
+    return yaml.dump(selene, sort_keys=False, Dumper=noalias_dumper)
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
