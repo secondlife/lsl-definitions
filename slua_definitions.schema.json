@@ -12,6 +12,15 @@
             "pattern": "^([ \n?&|,{}\\[\\]()\":a-zA-Z0-9_]|\\.\\.\\.|->)*$",
             "type": "string"
         },
+        "selene-type": {
+            "title": "A type understood by selene.",
+            "description": "See https://kampfkarren.github.io/selene/usage/std.html#properties.",
+            "oneOf": [
+                {"enum": ["any", "bool", "function", "nil", "number", "string", "table"]},
+                {"type": "array", "items": {"type": "string"}},
+                {"type": "object", "additionalProperties": false, "properties": {"display": {"type": "string"}}}
+            ]
+        },
         "property": {
             "markdownDescription": "A property or constant.",
             "additionalProperties": false,
@@ -30,6 +39,12 @@
                     "const": true,
                     "markdownDescription": "This property is only present in Luau, not SLua.",
                     "type": "boolean"
+                },
+                "modifiable": {
+                    "title": "Passed through to the selene `property` field.",
+                    "description": "See https://kampfkarren.github.io/selene/usage/std.html#properties.",
+                    "enum": ["read-only", "new-fields", "override-fields", "full-write"],
+                    "default": "read-only"
                 }
             },
             "required": ["name", "type"],
@@ -41,6 +56,7 @@
             "properties": {
                 "name": { "$ref": "#/$defs/identifier" },
                 "definition": { "$ref": "#/$defs/type" },
+                "selene-type": { "$ref": "#/$defs/selene-type" },
                 "comment": {
                     "markdownDescription": "A brief description of this alias.",
                     "type": "string"
@@ -51,7 +67,7 @@
                     "type": "boolean"
                 }
             },
-            "required": ["name", "definition"],
+            "required": ["name", "definition", "selene-type"],
             "type": "object"
         },
         "function-parameter": {
@@ -63,6 +79,18 @@
                     { "const": "...", "type": "string" }
                 ]},
                 "type": { "$ref": "#/$defs/type" },
+                "optional": {
+                    "const": true,
+                    "title": "Is this parameter optional.",
+                    "markdownDescription": "Defaults to true if type ends in `?`, false otherwise.",
+                    "type": "boolean"
+                },
+                "observes": {
+                    "title": "Hint for unused variable detection.",
+                    "description": "See https://kampfkarren.github.io/selene/usage/std.html#observes.",
+                    "enum": ["read-write", "read", "write"],
+                    "default": "read-write"
+                },
                 "comment": {
                     "markdownDescription": "A brief description of this parameter.",
                     "type": "string"
@@ -124,6 +152,12 @@
                 "private": {
                     "const": true,
                     "markdownDescription": "Don't include in documentation.",
+                    "type": "boolean"
+                },
+                "must-use": {
+                    "const": true,
+                    "title": "Give a warning if the return value is not used.",
+                    "description": "See https://kampfkarren.github.io/selene/usage/std.html#must_use.",
                     "type": "boolean"
                 },
                 "comment": {
