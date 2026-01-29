@@ -307,24 +307,28 @@ globalFunctions:
   parameters:
   - name: val
     type: string | buffer | uuid
+    selene-type: string
   returnType: uuid?
 - name: tovector
-  comment: Converts a value to a vector, returns nil if invalid
+  comment: Converts a string to a vector, returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | vector
+    selene-type: string
   returnType: vector?
 - name: toquaternion
-  comment: Converts a value to a quaternion, returns nil if invalid
+  comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | quaternion
+    selene-type: string
   returnType: quaternion?
 - name: torotation
-  comment: Converts a value to a rotation (quaternion), returns nil if invalid
+  comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | quaternion
+    selene-type: string
   returnType: quaternion?
 modules:
 - name: bit32

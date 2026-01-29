@@ -468,6 +468,8 @@ class SLuaParameter:
 
     name: str
     type: Optional[str] = None
+    selene_type: Any = None
+    """a custom Selene type for this parameter, in case auto-detection fails"""
     comment: str = ""
     optional: bool | None = None
     observes: Literal["read-write", "read", "write"] | None = None
@@ -1157,7 +1159,10 @@ class SLuaDefinitionParser:
             func = SLuaFunction(
                 name=data["name"],
                 typeParameters=data.get("typeParameters", []),
-                parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
+                parameters=[
+                    SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                    for p in data.get("parameters", [])
+                ],
                 returnType=data.get("returnType", LSLType.VOID.meta.slua_name),
                 comment=data.get("comment", ""),
                 deprecated=data.get("deprecated", False),
@@ -1172,7 +1177,10 @@ class SLuaDefinitionParser:
             for overload_data in data.get("overloads", []):
                 overload = SLuaFunctionAnon(
                     typeParameters=overload_data.get("typeParameters", []),
-                    parameters=[SLuaParameter(**p) for p in overload_data.get("parameters", [])],
+                    parameters=[
+                        SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                        for p in overload_data.get("parameters", [])
+                    ],
                     returnType=overload_data.get("returnType", LSLType.VOID.meta.slua_name),
                     comment=overload_data.get("comment", ""),
                 )
@@ -1501,7 +1509,7 @@ def gen_selene_yml(
     def selene_param(param: SLuaParameter) -> dict:
         optional = param.type.endswith("?") if param.optional is None else param.optional
         return _remove_nones(
-            type=selene_type(param.type),
+            type=param.selene_type or selene_type(param.type),
             required=None if not optional and param.optional is None else not optional,
             observes=param.observes,
         )

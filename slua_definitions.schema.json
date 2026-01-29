@@ -79,6 +79,7 @@
                     { "const": "...", "type": "string" }
                 ]},
                 "type": { "$ref": "#/$defs/type" },
+                "selene-type": { "$ref": "#/$defs/selene-type" },
                 "optional": {
                     "title": "Is this parameter optional.",
                     "markdownDescription": "Defaults to true if type ends in `?`, false otherwise.",
