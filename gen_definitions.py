@@ -919,12 +919,12 @@ class SLuaDefinitionParser:
             raise RuntimeError("Already parsed!")
 
         # 1. Luau builtins. Typecheckers already know about these
-        # nil is hardcoded because it should highlight as a constant, not a type
-        self.type_names.add("nil")
         self.definitions.builtinTypes.update(def_dict["builtinTypes"])
         self.type_names.update(self.definitions.builtinTypes.keys())
         self.definitions.controls.update(def_dict["controls"])
         self.global_scope.update(self.definitions.controls.keys())
+        # nil, true, false are also valid type literals
+        self.type_names.update(const["name"] for const in def_dict["builtinConstants"])
         self.definitions.builtinConstants.extend(
             self._validate_property(const, self.global_scope, const=True)
             for const in def_dict["builtinConstants"]

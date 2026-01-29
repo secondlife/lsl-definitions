@@ -1030,21 +1030,27 @@ modules:
     parameters:
     - name: data
       type: string | buffer
+      selene-type: string
     returnType: string
+    must-use: true
   - name: decode
-    comment: Decodes a base64 string to a string
+    comment: Decodes a base64 string to a string, or buffer if asBuffer is true
     overloads:
-    - comment: Decodes a base64 string to a string or buffer
+    - comment: Decodes a base64 string to a buffer if asBuffer is true
       parameters:
       - name: data
         type: string
       - name: asBuffer
-        type: boolean?
-      returnType: string | buffer
+        type: "true"
+      returnType: buffer
     parameters:
     - name: data
       type: string
+    - name: asBuffer
+      type: false?
+      selene-type: bool
     returnType: string
+    must-use: true
 - name: lljson
   comment: JSON encoding/decoding library for Second Life.
   functions:
