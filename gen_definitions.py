@@ -1476,14 +1476,14 @@ def gen_selene_yml(
             return t
         if type_str in type_aliases:
             return type_aliases[type_str].selene_type
+        if type_str.startswith("..."):
+            return "..."
+        if type_str.startswith("{") and type_str.endswith("}"):
+            return "table"
         if "|" in type_str:
             return default
-        if type_str.startswith("{"):
-            return "table"
         if "->" in type_str:
             return "function"
-        if "..." in type_str:
-            return "..."
         return default
 
     def selene_property(prop: SLuaProperty) -> dict:
@@ -1510,6 +1510,7 @@ def gen_selene_yml(
         parameters = func.parameters[1:] if method else func.parameters
         return _remove_nones(
             method=method or None,
+            deprecated={"message": func.comment} if func.deprecated else None,
             args=[selene_param(a) for a in parameters],
             must_use=func.must_use or None,
             description=func.comment or None,

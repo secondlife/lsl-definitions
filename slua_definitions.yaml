@@ -1810,6 +1810,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: string
+    must-use: true
   - name: foreach
     comment: Iterates over all key-value pairs in the table (deprecated).
     deprecated: true
@@ -1821,6 +1822,7 @@ modules:
     - name: f
       comment: Function applied to each key-value pair.
       type: '(key: K, value: V) -> R?'
+      optional: false
     returnType: R?
   - name: foreachi
     comment: Iterates over all index-value pairs in the array (deprecated).
@@ -1842,6 +1844,7 @@ modules:
       comment: Array to check.
       type: '{any}'
     returnType: number
+    must-use: true
   - name: maxn
     comment: Returns the highest numeric key in the table.
     parameters:
@@ -1849,6 +1852,7 @@ modules:
       comment: Table to check.
       type: '{any}'
     returnType: number
+    must-use: true
   - name: insert
     comment: Inserts an element at the specified index,
       or at the end of the array.
@@ -1859,6 +1863,7 @@ modules:
       - name: a
         comment: Array to insert into.
         type: '{V}'
+        observes: write
       - name: value
         comment: Value to insert.
         type: V
@@ -1868,9 +1873,11 @@ modules:
     - name: a
       comment: Array to insert into.
       type: '{V}'
+      observes: write
     - name: i
       comment: "Index to insert at (default: at the end)."
       type: number
+      optional: true
     - name: v
       comment: Value to insert.
       type: V
@@ -1939,6 +1946,7 @@ modules:
     - name: dest
       comment: Destination array (optional).
       type: '{V}?'
+      observes: write
     returnType: '{V}'
   - name: create
     comment: Creates a new table with pre-allocated array capacity, optionally filled.
@@ -1951,6 +1959,7 @@ modules:
       comment: Value to prefill elements with (optional).
       type: V?
     returnType: '{V}'
+    must-use: true
   - name: find
     comment: Finds the first occurrence of a value in the array and returns its index.
     typeParameters: [V]
@@ -1965,12 +1974,14 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: number?
+    must-use: true
   - name: clear
     comment: Clears all elements from a table while keeping its capacity.
     parameters:
     - name: t
       comment: Table to clear.
       type: '{[any]: any}'
+      observes: write
     returnType: ()
   - name: shrink
     comment: Reduces the memory usage of the table to the minimum necessary.
@@ -1998,6 +2009,7 @@ modules:
       comment: Table to check.
       type: '{[any]: any}'
     returnType: boolean
+    must-use: true
   - name: clone
     comment: Creates a shallow copy of the table.
     typeParameters: [K, V]
@@ -2006,6 +2018,7 @@ modules:
       comment: Table to clone.
       type: '{[K]: V}'
     returnType: '{[K]: V}'
+    must-use: true
 - name: utf8
   comment: UTF-8 support library.
   functions:
