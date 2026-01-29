@@ -1495,7 +1495,7 @@ def gen_selene_yml(
             )
 
     def selene_param(param: SLuaParameter) -> dict:
-        optional = param.optional or param.type.endswith("?")
+        optional = param.type.endswith("?") if param.optional is None else param.optional
         return _remove_nones(
             type=selene_type(param.type),
             required=None if not optional and param.optional is None else not optional,

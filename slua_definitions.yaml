@@ -1453,6 +1453,7 @@ modules:
     comment: Returns a high-precision timestamp in seconds for measuring durations.
     parameters: []
     returnType: number
+    must-use: true
   - name: date
     comment: Returns a table or string representation of the time based on the provided format.
     parameters:
@@ -1463,8 +1464,10 @@ modules:
       comment: Optional timestamp to format; defaults to the current time.
       type: number?
     returnType: (string | OsDateTime)?
+    must-use: true
   - name: difftime
-    comment: Returns the difference in seconds between two timestamps.
+    deprecated: true
+    comment: Returns the difference in seconds between two timestamps. Same as a - b.
     parameters:
     - name: a
       comment: First timestamp value.
@@ -1472,7 +1475,9 @@ modules:
     - name: b
       comment: Second timestamp value.
       type: number?
+      optional: false
     returnType: number
+    must-use: true
   - name: time
     comment: Returns the current Unix timestamp or the timestamp of the given date.
     parameters:
@@ -1480,6 +1485,7 @@ modules:
       comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
       type: OsDateTime?
     returnType: number?
+    must-use: true
 - name: quaternion
   comment: Quaternion manipulation library.
   callable:
