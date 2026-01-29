@@ -278,10 +278,10 @@ globalVariables:
   comment: rotation is an alias for quaternion.
   type: typeof(quaternion)
 - name: LLEvents
-  comment: The instance of the LLEvents singleton.
+  comment: Event registration and management singleton for Second Life events.
   type: LLEvents
 - name: LLTimers
-  comment: The instance of the LLTimers singleton.
+  comment: Timer management singleton for scheduling periodic and one-time callbacks.
   type: LLTimers
 - name: loadstring
   comment: loadstring is removed in SLua.
