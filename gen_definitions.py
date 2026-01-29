@@ -1589,6 +1589,9 @@ def gen_selene_yml(
     #         syntax["constants"][const.name] = const.to_keywords_dict()
     #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
     #         syntax["constants"].update(module.to_keywords_constants_dict())
+    for const in slua_definitions.globalVariables:
+        if not const.private:
+            selene["globals"][const.name] = selene_property(const)
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
         if not const.private and not const.slua_removed:
             selene["globals"][const.name] = selene_property(const)
