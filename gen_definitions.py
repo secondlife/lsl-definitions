@@ -963,9 +963,8 @@ class SLuaDefinitionParser:
         LLNonDetectedEventName_alias = [
             m for m in self.definitions.typeAliases if m.name == "LLNonDetectedEventName"
         ][0]
+        LLEventName_alias = [m for m in self.definitions.typeAliases if m.name == "LLEventName"][0]
         LLEvents_class = [m for m in self.definitions.classes if m.name == "LLEvents"][0]
-        detected_event_names: List[str] = []
-        non_detected_event_names: List[str] = []
         for event in lsl.events.values():
             if event.slua_removed:
                 continue
@@ -983,10 +982,10 @@ class SLuaDefinitionParser:
                 ],
             )
             if event.detected_semantics:
-                detected_event_names.append(event.name)
+                LLDetectedEventName_alias.selene_type.append(event.name)
                 type_def = "LLDetectedEventHandler"
             else:
-                non_detected_event_names.append(event.name)
+                LLNonDetectedEventName_alias.selene_type.append(event.name)
                 # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
                 type_def = event_func.type_def_string()
                 overload_parameters = [
@@ -1019,10 +1018,13 @@ class SLuaDefinitionParser:
             )
             LLEvents_class.properties.append(event_prop)
         LLDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in detected_event_names
+            f'"{name}"' for name in LLDetectedEventName_alias.selene_type
         )
         LLNonDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in non_detected_event_names
+            f'"{name}"' for name in LLNonDetectedEventName_alias.selene_type
+        )
+        LLEventName_alias.selene_type = (
+            LLDetectedEventName_alias.selene_type + LLNonDetectedEventName_alias.selene_type
         )
         for register_func in LLEvents_class.methods:
             if register_func.name in {"off", "on", "once"}:
@@ -1602,6 +1604,13 @@ def gen_selene_yml(
     selene["globals"].update(selene_module(ll_module))
     for class_ in slua_definitions.classes:
         selene["structs"][class_.name] = selene_class(class_)
+
+    # Fix up LLEvents argument types
+    event_names = [m for m in slua_definitions.typeAliases if m.name == "LLEventName"][
+        0
+    ].selene_type
+    for method_name in ["on", "once", "off", "listeners"]:
+        selene["structs"]["LLEvents"][method_name]["args"][0]["type"] = event_names
 
     #     if pretty:
     #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
