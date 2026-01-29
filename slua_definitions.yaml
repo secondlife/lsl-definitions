@@ -1913,6 +1913,7 @@ modules:
       comment: Array elements.
       type: ...V
     returnType: '{ n: number, [number]: V }'
+    must-use: true
   - name: unpack
     comment: Unpacks array elements into multiple return values.
     typeParameters: [V]
@@ -1927,6 +1928,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...V'
+    must-use: true
   - name: move
     comment: Inserts elements [i..j] from src array into dest array at [d].
     typeParameters: [V]
@@ -2028,6 +2030,7 @@ modules:
     - name: ...
       comment: Unicode codepoints.
       type: ...number
+      optional: false
     returnType: string
   - name: codes
     comment: Returns an iterator that produces
@@ -2037,6 +2040,7 @@ modules:
       comment: Input string.
       type: string
     returnType: ((string, number) -> (number, number), string, number)
+    must-use: true
   - name: codepoint
     comment: Returns the Unicode codepoints in the specified range of the string.
     parameters:
@@ -2050,6 +2054,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...number'
+    must-use: true
   - name: len
     comment: Returns the number of Unicode codepoints in the specified range of the string,
       or nil and error index.
@@ -2064,6 +2069,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: (number?, number?)
+    must-use: true
   - name: offset
     comment: Returns the byte offset of the nth Unicode codepoint in the string.
     parameters:
@@ -2077,6 +2083,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: number?
+    must-use: true
   constants:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
