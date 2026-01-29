@@ -1461,15 +1461,7 @@ def gen_selene_yml(
     def selene_type(type_str: str, default="any") -> str | dict | None:
         if type_str.endswith("?"):
             type_str = type_str[:-1]
-        if type_str in type_aliases:
-            return type_aliases[type_str].selene_type
-        if type_str.startswith("{"):
-            return "table"
-        if "..." in type_str:
-            return "..."
-        if "->" in type_str:
-            return "function"
-        return {
+        if t := {
             "boolean": "bool",
             "boolean | number": "bool",
             "number": "number",
@@ -1480,7 +1472,19 @@ def gen_selene_yml(
             "quaternion": {"display": "quaternion"},
             "list": "table",
             "thread": {"display": "thread"},
-        }.get(type_str, default)
+        }.get(type_str, None):
+            return t
+        if type_str in type_aliases:
+            return type_aliases[type_str].selene_type
+        if "|" in type_str:
+            return default
+        if type_str.startswith("{"):
+            return "table"
+        if "->" in type_str:
+            return "function"
+        if "..." in type_str:
+            return "..."
+        return default
 
     def selene_property(prop: SLuaProperty) -> dict:
         if prop.slua_removed:

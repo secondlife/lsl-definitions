@@ -1609,13 +1609,16 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...number'
+    must-use: true
   - name: char
     comment: Returns a string containing characters for the given byte values.
     parameters:
     - name: ...
       comment: Byte values to convert to string.
       type: ...number
+      optional: false
     returnType: string
+    must-use: true
   - name: find
     comment: Finds the first instance of the pattern in the string.
     parameters:
@@ -1632,6 +1635,7 @@ modules:
       comment: Perform raw search (optional).
       type: boolean?
     returnType: (number?, number?, ...string)
+    must-use: true
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
@@ -1641,7 +1645,9 @@ modules:
     - name: ...
       comment: Values to format.
       type: ...any
+      optional: false
     returnType: string
+    must-use: true
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
@@ -1652,6 +1658,7 @@ modules:
       comment: Pattern to search for.
       type: string
     returnType: () -> ...string
+    must-use: true
   - name: gsub
     comment: Performs pattern-based substitution in a string.
     parameters:
@@ -1668,6 +1675,7 @@ modules:
       comment: Maximum replacements (optional).
       type: number?
     returnType: (string, number)
+    must-use: true
   - name: len
     comment: "Returns the number of bytes in the string. Identical to #s"
     parameters:
@@ -1675,6 +1683,7 @@ modules:
       comment: Input string.
       type: string
     returnType: number
+    must-use: true
   - name: lower
     comment: Returns a lowercase version of the input string.
     parameters:
@@ -1682,6 +1691,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
   - name: match
     comment: Finds and returns matches for a pattern in the input string.
     parameters:
@@ -1695,6 +1705,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: '...string'
+    must-use: true
   - name: pack
     comment: Packs values into a binary string.
     parameters:
@@ -1705,6 +1716,7 @@ modules:
       comment: Values to encode.
       type: ...any
     returnType: string
+    must-use: true
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
@@ -1712,6 +1724,7 @@ modules:
       comment: Pack format string.
       type: string
     returnType: number
+    must-use: true
   - name: rep
     comment: Returns the input string repeated a given number of times.
     parameters:
@@ -1722,6 +1735,7 @@ modules:
       comment: Number of times to repeat the string.
       type: number
     returnType: string
+    must-use: true
   - name: reverse
     comment: Returns the input string with bytes in reverse order.
     parameters:
@@ -1729,6 +1743,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
   - name: split
     comment: Splits a string by separator. Returns a list of substrings.
     parameters:
@@ -1739,6 +1754,7 @@ modules:
       comment: Separator to split on. Default is ","
       type: string?
     returnType: '{string}'
+    must-use: true
   - name: sub
     comment: Returns a substring from the given range.
     parameters:
@@ -1752,6 +1768,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: string
+    must-use: true
   - name: unpack
     comment: Decodes a binary string using a pack format.
     parameters:
@@ -1765,6 +1782,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: '...any'
+    must-use: true
   - name: upper
     comment: Returns an uppercase version of the input string.
     parameters:
@@ -1772,6 +1790,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
 - name: table
   comment: Table manipulation library. Tables are collections of key-value pairs.
   functions:
