@@ -1091,6 +1091,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: acos
     comment: Returns the arc cosine of n in radians.
     parameters:
@@ -1098,6 +1099,7 @@ modules:
       comment: A number in the range [-1, 1].
       type: number
     returnType: number
+    must-use: true
   - name: asin
     comment: Returns the arc sine of n in radians.
     parameters:
@@ -1105,6 +1107,7 @@ modules:
       comment: A number in the range [-1, 1].
       type: number
     returnType: number
+    must-use: true
   - name: atan
     comment: Returns the arc tangent of n in radians.
     parameters:
@@ -1112,6 +1115,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: atan2
     comment: Returns the arc tangent of y/x in radians, using the signs to determine
       the quadrant.
@@ -1123,6 +1127,7 @@ modules:
       comment: The x-coordinate.
       type: number
     returnType: number
+    must-use: true
   - name: ceil
     comment: Returns the smallest integer larger than or equal to n.
     parameters:
@@ -1130,6 +1135,7 @@ modules:
       comment: A number to round up.
       type: number
     returnType: number
+    must-use: true
   - name: clamp
     comment: Returns n clamped between min and max.
     parameters:
@@ -1143,6 +1149,7 @@ modules:
       comment: Maximum allowable value.
       type: number
     returnType: number
+    must-use: true
   - name: cos
     comment: Returns the cosine of n (n is in radians).
     parameters:
@@ -1150,6 +1157,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: cosh
     comment: Returns the hyperbolic cosine of n.
     parameters:
@@ -1157,6 +1165,7 @@ modules:
       comment: A number to compute the hyperbolic cosine of.
       type: number
     returnType: number
+    must-use: true
   - name: deg
     comment: Converts n from radians to degrees.
     parameters:
@@ -1164,6 +1173,7 @@ modules:
       comment: A value in radians.
       type: number
     returnType: number
+    must-use: true
   - name: exp
     comment: Returns the base-e exponent of n.
     parameters:
@@ -1171,6 +1181,7 @@ modules:
       comment: A number to compute e^n.
       type: number
     returnType: number
+    must-use: true
   - name: floor
     comment: Returns the largest integer smaller than or equal to n.
     parameters:
@@ -1178,6 +1189,7 @@ modules:
       comment: A number to round down.
       type: number
     returnType: number
+    must-use: true
   - name: fmod
     comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
@@ -1188,6 +1200,7 @@ modules:
       comment: The divisor.
       type: number
     returnType: number
+    must-use: true
   - name: frexp
     comment: Returns m and e such that n = m * 2^e.
     parameters:
@@ -1195,6 +1208,7 @@ modules:
       comment: A number to split into significand and exponent.
       type: number
     returnType: (number, number)
+    must-use: true
   - name: ldexp
     comment: Returns s * 2^e.
     parameters:
@@ -1205,6 +1219,7 @@ modules:
       comment: The exponent.
       type: number
     returnType: number
+    must-use: true
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -1218,6 +1233,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: number
+    must-use: true
   - name: log
     comment: Returns the logarithm of n in the given base (default e).
     parameters:
@@ -1228,6 +1244,7 @@ modules:
       comment: Base of the logarithm (default is e).
       type: number?
     returnType: number
+    must-use: true
   - name: log10
     comment: Returns the base-10 logarithm of n.
     parameters:
@@ -1235,6 +1252,7 @@ modules:
       comment: A number to compute base-10 logarithm.
       type: number
     returnType: number
+    must-use: true
   - name: map
     comment: Maps n from input range to output range.
     parameters:
@@ -1254,6 +1272,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: max
     comment: Returns the maximum value from the given numbers.
     parameters:
@@ -1263,7 +1282,9 @@ modules:
     - name: ...
       comment: Numbers to find the maximum from.
       type: ...number
+      optional: false
     returnType: number
+    must-use: true
   - name: min
     comment: Returns the minimum value from the given numbers.
     parameters:
@@ -1273,7 +1294,9 @@ modules:
     - name: ...
       comment: Numbers to find the minimum from.
       type: ...number
+      optional: false
     returnType: number
+    must-use: true
   - name: modf
     comment: Returns the integer and fractional parts of n.
     parameters:
@@ -1281,6 +1304,7 @@ modules:
       comment: A number to split into integer and fractional parts.
       type: number
     returnType: (number, number)
+    must-use: true
   - name: noise
     comment: Returns Perlin noise value for the point (x, y, z).
     parameters:
@@ -1294,6 +1318,7 @@ modules:
       comment: Z coordinate for the noise function (default is 0).
       type: number?
     returnType: number
+    must-use: true
   - name: pow
     comment: Returns base to the power of exponent.
     parameters:
@@ -1304,6 +1329,7 @@ modules:
       comment: Exponent value.
       type: number
     returnType: number
+    must-use: true
   - name: rad
     comment: Converts n from degrees to radians.
     parameters:
@@ -1311,6 +1337,7 @@ modules:
       comment: A value in degrees.
       type: number
     returnType: number
+    must-use: true
   - name: random
     comment: Returns a random number within the given range.
     parameters:
@@ -1321,6 +1348,7 @@ modules:
       comment: Maximum value of the range (optional).
       type: number?
     returnType: number
+    must-use: true
   - name: randomseed
     comment: Sets the seed for the random number generator.
     parameters:
@@ -1328,6 +1356,7 @@ modules:
       comment: Seed for the random number generator.
       type: number
     returnType: ()
+    must-use: true
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
@@ -1335,6 +1364,7 @@ modules:
       comment: A number to round to the nearest integer.
       type: number
     returnType: number
+    must-use: true
   - name: sign
     comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
     parameters:
@@ -1342,6 +1372,7 @@ modules:
       comment: A number to get the sign of.
       type: number
     returnType: number
+    must-use: true
   - name: sin
     comment: Returns the sine of n (n is in radians).
     parameters:
@@ -1349,6 +1380,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: sinh
     comment: Returns the hyperbolic sine of n.
     parameters:
@@ -1356,6 +1388,7 @@ modules:
       comment: A number to compute the hyperbolic sine of.
       type: number
     returnType: number
+    must-use: true
   - name: sqrt
     comment: Returns the square root of n.
     parameters:
@@ -1363,6 +1396,7 @@ modules:
       comment: A number to compute the square root of.
       type: number
     returnType: number
+    must-use: true
   - name: tan
     comment: Returns the tangent of n (n is in radians).
     parameters:
@@ -1370,6 +1404,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: tanh
     comment: Returns the hyperbolic tangent of n.
     parameters:
@@ -1377,6 +1412,7 @@ modules:
       comment: A number to compute the hyperbolic tangent of.
       type: number
     returnType: number
+    must-use: true
   - name: isnan
     comment: Returns true if n is NaN.
     parameters:
@@ -1384,6 +1420,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   - name: isinf
     comment: Returns true if n is infinite.
     parameters:
@@ -1391,6 +1428,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   - name: isfinite
     comment: Returns true if n is finite.
     parameters:
@@ -1398,6 +1436,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   constants:
   - name: pi
     comment: The value of pi

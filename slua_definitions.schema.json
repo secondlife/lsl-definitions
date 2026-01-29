@@ -80,7 +80,6 @@
                 ]},
                 "type": { "$ref": "#/$defs/type" },
                 "optional": {
-                    "const": true,
                     "title": "Is this parameter optional.",
                     "markdownDescription": "Defaults to true if type ends in `?`, false otherwise.",
                     "type": "boolean"

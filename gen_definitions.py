@@ -469,7 +469,7 @@ class SLuaParameter:
     name: str
     type: Optional[str] = None
     comment: str = ""
-    optional: bool = False
+    optional: bool | None = None
     observes: Literal["read-write", "read", "write"] | None = None
     """See https://kampfkarren.github.io/selene/usage/std.html#observes."""
 
@@ -1498,7 +1498,7 @@ def gen_selene_yml(
         optional = param.optional or param.type.endswith("?")
         return _remove_nones(
             type=selene_type(param.type),
-            required=not optional and None,
+            required=None if not optional and param.optional is None else not optional,
             observes=param.observes,
         )
 
