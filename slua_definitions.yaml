@@ -192,7 +192,7 @@ typeAliases:
       yday: number?,
       isdst: boolean?,
     }
-  selene-type: "table"
+  selene-type: {display: "OsDateTime"}
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
