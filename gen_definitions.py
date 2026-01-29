@@ -1463,8 +1463,6 @@ def gen_selene_yml(
     parser.generate_ll_modules(lsl_definitions)
     classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
     type_aliases = {a.name: a for a in slua_definitions.typeAliases}
-    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
-    # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
     def selene_type(type_str: str, default="any") -> str | dict | None:
         if type_str.endswith("?"):
@@ -1563,50 +1561,19 @@ def gen_selene_yml(
         "structs": {},
     }
 
-    #     syntax = {
-    #         "controls": slua_definitions.controls.copy(),
-    #         "types": slua_definitions.builtinTypes.copy(),
-    #         "constants": {},
-    #         "events": {},
-    #         "functions": {},
-    #         "llsd-lsl-syntax-version": 2,
-    #     }
+    # Duplicate quaternion module as rotation. The callable aspect of quaternion
+    # prevents us from being able to de-duplicate this with structs.
+    modules = {m.name: m for m in slua_definitions.modules}
+    modules["rotation"] = SLuaModule(
+        name="rotation",
+        comment=modules["quaternion"].comment,
+        callable=modules["quaternion"].callable,
+        constants=modules["quaternion"].constants,
+        functions=modules["quaternion"].functions,
+    )
 
-    #     # types
-    #     for class_ in sorted(slua_definitions.baseClasses, key=lambda x: x.name):
-    #         syntax["types"][class_.name] = class_.to_keywords_dict()
-    #     for alias in sorted(slua_definitions.typeAliases, key=lambda x: x.name):
-    #         if alias.export:
-    #             syntax["types"][alias.name] = alias.to_keywords_dict()
-    #     for class_ in sorted(slua_definitions.classes, key=lambda x: x.name):
-    #         syntax["types"][class_.name] = class_.to_keywords_dict()
-
-    #     # events
-    #     for event in sorted(lsl_definitions.events.values(), key=lambda x: x.name):
-    #         if event.slua_removed:
-    #             continue
-    #         syntax["events"][event.name] = event.to_slua_dict(parser)
-
-    #     # functions
-    #     for func in slua_definitions.builtinFunctions:
-    #         syntax["functions"][func.name] = func.to_keywords_dict()
-    #     for func in sorted(slua_definitions.globalFunctions, key=lambda x: x.name):
-    #         syntax["functions"][func.name] = func.to_keywords_dict()
-    #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-    #         if module.name not in {"ll", "llcompat"}:
-    #             syntax["functions"].update(module.to_keywords_functions_dict())
-    #     syntax["functions"].update(ll_module.to_keywords_functions_dict())
-    #     for func in sorted(lsl_definitions.functions.values(), key=lambda x: x.name):
-    #         if not func.private:
-    #             syntax["functions"][func.compute_slua_name()] = func.to_slua_dict(parser)
-
-    #     # constants
-    #     for const in slua_definitions.builtinConstants:
-    #         syntax["constants"][const.name] = const.to_keywords_dict()
-    #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-    #         syntax["constants"].update(module.to_keywords_constants_dict())
     for const in slua_definitions.globalVariables:
-        if not const.private:
+        if not const.private and const.name != "rotation":
             selene["globals"][const.name] = selene_property(const)
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
         if not const.private and not const.slua_removed:
@@ -1615,10 +1582,11 @@ def gen_selene_yml(
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
         selene["globals"][func.name] = selene_function(func)
-    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+    for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
-    selene["globals"].update(selene_module(ll_module))
+    selene["globals"].update(selene_module(modules["ll"]))
+    selene["globals"].update(selene_module(modules["llcompat"]))
     for class_ in classes.values():
         selene["structs"][class_.name] = selene_class(class_)
 
@@ -1628,67 +1596,6 @@ def gen_selene_yml(
     ].selene_type
     for method_name in ["on", "once", "off", "listeners"]:
         selene["structs"]["LLEvents"][method_name]["args"][0]["type"] = event_names
-
-    #     if pretty:
-    #         return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
-    #     else:
-    #         return llsd.format_xml(syntax)
-
-    #     defs = io.StringIO()
-    #     defs.write("""
-    # ----------------------------------
-    # ---------- LSL LUAU DEFS ---------
-    # ----------------------------------
-
-    # """)
-
-    #     # 1. Luau builtins unneeded. Luau-lsp already know about these
-    #     # 2. SLua base classes. These only depend on Luau builtins
-    #     classes = slua_definitions.baseClasses + slua_definitions.classes
-    #     classes.sort(key=lambda x: x.name)
-    #     for class_ in (class_ for class_ in classes if class_.name[0].islower()):
-    #         class_.write_luau_def(defs)
-    #     defs.write("\n")
-    #     for alias in slua_definitions.typeAliases:
-    #         defs.write(alias.to_luau_def())
-    #         defs.write("\n")
-    #     defs.write("\n")
-
-    #     # 3. SLua standard library. Depends on base classes
-    #     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
-    #         class_.write_luau_def(defs)
-    #     defs.write("\n")
-    #     for func in slua_definitions.globalFunctions:
-    #         defs.write("declare ")
-    #         func.write_luau_global_def(defs)
-    #     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-    #         if module.name in {"ll", "llcompat"}:
-    #             continue
-    #         module.write_luau_def(defs)
-    #     for var in slua_definitions.globalVariables:
-    #         defs.write("declare ")
-    #         defs.write(var.to_luau_def())
-    #         defs.write("\n")
-    #     ll_module.write_luau_def(defs)
-    #     llcompat_module.write_luau_def(defs)
-    #     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-    #         if const.private:
-    #             continue
-    #         defs.write("declare ")
-    #         defs.write(const.to_luau_def())
-    #         defs.write("\n")
-
-    #     return defs.getvalue()
-
-    # selene = {
-    #     "globals": {
-    #         "BEACON_MAP": {
-    #             "property": "read-only",
-    #             "type": "number",
-    #             "description": "Cause llMapBeacon to optionally display and focus the world map on the avatar's viewer.",
-    #         }
-    #     },
-    # }
 
     noalias_dumper = yaml.dumper.SafeDumper
     noalias_dumper.ignore_aliases = lambda self, data: True
