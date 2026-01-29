@@ -818,6 +818,7 @@ modules:
       comment: A function to be executed by the new coroutine.
       type: (...any) -> ...any
     returnType: thread
+    must-use: true
   - name: resume
     comment: Resumes a coroutine, returning true and results if successful, or false and an error.
     parameters:
@@ -832,6 +833,7 @@ modules:
     comment: Returns the currently running coroutine, or nil if called from in the main coroutine.
     parameters: []
     returnType: thread?
+    must-use: true
   - name: status
     comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
     parameters:
@@ -839,6 +841,7 @@ modules:
       comment: The coroutine to check status of.
       type: thread
     returnType: '"running" | "suspended" | "normal" | "dead"'
+    must-use: true
   - name: wrap
     comment: Creates a coroutine and returns a function that resumes it.
     parameters:
@@ -846,6 +849,7 @@ modules:
       comment: A function to execute in a coroutine.
       type: (...any) -> ...any
     returnType: (...any) -> ...any
+    must-use: true
   - name: yield
     comment: Yields the current coroutine, passing arguments to the resuming code.
     parameters:
@@ -857,6 +861,7 @@ modules:
     comment: Returns true if the currently running coroutine can yield.
     parameters: []
     returnType: boolean
+    must-use: true
   - name: close
     comment: Closes a coroutine, returning true if successful or false and an error.
     parameters:
@@ -895,10 +900,12 @@ modules:
     - name: level
       comment: Stack level or function reference for inspection.
       type: number
+      optional: true
     - name: s
       comment: String specifying requested information.
       type: string
     returnType: '...any'
+    must-use: true
   - name: traceback
     comment: Returns a human-readable call stack starting from the specified level.
     overloads:
@@ -915,6 +922,7 @@ modules:
     - name: co
       comment: Optional thread reference for traceback.
       type: thread
+      optional: true
     - name: msg
       comment: Optional message prepended to the traceback.
       type: string?
@@ -922,6 +930,7 @@ modules:
       comment: Optional stack level to start traceback.
       type: number?
     returnType: string
+    must-use: true
   - name: getinfo
     comment: Returns a table containing debug information about a function or stack frame.
     parameters:
@@ -936,6 +945,7 @@ modules:
       type: string
     private: true
     returnType: "{[any]: any}"
+    must-use: true
   - name: getlocal
     comment: Returns the name and value of a local variable at the specified stack level.
     parameters:
@@ -947,6 +957,7 @@ modules:
       type: number
     private: true
     returnType: string | any
+    must-use: true
   - name: setlocal
     comment: Sets the value of a local variable at the specified stack level.
     parameters:
@@ -972,6 +983,7 @@ modules:
       type: number
     private: true
     returnType: string | any
+    must-use: true
   - name: setupvalue
     comment: Sets the value of an upvalue for a given function.
     parameters:
@@ -994,6 +1006,7 @@ modules:
       type: any
     private: true
     returnType: "{[any]: any}?"
+    must-use: true
   - name: setmetatable
     comment: Sets the metatable for a given value.
     parameters:
