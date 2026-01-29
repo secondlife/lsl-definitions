@@ -1603,7 +1603,7 @@ def gen_selene_yml(
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
     selene["globals"].update(selene_module(ll_module))
-    for class_ in slua_definitions.classes:
+    for class_ in classes.values():
         selene["structs"][class_.name] = selene_class(class_)
 
     # Fix up LLEvents argument types
