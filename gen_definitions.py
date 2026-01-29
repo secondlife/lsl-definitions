@@ -983,7 +983,7 @@ class SLuaDefinitionParser:
             )
             if event.detected_semantics:
                 LLDetectedEventName_alias.selene_type.append(event.name)
-                type_def = "LLDetectedEventHandler"
+                type_def = "LLDetectedEventHandler?"
             else:
                 LLNonDetectedEventName_alias.selene_type.append(event.name)
                 # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
@@ -1010,10 +1010,11 @@ class SLuaDefinitionParser:
                                 returnType=register_func.returnType,
                             )
                         )
+                type_def = f"({type_def})?"
             event_prop = SLuaProperty(
                 name=event.name,
                 comment=event.tooltip,
-                type=f"({type_def})?",
+                type=type_def,
                 modifiable="override-fields",
             )
             LLEvents_class.properties.append(event_prop)
@@ -1458,6 +1459,8 @@ def gen_selene_yml(
     # llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
     def selene_type(type_str: str, default="any") -> str | dict | None:
+        if type_str.endswith("?"):
+            type_str = type_str[:-1]
         if type_str in type_aliases:
             return type_aliases[type_str].selene_type
         if type_str.startswith("{"):
@@ -1466,8 +1469,6 @@ def gen_selene_yml(
             return "..."
         if "->" in type_str:
             return "function"
-        if type_str.endswith("?"):
-            type_str = type_str[:-1]
         return {
             "boolean": "bool",
             "boolean | number": "bool",
