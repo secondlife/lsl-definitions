@@ -143,30 +143,40 @@ typeAliases:
   comment: '''rotation'' is an alias for ''quaternion'''
   export: true
   definition: quaternion
+  selene-type: {display: "quaternion"}
 - name: list
   export: true
   definition: "{string | number | vector | uuid | quaternion | boolean}"
+  selene-type: "table"
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
+  selene-type: []
 - name: LLNonDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
+  selene-type: []
 - name: LLEventName
   definition: LLDetectedEventName | LLNonDetectedEventName
+  selene-type: []
 - name: LLEventHandler
   definition: (...any) -> ()
+  selene-type: "function"
 - name: LLDetectedEventHandler
   definition: "(detected: {DetectedEvent}) -> ()"
+  selene-type: "function"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
   definition: "(scheduled: number, interval: number) -> ()"
+  selene-type: "function"
 - name: LLTimerOnceCallback
   comment: Callback type for LLTimers.once() - receives scheduled time
   definition: "(scheduled: number) -> ()"
+  selene-type: "function"
 - name: LLTimerCallback
   comment: Union of timer callback types
   definition: LLTimerEveryCallback | LLTimerOnceCallback
+  selene-type: "function"
 - name: OsDateTime
   comment: Date/time table structure used by os.date and os.time
   export: true
@@ -182,6 +192,7 @@ typeAliases:
       yday: number?,
       isdst: boolean?,
     }
+  selene-type: "table"
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
