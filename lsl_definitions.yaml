@@ -5006,10 +5006,10 @@ functions:
     energy: 10.0
     func-id: 173
     native: true
+    must-use: true # not pure because it might trigger a math error
     return: float
     sleep: 0.0
     tooltip: Returns the arc-sine, in radians, of Value.
-    # not pure because it might trigger a math error
   llAtan2:
     arguments:
     - y:
@@ -5996,6 +5996,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 507
+    must-use: true
     return: key
     sleep: 0.0
     tooltip: "Searches the text of a cached notecard for lines containing the given\
@@ -6022,6 +6023,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 508
+    must-use: true
     return: list
     # There are list indices in the return value!
     index-semantics: true
@@ -7376,6 +7378,7 @@ functions:
     arguments: []
     energy: 10.0
     func-id: 708
+    must-use: true
     return: rotation
     sleep: 0.0
     tooltip: Returns the rotation applied to the sun in the region.
@@ -9429,6 +9432,7 @@ functions:
         type: key
     energy: 10.0
     func-id: 215
+    must-use: true
     return: integer
     bool-semantics: true
     sleep: 0.0
@@ -9465,6 +9469,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 299
+    must-use: true
     return: list
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
