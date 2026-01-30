@@ -310,6 +310,9 @@ class LSLFunction:
     and we expect that the implementations live in `lscript_library` rather
     than `newsim` so that they can be unit tested by our LSL testing harness.
     """
+    must_use: bool
+    """Emit a warning if the return value is not used.
+    See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     native: bool
     """
     Whether the function must have a native implementation for non-LSO VMs
@@ -349,8 +352,10 @@ class LSLFunction:
                         "func-id": self.func_id,
                         "private": self.private,
                         "pure": self.pure,
+                        "must-use": self.must_use,
                         "native": self.native,
                         "mono-sleep": self.mono_sleep,
+                        "index-semantics": self.index_semantics,
                     }
                 ),
             }
@@ -513,7 +518,8 @@ class SLuaFunction(SLuaFunctionAnon):
     private: bool = False
     deprecated: bool = False
     must_use: bool = False
-    """See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
+    """Emit a warning if the return value is not used.
+    See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     overloads: List[SLuaFunctionAnon] = dataclasses.field(default_factory=list)
 
     def deprecated_string(self):
@@ -801,6 +807,7 @@ class LSLDefinitionParser:
             slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
+            must_use=func_data.get("must-use", False),
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
@@ -1062,6 +1069,7 @@ class SLuaDefinitionParser:
                     for a in func.arguments
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
+                must_use=func.must_use or func.pure,
             )
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
@@ -1070,6 +1078,7 @@ class SLuaDefinitionParser:
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
                 returnType=self.validate_type(func.compute_slua_type(llcompat=True), known_types),
+                must_use=ll_func.must_use,
             )
             if not func.slua_removed:
                 ll_module.functions.append(ll_func)
@@ -1084,6 +1093,7 @@ class SLuaDefinitionParser:
                     typeParameters=ll_func.typeParameters,
                     parameters=ll_func.parameters[:],
                     returnType=ll_func.returnType,
+                    must_use=ll_func.must_use,
                 )
                 detected_func.parameters[0] = SLuaParameter(name="self")
                 DetectedEvent_class.methods.append(detected_func)
