@@ -5864,7 +5864,6 @@ functions:
     sleep: 0.0
     tooltip: Delete the object which holds the script.
   llDumpList2String:
-    # not pure, because the C++ impl looks at the running script type, which requires context
     arguments:
     - Source:
         tooltip: ''
@@ -5875,7 +5874,7 @@ functions:
     energy: 10.0
     func-id: 245
     native: true
-    must-use: true
+    must-use: true  # not pure, because the C++ impl looks at the running script type, which requires context
     return: string
     sleep: 0.0
     tooltip: Returns the list as a single string, using Separator between the entries.\nWrite
