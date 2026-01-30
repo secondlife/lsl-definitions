@@ -5346,7 +5346,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 548
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns hex-encoded Hash string of Message using digest Algorithm.
@@ -5849,6 +5849,7 @@ functions:
     sleep: 0.0
     tooltip: Delete the object which holds the script.
   llDumpList2String:
+    # not pure, because the C++ impl looks at the running script type, which requires context
     arguments:
     - Source:
         tooltip: ''
@@ -5859,7 +5860,7 @@ functions:
     energy: 10.0
     func-id: 245
     native: true
-    must-use: true  # not pure, because the C++ impl looks at the running script type, which requires context
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns the list as a single string, using Separator between the entries.\nWrite
@@ -7907,7 +7908,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 538
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns the base64-encoded hashed message authentication code (HMAC),
@@ -7957,7 +7958,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 528
-    pure: true
+    must-use: true
     return: integer
     sleep: 0.0
     tooltip: Calculates the 32bit hash value for the provided string.
@@ -8164,7 +8165,7 @@ functions:
         type: vector
     energy: 10.0
     func-id: 715
-    pure: true
+    must-use: true
     return: vector
     sleep: 0.0
     tooltip: Converts a color from the linear colorspace to sRGB.
@@ -8580,7 +8581,7 @@ functions:
         index-semantics: true
     energy: 10.0
     func-id: 801
-    pure: true
+    must-use: true
     return: list
     slua-return: '{T}'
     sleep: 0.0
@@ -8612,7 +8613,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 198
-    pure: true
+    must-use: true
     return: list
     slua-return: '{T}'
     sleep: 0.0
@@ -8682,7 +8683,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 201
-    pure: true
+    must-use: true
     return: integer
     index-semantics: true
     sleep: 0.0
@@ -8703,7 +8704,7 @@ functions:
         index-semantics: true
     energy: 10.0
     func-id: 803
-    pure: true
+    must-use: true
     return: integer
     index-semantics: true
     sleep: 0.0
@@ -8730,7 +8731,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 800
-    pure: true
+    must-use: true
     return: integer
     index-semantics: true
     sleep: 0.0
@@ -8831,7 +8832,7 @@ functions:
         bool-semantics: true
     energy: 10.0
     func-id: 184
-    pure: true
+    must-use: true
     return: list
     slua-return: '{T}'
     sleep: 0.0
@@ -8859,7 +8860,7 @@ functions:
         bool-semantics: true
     energy: 10.0
     func-id: 802
-    pure: true
+    must-use: true
     return: list
     slua-return: '{T}'
     sleep: 0.0
@@ -8876,7 +8877,7 @@ functions:
         type: list
     energy: 10.0
     func-id: 315
-    pure: true
+    must-use: true
     return: float
     sleep: 0.0
     tooltip: Performs a statistical aggregate function, specified by a LIST_STAT_*
@@ -9065,7 +9066,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 258
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns a string of 32 hex characters that is an RSA Data Security Inc.,
@@ -10404,7 +10405,7 @@ functions:
         type: float
     energy: 10.0
     func-id: 11
-    pure: true
+    must-use: true
     return: integer
     sleep: 0.0
     tooltip: Returns Value rounded to the nearest integer.\nReturns the Value rounded
@@ -10416,7 +10417,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 343
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns a string of 40 hex characters that is the SHA1 security hash
@@ -10428,7 +10429,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 531
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns a string of 64 hex characters that is the SHA256 security hash
@@ -11646,7 +11647,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 539
-    pure: true
+    must-use: true
     return: string
     sleep: 0.0
     tooltip: Returns the base64-encoded RSA signature of Message using PEM-formatted
@@ -12290,7 +12291,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 540
-    pure: true
+    must-use: true
     return: integer
     bool-semantics: true
     sleep: 0.0
@@ -12436,7 +12437,7 @@ functions:
         type: vector
     energy: 10.0
     func-id: 716
-    pure: true
+    must-use: true
     return: vector
     sleep: 0.0
     tooltip: Converts a color from the sRGB to the linear colorspace.
