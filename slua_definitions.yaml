@@ -1034,7 +1034,8 @@ modules:
     returnType: string
     must-use: true
   - name: decode
-    comment: Decodes a base64 string to a string, or buffer if asBuffer is true
+    comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
+      Returns an empty string/buffer if input is invalid.
     overloads:
     - comment: Decodes a base64 string to a buffer if asBuffer is true
       parameters:
@@ -1055,22 +1056,24 @@ modules:
   comment: JSON encoding/decoding library for Second Life.
   functions:
   - name: encode
-    comment: Encodes a Lua value as JSON
+    comment: Encodes a Lua value as JSON.
+      Raises an error if value contains unsupported types.
     parameters:
     - name: value
       type: any
     returnType: string
     must-use: true
   - name: decode
-    comment: Decodes a JSON string to a Lua value
+    comment: Decodes a JSON string to a Lua value.
+      Raises an error if JSON is invalid.
     parameters:
     - name: json
       type: string
     returnType: any
     must-use: true
   - name: slencode
-    comment: Encodes a Lua value as JSON preserving SL types. Use tight to encode
-      more compactly.
+    comment: Encodes a Lua value as JSON, preserving SL types. Use tight to encode
+      more compactly. Raises an error if value contains unsupported types.
     parameters:
     - name: value
       type: any
@@ -1079,7 +1082,8 @@ modules:
     returnType: string
     must-use: true
   - name: sldecode
-    comment: Decodes a JSON string to a Lua value preserving SL types
+    comment: Decodes a JSON string to a Lua value, preserving SL types.
+      Raises an error if JSON is invalid.
     parameters:
     - name: json
       type: string
