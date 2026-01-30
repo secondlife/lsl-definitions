@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<llsd>
+<map>
+    <key>version</key>
+    <string>1.3</string>
+    <key>type</key>
+    <string>autobuild</string>
+    <key>package_description</key>
+    <map>
+      <key>platforms</key>
+      <map>
+        <key>common</key>
+        <map>
+          <key>build_directory</key>
+          <string>stage</string>
+          <key>configurations</key>
+          <map>
+            <key>common</key>
+            <map>
+              <key>build</key>
+              <map>
+                <key>command</key>
+                <string>bash</string>
+                <key>arguments</key>
+                <array>
+                  <string>../build-cmd.sh</string>
+                </array>
+              </map>
+              <key>default</key>
+              <string>true</string>
+              <key>name</key>
+              <string>common</string>
+            </map>
+          </map>
+          <key>manifest</key>
+          <array>
+            <string>definitions/*</string>
+            <string>LICENSES/lsl_definitions.txt</string>
+          </array>
+          <key>name</key>
+          <string>common</string>
+        </map>
+      </map>
+      <key>license</key>
+      <string>MIT</string>
+      <key>license_file</key>
+      <string>LICENSES/lsl_definitions.txt</string>
+      <key>copyright</key>
+      <string>Copyright (c) 2026, Linden Lab</string>
+      <key>name</key>
+      <string>lsl_definitions</string>
+      <key>source_directory</key>
+      <string>.</string>
+      <key>source_type</key>
+      <string>git</string>
+      <key>use_scm_version</key>
+      <boolean>true</boolean>
+      <key>canonical_repo</key>
+      <string>https://github.com/secondlife/lsl-definitions</string>
+      <key>description</key>
+      <string>LSL definitions</string>
+    </map>
+  </map>
+</llsd>
