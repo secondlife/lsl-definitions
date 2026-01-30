@@ -5035,6 +5035,8 @@ functions:
     func-id: 113
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_ATTACH
     tooltip: Attach to avatar at point AttachmentPoint.\nRequires the PERMISSION_ATTACH
       runtime permission.
   llAttachToAvatarTemp:
@@ -5046,9 +5048,11 @@ functions:
     func-id: 391
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_ATTACH
     tooltip: Follows the same convention as llAttachToAvatar, with the exception that
       the object will not create new inventory for the user, and will disappear on
-      detach or disconnect.
+      detach or disconnect.\nRequires the PERMISSION_ATTACH runtime permission.
   llAvatarOnLinkSitTarget:
     arguments:
     - LinkNumber:
@@ -5136,8 +5140,10 @@ functions:
     func-id: 143
     return: void
     sleep: 0.0
-    tooltip: De-links all prims in the link set (requires permission PERMISSION_CHANGE_LINKS
-      be set).
+    requires-permission:
+      - PERMISSION_CHANGE_LINKS
+    tooltip: De-links all prims in the link set.\nRequires the PERMISSION_CHANGE_LINKS
+      runtime permission.
   llBreakLink:
     arguments:
     - LinkNumber:
@@ -5147,8 +5153,10 @@ functions:
     func-id: 142
     return: void
     sleep: 0.0
-    tooltip: De-links the prim with the given link number (requires permission PERMISSION_CHANGE_LINKS
-      be set).
+    requires-permission:
+      - PERMISSION_CHANGE_LINKS
+    tooltip: De-links the prim with the given link number.\nRequires the PERMISSION_CHANGE_LINKS
+      runtime permission.
   llCSV2List:
     arguments:
     - Text:
@@ -5212,8 +5220,11 @@ functions:
     func-id: 314
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_CONTROL_CAMERA
     tooltip: Resets all camera parameters to default values and turns off scripted
-      camera control.
+      camera control.\nRequires the PERMISSION_CONTROL_CAMERA runtime permission
+      (automatically granted to attached or sat on objects).
   llClearExperience:
     arguments:
     - AgentID:
@@ -5410,9 +5421,10 @@ functions:
     func-id: 141
     return: void
     sleep: 0.1
-    tooltip: Attempt to link the object the script is in, to target (requires permission
-      PERMISSION_CHANGE_LINKS be set).\nRequires permission PERMISSION_CHANGE_LINKS
-      be set.
+    requires-permission:
+      - PERMISSION_CHANGE_LINKS
+    tooltip: Attempt to link the object the script is in, to target.\nRequires the
+      PERMISSION_CHANGE_LINKS runtime permission.
   llDamage:
     arguments:
     - target:
@@ -5543,7 +5555,10 @@ functions:
     func-id: 114
     return: void
     sleep: 0.0
-    tooltip: Remove the object containing the script from the avatar.
+    requires-permission:
+      - PERMISSION_ATTACH
+    tooltip: Remove the object containing the script from the avatar.\nRequires the
+      PERMISSION_ATTACH runtime permission (automatically granted to attached objects).
   llDetectedDamage:
     arguments:
     - Number:
@@ -6225,10 +6240,12 @@ functions:
     func-id: 500
     return: string
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_OVERRIDE_ANIMATIONS
+      - PERMISSION_TRIGGER_ANIMATION
     tooltip: Returns a string that is the name of the animation that is used for the
-      specified animation state\nTo use this function the script must obtain either
-      the PERMISSION_OVERRIDE_ANIMATIONS or PERMISSION_TRIGGER_ANIMATION permission
-      (automatically granted to attached objects).
+      specified animation state.\nRequires the PERMISSION_OVERRIDE_ANIMATIONS or
+      PERMISSION_TRIGGER_ANIMATION runtime permission (automatically granted to attached objects).
     must-use: true
   llGetAttached:
     arguments: []
@@ -6286,6 +6303,8 @@ functions:
     func-id: 545
     return: float
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRACK_CAMERA
     tooltip: 'Returns the current camera aspect ratio (width / height) of the agent
       who has granted the scripted object PERMISSION_TRACK_CAMERA permissions. If
       no permissions have been granted: it returns zero.'
@@ -6296,6 +6315,8 @@ functions:
     func-id: 546
     return: float
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRACK_CAMERA
     tooltip: 'Returns the current camera field of view of the agent who has granted
       the scripted object PERMISSION_TRACK_CAMERA permissions. If no permissions have
       been granted: it returns zero.'
@@ -6306,6 +6327,8 @@ functions:
     func-id: 303
     return: vector
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRACK_CAMERA
     tooltip: Returns the current camera position for the agent the task has permissions
       for.\nReturns the position of the camera, of the user that granted the script
       PERMISSION_TRACK_CAMERA. If no user has granted the permission, it returns ZERO_VECTOR.
@@ -6316,6 +6339,8 @@ functions:
     func-id: 304
     return: rotation
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRACK_CAMERA
     tooltip: Returns the current camera orientation for the agent the task has permissions
       for. If no user has granted the PERMISSION_TRACK_CAMERA permission, returns
       ZERO_ROTATION.
@@ -7807,6 +7832,8 @@ functions:
     func-id: 99
     return: integer
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_DEBIT
     tooltip: Transfers Amount of L$ from script owner to AvatarID.\nThis call will
       silently fail if PERMISSION_DEBIT has not been granted.
   llGodLikeRezObject:
@@ -10115,8 +10142,11 @@ functions:
     func-id: 502
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_OVERRIDE_ANIMATIONS
     tooltip: Resets the animation of the specified animation state to the default
-      value.\nIf animation state equals "ALL", then all animation states are reset.
+      value.\nIf animation state equals "ALL", then all animation states are reset.\nRequires
+      the PERMISSION_OVERRIDE_ANIMATIONS permission (automatically granted to attached objects).
   llResetLandBanList:
     arguments: []
     energy: 10.0
@@ -10165,6 +10195,8 @@ functions:
     func-id: 520
     return: integer
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_RETURN_OBJECTS
     tooltip: Return objects using their UUIDs.\nRequires the PERMISSION_RETURN_OBJECTS
       permission and that the script owner owns the parcel the returned objects are
       in, or is an estate manager or region owner.
@@ -10180,6 +10212,8 @@ functions:
     func-id: 521
     return: integer
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_RETURN_OBJECTS
     tooltip: Return objects based upon their owner and a scope of parcel, parcel owner,
       or region.\nRequires the PERMISSION_RETURN_OBJECTS permission and that the script
       owner owns the parcel the returned objects are in, or is an estate manager or
@@ -10682,6 +10716,8 @@ functions:
     func-id: 501
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_OVERRIDE_ANIMATIONS
     tooltip: Sets the animation (in object inventory) that will play for the given
       animation state.\nTo use this function the script must obtain the PERMISSION_OVERRIDE_ANIMATIONS
       permission.
@@ -10728,8 +10764,11 @@ functions:
     func-id: 313
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_CONTROL_CAMERA
     tooltip: Sets multiple camera parameters at once. List format is [ rule-1, data-1,
-      rule-2, data-2 . . . rule-n, data-n ].
+      rule-2, data-2 . . . rule-n, data-n ].\nRequires the PERMISSION_CONTROL_CAMERA runtime permission
+      (automatically granted to attached or sat on objects).
   llSetClickAction:
     arguments:
     - Action:
@@ -11193,11 +11232,13 @@ functions:
     func-id: 561
     return: integer
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_PRIVILEGED_LAND_ACCESS
     tooltip: Sets the parcel the object is on for sale.\nForSale is a boolean, if TRUE
       the parcel is put up for sale. Options is a list of options to set for the sale,
       such as price, authorized buyer, and whether to include objects on the parcel.\n
       Setting ForSale to FALSE will remove the parcel from sale and clear any options
-      that were set.
+      that were set.\nRequires the PERMISSION_PRIVILEGED_LAND_ACCESS permission.
   llSetParcelMusicURL:
     arguments:
     - URL:
@@ -11755,9 +11796,12 @@ functions:
     func-id: 129
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRIGGER_ANIMATION
     tooltip: This function plays the specified animation from playing on the avatar
       who received the script's most recent permissions request.\nAnimation may be
-      an animation in task inventory or a built-in animation.\nRequires PERMISSION_TRIGGER_ANIMATION.
+      an animation in task inventory or a built-in animation.\nRequires the PERMISSION_TRIGGER_ANIMATION
+      runtime permission (automatically granted to attached or sat on objects).
   llStartObjectAnimation:
     arguments:
     - Animation:
@@ -11779,10 +11823,13 @@ functions:
     func-id: 130
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRIGGER_ANIMATION
     tooltip: This function stops the specified animation on the avatar who received
       the script's most recent permissions request.\nAnimation may be an animation
       in task inventory, a built-in animation, or the uuid of an animation.\nRequires
-      PERMISSION_TRIGGER_ANIMATION.
+      the PERMISSION_TRIGGER_ANIMATION runtime permission (automatically granted to
+      attached or sat on objects).
   llStopHover:
     arguments: []
     energy: 10.0
@@ -11916,10 +11963,12 @@ functions:
     func-id: 111
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TAKE_CONTROLS
     tooltip: Take controls from the agent the script has permissions for.\nIf (Accept
       == (Controls & input)), send input to the script.  PassOn determines whether
       Controls also perform their normal functions.\nRequires the PERMISSION_TAKE_CONTROLS
-      permission to run.
+      runtime permission (automatically granted to attached or sat on objects).
   llTan:
     arguments:
     - Theta:
@@ -12011,11 +12060,13 @@ functions:
     func-id: 368
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TELEPORT
     tooltip: Requests a teleport of avatar to a landmark stored in the object's inventory.
       If no landmark is provided (an empty string), the avatar is teleported to the
       location position in the current region. In either case, the avatar is turned
       to face the position given by look_at in local coordinates.\nRequires the PERMISSION_TELEPORT
-      permission. This function can only teleport the owner of the object.
+      runtime permission.\nThis function can only teleport the owner of the object.
   llTeleportAgentGlobalCoords:
     arguments:
     - AvatarID:
@@ -12037,10 +12088,12 @@ functions:
     func-id: 414
     return: void
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TELEPORT
     tooltip: Teleports an agent to the RegionPosition local coordinates within a region
       which is specified by the GlobalPosition global coordinates. The agent lands
       facing the position defined by LookAtPoint local coordinates.\nRequires the
-      PERMISSION_TELEPORT permission. This function can only teleport the owner of
+      PERMISSION_TELEPORT runtime permission.\nThis function can only teleport the owner of
       the object.
   llTeleportAgentHome:
     arguments:
@@ -12107,10 +12160,13 @@ functions:
     func-id: 395
     return: key
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_DEBIT
     tooltip: Transfer Amount of linden dollars (L$) from script owner to AvatarID.
       Returns a key to a corresponding transaction_result event for the success of
       the transfer.\nAttempts to send the amount of money to the specified avatar,
-      and trigger a transaction_result event identified by the returned key.
+      and trigger a transaction_result event identified by the returned key. Requires
+      the PERMISSION_DEBIT runtime permission.
   llTransferOwnership:
     arguments:
     - AgentID:
@@ -12374,8 +12430,11 @@ functions:
     func-id: 547
     return: vector
     sleep: 0.0
+    requires-permission:
+      - PERMISSION_TRACK_CAMERA
     tooltip: Returns the local position that would put the origin of a HUD object
-      directly over world_pos as viewed by the current camera.
+      directly over world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
+      runtime permission (else will return zero vector).
     must-use: true
   llXorBase64:
     arguments:

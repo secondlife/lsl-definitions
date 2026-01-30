@@ -494,6 +494,27 @@
                             "markdownDescription": "A more specific return type for slua type-checking.",
                             "type": "string"
                         },
+                        "requires-permission": {
+                            "items": {
+                                "enum": [
+                                    "PERMISSION_DEBIT",
+                                    "PERMISSION_TAKE_CONTROLS",
+                                    "PERMISSION_TRIGGER_ANIMATION",
+                                    "PERMISSION_ATTACH",
+                                    "PERMISSION_CHANGE_LINKS",
+                                    "PERMISSION_TRACK_CAMERA",
+                                    "PERMISSION_CONTROL_CAMERA",
+                                    "PERMISSION_TELEPORT",
+                                    "PERMISSION_SILENT_ESTATE_MANAGEMENT",
+                                    "PERMISSION_OVERRIDE_ANIMATIONS",
+                                    "PERMISSION_RETURN_OBJECTS",
+                                    "PERMISSION_PRIVILEGED_LAND_ACCESS"
+                                ]
+                            },
+                            "markdownDescription": "The runtime permission required to call this function. If multiple permissions are listed, only one must be granted.",
+                            "type": "array",
+                            "uniqueItems": true
+                        },
                         "sleep": {
                             "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "Additional sleep time imposed by the script after this function completes."
