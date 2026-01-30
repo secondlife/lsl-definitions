@@ -1035,7 +1035,7 @@ modules:
     must-use: true
   - name: decode
     comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
-      Returns an empty string/buffer if input is invalid.
+      The output is truncated at the first decoding error.
     overloads:
     - comment: Decodes a base64 string to a buffer if asBuffer is true
       parameters:
