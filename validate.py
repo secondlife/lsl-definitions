@@ -4,9 +4,9 @@
 
 import json
 import sys
-import yaml
 
 import jsonschema
+import yaml
 
 
 def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
