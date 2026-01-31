@@ -2,29 +2,29 @@
 # Importantly, this shebang line prevents the bytecode pre-compilation step from
 # deciding that this script is Python 2. It is not.
 import abc
+import argparse
 import ast
 import dataclasses
 import enum
-import itertools
 import io
+import itertools
+import os
 import os.path
 import re
 import stat
-import argparse
 import uuid
-import os
 from typing import (
-    TextIO,
-    Dict,
-    NamedTuple,
-    Set,
-    List,
-    Optional,
-    Union,
     Any,
+    Dict,
     Iterable,
+    List,
+    NamedTuple,
+    Optional,
     Sequence,
+    Set,
+    TextIO,
     TypeVar,
+    Union,
 )
 
 import llsd  # noqa
