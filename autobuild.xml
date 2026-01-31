@@ -34,7 +34,7 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>definitions/*</string>
+            <string>lsl_definitions/*</string>
             <string>LICENSES/lsl_definitions.txt</string>
           </array>
           <key>name</key>
