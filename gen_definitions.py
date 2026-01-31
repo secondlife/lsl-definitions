@@ -1,30 +1,31 @@
 #!/bin/env python3
 # Importantly, this shebang line prevents the bytecode pre-compilation step from
 # deciding that this script is Python 2. It is not.
-
+import abc
+import argparse
 import ast
 import dataclasses
 import enum
-import itertools
 import io
+import itertools
+import os
 import os.path
 import re
 import stat
-import argparse
 import uuid
-import os
 from typing import (
+    Any,
+    Dict,
     Iterable,
+    List,
     Literal,
     NamedTuple,
-    Dict,
-    List,
     Optional,
-    Set,
     Sequence,
+    Set,
+    TextIO,
     TypeVar,
     Union,
-    Any,
 )
 
 import llsd  # noqa
@@ -490,39 +491,46 @@ class SLuaParameter:
 
 
 @dataclasses.dataclass
-class SLuaFunctionAnon:
-    """Annonymous function signature"""
-
+class SLuaFunctionBase(abc.ABC):
+    name: str = ""
     typeParameters: List[str] = dataclasses.field(default_factory=list)
     parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
     returnType: str = LSLType.VOID.meta.slua_name
     comment: str = ""
 
+    @property
     def type_parameters_string(self) -> str:
         if not self.typeParameters:
             return ""
         return "<" + ", ".join(self.typeParameters) + ">"
 
+    @property
     def parameters_string(self) -> str:
         return "(" + ", ".join(p.to_luau_def() for p in self.parameters) + ")"
 
+    @property
     def type_def_string(self) -> str:
-        return self.type_parameters_string() + self.parameters_string() + " -> " + self.returnType
+        return self.type_parameters_string + self.parameters_string + " -> " + self.returnType
 
 
 @dataclasses.dataclass
-class SLuaFunction(SLuaFunctionAnon):
+class SLuaFunctionOverload(SLuaFunctionBase):
+    pass
+
+
+@dataclasses.dataclass
+class SLuaFunction(SLuaFunctionBase):
     """Full function or method signature with optional overloads"""
 
-    name: str = ""
     private: bool = False
     deprecated: bool = False
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
-    overloads: List[SLuaFunctionAnon] = dataclasses.field(default_factory=list)
+    overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
-    def deprecated_string(self):
+    @property
+    def deprecated_string(self) -> str:
         if not self.deprecated:
             return ""
         return "@deprecated "
@@ -548,31 +556,31 @@ class SLuaFunction(SLuaFunctionAnon):
             }
         )
 
-    def write_luau_global_def(self, f: io.StringIO, indent: int = 0) -> None:
+    def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
         if self.overloads:
             # the function format can't handle overloads
             self.write_luau_table_def(f, indent, suffix="")
         else:
             f.write(f"{'  ' * indent}")
-            f.write(self.deprecated_string())
+            f.write(self.deprecated_string)
             f.write(f"function {self.name}")
-            f.write(self.type_parameters_string())
-            f.write(self.parameters_string())
+            f.write(self.type_parameters_string)
+            f.write(self.parameters_string)
             f.write(f": {self.returnType}\n")
 
-    def write_luau_table_def(self, f: io.StringIO, indent: int = 0, suffix=",") -> None:
+    def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
         f.write(f"{'  ' * indent}{self.name}: ")
-        f.write(self.deprecated_string())
+        f.write(self.deprecated_string)
         if not self.overloads:
-            f.write(self.type_def_string())
+            f.write(self.type_def_string)
         else:
             f.write("(")
-            f.write(self.type_def_string())
+            f.write(self.type_def_string)
             for overload in self.overloads:
                 f.write(f")\n{'  ' * (indent + 1)}& (")
-                f.write(overload.type_def_string())
+                f.write(overload.type_def_string)
             f.write(")")
         f.write(suffix)
         f.write("\n")
@@ -614,7 +622,7 @@ class SLuaClassDeclaration:
     def to_keywords_dict(self) -> dict:
         return {"tooltip": self.comment}
 
-    def write_luau_def(self, f: io.StringIO) -> None:
+    def write_luau_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()}\n")
@@ -654,7 +662,7 @@ class SLuaModule:
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
-    def write_luau_def(self, f: io.StringIO) -> None:
+    def write_luau_def(self, f: TextIO) -> None:
         f.write(f"""
 ---------------------------
 -- Global Table: {self.name}
@@ -663,7 +671,7 @@ class SLuaModule:
 declare {self.name}: """)
         if self.callable:
             f.write("(")
-            f.write(self.callable.type_def_string())
+            f.write(self.callable.type_def_string)
             f.write(") & ")
         f.write("{\n")
         for prop in self.constants:
@@ -995,8 +1003,8 @@ class SLuaDefinitionParser:
                 type_def = "LLDetectedEventHandler?"
             else:
                 LLNonDetectedEventName_alias.selene_type.append(event.name)
-                # type_def=f"{event_func.deprecated_string()}{event_func.type_def_string()}"
-                type_def = event_func.type_def_string()
+                # type_def=f"{event_func.deprecated_string}{event_func.type_def_string}"
+                type_def = event_func.type_def_string
                 overload_parameters = [
                     SLuaParameter("self", type="LLEvents"),
                     SLuaParameter("event", type=f'"{event.name}"'),
@@ -1005,7 +1013,8 @@ class SLuaDefinitionParser:
                 for register_func in LLEvents_class.methods:
                     if register_func.name in {"on", "once"}:
                         register_func.overloads.append(
-                            SLuaFunctionAnon(
+                            SLuaFunctionOverload(
+                                name=register_func.name,
                                 comment=event.tooltip,
                                 parameters=overload_parameters,
                                 returnType=type_def,
@@ -1013,7 +1022,8 @@ class SLuaDefinitionParser:
                         )
                     elif register_func.name == "off":
                         register_func.overloads.append(
-                            SLuaFunctionAnon(
+                            SLuaFunctionOverload(
+                                name=register_func.name,
                                 comment=event.tooltip,
                                 parameters=overload_parameters,
                                 returnType=register_func.returnType,
@@ -1110,7 +1120,7 @@ class SLuaDefinitionParser:
             )
             self.definitions.globalConstants.append(prop)
 
-    def _validate_module(self, data: any) -> SLuaModule:
+    def _validate_module(self, data: dict) -> SLuaModule:
         module = SLuaModule(
             name=data["name"],
             comment=data.get("comment", ""),
@@ -1140,7 +1150,7 @@ class SLuaDefinitionParser:
             raise ValueError(f"In module {module.name}: {e}") from e
         return module
 
-    def _validate_class(self, data: any) -> SLuaClassDeclaration:
+    def _validate_class(self, data: dict) -> SLuaClassDeclaration:
         class_ = SLuaClassDeclaration(
             name=data["name"],
             comment=data.get("comment", ""),
@@ -1163,7 +1173,7 @@ class SLuaDefinitionParser:
         return class_
 
     def _validate_function(
-        self, data: any, scope: Set[str], class_name: str | None = None
+        self, data: dict, scope: Set[str], class_name: str | None = None
     ) -> SLuaFunction:
         try:
             func = SLuaFunction(
@@ -1185,7 +1195,8 @@ class SLuaDefinitionParser:
             known_types = self.validate_type_params(func.typeParameters)
             self.validate_type(func.returnType, known_types)
             for overload_data in data.get("overloads", []):
-                overload = SLuaFunctionAnon(
+                overload = SLuaFunctionOverload(
+                    name=func.name,
                     typeParameters=overload_data.get("typeParameters", []),
                     parameters=[
                         SLuaParameter(selene_type=p.pop("selene-type", None), **p)
@@ -1200,7 +1211,7 @@ class SLuaDefinitionParser:
         except Exception as e:
             raise ValueError(f"In function {data['name']}: {e}") from e
 
-    def _validate_type_alias(self, data: any) -> SLuaTypeAlias:
+    def _validate_type_alias(self, data: dict) -> SLuaTypeAlias:
         alias = SLuaTypeAlias(selene_type=data.pop("selene-type"), **data)
         try:
             self._validate_identifier(alias.name)
@@ -1211,7 +1222,7 @@ class SLuaDefinitionParser:
             raise ValueError(f"In type alias {alias.name}: {e}") from e
         return alias
 
-    def _validate_property(self, data: any, scope: Set[str], const: bool = False) -> SLuaProperty:
+    def _validate_property(self, data: dict, scope: Set[str], const: bool = False) -> SLuaProperty:
         prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
@@ -1221,7 +1232,7 @@ class SLuaDefinitionParser:
         return prop
 
     def _validate_function_signature(
-        self, func: SLuaFunctionAnon, class_name: str | None = None
+        self, func: SLuaFunctionBase, class_name: str | None = None
     ) -> None:
         known_types = self.validate_type_params(func.typeParameters)
         self.validate_type(func.returnType, known_types)
