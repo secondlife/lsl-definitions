@@ -30,10 +30,10 @@ source_environment_tempfile="$stage/source_environment.sh"
 . "$source_environment_tempfile"
 
 # Generate definition files
-./gen_all_definitions.sh "$stage/definitions"
+./gen_all_definitions.sh "$stage/lsl_definitions"
 
 # Copy source files
-cp lsl_definitions.yaml "$stage/definitions/"
-cp slua_definitions.yaml "$stage/definitions/"
-cp gen_definitions.py "$stage/definitions/"
+cp lsl_definitions.yaml "$stage/lsl_definitions/"
+cp slua_definitions.yaml "$stage/lsl_definitions/"
+cp gen_definitions.py "$stage/lsl_definitions/"
 cp LICENSE "$stage/LICENSES/lsl_definitions.txt"
