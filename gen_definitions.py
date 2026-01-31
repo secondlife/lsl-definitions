@@ -18,6 +18,7 @@ from typing import (
     Dict,
     Iterable,
     List,
+    Literal,
     NamedTuple,
     Optional,
     Sequence,
@@ -310,6 +311,9 @@ class LSLFunction:
     and we expect that the implementations live in `lscript_library` rather
     than `newsim` so that they can be unit tested by our LSL testing harness.
     """
+    must_use: bool
+    """Emit a warning if the return value is not used.
+    See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     native: bool
     """
     Whether the function must have a native implementation for non-LSO VMs
@@ -349,8 +353,10 @@ class LSLFunction:
                         "func-id": self.func_id,
                         "private": self.private,
                         "pure": self.pure,
+                        "must-use": self.must_use,
                         "native": self.native,
                         "mono-sleep": self.mono_sleep,
+                        "index-semantics": self.index_semantics,
                     }
                 ),
             }
@@ -443,6 +449,8 @@ class SLuaProperty:
     """This property is in Luau but not SLua"""
     private: bool = False
     """Whether this should this be included in the syntax file"""
+    modifiable: Literal["read-only", "new-fields", "override-fields", "full-write"] = "read-only"
+    """https://kampfkarren.github.io/selene/usage/std.html#properties"""
 
     def to_keywords_dict(self) -> dict:
         return {
@@ -466,7 +474,12 @@ class SLuaParameter:
 
     name: str
     type: Optional[str] = None
+    selene_type: Any = None
+    """a custom Selene type for this parameter, in case auto-detection fails"""
     comment: str = ""
+    optional: bool | None = None
+    observes: Literal["read-write", "read", "write"] | None = None
+    """See https://kampfkarren.github.io/selene/usage/std.html#observes."""
 
     def to_luau_def(self) -> str:
         if self.type is None:
@@ -511,6 +524,9 @@ class SLuaFunction(SLuaFunctionBase):
 
     private: bool = False
     deprecated: bool = False
+    must_use: bool = False
+    """Emit a warning if the return value is not used.
+    See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
@@ -576,6 +592,7 @@ class SLuaTypeAlias:
 
     name: str
     definition: str
+    selene_type: Any
     comment: str = ""
     export: bool = False
     """Whether this type is available to users"""
@@ -798,6 +815,7 @@ class LSLDefinitionParser:
             slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
+            must_use=func_data.get("must-use", False),
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
@@ -916,12 +934,12 @@ class SLuaDefinitionParser:
             raise RuntimeError("Already parsed!")
 
         # 1. Luau builtins. Typecheckers already know about these
-        # nil is hardcoded because it should highlight as a constant, not a type
-        self.type_names.add("nil")
         self.definitions.builtinTypes.update(def_dict["builtinTypes"])
         self.type_names.update(self.definitions.builtinTypes.keys())
         self.definitions.controls.update(def_dict["controls"])
         self.global_scope.update(self.definitions.controls.keys())
+        # nil, true, false are also valid type literals
+        self.type_names.update(const["name"] for const in def_dict["builtinConstants"])
         self.definitions.builtinConstants.extend(
             self._validate_property(const, self.global_scope, const=True)
             for const in def_dict["builtinConstants"]
@@ -962,9 +980,8 @@ class SLuaDefinitionParser:
         LLNonDetectedEventName_alias = [
             m for m in self.definitions.typeAliases if m.name == "LLNonDetectedEventName"
         ][0]
+        LLEventName_alias = [m for m in self.definitions.typeAliases if m.name == "LLEventName"][0]
         LLEvents_class = [m for m in self.definitions.classes if m.name == "LLEvents"][0]
-        detected_event_names: List[str] = []
-        non_detected_event_names: List[str] = []
         for event in lsl.events.values():
             if event.slua_removed:
                 continue
@@ -982,10 +999,10 @@ class SLuaDefinitionParser:
                 ],
             )
             if event.detected_semantics:
-                detected_event_names.append(event.name)
-                type_def = "LLDetectedEventHandler"
+                LLDetectedEventName_alias.selene_type.append(event.name)
+                type_def = "LLDetectedEventHandler?"
             else:
-                non_detected_event_names.append(event.name)
+                LLNonDetectedEventName_alias.selene_type.append(event.name)
                 # type_def=f"{event_func.deprecated_string}{event_func.type_def_string}"
                 type_def = event_func.type_def_string
                 overload_parameters = [
@@ -1012,17 +1029,22 @@ class SLuaDefinitionParser:
                                 returnType=register_func.returnType,
                             )
                         )
+                type_def = f"({type_def})?"
             event_prop = SLuaProperty(
                 name=event.name,
                 comment=event.tooltip,
-                type=f"({type_def})?",
+                type=type_def,
+                modifiable="override-fields",
             )
             LLEvents_class.properties.append(event_prop)
         LLDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in detected_event_names
+            f'"{name}"' for name in LLDetectedEventName_alias.selene_type
         )
         LLNonDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in non_detected_event_names
+            f'"{name}"' for name in LLNonDetectedEventName_alias.selene_type
+        )
+        LLEventName_alias.selene_type = (
+            LLDetectedEventName_alias.selene_type + LLNonDetectedEventName_alias.selene_type
         )
         for register_func in LLEvents_class.methods:
             if register_func.name in {"off", "on", "once"}:
@@ -1057,6 +1079,7 @@ class SLuaDefinitionParser:
                     for a in func.arguments
                 ],
                 returnType=self.validate_type(func.compute_slua_type(), known_types),
+                must_use=func.must_use or func.pure,
             )
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
@@ -1065,6 +1088,7 @@ class SLuaDefinitionParser:
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
                 returnType=self.validate_type(func.compute_slua_type(llcompat=True), known_types),
+                must_use=ll_func.must_use,
             )
             if not func.slua_removed:
                 ll_module.functions.append(ll_func)
@@ -1079,6 +1103,7 @@ class SLuaDefinitionParser:
                     typeParameters=ll_func.typeParameters,
                     parameters=ll_func.parameters[:],
                     returnType=ll_func.returnType,
+                    must_use=ll_func.must_use,
                 )
                 detected_func.parameters[0] = SLuaParameter(name="self")
                 DetectedEvent_class.methods.append(detected_func)
@@ -1154,11 +1179,15 @@ class SLuaDefinitionParser:
             func = SLuaFunction(
                 name=data["name"],
                 typeParameters=data.get("typeParameters", []),
-                parameters=[SLuaParameter(**p) for p in data.get("parameters", [])],
+                parameters=[
+                    SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                    for p in data.get("parameters", [])
+                ],
                 returnType=data.get("returnType", LSLType.VOID.meta.slua_name),
                 comment=data.get("comment", ""),
                 deprecated=data.get("deprecated", False),
                 private=data.get("private", False),
+                must_use=data.get("must-use", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
@@ -1169,7 +1198,10 @@ class SLuaDefinitionParser:
                 overload = SLuaFunctionOverload(
                     name=func.name,
                     typeParameters=overload_data.get("typeParameters", []),
-                    parameters=[SLuaParameter(**p) for p in overload_data.get("parameters", [])],
+                    parameters=[
+                        SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                        for p in overload_data.get("parameters", [])
+                    ],
                     returnType=overload_data.get("returnType", LSLType.VOID.meta.slua_name),
                     comment=overload_data.get("comment", ""),
                 )
@@ -1180,7 +1212,7 @@ class SLuaDefinitionParser:
             raise ValueError(f"In function {data['name']}: {e}") from e
 
     def _validate_type_alias(self, data: dict) -> SLuaTypeAlias:
-        alias = SLuaTypeAlias(**data)
+        alias = SLuaTypeAlias(selene_type=data.pop("selene-type"), **data)
         try:
             self._validate_identifier(alias.name)
             self.validate_type(alias.definition)
@@ -1283,8 +1315,18 @@ def _remove_worthless(val: dict) -> dict:
     return val
 
 
+def _remove_nones(**kwargs) -> dict:
+    """Remove any None values from a dict"""
+    return {k: v for k, v in kwargs.items() if v is not None}
+
+
 def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     """Write a syntax file for use by viewers"""
+    header_comment = b"""<!-- LSL (Linden Scripting Language) keywonds file for Second Life Viewer.
+This file is auto-generated by https://github.com/secondlife/lsl-definitions.
+Version: TODO: auto-generate
+Last Updated: TODO: auto-generate
+-->"""
     syntax = {
         "controls": definitions.controls.copy(),
         "types": definitions.types.copy(),
@@ -1317,9 +1359,13 @@ def dump_syntax(definitions: LSLDefinitions, pretty: bool = False) -> bytes:
     }
 
     if pretty:
-        return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+        output = llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+        header_comment = b"\n" + header_comment
     else:
-        return llsd.format_xml(syntax)
+        output = llsd.format_xml(syntax)
+    start_offset = output.find(b"?>") + 2
+    output = output[:start_offset] + header_comment + output[start_offset:]
+    return output
 
 
 def dump_slua_syntax(
@@ -1329,6 +1375,11 @@ def dump_slua_syntax(
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
     ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
+    header_comment = b"""<!-- SLua (Server Lua) keywonds file for Second Life Viewer.
+This file is auto-generated by https://github.com/secondlife/lsl-definitions.
+Version: TODO: auto-generate
+Last Updated: TODO: auto-generate
+-->"""
     syntax = {
         "controls": slua_definitions.controls.copy(),
         "types": slua_definitions.builtinTypes.copy(),
@@ -1376,14 +1427,16 @@ def dump_slua_syntax(
             syntax["constants"][const.name] = const.to_slua_dict(parser)
 
     if pretty:
-        return llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+        output = llsd.LLSDXMLPrettyFormatter(indent_atom=b"   ").format(syntax)
+        header_comment = b"\n" + header_comment
     else:
-        return llsd.format_xml(syntax)
+        output = llsd.format_xml(syntax)
+    start_offset = output.find(b"?>") + 2
+    output = output[:start_offset] + header_comment + output[start_offset:]
+    return output
 
 
-def gen_luau_lsp_defs(
-    lsl_definitions: LSLDefinitions, slua_definitions_file: str, pretty: bool = False
-) -> str:
+def gen_luau_lsp_defs(lsl_definitions: LSLDefinitions, slua_definitions_file: str) -> str:
     """Write a definitions file for use by the Luau Language Server"""
     parser = SLuaDefinitionParser()
     slua_definitions = parser.parse_file(slua_definitions_file)
@@ -1392,7 +1445,11 @@ def gen_luau_lsp_defs(
     llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
     defs = io.StringIO()
-    defs.write("""
+    defs.write("""-- Second Life SLua (Server Lua) definitions file for luau-lsp.
+-- This file is auto-generated by https://github.com/secondlife/lsl-definitions.
+-- Version: TODO: auto-generate
+-- Last Updated: TODO: auto-generate
+
 ----------------------------------
 ---------- LSL LUAU DEFS ---------
 ----------------------------------
@@ -1436,6 +1493,161 @@ def gen_luau_lsp_defs(
         defs.write("\n")
 
     return defs.getvalue()
+
+
+def gen_selene_yml(
+    lsl_definitions: LSLDefinitions, slua_definitions_file: str, version: str | None = None
+) -> str:
+    """Write a standard library file for use by the Selene Lua Linter"""
+    parser = SLuaDefinitionParser()
+    slua_definitions = parser.parse_file(slua_definitions_file)
+    parser.generate_ll_modules(lsl_definitions)
+    classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
+    type_aliases = {a.name: a for a in slua_definitions.typeAliases}
+
+    file = io.StringIO()
+    file.write("""# Second Life SLua (Server Lua) standard library definition file for selene.
+# This file is auto-generated by https://github.com/secondlife/lsl-definitions.
+# Version: TODO: auto-generate
+# Last Updated: TODO: auto-generate
+""")
+    selene = {
+        "base": "luau",
+        "name": "Second Life SLua language support",
+        "lua_versions": ["luau", "lua51"],
+        "last_updated": 1763572449,  # TODO: auto-generate
+        "globals": {},
+        "structs": {},
+    }
+
+    def selene_type(type_str: str, default="any") -> str | dict | None:
+        if type_str.endswith("?"):
+            type_str = type_str[:-1]
+        if t := {
+            "boolean": "bool",
+            "boolean | number": "bool",
+            "number": "number",
+            "string": "string",
+            "buffer": {"display": "buffer"},
+            "uuid": {"display": "uuid"},
+            "vector": {"display": "vector"},
+            "quaternion": {"display": "quaternion"},
+            "list": "table",
+            "thread": {"display": "thread"},
+        }.get(type_str, None):
+            return t
+        if type_str in type_aliases:
+            return type_aliases[type_str].selene_type
+        if type_str.startswith("..."):
+            return "..."
+        if type_str.startswith("{") and type_str.endswith("}"):
+            return "table"
+        if "|" in type_str:
+            return default
+        if "->" in type_str:
+            return "function"
+        return default
+
+    def selene_property(prop: SLuaProperty) -> dict:
+        if prop.slua_removed:
+            return _remove_nones(removed=True, description=prop.comment or None)
+        elif prop.type in classes:
+            return _remove_nones(struct=prop.type, description=prop.comment or None)
+        else:
+            return _remove_nones(
+                property=prop.modifiable,
+                type=selene_type(prop.type, default=None),
+                description=prop.comment or None,
+            )
+
+    def selene_param(param: SLuaParameter) -> dict:
+        optional = param.type.endswith("?") if param.optional is None else param.optional
+        return _remove_nones(
+            type=param.selene_type or selene_type(param.type),
+            required=None if not optional and param.optional is None else not optional,
+            observes=param.observes,
+        )
+
+    def selene_function(func: SLuaFunction, method=False) -> dict:
+        parameters = func.parameters[1:] if method else func.parameters
+        return _remove_nones(
+            method=method or None,
+            deprecated={"message": func.comment} if func.deprecated else None,
+            args=[selene_param(a) for a in parameters],
+            must_use=func.must_use or None,
+            description=func.comment or None,
+        )
+
+    def selene_class(class_: SLuaClassDeclaration) -> dict:
+        fields = {}
+        for method in class_.methods:
+            fields[method.name] = selene_function(method, method=True)
+        for prop in class_.properties:
+            fields[prop.name] = selene_property(prop)
+        return fields
+
+    def selene_module(module: SLuaModule) -> dict:
+        globals = {}
+        if module.callable:
+            globals[module.name] = selene_function(module.callable)
+        globals.update(
+            {
+                f"{module.name}.{const.name}": selene_property(const)
+                # for func in sorted(self.functions, key=lambda x: x.name)
+                for const in module.constants
+                if not const.private
+            }
+        )
+        globals.update(
+            {
+                f"{module.name}.{func.name}": selene_function(func)
+                # for func in sorted(self.functions, key=lambda x: x.name)
+                for func in module.functions
+                if not func.private
+            }
+        )
+        return globals
+
+    # Duplicate quaternion module as rotation. The callable aspect of quaternion
+    # prevents us from being able to de-duplicate this with structs.
+    modules = {m.name: m for m in slua_definitions.modules}
+    modules["rotation"] = SLuaModule(
+        name="rotation",
+        comment=modules["quaternion"].comment,
+        callable=modules["quaternion"].callable,
+        constants=modules["quaternion"].constants,
+        functions=modules["quaternion"].functions,
+    )
+
+    for const in slua_definitions.globalVariables:
+        if not const.private and const.name != "rotation":
+            selene["globals"][const.name] = selene_property(const)
+    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        if not const.private and not const.slua_removed:
+            selene["globals"][const.name] = selene_property(const)
+    # for func in slua_definitions.builtinFunctions:
+    #     selene["globals"][func.name] = func.to_selene_dict()
+    for func in slua_definitions.globalFunctions:
+        selene["globals"][func.name] = selene_function(func)
+    for module in sorted(modules.values(), key=lambda x: x.name):
+        if module.name not in {"ll", "llcompat"}:
+            selene["globals"].update(selene_module(module))
+    selene["globals"].update(selene_module(modules["ll"]))
+    selene["globals"].update(selene_module(modules["llcompat"]))
+    for class_ in classes.values():
+        selene["structs"][class_.name] = selene_class(class_)
+
+    # Fix up LLEvents argument types
+    event_names = [m for m in slua_definitions.typeAliases if m.name == "LLEventName"][
+        0
+    ].selene_type
+    for method_name in ["on", "once", "off", "listeners"]:
+        selene["structs"]["LLEvents"][method_name]["args"][0]["type"] = event_names
+
+    noalias_dumper = yaml.dumper.SafeDumper
+    noalias_dumper.ignore_aliases = lambda self, data: True
+    yaml.dump(selene, file, sort_keys=False, Dumper=noalias_dumper)
+    return file.getvalue()
 
 
 def _write_if_different(filename: str, data: Union[bytes, str]):
@@ -2881,6 +3093,15 @@ def main():
     sub.set_defaults(
         func=lambda args, defs: _write_if_different(
             args.filename, gen_luau_lsp_defs(defs, args.slua_definitions)
+        )
+    )
+
+    sub = subparsers.add_parser("slua_selene")
+    sub.add_argument("slua_definitions", help="Path to the SLua definition yaml")
+    sub.add_argument("filename")
+    sub.set_defaults(
+        func=lambda args, defs: _write_if_different(
+            args.filename, gen_selene_yml(defs, args.slua_definitions)
         )
     )
 

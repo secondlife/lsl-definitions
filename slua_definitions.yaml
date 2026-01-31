@@ -143,30 +143,40 @@ typeAliases:
   comment: '''rotation'' is an alias for ''quaternion'''
   export: true
   definition: quaternion
+  selene-type: {display: "quaternion"}
 - name: list
   export: true
   definition: "{string | number | vector | uuid | quaternion | boolean}"
+  selene-type: "table"
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
+  selene-type: []
 - name: LLNonDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
+  selene-type: []
 - name: LLEventName
   definition: LLDetectedEventName | LLNonDetectedEventName
+  selene-type: []
 - name: LLEventHandler
   definition: (...any) -> ()
+  selene-type: "function"
 - name: LLDetectedEventHandler
   definition: "(detected: {DetectedEvent}) -> ()"
+  selene-type: "function"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
   definition: "(scheduled: number, interval: number) -> ()"
+  selene-type: "function"
 - name: LLTimerOnceCallback
   comment: Callback type for LLTimers.once() - receives scheduled time
   definition: "(scheduled: number) -> ()"
+  selene-type: "function"
 - name: LLTimerCallback
   comment: Union of timer callback types
   definition: LLTimerEveryCallback | LLTimerOnceCallback
+  selene-type: "function"
 - name: OsDateTime
   comment: Date/time table structure used by os.date and os.time
   export: true
@@ -182,6 +192,7 @@ typeAliases:
       yday: number?,
       isdst: boolean?,
     }
+  selene-type: {display: "OsDateTime"}
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -267,10 +278,10 @@ globalVariables:
   comment: rotation is an alias for quaternion.
   type: typeof(quaternion)
 - name: LLEvents
-  comment: The instance of the LLEvents singleton.
+  comment: Event registration and management singleton for Second Life events.
   type: LLEvents
 - name: LLTimers
-  comment: The instance of the LLTimers singleton.
+  comment: Timer management singleton for scheduling periodic and one-time callbacks.
   type: LLTimers
 - name: loadstring
   comment: loadstring is removed in SLua.
@@ -296,24 +307,28 @@ globalFunctions:
   parameters:
   - name: val
     type: string | buffer | uuid
+    selene-type: string
   returnType: uuid?
 - name: tovector
-  comment: Converts a value to a vector, returns nil if invalid
+  comment: Converts a string to a vector, returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | vector
+    selene-type: string
   returnType: vector?
 - name: toquaternion
-  comment: Converts a value to a quaternion, returns nil if invalid
+  comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | quaternion
+    selene-type: string
   returnType: quaternion?
 - name: torotation
-  comment: Converts a value to a rotation (quaternion), returns nil if invalid
+  comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
   - name: val
-    type: any
+    type: string | quaternion
+    selene-type: string
   returnType: quaternion?
 modules:
 - name: bit32
@@ -331,6 +346,7 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: band
     comment: Performs a bitwise AND operation on input numbers.
     parameters:
@@ -338,6 +354,7 @@ modules:
       comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: number
+    must-use: true
   - name: bnot
     comment: Returns the bitwise negation of the input number.
     parameters:
@@ -345,6 +362,7 @@ modules:
       comment: Number to negate.
       type: number
     returnType: number
+    must-use: true
   - name: bor
     comment: Performs a bitwise OR operation on input numbers.
     parameters:
@@ -352,6 +370,7 @@ modules:
       comment: Numbers to perform bitwise OR on.
       type: ...number
     returnType: number
+    must-use: true
   - name: bxor
     comment: Performs a bitwise XOR operation on input numbers.
     parameters:
@@ -359,6 +378,7 @@ modules:
       comment: Numbers to perform bitwise XOR on.
       type: ...number
     returnType: number
+    must-use: true
   - name: btest
     comment: |-
       Performs a bitwise AND operation on input numbers.
@@ -368,6 +388,7 @@ modules:
       comment: Numbers to perform bitwise AND on.
       type: ...number
     returnType: boolean
+    must-use: true
   - name: extract
     comment: Extracts bits from n at position field with width
     parameters:
@@ -378,6 +399,7 @@ modules:
     - name: width
       type: number?
     returnType: number
+    must-use: true
   - name: lrotate
     comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
@@ -388,6 +410,7 @@ modules:
       comment: Number of bits to rotate.
       type: number
     returnType: number
+    must-use: true
   - name: lshift
     comment: Shifts n by i bits to the left. If i is negative, a right shift is performed.
     parameters:
@@ -398,6 +421,7 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: replace
     comment: Replaces bits in n at position field with width using value v
     parameters:
@@ -410,6 +434,7 @@ modules:
     - name: width
       type: number?
     returnType: number
+    must-use: true
   - name: rrotate
     comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
     parameters:
@@ -420,6 +445,7 @@ modules:
       comment: Number of bits to rotate.
       type: number
     returnType: number
+    must-use: true
   - name: rshift
     comment: Shifts n by i bits to the right. If i is negative, a left shift is performed.
     parameters:
@@ -430,24 +456,28 @@ modules:
       comment: Number of bits to shift.
       type: number
     returnType: number
+    must-use: true
   - name: countlz
     comment: Count leading zeros
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
   - name: countrz
     comment: Count trailing zeros
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
   - name: byteswap
     comment: Swap byte order
     parameters:
     - name: "n"
       type: number
     returnType: number
+    must-use: true
 - name: buffer
   comment: Buffer manipulation library for binary data.
   functions:
@@ -458,6 +488,7 @@ modules:
       comment: Size of the buffer to create.
       type: number
     returnType: buffer
+    must-use: true
   - name: fromstring
     comment: Creates a buffer initialized to the contents of the string.
     parameters:
@@ -465,6 +496,7 @@ modules:
       comment: String to initialize the buffer with.
       type: string
     returnType: buffer
+    must-use: true
   - name: tostring
     comment: Returns the buffer data as a string.
     parameters:
@@ -472,6 +504,7 @@ modules:
       comment: Buffer to convert to a string.
       type: buffer
     returnType: string
+    must-use: true
   - name: readi8
     comment: Reads a signed 8-bit integer from the buffer at the given offset.
     parameters:
@@ -482,6 +515,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu8
     comment: Reads an unsigned 8-bit integer from the buffer at the given offset.
     parameters:
@@ -492,6 +526,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readi16
     comment: Reads a signed 16-bit integer from the buffer at the given offset.
     parameters:
@@ -502,6 +537,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu16
     comment: Reads an unsigned 16-bit integer from the buffer at the given offset.
     parameters:
@@ -512,6 +548,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readi32
     comment: Reads a signed 32-bit integer from the buffer at the given offset.
     parameters:
@@ -522,6 +559,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -532,6 +570,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readf32
     comment: Reads a 32-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -542,6 +581,7 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: readf64
     comment: Reads a 64-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -552,12 +592,14 @@ modules:
       comment: Byte offset to read from.
       type: number
     returnType: number
+    must-use: true
   - name: writei8
     comment: Writes a signed 8-bit integer to the buffer at the given offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -571,6 +613,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -584,6 +627,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -597,6 +641,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -610,6 +655,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -623,6 +669,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -636,6 +683,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -649,6 +697,7 @@ modules:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -669,12 +718,14 @@ modules:
       comment: Number of bytes to read.
       type: number
     returnType: string
+    must-use: true
   - name: writestring
     comment: Writes data from a string into the buffer at the specified offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to write at.
       type: number
@@ -692,6 +743,7 @@ modules:
       comment: Buffer to get the size of.
       type: buffer
     returnType: number
+    must-use: true
   - name: copy
     comment: Copies bytes from the source buffer into the target buffer.
     parameters:
@@ -704,6 +756,7 @@ modules:
     - name: source
       comment: Source buffer to copy from.
       type: buffer
+      observes: write
     - name: sourceOffset
       comment: Offset in source buffer (optional).
       type: number?
@@ -717,6 +770,7 @@ modules:
     - name: b
       comment: Buffer to fill.
       type: buffer
+      observes: write
     - name: offset
       comment: Byte offset to start filling.
       type: number
@@ -740,12 +794,14 @@ modules:
       comment: Number of bits to read. Must be in [0, 32] range.
       type: number
     returnType: number
+    must-use: true
   - name: writebits
     comment: Writes up to 32 bits to the buffer at the given offset.
     parameters:
     - name: b
       comment: Buffer to write to.
       type: buffer
+      observes: write
     - name: bitOffset
       comment: Bit offset to write at.
       type: number
@@ -766,6 +822,7 @@ modules:
       comment: A function to be executed by the new coroutine.
       type: (...any) -> ...any
     returnType: thread
+    must-use: true
   - name: resume
     comment: Resumes a coroutine, returning true and results if successful, or false and an error.
     parameters:
@@ -780,6 +837,7 @@ modules:
     comment: Returns the currently running coroutine, or nil if called from in the main coroutine.
     parameters: []
     returnType: thread?
+    must-use: true
   - name: status
     comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
     parameters:
@@ -787,6 +845,7 @@ modules:
       comment: The coroutine to check status of.
       type: thread
     returnType: '"running" | "suspended" | "normal" | "dead"'
+    must-use: true
   - name: wrap
     comment: Creates a coroutine and returns a function that resumes it.
     parameters:
@@ -794,6 +853,7 @@ modules:
       comment: A function to execute in a coroutine.
       type: (...any) -> ...any
     returnType: (...any) -> ...any
+    must-use: true
   - name: yield
     comment: Yields the current coroutine, passing arguments to the resuming code.
     parameters:
@@ -805,6 +865,7 @@ modules:
     comment: Returns true if the currently running coroutine can yield.
     parameters: []
     returnType: boolean
+    must-use: true
   - name: close
     comment: Closes a coroutine, returning true if successful or false and an error.
     parameters:
@@ -843,10 +904,12 @@ modules:
     - name: level
       comment: Stack level or function reference for inspection.
       type: number
+      optional: true
     - name: s
       comment: String specifying requested information.
       type: string
     returnType: '...any'
+    must-use: true
   - name: traceback
     comment: Returns a human-readable call stack starting from the specified level.
     overloads:
@@ -863,6 +926,7 @@ modules:
     - name: co
       comment: Optional thread reference for traceback.
       type: thread
+      optional: true
     - name: msg
       comment: Optional message prepended to the traceback.
       type: string?
@@ -870,6 +934,7 @@ modules:
       comment: Optional stack level to start traceback.
       type: number?
     returnType: string
+    must-use: true
   - name: getinfo
     comment: Returns a table containing debug information about a function or stack frame.
     parameters:
@@ -884,6 +949,7 @@ modules:
       type: string
     private: true
     returnType: "{[any]: any}"
+    must-use: true
   - name: getlocal
     comment: Returns the name and value of a local variable at the specified stack level.
     parameters:
@@ -895,6 +961,7 @@ modules:
       type: number
     private: true
     returnType: string | any
+    must-use: true
   - name: setlocal
     comment: Sets the value of a local variable at the specified stack level.
     parameters:
@@ -920,6 +987,7 @@ modules:
       type: number
     private: true
     returnType: string | any
+    must-use: true
   - name: setupvalue
     comment: Sets the value of an upvalue for a given function.
     parameters:
@@ -942,6 +1010,7 @@ modules:
       type: any
     private: true
     returnType: "{[any]: any}?"
+    must-use: true
   - name: setmetatable
     comment: Sets the metatable for a given value.
     parameters:
@@ -961,51 +1030,65 @@ modules:
     parameters:
     - name: data
       type: string | buffer
+      selene-type: string
     returnType: string
+    must-use: true
   - name: decode
-    comment: Decodes a base64 string to a string
+    comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
+      The output is truncated at the first decoding error.
     overloads:
-    - comment: Decodes a base64 string to a string or buffer
+    - comment: Decodes a base64 string to a buffer if asBuffer is true
       parameters:
       - name: data
         type: string
       - name: asBuffer
-        type: boolean?
-      returnType: string | buffer
+        type: "true"
+      returnType: buffer
     parameters:
     - name: data
       type: string
+    - name: asBuffer
+      type: false?
+      selene-type: bool
     returnType: string
+    must-use: true
 - name: lljson
   comment: JSON encoding/decoding library for Second Life.
   functions:
   - name: encode
-    comment: Encodes a Lua value as JSON
+    comment: Encodes a Lua value as JSON.
+      Raises an error if value contains unsupported types.
     parameters:
     - name: value
       type: any
     returnType: string
+    must-use: true
   - name: decode
-    comment: Decodes a JSON string to a Lua value
+    comment: Decodes a JSON string to a Lua value.
+      Raises an error if JSON is invalid.
     parameters:
     - name: json
       type: string
     returnType: any
+    must-use: true
   - name: slencode
-    comment: Encodes a Lua value as JSON preserving SL types. Use tight to encode
-      more compactly.
+    comment: Encodes a Lua value as JSON, preserving SL types. Use tight to encode
+      more compactly. Raises an error if value contains unsupported types.
     parameters:
     - name: value
       type: any
     - name: tight
       type: boolean?
     returnType: string
+    must-use: true
   - name: sldecode
-    comment: Decodes a JSON string to a Lua value preserving SL types
+    comment: Decodes a JSON string to a Lua value, preserving SL types.
+      Raises an error if JSON is invalid.
     parameters:
     - name: json
       type: string
     returnType: any
+    must-use: true
   constants:
   - name: 'null'
     comment: A constant to pass for null to json encode
@@ -1039,6 +1122,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: acos
     comment: Returns the arc cosine of n in radians.
     parameters:
@@ -1046,6 +1130,7 @@ modules:
       comment: A number in the range [-1, 1].
       type: number
     returnType: number
+    must-use: true
   - name: asin
     comment: Returns the arc sine of n in radians.
     parameters:
@@ -1053,6 +1138,7 @@ modules:
       comment: A number in the range [-1, 1].
       type: number
     returnType: number
+    must-use: true
   - name: atan
     comment: Returns the arc tangent of n in radians.
     parameters:
@@ -1060,6 +1146,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: atan2
     comment: Returns the arc tangent of y/x in radians, using the signs to determine
       the quadrant.
@@ -1071,6 +1158,7 @@ modules:
       comment: The x-coordinate.
       type: number
     returnType: number
+    must-use: true
   - name: ceil
     comment: Returns the smallest integer larger than or equal to n.
     parameters:
@@ -1078,6 +1166,7 @@ modules:
       comment: A number to round up.
       type: number
     returnType: number
+    must-use: true
   - name: clamp
     comment: Returns n clamped between min and max.
     parameters:
@@ -1091,6 +1180,7 @@ modules:
       comment: Maximum allowable value.
       type: number
     returnType: number
+    must-use: true
   - name: cos
     comment: Returns the cosine of n (n is in radians).
     parameters:
@@ -1098,6 +1188,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: cosh
     comment: Returns the hyperbolic cosine of n.
     parameters:
@@ -1105,6 +1196,7 @@ modules:
       comment: A number to compute the hyperbolic cosine of.
       type: number
     returnType: number
+    must-use: true
   - name: deg
     comment: Converts n from radians to degrees.
     parameters:
@@ -1112,6 +1204,7 @@ modules:
       comment: A value in radians.
       type: number
     returnType: number
+    must-use: true
   - name: exp
     comment: Returns the base-e exponent of n.
     parameters:
@@ -1119,6 +1212,7 @@ modules:
       comment: A number to compute e^n.
       type: number
     returnType: number
+    must-use: true
   - name: floor
     comment: Returns the largest integer smaller than or equal to n.
     parameters:
@@ -1126,6 +1220,7 @@ modules:
       comment: A number to round down.
       type: number
     returnType: number
+    must-use: true
   - name: fmod
     comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
@@ -1136,6 +1231,7 @@ modules:
       comment: The divisor.
       type: number
     returnType: number
+    must-use: true
   - name: frexp
     comment: Returns m and e such that n = m * 2^e.
     parameters:
@@ -1143,6 +1239,7 @@ modules:
       comment: A number to split into significand and exponent.
       type: number
     returnType: (number, number)
+    must-use: true
   - name: ldexp
     comment: Returns s * 2^e.
     parameters:
@@ -1153,6 +1250,7 @@ modules:
       comment: The exponent.
       type: number
     returnType: number
+    must-use: true
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -1166,6 +1264,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: number
+    must-use: true
   - name: log
     comment: Returns the logarithm of n in the given base (default e).
     parameters:
@@ -1176,6 +1275,7 @@ modules:
       comment: Base of the logarithm (default is e).
       type: number?
     returnType: number
+    must-use: true
   - name: log10
     comment: Returns the base-10 logarithm of n.
     parameters:
@@ -1183,6 +1283,7 @@ modules:
       comment: A number to compute base-10 logarithm.
       type: number
     returnType: number
+    must-use: true
   - name: map
     comment: Maps n from input range to output range.
     parameters:
@@ -1202,6 +1303,7 @@ modules:
       comment: A number.
       type: number
     returnType: number
+    must-use: true
   - name: max
     comment: Returns the maximum value from the given numbers.
     parameters:
@@ -1211,7 +1313,9 @@ modules:
     - name: ...
       comment: Numbers to find the maximum from.
       type: ...number
+      optional: false
     returnType: number
+    must-use: true
   - name: min
     comment: Returns the minimum value from the given numbers.
     parameters:
@@ -1221,7 +1325,9 @@ modules:
     - name: ...
       comment: Numbers to find the minimum from.
       type: ...number
+      optional: false
     returnType: number
+    must-use: true
   - name: modf
     comment: Returns the integer and fractional parts of n.
     parameters:
@@ -1229,6 +1335,7 @@ modules:
       comment: A number to split into integer and fractional parts.
       type: number
     returnType: (number, number)
+    must-use: true
   - name: noise
     comment: Returns Perlin noise value for the point (x, y, z).
     parameters:
@@ -1242,6 +1349,7 @@ modules:
       comment: Z coordinate for the noise function (default is 0).
       type: number?
     returnType: number
+    must-use: true
   - name: pow
     comment: Returns base to the power of exponent.
     parameters:
@@ -1252,6 +1360,7 @@ modules:
       comment: Exponent value.
       type: number
     returnType: number
+    must-use: true
   - name: rad
     comment: Converts n from degrees to radians.
     parameters:
@@ -1259,6 +1368,7 @@ modules:
       comment: A value in degrees.
       type: number
     returnType: number
+    must-use: true
   - name: random
     comment: Returns a random number within the given range.
     parameters:
@@ -1269,6 +1379,7 @@ modules:
       comment: Maximum value of the range (optional).
       type: number?
     returnType: number
+    must-use: true
   - name: randomseed
     comment: Sets the seed for the random number generator.
     parameters:
@@ -1276,6 +1387,7 @@ modules:
       comment: Seed for the random number generator.
       type: number
     returnType: ()
+    must-use: true
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
@@ -1283,6 +1395,7 @@ modules:
       comment: A number to round to the nearest integer.
       type: number
     returnType: number
+    must-use: true
   - name: sign
     comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
     parameters:
@@ -1290,6 +1403,7 @@ modules:
       comment: A number to get the sign of.
       type: number
     returnType: number
+    must-use: true
   - name: sin
     comment: Returns the sine of n (n is in radians).
     parameters:
@@ -1297,6 +1411,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: sinh
     comment: Returns the hyperbolic sine of n.
     parameters:
@@ -1304,6 +1419,7 @@ modules:
       comment: A number to compute the hyperbolic sine of.
       type: number
     returnType: number
+    must-use: true
   - name: sqrt
     comment: Returns the square root of n.
     parameters:
@@ -1311,6 +1427,7 @@ modules:
       comment: A number to compute the square root of.
       type: number
     returnType: number
+    must-use: true
   - name: tan
     comment: Returns the tangent of n (n is in radians).
     parameters:
@@ -1318,6 +1435,7 @@ modules:
       comment: An angle in radians.
       type: number
     returnType: number
+    must-use: true
   - name: tanh
     comment: Returns the hyperbolic tangent of n.
     parameters:
@@ -1325,6 +1443,7 @@ modules:
       comment: A number to compute the hyperbolic tangent of.
       type: number
     returnType: number
+    must-use: true
   - name: isnan
     comment: Returns true if n is NaN.
     parameters:
@@ -1332,6 +1451,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   - name: isinf
     comment: Returns true if n is infinite.
     parameters:
@@ -1339,6 +1459,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   - name: isfinite
     comment: Returns true if n is finite.
     parameters:
@@ -1346,6 +1467,7 @@ modules:
       comment: A number.
       type: number
     returnType: boolean
+    must-use: true
   constants:
   - name: pi
     comment: The value of pi
@@ -1362,6 +1484,7 @@ modules:
     comment: Returns a high-precision timestamp in seconds for measuring durations.
     parameters: []
     returnType: number
+    must-use: true
   - name: date
     comment: Returns a table or string representation of the time based on the provided format.
     parameters:
@@ -1372,8 +1495,10 @@ modules:
       comment: Optional timestamp to format; defaults to the current time.
       type: number?
     returnType: (string | OsDateTime)?
+    must-use: true
   - name: difftime
-    comment: Returns the difference in seconds between two timestamps.
+    deprecated: true
+    comment: Returns the difference in seconds between two timestamps. Same as a - b.
     parameters:
     - name: a
       comment: First timestamp value.
@@ -1381,7 +1506,9 @@ modules:
     - name: b
       comment: Second timestamp value.
       type: number?
+      optional: false
     returnType: number
+    must-use: true
   - name: time
     comment: Returns the current Unix timestamp or the timestamp of the given date.
     parameters:
@@ -1389,6 +1516,7 @@ modules:
       comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
       type: OsDateTime?
     returnType: number?
+    must-use: true
 - name: quaternion
   comment: Quaternion manipulation library.
   callable:
@@ -1409,6 +1537,7 @@ modules:
       comment: S component of the quaternion.
       type: number
     returnType: quaternion
+    must-use: true
   functions:
   - name: create
     comment: Creates a new quaternion with the given component values.
@@ -1426,6 +1555,7 @@ modules:
       comment: S component of the quaternion.
       type: number
     returnType: quaternion
+    must-use: true
   - name: normalize
     comment: Computes the normalized version (unit quaternion) of the quaternion.
     parameters:
@@ -1433,6 +1563,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: quaternion
+    must-use: true
   - name: magnitude
     comment: Computes the magnitude of the quaternion.
     parameters:
@@ -1440,6 +1571,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: number
+    must-use: true
   - name: dot
     comment: Computes the dot product of two quaternions.
     parameters:
@@ -1450,6 +1582,7 @@ modules:
       comment: Right input quaternion.
       type: quaternion
     returnType: number
+    must-use: true
   - name: slerp
     comment: Spherical linear interpolation from a to b using factor t.
     parameters:
@@ -1463,6 +1596,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: quaternion
+    must-use: true
   - name: conjugate
     comment: Computes the conjugate of the quaternion.
     parameters:
@@ -1470,6 +1604,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: quaternion
+    must-use: true
   - name: tofwd
     comment: Computes the forward vector from the quaternion.
     parameters:
@@ -1477,6 +1612,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   - name: toleft
     comment: Computes the left vector from the quaternion.
     parameters:
@@ -1484,6 +1620,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   - name: toup
     comment: Computes the up vector from the quaternion.
     parameters:
@@ -1491,6 +1628,7 @@ modules:
       comment: Input quaternion.
       type: quaternion
     returnType: vector
+    must-use: true
   constants:
   - name: identity
     comment: Identity quaternion constant.
@@ -1512,13 +1650,16 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...number'
+    must-use: true
   - name: char
     comment: Returns a string containing characters for the given byte values.
     parameters:
     - name: ...
       comment: Byte values to convert to string.
       type: ...number
+      optional: false
     returnType: string
+    must-use: true
   - name: find
     comment: Finds the first instance of the pattern in the string.
     parameters:
@@ -1535,6 +1676,7 @@ modules:
       comment: Perform raw search (optional).
       type: boolean?
     returnType: (number?, number?, ...string)
+    must-use: true
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
@@ -1544,7 +1686,9 @@ modules:
     - name: ...
       comment: Values to format.
       type: ...any
+      optional: false
     returnType: string
+    must-use: true
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
@@ -1555,6 +1699,7 @@ modules:
       comment: Pattern to search for.
       type: string
     returnType: () -> ...string
+    must-use: true
   - name: gsub
     comment: Performs pattern-based substitution in a string.
     parameters:
@@ -1571,6 +1716,7 @@ modules:
       comment: Maximum replacements (optional).
       type: number?
     returnType: (string, number)
+    must-use: true
   - name: len
     comment: "Returns the number of bytes in the string. Identical to #s"
     parameters:
@@ -1578,6 +1724,7 @@ modules:
       comment: Input string.
       type: string
     returnType: number
+    must-use: true
   - name: lower
     comment: Returns a lowercase version of the input string.
     parameters:
@@ -1585,6 +1732,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
   - name: match
     comment: Finds and returns matches for a pattern in the input string.
     parameters:
@@ -1598,6 +1746,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: '...string'
+    must-use: true
   - name: pack
     comment: Packs values into a binary string.
     parameters:
@@ -1608,6 +1757,7 @@ modules:
       comment: Values to encode.
       type: ...any
     returnType: string
+    must-use: true
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
@@ -1615,6 +1765,7 @@ modules:
       comment: Pack format string.
       type: string
     returnType: number
+    must-use: true
   - name: rep
     comment: Returns the input string repeated a given number of times.
     parameters:
@@ -1625,6 +1776,7 @@ modules:
       comment: Number of times to repeat the string.
       type: number
     returnType: string
+    must-use: true
   - name: reverse
     comment: Returns the input string with bytes in reverse order.
     parameters:
@@ -1632,6 +1784,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
   - name: split
     comment: Splits a string by separator. Returns a list of substrings.
     parameters:
@@ -1642,6 +1795,7 @@ modules:
       comment: Separator to split on. Default is ","
       type: string?
     returnType: '{string}'
+    must-use: true
   - name: sub
     comment: Returns a substring from the given range.
     parameters:
@@ -1655,6 +1809,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: string
+    must-use: true
   - name: unpack
     comment: Decodes a binary string using a pack format.
     parameters:
@@ -1668,6 +1823,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: '...any'
+    must-use: true
   - name: upper
     comment: Returns an uppercase version of the input string.
     parameters:
@@ -1675,6 +1831,7 @@ modules:
       comment: Input string.
       type: string
     returnType: string
+    must-use: true
 - name: table
   comment: Table manipulation library. Tables are collections of key-value pairs.
   functions:
@@ -1694,6 +1851,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: string
+    must-use: true
   - name: foreach
     comment: Iterates over all key-value pairs in the table (deprecated).
     deprecated: true
@@ -1705,6 +1863,7 @@ modules:
     - name: f
       comment: Function applied to each key-value pair.
       type: '(key: K, value: V) -> R?'
+      optional: false
     returnType: R?
   - name: foreachi
     comment: Iterates over all index-value pairs in the array (deprecated).
@@ -1726,6 +1885,7 @@ modules:
       comment: Array to check.
       type: '{any}'
     returnType: number
+    must-use: true
   - name: maxn
     comment: Returns the highest numeric key in the table.
     parameters:
@@ -1733,6 +1893,7 @@ modules:
       comment: Table to check.
       type: '{any}'
     returnType: number
+    must-use: true
   - name: insert
     comment: Inserts an element at the specified index,
       or at the end of the array.
@@ -1743,6 +1904,7 @@ modules:
       - name: a
         comment: Array to insert into.
         type: '{V}'
+        observes: write
       - name: value
         comment: Value to insert.
         type: V
@@ -1752,9 +1914,11 @@ modules:
     - name: a
       comment: Array to insert into.
       type: '{V}'
+      observes: write
     - name: i
       comment: "Index to insert at (default: at the end)."
       type: number
+      optional: true
     - name: v
       comment: Value to insert.
       type: V
@@ -1790,6 +1954,7 @@ modules:
       comment: Array elements.
       type: ...V
     returnType: '{ n: number, [number]: V }'
+    must-use: true
   - name: unpack
     comment: Unpacks array elements into multiple return values.
     typeParameters: [V]
@@ -1804,6 +1969,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...V'
+    must-use: true
   - name: move
     comment: Inserts elements [i..j] from src array into dest array at [d].
     typeParameters: [V]
@@ -1823,6 +1989,7 @@ modules:
     - name: dest
       comment: Destination array (optional).
       type: '{V}?'
+      observes: write
     returnType: '{V}'
   - name: create
     comment: Creates a new table with pre-allocated array capacity, optionally filled.
@@ -1835,6 +2002,7 @@ modules:
       comment: Value to prefill elements with (optional).
       type: V?
     returnType: '{V}'
+    must-use: true
   - name: find
     comment: Finds the first occurrence of a value in the array and returns its index.
     typeParameters: [V]
@@ -1849,12 +2017,14 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: number?
+    must-use: true
   - name: clear
     comment: Clears all elements from a table while keeping its capacity.
     parameters:
     - name: t
       comment: Table to clear.
       type: '{[any]: any}'
+      observes: write
     returnType: ()
   - name: shrink
     comment: Reduces the memory usage of the table to the minimum necessary.
@@ -1882,6 +2052,7 @@ modules:
       comment: Table to check.
       type: '{[any]: any}'
     returnType: boolean
+    must-use: true
   - name: clone
     comment: Creates a shallow copy of the table.
     typeParameters: [K, V]
@@ -1890,6 +2061,7 @@ modules:
       comment: Table to clone.
       type: '{[K]: V}'
     returnType: '{[K]: V}'
+    must-use: true
 - name: utf8
   comment: UTF-8 support library.
   functions:
@@ -1899,6 +2071,7 @@ modules:
     - name: ...
       comment: Unicode codepoints.
       type: ...number
+      optional: false
     returnType: string
   - name: codes
     comment: Returns an iterator that produces
@@ -1908,6 +2081,7 @@ modules:
       comment: Input string.
       type: string
     returnType: ((string, number) -> (number, number), string, number)
+    must-use: true
   - name: codepoint
     comment: Returns the Unicode codepoints in the specified range of the string.
     parameters:
@@ -1921,6 +2095,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: '...number'
+    must-use: true
   - name: len
     comment: Returns the number of Unicode codepoints in the specified range of the string,
       or nil and error index.
@@ -1935,6 +2110,7 @@ modules:
       comment: Ending index (optional).
       type: number?
     returnType: (number?, number?)
+    must-use: true
   - name: offset
     comment: Returns the byte offset of the nth Unicode codepoint in the string.
     parameters:
@@ -1948,6 +2124,7 @@ modules:
       comment: Starting index (optional).
       type: number?
     returnType: number?
+    must-use: true
   constants:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
@@ -1964,6 +2141,7 @@ modules:
     - name: value
       type: string | buffer | uuid
     returnType: uuid?
+    must-use: true
   functions:
   - name: create
     comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
@@ -1973,6 +2151,7 @@ modules:
     - name: value
       type: string | buffer | uuid
     returnType: uuid?
+    must-use: true
 - name: vector
   comment: Vector manipuluation library.
   callable:
@@ -1990,6 +2169,7 @@ modules:
       comment: Z component of the vector (optional).
       type: number?
     returnType: vector
+    must-use: true
   functions:
   - name: create
     comment: Creates a new vector with the given component values.
@@ -2004,6 +2184,7 @@ modules:
       comment: Z component of the vector (optional).
       type: number?
     returnType: vector
+    must-use: true
   - name: magnitude
     comment: Computes the magnitude of the vector.
     parameters:
@@ -2011,6 +2192,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: number
+    must-use: true
   - name: normalize
     comment: Computes the normalized version (unit vector) of the vector.
     parameters:
@@ -2018,6 +2200,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: cross
     comment: Computes the cross product of two vectors.
     parameters:
@@ -2028,6 +2211,7 @@ modules:
       comment: Right input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: dot
     comment: Computes the dot product of two vectors.
     parameters:
@@ -2038,6 +2222,7 @@ modules:
       comment: Right input vector.
       type: vector
     returnType: number
+    must-use: true
   - name: angle
     comment: Computes the angle between two vectors in radians.
       The axis, if specified, is used to determine the sign of the angle.
@@ -2052,6 +2237,7 @@ modules:
       comment: Axis to determine the sign of the angle (optional).
       type: vector?
     returnType: number
+    must-use: true
   - name: floor
     comment: Applies math.floor to each component of the vector.
     parameters:
@@ -2059,6 +2245,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: ceil
     comment: Applies math.ceil to each component of the vector.
     parameters:
@@ -2066,6 +2253,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: abs
     comment: Applies math.abs to each component of the vector.
     parameters:
@@ -2073,6 +2261,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: sign
     comment: Applies math.sign to each component of the vector.
     parameters:
@@ -2080,6 +2269,7 @@ modules:
       comment: Input vector.
       type: vector
     returnType: vector
+    must-use: true
   - name: clamp
     comment: Clamps each component of the vector between min and max values.
     parameters:
@@ -2093,6 +2283,7 @@ modules:
       comment: Maximum vector value.
       type: vector
     returnType: vector
+    must-use: true
   - name: max
     comment: Applies math.max to each component of the vectors.
     parameters:
@@ -2103,6 +2294,7 @@ modules:
       comment: Vectors to find the maximum from.
       type: ...vector
     returnType: vector
+    must-use: true
   - name: min
     comment: Applies math.max to each component of the vectors.
     parameters:
@@ -2113,6 +2305,7 @@ modules:
       comment: Vectors to find the minimum from.
       type: ...vector
     returnType: vector
+    must-use: true
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -2126,6 +2319,7 @@ modules:
       comment: Interpolation factor.
       type: number
     returnType: vector
+    must-use: true
   constants:
   - name: zero
     comment: Constant vector with all components set to 0.
