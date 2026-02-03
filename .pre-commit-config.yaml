@@ -3,7 +3,7 @@ repos:
   rev: v0.14.7
   hooks:
     - id: ruff-check
-      args: [--extend-select, I, --fix]
+      args: [--fix]
     - id: ruff-format
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -12,7 +12,9 @@ repos:
     -   id: check-yaml
         args: [--allow-multiple-documents]
     -   id: end-of-file-fixer
+        exclude: ^generated/
     -   id: trailing-whitespace
+        exclude: ^generated/
 -   repo: local
     hooks:
     -   id: check-generated

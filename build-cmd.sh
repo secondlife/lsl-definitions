@@ -31,9 +31,19 @@ source_environment_tempfile="$stage/source_environment.sh"
 
 # Generate definition files
 ./gen_all_definitions.sh "$stage/lsl_definitions"
+# Don't care about these, actually
+rm -rf "$stage/lsl_definitions/templated"
+rm -rf "$stage/lsl_definitions/cpp"
 
-# Copy source files
+# Copy definition files
 cp lsl_definitions.yaml "$stage/lsl_definitions/"
 cp slua_definitions.yaml "$stage/lsl_definitions/"
-cp gen_definitions.py "$stage/lsl_definitions/"
+
+# Copy Python package to subdirectory for `pip install -e`
+mkdir -p "$stage/lsl_definitions/python"
+cp gen_definitions.py "$stage/lsl_definitions/python/"
+cp validate.py "$stage/lsl_definitions/python/"
+cp pyproject.toml "$stage/lsl_definitions/python/"
+cp -r lsl_definitions "$stage/lsl_definitions/python/"
+
 cp LICENSE "$stage/LICENSES/lsl_definitions.txt"

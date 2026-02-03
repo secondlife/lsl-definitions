@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lsl-definitions"
+name = "lsl_definitions"
 version = "0.2.0"
 description = "LSL (Linden Scripting Language) definitions generator"
 readme = "README.md"
@@ -22,7 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.7"
 dependencies = [
     "PyYAML",
     "llsd"
@@ -48,6 +48,11 @@ py-modules = [
     "gen_definitions",
     "validate"
 ]
+packages = ["lsl_definitions", "lsl_definitions.generators"]
 
 [tool.ruff]
 line-length = 100
+target-version = "py37"
+
+[tool.ruff.lint]
+extend-select = ["I"]

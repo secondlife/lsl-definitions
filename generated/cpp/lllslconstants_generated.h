@@ -191,6 +191,7 @@ constexpr int32_t LSL_GEN_DATA_NAME = 2;
 constexpr int32_t LSL_GEN_DATA_ONLINE = 1;
 constexpr int32_t LSL_GEN_DATA_PAYINFO = 8;
 constexpr int32_t LSL_GEN_DATA_RATING = 4;
+constexpr int32_t LSL_GEN_DATA_RESERVED_0 = 9;
 constexpr int32_t LSL_GEN_DATA_SIM_POS = 5;
 constexpr int32_t LSL_GEN_DATA_SIM_RATING = 7;
 constexpr int32_t LSL_GEN_DATA_SIM_STATUS = 6;

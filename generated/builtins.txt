@@ -714,6 +714,7 @@ const integer DATA_NAME = 2
 const integer DATA_ONLINE = 1
 const integer DATA_PAYINFO = 8
 const integer DATA_RATING = 4
+const integer DATA_RESERVED_0 = 9
 const integer DATA_SIM_POS = 5
 const integer DATA_SIM_RATING = 7
 const integer DATA_SIM_STATUS = 6

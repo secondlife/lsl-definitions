@@ -39,16 +39,21 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install and generate
-        run: |
-          pip install .
-          ./gen_all_definitions.sh "generated"
-          cp lsl_definitions.yaml generated/
-          cp slua_definitions.yaml generated/
+      - name: Install python package
+        run: pip install -e .
 
+      - uses: secondlife/action-autobuild@v5
+        with:
+          platform: common
+
+      # The generated files should already be correct per the pre-commit hooks.
+      # We don't need to generated them again to zip them.
       - name: Create zip
         run: |
-          cd generated && zip -r ../lsl-definitions.zip .
+          cp -r generated to_package
+          rm -rf "to_package/templated"
+          rm -rf "to_package/cpp"
+          cd to_package && zip -r ../lsl-definitions.zip .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -56,9 +61,6 @@ jobs:
           name: lsl-definitions
           path: lsl-definitions.zip
 
-      - uses: secondlife/action-autobuild@v5
-        with:
-          platform: common
 
   release:
     needs: build
