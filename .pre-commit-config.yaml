@@ -13,3 +13,10 @@ repos:
         args: [--allow-multiple-documents]
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+-   repo: local
+    hooks:
+    -   id: check-generated
+        name: Check generated files match
+        entry: bash -c 'tmp=$(mktemp -d) && ./gen_all_definitions.sh "$tmp" && diff -r generated "$tmp"'
+        language: system
+        pass_filenames: false

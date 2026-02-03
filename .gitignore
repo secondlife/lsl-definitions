@@ -22,7 +22,6 @@ __pycache__/
 .venv/
 
 build
-generated/
 dist/
 stage/
 /*.tar.*
