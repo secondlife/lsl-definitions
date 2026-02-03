@@ -565,6 +565,9 @@
     luaSL_pushnativeinteger(L, 4);
     lua_setglobal(L, "DATA_RATING");
 
+    luaSL_pushnativeinteger(L, 9);
+    lua_setglobal(L, "DATA_RESERVED_0");
+
     luaSL_pushnativeinteger(L, 5);
     lua_setglobal(L, "DATA_SIM_POS");
 

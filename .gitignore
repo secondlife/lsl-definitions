@@ -23,5 +23,7 @@ __pycache__/
 
 build
 dist/
+to_package
+lsl-definitions.zip
 stage/
 /*.tar.*

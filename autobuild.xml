@@ -35,6 +35,9 @@
           <key>manifest</key>
           <array>
             <string>lsl_definitions/*</string>
+            <string>lsl_definitions/python/*</string>
+            <string>lsl_definitions/python/lsl_definitions/*</string>
+            <string>lsl_definitions/python/lsl_definitions/generators/*</string>
             <string>LICENSES/lsl_definitions.txt</string>
           </array>
           <key>name</key>

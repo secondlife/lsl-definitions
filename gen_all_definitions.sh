@@ -3,15 +3,17 @@
 set -ex
 
 outdir="${1:-generated}"
-mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/lsl"
+mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated"
 
 DEFS="./lsl_definitions.yaml"
 SLUA="./slua_definitions.yaml"
-CMD="gen-lsl-definitions"
+CMD="python gen_definitions.py"
 
 # Viewer outputs
 $CMD $DEFS syntax "$outdir/lsl_keywords.xml"
+$CMD $DEFS syntax --pretty "$outdir/lsl_keywords_pretty.xml"
 $CMD $DEFS slua_syntax $SLUA "$outdir/slua_keywords.xml"
+$CMD $DEFS slua_syntax --pretty $SLUA "$outdir/slua_keywords_pretty.xml"
 $CMD $DEFS slua_lsp_defs $SLUA "$outdir/slua_default.d.luau"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
 $CMD $DEFS slua_selene $SLUA "$outdir/slua_selene.yml"

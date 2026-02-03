@@ -1,0 +1,28 @@
+# Auto-detect text files and normalize line endings
+* text=auto eol=lf
+
+# Ensure shell scripts always use LF
+*.sh text eol=lf
+
+# Python files
+*.py text eol=lf
+
+# Data files
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+
+# Generated code
+*.cpp text eol=lf
+*.h text eol=lf
+*.cs text eol=lf
+*.l text eol=lf
+*.y text eol=lf
+*.luau text eol=lf
+*.txt text eol=lf
+
+# Keep binary files as-is
+*.png binary
+*.jpg binary
+*.gif binary

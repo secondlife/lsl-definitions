@@ -193,6 +193,7 @@
 "DATA_ONLINE" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
 "DATA_PAYINFO" { count(); yylval.ival = 8; return(INTEGER_CONSTANT); }
 "DATA_RATING" { count(); yylval.ival = 4; return(INTEGER_CONSTANT); }
+"DATA_RESERVED_0" { count(); yylval.ival = 9; return(INTEGER_CONSTANT); }
 "DATA_SIM_POS" { count(); yylval.ival = 5; return(INTEGER_CONSTANT); }
 "DATA_SIM_RATING" { count(); yylval.ival = 7; return(INTEGER_CONSTANT); }
 "DATA_SIM_STATUS" { count(); yylval.ival = 6; return(INTEGER_CONSTANT); }
