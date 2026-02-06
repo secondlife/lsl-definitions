@@ -56,8 +56,12 @@ class DocBuilder:
 
     def add_constant(self, const: SLuaProperty, module: str | None = None):
         module_prefix = f"{module}." if module else ""
+        if const.value is not None:
+            value_prefix = f"Value: {const.value}\n"
+        else:
+            value_prefix = ""
         entry = remove_nones(
-            documentation=htmlize(const.comment or f"{const.name} constant"),
+            documentation=(value_prefix + htmlize(const.comment)).strip(),
             learn_more_link=doc_url(module, const.name),
         )
         self.docs[f"{GLOBALS_PREFIX}{module_prefix}{const.name}"] = entry
