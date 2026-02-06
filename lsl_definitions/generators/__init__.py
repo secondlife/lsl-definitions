@@ -8,6 +8,7 @@ from lsl_definitions.generators import (
     lscript_compiler,
     lsl,
     slua,
+    slua_lsp_docs,
 )
 from lsl_definitions.generators.base import GENERATORS, register
 
@@ -20,4 +21,5 @@ __all__ = [
     "lscript_compiler",
     "lsl",
     "slua",
+    "slua_lsp_docs",
 ]

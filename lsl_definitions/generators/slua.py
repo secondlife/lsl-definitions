@@ -77,7 +77,9 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
 
 @register("slua_selene")
 def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
-    """Generate SLua standard library for Selene linter"""
+    """Generate SLua standard library for Selene linter
+    https://kampfkarren.github.io/selene/usage/std.html
+    """
     slua_definitions.generate_ll_modules(definitions)
     classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
     type_aliases = {a.name: a for a in slua_definitions.typeAliases}
