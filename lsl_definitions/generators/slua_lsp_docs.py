@@ -10,8 +10,21 @@ from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions
 from lsl_definitions.slua import (
     SLuaDefinitions,
+    SLuaFunction,
 )
-from lsl_definitions.utils import remove_nones
+from lsl_definitions.utils import (
+    escape_python,
+    remove_nones,
+)
+
+GLOBALS_PREFIX = "@sl-slua/global/"
+
+
+def doc_function(func: SLuaFunction, method=False) -> dict:
+    entry = remove_nones(
+        documentation=escape_python(func.comment or f"{func.name} function"),
+    )
+    return {f"{GLOBALS_PREFIX}{func.name}": entry}
 
 
 @register("slua_lsp_docs")
@@ -21,9 +34,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
     #     type_aliases = {a.name: a for a in slua_definitions.typeAliases}
 
-    docs = remove_nones(
-        version=1,
-    )
+    docs = {}
 
     #     file = io.StringIO()
     #     file.write("""# Second Life SLua (Server Lua) standard library definition file for selene.
@@ -86,16 +97,6 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #             observes=param.observes,
     #         )
 
-    #     def selene_function(func: SLuaFunction, method=False) -> dict:
-    #         parameters = func.parameters[1:] if method else func.parameters
-    #         return remove_nones(
-    #             method=method or None,
-    #             deprecated={"message": func.comment} if func.deprecated else None,
-    #             args=[selene_param(a) for a in parameters],
-    #             must_use=func.must_use or None,
-    #             description=func.comment or None,
-    #         )
-
     #     def selene_class(class_: SLuaClassDeclaration) -> dict:
     #         fields = {}
     #         for method in class_.methods:
@@ -143,10 +144,10 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
     #         if not const.private and not const.slua_removed:
     #             selene["globals"][const.name] = selene_property(const)
-    #     # for func in slua_definitions.builtinFunctions:
-    #     #     selene["globals"][func.name] = func.to_selene_dict()
-    #     for func in slua_definitions.globalFunctions:
-    #         selene["globals"][func.name] = selene_function(func)
+    # for func in slua_definitions.builtinFunctions:
+    #     selene["globals"][func.name] = func.to_selene_dict()
+    for func in slua_definitions.globalFunctions:
+        docs.update(doc_function(func))
     #     for module in sorted(modules.values(), key=lambda x: x.name):
     #         if module.name not in {"ll", "llcompat"}:
     #             selene["globals"].update(selene_module(module))

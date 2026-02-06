@@ -1,3 +1,18 @@
 {
-    "version": 1
+    "version": 1,
+    "@sl-slua/global/dangerouslyexecuterequiredmodule": {
+        "documentation": "Dangerously executes a required module function"
+    },
+    "@sl-slua/global/touuid": {
+        "documentation": "Converts a string, buffer, or uuid to a uuid, returns nil if invalid"
+    },
+    "@sl-slua/global/tovector": {
+        "documentation": "Converts a string to a vector, returns nil if invalid"
+    },
+    "@sl-slua/global/toquaternion": {
+        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+    },
+    "@sl-slua/global/torotation": {
+        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+    }
 }
