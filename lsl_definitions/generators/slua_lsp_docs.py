@@ -4,6 +4,7 @@ https://github.com/MaximumADHD/Roblox-Client-Tracker/blob/roblox/api-docs/en-us.
 
 from __future__ import annotations
 
+import dataclasses
 import json
 
 from lsl_definitions.generators.base import register
@@ -11,6 +12,8 @@ from lsl_definitions.lsl import LSLDefinitions
 from lsl_definitions.slua import (
     SLuaDefinitions,
     SLuaFunction,
+    SLuaModule,
+    SLuaProperty,
 )
 from lsl_definitions.utils import (
     escape_python,
@@ -20,24 +23,54 @@ from lsl_definitions.utils import (
 GLOBALS_PREFIX = "@sl-slua/global/"
 
 
-def doc_url(module: str | None, func: str) -> str | None:
+def doc_url(module: str | None, func: str | None) -> str | None:
     # TODO: None of these links actually exist
     if module == "ll":
         return f"https://create.secondlife.com/script/slua-reference/functions/ll{func}/"
-    elif func in {"toquaternion", "tovector"}:
+    if func in {"toquaternion", "tovector"}:
         return f"https://create.secondlife.com/script/slua-reference/{func}/"
-    elif module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
-        return f"https://create.secondlife.com/script/slua-reference/{module}/"
-    else:
-        return None
+    if module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
+        if func is None:
+            return f"https://create.secondlife.com/script/slua-reference/{module}/"
+    return None
 
 
-def doc_function(func: SLuaFunction, method=False) -> dict:
-    entry = remove_nones(
-        documentation=escape_python(func.comment or f"{func.name} function"),
-        learn_more_link=doc_url(None, func.name),
-    )
-    return {f"{GLOBALS_PREFIX}{func.name}": entry}
+@dataclasses.dataclass
+class DocBuilder:
+    docs: dict = dataclasses.field(default_factory=dict)
+
+    def add_function(self, func: SLuaFunction, module: str | None = None, method=False):
+        module_prefix = f"{module}." if module else ""
+        entry = remove_nones(
+            documentation=escape_python(func.comment or f"{func.name} function"),
+            learn_more_link=doc_url(module, func.name),
+        )
+        self.docs[f"{GLOBALS_PREFIX}{module_prefix}{func.name}"] = entry
+
+    def add_constant(self, const: SLuaProperty, module: str | None = None):
+        module_prefix = f"{module}." if module else ""
+        entry = remove_nones(
+            documentation=escape_python(const.comment or f"{const.name} constant"),
+            learn_more_link=doc_url(module, const.name),
+        )
+        self.docs[f"{GLOBALS_PREFIX}{module_prefix}{const.name}"] = entry
+
+    def add_module(self, module: SLuaModule) -> None:
+        if module.callable:
+            self.add_function(module.callable)
+        else:
+            self.docs[f"{GLOBALS_PREFIX}{module.name}"] = remove_nones(
+                documentation=escape_python(module.comment),
+                learn_more_link=doc_url(module.name, None),
+            )
+        # for const in sorted(self.constants, key=lambda x: x.name)
+        for const in module.constants:
+            if not const.private:
+                self.add_constant(const, module=module.name)
+        # for func in sorted(self.functions, key=lambda x: x.name)
+        for func in module.functions:
+            if not func.private:
+                self.add_function(func, module=module.name)
 
 
 @register("slua_lsp_docs")
@@ -47,7 +80,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
     #     type_aliases = {a.name: a for a in slua_definitions.typeAliases}
 
-    docs = {}
+    builder = DocBuilder()
 
     #     file = io.StringIO()
     #     file.write("""# Second Life SLua (Server Lua) standard library definition file for selene.
@@ -118,38 +151,16 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #             fields[prop.name] = selene_property(prop)
     #         return fields
 
-    #     def selene_module(module: SLuaModule) -> dict:
-    #         globals = {}
-    #         if module.callable:
-    #             globals[module.name] = selene_function(module.callable)
-    #         globals.update(
-    #             {
-    #                 f"{module.name}.{const.name}": selene_property(const)
-    #                 # for func in sorted(self.functions, key=lambda x: x.name)
-    #                 for const in module.constants
-    #                 if not const.private
-    #             }
-    #         )
-    #         globals.update(
-    #             {
-    #                 f"{module.name}.{func.name}": selene_function(func)
-    #                 # for func in sorted(self.functions, key=lambda x: x.name)
-    #                 for func in module.functions
-    #                 if not func.private
-    #             }
-    #         )
-    #         return globals
-
-    #     # Duplicate quaternion module as rotation. The callable aspect of quaternion
-    #     # prevents us from being able to de-duplicate this with structs.
-    #     modules = {m.name: m for m in slua_definitions.modules}
-    #     modules["rotation"] = SLuaModule(
-    #         name="rotation",
-    #         comment=modules["quaternion"].comment,
-    #         callable=modules["quaternion"].callable,
-    #         constants=modules["quaternion"].constants,
-    #         functions=modules["quaternion"].functions,
-    #     )
+    # Duplicate quaternion module as rotation. The callable aspect of quaternion
+    # prevents us from being able to de-duplicate this with structs.
+    modules = {m.name: m for m in slua_definitions.modules}
+    modules["rotation"] = SLuaModule(
+        name="rotation",
+        comment=modules["quaternion"].comment,
+        callable=modules["quaternion"].callable,
+        constants=modules["quaternion"].constants,
+        functions=modules["quaternion"].functions,
+    )
 
     #     for const in slua_definitions.globalVariables:
     #         if not const.private and const.name != "rotation":
@@ -160,10 +171,10 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
-        docs.update(doc_function(func))
-    #     for module in sorted(modules.values(), key=lambda x: x.name):
-    #         if module.name not in {"ll", "llcompat"}:
-    #             selene["globals"].update(selene_module(module))
+        builder.add_function(func)
+    for module in sorted(modules.values(), key=lambda x: x.name):
+        if module.name not in {"ll", "llcompat"}:
+            builder.add_module(module)
     #     selene["globals"].update(selene_module(modules["ll"]))
     #     selene["globals"].update(selene_module(modules["llcompat"]))
     #     for class_ in classes.values():
@@ -176,4 +187,4 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     for method_name in ["on", "once", "off", "listeners"]:
     #         selene["structs"]["LLEvents"][method_name]["args"][0]["type"] = event_names
 
-    return json.dumps(docs, indent=4)
+    return json.dumps(builder.docs, indent=4)
