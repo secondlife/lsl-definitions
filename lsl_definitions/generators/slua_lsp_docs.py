@@ -16,17 +16,23 @@ from lsl_definitions.slua import (
     SLuaProperty,
 )
 from lsl_definitions.utils import (
-    escape_python,
     remove_nones,
 )
 
 GLOBALS_PREFIX = "@sl-slua/global/"
 
 
+def htmlize(text: str) -> str:
+    text = text.replace("\\n", "\n").strip()
+    text = text.replace("\n", "<br>")
+    text = text.replace("    ", "&nbsp;&nbsp;")
+    return text
+
+
 def doc_url(module: str | None, func: str | None) -> str | None:
     # TODO: None of these links actually exist
-    if module == "ll":
-        return f"https://create.secondlife.com/script/slua-reference/functions/ll{func}/"
+    if module == "ll" and func is not None:
+        return f"https://create.secondlife.com/script/slua-reference/functions/ll{func.lower()}/"
     if func in {"toquaternion", "tovector"}:
         return f"https://create.secondlife.com/script/slua-reference/{func}/"
     if module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
@@ -42,7 +48,7 @@ class DocBuilder:
     def add_function(self, func: SLuaFunction, module: str | None = None, method=False):
         module_prefix = f"{module}." if module else ""
         entry = remove_nones(
-            documentation=escape_python(func.comment or f"{func.name} function"),
+            documentation=htmlize(func.comment or f"{func.name} function"),
             learn_more_link=doc_url(module, func.name),
         )
         self.docs[f"{GLOBALS_PREFIX}{module_prefix}{func.name}"] = entry
@@ -50,7 +56,7 @@ class DocBuilder:
     def add_constant(self, const: SLuaProperty, module: str | None = None):
         module_prefix = f"{module}." if module else ""
         entry = remove_nones(
-            documentation=escape_python(const.comment or f"{const.name} constant"),
+            documentation=htmlize(const.comment or f"{const.name} constant"),
             learn_more_link=doc_url(module, const.name),
         )
         self.docs[f"{GLOBALS_PREFIX}{module_prefix}{const.name}"] = entry
@@ -60,7 +66,7 @@ class DocBuilder:
             self.add_function(module.callable)
         else:
             self.docs[f"{GLOBALS_PREFIX}{module.name}"] = remove_nones(
-                documentation=escape_python(module.comment),
+                documentation=htmlize(module.comment),
                 learn_more_link=doc_url(module.name, None),
             )
         # for const in sorted(self.constants, key=lambda x: x.name)
@@ -76,7 +82,7 @@ class DocBuilder:
 @register("slua_lsp_docs")
 def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua standard library for Luau LSP docs.json"""
-    # slua_definitions.generate_ll_modules(definitions)
+    slua_definitions.generate_ll_modules(definitions)
     #     classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
     #     type_aliases = {a.name: a for a in slua_definitions.typeAliases}
 
@@ -175,7 +181,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             builder.add_module(module)
-    #     selene["globals"].update(selene_module(modules["ll"]))
+    builder.add_module(modules["ll"])
     #     selene["globals"].update(selene_module(modules["llcompat"]))
     #     for class_ in classes.values():
     #         selene["structs"][class_.name] = selene_class(class_)
