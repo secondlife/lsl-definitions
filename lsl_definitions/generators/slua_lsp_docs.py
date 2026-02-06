@@ -26,6 +26,7 @@ def htmlize(text: str) -> str:
     text = text.replace("\\n", "\n").strip()
     text = text.replace("\n", "<br>")
     text = text.replace("    ", "&nbsp;&nbsp;")
+    text = text.replace("\t", "&nbsp;")
     return text
 
 
@@ -171,9 +172,6 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     for const in slua_definitions.globalVariables:
     #         if not const.private and const.name != "rotation":
     #             selene["globals"][const.name] = selene_property(const)
-    #     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-    #         if not const.private and not const.slua_removed:
-    #             selene["globals"][const.name] = selene_property(const)
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
@@ -183,6 +181,9 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
             builder.add_module(module)
     builder.add_module(modules["ll"])
     #     selene["globals"].update(selene_module(modules["llcompat"]))
+    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+        if not const.private and not const.slua_removed:
+            builder.add_constant(const)
     #     for class_ in classes.values():
     #         selene["structs"][class_.name] = selene_class(class_)
 

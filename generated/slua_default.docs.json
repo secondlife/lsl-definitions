@@ -873,7 +873,7 @@
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/lldetectedtouchuv/"
     },
     "@sl-slua/global/ll.DetectedType": {
-        "documentation": "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object.<br>Returns 0 if number is not a valid index.<br>Note that number is a bit-field, so comparisons need to be a bitwise checked. e.g.:<br>integer iType = llDetectedType(0);<br>{<br>\t// ...do stuff with the agent<br>}",
+        "documentation": "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object.<br>Returns 0 if number is not a valid index.<br>Note that number is a bit-field, so comparisons need to be a bitwise checked. e.g.:<br>integer iType = llDetectedType(0);<br>{<br>&nbsp;// ...do stuff with the agent<br>}",
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/lldetectedtype/"
     },
     "@sl-slua/global/ll.DetectedVel": {
@@ -1145,7 +1145,7 @@
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llgetlinkkey/"
     },
     "@sl-slua/global/ll.GetLinkMedia": {
-        "documentation": "Get the media parameters for a particular face on linked prim, given the desired list of parameter names. Returns a list of values in the order requested.\tReturns an empty list if no media exists on the face.",
+        "documentation": "Get the media parameters for a particular face on linked prim, given the desired list of parameter names. Returns a list of values in the order requested.&nbsp;Returns an empty list if no media exists on the face.",
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llgetlinkmedia/"
     },
     "@sl-slua/global/ll.GetLinkName": {
@@ -1785,7 +1785,7 @@
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/lllistenremove/"
     },
     "@sl-slua/global/ll.LoadURL": {
-        "documentation": "Shows dialog to avatar AvatarID offering to load web page at URL.\tIf user clicks yes, launches their web browser.<br>llLoadURL displays a dialogue box to the user, offering to load the specified web page using the default web browser.",
+        "documentation": "Shows dialog to avatar AvatarID offering to load web page at URL.&nbsp;If user clicks yes, launches their web browser.<br>llLoadURL displays a dialogue box to the user, offering to load the specified web page using the default web browser.",
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llloadurl/"
     },
     "@sl-slua/global/ll.Log": {
@@ -2245,7 +2245,7 @@
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llsetcontenttype/"
     },
     "@sl-slua/global/ll.SetDamage": {
-        "documentation": "Sets the amount of damage that will be done to an avatar that this task hits.\tTask will be killed.<br>Sets the amount of damage that will be done to an avatar that this object hits. This object will be destroyed on damaging an avatar, and no collision event is triggered.",
+        "documentation": "Sets the amount of damage that will be done to an avatar that this task hits.&nbsp;Task will be killed.<br>Sets the amount of damage that will be done to an avatar that this object hits. This object will be destroyed on damaging an avatar, and no collision event is triggered.",
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llsetdamage/"
     },
     "@sl-slua/global/ll.SetEnvironment": {
@@ -2675,5 +2675,3017 @@
     "@sl-slua/global/ll.sRGB2Linear": {
         "documentation": "Converts a color from the sRGB to the linear colorspace.",
         "learn_more_link": "https://create.secondlife.com/script/slua-reference/functions/llsrgb2linear/"
+    },
+    "@sl-slua/global/ACTIVE": {
+        "documentation": "Objects in world that are running a script or currently physically moving."
+    },
+    "@sl-slua/global/AGENT": {
+        "documentation": "Objects in world that are agents."
+    },
+    "@sl-slua/global/AGENT_ALWAYS_RUN": {
+        "documentation": "AGENT_ALWAYS_RUN constant"
+    },
+    "@sl-slua/global/AGENT_ATTACHMENTS": {
+        "documentation": "The agent has attachments."
+    },
+    "@sl-slua/global/AGENT_AUTOMATED": {
+        "documentation": "The agent has been identified as a scripted agent"
+    },
+    "@sl-slua/global/AGENT_AUTOPILOT": {
+        "documentation": "AGENT_AUTOPILOT constant"
+    },
+    "@sl-slua/global/AGENT_AWAY": {
+        "documentation": "AGENT_AWAY constant"
+    },
+    "@sl-slua/global/AGENT_BUSY": {
+        "documentation": "AGENT_BUSY constant"
+    },
+    "@sl-slua/global/AGENT_BY_LEGACY_NAME": {
+        "documentation": "AGENT_BY_LEGACY_NAME constant"
+    },
+    "@sl-slua/global/AGENT_BY_USERNAME": {
+        "documentation": "AGENT_BY_USERNAME constant"
+    },
+    "@sl-slua/global/AGENT_CROUCHING": {
+        "documentation": "AGENT_CROUCHING constant"
+    },
+    "@sl-slua/global/AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT": {
+        "documentation": "The agent is floating via scripted attachment."
+    },
+    "@sl-slua/global/AGENT_FLYING": {
+        "documentation": "The agent is flying."
+    },
+    "@sl-slua/global/AGENT_IN_AIR": {
+        "documentation": "AGENT_IN_AIR constant"
+    },
+    "@sl-slua/global/AGENT_LIST_PARCEL": {
+        "documentation": "Agents on the same parcel where the script is running."
+    },
+    "@sl-slua/global/AGENT_LIST_PARCEL_OWNER": {
+        "documentation": "Agents on any parcel in the region where the parcel owner is the same as the owner of the parcel under the scripted object."
+    },
+    "@sl-slua/global/AGENT_LIST_REGION": {
+        "documentation": "All agents in the region."
+    },
+    "@sl-slua/global/AGENT_MOUSELOOK": {
+        "documentation": "AGENT_MOUSELOOK constant"
+    },
+    "@sl-slua/global/AGENT_ON_OBJECT": {
+        "documentation": "AGENT_ON_OBJECT constant"
+    },
+    "@sl-slua/global/AGENT_SCRIPTED": {
+        "documentation": "The agent has scripted attachments."
+    },
+    "@sl-slua/global/AGENT_SITTING": {
+        "documentation": "AGENT_SITTING constant"
+    },
+    "@sl-slua/global/AGENT_TYPING": {
+        "documentation": "AGENT_TYPING constant"
+    },
+    "@sl-slua/global/AGENT_WALKING": {
+        "documentation": "AGENT_WALKING constant"
+    },
+    "@sl-slua/global/ALL_SIDES": {
+        "documentation": "ALL_SIDES constant"
+    },
+    "@sl-slua/global/ANIM_ON": {
+        "documentation": "Texture animation is on."
+    },
+    "@sl-slua/global/ATTACH_ANY_HUD": {
+        "documentation": "Filtering for any HUD attachment."
+    },
+    "@sl-slua/global/ATTACH_AVATAR_CENTER": {
+        "documentation": "Attach to the avatar's geometric centre."
+    },
+    "@sl-slua/global/ATTACH_BACK": {
+        "documentation": "Attach to the avatar's back."
+    },
+    "@sl-slua/global/ATTACH_BELLY": {
+        "documentation": "Attach to the avatar's belly."
+    },
+    "@sl-slua/global/ATTACH_CHEST": {
+        "documentation": "Attach to the avatar's chest."
+    },
+    "@sl-slua/global/ATTACH_CHIN": {
+        "documentation": "Attach to the avatar's chin."
+    },
+    "@sl-slua/global/ATTACH_FACE_JAW": {
+        "documentation": "Attach to the avatar's jaw."
+    },
+    "@sl-slua/global/ATTACH_FACE_LEAR": {
+        "documentation": "Attach to the avatar's left ear (extended)."
+    },
+    "@sl-slua/global/ATTACH_FACE_LEYE": {
+        "documentation": "Attach to the avatar's left eye (extended)."
+    },
+    "@sl-slua/global/ATTACH_FACE_REAR": {
+        "documentation": "Attach to the avatar's right ear (extended)."
+    },
+    "@sl-slua/global/ATTACH_FACE_REYE": {
+        "documentation": "Attach to the avatar's right eye (extended)."
+    },
+    "@sl-slua/global/ATTACH_FACE_TONGUE": {
+        "documentation": "Attach to the avatar's tongue."
+    },
+    "@sl-slua/global/ATTACH_GROIN": {
+        "documentation": "Attach to the avatar's groin."
+    },
+    "@sl-slua/global/ATTACH_HEAD": {
+        "documentation": "Attach to the avatar's head."
+    },
+    "@sl-slua/global/ATTACH_HIND_LFOOT": {
+        "documentation": "Attach to the avatar's left hind foot."
+    },
+    "@sl-slua/global/ATTACH_HIND_RFOOT": {
+        "documentation": "Attach to the avatar's right hind foot."
+    },
+    "@sl-slua/global/ATTACH_HUD_BOTTOM": {
+        "documentation": "ATTACH_HUD_BOTTOM constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_BOTTOM_LEFT": {
+        "documentation": "ATTACH_HUD_BOTTOM_LEFT constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_BOTTOM_RIGHT": {
+        "documentation": "ATTACH_HUD_BOTTOM_RIGHT constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_CENTER_1": {
+        "documentation": "ATTACH_HUD_CENTER_1 constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_CENTER_2": {
+        "documentation": "ATTACH_HUD_CENTER_2 constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_TOP_CENTER": {
+        "documentation": "ATTACH_HUD_TOP_CENTER constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_TOP_LEFT": {
+        "documentation": "ATTACH_HUD_TOP_LEFT constant"
+    },
+    "@sl-slua/global/ATTACH_HUD_TOP_RIGHT": {
+        "documentation": "ATTACH_HUD_TOP_RIGHT constant"
+    },
+    "@sl-slua/global/ATTACH_LEAR": {
+        "documentation": "Attach to the avatar's left ear."
+    },
+    "@sl-slua/global/ATTACH_LEFT_PEC": {
+        "documentation": "Attach to the avatar's left pectoral."
+    },
+    "@sl-slua/global/ATTACH_LEYE": {
+        "documentation": "Attach to the avatar's left eye."
+    },
+    "@sl-slua/global/ATTACH_LFOOT": {
+        "documentation": "Attach to the avatar's left foot."
+    },
+    "@sl-slua/global/ATTACH_LHAND": {
+        "documentation": "Attach to the avatar's left hand."
+    },
+    "@sl-slua/global/ATTACH_LHAND_RING1": {
+        "documentation": "Attach to the avatar's left ring finger."
+    },
+    "@sl-slua/global/ATTACH_LHIP": {
+        "documentation": "Attach to the avatar's left hip."
+    },
+    "@sl-slua/global/ATTACH_LLARM": {
+        "documentation": "Attach to the avatar's left lower arm."
+    },
+    "@sl-slua/global/ATTACH_LLLEG": {
+        "documentation": "Attach to the avatar's lower left leg."
+    },
+    "@sl-slua/global/ATTACH_LPEC": {
+        "documentation": "Attach to the avatar's right pectoral. (Deprecated, use ATTACH_RIGHT_PEC)"
+    },
+    "@sl-slua/global/ATTACH_LSHOULDER": {
+        "documentation": "Attach to the avatar's left shoulder."
+    },
+    "@sl-slua/global/ATTACH_LUARM": {
+        "documentation": "Attach to the avatar's left upper arm."
+    },
+    "@sl-slua/global/ATTACH_LULEG": {
+        "documentation": "Attach to the avatar's lower upper leg."
+    },
+    "@sl-slua/global/ATTACH_LWING": {
+        "documentation": "Attach to the avatar's left wing."
+    },
+    "@sl-slua/global/ATTACH_MOUTH": {
+        "documentation": "Attach to the avatar's mouth."
+    },
+    "@sl-slua/global/ATTACH_NECK": {
+        "documentation": "Attach to the avatar's neck."
+    },
+    "@sl-slua/global/ATTACH_NOSE": {
+        "documentation": "Attach to the avatar's nose."
+    },
+    "@sl-slua/global/ATTACH_PELVIS": {
+        "documentation": "Attach to the avatar's pelvis."
+    },
+    "@sl-slua/global/ATTACH_REAR": {
+        "documentation": "Attach to the avatar's right ear."
+    },
+    "@sl-slua/global/ATTACH_REYE": {
+        "documentation": "Attach to the avatar's right eye."
+    },
+    "@sl-slua/global/ATTACH_RFOOT": {
+        "documentation": "Attach to the avatar's right foot."
+    },
+    "@sl-slua/global/ATTACH_RHAND": {
+        "documentation": "Attach to the avatar's right hand."
+    },
+    "@sl-slua/global/ATTACH_RHAND_RING1": {
+        "documentation": "Attach to the avatar's right ring finger."
+    },
+    "@sl-slua/global/ATTACH_RHIP": {
+        "documentation": "Attach to the avatar's right hip."
+    },
+    "@sl-slua/global/ATTACH_RIGHT_PEC": {
+        "documentation": "Attach to the avatar's right pectoral."
+    },
+    "@sl-slua/global/ATTACH_RLARM": {
+        "documentation": "Attach to the avatar's right lower arm."
+    },
+    "@sl-slua/global/ATTACH_RLLEG": {
+        "documentation": "Attach to the avatar's right lower leg."
+    },
+    "@sl-slua/global/ATTACH_RPEC": {
+        "documentation": "Attach to the avatar's left pectoral. (deprecated, use ATTACH_LEFT_PEC)"
+    },
+    "@sl-slua/global/ATTACH_RSHOULDER": {
+        "documentation": "Attach to the avatar's right shoulder."
+    },
+    "@sl-slua/global/ATTACH_RUARM": {
+        "documentation": "Attach to the avatar's right upper arm."
+    },
+    "@sl-slua/global/ATTACH_RULEG": {
+        "documentation": "Attach to the avatar's right upper leg."
+    },
+    "@sl-slua/global/ATTACH_RWING": {
+        "documentation": "Attach to the avatar's right wing."
+    },
+    "@sl-slua/global/ATTACH_TAIL_BASE": {
+        "documentation": "Attach to the avatar's tail base."
+    },
+    "@sl-slua/global/ATTACH_TAIL_TIP": {
+        "documentation": "Attach to the avatar's tail tip."
+    },
+    "@sl-slua/global/AVOID_CHARACTERS": {
+        "documentation": "AVOID_CHARACTERS constant"
+    },
+    "@sl-slua/global/AVOID_DYNAMIC_OBSTACLES": {
+        "documentation": "AVOID_DYNAMIC_OBSTACLES constant"
+    },
+    "@sl-slua/global/AVOID_NONE": {
+        "documentation": "AVOID_NONE constant"
+    },
+    "@sl-slua/global/BEACON_MAP": {
+        "documentation": "Cause llMapBeacon to optionally display and focus the world map on the avatar's viewer."
+    },
+    "@sl-slua/global/CAMERA_ACTIVE": {
+        "documentation": "CAMERA_ACTIVE constant"
+    },
+    "@sl-slua/global/CAMERA_BEHINDNESS_ANGLE": {
+        "documentation": "CAMERA_BEHINDNESS_ANGLE constant"
+    },
+    "@sl-slua/global/CAMERA_BEHINDNESS_LAG": {
+        "documentation": "CAMERA_BEHINDNESS_LAG constant"
+    },
+    "@sl-slua/global/CAMERA_DISTANCE": {
+        "documentation": "CAMERA_DISTANCE constant"
+    },
+    "@sl-slua/global/CAMERA_FOCUS": {
+        "documentation": "CAMERA_FOCUS constant"
+    },
+    "@sl-slua/global/CAMERA_FOCUS_LAG": {
+        "documentation": "CAMERA_FOCUS_LAG constant"
+    },
+    "@sl-slua/global/CAMERA_FOCUS_LOCKED": {
+        "documentation": "CAMERA_FOCUS_LOCKED constant"
+    },
+    "@sl-slua/global/CAMERA_FOCUS_OFFSET": {
+        "documentation": "CAMERA_FOCUS_OFFSET constant"
+    },
+    "@sl-slua/global/CAMERA_FOCUS_THRESHOLD": {
+        "documentation": "CAMERA_FOCUS_THRESHOLD constant"
+    },
+    "@sl-slua/global/CAMERA_PITCH": {
+        "documentation": "CAMERA_PITCH constant"
+    },
+    "@sl-slua/global/CAMERA_POSITION": {
+        "documentation": "CAMERA_POSITION constant"
+    },
+    "@sl-slua/global/CAMERA_POSITION_LAG": {
+        "documentation": "CAMERA_POSITION_LAG constant"
+    },
+    "@sl-slua/global/CAMERA_POSITION_LOCKED": {
+        "documentation": "CAMERA_POSITION_LOCKED constant"
+    },
+    "@sl-slua/global/CAMERA_POSITION_THRESHOLD": {
+        "documentation": "CAMERA_POSITION_THRESHOLD constant"
+    },
+    "@sl-slua/global/CHANGED_ALLOWED_DROP": {
+        "documentation": "The object inventory has changed because an item was added through the llAllowInventoryDrop interface."
+    },
+    "@sl-slua/global/CHANGED_COLOR": {
+        "documentation": "The object color has changed."
+    },
+    "@sl-slua/global/CHANGED_INVENTORY": {
+        "documentation": "The object inventory has changed."
+    },
+    "@sl-slua/global/CHANGED_LINK": {
+        "documentation": "The object has linked or its links were broken."
+    },
+    "@sl-slua/global/CHANGED_MEDIA": {
+        "documentation": "CHANGED_MEDIA constant"
+    },
+    "@sl-slua/global/CHANGED_OWNER": {
+        "documentation": "The object has changed ownership."
+    },
+    "@sl-slua/global/CHANGED_REGION": {
+        "documentation": "The object has changed region."
+    },
+    "@sl-slua/global/CHANGED_REGION_START": {
+        "documentation": "The region this object is in has just come online."
+    },
+    "@sl-slua/global/CHANGED_RENDER_MATERIAL": {
+        "documentation": "The render material has changed."
+    },
+    "@sl-slua/global/CHANGED_SCALE": {
+        "documentation": "The object scale (size) has changed."
+    },
+    "@sl-slua/global/CHANGED_SHAPE": {
+        "documentation": "The object base shape has changed, e.g., a box to a cylinder."
+    },
+    "@sl-slua/global/CHANGED_TELEPORT": {
+        "documentation": "The avatar to whom this object is attached has teleported."
+    },
+    "@sl-slua/global/CHANGED_TEXTURE": {
+        "documentation": "The texture offset, scale rotation, or simply the object texture has changed."
+    },
+    "@sl-slua/global/CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES": {
+        "documentation": "If set to false, character will not attempt to catch up on lost time when pathfinding performance is low, potentially providing more reliable movement (albeit while potentially appearing to be more stuttery). Default is true to match pre-existing behavior."
+    },
+    "@sl-slua/global/CHARACTER_AVOIDANCE_MODE": {
+        "documentation": "Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both."
+    },
+    "@sl-slua/global/CHARACTER_CMD_JUMP": {
+        "documentation": "Makes the character jump. Requires an additional parameter, the height to jump, between 0.1m and 2.0m. This must be provided as the first element of the llExecCharacterCmd option list."
+    },
+    "@sl-slua/global/CHARACTER_CMD_SMOOTH_STOP": {
+        "documentation": "CHARACTER_CMD_SMOOTH_STOP constant"
+    },
+    "@sl-slua/global/CHARACTER_CMD_STOP": {
+        "documentation": "Stops any current pathfinding operation."
+    },
+    "@sl-slua/global/CHARACTER_DESIRED_SPEED": {
+        "documentation": "Speed of pursuit in meters per second."
+    },
+    "@sl-slua/global/CHARACTER_DESIRED_TURN_SPEED": {
+        "documentation": "The character's maximum speed while turning about the Z axis. - Note that this is only loosely enforced."
+    },
+    "@sl-slua/global/CHARACTER_LENGTH": {
+        "documentation": "Set collision capsule length - cannot be less than two times the radius."
+    },
+    "@sl-slua/global/CHARACTER_MAX_ACCEL": {
+        "documentation": "The character's maximum acceleration rate."
+    },
+    "@sl-slua/global/CHARACTER_MAX_DECEL": {
+        "documentation": "The character's maximum deceleration rate."
+    },
+    "@sl-slua/global/CHARACTER_MAX_SPEED": {
+        "documentation": "The character's maximum speed."
+    },
+    "@sl-slua/global/CHARACTER_MAX_TURN_RADIUS": {
+        "documentation": "The character's turn radius when travelling at CHARACTER_MAX_TURN_SPEED."
+    },
+    "@sl-slua/global/CHARACTER_ORIENTATION": {
+        "documentation": "Valid options are: VERTICAL, HORIZONTAL."
+    },
+    "@sl-slua/global/CHARACTER_RADIUS": {
+        "documentation": "Set collision capsule radius."
+    },
+    "@sl-slua/global/CHARACTER_STAY_WITHIN_PARCEL": {
+        "documentation": "Determines whether a character can leave its starting parcel.<br>Takes a boolean parameter. If TRUE, the character cannot voluntarilly leave the parcel, but can return to it."
+    },
+    "@sl-slua/global/CHARACTER_TYPE": {
+        "documentation": "Specifies which walk-ability coefficient will be used by this character."
+    },
+    "@sl-slua/global/CHARACTER_TYPE_A": {
+        "documentation": "CHARACTER_TYPE_A constant"
+    },
+    "@sl-slua/global/CHARACTER_TYPE_B": {
+        "documentation": "CHARACTER_TYPE_B constant"
+    },
+    "@sl-slua/global/CHARACTER_TYPE_C": {
+        "documentation": "CHARACTER_TYPE_C constant"
+    },
+    "@sl-slua/global/CHARACTER_TYPE_D": {
+        "documentation": "CHARACTER_TYPE_D constant"
+    },
+    "@sl-slua/global/CHARACTER_TYPE_NONE": {
+        "documentation": "CHARACTER_TYPE_NONE constant"
+    },
+    "@sl-slua/global/CLICK_ACTION_BUY": {
+        "documentation": "When the prim is clicked, the buy dialog is opened."
+    },
+    "@sl-slua/global/CLICK_ACTION_DISABLED": {
+        "documentation": "No click action. No touches detected or passed."
+    },
+    "@sl-slua/global/CLICK_ACTION_IGNORE": {
+        "documentation": "No click action. Object is invisible to the mouse."
+    },
+    "@sl-slua/global/CLICK_ACTION_NONE": {
+        "documentation": "Performs the default action: when the prim is clicked, touch events are triggered."
+    },
+    "@sl-slua/global/CLICK_ACTION_OPEN": {
+        "documentation": "When the prim is clicked, the object inventory dialog is opened."
+    },
+    "@sl-slua/global/CLICK_ACTION_OPEN_MEDIA": {
+        "documentation": "When the prim is touched, the web media dialog is opened."
+    },
+    "@sl-slua/global/CLICK_ACTION_PAY": {
+        "documentation": "When the prim is clicked, the pay dialog is opened."
+    },
+    "@sl-slua/global/CLICK_ACTION_PLAY": {
+        "documentation": "When the prim is clicked, html-on-a-prim is enabled?"
+    },
+    "@sl-slua/global/CLICK_ACTION_SIT": {
+        "documentation": "When the prim is clicked, the avatar sits upon it."
+    },
+    "@sl-slua/global/CLICK_ACTION_TOUCH": {
+        "documentation": "When the prim is clicked, touch events are triggered."
+    },
+    "@sl-slua/global/CLICK_ACTION_ZOOM": {
+        "documentation": "Zoom in on object when clicked."
+    },
+    "@sl-slua/global/COMBAT_CHANNEL": {
+        "documentation": "COMBAT_CHANNEL is an integer constant that, when passed to llRegionSay will add the message to the combat log. A script with a chat listen active on COMBAT_CHANNEL may also monitor the combat log."
+    },
+    "@sl-slua/global/COMBAT_LOG_ID": {
+        "documentation": "Messages from the region to the COMBAT_CHANNEL will all be from this ID.<br> Scripts may filter llListen calls on this ID to receive only system generated combat log messages."
+    },
+    "@sl-slua/global/CONTENT_TYPE_ATOM": {
+        "documentation": "\"application/atom+xml\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_FORM": {
+        "documentation": "\"application/x-www-form-urlencoded\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_HTML": {
+        "documentation": "\"text/html\", only valid for embedded browsers on content owned by the person viewing. Falls back to \"text/plain\" otherwise."
+    },
+    "@sl-slua/global/CONTENT_TYPE_JSON": {
+        "documentation": "\"application/json\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_LLSD": {
+        "documentation": "\"application/llsd+xml\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_RSS": {
+        "documentation": "\"application/rss+xml\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_TEXT": {
+        "documentation": "\"text/plain\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_XHTML": {
+        "documentation": "\"application/xhtml+xml\""
+    },
+    "@sl-slua/global/CONTENT_TYPE_XML": {
+        "documentation": "\"application/xml\""
+    },
+    "@sl-slua/global/CONTROL_BACK": {
+        "documentation": "Test for the avatar move back control."
+    },
+    "@sl-slua/global/CONTROL_DOWN": {
+        "documentation": "Test for the avatar move down control."
+    },
+    "@sl-slua/global/CONTROL_FWD": {
+        "documentation": "Test for the avatar move forward control."
+    },
+    "@sl-slua/global/CONTROL_LBUTTON": {
+        "documentation": "Test for the avatar left button control."
+    },
+    "@sl-slua/global/CONTROL_LEFT": {
+        "documentation": "Test for the avatar move left control."
+    },
+    "@sl-slua/global/CONTROL_ML_LBUTTON": {
+        "documentation": "Test for the avatar left button control while in mouse look."
+    },
+    "@sl-slua/global/CONTROL_RIGHT": {
+        "documentation": "Test for the avatar move right control."
+    },
+    "@sl-slua/global/CONTROL_ROT_LEFT": {
+        "documentation": "Test for the avatar rotate left control."
+    },
+    "@sl-slua/global/CONTROL_ROT_RIGHT": {
+        "documentation": "Test for the avatar rotate right control."
+    },
+    "@sl-slua/global/CONTROL_UP": {
+        "documentation": "Test for the avatar move up control."
+    },
+    "@sl-slua/global/DAMAGEABLE": {
+        "documentation": "Objects in world that are able to process damage."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_ACID": {
+        "documentation": "Damage caused by a caustic substance, such as acid"
+    },
+    "@sl-slua/global/DAMAGE_TYPE_BLUDGEONING": {
+        "documentation": "Damage caused by a blunt object, such as a club."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_COLD": {
+        "documentation": "Damage inflicted by exposure to extreme cold"
+    },
+    "@sl-slua/global/DAMAGE_TYPE_ELECTRIC": {
+        "documentation": "Damage caused by electricity."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_EMOTIONAL": {
+        "documentation": "DAMAGE_TYPE_EMOTIONAL constant"
+    },
+    "@sl-slua/global/DAMAGE_TYPE_FIRE": {
+        "documentation": "Damage inflicted by exposure to heat or flames."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_FORCE": {
+        "documentation": "Damage inflicted by a great force or impact."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_GENERIC": {
+        "documentation": "Generic or legacy damage."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_IMPACT": {
+        "documentation": "System damage generated by impact with land or a prim."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_NECROTIC": {
+        "documentation": "Damage caused by a direct assault on life-force"
+    },
+    "@sl-slua/global/DAMAGE_TYPE_PIERCING": {
+        "documentation": "Damage caused by a piercing object such as a bullet, spear, or arrow."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_POISON": {
+        "documentation": "Damage caused by poison."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_PSYCHIC": {
+        "documentation": "Damage caused by a direct assault on the mind."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_RADIANT": {
+        "documentation": "Damage caused by radiation or extreme light."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_SLASHING": {
+        "documentation": "Damage caused by a slashing object such as a sword or axe."
+    },
+    "@sl-slua/global/DAMAGE_TYPE_SONIC": {
+        "documentation": "Damage caused by loud noises, like a Crash Worship concert."
+    },
+    "@sl-slua/global/DATA_BORN": {
+        "documentation": "The date the agent was born, returned in ISO 8601 format of YYYY-MM-DD."
+    },
+    "@sl-slua/global/DATA_NAME": {
+        "documentation": "The name of the agent."
+    },
+    "@sl-slua/global/DATA_ONLINE": {
+        "documentation": "TRUE for online, FALSE for offline."
+    },
+    "@sl-slua/global/DATA_PAYINFO": {
+        "documentation": "DATA_PAYINFO constant"
+    },
+    "@sl-slua/global/DATA_RATING": {
+        "documentation": "Returns the agent ratings as a comma separated string of six integers. They are:<br>&nbsp;&nbsp;&nbsp;1) Positive rated behaviour<br>&nbsp;&nbsp;&nbsp;2) Negative rated behaviour<br>&nbsp;&nbsp;&nbsp;3) Positive rated appearance<br>&nbsp;&nbsp;&nbsp;4) Negative rated appearance<br>&nbsp;&nbsp;&nbsp;5) Positive rated building<br>&nbsp;&nbsp;&nbsp;6) Negative rated building"
+    },
+    "@sl-slua/global/DATA_SIM_POS": {
+        "documentation": "DATA_SIM_POS constant"
+    },
+    "@sl-slua/global/DATA_SIM_RATING": {
+        "documentation": "DATA_SIM_RATING constant"
+    },
+    "@sl-slua/global/DATA_SIM_STATUS": {
+        "documentation": "DATA_SIM_STATUS constant"
+    },
+    "@sl-slua/global/DEBUG_CHANNEL": {
+        "documentation": "DEBUG_CHANNEL is an integer constant that, when passed to llSay, llWhisper, or llShout as a channel parameter, will print text to the Script Warning/Error Window."
+    },
+    "@sl-slua/global/DEG_TO_RAD": {
+        "documentation": "0.017453293 - Number of radians per degree.<br>&nbsp;&nbsp;&nbsp;You can use this to convert degrees to radians by multiplying the degrees by this number."
+    },
+    "@sl-slua/global/DENSITY": {
+        "documentation": "Used with llSetPhysicsMaterial to enable the density value. Must be between 1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)"
+    },
+    "@sl-slua/global/DEREZ_DIE": {
+        "documentation": "Causes the object to immediately die."
+    },
+    "@sl-slua/global/DEREZ_MAKE_TEMP": {
+        "documentation": "The object is made temporary and will be cleaned up at some later timer."
+    },
+    "@sl-slua/global/DEREZ_TO_INVENTORY": {
+        "documentation": "The object is returned to the inventory of the rezzer."
+    },
+    "@sl-slua/global/ENVIRONMENT_DAYINFO": {
+        "documentation": "Day length, offset and progression."
+    },
+    "@sl-slua/global/ENV_INVALID_AGENT": {
+        "documentation": "Could not find agent with the specified ID"
+    },
+    "@sl-slua/global/ENV_INVALID_RULE": {
+        "documentation": "Attempted to change an unknown property."
+    },
+    "@sl-slua/global/ENV_NOT_EXPERIENCE": {
+        "documentation": "Attempt to change environments outside an experience."
+    },
+    "@sl-slua/global/ENV_NO_ENVIRONMENT": {
+        "documentation": "Could not find environmental settings in object inventory."
+    },
+    "@sl-slua/global/ENV_NO_EXPERIENCE_LAND": {
+        "documentation": "The experience has not been enabled on this land."
+    },
+    "@sl-slua/global/ENV_NO_EXPERIENCE_PERMISSION": {
+        "documentation": "Agent has not granted permission to change environments."
+    },
+    "@sl-slua/global/ENV_NO_PERMISSIONS": {
+        "documentation": "Script does not have permission to modify environment."
+    },
+    "@sl-slua/global/ENV_THROTTLE": {
+        "documentation": "Could not validate values for environment."
+    },
+    "@sl-slua/global/ENV_VALIDATION_FAIL": {
+        "documentation": "Could not validate values for environment."
+    },
+    "@sl-slua/global/EOF": {
+        "documentation": "Indicates the last line of a notecard was read."
+    },
+    "@sl-slua/global/ERR_GENERIC": {
+        "documentation": "ERR_GENERIC constant"
+    },
+    "@sl-slua/global/ERR_MALFORMED_PARAMS": {
+        "documentation": "ERR_MALFORMED_PARAMS constant"
+    },
+    "@sl-slua/global/ERR_PARCEL_PERMISSIONS": {
+        "documentation": "ERR_PARCEL_PERMISSIONS constant"
+    },
+    "@sl-slua/global/ERR_RUNTIME_PERMISSIONS": {
+        "documentation": "ERR_RUNTIME_PERMISSIONS constant"
+    },
+    "@sl-slua/global/ERR_THROTTLED": {
+        "documentation": "ERR_THROTTLED constant"
+    },
+    "@sl-slua/global/ESTATE_ACCESS_ALLOWED_AGENT_ADD": {
+        "documentation": "Add the agent to this estate's Allowed Residents list."
+    },
+    "@sl-slua/global/ESTATE_ACCESS_ALLOWED_AGENT_REMOVE": {
+        "documentation": "Remove the agent from this estate's Allowed Residents list."
+    },
+    "@sl-slua/global/ESTATE_ACCESS_ALLOWED_GROUP_ADD": {
+        "documentation": "Add the group to this estate's Allowed groups list."
+    },
+    "@sl-slua/global/ESTATE_ACCESS_ALLOWED_GROUP_REMOVE": {
+        "documentation": "Remove the group from this estate's Allowed groups list."
+    },
+    "@sl-slua/global/ESTATE_ACCESS_BANNED_AGENT_ADD": {
+        "documentation": "Add the agent to this estate's Banned residents list."
+    },
+    "@sl-slua/global/ESTATE_ACCESS_BANNED_AGENT_REMOVE": {
+        "documentation": "Remove the agent from this estate's Banned residents list."
+    },
+    "@sl-slua/global/FILTER_FLAGS": {
+        "documentation": "Flags to control returned attachments."
+    },
+    "@sl-slua/global/FILTER_FLAG_HUDS": {
+        "documentation": "Include HUDs with matching experience."
+    },
+    "@sl-slua/global/FILTER_INCLUDE": {
+        "documentation": "Include attachment point."
+    },
+    "@sl-slua/global/FORCE_DIRECT_PATH": {
+        "documentation": "Makes character navigate in a straight line toward position. May be set to TRUE or FALSE."
+    },
+    "@sl-slua/global/FRICTION": {
+        "documentation": "Used with llSetPhysicsMaterial to enable the friction value. Must be between 0.0 and 255.0"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_LEFTX": {
+        "documentation": "GAME_CONTROL_AXIS_LEFTX constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_LEFTY": {
+        "documentation": "GAME_CONTROL_AXIS_LEFTY constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_RIGHTX": {
+        "documentation": "GAME_CONTROL_AXIS_RIGHTX constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_RIGHTY": {
+        "documentation": "GAME_CONTROL_AXIS_RIGHTY constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_TRIGGERLEFT": {
+        "documentation": "GAME_CONTROL_AXIS_TRIGGERLEFT constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_TRIGGERRIGHT": {
+        "documentation": "GAME_CONTROL_AXIS_TRIGGERRIGHT constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_A": {
+        "documentation": "GAME_CONTROL_BUTTON_A constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_B": {
+        "documentation": "GAME_CONTROL_BUTTON_B constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_BACK": {
+        "documentation": "GAME_CONTROL_BUTTON_BACK constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_DOWN": {
+        "documentation": "GAME_CONTROL_BUTTON_DPAD_DOWN constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_LEFT": {
+        "documentation": "GAME_CONTROL_BUTTON_DPAD_LEFT constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_RIGHT": {
+        "documentation": "GAME_CONTROL_BUTTON_DPAD_RIGHT constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_UP": {
+        "documentation": "GAME_CONTROL_BUTTON_DPAD_UP constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_GUIDE": {
+        "documentation": "GAME_CONTROL_BUTTON_GUIDE constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_LEFTSHOULDER": {
+        "documentation": "GAME_CONTROL_BUTTON_LEFTSHOULDER constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_LEFTSTICK": {
+        "documentation": "GAME_CONTROL_BUTTON_LEFTSTICK constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_MISC1": {
+        "documentation": "GAME_CONTROL_BUTTON_MISC1 constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE1": {
+        "documentation": "GAME_CONTROL_BUTTON_PADDLE1 constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE2": {
+        "documentation": "GAME_CONTROL_BUTTON_PADDLE2 constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE3": {
+        "documentation": "GAME_CONTROL_BUTTON_PADDLE3 constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE4": {
+        "documentation": "GAME_CONTROL_BUTTON_PADDLE4 constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_RIGHTSHOULDER": {
+        "documentation": "GAME_CONTROL_BUTTON_RIGHTSHOULDER constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_RIGHTSTICK": {
+        "documentation": "GAME_CONTROL_BUTTON_RIGHTSTICK constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_START": {
+        "documentation": "GAME_CONTROL_BUTTON_START constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOUCHPAD": {
+        "documentation": "GAME_CONTROL_BUTTON_TOUCHPAD constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_X": {
+        "documentation": "GAME_CONTROL_BUTTON_X constant"
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_Y": {
+        "documentation": "GAME_CONTROL_BUTTON_Y constant"
+    },
+    "@sl-slua/global/GCNP_RADIUS": {
+        "documentation": "GCNP_RADIUS constant"
+    },
+    "@sl-slua/global/GCNP_STATIC": {
+        "documentation": "GCNP_STATIC constant"
+    },
+    "@sl-slua/global/GRAVITY_MULTIPLIER": {
+        "documentation": "Used with llSetPhysicsMaterial to enable the gravity multiplier value. Must be between -1.0 and +28.0"
+    },
+    "@sl-slua/global/HORIZONTAL": {
+        "documentation": "HORIZONTAL constant"
+    },
+    "@sl-slua/global/HTTP_ACCEPT": {
+        "documentation": "Provide a string value to be included in the HTTP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accepts header value. This replaces the default Second Life HTTP accepts header."
+    },
+    "@sl-slua/global/HTTP_BODY_MAXLENGTH": {
+        "documentation": "HTTP_BODY_MAXLENGTH constant"
+    },
+    "@sl-slua/global/HTTP_BODY_TRUNCATED": {
+        "documentation": "HTTP_BODY_TRUNCATED constant"
+    },
+    "@sl-slua/global/HTTP_CUSTOM_HEADER": {
+        "documentation": "Add an extra custom HTTP header to the request. The first string is the name of the parameter to change, e.g. \"Pragma\", and the second string is the value, e.g. \"no-cache\". Up to 8 custom headers may be configured per request. Note that certain headers, such as the default headers, are blocked for security reasons."
+    },
+    "@sl-slua/global/HTTP_EXTENDED_ERROR": {
+        "documentation": "Report extended error information through http_response event."
+    },
+    "@sl-slua/global/HTTP_METHOD": {
+        "documentation": "HTTP_METHOD constant"
+    },
+    "@sl-slua/global/HTTP_MIMETYPE": {
+        "documentation": "HTTP_MIMETYPE constant"
+    },
+    "@sl-slua/global/HTTP_PRAGMA_NO_CACHE": {
+        "documentation": "Allows enabling/disabling of the \"Pragma: no-cache\" header.<br>Usage: [HTTP_PRAGMA_NO_CACHE, integer SendHeader]. When SendHeader is TRUE, the \"Pragma: no-cache\" header is sent by the script. This matches the default behavior. When SendHeader is FALSE, no \"Pragma\" header is sent by the script."
+    },
+    "@sl-slua/global/HTTP_USER_AGENT": {
+        "documentation": "Provide a string value to be included in the HTTP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User-Agent header value. This is appended to the default value."
+    },
+    "@sl-slua/global/HTTP_VERBOSE_THROTTLE": {
+        "documentation": "HTTP_VERBOSE_THROTTLE constant"
+    },
+    "@sl-slua/global/HTTP_VERIFY_CERT": {
+        "documentation": "HTTP_VERIFY_CERT constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_AUX1": {
+        "documentation": "IMG_USE_BAKED_AUX1 constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_AUX2": {
+        "documentation": "IMG_USE_BAKED_AUX2 constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_AUX3": {
+        "documentation": "IMG_USE_BAKED_AUX3 constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_EYES": {
+        "documentation": "IMG_USE_BAKED_EYES constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_HAIR": {
+        "documentation": "IMG_USE_BAKED_HAIR constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_HEAD": {
+        "documentation": "IMG_USE_BAKED_HEAD constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_LEFTARM": {
+        "documentation": "IMG_USE_BAKED_LEFTARM constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_LEFTLEG": {
+        "documentation": "IMG_USE_BAKED_LEFTLEG constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_LOWER": {
+        "documentation": "IMG_USE_BAKED_LOWER constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_SKIRT": {
+        "documentation": "IMG_USE_BAKED_SKIRT constant"
+    },
+    "@sl-slua/global/IMG_USE_BAKED_UPPER": {
+        "documentation": "IMG_USE_BAKED_UPPER constant"
+    },
+    "@sl-slua/global/INVENTORY_ALL": {
+        "documentation": "INVENTORY_ALL constant"
+    },
+    "@sl-slua/global/INVENTORY_ANIMATION": {
+        "documentation": "INVENTORY_ANIMATION constant"
+    },
+    "@sl-slua/global/INVENTORY_BODYPART": {
+        "documentation": "INVENTORY_BODYPART constant"
+    },
+    "@sl-slua/global/INVENTORY_CLOTHING": {
+        "documentation": "INVENTORY_CLOTHING constant"
+    },
+    "@sl-slua/global/INVENTORY_GESTURE": {
+        "documentation": "INVENTORY_GESTURE constant"
+    },
+    "@sl-slua/global/INVENTORY_LANDMARK": {
+        "documentation": "INVENTORY_LANDMARK constant"
+    },
+    "@sl-slua/global/INVENTORY_MATERIAL": {
+        "documentation": "INVENTORY_MATERIAL constant"
+    },
+    "@sl-slua/global/INVENTORY_NONE": {
+        "documentation": "INVENTORY_NONE constant"
+    },
+    "@sl-slua/global/INVENTORY_NOTECARD": {
+        "documentation": "INVENTORY_NOTECARD constant"
+    },
+    "@sl-slua/global/INVENTORY_OBJECT": {
+        "documentation": "INVENTORY_OBJECT constant"
+    },
+    "@sl-slua/global/INVENTORY_SCRIPT": {
+        "documentation": "INVENTORY_SCRIPT constant"
+    },
+    "@sl-slua/global/INVENTORY_SETTING": {
+        "documentation": "INVENTORY_SETTING constant"
+    },
+    "@sl-slua/global/INVENTORY_SOUND": {
+        "documentation": "INVENTORY_SOUND constant"
+    },
+    "@sl-slua/global/INVENTORY_TEXTURE": {
+        "documentation": "INVENTORY_TEXTURE constant"
+    },
+    "@sl-slua/global/JSON_APPEND": {
+        "documentation": "JSON_APPEND constant"
+    },
+    "@sl-slua/global/JSON_ARRAY": {
+        "documentation": "JSON_ARRAY constant"
+    },
+    "@sl-slua/global/JSON_DELETE": {
+        "documentation": "JSON_DELETE constant"
+    },
+    "@sl-slua/global/JSON_FALSE": {
+        "documentation": "JSON_FALSE constant"
+    },
+    "@sl-slua/global/JSON_INVALID": {
+        "documentation": "JSON_INVALID constant"
+    },
+    "@sl-slua/global/JSON_NULL": {
+        "documentation": "JSON_NULL constant"
+    },
+    "@sl-slua/global/JSON_NUMBER": {
+        "documentation": "JSON_NUMBER constant"
+    },
+    "@sl-slua/global/JSON_OBJECT": {
+        "documentation": "JSON_OBJECT constant"
+    },
+    "@sl-slua/global/JSON_STRING": {
+        "documentation": "JSON_STRING constant"
+    },
+    "@sl-slua/global/JSON_TRUE": {
+        "documentation": "JSON_TRUE constant"
+    },
+    "@sl-slua/global/KFM_CMD_PAUSE": {
+        "documentation": "For use with KFM_COMMAND."
+    },
+    "@sl-slua/global/KFM_CMD_PLAY": {
+        "documentation": "For use with KFM_COMMAND."
+    },
+    "@sl-slua/global/KFM_CMD_STOP": {
+        "documentation": "For use with KFM_COMMAND."
+    },
+    "@sl-slua/global/KFM_COMMAND": {
+        "documentation": "KFM_COMMAND constant"
+    },
+    "@sl-slua/global/KFM_DATA": {
+        "documentation": "KFM_DATA constant"
+    },
+    "@sl-slua/global/KFM_FORWARD": {
+        "documentation": "For use with KFM_MODE."
+    },
+    "@sl-slua/global/KFM_LOOP": {
+        "documentation": "For use with KFM_MODE."
+    },
+    "@sl-slua/global/KFM_MODE": {
+        "documentation": "KFM_MODE constant"
+    },
+    "@sl-slua/global/KFM_PING_PONG": {
+        "documentation": "For use with KFM_MODE."
+    },
+    "@sl-slua/global/KFM_REVERSE": {
+        "documentation": "For use with KFM_MODE."
+    },
+    "@sl-slua/global/KFM_ROTATION": {
+        "documentation": "For use with KFM_DATA."
+    },
+    "@sl-slua/global/KFM_TRANSLATION": {
+        "documentation": "For use with KFM_DATA."
+    },
+    "@sl-slua/global/LAND_LARGE_BRUSH": {
+        "documentation": "Use a large brush size.<br>NOTE: This value is incorrect, a large brush should be 2."
+    },
+    "@sl-slua/global/LAND_LEVEL": {
+        "documentation": "Action to level the land."
+    },
+    "@sl-slua/global/LAND_LOWER": {
+        "documentation": "Action to lower the land."
+    },
+    "@sl-slua/global/LAND_MEDIUM_BRUSH": {
+        "documentation": "Use a medium brush size.<br>NOTE: This value is incorrect, a medium brush should be 1."
+    },
+    "@sl-slua/global/LAND_NOISE": {
+        "documentation": "LAND_NOISE constant"
+    },
+    "@sl-slua/global/LAND_RAISE": {
+        "documentation": "Action to raise the land."
+    },
+    "@sl-slua/global/LAND_REVERT": {
+        "documentation": "LAND_REVERT constant"
+    },
+    "@sl-slua/global/LAND_SMALL_BRUSH": {
+        "documentation": "Use a small brush size.<br>NOTE: This value is incorrect, a small brush should be 0."
+    },
+    "@sl-slua/global/LAND_SMOOTH": {
+        "documentation": "LAND_SMOOTH constant"
+    },
+    "@sl-slua/global/LINKSETDATA_DELETE": {
+        "documentation": "A name:value pair has been removed from the linkset datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_EMEMORY": {
+        "documentation": "A name:value pair was too large to write to the linkset datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_ENOKEY": {
+        "documentation": "The key supplied was empty."
+    },
+    "@sl-slua/global/LINKSETDATA_EPROTECTED": {
+        "documentation": "The name:value pair has been protected from overwrite in the linkset datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_MULTIDELETE": {
+        "documentation": "A CSV list of names removed from the linkset datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_NOTFOUND": {
+        "documentation": "The named key was not found in the datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_NOUPDATE": {
+        "documentation": "The value written to a name in the keystore is the same as the value already there."
+    },
+    "@sl-slua/global/LINKSETDATA_OK": {
+        "documentation": "The name:value pair was written to the datastore."
+    },
+    "@sl-slua/global/LINKSETDATA_RESET": {
+        "documentation": "The linkset datastore has been reset."
+    },
+    "@sl-slua/global/LINKSETDATA_UPDATE": {
+        "documentation": "A name:value pair in the linkset datastore has been changed or created."
+    },
+    "@sl-slua/global/LINK_ALL_CHILDREN": {
+        "documentation": "This targets every object except the root in the linked set."
+    },
+    "@sl-slua/global/LINK_ALL_OTHERS": {
+        "documentation": "This targets every object in the linked set except the object with the script."
+    },
+    "@sl-slua/global/LINK_ROOT": {
+        "documentation": "This targets the root of the linked set."
+    },
+    "@sl-slua/global/LINK_SET": {
+        "documentation": "This targets every object in the linked set."
+    },
+    "@sl-slua/global/LINK_THIS": {
+        "documentation": "The link number of the prim containing the script."
+    },
+    "@sl-slua/global/LIST_STAT_GEOMETRIC_MEAN": {
+        "documentation": "LIST_STAT_GEOMETRIC_MEAN constant"
+    },
+    "@sl-slua/global/LIST_STAT_MAX": {
+        "documentation": "LIST_STAT_MAX constant"
+    },
+    "@sl-slua/global/LIST_STAT_MEAN": {
+        "documentation": "LIST_STAT_MEAN constant"
+    },
+    "@sl-slua/global/LIST_STAT_MEDIAN": {
+        "documentation": "LIST_STAT_MEDIAN constant"
+    },
+    "@sl-slua/global/LIST_STAT_MIN": {
+        "documentation": "LIST_STAT_MIN constant"
+    },
+    "@sl-slua/global/LIST_STAT_NUM_COUNT": {
+        "documentation": "LIST_STAT_NUM_COUNT constant"
+    },
+    "@sl-slua/global/LIST_STAT_RANGE": {
+        "documentation": "LIST_STAT_RANGE constant"
+    },
+    "@sl-slua/global/LIST_STAT_STD_DEV": {
+        "documentation": "LIST_STAT_STD_DEV constant"
+    },
+    "@sl-slua/global/LIST_STAT_SUM": {
+        "documentation": "LIST_STAT_SUM constant"
+    },
+    "@sl-slua/global/LIST_STAT_SUM_SQUARES": {
+        "documentation": "LIST_STAT_SUM_SQUARES constant"
+    },
+    "@sl-slua/global/LOOP": {
+        "documentation": "Loop the texture animation."
+    },
+    "@sl-slua/global/MASK_BASE": {
+        "documentation": "MASK_BASE constant"
+    },
+    "@sl-slua/global/MASK_COMBINED": {
+        "documentation": "Fold permissions for object inventory into results."
+    },
+    "@sl-slua/global/MASK_EVERYONE": {
+        "documentation": "MASK_EVERYONE constant"
+    },
+    "@sl-slua/global/MASK_GROUP": {
+        "documentation": "MASK_GROUP constant"
+    },
+    "@sl-slua/global/MASK_NEXT": {
+        "documentation": "MASK_NEXT constant"
+    },
+    "@sl-slua/global/MASK_OWNER": {
+        "documentation": "MASK_OWNER constant"
+    },
+    "@sl-slua/global/NAK": {
+        "documentation": "Indicates a notecard read was attempted and the notecard was not yet cached on the server."
+    },
+    "@sl-slua/global/NULL_KEY": {
+        "documentation": "NULL_KEY constant"
+    },
+    "@sl-slua/global/OBJECT_ACCOUNT_LEVEL": {
+        "documentation": "Retrieves the account level of an avatar.<br>Returns 0 when the avatar has a basic account,<br> 1 when the avatar has a premium account,<br> 10 when the avatar has a premium plus account,<br> or -1 if the object is not an avatar."
+    },
+    "@sl-slua/global/OBJECT_ANIMATED_COUNT": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the number of associated animated objects"
+    },
+    "@sl-slua/global/OBJECT_ANIMATED_SLOTS_AVAILABLE": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the number of additional animated object attachments allowed."
+    },
+    "@sl-slua/global/OBJECT_ATTACHED_POINT": {
+        "documentation": "Gets the attachment point to which the object is attached.<br>Returns 0 if the object is not an attachment (or is an avatar, etc)."
+    },
+    "@sl-slua/global/OBJECT_ATTACHED_SLOTS_AVAILABLE": {
+        "documentation": "Returns the number of attachment slots available.<br>Returns 0 if the object is not an avatar or none are available."
+    },
+    "@sl-slua/global/OBJECT_BODY_SHAPE_TYPE": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the body type of the avatar, based on shape data.<br>If no data is available, -1.0 is returned.<br>This is normally between 0 and 1.0, with 0.5 and larger considered 'male'"
+    },
+    "@sl-slua/global/OBJECT_CHARACTER_TIME": {
+        "documentation": "Units in seconds"
+    },
+    "@sl-slua/global/OBJECT_CLICK_ACTION": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the click action.<br>The default is 0"
+    },
+    "@sl-slua/global/OBJECT_CREATION_TIME": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the time this object was created"
+    },
+    "@sl-slua/global/OBJECT_CREATOR": {
+        "documentation": "Gets the object's creator key. If id is an avatar, a NULL_KEY is returned."
+    },
+    "@sl-slua/global/OBJECT_DAMAGE": {
+        "documentation": "Gets the damage value assigned to this object."
+    },
+    "@sl-slua/global/OBJECT_DAMAGE_TYPE": {
+        "documentation": "Gets the damage type, if any, assigned to this object."
+    },
+    "@sl-slua/global/OBJECT_DESC": {
+        "documentation": "Gets the object's description. If id is an avatar, an empty string is returned."
+    },
+    "@sl-slua/global/OBJECT_GROUP": {
+        "documentation": "Gets the prims's group key. If id is an avatar, a NULL_KEY is returned."
+    },
+    "@sl-slua/global/OBJECT_GROUP_TAG": {
+        "documentation": "Gets the agent's current group role tag. If id is an object, an empty is returned."
+    },
+    "@sl-slua/global/OBJECT_HEALTH": {
+        "documentation": "Gets current health value for the object."
+    },
+    "@sl-slua/global/OBJECT_HOVER_HEIGHT": {
+        "documentation": "This is a flag used with llGetObjectDetails to get hover height of the avatar<br>If no data is available, 0.0 is returned."
+    },
+    "@sl-slua/global/OBJECT_LAST_OWNER_ID": {
+        "documentation": "Gets the object's last owner ID."
+    },
+    "@sl-slua/global/OBJECT_LINK_NUMBER": {
+        "documentation": "Gets the object's link number or 0 if unlinked."
+    },
+    "@sl-slua/global/OBJECT_MASS": {
+        "documentation": "Get the object's mass"
+    },
+    "@sl-slua/global/OBJECT_MATERIAL": {
+        "documentation": "Get an object's material setting."
+    },
+    "@sl-slua/global/OBJECT_NAME": {
+        "documentation": "Gets the object's name."
+    },
+    "@sl-slua/global/OBJECT_OMEGA": {
+        "documentation": "Gets an object's angular velocity."
+    },
+    "@sl-slua/global/OBJECT_OWNER": {
+        "documentation": "Gets an object's owner's key. If id is group owned, a NULL_KEY is returned."
+    },
+    "@sl-slua/global/OBJECT_PATHFINDING_TYPE": {
+        "documentation": "Returns the pathfinding setting of any object in the region. It returns an integer matching one of the OPT_* constants."
+    },
+    "@sl-slua/global/OBJECT_PERMS": {
+        "documentation": "Gets the objects permissions"
+    },
+    "@sl-slua/global/OBJECT_PERMS_COMBINED": {
+        "documentation": "Gets the object's permissions including any inventory."
+    },
+    "@sl-slua/global/OBJECT_PHANTOM": {
+        "documentation": "Returns boolean, detailing if phantom is enabled or disabled on the object.<br>If id is an avatar or attachment, 0 is returned."
+    },
+    "@sl-slua/global/OBJECT_PHYSICS": {
+        "documentation": "Returns boolean, detailing if physics is enabled or disabled on the object.<br>If id is an avatar or attachment, 0 is returned."
+    },
+    "@sl-slua/global/OBJECT_PHYSICS_COST": {
+        "documentation": "OBJECT_PHYSICS_COST constant"
+    },
+    "@sl-slua/global/OBJECT_POS": {
+        "documentation": "Gets the object's position in region coordinates."
+    },
+    "@sl-slua/global/OBJECT_PRIM_COUNT": {
+        "documentation": "Gets the prim count of the object.  The script and target object  must be owned by the same owner"
+    },
+    "@sl-slua/global/OBJECT_PRIM_EQUIVALENCE": {
+        "documentation": "OBJECT_PRIM_EQUIVALENCE constant"
+    },
+    "@sl-slua/global/OBJECT_RENDER_WEIGHT": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the Avatar_Rendering_Cost of an avatar, based on values reported by nearby viewers.<br>If no data is available, -1 is returned.<br>The maximum render weight stored by the simulator is 500000. When called against an object, 0 is returned."
+    },
+    "@sl-slua/global/OBJECT_RETURN_PARCEL": {
+        "documentation": "OBJECT_RETURN_PARCEL constant"
+    },
+    "@sl-slua/global/OBJECT_RETURN_PARCEL_OWNER": {
+        "documentation": "OBJECT_RETURN_PARCEL_OWNER constant"
+    },
+    "@sl-slua/global/OBJECT_RETURN_REGION": {
+        "documentation": "OBJECT_RETURN_REGION constant"
+    },
+    "@sl-slua/global/OBJECT_REZZER_KEY": {
+        "documentation": "OBJECT_REZZER_KEY constant"
+    },
+    "@sl-slua/global/OBJECT_REZ_TIME": {
+        "documentation": "Get the time when an object was rezzed."
+    },
+    "@sl-slua/global/OBJECT_ROOT": {
+        "documentation": "Gets the id of the root prim of the object requested.<br>If id is an avatar, return the id of the root prim of the linkset the avatar is sitting on (or the avatar's own id if the avatar is not sitting on an object within the region)."
+    },
+    "@sl-slua/global/OBJECT_ROT": {
+        "documentation": "Gets the object's rotation."
+    },
+    "@sl-slua/global/OBJECT_RUNNING_SCRIPT_COUNT": {
+        "documentation": "OBJECT_RUNNING_SCRIPT_COUNT constant"
+    },
+    "@sl-slua/global/OBJECT_SCALE": {
+        "documentation": "Gets the object's size."
+    },
+    "@sl-slua/global/OBJECT_SCRIPT_MEMORY": {
+        "documentation": "OBJECT_SCRIPT_MEMORY constant"
+    },
+    "@sl-slua/global/OBJECT_SCRIPT_TIME": {
+        "documentation": "OBJECT_SCRIPT_TIME constant"
+    },
+    "@sl-slua/global/OBJECT_SELECT_COUNT": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the number of avatars selecting any part of the object"
+    },
+    "@sl-slua/global/OBJECT_SERVER_COST": {
+        "documentation": "OBJECT_SERVER_COST constant"
+    },
+    "@sl-slua/global/OBJECT_SIT_COUNT": {
+        "documentation": "This is a flag used with llGetObjectDetails to get the number of avatars sitting on the object"
+    },
+    "@sl-slua/global/OBJECT_STREAMING_COST": {
+        "documentation": "OBJECT_STREAMING_COST constant"
+    },
+    "@sl-slua/global/OBJECT_TEMP_ATTACHED": {
+        "documentation": "Returns boolean, indicating if object is a temp attachment."
+    },
+    "@sl-slua/global/OBJECT_TEMP_ON_REZ": {
+        "documentation": "Returns boolean, detailing if temporary is enabled or disabled on the object."
+    },
+    "@sl-slua/global/OBJECT_TEXT": {
+        "documentation": "Gets an objects hover text."
+    },
+    "@sl-slua/global/OBJECT_TEXT_ALPHA": {
+        "documentation": "Gets the alpha of an objects hover text."
+    },
+    "@sl-slua/global/OBJECT_TEXT_COLOR": {
+        "documentation": "Gets the color of an objects hover text."
+    },
+    "@sl-slua/global/OBJECT_TOTAL_INVENTORY_COUNT": {
+        "documentation": "Gets the total inventory count of the object.  The script and target object must be owned by the same owner"
+    },
+    "@sl-slua/global/OBJECT_TOTAL_SCRIPT_COUNT": {
+        "documentation": "OBJECT_TOTAL_SCRIPT_COUNT constant"
+    },
+    "@sl-slua/global/OBJECT_UNKNOWN_DETAIL": {
+        "documentation": "OBJECT_UNKNOWN_DETAIL constant"
+    },
+    "@sl-slua/global/OBJECT_VELOCITY": {
+        "documentation": "Gets the object's velocity."
+    },
+    "@sl-slua/global/OPT_AVATAR": {
+        "documentation": "Returned for avatars."
+    },
+    "@sl-slua/global/OPT_CHARACTER": {
+        "documentation": "Returned for pathfinding characters."
+    },
+    "@sl-slua/global/OPT_EXCLUSION_VOLUME": {
+        "documentation": "Returned for exclusion volumes."
+    },
+    "@sl-slua/global/OPT_LEGACY_LINKSET": {
+        "documentation": "Returned for movable obstacles, movable phantoms, physical, and volumedetect objects."
+    },
+    "@sl-slua/global/OPT_MATERIAL_VOLUME": {
+        "documentation": "Returned for material volumes."
+    },
+    "@sl-slua/global/OPT_OTHER": {
+        "documentation": "Returned for attachments, Linden trees, and grass."
+    },
+    "@sl-slua/global/OPT_STATIC_OBSTACLE": {
+        "documentation": "Returned for static obstacles."
+    },
+    "@sl-slua/global/OPT_WALKABLE": {
+        "documentation": "Returned for walkable objects."
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_BASE_ALPHA": {
+        "documentation": "OVERRIDE_GLTF_BASE_ALPHA constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_BASE_ALPHA_MASK": {
+        "documentation": "OVERRIDE_GLTF_BASE_ALPHA_MASK constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_BASE_ALPHA_MODE": {
+        "documentation": "OVERRIDE_GLTF_BASE_ALPHA_MODE constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_BASE_COLOR_FACTOR": {
+        "documentation": "OVERRIDE_GLTF_BASE_COLOR_FACTOR constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_BASE_DOUBLE_SIDED": {
+        "documentation": "OVERRIDE_GLTF_BASE_DOUBLE_SIDED constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_EMISSIVE_FACTOR": {
+        "documentation": "OVERRIDE_GLTF_EMISSIVE_FACTOR constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_METALLIC_FACTOR": {
+        "documentation": "OVERRIDE_GLTF_METALLIC_FACTOR constant"
+    },
+    "@sl-slua/global/OVERRIDE_GLTF_ROUGHNESS_FACTOR": {
+        "documentation": "OVERRIDE_GLTF_ROUGHNESS_FACTOR constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_GROUP": {
+        "documentation": "PARCEL_COUNT_GROUP constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_OTHER": {
+        "documentation": "PARCEL_COUNT_OTHER constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_OWNER": {
+        "documentation": "PARCEL_COUNT_OWNER constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_SELECTED": {
+        "documentation": "PARCEL_COUNT_SELECTED constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_TEMP": {
+        "documentation": "PARCEL_COUNT_TEMP constant"
+    },
+    "@sl-slua/global/PARCEL_COUNT_TOTAL": {
+        "documentation": "PARCEL_COUNT_TOTAL constant"
+    },
+    "@sl-slua/global/PARCEL_DETAILS_AREA": {
+        "documentation": "The parcel's area, in square meters. (5 chars.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_DESC": {
+        "documentation": "The description of the parcel. (127 chars)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_FLAGS": {
+        "documentation": "Flags set on the parcel"
+    },
+    "@sl-slua/global/PARCEL_DETAILS_GROUP": {
+        "documentation": "The parcel group's key. (36 chars.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_ID": {
+        "documentation": "The parcel's key. (36 chars.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_LANDING_LOOKAT": {
+        "documentation": "Lookat vector set for teleport routing."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_LANDING_POINT": {
+        "documentation": "The parcel's landing point, if any."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_NAME": {
+        "documentation": "The name of the parcel. (63 chars.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_OWNER": {
+        "documentation": "The parcel owner's key. (36 chars.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_PRIM_CAPACITY": {
+        "documentation": "The parcel's prim capacity."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_PRIM_USED": {
+        "documentation": "The number of prims used on this parcel."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_SCRIPT_DANGER": {
+        "documentation": "There are restrictions on this parcel that may impact script execution."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_SEE_AVATARS": {
+        "documentation": "The parcel's avatar visibility setting. (1 char.)."
+    },
+    "@sl-slua/global/PARCEL_DETAILS_TP_ROUTING": {
+        "documentation": "Parcel's teleport routing setting."
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY": {
+        "documentation": "PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS": {
+        "documentation": "PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_CREATE_OBJECTS": {
+        "documentation": "PARCEL_FLAG_ALLOW_CREATE_OBJECTS constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_DAMAGE": {
+        "documentation": "PARCEL_FLAG_ALLOW_DAMAGE constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_FLY": {
+        "documentation": "PARCEL_FLAG_ALLOW_FLY constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY": {
+        "documentation": "PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_GROUP_SCRIPTS": {
+        "documentation": "PARCEL_FLAG_ALLOW_GROUP_SCRIPTS constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_LANDMARK": {
+        "documentation": "PARCEL_FLAG_ALLOW_LANDMARK constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_SCRIPTS": {
+        "documentation": "PARCEL_FLAG_ALLOW_SCRIPTS constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_ALLOW_TERRAFORM": {
+        "documentation": "PARCEL_FLAG_ALLOW_TERRAFORM constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_LOCAL_SOUND_ONLY": {
+        "documentation": "PARCEL_FLAG_LOCAL_SOUND_ONLY constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_RESTRICT_PUSHOBJECT": {
+        "documentation": "PARCEL_FLAG_RESTRICT_PUSHOBJECT constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_USE_ACCESS_GROUP": {
+        "documentation": "PARCEL_FLAG_USE_ACCESS_GROUP constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_USE_ACCESS_LIST": {
+        "documentation": "PARCEL_FLAG_USE_ACCESS_LIST constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_USE_BAN_LIST": {
+        "documentation": "PARCEL_FLAG_USE_BAN_LIST constant"
+    },
+    "@sl-slua/global/PARCEL_FLAG_USE_LAND_PASS_LIST": {
+        "documentation": "PARCEL_FLAG_USE_LAND_PASS_LIST constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_AGENT": {
+        "documentation": "PARCEL_MEDIA_COMMAND_AGENT constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_AUTO_ALIGN": {
+        "documentation": "PARCEL_MEDIA_COMMAND_AUTO_ALIGN constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_DESC": {
+        "documentation": "Use this to get or set the parcel media description."
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_LOOP": {
+        "documentation": "PARCEL_MEDIA_COMMAND_LOOP constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_LOOP_SET": {
+        "documentation": "Used to get or set the parcel's media looping variable."
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_PAUSE": {
+        "documentation": "PARCEL_MEDIA_COMMAND_PAUSE constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_PLAY": {
+        "documentation": "PARCEL_MEDIA_COMMAND_PLAY constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_SIZE": {
+        "documentation": "Use this to get or set the parcel media pixel resolution."
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_STOP": {
+        "documentation": "PARCEL_MEDIA_COMMAND_STOP constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_TEXTURE": {
+        "documentation": "PARCEL_MEDIA_COMMAND_TEXTURE constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_TIME": {
+        "documentation": "PARCEL_MEDIA_COMMAND_TIME constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_TYPE": {
+        "documentation": "Use this to get or set the parcel media MIME type (e.g. \"text/html\")."
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_UNLOAD": {
+        "documentation": "PARCEL_MEDIA_COMMAND_UNLOAD constant"
+    },
+    "@sl-slua/global/PARCEL_MEDIA_COMMAND_URL": {
+        "documentation": "PARCEL_MEDIA_COMMAND_URL constant"
+    },
+    "@sl-slua/global/PARCEL_SALE_AGENT": {
+        "documentation": "The agent authorized to purchase the parcel."
+    },
+    "@sl-slua/global/PARCEL_SALE_ERROR_BAD_PARAMS": {
+        "documentation": "The parameters provided to set the sale information are invalid."
+    },
+    "@sl-slua/global/PARCEL_SALE_ERROR_INVALID_PRICE": {
+        "documentation": "The price set for the parcel is invalid (e.g., less than or equal to 0)."
+    },
+    "@sl-slua/global/PARCEL_SALE_ERROR_IN_ESCROW": {
+        "documentation": "The parcel is currently in escrow and cannot be set for sale."
+    },
+    "@sl-slua/global/PARCEL_SALE_ERROR_NO_PARCEL": {
+        "documentation": "The parcel could not be found."
+    },
+    "@sl-slua/global/PARCEL_SALE_ERROR_NO_PERMISSIONS": {
+        "documentation": "The script does not have the required permissions to set the sale information."
+    },
+    "@sl-slua/global/PARCEL_SALE_OBJECTS": {
+        "documentation": "Are the objects on the parcel included in the sale?"
+    },
+    "@sl-slua/global/PARCEL_SALE_OK": {
+        "documentation": "The sale information was successfully set."
+    },
+    "@sl-slua/global/PARCEL_SALE_PRICE": {
+        "documentation": "The price of the parcel. If no authorized agent is set, must be greater than 0."
+    },
+    "@sl-slua/global/PASSIVE": {
+        "documentation": "Static in-world objects."
+    },
+    "@sl-slua/global/PASS_ALWAYS": {
+        "documentation": "Always pass the event."
+    },
+    "@sl-slua/global/PASS_IF_NOT_HANDLED": {
+        "documentation": "Pass the event if there is no script handling the event in the prim."
+    },
+    "@sl-slua/global/PASS_NEVER": {
+        "documentation": "Always pass the event."
+    },
+    "@sl-slua/global/PATROL_PAUSE_AT_WAYPOINTS": {
+        "documentation": "PATROL_PAUSE_AT_WAYPOINTS constant"
+    },
+    "@sl-slua/global/PAYMENT_INFO_ON_FILE": {
+        "documentation": "PAYMENT_INFO_ON_FILE constant"
+    },
+    "@sl-slua/global/PAYMENT_INFO_USED": {
+        "documentation": "PAYMENT_INFO_USED constant"
+    },
+    "@sl-slua/global/PAY_DEFAULT": {
+        "documentation": "PAY_DEFAULT constant"
+    },
+    "@sl-slua/global/PAY_HIDE": {
+        "documentation": "PAY_HIDE constant"
+    },
+    "@sl-slua/global/PERMISSION_ATTACH": {
+        "documentation": "If this permission is enabled, the object can successfully call llAttachToAvatar to attach to the given avatar."
+    },
+    "@sl-slua/global/PERMISSION_CHANGE_JOINTS": {
+        "documentation": "(not yet implemented)"
+    },
+    "@sl-slua/global/PERMISSION_CHANGE_LINKS": {
+        "documentation": "If this permission is enabled, the object can successfully call llCreateLink, llBreakLink, and llBreakAllLinks to change links to other objects."
+    },
+    "@sl-slua/global/PERMISSION_CHANGE_PERMISSIONS": {
+        "documentation": "(not yet implemented)"
+    },
+    "@sl-slua/global/PERMISSION_CONTROL_CAMERA": {
+        "documentation": "PERMISSION_CONTROL_CAMERA constant"
+    },
+    "@sl-slua/global/PERMISSION_DEBIT": {
+        "documentation": "If this permission is enabled, the object can successfully call llGiveMoney or llTransferLindenDollars to debit the owners account."
+    },
+    "@sl-slua/global/PERMISSION_OVERRIDE_ANIMATIONS": {
+        "documentation": "Permission to override default animations."
+    },
+    "@sl-slua/global/PERMISSION_PRIVILEGED_LAND_ACCESS": {
+        "documentation": "Grants the script privileged access to land parcel functions, such as parcel sale."
+    },
+    "@sl-slua/global/PERMISSION_RELEASE_OWNERSHIP": {
+        "documentation": "(not yet implemented)"
+    },
+    "@sl-slua/global/PERMISSION_REMAP_CONTROLS": {
+        "documentation": "(not yet implemented)"
+    },
+    "@sl-slua/global/PERMISSION_RETURN_OBJECTS": {
+        "documentation": "PERMISSION_RETURN_OBJECTS constant"
+    },
+    "@sl-slua/global/PERMISSION_SILENT_ESTATE_MANAGEMENT": {
+        "documentation": "A script with this permission does not notify the object owner when it modifies estate access rules via llManageEstateAccess."
+    },
+    "@sl-slua/global/PERMISSION_TAKE_CONTROLS": {
+        "documentation": "If this permission enabled, the object can successfully call the llTakeControls library call."
+    },
+    "@sl-slua/global/PERMISSION_TELEPORT": {
+        "documentation": "PERMISSION_TELEPORT constant"
+    },
+    "@sl-slua/global/PERMISSION_TRACK_CAMERA": {
+        "documentation": "PERMISSION_TRACK_CAMERA constant"
+    },
+    "@sl-slua/global/PERMISSION_TRIGGER_ANIMATION": {
+        "documentation": "If this permission is enabled, the object can successfully call llStartAnimation for the avatar that owns this."
+    },
+    "@sl-slua/global/PERM_ALL": {
+        "documentation": "PERM_ALL constant"
+    },
+    "@sl-slua/global/PERM_COPY": {
+        "documentation": "PERM_COPY constant"
+    },
+    "@sl-slua/global/PERM_MODIFY": {
+        "documentation": "PERM_MODIFY constant"
+    },
+    "@sl-slua/global/PERM_MOVE": {
+        "documentation": "PERM_MOVE constant"
+    },
+    "@sl-slua/global/PERM_TRANSFER": {
+        "documentation": "PERM_TRANSFER constant"
+    },
+    "@sl-slua/global/PI": {
+        "documentation": "3.14159265 - The number of radians in a semi-circle."
+    },
+    "@sl-slua/global/PING_PONG": {
+        "documentation": "Play animation going forwards, then backwards."
+    },
+    "@sl-slua/global/PI_BY_TWO": {
+        "documentation": "1.57079633 - The number of radians in a quarter circle."
+    },
+    "@sl-slua/global/PRIM_ALLOW_UNSIT": {
+        "documentation": "Prim parameter for restricting manual standing for seated avatars in an experience.<br>Ignored if the avatar was not seated via a call to llSitOnLink."
+    },
+    "@sl-slua/global/PRIM_ALPHA_MODE": {
+        "documentation": "Prim parameter for materials using integer face, integer alpha_mode, integer alpha_cutoff.<br>Defines how the alpha channel of the diffuse texture should be rendered.<br>Valid options for alpha_mode are PRIM_ALPHA_MODE_BLEND, _NONE, _MASK, and _EMISSIVE.<br>alpha_cutoff is used only for PRIM_ALPHA_MODE_MASK."
+    },
+    "@sl-slua/global/PRIM_ALPHA_MODE_BLEND": {
+        "documentation": "Prim parameter setting for PRIM_ALPHA_MODE.<br>Indicates that the diffuse texture's alpha channel should be rendered as alpha-blended."
+    },
+    "@sl-slua/global/PRIM_ALPHA_MODE_EMISSIVE": {
+        "documentation": "Prim parameter setting for PRIM_ALPHA_MODE.<br>Indicates that the diffuse texture's alpha channel should be rendered as an emissivity mask."
+    },
+    "@sl-slua/global/PRIM_ALPHA_MODE_MASK": {
+        "documentation": "Prim parameter setting for PRIM_ALPHA_MODE.<br>Indicates that the diffuse texture's alpha channel should be rendered as fully opaque for alpha values above alpha_cutoff and fully transparent otherwise."
+    },
+    "@sl-slua/global/PRIM_ALPHA_MODE_NONE": {
+        "documentation": "Prim parameter setting for PRIM_ALPHA_MODE.<br>Indicates that the diffuse texture's alpha channel should be ignored."
+    },
+    "@sl-slua/global/PRIM_BUMP_BARK": {
+        "documentation": "PRIM_BUMP_BARK constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_BLOBS": {
+        "documentation": "PRIM_BUMP_BLOBS constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_BRICKS": {
+        "documentation": "PRIM_BUMP_BRICKS constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_BRIGHT": {
+        "documentation": "PRIM_BUMP_BRIGHT constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_CHECKER": {
+        "documentation": "PRIM_BUMP_CHECKER constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_CONCRETE": {
+        "documentation": "PRIM_BUMP_CONCRETE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_DARK": {
+        "documentation": "PRIM_BUMP_DARK constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_DISKS": {
+        "documentation": "PRIM_BUMP_DISKS constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_GRAVEL": {
+        "documentation": "PRIM_BUMP_GRAVEL constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_LARGETILE": {
+        "documentation": "PRIM_BUMP_LARGETILE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_NONE": {
+        "documentation": "PRIM_BUMP_NONE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_SHINY": {
+        "documentation": "PRIM_BUMP_SHINY constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_SIDING": {
+        "documentation": "PRIM_BUMP_SIDING constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_STONE": {
+        "documentation": "PRIM_BUMP_STONE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_STUCCO": {
+        "documentation": "PRIM_BUMP_STUCCO constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_SUCTION": {
+        "documentation": "PRIM_BUMP_SUCTION constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_TILE": {
+        "documentation": "PRIM_BUMP_TILE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_WEAVE": {
+        "documentation": "PRIM_BUMP_WEAVE constant"
+    },
+    "@sl-slua/global/PRIM_BUMP_WOOD": {
+        "documentation": "PRIM_BUMP_WOOD constant"
+    },
+    "@sl-slua/global/PRIM_CAST_SHADOWS": {
+        "documentation": "PRIM_CAST_SHADOWS constant"
+    },
+    "@sl-slua/global/PRIM_CLICK_ACTION": {
+        "documentation": "[PRIM_CLICK_ACTION, integer CLICK_ACTION_*]"
+    },
+    "@sl-slua/global/PRIM_COLLISION_SOUND": {
+        "documentation": "Collision sound uuid and volume for this prim"
+    },
+    "@sl-slua/global/PRIM_COLOR": {
+        "documentation": "[PRIM_COLOR, integer face, vector color, float alpha]<br><br>integer face \u2013 face number or ALL_SIDES<br>vector color \u2013 color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)<br>float alpha \u2013 from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)"
+    },
+    "@sl-slua/global/PRIM_DAMAGE": {
+        "documentation": "Damage and damage type assigned to this prim."
+    },
+    "@sl-slua/global/PRIM_DESC": {
+        "documentation": "[PRIM_DESC, string description]"
+    },
+    "@sl-slua/global/PRIM_FLEXIBLE": {
+        "documentation": "[ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]<br><br>integer boolean \u2013 TRUE enables, FALSE disables<br>integer softness \u2013 ranges from 0 to 3<br>float gravity \u2013 ranges from -10.0 to 10.0<br>float friction \u2013 ranges from 0.0 to 10.0<br>float wind \u2013 ranges from 0.0 to 10.0<br>float tension \u2013 ranges from 0.0 to 10.0<br>vector force"
+    },
+    "@sl-slua/global/PRIM_FULLBRIGHT": {
+        "documentation": "[ PRIM_FULLBRIGHT, integer face, integer boolean ]"
+    },
+    "@sl-slua/global/PRIM_GLOW": {
+        "documentation": "PRIM_GLOW is used to get or set the glow status of the face.<br>[ PRIM_GLOW, integer face, float intensity ]"
+    },
+    "@sl-slua/global/PRIM_GLTF_ALPHA_MODE_BLEND": {
+        "documentation": "Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode \"BLEND\"."
+    },
+    "@sl-slua/global/PRIM_GLTF_ALPHA_MODE_MASK": {
+        "documentation": "Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode \"MASK\"."
+    },
+    "@sl-slua/global/PRIM_GLTF_ALPHA_MODE_OPAQUE": {
+        "documentation": "Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode \"OPAQUE\"."
+    },
+    "@sl-slua/global/PRIM_GLTF_BASE_COLOR": {
+        "documentation": "Prim parameter for materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians, vector color, integer alpha_mode, float alpha_cutoff, boolean double_sided.<br>Valid options for alpha_mode are PRIM_ALPHA_MODE_BLEND, _NONE, and _MASK.<br>alpha_cutoff is used only for PRIM_ALPHA_MODE_MASK."
+    },
+    "@sl-slua/global/PRIM_GLTF_EMISSIVE": {
+        "documentation": "Prim parameter for GLTF materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians, vector color"
+    },
+    "@sl-slua/global/PRIM_GLTF_METALLIC_ROUGHNESS": {
+        "documentation": "Prim parameter for GLTF materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians, float metallic_factor, float roughness_factor"
+    },
+    "@sl-slua/global/PRIM_GLTF_NORMAL": {
+        "documentation": "Prim parameter for GLTF materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians"
+    },
+    "@sl-slua/global/PRIM_HEALTH": {
+        "documentation": "Health value for this prim"
+    },
+    "@sl-slua/global/PRIM_HOLE_CIRCLE": {
+        "documentation": "PRIM_HOLE_CIRCLE constant"
+    },
+    "@sl-slua/global/PRIM_HOLE_DEFAULT": {
+        "documentation": "PRIM_HOLE_DEFAULT constant"
+    },
+    "@sl-slua/global/PRIM_HOLE_SQUARE": {
+        "documentation": "PRIM_HOLE_SQUARE constant"
+    },
+    "@sl-slua/global/PRIM_HOLE_TRIANGLE": {
+        "documentation": "PRIM_HOLE_TRIANGLE constant"
+    },
+    "@sl-slua/global/PRIM_LINK_TARGET": {
+        "documentation": "[ PRIM_LINK_TARGET, integer link_target ]<br><br>Used to get or set multiple links with a single PrimParameters call."
+    },
+    "@sl-slua/global/PRIM_MATERIAL": {
+        "documentation": "[ PRIM_MATERIAL, integer PRIM_MATERIAL_* ]"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_FLESH": {
+        "documentation": "PRIM_MATERIAL_FLESH constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_GLASS": {
+        "documentation": "PRIM_MATERIAL_GLASS constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_LIGHT": {
+        "documentation": "PRIM_MATERIAL_LIGHT constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_METAL": {
+        "documentation": "PRIM_MATERIAL_METAL constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_PLASTIC": {
+        "documentation": "PRIM_MATERIAL_PLASTIC constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_RUBBER": {
+        "documentation": "PRIM_MATERIAL_RUBBER constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_STONE": {
+        "documentation": "PRIM_MATERIAL_STONE constant"
+    },
+    "@sl-slua/global/PRIM_MATERIAL_WOOD": {
+        "documentation": "PRIM_MATERIAL_WOOD constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_ALT_IMAGE_ENABLE": {
+        "documentation": "Boolean. Gets/Sets the default image state (the image that the user sees before a piece of media is active) for the chosen face. The default image is specified by Second Life's server for that media type."
+    },
+    "@sl-slua/global/PRIM_MEDIA_AUTO_LOOP": {
+        "documentation": "Boolean. Gets/Sets whether auto-looping is enabled."
+    },
+    "@sl-slua/global/PRIM_MEDIA_AUTO_PLAY": {
+        "documentation": "Boolean. Gets/Sets whether the media auto-plays when a Resident can view it."
+    },
+    "@sl-slua/global/PRIM_MEDIA_AUTO_SCALE": {
+        "documentation": "Boolean. Gets/Sets whether auto-scaling is enabled. Auto-scaling forces the media to the full size of the texture."
+    },
+    "@sl-slua/global/PRIM_MEDIA_AUTO_ZOOM": {
+        "documentation": "Boolean. Gets/Sets whether clicking the media triggers auto-zoom and auto-focus on the media."
+    },
+    "@sl-slua/global/PRIM_MEDIA_CONTROLS": {
+        "documentation": "Integer. Gets/Sets the style of controls. Can be either PRIM_MEDIA_CONTROLS_STANDARD or PRIM_MEDIA_CONTROLS_MINI."
+    },
+    "@sl-slua/global/PRIM_MEDIA_CONTROLS_MINI": {
+        "documentation": "Mini web navigation controls; does not include an address bar."
+    },
+    "@sl-slua/global/PRIM_MEDIA_CONTROLS_STANDARD": {
+        "documentation": "Standard web navigation controls."
+    },
+    "@sl-slua/global/PRIM_MEDIA_CURRENT_URL": {
+        "documentation": "String. Gets/Sets the current url displayed on the chosen face. Changing this URL causes navigation. 1024 characters Maximum."
+    },
+    "@sl-slua/global/PRIM_MEDIA_FIRST_CLICK_INTERACT": {
+        "documentation": "Boolean. Gets/Sets whether the first click interaction is enabled."
+    },
+    "@sl-slua/global/PRIM_MEDIA_HEIGHT_PIXELS": {
+        "documentation": "Integer. Gets/Sets the height of the media in pixels."
+    },
+    "@sl-slua/global/PRIM_MEDIA_HOME_URL": {
+        "documentation": "String. Gets/Sets the home URL for the chosen face. 1024 characters maximum."
+    },
+    "@sl-slua/global/PRIM_MEDIA_MAX_HEIGHT_PIXELS": {
+        "documentation": "PRIM_MEDIA_MAX_HEIGHT_PIXELS constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_MAX_URL_LENGTH": {
+        "documentation": "PRIM_MEDIA_MAX_URL_LENGTH constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_MAX_WHITELIST_COUNT": {
+        "documentation": "PRIM_MEDIA_MAX_WHITELIST_COUNT constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_MAX_WHITELIST_SIZE": {
+        "documentation": "PRIM_MEDIA_MAX_WHITELIST_SIZE constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_MAX_WIDTH_PIXELS": {
+        "documentation": "PRIM_MEDIA_MAX_WIDTH_PIXELS constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PARAM_MAX": {
+        "documentation": "PRIM_MEDIA_PARAM_MAX constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERMS_CONTROL": {
+        "documentation": "Integer. Gets/Sets the permissions mask that control who can see the media control bar above the object:: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERMS_INTERACT": {
+        "documentation": "Integer. Gets/Sets the permissions mask that control who can interact with the object: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERM_ANYONE": {
+        "documentation": "PRIM_MEDIA_PERM_ANYONE constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERM_GROUP": {
+        "documentation": "PRIM_MEDIA_PERM_GROUP constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERM_NONE": {
+        "documentation": "PRIM_MEDIA_PERM_NONE constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_PERM_OWNER": {
+        "documentation": "PRIM_MEDIA_PERM_OWNER constant"
+    },
+    "@sl-slua/global/PRIM_MEDIA_WHITELIST": {
+        "documentation": "String. Gets/Sets the white-list as a string of escaped, comma-separated URLs. This string can hold up to 64 URLs or 1024 characters, whichever comes first."
+    },
+    "@sl-slua/global/PRIM_MEDIA_WHITELIST_ENABLE": {
+        "documentation": "Boolean. Gets/Sets whether navigation is restricted to URLs in PRIM_MEDIA_WHITELIST."
+    },
+    "@sl-slua/global/PRIM_MEDIA_WIDTH_PIXELS": {
+        "documentation": "Integer. Gets/Sets the width of the media in pixels."
+    },
+    "@sl-slua/global/PRIM_NAME": {
+        "documentation": "[ PRIM_NAME, string name ]"
+    },
+    "@sl-slua/global/PRIM_NORMAL": {
+        "documentation": "Prim parameter for materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians"
+    },
+    "@sl-slua/global/PRIM_OMEGA": {
+        "documentation": "[ PRIM_OMEGA, vector axis, float spinrate, float gain ]<br><br>vector axis \u2013 arbitrary axis to rotate the object around<br>float spinrate \u2013 rate of rotation in radians per second<br>float gain \u2013 also modulates the final spinrate and disables the rotation behavior if zero"
+    },
+    "@sl-slua/global/PRIM_PHANTOM": {
+        "documentation": "[ PRIM_PHANTOM, integer boolean ]"
+    },
+    "@sl-slua/global/PRIM_PHYSICS": {
+        "documentation": "[ PRIM_PHYSICS, integer boolean ]"
+    },
+    "@sl-slua/global/PRIM_PHYSICS_SHAPE_CONVEX": {
+        "documentation": "Use the convex hull of the prim shape for physics (this is the default for mesh objects)."
+    },
+    "@sl-slua/global/PRIM_PHYSICS_SHAPE_NONE": {
+        "documentation": "Ignore this prim in the physics shape. NB: This cannot be applied to the root prim."
+    },
+    "@sl-slua/global/PRIM_PHYSICS_SHAPE_PRIM": {
+        "documentation": "Use the normal prim shape for physics (this is the default for all non-mesh objects)."
+    },
+    "@sl-slua/global/PRIM_PHYSICS_SHAPE_TYPE": {
+        "documentation": "Allows you to set the physics shape type of a prim via lsl. Permitted values are:<br>&nbsp;&nbsp;&nbsp;PRIM_PHYSICS_SHAPE_NONE, PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_CONVEX"
+    },
+    "@sl-slua/global/PRIM_POINT_LIGHT": {
+        "documentation": "[ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]<br><br>integer boolean \u2013 TRUE enables, FALSE disables<br>vector linear_color \u2013 linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)<br>float intensity \u2013 ranges from 0.0 to 1.0<br>float radius \u2013 ranges from 0.1 to 20.0<br>float falloff \u2013 ranges from 0.01 to 2.0"
+    },
+    "@sl-slua/global/PRIM_POSITION": {
+        "documentation": "[ PRIM_POSITION, vector position ]<br><br>vector position \u2013 position in region or local coordinates depending upon the situation"
+    },
+    "@sl-slua/global/PRIM_POS_LOCAL": {
+        "documentation": "[ PRIM_POS_LOCAL, vector position ]<br><br>vector position - position in local coordinates"
+    },
+    "@sl-slua/global/PRIM_PROJECTOR": {
+        "documentation": "[ PRIM_PROJECTOR, string texture, float fov, float focus, float ambiance ]"
+    },
+    "@sl-slua/global/PRIM_REFLECTION_PROBE": {
+        "documentation": "Allows you to configure the object as a custom-placed reflection probe, for image-based lighting (IBL). Only objects in the influence volume of the reflection probe object are affected."
+    },
+    "@sl-slua/global/PRIM_REFLECTION_PROBE_BOX": {
+        "documentation": "This is a flag option used with llGetPrimitiveParams and related functions when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe is a box. When unset, the reflection probe is a sphere."
+    },
+    "@sl-slua/global/PRIM_REFLECTION_PROBE_DYNAMIC": {
+        "documentation": "This is a flag option used with llGetPrimitiveParams and related functions when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe includes avatars in IBL effects. When unset, the reflection probe excludes avatars."
+    },
+    "@sl-slua/global/PRIM_REFLECTION_PROBE_MIRROR": {
+        "documentation": "This is a flag option used with llGetPrimitiveParams and related functions when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe acts as a mirror."
+    },
+    "@sl-slua/global/PRIM_RENDER_MATERIAL": {
+        "documentation": "[ PRIM_RENDER_MATERIAL, integer face, string material ]"
+    },
+    "@sl-slua/global/PRIM_ROTATION": {
+        "documentation": "[ PRIM_ROT_LOCAL, rotation global_rot ]"
+    },
+    "@sl-slua/global/PRIM_ROT_LOCAL": {
+        "documentation": "[ PRIM_ROT_LOCAL, rotation local_rot ]"
+    },
+    "@sl-slua/global/PRIM_SCRIPTED_SIT_ONLY": {
+        "documentation": "Prim parameter for restricting manual sitting on this prim.<br>Sitting must be initiated via call to llSitOnLink."
+    },
+    "@sl-slua/global/PRIM_SCULPT_FLAG_ANIMESH": {
+        "documentation": "Mesh is animated."
+    },
+    "@sl-slua/global/PRIM_SCULPT_FLAG_INVERT": {
+        "documentation": "Render inside out (inverts the normals)."
+    },
+    "@sl-slua/global/PRIM_SCULPT_FLAG_MIRROR": {
+        "documentation": "Render an X axis mirror of the sculpty."
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_CYLINDER": {
+        "documentation": "PRIM_SCULPT_TYPE_CYLINDER constant"
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_MASK": {
+        "documentation": "PRIM_SCULPT_TYPE_MASK constant"
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_MESH": {
+        "documentation": "PRIM_SCULPT_TYPE_MESH constant"
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_PLANE": {
+        "documentation": "PRIM_SCULPT_TYPE_PLANE constant"
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_SPHERE": {
+        "documentation": "PRIM_SCULPT_TYPE_SPHERE constant"
+    },
+    "@sl-slua/global/PRIM_SCULPT_TYPE_TORUS": {
+        "documentation": "PRIM_SCULPT_TYPE_TORUS constant"
+    },
+    "@sl-slua/global/PRIM_SHINY_HIGH": {
+        "documentation": "PRIM_SHINY_HIGH constant"
+    },
+    "@sl-slua/global/PRIM_SHINY_LOW": {
+        "documentation": "PRIM_SHINY_LOW constant"
+    },
+    "@sl-slua/global/PRIM_SHINY_MEDIUM": {
+        "documentation": "PRIM_SHINY_MEDIUM constant"
+    },
+    "@sl-slua/global/PRIM_SHINY_NONE": {
+        "documentation": "PRIM_SHINY_NONE constant"
+    },
+    "@sl-slua/global/PRIM_SIT_FLAGS": {
+        "documentation": "PRIM_SIT_FLAGS constant"
+    },
+    "@sl-slua/global/PRIM_SIT_TARGET": {
+        "documentation": "[ PRIM_SIT_TARGET, integer boolean, vector offset, rotation rot ]"
+    },
+    "@sl-slua/global/PRIM_SIZE": {
+        "documentation": "[ PRIM_SIZE, vector size ]"
+    },
+    "@sl-slua/global/PRIM_SLICE": {
+        "documentation": "[ PRIM_SLICE, vector slice ]"
+    },
+    "@sl-slua/global/PRIM_SPECULAR": {
+        "documentation": "Prim parameter for materials using integer face, string texture, vector repeats, vector offsets, float rotation_in_radians, vector color, integer glossy, integer environment"
+    },
+    "@sl-slua/global/PRIM_TEMP_ON_REZ": {
+        "documentation": "PRIM_TEMP_ON_REZ constant"
+    },
+    "@sl-slua/global/PRIM_TEXGEN": {
+        "documentation": "[ PRIM_TEXGEN, integer face, PRIM_TEXGEN_* ]"
+    },
+    "@sl-slua/global/PRIM_TEXGEN_DEFAULT": {
+        "documentation": "PRIM_TEXGEN_DEFAULT constant"
+    },
+    "@sl-slua/global/PRIM_TEXGEN_PLANAR": {
+        "documentation": "PRIM_TEXGEN_PLANAR constant"
+    },
+    "@sl-slua/global/PRIM_TEXT": {
+        "documentation": "[ PRIM_TEXT, string text, vector color, float alpha ]"
+    },
+    "@sl-slua/global/PRIM_TEXTURE": {
+        "documentation": "[ PRIM_TEXTURE, integer face, string texture, vector repeats, vector offsets, float rotation_in_radians ]"
+    },
+    "@sl-slua/global/PRIM_TYPE": {
+        "documentation": "PRIM_TYPE constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_BOX": {
+        "documentation": "PRIM_TYPE_BOX constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_CYLINDER": {
+        "documentation": "PRIM_TYPE_CYLINDER constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_PRISM": {
+        "documentation": "PRIM_TYPE_PRISM constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_RING": {
+        "documentation": "PRIM_TYPE_RING constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_SCULPT": {
+        "documentation": "PRIM_TYPE_SCULPT constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_SPHERE": {
+        "documentation": "PRIM_TYPE_SPHERE constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_TORUS": {
+        "documentation": "PRIM_TYPE_TORUS constant"
+    },
+    "@sl-slua/global/PRIM_TYPE_TUBE": {
+        "documentation": "PRIM_TYPE_TUBE constant"
+    },
+    "@sl-slua/global/PROFILE_NONE": {
+        "documentation": "Disables profiling"
+    },
+    "@sl-slua/global/PROFILE_SCRIPT_MEMORY": {
+        "documentation": "Enables memory profiling"
+    },
+    "@sl-slua/global/PSYS_PART_BF_DEST_COLOR": {
+        "documentation": "PSYS_PART_BF_DEST_COLOR constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_ONE": {
+        "documentation": "PSYS_PART_BF_ONE constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_ONE_MINUS_DEST_COLOR": {
+        "documentation": "PSYS_PART_BF_ONE_MINUS_DEST_COLOR constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA": {
+        "documentation": "PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR": {
+        "documentation": "PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_SOURCE_ALPHA": {
+        "documentation": "PSYS_PART_BF_SOURCE_ALPHA constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_SOURCE_COLOR": {
+        "documentation": "PSYS_PART_BF_SOURCE_COLOR constant"
+    },
+    "@sl-slua/global/PSYS_PART_BF_ZERO": {
+        "documentation": "PSYS_PART_BF_ZERO constant"
+    },
+    "@sl-slua/global/PSYS_PART_BLEND_FUNC_DEST": {
+        "documentation": "PSYS_PART_BLEND_FUNC_DEST constant"
+    },
+    "@sl-slua/global/PSYS_PART_BLEND_FUNC_SOURCE": {
+        "documentation": "PSYS_PART_BLEND_FUNC_SOURCE constant"
+    },
+    "@sl-slua/global/PSYS_PART_BOUNCE_MASK": {
+        "documentation": "Particles bounce off of a plane at the objects Z height."
+    },
+    "@sl-slua/global/PSYS_PART_EMISSIVE_MASK": {
+        "documentation": "The particle glows."
+    },
+    "@sl-slua/global/PSYS_PART_END_ALPHA": {
+        "documentation": "A float which determines the ending alpha of the object."
+    },
+    "@sl-slua/global/PSYS_PART_END_COLOR": {
+        "documentation": "A vector <r, g, b> which determines the ending color of the object."
+    },
+    "@sl-slua/global/PSYS_PART_END_GLOW": {
+        "documentation": "PSYS_PART_END_GLOW constant"
+    },
+    "@sl-slua/global/PSYS_PART_END_SCALE": {
+        "documentation": "A vector <sx, sy, z>, which is the ending size of the particle billboard in meters (z is ignored)."
+    },
+    "@sl-slua/global/PSYS_PART_FLAGS": {
+        "documentation": "Each particle that is emitted by the particle system is simulated based on the following flags. To use multiple flags, bitwise or (|) them together."
+    },
+    "@sl-slua/global/PSYS_PART_FOLLOW_SRC_MASK": {
+        "documentation": "The particle position is relative to the source objects position."
+    },
+    "@sl-slua/global/PSYS_PART_FOLLOW_VELOCITY_MASK": {
+        "documentation": "The particle orientation is rotated so the vertical axis faces towards the particle velocity."
+    },
+    "@sl-slua/global/PSYS_PART_INTERP_COLOR_MASK": {
+        "documentation": "Interpolate both the color and alpha from the start value to the end value."
+    },
+    "@sl-slua/global/PSYS_PART_INTERP_SCALE_MASK": {
+        "documentation": "Interpolate the particle scale from the start value to the end value."
+    },
+    "@sl-slua/global/PSYS_PART_MAX_AGE": {
+        "documentation": "Age in seconds of a particle at which it dies."
+    },
+    "@sl-slua/global/PSYS_PART_RIBBON_MASK": {
+        "documentation": "PSYS_PART_RIBBON_MASK constant"
+    },
+    "@sl-slua/global/PSYS_PART_START_ALPHA": {
+        "documentation": "A float which determines the starting alpha of the object."
+    },
+    "@sl-slua/global/PSYS_PART_START_COLOR": {
+        "documentation": "A vector <r, g, b> which determines the starting color of the object."
+    },
+    "@sl-slua/global/PSYS_PART_START_GLOW": {
+        "documentation": "PSYS_PART_START_GLOW constant"
+    },
+    "@sl-slua/global/PSYS_PART_START_SCALE": {
+        "documentation": "A vector <sx, sy, z>, which is the starting size of the particle billboard in meters (z is ignored)."
+    },
+    "@sl-slua/global/PSYS_PART_TARGET_LINEAR_MASK": {
+        "documentation": "PSYS_PART_TARGET_LINEAR_MASK constant"
+    },
+    "@sl-slua/global/PSYS_PART_TARGET_POS_MASK": {
+        "documentation": "The particle heads towards the location of the target object as defined by PSYS_SRC_TARGET_KEY."
+    },
+    "@sl-slua/global/PSYS_PART_WIND_MASK": {
+        "documentation": "Particles have their velocity damped towards the wind velocity."
+    },
+    "@sl-slua/global/PSYS_SRC_ACCEL": {
+        "documentation": "A vector <x, y, z> which is the acceleration to apply on particles."
+    },
+    "@sl-slua/global/PSYS_SRC_ANGLE_BEGIN": {
+        "documentation": "Area in radians specifying where particles will NOT be created (for ANGLE patterns)"
+    },
+    "@sl-slua/global/PSYS_SRC_ANGLE_END": {
+        "documentation": "Area in radians filled with particles (for ANGLE patterns) (if lower than PSYS_SRC_ANGLE_BEGIN, acts as PSYS_SRC_ANGLE_BEGIN itself, and PSYS_SRC_ANGLE_BEGIN acts as PSYS_SRC_ANGLE_END)."
+    },
+    "@sl-slua/global/PSYS_SRC_BURST_PART_COUNT": {
+        "documentation": "How many particles to release in a burst."
+    },
+    "@sl-slua/global/PSYS_SRC_BURST_RADIUS": {
+        "documentation": "What distance from the center of the object to create the particles."
+    },
+    "@sl-slua/global/PSYS_SRC_BURST_RATE": {
+        "documentation": "How often to release a particle burst (float seconds)."
+    },
+    "@sl-slua/global/PSYS_SRC_BURST_SPEED_MAX": {
+        "documentation": "Maximum speed that a particle should be moving."
+    },
+    "@sl-slua/global/PSYS_SRC_BURST_SPEED_MIN": {
+        "documentation": "Minimum speed that a particle should be moving."
+    },
+    "@sl-slua/global/PSYS_SRC_INNERANGLE": {
+        "documentation": "Specifies the inner angle of the arc created by the PSYS_SRC_PATTERN_ANGLE or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.<br>&nbsp;&nbsp;&nbsp;The area specified will NOT have particles in it."
+    },
+    "@sl-slua/global/PSYS_SRC_MAX_AGE": {
+        "documentation": "How long this particle system should last, 0.0 means forever."
+    },
+    "@sl-slua/global/PSYS_SRC_OMEGA": {
+        "documentation": "Sets the angular velocity to rotate the axis that SRC_PATTERN_ANGLE and SRC_PATTERN_ANGLE_CONE use."
+    },
+    "@sl-slua/global/PSYS_SRC_OUTERANGLE": {
+        "documentation": "Specifies the outer angle of the arc created by the PSYS_SRC_PATTERN_ANGLE or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.<br>&nbsp;&nbsp;&nbsp;The area between the outer and inner angle will be filled with particles."
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN": {
+        "documentation": "The pattern which is used to generate particles.<br>&nbsp;&nbsp;&nbsp;Use one of the following values: PSYS_SRC_PATTERN Values."
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN_ANGLE": {
+        "documentation": "Shoot particles across a 2 dimensional area defined by the arc created from PSYS_SRC_OUTERANGLE. There will be an open area defined by PSYS_SRC_INNERANGLE within the larger arc."
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN_ANGLE_CONE": {
+        "documentation": "Shoot particles out in a 3 dimensional cone with an outer arc of PSYS_SRC_OUTERANGLE and an inner open area defined by PSYS_SRC_INNERANGLE."
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY": {
+        "documentation": "PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY constant"
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN_DROP": {
+        "documentation": "Drop particles at the source position."
+    },
+    "@sl-slua/global/PSYS_SRC_PATTERN_EXPLODE": {
+        "documentation": "Shoot particles out in all directions, using the burst parameters."
+    },
+    "@sl-slua/global/PSYS_SRC_TARGET_KEY": {
+        "documentation": "The key of a target object to move towards if PSYS_PART_TARGET_POS_MASK is enabled."
+    },
+    "@sl-slua/global/PSYS_SRC_TEXTURE": {
+        "documentation": "An asset name for the texture to use for the particles."
+    },
+    "@sl-slua/global/PUBLIC_CHANNEL": {
+        "documentation": "PUBLIC_CHANNEL is an integer constant that, when passed to llSay, llWhisper, or llShout as a channel parameter, will print text to the publicly heard chat channel."
+    },
+    "@sl-slua/global/PURSUIT_FUZZ_FACTOR": {
+        "documentation": "Selects a random destination near the offset."
+    },
+    "@sl-slua/global/PURSUIT_GOAL_TOLERANCE": {
+        "documentation": "PURSUIT_GOAL_TOLERANCE constant"
+    },
+    "@sl-slua/global/PURSUIT_INTERCEPT": {
+        "documentation": "Define whether the character attempts to predict the target's location."
+    },
+    "@sl-slua/global/PURSUIT_OFFSET": {
+        "documentation": "Go to a position offset from the target."
+    },
+    "@sl-slua/global/PU_EVADE_HIDDEN": {
+        "documentation": "Triggered when an llEvade character thinks it has hidden from its pursuer."
+    },
+    "@sl-slua/global/PU_EVADE_SPOTTED": {
+        "documentation": "Triggered when an llEvade character switches from hiding to running"
+    },
+    "@sl-slua/global/PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED": {
+        "documentation": "PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED constant"
+    },
+    "@sl-slua/global/PU_FAILURE_INVALID_GOAL": {
+        "documentation": "Goal is not on the navigation-mesh and cannot be reached."
+    },
+    "@sl-slua/global/PU_FAILURE_INVALID_START": {
+        "documentation": "Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it."
+    },
+    "@sl-slua/global/PU_FAILURE_NO_NAVMESH": {
+        "documentation": "This is a fatal error reported to a character when there is no navmesh for the region. This usually indicates a server failure and users should file a bug report and include the time and region in which they received this message."
+    },
+    "@sl-slua/global/PU_FAILURE_NO_VALID_DESTINATION": {
+        "documentation": "There is no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable."
+    },
+    "@sl-slua/global/PU_FAILURE_OTHER": {
+        "documentation": "PU_FAILURE_OTHER constant"
+    },
+    "@sl-slua/global/PU_FAILURE_PARCEL_UNREACHABLE": {
+        "documentation": "PU_FAILURE_PARCEL_UNREACHABLE constant"
+    },
+    "@sl-slua/global/PU_FAILURE_TARGET_GONE": {
+        "documentation": "Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region."
+    },
+    "@sl-slua/global/PU_FAILURE_UNREACHABLE": {
+        "documentation": "Goal is no longer reachable for some reason - e.g., an obstacle blocks the path."
+    },
+    "@sl-slua/global/PU_GOAL_REACHED": {
+        "documentation": "Character has reached the goal and will stop or choose a new goal (if wandering)."
+    },
+    "@sl-slua/global/PU_SLOWDOWN_DISTANCE_REACHED": {
+        "documentation": "Character is near current goal."
+    },
+    "@sl-slua/global/RAD_TO_DEG": {
+        "documentation": "57.2957795 - Number of degrees per radian. You can use this number to convert radians to degrees by multiplying the radians by this number."
+    },
+    "@sl-slua/global/RCERR_CAST_TIME_EXCEEDED": {
+        "documentation": "RCERR_CAST_TIME_EXCEEDED constant"
+    },
+    "@sl-slua/global/RCERR_SIM_PERF_LOW": {
+        "documentation": "RCERR_SIM_PERF_LOW constant"
+    },
+    "@sl-slua/global/RCERR_UNKNOWN": {
+        "documentation": "RCERR_UNKNOWN constant"
+    },
+    "@sl-slua/global/RC_DATA_FLAGS": {
+        "documentation": "RC_DATA_FLAGS constant"
+    },
+    "@sl-slua/global/RC_DETECT_PHANTOM": {
+        "documentation": "RC_DETECT_PHANTOM constant"
+    },
+    "@sl-slua/global/RC_GET_LINK_NUM": {
+        "documentation": "RC_GET_LINK_NUM constant"
+    },
+    "@sl-slua/global/RC_GET_NORMAL": {
+        "documentation": "RC_GET_NORMAL constant"
+    },
+    "@sl-slua/global/RC_GET_ROOT_KEY": {
+        "documentation": "RC_GET_ROOT_KEY constant"
+    },
+    "@sl-slua/global/RC_MAX_HITS": {
+        "documentation": "RC_MAX_HITS constant"
+    },
+    "@sl-slua/global/RC_REJECT_AGENTS": {
+        "documentation": "RC_REJECT_AGENTS constant"
+    },
+    "@sl-slua/global/RC_REJECT_LAND": {
+        "documentation": "RC_REJECT_LAND constant"
+    },
+    "@sl-slua/global/RC_REJECT_NONPHYSICAL": {
+        "documentation": "RC_REJECT_NONPHYSICAL constant"
+    },
+    "@sl-slua/global/RC_REJECT_PHYSICAL": {
+        "documentation": "RC_REJECT_PHYSICAL constant"
+    },
+    "@sl-slua/global/RC_REJECT_TYPES": {
+        "documentation": "RC_REJECT_TYPES constant"
+    },
+    "@sl-slua/global/REGION_FLAG_ALLOW_DAMAGE": {
+        "documentation": "REGION_FLAG_ALLOW_DAMAGE constant"
+    },
+    "@sl-slua/global/REGION_FLAG_ALLOW_DIRECT_TELEPORT": {
+        "documentation": "REGION_FLAG_ALLOW_DIRECT_TELEPORT constant"
+    },
+    "@sl-slua/global/REGION_FLAG_BLOCK_FLY": {
+        "documentation": "REGION_FLAG_BLOCK_FLY constant"
+    },
+    "@sl-slua/global/REGION_FLAG_BLOCK_FLYOVER": {
+        "documentation": "REGION_FLAG_BLOCK_FLYOVER constant"
+    },
+    "@sl-slua/global/REGION_FLAG_BLOCK_TERRAFORM": {
+        "documentation": "REGION_FLAG_BLOCK_TERRAFORM constant"
+    },
+    "@sl-slua/global/REGION_FLAG_DISABLE_COLLISIONS": {
+        "documentation": "REGION_FLAG_DISABLE_COLLISIONS constant"
+    },
+    "@sl-slua/global/REGION_FLAG_DISABLE_PHYSICS": {
+        "documentation": "REGION_FLAG_DISABLE_PHYSICS constant"
+    },
+    "@sl-slua/global/REGION_FLAG_FIXED_SUN": {
+        "documentation": "REGION_FLAG_FIXED_SUN constant"
+    },
+    "@sl-slua/global/REGION_FLAG_RESTRICT_PUSHOBJECT": {
+        "documentation": "REGION_FLAG_RESTRICT_PUSHOBJECT constant"
+    },
+    "@sl-slua/global/REGION_FLAG_SANDBOX": {
+        "documentation": "REGION_FLAG_SANDBOX constant"
+    },
+    "@sl-slua/global/REMOTE_DATA_CHANNEL": {
+        "documentation": "REMOTE_DATA_CHANNEL constant"
+    },
+    "@sl-slua/global/REMOTE_DATA_REPLY": {
+        "documentation": "REMOTE_DATA_REPLY constant"
+    },
+    "@sl-slua/global/REMOTE_DATA_REQUEST": {
+        "documentation": "REMOTE_DATA_REQUEST constant"
+    },
+    "@sl-slua/global/REQUIRE_LINE_OF_SIGHT": {
+        "documentation": "Define whether the character needs a line-of-sight to give chase."
+    },
+    "@sl-slua/global/RESTITUTION": {
+        "documentation": "Used with llSetPhysicsMaterial to enable the density value. Must be between 0.0 and 1.0"
+    },
+    "@sl-slua/global/REVERSE": {
+        "documentation": "Play animation in reverse direction."
+    },
+    "@sl-slua/global/REZ_ACCEL": {
+        "documentation": "Acceleration forced applied to the rezzed object. [vector force, integer rel]"
+    },
+    "@sl-slua/global/REZ_DAMAGE": {
+        "documentation": "Damage applied by the object when it collides with an agent. [float damage]"
+    },
+    "@sl-slua/global/REZ_DAMAGE_TYPE": {
+        "documentation": "Set the damage type applied when this object collides. [integer damage_type]"
+    },
+    "@sl-slua/global/REZ_FLAGS": {
+        "documentation": "Rez flags to set on the newly rezzed object. [integer flags]"
+    },
+    "@sl-slua/global/REZ_FLAG_BLOCK_GRAB_OBJECT": {
+        "documentation": "Prevent grabbing the object."
+    },
+    "@sl-slua/global/REZ_FLAG_DIE_ON_COLLIDE": {
+        "documentation": "Object will die after its first collision."
+    },
+    "@sl-slua/global/REZ_FLAG_DIE_ON_NOENTRY": {
+        "documentation": "Object will die if it attempts to enter a parcel that it can not."
+    },
+    "@sl-slua/global/REZ_FLAG_NO_COLLIDE_FAMILY": {
+        "documentation": "Object will not trigger collision events with other objects created by the same rezzer."
+    },
+    "@sl-slua/global/REZ_FLAG_NO_COLLIDE_OWNER": {
+        "documentation": "Object will not trigger collision events with its owner."
+    },
+    "@sl-slua/global/REZ_FLAG_PHANTOM": {
+        "documentation": "Make the object phantom on rez."
+    },
+    "@sl-slua/global/REZ_FLAG_PHYSICAL": {
+        "documentation": "Make the object physical on rez."
+    },
+    "@sl-slua/global/REZ_FLAG_TEMP": {
+        "documentation": "Flag the object as temp on rez."
+    },
+    "@sl-slua/global/REZ_LOCK_AXES": {
+        "documentation": "Prevent the object from rotating around some axes. [vector locks]"
+    },
+    "@sl-slua/global/REZ_OMEGA": {
+        "documentation": "Omega applied to the rezzed object. [vector axis, integer rel, float spin, float gain]"
+    },
+    "@sl-slua/global/REZ_PARAM": {
+        "documentation": "Integer value to pass to the object as its rez parameter. [integer param]"
+    },
+    "@sl-slua/global/REZ_PARAM_STRING": {
+        "documentation": "A string value to pass to the object as its rez parameter. [string param]"
+    },
+    "@sl-slua/global/REZ_POS": {
+        "documentation": "Position at which to rez the new object. [vector position, integer rel, integer atroot]"
+    },
+    "@sl-slua/global/REZ_ROT": {
+        "documentation": "Rotation applied to newly rezzed object. [rotation rot, integer rel]"
+    },
+    "@sl-slua/global/REZ_SOUND": {
+        "documentation": "Sound attached to the rezzed object. [string name, float volume, integer loop]"
+    },
+    "@sl-slua/global/REZ_SOUND_COLLIDE": {
+        "documentation": "Sound played by the object on a collision. [string name, float volume]"
+    },
+    "@sl-slua/global/REZ_VEL": {
+        "documentation": "Initial velocity of rezzed object. [vector vel, integer rel, integer inherit]"
+    },
+    "@sl-slua/global/ROTATE": {
+        "documentation": "Animate texture rotation."
+    },
+    "@sl-slua/global/SCALE": {
+        "documentation": "Animate the texture scale."
+    },
+    "@sl-slua/global/SCRIPTED": {
+        "documentation": "Scripted in-world objects."
+    },
+    "@sl-slua/global/SIM_STAT_ACTIVE_SCRIPT_COUNT": {
+        "documentation": "Number of active scripts."
+    },
+    "@sl-slua/global/SIM_STAT_AGENT_COUNT": {
+        "documentation": "Number of agents in region."
+    },
+    "@sl-slua/global/SIM_STAT_AGENT_MS": {
+        "documentation": "Time spent in 'agent' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_AGENT_UPDATES": {
+        "documentation": "Agent updates per second."
+    },
+    "@sl-slua/global/SIM_STAT_AI_MS": {
+        "documentation": "Time spent on AI step."
+    },
+    "@sl-slua/global/SIM_STAT_ASSET_DOWNLOADS": {
+        "documentation": "Pending asset download count."
+    },
+    "@sl-slua/global/SIM_STAT_ASSET_UPLOADS": {
+        "documentation": "Pending asset upload count."
+    },
+    "@sl-slua/global/SIM_STAT_CHILD_AGENT_COUNT": {
+        "documentation": "Number of child agents in region."
+    },
+    "@sl-slua/global/SIM_STAT_FRAME_MS": {
+        "documentation": "Total frame time."
+    },
+    "@sl-slua/global/SIM_STAT_IMAGE_MS": {
+        "documentation": "Time spent in 'image' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_IO_PUMP_MS": {
+        "documentation": "Pump IO time."
+    },
+    "@sl-slua/global/SIM_STAT_NET_MS": {
+        "documentation": "Time spent in 'network' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_OTHER_MS": {
+        "documentation": "Time spent in 'other' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_PACKETS_IN": {
+        "documentation": "Packets in per second."
+    },
+    "@sl-slua/global/SIM_STAT_PACKETS_OUT": {
+        "documentation": "Packets out per second."
+    },
+    "@sl-slua/global/SIM_STAT_PCT_CHARS_STEPPED": {
+        "documentation": "Returns the % of pathfinding characters skipped each frame, averaged over the last minute.<br>The returned value corresponds to the \"Characters Updated\" stat in the viewer's Statistics Bar."
+    },
+    "@sl-slua/global/SIM_STAT_PHYSICS_FPS": {
+        "documentation": "Physics simulation FPS."
+    },
+    "@sl-slua/global/SIM_STAT_PHYSICS_MS": {
+        "documentation": "Time spent in 'physics' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_PHYSICS_OTHER_MS": {
+        "documentation": "Physics other time."
+    },
+    "@sl-slua/global/SIM_STAT_PHYSICS_SHAPE_MS": {
+        "documentation": "Physics shape update time."
+    },
+    "@sl-slua/global/SIM_STAT_PHYSICS_STEP_MS": {
+        "documentation": "Physics step time."
+    },
+    "@sl-slua/global/SIM_STAT_SCRIPT_EPS": {
+        "documentation": "Script events per second."
+    },
+    "@sl-slua/global/SIM_STAT_SCRIPT_MS": {
+        "documentation": "Time spent in 'script' segment of simulation frame."
+    },
+    "@sl-slua/global/SIM_STAT_SCRIPT_RUN_PCT": {
+        "documentation": "Percent of scripts run during frame."
+    },
+    "@sl-slua/global/SIM_STAT_SLEEP_MS": {
+        "documentation": "Time spent sleeping."
+    },
+    "@sl-slua/global/SIM_STAT_SPARE_MS": {
+        "documentation": "Spare time left after frame."
+    },
+    "@sl-slua/global/SIM_STAT_UNACKED_BYTES": {
+        "documentation": "Total unacknowledged bytes."
+    },
+    "@sl-slua/global/SIT_FLAG_ALLOW_UNSIT": {
+        "documentation": "The prim allows a seated avatar to stand up."
+    },
+    "@sl-slua/global/SIT_FLAG_NO_COLLIDE": {
+        "documentation": "The seated avatar's hit box is disabled when seated on this prim."
+    },
+    "@sl-slua/global/SIT_FLAG_NO_DAMAGE": {
+        "documentation": "Damage will not be forwarded to an avatar seated on this prim."
+    },
+    "@sl-slua/global/SIT_FLAG_SCRIPTED_ONLY": {
+        "documentation": "An avatar may not manually sit on this prim."
+    },
+    "@sl-slua/global/SIT_FLAG_SIT_TARGET": {
+        "documentation": "The prim has an explicitly set sit target."
+    },
+    "@sl-slua/global/SIT_INVALID_AGENT": {
+        "documentation": "Avatar ID did not specify a valid avatar."
+    },
+    "@sl-slua/global/SIT_INVALID_LINK": {
+        "documentation": "Link ID did not specify a valid prim in the linkset or resolved to multiple prims."
+    },
+    "@sl-slua/global/SIT_INVALID_OBJECT": {
+        "documentation": "Attempt to force an avatar to sit on an attachment or other invalid target."
+    },
+    "@sl-slua/global/SIT_NOT_EXPERIENCE": {
+        "documentation": "Attempt to force an avatar to sit outside an experience."
+    },
+    "@sl-slua/global/SIT_NO_ACCESS": {
+        "documentation": "Avatar does not have access to the parcel containing the target linkset of the forced sit."
+    },
+    "@sl-slua/global/SIT_NO_EXPERIENCE_PERMISSION": {
+        "documentation": "Avatar has not granted permission to force sits."
+    },
+    "@sl-slua/global/SIT_NO_SIT_TARGET": {
+        "documentation": "No available sit target in linkset for forced sit."
+    },
+    "@sl-slua/global/SKY_AMBIENT": {
+        "documentation": "The ambient color of the environment"
+    },
+    "@sl-slua/global/SKY_BLUE": {
+        "documentation": "Blue settings for environment"
+    },
+    "@sl-slua/global/SKY_CLOUDS": {
+        "documentation": "Settings controlling cloud density and configuration"
+    },
+    "@sl-slua/global/SKY_CLOUD_TEXTURE": {
+        "documentation": "Texture ID used by clouds"
+    },
+    "@sl-slua/global/SKY_DOME": {
+        "documentation": "Sky dome information."
+    },
+    "@sl-slua/global/SKY_GAMMA": {
+        "documentation": "The gamma value applied to the scene."
+    },
+    "@sl-slua/global/SKY_GLOW": {
+        "documentation": "Glow color applied to the sun and moon."
+    },
+    "@sl-slua/global/SKY_HAZE": {
+        "documentation": "Haze settings for environment"
+    },
+    "@sl-slua/global/SKY_LIGHT": {
+        "documentation": "Miscellaneous lighting values."
+    },
+    "@sl-slua/global/SKY_MOON": {
+        "documentation": "Environmental moon details."
+    },
+    "@sl-slua/global/SKY_MOON_TEXTURE": {
+        "documentation": "Environmental moon texture."
+    },
+    "@sl-slua/global/SKY_PLANET": {
+        "documentation": "Planet information used in rendering the sky."
+    },
+    "@sl-slua/global/SKY_REFLECTION_PROBE_AMBIANCE": {
+        "documentation": "Settings the ambience of the reflection probe."
+    },
+    "@sl-slua/global/SKY_REFRACTION": {
+        "documentation": "Sky refraction parameters for rainbows and optical effects."
+    },
+    "@sl-slua/global/SKY_STAR_BRIGHTNESS": {
+        "documentation": "Brightness value for the stars."
+    },
+    "@sl-slua/global/SKY_SUN": {
+        "documentation": "Detailed sun information"
+    },
+    "@sl-slua/global/SKY_SUN_TEXTURE": {
+        "documentation": "Environmental sun texture"
+    },
+    "@sl-slua/global/SKY_TEXTURE_DEFAULTS": {
+        "documentation": "Is the environment using the default textures."
+    },
+    "@sl-slua/global/SKY_TRACKS": {
+        "documentation": "Track elevations for this region."
+    },
+    "@sl-slua/global/SMOOTH": {
+        "documentation": "Slide in the X direction, instead of playing separate frames."
+    },
+    "@sl-slua/global/SOUND_LOOP": {
+        "documentation": "Sound will loop until stopped."
+    },
+    "@sl-slua/global/SOUND_PLAY": {
+        "documentation": "Sound will play normally."
+    },
+    "@sl-slua/global/SOUND_SYNC": {
+        "documentation": "Sound will be synchronized with the nearest master."
+    },
+    "@sl-slua/global/SOUND_TRIGGER": {
+        "documentation": "Sound will be triggered at the prim's location and not attached."
+    },
+    "@sl-slua/global/SQRT2": {
+        "documentation": "1.41421356 - The square root of 2."
+    },
+    "@sl-slua/global/STATUS_BLOCK_GRAB": {
+        "documentation": "Controls whether the object can be grabbed.<br>A grab is the default action when in third person, and is available as the hand tool in build mode. This is useful for physical objects that you don't want other people to be able to trivially disturb. The default is FALSE"
+    },
+    "@sl-slua/global/STATUS_BLOCK_GRAB_OBJECT": {
+        "documentation": "Prevent click-and-drag movement on all prims in the object."
+    },
+    "@sl-slua/global/STATUS_BOUNDS_ERROR": {
+        "documentation": "Argument(s) passed to function had a bounds error."
+    },
+    "@sl-slua/global/STATUS_CAST_SHADOWS": {
+        "documentation": "STATUS_CAST_SHADOWS constant"
+    },
+    "@sl-slua/global/STATUS_DIE_AT_EDGE": {
+        "documentation": "Controls whether the object is returned to the owner's inventory if it wanders off the edge of the world.<br>It is useful to set this status TRUE for things like bullets or rockets. The default is TRUE"
+    },
+    "@sl-slua/global/STATUS_DIE_AT_NO_ENTRY": {
+        "documentation": "Controls whether the object dies if it attempts to enter a parcel that does not allow object entry or does not have enough capacity.<br>It is useful to set this status TRUE for things like bullets or rockets. The default is FALSE"
+    },
+    "@sl-slua/global/STATUS_INTERNAL_ERROR": {
+        "documentation": "An internal error occurred."
+    },
+    "@sl-slua/global/STATUS_MALFORMED_PARAMS": {
+        "documentation": "Function was called with malformed parameters."
+    },
+    "@sl-slua/global/STATUS_NOT_FOUND": {
+        "documentation": "Object or other item was not found."
+    },
+    "@sl-slua/global/STATUS_NOT_SUPPORTED": {
+        "documentation": "Feature not supported."
+    },
+    "@sl-slua/global/STATUS_OK": {
+        "documentation": "Result of function call was a success."
+    },
+    "@sl-slua/global/STATUS_PHANTOM": {
+        "documentation": "Controls/indicates whether the object collides or not.<br>Setting the value to TRUE makes the object non-colliding with all objects. It is a good idea to use this for most objects that move or rotate, but are non-physical. It is also useful for simulating volumetric lighting. The default is FALSE."
+    },
+    "@sl-slua/global/STATUS_PHYSICS": {
+        "documentation": "Controls/indicates whether the object moves physically.<br>This controls the same flag that the UI check-box for Physical controls. The default is FALSE."
+    },
+    "@sl-slua/global/STATUS_RETURN_AT_EDGE": {
+        "documentation": "STATUS_RETURN_AT_EDGE constant"
+    },
+    "@sl-slua/global/STATUS_ROTATE_X": {
+        "documentation": "STATUS_ROTATE_X constant"
+    },
+    "@sl-slua/global/STATUS_ROTATE_Y": {
+        "documentation": "STATUS_ROTATE_Y constant"
+    },
+    "@sl-slua/global/STATUS_ROTATE_Z": {
+        "documentation": "Controls/indicates whether the object can physically rotate around<br>&nbsp;&nbsp;&nbsp;the specific axis or not. This flag has no meaning<br>&nbsp;&nbsp;&nbsp;for non-physical objects. Set the value to FALSE<br>&nbsp;&nbsp;&nbsp;if you want to disable rotation around that axis. The<br>&nbsp;&nbsp;&nbsp;default is TRUE for a physical object.<br>&nbsp;&nbsp;&nbsp;A useful example to think about when visualizing<br>&nbsp;&nbsp;&nbsp;the effect is a sit-and-spin device. They spin around the<br>&nbsp;&nbsp;&nbsp;Z axis (up) but not around the X or Y axis."
+    },
+    "@sl-slua/global/STATUS_SANDBOX": {
+        "documentation": "Controls/indicates whether the object can cross region boundaries<br>&nbsp;&nbsp;&nbsp;and move more than 20 meters from its creation<br>&nbsp;&nbsp;&nbsp;point. The default if FALSE."
+    },
+    "@sl-slua/global/STATUS_TYPE_MISMATCH": {
+        "documentation": "Argument(s) passed to function had a type mismatch."
+    },
+    "@sl-slua/global/STATUS_WHITELIST_FAILED": {
+        "documentation": "Whitelist Failed."
+    },
+    "@sl-slua/global/STRING_TRIM": {
+        "documentation": "STRING_TRIM constant"
+    },
+    "@sl-slua/global/STRING_TRIM_HEAD": {
+        "documentation": "STRING_TRIM_HEAD constant"
+    },
+    "@sl-slua/global/STRING_TRIM_TAIL": {
+        "documentation": "STRING_TRIM_TAIL constant"
+    },
+    "@sl-slua/global/TARGETED_EMAIL_OBJECT_OWNER": {
+        "documentation": "Send email to the owner of the object"
+    },
+    "@sl-slua/global/TARGETED_EMAIL_ROOT_CREATOR": {
+        "documentation": "Send email to the creator of the root object"
+    },
+    "@sl-slua/global/TERRAIN_DETAIL_1": {
+        "documentation": "TERRAIN_DETAIL_1 constant"
+    },
+    "@sl-slua/global/TERRAIN_DETAIL_2": {
+        "documentation": "TERRAIN_DETAIL_2 constant"
+    },
+    "@sl-slua/global/TERRAIN_DETAIL_3": {
+        "documentation": "TERRAIN_DETAIL_3 constant"
+    },
+    "@sl-slua/global/TERRAIN_DETAIL_4": {
+        "documentation": "TERRAIN_DETAIL_4 constant"
+    },
+    "@sl-slua/global/TERRAIN_HEIGHT_RANGE_NE": {
+        "documentation": "TERRAIN_HEIGHT_RANGE_NE constant"
+    },
+    "@sl-slua/global/TERRAIN_HEIGHT_RANGE_NW": {
+        "documentation": "TERRAIN_HEIGHT_RANGE_NW constant"
+    },
+    "@sl-slua/global/TERRAIN_HEIGHT_RANGE_SE": {
+        "documentation": "TERRAIN_HEIGHT_RANGE_SE constant"
+    },
+    "@sl-slua/global/TERRAIN_HEIGHT_RANGE_SW": {
+        "documentation": "TERRAIN_HEIGHT_RANGE_SW constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_OFFSET_1": {
+        "documentation": "TERRAIN_PBR_OFFSET_1 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_OFFSET_2": {
+        "documentation": "TERRAIN_PBR_OFFSET_2 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_OFFSET_3": {
+        "documentation": "TERRAIN_PBR_OFFSET_3 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_OFFSET_4": {
+        "documentation": "TERRAIN_PBR_OFFSET_4 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_ROTATION_1": {
+        "documentation": "TERRAIN_PBR_ROTATION_1 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_ROTATION_2": {
+        "documentation": "TERRAIN_PBR_ROTATION_2 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_ROTATION_3": {
+        "documentation": "TERRAIN_PBR_ROTATION_3 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_ROTATION_4": {
+        "documentation": "TERRAIN_PBR_ROTATION_4 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_SCALE_1": {
+        "documentation": "TERRAIN_PBR_SCALE_1 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_SCALE_2": {
+        "documentation": "TERRAIN_PBR_SCALE_2 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_SCALE_3": {
+        "documentation": "TERRAIN_PBR_SCALE_3 constant"
+    },
+    "@sl-slua/global/TERRAIN_PBR_SCALE_4": {
+        "documentation": "TERRAIN_PBR_SCALE_4 constant"
+    },
+    "@sl-slua/global/TEXTURE_BLANK": {
+        "documentation": "TEXTURE_BLANK constant"
+    },
+    "@sl-slua/global/TEXTURE_DEFAULT": {
+        "documentation": "TEXTURE_DEFAULT constant"
+    },
+    "@sl-slua/global/TEXTURE_MEDIA": {
+        "documentation": "TEXTURE_MEDIA constant"
+    },
+    "@sl-slua/global/TEXTURE_PLYWOOD": {
+        "documentation": "TEXTURE_PLYWOOD constant"
+    },
+    "@sl-slua/global/TEXTURE_TRANSPARENT": {
+        "documentation": "TEXTURE_TRANSPARENT constant"
+    },
+    "@sl-slua/global/TOUCH_INVALID_FACE": {
+        "documentation": "TOUCH_INVALID_FACE constant"
+    },
+    "@sl-slua/global/TOUCH_INVALID_TEXCOORD": {
+        "documentation": "TOUCH_INVALID_TEXCOORD constant"
+    },
+    "@sl-slua/global/TOUCH_INVALID_VECTOR": {
+        "documentation": "TOUCH_INVALID_VECTOR constant"
+    },
+    "@sl-slua/global/TP_ROUTING_BLOCKED": {
+        "documentation": "Direct teleporting is blocked on this parcel."
+    },
+    "@sl-slua/global/TP_ROUTING_FREE": {
+        "documentation": "Teleports are unrestricted on this parcel."
+    },
+    "@sl-slua/global/TP_ROUTING_LANDINGP": {
+        "documentation": "Teleports are routed to a landing point if set on this parcel."
+    },
+    "@sl-slua/global/TRANSFER_BAD_OPTS": {
+        "documentation": "Invalid inventory options."
+    },
+    "@sl-slua/global/TRANSFER_BAD_ROOT": {
+        "documentation": "The root path specified in TRANSFER_DEST contained an invalid directory or was reduced to nothing."
+    },
+    "@sl-slua/global/TRANSFER_DEST": {
+        "documentation": "The root folder to transfer inventory into."
+    },
+    "@sl-slua/global/TRANSFER_FLAGS": {
+        "documentation": "Flags to control the behavior of inventory transfer."
+    },
+    "@sl-slua/global/TRANSFER_FLAG_COPY": {
+        "documentation": "Gives a copy of the object being transfered. Implies TRANSFER_FLAG_TAKE."
+    },
+    "@sl-slua/global/TRANSFER_FLAG_RESERVED": {
+        "documentation": "Reserved for future expansion."
+    },
+    "@sl-slua/global/TRANSFER_FLAG_TAKE": {
+        "documentation": "On a successful transfer, automatically takes the object into inventory."
+    },
+    "@sl-slua/global/TRANSFER_NO_ATTACHMENT": {
+        "documentation": "Can not transfer ownership of an attached object."
+    },
+    "@sl-slua/global/TRANSFER_NO_ITEMS": {
+        "documentation": "No items in the inventory list are eligible for transfer."
+    },
+    "@sl-slua/global/TRANSFER_NO_PERMS": {
+        "documentation": "The object does not have transfer permissions."
+    },
+    "@sl-slua/global/TRANSFER_NO_TARGET": {
+        "documentation": "Could not find the receiver in the current region."
+    },
+    "@sl-slua/global/TRANSFER_OK": {
+        "documentation": "Inventory transfer offer was successfully made."
+    },
+    "@sl-slua/global/TRANSFER_THROTTLE": {
+        "documentation": "Inventory throttle hit."
+    },
+    "@sl-slua/global/TRAVERSAL_TYPE": {
+        "documentation": "One of TRAVERSAL_TYPE_FAST, TRAVERSAL_TYPE_SLOW, and TRAVERSAL_TYPE_NONE."
+    },
+    "@sl-slua/global/TRAVERSAL_TYPE_FAST": {
+        "documentation": "TRAVERSAL_TYPE_FAST constant"
+    },
+    "@sl-slua/global/TRAVERSAL_TYPE_NONE": {
+        "documentation": "TRAVERSAL_TYPE_NONE constant"
+    },
+    "@sl-slua/global/TRAVERSAL_TYPE_SLOW": {
+        "documentation": "TRAVERSAL_TYPE_SLOW constant"
+    },
+    "@sl-slua/global/TWO_PI": {
+        "documentation": "6.28318530 - The radians of a circle."
+    },
+    "@sl-slua/global/TYPE_FLOAT": {
+        "documentation": "The list entry is a float."
+    },
+    "@sl-slua/global/TYPE_INTEGER": {
+        "documentation": "The list entry is an integer."
+    },
+    "@sl-slua/global/TYPE_INVALID": {
+        "documentation": "The list entry is invalid."
+    },
+    "@sl-slua/global/TYPE_KEY": {
+        "documentation": "The list entry is a key."
+    },
+    "@sl-slua/global/TYPE_ROTATION": {
+        "documentation": "The list entry is a rotation."
+    },
+    "@sl-slua/global/TYPE_STRING": {
+        "documentation": "The list entry is a string."
+    },
+    "@sl-slua/global/TYPE_VECTOR": {
+        "documentation": "The list entry is a vector."
+    },
+    "@sl-slua/global/URL_REQUEST_DENIED": {
+        "documentation": "URL_REQUEST_DENIED constant"
+    },
+    "@sl-slua/global/URL_REQUEST_GRANTED": {
+        "documentation": "URL_REQUEST_GRANTED constant"
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY": {
+        "documentation": "A slider between minimum (0.0) and maximum (1.0) deflection of angular orientation. That is, its a simple scalar for modulating the strength of angular deflection such that the vehicles preferred axis of motion points toward its real velocity."
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_DEFLECTION_TIMESCALE": {
+        "documentation": "The time-scale for exponential success of linear deflection deflection. Its another way to specify the strength of the vehicles tendency to reorient itself so that its preferred axis of motion agrees with its true velocity."
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_FRICTION_TIMESCALE": {
+        "documentation": "A vector of timescales for exponential decay of the vehicle's angular velocity about its preferred axes of motion (at, left, up).<br>&nbsp;&nbsp;&nbsp;Range = [0.07, inf) seconds for each element of the vector."
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE": {
+        "documentation": "The timescale for exponential decay of the angular motors magnitude."
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_MOTOR_DIRECTION": {
+        "documentation": "The direction and magnitude (in preferred frame) of the vehicle's angular motor. The vehicle will accelerate (or decelerate if necessary) to match its velocity to its motor."
+    },
+    "@sl-slua/global/VEHICLE_ANGULAR_MOTOR_TIMESCALE": {
+        "documentation": "The timescale for exponential approach to full angular motor velocity."
+    },
+    "@sl-slua/global/VEHICLE_BANKING_EFFICIENCY": {
+        "documentation": "A slider between anti (-1.0), none (0.0), and maxmum (1.0) banking strength."
+    },
+    "@sl-slua/global/VEHICLE_BANKING_MIX": {
+        "documentation": "A slider between static (0.0) and dynamic (1.0) banking. \"Static\" means the banking scales only with the angle of roll, whereas \"dynamic\" is a term that also scales with the vehicles linear speed."
+    },
+    "@sl-slua/global/VEHICLE_BANKING_TIMESCALE": {
+        "documentation": "The timescale for banking to exponentially approach its maximum effect. This is another way to scale the strength of the banking effect, however it affects the term that is proportional to the difference between what the banking behavior is trying to do, and what the vehicle is actually doing."
+    },
+    "@sl-slua/global/VEHICLE_BUOYANCY": {
+        "documentation": "A slider between minimum (0.0) and maximum anti-gravity (1.0)."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_BLOCK_INTERFERENCE": {
+        "documentation": "Prevent other scripts from pushing vehicle."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_CAMERA_DECOUPLED": {
+        "documentation": "VEHICLE_FLAG_CAMERA_DECOUPLED constant"
+    },
+    "@sl-slua/global/VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT": {
+        "documentation": "Hover at global height."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_HOVER_TERRAIN_ONLY": {
+        "documentation": "Ignore water height when hovering."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_HOVER_UP_ONLY": {
+        "documentation": "Hover does not push down. Use this flag for hovering vehicles that should be able to jump above their hover height."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_HOVER_WATER_ONLY": {
+        "documentation": "Ignore terrain height when hovering."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_LIMIT_MOTOR_UP": {
+        "documentation": "Prevents ground vehicles from motoring into the sky."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_LIMIT_ROLL_ONLY": {
+        "documentation": "For vehicles with vertical attractor that want to be able to climb/dive, for instance, aeroplanes that want to use the banking feature."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_MOUSELOOK_BANK": {
+        "documentation": "VEHICLE_FLAG_MOUSELOOK_BANK constant"
+    },
+    "@sl-slua/global/VEHICLE_FLAG_MOUSELOOK_STEER": {
+        "documentation": "VEHICLE_FLAG_MOUSELOOK_STEER constant"
+    },
+    "@sl-slua/global/VEHICLE_FLAG_NO_DEFLECTION_UP": {
+        "documentation": "This flag prevents linear deflection parallel to world z-axis. This is useful for preventing ground vehicles with large linear deflection, like bumper cars, from climbing their linear deflection into the sky."
+    },
+    "@sl-slua/global/VEHICLE_FLAG_NO_FLY_UP": {
+        "documentation": "Old, changed to VEHICLE_FLAG_NO_DEFLECTION_UP"
+    },
+    "@sl-slua/global/VEHICLE_HOVER_EFFICIENCY": {
+        "documentation": "A slider between minimum (0.0 = bouncy) and maximum (1.0 = fast as possible) damped motion of the hover behavior."
+    },
+    "@sl-slua/global/VEHICLE_HOVER_HEIGHT": {
+        "documentation": "The height (above the terrain or water, or global) at which the vehicle will try to hover."
+    },
+    "@sl-slua/global/VEHICLE_HOVER_TIMESCALE": {
+        "documentation": "Period of time (in seconds) for the vehicle to achieve its hover height."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_DEFLECTION_EFFICIENCY": {
+        "documentation": "A slider between minimum (0.0) and maximum (1.0) deflection of linear velocity. That is, its a simple scalar for modulating the strength of linear deflection."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_DEFLECTION_TIMESCALE": {
+        "documentation": "The timescale for exponential success of linear deflection deflection. It is another way to specify how much time it takes for the vehicle's linear velocity to be redirected to its preferred axis of motion."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_FRICTION_TIMESCALE": {
+        "documentation": "A vector of timescales for exponential decay of the vehicle's linear velocity along its preferred axes of motion (at, left, up).<br>&nbsp;&nbsp;&nbsp;Range = [0.07, inf) seconds for each element of the vector."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE": {
+        "documentation": "The timescale for exponential decay of the linear motors magnitude."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_MOTOR_DIRECTION": {
+        "documentation": "The direction and magnitude (in preferred frame) of the vehicle's linear motor. The vehicle will accelerate (or decelerate if necessary) to match its velocity to its motor.<br>&nbsp;&nbsp;&nbsp;Range of magnitude = [0, 30] meters/second."
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_MOTOR_OFFSET": {
+        "documentation": "VEHICLE_LINEAR_MOTOR_OFFSET constant"
+    },
+    "@sl-slua/global/VEHICLE_LINEAR_MOTOR_TIMESCALE": {
+        "documentation": "The timescale for exponential approach to full linear motor velocity."
+    },
+    "@sl-slua/global/VEHICLE_REFERENCE_FRAME": {
+        "documentation": "A rotation of the vehicle's preferred axes of motion and orientation (at, left, up) with respect to the vehicle's local frame (x, y, z)."
+    },
+    "@sl-slua/global/VEHICLE_TYPE_AIRPLANE": {
+        "documentation": "Uses linear deflection for lift, no hover, and banking to turn.<br>See http://wiki.secondlife.com/wiki/VEHICLE_TYPE_AIRPLANE"
+    },
+    "@sl-slua/global/VEHICLE_TYPE_BALLOON": {
+        "documentation": "Hover, and friction, but no deflection.<br>See http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BALLOON"
+    },
+    "@sl-slua/global/VEHICLE_TYPE_BOAT": {
+        "documentation": "Hovers over water with lots of friction and some anglar deflection.<br>See http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BOAT"
+    },
+    "@sl-slua/global/VEHICLE_TYPE_CAR": {
+        "documentation": "Another vehicle that bounces along the ground but needs the motors to be driven from external controls or timer events.<br>See http://wiki.secondlife.com/wiki/VEHICLE_TYPE_CAR"
+    },
+    "@sl-slua/global/VEHICLE_TYPE_NONE": {
+        "documentation": "VEHICLE_TYPE_NONE constant"
+    },
+    "@sl-slua/global/VEHICLE_TYPE_SLED": {
+        "documentation": "Simple vehicle that bumps along the ground, and likes to move along its local x-axis.<br>See http://wiki.secondlife.com/wiki/VEHICLE_TYPE_SLED"
+    },
+    "@sl-slua/global/VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY": {
+        "documentation": "A slider between minimum (0.0 = wobbly) and maximum (1.0 = firm as possible) stability of the vehicle to keep itself upright."
+    },
+    "@sl-slua/global/VEHICLE_VERTICAL_ATTRACTION_TIMESCALE": {
+        "documentation": "The period of wobble, or timescale for exponential approach, of the vehicle to rotate such that its preferred \"up\" axis is oriented along the world's \"up\" axis."
+    },
+    "@sl-slua/global/VERTICAL": {
+        "documentation": "VERTICAL constant"
+    },
+    "@sl-slua/global/WANDER_PAUSE_AT_WAYPOINTS": {
+        "documentation": "WANDER_PAUSE_AT_WAYPOINTS constant"
+    },
+    "@sl-slua/global/WATER_BLUR_MULTIPLIER": {
+        "documentation": "Blur factor."
+    },
+    "@sl-slua/global/WATER_FOG": {
+        "documentation": "Fog properties when underwater."
+    },
+    "@sl-slua/global/WATER_FRESNEL": {
+        "documentation": "Fresnel scattering applied to the surface of the water."
+    },
+    "@sl-slua/global/WATER_NORMAL_SCALE": {
+        "documentation": "Scaling applied to the water normal map."
+    },
+    "@sl-slua/global/WATER_NORMAL_TEXTURE": {
+        "documentation": "Normal map used for environmental waves."
+    },
+    "@sl-slua/global/WATER_REFRACTION": {
+        "documentation": "Refraction factors when looking through the surface of the water."
+    },
+    "@sl-slua/global/WATER_TEXTURE_DEFAULTS": {
+        "documentation": "Is the environment using the default wave map."
+    },
+    "@sl-slua/global/WATER_WAVE_DIRECTION": {
+        "documentation": "Vectors for the directions of the waves."
+    },
+    "@sl-slua/global/XP_ERROR_EXPERIENCES_DISABLED": {
+        "documentation": "The region currently has experiences disabled."
+    },
+    "@sl-slua/global/XP_ERROR_EXPERIENCE_DISABLED": {
+        "documentation": "The experience owner has temporarily disabled the experience."
+    },
+    "@sl-slua/global/XP_ERROR_EXPERIENCE_SUSPENDED": {
+        "documentation": "The experience has been suspended by Linden Customer Support."
+    },
+    "@sl-slua/global/XP_ERROR_INVALID_EXPERIENCE": {
+        "documentation": "The script is associated with an experience that no longer exists."
+    },
+    "@sl-slua/global/XP_ERROR_INVALID_PARAMETERS": {
+        "documentation": "One of the string arguments was too big to fit in the key-value store."
+    },
+    "@sl-slua/global/XP_ERROR_KEY_NOT_FOUND": {
+        "documentation": "The requested key does not exist."
+    },
+    "@sl-slua/global/XP_ERROR_MATURITY_EXCEEDED": {
+        "documentation": "The content rating of the experience exceeds that of the region."
+    },
+    "@sl-slua/global/XP_ERROR_NONE": {
+        "documentation": "No error was detected."
+    },
+    "@sl-slua/global/XP_ERROR_NOT_FOUND": {
+        "documentation": "The sim was unable to verify the validity of the experience. Retrying after a short wait is advised."
+    },
+    "@sl-slua/global/XP_ERROR_NOT_PERMITTED": {
+        "documentation": "This experience is not allowed to run by the requested agent."
+    },
+    "@sl-slua/global/XP_ERROR_NOT_PERMITTED_LAND": {
+        "documentation": "This experience is not allowed to run on the current region."
+    },
+    "@sl-slua/global/XP_ERROR_NO_EXPERIENCE": {
+        "documentation": "This script is not associated with an experience."
+    },
+    "@sl-slua/global/XP_ERROR_QUOTA_EXCEEDED": {
+        "documentation": "An attempted write data to the key-value store failed due to the data quota being met."
+    },
+    "@sl-slua/global/XP_ERROR_REQUEST_PERM_TIMEOUT": {
+        "documentation": "Request timed out; permissions not modified."
+    },
+    "@sl-slua/global/XP_ERROR_RETRY_UPDATE": {
+        "documentation": "A checked update failed due to an out of date request."
+    },
+    "@sl-slua/global/XP_ERROR_STORAGE_EXCEPTION": {
+        "documentation": "Unable to communicate with the key-value store."
+    },
+    "@sl-slua/global/XP_ERROR_STORE_DISABLED": {
+        "documentation": "The key-value store is currently disabled on this region."
+    },
+    "@sl-slua/global/XP_ERROR_THROTTLED": {
+        "documentation": "The call failed due to too many recent calls."
+    },
+    "@sl-slua/global/XP_ERROR_UNKNOWN_ERROR": {
+        "documentation": "Other unknown error."
+    },
+    "@sl-slua/global/ZERO_ROTATION": {
+        "documentation": "ZERO_ROTATION constant"
+    },
+    "@sl-slua/global/ZERO_VECTOR": {
+        "documentation": "ZERO_VECTOR constant"
     }
 }
