@@ -408,6 +408,9 @@ class SLuaDefinitions:
         for func in lsl.functions.values():
             if func.private:
                 continue
+            semantic_prefix = (
+                "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
+            )
             known_types = self.validate_type_params(func.type_arguments)
             ll_func = SLuaFunction(
                 name=func.compute_slua_name(with_module=False),
@@ -427,7 +430,7 @@ class SLuaDefinitions:
             )
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
-                comment=ll_func.comment,
+                comment=semantic_prefix + ll_func.comment,
                 deprecated=True,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,

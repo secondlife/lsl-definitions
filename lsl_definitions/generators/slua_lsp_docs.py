@@ -180,7 +180,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         if module.name not in {"ll", "llcompat"}:
             builder.add_module(module)
     builder.add_module(modules["ll"])
-    #     selene["globals"].update(selene_module(modules["llcompat"]))
+    builder.add_module(modules["llcompat"])
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
         if not const.private and not const.slua_removed:
             builder.add_constant(const)
