@@ -4803,6 +4803,9 @@
     "@sl-slua/global/DATA_RATING": {
         "documentation": "Value: 4\nReturns the agent ratings as a comma separated string of six integers. They are:<br>&nbsp;&nbsp;&nbsp;1) Positive rated behaviour<br>&nbsp;&nbsp;&nbsp;2) Negative rated behaviour<br>&nbsp;&nbsp;&nbsp;3) Positive rated appearance<br>&nbsp;&nbsp;&nbsp;4) Negative rated appearance<br>&nbsp;&nbsp;&nbsp;5) Positive rated building<br>&nbsp;&nbsp;&nbsp;6) Negative rated building"
     },
+    "@sl-slua/global/DATA_RESERVED_0": {
+        "documentation": "Value: 9\nReserved for Linden use."
+    },
     "@sl-slua/global/DATA_SIM_POS": {
         "documentation": "Value: 5"
     },
@@ -4861,7 +4864,7 @@
         "documentation": "Value: -6\nCould not validate values for environment."
     },
     "@sl-slua/global/EOF": {
-        "documentation": "Value: \\\"\\\\\\\\n\\\\\\\\n\\\\\\\\n\\\"\nIndicates the last line of a notecard was read."
+        "documentation": "Value: \n\n\n\nIndicates the last line of a notecard was read."
     },
     "@sl-slua/global/ERR_GENERIC": {
         "documentation": "Value: -1"
@@ -5116,31 +5119,31 @@
         "documentation": "Value: -1"
     },
     "@sl-slua/global/JSON_ARRAY": {
-        "documentation": "Value: \\\\uFDD2"
+        "documentation": "Value: \ufdd2"
     },
     "@sl-slua/global/JSON_DELETE": {
-        "documentation": "Value: \\\\uFDD8"
+        "documentation": "Value: \ufdd8"
     },
     "@sl-slua/global/JSON_FALSE": {
-        "documentation": "Value: \\\\uFDD7"
+        "documentation": "Value: \ufdd7"
     },
     "@sl-slua/global/JSON_INVALID": {
-        "documentation": "Value: \\\\uFDD0"
+        "documentation": "Value: \ufdd0"
     },
     "@sl-slua/global/JSON_NULL": {
-        "documentation": "Value: \\\\uFDD5"
+        "documentation": "Value: \ufdd5"
     },
     "@sl-slua/global/JSON_NUMBER": {
-        "documentation": "Value: \\\\uFDD3"
+        "documentation": "Value: \ufdd3"
     },
     "@sl-slua/global/JSON_OBJECT": {
-        "documentation": "Value: \\\\uFDD1"
+        "documentation": "Value: \ufdd1"
     },
     "@sl-slua/global/JSON_STRING": {
-        "documentation": "Value: \\\\uFDD4"
+        "documentation": "Value: \ufdd4"
     },
     "@sl-slua/global/JSON_TRUE": {
-        "documentation": "Value: \\\\uFDD6"
+        "documentation": "Value: \ufdd6"
     },
     "@sl-slua/global/KFM_CMD_PAUSE": {
         "documentation": "Value: 2\nFor use with KFM_COMMAND."
@@ -5302,7 +5305,7 @@
         "documentation": "Value: 1"
     },
     "@sl-slua/global/NAK": {
-        "documentation": "Value: \\\\n\\\\x15\\\\n\nIndicates a notecard read was attempted and the notecard was not yet cached on the server."
+        "documentation": "Value: \n\u0015\n\nIndicates a notecard read was attempted and the notecard was not yet cached on the server."
     },
     "@sl-slua/global/NULL_KEY": {
         "documentation": "Value: 00000000-0000-0000-0000-000000000000"
