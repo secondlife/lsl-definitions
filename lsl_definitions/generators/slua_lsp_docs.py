@@ -20,9 +20,22 @@ from lsl_definitions.utils import (
 GLOBALS_PREFIX = "@sl-slua/global/"
 
 
+def doc_url(module: str | None, func: str) -> str | None:
+    # TODO: None of these links actually exist
+    if module == "ll":
+        return f"https://create.secondlife.com/script/slua-reference/functions/ll{func}/"
+    elif func in {"toquaternion", "tovector"}:
+        return f"https://create.secondlife.com/script/slua-reference/{func}/"
+    elif module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
+        return f"https://create.secondlife.com/script/slua-reference/{module}/"
+    else:
+        return None
+
+
 def doc_function(func: SLuaFunction, method=False) -> dict:
     entry = remove_nones(
         documentation=escape_python(func.comment or f"{func.name} function"),
+        learn_more_link=doc_url(None, func.name),
     )
     return {f"{GLOBALS_PREFIX}{func.name}": entry}
 
