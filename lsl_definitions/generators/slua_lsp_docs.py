@@ -31,7 +31,7 @@ def htmlize(text: str) -> str:
 
 
 def doc_url(module: str | None, func: str | None) -> str | None:
-    # TODO: None of these links actually exist
+    # TODO: Change these when they have a more stable home
     if module in {"ll", "llcompat"} and func is not None:
         return f"https://wiki.secondlife.com/wiki/Ll{func}"
     if module in {
@@ -53,6 +53,8 @@ def doc_url(module: str | None, func: str | None) -> str | None:
         return "https://luau.org/library/#vector-library"
     if module == "lljson":
         return "https://create.secondlife.com/script/learn-slua/json/"
+    if module in {"quaternion", "rotation"}:
+        return "https://suzanna-linn.github.io/slua/moving-rotations"
     return None
 
 

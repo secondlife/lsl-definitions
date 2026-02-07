@@ -471,64 +471,84 @@
         "documentation": "Creates a new quaternion with the given component values. Alias of quaternion.create."
     },
     "@sl-slua/global/quaternion.identity": {
-        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant."
+        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.create": {
-        "documentation": "Creates a new quaternion with the given component values."
+        "documentation": "Creates a new quaternion with the given component values.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.normalize": {
-        "documentation": "Computes the normalized version (unit quaternion) of the quaternion."
+        "documentation": "Computes the normalized version (unit quaternion) of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.magnitude": {
-        "documentation": "Computes the magnitude of the quaternion."
+        "documentation": "Computes the magnitude of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.dot": {
-        "documentation": "Computes the dot product of two quaternions."
+        "documentation": "Computes the dot product of two quaternions.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.slerp": {
-        "documentation": "Spherical linear interpolation from a to b using factor t."
+        "documentation": "Spherical linear interpolation from a to b using factor t.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.conjugate": {
-        "documentation": "Computes the conjugate of the quaternion."
+        "documentation": "Computes the conjugate of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.tofwd": {
-        "documentation": "Computes the forward vector from the quaternion."
+        "documentation": "Computes the forward vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.toleft": {
-        "documentation": "Computes the left vector from the quaternion."
+        "documentation": "Computes the left vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.toup": {
-        "documentation": "Computes the up vector from the quaternion."
+        "documentation": "Computes the up vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.identity": {
-        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant."
+        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.create": {
-        "documentation": "Creates a new quaternion with the given component values."
+        "documentation": "Creates a new quaternion with the given component values.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.normalize": {
-        "documentation": "Computes the normalized version (unit quaternion) of the quaternion."
+        "documentation": "Computes the normalized version (unit quaternion) of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.magnitude": {
-        "documentation": "Computes the magnitude of the quaternion."
+        "documentation": "Computes the magnitude of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.dot": {
-        "documentation": "Computes the dot product of two quaternions."
+        "documentation": "Computes the dot product of two quaternions.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.slerp": {
-        "documentation": "Spherical linear interpolation from a to b using factor t."
+        "documentation": "Spherical linear interpolation from a to b using factor t.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.conjugate": {
-        "documentation": "Computes the conjugate of the quaternion."
+        "documentation": "Computes the conjugate of the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.tofwd": {
-        "documentation": "Computes the forward vector from the quaternion."
+        "documentation": "Computes the forward vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.toleft": {
-        "documentation": "Computes the left vector from the quaternion."
+        "documentation": "Computes the left vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.toup": {
-        "documentation": "Computes the up vector from the quaternion."
+        "documentation": "Computes the up vector from the quaternion.",
+        "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/string": {
         "documentation": "String manipulation library.",
