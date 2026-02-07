@@ -643,7 +643,15 @@ class SLuaDefinitionParser:
         return alias
 
     def _validate_property(self, data: dict, scope: Set[str], const: bool = False) -> SLuaProperty:
-        prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
+        prop = SLuaProperty(
+            name=data["name"],
+            type=data["type"],
+            value=str(data.get("value", "")) or None,
+            comment=data.get("comment", ""),
+            slua_removed=data.get("slua-removed", False),
+            private=data.get("private", False),
+            modifiable=data.get("modifiable", "read-only"),
+        )
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
         if const and prop.type != "any" and prop.value is None:
