@@ -147,7 +147,7 @@ class LSLConstant(NamedTuple):
     @property
     def value_raw(self) -> str:
         """A LSL literal, except strings are stripped of start/end quotes (")
-        All string escape sequences have been decoded
+        All string escape sequences have been decoded into plain unicode code points
         """
         import ast
 
