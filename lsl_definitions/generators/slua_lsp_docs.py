@@ -32,8 +32,8 @@ def htmlize(text: str) -> str:
 
 def doc_url(module: str | None, func: str | None) -> str | None:
     # TODO: None of these links actually exist
-    if module == "ll" and func is not None:
-        return f"https://create.secondlife.com/script/slua-reference/functions/ll{func.lower()}/"
+    if module in {"ll", "llcompat"} and func is not None:
+        return f"https://wiki.secondlife.com/wiki/Ll{func}"
     if func in {"toquaternion", "tovector"}:
         return f"https://create.secondlife.com/script/slua-reference/{func}/"
     if module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
