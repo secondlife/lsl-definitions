@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import ast
 import dataclasses
 import enum
 import re
@@ -144,10 +143,12 @@ class LSLConstant(NamedTuple):
     @property
     def value_raw(self) -> str:
         """My value, except that string escape sequences have been decoded"""
+        import ast
+
         if self.type != LSLType.STRING:
             return self.value
         # convert unicode escapes from Luau format to Python format
-        python_literal = '"' + re.sub(r"\\u\{([a-fA-F0-9]+)\}", r"\\u\1", self.value) + '"'
+        python_literal = re.sub(r"\\u\{([a-fA-F0-9]+)\}", r"\\u\1", f'"{self.value}"')
         # Decode escape sequences
         return ast.literal_eval(python_literal)
 
@@ -157,7 +158,7 @@ class LSLConstant(NamedTuple):
         if self.type in {LSLType.STRING, LSLType.KEY}:
             return f'"{self.value}"'
         else:
-            return str(self.value)
+            return self.value
 
     @property
     def slua_literal(self) -> str:
