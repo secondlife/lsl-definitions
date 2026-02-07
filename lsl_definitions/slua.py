@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any, List, Literal, Optional, Set, TextIO
 import llsd
 import yaml
 
-from lsl_definitions.utils import escape_python, remove_worthless
+from lsl_definitions.utils import remove_worthless
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -35,7 +35,7 @@ class SLuaProperty:
         return {
             "tooltip": self.comment,
             "type": self.type,
-            **({"value": escape_python(self.value)} if self.value is not None else {}),
+            **({"value": str(self.value)} if self.value is not None else {}),
         }
 
     def to_luau_def(self) -> str:
@@ -462,7 +462,7 @@ class SLuaDefinitions:
                 name=const.name,
                 comment=const.tooltip,
                 type=self.validate_type(const.slua_type or const.type.meta.slua_name),
-                value=const.value,
+                value=const.slua_literal,
                 private=const.private,
             )
             self.globalConstants.append(prop)

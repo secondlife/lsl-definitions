@@ -1,6 +1,5 @@
 """Utility functions for LSL definitions processing."""
 
-import ast
 import enum
 import os
 import os.path
@@ -11,19 +10,6 @@ from typing import Iterable, Sequence, TypeVar, Union
 class StringEnum(str, enum.Enum):
     def __str__(self):
         return self.value
-
-
-def escape_python(val: str) -> str:
-    """Encode a string with escapes according to repr() rules"""
-    # Syntax files have double-encoded values :(
-    return repr(repr(val)[1:-1])[1:-1]
-
-
-def unescape_python(val: str) -> str:
-    """Decode a string with escapes as if it were a string literal"""
-    if '"' in val:
-        raise ValueError("Can't handle quotes here")
-    return ast.literal_eval('"' + ast.literal_eval('"' + val + '"') + '"')
 
 
 def to_c_str(val: str) -> str:

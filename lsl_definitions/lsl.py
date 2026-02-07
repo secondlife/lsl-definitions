@@ -2,20 +2,16 @@
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import enum
 import re
-from typing import TYPE_CHECKING, Any, Dict, List, NamedTuple, Optional, Set, Union
+from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
 
 import llsd
 import yaml
 
-from lsl_definitions.utils import (
-    StringEnum,
-    escape_python,
-    remove_worthless,
-    unescape_python,
-)
+from lsl_definitions.utils import StringEnum, remove_worthless
 
 if TYPE_CHECKING:
     from lsl_definitions.slua import SLuaDefinitions
@@ -145,6 +141,36 @@ class LSLConstant(NamedTuple):
     private: bool
     """Whether this should this be included in the syntax file"""
 
+    @property
+    def value_raw(self) -> str:
+        """My value, except that string escape sequences have been decoded"""
+        if self.type != LSLType.STRING:
+            return self.value
+        # convert unicode escapes from Luau format to Python format
+        python_literal = '"' + re.sub(r"\\u\{([a-fA-F0-9]+)\}", r"\\u\1", self.value) + '"'
+        # Decode escape sequences
+        return ast.literal_eval(python_literal)
+
+    @property
+    def lsl_doc_literal(self) -> str:
+        """My value as a LSL literal, except strings might have luau escape sequences for readability"""
+        if self.type in {LSLType.STRING, LSLType.KEY}:
+            return f'"{self.value}"'
+        else:
+            return str(self.value)
+
+    @property
+    def slua_literal(self) -> str:
+        """My value as a SLua literal"""
+        if self.type == LSLType.KEY or self.slua_type == "uuid":
+            return f"uuid({self.lsl_doc_literal})"
+        elif self.type == LSLType.VECTOR:
+            return f"vector({self.value[1:-1]})"
+        elif self.type == LSLType.ROTATION:
+            return f"rotation({self.value[1:-1]})"
+        else:
+            return self.lsl_doc_literal
+
     def to_dict(self) -> dict:
         return remove_worthless(
             {
@@ -153,7 +179,7 @@ class LSLConstant(NamedTuple):
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
                 "type": str(self.type),
-                "value": escape_python(self.value),
+                "value": self.lsl_doc_literal,
             }
         )
 
@@ -167,7 +193,7 @@ class LSLConstant(NamedTuple):
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
                     "type": slua.validate_type(self.slua_type or self.type.meta.slua_name),
-                    "value": escape_python(self.value),
+                    "value": self.slua_literal,
                 }
             )
         except Exception as e:
@@ -591,7 +617,7 @@ class LSLDefinitionParser:
             type=LSLType(const_data["type"]),
             slua_type=const_data.get("slua-type", None),
             slua_removed=const_data.get("slua-removed", False),
-            value=str(self._massage_const_value(const_data["value"])),
+            value=str(const_data["value"]),
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
             deprecated=const_data.get("deprecated", False),
@@ -602,10 +628,3 @@ class LSLDefinitionParser:
             raise KeyError(f"{const.name} is already defined")
         self._definitions.constants[const.name] = const
         return const
-
-    @staticmethod
-    def _massage_const_value(val: Any) -> Any:
-        if not isinstance(val, str):
-            return val
-        # Unescape any Python-like string escapes in the code
-        return unescape_python(val)
