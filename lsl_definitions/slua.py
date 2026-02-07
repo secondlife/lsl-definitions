@@ -23,6 +23,7 @@ class SLuaProperty:
     name: str
     type: str
     value: str | None = None
+    """A SLua literal or expression"""
     comment: str = ""
     slua_removed: bool = False
     """This property is in Luau but not SLua"""
@@ -35,7 +36,7 @@ class SLuaProperty:
         return {
             "tooltip": self.comment,
             "type": self.type,
-            **({"value": str(self.value)} if self.value is not None else {}),
+            **({"value": self.value} if self.value is not None else {}),
         }
 
     def to_luau_def(self) -> str:

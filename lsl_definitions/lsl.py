@@ -135,6 +135,10 @@ class LSLConstant(NamedTuple):
     slua_type: Optional[str]
     slua_removed: bool
     value: str
+    """A LSL literal, except:
+        1. strings might have luau escape sequences for readability
+        2. strings are stripped of start/end quotes (")
+    """
     tooltip: str
     deprecated: bool
     private: bool
@@ -142,7 +146,9 @@ class LSLConstant(NamedTuple):
 
     @property
     def value_raw(self) -> str:
-        """My value, except that string escape sequences have been decoded"""
+        """A LSL literal, except strings are stripped of start/end quotes (")
+        All string escape sequences have been decoded
+        """
         import ast
 
         if self.type != LSLType.STRING:
@@ -154,7 +160,7 @@ class LSLConstant(NamedTuple):
 
     @property
     def lsl_doc_literal(self) -> str:
-        """My value as a LSL literal, except strings might have luau escape sequences for readability"""
+        """A LSL literal, except strings might have luau escape sequences for readability"""
         if self.type in {LSLType.STRING, LSLType.KEY}:
             return f'"{self.value}"'
         else:
@@ -162,7 +168,7 @@ class LSLConstant(NamedTuple):
 
     @property
     def slua_literal(self) -> str:
-        """My value as a SLua literal"""
+        """A SLua literal or expression"""
         if self.type == LSLType.KEY or self.slua_type == "uuid":
             return f"uuid({self.lsl_doc_literal})"
         elif self.type == LSLType.VECTOR:
