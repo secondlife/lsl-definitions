@@ -235,8 +235,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/debug#traceback"
     },
     "@sl-slua/global/llbase64": {
-        "documentation": "Base64 encoding/decoding library.",
-        "learn_more_link": "https://create.secondlife.com/script/slua-reference/llbase64/"
+        "documentation": "Base64 encoding/decoding library."
     },
     "@sl-slua/global/llbase64.encode": {
         "documentation": "Encodes a string or buffer to base64"
@@ -246,37 +245,47 @@
     },
     "@sl-slua/global/lljson": {
         "documentation": "JSON encoding/decoding library for Second Life.",
-        "learn_more_link": "https://create.secondlife.com/script/slua-reference/lljson/"
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.null": {
-        "documentation": "A constant to pass for null to json encode"
+        "documentation": "A constant to pass for null to json encode",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.empty_array_mt": {
-        "documentation": "Value: {}<br>Metatable for declaring table as an empty array for json encode"
+        "documentation": "Value: {}<br>Metatable for declaring table as an empty array for json encode",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.array_mt": {
-        "documentation": "Value: {}<br>Metatable for declaring table as an array for json encode"
+        "documentation": "Value: {}<br>Metatable for declaring table as an array for json encode",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.empty_array": {
-        "documentation": "A constant to pass for an empty array to json encode"
+        "documentation": "A constant to pass for an empty array to json encode",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson._NAME": {
-        "documentation": "Value: \"lljson\"<br>Name of the lljson library"
+        "documentation": "Value: \"lljson\"<br>Name of the lljson library",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson._VERSION": {
-        "documentation": "Value: \"2.1.0.11\"<br>Version of the lljson library"
+        "documentation": "Value: \"2.1.0.11\"<br>Version of the lljson library",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.encode": {
-        "documentation": "Encodes a Lua value as JSON. Raises an error if value contains unsupported types."
+        "documentation": "Encodes a Lua value as JSON. Raises an error if value contains unsupported types.",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.decode": {
-        "documentation": "Decodes a JSON string to a Lua value. Raises an error if JSON is invalid."
+        "documentation": "Decodes a JSON string to a Lua value. Raises an error if JSON is invalid.",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.slencode": {
-        "documentation": "Encodes a Lua value as JSON, preserving SL types. Use tight to encode more compactly. Raises an error if value contains unsupported types."
+        "documentation": "Encodes a Lua value as JSON, preserving SL types. Use tight to encode more compactly. Raises an error if value contains unsupported types.",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.sldecode": {
-        "documentation": "Decodes a JSON string to a Lua value, preserving SL types. Raises an error if JSON is invalid."
+        "documentation": "Decodes a JSON string to a Lua value, preserving SL types. Raises an error if JSON is invalid.",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",

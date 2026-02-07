@@ -51,9 +51,8 @@ def doc_url(module: str | None, func: str | None) -> str | None:
         return f"https://create.roblox.com/docs/reference/engine/libraries/{module}#{func}"
     if func == "vector":
         return "https://luau.org/library/#vector-library"
-    if module in {"uuid", "vector", "quaternion", "bit32", "lljson", "llbase64"}:
-        if func is None:
-            return f"https://create.secondlife.com/script/slua-reference/{module}/"
+    if module == "lljson":
+        return "https://create.secondlife.com/script/learn-slua/json/"
     return None
 
 
