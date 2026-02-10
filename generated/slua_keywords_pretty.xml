@@ -2238,7 +2238,7 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>string</string>
             <key>value</key>
-            <string>"\n\n\n"</string>
+            <string>"␇␇␇"</string>
          </map>
          <key>ERR_GENERIC</key>
          <map>
@@ -3563,7 +3563,7 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>string</string>
             <key>value</key>
-            <string>"\n\x15\n"</string>
+            <string>"␇␕␇"</string>
          </map>
          <key>NULL_KEY</key>
          <map>

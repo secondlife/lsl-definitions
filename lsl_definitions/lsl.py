@@ -10,7 +10,11 @@ from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
 import llsd
 import yaml
 
-from lsl_definitions.utils import StringEnum, remove_worthless
+from lsl_definitions.utils import (
+    StringEnum,
+    remove_worthless,
+    unescape_control_characters,
+)
 
 if TYPE_CHECKING:
     from lsl_definitions.slua import SLuaDefinitions
@@ -186,7 +190,7 @@ class LSLConstant(NamedTuple):
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
                 "type": str(self.type),
-                "value": self.lsl_doc_literal,
+                "value": unescape_control_characters(self.lsl_doc_literal),
             }
         )
 
@@ -200,7 +204,7 @@ class LSLConstant(NamedTuple):
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
                     "type": slua.validate_type(self.slua_type or self.type.meta.slua_name),
-                    "value": self.slua_literal,
+                    "value": unescape_control_characters(self.slua_literal),
                 }
             )
         except Exception as e:

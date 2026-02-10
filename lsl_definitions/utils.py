@@ -6,6 +6,16 @@ import os.path
 import stat
 from typing import Iterable, Sequence, TypeVar, Union
 
+CONTROL_PICTURES = range(0x2400, 0x2420)
+"""Pass this to str.translate to display EOF and NAK prettier"""
+
+
+def unescape_control_characters(s: str) -> str:
+    s = s.replace("\\n", "\u2407")
+    for i in range(0x20):
+        s = s.replace(f"\\x{i:02x}", chr(0x2400 + i))
+    return s
+
 
 class StringEnum(str, enum.Enum):
     def __str__(self):
