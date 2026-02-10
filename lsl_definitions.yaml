@@ -12225,6 +12225,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float

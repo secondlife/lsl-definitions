@@ -30502,7 +30502,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string</string>
+                     <string>string | uuid</string>
                   </map>
                </map>
                <map>
