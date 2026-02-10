@@ -275,6 +275,11 @@
                                     "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
                                         "additionalProperties": false,
                                         "properties": {
+                                            "asset-semantics": {
+                                                "const": true,
+                                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
+                                                "type": "boolean"
+                                            },
                                             "bool-semantics": {
                                                 "const": true,
                                                 "markdownDescription": "This function argument's integer value represents a boolean value.",

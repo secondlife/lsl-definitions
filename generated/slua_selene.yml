@@ -7450,8 +7450,8 @@ globals:
     args:
     - type: number
     - type: number
-    - type: any
-    - type: any
+    - type: string
+    - type: string
     description: Sends Number, Text, and ID to members of the link set identified
       by LinkNumber.\nLinkNumber is either a linked number (available through llGetLinkNumber)
       or a LINK_* constant.
@@ -12331,8 +12331,8 @@ globals:
     args:
     - type: number
     - type: number
-    - type: any
-    - type: any
+    - type: string
+    - type: string
     description: Sends Number, Text, and ID to members of the link set identified
       by LinkNumber.\nLinkNumber is either a linked number (available through llGetLinkNumber)
       or a LINK_* constant.

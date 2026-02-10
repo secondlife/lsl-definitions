@@ -4846,6 +4846,7 @@ functions:
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
 #    bool-semantics: If true then the returned integer represents a boolean 1 or 0
+#    asset-semantics: If true this argument represents an inventory item and can accept either name or uuid
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
   llAbs:
     arguments:
@@ -5329,6 +5330,7 @@ functions:
     - ImpactSound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - ImpactVolume:
         tooltip: ''
         type: float
@@ -5344,6 +5346,7 @@ functions:
     - ImpactSprite:
         tooltip: ''
         type: string
+        asset-semantics: true
     deprecated: true
     energy: 10.0
     func-id: 161
@@ -6005,6 +6008,7 @@ functions:
     - NotecardName:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Pattern:
         tooltip: Regex pattern to find in the notecard text.
         type: string
@@ -6025,6 +6029,7 @@ functions:
     - NotecardName:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Pattern:
         tooltip: Regex pattern to find in the notecard text.
         type: string
@@ -6232,6 +6237,7 @@ functions:
     func-id: 266
     must-use: true
     return: list
+    slua-return: "{uuid}"
     sleep: 0.0
     tooltip: Returns a list of keys of playing animations for an avatar.\nReturns
       a list of keys of all playing animations for the specified avatar ID.
@@ -6954,6 +6960,7 @@ functions:
     - NotecardName:
         tooltip: ''
         type: string
+        asset-semantics: true
     - LineNumber:
         tooltip: ''
         type: integer
@@ -6972,6 +6979,7 @@ functions:
     - NotecardName:
         tooltip: ''
         type: string
+        asset-semantics: true
     - LineNumber:
         tooltip: ''
         type: integer
@@ -6990,6 +6998,7 @@ functions:
     - NotecardName:
         tooltip: ''
         type: string
+        asset-semantics: true
     energy: 10.0
     func-id: 276
     return: key
@@ -7021,6 +7030,7 @@ functions:
     func-id: 506
     must-use: true
     return: list
+    slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns a list of names of playing animations for an object.\nReturns
       a list of names of all playing animations for the current object.
@@ -8242,6 +8252,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9035,6 +9046,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9054,6 +9066,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9073,6 +9086,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9122,6 +9136,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Offset:
         tooltip: ''
         type: vector
@@ -9153,6 +9168,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Offset:
         tooltip: ''
         type: vector
@@ -9187,6 +9203,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Offset:
         tooltip: ''
         type: vector
@@ -9221,6 +9238,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Offset:
         tooltip: ''
         type: vector
@@ -9615,6 +9633,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9634,6 +9653,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -9682,6 +9702,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     energy: 10.0
     func-id: 93
     return: void
@@ -11087,6 +11108,7 @@ functions:
     - RenderMaterial:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Face:
         tooltip: ''
         type: integer
@@ -11119,6 +11141,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Face:
         tooltip: ''
         type: integer
@@ -11385,6 +11408,7 @@ functions:
     - Material:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Face:
         tooltip: ''
         type: integer
@@ -11503,6 +11527,7 @@ functions:
     - Texture:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Face:
         tooltip: ''
         type: integer
@@ -11751,6 +11776,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
@@ -11774,6 +11800,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     deprecated: true
     energy: 10.0
     func-id: 126
@@ -11826,6 +11853,7 @@ functions:
     - Animation:
         tooltip: ''
         type: string
+        asset-semantics: true
     energy: 10.0
     func-id: 130
     return: void
@@ -11863,6 +11891,7 @@ functions:
     - Animation:
         tooltip: ''
         type: string
+        asset-semantics: true
     energy: 10.0
     func-id: 505
     return: void
@@ -12214,6 +12243,7 @@ functions:
     - Sound:
         tooltip: ''
         type: string
+        asset-semantics: true
     - Volume:
         tooltip: ''
         type: float
