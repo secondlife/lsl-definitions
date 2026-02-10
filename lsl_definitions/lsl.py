@@ -181,11 +181,16 @@ class LSLArgument:
     slua_type: Optional[str]
     tooltip: str
     index_semantics: bool
+    asset_semantics: bool
+    """Represents an asset name or uuid"""
     bool_semantics: bool
+    """Represents a boolean"""
 
     def compute_slua_type(self) -> str:
         if self.slua_type is not None:
             return self.slua_type
+        if self.asset_semantics and self.type == LSLType.STRING:
+            return "string | uuid"
         if self.bool_semantics and self.type == LSLType.INTEGER:
             return "boolean | number"
         return self.type.meta.slua_name
@@ -543,10 +548,19 @@ class LSLDefinitionParser:
             name=arg_name,
             type=LSLType(arg_data["type"]),
             slua_type=arg_data.get("slua-type", None),
-            index_semantics=bool(arg_data.get("index-semantics", False)),
+            asset_semantics=bool(arg_data.get("asset-semantics", False)),
             bool_semantics=bool(arg_data.get("bool-semantics", False)),
+            index_semantics=bool(arg_data.get("index-semantics", False)),
             tooltip=arg_data.get("tooltip", ""),
         )
+        if arg.asset_semantics and arg.type != LSLType.STRING:
+            raise ValueError(
+                f"{func_name}'s {arg_name} has asset semantics, but type is {arg.type!r}"
+            )
+        if arg.bool_semantics and arg.type != LSLType.INTEGER:
+            raise ValueError(
+                f"{func_name}'s {arg_name} has bool semantics, but type is {arg.type!r}"
+            )
         if arg.index_semantics and arg.type != LSLType.INTEGER:
             raise ValueError(
                 f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"

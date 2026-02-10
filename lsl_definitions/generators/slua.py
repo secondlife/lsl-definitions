@@ -102,6 +102,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             "boolean | number": "bool",
             "number": "number",
             "string": "string",
+            "string | uuid": "string",
             "buffer": {"display": "buffer"},
             "uuid": {"display": "uuid"},
             "vector": {"display": "vector"},
