@@ -803,6 +803,7 @@ constants:
     type: integer
     value: 4
   DATA_RESERVED_0:
+    private: true
     tooltip: "Reserved for Linden use."
     type: integer
     value: 9

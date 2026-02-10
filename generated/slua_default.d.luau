@@ -1779,7 +1779,6 @@ declare DATA_NAME: number
 declare DATA_ONLINE: number
 declare DATA_PAYINFO: number
 declare DATA_RATING: number
-declare DATA_RESERVED_0: number
 declare DATA_SIM_POS: number
 declare DATA_SIM_RATING: number
 declare DATA_SIM_STATUS: number

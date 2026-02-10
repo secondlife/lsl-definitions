@@ -2050,15 +2050,6 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>4</string>
          </map>
-         <key>DATA_RESERVED_0</key>
-         <map>
-            <key>tooltip</key>
-            <string>Reserved for Linden use.</string>
-            <key>type</key>
-            <string>number</string>
-            <key>value</key>
-            <string>9</string>
-         </map>
          <key>DATA_SIM_POS</key>
          <map>
             <key>tooltip</key>

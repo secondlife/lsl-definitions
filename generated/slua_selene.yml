@@ -753,10 +753,6 @@ globals:
       \ They are:\n\t\t\t1) Positive rated behaviour\n\t\t\t2) Negative rated behaviour\n\
       \t\t\t3) Positive rated appearance\n\t\t\t4) Negative rated appearance\n\t\t\
       \t5) Positive rated building\n\t\t\t6) Negative rated building"
-  DATA_RESERVED_0:
-    property: read-only
-    type: number
-    description: Reserved for Linden use.
   DATA_SIM_POS:
     property: read-only
     type: number
