@@ -11,7 +11,7 @@ CONTROL_PICTURES = range(0x2400, 0x2420)
 
 
 def unescape_control_characters(s: str) -> str:
-    s = s.replace("\\n", "\u2407")
+    s = s.replace("\\n", "\u240a")
     for i in range(0x20):
         s = s.replace(f"\\x{i:02x}", chr(0x2400 + i))
     return s
