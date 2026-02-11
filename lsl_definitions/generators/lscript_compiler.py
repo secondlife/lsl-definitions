@@ -63,8 +63,9 @@ def gen_lexer_file(definitions: LSLDefinitions, template_path: str) -> str:
                 "INTEGER_CONSTANT",
             )
         elif const.type == LSLType.STRING:
-            c_str = to_c_str(const.value)
-            c_str_len = len(const.value.encode("utf8")) + 1
+            value_raw = const.value_raw
+            c_str = to_c_str(value_raw)
+            c_str_len = len(value_raw.encode("utf8")) + 1
             generated_constants += _LEXER_STR_TEMPLATE % (const.name, c_str_len, c_str)
         else:
             raise ValueError(f"Unknown constant type {const.type!r}")
@@ -435,9 +436,9 @@ def gen_cpp_constants(definitions: LSLDefinitions) -> str:
 
         cpp_constants += f"constexpr {const.type.meta.cpp_name} LSL_GEN_{const.name.upper()} = "
         if const.type == LSLType.STRING:
-            cpp_constants += f'"{to_c_str(const.value)}"'
+            cpp_constants += f'"{to_c_str(const.value_raw)}"'
         elif const.type in (LSLType.INTEGER, LSLType.FLOAT):
-            cpp_constants += const.value
+            cpp_constants += const.value_raw
         cpp_constants += ";\n"
 
     return cpp_constants

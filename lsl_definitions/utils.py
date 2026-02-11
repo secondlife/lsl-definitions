@@ -1,29 +1,38 @@
 """Utility functions for LSL definitions processing."""
 
-import ast
 import enum
 import os
 import os.path
 import stat
 from typing import Iterable, Sequence, TypeVar, Union
 
+CONTROL_PICTURES = range(0x2400, 0x2420)
+"""Pass this to str.translate to display EOF and NAK prettier"""
+
+
+def unescape_control_characters(s: str) -> str:
+    """Convert control character escape sequences \n and \x00-\x1f
+    to their matching picture character \u2400-\u241f (␀-␟).
+
+    This is partially a workaround for bad newline handling in both the source file lsl_definitions.yaml
+    and the generated file keywords.xml:
+    1. The keywords.xml file contains some \\n sequences, even though it could/should use real newline characters
+    2. Therefore, the viewer works around this by substituting \\n for \n when rendering tooltips
+    3. This also replaces the \n sequences in the values of EOF and NAK. Possibly an oversight
+    4. Therefore, replace \n with control picture, but only in keywords.xml value field
+
+    I avoided needing this in docs.json generation by replacing \n and \\n with <br>
+    only in the comment field, not the value field
+    """
+    s = s.replace("\\n", "\u240a")
+    for i in range(0x20):
+        s = s.replace(f"\\x{i:02x}", chr(0x2400 + i))
+    return s
+
 
 class StringEnum(str, enum.Enum):
     def __str__(self):
         return self.value
-
-
-def escape_python(val: str) -> str:
-    """Encode a string with escapes according to repr() rules"""
-    # Syntax files have double-encoded values :(
-    return repr(repr(val)[1:-1])[1:-1]
-
-
-def unescape_python(val: str) -> str:
-    """Decode a string with escapes as if it were a string literal"""
-    if '"' in val:
-        raise ValueError("Can't handle quotes here")
-    return ast.literal_eval('"' + ast.literal_eval('"' + val + '"') + '"')
 
 
 def to_c_str(val: str) -> str:

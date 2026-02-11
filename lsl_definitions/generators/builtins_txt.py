@@ -22,7 +22,7 @@ def gen_builtins_txt(definitions: LSLDefinitions) -> str:
             # We don't use C encoding semantics to escape values because LSL only knows
             # about a handful of basic escapes like `\n`.
             # Other values we want to output verbatim.
-            lsl_val = const.value.replace("\\", "\\\\").replace("\n", "\\n")
+            lsl_val = const.value_raw.replace("\n", "\\n")
             builtins_str += f'"{lsl_val}"'
         else:
             builtins_str += const.value
