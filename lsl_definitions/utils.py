@@ -12,7 +12,18 @@ CONTROL_PICTURES = range(0x2400, 0x2420)
 
 def unescape_control_characters(s: str) -> str:
     """Convert control character escape sequences \n and \x00-\x1f
-    to their matching picture character \u2400-\u241f (␀-␟)"""
+    to their matching picture character \u2400-\u241f (␀-␟).
+
+    This is partially a workaround for bad newline handling in both the source file lsl_definitions.yaml
+    and the generated file keywords.xml:
+    1. The keywords.xml file contains some \\n sequences, even though it could/should use real newline characters
+    2. Therefore, the viewer works around this by substituting \\n for \n when rendering tooltips
+    3. This also replaces the \n sequences in the values of EOF and NAK. Possibly an oversight
+    4. Therefore, replace \n with control picture, but only in keywords.xml value field
+
+    I avoided needing this in docs.json generation by replacing \n and \\n with <br>
+    only in the comment field, not the value field
+    """
     s = s.replace("\\n", "\u240a")
     for i in range(0x20):
         s = s.replace(f"\\x{i:02x}", chr(0x2400 + i))
