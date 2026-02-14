@@ -7783,7 +7783,7 @@ functions:
     func-id: 530
     must-use: true
     return: list
-    slua-return: "{number | string}"
+    slua-return: '{number | ""}'
     sleep: 0.0
     tooltip: Returns a list of the current value for each requested visual parameter.
   llGetWallclock:

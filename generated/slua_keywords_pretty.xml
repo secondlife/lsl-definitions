@@ -21571,7 +21571,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{number | string}</string>
+            <string>{number | ""}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
