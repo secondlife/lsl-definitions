@@ -1923,6 +1923,30 @@ modules:
       comment: Value to insert.
       type: V
     returnType: ()
+  - name: append
+    comment: Appends one or more an elements to end of the array.
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to be appended to.
+      type: '{V}'
+      observes: write
+    - name: ...
+      comment: Values to append.
+      type: ...V
+    returnType: ()
+  - name: extend
+    comment: "Appends all elements from one array to the end of another.
+      Shorthand for table.move(b, 1, #b, #a+1, a)"
+    typeParameters: [V]
+    parameters:
+    - name: a
+      comment: Array to be appended to.
+      type: '{V}'
+    - name: b
+      comment: Array to append.
+      type: '{V}'
+    returnType: '{V}'
   - name: remove
     comment: Removes and returns the element at the specified index from the array,
       or from the end of the array.
