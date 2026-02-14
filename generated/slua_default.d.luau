@@ -473,6 +473,8 @@ declare table: {
   maxn: (t: {any}) -> number,
   insert: (<V>(a: {V}, i: number, v: V) -> ())
     & (<V>(a: {V}, value: V) -> ()),
+  append: <V>(a: {V}, ...V) -> {V},
+  extend: <V>(a: {V}, b: {V}) -> {V},
   remove: <V>(a: {V}, i: number?) -> V?,
   sort: <V>(a: {V}, f: ((a: V, b: V) -> boolean)?) -> (),
   pack: <V>(...V) -> { n: number, [number]: V },

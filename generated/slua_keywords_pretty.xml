@@ -15134,6 +15134,42 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Table manipulation library. Tables are collections of key-value pairs.</string>
          </map>
+         <key>table.append</key>
+         <map>
+            <key>type-arguments</key>
+            <array>
+               <string>V</string>
+            </array>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>a</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>Array to be appended to.</string>
+                     <key>type</key>
+                     <string>{V}</string>
+                  </map>
+               </map>
+               <map>
+                  <key>...</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>Values to append.</string>
+                     <key>type</key>
+                     <string>...V</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>{V}</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Appends one or more an elements to end of the array.</string>
+         </map>
          <key>table.clear</key>
          <map>
             <key>arguments</key>
@@ -15270,6 +15306,42 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Creates a new table with pre-allocated array capacity, optionally filled.</string>
+         </map>
+         <key>table.extend</key>
+         <map>
+            <key>type-arguments</key>
+            <array>
+               <string>V</string>
+            </array>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>a</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>Array to be appended to.</string>
+                     <key>type</key>
+                     <string>{V}</string>
+                  </map>
+               </map>
+               <map>
+                  <key>b</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>Array to append.</string>
+                     <key>type</key>
+                     <string>{V}</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>{V}</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a)</string>
          </map>
          <key>table.find</key>
          <map>
