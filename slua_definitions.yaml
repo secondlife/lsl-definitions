@@ -1930,10 +1930,11 @@ modules:
     - name: a
       comment: Array to be appended to.
       type: '{V}'
+      observes: write
     - name: ...
       comment: Values to append.
       type: ...V
-    returnType: '{V}'
+    returnType: ()
   - name: extend
     comment: "Appends all elements from one array to the end of another.
       Shorthand for table.move(b, 1, #b, #a+1, a)"

@@ -4928,6 +4928,7 @@ globals:
   table.append:
     args:
     - type: table
+      observes: write
     - type: '...'
     description: Appends one or more an elements to end of the array.
   table.extend:
