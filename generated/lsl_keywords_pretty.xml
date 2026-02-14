@@ -13567,7 +13567,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>Parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of PRIM_* property constants to return values of.</string>
+                     <string>A list of PRIM_MEDIA_* property constants to return values of.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -14497,7 +14497,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>Parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>One or more PRIM_MEDIA_* flags</string>
+                     <string>A list of PRIM_MEDIA_* property constants to return values of.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
