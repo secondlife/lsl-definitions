@@ -327,6 +327,27 @@ class SLuaDefinitions:
         LLEventName_alias = next(m for m in self.typeAliases if m.name == "LLEventName")
         LLEvents_class = next(m for m in self.classes if m.name == "LLEvents")
 
+        def replace_list(type: str) -> str:
+            """
+            When making use of return types like llGetPrimitiveParams, you need to cast
+            them to do anything with them. Use any instead to avoid the need for that.
+
+            For example, this script gives a type error, unless you cast `t :: any`
+
+            --!strict
+            local t = ll.GetPrimitiveParams({PRIM_POSITION, PRIM_ROTATION})
+            local pos: number, rot: quaternion = unpack(t)
+            TypeError: Expected this to be 'number', but got 'boolean | number | quaternion | string | uuid | vector'
+
+            Instead, define it to return `{any}` so the cast is unneeded
+
+            But don't replace parameters. The typechecker should still
+            prevent you from passing nil to llSetLinkPrimitiveParamsFast, and such.
+            """
+            if type == "list":
+                return "{any}"
+            return type
+
         for event in lsl.events.values():
             if event.slua_removed:
                 continue
@@ -338,7 +359,7 @@ class SLuaDefinitions:
                     SLuaParameter(
                         name=a.name,
                         comment=a.tooltip,
-                        type=self.validate_type(a.compute_slua_type()),
+                        type=self.validate_type(replace_list(a.compute_slua_type())),
                     )
                     for a in event.arguments
                 ],
@@ -422,7 +443,7 @@ class SLuaDefinitions:
                     )
                     for a in func.arguments
                 ],
-                returnType=self.validate_type(func.compute_slua_type(), known_types),
+                returnType=self.validate_type(replace_list(func.compute_slua_type()), known_types),
                 must_use=func.must_use or func.pure,
             )
             llcompat_func = SLuaFunction(
@@ -431,7 +452,9 @@ class SLuaDefinitions:
                 deprecated=True,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
-                returnType=self.validate_type(func.compute_slua_type(llcompat=True), known_types),
+                returnType=self.validate_type(
+                    replace_list(func.compute_slua_type(llcompat=True)), known_types
+                ),
                 must_use=ll_func.must_use,
             )
             if not func.slua_removed:
