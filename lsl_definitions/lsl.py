@@ -193,6 +193,7 @@ class LSLConstant(NamedTuple):
                 # This format looks better in viewer tooltips
                 # "value": unescape_control_characters(self.lsl_doc_literal),
                 # But this format is backwards compatible with some other (mis?)uses of the file
+                # https://github.com/secondlife/lsl-definitions/pull/50#pullrequestreview-3829921292
                 "value": repr(self.value_raw).strip("'").replace("\\", "\\\\"),
             }
         )
