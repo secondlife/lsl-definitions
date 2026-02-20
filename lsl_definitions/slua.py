@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any, List, Literal, Optional, Set, TextIO
 import llsd
 import yaml
 
-from lsl_definitions.utils import escape_python, remove_worthless
+from lsl_definitions.utils import remove_worthless
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -23,6 +23,7 @@ class SLuaProperty:
     name: str
     type: str
     value: str | None = None
+    """A SLua literal or expression"""
     comment: str = ""
     slua_removed: bool = False
     """This property is in Luau but not SLua"""
@@ -35,7 +36,7 @@ class SLuaProperty:
         return {
             "tooltip": self.comment,
             "type": self.type,
-            **({"value": escape_python(self.value)} if self.value is not None else {}),
+            **({"value": self.value} if self.value is not None else {}),
         }
 
     def to_luau_def(self) -> str:
@@ -408,6 +409,9 @@ class SLuaDefinitions:
         for func in lsl.functions.values():
             if func.private:
                 continue
+            semantic_prefix = (
+                "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
+            )
             known_types = self.validate_type_params(func.type_arguments)
             ll_func = SLuaFunction(
                 name=func.compute_slua_name(with_module=False),
@@ -427,7 +431,7 @@ class SLuaDefinitions:
             )
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
-                comment=ll_func.comment,
+                comment=semantic_prefix + ll_func.comment,
                 deprecated=True,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
@@ -459,7 +463,7 @@ class SLuaDefinitions:
                 name=const.name,
                 comment=const.tooltip,
                 type=self.validate_type(const.slua_type or const.type.meta.slua_name),
-                value=const.value,
+                value=const.slua_literal,
                 private=const.private,
             )
             self.globalConstants.append(prop)
@@ -639,7 +643,15 @@ class SLuaDefinitionParser:
         return alias
 
     def _validate_property(self, data: dict, scope: Set[str], const: bool = False) -> SLuaProperty:
-        prop = SLuaProperty(slua_removed=data.pop("slua-removed", False), **data)
+        prop = SLuaProperty(
+            name=data["name"],
+            type=data["type"],
+            value=str(data.get("value", "")) or None,
+            comment=data.get("comment", ""),
+            slua_removed=data.get("slua-removed", False),
+            private=data.get("private", False),
+            modifiable=data.get("modifiable", "read-only"),
+        )
         self._validate_identifier(prop.name)
         self._validate_scope(prop.name, scope)
         if const and prop.type != "any" and prop.value is None:

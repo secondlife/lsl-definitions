@@ -9038,11 +9038,13 @@ globals:
     description: Add avatar ID to the land pass list, for a duration of Hours.
   llcompat.AdjustDamage:
     deprecated:
-      message: Changes the amount of damage to be delivered by this damage event.
+      message: (Index semantics) Changes the amount of damage to be delivered by this
+        damage event.
     args:
     - type: number
     - type: number
-    description: Changes the amount of damage to be delivered by this damage event.
+    description: (Index semantics) Changes the amount of damage to be delivered by
+      this damage event.
   llcompat.AdjustSoundVolume:
     deprecated:
       message: Adjusts the volume (0.0 - 1.0) of the currently playing attached sound.\nThis
@@ -9509,189 +9511,195 @@ globals:
       objects).
   llcompat.DetectedDamage:
     deprecated:
-      message: Returns a list containing the current damage for the event, the damage
-        type and the original damage delivered.
+      message: (Index semantics) Returns a list containing the current damage for
+        the event, the damage type and the original damage delivered.
     args:
     - type: number
     must_use: true
-    description: Returns a list containing the current damage for the event, the damage
-      type and the original damage delivered.
+    description: (Index semantics) Returns a list containing the current damage for
+      the event, the damage type and the original damage delivered.
   llcompat.DetectedGrab:
     deprecated:
-      message: Returns the grab offset of a user touching the object.\nReturns <0.0,
-        0.0, 0.0> if Number is not a valid object.
+      message: (Index semantics) Returns the grab offset of a user touching the object.\nReturns
+        <0.0, 0.0, 0.0> if Number is not a valid object.
     args:
     - type: number
     must_use: true
-    description: Returns the grab offset of a user touching the object.\nReturns <0.0,
-      0.0, 0.0> if Number is not a valid object.
+    description: (Index semantics) Returns the grab offset of a user touching the
+      object.\nReturns <0.0, 0.0, 0.0> if Number is not a valid object.
   llcompat.DetectedGroup:
     deprecated:
-      message: Returns TRUE if detected object or agent Number has the same user group
-        active as this object.\nIt will return FALSE if the object or agent is in
-        the group, but the group is not active.
+      message: (Index semantics) Returns TRUE if detected object or agent Number has
+        the same user group active as this object.\nIt will return FALSE if the object
+        or agent is in the group, but the group is not active.
     args:
     - type: number
     must_use: true
-    description: Returns TRUE if detected object or agent Number has the same user
-      group active as this object.\nIt will return FALSE if the object or agent is
-      in the group, but the group is not active.
+    description: (Index semantics) Returns TRUE if detected object or agent Number
+      has the same user group active as this object.\nIt will return FALSE if the
+      object or agent is in the group, but the group is not active.
   llcompat.DetectedKey:
     deprecated:
-      message: Returns the key of detected object or avatar number.\nReturns NULL_KEY
-        if Number is not a valid index.
+      message: (Index semantics) Returns the key of detected object or avatar number.\nReturns
+        NULL_KEY if Number is not a valid index.
     args:
     - type: number
     must_use: true
-    description: Returns the key of detected object or avatar number.\nReturns NULL_KEY
-      if Number is not a valid index.
+    description: (Index semantics) Returns the key of detected object or avatar number.\nReturns
+      NULL_KEY if Number is not a valid index.
   llcompat.DetectedLinkNumber:
     deprecated:
-      message: Returns the link position of the triggered event for touches and collisions
-        only.\n0 for a non-linked object, 1 for the root of a linked object, 2 for
-        the first child, etc.
+      message: (Index semantics) Returns the link position of the triggered event
+        for touches and collisions only.\n0 for a non-linked object, 1 for the root
+        of a linked object, 2 for the first child, etc.
     args:
     - type: number
     must_use: true
-    description: Returns the link position of the triggered event for touches and
-      collisions only.\n0 for a non-linked object, 1 for the root of a linked object,
-      2 for the first child, etc.
+    description: (Index semantics) Returns the link position of the triggered event
+      for touches and collisions only.\n0 for a non-linked object, 1 for the root
+      of a linked object, 2 for the first child, etc.
   llcompat.DetectedName:
     deprecated:
-      message: Returns the name of detected object or avatar number.\nReturns the
-        name of detected object number.\nReturns empty string if Number is not a valid
-        index.
+      message: (Index semantics) Returns the name of detected object or avatar number.\nReturns
+        the name of detected object number.\nReturns empty string if Number is not
+        a valid index.
     args:
     - type: number
     must_use: true
-    description: Returns the name of detected object or avatar number.\nReturns the
-      name of detected object number.\nReturns empty string if Number is not a valid
-      index.
+    description: (Index semantics) Returns the name of detected object or avatar number.\nReturns
+      the name of detected object number.\nReturns empty string if Number is not a
+      valid index.
   llcompat.DetectedOwner:
     deprecated:
-      message: Returns the key of detected object's owner.\nReturns invalid key if
-        Number is not a valid index.
+      message: (Index semantics) Returns the key of detected object's owner.\nReturns
+        invalid key if Number is not a valid index.
     args:
     - type: number
     must_use: true
-    description: Returns the key of detected object's owner.\nReturns invalid key
-      if Number is not a valid index.
+    description: (Index semantics) Returns the key of detected object's owner.\nReturns
+      invalid key if Number is not a valid index.
   llcompat.DetectedPos:
     deprecated:
-      message: Returns the position of detected object or avatar number.\nReturns
-        <0.0, 0.0, 0.0> if Number is not a valid index.
+      message: (Index semantics) Returns the position of detected object or avatar
+        number.\nReturns <0.0, 0.0, 0.0> if Number is not a valid index.
     args:
     - type: number
     must_use: true
-    description: Returns the position of detected object or avatar number.\nReturns
-      <0.0, 0.0, 0.0> if Number is not a valid index.
+    description: (Index semantics) Returns the position of detected object or avatar
+      number.\nReturns <0.0, 0.0, 0.0> if Number is not a valid index.
   llcompat.DetectedRezzer:
     deprecated:
-      message: Returns the key for the rezzer of the detected object.
+      message: (Index semantics) Returns the key for the rezzer of the detected object.
     args:
     - type: number
     must_use: true
-    description: Returns the key for the rezzer of the detected object.
+    description: (Index semantics) Returns the key for the rezzer of the detected
+      object.
   llcompat.DetectedRot:
     deprecated:
-      message: Returns the rotation of detected object or avatar number.\nReturns
-        <0.0, 0.0, 0.0, 1.0> if Number is not a valid offset.
+      message: (Index semantics) Returns the rotation of detected object or avatar
+        number.\nReturns <0.0, 0.0, 0.0, 1.0> if Number is not a valid offset.
     args:
     - type: number
     must_use: true
-    description: Returns the rotation of detected object or avatar number.\nReturns
-      <0.0, 0.0, 0.0, 1.0> if Number is not a valid offset.
+    description: (Index semantics) Returns the rotation of detected object or avatar
+      number.\nReturns <0.0, 0.0, 0.0, 1.0> if Number is not a valid offset.
   llcompat.DetectedTouchBinormal:
     deprecated:
-      message: Returns the surface bi-normal for a triggered touch event.\nReturns
-        a vector that is the surface bi-normal (tangent to the surface) where the
-        touch event was triggered.
+      message: (Index semantics) Returns the surface bi-normal for a triggered touch
+        event.\nReturns a vector that is the surface bi-normal (tangent to the surface)
+        where the touch event was triggered.
     args:
     - type: number
     must_use: true
-    description: Returns the surface bi-normal for a triggered touch event.\nReturns
-      a vector that is the surface bi-normal (tangent to the surface) where the touch
-      event was triggered.
+    description: (Index semantics) Returns the surface bi-normal for a triggered touch
+      event.\nReturns a vector that is the surface bi-normal (tangent to the surface)
+      where the touch event was triggered.
   llcompat.DetectedTouchFace:
     deprecated:
-      message: Returns the index of the face where the avatar clicked in a triggered
-        touch event.
+      message: (Index semantics) Returns the index of the face where the avatar clicked
+        in a triggered touch event.
     args:
     - type: number
     must_use: true
-    description: Returns the index of the face where the avatar clicked in a triggered
-      touch event.
+    description: (Index semantics) Returns the index of the face where the avatar
+      clicked in a triggered touch event.
   llcompat.DetectedTouchNormal:
     deprecated:
-      message: Returns the surface normal for a triggered touch event.\nReturns a
-        vector that is the surface normal (perpendicular to the surface) where the
-        touch event was triggered.
+      message: (Index semantics) Returns the surface normal for a triggered touch
+        event.\nReturns a vector that is the surface normal (perpendicular to the
+        surface) where the touch event was triggered.
     args:
     - type: number
     must_use: true
-    description: Returns the surface normal for a triggered touch event.\nReturns
-      a vector that is the surface normal (perpendicular to the surface) where the
-      touch event was triggered.
+    description: (Index semantics) Returns the surface normal for a triggered touch
+      event.\nReturns a vector that is the surface normal (perpendicular to the surface)
+      where the touch event was triggered.
   llcompat.DetectedTouchPos:
     deprecated:
-      message: Returns the position, in region coordinates, where the object was touched
-        in a triggered touch event.\nUnless it is a HUD, in which case it returns
-        the position relative to the attach point.
+      message: (Index semantics) Returns the position, in region coordinates, where
+        the object was touched in a triggered touch event.\nUnless it is a HUD, in
+        which case it returns the position relative to the attach point.
     args:
     - type: number
     must_use: true
-    description: Returns the position, in region coordinates, where the object was
-      touched in a triggered touch event.\nUnless it is a HUD, in which case it returns
-      the position relative to the attach point.
+    description: (Index semantics) Returns the position, in region coordinates, where
+      the object was touched in a triggered touch event.\nUnless it is a HUD, in which
+      case it returns the position relative to the attach point.
   llcompat.DetectedTouchST:
     deprecated:
-      message: Returns a vector that is the surface coordinates where the prim was
-        touched.\nThe X and Y vector positions contain the horizontal (S) and vertical
-        (T) face coordinates respectively.\nEach component is in the interval [0.0,
-        1.0].\nTOUCH_INVALID_TEXCOORD is returned if the surface coordinates cannot
-        be determined (e.g. when the viewer does not support this function).
+      message: (Index semantics) Returns a vector that is the surface coordinates
+        where the prim was touched.\nThe X and Y vector positions contain the horizontal
+        (S) and vertical (T) face coordinates respectively.\nEach component is in
+        the interval [0.0, 1.0].\nTOUCH_INVALID_TEXCOORD is returned if the surface
+        coordinates cannot be determined (e.g. when the viewer does not support this
+        function).
     args:
     - type: number
     must_use: true
-    description: Returns a vector that is the surface coordinates where the prim was
-      touched.\nThe X and Y vector positions contain the horizontal (S) and vertical
-      (T) face coordinates respectively.\nEach component is in the interval [0.0,
-      1.0].\nTOUCH_INVALID_TEXCOORD is returned if the surface coordinates cannot
-      be determined (e.g. when the viewer does not support this function).
+    description: (Index semantics) Returns a vector that is the surface coordinates
+      where the prim was touched.\nThe X and Y vector positions contain the horizontal
+      (S) and vertical (T) face coordinates respectively.\nEach component is in the
+      interval [0.0, 1.0].\nTOUCH_INVALID_TEXCOORD is returned if the surface coordinates
+      cannot be determined (e.g. when the viewer does not support this function).
   llcompat.DetectedTouchUV:
     deprecated:
-      message: Returns a vector that is the texture coordinates for where the prim
-        was touched.\nThe X and Y vector positions contain the U and V face coordinates
-        respectively.\nTOUCH_INVALID_TEXCOORD is returned if the touch UV coordinates
-        cannot be determined (e.g. when the viewer does not support this function).
+      message: (Index semantics) Returns a vector that is the texture coordinates
+        for where the prim was touched.\nThe X and Y vector positions contain the
+        U and V face coordinates respectively.\nTOUCH_INVALID_TEXCOORD is returned
+        if the touch UV coordinates cannot be determined (e.g. when the viewer does
+        not support this function).
     args:
     - type: number
     must_use: true
-    description: Returns a vector that is the texture coordinates for where the prim
-      was touched.\nThe X and Y vector positions contain the U and V face coordinates
-      respectively.\nTOUCH_INVALID_TEXCOORD is returned if the touch UV coordinates
-      cannot be determined (e.g. when the viewer does not support this function).
+    description: (Index semantics) Returns a vector that is the texture coordinates
+      for where the prim was touched.\nThe X and Y vector positions contain the U
+      and V face coordinates respectively.\nTOUCH_INVALID_TEXCOORD is returned if
+      the touch UV coordinates cannot be determined (e.g. when the viewer does not
+      support this function).
   llcompat.DetectedType:
     deprecated:
-      message: "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object.\\\
-        nReturns 0 if number is not a valid index.\\nNote that number is a bit-field,\
-        \ so comparisons need to be a bitwise checked. e.g.:\\ninteger iType = llDetectedType(0);\\\
-        n{\\n\t// ...do stuff with the agent\\n}"
+      message: "(Index semantics) Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED)\
+        \ of detected object.\\nReturns 0 if number is not a valid index.\\nNote that\
+        \ number is a bit-field, so comparisons need to be a bitwise checked. e.g.:\\\
+        ninteger iType = llDetectedType(0);\\n{\\n\t// ...do stuff with the agent\\\
+        n}"
     args:
     - type: number
     must_use: true
-    description: "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected\
-      \ object.\\nReturns 0 if number is not a valid index.\\nNote that number is\
-      \ a bit-field, so comparisons need to be a bitwise checked. e.g.:\\ninteger\
-      \ iType = llDetectedType(0);\\n{\\n\t// ...do stuff with the agent\\n}"
+    description: "(Index semantics) Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED)\
+      \ of detected object.\\nReturns 0 if number is not a valid index.\\nNote that\
+      \ number is a bit-field, so comparisons need to be a bitwise checked. e.g.:\\\
+      ninteger iType = llDetectedType(0);\\n{\\n\t// ...do stuff with the agent\\\
+      n}"
   llcompat.DetectedVel:
     deprecated:
-      message: Returns the velocity of the detected object Number.\nReturns<0.0, 0.0,
-        0.0> if Number is not a valid offset.
+      message: (Index semantics) Returns the velocity of the detected object Number.\nReturns<0.0,
+        0.0, 0.0> if Number is not a valid offset.
     args:
     - type: number
     must_use: true
-    description: Returns the velocity of the detected object Number.\nReturns<0.0,
+    description: (Index semantics) Returns the velocity of the detected object Number.\nReturns<0.0,
       0.0, 0.0> if Number is not a valid offset.
   llcompat.Dialog:
     deprecated:
@@ -9853,11 +9861,11 @@ globals:
       \ a dataserver event.\n            "
   llcompat.FindNotecardTextSync:
     deprecated:
-      message: "Searches the text of a cached notecard for lines containing the given\
-        \ pattern. \n            Returns a list of line numbers and column where a\
-        \ match is found. If the notecard is not in\n            the cache it returns\
-        \ a list containing a single entry of NAK. If no matches are found an\n  \
-        \          empty list is returned."
+      message: "(Index semantics) Searches the text of a cached notecard for lines\
+        \ containing the given pattern. \n            Returns a list of line numbers\
+        \ and column where a match is found. If the notecard is not in\n         \
+        \   the cache it returns a list containing a single entry of NAK. If no matches\
+        \ are found an\n            empty list is returned."
     args:
     - type: string
     - type: string
@@ -9865,11 +9873,11 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: "Searches the text of a cached notecard for lines containing the\
-      \ given pattern. \n            Returns a list of line numbers and column where\
-      \ a match is found. If the notecard is not in\n            the cache it returns\
-      \ a list containing a single entry of NAK. If no matches are found an\n    \
-      \        empty list is returned."
+    description: "(Index semantics) Searches the text of a cached notecard for lines\
+      \ containing the given pattern. \n            Returns a list of line numbers\
+      \ and column where a match is found. If the notecard is not in\n           \
+      \ the cache it returns a list containing a single entry of NAK. If no matches\
+      \ are found an\n            empty list is returned."
   llcompat.FleeFrom:
     deprecated:
       message: Flee from a point.\nDirects a character (llCreateCharacter) to keep
@@ -11919,33 +11927,33 @@ globals:
       value cannot be type-cast to a vector, then ZERO_VECTOR is returned.
   llcompat.ListFindList:
     deprecated:
-      message: Returns the index of the first instance of Find in ListVariable. Returns
-        -1 if not found.\nReturns the position of the first instance of the Find list
-        in the ListVariable. Returns -1 if not found.
+      message: (Index semantics) Returns the index of the first instance of Find in
+        ListVariable. Returns -1 if not found.\nReturns the position of the first
+        instance of the Find list in the ListVariable. Returns -1 if not found.
     args:
     - type: table
     - type: table
     must_use: true
-    description: Returns the index of the first instance of Find in ListVariable.
-      Returns -1 if not found.\nReturns the position of the first instance of the
-      Find list in the ListVariable. Returns -1 if not found.
+    description: (Index semantics) Returns the index of the first instance of Find
+      in ListVariable. Returns -1 if not found.\nReturns the position of the first
+      instance of the Find list in the ListVariable. Returns -1 if not found.
   llcompat.ListFindListNext:
     deprecated:
-      message: Returns the index of the nth instance of Find in ListVariable. Returns
-        -1 if not found.
+      message: (Index semantics) Returns the index of the nth instance of Find in
+        ListVariable. Returns -1 if not found.
     args:
     - type: table
     - type: table
     - type: number
     must_use: true
-    description: Returns the index of the nth instance of Find in ListVariable. Returns
-      -1 if not found.
+    description: (Index semantics) Returns the index of the nth instance of Find in
+      ListVariable. Returns -1 if not found.
   llcompat.ListFindStrided:
     deprecated:
-      message: Returns the index of the first instance of Find in ListVariable. Returns
-        -1 if not found.\nReturns the position of the first instance of the Find list
-        in the ListVariable after the start index and before the end index. Steps
-        through ListVariable by stride.  Returns -1 if not found.
+      message: (Index semantics) Returns the index of the first instance of Find in
+        ListVariable. Returns -1 if not found.\nReturns the position of the first
+        instance of the Find list in the ListVariable after the start index and before
+        the end index. Steps through ListVariable by stride.  Returns -1 if not found.
     args:
     - type: table
     - type: table
@@ -11953,10 +11961,10 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns the index of the first instance of Find in ListVariable.
-      Returns -1 if not found.\nReturns the position of the first instance of the
-      Find list in the ListVariable after the start index and before the end index.
-      Steps through ListVariable by stride.  Returns -1 if not found.
+    description: (Index semantics) Returns the index of the first instance of Find
+      in ListVariable. Returns -1 if not found.\nReturns the position of the first
+      instance of the Find list in the ListVariable after the start index and before
+      the end index. Steps through ListVariable by stride.  Returns -1 if not found.
   llcompat.ListInsertList:
     deprecated:
       message: Returns a list that contains all the elements from Target but with
@@ -14227,14 +14235,14 @@ globals:
       in Text\nSTRING_TRIM: trim all leading and trailing spaces in Text.'
   llcompat.SubStringIndex:
     deprecated:
-      message: Returns an integer that is the index in Text where string pattern Sequence
-        first appears. Returns -1 if not found.
+      message: (Index semantics) Returns an integer that is the index in Text where
+        string pattern Sequence first appears. Returns -1 if not found.
     args:
     - type: string
     - type: string
     must_use: true
-    description: Returns an integer that is the index in Text where string pattern
-      Sequence first appears. Returns -1 if not found.
+    description: (Index semantics) Returns an integer that is the index in Text where
+      string pattern Sequence first appears. Returns -1 if not found.
   llcompat.TakeCamera:
     deprecated:
       message: 'Deprecated: Use llSetCameraParams instead.'

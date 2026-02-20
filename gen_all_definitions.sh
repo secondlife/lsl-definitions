@@ -15,6 +15,7 @@ $CMD $DEFS syntax --pretty "$outdir/lsl_keywords_pretty.xml"
 $CMD $DEFS slua_syntax $SLUA "$outdir/slua_keywords.xml"
 $CMD $DEFS slua_syntax --pretty $SLUA "$outdir/slua_keywords_pretty.xml"
 $CMD $DEFS slua_lsp_defs $SLUA "$outdir/slua_default.d.luau"
+$CMD $DEFS slua_lsp_docs $SLUA "$outdir/slua_default.docs.json"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
 $CMD $DEFS slua_selene $SLUA "$outdir/slua_selene.yml"
 

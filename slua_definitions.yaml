@@ -1107,11 +1107,11 @@ modules:
   - name: _NAME
     comment: Name of the lljson library
     type: string
-    value: lljson
+    value: '"lljson"'
   - name: _VERSION
     comment: Version of the lljson library
     type: string
-    value: "2.1.0.11"
+    value: '"2.1.0.11"'
 - name: math
   comment: Mathematical functions library.
   functions:
@@ -1633,7 +1633,7 @@ modules:
   - name: identity
     comment: Identity quaternion constant.
     type: quaternion
-    value: <0, 0, 0, 1>
+    value: quaternion(0, 0, 0, 1)
 - name: string
   comment: String manipulation library.
   functions:
@@ -2129,7 +2129,7 @@ modules:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence
     type: string
-    value: "[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*"
+    value: '"[\x00-\x7F\xC2-\xF4][\x80-\xBF]*"'
 - name: uuid
   comment: UUID library.
   callable:
@@ -2324,11 +2324,11 @@ modules:
   - name: zero
     comment: Constant vector with all components set to 0.
     type: vector
-    value: <0,0,0>
+    value: vector(0, 0, 0)
   - name: one
     comment: Constant vector with all components set to 1.
     type: vector
-    value: <1,1,1>
+    value: vector(1, 1, 1)
 - name: ll
   # auto-generated from lsl_definitions.yaml
   comment: Library for functions shared between LSL and SLua.

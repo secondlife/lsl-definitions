@@ -834,7 +834,7 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
             # Make these an actual UUID if we can to make comparison easier.
             binding += f'luaSL_pushuuidstring(L, "{to_c_str(const.value)}");'
         elif const.type == LSLType.STRING:
-            binding += f'lua_pushstring(L, "{to_c_str(const.value)}");'
+            binding += f'lua_pushstring(L, "{to_c_str(const.value_raw)}");'
         elif const.type == LSLType.INTEGER:
             binding += f"luaSL_pushnativeinteger(L, {const.value});"
         elif const.type == LSLType.FLOAT:

@@ -889,7 +889,7 @@ constants:
   EOF:
     tooltip: Indicates the last line of a notecard was read.
     type: string
-    value: \\n\\n\\n
+    value: '\n\n\n'
   ERR_GENERIC:
     tooltip: ''
     type: integer
@@ -1262,39 +1262,39 @@ constants:
   JSON_ARRAY:
     tooltip: ''
     type: string
-    value: \\uFDD2
+    value: '\u{FDD2}'
   JSON_DELETE:
     tooltip: ''
     type: string
-    value: \\uFDD8
+    value: '\u{FDD8}'
   JSON_FALSE:
     tooltip: ''
     type: string
-    value: \\uFDD7
+    value: '\u{FDD7}'
   JSON_INVALID:
     tooltip: ''
     type: string
-    value: \\uFDD0
+    value: '\u{FDD0}'
   JSON_NULL:
     tooltip: ''
     type: string
-    value: \\uFDD5
+    value: '\u{FDD5}'
   JSON_NUMBER:
     tooltip: ''
     type: string
-    value: \\uFDD3
+    value: '\u{FDD3}'
   JSON_OBJECT:
     tooltip: ''
     type: string
-    value: \\uFDD1
+    value: '\u{FDD1}'
   JSON_STRING:
     tooltip: ''
     type: string
-    value: \\uFDD4
+    value: '\u{FDD4}'
   JSON_TRUE:
     tooltip: ''
     type: string
-    value: \\uFDD6
+    value: '\u{FDD6}'
   KFM_CMD_PAUSE:
     tooltip: For use with KFM_COMMAND.
     type: integer
@@ -1522,7 +1522,7 @@ constants:
     tooltip: Indicates a notecard read was attempted and the notecard was not yet
       cached on the server.
     type: string
-    value: \\n\\x15\\n
+    value: '\n\x15\n'
   NAVIGATE_TO_GOAL_REACHED_DIST:
     private: true
     tooltip: ''
