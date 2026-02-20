@@ -190,7 +190,10 @@ class LSLConstant(NamedTuple):
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
                 "type": str(self.type),
-                "value": unescape_control_characters(self.lsl_doc_literal),
+                # This format looks better in viewer tooltips
+                # "value": unescape_control_characters(self.lsl_doc_literal),
+                # But this format is backwards compatible with some other (mis?)uses of the file
+                "value": repr(self.value_raw).strip("'").replace("\\", "\\\\"),
             }
         )
 
