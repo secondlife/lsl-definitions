@@ -9824,7 +9824,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>Six float values in range [-1, 1]</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -18265,7 +18265,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{string}</string>
                   </map>
                </map>
                <map>
@@ -18888,7 +18888,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{uuid}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -19213,7 +19213,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{vector}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -19377,7 +19377,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>List of environment settings requested for the specified parcel location.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -19853,9 +19853,9 @@ Returns true if result is non-zero.</string>
                   <key>Parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of PRIM_* property constants to return values of.</string>
+                     <string>A list of PRIM_MEDIA_* property constants to return values of.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -19947,7 +19947,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>PRIM_* flags.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -20358,7 +20358,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>List of OBJECT_* flags.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -20556,7 +20556,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>List of details requested for the specified parcel location.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -20738,7 +20738,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{number}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -20775,9 +20775,9 @@ Returns true if result is non-zero.</string>
                   <key>Parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>One or more PRIM_MEDIA_* flags</string>
+                     <string>A list of PRIM_MEDIA_* property constants to return values of.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -20800,7 +20800,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>PRIM_* flags and face parameters</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -21564,14 +21564,14 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>List of visual parameter IDs.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number | string}</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{number | ""}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -21619,7 +21619,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Inventory items to give to the agent.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{string}</string>
                   </map>
                </map>
                <map>
@@ -21701,7 +21701,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{string}</string>
                   </map>
                </map>
             </array>
@@ -22778,7 +22778,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{number}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -22851,7 +22851,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{string}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -22883,7 +22883,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>list</string>
+            <string>{string}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -25089,7 +25089,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -25263,7 +25263,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>A list of vectors for the character to travel through sequentially. The list must contain at least two entries.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{vector}</string>
                   </map>
                </map>
                <map>
@@ -26396,7 +26396,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>List of object UUIDs to be returned.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{uuid}</string>
                   </map>
                </map>
             </array>
@@ -28604,7 +28604,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Specifies the 4 payment values shown in the payment dialog's buttons (or PAY_HIDE).</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>

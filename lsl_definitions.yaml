@@ -4557,6 +4557,7 @@ events:
     - axes:
         tooltip: Six float values in range [-1, 1]
         type: list
+        slua-type: "{number}"
     tooltip: This event is raised when game controller input changes.
   http_request:
     arguments:
@@ -5842,6 +5843,7 @@ functions:
     - Buttons:
         tooltip: ''
         type: list
+        slua-type: "{string}"
     - Channel:
         tooltip: ''
         type: integer
@@ -6176,6 +6178,7 @@ functions:
     func-id: 412
     must-use: true
     return: list
+    slua-return: "{uuid}"
     sleep: 0.0
     tooltip: Requests a list of agents currently in the region, limited by the scope
       parameter.\nReturns a list [key UUID-0, key UUID-1, ..., key UUID-n] or [string
@@ -6376,6 +6379,7 @@ functions:
     func-id: 408
     must-use: true
     return: list
+    slua-return: "{vector}"
     sleep: 0.0
     tooltip: Get the closest navigable point to the point provided.\nThe function
       accepts a point in region-local space (like all the other path-finding methods)
@@ -6471,6 +6475,7 @@ functions:
     - EnvParams:
         tooltip: List of environment settings requested for the specified parcel location.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 711
     must-use: true
@@ -6744,8 +6749,9 @@ functions:
         tooltip: The prim's side number
         type: integer
     - Parameters:
-        tooltip: A list of PRIM_* property constants to return values of.
+        tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 372
     must-use: true
@@ -6801,6 +6807,7 @@ functions:
     - Parameters:
         tooltip: PRIM_* flags.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 354
     must-use: true
@@ -7052,6 +7059,7 @@ functions:
     - Parameters:
         tooltip: List of OBJECT_* flags.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 332
     must-use: true
@@ -7160,6 +7168,7 @@ functions:
     - ParcelDetails:
         tooltip: List of details requested for the specified parcel location.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 327
     must-use: true
@@ -7279,6 +7288,7 @@ functions:
     func-id: 381
     must-use: true
     return: list
+    slua-return: "{number}"
     sleep: 0.0
     tooltip: Returns a list of the form [float gravity_multiplier, float restitution,
       float friction, float density].
@@ -7297,8 +7307,9 @@ functions:
         tooltip: face number
         type: integer
     - Parameters:
-        tooltip: One or more PRIM_MEDIA_* flags
+        tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 351
     must-use: true
@@ -7314,6 +7325,7 @@ functions:
     - Parameters:
         tooltip: PRIM_* flags and face parameters
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 279
     must-use: true
@@ -7766,10 +7778,12 @@ functions:
     - Parameters:
         tooltip: List of visual parameter IDs.
         type: list
+        slua-type: "{number | string}"
     energy: 10.0
     func-id: 530
     must-use: true
     return: list
+    slua-return: '{number | ""}'
     sleep: 0.0
     tooltip: Returns a list of the current value for each requested visual parameter.
   llGetWallclock:
@@ -7792,6 +7806,7 @@ functions:
     - InventoryItems:
         tooltip: Inventory items to give to the agent.
         type: list
+        slua-type: "{string}"
     - Options:
         tooltip: A list of option for inventory transfer.
         type: list
@@ -7827,6 +7842,7 @@ functions:
     - InventoryItems:
         tooltip: ''
         type: list
+        slua-type: "{string}"
     energy: 10.0
     func-id: 231
     return: void
@@ -8378,6 +8394,7 @@ functions:
     energy: 10.0
     func-id: 662
     return: list
+    slua-return: "{number}"
     sleep: 0.0
     tooltip: 'Deletes all key value pairs in the linkset data where the key matches
       the regular expression in search. Returns a list consisting of [ #deleted, #not
@@ -8411,6 +8428,7 @@ functions:
     func-id: 657
     must-use: true
     return: list
+    slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns a list of keys from the linkset's data store matching the search
       parameter.
@@ -8427,6 +8445,7 @@ functions:
     func-id: 656
     must-use: true
     return: list
+    slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns a list of all keys in the linkset datastore.
   llLinksetDataRead:
@@ -9515,6 +9534,7 @@ functions:
     - QueryList:
         tooltip: ''
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 299
     must-use: true
@@ -9619,6 +9639,7 @@ functions:
         tooltip: A list of vectors for the character to travel through sequentially.
           The list must contain at least two entries.
         type: list
+        slua-type: "{vector}"
     - Options:
         tooltip: No options available at this time.
         type: list
@@ -10219,6 +10240,7 @@ functions:
     - ObjectIDs:
         tooltip: List of object UUIDs to be returned.
         type: list
+        slua-type: "{uuid}"
     energy: 10.0
     func-id: 520
     return: integer
@@ -11290,6 +11312,7 @@ functions:
         tooltip: Specifies the 4 payment values shown in the payment dialog's buttons
           (or PAY_HIDE).
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 302
     return: void
