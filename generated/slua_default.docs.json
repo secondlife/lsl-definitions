@@ -650,6 +650,14 @@
         "documentation": "Inserts an element at the specified index, or at the end of the array.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#insert"
     },
+    "@sl-slua/global/table.append": {
+        "documentation": "Appends one or more an elements to end of the array.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#append"
+    },
+    "@sl-slua/global/table.extend": {
+        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a)",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#extend"
+    },
     "@sl-slua/global/table.remove": {
         "documentation": "Removes and returns the element at the specified index from the array, or from the end of the array.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#remove"

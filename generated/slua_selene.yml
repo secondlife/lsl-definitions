@@ -4925,6 +4925,18 @@ globals:
       required: false
     - type: any
     description: Inserts an element at the specified index, or at the end of the array.
+  table.append:
+    args:
+    - type: table
+      observes: write
+    - type: '...'
+    description: Appends one or more an elements to end of the array.
+  table.extend:
+    args:
+    - type: table
+    - type: table
+    description: 'Appends all elements from one array to the end of another. Shorthand
+      for table.move(b, 1, #b, #a+1, a)'
   table.remove:
     args:
     - type: table
