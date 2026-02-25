@@ -2047,44 +2047,46 @@ modules:
     parameters:
     - name: t
       comment: Table to clear.
-      type: '{[any]: any}'
+      type: '{}'
       observes: write
     returnType: ()
   - name: shrink
     comment: Reduces the memory usage of the table to the minimum necessary.
-    typeParameters: [K, V]
+    typeParameters: [V]
     parameters:
     - name: t
       comment: Table to shrink.
-      type: '{[K]: V}'
+      type: '{V}'
     - name: reorder
       comment: Allow moving sparse array elements to hash table storage.
       type: boolean?
-    returnType: '{[K]: V}'
+    returnType: '{V}'
   - name: freeze
     comment: Freezes a table, making it read-only.
-    typeParameters: [K, V]
+    typeParameters: [table]
     parameters:
     - name: t
       comment: Table to freeze.
-      type: '{[K]: V}'
-    returnType: '{[K]: V}'
+      type: table # should be: generic table. See
+      selene-type: table
+    returnType: table
   - name: isfrozen
     comment: Returns true if a table is frozen.
     parameters:
     - name: t
       comment: Table to check.
-      type: '{[any]: any}'
+      type: '{}'
     returnType: boolean
     must-use: true
   - name: clone
     comment: Creates a shallow copy of the table.
-    typeParameters: [K, V]
+    typeParameters: [table]
     parameters:
     - name: t
       comment: Table to clone.
-      type: '{[K]: V}'
-    returnType: '{[K]: V}'
+      type: table # should be: generic table. See
+      selene-type: table
+    returnType: table
     must-use: true
 - name: utf8
   comment: UTF-8 support library.

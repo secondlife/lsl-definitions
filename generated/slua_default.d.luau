@@ -482,11 +482,11 @@ declare table: {
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
   create: <V>(n: number, v: V?) -> {V},
   find: <V>(t: {V}, v: V, i: number?) -> number?,
-  clear: (t: {[any]: any}) -> (),
-  shrink: <K, V>(t: {[K]: V}, reorder: boolean?) -> {[K]: V},
-  freeze: <K, V>(t: {[K]: V}) -> {[K]: V},
-  isfrozen: (t: {[any]: any}) -> boolean,
-  clone: <K, V>(t: {[K]: V}) -> {[K]: V},
+  clear: (t: {}) -> (),
+  shrink: <V>(t: {V}, reorder: boolean?) -> {V},
+  freeze: <Table>(t: Table) -> Table,
+  isfrozen: (t: {}) -> boolean,
+  clone: <table>(t: table) -> table,
 }
 
 

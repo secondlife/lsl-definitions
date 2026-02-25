@@ -15180,7 +15180,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to clear.</string>
                      <key>type</key>
-                     <string>{[any]: any}</string>
+                     <string>{}</string>
                   </map>
                </map>
             </array>
@@ -15197,8 +15197,7 @@ Returns true if result is non-zero.</string>
          <map>
             <key>type-arguments</key>
             <array>
-               <string>K</string>
-               <string>V</string>
+               <string>table</string>
             </array>
             <key>arguments</key>
             <array>
@@ -15208,14 +15207,14 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to clone.</string>
                      <key>type</key>
-                     <string>{[K]: V}</string>
+                     <string>table</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{[K]: V}</string>
+            <string>table</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -15471,8 +15470,7 @@ Returns true if result is non-zero.</string>
          <map>
             <key>type-arguments</key>
             <array>
-               <string>K</string>
-               <string>V</string>
+               <string>Table</string>
             </array>
             <key>arguments</key>
             <array>
@@ -15482,14 +15480,14 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to freeze.</string>
                      <key>type</key>
-                     <string>{[K]: V}</string>
+                     <string>Table</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{[K]: V}</string>
+            <string>Table</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -15575,7 +15573,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to check.</string>
                      <key>type</key>
-                     <string>{[any]: any}</string>
+                     <string>{}</string>
                   </map>
                </map>
             </array>
@@ -15741,7 +15739,6 @@ Returns true if result is non-zero.</string>
          <map>
             <key>type-arguments</key>
             <array>
-               <string>K</string>
                <string>V</string>
             </array>
             <key>arguments</key>
@@ -15752,7 +15749,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to shrink.</string>
                      <key>type</key>
-                     <string>{[K]: V}</string>
+                     <string>{V}</string>
                   </map>
                </map>
                <map>
@@ -15768,7 +15765,7 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{[K]: V}</string>
+            <string>{V}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
