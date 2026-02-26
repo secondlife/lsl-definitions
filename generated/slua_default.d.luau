@@ -484,7 +484,7 @@ declare table: {
   find: <V>(t: {V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, reorder: boolean?) -> {V},
-  freeze: <Table>(t: Table) -> Table,
+  freeze: <table>(t: table) -> table,
   isfrozen: (t: {}) -> boolean,
   clone: <table>(t: table) -> table,
 }

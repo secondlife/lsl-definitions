@@ -2067,7 +2067,7 @@ modules:
     parameters:
     - name: t
       comment: Table to freeze.
-      type: table # should be: generic table. See
+      type: table # should be: generic table. See #56
       selene-type: table
     returnType: table
   - name: isfrozen
@@ -2084,7 +2084,7 @@ modules:
     parameters:
     - name: t
       comment: Table to clone.
-      type: table # should be: generic table. See
+      type: table # should be: generic table. See #56
       selene-type: table
     returnType: table
     must-use: true

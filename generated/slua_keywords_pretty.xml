@@ -15470,7 +15470,7 @@ Returns true if result is non-zero.</string>
          <map>
             <key>type-arguments</key>
             <array>
-               <string>Table</string>
+               <string>table</string>
             </array>
             <key>arguments</key>
             <array>
@@ -15480,14 +15480,14 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>Table to freeze.</string>
                      <key>type</key>
-                     <string>Table</string>
+                     <string>table</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>Table</string>
+            <string>table</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
