@@ -10226,7 +10226,7 @@ If another state is defined before the default state, the compiler will report a
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered by llTransferMoney() function.</string>
+            <string>Triggered by llTransferLindenDollars() function.</string>
          </map>
       </map>
       <key>functions</key>

@@ -10420,7 +10420,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>number</string>
+                     <string>boolean</string>
                   </map>
                </map>
                <map>
@@ -10434,7 +10434,7 @@ vector position - position in local coordinates
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered by llTransferMoney() function.</string>
+            <string>Triggered by llTransferLindenDollars() function.</string>
          </map>
       </map>
       <key>functions</key>

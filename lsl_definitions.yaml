@@ -4818,10 +4818,11 @@ events:
     - Success:
         tooltip: ''
         type: integer
+        bool-semantics: true
     - Message:
         tooltip: ''
         type: string
-    tooltip: Triggered by llTransferMoney() function.
+    tooltip: Triggered by llTransferLindenDollars() function.
 functions:
 
 #  <key>: is the LSL name for the function.

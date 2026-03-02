@@ -227,13 +227,16 @@ class LSLArgument:
     bool_semantics: bool
     """Represents a boolean"""
 
-    def compute_slua_type(self) -> str:
+    def compute_slua_type(self, event: bool = False) -> str:
         if self.slua_type is not None:
             return self.slua_type
         if self.asset_semantics and self.type == LSLType.STRING:
             return "string | uuid"
         if self.bool_semantics and self.type == LSLType.INTEGER:
-            return "boolean | number"
+            if event:
+                return "boolean"
+            else:
+                return "boolean | number"
         return self.type.meta.slua_name
 
 
@@ -281,7 +284,7 @@ class LSLEvent:
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": slua.validate_type(a.compute_slua_type()),
+                            "type": slua.validate_type(a.compute_slua_type(event=True)),
                         }
                     }
                     for a in self.arguments

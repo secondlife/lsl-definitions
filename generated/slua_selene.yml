@@ -15324,7 +15324,7 @@ structs:
     transaction_result:
       property: override-fields
       type: function
-      description: Triggered by llTransferMoney() function.
+      description: Triggered by llTransferLindenDollars() function.
   LLTimers:
     every:
       method: true
