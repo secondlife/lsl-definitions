@@ -8748,10 +8748,10 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
+    find-index-semantics: true
     sleep: 0.0
-    tooltip: Returns the index of the first instance of Find in ListVariable. Returns
-      -1 if not found.\nReturns the position of the first instance of the Find list
-      in the ListVariable. Returns -1 if not found.
+    tooltip: Returns the first index where Find appears in ListVariable. Returns
+      -1 if not found.
   llListFindListNext:
     arguments:
     - ListVariable:
@@ -8769,8 +8769,9 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
+    find-index-semantics: true
     sleep: 0.0
-    tooltip: Returns the index of the nth instance of Find in ListVariable. Returns
+    tooltip: Returns the nth index where Find appears in ListVariable. Returns
       -1 if not found.
   llListFindStrided:
     arguments:
@@ -8796,11 +8797,10 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
+    find-index-semantics: true
     sleep: 0.0
-    tooltip: Returns the index of the first instance of Find in ListVariable. Returns
-      -1 if not found.\nReturns the position of the first instance of the Find list
-      in the ListVariable after the start index and before the end index. Steps through
-      ListVariable by stride.  Returns -1 if not found.
+    tooltip: Returns the first index (between Start and End) where Find appears in ListVariable. Steps through
+      ListVariable by Stride.  Returns -1 if not found.
   llListInsertList:
     type-arguments: [T]
     arguments:
@@ -11997,9 +11997,9 @@ functions:
     pure: true
     return: integer
     index-semantics: true
+    find-index-semantics: true
     sleep: 0.0
-    tooltip: Returns an integer that is the index in Text where string pattern Sequence
-      first appears. Returns -1 if not found.
+    tooltip: Returns the first index where Sequence appears in Text. Returns -1 if not found.
   llTakeCamera:
     arguments:
     - AvatarID:

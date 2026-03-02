@@ -23535,11 +23535,11 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>number</string>
+            <string>number?</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.\nReturns the position of the first instance of the Find list in the ListVariable. Returns -1 if not found.</string>
+            <string>Returns the first index where Find appears in ListVariable. Returns nil if not found.</string>
          </map>
          <key>ll.ListFindListNext</key>
          <map>
@@ -23576,11 +23576,11 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>number</string>
+            <string>number?</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the index of the nth instance of Find in ListVariable. Returns -1 if not found.</string>
+            <string>Returns the nth index where Find appears in ListVariable. Returns nil if not found.</string>
          </map>
          <key>ll.ListFindStrided</key>
          <map>
@@ -23635,11 +23635,11 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>number</string>
+            <string>number?</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.\nReturns the position of the first instance of the Find list in the ListVariable after the start index and before the end index. Steps through ListVariable by stride.  Returns -1 if not found.</string>
+            <string>Returns the first index (between Start and End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns nil if not found.</string>
          </map>
          <key>ll.ListInsertList</key>
          <map>
@@ -30046,11 +30046,11 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>number</string>
+            <string>number?</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer that is the index in Text where string pattern Sequence first appears. Returns -1 if not found.</string>
+            <string>Returns the first index where Sequence appears in Text. Returns nil if not found.</string>
          </map>
          <key>ll.TakeCamera</key>
          <map>

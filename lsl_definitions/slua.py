@@ -436,7 +436,7 @@ class SLuaDefinitions:
             known_types = self.validate_type_params(func.type_arguments)
             ll_func = SLuaFunction(
                 name=func.compute_slua_name(with_module=False),
-                comment=func.tooltip,
+                comment=func.compute_slua_tooltip(),
                 deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
                 typeParameters=func.type_arguments,
                 parameters=[
@@ -452,7 +452,7 @@ class SLuaDefinitions:
             )
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
-                comment=semantic_prefix + ll_func.comment,
+                comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
                 deprecated=True,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,

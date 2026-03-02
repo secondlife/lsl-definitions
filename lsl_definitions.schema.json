@@ -385,6 +385,11 @@
                             "markdownDescription": "This function requires an experience to be set for the script to compile.",
                             "type": "boolean"
                         },
+                        "find-index-semantics": {
+                            "const": true,
+                            "markdownDescription": "This function returns -1 if not found in LSL, or nil in SLua.",
+                            "type": "boolean"
+                        },
                         "func-id": {
                             "$comment": "llSin has 'func-id: 0', so we must include zero",
                             "$ref": "#/$defs/nonNegativeInteger",
