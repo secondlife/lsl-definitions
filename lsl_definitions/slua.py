@@ -360,7 +360,7 @@ class SLuaDefinitions:
                     SLuaParameter(
                         name=a.name,
                         comment=a.tooltip,
-                        type=self.validate_type(replace_list(a.compute_slua_type())),
+                        type=self.validate_type(replace_list(a.compute_slua_type(event=True))),
                     )
                     for a in event.arguments
                 ],

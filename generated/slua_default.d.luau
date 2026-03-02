@@ -127,7 +127,7 @@ declare extern type LLEvents with
   touch: LLDetectedEventHandler?
   touch_end: LLDetectedEventHandler?
   touch_start: LLDetectedEventHandler?
-  transaction_result: ((RequestID: uuid, Success: number, Message: string) -> ())?
+  transaction_result: ((RequestID: uuid, Success: boolean, Message: string) -> ())?
   on: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
     & ((self: LLEvents, event: "at_rot_target", callback: (TargetNumber: number, TargetRotation: quaternion, CurrentRotation: quaternion) -> ()) -> (TargetNumber: number, TargetRotation: quaternion, CurrentRotation: quaternion) -> ())
     & ((self: LLEvents, event: "at_target", callback: (TargetNumber: number, TargetPosition: vector, CurrentPosition: vector) -> ()) -> (TargetNumber: number, TargetPosition: vector, CurrentPosition: vector) -> ())
@@ -160,7 +160,7 @@ declare extern type LLEvents with
     & ((self: LLEvents, event: "remote_data", callback: (EventType: number, ChannelID: uuid, MessageID: uuid, Sender: string, IData: number, SData: string) -> ()) -> (EventType: number, ChannelID: uuid, MessageID: uuid, Sender: string, IData: number, SData: string) -> ())
     & ((self: LLEvents, event: "run_time_permissions", callback: (PermissionFlags: number) -> ()) -> (PermissionFlags: number) -> ())
     & ((self: LLEvents, event: "timer", callback: () -> ()) -> () -> ())
-    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: number, Message: string) -> ()) -> (RequestID: uuid, Success: number, Message: string) -> ())
+    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: boolean, Message: string) -> ()) -> (RequestID: uuid, Success: boolean, Message: string) -> ())
   off: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> boolean)
     & ((self: LLEvents, event: "at_rot_target", callback: (TargetNumber: number, TargetRotation: quaternion, CurrentRotation: quaternion) -> ()) -> boolean)
     & ((self: LLEvents, event: "at_target", callback: (TargetNumber: number, TargetPosition: vector, CurrentPosition: vector) -> ()) -> boolean)
@@ -193,7 +193,7 @@ declare extern type LLEvents with
     & ((self: LLEvents, event: "remote_data", callback: (EventType: number, ChannelID: uuid, MessageID: uuid, Sender: string, IData: number, SData: string) -> ()) -> boolean)
     & ((self: LLEvents, event: "run_time_permissions", callback: (PermissionFlags: number) -> ()) -> boolean)
     & ((self: LLEvents, event: "timer", callback: () -> ()) -> boolean)
-    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: number, Message: string) -> ()) -> boolean)
+    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: boolean, Message: string) -> ()) -> boolean)
   once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
     & ((self: LLEvents, event: "at_rot_target", callback: (TargetNumber: number, TargetRotation: quaternion, CurrentRotation: quaternion) -> ()) -> (TargetNumber: number, TargetRotation: quaternion, CurrentRotation: quaternion) -> ())
     & ((self: LLEvents, event: "at_target", callback: (TargetNumber: number, TargetPosition: vector, CurrentPosition: vector) -> ()) -> (TargetNumber: number, TargetPosition: vector, CurrentPosition: vector) -> ())
@@ -226,7 +226,7 @@ declare extern type LLEvents with
     & ((self: LLEvents, event: "remote_data", callback: (EventType: number, ChannelID: uuid, MessageID: uuid, Sender: string, IData: number, SData: string) -> ()) -> (EventType: number, ChannelID: uuid, MessageID: uuid, Sender: string, IData: number, SData: string) -> ())
     & ((self: LLEvents, event: "run_time_permissions", callback: (PermissionFlags: number) -> ()) -> (PermissionFlags: number) -> ())
     & ((self: LLEvents, event: "timer", callback: () -> ()) -> () -> ())
-    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: number, Message: string) -> ()) -> (RequestID: uuid, Success: number, Message: string) -> ())
+    & ((self: LLEvents, event: "transaction_result", callback: (RequestID: uuid, Success: boolean, Message: string) -> ()) -> (RequestID: uuid, Success: boolean, Message: string) -> ())
   function listeners(self, event: LLEventName): {LLEventHandler}
   function eventNames(self): {string}
 end
