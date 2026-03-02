@@ -4847,6 +4847,7 @@ functions:
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
+#    find-index-semantics: This function returns -1 if not found in LSL, or nil in SLua
 #    bool-semantics: If true then the returned integer represents a boolean 1 or 0
 #    asset-semantics: If true this argument represents an inventory item and can accept either name or uuid
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
