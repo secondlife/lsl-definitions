@@ -6039,6 +6039,7 @@ functions:
     - StartMatch:
         tooltip: The number of matches to skip before returning values.
         type: integer
+        index-semantics: true
     - Count:
         tooltip: The maximum number of matches to return. If 0 this function will
           return the first 64 matches found.
