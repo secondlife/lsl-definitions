@@ -9983,6 +9983,7 @@ functions:
     - environment:
         tooltip: ''
         type: string
+        asset-semantics: true
     energy: 10.0
     experience: true
     func-id: 713
@@ -9999,6 +10000,7 @@ functions:
         tooltip: "Name of inventory item, or UUID of environment resource to apply.\n\
           \                         Use NULL_KEY or empty string to remove environment."
         type: string
+        asset-semantics: true
     - track_no:
         tooltip: Elevation zone of where to apply environment. Use -1 for all.
         type: integer
