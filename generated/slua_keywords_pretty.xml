@@ -25978,7 +25978,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string</string>
+                     <string>string | uuid</string>
                   </map>
                </map>
             </array>
@@ -26011,7 +26011,7 @@ Returns true if result is non-zero.</string>
                      <string>Name of inventory item, or UUID of environment resource to apply.
                          Use NULL_KEY or empty string to remove environment.</string>
                      <key>type</key>
-                     <string>string</string>
+                     <string>string | uuid</string>
                   </map>
                </map>
                <map>
