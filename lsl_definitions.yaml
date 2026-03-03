@@ -11703,6 +11703,7 @@ functions:
         tooltip: If TRUE, the Velocity is treated as a local directional vector instead
           of a regional directional vector.
         type: integer
+        bool-semantics: true
     energy: 10.0
     func-id: 378
     return: void

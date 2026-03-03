@@ -29498,7 +29498,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>If TRUE, the Velocity is treated as a local directional vector instead of a regional directional vector.</string>
                      <key>type</key>
-                     <string>number</string>
+                     <string>boolean | number</string>
                   </map>
                </map>
             </array>
