@@ -18710,7 +18710,7 @@ Returns true if result is non-zero.</string>
                   <key>StartMatch</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The number of matches to skip before returning values.</string>
+                     <string>Index of the first match to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -22902,7 +22902,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>First entry to return. 0 for start of list.</string>
+                     <string>Index of the first entry to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -23567,7 +23567,7 @@ Returns true if result is non-zero.</string>
                   <key>Instance</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>Index of the match to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>

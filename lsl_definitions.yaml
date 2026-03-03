@@ -6037,7 +6037,7 @@ functions:
         tooltip: Regex pattern to find in the notecard text.
         type: string
     - StartMatch:
-        tooltip: The number of matches to skip before returning values.
+        tooltip: Index of the first match to return.
         type: integer
         index-semantics: true
     - Count:
@@ -8420,7 +8420,7 @@ functions:
         tooltip: A regex search string to match against keys in the datastore.
         type: string
     - start:
-        tooltip: First entry to return. 0 for start of list.
+        tooltip: Index of the first entry to return.
         type: integer
         index-semantics: true
     - count:
@@ -8761,7 +8761,7 @@ functions:
         tooltip: ''
         type: list
     - Instance:
-        tooltip: ''
+        tooltip: Index of the match to return.
         type: integer
         index-semantics: true
     energy: 10.0
