@@ -8582,7 +8582,7 @@ globals:
     args:
     - type:
         display: vector
-    - type: number
+    - type: bool
     description: If the object is physics-enabled, sets the object's linear velocity
       to Velocity.\nIf Local==TRUE, Velocity is treated as a local directional vector;
       otherwise, Velocity is treated as a global directional vector.
@@ -14058,7 +14058,7 @@ globals:
     args:
     - type:
         display: vector
-    - type: number
+    - type: bool
     description: If the object is physics-enabled, sets the object's linear velocity
       to Velocity.\nIf Local==TRUE, Velocity is treated as a local directional vector;
       otherwise, Velocity is treated as a global directional vector.
