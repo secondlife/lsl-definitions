@@ -11766,6 +11766,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 503
+    experience: true
     return: integer
     sleep: 0.0
     tooltip: If agent identified by AvatarID is participating in the experience, sit
