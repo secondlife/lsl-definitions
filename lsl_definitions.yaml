@@ -4847,7 +4847,6 @@ functions:
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
-#    find-index-semantics: This function returns -1 if not found in LSL, or nil in SLua
 #    bool-semantics: If true then the returned integer represents a boolean 1 or 0
 #    asset-semantics: If true this argument represents an inventory item and can accept either name or uuid
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
@@ -8749,7 +8748,6 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
-    find-index-semantics: true
     sleep: 0.0
     tooltip: Returns the first index where Find appears in ListVariable. Returns
       -1 if not found.
@@ -8770,7 +8768,6 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
-    find-index-semantics: true
     sleep: 0.0
     tooltip: Returns the nth index where Find appears in ListVariable. Returns
       -1 if not found.
@@ -8798,7 +8795,6 @@ functions:
     must-use: true
     return: integer
     index-semantics: true
-    find-index-semantics: true
     sleep: 0.0
     tooltip: Returns the first index (between Start and End) where Find appears in ListVariable. Steps through
       ListVariable by Stride.  Returns -1 if not found.
@@ -11998,7 +11994,6 @@ functions:
     pure: true
     return: integer
     index-semantics: true
-    find-index-semantics: true
     sleep: 0.0
     tooltip: Returns the first index where Sequence appears in Text. Returns -1 if not found.
   llTakeCamera:

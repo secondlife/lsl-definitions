@@ -309,7 +309,6 @@ class LSLFunction:
     slua_type: Optional[str]
     god_mode: bool
     index_semantics: bool
-    find_index_semantics: bool
     bool_semantics: bool
     detected_semantics: bool
     type_arguments: List[str]
@@ -401,7 +400,7 @@ class LSLFunction:
     def compute_slua_type(self, llcompat=False) -> str:
         if self.slua_type is not None:
             return self.slua_type
-        if not llcompat and self.find_index_semantics and self.ret_type == LSLType.INTEGER:
+        if not llcompat and self.index_semantics and self.ret_type == LSLType.INTEGER:
             return "number?"
         if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
             return "boolean"
@@ -409,7 +408,7 @@ class LSLFunction:
 
     def compute_slua_tooltip(self, llcompat=False) -> str:
         tooltip = self.tooltip
-        if self.find_index_semantics and not llcompat:
+        if self.index_semantics and not llcompat:
             tooltip = tooltip.replace("-1", "nil")
         return tooltip
 
@@ -566,7 +565,6 @@ class LSLDefinitionParser:
             must_use=func_data.get("must-use", False),
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
-            find_index_semantics=bool(func_data.get("find-index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
             detected_semantics=bool(func_data.get("detected-semantics", False)),
         )
@@ -577,10 +575,6 @@ class LSLDefinitionParser:
         if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
             raise ValueError(
                 f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
-            )
-        if func.find_index_semantics and func.ret_type != LSLType.INTEGER:
-            raise ValueError(
-                f"{func.name} has ret with find index semantics, but ret type is {func.ret_type!r}"
             )
         if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
             raise ValueError(
