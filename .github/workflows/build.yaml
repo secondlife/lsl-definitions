@@ -42,6 +42,11 @@ jobs:
       - name: Install python package
         run: pip install -e .
 
+      # Needed because some of the generated files intentionally aren't
+      # tracked in the repo, since they're not easily diffable.
+      - name: Generate files
+        run: bash ./gen_all_definitions.sh
+
       - uses: secondlife/action-autobuild@v5
         with:
           platform: common
