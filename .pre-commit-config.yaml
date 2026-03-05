@@ -19,6 +19,6 @@ repos:
     hooks:
     -   id: check-generated
         name: Check generated files match
-        entry: bash -c 'tmp=$(mktemp -d) && ./gen_all_definitions.sh "$tmp" && diff -r generated "$tmp"'
+        entry: bash -c './gen_all_definitions.sh generated && git diff --exit-code generated/'
         language: system
         pass_filenames: false
