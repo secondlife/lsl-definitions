@@ -1940,7 +1940,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindListNext"
     },
     "@sl-slua/global/ll.ListFindStrided": {
-        "documentation": "Returns the first index (between Start and End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns nil if not found.",
+        "documentation": "Returns the first index (where Start <= index <= End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns nil if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindStrided"
     },
     "@sl-slua/global/ll.ListInsertList": {
@@ -4007,7 +4007,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindListNext"
     },
     "@sl-slua/global/llcompat.ListFindStrided": {
-        "documentation": "(Index semantics) Returns the first index (between Start and End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the first index (where Start <= index <= End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns -1 if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindStrided"
     },
     "@sl-slua/global/llcompat.ListInsertList": {

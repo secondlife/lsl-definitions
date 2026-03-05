@@ -17292,7 +17292,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the first index (between Start and End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns -1 if not found.</string>
+            <string>Returns the first index (where Start &lt;= index &lt;= End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns -1 if not found.</string>
          </map>
          <key>llListInsertList</key>
          <map>

@@ -8796,7 +8796,7 @@ functions:
     return: integer
     index-semantics: true
     sleep: 0.0
-    tooltip: Returns the first index (between Start and End) where Find appears in ListVariable. Steps through
+    tooltip: Returns the first index (where Start <= index <= End) where Find appears in ListVariable. Steps through
       ListVariable by Stride.  Returns -1 if not found.
   llListInsertList:
     type-arguments: [T]

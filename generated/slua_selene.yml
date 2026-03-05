@@ -7193,8 +7193,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns the first index (between Start and End) where Find appears
-      in ListVariable. Steps through ListVariable by Stride.  Returns nil if not found.
+    description: Returns the first index (where Start <= index <= End) where Find
+      appears in ListVariable. Steps through ListVariable by Stride.  Returns nil
+      if not found.
   ll.ListInsertList:
     args:
     - type: table
@@ -11957,8 +11958,8 @@ globals:
       Returns -1 if not found.
   llcompat.ListFindStrided:
     deprecated:
-      message: (Index semantics) Returns the first index (between Start and End) where
-        Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
+      message: (Index semantics) Returns the first index (where Start <= index <=
+        End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
         -1 if not found.
     args:
     - type: table
@@ -11967,8 +11968,8 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: (Index semantics) Returns the first index (between Start and End)
-      where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
+    description: (Index semantics) Returns the first index (where Start <= index <=
+      End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
       -1 if not found.
   llcompat.ListInsertList:
     deprecated:
