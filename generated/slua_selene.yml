@@ -7175,17 +7175,16 @@ globals:
     - type: table
     - type: table
     must_use: true
-    description: Returns the index of the first instance of Find in ListVariable.
-      Returns -1 if not found.\nReturns the position of the first instance of the
-      Find list in the ListVariable. Returns -1 if not found.
+    description: Returns the first index where Find appears in ListVariable. Returns
+      nil if not found.
   ll.ListFindListNext:
     args:
     - type: table
     - type: table
     - type: number
     must_use: true
-    description: Returns the index of the nth instance of Find in ListVariable. Returns
-      -1 if not found.
+    description: Returns the nth index where Find appears in ListVariable. Returns
+      nil if not found.
   ll.ListFindStrided:
     args:
     - type: table
@@ -7194,10 +7193,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns the index of the first instance of Find in ListVariable.
-      Returns -1 if not found.\nReturns the position of the first instance of the
-      Find list in the ListVariable after the start index and before the end index.
-      Steps through ListVariable by stride.  Returns -1 if not found.
+    description: Returns the first index (where Start <= index <= End) where Find
+      appears in ListVariable. Steps through ListVariable by Stride.  Returns nil
+      if not found.
   ll.ListInsertList:
     args:
     - type: table
@@ -8715,8 +8713,8 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns an integer that is the index in Text where string pattern
-      Sequence first appears. Returns -1 if not found.
+    description: Returns the first index where Sequence appears in Text. Returns nil
+      if not found.
   ll.TakeCamera:
     deprecated:
       message: 'Deprecated: Use llSetCameraParams instead.'
@@ -11939,33 +11937,30 @@ globals:
       value cannot be type-cast to a vector, then ZERO_VECTOR is returned.
   llcompat.ListFindList:
     deprecated:
-      message: (Index semantics) Returns the index of the first instance of Find in
-        ListVariable. Returns -1 if not found.\nReturns the position of the first
-        instance of the Find list in the ListVariable. Returns -1 if not found.
+      message: (Index semantics) Returns the first index where Find appears in ListVariable.
+        Returns -1 if not found.
     args:
     - type: table
     - type: table
     must_use: true
-    description: (Index semantics) Returns the index of the first instance of Find
-      in ListVariable. Returns -1 if not found.\nReturns the position of the first
-      instance of the Find list in the ListVariable. Returns -1 if not found.
+    description: (Index semantics) Returns the first index where Find appears in ListVariable.
+      Returns -1 if not found.
   llcompat.ListFindListNext:
     deprecated:
-      message: (Index semantics) Returns the index of the nth instance of Find in
-        ListVariable. Returns -1 if not found.
+      message: (Index semantics) Returns the nth index where Find appears in ListVariable.
+        Returns -1 if not found.
     args:
     - type: table
     - type: table
     - type: number
     must_use: true
-    description: (Index semantics) Returns the index of the nth instance of Find in
-      ListVariable. Returns -1 if not found.
+    description: (Index semantics) Returns the nth index where Find appears in ListVariable.
+      Returns -1 if not found.
   llcompat.ListFindStrided:
     deprecated:
-      message: (Index semantics) Returns the index of the first instance of Find in
-        ListVariable. Returns -1 if not found.\nReturns the position of the first
-        instance of the Find list in the ListVariable after the start index and before
-        the end index. Steps through ListVariable by stride.  Returns -1 if not found.
+      message: (Index semantics) Returns the first index (where Start <= index <=
+        End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
+        -1 if not found.
     args:
     - type: table
     - type: table
@@ -11973,10 +11968,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: (Index semantics) Returns the index of the first instance of Find
-      in ListVariable. Returns -1 if not found.\nReturns the position of the first
-      instance of the Find list in the ListVariable after the start index and before
-      the end index. Steps through ListVariable by stride.  Returns -1 if not found.
+    description: (Index semantics) Returns the first index (where Start <= index <=
+      End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns
+      -1 if not found.
   llcompat.ListInsertList:
     deprecated:
       message: Returns a list that contains all the elements from Target but with
@@ -14247,14 +14241,14 @@ globals:
       in Text\nSTRING_TRIM: trim all leading and trailing spaces in Text.'
   llcompat.SubStringIndex:
     deprecated:
-      message: (Index semantics) Returns an integer that is the index in Text where
-        string pattern Sequence first appears. Returns -1 if not found.
+      message: (Index semantics) Returns the first index where Sequence appears in
+        Text. Returns -1 if not found.
     args:
     - type: string
     - type: string
     must_use: true
-    description: (Index semantics) Returns an integer that is the index in Text where
-      string pattern Sequence first appears. Returns -1 if not found.
+    description: (Index semantics) Returns the first index where Sequence appears
+      in Text. Returns -1 if not found.
   llcompat.TakeCamera:
     deprecated:
       message: 'Deprecated: Use llSetCameraParams instead.'
