@@ -128,9 +128,12 @@ declare extern type LLEvents with
   touch_end: LLDetectedEventHandler?
   touch_start: LLDetectedEventHandler?
   transaction_result: ((RequestID: uuid, Success: boolean, Message: string) -> ())?
-  function on(self, event: LLEventName, callback: LLEventHandler): LLEventHandler
-  function off(self, event: LLEventName, callback: LLEventHandler): boolean
-  function once(self, event: LLEventName, callback: LLEventHandler): LLEventHandler
+  on: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
+  off: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> boolean)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> boolean)
+  once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
   function listeners(self, event: LLEventName): {LLEventHandler}
   function eventNames(self): {string}
 end

@@ -420,16 +420,30 @@ class SLuaDefinitions:
         LLEventName_alias.selene_type = (
             LLDetectedEventName_alias.selene_type + LLNonDetectedEventName_alias.selene_type
         )
-        if not solverV2:
-            for register_func in LLEvents_class.methods:
-                if register_func.name in {"off", "on", "once"}:
-                    register_func.parameters = [
-                        SLuaParameter("self", type="LLEvents"),
-                        SLuaParameter("event", type="LLDetectedEventName"),
-                        SLuaParameter("callback", type="LLDetectedEventHandler"),
-                    ]
-                if register_func.name in {"on", "once"}:
-                    register_func.returnType = "LLDetectedEventHandler"
+        for register_func in LLEvents_class.methods:
+            if register_func.name in {"off", "on", "once"}:
+                register_func.parameters = [
+                    SLuaParameter("self", type="LLEvents"),
+                    SLuaParameter("event", type="LLDetectedEventName"),
+                    SLuaParameter("callback", type="LLDetectedEventHandler"),
+                ]
+                if solverV2:
+                    register_func.overloads.append(
+                        SLuaFunctionOverload(
+                            name=register_func.name,
+                            comment=register_func.comment,
+                            parameters=[
+                                SLuaParameter("self", type="LLEvents"),
+                                SLuaParameter("event", type="LLNonDetectedEventName"),
+                                SLuaParameter("callback", type="LLEventHandler"),
+                            ],
+                            returnType=register_func.returnType,
+                        )
+                    )
+            if register_func.name in {"on", "once"}:
+                register_func.returnType = "LLDetectedEventHandler"
+                if solverV2:
+                    register_func.overloads[0].returnType = "LLEventHandler"
 
         ll_module = next(m for m in self.modules if m.name == "ll")
         llcompat_module = next(m for m in self.modules if m.name == "llcompat")
