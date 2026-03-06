@@ -321,9 +321,11 @@ class SLuaDefinitions:
         """
         Generate ll and llcompat module content from LSL definitions.
 
-        If solverV2 is True, (default for now), do not generate overloads for
-        LLEvents.on/off/once, as LuauSolverV2 fails to parse them.
+        If solverV2 is True, (default for now), generate a simple overload for
+        LLEvents.on/off/once, as LuauSolverV2 fails to parse a longer overload.
         This is a Luau bug: https://github.com/luau-lang/luau/issues/2234
+
+        If solverV2 is False, generate an overload for each event. (more correct)
         """
         LLDetectedEventName_alias = next(
             m for m in self.typeAliases if m.name == "LLDetectedEventName"
