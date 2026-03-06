@@ -317,8 +317,16 @@ class SLuaDefinitions:
             known_types.add(type_param)
         return known_types
 
-    def generate_ll_modules(self, lsl: "LSLDefinitions") -> None:
-        """Generate ll and llcompat module content from LSL definitions."""
+    def generate_ll_modules(self, lsl: "LSLDefinitions", solverV2: bool = True) -> None:
+        """
+        Generate ll and llcompat module content from LSL definitions.
+
+        If solverV2 is True, (default for now), generate a simple overload for
+        LLEvents.on/off/once, as LuauSolverV2 fails to parse a longer overload.
+        This is a Luau bug: https://github.com/luau-lang/luau/issues/2234
+
+        If solverV2 is False, generate an overload for each event. (more correct)
+        """
         LLDetectedEventName_alias = next(
             m for m in self.typeAliases if m.name == "LLDetectedEventName"
         )
@@ -376,25 +384,26 @@ class SLuaDefinitions:
                     SLuaParameter("event", type=f'"{event.name}"'),
                     SLuaParameter("callback", type=type_def),
                 ]
-                for register_func in LLEvents_class.methods:
-                    if register_func.name in {"on", "once"}:
-                        register_func.overloads.append(
-                            SLuaFunctionOverload(
-                                name=register_func.name,
-                                comment=event.tooltip,
-                                parameters=overload_parameters,
-                                returnType=type_def,
+                if not solverV2:
+                    for register_func in LLEvents_class.methods:
+                        if register_func.name in {"on", "once"}:
+                            register_func.overloads.append(
+                                SLuaFunctionOverload(
+                                    name=register_func.name,
+                                    comment=event.tooltip,
+                                    parameters=overload_parameters,
+                                    returnType=type_def,
+                                )
                             )
-                        )
-                    elif register_func.name == "off":
-                        register_func.overloads.append(
-                            SLuaFunctionOverload(
-                                name=register_func.name,
-                                comment=event.tooltip,
-                                parameters=overload_parameters,
-                                returnType=register_func.returnType,
+                        elif register_func.name == "off":
+                            register_func.overloads.append(
+                                SLuaFunctionOverload(
+                                    name=register_func.name,
+                                    comment=event.tooltip,
+                                    parameters=overload_parameters,
+                                    returnType=register_func.returnType,
+                                )
                             )
-                        )
                 type_def = f"({type_def})?"
             event_prop = SLuaProperty(
                 name=event.name,
@@ -420,8 +429,23 @@ class SLuaDefinitions:
                     SLuaParameter("event", type="LLDetectedEventName"),
                     SLuaParameter("callback", type="LLDetectedEventHandler"),
                 ]
+                if solverV2:
+                    register_func.overloads.append(
+                        SLuaFunctionOverload(
+                            name=register_func.name,
+                            comment=register_func.comment,
+                            parameters=[
+                                SLuaParameter("self", type="LLEvents"),
+                                SLuaParameter("event", type="LLNonDetectedEventName"),
+                                SLuaParameter("callback", type="LLEventHandler"),
+                            ],
+                            returnType=register_func.returnType,
+                        )
+                    )
             if register_func.name in {"on", "once"}:
                 register_func.returnType = "LLDetectedEventHandler"
+                if solverV2:
+                    register_func.overloads[0].returnType = "LLEventHandler"
 
         ll_module = next(m for m in self.modules if m.name == "ll")
         llcompat_module = next(m for m in self.modules if m.name == "llcompat")
