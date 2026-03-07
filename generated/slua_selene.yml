@@ -7103,6 +7103,10 @@ globals:
     description: Converts either a strided list of key:value pairs to a JSON_OBJECT,
       or a list of values to a JSON_ARRAY.
   ll.List2Key:
+    deprecated:
+      message: Copies the key at Index in the list.\nReturns the value at Index in
+        the specified list. If Index describes a location not in the list, or the
+        value cannot be type-cast to a key, then null string is returned.
     args:
     - type: table
     - type: number
