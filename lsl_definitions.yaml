@@ -8588,6 +8588,7 @@ functions:
     native: true
     pure: true
     return: key
+    slua-deprecated: true
     sleep: 0.0
     tooltip: Copies the key at Index in the list.\nReturns the value at Index in the
       specified list. If Index describes a location not in the list, or the value
