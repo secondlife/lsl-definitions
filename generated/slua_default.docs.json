@@ -1932,15 +1932,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlList2Vector"
     },
     "@sl-slua/global/ll.ListFindList": {
-        "documentation": "Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.<br>Returns the position of the first instance of the Find list in the ListVariable. Returns -1 if not found.",
+        "documentation": "Returns the first index where Find appears in ListVariable. Returns nil if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindList"
     },
     "@sl-slua/global/ll.ListFindListNext": {
-        "documentation": "Returns the index of the nth instance of Find in ListVariable. Returns -1 if not found.",
+        "documentation": "Returns the nth index where Find appears in ListVariable. Returns nil if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindListNext"
     },
     "@sl-slua/global/ll.ListFindStrided": {
-        "documentation": "Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.<br>Returns the position of the first instance of the Find list in the ListVariable after the start index and before the end index. Steps through ListVariable by stride.  Returns -1 if not found.",
+        "documentation": "Returns the first index (where Start <= index <= End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns nil if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindStrided"
     },
     "@sl-slua/global/ll.ListInsertList": {
@@ -2728,7 +2728,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/ll.SubStringIndex": {
-        "documentation": "Returns an integer that is the index in Text where string pattern Sequence first appears. Returns -1 if not found.",
+        "documentation": "Returns the first index where Sequence appears in Text. Returns nil if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/ll.TakeCamera": {
@@ -3999,15 +3999,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlList2Vector"
     },
     "@sl-slua/global/llcompat.ListFindList": {
-        "documentation": "(Index semantics) Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.<br>Returns the position of the first instance of the Find list in the ListVariable. Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the first index where Find appears in ListVariable. Returns -1 if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindList"
     },
     "@sl-slua/global/llcompat.ListFindListNext": {
-        "documentation": "(Index semantics) Returns the index of the nth instance of Find in ListVariable. Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the nth index where Find appears in ListVariable. Returns -1 if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindListNext"
     },
     "@sl-slua/global/llcompat.ListFindStrided": {
-        "documentation": "(Index semantics) Returns the index of the first instance of Find in ListVariable. Returns -1 if not found.<br>Returns the position of the first instance of the Find list in the ListVariable after the start index and before the end index. Steps through ListVariable by stride.  Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the first index (where Start <= index <= End) where Find appears in ListVariable. Steps through ListVariable by Stride.  Returns -1 if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListFindStrided"
     },
     "@sl-slua/global/llcompat.ListInsertList": {
@@ -4807,7 +4807,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/llcompat.SubStringIndex": {
-        "documentation": "(Index semantics) Returns an integer that is the index in Text where string pattern Sequence first appears. Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the first index where Sequence appears in Text. Returns -1 if not found.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/llcompat.TakeCamera": {

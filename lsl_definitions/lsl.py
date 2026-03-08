@@ -400,9 +400,17 @@ class LSLFunction:
     def compute_slua_type(self, llcompat=False) -> str:
         if self.slua_type is not None:
             return self.slua_type
+        if not llcompat and self.index_semantics and self.ret_type == LSLType.INTEGER:
+            return "number?"
         if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
             return "boolean"
         return self.ret_type.meta.slua_name
+
+    def compute_slua_tooltip(self, llcompat=False) -> str:
+        tooltip = self.tooltip
+        if self.index_semantics and not llcompat:
+            tooltip = tooltip.replace("-1", "nil")
+        return tooltip
 
     def to_slua_dict(self, slua: "SLuaDefinitions") -> dict:
         try:
@@ -427,7 +435,7 @@ class LSLFunction:
                     "god-mode": self.god_mode,
                     "return": slua.validate_type(self.compute_slua_type(), known_types),
                     "sleep": self.sleep,
-                    "tooltip": self.tooltip,
+                    "tooltip": self.compute_slua_tooltip(),
                 }
             )
         except Exception as e:
