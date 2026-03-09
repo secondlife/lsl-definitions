@@ -66,6 +66,14 @@
         "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rshift"
     },
+    "@sl-slua/global/bit32.s32": {
+        "documentation": "Mod this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatable with LSL.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#s32"
+    },
+    "@sl-slua/global/bit32.smul": {
+        "documentation": "Multiplies two signed 32-bit integers. Returns the result as a 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatable with LSL integer multiplication.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#smul"
+    },
     "@sl-slua/global/bit32.countlz": {
         "documentation": "Count leading zeros",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countlz"

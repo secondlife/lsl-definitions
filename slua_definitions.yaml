@@ -463,6 +463,27 @@ modules:
       type: number
     returnType: number
     must-use: true
+  - name: s32
+    comment: Mod this number from float64 range to signed int32 range and truncate to integer.
+      Makes integer arithmetic compatable with LSL.
+    parameters:
+    - name: "n"
+      comment: Number to truncate.
+      type: number
+    returnType: number
+    must-use: true
+  - name: smul
+    comment: Multiplies two signed 32-bit integers. Returns the result as a 32-bit integer, wrapping as necessary.
+      Avoids precision loss ascociated with float64 multiplication. Compatable with LSL integer multiplication.
+    parameters:
+    - name: a
+      comment: Left factor.
+      type: number
+    - name: b
+      comment: Right factor.
+      type: number
+    returnType: number
+    must-use: true
   - name: countlz
     comment: Count leading zeros
     parameters:

@@ -168,6 +168,8 @@ declare bit32: {
   replace: (n: number, v: number, field: number, width: number?) -> number,
   rrotate: (n: number, i: number) -> number,
   rshift: (n: number, i: number) -> number,
+  s32: (n: number) -> number,
+  smul: (a: number, b: number) -> number,
   countlz: (n: number) -> number,
   countrz: (n: number) -> number,
   byteswap: (n: number) -> number,
