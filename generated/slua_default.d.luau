@@ -21,7 +21,7 @@ end
 
 declare extern type uuid with
   istruthy: boolean
-  bytes: string?
+  bytes: string
   function __tostring(self): string
 end
 

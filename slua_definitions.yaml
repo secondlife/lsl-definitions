@@ -70,7 +70,7 @@ baseClasses:
   - name: bytes
     comment: Returns the raw 16-byte binary string of the UUID, or nil if the UUID
       is not in a compressed state
-    type: string?
+    type: string
 - name: vector
   comment: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
   methods:
