@@ -29,6 +29,26 @@
         "lslType": {
             "markdownDescription": "One of the valid types:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
             "enum": ["float", "integer", "key", "list", "rotation", "string", "vector"]
+        },
+        "deprecated": {
+            "markdownDescription": "This function or property has been deprecated.",
+            "additionalProperties": false,
+            "properties": {
+                "reason": {
+                    "markdownDescription": "The reason for deprecation.",
+                    "type": "string"
+                },
+                "use": {
+                    "markdownDescription": "What to use instead.",
+                    "type": "string"
+                },
+                "selene-replace": {
+                    "markdownDescription": "Pattern replacements for selene.",
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            },
+            "type": "object"
         }
     },
     "properties": {
@@ -38,11 +58,7 @@
                 "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
                     "properties": {
                         "additionalProperties": false,
-                        "deprecated": {
-                            "const": true,
-                            "markdownDescription": "This constant has been deprecated.",
-                            "type": "boolean"
-                        },
+                        "deprecated": { "$ref": "#/$defs/deprecated" },
                         "slua-removed": {
                             "const": true,
                             "markdownDescription": "This constant is only present in LSL, not SLua.",
@@ -130,15 +146,10 @@
                             "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
                             "type": "boolean"
                         },
-                        "deprecated": {
-                            "const": true,
-                            "markdownDescription": "This event has been deprecated.",
-                            "type": "boolean"
-                        },
+                        "deprecated": { "$ref": "#/$defs/deprecated" },
                         "slua-deprecated": {
-                            "const": true,
                             "markdownDescription": "This event has been deprecated in SLua.",
-                            "type": "boolean"
+                            "$ref": "#/$defs/deprecated"
                         },
                         "slua-removed": {
                             "const": true,
@@ -223,11 +234,7 @@
                             "markdownDescription": "The returned integer value represents a boolean value.",
                             "type": "boolean"
                         },
-                        "deprecated": {
-                            "const": true,
-                            "markdownDescription": "This function has been deprecated.",
-                            "type": "boolean"
-                        },
+                        "deprecated": { "$ref": "#/$defs/deprecated" },
                         "detected-semantics": {
                             "const": true,
                             "markdownDescription": "This function is wrapped in the DetectedEvent class.",
@@ -295,9 +302,8 @@
                             ]
                         },
                         "slua-deprecated": {
-                            "const": true,
                             "markdownDescription": "This function is deprecated in SLua.",
-                            "type": "boolean"
+                            "$ref": "#/$defs/deprecated"
                         },
                         "slua-removed": {
                             "const": true,

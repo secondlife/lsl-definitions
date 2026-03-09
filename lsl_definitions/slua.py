@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any, List, Literal, Optional, Set, TextIO
 import llsd
 import yaml
 
-from lsl_definitions.utils import remove_worthless
+from lsl_definitions.utils import Deprecated, remove_worthless
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -103,7 +103,7 @@ class SLuaFunction(SLuaFunctionBase):
     """Full function or method signature with optional overloads"""
 
     private: bool = False
-    deprecated: bool = False
+    deprecated: Deprecated | None
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
