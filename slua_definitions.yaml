@@ -303,33 +303,39 @@ globalFunctions:
     type: (...any) -> ...any
   returnType: '...any'
 - name: touuid
-  comment: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
+  comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
+    nil if the string is not a valid UUID, or the the buffer is
+    shorter than 16 bytes.
   parameters:
   - name: val
-    type: string | buffer | uuid
+    type: string? | buffer | uuid
     selene-type: string
   returnType: uuid?
+  must-use: true
 - name: tovector
   comment: Converts a string to a vector, returns nil if invalid
   parameters:
   - name: val
-    type: string | vector
+    type: string? | vector
     selene-type: string
   returnType: vector?
+  must-use: true
 - name: toquaternion
   comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
   - name: val
-    type: string | quaternion
+    type: string? | quaternion
     selene-type: string
   returnType: quaternion?
+  must-use: true
 - name: torotation
   comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
   - name: val
-    type: string | quaternion
+    type: string? | quaternion
     selene-type: string
   returnType: quaternion?
+  must-use: true
 modules:
 - name: bit32
   comment: Bitwise operations library.
@@ -2160,23 +2166,23 @@ modules:
   comment: UUID library.
   callable:
     name: uuid
-    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is
-      shorter than 16 bytes. Alias of uuid.create
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is
+      shorter than 16 bytes. Alias of uuid.create.
     parameters:
     - name: value
-      type: string | buffer | uuid
-    returnType: uuid?
+      type: string? | buffer | uuid
+    returnType: uuid
     must-use: true
   functions:
   - name: create
-    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is
       shorter than 16 bytes.
     parameters:
     - name: value
-      type: string | buffer | uuid
-    returnType: uuid?
+      type: string? | buffer | uuid
+    returnType: uuid
     must-use: true
 - name: vector
   comment: Vector manipuluation library.

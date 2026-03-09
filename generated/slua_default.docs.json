@@ -3,7 +3,7 @@
         "documentation": "Dangerously executes a required module function"
     },
     "@sl-slua/global/touuid": {
-        "documentation": "Converts a string, buffer, or uuid to a uuid, returns nil if invalid"
+        "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
         "documentation": "Converts a string to a vector, returns nil if invalid"
@@ -735,10 +735,10 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#offset"
     },
     "@sl-slua/global/uuid": {
-        "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID. Throws an error if the buffer is shorter than 16 bytes. Alias of uuid.create"
+        "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the the buffer is shorter than 16 bytes. Alias of uuid.create."
     },
     "@sl-slua/global/uuid.create": {
-        "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID. Throws an error if the buffer is shorter than 16 bytes."
+        "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/vector": {
         "documentation": "Creates a new vector with the given component values. Alias of vector.create.",

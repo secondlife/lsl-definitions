@@ -3925,18 +3925,24 @@ globals:
   touuid:
     args:
     - type: string
-    description: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
+    must_use: true
+    description: Creates a new uuid from a string, buffer, or existing uuid. Returns
+      nil if the string is not a valid UUID, or the the buffer is shorter than 16
+      bytes.
   tovector:
     args:
     - type: string
+    must_use: true
     description: Converts a string to a vector, returns nil if invalid
   toquaternion:
     args:
     - type: string
+    must_use: true
     description: Converts a string to a quaternion, returns nil if invalid
   torotation:
     args:
     - type: string
+    must_use: true
     description: Converts a string to a rotation (quaternion), returns nil if invalid
   bit32.arshift:
     args:
@@ -5062,16 +5068,16 @@ globals:
     args:
     - type: any
     must_use: true
-    description: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is shorter
-      than 16 bytes. Alias of uuid.create
+    description: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is shorter than
+      16 bytes. Alias of uuid.create.
   uuid.create:
     args:
     - type: any
     must_use: true
-    description: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is shorter
-      than 16 bytes.
+    description: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is shorter than
+      16 bytes.
   vector:
     args:
     - type: number
