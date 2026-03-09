@@ -25,6 +25,10 @@
             "maximum": 1.0,
             "minimum": 0.0,
             "type": "number"
+        },
+        "lslType": {
+            "markdownDescription": "One of the valid types for this function argument:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
+            "enum": ["float", "integer", "key", "list", "rotation", "string", "vector"]
         }
     },
     "properties": {
@@ -53,56 +57,7 @@
                             "markdownDescription": "A brief description of this constant.",
                             "type": "string"
                         },
-                        "type": {
-                            "defaultSnippets": [
-                                {
-                                    "label": "float",
-                                    "body": "float"
-                                },
-                                {
-                                    "label": "integer",
-                                    "body": "integer"
-                                },
-                                {
-                                    "label": "key",
-                                    "body": "key"
-                                },
-                                {
-                                    "label": "list",
-                                    "body": "list"
-                                },
-                                {
-                                    "label": "quaternion",
-                                    "body": "quaternion"
-                                },
-                                {
-                                    "label": "rotation",
-                                    "body": "rotation"
-                                },
-                                {
-                                    "label": "string",
-                                    "body": "string"
-                                },
-                                {
-                                    "label": "vector",
-                                    "body": "vector"
-                                }
-                            ],
-                            "markdownDescription": "One of the valid types for this constant: [float, integer, key, list, rotation, string, vector].",
-                            "oneOf": [
-                                { "const": "float" },
-                                { "const": "integer" },
-                                { "const": "key" },
-                                { "const": "list" },
-                                {
-                                    "$comment": "quaternion is an alias for rotation",
-                                    "const": "quaternion"
-                                },
-                                { "const": "rotation" },
-                                { "const": "string" },
-                                { "const": "vector" }
-                            ]
-                        },
+                        "type": { "$ref": "#/$defs/lslType" },
                         "value": {
                             "markdownDescription": "The value of the constant.",
                             "type": [
@@ -155,56 +110,7 @@
                                                 "markdownDescription": "A brief description of this event argument.",
                                                 "type": "string"
                                             },
-                                            "type": {
-                                                "defaultSnippets": [
-                                                    {
-                                                        "label": "float",
-                                                        "body": "float"
-                                                    },
-                                                    {
-                                                        "label": "integer",
-                                                        "body": "integer"
-                                                    },
-                                                    {
-                                                        "label": "key",
-                                                        "body": "key"
-                                                    },
-                                                    {
-                                                        "label": "list",
-                                                        "body": "list"
-                                                    },
-                                                    {
-                                                        "label": "quaternion",
-                                                        "body": "quaternion"
-                                                    },
-                                                    {
-                                                        "label": "rotation",
-                                                        "body": "rotation"
-                                                    },
-                                                    {
-                                                        "label": "string",
-                                                        "body": "string"
-                                                    },
-                                                    {
-                                                        "label": "vector",
-                                                        "body": "vector"
-                                                    }
-                                                ],
-                                                "markdownDescription": "One of the valid types for this event argument: [float, integer, key, list, rotation, string, vector].",
-                                                "oneOf": [
-                                                    { "const": "float" },
-                                                    { "const": "integer" },
-                                                    { "const": "key" },
-                                                    { "const": "list" },
-                                                    {
-                                                        "$comment": "quaternion is an alias for rotation",
-                                                        "const": "quaternion"
-                                                    },
-                                                    { "const": "rotation" },
-                                                    { "const": "string" },
-                                                    { "const": "vector" }
-                                                ]
-                                            }
+                                            "type": { "$ref": "#/$defs/lslType" }
                                         },
                                         "required": [
                                             "type"
@@ -294,56 +200,7 @@
                                                 "markdownDescription": "A brief description of this function argument.",
                                                 "type": "string"
                                             },
-                                            "type": {
-                                                "defaultSnippets": [
-                                                    {
-                                                        "label": "float",
-                                                        "body": "float"
-                                                    },
-                                                    {
-                                                        "label": "integer",
-                                                        "body": "integer"
-                                                    },
-                                                    {
-                                                        "label": "key",
-                                                        "body": "key"
-                                                    },
-                                                    {
-                                                        "label": "list",
-                                                        "body": "list"
-                                                    },
-                                                    {
-                                                        "label": "quaternion",
-                                                        "body": "quaternion"
-                                                    },
-                                                    {
-                                                        "label": "rotation",
-                                                        "body": "rotation"
-                                                    },
-                                                    {
-                                                        "label": "string",
-                                                        "body": "string"
-                                                    },
-                                                    {
-                                                        "label": "vector",
-                                                        "body": "vector"
-                                                    }
-                                                ],
-                                                "markdownDescription": "One of the valid types for this function argument:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
-                                                "oneOf": [
-                                                    { "const": "float" },
-                                                    { "const": "integer" },
-                                                    { "const": "key" },
-                                                    { "const": "list" },
-                                                    {
-                                                        "$comment": "quaternion is an alias for rotation",
-                                                        "const": "quaternion"
-                                                    },
-                                                    { "const": "rotation" },
-                                                    { "const": "string" },
-                                                    { "const": "vector" }
-                                                ]
-                                            },
+                                            "type": { "$ref": "#/$defs/lslType" },
                                             "slua-type": {
                                                 "markdownDescription": "A more specific argument type for slua type-checking.",
                                                 "type": "string"
@@ -431,57 +288,9 @@
                         },
                         "return": {
                             "default": "void",
-                            "defaultSnippets": [
-                                {
-                                    "label": "float",
-                                    "body": "float"
-                                },
-                                {
-                                    "label": "integer",
-                                    "body": "integer"
-                                },
-                                {
-                                    "label": "key",
-                                    "body": "key"
-                                },
-                                {
-                                    "label": "list",
-                                    "body": "list"
-                                },
-                                {
-                                    "label": "quaternion",
-                                    "body": "quaternion"
-                                },
-                                {
-                                    "label": "rotation",
-                                    "body": "rotation"
-                                },
-                                {
-                                    "label": "string",
-                                    "body": "string"
-                                },
-                                {
-                                    "label": "vector",
-                                    "body": "vector"
-                                },
-                                {
-                                    "label": "void",
-                                    "body": "void"
-                                }
-                            ],
                             "markdownDescription": "One of the valid return types for functions:\n\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector\n- void\n\nIf omitted, it is assumed to be void.",
                             "oneOf": [
-                                { "const": "float" },
-                                { "const": "integer" },
-                                { "const": "key" },
-                                { "const": "list" },
-                                {
-                                    "$comment": "quaternion is an alias for rotation",
-                                    "const": "quaternion"
-                                },
-                                { "const": "rotation" },
-                                { "const": "string" },
-                                { "const": "vector" },
+                                { "$ref": "#/$defs/lslType" },
                                 { "const": "void" }
                             ]
                         },
@@ -542,40 +351,6 @@
         },
         "types": {
             "additionalProperties": false,
-            "defaultSnippets": [
-                {
-                    "label": "float",
-                    "body": "float"
-                },
-                {
-                    "label": "integer",
-                    "body": "integer"
-                },
-                {
-                    "label": "key",
-                    "body": "key"
-                },
-                {
-                    "label": "list",
-                    "body": "list"
-                },
-                {
-                    "label": "quaternion",
-                    "body": "quaternion"
-                },
-                {
-                    "label": "rotation",
-                    "body": "rotation"
-                },
-                {
-                    "label": "string",
-                    "body": "string"
-                },
-                {
-                    "label": "vector",
-                    "body": "vector"
-                }
-            ],
             "markdownDescription": "The valid LSL storage types:\n\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
             "patternProperties": {
                 "^(?:float|integer|key|list|quaternion|rotation|string|vector)$": {
