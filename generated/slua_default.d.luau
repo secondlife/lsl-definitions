@@ -728,7 +728,7 @@ declare ll: {
   List2Float: (ListVariable: list, Index: number) -> number,
   List2Integer: (ListVariable: list, Index: number) -> number,
   List2Json: (JsonType: string, Values: list) -> string,
-  List2Key: @deprecated (ListVariable: list, Index: number) -> uuid,
+  List2Key: (ListVariable: list, Index: number) -> uuid,
   List2List: <T>(ListVariable: {T}, Start: number, End: number) -> {T},
   List2ListSlice: <T>(ListVariable: {T}, Start: number, End: number, Stride: number, slice_index: number) -> {T},
   List2ListStrided: <T>(ListVariable: {T}, Start: number, End: number, Stride: number) -> {T},
