@@ -4037,9 +4037,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Multiplies two signed 32-bit integers. Returns the result as a 32-bit
-      integer, wrapping as necessary. Avoids precision loss ascociated with float64
-      multiplication. Compatable with LSL integer multiplication.
+    description: Multiplies two signed 32-bit integers. Returns the result as a signed
+      32-bit integer, wrapping as necessary. Avoids precision loss ascociated with
+      float64 multiplication. Compatable with LSL integer multiplication.
   bit32.countlz:
     args:
     - type: number

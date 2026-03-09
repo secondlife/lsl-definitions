@@ -71,7 +71,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#s32"
     },
     "@sl-slua/global/bit32.smul": {
-        "documentation": "Multiplies two signed 32-bit integers. Returns the result as a 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatable with LSL integer multiplication.",
+        "documentation": "Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatable with LSL integer multiplication.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#smul"
     },
     "@sl-slua/global/bit32.countlz": {
