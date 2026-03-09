@@ -309,6 +309,7 @@ globalFunctions:
     type: string? | buffer | uuid
     selene-type: string
   returnType: uuid?
+  must-use: true
 - name: tovector
   comment: Converts a string to a vector, returns nil if invalid
   parameters:
@@ -316,6 +317,7 @@ globalFunctions:
     type: string? | vector
     selene-type: string
   returnType: vector?
+  must-use: true
 - name: toquaternion
   comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
@@ -323,6 +325,7 @@ globalFunctions:
     type: string? | quaternion
     selene-type: string
   returnType: quaternion?
+  must-use: true
 - name: torotation
   comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
@@ -330,6 +333,7 @@ globalFunctions:
     type: string? | quaternion
     selene-type: string
   returnType: quaternion?
+  must-use: true
 modules:
 - name: bit32
   comment: Bitwise operations library.
