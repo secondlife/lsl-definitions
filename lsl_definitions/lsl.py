@@ -186,7 +186,7 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return remove_worthless(
             {
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
@@ -204,7 +204,7 @@ class LSLConstant(NamedTuple):
         try:
             return remove_worthless(
                 {
-                    "deprecated": self.deprecated,
+                    "deprecated": self.deprecated is not None,
                     # Will always use a <string> node, but that's fine for our purposes.
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
@@ -255,7 +255,7 @@ class LSLEvent:
     def to_dict(self) -> dict:
         return remove_worthless(
             {
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "arguments": [
                     {
                         a.name: {
@@ -292,7 +292,7 @@ class LSLEvent:
                 ]
             return remove_worthless(
                 {
-                    "deprecated": self.deprecated or self.slua_deprecated,
+                    "deprecated": (self.deprecated or self.slua_deprecated) is not None,
                     "arguments": arguments,
                     "tooltip": self.tooltip,
                 }
@@ -367,7 +367,7 @@ class LSLFunction:
                     }
                     for a in self.arguments
                 ],
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "energy": self.energy,
                 "god-mode": self.god_mode,
                 "return": str(self.ret_type),
@@ -428,10 +428,13 @@ class LSLFunction:
                         }
                         for a in self.arguments
                     ],
-                    "deprecated": self.deprecated
-                    or self.slua_deprecated
-                    or self.slua_removed
-                    or self.detected_semantics,
+                    "deprecated": (
+                        self.deprecated
+                        or self.slua_deprecated
+                        or self.slua_removed
+                        or self.detected_semantics
+                    )
+                    is not None,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
                     "return": slua.validate_type(self.compute_slua_type(), known_types),

@@ -103,7 +103,7 @@ class SLuaFunction(SLuaFunctionBase):
     """Full function or method signature with optional overloads"""
 
     private: bool = False
-    deprecated: Deprecated | None
+    deprecated: Deprecated | None = None
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
