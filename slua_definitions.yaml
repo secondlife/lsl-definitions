@@ -306,28 +306,28 @@ globalFunctions:
   comment: Converts a string, buffer, or uuid to a uuid, returns nil if invalid
   parameters:
   - name: val
-    type: string | buffer | uuid
+    type: string? | buffer | uuid
     selene-type: string
   returnType: uuid?
 - name: tovector
   comment: Converts a string to a vector, returns nil if invalid
   parameters:
   - name: val
-    type: string | vector
+    type: string? | vector
     selene-type: string
   returnType: vector?
 - name: toquaternion
   comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
   - name: val
-    type: string | quaternion
+    type: string? | quaternion
     selene-type: string
   returnType: quaternion?
 - name: torotation
   comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
   - name: val
-    type: string | quaternion
+    type: string? | quaternion
     selene-type: string
   returnType: quaternion?
 modules:
@@ -2165,7 +2165,7 @@ modules:
       shorter than 16 bytes. Alias of uuid.create
     parameters:
     - name: value
-      type: string | buffer | uuid
+      type: string? | buffer | uuid
     returnType: uuid?
     must-use: true
   functions:
@@ -2175,7 +2175,7 @@ modules:
       shorter than 16 bytes.
     parameters:
     - name: value
-      type: string | buffer | uuid
+      type: string? | buffer | uuid
     returnType: uuid?
     must-use: true
 - name: vector

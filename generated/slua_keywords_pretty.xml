@@ -11176,7 +11176,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | quaternion</string>
+                     <string>string? | quaternion</string>
                   </map>
                </map>
             </array>
@@ -11199,7 +11199,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | quaternion</string>
+                     <string>string? | quaternion</string>
                   </map>
                </map>
             </array>
@@ -11222,7 +11222,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | buffer | uuid</string>
+                     <string>string? | buffer | uuid</string>
                   </map>
                </map>
             </array>
@@ -11245,7 +11245,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | vector</string>
+                     <string>string? | vector</string>
                   </map>
                </map>
             </array>
@@ -16038,7 +16038,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | buffer | uuid</string>
+                     <string>string? | buffer | uuid</string>
                   </map>
                </map>
             </array>
@@ -16061,7 +16061,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>string | buffer | uuid</string>
+                     <string>string? | buffer | uuid</string>
                   </map>
                </map>
             </array>
