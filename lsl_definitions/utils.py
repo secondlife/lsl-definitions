@@ -17,7 +17,7 @@ class Deprecated:
     selene_replace: list[str] | None = None
 
     def from_definition(definition: dict | None) -> "Deprecated | None":
-        if not definition:
+        if definition is None:
             return None
         return Deprecated(
             reason=definition.get("reason", None),
