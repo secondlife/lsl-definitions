@@ -415,8 +415,8 @@ declare utf8: {
 -- Global Table: uuid
 ---------------------------
 
-declare uuid: ((value: string? | buffer | uuid) -> uuid?) & {
-  create: (value: string? | buffer | uuid) -> uuid?,
+declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
+  create: (value: string? | buffer | uuid) -> uuid,
 }
 
 

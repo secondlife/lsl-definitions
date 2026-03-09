@@ -2164,23 +2164,23 @@ modules:
   comment: UUID library.
   callable:
     name: uuid
-    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is
-      shorter than 16 bytes. Alias of uuid.create
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is
+      shorter than 16 bytes. Alias of uuid.create.
     parameters:
     - name: value
       type: string? | buffer | uuid
-    returnType: uuid?
+    returnType: uuid
     must-use: true
   functions:
   - name: create
-    comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID. Throws an error if the buffer is
+    comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
+      an error if the string is not a valid UUID, or the the buffer is
       shorter than 16 bytes.
     parameters:
     - name: value
       type: string? | buffer | uuid
-    returnType: uuid?
+    returnType: uuid
     must-use: true
 - name: vector
   comment: Vector manipuluation library.
