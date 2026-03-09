@@ -27,7 +27,7 @@
             "type": "number"
         },
         "lslType": {
-            "markdownDescription": "One of the valid types for this function argument:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
+            "markdownDescription": "One of the valid types:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
             "enum": ["float", "integer", "key", "list", "rotation", "string", "vector"]
         }
     },
