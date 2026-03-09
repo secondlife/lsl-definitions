@@ -128,7 +128,7 @@ class SLuaFunction(SLuaFunctionBase):
                     }
                     for a in self.parameters
                 ],
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "energy": 10.0,
                 "return": self.returnType,
                 "sleep": 0.0,
@@ -652,7 +652,7 @@ class SLuaDefinitionParser:
                 ],
                 returnType=data.get("returnType", "()"),
                 comment=data.get("comment", ""),
-                deprecated=data.get("deprecated", False),
+                deprecated=Deprecated.from_definition(data.get("deprecated", None)),
                 private=data.get("private", False),
                 must_use=data.get("must-use", False),
             )

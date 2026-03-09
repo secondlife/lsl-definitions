@@ -428,13 +428,10 @@ class LSLFunction:
                         }
                         for a in self.arguments
                     ],
-                    "deprecated": (
-                        self.deprecated
-                        or self.slua_deprecated
-                        or self.slua_removed
-                        or self.detected_semantics
-                    )
-                    is not None,
+                    "deprecated": self.deprecated is not None
+                    or self.slua_deprecated is not None
+                    or self.slua_removed
+                    or self.detected_semantics,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
                     "return": slua.validate_type(self.compute_slua_type(), known_types),
