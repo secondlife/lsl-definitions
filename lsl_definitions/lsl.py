@@ -527,8 +527,8 @@ class LSLDefinitionParser:
                 for arg in (event_data.get("arguments") or [])
             ],
             private=event_data.get("private", False),
-            deprecated=Deprecated.from_definition(event_data.get("deprecated", None)),
-            slua_deprecated=Deprecated.from_definition(event_data.get("slua-deprecated", None)),
+            deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(event_data.get("slua-deprecated", False)),
             slua_removed=event_data.get("slua-removed", False),
             detected_semantics=event_data.get("detected-semantics", False),
         )
@@ -558,8 +558,8 @@ class LSLDefinitionParser:
             ],
             private=func_data.get("private", False),
             god_mode=func_data.get("god-mode", False),
-            deprecated=Deprecated.from_definition(func_data.get("deprecated", None)),
-            slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", None)),
+            deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
             slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
@@ -647,7 +647,7 @@ class LSLDefinitionParser:
             value=str(const_data["value"]),
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
-            deprecated=Deprecated.from_definition(const_data.get("deprecated", None)),
+            deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
         )
         if const.type not in {"float", "integer", "string", "vector", "rotation"}:
             raise ValueError(f"Invalid constant type {const.type}")

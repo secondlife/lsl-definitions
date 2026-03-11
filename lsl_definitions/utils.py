@@ -16,9 +16,11 @@ class Deprecated:
     use: str | None = None
     selene_replace: list[str] | None = None
 
-    def from_definition(definition: dict | None) -> "Deprecated | None":
-        if definition is None:
+    def from_definition(definition: dict | bool) -> "Deprecated | None":
+        if definition is False:
             return None
+        if definition is True:
+            return Deprecated()
         return Deprecated(
             reason=definition.get("reason", None),
             use=definition.get("use", None),

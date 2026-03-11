@@ -3305,17 +3305,17 @@ constants:
     type: integer
     value: '0x100'
   REMOTE_DATA_CHANNEL:
-    deprecated: {}
+    deprecated: true
     tooltip: ''
     type: integer
     value: 1
   REMOTE_DATA_REPLY:
-    deprecated: {}
+    deprecated: true
     tooltip: ''
     type: integer
     value: 3
   REMOTE_DATA_REQUEST:
-    deprecated: {}
+    deprecated: true
     tooltip: ''
     type: integer
     value: 2
@@ -4745,7 +4745,7 @@ events:
     - SData:
         tooltip: ''
         type: string
-    deprecated: {}
+    deprecated: true
     tooltip: This event is deprecated.
   run_time_permissions:
     arguments:
@@ -5244,7 +5244,7 @@ functions:
     - ExperienceID:
         tooltip: ''
         type: key
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 411
     private: true
@@ -5256,7 +5256,7 @@ functions:
     - AgentID:
         tooltip: ''
         type: key
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 385
     private: true
@@ -5295,7 +5295,7 @@ functions:
     - ChannelID:
         tooltip: ''
         type: key
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 257
     return: void
@@ -5306,7 +5306,7 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 43
     must-use: true
@@ -5354,7 +5354,7 @@ functions:
         tooltip: ''
         type: string
         asset-semantics: true
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 161
     return: void
@@ -6526,7 +6526,7 @@ functions:
     - AgentID:
         tooltip: ''
         type: key
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 410
     private: true
@@ -9479,7 +9479,7 @@ functions:
       the value of the Header for HTTPRequestID.
   llOpenRemoteDataChannel:
     arguments: []
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 254
     return: void
@@ -9703,7 +9703,7 @@ functions:
     - Point:
         tooltip: ''
         type: vector
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 131
     private: true
@@ -9877,7 +9877,7 @@ functions:
     - iData:
         tooltip: Integer data to send
         type: integer
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 256
     return: void
@@ -9885,7 +9885,7 @@ functions:
     tooltip: This function is deprecated.
   llRemoteDataSetRegion:
     arguments: []
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 263
     return: void
@@ -9905,7 +9905,7 @@ functions:
     - Unknown2:
         tooltip: ''
         type: integer
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 251
     private: true
@@ -10633,7 +10633,7 @@ functions:
     - Text:
         tooltip: ''
         type: string
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 255
     return: key
@@ -10903,7 +10903,7 @@ functions:
     - ExperienceID:
         tooltip: ''
         type: key
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 386
     private: true
@@ -11949,7 +11949,7 @@ functions:
       a built-in animation, or the uuid of an animation.\n
   llStopPointAt:
     arguments: []
-    deprecated: {}
+    deprecated: true
     energy: 10.0
     func-id: 132
     private: true

@@ -23,23 +23,28 @@
         },
         "deprecated": {
             "markdownDescription": "This function or property has been deprecated.",
-            "additionalProperties": false,
-            "properties": {
-                "reason": {
-                    "markdownDescription": "The reason for deprecation.",
-                    "type": "string"
-                },
-                "use": {
-                    "markdownDescription": "What to use instead.",
-                    "type": "string"
-                },
-                "selene-replace": {
-                    "markdownDescription": "Pattern replacements for selene.",
-                    "type": "array",
-                    "items": {"type": "string"}
+            "oneOf": [
+                {"type": "boolean" , "const": true},
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "reason": {
+                            "markdownDescription": "The reason for deprecation.",
+                            "type": "string"
+                        },
+                        "use": {
+                            "markdownDescription": "What to use instead.",
+                            "type": "string"
+                        },
+                        "selene-replace": {
+                            "markdownDescription": "Pattern replacements for selene.",
+                            "type": "array",
+                            "items": {"type": "string"}
+                        }
+                    }
                 }
-            },
-            "type": "object"
+            ]
         },
         "property": {
             "markdownDescription": "A property or constant.",

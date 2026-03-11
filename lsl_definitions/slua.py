@@ -660,7 +660,7 @@ class SLuaDefinitionParser:
                 ],
                 returnType=data.get("returnType", "()"),
                 comment=data.get("comment", ""),
-                deprecated=Deprecated.from_definition(data.get("deprecated", None)),
+                deprecated=Deprecated.from_definition(data.get("deprecated", False)),
                 private=data.get("private", False),
                 must_use=data.get("must-use", False),
             )
