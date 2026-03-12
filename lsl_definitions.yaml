@@ -8187,7 +8187,7 @@ functions:
           # index-semantics: true
         type: list
     slua-deprecated:
-      reason: Use lljson.decode and typeof instead.
+      reason: Use lljson.decode and typeof instead. Also, the indices are zero-based.
     energy: 10.0
     func-id: 512
     pure: true
