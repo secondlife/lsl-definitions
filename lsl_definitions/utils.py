@@ -1,10 +1,32 @@
 """Utility functions for LSL definitions processing."""
 
+import dataclasses
 import enum
 import os
 import os.path
 import stat
 from typing import Iterable, Sequence, TypeVar, Union
+
+
+@dataclasses.dataclass
+class Deprecated:
+    """Information about deprecation of a function or property."""
+
+    reason: str | None = None
+    use: str | None = None
+    selene_replace: list[str] | None = None
+
+    def from_definition(definition: dict | bool) -> "Deprecated | None":
+        if definition is False:
+            return None
+        if definition is True:
+            return Deprecated()
+        return Deprecated(
+            reason=definition.get("reason", None),
+            use=definition.get("use", None),
+            selene_replace=definition.get("selene-replace", None),
+        )
+
 
 CONTROL_PICTURES = range(0x2400, 0x2420)
 """Pass this to str.translate to display EOF and NAK prettier"""

@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any, List, Literal, Optional, Set, TextIO
 import llsd
 import yaml
 
-from lsl_definitions.utils import remove_worthless
+from lsl_definitions.utils import Deprecated, remove_worthless
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -103,7 +103,7 @@ class SLuaFunction(SLuaFunctionBase):
     """Full function or method signature with optional overloads"""
 
     private: bool = False
-    deprecated: bool = False
+    deprecated: Deprecated | None = None
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
@@ -111,8 +111,15 @@ class SLuaFunction(SLuaFunctionBase):
 
     @property
     def deprecated_string(self) -> str:
-        if not self.deprecated:
+        if self.deprecated is None:
             return ""
+        params: list[str] = []
+        if self.deprecated.use:
+            params.append(f"use={self.deprecated.use!r}")
+        if self.deprecated.reason:
+            params.append(f"reason={self.deprecated.reason!r}")
+        if params:
+            return f"@[deprecated {{{', '.join(params)}}}]"
         return "@deprecated "
 
     def to_keywords_dict(self) -> dict:
@@ -128,7 +135,7 @@ class SLuaFunction(SLuaFunctionBase):
                     }
                     for a in self.parameters
                 ],
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "energy": 10.0,
                 "return": self.returnType,
                 "sleep": 0.0,
@@ -461,7 +468,7 @@ class SLuaDefinitions:
             ll_func = SLuaFunction(
                 name=func.compute_slua_name(with_module=False),
                 comment=func.compute_slua_tooltip(),
-                deprecated=func.deprecated or func.slua_deprecated or func.detected_semantics,
+                deprecated=func.deprecated or func.slua_deprecated,
                 typeParameters=func.type_arguments,
                 parameters=[
                     SLuaParameter(
@@ -477,7 +484,7 @@ class SLuaDefinitions:
             llcompat_func = SLuaFunction(
                 name=ll_func.name,
                 comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
-                deprecated=True,
+                deprecated=Deprecated(),
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
                 returnType=self.validate_type(
@@ -491,10 +498,11 @@ class SLuaDefinitions:
             if func.detected_semantics:
                 name = ll_func.name.replace("Detected", "Get")
                 name = name[0].lower() + name[1:]
+                ll_func.deprecated = Deprecated(use=name)
                 detected_func = SLuaFunction(
                     name=name,
                     comment=ll_func.comment,
-                    deprecated=False,
+                    deprecated=None,
                     typeParameters=ll_func.typeParameters,
                     parameters=ll_func.parameters[:],
                     returnType=ll_func.returnType,
@@ -652,7 +660,7 @@ class SLuaDefinitionParser:
                 ],
                 returnType=data.get("returnType", "()"),
                 comment=data.get("comment", ""),
-                deprecated=data.get("deprecated", False),
+                deprecated=Deprecated.from_definition(data.get("deprecated", False)),
                 private=data.get("private", False),
                 must_use=data.get("must-use", False),
             )

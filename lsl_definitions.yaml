@@ -255,7 +255,8 @@ constants:
     type: integer
     value: 27
   ATTACH_LPEC:
-    deprecated: true
+    deprecated:
+      use: ATTACH_RIGHT_PEC
     tooltip: Attach to the avatar's right pectoral. (Deprecated, use ATTACH_RIGHT_PEC)
     type: integer
     value: 30
@@ -328,7 +329,8 @@ constants:
     type: integer
     value: 24
   ATTACH_RPEC:
-    deprecated: true
+    deprecated:
+      use: ATTACH_LEFT_PEC
     tooltip: Attach to the avatar's left pectoral. (deprecated, use ATTACH_LEFT_PEC)
     type: integer
     value: 29
@@ -2345,7 +2347,8 @@ constants:
     type: integer
     value: 3
   PRIM_CAST_SHADOWS:
-    deprecated: true
+    deprecated:
+      reason: Not implemented.
     tooltip: ''
     type: integer
     value: 24
@@ -4181,7 +4184,8 @@ constants:
     type: integer
     value: '0x1'
   VEHICLE_FLAG_NO_FLY_UP:
-    deprecated: true
+    deprecated:
+      use: VEHICLE_FLAG_NO_DEFLECTION_UP
     tooltip: Old, changed to VEHICLE_FLAG_NO_DEFLECTION_UP
     type: integer
     value: '0x1'
@@ -4777,7 +4781,8 @@ events:
       to another state. It is handled before the new states state_entry event.
   timer:
     arguments: []
-    slua-deprecated: true
+    slua-deprecated:
+      use: LLTimers
     tooltip: This event is raised at regular intervals set by the llSetTimerEvent
       library function.
   touch:
@@ -9158,7 +9163,8 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
-    deprecated: true
+    deprecated:
+      use: ll.ParticleSystem
     energy: 10.0
     func-id: 100
     return: void
@@ -9190,7 +9196,8 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
-    deprecated: true
+    deprecated:
+      use: ll.ParticleSystem
     energy: 10.0
     func-id: 103
     return: void
@@ -9228,7 +9235,8 @@ functions:
     - Bounce_Offset:
         tooltip: ''
         type: float
-    deprecated: true
+    deprecated:
+      use: ll.ParticleSystem
     energy: 10.0
     func-id: 101
     return: void
@@ -9260,7 +9268,8 @@ functions:
     - Offset:
         tooltip: ''
         type: vector
-    deprecated: true
+    deprecated:
+      use: ll.ParticleSystem
     energy: 10.0
     func-id: 102
     return: void
@@ -9785,7 +9794,8 @@ functions:
       \ key.\n                "
   llRefreshPrimURL:
     arguments: []
-    deprecated: true
+    deprecated:
+      use: ll.SetPrimMediaParams
     energy: 10.0
     func-id: 306
     return: void
@@ -9827,7 +9837,9 @@ functions:
     - AvatarID:
         tooltip: ''
         type: key
-    deprecated: true
+    deprecated:
+      use: ll.ClearCameraParams
+      selene-replace: ["ll.ClearCameraParams()"]
     energy: 10.0
     func-id: 116
     return: void
@@ -11100,7 +11112,9 @@ functions:
     - Parameters:
         tooltip: ''
         type: list
-    deprecated: true
+    deprecated:
+      use: ll.SetLinkPrimitiveParamsFast
+      selene-replace: ["ll.SetLinkPrimitiveParamsFast(%...)"]
     energy: 10.0
     func-id: 328
     return: void
@@ -11383,7 +11397,9 @@ functions:
     - URL:
         tooltip: ''
         type: string
-    deprecated: true
+    deprecated:
+      use: ll.SetPrimMediaParams
+      selene-replace: ["ll.SetPrimMediaParams(ALL_SIDES, {PRIM_MEDIA_CURRENT_URL, %1})"]
     energy: 10.0
     func-id: 305
     return: void
@@ -11394,7 +11410,9 @@ functions:
     - Parameters:
         tooltip: A list of changes.
         type: list
-    deprecated: true
+    deprecated:
+      use: ll.SetLinkPrimitiveParamsFast
+      selene-replace: ["ll.SetLinkPrimitiveParamsFast(%...)"]
     energy: 10.0
     func-id: 259
     return: void
@@ -11814,7 +11832,9 @@ functions:
         tooltip: ''
         type: integer
         bool-semantics: true
-    deprecated: true
+    deprecated:
+      use: ll.PlaySound
+      selene-replace: ["ll.PlaySound(%1, %2)", "ll.LoopSound(%1, %2)"]
     energy: 10.0
     func-id: 85
     return: void
@@ -11827,7 +11847,9 @@ functions:
         tooltip: ''
         type: string
         asset-semantics: true
-    deprecated: true
+    deprecated:
+      use: ll.PreloadSound
+      selene-replace: ["ll.PreloadSound(%1)"]
     energy: 10.0
     func-id: 126
     return: void
@@ -12001,7 +12023,8 @@ functions:
     - AvatarID:
         tooltip: ''
         type: key
-    deprecated: true
+    deprecated:
+      use: ll.SetCameraParams
     energy: 10.0
     func-id: 115
     return: void
@@ -12522,7 +12545,9 @@ functions:
     - Text2:
         tooltip: ''
         type: string
-    deprecated: true
+    deprecated:
+      use: ll.XorBase64
+      selene-replace: ["ll.XorBase64(%1, %2)"]
     energy: 10.0
     func-id: 262
     pure: true
@@ -12539,7 +12564,9 @@ functions:
     - Text2:
         tooltip: ''
         type: string
-    deprecated: true
+    deprecated:
+      use: ll.XorBase64
+      selene-replace: ["ll.XorBase64(%1, %2)"]
     energy: 10.0
     func-id: 319
     pure: true

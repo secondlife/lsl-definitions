@@ -16,7 +16,7 @@ from lsl_definitions.slua import (
     SLuaParameter,
     SLuaProperty,
 )
-from lsl_definitions.utils import remove_nones
+from lsl_definitions.utils import Deprecated, remove_nones
 
 
 @register("slua_lsp_defs")
@@ -146,11 +146,23 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             observes=param.observes,
         )
 
+    def selene_deprecated(deprecated: Deprecated | None, comment: str) -> dict | None:
+        if deprecated is None:
+            return None
+        messages: list[str] = []
+        if deprecated.use:
+            messages.append(f"Use {deprecated.use!r} instead.")
+        if deprecated.reason:
+            messages.append(deprecated.reason)
+        if not messages:
+            messages.append(comment)
+        return remove_nones(message=" ".join(messages), replace=deprecated.selene_replace)
+
     def selene_function(func: SLuaFunction, method=False) -> dict:
         parameters = func.parameters[1:] if method else func.parameters
         return remove_nones(
             method=method or None,
-            deprecated={"message": func.comment} if func.deprecated else None,
+            deprecated=selene_deprecated(func.deprecated, func.comment),
             args=[selene_param(a) for a in parameters],
             must_use=func.must_use or None,
             description=func.comment or None,

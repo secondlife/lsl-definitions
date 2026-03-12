@@ -11,6 +11,7 @@ import llsd
 import yaml
 
 from lsl_definitions.utils import (
+    Deprecated,
     StringEnum,
     remove_worthless,
     unescape_control_characters,
@@ -144,7 +145,7 @@ class LSLConstant(NamedTuple):
         2. strings are stripped of start/end quotes (")
     """
     tooltip: str
-    deprecated: bool
+    deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
 
@@ -185,7 +186,7 @@ class LSLConstant(NamedTuple):
     def to_dict(self) -> dict:
         return remove_worthless(
             {
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
@@ -203,7 +204,7 @@ class LSLConstant(NamedTuple):
         try:
             return remove_worthless(
                 {
-                    "deprecated": self.deprecated,
+                    "deprecated": self.deprecated is not None,
                     # Will always use a <string> node, but that's fine for our purposes.
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
@@ -246,15 +247,15 @@ class LSLEvent:
     arguments: List[LSLArgument]
     tooltip: str
     private: bool
-    deprecated: bool
-    slua_deprecated: bool
+    deprecated: Deprecated | None
+    slua_deprecated: Deprecated | None
     slua_removed: bool
     detected_semantics: bool
 
     def to_dict(self) -> dict:
         return remove_worthless(
             {
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "arguments": [
                     {
                         a.name: {
@@ -291,7 +292,7 @@ class LSLEvent:
                 ]
             return remove_worthless(
                 {
-                    "deprecated": self.deprecated or self.slua_deprecated,
+                    "deprecated": (self.deprecated or self.slua_deprecated) is not None,
                     "arguments": arguments,
                     "tooltip": self.tooltip,
                 }
@@ -321,8 +322,8 @@ class LSLFunction:
     Might be useful for cases where you're intending to push an un-finalized
     implementation to Agni and don't want people to use it yet.
     """
-    deprecated: bool
-    slua_deprecated: bool
+    deprecated: Deprecated | None
+    slua_deprecated: Deprecated | None
     slua_removed: bool
     """Only exists in llcompat"""
     func_id: int
@@ -366,7 +367,7 @@ class LSLFunction:
                     }
                     for a in self.arguments
                 ],
-                "deprecated": self.deprecated,
+                "deprecated": self.deprecated is not None,
                 "energy": self.energy,
                 "god-mode": self.god_mode,
                 "return": str(self.ret_type),
@@ -427,8 +428,8 @@ class LSLFunction:
                         }
                         for a in self.arguments
                     ],
-                    "deprecated": self.deprecated
-                    or self.slua_deprecated
+                    "deprecated": self.deprecated is not None
+                    or self.slua_deprecated is not None
                     or self.slua_removed
                     or self.detected_semantics,
                     "energy": self.energy,
@@ -526,8 +527,8 @@ class LSLDefinitionParser:
                 for arg in (event_data.get("arguments") or [])
             ],
             private=event_data.get("private", False),
-            deprecated=event_data.get("deprecated", False),
-            slua_deprecated=event_data.get("slua-deprecated", False),
+            deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(event_data.get("slua-deprecated", False)),
             slua_removed=event_data.get("slua-removed", False),
             detected_semantics=event_data.get("detected-semantics", False),
         )
@@ -557,8 +558,8 @@ class LSLDefinitionParser:
             ],
             private=func_data.get("private", False),
             god_mode=func_data.get("god-mode", False),
-            deprecated=func_data.get("deprecated", False),
-            slua_deprecated=func_data.get("slua-deprecated", False),
+            deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
             slua_removed=func_data.get("slua-removed", False),
             func_id=func_data["func-id"],
             pure=func_data.get("pure", False),
@@ -646,7 +647,7 @@ class LSLDefinitionParser:
             value=str(const_data["value"]),
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
-            deprecated=const_data.get("deprecated", False),
+            deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
         )
         if const.type not in {"float", "integer", "string", "vector", "rotation"}:
             raise ValueError(f"Invalid constant type {const.type}")

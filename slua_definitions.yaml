@@ -1503,7 +1503,9 @@ modules:
     returnType: (string | OsDateTime)?
     must-use: true
   - name: difftime
-    deprecated: true
+    deprecated:
+      reason: Same as a - b
+      selene-replace: ["%1 - %2"]
     comment: Returns the difference in seconds between two timestamps. Same as a - b.
     parameters:
     - name: a
@@ -1860,7 +1862,8 @@ modules:
     must-use: true
   - name: foreach
     comment: Iterates over all key-value pairs in the table (deprecated).
-    deprecated: true
+    deprecated:
+      reason: Use a for loop instead
     typeParameters: [K, V, R]
     parameters:
     - name: t
@@ -1873,7 +1876,8 @@ modules:
     returnType: R?
   - name: foreachi
     comment: Iterates over all index-value pairs in the array (deprecated).
-    deprecated: true
+    deprecated:
+      reason: Use a for loop instead
     typeParameters: [V, R]
     parameters:
     - name: a
@@ -1885,7 +1889,9 @@ modules:
     returnType: R?
   - name: getn
     comment: 'Returns the length of an array (deprecated; use # instead).'
-    deprecated: true
+    deprecated:
+      use: "#"
+      selene-replace: ["#%1"]
     parameters:
     - name: a
       comment: Array to check.
