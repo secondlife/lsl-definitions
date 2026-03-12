@@ -699,7 +699,7 @@ declare ll: {
   Json2List: @[deprecated {use='lljson.decode'}](JSON: string) -> {any},
   JsonGetValue: @[deprecated {use='lljson.decode', reason='Also, the indices are zero-based.'}](JSON: string, Specifiers: list) -> string,
   JsonSetValue: @[deprecated {use='lljson.encode', reason='Also, the indices are zero-based.'}](JSON: string, Specifiers: list, Value: string) -> string,
-  JsonValueType: @[deprecated {reason='Use lljson.decode and typeof instead.'}](JSON: string, Specifiers: list) -> string,
+  JsonValueType: @[deprecated {reason='Use lljson.decode and typeof instead. Also, the indices are zero-based.'}](JSON: string, Specifiers: list) -> string,
   Key2Name: (ID: uuid) -> string,
   KeyCountKeyValue: () -> uuid,
   KeysKeyValue: (First: number, Count: number) -> uuid,
