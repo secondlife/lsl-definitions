@@ -11723,7 +11723,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Mod this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatable with LSL.</string>
+            <string>Wrap this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatable with LSL.</string>
          </map>
          <key>bit32.smul</key>
          <map>
@@ -11755,7 +11755,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatable with LSL integer multiplication.</string>
+            <string>Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatible with LSL integer multiplication.</string>
          </map>
          <key>buffer</key>
          <map>
