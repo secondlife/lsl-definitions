@@ -146,6 +146,7 @@ class LSLConstant(NamedTuple):
     """
     tooltip: str
     deprecated: Deprecated | None
+    slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
 
@@ -204,7 +205,7 @@ class LSLConstant(NamedTuple):
         try:
             return remove_worthless(
                 {
-                    "deprecated": self.deprecated is not None,
+                    "deprecated": (self.deprecated or self.slua_deprecated) is not None,
                     # Will always use a <string> node, but that's fine for our purposes.
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
@@ -648,6 +649,7 @@ class LSLDefinitionParser:
             tooltip=const_data.get("tooltip", ""),
             private=const_data.get("private", False),
             deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(const_data.get("slua-deprecated", False)),
         )
         if const.type not in {"float", "integer", "string", "vector", "rotation"}:
             raise ValueError(f"Invalid constant type {const.type}")

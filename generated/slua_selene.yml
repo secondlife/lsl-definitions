@@ -6865,17 +6865,23 @@ globals:
     must_use: true
     description: Checks the face for a PBR render material.
   ll.Json2List:
+    deprecated:
+      message: Use 'lljson.decode' instead.
     args:
     - type: string
     must_use: true
     description: Converts the top level of the JSON string to a list.
   ll.JsonGetValue:
+    deprecated:
+      message: Use 'lljson.decode' instead. Also, the indices are zero-based.
     args:
     - type: string
     - type: table
     must_use: true
     description: Gets the value indicated by Specifiers from the JSON string.
   ll.JsonSetValue:
+    deprecated:
+      message: Use 'lljson.encode' instead. Also, the indices are zero-based.
     args:
     - type: string
     - type: table
@@ -6884,6 +6890,8 @@ globals:
     description: Returns a new JSON string that is the JSON given with the Value indicated
       by Specifiers set to Value.
   ll.JsonValueType:
+    deprecated:
+      message: Use lljson.decode and typeof instead.
     args:
     - type: string
     - type: table
@@ -7075,6 +7083,8 @@ globals:
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to an integer, then zero is returned.
   ll.List2Json:
+    deprecated:
+      message: Use 'lljson.encode' instead.
     args:
     - type: string
     - type: table
