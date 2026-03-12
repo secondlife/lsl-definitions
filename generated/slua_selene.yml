@@ -4026,6 +4026,20 @@ globals:
     must_use: true
     description: Shifts n by i bits to the right. If i is negative, a left shift is
       performed.
+  bit32.s32:
+    args:
+    - type: number
+    must_use: true
+    description: Wrap this number from float64 range to signed int32 range and truncate
+      to integer. Makes integer arithmetic compatable with LSL.
+  bit32.smul:
+    args:
+    - type: number
+    - type: number
+    must_use: true
+    description: Multiplies two signed 32-bit integers. Returns the result as a signed
+      32-bit integer, wrapping as necessary. Avoids precision loss ascociated with
+      float64 multiplication. Compatible with LSL integer multiplication.
   bit32.countlz:
     args:
     - type: number
