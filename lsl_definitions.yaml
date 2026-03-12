@@ -1259,7 +1259,7 @@ constants:
     value: 0
   JSON_APPEND:
     slua-deprecated:
-      reason: Use lljson.decode and table.insert instead.
+      reason: Use 'lljson.decode' and 'table.insert' instead.
     tooltip: ''
     type: integer
     value: -1
@@ -8187,7 +8187,7 @@ functions:
           # index-semantics: true
         type: list
     slua-deprecated:
-      reason: Use lljson.decode and typeof instead. Also, the indices are zero-based.
+      reason: Use 'lljson.decode' and 'typeof' instead. Also, the indices are zero-based.
     energy: 10.0
     func-id: 512
     pure: true
@@ -8604,6 +8604,7 @@ functions:
         type: list
     slua-deprecated:
       use: lljson.encode
+      selene-replace: ["lljson.encode(%2)"]
     energy: 10.0
     func-id: 514
     pure: true

@@ -6891,7 +6891,7 @@ globals:
       by Specifiers set to Value.
   ll.JsonValueType:
     deprecated:
-      message: Use lljson.decode and typeof instead. Also, the indices are zero-based.
+      message: Use 'lljson.decode' and 'typeof' instead. Also, the indices are zero-based.
     args:
     - type: string
     - type: table
@@ -7085,6 +7085,8 @@ globals:
   ll.List2Json:
     deprecated:
       message: Use 'lljson.encode' instead.
+      replace:
+      - lljson.encode(%2)
     args:
     - type: string
     - type: table
