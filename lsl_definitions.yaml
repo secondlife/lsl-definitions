@@ -6882,6 +6882,10 @@ functions:
     - ListVariable:
         tooltip: ''
         type: list
+    slua-deprecated:
+      use: "#"
+      reason: Metatable support.
+      selene-replace: ["#%1"]
     energy: 10.0
     func-id: 185
     native: true
@@ -8621,6 +8625,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'touuid' instead.
+      selene-replace: ["touuid(%1[%2]) or NULL_KEY"]
     energy: 10.0
     func-id: 189
     native: true
@@ -8728,6 +8735,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: '[]'
+      selene-replace: ["%1[%2]"]
     energy: 10.0
     func-id: 191
     native: true
@@ -8746,6 +8756,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'tostring' instead.
+      selene-replace: ["tostring(%1[%2])"]
     energy: 10.0
     func-id: 188
     native: true
@@ -8764,6 +8777,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: '[]'
+      selene-replace: ["%1[%2]"]
     energy: 10.0
     func-id: 190
     native: true
@@ -8781,6 +8797,9 @@ functions:
     - Find:
         tooltip: ''
         type: list
+    slua-deprecated:
+      use: 'table.find'
+      reason: Metatable support.
     energy: 10.0
     func-id: 201
     must-use: true
