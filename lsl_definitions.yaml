@@ -1258,42 +1258,62 @@ constants:
     type: integer
     value: 0
   JSON_APPEND:
+    slua-deprecated:
+      reason: Use 'lljson.decode' and 'table.insert' instead.
     tooltip: ''
     type: integer
     value: -1
   JSON_ARRAY:
+    slua-deprecated:
+      use: lljson.array_mt
     tooltip: ''
     type: string
     value: '\u{FDD2}'
   JSON_DELETE:
+    slua-deprecated:
+      use: nil
     tooltip: ''
     type: string
     value: '\u{FDD8}'
   JSON_FALSE:
+    slua-deprecated:
+      use: "false"
     tooltip: ''
     type: string
     value: '\u{FDD7}'
   JSON_INVALID:
+    slua-deprecated:
+      use: pcall
     tooltip: ''
     type: string
     value: '\u{FDD0}'
   JSON_NULL:
+    slua-deprecated:
+      use: lljson.null
     tooltip: ''
     type: string
     value: '\u{FDD5}'
   JSON_NUMBER:
+    slua-deprecated:
+      use: typeof
     tooltip: ''
     type: string
     value: '\u{FDD3}'
   JSON_OBJECT:
+    slua-deprecated:
+      use: lljson.object_mt
     tooltip: ''
     type: string
     value: '\u{FDD1}'
   JSON_STRING:
+    slua-deprecated:
+      use: typeof
     tooltip: ''
     type: string
     value: '\u{FDD4}'
   JSON_TRUE:
+    slua-deprecated:
+      use: "true"
     tooltip: ''
     type: string
     value: '\u{FDD6}'
@@ -8103,6 +8123,8 @@ functions:
     - JSON:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: lljson.decode
     energy: 10.0
     func-id: 513
     pure: true
@@ -8120,6 +8142,9 @@ functions:
           # But we don't support that in the bindgen yet.
           # index-semantics: true
         type: list
+    slua-deprecated:
+      use: lljson.decode
+      reason: Also, the indices are zero-based.
     energy: 10.0
     func-id: 511
     pure: true
@@ -8140,6 +8165,9 @@ functions:
     - Value:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: lljson.encode
+      reason: Also, the indices are zero-based.
     energy: 10.0
     func-id: 510
     pure: true
@@ -8158,6 +8186,8 @@ functions:
           # But we don't support that in the bindgen yet.
           # index-semantics: true
         type: list
+    slua-deprecated:
+      reason: Use 'lljson.decode' and 'typeof' instead. Also, the indices are zero-based.
     energy: 10.0
     func-id: 512
     pure: true
@@ -8572,6 +8602,9 @@ functions:
     - Values:
         tooltip: List of values to convert.
         type: list
+    slua-deprecated:
+      use: lljson.encode
+      selene-replace: ["lljson.encode(%2)"]
     energy: 10.0
     func-id: 514
     pure: true

@@ -2991,6 +2991,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_APPEND</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3000,6 +3002,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_ARRAY</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3009,6 +3013,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_DELETE</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3018,6 +3024,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_FALSE</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3027,6 +3035,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_INVALID</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3036,6 +3046,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_NULL</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3045,6 +3057,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_NUMBER</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3054,6 +3068,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_OBJECT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3063,6 +3079,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_STRING</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -3072,6 +3090,8 @@ export type rotation = quaternion</string>
          </map>
          <key>JSON_TRUE</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
@@ -22350,6 +22370,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -22382,6 +22404,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -22423,6 +22447,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -22455,6 +22481,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23265,6 +23293,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
