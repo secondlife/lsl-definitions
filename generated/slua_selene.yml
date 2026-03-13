@@ -5578,6 +5578,10 @@ globals:
       list.\nIf Start is larger than End the list deleted is the exclusion of the
       entries; so 6, 4 would delete the entire list except for the 5th list entry.
   ll.DeleteSubString:
+    deprecated:
+      message: Use 'string.sub' instead.
+      replace:
+      - '%1:sub(1, %2-1) .. %1:sub(%3+1, -1)'
     args:
     - type: string
     - type: number
@@ -7884,6 +7888,10 @@ globals:
     - type: number
     description: Replaces the environment for a parcel or region.
   ll.ReplaceSubString:
+    deprecated:
+      message: Use 'string.gsub' instead.
+      replace:
+      - '%1:gsub(%2)'
     args:
     - type: string
     - type: string
