@@ -5215,11 +5215,19 @@ globals:
     must_use: true
     description: Linearly interpolates between a and b using factor t.
   ll.Abs:
+    deprecated:
+      message: Use 'math.abs' instead. It's a fastcall.
+      replace:
+      - math.abs(%...)
     args:
     - type: number
     must_use: true
     description: Returns the absolute (positive) version of Value.
   ll.Acos:
+    deprecated:
+      message: Use 'math.acos' instead. It's a fastcall.
+      replace:
+      - math.acos(%...)
     args:
     - type: number
     must_use: true
@@ -5291,11 +5299,19 @@ globals:
       the Force in local coordinates; otherwise, apply the Force in global coordinates.\nThis
       function only works on physical objects.
   ll.Asin:
+    deprecated:
+      message: Use 'math.asin' instead. It's a fastcall.
+      replace:
+      - math.asin(%...)
     args:
     - type: number
     must_use: true
     description: Returns the arc-sine, in radians, of Value.
   ll.Atan2:
+    deprecated:
+      message: Use 'math.atan2' instead. It's a fastcall.
+      replace:
+      - math.atan2(%...)
     args:
     - type: number
     - type: number
@@ -5385,6 +5401,10 @@ globals:
       UUID_2, {link_number_2}, hit_position_2, {hit_normal_2}, ... , status_code]
       where {} indicates optional data.'
   ll.Ceil:
+    deprecated:
+      message: Use 'math.ceil' instead. It's a fastcall.
+      replace:
+      - math.ceil(%...)
     args:
     - type: number
     must_use: true
@@ -5458,6 +5478,10 @@ globals:
     must_use: true
     description: Returns hex-encoded Hash string of Message using digest Algorithm.
   ll.Cos:
+    deprecated:
+      message: Use 'math.cos' instead. It's a fastcall.
+      replace:
+      - math.cos(%...)
     args:
     - type: number
     must_use: true
@@ -5800,6 +5824,10 @@ globals:
       only supports stopping the current path-finding operation or causing the character
       to jump.
   ll.Fabs:
+    deprecated:
+      message: Use 'math.abs' instead. It's a fastcall.
+      replace:
+      - math.abs(%...)
     args:
     - type: number
     must_use: true
@@ -5836,6 +5864,10 @@ globals:
     description: Flee from a point.\nDirects a character (llCreateCharacter) to keep
       away from a defined position in the region or adjacent regions.
   ll.Floor:
+    deprecated:
+      message: Use 'math.floor' instead. It's a fastcall.
+      replace:
+      - math.floor(%...)
     args:
     - type: number
     must_use: true
@@ -5850,6 +5882,10 @@ globals:
       be reset by calling this function with Enable set to FALSE in order to disable
       it.
   ll.Frand:
+    deprecated:
+      message: Use 'math.random' instead.
+      replace:
+      - math.random() * %1
     args:
     - type: number
     must_use: true
@@ -7297,12 +7333,20 @@ globals:
       \ box to the user, offering to load the specified web page using the default\
       \ web browser."
   ll.Log:
+    deprecated:
+      message: Use 'math.log' instead. It's a fastcall.
+      replace:
+      - math.log(%...)
     args:
     - type: number
     must_use: true
     description: Returns the natural logarithm of Value. Returns zero if Value <=
       0.\nReturns the base e (natural) logarithm of the specified Value.
   ll.Log10:
+    deprecated:
+      message: Use 'math.log10' instead. It's a fastcall.
+      replace:
+      - math.log10(%...)
     args:
     - type: number
     must_use: true
@@ -7625,6 +7669,12 @@ globals:
       with extra silence padded on the end of the sound or ensure that llPlaySoundSlave
       is called at least once per loop of the Master.
   ll.Pow:
+    deprecated:
+      message: Use '^' instead. It's a fastcall.
+      replace:
+      - '%1 ^ %2'
+      - math.pow(%...)
+      - math.exp(%2)
     args:
     - type: number
     - type: number
@@ -8018,6 +8068,10 @@ globals:
     description: Sets the texture rotation for the specified Face to angle Radians.\nIf
       Face is ALL_SIDES, rotates the texture of all sides.
   ll.Round:
+    deprecated:
+      message: Use 'math.round' instead. It's a fastcall.
+      replace:
+      - math.round(%...)
     args:
     - type: number
     must_use: true
@@ -8606,6 +8660,10 @@ globals:
     description: Returns the base64-encoded RSA signature of Message using PEM-formatted
       PrivateKey and digest Algorithm (sha1, sha224, sha256, sha384, sha512).
   ll.Sin:
+    deprecated:
+      message: Use 'math.sin' instead. It's a fastcall.
+      replace:
+      - math.sin(%...)
     args:
     - type: number
     must_use: true
@@ -8652,6 +8710,10 @@ globals:
     description: 'Deprecated: Use llPreloadSound instead.\nPreloads a sound on viewers
       within range.'
   ll.Sqrt:
+    deprecated:
+      message: Use 'math.sqrt' instead. It's a fastcall.
+      replace:
+      - math.sqrt(%...)
     args:
     - type: number
     must_use: true
@@ -8740,6 +8802,10 @@ globals:
       whether Controls also perform their normal functions.\nRequires the PERMISSION_TAKE_CONTROLS
       runtime permission (automatically granted to attached or sat on objects).
   ll.Tan:
+    deprecated:
+      message: Use 'math.tan' instead. It's a fastcall.
+      replace:
+      - math.tan(%...)
     args:
     - type: number
     must_use: true
