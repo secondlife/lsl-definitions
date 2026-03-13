@@ -737,7 +737,7 @@ declare ll: {
   List2Rot: @[deprecated {use='[]'}](ListVariable: list, Index: number) -> quaternion,
   List2String: @[deprecated {reason="Use '[]' and 'tostring' instead."}](ListVariable: list, Index: number) -> string,
   List2Vector: @[deprecated {use='[]'}](ListVariable: list, Index: number) -> vector,
-  ListFindList: @[deprecated {use='table.find', reason='Metatable support.'}](ListVariable: list, Find: list) -> number?,
+  ListFindList: (ListVariable: list, Find: list) -> number?,
   ListFindListNext: (ListVariable: list, Find: list, Instance: number) -> number?,
   ListFindStrided: (ListVariable: list, Find: list, Start: number, End: number, Stride: number) -> number?,
   ListInsertList: <T>(Target: {T}, ListVariable: {T}, Position: number) -> {T},
