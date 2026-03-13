@@ -10421,7 +10421,7 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.tofwd
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["quaternion.tofwd(%1)"]
     energy: 10.0
     func-id: 18
@@ -10437,7 +10437,7 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.toleft
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["quaternion.toleft(%1)"]
     energy: 10.0
     func-id: 19
@@ -10453,7 +10453,7 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.toup
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["quaternion.toup(%1)"]
     energy: 10.0
     func-id: 20
@@ -12432,7 +12432,7 @@ functions:
         type: vector
     slua-deprecated:
       use: vector.magnitude
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["vector.magnitude(%1 - %2)"]
     energy: 10.0
     func-id: 14
@@ -12447,7 +12447,7 @@ functions:
         type: vector
     slua-deprecated:
       use: vector.magnitude
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["vector.magnitude(%1)"]
     energy: 10.0
     func-id: 12
@@ -12462,7 +12462,7 @@ functions:
         type: vector
     slua-deprecated:
       use: vector.normalize
-      reason: Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["vector.normalize(%1)"]
     energy: 10.0
     func-id: 13

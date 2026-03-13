@@ -7960,7 +7960,7 @@ globals:
       the Euler Angle representation of the Rotation.
   ll.Rot2Fwd:
     deprecated:
-      message: Use 'quaternion.tofwd' instead. Fastcall.
+      message: Use 'quaternion.tofwd' instead. It's a fastcall.
       replace:
       - quaternion.tofwd(%1)
     args:
@@ -7971,7 +7971,7 @@ globals:
       axis represented by the Rotation.
   ll.Rot2Left:
     deprecated:
-      message: Use 'quaternion.toleft' instead. Fastcall.
+      message: Use 'quaternion.toleft' instead. It's a fastcall.
       replace:
       - quaternion.toleft(%1)
     args:
@@ -7982,7 +7982,7 @@ globals:
       represented by the Rotation.
   ll.Rot2Up:
     deprecated:
-      message: Use 'quaternion.toup' instead. Fastcall.
+      message: Use 'quaternion.toup' instead. It's a fastcall.
       replace:
       - quaternion.toup(%1)
     args:
@@ -8915,7 +8915,7 @@ globals:
       \ is 0 the key will be created if necessary.\n                "
   ll.VecDist:
     deprecated:
-      message: Use 'vector.magnitude' instead. Fastcall.
+      message: Use 'vector.magnitude' instead. It's a fastcall.
       replace:
       - vector.magnitude(%1 - %2)
     args:
@@ -8927,7 +8927,7 @@ globals:
     description: Returns the distance between Location1 and Location2.
   ll.VecMag:
     deprecated:
-      message: Use 'vector.magnitude' instead. Fastcall.
+      message: Use 'vector.magnitude' instead. It's a fastcall.
       replace:
       - vector.magnitude(%1)
     args:
@@ -8937,7 +8937,7 @@ globals:
     description: Returns the magnitude of the vector.
   ll.VecNorm:
     deprecated:
-      message: Use 'vector.normalize' instead. Fastcall.
+      message: Use 'vector.normalize' instead. It's a fastcall.
       replace:
       - vector.normalize(%1)
     args:
