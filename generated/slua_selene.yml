@@ -5522,6 +5522,10 @@ globals:
       \ case the second item will be the value associated with the key.\n        \
       \        "
   ll.DeleteSubList:
+    deprecated:
+      message: Use 'table.delete' instead. Prefer structured tables over strided lists.
+      replace:
+      - table.delete(%1, %2)
     args:
     - type: table
     - type: number

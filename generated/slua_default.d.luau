@@ -501,7 +501,7 @@ declare ll: {
   DataSizeKeyValue: () -> uuid,
   DeleteCharacter: () -> (),
   DeleteKeyValue: (Key: string) -> uuid,
-  DeleteSubList: <T>(Source: {T}, Start: number, End: number) -> {T},
+  DeleteSubList: @[deprecated {use='table.delete', reason='Prefer structured tables over strided lists.'}]<T>(Source: {T}, Start: number, End: number) -> {T},
   DeleteSubString: (Source: string, Start: number, End: number) -> string,
   DerezObject: (ID: uuid, flags: number) -> boolean,
   DetachFromAvatar: () -> (),
