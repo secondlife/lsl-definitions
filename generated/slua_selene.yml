@@ -6221,6 +6221,10 @@ globals:
     must_use: true
     description: Returns the sit flags set on the specified prim in a linkset.
   ll.GetListEntryType:
+    deprecated:
+      message: Use 'typeof' instead.
+      replace:
+      - typeof(%1[%2])
     args:
     - type: table
     - type: number
@@ -6229,6 +6233,11 @@ globals:
       TYPE_STRING, TYPE_KEY, TYPE_VECTOR, TYPE_ROTATION, or TYPE_INVALID if index
       is off list).\nReturns the type of the variable at Index in ListVariable.
   ll.GetListLength:
+    deprecated:
+      message: Use '#' or 'rawlen' instead. Metatable support.
+      replace:
+      - '#%1'
+      - rawlen(%1)
     args:
     - type: table
     must_use: true
@@ -7108,6 +7117,10 @@ globals:
     description: Converts either a strided list of key:value pairs to a JSON_OBJECT,
       or a list of values to a JSON_ARRAY.
   ll.List2Key:
+    deprecated:
+      message: Use '[]' and 'touuid' instead.
+      replace:
+      - touuid(%1[%2]) or NULL_KEY
     args:
     - type: table
     - type: number
@@ -7152,6 +7165,10 @@ globals:
     description: Copies the strided slice of the list from Start to End.\nReturns
       a copy of the strided slice of the specified list from Start to End.
   ll.List2Rot:
+    deprecated:
+      message: Use '[]' instead.
+      replace:
+      - '%1[%2]'
     args:
     - type: table
     - type: number
@@ -7160,6 +7177,10 @@ globals:
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to rotation, thenZERO_ROTATION is returned.
   ll.List2String:
+    deprecated:
+      message: Use '[]' and 'tostring' instead.
+      replace:
+      - tostring(%1[%2])
     args:
     - type: table
     - type: number
@@ -7168,6 +7189,10 @@ globals:
       in the specified list as a string. If Index describes a location not in the
       list then null string is returned.
   ll.List2Vector:
+    deprecated:
+      message: Use '[]' instead.
+      replace:
+      - '%1[%2]'
     args:
     - type: table
     - type: number
