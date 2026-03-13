@@ -7959,6 +7959,10 @@ globals:
     description: Returns the Euler representation (roll, pitch, yaw) of Rotation.\nReturns
       the Euler Angle representation of the Rotation.
   ll.Rot2Fwd:
+    deprecated:
+      message: Use 'quaternion.tofwd' instead.
+      replace:
+      - quaternion.tofwd(%1)
     args:
     - type:
         display: quaternion
@@ -7966,6 +7970,10 @@ globals:
     description: Returns the forward vector defined by Rotation.\nReturns the forward
       axis represented by the Rotation.
   ll.Rot2Left:
+    deprecated:
+      message: Use 'quaternion.toleft' instead.
+      replace:
+      - quaternion.toleft(%1)
     args:
     - type:
         display: quaternion
@@ -7973,6 +7981,10 @@ globals:
     description: Returns the left vector defined by Rotation.\nReturns the left axis
       represented by the Rotation.
   ll.Rot2Up:
+    deprecated:
+      message: Use 'quaternion.toup' instead.
+      replace:
+      - quaternion.toup(%1)
     args:
     - type:
         display: quaternion
@@ -8902,6 +8914,10 @@ globals:
       \ the OriginalValue passed or XP_ERROR_RETRY_UPDATE will be returned. If Checked\
       \ is 0 the key will be created if necessary.\n                "
   ll.VecDist:
+    deprecated:
+      message: Use 'vector.magnitude' instead. It's a fastcall.
+      replace:
+      - vector.magnitude(%1 - %2)
     args:
     - type:
         display: vector
@@ -8910,12 +8926,20 @@ globals:
     must_use: true
     description: Returns the distance between Location1 and Location2.
   ll.VecMag:
+    deprecated:
+      message: Use 'vector.magnitude' instead. It's a fastcall.
+      replace:
+      - vector.magnitude(%1)
     args:
     - type:
         display: vector
     must_use: true
     description: Returns the magnitude of the vector.
   ll.VecNorm:
+    deprecated:
+      message: Use 'vector.normalize' instead. It's a fastcall.
+      replace:
+      - vector.normalize(%1)
     args:
     - type:
         display: vector
