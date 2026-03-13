@@ -4870,6 +4870,10 @@ globals:
     must_use: true
     description: 'Returns the number of bytes in the string. Identical to #s'
   string.lower:
+    deprecated:
+      message: Use 'll.ToLower' instead. Unicode handling.
+      replace:
+      - ll.ToLower(%1)
     args:
     - type: string
     must_use: true
@@ -4928,6 +4932,10 @@ globals:
     must_use: true
     description: Decodes a binary string using a pack format.
   string.upper:
+    deprecated:
+      message: Use 'll.ToUpper' instead. Unicode handling.
+      replace:
+      - ll.ToUpper(%1)
     args:
     - type: string
     must_use: true
