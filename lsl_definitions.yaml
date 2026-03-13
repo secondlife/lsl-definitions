@@ -5278,6 +5278,9 @@ functions:
     - value:
         tooltip: Unicode value to convert into a string.
         type: integer
+    slua-deprecated:
+      reason: "Use 'utf8.char' or 'string.char' instead."
+      selene-replace: ["utf8.char(%1)", "string.char(%1)"]
     energy: 10.0
     func-id: 526
     pure: true
@@ -7706,6 +7709,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: string.sub
+      selene-replace: ['%1:sub(%2, %3)']
     energy: 10.0
     func-id: 94
     pure: true
@@ -9611,6 +9617,9 @@ functions:
         tooltip: Index of character to convert to unicode.
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: "Use 'utf8.codepoint' or 'string.byte' instead."
+      selene-replace: ["utf8.codepoint(%...)", "string.byte(%...)"]
     energy: 10.0
     func-id: 527
     pure: true
@@ -12153,6 +12162,9 @@ functions:
     - Sequence:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: string.find
+      selene-replace: ['%1:find(%2)']
     energy: 10.0
     func-id: 181
     pure: true
@@ -12359,6 +12371,9 @@ functions:
     - Text:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: string.lower
+      selene-replace: ["%1:lower()"]
     energy: 10.0
     func-id: 98
     native: true
@@ -12371,6 +12386,9 @@ functions:
     - Text:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: string.upper
+      selene-replace: ["%1:upper()"]
     energy: 10.0
     func-id: 97
     native: true
