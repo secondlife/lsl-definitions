@@ -7271,6 +7271,8 @@ globals:
   ll.ListFindList:
     deprecated:
       message: Use 'table.find' instead. Prefer dictionaries or single-item searches.
+      replace:
+      - table.find(%1, %2[1])
     args:
     - type: table
     - type: table
@@ -7280,6 +7282,8 @@ globals:
   ll.ListFindListNext:
     deprecated:
       message: Use 'table.find' instead. Prefer dictionaries or single-item searches.
+      replace:
+      - table.find(%1, %2[1])
     args:
     - type: table
     - type: table
@@ -7289,7 +7293,7 @@ globals:
       nil if not found.
   ll.ListFindStrided:
     deprecated:
-      message: Prefer dictionaries over strided lists.
+      message: Prefer structured tables over strided lists.
     args:
     - type: table
     - type: table
