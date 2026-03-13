@@ -5216,7 +5216,7 @@ globals:
     description: Linearly interpolates between a and b using factor t.
   ll.Abs:
     deprecated:
-      message: Use 'math.abs' instead. It's a Fastcall.
+      message: Use 'math.abs' instead. It's a fastcall.
       replace:
       - math.abs(%...)
     args:
@@ -5225,7 +5225,7 @@ globals:
     description: Returns the absolute (positive) version of Value.
   ll.Acos:
     deprecated:
-      message: Use 'math.acos' instead. It's a Fastcall.
+      message: Use 'math.acos' instead. It's a fastcall.
       replace:
       - math.acos(%...)
     args:
@@ -5300,7 +5300,7 @@ globals:
       function only works on physical objects.
   ll.Asin:
     deprecated:
-      message: Use 'math.asin' instead. It's a Fastcall.
+      message: Use 'math.asin' instead. It's a fastcall.
       replace:
       - math.asin(%...)
     args:
@@ -5309,7 +5309,7 @@ globals:
     description: Returns the arc-sine, in radians, of Value.
   ll.Atan2:
     deprecated:
-      message: Use 'math.atan2' instead. It's a Fastcall.
+      message: Use 'math.atan2' instead. It's a fastcall.
       replace:
       - math.atan2(%...)
     args:
@@ -5402,7 +5402,7 @@ globals:
       where {} indicates optional data.'
   ll.Ceil:
     deprecated:
-      message: Use 'math.ceil' instead. It's a Fastcall.
+      message: Use 'math.ceil' instead. It's a fastcall.
       replace:
       - math.ceil(%...)
     args:
@@ -5479,7 +5479,7 @@ globals:
     description: Returns hex-encoded Hash string of Message using digest Algorithm.
   ll.Cos:
     deprecated:
-      message: Use 'math.cos' instead. It's a Fastcall.
+      message: Use 'math.cos' instead. It's a fastcall.
       replace:
       - math.cos(%...)
     args:
@@ -5825,7 +5825,7 @@ globals:
       to jump.
   ll.Fabs:
     deprecated:
-      message: Use 'math.abs' instead. It's a Fastcall.
+      message: Use 'math.abs' instead. It's a fastcall.
       replace:
       - math.abs(%...)
     args:
@@ -5865,7 +5865,7 @@ globals:
       away from a defined position in the region or adjacent regions.
   ll.Floor:
     deprecated:
-      message: Use 'math.floor' instead. It's a Fastcall.
+      message: Use 'math.floor' instead. It's a fastcall.
       replace:
       - math.floor(%...)
     args:
@@ -7334,7 +7334,7 @@ globals:
       \ web browser."
   ll.Log:
     deprecated:
-      message: Use 'math.log' instead. It's a Fastcall.
+      message: Use 'math.log' instead. It's a fastcall.
       replace:
       - math.log(%...)
     args:
@@ -7344,7 +7344,7 @@ globals:
       0.\nReturns the base e (natural) logarithm of the specified Value.
   ll.Log10:
     deprecated:
-      message: Use 'math.log10' instead. It's a Fastcall.
+      message: Use 'math.log10' instead. It's a fastcall.
       replace:
       - math.log10(%...)
     args:
@@ -7670,7 +7670,7 @@ globals:
       is called at least once per loop of the Master.
   ll.Pow:
     deprecated:
-      message: Use '^' instead. It's a Fastcall.
+      message: Use '^' instead. It's a fastcall.
       replace:
       - '%1 ^ %2'
       - math.pow(%...)
@@ -8069,7 +8069,7 @@ globals:
       Face is ALL_SIDES, rotates the texture of all sides.
   ll.Round:
     deprecated:
-      message: Use 'math.round' instead. It's a Fastcall.
+      message: Use 'math.round' instead. It's a fastcall.
       replace:
       - math.round(%...)
     args:
@@ -8661,7 +8661,7 @@ globals:
       PrivateKey and digest Algorithm (sha1, sha224, sha256, sha384, sha512).
   ll.Sin:
     deprecated:
-      message: Use 'math.sin' instead. It's a Fastcall.
+      message: Use 'math.sin' instead. It's a fastcall.
       replace:
       - math.sin(%...)
     args:
@@ -8711,7 +8711,7 @@ globals:
       within range.'
   ll.Sqrt:
     deprecated:
-      message: Use 'math.sqrt' instead. It's a Fastcall.
+      message: Use 'math.sqrt' instead. It's a fastcall.
       replace:
       - math.sqrt(%...)
     args:
@@ -8803,7 +8803,7 @@ globals:
       runtime permission (automatically granted to attached or sat on objects).
   ll.Tan:
     deprecated:
-      message: Use 'math.tan' instead. It's a Fastcall.
+      message: Use 'math.tan' instead. It's a fastcall.
       replace:
       - math.tan(%...)
     args:

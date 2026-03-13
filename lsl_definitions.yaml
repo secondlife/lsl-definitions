@@ -4882,7 +4882,7 @@ functions:
         type: integer
     slua-deprecated:
       use: math.abs
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.abs(%...)"]
     energy: 10.0
     func-id: 6
@@ -4898,7 +4898,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.acos
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.acos(%...)"]
     energy: 10.0
     func-id: 172
@@ -5045,7 +5045,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.asin
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.asin(%...)"]
     energy: 10.0
     func-id: 173
@@ -5064,7 +5064,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.atan2
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.atan2(%...)"]
     energy: 10.0
     func-id: 3
@@ -5244,7 +5244,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.ceil
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.ceil(%...)"]
     energy: 10.0
     func-id: 10
@@ -5422,7 +5422,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.cos
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.cos(%...)"]
     energy: 10.0
     func-id: 1
@@ -6049,7 +6049,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.abs
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.abs(%...)"]
     energy: 10.0
     func-id: 7
@@ -6137,7 +6137,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.floor
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.floor(%...)"]
     energy: 10.0
     func-id: 9
@@ -9094,7 +9094,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.log
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.log(%...)"]
     energy: 10.0
     func-id: 265
@@ -9111,7 +9111,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.log10
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.log10(%...)"]
     energy: 10.0
     func-id: 264
@@ -9796,7 +9796,7 @@ functions:
         type: float
     slua-deprecated:
       use: "^"
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["%1 ^ %2", "math.pow(%...)", "math.exp(%2)"]
     energy: 10.0
     func-id: 5
@@ -10578,7 +10578,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.round
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.round(%...)"]
     energy: 10.0
     func-id: 11
@@ -11855,7 +11855,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.sin
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.sin(%...)"]
     energy: 10.0
     func-id: 0
@@ -11951,7 +11951,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.sqrt
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.sqrt(%...)"]
     energy: 10.0
     func-id: 4
@@ -12152,7 +12152,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.tan
-      reason: It's a Fastcall.
+      reason: It's a fastcall.
       selene-replace: ["math.tan(%...)"]
     energy: 10.0
     func-id: 2
