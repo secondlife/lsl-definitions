@@ -10419,6 +10419,10 @@ functions:
     - Rotation:
         tooltip: ''
         type: rotation
+    slua-deprecated:
+      use: quaternion.tofwd
+      reason: Fastcall.
+      selene-replace: ["quaternion.tofwd(%1)"]
     energy: 10.0
     func-id: 18
     pure: true
@@ -10431,6 +10435,10 @@ functions:
     - Rotation:
         tooltip: ''
         type: rotation
+    slua-deprecated:
+      use: quaternion.toleft
+      reason: Fastcall.
+      selene-replace: ["quaternion.toleft(%1)"]
     energy: 10.0
     func-id: 19
     pure: true
@@ -10443,6 +10451,10 @@ functions:
     - Rotation:
         tooltip: ''
         type: rotation
+    slua-deprecated:
+      use: quaternion.toup
+      reason: Fastcall.
+      selene-replace: ["quaternion.toup(%1)"]
     energy: 10.0
     func-id: 20
     pure: true
@@ -12418,6 +12430,10 @@ functions:
     - Location2:
         tooltip: ''
         type: vector
+    slua-deprecated:
+      use: vector.magnitude
+      reason: Fastcall.
+      selene-replace: ["vector.magnitude(%1 - %2)"]
     energy: 10.0
     func-id: 14
     pure: true
@@ -12429,6 +12445,10 @@ functions:
     - Vector:
         tooltip: ''
         type: vector
+    slua-deprecated:
+      use: vector.magnitude
+      reason: Fastcall.
+      selene-replace: ["vector.magnitude(%1)"]
     energy: 10.0
     func-id: 12
     pure: true
@@ -12440,6 +12460,10 @@ functions:
     - Vector:
         tooltip: ''
         type: vector
+    slua-deprecated:
+      use: vector.normalize
+      reason: Fastcall.
+      selene-replace: ["vector.normalize(%1)"]
     energy: 10.0
     func-id: 13
     pure: true
