@@ -7217,7 +7217,7 @@ globals:
       nil if not found.
   ll.ListFindStrided:
     deprecated:
-      message: Prefer structured tables over strided lists.
+      message: Prefer dictionary lookups over strided list searches.
     args:
     - type: table
     - type: table

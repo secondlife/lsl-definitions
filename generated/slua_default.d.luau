@@ -739,7 +739,7 @@ declare ll: {
   List2Vector: (ListVariable: list, Index: number) -> vector,
   ListFindList: @[deprecated {use='table.find', reason='Prefer dictionaries or single-item searches.'}](ListVariable: list, Find: list) -> number?,
   ListFindListNext: @[deprecated {use='table.find', reason='Prefer dictionaries or single-item searches.'}](ListVariable: list, Find: list, Instance: number) -> number?,
-  ListFindStrided: @[deprecated {reason='Prefer structured tables over strided lists.'}](ListVariable: list, Find: list, Start: number, End: number, Stride: number) -> number?,
+  ListFindStrided: @[deprecated {reason='Prefer dictionary lookups over strided list searches.'}](ListVariable: list, Find: list, Start: number, End: number, Stride: number) -> number?,
   ListInsertList: @[deprecated {use='table.insert', reason='Prefer structured tables over strided lists.'}]<T>(Target: {T}, ListVariable: {T}, Position: number) -> {T},
   ListRandomize: <T>(ListVariable: {T}, Stride: number) -> {T},
   ListReplaceList: @[deprecated {use='t[n] = x', reason='Prefer structured tables over strided lists.'}]<T>(Target: {T}, ListVariable: {T}, Start: number, End: number) -> {T},
