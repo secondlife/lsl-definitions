@@ -6221,6 +6221,10 @@ globals:
     must_use: true
     description: Returns the sit flags set on the specified prim in a linkset.
   ll.GetListEntryType:
+    deprecated:
+      message: Use 'typeof' instead.
+      replace:
+      - typeof(%1[%2])
     args:
     - type: table
     - type: number
