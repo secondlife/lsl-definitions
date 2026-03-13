@@ -8928,7 +8928,7 @@ functions:
         tooltip: ''
         type: integer
     slua-deprecated:
-      reason: Prefer structured tables over strided lists.
+      reason: Prefer dictionary lookups over strided list searches.
     energy: 10.0
     func-id: 800
     must-use: true
