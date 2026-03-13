@@ -5737,6 +5737,11 @@ globals:
     args: []
     description: Delete the object which holds the script.
   ll.DumpList2String:
+    deprecated:
+      message: Use 'table.concat' or 'lljson.encode' instead.
+      replace:
+      - table.concat(%...)
+      - lljson.encode(%1)
     args:
     - type: table
     - type: string
@@ -7116,6 +7121,10 @@ globals:
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to a key, then null string is returned.
   ll.List2List:
+    deprecated:
+      message: Use 'unpack' instead. Prefer structured tables over strided lists.
+      replace:
+      - table.pack(unpack(%...))
     args:
     - type: table
     - type: number
@@ -7127,6 +7136,8 @@ globals:
       so 0, -1 would capture the entire string.\nIf Start is greater than End, the
       sub string is the exclusion of the entries.
   ll.List2ListSlice:
+    deprecated:
+      message: Prefer structured tables over strided lists.
     args:
     - type: table
     - type: number
@@ -7143,6 +7154,8 @@ globals:
       falls outside range of stride, an empty list is returned. slice_index is zero-based.
       (e.g. A stride of 2 has valid indices 0,1)
   ll.List2ListStrided:
+    deprecated:
+      message: Prefer structured tables over strided lists.
     args:
     - type: table
     - type: number
@@ -7176,6 +7189,8 @@ globals:
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to a vector, then ZERO_VECTOR is returned.
   ll.ListFindList:
+    deprecated:
+      message: Use 'table.find' instead. Prefer dictionaries or single-item searches.
     args:
     - type: table
     - type: table
@@ -7183,6 +7198,8 @@ globals:
     description: Returns the first index where Find appears in ListVariable. Returns
       nil if not found.
   ll.ListFindListNext:
+    deprecated:
+      message: Use 'table.find' instead. Prefer dictionaries or single-item searches.
     args:
     - type: table
     - type: table
@@ -7191,6 +7208,8 @@ globals:
     description: Returns the nth index where Find appears in ListVariable. Returns
       nil if not found.
   ll.ListFindStrided:
+    deprecated:
+      message: Prefer dictionaries over strided lists.
     args:
     - type: table
     - type: table
@@ -7202,6 +7221,11 @@ globals:
       appears in ListVariable. Steps through ListVariable by Stride.  Returns nil
       if not found.
   ll.ListInsertList:
+    deprecated:
+      message: Use 'table.insert' instead. Prefer structured tables over strided lists.
+      replace:
+      - table.insert(%1, %3, %2[1])
+      - 'table.move(%2, 1, #%2, %3, %1)'
     args:
     - type: table
     - type: table
@@ -7220,6 +7244,10 @@ globals:
       by blocks of size Stride.\nIf the remainder from the length of the list, divided
       by the stride is non-zero, this function does not randomize the list.
   ll.ListReplaceList:
+    deprecated:
+      message: Use 't[n] = x' instead. Prefer structured tables over strided lists.
+      replace:
+      - '%1[%3] = %2[1]'
     args:
     - type: table
     - type: table
@@ -7241,6 +7269,8 @@ globals:
       order (if Ascending is TRUE, otherwise descending). Note that sort only works
       if the first entry of each block is the same datatype.
   ll.ListSortStrided:
+    deprecated:
+      message: Use 'table.sort' instead. Prefer structured tables over strided lists.
     args:
     - type: table
     - type: number
