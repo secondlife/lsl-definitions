@@ -8795,6 +8795,7 @@ functions:
     slua-deprecated:
       use: table.find
       reason: Prefer dictionaries or single-item searches.
+      selene-replace: ["table.find(%1, %2[1])"]
     energy: 10.0
     func-id: 201
     must-use: true
@@ -8818,6 +8819,7 @@ functions:
     slua-deprecated:
       use: table.find
       reason: Prefer dictionaries or single-item searches.
+      selene-replace: ["table.find(%1, %2[1])"]
     energy: 10.0
     func-id: 803
     must-use: true
@@ -8846,7 +8848,7 @@ functions:
         tooltip: ''
         type: integer
     slua-deprecated:
-      reason: Prefer dictionaries over strided lists.
+      reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 800
     must-use: true
