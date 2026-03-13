@@ -7960,7 +7960,7 @@ globals:
       the Euler Angle representation of the Rotation.
   ll.Rot2Fwd:
     deprecated:
-      message: Use 'quaternion.tofwd' instead. It's a fastcall.
+      message: Use 'quaternion.tofwd' instead.
       replace:
       - quaternion.tofwd(%1)
     args:
@@ -7971,7 +7971,7 @@ globals:
       axis represented by the Rotation.
   ll.Rot2Left:
     deprecated:
-      message: Use 'quaternion.toleft' instead. It's a fastcall.
+      message: Use 'quaternion.toleft' instead.
       replace:
       - quaternion.toleft(%1)
     args:
@@ -7982,7 +7982,7 @@ globals:
       represented by the Rotation.
   ll.Rot2Up:
     deprecated:
-      message: Use 'quaternion.toup' instead. It's a fastcall.
+      message: Use 'quaternion.toup' instead.
       replace:
       - quaternion.toup(%1)
     args:

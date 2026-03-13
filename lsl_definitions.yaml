@@ -10421,7 +10421,6 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.tofwd
-      reason: It's a fastcall.
       selene-replace: ["quaternion.tofwd(%1)"]
     energy: 10.0
     func-id: 18
@@ -10437,7 +10436,6 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.toleft
-      reason: It's a fastcall.
       selene-replace: ["quaternion.toleft(%1)"]
     energy: 10.0
     func-id: 19
@@ -10453,7 +10451,6 @@ functions:
         type: rotation
     slua-deprecated:
       use: quaternion.toup
-      reason: It's a fastcall.
       selene-replace: ["quaternion.toup(%1)"]
     energy: 10.0
     func-id: 20
