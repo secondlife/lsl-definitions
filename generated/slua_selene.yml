@@ -5344,6 +5344,10 @@ globals:
     must_use: true
     description: Returns the rotation that is a generated Angle about Axis.
   ll.Base64ToInteger:
+    deprecated:
+      message: Use 'llbase64.decode' and 'string.unpack' or 'buffer.readi32' instead.
+      replace:
+      - string.unpack(">i", llbase64.decode(s))
     args:
     - type: string
     must_use: true
@@ -5351,6 +5355,10 @@ globals:
       integer.\nReturns zero if Text is longer then 8 characters. If Text contains
       fewer then 6 characters, the return value is unpredictable.
   ll.Base64ToString:
+    deprecated:
+      message: Use 'llbase64.decode' instead.
+      replace:
+      - llbase64.decode(%1)
     args:
     - type: string
     must_use: true
@@ -5390,6 +5398,11 @@ globals:
     must_use: true
     description: Returns smallest integer value >= Value.
   ll.Char:
+    deprecated:
+      message: Use 'utf8.char' or 'string.char' instead.
+      replace:
+      - utf8.char(%1)
+      - string.char(%1)
     args:
     - type: number
     must_use: true
@@ -6633,6 +6646,10 @@ globals:
     description: Returns boolean value of the specified status (e.g. STATUS_PHANTOM)
       of the object the script is attached to.
   ll.GetSubString:
+    deprecated:
+      message: Use 'string.sub' instead.
+      replace:
+      - '%1:sub(%2, %3)'
     args:
     - type: string
     - type: number
@@ -7522,6 +7539,11 @@ globals:
     args: []
     description: This function is deprecated.
   ll.Ord:
+    deprecated:
+      message: Use 'utf8.codepoint' or 'string.byte' instead.
+      replace:
+      - utf8.codepoint(%...)
+      - string.byte(%...)
     args:
     - type: string
     - type: number
@@ -8697,12 +8719,22 @@ globals:
     args: []
     description: Stops playback of the currently attached sound.
   ll.StringLength:
+    deprecated:
+      message: Use 'utf8.len' or '#' or 'string.len' instead.
+      replace:
+      - utf8.len(%1)
+      - '#%1'
+      - string.len(%1)
     args:
     - type: string
     must_use: true
     description: Returns an integer that is the number of characters in Text (not
       counting the null).
   ll.StringToBase64:
+    deprecated:
+      message: Use 'llbase64.encode' instead.
+      replace:
+      - llbase64.encode(%1)
     args:
     - type: string
     must_use: true
@@ -8717,6 +8749,10 @@ globals:
       trim all leading spaces in Text\nSTRING_TRIM_TAIL: trim all trailing spaces
       in Text\nSTRING_TRIM: trim all leading and trailing spaces in Text.'
   ll.SubStringIndex:
+    deprecated:
+      message: Use 'string.find' instead.
+      replace:
+      - '%1:find(%2)'
     args:
     - type: string
     - type: string
@@ -8816,11 +8852,19 @@ globals:
       contains a text box for input. Any text that is entered is said on the specified
       Channel (as if by the avatar) when the "OK" button is clicked.
   ll.ToLower:
+    deprecated:
+      message: Use 'string.lower' instead.
+      replace:
+      - '%1:lower()'
     args:
     - type: string
     must_use: true
     description: Returns a string that is Text with all lower-case characters.
   ll.ToUpper:
+    deprecated:
+      message: Use 'string.upper' instead.
+      replace:
+      - '%1:upper()'
     args:
     - type: string
     must_use: true
