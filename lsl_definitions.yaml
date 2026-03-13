@@ -5532,9 +5532,9 @@ functions:
         type: integer
         index-semantics: true
     slua-deprecated:
-      use: table.delete
+      use: table.remove
       reason: Prefer structured tables over strided lists.
-      selene-replace: ["table.delete(%1, %2)"]
+      selene-replace: ["table.remove(%1, %2)"]
     energy: 10.0
     func-id: 193
     native: true
@@ -8653,9 +8653,8 @@ functions:
         type: integer
         index-semantics: true
     slua-deprecated:
-      use: unpack
-      reason: Prefer structured tables over strided lists.
-      selene-replace: ["table.pack(unpack(%...))"]
+      reason: Use 'unpack' or 'table.move' instead. Prefer structured tables over strided lists.
+      selene-replace: ["table.pack(unpack(%...))", "table.move(%..., 1, {})"]
     energy: 10.0
     func-id: 192
     native: true
