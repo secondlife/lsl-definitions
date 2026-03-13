@@ -5531,6 +5531,10 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: table.remove
+      reason: Prefer structured tables over strided lists.
+      selene-replace: ["table.remove(%1, %2)"]
     energy: 10.0
     func-id: 193
     native: true
@@ -5906,6 +5910,9 @@ functions:
     - Separator:
         tooltip: ''
         type: string
+    slua-deprecated:
+      reason: Use 'table.concat' or 'lljson.encode' instead.
+      selene-replace: ["table.concat(%...)", "lljson.encode(%1)"]
     energy: 10.0
     func-id: 245
     native: true
@@ -8645,6 +8652,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use 'unpack' or 'table.move' instead. Prefer structured tables over strided lists.
+      selene-replace: ["table.pack(unpack(%...))", "table.move(%..., 1, {})"]
     energy: 10.0
     func-id: 192
     native: true
@@ -8679,6 +8689,8 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 801
     must-use: true
@@ -8711,6 +8723,8 @@ functions:
     - Stride:
         tooltip: ''
         type: integer
+    slua-deprecated:
+      reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 198
     must-use: true
@@ -8781,6 +8795,10 @@ functions:
     - Find:
         tooltip: ''
         type: list
+    slua-deprecated:
+      use: table.find
+      reason: Prefer dictionaries or single-item searches.
+      selene-replace: ["table.find(%1, %2[1])"]
     energy: 10.0
     func-id: 201
     must-use: true
@@ -8801,6 +8819,10 @@ functions:
         tooltip: Index of the match to return.
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: table.find
+      reason: Prefer dictionaries or single-item searches.
+      selene-replace: ["table.find(%1, %2[1])"]
     energy: 10.0
     func-id: 803
     must-use: true
@@ -8828,6 +8850,8 @@ functions:
     - Stride:
         tooltip: ''
         type: integer
+    slua-deprecated:
+      reason: Prefer dictionary lookups over strided list searches.
     energy: 10.0
     func-id: 800
     must-use: true
@@ -8851,6 +8875,12 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: table.insert
+      reason: Prefer structured tables over strided lists.
+      selene-replace:
+      - "table.insert(%1, %3, %2[1])"
+      - "table.move(%2, 1, #%2, %3, %1)"
     energy: 10.0
     func-id: 200
     native: true
@@ -8900,6 +8930,10 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: 't[n] = x'
+      reason: Prefer structured tables over strided lists.
+      selene-replace: ["%1[%3] = %2[1]"]
     energy: 10.0
     func-id: 296
     native: true
@@ -8955,6 +8989,9 @@ functions:
           order.
         type: integer
         bool-semantics: true
+    slua-deprecated:
+      use: table.sort
+      reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 802
     must-use: true
