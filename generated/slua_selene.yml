@@ -5562,9 +5562,9 @@ globals:
       \        "
   ll.DeleteSubList:
     deprecated:
-      message: Use 'table.delete' instead. Prefer structured tables over strided lists.
+      message: Use 'table.remove' instead. Prefer structured tables over strided lists.
       replace:
-      - table.delete(%1, %2)
+      - table.remove(%1, %2)
     args:
     - type: table
     - type: number
@@ -7194,9 +7194,11 @@ globals:
       value cannot be type-cast to a key, then null string is returned.
   ll.List2List:
     deprecated:
-      message: Use 'unpack' instead. Prefer structured tables over strided lists.
+      message: Use 'unpack' or 'table.move' instead. Prefer structured tables over
+        strided lists.
       replace:
       - table.pack(unpack(%...))
+      - table.move(%..., 1, {})
     args:
     - type: table
     - type: number
