@@ -6234,9 +6234,10 @@ globals:
       is off list).\nReturns the type of the variable at Index in ListVariable.
   ll.GetListLength:
     deprecated:
-      message: Use '#' instead. Metatable support.
+      message: Use '#' or 'rawlen' instead. Metatable support.
       replace:
       - '#%1'
+      - rawlen(%1)
     args:
     - type: table
     must_use: true

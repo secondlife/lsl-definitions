@@ -6900,9 +6900,8 @@ functions:
         tooltip: ''
         type: list
     slua-deprecated:
-      use: "#"
-      reason: Metatable support.
-      selene-replace: ["#%1"]
+      reason: "Use '#' or 'rawlen' instead. Metatable support."
+      selene-replace: ["#%1", "rawlen(%1)"]
     energy: 10.0
     func-id: 185
     native: true

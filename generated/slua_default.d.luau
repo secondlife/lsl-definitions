@@ -596,7 +596,7 @@ declare ll: {
   GetLinkPrimitiveParams: (LinkNumber: number, Parameters: {number}) -> {any},
   GetLinkSitFlags: (LinkNumber: number) -> number,
   GetListEntryType: @[deprecated {use='typeof'}](ListVariable: list, Index: number) -> number,
-  GetListLength: @[deprecated {use='#', reason='Metatable support.'}](ListVariable: list) -> number,
+  GetListLength: @[deprecated {reason="Use '#' or 'rawlen' instead. Metatable support."}](ListVariable: list) -> number,
   GetLocalPos: () -> vector,
   GetLocalRot: () -> quaternion,
   GetMass: () -> number,
