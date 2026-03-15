@@ -193,6 +193,16 @@ typeAliases:
       isdst: boolean?,
     }
   selene-type: {display: "OsDateTime"}
+- name: LLJsonEncodeOptions
+  comment: Configuration options for lljson encoding
+  export: true
+  definition: |-
+    {
+      tight: boolean?,
+      skip_tojson: boolean?,
+      replacer: ((key: string, value: any) -> any)?,
+    }
+  selene-type: {display: "LLJsonEncodeOptions"}
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -1088,6 +1098,8 @@ modules:
     parameters:
     - name: value
       type: any
+    - name: options
+      type: LLJsonEncodeOptions?
     returnType: string
     must-use: true
   - name: decode
@@ -1096,6 +1108,8 @@ modules:
     parameters:
     - name: json
       type: string
+    - name: reviver
+      type: "((value: any) -> any)?"
     returnType: any
     must-use: true
   - name: slencode
@@ -1104,8 +1118,8 @@ modules:
     parameters:
     - name: value
       type: any
-    - name: tight
-      type: boolean?
+    - name: options
+      type: LLJsonEncodeOptions?
     returnType: string
     must-use: true
   - name: sldecode
@@ -1114,6 +1128,8 @@ modules:
     parameters:
     - name: json
       type: string
+    - name: reviver
+      type: "((value: any) -> any)?"
     returnType: any
     must-use: true
   constants:

@@ -60,6 +60,11 @@ export type OsDateTime = {
   yday: number?,
   isdst: boolean?,
 }
+export type LLJsonEncodeOptions = {
+  tight: boolean?,
+  skip_tojson: boolean?,
+  replacer: ((key: string, value: any) -> any)?,
+}
 
 declare extern type DetectedEvent with
   index: number
@@ -261,10 +266,10 @@ declare lljson: {
   empty_array: any,
   _NAME: string,
   _VERSION: string,
-  encode: (value: any) -> string,
-  decode: (json: string) -> any,
-  slencode: (value: any, tight: boolean?) -> string,
-  sldecode: (json: string) -> any,
+  encode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  decode: (json: string, reviver: ((value: any) -> any)?) -> any,
+  slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  sldecode: (json: string, reviver: ((value: any) -> any)?) -> any,
 }
 
 
