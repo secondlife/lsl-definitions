@@ -63,6 +63,7 @@ export type OsDateTime = {
 export type LLJsonEncodeOptions = {
   tight: boolean?,
   skip_tojson: boolean?,
+  allow_sparse: boolean?,
   replacer: ((key: any, value: any, parent: {}?) -> any)?,
 }
 
