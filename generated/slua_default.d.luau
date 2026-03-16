@@ -63,7 +63,7 @@ export type OsDateTime = {
 export type LLJsonEncodeOptions = {
   tight: boolean?,
   skip_tojson: boolean?,
-  replacer: ((key: string, value: any) -> any)?,
+  replacer: ((key: string, value: any, parent: any) -> any)?,
 }
 
 declare extern type DetectedEvent with
