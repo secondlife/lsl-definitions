@@ -1134,22 +1134,25 @@ modules:
     must-use: true
   constants:
   - name: 'null'
-    comment: A constant to pass for null to json encode
+    comment: A constant to pass for null to json encode.
+    type: any
+  - name: remove
+    comment: A constant to return from a reviver/replacer replacer function to omit this item.
     type: any
   - name: array_mt
-    comment: Metatable for declaring table as an array for json encode
+    comment: Metatable for declaring table as an array for json encode.
     type: '{__jsontype: string}'
     value: '{__jsontype = "array"}'
   - name: object_mt
-    comment: Metatable for declaring table as an object for json encode
+    comment: Metatable for declaring table as an object for json encode.
     type: '{__jsontype: string}'
     value: '{__jsontype = "object"}'
   - name: empty_array
-    comment: A constant to pass for an empty array to json encode
+    comment: A constant to pass for an empty array to json encode.
     type: '{}'
     value: 'setmetatable({}, lljson.array_mt}'
   - name: empty_object
-    comment: A constant to pass for an empty object to json encode
+    comment: A constant to pass for an empty object to json encode.
     type: '{}'
     value: 'setmetatable({}, lljson.object_mt}'
 - name: math

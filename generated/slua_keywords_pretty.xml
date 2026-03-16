@@ -248,7 +248,7 @@ export type rotation = quaternion</string>
          <key>lljson.array_mt</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an array for json encode</string>
+            <string>Metatable for declaring table as an array for json encode.</string>
             <key>type</key>
             <string>{__jsontype: string}</string>
             <key>value</key>
@@ -257,7 +257,7 @@ export type rotation = quaternion</string>
          <key>lljson.empty_array</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to pass for an empty array to json encode</string>
+            <string>A constant to pass for an empty array to json encode.</string>
             <key>type</key>
             <string>{}</string>
             <key>value</key>
@@ -266,7 +266,7 @@ export type rotation = quaternion</string>
          <key>lljson.empty_object</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to pass for an empty object to json encode</string>
+            <string>A constant to pass for an empty object to json encode.</string>
             <key>type</key>
             <string>{}</string>
             <key>value</key>
@@ -275,18 +275,25 @@ export type rotation = quaternion</string>
          <key>lljson.null</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to pass for null to json encode</string>
+            <string>A constant to pass for null to json encode.</string>
             <key>type</key>
             <string>any</string>
          </map>
          <key>lljson.object_mt</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an object for json encode</string>
+            <string>Metatable for declaring table as an object for json encode.</string>
             <key>type</key>
             <string>{__jsontype: string}</string>
             <key>value</key>
             <string>{__jsontype = "object"}</string>
+         </map>
+         <key>lljson.remove</key>
+         <map>
+            <key>tooltip</key>
+            <string>A constant to return from a reviver/replacer replacer function to omit this item.</string>
+            <key>type</key>
+            <string>any</string>
          </map>
          <key>math.huge</key>
          <map>

@@ -4339,23 +4339,27 @@ globals:
       The output is truncated at the first decoding error.
   lljson.null:
     property: read-only
-    description: A constant to pass for null to json encode
+    description: A constant to pass for null to json encode.
+  lljson.remove:
+    property: read-only
+    description: A constant to return from a reviver/replacer replacer function to
+      omit this item.
   lljson.array_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an array for json encode
+    description: Metatable for declaring table as an array for json encode.
   lljson.object_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an object for json encode
+    description: Metatable for declaring table as an object for json encode.
   lljson.empty_array:
     property: read-only
     type: table
-    description: A constant to pass for an empty array to json encode
+    description: A constant to pass for an empty array to json encode.
   lljson.empty_object:
     property: read-only
     type: table
-    description: A constant to pass for an empty object to json encode
+    description: A constant to pass for an empty object to json encode.
   lljson.encode:
     args:
     - type: any
