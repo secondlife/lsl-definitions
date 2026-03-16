@@ -200,7 +200,7 @@ typeAliases:
     {
       tight: boolean?,
       skip_tojson: boolean?,
-      replacer: ((key: string, value: any, parent: {}?) -> any)?,
+      replacer: ((key: any, value: any, parent: {}?) -> any)?,
     }
   selene-type: {display: "LLJsonEncodeOptions"}
 classes:
@@ -1109,7 +1109,7 @@ modules:
     - name: json
       type: string
     - name: reviver
-      type: "((key: any, value: any, parent: {}?) -> any)?"
+      type: "((key: string | number, value: any, parent: {}?) -> any)?"
     returnType: any
     must-use: true
   - name: slencode

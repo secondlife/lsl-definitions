@@ -4372,7 +4372,7 @@ globals:
   lljson.decode:
     args:
     - type: string
-    - type: function
+    - type: any
       required: false
     must_use: true
     description: Decodes a JSON string to a Lua value. Raises an error if JSON is
