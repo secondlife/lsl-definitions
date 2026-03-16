@@ -261,11 +261,10 @@ declare llbase64: {
 
 declare lljson: {
   null: any,
-  empty_array_mt: { [any]: any },
-  array_mt: { [any]: any },
-  empty_array: any,
-  _NAME: string,
-  _VERSION: string,
+  array_mt: {__jsontype: string},
+  object_mt: {__jsontype: string},
+  empty_array: {},
+  empty_object: {},
   encode: (value: any, options: LLJsonEncodeOptions?) -> string,
   decode: (json: string, reviver: ((value: any) -> any)?) -> any,
   slencode: (value: any, options: LLJsonEncodeOptions?) -> string,

@@ -4340,25 +4340,22 @@ globals:
   lljson.null:
     property: read-only
     description: A constant to pass for null to json encode
-  lljson.empty_array_mt:
-    property: read-only
-    type: table
-    description: Metatable for declaring table as an empty array for json encode
   lljson.array_mt:
     property: read-only
     type: table
     description: Metatable for declaring table as an array for json encode
+  lljson.object_mt:
+    property: read-only
+    type: table
+    description: Metatable for declaring table as an object for json encode
   lljson.empty_array:
     property: read-only
+    type: table
     description: A constant to pass for an empty array to json encode
-  lljson._NAME:
+  lljson.empty_object:
     property: read-only
-    type: string
-    description: Name of the lljson library
-  lljson._VERSION:
-    property: read-only
-    type: string
-    description: Version of the lljson library
+    type: table
+    description: A constant to pass for an empty object to json encode
   lljson.encode:
     args:
     - type: any

@@ -1136,25 +1136,22 @@ modules:
   - name: 'null'
     comment: A constant to pass for null to json encode
     type: any
-  - name: empty_array_mt
-    comment: Metatable for declaring table as an empty array for json encode
-    type: '{ [any]: any }'
-    value: '{}'
   - name: array_mt
     comment: Metatable for declaring table as an array for json encode
-    type: '{ [any]: any }'
-    value: '{}'
+    type: '{__jsontype: string}'
+    value: '{__jsontype = "array"}'
+  - name: object_mt
+    comment: Metatable for declaring table as an object for json encode
+    type: '{__jsontype: string}'
+    value: '{__jsontype = "object"}'
   - name: empty_array
     comment: A constant to pass for an empty array to json encode
-    type: any
-  - name: _NAME
-    comment: Name of the lljson library
-    type: string
-    value: '"lljson"'
-  - name: _VERSION
-    comment: Version of the lljson library
-    type: string
-    value: '"2.1.0.11"'
+    type: '{}'
+    value: 'setmetatable({}, lljson.array_mt}'
+  - name: empty_object
+    comment: A constant to pass for an empty object to json encode
+    type: '{}'
+    value: 'setmetatable({}, lljson.object_mt}'
 - name: math
   comment: Mathematical functions library.
   functions:

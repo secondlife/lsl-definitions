@@ -245,48 +245,32 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>false</string>
          </map>
-         <key>lljson._NAME</key>
-         <map>
-            <key>tooltip</key>
-            <string>Name of the lljson library</string>
-            <key>type</key>
-            <string>string</string>
-            <key>value</key>
-            <string>"lljson"</string>
-         </map>
-         <key>lljson._VERSION</key>
-         <map>
-            <key>tooltip</key>
-            <string>Version of the lljson library</string>
-            <key>type</key>
-            <string>string</string>
-            <key>value</key>
-            <string>"2.1.0.11"</string>
-         </map>
          <key>lljson.array_mt</key>
          <map>
             <key>tooltip</key>
             <string>Metatable for declaring table as an array for json encode</string>
             <key>type</key>
-            <string>{ [any]: any }</string>
+            <string>{__jsontype: string}</string>
             <key>value</key>
-            <string>{}</string>
+            <string>{__jsontype = "array"}</string>
          </map>
          <key>lljson.empty_array</key>
          <map>
             <key>tooltip</key>
             <string>A constant to pass for an empty array to json encode</string>
             <key>type</key>
-            <string>any</string>
+            <string>{}</string>
+            <key>value</key>
+            <string>setmetatable({}, lljson.array_mt}</string>
          </map>
-         <key>lljson.empty_array_mt</key>
+         <key>lljson.empty_object</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an empty array for json encode</string>
+            <string>A constant to pass for an empty object to json encode</string>
             <key>type</key>
-            <string>{ [any]: any }</string>
-            <key>value</key>
             <string>{}</string>
+            <key>value</key>
+            <string>setmetatable({}, lljson.object_mt}</string>
          </map>
          <key>lljson.null</key>
          <map>
@@ -294,6 +278,15 @@ export type rotation = quaternion</string>
             <string>A constant to pass for null to json encode</string>
             <key>type</key>
             <string>any</string>
+         </map>
+         <key>lljson.object_mt</key>
+         <map>
+            <key>tooltip</key>
+            <string>Metatable for declaring table as an object for json encode</string>
+            <key>type</key>
+            <string>{__jsontype: string}</string>
+            <key>value</key>
+            <string>{__jsontype = "object"}</string>
          </map>
          <key>math.huge</key>
          <map>
