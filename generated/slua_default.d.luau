@@ -63,7 +63,7 @@ export type OsDateTime = {
 export type LLJsonEncodeOptions = {
   tight: boolean?,
   skip_tojson: boolean?,
-  replacer: ((key: string, value: any, parent: any) -> any)?,
+  replacer: ((key: string, value: any, parent: {}?) -> any)?,
 }
 
 declare extern type DetectedEvent with
@@ -267,9 +267,9 @@ declare lljson: {
   empty_array: {},
   empty_object: {},
   encode: (value: any, options: LLJsonEncodeOptions?) -> string,
-  decode: (json: string, reviver: ((value: any) -> any)?) -> any,
+  decode: (json: string, reviver: ((key: any, value: any, parent: {}?) -> any)?) -> any,
   slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
-  sldecode: (json: string, reviver: ((value: any) -> any)?) -> any,
+  sldecode: (json: string, reviver: ((key: any, value: any, parent: {}?) -> any)?) -> any,
 }
 
 
