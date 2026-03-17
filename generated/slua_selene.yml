@@ -7090,6 +7090,10 @@ globals:
     description: Creates a string of comma separated values from the list.\nCreate
       a string of comma separated values from the specified list.
   ll.List2Float:
+    deprecated:
+      message: Use '[]' and 'tonumber' instead.
+      replace:
+      - tonumber(%1[%2]) or 0
     args:
     - type: table
     - type: number
@@ -7098,6 +7102,10 @@ globals:
       in the specified list. If Index describes a location not in the list, or the
       value cannot be type-cast to a float, then zero is returned.
   ll.List2Integer:
+    deprecated:
+      message: Use '[]', 'tonumber', and 'math.modf' instead.
+      replace:
+      - math.modf(tonumber(%1[%2]) or 0)
     args:
     - type: table
     - type: number

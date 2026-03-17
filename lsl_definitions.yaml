@@ -8587,6 +8587,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'tonumber' instead.
+      selene-replace: ["tonumber(%1[%2]) or 0"]
     energy: 10.0
     func-id: 187
     native: true
@@ -8605,6 +8608,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]', 'tonumber', and 'math.modf' instead.
+      selene-replace: ["math.modf(tonumber(%1[%2]) or 0)"]
     energy: 10.0
     func-id: 186
     native: true
