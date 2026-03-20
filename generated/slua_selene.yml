@@ -4363,8 +4363,7 @@ globals:
   lljson.encode:
     args:
     - type: any
-    - type:
-        display: LLJsonEncodeOptions
+    - type: table
       required: false
     must_use: true
     description: Encodes a Lua value as JSON. Raises an error if value contains unsupported
@@ -4372,8 +4371,7 @@ globals:
   lljson.decode:
     args:
     - type: string
-    - type:
-        display: LLJsonDecodeOptions
+    - type: any
       required: false
     must_use: true
     description: Decodes a JSON string to a Lua value. Raises an error if JSON is
@@ -4381,8 +4379,7 @@ globals:
   lljson.slencode:
     args:
     - type: any
-    - type:
-        display: LLJsonEncodeOptions
+    - type: table
       required: false
     must_use: true
     description: Encodes a Lua value as JSON, preserving SL types. Use tight to encode
@@ -4390,8 +4387,7 @@ globals:
   lljson.sldecode:
     args:
     - type: string
-    - type:
-        display: LLJsonDecodeOptions
+    - type: any
       required: false
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises
