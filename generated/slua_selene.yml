@@ -4372,7 +4372,8 @@ globals:
   lljson.decode:
     args:
     - type: string
-    - type: any
+    - type:
+        display: LLJsonDecodeOptions
       required: false
     must_use: true
     description: Decodes a JSON string to a Lua value. Raises an error if JSON is
@@ -4389,7 +4390,8 @@ globals:
   lljson.sldecode:
     args:
     - type: string
-    - type: function
+    - type:
+        display: LLJsonDecodeOptions
       required: false
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises

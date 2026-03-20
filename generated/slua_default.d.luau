@@ -60,12 +60,22 @@ export type OsDateTime = {
   yday: number?,
   isdst: boolean?,
 }
-export type LLJsonEncodeOptions = {
+type LLJsonEncodeOptions = {
   tight: boolean?,
   skip_tojson: boolean?,
   allow_sparse: boolean?,
   replacer: ((key: any, value: any, parent: {}?) -> any)?,
 }
+type LLJsonDecodeReviverWithoutPath = (key: string | number, value: any, parent: {}?, ctx: {}) -> any
+type LLJsonDecodeOptionsWithoutPath = {
+  track_path: false?,
+  reviver: LLJsonDecodeReviverWithoutPath?,
+} | LLJsonDecodeReviverWithoutPath
+type LLJsonDecodeOptionsWithPath = {
+  track_path: true,
+  reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
+}
+type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
 
 declare extern type DetectedEvent with
   index: number
@@ -268,9 +278,9 @@ declare lljson: {
   empty_array: {},
   empty_object: {},
   encode: (value: any, options: LLJsonEncodeOptions?) -> string,
-  decode: (json: string, reviver: ((key: string | number, value: any, parent: {}?) -> any)?) -> any,
+  decode: (json: string, options: LLJsonDecodeOptions?) -> any,
   slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
-  sldecode: (json: string, reviver: ((key: any, value: any, parent: {}?) -> any)?) -> any,
+  sldecode: (json: string, options: LLJsonDecodeOptions?) -> any,
 }
 
 

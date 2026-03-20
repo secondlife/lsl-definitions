@@ -195,7 +195,6 @@ typeAliases:
   selene-type: {display: "OsDateTime"}
 - name: LLJsonEncodeOptions
   comment: Configuration options for lljson encoding
-  export: true
   definition: |-
     {
       tight: boolean?,
@@ -204,6 +203,27 @@ typeAliases:
       replacer: ((key: any, value: any, parent: {}?) -> any)?,
     }
   selene-type: {display: "LLJsonEncodeOptions"}
+- name: LLJsonDecodeReviverWithoutPath
+  definition: "(key: string | number, value: any, parent: {}?, ctx: {}) -> any"
+  selene-type: function
+- name: LLJsonDecodeOptionsWithoutPath
+  definition: |-
+    {
+      track_path: false?,
+      reviver: LLJsonDecodeReviverWithoutPath?,
+    } | LLJsonDecodeReviverWithoutPath
+  selene-type: {display: "LLJsonDecodeOptions"}
+- name: LLJsonDecodeOptionsWithPath
+  definition: |-
+    {
+      track_path: true,
+      reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
+    }
+  selene-type: {display: "LLJsonDecodeOptions"}
+- name: LLJsonDecodeOptions
+  comment: Configuration options for lljson decoding
+  definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
+  selene-type: {display: "LLJsonDecodeOptions"}
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -1109,8 +1129,8 @@ modules:
     parameters:
     - name: json
       type: string
-    - name: reviver
-      type: "((key: string | number, value: any, parent: {}?) -> any)?"
+    - name: options
+      type: LLJsonDecodeOptions?
     returnType: any
     must-use: true
   - name: slencode
@@ -1129,8 +1149,8 @@ modules:
     parameters:
     - name: json
       type: string
-    - name: reviver
-      type: "((key: any, value: any, parent: {}?) -> any)?"
+    - name: options
+      type: LLJsonDecodeOptions?
     returnType: any
     must-use: true
   constants:
