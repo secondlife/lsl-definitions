@@ -5883,7 +5883,7 @@ globals:
       it.
   ll.Frand:
     deprecated:
-      message: Use 'math.random' instead.
+      message: Use 'math.random' instead. Double precision; integers.
       replace:
       - math.random() * %1
     args:
