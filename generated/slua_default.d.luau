@@ -273,8 +273,13 @@ declare lljson: {
 ---------------------------
 
 declare math: {
-  pi: number,
+  e: number,
   huge: number,
+  nan: number,
+  phi: number,
+  pi: number,
+  sqrt2: number,
+  tau: number,
   abs: (n: number) -> number,
   acos: (n: number) -> number,
   asin: (n: number) -> number,
