@@ -240,9 +240,9 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Metatable for declaring table as an array for json encode.</string>
             <key>type</key>
-            <string>{__jsontype: string}</string>
+            <string>{__jsonhint: string}</string>
             <key>value</key>
-            <string>{__jsontype = "array"}</string>
+            <string>{__jsonhint = "array"}</string>
          </map>
          <key>lljson.empty_array</key>
          <map>
@@ -274,9 +274,9 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Metatable for declaring table as an object for json encode.</string>
             <key>type</key>
-            <string>{__jsontype: string}</string>
+            <string>{__jsonhint: string}</string>
             <key>value</key>
-            <string>{__jsontype = "object"}</string>
+            <string>{__jsonhint = "object"}</string>
          </map>
          <key>lljson.remove</key>
          <map>

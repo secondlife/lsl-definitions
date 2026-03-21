@@ -1162,12 +1162,12 @@ modules:
     type: any
   - name: array_mt
     comment: Metatable for declaring table as an array for json encode.
-    type: '{__jsontype: string}'
-    value: '{__jsontype = "array"}'
+    type: '{__jsonhint: string}'
+    value: '{__jsonhint = "array"}'
   - name: object_mt
     comment: Metatable for declaring table as an object for json encode.
-    type: '{__jsontype: string}'
-    value: '{__jsontype = "object"}'
+    type: '{__jsonhint: string}'
+    value: '{__jsonhint = "object"}'
   - name: empty_array
     comment: A constant to pass for an empty array to json encode.
     type: '{}'
