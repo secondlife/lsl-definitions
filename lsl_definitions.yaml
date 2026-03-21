@@ -4880,6 +4880,10 @@ functions:
     - Value:
         tooltip: An integer value.
         type: integer
+    slua-deprecated:
+      use: math.abs
+      reason: Double precision; fastcall.
+      selene-replace: ["math.abs(%...)"]
     energy: 10.0
     func-id: 6
     native: true
@@ -4892,6 +4896,10 @@ functions:
     - Value:
         tooltip: A floating-point value.
         type: float
+    slua-deprecated:
+      use: math.acos
+      reason: Double precision; fastcall.
+      selene-replace: ["math.acos(%...)"]
     energy: 10.0
     func-id: 172
     native: true
@@ -5035,6 +5043,10 @@ functions:
     - Value:
         tooltip: A floating-point value.
         type: float
+    slua-deprecated:
+      use: math.asin
+      reason: Double precision; fastcall.
+      selene-replace: ["math.asin(%...)"]
     energy: 10.0
     func-id: 173
     native: true
@@ -5050,6 +5062,10 @@ functions:
     - x:
         tooltip: A floating-point value.
         type: float
+    slua-deprecated:
+      use: math.atan2
+      reason: Double precision; fastcall.
+      selene-replace: ["math.atan2(%...)"]
     energy: 10.0
     func-id: 3
     native: true
@@ -5226,6 +5242,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.ceil
+      reason: Double precision; fastcall.
+      selene-replace: ["math.ceil(%...)"]
     energy: 10.0
     func-id: 10
     native: true
@@ -5400,6 +5420,10 @@ functions:
     - Theta:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.cos
+      reason: Double precision; fastcall.
+      selene-replace: ["math.cos(%...)"]
     energy: 10.0
     func-id: 1
     native: true
@@ -6023,6 +6047,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.abs
+      reason: Double precision; fastcall.
+      selene-replace: ["math.abs(%...)"]
     energy: 10.0
     func-id: 7
     native: true
@@ -6107,6 +6135,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.floor
+      reason: Double precision; fastcall.
+      selene-replace: ["math.floor(%...)"]
     energy: 10.0
     func-id: 9
     native: true
@@ -6137,6 +6169,10 @@ functions:
     - Magnitude:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.random
+      reason: Double precision; integers.
+      selene-replace: ["math.random() * %1"]
     energy: 10.0
     func-id: 8
     must-use: true
@@ -9057,6 +9093,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.log
+      reason: It's a fastcall.
+      selene-replace: ["math.log(%...)"]
     energy: 10.0
     func-id: 265
     native: true
@@ -9070,6 +9110,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.log10
+      reason: It's a fastcall.
+      selene-replace: ["math.log10(%...)"]
     energy: 10.0
     func-id: 264
     native: true
@@ -9751,6 +9795,10 @@ functions:
     - Exponent:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: "^"
+      reason: It's a fastcall.
+      selene-replace: ["%1 ^ %2", "math.pow(%...)", "math.exp(%2)"]
     energy: 10.0
     func-id: 5
     native: true
@@ -10529,6 +10577,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.round
+      reason: It's a fastcall.
+      selene-replace: ["math.round(%...)"]
     energy: 10.0
     func-id: 11
     must-use: true
@@ -11802,6 +11854,10 @@ functions:
     - Theta:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.sin
+      reason: It's a fastcall.
+      selene-replace: ["math.sin(%...)"]
     energy: 10.0
     func-id: 0
     native: true
@@ -11894,6 +11950,10 @@ functions:
     - Value:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.sqrt
+      reason: It's a fastcall.
+      selene-replace: ["math.sqrt(%...)"]
     energy: 10.0
     func-id: 4
     native: true
@@ -12091,6 +12151,10 @@ functions:
     - Theta:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.tan
+      reason: It's a fastcall.
+      selene-replace: ["math.tan(%...)"]
     energy: 10.0
     func-id: 2
     native: true
