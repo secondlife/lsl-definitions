@@ -4414,14 +4414,34 @@ globals:
       an error if JSON is invalid.
   llprim.ParamsSetter:
     property: read-only
-  math.pi:
+  math.e:
     property: read-only
     type: number
-    description: The value of pi
+    description: The base of the natural logarithm.
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity)
+    description: A value larger than any other numeric value (infinity).
+  math.nan:
+    property: read-only
+    type: number
+    description: A number representing an error (not a number).
+  math.phi:
+    property: read-only
+    type: number
+    description: The golden ratio.
+  math.pi:
+    property: read-only
+    type: number
+    description: The ratio of a circle's circumference to its diameter. math.tau/2.
+  math.sqrt2:
+    property: read-only
+    type: number
+    description: The square root of 2.
+  math.tau:
+    property: read-only
+    type: number
+    description: The ratio of a circle's circumference to its radius. math.pi*2.
   math.abs:
     args:
     - type: number
