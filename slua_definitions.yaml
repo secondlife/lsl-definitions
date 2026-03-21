@@ -232,15 +232,15 @@ classes:
     - name: callback
       type: LLEventHandler
     returnType: LLEventHandler
-  - name: listeners
-    comment: Returns a list of all listeners for a specific event.
+  - name: handlers
+    comment: Returns a list of all handlers for a specific event.
     parameters:
     - name: self
     - name: event
       type: LLEventName
     returnType: '{LLEventHandler}'
   - name: eventNames
-    comment: Returns a list of all event names that have listeners.
+    comment: Returns a list of all event names that have handlers.
     parameters:
     - name: self
     returnType: '{string}'

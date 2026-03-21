@@ -15051,7 +15051,7 @@ structs:
         - transaction_result
       - type: function
       description: Registers a one-time callback. Returns the wrapper function.
-    listeners:
+    handlers:
       method: true
       args:
       - type:
@@ -15096,11 +15096,11 @@ structs:
         - run_time_permissions
         - timer
         - transaction_result
-      description: Returns a list of all listeners for a specific event.
+      description: Returns a list of all handlers for a specific event.
     eventNames:
       method: true
       args: []
-      description: Returns a list of all event names that have listeners.
+      description: Returns a list of all event names that have handlers.
     at_rot_target:
       property: override-fields
       type: function

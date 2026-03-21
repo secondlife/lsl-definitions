@@ -231,7 +231,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     event_names = [m for m in slua_definitions.typeAliases if m.name == "LLEventName"][
         0
     ].selene_type
-    for method_name in ["on", "once", "off", "listeners"]:
+    for method_name in ["on", "once", "off", "handlers"]:
         selene["structs"]["LLEvents"][method_name]["args"][0]["type"] = event_names
 
     noalias_dumper = yaml.dumper.SafeDumper

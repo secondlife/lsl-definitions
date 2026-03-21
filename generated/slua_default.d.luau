@@ -134,7 +134,7 @@ declare extern type LLEvents with
     & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> boolean)
   once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
     & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
-  function listeners(self, event: LLEventName): {LLEventHandler}
+  function handlers(self, event: LLEventName): {LLEventHandler}
   function eventNames(self): {string}
 end
 
