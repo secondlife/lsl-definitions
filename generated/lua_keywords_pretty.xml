@@ -338,6 +338,15 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>PrimParamsSetterTypeMeta</string>
          </map>
+         <key>math.e</key>
+         <map>
+            <key>tooltip</key>
+            <string>Base of the natural logarithm.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2.718281828459045</string>
+         </map>
          <key>math.huge</key>
          <map>
             <key>tooltip</key>
@@ -347,14 +356,50 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>inf</string>
          </map>
+         <key>math.nan</key>
+         <map>
+            <key>tooltip</key>
+            <string>Value representing an error (not a number).</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>nan</string>
+         </map>
+         <key>math.phi</key>
+         <map>
+            <key>tooltip</key>
+            <string>Golden ratio.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1.618033988749895</string>
+         </map>
          <key>math.pi</key>
          <map>
             <key>tooltip</key>
-            <string>The number of radians in a half circle (semi-circle).</string>
+            <string>Ratio of a circle's circumference to its diameter. The number of radians in a half circle (semi-circle). math.tau/2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>3.141592653589793</string>
+         </map>
+         <key>math.sqrt2</key>
+         <map>
+            <key>tooltip</key>
+            <string>Square root of 2.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1.4142135623730951</string>
+         </map>
+         <key>math.tau</key>
+         <map>
+            <key>tooltip</key>
+            <string>Ratio of a circle's circumference to its radius. The number of radians in a full circle. math.pi*2.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>6.283185307179586</string>
          </map>
          <key>quaternion.identity</key>
          <map>

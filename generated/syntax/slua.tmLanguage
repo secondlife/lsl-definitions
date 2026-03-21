@@ -645,7 +645,7 @@
             <key>name</key>
             <string>support.constant.luau</string>
             <key>match</key>
-            <string>(?&lt;![^.]\.|:)\bbit32|buffer|coroutine|debug|ll|llbase64|llcompat|lljson(\.array_mt|empty_array|empty_object|null|object_mt|remove)?|llprim(\.ParamsSetter)?|math(\.huge|pi)?|os|quaternion(\.identity)?|rotation(\.identity)?|string|table|utf8(\.charpattern)?|uuid|vector(\.one|zero)?\b</string>
+            <string>(?&lt;![^.]\.|:)\bbit32|buffer|coroutine|debug|ll|llbase64|llcompat|lljson(\.array_mt|empty_array|empty_object|null|object_mt|remove)?|llprim(\.ParamsSetter)?|math(\.e|huge|nan|phi|pi|sqrt2|tau)?|os|quaternion(\.identity)?|rotation(\.identity)?|string|table|utf8(\.charpattern)?|uuid|vector(\.one|zero)?\b</string>
           </dict>
           <dict>
             <key>name</key>

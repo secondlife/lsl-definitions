@@ -2069,14 +2069,36 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   constants:
-  - name: pi
-    comment: The number of radians in a half circle (semi-circle).
+  - name: e
+    comment: Base of the natural logarithm.
     type: number
-    value: 3.141592653589793
+    value: 2.718281828459045
   - name: huge
     comment: Value larger than any other numeric value (infinity).
     type: number
     value: inf
+  - name: nan
+    comment: Value representing an error (not a number).
+    type: number
+    value: nan
+  - name: phi
+    comment: Golden ratio.
+    type: number
+    value: 1.618033988749895
+  - name: pi
+    comment: Ratio of a circle's circumference to its diameter. 
+      The number of radians in a half circle (semi-circle). math.tau/2.
+    type: number
+    value: 3.141592653589793
+  - name: sqrt2
+    comment: Square root of 2.
+    type: number
+    value: 1.4142135623730951
+  - name: tau
+    comment: Ratio of a circle's circumference to its radius.
+      The number of radians in a full circle. math.pi*2.
+    type: number
+    value: 6.283185307179586
 - name: os
   comment: Operating system facilities library.
   functions:
