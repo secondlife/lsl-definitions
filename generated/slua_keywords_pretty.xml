@@ -285,23 +285,68 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>any</string>
          </map>
+         <key>math.e</key>
+         <map>
+            <key>tooltip</key>
+            <string>The base of the natural logarithm.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2.718281828459045</string>
+         </map>
          <key>math.huge</key>
          <map>
             <key>tooltip</key>
-            <string>A value larger than any other numeric value (infinity)</string>
+            <string>A value larger than any other numeric value (infinity).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>inf</string>
          </map>
+         <key>math.nan</key>
+         <map>
+            <key>tooltip</key>
+            <string>A number representing an error (not a number).</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>nan</string>
+         </map>
+         <key>math.phi</key>
+         <map>
+            <key>tooltip</key>
+            <string>The golden ratio.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1.618033988749895</string>
+         </map>
          <key>math.pi</key>
          <map>
             <key>tooltip</key>
-            <string>The value of pi</string>
+            <string>The ratio of a circle's circumference to its diameter. math.tau/2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>3.141592653589793</string>
+         </map>
+         <key>math.sqrt2</key>
+         <map>
+            <key>tooltip</key>
+            <string>The square root of 2.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1.4142135623730951</string>
+         </map>
+         <key>math.tau</key>
+         <map>
+            <key>tooltip</key>
+            <string>The ratio of a circle's circumference to its radius. math.pi*2.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>6.283185307179586</string>
          </map>
          <key>quaternion.identity</key>
          <map>
