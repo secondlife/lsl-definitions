@@ -5216,7 +5216,7 @@ globals:
     description: Linearly interpolates between a and b using factor t.
   ll.Abs:
     deprecated:
-      message: Use 'math.abs' instead. It's a fastcall.
+      message: Use 'math.abs' instead. Double precision; fastcall.
       replace:
       - math.abs(%...)
     args:
@@ -5225,7 +5225,7 @@ globals:
     description: Returns the absolute (positive) version of Value.
   ll.Acos:
     deprecated:
-      message: Use 'math.acos' instead. It's a fastcall.
+      message: Use 'math.acos' instead. Double precision; fastcall.
       replace:
       - math.acos(%...)
     args:
@@ -5300,7 +5300,7 @@ globals:
       function only works on physical objects.
   ll.Asin:
     deprecated:
-      message: Use 'math.asin' instead. It's a fastcall.
+      message: Use 'math.asin' instead. Double precision; fastcall.
       replace:
       - math.asin(%...)
     args:
@@ -5309,7 +5309,7 @@ globals:
     description: Returns the arc-sine, in radians, of Value.
   ll.Atan2:
     deprecated:
-      message: Use 'math.atan2' instead. It's a fastcall.
+      message: Use 'math.atan2' instead. Double precision; fastcall.
       replace:
       - math.atan2(%...)
     args:
@@ -5402,7 +5402,7 @@ globals:
       where {} indicates optional data.'
   ll.Ceil:
     deprecated:
-      message: Use 'math.ceil' instead. It's a fastcall.
+      message: Use 'math.ceil' instead. Double precision; fastcall.
       replace:
       - math.ceil(%...)
     args:
@@ -5479,7 +5479,7 @@ globals:
     description: Returns hex-encoded Hash string of Message using digest Algorithm.
   ll.Cos:
     deprecated:
-      message: Use 'math.cos' instead. It's a fastcall.
+      message: Use 'math.cos' instead. Double precision; fastcall.
       replace:
       - math.cos(%...)
     args:
@@ -5825,7 +5825,7 @@ globals:
       to jump.
   ll.Fabs:
     deprecated:
-      message: Use 'math.abs' instead. It's a fastcall.
+      message: Use 'math.abs' instead. Double precision; fastcall.
       replace:
       - math.abs(%...)
     args:
@@ -5865,7 +5865,7 @@ globals:
       away from a defined position in the region or adjacent regions.
   ll.Floor:
     deprecated:
-      message: Use 'math.floor' instead. It's a fastcall.
+      message: Use 'math.floor' instead. Double precision; fastcall.
       replace:
       - math.floor(%...)
     args:
