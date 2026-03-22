@@ -60,6 +60,22 @@ export type OsDateTime = {
   yday: number?,
   isdst: boolean?,
 }
+type LLJsonEncodeOptions = {
+  tight: boolean?,
+  skip_tojson: boolean?,
+  allow_sparse: boolean?,
+  replacer: ((key: any, value: any, parent: {}?) -> any)?,
+}
+type LLJsonDecodeReviverWithoutPath = (key: string | number, value: any, parent: {}?, ctx: {}) -> any
+type LLJsonDecodeOptionsWithoutPath = {
+  track_path: false?,
+  reviver: LLJsonDecodeReviverWithoutPath?,
+} | LLJsonDecodeReviverWithoutPath
+type LLJsonDecodeOptionsWithPath = {
+  track_path: true,
+  reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
+}
+type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
 
 declare extern type DetectedEvent with
   index: number
@@ -256,15 +272,15 @@ declare llbase64: {
 
 declare lljson: {
   null: any,
-  empty_array_mt: { [any]: any },
-  array_mt: { [any]: any },
-  empty_array: any,
-  _NAME: string,
-  _VERSION: string,
-  encode: (value: any) -> string,
-  decode: (json: string) -> any,
-  slencode: (value: any, tight: boolean?) -> string,
-  sldecode: (json: string) -> any,
+  remove: any,
+  array_mt: {__jsonhint: string},
+  object_mt: {__jsonhint: string},
+  empty_array: {},
+  empty_object: {},
+  encode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  decode: (json: string, options: LLJsonDecodeOptions?) -> any,
+  slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  sldecode: (json: string, options: LLJsonDecodeOptions?) -> any,
 }
 
 

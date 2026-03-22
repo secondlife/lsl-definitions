@@ -235,53 +235,53 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>false</string>
          </map>
-         <key>lljson._NAME</key>
-         <map>
-            <key>tooltip</key>
-            <string>Name of the lljson library</string>
-            <key>type</key>
-            <string>string</string>
-            <key>value</key>
-            <string>"lljson"</string>
-         </map>
-         <key>lljson._VERSION</key>
-         <map>
-            <key>tooltip</key>
-            <string>Version of the lljson library</string>
-            <key>type</key>
-            <string>string</string>
-            <key>value</key>
-            <string>"2.1.0.11"</string>
-         </map>
          <key>lljson.array_mt</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an array for json encode</string>
+            <string>Metatable for declaring table as an array for json encode.</string>
             <key>type</key>
-            <string>{ [any]: any }</string>
+            <string>{__jsonhint: string}</string>
             <key>value</key>
-            <string>{}</string>
+            <string>{__jsonhint = "array"}</string>
          </map>
          <key>lljson.empty_array</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to pass for an empty array to json encode</string>
+            <string>A constant to pass for an empty array to json encode.</string>
             <key>type</key>
-            <string>any</string>
+            <string>{}</string>
+            <key>value</key>
+            <string>setmetatable({}, lljson.array_mt}</string>
          </map>
-         <key>lljson.empty_array_mt</key>
+         <key>lljson.empty_object</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an empty array for json encode</string>
+            <string>A constant to pass for an empty object to json encode.</string>
             <key>type</key>
-            <string>{ [any]: any }</string>
-            <key>value</key>
             <string>{}</string>
+            <key>value</key>
+            <string>setmetatable({}, lljson.object_mt}</string>
          </map>
          <key>lljson.null</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to pass for null to json encode</string>
+            <string>A constant to pass for null to json encode.</string>
+            <key>type</key>
+            <string>any</string>
+         </map>
+         <key>lljson.object_mt</key>
+         <map>
+            <key>tooltip</key>
+            <string>Metatable for declaring table as an object for json encode.</string>
+            <key>type</key>
+            <string>{__jsonhint: string}</string>
+            <key>value</key>
+            <string>{__jsonhint = "object"}</string>
+         </map>
+         <key>lljson.remove</key>
+         <map>
+            <key>tooltip</key>
+            <string>A constant to return from a reviver/replacer replacer function to omit this item.</string>
             <key>type</key>
             <string>any</string>
          </map>
@@ -13104,6 +13104,15 @@ Returns true if result is non-zero.</string>
                      <string>string</string>
                   </map>
                </map>
+               <map>
+                  <key>options</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>LLJsonDecodeOptions?</string>
+                  </map>
+               </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
@@ -13127,6 +13136,15 @@ Returns true if result is non-zero.</string>
                      <string>any</string>
                   </map>
                </map>
+               <map>
+                  <key>options</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>LLJsonEncodeOptions?</string>
+                  </map>
+               </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
@@ -13148,6 +13166,15 @@ Returns true if result is non-zero.</string>
                      <string></string>
                      <key>type</key>
                      <string>string</string>
+                  </map>
+               </map>
+               <map>
+                  <key>options</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>LLJsonDecodeOptions?</string>
                   </map>
                </map>
             </array>
@@ -13174,12 +13201,12 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>tight</key>
+                  <key>options</key>
                   <map>
                      <key>tooltip</key>
                      <string></string>
                      <key>type</key>
-                     <string>boolean?</string>
+                     <string>LLJsonEncodeOptions?</string>
                   </map>
                </map>
             </array>

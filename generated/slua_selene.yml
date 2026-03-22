@@ -4339,42 +4339,47 @@ globals:
       The output is truncated at the first decoding error.
   lljson.null:
     property: read-only
-    description: A constant to pass for null to json encode
-  lljson.empty_array_mt:
+    description: A constant to pass for null to json encode.
+  lljson.remove:
     property: read-only
-    type: table
-    description: Metatable for declaring table as an empty array for json encode
+    description: A constant to return from a reviver/replacer replacer function to
+      omit this item.
   lljson.array_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an array for json encode
+    description: Metatable for declaring table as an array for json encode.
+  lljson.object_mt:
+    property: read-only
+    type: table
+    description: Metatable for declaring table as an object for json encode.
   lljson.empty_array:
     property: read-only
-    description: A constant to pass for an empty array to json encode
-  lljson._NAME:
+    type: table
+    description: A constant to pass for an empty array to json encode.
+  lljson.empty_object:
     property: read-only
-    type: string
-    description: Name of the lljson library
-  lljson._VERSION:
-    property: read-only
-    type: string
-    description: Version of the lljson library
+    type: table
+    description: A constant to pass for an empty object to json encode.
   lljson.encode:
     args:
     - type: any
+    - type: table
+      required: false
     must_use: true
     description: Encodes a Lua value as JSON. Raises an error if value contains unsupported
       types.
   lljson.decode:
     args:
     - type: string
+    - type: any
+      required: false
     must_use: true
     description: Decodes a JSON string to a Lua value. Raises an error if JSON is
       invalid.
   lljson.slencode:
     args:
     - type: any
-    - type: bool
+    - type: table
       required: false
     must_use: true
     description: Encodes a Lua value as JSON, preserving SL types. Use tight to encode
@@ -4382,6 +4387,8 @@ globals:
   lljson.sldecode:
     args:
     - type: string
+    - type: any
+      required: false
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises
       an error if JSON is invalid.

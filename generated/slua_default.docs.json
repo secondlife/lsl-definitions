@@ -256,27 +256,27 @@
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.null": {
-        "documentation": "A constant to pass for null to json encode",
+        "documentation": "A constant to pass for null to json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
-    "@sl-slua/global/lljson.empty_array_mt": {
-        "documentation": "Value: {}<br>Metatable for declaring table as an empty array for json encode",
+    "@sl-slua/global/lljson.remove": {
+        "documentation": "A constant to return from a reviver/replacer replacer function to omit this item.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.array_mt": {
-        "documentation": "Value: {}<br>Metatable for declaring table as an array for json encode",
+        "documentation": "Value: {__jsonhint = \"array\"}<br>Metatable for declaring table as an array for json encode.",
+        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
+    },
+    "@sl-slua/global/lljson.object_mt": {
+        "documentation": "Value: {__jsonhint = \"object\"}<br>Metatable for declaring table as an object for json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.empty_array": {
-        "documentation": "A constant to pass for an empty array to json encode",
+        "documentation": "Value: setmetatable({}, lljson.array_mt}<br>A constant to pass for an empty array to json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
-    "@sl-slua/global/lljson._NAME": {
-        "documentation": "Value: \"lljson\"<br>Name of the lljson library",
-        "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
-    },
-    "@sl-slua/global/lljson._VERSION": {
-        "documentation": "Value: \"2.1.0.11\"<br>Version of the lljson library",
+    "@sl-slua/global/lljson.empty_object": {
+        "documentation": "Value: setmetatable({}, lljson.object_mt}<br>A constant to pass for an empty object to json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.encode": {

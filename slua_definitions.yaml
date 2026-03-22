@@ -193,6 +193,37 @@ typeAliases:
       isdst: boolean?,
     }
   selene-type: {display: "OsDateTime"}
+- name: LLJsonEncodeOptions
+  comment: Configuration options for lljson encoding
+  definition: |-
+    {
+      tight: boolean?,
+      skip_tojson: boolean?,
+      allow_sparse: boolean?,
+      replacer: ((key: any, value: any, parent: {}?) -> any)?,
+    }
+  selene-type: table
+- name: LLJsonDecodeReviverWithoutPath
+  definition: "(key: string | number, value: any, parent: {}?, ctx: {}) -> any"
+  selene-type: function
+- name: LLJsonDecodeOptionsWithoutPath
+  definition: |-
+    {
+      track_path: false?,
+      reviver: LLJsonDecodeReviverWithoutPath?,
+    } | LLJsonDecodeReviverWithoutPath
+  selene-type: any
+- name: LLJsonDecodeOptionsWithPath
+  definition: |-
+    {
+      track_path: true,
+      reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
+    }
+  selene-type: table
+- name: LLJsonDecodeOptions
+  comment: Configuration options for lljson decoding
+  definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
+  selene-type: any
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -1088,6 +1119,8 @@ modules:
     parameters:
     - name: value
       type: any
+    - name: options
+      type: LLJsonEncodeOptions?
     returnType: string
     must-use: true
   - name: decode
@@ -1096,6 +1129,8 @@ modules:
     parameters:
     - name: json
       type: string
+    - name: options
+      type: LLJsonDecodeOptions?
     returnType: any
     must-use: true
   - name: slencode
@@ -1104,8 +1139,8 @@ modules:
     parameters:
     - name: value
       type: any
-    - name: tight
-      type: boolean?
+    - name: options
+      type: LLJsonEncodeOptions?
     returnType: string
     must-use: true
   - name: sldecode
@@ -1114,31 +1149,33 @@ modules:
     parameters:
     - name: json
       type: string
+    - name: options
+      type: LLJsonDecodeOptions?
     returnType: any
     must-use: true
   constants:
   - name: 'null'
-    comment: A constant to pass for null to json encode
+    comment: A constant to pass for null to json encode.
     type: any
-  - name: empty_array_mt
-    comment: Metatable for declaring table as an empty array for json encode
-    type: '{ [any]: any }'
-    value: '{}'
+  - name: remove
+    comment: A constant to return from a reviver/replacer replacer function to omit this item.
+    type: any
   - name: array_mt
-    comment: Metatable for declaring table as an array for json encode
-    type: '{ [any]: any }'
-    value: '{}'
+    comment: Metatable for declaring table as an array for json encode.
+    type: '{__jsonhint: string}'
+    value: '{__jsonhint = "array"}'
+  - name: object_mt
+    comment: Metatable for declaring table as an object for json encode.
+    type: '{__jsonhint: string}'
+    value: '{__jsonhint = "object"}'
   - name: empty_array
-    comment: A constant to pass for an empty array to json encode
-    type: any
-  - name: _NAME
-    comment: Name of the lljson library
-    type: string
-    value: '"lljson"'
-  - name: _VERSION
-    comment: Version of the lljson library
-    type: string
-    value: '"2.1.0.11"'
+    comment: A constant to pass for an empty array to json encode.
+    type: '{}'
+    value: 'setmetatable({}, lljson.array_mt}'
+  - name: empty_object
+    comment: A constant to pass for an empty object to json encode.
+    type: '{}'
+    value: 'setmetatable({}, lljson.object_mt}'
 - name: math
   comment: Mathematical functions library.
   functions:
