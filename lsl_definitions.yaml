@@ -9552,6 +9552,9 @@ functions:
     - Text:
         tooltip: ''
         type: string
+    slua-deprecated:
+      use: "print"
+      selene-replace: ["print(%...)"]
     energy: 10.0
     func-id: 292
     return: void

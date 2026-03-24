@@ -792,7 +792,7 @@ declare ll: {
   OpenRemoteDataChannel: @deprecated () -> (),
   Ord: (value: string, index: number) -> number,
   OverMyLand: (ID: uuid) -> boolean,
-  OwnerSay: (Text: string) -> (),
+  OwnerSay: @[deprecated {use='print'}](Text: string) -> (),
   ParcelMediaCommandList: (CommandList: list) -> (),
   ParcelMediaQuery: (QueryList: {number}) -> {any},
   ParseString2List: (Text: string, Separators: {string}, Spacers: {string}) -> {string},
