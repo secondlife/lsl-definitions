@@ -8746,6 +8746,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_FLOAT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is a float.</string>
             <key>type</key>
@@ -8755,6 +8757,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_INTEGER</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is an integer.</string>
             <key>type</key>
@@ -8764,6 +8768,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_INVALID</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is invalid.</string>
             <key>type</key>
@@ -8773,6 +8779,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_KEY</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is a key.</string>
             <key>type</key>
@@ -8782,6 +8790,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_ROTATION</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is a rotation.</string>
             <key>type</key>
@@ -8791,6 +8801,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_STRING</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is a string.</string>
             <key>type</key>
@@ -8800,6 +8812,8 @@ vector position - position in local coordinates
          </map>
          <key>TYPE_VECTOR</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>The list entry is a vector.</string>
             <key>type</key>
@@ -20177,6 +20191,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -20200,6 +20216,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23256,6 +23274,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23288,6 +23308,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23354,6 +23376,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23548,6 +23572,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23580,6 +23606,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -23612,6 +23640,8 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>

@@ -4066,30 +4066,44 @@ constants:
     type: float
     value: '6.28318530'
   TYPE_FLOAT:
+    slua-deprecated:
+      use: '"number"'
     tooltip: The list entry is a float.
     type: integer
     value: 2
   TYPE_INTEGER:
+    slua-deprecated:
+      use: '"number"'
     tooltip: The list entry is an integer.
     type: integer
     value: 1
   TYPE_INVALID:
+    slua-deprecated:
+      use: 'nil'
     tooltip: The list entry is invalid.
     type: integer
     value: 0
   TYPE_KEY:
+    slua-deprecated:
+      use: '"uuid"'
     tooltip: The list entry is a key.
     type: integer
     value: 4
   TYPE_ROTATION:
+    slua-deprecated:
+      use: '"quaternion"'
     tooltip: The list entry is a rotation.
     type: integer
     value: 6
   TYPE_STRING:
+    slua-deprecated:
+      use: '"string"'
     tooltip: The list entry is a string.
     type: integer
     value: 3
   TYPE_VECTOR:
+    slua-deprecated:
+      use: '"vector"'
     tooltip: The list entry is a vector.
     type: integer
     value: 5
@@ -6868,6 +6882,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: typeof
+      selene-replace: ["typeof(%1[%2])"]
     energy: 10.0
     func-id: 194
     native: true
@@ -6882,6 +6899,9 @@ functions:
     - ListVariable:
         tooltip: ''
         type: list
+    slua-deprecated:
+      reason: "Use '#' or 'rawlen' instead. Metatable support."
+      selene-replace: ["#%1", "rawlen(%1)"]
     energy: 10.0
     func-id: 185
     native: true
@@ -8567,6 +8587,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'tonumber' instead.
+      selene-replace: ["tonumber(%1[%2]) or 0"]
     energy: 10.0
     func-id: 187
     native: true
@@ -8585,6 +8608,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]', 'tonumber', and 'math.modf' instead.
+      selene-replace: ["math.modf(tonumber(%1[%2]) or 0)"]
     energy: 10.0
     func-id: 186
     native: true
@@ -8621,6 +8647,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'touuid' instead.
+      selene-replace: ["touuid(%1[%2]) or NULL_KEY"]
     energy: 10.0
     func-id: 189
     native: true
@@ -8728,6 +8757,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: '[]'
+      selene-replace: ["%1[%2]"]
     energy: 10.0
     func-id: 191
     native: true
@@ -8746,6 +8778,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      reason: Use '[]' and 'tostring' instead.
+      selene-replace: ["tostring(%1[%2])"]
     energy: 10.0
     func-id: 188
     native: true
@@ -8764,6 +8799,9 @@ functions:
         tooltip: ''
         type: integer
         index-semantics: true
+    slua-deprecated:
+      use: '[]'
+      selene-replace: ["%1[%2]"]
     energy: 10.0
     func-id: 190
     native: true
