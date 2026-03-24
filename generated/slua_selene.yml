@@ -7543,6 +7543,10 @@ globals:
       FALSE.\nReturns TRUE if key ID is over land owned by the object owner, FALSE
       otherwise.
   ll.OwnerSay:
+    deprecated:
+      message: Use 'print' instead.
+      replace:
+      - print(%...)
     args:
     - type: string
     description: says Text to owner only (if owner is in region).\nSays Text to the
