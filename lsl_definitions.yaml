@@ -6084,7 +6084,6 @@ functions:
     - StartMatch:
         tooltip: Index of the first match to return.
         type: integer
-        index-semantics: true
     - Count:
         tooltip: The maximum number of matches to return. If 0 this function will
           return the first 64 matches found.
