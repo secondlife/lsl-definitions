@@ -5882,10 +5882,6 @@ globals:
       be reset by calling this function with Enable set to FALSE in order to disable
       it.
   ll.Frand:
-    deprecated:
-      message: Use 'math.random' instead. Double precision; integers.
-      replace:
-      - math.random() * %1
     args:
     - type: number
     must_use: true
