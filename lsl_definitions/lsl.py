@@ -356,6 +356,15 @@ class LSLFunction:
     mono_sleep: float
     """Mono-specific sleep value, only used for legacy functions that had mismatched sleeps"""
 
+    @property
+    def need_compat(self) -> bool:
+        """Whether this function needs a "compat" wrapper with an upvalue to handle SLua fixups"""
+        return (
+            self.bool_semantics
+            or self.index_semantics
+            or any(a.index_semantics for a in self.arguments)
+        )
+
     def to_dict(self, include_internal: bool = False) -> dict:
         return remove_worthless(
             {

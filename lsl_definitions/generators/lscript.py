@@ -790,16 +790,40 @@ void task_lscript_init_generated()
 
 
 @register("gen_lua_registrations")
-def gen_lua_registrations(definitions: LSLDefinitions, *, pure_only: int = 0) -> str:
-    """Generate Lua function registrations"""
+def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) -> str:
+    """Generate lambdas to handle incoming Lua calls that wrap ll*() lscript functions"""
     bindings = []
     for func in definitions.functions.values():
-        if not func.pure and pure_only:
+        if compat_mode != func.need_compat:
             continue
         # `ll` prefix is superfluous for namespacing functions, this is all going to live
         # in the `ll` module.
         assert func.name.startswith("ll")
         func_name = func.name[2:]
+        prelude = ""
+
+        # If we're not a simple function we need to run an interrupt when the
+        # function _ends_ too, so we don't run over our time budget. This is
+        # for functions which may run excessively long, where we don't want
+        # control to flow into a place where we can't interrupt before we
+        # do our next yield check.
+        # Really, purity isn't a good basis for this, but they tend to be trivial
+        # functions, so it's good enough for now.
+        if not func.pure:
+            prelude += "    luau_interruptoncalltail(L);\n"
+
+        if func.need_compat:
+            prelude += "    const bool compat_mode = lua_toboolean(L, lua_upvalueindex(1));\n"
+
+        if any(a.index_semantics for a in func.arguments):
+            # If we're not in compat mode
+            prelude += "    if (!compat_mode)\n    {\n"
+            for arg_idx, arg in enumerate(func.arguments):
+                if arg.index_semantics:
+                    assert arg.type == LSLType.INTEGER
+                    # This function will fix up the index to be 0-based or throw an error if 0 was passed.
+                    prelude += f"        args[{arg_idx}].mInteger = luaSL_checkindexlike(L, {arg_idx + 1});\n"
+            prelude += "    }\n"
 
         binding = """
 {"%(func_name)s", [](lua_State *L) {
@@ -807,7 +831,8 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, pure_only: int = 0) ->
     const LSCRIPTType types[] = {%(arg_types)s};
     // Convert the arguments to LLScriptLibData, throwing if not possible.
     extract_lua_args(L, %(num_args)d, types, args);
-    return call_lib_func_lua(L, %(func_id)d, %(num_args)d, args, %(ret_type)s);
+%(prelude)s
+    return call_lib_func_lua(L, %(func_id)d, %(num_args)d, args, %(ret_type)s, %(bool_semantics)s, %(index_semantics)s);
 }}
         """ % {
             "num_args": len(func.arguments),
@@ -815,8 +840,12 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, pure_only: int = 0) ->
             "arg_types": ", ".join(a.type.meta.lst_name for a in func.arguments),
             "func_id": func.func_id,
             "func_name": func_name,
+            "prelude": prelude if prelude.strip() else "    // no prelude",
+            "index_semantics": "false" if not func.index_semantics else "!compat_mode",
+            "bool_semantics": "false" if not func.bool_semantics else "!compat_mode",
         }
         bindings.append(binding)
+
     return ",".join(bindings)
 
 
