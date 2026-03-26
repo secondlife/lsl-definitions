@@ -1,5 +1,7 @@
 """Utility functions for LSL definitions processing."""
 
+from __future__ import annotations
+
 import dataclasses
 import enum
 import os
@@ -16,12 +18,13 @@ class Deprecated:
     use: str | None = None
     selene_replace: list[str] | None = None
 
-    def from_definition(definition: dict | bool) -> "Deprecated | None":
+    @classmethod
+    def from_definition(cls, definition: dict | bool) -> "Deprecated | None":
         if definition is False:
             return None
         if definition is True:
-            return Deprecated()
-        return Deprecated(
+            return cls()
+        return cls(
             reason=definition.get("reason", None),
             use=definition.get("use", None),
             selene_replace=definition.get("selene-replace", None),
