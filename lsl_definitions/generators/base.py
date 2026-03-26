@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
+from typing import Callable, Union
 
-GeneratorFunc = Callable[..., str | bytes | None]
+GeneratorFunc = Callable[..., Union[str, bytes, None]]
 
 
 @dataclass
