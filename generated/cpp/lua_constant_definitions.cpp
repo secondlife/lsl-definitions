@@ -661,9 +661,6 @@
     luaSL_pushnativeinteger(L, 128);
     lua_setglobal(L, "ESTATE_ACCESS_BANNED_AGENT_REMOVE");
 
-    luaSL_pushnativeinteger(L, 0);
-    lua_setglobal(L, "FALSE");
-
     luaSL_pushnativeinteger(L, 2);
     lua_setglobal(L, "FILTER_FLAGS");
 
@@ -2811,9 +2808,6 @@
 
     luaSL_pushnativeinteger(L, 0);
     lua_setglobal(L, "TRAVERSAL_TYPE_SLOW");
-
-    luaSL_pushnativeinteger(L, 1);
-    lua_setglobal(L, "TRUE");
 
     lua_pushnumber(L, 6.28318530);
     lua_setglobal(L, "TWO_PI");
