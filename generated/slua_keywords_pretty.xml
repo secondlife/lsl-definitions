@@ -297,7 +297,7 @@ export type rotation = quaternion</string>
          <key>math.huge</key>
          <map>
             <key>tooltip</key>
-            <string>A value larger than any other numeric value (infinity).</string>
+            <string>A value larger than any other numeric value (infinity). 1/0.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -306,7 +306,7 @@ export type rotation = quaternion</string>
          <key>math.nan</key>
          <map>
             <key>tooltip</key>
-            <string>A number representing an error (not a number).</string>
+            <string>A number representing an error (not a number). 0/0.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -315,7 +315,7 @@ export type rotation = quaternion</string>
          <key>math.phi</key>
          <map>
             <key>tooltip</key>
-            <string>The golden ratio.</string>
+            <string>The golden ratio. (1 + math.sqrt(5))/2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -333,7 +333,7 @@ export type rotation = quaternion</string>
          <key>math.sqrt2</key>
          <map>
             <key>tooltip</key>
-            <string>The square root of 2.</string>
+            <string>The square root of 2. math.sqrt(2).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>

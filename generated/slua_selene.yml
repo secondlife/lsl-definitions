@@ -4392,15 +4392,15 @@ globals:
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity).
+    description: A value larger than any other numeric value (infinity). 1/0.
   math.nan:
     property: read-only
     type: number
-    description: A number representing an error (not a number).
+    description: A number representing an error (not a number). 0/0.
   math.phi:
     property: read-only
     type: number
-    description: The golden ratio.
+    description: The golden ratio. (1 + math.sqrt(5))/2.
   math.pi:
     property: read-only
     type: number
@@ -4408,7 +4408,7 @@ globals:
   math.sqrt2:
     property: read-only
     type: number
-    description: The square root of 2.
+    description: The square root of 2. math.sqrt(2).
   math.tau:
     property: read-only
     type: number
