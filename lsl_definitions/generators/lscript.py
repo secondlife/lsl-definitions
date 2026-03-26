@@ -857,6 +857,8 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
     #  is not free.
     bindings = []
     for const in definitions.constants.values():
+        if const.slua_removed:
+            continue
         binding = "    "
         if const.type == LSLType.KEY or is_uuid(const.value):
             # This is a bit weird. UUID constants don't exist in LSL, but they do in Lua.
