@@ -2074,15 +2074,15 @@ modules:
     type: number
     value: 2.718281828459045
   - name: huge
-    comment: Value larger than any other numeric value (infinity).
+    comment: Value larger than any other numeric value (infinity). 1/0.
     type: number
     value: inf
   - name: nan
-    comment: Value representing an error (not a number).
+    comment: Value representing an error (not a number). 0/0.
     type: number
     value: nan
   - name: phi
-    comment: Golden ratio.
+    comment: Golden ratio. (1 + math.sqrt(5))/2.
     type: number
     value: 1.618033988749895
   - name: pi
@@ -2091,7 +2091,7 @@ modules:
     type: number
     value: 3.141592653589793
   - name: sqrt2
-    comment: Square root of 2.
+    comment: Square root of 2. math.sqrt(2).
     type: number
     value: 1.4142135623730951
   - name: tau
