@@ -5,7 +5,7 @@ from __future__ import annotations
 import abc
 import dataclasses
 import re
-from typing import TYPE_CHECKING, Any, List, Literal, Optional, Set, TextIO
+from typing import TYPE_CHECKING, Any, List, Optional, Set, TextIO
 
 import llsd
 import yaml
@@ -13,6 +13,8 @@ import yaml
 from lsl_definitions.utils import Deprecated, remove_worthless
 
 if TYPE_CHECKING:
+    from typing import Literal
+
     from lsl_definitions.lsl import LSLDefinitions
 
 
