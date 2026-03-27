@@ -10178,9 +10178,6 @@ functions:
         tooltip: The max number of replacements to make. Zero Count means "replace
           all". Positive Count moves left to right. Negative moves right to left.
         type: integer
-    slua-deprecated:
-      use: string.gsub
-      selene-replace: ['%1:gsub(%2)']
     energy: 10.0
     func-id: 541
     pure: true
