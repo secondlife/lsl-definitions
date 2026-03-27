@@ -823,7 +823,7 @@ declare ll: {
   RemoveVehicleFlags: (Vehiclelags: number) -> (),
   ReplaceAgentEnvironment: (agent_id: uuid, transition: number, environment: string | uuid) -> number,
   ReplaceEnvironment: (position: vector, environment: string | uuid, track_no: number, day_length: number, day_offset: number) -> number,
-  ReplaceSubString: (InitialString: string, SubString: string, NewSubString: string, Count: number) -> string,
+  ReplaceSubString: @[deprecated {use='string.gsub'}](InitialString: string, SubString: string, NewSubString: string, Count: number) -> string,
   RequestAgentData: (AvatarID: uuid, Data: number) -> uuid,
   RequestDisplayName: (AvatarID: uuid) -> uuid,
   RequestExperiencePermissions: (AgentID: uuid, unused: string) -> (),

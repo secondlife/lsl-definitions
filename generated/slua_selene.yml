@@ -7870,6 +7870,10 @@ globals:
     - type: number
     description: Replaces the environment for a parcel or region.
   ll.ReplaceSubString:
+    deprecated:
+      message: Use 'string.gsub' instead.
+      replace:
+      - '%1:gsub(%2)'
     args:
     - type: string
     - type: string
