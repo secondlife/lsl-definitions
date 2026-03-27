@@ -12377,9 +12377,6 @@ functions:
     - Text:
         tooltip: ''
         type: string
-    slua-deprecated:
-      use: string.lower
-      selene-replace: ["%1:lower()"]
     energy: 10.0
     func-id: 98
     native: true
@@ -12392,9 +12389,6 @@ functions:
     - Text:
         tooltip: ''
         type: string
-    slua-deprecated:
-      use: string.upper
-      selene-replace: ["%1:upper()"]
     energy: 10.0
     func-id: 97
     native: true

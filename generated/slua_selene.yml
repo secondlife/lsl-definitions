@@ -8966,19 +8966,11 @@ globals:
       contains a text box for input. Any text that is entered is said on the specified
       Channel (as if by the avatar) when the "OK" button is clicked.
   ll.ToLower:
-    deprecated:
-      message: Use 'string.lower' instead.
-      replace:
-      - '%1:lower()'
     args:
     - type: string
     must_use: true
     description: Returns a string that is Text with all lower-case characters.
   ll.ToUpper:
-    deprecated:
-      message: Use 'string.upper' instead.
-      replace:
-      - '%1:upper()'
     args:
     - type: string
     must_use: true
