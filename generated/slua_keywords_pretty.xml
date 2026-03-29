@@ -15869,7 +15869,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>reorder</key>
+                  <key>shrink_sparse</key>
                   <map>
                      <key>tooltip</key>
                      <string>Allow moving sparse array elements to hash table storage.</string>

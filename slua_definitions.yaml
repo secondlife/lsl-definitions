@@ -2127,7 +2127,7 @@ modules:
     - name: t
       comment: Table to shrink.
       type: '{V}'
-    - name: reorder
+    - name: shrink_sparse
       comment: Allow moving sparse array elements to hash table storage.
       type: boolean?
     returnType: '{V}'
