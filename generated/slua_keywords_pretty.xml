@@ -235,6 +235,24 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>false</string>
          </map>
+         <key>_G</key>
+         <map>
+            <key>tooltip</key>
+            <string>The table of Lua builtin globals.</string>
+            <key>type</key>
+            <string>{[string]: any}</string>
+            <key>value</key>
+            <string>{}</string>
+         </map>
+         <key>_VERSION</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>string</string>
+            <key>value</key>
+            <string>"Luau"</string>
+         </map>
          <key>lljson.array_mt</key>
          <map>
             <key>tooltip</key>
