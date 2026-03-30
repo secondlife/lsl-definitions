@@ -2506,6 +2506,13 @@ builtinConstants:
     comment: "Lua false: Boolean false value."
     type: boolean
     value: 'false'
+  - name: _G
+    comment: The table of Lua builtin globals.
+    type: '{[string]: any}'
+    value: '{}'
+  - name: _VERSION
+    type: string
+    value: '"Luau"'
 builtinFunctions:
 - name: assert
   comment: Checks if the value is truthy; if not, raises an error with the optional message.
