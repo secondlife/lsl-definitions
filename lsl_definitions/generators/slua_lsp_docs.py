@@ -124,7 +124,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     # for func in slua_definitions.builtinFunctions:
     #     builder.add_function(func)
     for func in slua_definitions.globalFunctions:
-        if not func.private and not func.local_only:
+        if not func.private and not func.local_only and not func.slua_removed:
             builder.add_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
@@ -135,7 +135,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     # for const in slua_definitions.builtinConstants:
     #     builder.add_constant(const)
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-        if not const.private and not const.slua_removed:
+        if not const.private:
             builder.add_constant(const)
     # class docs are unused if generated
     #     for class_ in classes.values():

@@ -162,6 +162,9 @@ end
 
 
 declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
+declare loadstring: nil
+declare getfenv: nil
+declare setfenv: nil
 declare function touuid(val: string? | buffer | uuid): uuid?
 declare function tovector(val: string? | vector): vector?
 declare function toquaternion(val: string? | quaternion): quaternion?
@@ -464,9 +467,6 @@ declare vector: ((x: number, y: number, z: number?) -> vector) & {
 declare rotation: typeof(quaternion)
 declare LLEvents: LLEvents
 declare LLTimers: LLTimers
-declare loadstring: nil
-declare getfenv: nil
-declare setfenv: nil
 
 ---------------------------
 -- Global Table: ll

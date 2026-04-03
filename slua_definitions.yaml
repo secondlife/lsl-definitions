@@ -314,18 +314,6 @@ globalVariables:
 - name: LLTimers
   comment: Timer management singleton for scheduling periodic and one-time callbacks.
   type: LLTimers
-- name: loadstring
-  comment: loadstring is removed in SLua.
-  slua-removed: true
-  type: nil
-- name: getfenv
-  comment: getfenv is removed in SLua.
-  slua-removed: true
-  type: nil
-- name: setfenv
-  comment: setfenv is removed in SLua.
-  slua-removed: true
-  type: nil
 globalFunctions:
 - name: dangerouslyexecuterequiredmodule
   comment: Dangerously executes a required module function
@@ -333,6 +321,61 @@ globalFunctions:
   - name: f
     type: (...any) -> ...any
   returnType: '...any'
+- name: collectgarbage
+  comment: Run the garbage collector
+  parameters:
+  - name: option
+    type: '"collect"?'
+    selene-type: string
+  overloads:
+  - comment: Alias for gcinfo
+    parameters:
+    - name: option
+      type: '"count"'
+      selene-type: string
+    returnType: number
+  local-only: true
+- name: loadstring
+  comment: Compile Luau code into a function.
+  typeParameters: [A...]
+  parameters:
+  - name: src
+    type: string
+  - name: chunkname
+    type: string?
+  returnType: (((A...) -> any)?, string?)
+  slua-removed: true
+- name: getfenv
+  comment: Get the scoped environment for the given function.
+  parameters:
+  - name: target
+    type: '((...any) -> ...any) | number'
+    selene-type: function
+  returnType: '{[string]: any}'
+  slua-removed: true
+- name: graphheap
+  comment: Writes the contents of heap to the given file in JSON format.
+    Intended to be used with tools/graphanalyze.py
+  parameters:
+  - name: path
+    type: string
+  local-only: true
+- name: graphuserheap
+  comment: Writes the contents of user heap to the given file in JSON format.
+    Intended to be used with tools/graphanalyze.py
+  parameters:
+  - name: path
+    type: string
+  local-only: true
+- name: setfenv
+  comment: Set the scoped environment for the given function.
+  parameters:
+  - name: target
+    type: '((...any) -> ...any) | number'
+    selene-type: function
+  - name: env
+    type: '{[string]: any}'
+  slua-removed: true
 - name: touuid
   comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
     nil if the string is not a valid UUID, or the the buffer is
@@ -367,34 +410,6 @@ globalFunctions:
     selene-type: string
   returnType: quaternion?
   must-use: true
-- name: collectgarbage
-  comment: Run the garbage collector
-  overloads:
-  - comment: Alias for gcinfo
-    parameters:
-    - name: option
-      type: '"count"'
-      selene-type: string
-    returnType: number
-  parameters:
-  - name: option
-    type: '"collect"?'
-    selene-type: string
-  local-only: true
-- name: graphheap
-  comment: Writes the contents of heap to the given file in JSON format.
-    Intended to be used with tools/graphanalyze.py
-  parameters:
-  - name: path
-    type: string
-  local-only: true
-- name: graphuserheap
-  comment: Writes the contents of user heap to the given file in JSON format.
-    Intended to be used with tools/graphanalyze.py
-  parameters:
-  - name: path
-    type: string
-  local-only: true
 
 modules:
 - name: bit32

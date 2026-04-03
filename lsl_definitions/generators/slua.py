@@ -129,9 +129,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         return default
 
     def selene_property(prop: SLuaProperty) -> dict:
-        if prop.slua_removed:
-            return remove_nones(removed=True, description=prop.comment or None)
-        elif prop.type in classes:
+        if prop.type in classes:
             return remove_nones(struct=prop.type, description=prop.comment or None)
         else:
             return remove_nones(
@@ -161,6 +159,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         return remove_nones(message=" ".join(messages), replace=deprecated.selene_replace)
 
     def selene_function(func: SLuaFunction, method=False) -> dict:
+        if func.slua_removed:
+            return remove_nones(removed=True, description=f"{func.name} is removed in SLua.")
         parameters = func.parameters[1:] if method else func.parameters
         return remove_nones(
             method=method or None,
@@ -215,7 +215,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         if not const.private and const.name != "rotation":
             selene["globals"][const.name] = selene_property(const)
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-        if not const.private and not const.slua_removed:
+        if not const.private:
             selene["globals"][const.name] = selene_property(const)
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()

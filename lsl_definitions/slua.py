@@ -27,8 +27,6 @@ class SLuaProperty:
     value: str | None = None
     """A SLua literal or expression"""
     comment: str = ""
-    slua_removed: bool = False
-    """This property is in Luau but not SLua"""
     private: bool = False
     """Whether this should this be included in the syntax file"""
     modifiable: Literal["read-only", "new-fields", "override-fields", "full-write"] = "read-only"
@@ -107,6 +105,8 @@ class SLuaFunction(SLuaFunctionBase):
     private: bool = False  # currently only for private lsl functions
     local_only: bool = False
     deprecated: Deprecated | None = None
+    slua_removed: bool = False
+    """This function is in Luau but not SLua"""
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
@@ -148,7 +148,9 @@ class SLuaFunction(SLuaFunctionBase):
 
     def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
-        if self.overloads:
+        if self.slua_removed:
+            f.write(f"{self.name}: nil\n")
+        elif self.overloads:
             # the function format can't handle overloads
             self.write_luau_table_def(f, indent, suffix="")
         else:
@@ -668,6 +670,7 @@ class SLuaDefinitionParser:
                 comment=data.get("comment", ""),
                 deprecated=Deprecated.from_definition(data.get("deprecated", False)),
                 local_only=data.get("local-only", False),
+                slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
             )
             self._validate_identifier(func.name)
@@ -709,7 +712,6 @@ class SLuaDefinitionParser:
             type=data["type"],
             value=str(data.get("value", "")) or None,
             comment=data.get("comment", ""),
-            slua_removed=data.get("slua-removed", False),
             modifiable=data.get("modifiable", "read-only"),
         )
         self._validate_identifier(prop.name)

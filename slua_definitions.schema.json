@@ -60,11 +60,6 @@
                     "markdownDescription": "A brief description of this constant.",
                     "type": "string"
                 },
-                "slua-removed": {
-                    "const": true,
-                    "markdownDescription": "This property is only present in Luau, not SLua.",
-                    "type": "boolean"
-                },
                 "modifiable": {
                     "title": "Passed through to the selene `property` field.",
                     "description": "See https://kampfkarren.github.io/selene/usage/std.html#properties.",
@@ -173,6 +168,11 @@
                 "local-only": {
                     "const": true,
                     "markdownDescription": "This function is not available in-world, only locally.",
+                    "type": "boolean"
+                },
+                "slua-removed": {
+                    "const": true,
+                    "markdownDescription": "This function is only present in Luau, not SLua.",
                     "type": "boolean"
                 },
                 "must-use": {
