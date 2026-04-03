@@ -2466,6 +2466,8 @@ controls:
     tooltip: "Luau continue statement: skip to the next loop iteration."
   local:
     tooltip: "Lua local keyword: declares a local variable or function."
+  const:
+    tooltip: "Luau const keyword: declares a local constant variable or function."
   export:
     tooltip: "Luau export keyword: declares a type that can be used in outside this module."
   in:
