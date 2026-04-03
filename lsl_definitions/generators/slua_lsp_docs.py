@@ -124,7 +124,8 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     # for func in slua_definitions.builtinFunctions:
     #     builder.add_function(func)
     for func in slua_definitions.globalFunctions:
-        builder.add_function(func)
+        if not func.private:
+            builder.add_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             builder.add_module(module)

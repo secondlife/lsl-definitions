@@ -53,6 +53,8 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         class_.write_luau_def(defs)
     defs.write("\n")
     for func in slua_definitions.globalFunctions:
+        if func.private:
+            continue
         defs.write("declare ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
@@ -218,7 +220,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
-        selene["globals"][func.name] = selene_function(func)
+        if not func.private:
+            selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
