@@ -170,9 +170,9 @@
                     "type": "array"
                 },
                 "deprecated": { "$ref": "#/$defs/deprecated" },
-                "private": {
+                "local-only": {
                     "const": true,
-                    "markdownDescription": "Don't include in documentation.",
+                    "markdownDescription": "This function is not available in-world, only locally.",
                     "type": "boolean"
                 },
                 "must-use": {

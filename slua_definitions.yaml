@@ -380,21 +380,21 @@ globalFunctions:
   - name: option
     type: '"collect"?'
     selene-type: string
-  private: true
+  local-only: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
     Intended to be used with tools/graphanalyze.py
   parameters:
   - name: path
     type: string
-  private: true
+  local-only: true
 - name: graphuserheap
   comment: Writes the contents of user heap to the given file in JSON format.
     Intended to be used with tools/graphanalyze.py
   parameters:
   - name: path
     type: string
-  private: true
+  local-only: true
 
 modules:
 - name: bit32
@@ -1034,7 +1034,7 @@ modules:
     - name: what
       comment: String specifying which fields to retrieve.
       type: string
-    private: true
+    local-only: true
     returnType: "{[any]: any}"
     must-use: true
   - name: getlocal
@@ -1046,7 +1046,7 @@ modules:
     - name: index
       comment: Index of the local variable.
       type: number
-    private: true
+    local-only: true
     returnType: string | any
     must-use: true
   - name: setlocal
@@ -1061,7 +1061,7 @@ modules:
     - name: value
       comment: New value for the local variable.
       type: any
-    private: true
+    local-only: true
     returnType: boolean
   - name: getupvalue
     comment: Returns the name and value of an upvalue for a given function.
@@ -1072,7 +1072,7 @@ modules:
     - name: index
       comment: Index of the upvalue.
       type: number
-    private: true
+    local-only: true
     returnType: string | any
     must-use: true
   - name: setupvalue
@@ -1087,7 +1087,7 @@ modules:
     - name: value
       comment: New value for the upvalue.
       type: any
-    private: true
+    local-only: true
     returnType: string
   - name: getmetatable
     comment: Returns the metatable of the given value, if any.
@@ -1095,7 +1095,7 @@ modules:
     - name: value
       comment: Value whose metatable is retrieved.
       type: any
-    private: true
+    local-only: true
     returnType: "{[any]: any}?"
     must-use: true
   - name: setmetatable
@@ -1107,7 +1107,7 @@ modules:
     - name: metatable
       comment: Table to be set as the new metatable.
       type: "{[any]: any}?"
-    private: true
+    local-only: true
     returnType: any
 - name: llbase64
   comment: Base64 encoding/decoding library.
