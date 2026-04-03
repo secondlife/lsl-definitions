@@ -541,7 +541,7 @@ declare ll: {
   DetectedVel: @[deprecated {use='getVel'}](Number: number) -> vector,
   Dialog: (AvatarID: uuid, Text: string, Buttons: {string}, Channel: number) -> (),
   Die: () -> (),
-  DumpList2String: @[deprecated {reason="Use 'table.concat' or 'lljson.encode' instead."}](Source: list, Separator: string) -> string,
+  DumpList2String: (Source: list, Separator: string) -> string,
   EdgeOfWorld: (Position: vector, Direction: vector) -> boolean,
   EjectFromLand: (AvatarID: uuid) -> (),
   Email: (Address: string, Subject: string, Text: string) -> (),

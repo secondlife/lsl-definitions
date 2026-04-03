@@ -5780,11 +5780,6 @@ globals:
     args: []
     description: Delete the object which holds the script.
   ll.DumpList2String:
-    deprecated:
-      message: Use 'table.concat' or 'lljson.encode' instead.
-      replace:
-      - table.concat(%...)
-      - lljson.encode(%1)
     args:
     - type: table
     - type: string
