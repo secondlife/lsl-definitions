@@ -5954,9 +5954,6 @@ functions:
     - Separator:
         tooltip: ''
         type: string
-    slua-deprecated:
-      reason: Use 'table.concat' or 'lljson.encode' instead.
-      selene-replace: ["table.concat(%...)", "lljson.encode(%1)"]
     energy: 10.0
     func-id: 245
     native: true
