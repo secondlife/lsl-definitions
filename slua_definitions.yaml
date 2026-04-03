@@ -410,7 +410,6 @@ globalFunctions:
     selene-type: string
   returnType: quaternion?
   must-use: true
-
 modules:
 - name: bit32
   comment: Bitwise operations library.
