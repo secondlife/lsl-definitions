@@ -7189,8 +7189,8 @@ globals:
       value cannot be type-cast to a key, then null string is returned.
   ll.List2List:
     deprecated:
-      message: Use 'unpack' or 'table.move' instead. Prefer structured tables over
-        strided lists.
+      message: Use 'unpack' (fastcall) or 'table.move' instead. Prefer structured
+        tables over strided lists.
       replace:
       - table.pack(unpack(%...))
       - table.move(%..., 1, {})
@@ -7307,7 +7307,7 @@ globals:
       if not found.
   ll.ListInsertList:
     deprecated:
-      message: Use 'table.insert' instead. Unnecessary table copying.
+      message: Use 'table.insert' instead. Unnecessary table copying. Fastcall.
       replace:
       - table.insert(%1, %3, %2[1])
       - 'table.move(%2, 1, #%2, %3, %1)'
