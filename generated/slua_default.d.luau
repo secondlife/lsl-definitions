@@ -317,7 +317,7 @@ declare math: {
   pow: (base: number, exponent: number) -> number,
   rad: (n: number) -> number,
   random: (min: number?, max: number?) -> number,
-  randomseed: (seed: number) -> (),
+  randomseed: @[deprecated {reason='Disabled in SLua.'}](seed: number) -> (),
   round: (n: number) -> number,
   sign: (n: number) -> number,
   sin: (n: number) -> number,
