@@ -1505,6 +1505,8 @@ modules:
       comment: Seed for the random number generator.
       type: number
     returnType: ()
+    deprecated:
+      reason: Disabled in SLua.
     must-use: true
   - name: round
     comment: Rounds n to the nearest integer.

@@ -4557,6 +4557,8 @@ globals:
     must_use: true
     description: Returns a random number within the given range.
   math.randomseed:
+    deprecated:
+      message: Disabled in SLua.
     args:
     - type: number
     must_use: true
