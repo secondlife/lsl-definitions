@@ -183,7 +183,7 @@
                 },
                 "fastcall": {
                     "const": true,
-                    "title": "This function has a dedicated bytecode.",
+                    "title": "This function has a dedicated bytecode in the luau vm.",
                     "description": "See https://github.com/secondlife/slua/blob/main/Common/include/Luau/Bytecode.h#L542",
                     "type": "boolean"
                 },
