@@ -181,6 +181,12 @@
                     "description": "See https://kampfkarren.github.io/selene/usage/std.html#must_use.",
                     "type": "boolean"
                 },
+                "fastcall": {
+                    "const": true,
+                    "title": "This function has a dedicated bytecode in the luau vm.",
+                    "description": "See https://github.com/secondlife/slua/blob/main/Common/include/Luau/Bytecode.h#L542",
+                    "type": "boolean"
+                },
                 "comment": {
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"
