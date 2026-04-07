@@ -349,7 +349,7 @@ declare os: {
   date: ((formatString: string?, t: number?) -> string)
     & ((formatString: "*t" | "!*t", t: number?) -> DateTypeResult),
   difftime: @[deprecated {reason='Same as a - b'}](a: number, b: number) -> number,
-  time: ((time: DateTypeArg?) -> number?)
+  time: ((time: DateTypeArg) -> number?)
     & (() -> number),
 }
 

@@ -1668,7 +1668,8 @@ modules:
     parameters:
     - name: time
       comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
-      type: DateTypeArg?
+      type: DateTypeArg
+      optional: true
     returnType: number?
     overloads:
     - parameters: []
