@@ -5419,7 +5419,7 @@ globals:
       where {} indicates optional data.'
   ll.Ceil:
     deprecated:
-      message: Use 'math.ceil' instead. Double precision; fastcall.
+      message: Use 'math.ceil' instead. Fastcall.
       replace:
       - math.ceil(%...)
     args:
@@ -5882,7 +5882,7 @@ globals:
       away from a defined position in the region or adjacent regions.
   ll.Floor:
     deprecated:
-      message: Use 'math.floor' instead. Double precision; fastcall.
+      message: Use 'math.floor' instead. Fastcall.
       replace:
       - math.floor(%...)
     args:
@@ -7380,7 +7380,7 @@ globals:
       \ web browser."
   ll.Log:
     deprecated:
-      message: Use 'math.log' instead. It's a fastcall.
+      message: Use 'math.log' instead. Double precision; fastcall.
       replace:
       - math.log(%...)
     args:
@@ -7390,7 +7390,7 @@ globals:
       0.\nReturns the base e (natural) logarithm of the specified Value.
   ll.Log10:
     deprecated:
-      message: Use 'math.log10' instead. It's a fastcall.
+      message: Use 'math.log10' instead. Double precision; fastcall.
       replace:
       - math.log10(%...)
     args:
@@ -7720,7 +7720,7 @@ globals:
       is called at least once per loop of the Master.
   ll.Pow:
     deprecated:
-      message: Use '^' instead. It's a fastcall.
+      message: Use '^' instead. Double precision; operator.
       replace:
       - '%1 ^ %2'
       - math.pow(%...)
@@ -8119,7 +8119,7 @@ globals:
       Face is ALL_SIDES, rotates the texture of all sides.
   ll.Round:
     deprecated:
-      message: Use 'math.round' instead. It's a fastcall.
+      message: Use 'math.round' instead. Fastcall.
       replace:
       - math.round(%...)
     args:
@@ -8711,7 +8711,7 @@ globals:
       PrivateKey and digest Algorithm (sha1, sha224, sha256, sha384, sha512).
   ll.Sin:
     deprecated:
-      message: Use 'math.sin' instead. It's a fastcall.
+      message: Use 'math.sin' instead. Double precision; fastcall.
       replace:
       - math.sin(%...)
     args:
@@ -8761,7 +8761,7 @@ globals:
       within range.'
   ll.Sqrt:
     deprecated:
-      message: Use 'math.sqrt' instead. It's a fastcall.
+      message: Use 'math.sqrt' instead. Double precision; fastcall.
       replace:
       - math.sqrt(%...)
     args:
@@ -8863,7 +8863,7 @@ globals:
       runtime permission (automatically granted to attached or sat on objects).
   ll.Tan:
     deprecated:
-      message: Use 'math.tan' instead. It's a fastcall.
+      message: Use 'math.tan' instead. Double precision; fastcall.
       replace:
       - math.tan(%...)
     args:
