@@ -177,7 +177,21 @@ typeAliases:
   comment: Union of timer callback types
   definition: LLTimerEveryCallback | LLTimerOnceCallback
   selene-type: "function"
-- name: OsDateTime
+- name: DateTypeArg
+  comment: Date/time table structure used by os.date and os.time
+  export: true
+  definition: |-
+    {
+      year: number,
+      month: number,
+      day: number,
+      hour: number?,
+      min: number?,
+      sec: number?,
+      isdst: boolean?,
+    }
+  selene-type: {display: "DateTypeArg"}
+- name: DateTypeResult
   comment: Date/time table structure used by os.date and os.time
   export: true
   definition: |-
@@ -192,7 +206,7 @@ typeAliases:
       yday: number?,
       isdst: boolean?,
     }
-  selene-type: {display: "OsDateTime"}
+  selene-type: {display: "DateTypeResult"}
 - name: LLJsonEncodeOptions
   comment: Configuration options for lljson encoding
   definition: |-
@@ -1618,13 +1632,22 @@ modules:
   - name: date
     comment: Returns a table or string representation of the time based on the provided format.
     parameters:
-    - name: s
+    - name: formatString
       comment: Optional format string for the date representation.
       type: string?
     - name: t
       comment: Optional timestamp to format; defaults to the current time.
       type: number?
-    returnType: (string | OsDateTime)?
+    returnType: string
+    overloads:
+    - parameters:
+      - name: formatString
+        comment: Optional format string for the date representation.
+        type: '"*t" | "!*t"'
+      - name: t
+        comment: Optional timestamp to format; defaults to the current time.
+        type: number?
+      returnType: DateTypeResult
     must-use: true
   - name: difftime
     deprecated:
@@ -1637,17 +1660,20 @@ modules:
       type: number
     - name: b
       comment: Second timestamp value.
-      type: number?
-      optional: false
+      type: number
     returnType: number
     must-use: true
   - name: time
     comment: Returns the current Unix timestamp or the timestamp of the given date.
     parameters:
-    - name: t
+    - name: time
       comment: Optional table with date/time fields; returns the corresponding Unix timestamp.
-      type: OsDateTime?
+      type: DateTypeArg
+      optional: true
     returnType: number?
+    overloads:
+    - parameters: []
+      returnType: number
     must-use: true
 - name: quaternion
   comment: Quaternion manipulation library.

@@ -4634,14 +4634,13 @@ globals:
     args:
     - type: number
     - type: number
-      required: true
     must_use: true
     description: Returns the difference in seconds between two timestamps. Same as
       a - b.
   os.time:
     args:
     - type:
-        display: OsDateTime
+        display: DateTypeArg
       required: false
     must_use: true
     description: Returns the current Unix timestamp or the timestamp of the given
