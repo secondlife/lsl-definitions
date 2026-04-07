@@ -49,7 +49,16 @@ type LLDetectedEventHandler = (detected: {DetectedEvent}) -> ()
 type LLTimerEveryCallback = (scheduled: number, interval: number) -> ()
 type LLTimerOnceCallback = (scheduled: number) -> ()
 type LLTimerCallback = LLTimerEveryCallback | LLTimerOnceCallback
-export type OsDateTime = {
+export type DateTypeArg = {
+  year: number,
+  month: number,
+  day: number,
+  hour: number?,
+  min: number?,
+  sec: number?,
+  isdst: boolean?,
+}
+export type DateTypeResult = {
   year: number,
   month: number,
   day: number,
@@ -337,9 +346,11 @@ declare math: {
 
 declare os: {
   clock: () -> number,
-  date: (s: string?, t: number?) -> (string | OsDateTime)?,
-  difftime: @[deprecated {reason='Same as a - b'}](a: number, b: number?) -> number,
-  time: (t: OsDateTime?) -> number?,
+  date: ((formatString: string?, t: number?) -> string)
+    & ((formatString: "*t" | "!*t", t: number?) -> DateTypeResult),
+  difftime: @[deprecated {reason='Same as a - b'}](a: number, b: number) -> number,
+  time: ((time: DateTypeArg?) -> number?)
+    & (() -> number),
 }
 
 

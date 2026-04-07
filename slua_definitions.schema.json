@@ -9,7 +9,7 @@
         },
         "type": {
             "markdownDescription": "A luau-format type definition.",
-            "pattern": "^([ \n?&|,{}\\[\\]()\":a-zA-Z0-9_]|\\.\\.\\.|->)*$",
+            "pattern": "^([ \n?&|,{}\\[\\]():a-zA-Z0-9_]|\"[^\"]*\"|\\.\\.\\.|->)*$",
             "type": "string"
         },
         "selene-type": {
