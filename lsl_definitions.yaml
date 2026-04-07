@@ -5264,7 +5264,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.ceil
-      reason: Double precision; fastcall.
+      reason: Fastcall.
       selene-replace: ["math.ceil(%...)"]
     energy: 10.0
     func-id: 10
@@ -6157,7 +6157,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.floor
-      reason: Double precision; fastcall.
+      reason: Fastcall.
       selene-replace: ["math.floor(%...)"]
     energy: 10.0
     func-id: 9
@@ -9135,7 +9135,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.log
-      reason: It's a fastcall.
+      reason: Double precision; fastcall.
       selene-replace: ["math.log(%...)"]
     energy: 10.0
     func-id: 265
@@ -9152,7 +9152,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.log10
-      reason: It's a fastcall.
+      reason: Double precision; fastcall.
       selene-replace: ["math.log10(%...)"]
     energy: 10.0
     func-id: 264
@@ -9840,7 +9840,7 @@ functions:
         type: float
     slua-deprecated:
       use: "^"
-      reason: It's a fastcall.
+      reason: Double precision; operator.
       selene-replace: ["%1 ^ %2", "math.pow(%...)", "math.exp(%2)"]
     energy: 10.0
     func-id: 5
@@ -10622,7 +10622,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.round
-      reason: It's a fastcall.
+      reason: Fastcall.
       selene-replace: ["math.round(%...)"]
     energy: 10.0
     func-id: 11
@@ -11899,7 +11899,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.sin
-      reason: It's a fastcall.
+      reason: Double precision; fastcall.
       selene-replace: ["math.sin(%...)"]
     energy: 10.0
     func-id: 0
@@ -11995,7 +11995,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.sqrt
-      reason: It's a fastcall.
+      reason: Double precision; fastcall.
       selene-replace: ["math.sqrt(%...)"]
     energy: 10.0
     func-id: 4
@@ -12202,7 +12202,7 @@ functions:
         type: float
     slua-deprecated:
       use: math.tan
-      reason: It's a fastcall.
+      reason: Double precision; fastcall.
       selene-replace: ["math.tan(%...)"]
     energy: 10.0
     func-id: 2
