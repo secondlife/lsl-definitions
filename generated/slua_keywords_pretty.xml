@@ -5095,6 +5095,8 @@ export type rotation = quaternion</string>
          </map>
          <key>PI</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>3.14159265 - The number of radians in a semi-circle.</string>
             <key>type</key>
@@ -5113,6 +5115,8 @@ export type rotation = quaternion</string>
          </map>
          <key>PI_BY_TWO</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>1.57079633 - The number of radians in a quarter circle.</string>
             <key>type</key>
@@ -8094,6 +8098,8 @@ vector position - position in local coordinates
          </map>
          <key>SQRT2</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>1.41421356 - The square root of 2.</string>
             <key>type</key>
@@ -8769,6 +8775,8 @@ vector position - position in local coordinates
          </map>
          <key>TWO_PI</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>6.28318530 - The radians of a circle.</string>
             <key>type</key>
