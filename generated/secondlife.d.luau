@@ -387,7 +387,7 @@ declare string: {
   gmatch: (s: string, pattern: string) -> () -> ...string,
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number),
   len: (s: string) -> number,
-  lower: (s: string) -> string,
+  lower: @[deprecated {use='ll.ToLower', reason='Unicode handling.'}](s: string) -> string,
   match: (s: string, pattern: string, init: number?) -> ...string,
   pack: (fmt: string, ...any) -> string,
   packsize: (fmt: string) -> number,
@@ -396,7 +396,7 @@ declare string: {
   split: (s: string, separator: string?) -> {string},
   sub: (s: string, i: number, j: number?) -> string,
   unpack: (fmt: string, s: string, init: number?) -> ...any,
-  upper: (s: string) -> string,
+  upper: @[deprecated {use='ll.ToUpper', reason='Unicode handling.'}](s: string) -> string,
 }
 
 
