@@ -31,4 +31,4 @@ stage/
 # These ones are annoying to have in the repo because of the sparsity of newlines.
 # We want them generated and packaged, we just aren't so interested in their diffs.
 /generated/lsl_keywords.xml
-/generated/slua_keywords.xml
+/generated/lua_keywords.xml
