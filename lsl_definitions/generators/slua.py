@@ -53,6 +53,8 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         class_.write_luau_def(defs)
     defs.write("\n")
     for func in slua_definitions.globalFunctions:
+        if func.private or func.local_only:
+            continue
         defs.write("declare ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
@@ -127,9 +129,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         return default
 
     def selene_property(prop: SLuaProperty) -> dict:
-        if prop.slua_removed:
-            return remove_nones(removed=True, description=prop.comment or None)
-        elif prop.type in classes:
+        if prop.type in classes:
             return remove_nones(struct=prop.type, description=prop.comment or None)
         else:
             return remove_nones(
@@ -159,6 +159,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         return remove_nones(message=" ".join(messages), replace=deprecated.selene_replace)
 
     def selene_function(func: SLuaFunction, method=False) -> dict:
+        if func.slua_removed:
+            return remove_nones(removed=True, description=f"{func.name} is removed in SLua.")
         parameters = func.parameters[1:] if method else func.parameters
         return remove_nones(
             method=method or None,
@@ -193,7 +195,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
                 f"{module.name}.{func.name}": selene_function(func)
                 # for func in sorted(self.functions, key=lambda x: x.name)
                 for func in module.functions
-                if not func.private
+                if not func.private and not func.local_only
             }
         )
         return globals
@@ -213,12 +215,13 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         if not const.private and const.name != "rotation":
             selene["globals"][const.name] = selene_property(const)
     for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
-        if not const.private and not const.slua_removed:
+        if not const.private:
             selene["globals"][const.name] = selene_property(const)
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
     for func in slua_definitions.globalFunctions:
-        selene["globals"][func.name] = selene_function(func)
+        if not func.private and not func.local_only:
+            selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))

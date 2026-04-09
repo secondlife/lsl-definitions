@@ -27,8 +27,6 @@ class SLuaProperty:
     value: str | None = None
     """A SLua literal or expression"""
     comment: str = ""
-    slua_removed: bool = False
-    """This property is in Luau but not SLua"""
     private: bool = False
     """Whether this should this be included in the syntax file"""
     modifiable: Literal["read-only", "new-fields", "override-fields", "full-write"] = "read-only"
@@ -104,8 +102,11 @@ class SLuaFunctionOverload(SLuaFunctionBase):
 class SLuaFunction(SLuaFunctionBase):
     """Full function or method signature with optional overloads"""
 
-    private: bool = False
+    private: bool = False  # currently only for private lsl functions
+    local_only: bool = False
     deprecated: Deprecated | None = None
+    slua_removed: bool = False
+    """This function is in Luau but not SLua"""
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
@@ -147,7 +148,9 @@ class SLuaFunction(SLuaFunctionBase):
 
     def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
-        if self.overloads:
+        if self.slua_removed:
+            f.write(f"{self.name}: nil\n")
+        elif self.overloads:
             # the function format can't handle overloads
             self.write_luau_table_def(f, indent, suffix="")
         else:
@@ -240,7 +243,7 @@ class SLuaModule:
             {
                 f"{self.name}.{func.name}": func.to_keywords_dict()
                 for func in sorted(self.functions, key=lambda x: x.name)
-                if not func.private
+                if not func.private and not func.local_only
             }
         )
         return functions
@@ -266,7 +269,7 @@ declare {self.name}: """)
         for prop in self.constants:
             f.write(f"  {prop.to_luau_def()},\n")
         for func in self.functions:
-            if func.private:
+            if func.private or func.local_only:
                 continue
             func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")
@@ -372,6 +375,7 @@ class SLuaDefinitions:
             event_func = SLuaFunction(
                 name=event.name,
                 comment=event.tooltip,
+                private=event.private,
                 deprecated=event.deprecated or event.slua_deprecated,
                 parameters=[
                     SLuaParameter(
@@ -419,6 +423,7 @@ class SLuaDefinitions:
                 comment=event.tooltip,
                 type=type_def,
                 modifiable="override-fields",
+                private=event.private,
             )
             LLEvents_class.properties.append(event_prop)
 
@@ -461,8 +466,6 @@ class SLuaDefinitions:
         DetectedEvent_class = next(m for m in self.baseClasses if m.name == "DetectedEvent")
 
         for func in lsl.functions.values():
-            if func.private:
-                continue
             semantic_prefix = (
                 "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
             )
@@ -471,6 +474,7 @@ class SLuaDefinitions:
                 name=func.compute_slua_name(with_module=False),
                 comment=func.compute_slua_tooltip(),
                 deprecated=func.deprecated or func.slua_deprecated,
+                private=func.private,
                 typeParameters=func.type_arguments,
                 parameters=[
                     SLuaParameter(
@@ -487,6 +491,7 @@ class SLuaDefinitions:
                 name=ll_func.name,
                 comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
                 deprecated=Deprecated(),
+                private=ll_func.private,
                 typeParameters=ll_func.typeParameters,
                 parameters=ll_func.parameters,
                 returnType=self.validate_type(
@@ -505,6 +510,7 @@ class SLuaDefinitions:
                     name=name,
                     comment=ll_func.comment,
                     deprecated=None,
+                    private=ll_func.private,
                     typeParameters=ll_func.typeParameters,
                     parameters=ll_func.parameters[:],
                     returnType=ll_func.returnType,
@@ -663,7 +669,8 @@ class SLuaDefinitionParser:
                 returnType=data.get("returnType", "()"),
                 comment=data.get("comment", ""),
                 deprecated=Deprecated.from_definition(data.get("deprecated", False)),
-                private=data.get("private", False),
+                local_only=data.get("local-only", False),
+                slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
             )
             self._validate_identifier(func.name)
@@ -705,8 +712,6 @@ class SLuaDefinitionParser:
             type=data["type"],
             value=str(data.get("value", "")) or None,
             comment=data.get("comment", ""),
-            slua_removed=data.get("slua-removed", False),
-            private=data.get("private", False),
             modifiable=data.get("modifiable", "read-only"),
         )
         self._validate_identifier(prop.name)

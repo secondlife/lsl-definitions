@@ -12,15 +12,6 @@ globals:
   LLTimers:
     struct: LLTimers
     description: Timer management singleton for scheduling periodic and one-time callbacks.
-  loadstring:
-    removed: true
-    description: loadstring is removed in SLua.
-  getfenv:
-    removed: true
-    description: getfenv is removed in SLua.
-  setfenv:
-    removed: true
-    description: setfenv is removed in SLua.
   ACTIVE:
     property: read-only
     type: number
@@ -3922,6 +3913,15 @@ globals:
     args:
     - type: function
     description: Dangerously executes a required module function
+  loadstring:
+    removed: true
+    description: loadstring is removed in SLua.
+  getfenv:
+    removed: true
+    description: getfenv is removed in SLua.
+  setfenv:
+    removed: true
+    description: setfenv is removed in SLua.
   touuid:
     args:
     - type: string
