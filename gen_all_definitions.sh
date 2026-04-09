@@ -12,12 +12,12 @@ CMD="python gen_definitions.py"
 # Viewer outputs
 $CMD $DEFS syntax "$outdir/lsl_keywords.xml"
 $CMD $DEFS syntax --pretty "$outdir/lsl_keywords_pretty.xml"
-$CMD $DEFS slua_syntax $SLUA "$outdir/slua_keywords.xml"
-$CMD $DEFS slua_syntax --pretty $SLUA "$outdir/slua_keywords_pretty.xml"
-$CMD $DEFS slua_lsp_defs $SLUA "$outdir/slua_default.d.luau"
-$CMD $DEFS slua_lsp_docs $SLUA "$outdir/slua_default.docs.json"
+$CMD $DEFS slua_syntax $SLUA "$outdir/lua_keywords.xml"
+$CMD $DEFS slua_syntax --pretty $SLUA "$outdir/lua_keywords_pretty.xml"
+$CMD $DEFS slua_lsp_defs $SLUA "$outdir/secondlife.d.luau"
+$CMD $DEFS slua_lsp_docs $SLUA "$outdir/secondlife.docs.json"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
-$CMD $DEFS slua_selene $SLUA "$outdir/slua_selene.yml"
+$CMD $DEFS slua_selene $SLUA "$outdir/secondlife_selene.yml"
 
 # C++ snippets
 $CMD $DEFS gen_cpp_constants "$outdir/cpp/lllslconstants_generated.h"

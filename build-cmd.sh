@@ -31,6 +31,7 @@ source_environment_tempfile="$stage/source_environment.sh"
 
 # Generate definition files
 ./gen_all_definitions.sh "$stage/lsl_definitions"
+
 # Don't care about these, actually
 rm -rf "$stage/lsl_definitions/templated"
 rm -rf "$stage/lsl_definitions/cpp"
