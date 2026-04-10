@@ -123,7 +123,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     # builtin docs are unused if generated
     # for func in slua_definitions.builtinFunctions:
     #     builder.add_function(func)
-    for func in slua_definitions.globalFunctions:
+    for func in slua_definitions.global_functions:
         if not func.private and not func.local_only and not func.slua_removed:
             builder.add_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
@@ -132,9 +132,9 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     builder.add_module(modules["ll"])
     builder.add_module(modules["llcompat"])
     # builtin docs are unused if generated
-    # for const in slua_definitions.builtinConstants:
+    # for const in slua_definitions.builtin_constants:
     #     builder.add_constant(const)
-    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
         if not const.private:
             builder.add_constant(const)
     # class docs are unused if generated

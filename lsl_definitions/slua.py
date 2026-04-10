@@ -73,16 +73,16 @@ class SLuaParameter:
 @dataclasses.dataclass
 class SLuaFunctionBase(abc.ABC):
     name: str = ""
-    typeParameters: List[str] = dataclasses.field(default_factory=list)
+    type_parameters: List[str] = dataclasses.field(default_factory=list)
     parameters: List[SLuaParameter] = dataclasses.field(default_factory=list)
-    returnType: str = "()"
+    return_type: str = "()"
     comment: str = ""
 
     @property
     def type_parameters_string(self) -> str:
-        if not self.typeParameters:
+        if not self.type_parameters:
             return ""
-        return "<" + ", ".join(self.typeParameters) + ">"
+        return "<" + ", ".join(self.type_parameters) + ">"
 
     @property
     def parameters_string(self) -> str:
@@ -90,7 +90,7 @@ class SLuaFunctionBase(abc.ABC):
 
     @property
     def type_def_string(self) -> str:
-        return self.type_parameters_string + self.parameters_string + " -> " + self.returnType
+        return self.type_parameters_string + self.parameters_string + " -> " + self.return_type
 
 
 @dataclasses.dataclass
@@ -128,7 +128,7 @@ class SLuaFunction(SLuaFunctionBase):
     def to_keywords_dict(self) -> dict:
         return remove_worthless(
             {
-                "type-arguments": self.typeParameters,
+                "type-arguments": self.type_parameters,
                 "arguments": [
                     {
                         a.name: {
@@ -140,7 +140,7 @@ class SLuaFunction(SLuaFunctionBase):
                 ],
                 "deprecated": self.deprecated is not None,
                 "energy": 10.0,
-                "return": self.returnType,
+                "return": self.return_type,
                 "sleep": 0.0,
                 "tooltip": self.comment,
             }
@@ -159,7 +159,7 @@ class SLuaFunction(SLuaFunctionBase):
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string)
-            f.write(f": {self.returnType}\n")
+            f.write(f": {self.return_type}\n")
 
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
@@ -281,20 +281,20 @@ class SLuaDefinitions:
 
     # 1. Luau builtins. Typecheckers already know about these
     controls: dict  # same structure as LSLDefinitions.controls
-    builtinTypes: dict  # same structure as LSLDefinitions.types
-    builtinConstants: List[SLuaProperty]
-    builtinFunctions: List[SLuaFunction]
+    builtin_types: dict  # same structure as LSLDefinitions.types
+    builtin_constants: List[SLuaProperty]
+    builtin_functions: List[SLuaFunction]
 
     # 2. SLua base classes. These only depend on Luau builtins
-    baseClasses: List[SLuaClassDeclaration]
-    typeAliases: List[SLuaTypeAlias]
+    base_classes: List[SLuaClassDeclaration]
+    type_aliases: List[SLuaTypeAlias]
 
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
-    globalFunctions: List[SLuaFunction]
+    global_functions: List[SLuaFunction]
     modules: List[SLuaModule]
-    globalVariables: List[SLuaProperty]
-    globalConstants: List[SLuaProperty]
+    global_variables: List[SLuaProperty]
+    global_constants: List[SLuaProperty]
 
     # All known type names, populated by parser
     type_names: Set[str] = dataclasses.field(default_factory=set)
@@ -340,12 +340,12 @@ class SLuaDefinitions:
         If solverV2 is False, generate an overload for each event. (more correct)
         """
         LLDetectedEventName_alias = next(
-            m for m in self.typeAliases if m.name == "LLDetectedEventName"
+            m for m in self.type_aliases if m.name == "LLDetectedEventName"
         )
         LLNonDetectedEventName_alias = next(
-            m for m in self.typeAliases if m.name == "LLNonDetectedEventName"
+            m for m in self.type_aliases if m.name == "LLNonDetectedEventName"
         )
-        LLEventName_alias = next(m for m in self.typeAliases if m.name == "LLEventName")
+        LLEventName_alias = next(m for m in self.type_aliases if m.name == "LLEventName")
         LLEvents_class = next(m for m in self.classes if m.name == "LLEvents")
 
         def replace_list(type: str) -> str:
@@ -405,7 +405,7 @@ class SLuaDefinitions:
                                     name=register_func.name,
                                     comment=event.tooltip,
                                     parameters=overload_parameters,
-                                    returnType=type_def,
+                                    return_type=type_def,
                                 )
                             )
                         elif register_func.name == "off":
@@ -414,7 +414,7 @@ class SLuaDefinitions:
                                     name=register_func.name,
                                     comment=event.tooltip,
                                     parameters=overload_parameters,
-                                    returnType=register_func.returnType,
+                                    return_type=register_func.return_type,
                                 )
                             )
                 type_def = f"({type_def})?"
@@ -453,17 +453,17 @@ class SLuaDefinitions:
                                 SLuaParameter("event", type="LLNonDetectedEventName"),
                                 SLuaParameter("callback", type="LLEventHandler"),
                             ],
-                            returnType=register_func.returnType,
+                            return_type=register_func.return_type,
                         )
                     )
             if register_func.name in {"on", "once"}:
-                register_func.returnType = "LLDetectedEventHandler"
+                register_func.return_type = "LLDetectedEventHandler"
                 if solverV2:
-                    register_func.overloads[0].returnType = "LLEventHandler"
+                    register_func.overloads[0].return_type = "LLEventHandler"
 
         ll_module = next(m for m in self.modules if m.name == "ll")
         llcompat_module = next(m for m in self.modules if m.name == "llcompat")
-        DetectedEvent_class = next(m for m in self.baseClasses if m.name == "DetectedEvent")
+        DetectedEvent_class = next(m for m in self.base_classes if m.name == "DetectedEvent")
 
         for func in lsl.functions.values():
             semantic_prefix = (
@@ -475,7 +475,7 @@ class SLuaDefinitions:
                 comment=func.compute_slua_tooltip(),
                 deprecated=func.deprecated or func.slua_deprecated,
                 private=func.private,
-                typeParameters=func.type_arguments,
+                type_parameters=func.type_arguments,
                 parameters=[
                     SLuaParameter(
                         name=a.name,
@@ -484,7 +484,7 @@ class SLuaDefinitions:
                     )
                     for a in func.arguments
                 ],
-                returnType=self.validate_type(replace_list(func.compute_slua_type()), known_types),
+                return_type=self.validate_type(replace_list(func.compute_slua_type()), known_types),
                 must_use=func.must_use or func.pure,
             )
             llcompat_func = SLuaFunction(
@@ -492,9 +492,9 @@ class SLuaDefinitions:
                 comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
                 deprecated=Deprecated(),
                 private=ll_func.private,
-                typeParameters=ll_func.typeParameters,
+                type_parameters=ll_func.type_parameters,
                 parameters=ll_func.parameters,
-                returnType=self.validate_type(
+                return_type=self.validate_type(
                     replace_list(func.compute_slua_type(llcompat=True)), known_types
                 ),
                 must_use=ll_func.must_use,
@@ -511,9 +511,9 @@ class SLuaDefinitions:
                     comment=ll_func.comment,
                     deprecated=None,
                     private=ll_func.private,
-                    typeParameters=ll_func.typeParameters,
+                    type_parameters=ll_func.type_parameters,
                     parameters=ll_func.parameters[:],
-                    returnType=ll_func.returnType,
+                    return_type=ll_func.return_type,
                     must_use=ll_func.must_use,
                 )
                 detected_func.parameters[0] = SLuaParameter(name="self")
@@ -529,7 +529,7 @@ class SLuaDefinitions:
                 value=const.slua_literal,
                 private=const.private,
             )
-            self.globalConstants.append(prop)
+            self.global_constants.append(prop)
 
 
 class SLuaDefinitionParser:
@@ -555,51 +555,51 @@ class SLuaDefinitionParser:
 
     def _parse_dict(self, def_dict: dict) -> SLuaDefinitions:
         # 1. Luau builtins
-        builtin_types = dict(def_dict["builtinTypes"])
+        builtin_types = dict(def_dict["builtin-types"])
         self._type_names.update(builtin_types.keys())
 
         controls = dict(def_dict["controls"])
         self._global_scope.update(controls.keys())
 
         # nil, true, false are also valid type literals
-        self._type_names.update(const["name"] for const in def_dict["builtinConstants"])
+        self._type_names.update(const["name"] for const in def_dict["builtin-constants"])
         builtin_constants = [
             self._validate_property(const, self._global_scope, const=True)
-            for const in def_dict["builtinConstants"]
+            for const in def_dict["builtin-constants"]
         ]
         builtin_functions = [
             self._validate_function(func, self._global_scope)
-            for func in def_dict["builtinFunctions"]
+            for func in def_dict["builtin-functions"]
         ]
 
         # 2. SLua base classes
-        base_classes = [self._validate_class(class_) for class_ in def_dict["baseClasses"]]
-        type_aliases = [self._validate_type_alias(alias) for alias in def_dict["typeAliases"]]
+        base_classes = [self._validate_class(class_) for class_ in def_dict["base-classes"]]
+        type_aliases = [self._validate_type_alias(alias) for alias in def_dict["type-aliases"]]
 
         # 3. SLua standard library
         classes = [self._validate_class(class_) for class_ in def_dict["classes"]]
         global_functions = [
             self._validate_function(func, self._global_scope)
-            for func in def_dict["globalFunctions"]
+            for func in def_dict["global-functions"]
         ]
         modules = [self._validate_module(module) for module in def_dict["modules"]]
         global_variables = [
             self._validate_property(const, self._global_scope)
-            for const in def_dict["globalVariables"]
+            for const in def_dict["global-variables"]
         ]
 
         return SLuaDefinitions(
             controls=controls,
-            builtinTypes=builtin_types,
-            builtinConstants=builtin_constants,
-            builtinFunctions=builtin_functions,
-            baseClasses=base_classes,
-            typeAliases=type_aliases,
+            builtin_types=builtin_types,
+            builtin_constants=builtin_constants,
+            builtin_functions=builtin_functions,
+            base_classes=base_classes,
+            type_aliases=type_aliases,
             classes=classes,
-            globalFunctions=global_functions,
+            global_functions=global_functions,
             modules=modules,
-            globalVariables=global_variables,
-            globalConstants=[],
+            global_variables=global_variables,
+            global_constants=[],
             type_names=self._type_names,
         )
 
@@ -661,12 +661,12 @@ class SLuaDefinitionParser:
         try:
             func = SLuaFunction(
                 name=data["name"],
-                typeParameters=data.get("typeParameters", []),
+                type_parameters=data.get("type-parameters", []),
                 parameters=[
                     SLuaParameter(selene_type=p.pop("selene-type", None), **p)
                     for p in data.get("parameters", [])
                 ],
-                returnType=data.get("returnType", "()"),
+                return_type=data.get("return-type", "()"),
                 comment=data.get("comment", ""),
                 deprecated=Deprecated.from_definition(data.get("deprecated", False)),
                 local_only=data.get("local-only", False),
@@ -676,17 +676,17 @@ class SLuaDefinitionParser:
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
             self._validate_function_signature(func, class_name)
-            known_types = self._validate_type_params(func.typeParameters)
-            self._validate_type(func.returnType, known_types)
+            known_types = self._validate_type_params(func.type_parameters)
+            self._validate_type(func.return_type, known_types)
             for overload_data in data.get("overloads", []):
                 overload = SLuaFunctionOverload(
                     name=func.name,
-                    typeParameters=overload_data.get("typeParameters", []),
+                    type_parameters=overload_data.get("type-parameters", []),
                     parameters=[
                         SLuaParameter(selene_type=p.pop("selene-type", None), **p)
                         for p in overload_data.get("parameters", [])
                     ],
-                    returnType=overload_data.get("returnType", "()"),
+                    return_type=overload_data.get("return-type", "()"),
                     comment=overload_data.get("comment", ""),
                 )
                 self._validate_function_signature(overload)
@@ -724,8 +724,8 @@ class SLuaDefinitionParser:
     def _validate_function_signature(
         self, func: SLuaFunctionBase, class_name: str | None = None
     ) -> None:
-        known_types = self._validate_type_params(func.typeParameters)
-        self._validate_type(func.returnType, known_types)
+        known_types = self._validate_type_params(func.type_parameters)
+        self._validate_type(func.return_type, known_types)
         params = func.parameters
         params_scope: Set[str] = set()
         if class_name is not None:

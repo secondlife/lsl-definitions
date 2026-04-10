@@ -38,12 +38,12 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
 
     # 1. Luau builtins unneeded. Luau-lsp already know about these
     # 2. SLua base classes. These only depend on Luau builtins
-    classes = slua_definitions.baseClasses + slua_definitions.classes
+    classes = slua_definitions.base_classes + slua_definitions.classes
     classes.sort(key=lambda x: x.name)
     for class_ in (class_ for class_ in classes if class_.name[0].islower()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for alias in slua_definitions.typeAliases:
+    for alias in slua_definitions.type_aliases:
         defs.write(alias.to_luau_def())
         defs.write("\n")
     defs.write("\n")
@@ -52,7 +52,7 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for func in slua_definitions.globalFunctions:
+    for func in slua_definitions.global_functions:
         if func.private or func.local_only:
             continue
         defs.write("declare ")
@@ -61,13 +61,13 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         if module.name in {"ll", "llcompat"}:
             continue
         module.write_luau_def(defs)
-    for var in slua_definitions.globalVariables:
+    for var in slua_definitions.global_variables:
         defs.write("declare ")
         defs.write(var.to_luau_def())
         defs.write("\n")
     ll_module.write_luau_def(defs)
     llcompat_module.write_luau_def(defs)
-    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
         if const.private:
             continue
         defs.write("declare ")
@@ -83,8 +83,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     https://kampfkarren.github.io/selene/usage/std.html
     """
     slua_definitions.generate_ll_modules(definitions)
-    classes = {c.name: c for c in slua_definitions.baseClasses + slua_definitions.classes}
-    type_aliases = {a.name: a for a in slua_definitions.typeAliases}
+    classes = {c.name: c for c in slua_definitions.base_classes + slua_definitions.classes}
+    type_aliases = {a.name: a for a in slua_definitions.type_aliases}
 
     file = io.StringIO()
     file.write("""# Second Life SLua (Server Lua) standard library definition file for selene.
@@ -211,15 +211,15 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         functions=modules["quaternion"].functions,
     )
 
-    for const in slua_definitions.globalVariables:
+    for const in slua_definitions.global_variables:
         if not const.private and const.name != "rotation":
             selene["globals"][const.name] = selene_property(const)
-    for const in sorted(slua_definitions.globalConstants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
         if not const.private:
             selene["globals"][const.name] = selene_property(const)
     # for func in slua_definitions.builtinFunctions:
     #     selene["globals"][func.name] = func.to_selene_dict()
-    for func in slua_definitions.globalFunctions:
+    for func in slua_definitions.global_functions:
         if not func.private and not func.local_only:
             selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
@@ -231,7 +231,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         selene["structs"][class_.name] = selene_class(class_)
 
     # Fix up LLEvents argument types
-    event_names = [m for m in slua_definitions.typeAliases if m.name == "LLEventName"][
+    event_names = [m for m in slua_definitions.type_aliases if m.name == "LLEventName"][
         0
     ].selene_type
     for method_name in ["on", "once", "off", "handlers"]:
