@@ -123,7 +123,7 @@
             "markdownDescription": "A plain function signature; no name or overloads.",
             "additionalProperties": false,
             "properties": {
-                "typeParameters": {
+                "type-parameters": {
                     "items": {
                         "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
                         "type": "string"
@@ -134,7 +134,7 @@
                     "items": { "$ref": "#/$defs/function-parameter" },
                     "type": "array"
                 },
-                "returnType": { "$ref": "#/$defs/type" },
+                "return-type": { "$ref": "#/$defs/type" },
                 "comment": {
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"
@@ -148,7 +148,7 @@
             "additionalProperties": false,
             "properties": {
                 "name": { "$ref": "#/$defs/identifier" },
-                "typeParameters": {
+                "type-parameters": {
                     "items": {
                         "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
                         "type": "string"
@@ -159,7 +159,7 @@
                     "items": { "$ref": "#/$defs/function-parameter" },
                     "type": "array"
                 },
-                "returnType": { "$ref": "#/$defs/type" },
+                "return-type": { "$ref": "#/$defs/type" },
                 "overloads": {
                     "items": { "$ref": "#/$defs/function-anon" },
                     "type": "array"
@@ -246,11 +246,11 @@
             "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "type": "string"
         },
-        "baseClasses": {
+        "base-classes": {
             "items": { "$ref": "#/$defs/class" },
             "type": "array"
         },
-        "typeAliases": {
+        "type-aliases": {
             "items": { "$ref": "#/$defs/type-alias" },
             "type": "array"
         },
@@ -258,11 +258,11 @@
             "items": { "$ref": "#/$defs/class" },
             "type": "array"
         },
-        "globalVariables": {
+        "global-variables": {
             "items": { "$ref": "#/$defs/property" },
             "type": "array"
         },
-        "globalFunctions": {
+        "global-functions": {
             "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
@@ -274,11 +274,11 @@
             "items": { "$ref": "#/$defs/property" },
             "type": "array"
         },
-        "builtinConstants": {
+        "builtin-constants": {
             "items": { "$ref": "#/$defs/property" },
             "type": "array"
         },
-        "builtinFunctions": {
+        "builtin-functions": {
             "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
@@ -299,7 +299,7 @@
             },
             "type": "object"
         },
-        "builtinTypes": {
+        "builtin-types": {
             "markdownDescription": "The Luau builtin types.",
             "additionalProperties": false,
             "patternProperties": {
@@ -321,16 +321,16 @@
     },
     "required": [
         "version",
-        "baseClasses",
-        "typeAliases",
+        "base-classes",
+        "type-aliases",
         "classes",
-        "globalFunctions",
+        "global-functions",
         "modules",
         "constants",
         "controls",
-        "builtinTypes",
-        "builtinConstants",
-        "builtinFunctions"
+        "builtin-types",
+        "builtin-constants",
+        "builtin-functions"
     ],
     "title": "Second Life SLua Definitions",
     "type": "object"
