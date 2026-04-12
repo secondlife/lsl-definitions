@@ -459,6 +459,7 @@ class LSLDefinitions(NamedTuple):
     constants: Dict[str, LSLConstant]
     controls: dict
     types: dict
+    rulesets: dict
 
     @property
     def reserved_words(self) -> Set[str]:
@@ -485,7 +486,7 @@ class LSLFunctionRanges(enum.IntEnum):
 
 class LSLDefinitionParser:
     def __init__(self):
-        self._definitions = LSLDefinitions({}, {}, {}, {}, {})
+        self._definitions = LSLDefinitions({}, {}, {}, {}, {}, {})
 
     def parse_file(self, name: str) -> LSLDefinitions:
         if name.endswith(".llsd"):
@@ -524,6 +525,14 @@ class LSLDefinitionParser:
                 # This isn't a real constant, but it's in here for some reason, maybe syntax highlighting?
                 continue
             self._handle_constant(const_name, const_data)
+
+        rulesets = def_dict.get("rulesets", {})
+        prim_params = rulesets.get("prim_params")
+        if prim_params is not None:
+            for rule_name in prim_params["rules"]:
+                if rule_name not in self._definitions.constants:
+                    raise ValueError(f"prim_params rule {rule_name!r} is not a known constant")
+        self._definitions.rulesets.update(rulesets)
 
         return self._definitions
 

@@ -383,6 +383,64 @@
                 }
             },
             "type": "object"
+        },
+        "rulesets": {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "prim_params": {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "required": ["rules"],
+                    "properties": {
+                        "rules": {
+                            "additionalProperties": false,
+                            "type": "object",
+                            "patternProperties": {
+                                "^PRIM_[A-Z0-9_]+$": {
+                                    "additionalProperties": false,
+                                    "type": "object",
+                                    "required": ["params"],
+                                    "properties": {
+                                        "face_target": {
+                                            "const": true,
+                                            "markdownDescription": "This rule targets a specific face.",
+                                            "type": "boolean"
+                                        },
+                                        "nullable": {
+                                            "const": true,
+                                            "markdownDescription": "This rule's params may all be NULL.",
+                                            "type": "boolean"
+                                        },
+                                        "params": {
+                                            "items": {
+                                                "items": false,
+                                                "maxItems": 2,
+                                                "minItems": 2,
+                                                "prefixItems": [
+                                                    {
+                                                        "enum": ["integer", "boolean", "vector", "rotation", "float", "string", "asset"],
+                                                        "markdownDescription": "The parameter type."
+                                                    },
+                                                    {
+                                                        "markdownDescription": "The parameter name.",
+                                                        "pattern": "^[a-z_]+$",
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "type": "array"
+                                            },
+                                            "markdownDescription": "An array of parameter type-name pairs.",
+                                            "minItems": 1,
+                                            "type": "array"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "required": [
@@ -391,7 +449,8 @@
         "events",
         "functions",
         "llsd-lsl-syntax-version",
-        "types"
+        "types",
+        "rulesets"
     ],
     "title": "Second Life LSL Definitions",
     "type": "object"
