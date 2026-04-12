@@ -12837,3 +12837,228 @@ controls:
       change to the target state.
   while:
     tooltip: while loop\nwhile (<condition>) {\n...\n}
+
+# These are usage-specific rulesets for dynamically typed lists used by various
+# LSL APIs. The semantics are particular to each ruleset, though they should
+# all use a `rules` keyed on whichever LSL enum value is related to that rule.
+rulesets:
+  prim_params:
+    rules:
+      # PRIM_TYPE_LEGACY intentionally omitted, it has very annoying semantics,
+      #  has no "get" equivalent and isn't something anyone should use now.
+      # PRIM_LINK_TARGET also omitted since it's a meta-rule that relates to
+      #  all rules that follow it in the list, not an actual rule.
+      PRIM_MATERIAL:
+        params:
+          - [ integer, flag ]
+      PRIM_PHYSICS:
+        params:
+          # Note that we use "asset" and "boolean" types to denote places where
+          # `asset-semantics` or `bool-semantics` would apply.
+          - [ boolean, enabled ]
+      PRIM_TEMP_ON_REZ:
+        params:
+          - [ boolean, enabled ]
+      PRIM_PHANTOM:
+        params:
+          - [ boolean, enabled ]
+      PRIM_POSITION:
+        params:
+          - [ vector, position ]
+      PRIM_SIZE:
+        params:
+          - [ vector, size ]
+      PRIM_ROTATION:
+        params:
+          - [ rotation, rot ]
+# TODO: Enable this, semantics of following stuff switches on `prim_type` in both get and set.
+#      PRIM_TYPE:
+#        params:
+#          - [ integer, prim_type ]
+      PRIM_TEXTURE:
+        face_target: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+      PRIM_COLOR:
+        face_target: true
+        params:
+          - [ vector, color ]
+          - [ float, alpha ]
+      PRIM_BUMP_SHINY:
+        face_target: true
+        params:
+          - [ integer, shiny ]
+          - [ integer, bump ]
+      PRIM_FULLBRIGHT:
+        face_target: true
+        params:
+          - [ boolean, enabled ]
+      PRIM_FLEXIBLE:
+        params:
+          - [ boolean, enabled ]
+          - [ integer, softness ]
+          - [ float, gravity ]
+          - [ float, friction ]
+          - [ float, wind ]
+          - [ float, tension ]
+          - [ vector, force ]
+      PRIM_TEXGEN:
+        face_target: true
+        params:
+          # TODO: something so we can express an enum-like relationship
+          - [ integer, mode ]
+      PRIM_POINT_LIGHT:
+        params:
+          - [ boolean, enabled ]
+          - [ vector, linear_color ]
+          - [ float, intensity ]
+          - [ float, radius ]
+          - [ float, falloff ]
+      PRIM_CAST_SHADOWS:
+        params:
+          - [ boolean, enabled ]
+      PRIM_GLOW:
+        face_target: true
+        params:
+          - [ float, intensity ]
+      PRIM_TEXT:
+        params:
+          - [ string, text ]
+          - [ vector, color ]
+          - [ float, alpha ]
+      PRIM_NAME:
+        params:
+          - [ string, name ]
+      PRIM_DESC:
+        params:
+          - [ string, description ]
+      PRIM_ROT_LOCAL:
+        params:
+          - [ rotation, rot ]
+      PRIM_PHYSICS_SHAPE_TYPE:
+        params:
+          - [ integer, shape_type ]
+      PRIM_OMEGA:
+        params:
+          - [ vector, axis ]
+          - [ float, spinrate ]
+          - [ float, gain ]
+      PRIM_POS_LOCAL:
+        params:
+          - [ vector, position ]
+      PRIM_SLICE:
+        params:
+          - [ vector, slice ]
+      PRIM_SPECULAR:
+        face_target: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+          - [ vector, color ]
+          - [ integer, glossiness ]
+          - [ integer, environment ]
+      PRIM_NORMAL:
+        face_target: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+      PRIM_ALPHA_MODE:
+        face_target: true
+        params:
+          - [ integer, alpha_mode ]
+          - [ integer, mask_cutoff ]
+      PRIM_ALLOW_UNSIT:
+        params:
+          - [ boolean, allowed ]
+      PRIM_SCRIPTED_SIT_ONLY:
+        params:
+          - [ boolean, enabled ]
+      PRIM_SIT_TARGET:
+        params:
+          - [ boolean, active ]
+          - [ vector, offset ]
+          - [ rotation, rot ]
+      PRIM_PROJECTOR:
+        params:
+          # This should almost certainly have asset semantics, but the server
+          # appears to only allow `string`, though stringified UUID is fine?
+          # Will need to fix that, but we need `asset` here since the `get`
+          # may still return a UUID.
+          - [ asset, texture ]
+          - [ float, fov ]
+          - [ float, focus ]
+          - [ float, ambiance ]
+      PRIM_CLICK_ACTION:
+        params:
+          - [ integer, action ]
+      PRIM_REFLECTION_PROBE:
+        params:
+          - [ boolean, enabled ]
+          - [ float, ambiance ]
+          - [ float, clip_distance ]
+          - [ integer, flags ]
+      PRIM_GLTF_NORMAL:
+        face_target: true
+        nullable: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+      PRIM_GLTF_EMISSIVE:
+        face_target: true
+        nullable: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+          - [ vector, linear_emissive_tint ]
+      PRIM_GLTF_METALLIC_ROUGHNESS:
+        face_target: true
+        nullable: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+          - [ float, metallic_factor ]
+          - [ float, roughness_factor ]
+      PRIM_GLTF_BASE_COLOR:
+        face_target: true
+        nullable: true
+        params:
+          - [ asset, texture ]
+          - [ vector, repeats ]
+          - [ vector, offsets ]
+          - [ float, rotation_in_radians ]
+          - [ vector, linear_color ]
+          - [ float, alpha ]
+          - [ integer, gltf_alpha_mode ]
+          - [ float, alpha_mask_cutoff ]
+          - [ boolean, double_sided ]
+      PRIM_RENDER_MATERIAL:
+        face_target: true
+        params:
+          - [ asset, render_material ]
+      PRIM_SIT_FLAGS:
+        params:
+          - [ integer, flags ]
+      PRIM_DAMAGE:
+        params:
+          - [ float, damage ]
+          - [ integer, damage_type ]
+      PRIM_HEALTH:
+        params:
+          - [ float, health ]
+      PRIM_COLLISION_SOUND:
+        params:
+          - [ asset, sound ]
+          - [ float, volume ]
