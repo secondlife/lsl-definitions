@@ -368,6 +368,7 @@ constants:
     type: integer
     value: '0x80'
   ALL_SIDES:
+    # not enum-semantics as you can pass any positive integer also
     tooltip: ''
     type: integer
     value: -1
