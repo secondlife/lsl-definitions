@@ -228,7 +228,7 @@ enums:
   ScriptPermission:
     type: flag
   ScriptProfileMode:
-    type: flag
+    type: enum
   SensorType:
     type: flag
   SimulatorData:
