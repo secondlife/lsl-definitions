@@ -529,9 +529,10 @@ class LSLDefinitionParser:
         rulesets = def_dict.get("rulesets", {})
         prim_params = rulesets.get("prim_params")
         if prim_params is not None:
-            for rule_name in prim_params["rules"]:
+            for rule_name, rule_data in prim_params["rules"].items():
                 if rule_name not in self._definitions.constants:
                     raise ValueError(f"prim_params rule {rule_name!r} is not a known constant")
+                self._validate_rule_variants(rule_name, rule_data)
         self._definitions.rulesets.update(rulesets)
 
         return self._definitions
@@ -656,6 +657,35 @@ class LSLDefinitionParser:
             raise KeyError(f"{name!r} is not a valid identifier")
         if name in self._definitions.reserved_words:
             raise KeyError(f"{name!r} is a reserved name")
+
+    def _validate_rule_variants(self, rule_name: str, rule_data: dict) -> None:
+        variants_on = rule_data.get("variants_on")
+        variants = rule_data.get("variants")
+        if variants_on is None and variants is None:
+            return
+        if variants_on is None or variants is None:
+            raise ValueError(
+                f"prim_params rule {rule_name!r} must define both `variants_on` and `variants`, or neither"
+            )
+        param_names = {p[1] for p in rule_data["params"]}
+        if variants_on not in param_names:
+            raise ValueError(
+                f"prim_params rule {rule_name!r} has variants_on={variants_on!r}, "
+                f"which is not one of its params {sorted(param_names)}"
+            )
+        seen: Set[str] = set()
+        for variant in variants:
+            for tag in variant["applies_to"]:
+                if tag not in self._definitions.constants:
+                    raise ValueError(
+                        f"prim_params rule {rule_name!r} variant applies_to {tag!r}, "
+                        f"which is not a known constant"
+                    )
+                if tag in seen:
+                    raise ValueError(
+                        f"prim_params rule {rule_name!r} has {tag!r} in multiple variants"
+                    )
+                seen.add(tag)
 
     def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
         const = LSLConstant(
