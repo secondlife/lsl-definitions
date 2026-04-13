@@ -12848,6 +12848,7 @@ rulesets:
       #  has no "get" equivalent and isn't something anyone should use now.
       # PRIM_LINK_TARGET also omitted since it's a meta-rule that relates to
       #  all rules that follow it in the list, not an actual rule.
+      # PRIM_CAST_SHADOWS ignored because it's not even implemented
       PRIM_MATERIAL:
         params:
           - [ integer, flag ]
@@ -12871,10 +12872,45 @@ rulesets:
       PRIM_ROTATION:
         params:
           - [ rotation, rot ]
-# TODO: Enable this, semantics of following stuff switches on `prim_type` in both get and set.
-#      PRIM_TYPE:
-#        params:
-#          - [ integer, prim_type ]
+      PRIM_TYPE:
+        params:
+          # TODO: something so we can express an enum-like relationship,
+          #  this actually only accepts ints that are `PRIM_TYPE_*` consts.
+          - [ integer, prim_type ]
+        variants_on: prim_type
+        variants:
+          - applies_to: [ PRIM_TYPE_BOX, PRIM_TYPE_CYLINDER, PRIM_TYPE_PRISM ]
+            params:
+              - [ integer, hole_type ]
+              - [ vector, cut ]
+              - [ float, hollow ]
+              - [ vector, twist ]
+              - [ vector, top_size ]
+              - [ vector, top_shear ]
+          - applies_to: [ PRIM_TYPE_SPHERE ]
+            params:
+              - [ integer, hole_type ]
+              - [ vector, cut ]
+              - [ float, hollow ]
+              - [ vector, twist ]
+              - [ vector, dimple ]
+          - applies_to: [ PRIM_TYPE_TORUS, PRIM_TYPE_TUBE, PRIM_TYPE_RING ]
+            params:
+              - [ integer, hole_type ]
+              - [ vector, cut ]
+              - [ float, hollow ]
+              - [ vector, twist ]
+              - [ vector, hole_size ]
+              - [ vector, top_shear ]
+              - [ vector, advanced_cut ]
+              - [ vector, taper ]
+              - [ float, revolutions ]
+              - [ float, radius_offset ]
+              - [ float, skew ]
+          - applies_to: [ PRIM_TYPE_SCULPT ]
+            params:
+              - [ asset,   texture ]
+              - [ integer, type ]
       PRIM_TEXTURE:
         face_target: true
         params:
@@ -12908,7 +12944,6 @@ rulesets:
       PRIM_TEXGEN:
         face_target: true
         params:
-          # TODO: something so we can express an enum-like relationship
           - [ integer, mode ]
       PRIM_POINT_LIGHT:
         params:
@@ -12917,9 +12952,6 @@ rulesets:
           - [ float, intensity ]
           - [ float, radius ]
           - [ float, falloff ]
-      PRIM_CAST_SHADOWS:
-        params:
-          - [ boolean, enabled ]
       PRIM_GLOW:
         face_target: true
         params:

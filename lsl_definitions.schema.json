@@ -54,6 +54,28 @@
                     }
                 }
             ]
+        },
+        "rulesetParamArray": {
+            "items": {
+                "items": false,
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                    {
+                        "enum": ["integer", "boolean", "vector", "rotation", "float", "string", "asset"],
+                        "markdownDescription": "The parameter type."
+                    },
+                    {
+                        "markdownDescription": "The parameter name.",
+                        "pattern": "^[a-z_]+$",
+                        "type": "string"
+                    }
+                ],
+                "type": "array"
+            },
+            "markdownDescription": "An array of parameter type-name pairs.",
+            "minItems": 1,
+            "type": "array"
         }
     },
     "properties": {
@@ -401,6 +423,10 @@
                                     "additionalProperties": false,
                                     "type": "object",
                                     "required": ["params"],
+                                    "dependentRequired": {
+                                        "variants_on": ["variants"],
+                                        "variants": ["variants_on"]
+                                    },
                                     "properties": {
                                         "face_target": {
                                             "const": true,
@@ -412,25 +438,32 @@
                                             "markdownDescription": "This rule's params may all be NULL.",
                                             "type": "boolean"
                                         },
-                                        "params": {
+                                        "params": { "$ref": "#/$defs/rulesetParamArray" },
+                                        "variants_on": {
+                                            "markdownDescription": "Name of the discriminator parameter (must appear in `params`).",
+                                            "pattern": "^[a-z_]+$",
+                                            "type": "string"
+                                        },
+                                        "variants": {
+                                            "markdownDescription": "Variants whose additional params depend on the discriminator value.",
                                             "items": {
-                                                "items": false,
-                                                "maxItems": 2,
-                                                "minItems": 2,
-                                                "prefixItems": [
-                                                    {
-                                                        "enum": ["integer", "boolean", "vector", "rotation", "float", "string", "asset"],
-                                                        "markdownDescription": "The parameter type."
+                                                "additionalProperties": false,
+                                                "type": "object",
+                                                "required": ["applies_to", "params"],
+                                                "properties": {
+                                                    "applies_to": {
+                                                        "markdownDescription": "Constant names for which this variant applies.",
+                                                        "items": {
+                                                            "pattern": "^PRIM_[A-Z0-9_]+$",
+                                                            "type": "string"
+                                                        },
+                                                        "minItems": 1,
+                                                        "type": "array",
+                                                        "uniqueItems": true
                                                     },
-                                                    {
-                                                        "markdownDescription": "The parameter name.",
-                                                        "pattern": "^[a-z_]+$",
-                                                        "type": "string"
-                                                    }
-                                                ],
-                                                "type": "array"
+                                                    "params": { "$ref": "#/$defs/rulesetParamArray" }
+                                                }
                                             },
-                                            "markdownDescription": "An array of parameter type-name pairs.",
                                             "minItems": 1,
                                             "type": "array"
                                         }
