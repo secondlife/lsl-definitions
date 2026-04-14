@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import ast
 import dataclasses
-import enum
 import re
+from enum import IntEnum
 from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
 
 import llsd
@@ -238,9 +238,11 @@ class LSLEnum:
     tooltip: str
     deprecated: Deprecated | None
     slua_deprecated: Deprecated | None
-    members: list[LSLEnumMember]
-    _by_name: dict[str, LSLEnumMember] = dataclasses.field(default_factory=dict)
-    _by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
+    _special_members: set[str]
+    "Unusual members that break a validation rule"
+    members: list[LSLEnumMember] = dataclasses.field(default_factory=list)
+    by_name: dict[str, LSLEnumMember] = dataclasses.field(default_factory=dict)
+    by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
 
 
 @dataclasses.dataclass
@@ -498,7 +500,7 @@ class LSLDefinitions(NamedTuple):
         )
 
 
-class LSLFunctionRanges(enum.IntEnum):
+class LSLFunctionRanges(IntEnum):
     SCRIPT_ID_ANIMATION_STATES = 500
     SCRIPT_ID_JSON = 510
     SCRIPT_ID_MAINT = 520
@@ -554,6 +556,9 @@ class LSLDefinitionParser:
                 # This isn't a real constant, but it's in here for some reason, maybe syntax highlighting?
                 continue
             self._handle_constant(const_name, const_data)
+        for enum in self._definitions.enums.values():
+            for unused in enum._special_members:
+                raise ValueError(f"Enum {enum.name!r} has unused special member {unused!r}")
 
         rulesets = def_dict.get("rulesets", {})
         prim_params = rulesets.get("prim_params")
@@ -575,7 +580,7 @@ class LSLDefinitionParser:
             tooltip=enum_data.get("tooltip", ""),
             deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
             slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
-            members=[],
+            _special_members=set(enum_data.get("special-members", [])),
         )
 
         if enum.name in self._definitions.enums:
@@ -773,20 +778,25 @@ class LSLDefinitionParser:
         )
         if type(member.value) is not int:
             raise ValueError(f"{const.value!r} is not an integer")
-        if member.name in enum._by_name:
+        if member.name in enum.by_name:
             raise KeyError(f"{member.name!r} is already a member of {enum.name!r}")
         if enum.type == LSLEnumType.FLAG:
             is_power_of_two = member.value > 0 and (member.value & (member.value - 1)) == 0
             if not is_power_of_two:
-                raise ValueError(f"Flag value {member.value:x} is not a power of two")
-        # if const.private:
-        #     return member
-        if member.value in enum._by_value:
-            raise KeyError(
-                f"{member.value} is already the value of member {enum._by_value[member.value].name!r} "
-                f"in {enum.name!r}"
-            )
+                if member.constant.name in enum._special_members:
+                    enum._special_members.remove(member.constant.name)
+                else:
+                    raise ValueError(f"Flag value {member.value:x} is not a power of two")
+        if const.private or const.deprecated:
+            return member
+        if member.value in enum.by_value:
+            if member.constant.name in enum._special_members:
+                enum._special_members.remove(member.constant.name)
+            else:
+                raise KeyError(
+                    f"Value {member.value} duplicates {enum.name}.{enum.by_value[member.value].name!r}"
+                )
         enum.members.append(member)
-        enum._by_name[member.name] = member
-        enum._by_value[member.value] = member
+        enum.by_name[member.name] = member
+        enum.by_value[member.value] = member
         return member

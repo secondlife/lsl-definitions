@@ -31,7 +31,10 @@ enums:
     type: flag
   AssetPermission:
     type: flag
+    special-members: [PERM_ALL] # combination of other flags
   AssetPermissionCategory:
+    type: enum
+  AssetPermissionCategoryFlag:
     type: flag
   AttachedListFilterFlag:
     type: flag
@@ -44,7 +47,7 @@ enums:
   ChangeType:
     type: flag
   CharacterAvoidanceMode:
-    type: flag
+    type: enum
   CharacterCommand:
     type: enum
   CharacterEvadeParam:
@@ -103,6 +106,7 @@ enums:
     type: enum
   InventoryType:
     type: enum
+    special-members: [INVENTORY_NONE] # alias of INVENTORY_ALL
   KeyframedMotionCommand:
     type: enum
   KeyframedMotionData:
@@ -174,6 +178,7 @@ enums:
     type: enum
   PrimMediaPerm:
     type: flag
+    special-members: [PRIM_MEDIA_PERM_NONE] # zero
   PrimMediaParam:
     type: enum
   PrimParam:
@@ -210,6 +215,7 @@ enums:
     type: enum
   PlaySoundFlag:
     type: flag
+    special-members: [SOUND_PLAY] # zero
   RayCastData:
     type: flag
   RayCastParam:
@@ -231,6 +237,7 @@ enums:
     type: enum
   SensorType:
     type: flag
+    special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
   SimulatorData:
     type: enum
   SimulatorStat:
@@ -962,6 +969,8 @@ constants:
     value: 9
   CLICK_ACTION_NONE:
     member-of: [PrimClickAction]
+    deprecated:
+      use: CLICK_ACTION_TOUCH
     tooltip: 'Performs the default action: when the prim is clicked, touch events
       are triggered.'
     type: integer
@@ -2081,7 +2090,7 @@ constants:
     type: integer
     value: 0
   MASK_COMBINED:
-    member-of: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategoryFlag]
     tooltip: Fold permissions for object inventory into results.
     type: integer
     value: '0x10'
