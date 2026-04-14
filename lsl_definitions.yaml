@@ -1148,6 +1148,7 @@ constants:
     type: integer
     value: 4
   CHARACTER_RADIUS:
+    member-of: [CharacterParam]
     tooltip: Set collision capsule radius.
     type: integer
     value: 2
