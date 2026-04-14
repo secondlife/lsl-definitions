@@ -217,6 +217,31 @@ class LSLConstant(NamedTuple):
             raise ValueError(f"In constant {self.name}: {e}") from e
 
 
+class LSLEnumType(StringEnum):
+    ENUM = "enum"
+    FLAG = "flag"
+
+
+@dataclasses.dataclass
+class LSLEnumMember:
+    name: str
+    value: int
+    constant: LSLConstant
+
+
+@dataclasses.dataclass
+class LSLEnum:
+    name: str
+    type: LSLEnumType
+    prefix: str
+    tooltip: str
+    deprecated: Deprecated | None
+    slua_deprecated: Deprecated | None
+    members: list[LSLEnumMember]
+    _by_name: dict[str, LSLEnumMember] = dataclasses.field(default_factory=dict)
+    _by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
+
+
 @dataclasses.dataclass
 class LSLArgument:
     name: str
@@ -456,6 +481,7 @@ class LSLFunction:
 class LSLDefinitions(NamedTuple):
     events: Dict[str, LSLEvent]
     functions: Dict[str, LSLFunction]
+    enums: Dict[str, LSLEnum]
     constants: Dict[str, LSLConstant]
     controls: dict
     types: dict
@@ -486,7 +512,7 @@ class LSLFunctionRanges(enum.IntEnum):
 
 class LSLDefinitionParser:
     def __init__(self):
-        self._definitions = LSLDefinitions({}, {}, {}, {}, {}, {})
+        self._definitions = LSLDefinitions({}, {}, {}, {}, {}, {}, {})
 
     def parse_file(self, name: str) -> LSLDefinitions:
         if name.endswith(".llsd"):
@@ -513,6 +539,8 @@ class LSLDefinitionParser:
         self._definitions.types.update(def_dict["types"])
 
         seen_func_ids = set()
+        for enum_name, enum_data in def_dict["enums"].items():
+            self._handle_enum(enum_name, enum_data)
         for event_name, event_data in def_dict["events"].items():
             self._handle_event(event_name, event_data)
         for func_name, func_data in def_dict["functions"].items():
@@ -536,6 +564,23 @@ class LSLDefinitionParser:
         self._definitions.rulesets.update(rulesets)
 
         return self._definitions
+
+    def _handle_enum(self, enum_name: str, enum_data: dict) -> LSLEnum:
+        self._validate_identifier(enum_name)
+        enum = LSLEnum(
+            name=enum_name,
+            type=LSLEnumType(enum_data["type"]),
+            prefix=enum_data.get("prefix", ""),
+            tooltip=enum_data.get("tooltip", ""),
+            deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
+            members=[],
+        )
+
+        if enum.name in self._definitions.enums:
+            raise KeyError(f"{enum.name} is already defined")
+        self._definitions.enums[enum.name] = enum
+        return enum
 
     def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
         self._validate_identifier(event_name)
