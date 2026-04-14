@@ -149,6 +149,7 @@ class LSLConstant(NamedTuple):
     slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
+    member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
 
     @property
     def value_raw(self) -> str:
@@ -733,20 +734,52 @@ class LSLDefinitionParser:
                 seen.add(tag)
 
     def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
-        const = LSLConstant(
-            name=const_name,
-            type=LSLType(const_data["type"]),
-            slua_type=const_data.get("slua-type", None),
-            slua_removed=const_data.get("slua-removed", False),
-            value=str(const_data["value"]),
-            tooltip=const_data.get("tooltip", ""),
-            private=const_data.get("private", False),
-            deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(const_data.get("slua-deprecated", False)),
-        )
-        if const.type not in {"float", "integer", "string", "vector", "rotation"}:
-            raise ValueError(f"Invalid constant type {const.type}")
-        if const.name in self._definitions.constants:
-            raise KeyError(f"{const.name} is already defined")
-        self._definitions.constants[const.name] = const
-        return const
+        try:
+            const = LSLConstant(
+                name=const_name,
+                type=LSLType(const_data["type"]),
+                slua_type=const_data.get("slua-type", None),
+                slua_removed=const_data.get("slua-removed", False),
+                value=str(const_data["value"]),
+                tooltip=const_data.get("tooltip", ""),
+                private=const_data.get("private", False),
+                deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(
+                    const_data.get("slua-deprecated", False)
+                ),
+            )
+            if const.type not in {"float", "integer", "string", "vector", "rotation"}:
+                raise ValueError(f"Invalid constant type {const.type}")
+            if const.name in self._definitions.constants:
+                raise KeyError(f"{const.name} is already defined")
+            self._definitions.constants[const.name] = const
+            for enum_name in const_data.get("enum-semantics", []):
+                enum = self._definitions.enums.get(enum_name, None)
+                if enum is None:
+                    raise ValueError(f"Unknown enum {enum_name!r}")
+                if enum.type != LSLEnumType.ENUM:
+                    raise ValueError(f"{enum_name!r} is not an enum")
+            for enum_name in const_data.get("flag-semantics", []):
+                enum = self._definitions.enums.get(enum_name, None)
+                if enum is None:
+                    raise ValueError(f"Unknown enum {enum_name!r}")
+                if enum.type != LSLEnumType.FLAG:
+                    raise ValueError(f"{enum_name!r} is not a flag enum")
+            return const
+        except Exception as e:
+            raise ValueError(f"In constant {const_name!r}: {e}") from e
+
+    def _add_constant_to_enum(self, const: LSLConstant, enum: LSLEnum) -> LSLEnumMember:
+        # AI generated. review
+        member = LSLEnumMember(name=const.name, value=int(const.value), constant=const)
+        enum.members.append(member)
+        if member.name in enum._by_name:
+            raise KeyError(f"{member.name!r} is already a member of {enum.name!r}")
+        if member.value in enum._by_value:
+            raise KeyError(
+                f"{member.value} is already the value of member {enum._by_value[member.value].name!r} "
+                f"in {enum.name!r}"
+            )
+        enum._by_name[member.name] = member
+        enum._by_value[member.value] = member
+        return member
