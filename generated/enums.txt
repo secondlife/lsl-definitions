@@ -524,6 +524,11 @@ enum ModifyLandAction {
   NOISE = 4
   REVERT = 5
 };
+enum ModifyLandBrush {
+  SMALL_BRUSH = 1 // deprecated
+  MEDIUM_BRUSH = 2 // deprecated
+  LARGE_BRUSH = 3 // deprecated
+};
 enum ObjectDerezMode {
   DIE = 0
   MAKE_TEMP = 1
@@ -1225,9 +1230,6 @@ const string JSON_NUMBER = "\u{FDD3}"
 const string JSON_OBJECT = "\u{FDD1}"
 const string JSON_STRING = "\u{FDD4}"
 const string JSON_TRUE = "\u{FDD6}"
-const integer LAND_LARGE_BRUSH = 3 // deprecated
-const integer LAND_MEDIUM_BRUSH = 2 // deprecated
-const integer LAND_SMALL_BRUSH = 1 // deprecated
 const float LEGACY_MASS_FACTOR = 0.01 // private
 const integer LINK_ALL_CHILDREN = -3
 const integer LINK_ALL_OTHERS = -2

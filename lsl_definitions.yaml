@@ -225,6 +225,10 @@ enums:
     type: enum
     prefix: LAND_
     tooltip: ''
+  ModifyLandBrush:
+    type: enum
+    prefix: LAND_
+    tooltip: ''
   ObjectDerezMode:
     type: enum
     prefix: DEREZ_
@@ -2116,6 +2120,7 @@ constants:
     type: integer
     value: 2
   LAND_LARGE_BRUSH:
+    member-of: [ModifyLandBrush]
     deprecated:
       use: 2
     tooltip: 'Use a large brush size.\nNOTE: This value is incorrect, a large brush
@@ -2133,6 +2138,7 @@ constants:
     type: integer
     value: 2
   LAND_MEDIUM_BRUSH:
+    member-of: [ModifyLandBrush]
     deprecated:
       use: 1
     tooltip: 'Use a medium brush size.\nNOTE: This value is incorrect, a medium brush
@@ -2155,6 +2161,7 @@ constants:
     type: integer
     value: 5
   LAND_SMALL_BRUSH:
+    member-of: [ModifyLandBrush]
     deprecated:
       use: 0
     tooltip: 'Use a small brush size.\nNOTE: This value is incorrect, a small brush
