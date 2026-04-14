@@ -82,6 +82,8 @@ enum AttachPoint {
   ATTACH_LLLEG = 27
   ATTACH_BELLY = 28
   ATTACH_LEFT_PEC = 29
+  ATTACH_RPEC = 29 // deprecated
+  ATTACH_LPEC = 30 // deprecated
   ATTACH_RIGHT_PEC = 30
   ATTACH_HUD_CENTER_2 = 31
   ATTACH_HUD_TOP_RIGHT = 32
@@ -634,6 +636,7 @@ enum ObjectStatusParam {
   STATUS_BLOCK_GRAB = 0x40
   STATUS_DIE_AT_EDGE = 0x80
   STATUS_RETURN_AT_EDGE = 0x100
+  STATUS_CAST_SHADOWS = 0x200 // deprecated
   STATUS_BLOCK_GRAB_OBJECT = 0x400
   STATUS_DIE_AT_NO_ENTRY = 0x800
 };
@@ -759,6 +762,7 @@ enum PrimBump {
   PRIM_BUMP_WEAVE = 17
 };
 enum PrimClickAction {
+  CLICK_ACTION_NONE = 0 // deprecated
   CLICK_ACTION_TOUCH = 0
   CLICK_ACTION_SIT = 1
   CLICK_ACTION_BUY = 2
@@ -793,6 +797,7 @@ enum PrimMaterial {
   PRIM_MATERIAL_FLESH = 4
   PRIM_MATERIAL_PLASTIC = 5
   PRIM_MATERIAL_RUBBER = 6
+  PRIM_MATERIAL_LIGHT = 7 // deprecated
 };
 enum PrimMediaControl {
   PRIM_MEDIA_CONTROLS_STANDARD = 0
@@ -847,6 +852,7 @@ enum PrimParam {
   PRIM_FLEXIBLE = 21
   PRIM_TEXGEN = 22
   PRIM_POINT_LIGHT = 23
+  PRIM_CAST_SHADOWS = 24 // deprecated
   PRIM_GLOW = 25
   PRIM_TEXT = 26
   PRIM_NAME = 27
@@ -1038,6 +1044,9 @@ enum RegionFlag {
   REGION_FLAG_BLOCK_FLYOVER = 0x8000000
 };
 enum RemoteDataEventType {
+  REMOTE_DATA_CHANNEL = 1 // deprecated
+  REMOTE_DATA_REQUEST = 2 // deprecated
+  REMOTE_DATA_REPLY = 3 // deprecated
 };
 enum ReturnObjectsError {
   ERR_THROTTLED = -5
@@ -1138,6 +1147,7 @@ enum TransferOwnershipFlag {
 };
 enum VehicleFlag {
   VEHICLE_FLAG_NO_DEFLECTION_UP = 0x1
+  VEHICLE_FLAG_NO_FLY_UP = 0x1 // deprecated
   VEHICLE_FLAG_LIMIT_ROLL_ONLY = 0x2
   VEHICLE_FLAG_HOVER_WATER_ONLY = 0x4
   VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 0x8

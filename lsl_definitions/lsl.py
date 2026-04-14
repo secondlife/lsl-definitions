@@ -787,10 +787,15 @@ class LSLDefinitionParser:
                     enum._special_members.remove(member.constant.name)
                 else:
                     raise ValueError(f"Flag value {member.value:x} is not a power of two")
-        if const.private or const.deprecated:
+        if const.private:
             return member
         if member.value in enum.by_value:
-            if member.constant.name in enum._special_members:
+            dup = enum.by_value[member.value]
+            if const.deprecated:
+                pass
+            elif dup.constant.deprecated:
+                pass
+            elif member.constant.name in enum._special_members:
                 enum._special_members.remove(member.constant.name)
             else:
                 raise KeyError(
