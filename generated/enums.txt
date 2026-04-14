@@ -478,6 +478,13 @@ enum KeyframedMotionParam {
   MODE = 1
   DATA = 2
 };
+enum Link {
+  THIS = -4
+  ALL_CHILDREN = -3
+  ALL_OTHERS = -2
+  SET = -1
+  ROOT = 1
+};
 enum LinksetDataAction {
   RESET = 0
   UPDATE = 1
@@ -733,6 +740,10 @@ enum PassMode {
   IF_NOT_HANDLED = 0
   ALWAYS = 1
   NEVER = 2
+};
+enum PayButton {
+  DEFAULT = -2
+  HIDE = -1
 };
 enum PlaySoundFlag {
   PLAY = 0x0
@@ -1024,6 +1035,11 @@ enum RayCastData {
   ROOT_KEY = 0x2
   LINK_NUM = 0x4
 };
+enum RayCastError {
+  CAST_TIME_EXCEEDED = -3
+  SIM_PERF_LOW = -2
+  UNKNOWN = -1
+};
 enum RayCastParam {
   REJECT_TYPES = 0
   DETECT_PHANTOM = 1
@@ -1231,16 +1247,9 @@ const string JSON_OBJECT = "\u{FDD1}"
 const string JSON_STRING = "\u{FDD4}"
 const string JSON_TRUE = "\u{FDD6}"
 const float LEGACY_MASS_FACTOR = 0.01 // private
-const integer LINK_ALL_CHILDREN = -3
-const integer LINK_ALL_OTHERS = -2
-const integer LINK_ROOT = 1
-const integer LINK_SET = -1
-const integer LINK_THIS = -4
 const string NAK = "\n\x15\n"
 const string NULL_KEY = "00000000-0000-0000-0000-000000000000"
 const integer OBJECT_UNKNOWN_DETAIL = -1
-const integer PAY_DEFAULT = -2
-const integer PAY_HIDE = -1
 const float PI = 3.14159265
 const float PI_BY_TWO = 1.57079633
 const integer PRIM_MEDIA_MAX_HEIGHT_PIXELS = 2048
@@ -1251,9 +1260,6 @@ const integer PRIM_MEDIA_MAX_WIDTH_PIXELS = 2048
 const integer PRIM_MEDIA_PARAM_MAX = 14
 const integer PUBLIC_CHANNEL = 0
 const float RAD_TO_DEG = 57.2957795
-const integer RCERR_CAST_TIME_EXCEEDED = -3
-const integer RCERR_SIM_PERF_LOW = -2
-const integer RCERR_UNKNOWN = -1
 const float SQRT2 = 1.41421356
 const string TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f"
 const string TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f"

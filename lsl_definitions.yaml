@@ -200,6 +200,10 @@ enums:
     type: enum
     prefix: KFM_
     tooltip: ''
+  Link:
+    type: enum
+    prefix: LINK_
+    tooltip: ''
   LinksetDataAction:
     type: enum
     prefix: LINKSETDATA_
@@ -291,6 +295,10 @@ enums:
   PassMode:
     type: enum
     prefix: PASS_
+    tooltip: ''
+  PayButton:
+    type: enum
+    prefix: PAY_
     tooltip: ''
   PlaySoundFlag:
     type: flag
@@ -404,6 +412,10 @@ enums:
   RayCastData:
     type: flag
     prefix: RC_GET_
+    tooltip: ''
+  RayCastError:
+    type: enum
+    prefix: RCERR_
     tooltip: ''
   RayCastParam:
     type: enum
@@ -2231,28 +2243,28 @@ constants:
     type: integer
     value: 1
   LINK_ALL_CHILDREN:
-    # not enum as you can pass any positive integer also
+    member-of: [Link]
     tooltip: This targets every object except the root in the linked set.
     type: integer
     value: -3
   LINK_ALL_OTHERS:
-    # not enum as you can pass any positive integer also
+    member-of: [Link]
     tooltip: This targets every object in the linked set except the object with the
       script.
     type: integer
     value: -2
   LINK_ROOT:
-    # not enum as you can pass any positive integer also
+    member-of: [Link]
     tooltip: This targets the root of the linked set.
     type: integer
     value: 1
   LINK_SET:
-    # not enum as you can pass any positive integer also
+    member-of: [Link]
     tooltip: This targets every object in the linked set.
     type: integer
     value: -1
   LINK_THIS:
-    # not enum as you can pass any positive integer also
+    member-of: [Link]
     tooltip: The link number of the prim containing the script.
     type: integer
     value: -4
@@ -3090,12 +3102,12 @@ constants:
     type: integer
     value: 2
   PAY_DEFAULT:
-    # not enum as you can pass any positive integer also
+    member-of: [PayButton]
     tooltip: ''
     type: integer
     value: -2
   PAY_HIDE:
-    # not enum as you can pass any positive integer also
+    member-of: [PayButton]
     tooltip: ''
     type: integer
     value: -1
@@ -4410,17 +4422,17 @@ constants:
     type: float
     value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
-    # not enum as it can return positive integers also
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -3
   RCERR_SIM_PERF_LOW:
-    # not enum as it can return positive integers also
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -2
   RCERR_UNKNOWN:
-    # not enum as it can return positive integers also
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -1
