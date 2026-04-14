@@ -24,345 +24,460 @@ enums:
   AgentData:
     type: enum
     prefix: DATA_
+    tooltip: ''
   AgentDataPaymentInfo:
     type: flag
     prefix: PAYMENT_INFO_
+    tooltip: ''
   AgentInfo:
     type: flag
     prefix: AGENT_
+    tooltip: ''
   AgentListScope:
     type: flag
     prefix: AGENT_LIST_
+    tooltip: ''
   AssetPermission:
     type: flag
     prefix: PERM_
     special-members: [PERM_ALL] # combination of other flags
+    tooltip: ''
   AssetPermissionCategory:
     type: enum
     prefix: MASK_
+    tooltip: ''
   AssetPermissionCategoryFlag:
     type: flag
     prefix: MASK_
+    tooltip: ''
   AttachedListFilterFlag:
     type: flag
     prefix: FILTER_FLAG_
+    tooltip: ''
   AttachedListFilterParam:
     type: enum
     prefix: FILTER_
+    tooltip: ''
   AttachPoint:
     type: enum
     prefix: ATTACH_
+    tooltip: ''
   CameraParam:
     type: enum
     prefix: CAMERA_
+    tooltip: ''
   ChangeType:
     type: flag
     prefix: CHANGED_
+    tooltip: ''
   CharacterAvoidanceMode:
     type: enum
     prefix: AVOID_
+    tooltip: ''
   CharacterCommand:
     type: enum
     prefix: CHARACTER_CMD_
+    tooltip: ''
   CharacterEvadeParam:
     type: enum
+    tooltip: ''
   CharacterFleeFromParam:
     type: enum
+    tooltip: ''
   CharacterNavigateParam:
     type: enum
+    tooltip: ''
   CharacterOrientation:
     type: enum
+    tooltip: ''
   CharacterParam:
     type: enum
     prefix: CHARACTER_
+    tooltip: ''
   CharacterPathUpdateType:
     type: enum
     prefix: PU_
+    tooltip: ''
   CharacterPatrolPointsParam:
     type: enum
     prefix: PATROL_
+    tooltip: ''
   CharacterPursueParam:
     type: enum
     prefix: PURSUIT_
+    tooltip: ''
   CharacterTraversalType:
     type: enum
     prefix: TRAVERSAL_TYPE_
+    tooltip: ''
   CharacterType:
     type: enum
     prefix: CHARACTER_TYPE_
+    tooltip: ''
   CharacterWanderWithinParam:
     type: enum
+    tooltip: ''
   ControlButton:
     type: flag
     prefix: CONTROL_
+    tooltip: ''
   DamageType:
     type: enum
     prefix: DAMAGE_TYPE_
+    tooltip: ''
   EmailTarget:
     type: enum
     prefix: TARGETED_EMAIL_
+    tooltip: ''
   EnvironmentError:
     type: enum
     prefix: ENV_
+    tooltip: ''
   EnvironmentParam:
     type: enum
+    tooltip: ''
   EnvironmentParamReadOnly:
     type: enum
+    tooltip: ''
   EstateAccessParam:
     type: enum
     prefix: ESTATE_ACCESS_
+    tooltip: ''
   ExperienceError:
     type: enum
     prefix: XP_ERROR_
+    tooltip: ''
   GameControlAxis:
     type: enum
     prefix: GAME_CONTROL_AXIS_
+    tooltip: ''
   GameControlButton:
     type: flag
     prefix: GAME_CONTROL_BUTTON_
+    tooltip: ''
   GetClosestNavPointParam:
     type: enum
     prefix: GCNP_
+    tooltip: ''
   GiveAgentInventoryParam:
     type: enum
     prefix: TRANSFER_
+    tooltip: ''
   GroundTextureParam:
     type: enum
     prefix: TERRAIN_
+    tooltip: ''
   HTTPContentType:
     type: enum
     prefix: CONTENT_TYPE_
+    tooltip: ''
   HTTPRequestParam:
     type: enum
     prefix: HTTP_
+    tooltip: ''
   HTTPResponseError:
     type: enum
     prefix: HTTP_
+    tooltip: ''
   InventoryType:
     type: enum
     prefix: INVENTORY_
     special-members: [INVENTORY_NONE] # alias of INVENTORY_ALL
+    tooltip: ''
   KeyframedMotionCommand:
     type: enum
     prefix: KFM_CMD_
+    tooltip: ''
   KeyframedMotionData:
     type: flag
     prefix: KFM_
+    tooltip: ''
   KeyframedMotionMode:
     type: enum
     prefix: KFM_
+    tooltip: ''
   KeyframedMotionParam:
     type: enum
     prefix: KFM_
+    tooltip: ''
   LinksetDataAction:
     type: enum
     prefix: LINKSETDATA_
+    tooltip: ''
   LinksetDataError:
     type: enum
     prefix: LINKSETDATA_
+    tooltip: ''
   ListEntryType:
     type: enum
     prefix: TYPE_
     slua-deprecated: true
+    tooltip: ''
   ListStatisticsOperation:
     type: enum
     prefix: LIST_STAT_
+    tooltip: ''
   MapBeaconParam:
     type: enum
     prefix: BEACON_
+    tooltip: ''
   ModifyLandAction:
     type: enum
     prefix: LAND_
+    tooltip: ''
   ObjectDerezMode:
     type: enum
     prefix: DEREZ_
+    tooltip: ''
   ObjectDetailsParam:
     type: enum
     prefix: OBJECT_
+    tooltip: ''
   ObjectDetailsPathfindingType:
     type: enum
     prefix: OPT_
+    tooltip: ''
   ObjectPhysicsMaterialParam:
     type: flag
+    tooltip: ''
   ObjectRezFlag:
     type: flag
     prefix: REZ_FLAG_
+    tooltip: ''
   ObjectRezParam:
     type: enum
     prefix: REZ_
+    tooltip: ''
   ObjectStatusParam:
     type: flag
     prefix: STATUS_
+    tooltip: ''
   ParcelDetailsParam:
     type: enum
     prefix: PARCEL_DETAILS_
+    tooltip: ''
   ParcelDetailsTeleportRouting:
     type: enum
     prefix: TP_ROUTING_
+    tooltip: ''
   ParcelFlag:
     type: flag
     prefix: PARCEL_FLAG_
+    tooltip: ''
   ParcelMediaCommand:
     type: enum
     prefix: PARCEL_MEDIA_COMMAND_
+    tooltip: ''
   ParcelMediaQuery:
     type: enum
     prefix: PARCEL_MEDIA_COMMAND_
+    tooltip: ''
   ParcelPrimCountCategory:
     type: enum
     prefix: PARCEL_COUNT_
+    tooltip: ''
   ParcelSaleError:
     type: enum
     prefix: PARCEL_SALE_
+    tooltip: ''
   ParcelSaleParam:
     type: enum
     prefix: PARCEL_SALE_
+    tooltip: ''
   PassMode:
     type: enum
     prefix: PASS_
+    tooltip: ''
   PlaySoundFlag:
     type: flag
     prefix: SOUND_
     special-members: [SOUND_PLAY] # zero
+    tooltip: ''
   PrimAlphaMode:
     type: enum
     prefix: PRIM_ALPHA_MODE_
+    tooltip: ''
   PrimBump:
     type: enum
     prefix: PRIM_BUMP_
+    tooltip: ''
   PrimClickAction:
     type: enum
     prefix: CLICK_ACTION_
+    tooltip: ''
   PrimGLTFAlphaMode:
     type: enum
     prefix: PRIM_GLTF_ALPHA_MODE_
+    tooltip: ''
   PrimGLTFOverride:
     type: enum
     prefix: OVERRIDE_GLTF_
+    tooltip: ''
   PrimMaterial:
     type: enum
     prefix: PRIM_MATERIAL_
+    tooltip: ''
   PrimMediaControl:
     type: enum
     prefix: PRIM_MEDIA_CONTROLS_
+    tooltip: ''
   PrimMediaError:
     type: enum
     prefix: STATUS_
+    tooltip: ''
   PrimMediaParam:
     type: enum
     prefix: PRIM_MEDIA_
+    tooltip: ''
   PrimMediaPerm:
     type: flag
     prefix: PRIM_MEDIA_PERM_
     special-members: [PRIM_MEDIA_PERM_NONE] # zero
+    tooltip: ''
   PrimParam:
     type: enum
     prefix: PRIM_
+    tooltip: ''
   PrimParticleBlendFunc:
     type: enum
     prefix: PSYS_PART_BF_
+    tooltip: ''
   PrimParticleFlag:
     type: flag
     prefix: PSYS_PART_
+    tooltip: ''
   PrimParticleParam:
     type: enum
     prefix: PSYS_
+    tooltip: ''
   PrimParticleSourcePattern:
     type: flag
     prefix: PSYS_SRC_PATTERN_
+    tooltip: ''
   PrimPhysicsShapeType:
     type: enum
     prefix: PRIM_PHYSICS_SHAPE_
+    tooltip: ''
   PrimReflectionProbeType:
     type: flag
     prefix: PRIM_REFLECTION_PROBE_
+    tooltip: ''
   PrimShiny:
     type: enum
     prefix: PRIM_SHINY_
+    tooltip: ''
   PrimSitError:
     type: enum
     prefix: SIT_
+    tooltip: ''
   PrimSitFlag:
     type: flag
     prefix: SIT_FLAG_
+    tooltip: ''
   PrimTexgen:
     type: enum
     prefix: PRIM_TEXGEN_
+    tooltip: ''
   PrimTextureAnimMode:
     type: flag
+    tooltip: ''
   PrimType:
     type: enum
     prefix: PRIM_TYPE_
+    tooltip: ''
   PrimTypeHole:
     type: enum
     prefix: PRIM_HOLE_
+    tooltip: ''
   PrimTypeSculptFlag:
     type: flag
     prefix: PRIM_SCULPT_FLAG_
+    tooltip: ''
   PrimTypeSculptType:
     type: enum
     prefix: PRIM_SCULPT_TYPE_
+    tooltip: ''
   RayCastData:
     type: flag
     prefix: RC_GET_
+    tooltip: ''
   RayCastParam:
     type: enum
     prefix: RC_
+    tooltip: ''
   RayCastRejectType:
     type: flag
     prefix: RC_REJECT_
+    tooltip: ''
   RegionFlag:
     type: flag
     prefix: REGION_FLAG_
+    tooltip: ''
   RemoteDataEventType:
     type: enum
     prefix: REMOTE_DATA_
     deprecated: true
+    tooltip: ''
   ReturnObjectsError:
     type: enum
     prefix: ERR_
+    tooltip: ''
   ReturnObjectsScope:
     type: flag
     prefix: OBJECT_RETURN_
+    tooltip: ''
   ScriptPermission:
     type: flag
     prefix: PERMISSION_
+    tooltip: ''
   ScriptProfileMode:
     type: enum
     prefix: PROFILE_
+    tooltip: ''
   SensorType:
     type: flag
     special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
+    tooltip: ''
   SimulatorData:
     type: enum
     prefix: DATA_SIM_
+    tooltip: ''
   SimulatorStat:
     type: enum
     prefix: SIM_STAT_
+    tooltip: ''
   StringTrimType:
     type: enum
     prefix: STRING_TRIM_
+    tooltip: ''
   TransferError:
     type: enum
     prefix: TRANSFER_
+    tooltip: ''
   TransferOwnershipFlag:
     type: flag
     prefix: TRANSFER_FLAG_
+    tooltip: ''
   VehicleFlag:
     type: flag
     prefix: VEHICLE_FLAG_
+    tooltip: ''
   VehicleFloatParam:
     type: enum
     prefix: VEHICLE_
+    tooltip: ''
   VehicleRotationParam:
     type: enum
     prefix: VEHICLE_
+    tooltip: ''
   VehicleType:
     type: enum
     prefix: VEHICLE_TYPE_
+    tooltip: ''
   VehicleVectorParam:
     type: enum
     prefix: VEHICLE_
+    tooltip: ''
 
 constants:
   ACTIVE:
