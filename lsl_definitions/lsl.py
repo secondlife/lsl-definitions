@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import enum
 import re
@@ -157,8 +158,6 @@ class LSLConstant:
         """A LSL literal, except strings are stripped of start/end quotes (")
         All string escape sequences have been decoded into plain unicode code points
         """
-        import ast
-
         if self.type != LSLType.STRING:
             return self.value
         # convert unicode escapes from Luau format to Python format
@@ -755,25 +754,39 @@ class LSLDefinitionParser:
                 raise KeyError(f"{const.name} is already defined")
             self._definitions.constants[const.name] = const
             for enum_name in const_data.get("member-of", []):
-                enum = self._definitions.enums.get(enum_name, None)
-                if enum is None:
-                    raise ValueError(f"Unknown enum {enum_name!r}")
-                const.member_of.append(enum)
+                self._add_enum_member(enum_name, const)
             return const
         except Exception as e:
             raise ValueError(f"In constant {const_name!r}: {e}") from e
 
-    def _add_constant_to_enum(self, const: LSLConstant, enum: LSLEnum) -> LSLEnumMember:
-        # AI generated. review
-        member = LSLEnumMember(name=const.name, value=int(const.value), constant=const)
-        enum.members.append(member)
+    def _add_enum_member(self, enum_name: str, const: LSLConstant) -> LSLEnumMember:
+        if const.type != LSLType.INTEGER:
+            raise ValueError("Only integer constants can be enum members")
+        enum: LSLEnum = self._definitions.enums.get(enum_name, None)
+        if enum is None:
+            raise ValueError(f"Unknown enum {enum_name!r}")
+        const.member_of.append(enum)
+        member = LSLEnumMember(
+            name=const.name.removeprefix(enum.prefix),
+            value=ast.literal_eval(const.value),
+            constant=const,
+        )
+        if type(member.value) is not int:
+            raise ValueError(f"{const.value!r} is not an integer")
         if member.name in enum._by_name:
             raise KeyError(f"{member.name!r} is already a member of {enum.name!r}")
+        if enum.type == LSLEnumType.FLAG:
+            is_power_of_two = member.value > 0 and (member.value & (member.value - 1)) == 0
+            if not is_power_of_two:
+                raise ValueError(f"Flag value {member.value:x} is not a power of two")
+        # if const.private:
+        #     return member
         if member.value in enum._by_value:
             raise KeyError(
                 f"{member.value} is already the value of member {enum._by_value[member.value].name!r} "
                 f"in {enum.name!r}"
             )
+        enum.members.append(member)
         enum._by_name[member.name] = member
         enum._by_value[member.value] = member
         return member
