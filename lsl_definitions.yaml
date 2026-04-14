@@ -23,33 +23,47 @@ llsd-lsl-syntax-version: 2
 enums:
   AgentData:
     type: enum
+    prefix: DATA_
   AgentDataPaymentInfo:
     type: flag
+    prefix: PAYMENT_INFO_
   AgentInfo:
     type: flag
+    prefix: AGENT_
   AgentListScope:
     type: flag
+    prefix: AGENT_LIST_
   AssetPermission:
     type: flag
+    prefix: PERM_
     special-members: [PERM_ALL] # combination of other flags
   AssetPermissionCategory:
     type: enum
+    prefix: MASK_
   AssetPermissionCategoryFlag:
     type: flag
+    prefix: MASK_
   AttachedListFilterFlag:
     type: flag
+    prefix: FILTER_FLAG_
   AttachedListFilterParam:
     type: enum
+    prefix: FILTER_
   AttachPoint:
     type: enum
+    prefix: ATTACH_
   CameraParam:
     type: enum
+    prefix: CAMERA_
   ChangeType:
     type: flag
+    prefix: CHANGED_
   CharacterAvoidanceMode:
     type: enum
+    prefix: AVOID_
   CharacterCommand:
     type: enum
+    prefix: CHARACTER_CMD_
   CharacterEvadeParam:
     type: enum
   CharacterFleeFromParam:
@@ -60,204 +74,295 @@ enums:
     type: enum
   CharacterParam:
     type: enum
+    prefix: CHARACTER_
   CharacterPathUpdateType:
     type: enum
+    prefix: PU_
   CharacterPatrolPointsParam:
     type: enum
+    prefix: PATROL_
   CharacterPursueParam:
     type: enum
+    prefix: PURSUIT_
   CharacterTraversalType:
     type: enum
+    prefix: TRAVERSAL_TYPE_
   CharacterType:
     type: enum
+    prefix: CHARACTER_TYPE_
   CharacterWanderWithinParam:
-    type: enum
-  DamageType:
     type: enum
   ControlButton:
     type: flag
+    prefix: CONTROL_
+  DamageType:
+    type: enum
+    prefix: DAMAGE_TYPE_
   EmailTarget:
     type: enum
+    prefix: TARGETED_EMAIL_
   EnvironmentError:
     type: enum
+    prefix: ENV_
   EnvironmentParam:
     type: enum
   EnvironmentParamReadOnly:
     type: enum
-  ExperienceError:
-    type: enum
   EstateAccessParam:
     type: enum
+    prefix: ESTATE_ACCESS_
+  ExperienceError:
+    type: enum
+    prefix: XP_ERROR_
   GameControlAxis:
     type: enum
+    prefix: GAME_CONTROL_AXIS_
   GameControlButton:
     type: flag
+    prefix: GAME_CONTROL_BUTTON_
   GetClosestNavPointParam:
     type: enum
+    prefix: GCNP_
   GiveAgentInventoryParam:
     type: enum
+    prefix: TRANSFER_
   GroundTextureParam:
     type: enum
+    prefix: TERRAIN_
   HTTPContentType:
     type: enum
+    prefix: CONTENT_TYPE_
   HTTPRequestParam:
     type: enum
+    prefix: HTTP_
   HTTPResponseError:
     type: enum
+    prefix: HTTP_
   InventoryType:
     type: enum
+    prefix: INVENTORY_
     special-members: [INVENTORY_NONE] # alias of INVENTORY_ALL
   KeyframedMotionCommand:
     type: enum
+    prefix: KFM_CMD_
   KeyframedMotionData:
     type: flag
+    prefix: KFM_
   KeyframedMotionMode:
     type: enum
+    prefix: KFM_
   KeyframedMotionParam:
     type: enum
+    prefix: KFM_
   LinksetDataAction:
     type: enum
+    prefix: LINKSETDATA_
   LinksetDataError:
     type: enum
-  ListStatisticsOperation:
-    type: enum
+    prefix: LINKSETDATA_
   ListEntryType:
     type: enum
+    prefix: TYPE_
     slua-deprecated: true
+  ListStatisticsOperation:
+    type: enum
+    prefix: LIST_STAT_
   MapBeaconParam:
     type: enum
+    prefix: BEACON_
   ModifyLandAction:
     type: enum
+    prefix: LAND_
   ObjectDerezMode:
     type: enum
+    prefix: DEREZ_
   ObjectDetailsParam:
     type: enum
+    prefix: OBJECT_
   ObjectDetailsPathfindingType:
     type: enum
+    prefix: OPT_
   ObjectPhysicsMaterialParam:
     type: flag
   ObjectRezFlag:
     type: flag
+    prefix: REZ_FLAG_
   ObjectRezParam:
     type: enum
+    prefix: REZ_
   ObjectStatusParam:
     type: flag
+    prefix: STATUS_
   ParcelDetailsParam:
     type: enum
+    prefix: PARCEL_DETAILS_
   ParcelDetailsTeleportRouting:
     type: enum
+    prefix: TP_ROUTING_
   ParcelFlag:
     type: flag
+    prefix: PARCEL_FLAG_
   ParcelMediaCommand:
     type: enum
+    prefix: PARCEL_MEDIA_COMMAND_
   ParcelMediaQuery:
     type: enum
+    prefix: PARCEL_MEDIA_COMMAND_
   ParcelPrimCountCategory:
     type: enum
+    prefix: PARCEL_COUNT_
   ParcelSaleError:
     type: enum
+    prefix: PARCEL_SALE_
   ParcelSaleParam:
     type: enum
+    prefix: PARCEL_SALE_
   PassMode:
     type: enum
+    prefix: PASS_
+  PlaySoundFlag:
+    type: flag
+    prefix: SOUND_
+    special-members: [SOUND_PLAY] # zero
   PrimAlphaMode:
     type: enum
+    prefix: PRIM_ALPHA_MODE_
   PrimBump:
     type: enum
+    prefix: PRIM_BUMP_
   PrimClickAction:
     type: enum
+    prefix: CLICK_ACTION_
   PrimGLTFAlphaMode:
     type: enum
+    prefix: PRIM_GLTF_ALPHA_MODE_
   PrimGLTFOverride:
     type: enum
+    prefix: OVERRIDE_GLTF_
   PrimMaterial:
     type: enum
+    prefix: PRIM_MATERIAL_
   PrimMediaControl:
     type: enum
+    prefix: PRIM_MEDIA_CONTROLS_
   PrimMediaError:
     type: enum
-  PrimMediaPerm:
-    type: flag
-    special-members: [PRIM_MEDIA_PERM_NONE] # zero
+    prefix: STATUS_
   PrimMediaParam:
     type: enum
+    prefix: PRIM_MEDIA_
+  PrimMediaPerm:
+    type: flag
+    prefix: PRIM_MEDIA_PERM_
+    special-members: [PRIM_MEDIA_PERM_NONE] # zero
   PrimParam:
     type: enum
+    prefix: PRIM_
   PrimParticleBlendFunc:
     type: enum
+    prefix: PSYS_PART_BF_
   PrimParticleFlag:
     type: flag
+    prefix: PSYS_PART_
   PrimParticleParam:
     type: enum
+    prefix: PSYS_
   PrimParticleSourcePattern:
     type: flag
+    prefix: PSYS_SRC_PATTERN_
   PrimPhysicsShapeType:
     type: enum
+    prefix: PRIM_PHYSICS_SHAPE_
   PrimReflectionProbeType:
     type: flag
-  PrimSitError:
-    type: enum
-  PrimSitFlag:
-    type: flag
+    prefix: PRIM_REFLECTION_PROBE_
   PrimShiny:
     type: enum
+    prefix: PRIM_SHINY_
+  PrimSitError:
+    type: enum
+    prefix: SIT_
+  PrimSitFlag:
+    type: flag
+    prefix: SIT_FLAG_
   PrimTexgen:
     type: enum
+    prefix: PRIM_TEXGEN_
   PrimTextureAnimMode:
     type: flag
   PrimType:
     type: enum
+    prefix: PRIM_TYPE_
   PrimTypeHole:
     type: enum
+    prefix: PRIM_HOLE_
   PrimTypeSculptFlag:
     type: flag
+    prefix: PRIM_SCULPT_FLAG_
   PrimTypeSculptType:
     type: enum
-  PlaySoundFlag:
-    type: flag
-    special-members: [SOUND_PLAY] # zero
+    prefix: PRIM_SCULPT_TYPE_
   RayCastData:
     type: flag
+    prefix: RC_GET_
   RayCastParam:
     type: enum
+    prefix: RC_
   RayCastRejectType:
     type: flag
+    prefix: RC_REJECT_
   RegionFlag:
     type: flag
+    prefix: REGION_FLAG_
   RemoteDataEventType:
     type: enum
+    prefix: REMOTE_DATA_
     deprecated: true
   ReturnObjectsError:
     type: enum
+    prefix: ERR_
   ReturnObjectsScope:
     type: flag
+    prefix: OBJECT_RETURN_
   ScriptPermission:
     type: flag
+    prefix: PERMISSION_
   ScriptProfileMode:
     type: enum
+    prefix: PROFILE_
   SensorType:
     type: flag
     special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
   SimulatorData:
     type: enum
+    prefix: DATA_SIM_
   SimulatorStat:
     type: enum
+    prefix: SIM_STAT_
   StringTrimType:
     type: enum
+    prefix: STRING_TRIM_
   TransferError:
     type: enum
+    prefix: TRANSFER_
   TransferOwnershipFlag:
     type: flag
+    prefix: TRANSFER_FLAG_
   VehicleFlag:
     type: flag
+    prefix: VEHICLE_FLAG_
   VehicleFloatParam:
     type: enum
+    prefix: VEHICLE_
   VehicleRotationParam:
     type: enum
-  VehicleVectorParam:
-    type: enum
+    prefix: VEHICLE_
   VehicleType:
     type: enum
+    prefix: VEHICLE_TYPE_
+  VehicleVectorParam:
+    type: enum
+    prefix: VEHICLE_
 
 constants:
   ACTIVE:
