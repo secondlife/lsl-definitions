@@ -247,123 +247,125 @@ enums:
     type: enum
   VehicleRotationParam:
     type: enum
+  VehicleVectorParam:
+    type: enum
   VehicleType:
     type: enum
 
 constants:
   ACTIVE:
-    flag-semantics: SensorType
+    flag-semantics: [SensorType]
     tooltip: Objects in world that are running a script or currently physically moving.
     type: integer
     value: '0x2'
   AGENT:
-    flag-semantics: SensorType
+    flag-semantics: [SensorType]
     tooltip: Objects in world that are agents.
     type: integer
     value: '0x1'
   AGENT_ALWAYS_RUN:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x1000'
   AGENT_ATTACHMENTS:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: The agent has attachments.
     type: integer
     value: '0x2'
   AGENT_AUTOMATED:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: The agent has been identified as a scripted agent
     type: integer
     value: '0x4000'
   AGENT_AUTOPILOT:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x2000'
   AGENT_AWAY:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x40'
   AGENT_BUSY:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x800'
   AGENT_BY_LEGACY_NAME:
-    flag-semantics: SensorType
+    flag-semantics: [SensorType]
     tooltip: ''
     type: integer
     value: '0x1'
   AGENT_BY_USERNAME:
-    flag-semantics: SensorType
+    flag-semantics: [SensorType]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_CROUCHING:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x400'
   AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: The agent is floating via scripted attachment.
     type: integer
     value: '0x8000'
   AGENT_FLYING:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: The agent is flying.
     type: integer
     value: '0x1'
   AGENT_IN_AIR:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x100'
   AGENT_LIST_PARCEL:
-    flag-semantics: AgentListScope
+    flag-semantics: [AgentListScope]
     tooltip: Agents on the same parcel where the script is running.
     type: integer
     value: 1
   AGENT_LIST_PARCEL_OWNER:
-    flag-semantics: AgentListScope
+    flag-semantics: [AgentListScope]
     tooltip: Agents on any parcel in the region where the parcel owner is the same
       as the owner of the parcel under the scripted object.
     type: integer
     value: 2
   AGENT_LIST_REGION:
-    flag-semantics: AgentListScope
+    flag-semantics: [AgentListScope]
     tooltip: All agents in the region.
     type: integer
     value: 4
   AGENT_MOUSELOOK:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x8'
   AGENT_ON_OBJECT:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x20'
   AGENT_SCRIPTED:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: The agent has scripted attachments.
     type: integer
     value: '0x4'
   AGENT_SITTING:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_TYPING:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x200'
   AGENT_WALKING:
-    flag-semantics: AgentInfo
+    flag-semantics: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x80'
@@ -373,7 +375,7 @@ constants:
     type: integer
     value: -1
   ANIM_ON:
-    flag-semantics: PrimTextureAnimMode
+    flag-semantics: [PrimTextureAnimMode]
     tooltip: Texture animation is on.
     type: integer
     value: '0x1'
@@ -1444,107 +1446,107 @@ constants:
     type: integer
     value: 5
   GAME_CONTROL_BUTTON_A:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1'
   GAME_CONTROL_BUTTON_B:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x800'
   GAME_CONTROL_BUTTON_GUIDE:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8000'
   GAME_CONTROL_BUTTON_PADDLE1:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80000'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100'
   GAME_CONTROL_BUTTON_START:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40'
   GAME_CONTROL_BUTTON_TOUCHPAD:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100000'
   GAME_CONTROL_BUTTON_X:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
-    enum-semantics: [GameControlButton]
+    flag-semantics: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8'
@@ -1875,12 +1877,12 @@ constants:
     type: integer
     value: 3
   KFM_ROTATION:
-    enum-semantics: [KeyframedMotionData]
+    flag-semantics: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 1
   KFM_TRANSLATION:
-    enum-semantics: [KeyframedMotionData]
+    flag-semantics: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 2
@@ -3261,7 +3263,7 @@ constants:
     type: integer
     value: 2
   PRIM_MATERIAL_DENSITY:
-    enum-semantics: [ObjectPhysicsMaterialParam]
+    flag-semantics: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: DENSITY
@@ -3274,7 +3276,7 @@ constants:
     type: integer
     value: 4
   PRIM_MATERIAL_FRICTION:
-    enum-semantics: [ObjectPhysicsMaterialParam]
+    flag-semantics: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: FRICTION
@@ -3287,7 +3289,7 @@ constants:
     type: integer
     value: 2
   PRIM_MATERIAL_GRAVITY_MULTIPLIER:
-    enum-semantics: [ObjectPhysicsMaterialParam]
+    flag-semantics: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: GRAVITY_MULTIPLIER
@@ -3312,7 +3314,7 @@ constants:
     type: integer
     value: 5
   PRIM_MATERIAL_RESTITUTION:
-    enum-semantics: [ObjectPhysicsMaterialParam]
+    flag-semantics: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: RESTITUTION
