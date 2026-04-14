@@ -2122,7 +2122,7 @@ constants:
   LAND_LARGE_BRUSH:
     member-of: [ModifyLandBrush]
     deprecated:
-      use: 2
+      use: '2'
     tooltip: 'Use a large brush size.\nNOTE: This value is incorrect, a large brush
       should be 2.'
     type: integer
@@ -2140,7 +2140,7 @@ constants:
   LAND_MEDIUM_BRUSH:
     member-of: [ModifyLandBrush]
     deprecated:
-      use: 1
+      use: '1'
     tooltip: 'Use a medium brush size.\nNOTE: This value is incorrect, a medium brush
       should be 1.'
     type: integer
@@ -2163,7 +2163,7 @@ constants:
   LAND_SMALL_BRUSH:
     member-of: [ModifyLandBrush]
     deprecated:
-      use: 0
+      use: '0'
     tooltip: 'Use a small brush size.\nNOTE: This value is incorrect, a small brush
       should be 0.'
     type: integer
@@ -6540,7 +6540,6 @@ functions:
     - AttachmentPoint:
         tooltip: ''
         type: integer
-        member-of: AttachPoints
     energy: 10.0
     func-id: 113
     return: void
@@ -7679,7 +7678,6 @@ functions:
     func-id: 206
     must-use: true
     return: integer
-    member-of: AgentInfo
     sleep: 0.0
     tooltip: "Returns an integer bit-field containing the agent information about\
       \ id.\\n\n                    Returns AGENT_FLYING, AGENT_ATTACHMENTS, AGENT_SCRIPTED,\

@@ -78,14 +78,49 @@
             "type": "array"
         }
     },
+    "additionalProperties": false,
     "properties": {
+        "enums": {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[A-Z][A-Za-z]+$": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "type": { "enum": ["enum", "flag"] },
+                        "prefix": {
+                            "type": "string",
+                            "pattern": "^[A-Z]+[A-Z_]*$",
+                            "markdownDescription": "The prefix common to all my constants."
+                        },
+                        "deprecated": { "$ref": "#/$defs/deprecated" },
+                        "slua-deprecated": { "$ref": "#/$defs/deprecated" },
+                        "special-members": {
+                            "markdownDescription": "Valid member names whose value violates the validation rules",
+                            "type": "array",
+                            "items": { "type": "string", "pattern": "^[A-Z]+[A-Z_]*$" }
+                        },
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this enum.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "tooltip"
+                    ]
+                }
+            }
+        },
         "constants": {
             "additionalProperties": false,
             "patternProperties": {
                 "^(?:[A-Z]+[0-9]*(?:_(?:[0-9]+|[A-Z]+[0-9]*))*)$": {
+                    "additionalProperties": false,
                     "properties": {
-                        "additionalProperties": false,
                         "deprecated": { "$ref": "#/$defs/deprecated" },
+                        "slua-deprecated": { "$ref": "#/$defs/deprecated" },
                         "slua-removed": {
                             "const": true,
                             "markdownDescription": "This constant is only present in LSL, not SLua.",
@@ -101,12 +136,18 @@
                             "type": "string"
                         },
                         "type": { "$ref": "#/$defs/lslType" },
+                        "slua-type": {
+                            "markdownDescription": "A more specific constant type for slua type-checking.",
+                            "type": "string"
+                        },
                         "value": {
                             "markdownDescription": "The value of the constant.",
-                            "type": [
-                                "integer",
-                                "string"
-                            ]
+                            "type": [ "integer", "string" ]
+                        },
+                        "member-of": {
+                            "markdownDescription": "The name of the enum this constant is a member of, if any.",
+                            "type": "array",
+                            "items": { "type": "string", "pattern": "^[A-Z]+[A-Za-z_]*$" }
                         }
                     },
                     "required": [
