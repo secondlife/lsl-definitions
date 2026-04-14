@@ -134,7 +134,8 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 }
 
 
-class LSLConstant(NamedTuple):
+@dataclasses.dataclass
+class LSLConstant:
     name: str
     type: LSLType
     slua_type: Optional[str]
@@ -753,18 +754,11 @@ class LSLDefinitionParser:
             if const.name in self._definitions.constants:
                 raise KeyError(f"{const.name} is already defined")
             self._definitions.constants[const.name] = const
-            for enum_name in const_data.get("enum-semantics", []):
+            for enum_name in const_data.get("member-of", []):
                 enum = self._definitions.enums.get(enum_name, None)
                 if enum is None:
                     raise ValueError(f"Unknown enum {enum_name!r}")
-                if enum.type != LSLEnumType.ENUM:
-                    raise ValueError(f"{enum_name!r} is not an enum")
-            for enum_name in const_data.get("flag-semantics", []):
-                enum = self._definitions.enums.get(enum_name, None)
-                if enum is None:
-                    raise ValueError(f"Unknown enum {enum_name!r}")
-                if enum.type != LSLEnumType.FLAG:
-                    raise ValueError(f"{enum_name!r} is not a flag enum")
+                const.member_of.append(enum)
             return const
         except Exception as e:
             raise ValueError(f"In constant {const_name!r}: {e}") from e

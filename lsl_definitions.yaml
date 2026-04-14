@@ -254,585 +254,585 @@ enums:
 
 constants:
   ACTIVE:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: Objects in world that are running a script or currently physically moving.
     type: integer
     value: '0x2'
   AGENT:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: Objects in world that are agents.
     type: integer
     value: '0x1'
   AGENT_ALWAYS_RUN:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x1000'
   AGENT_ATTACHMENTS:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: The agent has attachments.
     type: integer
     value: '0x2'
   AGENT_AUTOMATED:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: The agent has been identified as a scripted agent
     type: integer
     value: '0x4000'
   AGENT_AUTOPILOT:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x2000'
   AGENT_AWAY:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x40'
   AGENT_BUSY:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x800'
   AGENT_BY_LEGACY_NAME:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: ''
     type: integer
     value: '0x1'
   AGENT_BY_USERNAME:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_CROUCHING:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x400'
   AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: The agent is floating via scripted attachment.
     type: integer
     value: '0x8000'
   AGENT_FLYING:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: The agent is flying.
     type: integer
     value: '0x1'
   AGENT_IN_AIR:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x100'
   AGENT_LIST_PARCEL:
-    flag-semantics: [AgentListScope]
+    member-of: [AgentListScope]
     tooltip: Agents on the same parcel where the script is running.
     type: integer
     value: 1
   AGENT_LIST_PARCEL_OWNER:
-    flag-semantics: [AgentListScope]
+    member-of: [AgentListScope]
     tooltip: Agents on any parcel in the region where the parcel owner is the same
       as the owner of the parcel under the scripted object.
     type: integer
     value: 2
   AGENT_LIST_REGION:
-    flag-semantics: [AgentListScope]
+    member-of: [AgentListScope]
     tooltip: All agents in the region.
     type: integer
     value: 4
   AGENT_MOUSELOOK:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x8'
   AGENT_ON_OBJECT:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x20'
   AGENT_SCRIPTED:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: The agent has scripted attachments.
     type: integer
     value: '0x4'
   AGENT_SITTING:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_TYPING:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x200'
   AGENT_WALKING:
-    flag-semantics: [AgentInfo]
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x80'
   ALL_SIDES:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: ''
     type: integer
     value: -1
   ANIM_ON:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Texture animation is on.
     type: integer
     value: '0x1'
   ATTACH_ANY_HUD:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Filtering for any HUD attachment.
     type: integer
     value: -1
   ATTACH_AVATAR_CENTER:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's geometric centre.
     type: integer
     value: 40
   ATTACH_BACK:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's back.
     type: integer
     value: 9
   ATTACH_BELLY:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's belly.
     type: integer
     value: 28
   ATTACH_CHEST:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's chest.
     type: integer
     value: 1
   ATTACH_CHIN:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's chin.
     type: integer
     value: 12
   ATTACH_FACE_JAW:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's jaw.
     type: integer
     value: 47
   ATTACH_FACE_LEAR:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ear (extended).
     type: integer
     value: 48
   ATTACH_FACE_LEYE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left eye (extended).
     type: integer
     value: 50
   ATTACH_FACE_REAR:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ear (extended).
     type: integer
     value: 49
   ATTACH_FACE_REYE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right eye (extended).
     type: integer
     value: 51
   ATTACH_FACE_TONGUE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tongue.
     type: integer
     value: 52
   ATTACH_GROIN:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's groin.
     type: integer
     value: 53
   ATTACH_HEAD:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's head.
     type: integer
     value: 2
   ATTACH_HIND_LFOOT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hind foot.
     type: integer
     value: 54
   ATTACH_HIND_RFOOT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hind foot.
     type: integer
     value: 55
   ATTACH_HUD_BOTTOM:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 37
   ATTACH_HUD_BOTTOM_LEFT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 36
   ATTACH_HUD_BOTTOM_RIGHT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 38
   ATTACH_HUD_CENTER_1:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 35
   ATTACH_HUD_CENTER_2:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 31
   ATTACH_HUD_TOP_CENTER:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 33
   ATTACH_HUD_TOP_LEFT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 34
   ATTACH_HUD_TOP_RIGHT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 32
   ATTACH_LEAR:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ear.
     type: integer
     value: 13
   ATTACH_LEFT_PEC:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left pectoral.
     type: integer
     value: 29
   ATTACH_LEYE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left eye.
     type: integer
     value: 15
   ATTACH_LFOOT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left foot.
     type: integer
     value: 7
   ATTACH_LHAND:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hand.
     type: integer
     value: 5
   ATTACH_LHAND_RING1:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ring finger.
     type: integer
     value: 41
   ATTACH_LHIP:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hip.
     type: integer
     value: 25
   ATTACH_LLARM:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left lower arm.
     type: integer
     value: 21
   ATTACH_LLLEG:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's lower left leg.
     type: integer
     value: 27
   ATTACH_LPEC:
     deprecated:
       use: ATTACH_RIGHT_PEC
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right pectoral. (Deprecated, use ATTACH_RIGHT_PEC)
     type: integer
     value: 30
   ATTACH_LSHOULDER:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left shoulder.
     type: integer
     value: 3
   ATTACH_LUARM:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left upper arm.
     type: integer
     value: 20
   ATTACH_LULEG:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's lower upper leg.
     type: integer
     value: 26
   ATTACH_LWING:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left wing.
     type: integer
     value: 45
   ATTACH_MOUTH:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's mouth.
     type: integer
     value: 11
   ATTACH_NECK:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's neck.
     type: integer
     value: 39
   ATTACH_NOSE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's nose.
     type: integer
     value: 17
   ATTACH_PELVIS:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's pelvis.
     type: integer
     value: 10
   ATTACH_REAR:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ear.
     type: integer
     value: 14
   ATTACH_REYE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right eye.
     type: integer
     value: 16
   ATTACH_RFOOT:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right foot.
     type: integer
     value: 8
   ATTACH_RHAND:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hand.
     type: integer
     value: 6
   ATTACH_RHAND_RING1:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ring finger.
     type: integer
     value: 42
   ATTACH_RHIP:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hip.
     type: integer
     value: 22
   ATTACH_RIGHT_PEC:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right pectoral.
     type: integer
     value: 30
   ATTACH_RLARM:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right lower arm.
     type: integer
     value: 19
   ATTACH_RLLEG:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right lower leg.
     type: integer
     value: 24
   ATTACH_RPEC:
     deprecated:
       use: ATTACH_LEFT_PEC
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left pectoral. (deprecated, use ATTACH_LEFT_PEC)
     type: integer
     value: 29
   ATTACH_RSHOULDER:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right shoulder.
     type: integer
     value: 4
   ATTACH_RUARM:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right upper arm.
     type: integer
     value: 18
   ATTACH_RULEG:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right upper leg.
     type: integer
     value: 23
   ATTACH_RWING:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right wing.
     type: integer
     value: 46
   ATTACH_TAIL_BASE:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tail base.
     type: integer
     value: 43
   ATTACH_TAIL_TIP:
-    enum-semantics: [AttachPoint]
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tail tip.
     type: integer
     value: 44
   AVOID_CHARACTERS:
-    flag-semantics: [CharacterAvoidanceMode]
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 1
   AVOID_DYNAMIC_OBSTACLES:
-    flag-semantics: [CharacterAvoidanceMode]
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 2
   AVOID_NONE:
-    flag-semantics: [CharacterAvoidanceMode]
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 0
   BEACON_MAP:
-    enum-semantics: [MapBeaconParam]
+    member-of: [MapBeaconParam]
     tooltip: Cause llMapBeacon to optionally display and focus the world map on the
       avatar's viewer.
     type: integer
     value: 1
   CAMERA_ACTIVE:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 12
   CAMERA_BEHINDNESS_ANGLE:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 8
   CAMERA_BEHINDNESS_LAG:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 9
   CAMERA_DISTANCE:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 7
   CAMERA_FOCUS:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 17
   CAMERA_FOCUS_LAG:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 6
   CAMERA_FOCUS_LOCKED:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 22
   CAMERA_FOCUS_OFFSET:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 1
   CAMERA_FOCUS_THRESHOLD:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 11
   CAMERA_PITCH:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 0
   CAMERA_POSITION:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 13
   CAMERA_POSITION_LAG:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 5
   CAMERA_POSITION_LOCKED:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 21
   CAMERA_POSITION_THRESHOLD:
-    enum-semantics: [CameraParam]
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 10
   CHANGED_ALLOWED_DROP:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object inventory has changed because an item was added through the
       llAllowInventoryDrop interface.
     type: integer
     value: '0x40'
   CHANGED_COLOR:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object color has changed.
     type: integer
     value: '0x2'
   CHANGED_INVENTORY:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object inventory has changed.
     type: integer
     value: '0x1'
   CHANGED_LINK:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object has linked or its links were broken.
     type: integer
     value: '0x20'
   CHANGED_MEDIA:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: ''
     type: integer
     value: '0x800'
   CHANGED_OWNER:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object has changed ownership.
     type: integer
     value: '0x80'
   CHANGED_REGION:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object has changed region.
     type: integer
     value: '0x100'
   CHANGED_REGION_START:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The region this object is in has just come online.
     type: integer
     value: '0x400'
   CHANGED_RENDER_MATERIAL:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The render material has changed.
     type: integer
     value: '0x1000'
   CHANGED_SCALE:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object scale (size) has changed.
     type: integer
     value: '0x8'
   CHANGED_SHAPE:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The object base shape has changed, e.g., a box to a cylinder.
     type: integer
     value: '0x4'
   CHANGED_TELEPORT:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The avatar to whom this object is attached has teleported.
     type: integer
     value: '0x200'
   CHANGED_TEXTURE:
-    flag-semantics: [ChangeType]
+    member-of: [ChangeType]
     tooltip: The texture offset, scale rotation, or simply the object texture has
       changed.
     type: integer
     value: '0x10'
   CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: If set to false, character will not attempt to catch up on lost time
       when pathfinding performance is low, potentially providing more reliable movement
       (albeit while potentially appearing to be more stuttery). Default is true to
@@ -840,67 +840,67 @@ constants:
     type: integer
     value: 14
   CHARACTER_AVOIDANCE_MODE:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: Allows you to specify that a character should not try to avoid other
       characters, should not try to avoid dynamic obstacles (relatively fast moving
       objects and avatars), or both.
     type: integer
     value: 5
   CHARACTER_CMD_JUMP:
-    enum-semantics: [CharacterCommand]
+    member-of: [CharacterCommand]
     tooltip: Makes the character jump. Requires an additional parameter, the height
       to jump, between 0.1m and 2.0m. This must be provided as the first element of
       the llExecCharacterCmd option list.
     type: integer
     value: '0x01'
   CHARACTER_CMD_SMOOTH_STOP:
-    enum-semantics: [CharacterCommand]
+    member-of: [CharacterCommand]
     tooltip: ''
     type: integer
     value: 2
   CHARACTER_CMD_STOP:
-    enum-semantics: [CharacterCommand]
+    member-of: [CharacterCommand]
     tooltip: Stops any current pathfinding operation.
     type: integer
     value: '0x00'
   CHARACTER_DESIRED_SPEED:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: Speed of pursuit in meters per second.
     type: integer
     value: 1
   CHARACTER_DESIRED_TURN_SPEED:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: The character's maximum speed while turning about the Z axis. - Note
       that this is only loosely enforced.
     type: integer
     value: 12
   CHARACTER_LENGTH:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: Set collision capsule length - cannot be less than two times the radius.
     type: integer
     value: 3
   CHARACTER_MAX_ACCEL:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: The character's maximum acceleration rate.
     type: integer
     value: 8
   CHARACTER_MAX_DECEL:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: The character's maximum deceleration rate.
     type: integer
     value: 9
   CHARACTER_MAX_SPEED:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: The character's maximum speed.
     type: integer
     value: 13
   CHARACTER_MAX_TURN_RADIUS:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: The character's turn radius when travelling at CHARACTER_MAX_TURN_SPEED.
     type: integer
     value: 10
   CHARACTER_ORIENTATION:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: 'Valid options are: VERTICAL, HORIZONTAL.'
     type: integer
     value: 4
@@ -909,95 +909,95 @@ constants:
     type: integer
     value: 2
   CHARACTER_STAY_WITHIN_PARCEL:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: Determines whether a character can leave its starting parcel.\nTakes
       a boolean parameter. If TRUE, the character cannot voluntarilly leave the parcel,
       but can return to it.
     type: integer
     value: 15
   CHARACTER_TYPE:
-    enum-semantics: [CharacterParam, GetClosestNavPointParam]
+    member-of: [CharacterParam, GetClosestNavPointParam]
     tooltip: Specifies which walk-ability coefficient will be used by this character.
     type: integer
     value: 6
   CHARACTER_TYPE_A:
-    enum-semantics: [CharacterType]
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 0
   CHARACTER_TYPE_B:
-    enum-semantics: [CharacterType]
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 1
   CHARACTER_TYPE_C:
-    enum-semantics: [CharacterType]
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 2
   CHARACTER_TYPE_D:
-    enum-semantics: [CharacterType]
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 3
   CHARACTER_TYPE_NONE:
-    enum-semantics: [CharacterType]
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 4
   CLICK_ACTION_BUY:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, the buy dialog is opened.
     type: integer
     value: 2
   CLICK_ACTION_DISABLED:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: No click action. No touches detected or passed.
     type: integer
     value: 8
   CLICK_ACTION_IGNORE:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: No click action. Object is invisible to the mouse.
     type: integer
     value: 9
   CLICK_ACTION_NONE:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: 'Performs the default action: when the prim is clicked, touch events
       are triggered.'
     type: integer
     value: 0
   CLICK_ACTION_OPEN:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, the object inventory dialog is opened.
     type: integer
     value: 4
   CLICK_ACTION_OPEN_MEDIA:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is touched, the web media dialog is opened.
     type: integer
     value: 6
   CLICK_ACTION_PAY:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, the pay dialog is opened.
     type: integer
     value: 3
   CLICK_ACTION_PLAY:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, html-on-a-prim is enabled?
     type: integer
     value: 5
   CLICK_ACTION_SIT:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, the avatar sits upon it.
     type: integer
     value: 1
   CLICK_ACTION_TOUCH:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: When the prim is clicked, touch events are triggered.
     type: integer
     value: 0
   CLICK_ACTION_ZOOM:
-    enum-semantics: [PrimClickAction]
+    member-of: [PrimClickAction]
     tooltip: Zoom in on object when clicked.
     type: integer
     value: 7
@@ -1014,208 +1014,208 @@ constants:
     slua-type: uuid
     value: "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
   CONTENT_TYPE_ATOM:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/atom+xml"'
     type: integer
     value: 4
   CONTENT_TYPE_FORM:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/x-www-form-urlencoded"'
     type: integer
     value: 7
   CONTENT_TYPE_HTML:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"text/html", only valid for embedded browsers on content owned by the
       person viewing. Falls back to "text/plain" otherwise.'
     type: integer
     value: 1
   CONTENT_TYPE_JSON:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/json"'
     type: integer
     value: 5
   CONTENT_TYPE_LLSD:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/llsd+xml"'
     type: integer
     value: 6
   CONTENT_TYPE_RSS:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/rss+xml"'
     type: integer
     value: 8
   CONTENT_TYPE_TEXT:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"text/plain"'
     type: integer
     value: 0
   CONTENT_TYPE_XHTML:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/xhtml+xml"'
     type: integer
     value: 3
   CONTENT_TYPE_XML:
-    enum-semantics: [HTTPContentType]
+    member-of: [HTTPContentType]
     tooltip: '"application/xml"'
     type: integer
     value: 2
   CONTROL_BACK:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move back control.
     type: integer
     value: '0x2'
   CONTROL_DOWN:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move down control.
     type: integer
     value: '0x20'
   CONTROL_FWD:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move forward control.
     type: integer
     value: '0x1'
   CONTROL_LBUTTON:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar left button control.
     type: integer
     value: '0x10000000'
   CONTROL_LEFT:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move left control.
     type: integer
     value: '0x4'
   CONTROL_ML_LBUTTON:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar left button control while in mouse look.
     type: integer
     value: '0x40000000'
   CONTROL_RIGHT:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move right control.
     type: integer
     value: '0x8'
   CONTROL_ROT_LEFT:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar rotate left control.
     type: integer
     value: '0x100'
   CONTROL_ROT_RIGHT:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar rotate right control.
     type: integer
     value: '0x200'
   CONTROL_UP:
-    flag-semantics: [ControlButton]
+    member-of: [ControlButton]
     tooltip: Test for the avatar move up control.
     type: integer
     value: '0x10'
   DAMAGEABLE:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: Objects in world that are able to process damage.
     type: integer
     value: '0x20'
   DAMAGE_TYPE_ACID:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a caustic substance, such as acid
     type: integer
     value: 1
   DAMAGE_TYPE_BLUDGEONING:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a blunt object, such as a club.
     type: integer
     value: '2'
   DAMAGE_TYPE_COLD:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage inflicted by exposure to extreme cold
     type: integer
     value: 3
   DAMAGE_TYPE_ELECTRIC:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by electricity.
     type: integer
     value: 4
   DAMAGE_TYPE_EMOTIONAL:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: ''
     type: integer
     value: 14
   DAMAGE_TYPE_FIRE:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage inflicted by exposure to heat or flames.
     type: integer
     value: 5
   DAMAGE_TYPE_FORCE:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage inflicted by a great force or impact.
     type: integer
     value: 6
   DAMAGE_TYPE_GENERIC:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Generic or legacy damage.
     type: integer
     value: 0
   DAMAGE_TYPE_IMPACT:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: System damage generated by impact with land or a prim.
     type: integer
     value: -1
   DAMAGE_TYPE_NECROTIC:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a direct assault on life-force
     type: integer
     value: 7
   DAMAGE_TYPE_PIERCING:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a piercing object such as a bullet, spear, or arrow.
     type: integer
     value: 8
   DAMAGE_TYPE_POISON:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by poison.
     type: integer
     value: 9
   DAMAGE_TYPE_PSYCHIC:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a direct assault on the mind.
     type: integer
     value: 10
   DAMAGE_TYPE_RADIANT:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by radiation or extreme light.
     type: integer
     value: 11
   DAMAGE_TYPE_SLASHING:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by a slashing object such as a sword or axe.
     type: integer
     value: 12
   DAMAGE_TYPE_SONIC:
-    enum-semantics: [DamageType]
+    member-of: [DamageType]
     tooltip: Damage caused by loud noises, like a Crash Worship concert.
     type: integer
     value: 13
   DATA_BORN:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: The date the agent was born, returned in ISO 8601 format of YYYY-MM-DD.
     type: integer
     value: 3
   DATA_NAME:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: The name of the agent.
     type: integer
     value: 2
   DATA_ONLINE:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: TRUE for online, FALSE for offline.
     type: integer
     value: 1
   DATA_PAYINFO:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: ''
     type: integer
     value: 8
   DATA_RATING:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: "Returns the agent ratings as a comma separated string of six integers.\
       \ They are:\n\t\t\t1) Positive rated behaviour\n\t\t\t2) Negative rated behaviour\n\
       \t\t\t3) Positive rated appearance\n\t\t\t4) Negative rated appearance\n\t\t\
@@ -1223,22 +1223,22 @@ constants:
     type: integer
     value: 4
   DATA_RESERVED_0:
-    enum-semantics: [AgentData]
+    member-of: [AgentData]
     tooltip: "Reserved for Linden use."
     type: integer
     value: 9
   DATA_SIM_POS:
-    enum-semantics: [SimulatorData]
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 5
   DATA_SIM_RATING:
-    enum-semantics: [SimulatorData]
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 7
   DATA_SIM_STATUS:
-    enum-semantics: [SimulatorData]
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 6
@@ -1254,73 +1254,73 @@ constants:
     type: float
     value: '0.017453293'
   DENSITY:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)
     type: integer
     value: 1
   DEREZ_DIE:
-    enum-semantics: [ObjectDerezMode]
+    member-of: [ObjectDerezMode]
     tooltip: Causes the object to immediately die.
     type: integer
     value: 0
   DEREZ_MAKE_TEMP:
-    enum-semantics: [ObjectDerezMode]
+    member-of: [ObjectDerezMode]
     tooltip: The object is made temporary and will be cleaned up at some later timer.
     type: integer
     value: 1
   DEREZ_TO_INVENTORY:
-    enum-semantics: [ObjectDerezMode]
+    member-of: [ObjectDerezMode]
     tooltip: The object is returned to the inventory of the rezzer.
     type: integer
     value: 2
   ENVIRONMENT_DAYINFO:
-    enum-semantics: [EnvironmentParamReadOnly]
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Day length, offset and progression.
     type: integer
     value: 200
   ENV_INVALID_AGENT:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Could not find agent with the specified ID
     type: integer
     value: -4
   ENV_INVALID_RULE:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Attempted to change an unknown property.
     type: integer
     value: -5
   ENV_NOT_EXPERIENCE:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Attempt to change environments outside an experience.
     type: integer
     value: -1
   ENV_NO_ENVIRONMENT:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Could not find environmental settings in object inventory.
     type: integer
     value: -3
   ENV_NO_EXPERIENCE_LAND:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: The experience has not been enabled on this land.
     type: integer
     value: -7
   ENV_NO_EXPERIENCE_PERMISSION:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Agent has not granted permission to change environments.
     type: integer
     value: -2
   ENV_NO_PERMISSIONS:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Script does not have permission to modify environment.
     type: integer
     value: -9
   ENV_THROTTLE:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Could not validate values for environment.
     type: integer
     value: -8
   ENV_VALIDATION_FAIL:
-    enum-semantics: [EnvironmentError]
+    member-of: [EnvironmentError]
     tooltip: Could not validate values for environment.
     type: integer
     value: -6
@@ -1329,57 +1329,57 @@ constants:
     type: string
     value: '\n\n\n'
   ERR_GENERIC:
-    enum-semantics: [ReturnObjectsError]
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -1
   ERR_MALFORMED_PARAMS:
-    enum-semantics: [ReturnObjectsError]
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -3
   ERR_PARCEL_PERMISSIONS:
-    enum-semantics: [ReturnObjectsError]
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -2
   ERR_RUNTIME_PERMISSIONS:
-    enum-semantics: [ReturnObjectsError]
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -4
   ERR_THROTTLED:
-    enum-semantics: [ReturnObjectsError]
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -5
   ESTATE_ACCESS_ALLOWED_AGENT_ADD:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Add the agent to this estate's Allowed Residents list.
     type: integer
     value: 4
   ESTATE_ACCESS_ALLOWED_AGENT_REMOVE:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Remove the agent from this estate's Allowed Residents list.
     type: integer
     value: 8
   ESTATE_ACCESS_ALLOWED_GROUP_ADD:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Add the group to this estate's Allowed groups list.
     type: integer
     value: 16
   ESTATE_ACCESS_ALLOWED_GROUP_REMOVE:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Remove the group from this estate's Allowed groups list.
     type: integer
     value: 32
   ESTATE_ACCESS_BANNED_AGENT_ADD:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Add the agent to this estate's Banned residents list.
     type: integer
     value: 64
   ESTATE_ACCESS_BANNED_AGENT_REMOVE:
-    enum-semantics: [EstateAccessParam]
+    member-of: [EstateAccessParam]
     tooltip: Remove the agent from this estate's Banned residents list.
     type: integer
     value: 128
@@ -1389,212 +1389,212 @@ constants:
     slua-removed: true
     value: 0
   FILTER_FLAGS:
-    enum-semantics: [AttachedListFilterParam]
+    member-of: [AttachedListFilterParam]
     tooltip: Flags to control returned attachments.
     type: integer
     value: 2
   FILTER_FLAG_HUDS:
-    flag-semantics: [AttachedListFilterFlag]
+    member-of: [AttachedListFilterFlag]
     tooltip: Include HUDs with matching experience.
     type: integer
     value: '0x0001'
   FILTER_INCLUDE:
-    enum-semantics: [AttachedListFilterParam]
+    member-of: [AttachedListFilterParam]
     tooltip: Include attachment point.
     type: integer
     value: 1
   FORCE_DIRECT_PATH:
-    enum-semantics: [CharacterNavigateParam]
+    member-of: [CharacterNavigateParam]
     tooltip: Makes character navigate in a straight line toward position. May be set
       to TRUE or FALSE.
     type: integer
     value: 1
   FRICTION:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the friction value. Must be
       between 0.0 and 255.0
     type: integer
     value: 2
   GAME_CONTROL_AXIS_LEFTX:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 1
   GAME_CONTROL_AXIS_RIGHTX:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 3
   GAME_CONTROL_AXIS_TRIGGERLEFT:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
-    enum-semantics: [GameControlAxis]
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 5
   GAME_CONTROL_BUTTON_A:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1'
   GAME_CONTROL_BUTTON_B:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x800'
   GAME_CONTROL_BUTTON_GUIDE:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8000'
   GAME_CONTROL_BUTTON_PADDLE1:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80000'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100'
   GAME_CONTROL_BUTTON_START:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40'
   GAME_CONTROL_BUTTON_TOUCHPAD:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100000'
   GAME_CONTROL_BUTTON_X:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
-    flag-semantics: [GameControlButton]
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8'
   GCNP_GET_WALKABILITY:
-    enum-semantics: [GetClosestNavPointParam]
+    member-of: [GetClosestNavPointParam]
     private: true
     tooltip: ''
     type: integer
     value: '2'
   GCNP_RADIUS:
-    enum-semantics: [GetClosestNavPointParam]
+    member-of: [GetClosestNavPointParam]
     tooltip: ''
     type: integer
     value: 0
   GCNP_STATIC:
-    enum-semantics: [GetClosestNavPointParam]
+    member-of: [GetClosestNavPointParam]
     tooltip: ''
     type: integer
     value: 1
   GRAVITY_MULTIPLIER:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the gravity multiplier value.
       Must be between -1.0 and +28.0
     type: integer
     value: 8
   HORIZONTAL:
-    enum-semantics: [CharacterOrientation]
+    member-of: [CharacterOrientation]
     tooltip: ''
     type: integer
     value: 1
   HTTP_ACCEPT:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: "Provide a string value to be included in the HTTP\n            accepts\
       \ header value. This replaces the default Second Life HTTP accepts header."
     type: integer
     value: 8
   HTTP_BODY_MAXLENGTH:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 2
   HTTP_BODY_TRUNCATED:
-    enum-semantics: [HTTPResponseError]
+    member-of: [HTTPResponseError]
     tooltip: ''
     type: integer
     value: 0
   HTTP_CUSTOM_HEADER:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: Add an extra custom HTTP header to the request. The first string is the
       name of the parameter to change, e.g. "Pragma", and the second string is the
       value, e.g. "no-cache". Up to 8 custom headers may be configured per request.
@@ -1603,22 +1603,22 @@ constants:
     type: integer
     value: 5
   HTTP_EXTENDED_ERROR:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: Report extended error information through http_response event.
     type: integer
     value: 9
   HTTP_METHOD:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 0
   HTTP_MIMETYPE:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 1
   HTTP_PRAGMA_NO_CACHE:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: 'Allows enabling/disabling of the "Pragma: no-cache" header.\nUsage: [HTTP_PRAGMA_NO_CACHE,
       integer SendHeader]. When SendHeader is TRUE, the "Pragma: no-cache" header
       is sent by the script. This matches the default behavior. When SendHeader is
@@ -1626,18 +1626,18 @@ constants:
     type: integer
     value: 6
   HTTP_USER_AGENT:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: "Provide a string value to be included in the HTTP\n            User-Agent\
       \ header value. This is appended to the default value."
     type: integer
     value: 7
   HTTP_VERBOSE_THROTTLE:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 4
   HTTP_VERIFY_CERT:
-    enum-semantics: [HTTPRequestParam]
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 3
@@ -1697,72 +1697,72 @@ constants:
     slua-type: uuid
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
   INVENTORY_ALL:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: -1
   INVENTORY_ANIMATION:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 20
   INVENTORY_BODYPART:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 13
   INVENTORY_CLOTHING:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 5
   INVENTORY_GESTURE:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 21
   INVENTORY_LANDMARK:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 3
   INVENTORY_MATERIAL:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 57
   INVENTORY_NONE:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: -1
   INVENTORY_NOTECARD:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 7
   INVENTORY_OBJECT:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 6
   INVENTORY_SCRIPT:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 10
   INVENTORY_SETTING:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 56
   INVENTORY_SOUND:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 1
   INVENTORY_TEXTURE:
-    enum-semantics: [InventoryType]
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 0
@@ -1827,62 +1827,62 @@ constants:
     type: string
     value: '\u{FDD6}'
   KFM_CMD_PAUSE:
-    enum-semantics: [KeyframedMotionCommand]
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 2
   KFM_CMD_PLAY:
-    enum-semantics: [KeyframedMotionCommand]
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 0
   KFM_CMD_STOP:
-    enum-semantics: [KeyframedMotionCommand]
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 1
   KFM_COMMAND:
-    enum-semantics: [KeyframedMotionParam]
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 0
   KFM_DATA:
-    enum-semantics: [KeyframedMotionParam]
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 2
   KFM_FORWARD:
-    enum-semantics: [KeyframedMotionMode]
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 0
   KFM_LOOP:
-    enum-semantics: [KeyframedMotionMode]
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 1
   KFM_MODE:
-    enum-semantics: [KeyframedMotionParam]
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 1
   KFM_PING_PONG:
-    enum-semantics: [KeyframedMotionMode]
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 2
   KFM_REVERSE:
-    enum-semantics: [KeyframedMotionMode]
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 3
   KFM_ROTATION:
-    flag-semantics: [KeyframedMotionData]
+    member-of: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 1
   KFM_TRANSLATION:
-    flag-semantics: [KeyframedMotionData]
+    member-of: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 2
@@ -1894,12 +1894,12 @@ constants:
     type: integer
     value: 3
   LAND_LEVEL:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: Action to level the land.
     type: integer
     value: 0
   LAND_LOWER:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: Action to lower the land.
     type: integer
     value: 2
@@ -1911,17 +1911,17 @@ constants:
     type: integer
     value: 2
   LAND_NOISE:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 4
   LAND_RAISE:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: Action to raise the land.
     type: integer
     value: 1
   LAND_REVERT:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 5
@@ -1933,7 +1933,7 @@ constants:
     type: integer
     value: 1
   LAND_SMOOTH:
-    enum-semantics: [ModifyLandAction]
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 3
@@ -1943,165 +1943,165 @@ constants:
     type: float
     value: '0.01'
   LINKSETDATA_DELETE:
-    enum-semantics: [LinksetDataAction]
+    member-of: [LinksetDataAction]
     tooltip: A name:value pair has been removed from the linkset datastore.
     type: integer
     value: 2
   LINKSETDATA_EMEMORY:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: A name:value pair was too large to write to the linkset datastore.
     type: integer
     value: 1
   LINKSETDATA_ENOKEY:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: The key supplied was empty.
     type: integer
     value: 2
   LINKSETDATA_EPROTECTED:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: The name:value pair has been protected from overwrite in the linkset
       datastore.
     type: integer
     value: 3
   LINKSETDATA_MULTIDELETE:
-    enum-semantics: [LinksetDataAction]
+    member-of: [LinksetDataAction]
     tooltip: A CSV list of names removed from the linkset datastore.
     type: integer
     value: 3
   LINKSETDATA_NOTFOUND:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: The named key was not found in the datastore.
     type: integer
     value: 4
   LINKSETDATA_NOUPDATE:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: The value written to a name in the keystore is the same as the value
       already there.
     type: integer
     value: 5
   LINKSETDATA_OK:
-    enum-semantics: [LinksetDataError]
+    member-of: [LinksetDataError]
     tooltip: The name:value pair was written to the datastore.
     type: integer
     value: 0
   LINKSETDATA_RESET:
-    enum-semantics: [LinksetDataAction]
+    member-of: [LinksetDataAction]
     tooltip: The linkset datastore has been reset.
     type: integer
     value: 0
   LINKSETDATA_UPDATE:
-    enum-semantics: [LinksetDataAction]
+    member-of: [LinksetDataAction]
     tooltip: A name:value pair in the linkset datastore has been changed or created.
     type: integer
     value: 1
   LINK_ALL_CHILDREN:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: This targets every object except the root in the linked set.
     type: integer
     value: -3
   LINK_ALL_OTHERS:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: This targets every object in the linked set except the object with the
       script.
     type: integer
     value: -2
   LINK_ROOT:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: This targets the root of the linked set.
     type: integer
     value: 1
   LINK_SET:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: This targets every object in the linked set.
     type: integer
     value: -1
   LINK_THIS:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: The link number of the prim containing the script.
     type: integer
     value: -4
   LIST_STAT_GEOMETRIC_MEAN:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 9
   LIST_STAT_MAX:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 2
   LIST_STAT_MEAN:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 3
   LIST_STAT_MEDIAN:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 4
   LIST_STAT_MIN:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 1
   LIST_STAT_NUM_COUNT:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 8
   LIST_STAT_RANGE:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 0
   LIST_STAT_STD_DEV:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 5
   LIST_STAT_SUM:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 6
   LIST_STAT_SUM_SQUARES:
-    enum-semantics: [ListStatisticsOperation]
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 7
   LOOP:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Loop the texture animation.
     type: integer
     value: '0x2'
   MASK_BASE:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 0
   MASK_COMBINED:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: Fold permissions for object inventory into results.
     type: integer
     value: '0x10'
   MASK_EVERYONE:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 3
   MASK_GROUP:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 2
   MASK_NEXT:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 4
   MASK_OWNER:
-    flag-semantics: [AssetPermissionCategory]
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 1
@@ -2111,7 +2111,7 @@ constants:
     type: string
     value: '\n\x15\n'
   NAVIGATE_TO_GOAL_REACHED_DIST:
-    enum-semantics: [CharacterNavigateParam]
+    member-of: [CharacterNavigateParam]
     private: true
     tooltip: ''
     type: integer
@@ -2122,189 +2122,189 @@ constants:
     slua-type: uuid
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Retrieves the account level of an avatar.\nReturns 0 when the avatar
       has a basic account,\n 1 when the avatar has a premium account,\n 10 when the
       avatar has a premium plus account,\n or -1 if the object is not an avatar.
     type: integer
     value: 41
   OBJECT_ANIMATED_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of associated
       animated objects
     type: integer
     value: 39
   OBJECT_ANIMATED_SLOTS_AVAILABLE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of additional
       animated object attachments allowed.
     type: integer
     value: 40
   OBJECT_ATTACHED_POINT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the attachment point to which the object is attached.\nReturns 0
       if the object is not an attachment (or is an avatar, etc).
     type: integer
     value: 19
   OBJECT_ATTACHED_SLOTS_AVAILABLE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns the number of attachment slots available.\nReturns 0 if the object
       is not an avatar or none are available.
     type: integer
     value: 35
   OBJECT_BODY_SHAPE_TYPE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the body type of the
       avatar, based on shape data.\nIf no data is available, -1.0 is returned.\nThis
       is normally between 0 and 1.0, with 0.5 and larger considered 'male'
     type: integer
     value: 26
   OBJECT_CHARACTER_TIME:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Units in seconds
     type: integer
     value: 17
   OBJECT_CLICK_ACTION:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the click action.\nThe
       default is 0
     type: integer
     value: 28
   OBJECT_CREATION_TIME:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the time this object
       was created
     type: integer
     value: 36
   OBJECT_CREATOR:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's creator key. If id is an avatar, a NULL_KEY is returned.
     type: integer
     value: 8
   OBJECT_DAMAGE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the damage value assigned to this object.
     type: integer
     value: 51
   OBJECT_DAMAGE_TYPE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the damage type, if any, assigned to this object.
     type: integer
     value: 52
   OBJECT_DESC:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's description. If id is an avatar, an empty string is
       returned.
     type: integer
     value: 2
   OBJECT_GROUP:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the prims's group key. If id is an avatar, a NULL_KEY is returned.
     type: integer
     value: 7
   OBJECT_GROUP_TAG:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the agent's current group role tag. If id is an object, an empty
       is returned.
     type: integer
     value: 33
   OBJECT_HEALTH:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets current health value for the object.
     type: integer
     value: 50
   OBJECT_HOVER_HEIGHT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get hover height of the
       avatar\nIf no data is available, 0.0 is returned.
     type: integer
     value: 25
   OBJECT_LAST_OWNER_ID:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's last owner ID.
     type: integer
     value: 27
   OBJECT_LINK_NUMBER:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's link number or 0 if unlinked.
     type: integer
     value: 46
   OBJECT_MASS:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Get the object's mass
     type: integer
     value: 43
   OBJECT_MATERIAL:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Get an object's material setting.
     type: integer
     value: 42
   OBJECT_NAME:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's name.
     type: integer
     value: 1
   OBJECT_OMEGA:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an object's angular velocity.
     type: integer
     value: 29
   OBJECT_OWNER:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an object's owner's key. If id is group owned, a NULL_KEY is returned.
     type: integer
     value: 6
   OBJECT_PATHFINDING_TYPE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns the pathfinding setting of any object in the region. It returns
       an integer matching one of the OPT_* constants.
     type: integer
     value: 20
   OBJECT_PERMS:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the objects permissions
     type: integer
     value: 53
   OBJECT_PERMS_COMBINED:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's permissions including any inventory.
     type: integer
     value: 54
   OBJECT_PHANTOM:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if phantom is enabled or disabled on the object.\nIf
       id is an avatar or attachment, 0 is returned.
     type: integer
     value: 22
   OBJECT_PHYSICS:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if physics is enabled or disabled on the object.\nIf
       id is an avatar or attachment, 0 is returned.
     type: integer
     value: 21
   OBJECT_PHYSICS_COST:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 16
   OBJECT_POS:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's position in region coordinates.
     type: integer
     value: 3
   OBJECT_PRIM_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the prim count of the object.  The script and target object  must
       be owned by the same owner
     type: integer
     value: 30
   OBJECT_PRIM_EQUIVALENCE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 13
   OBJECT_RENDER_WEIGHT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the Avatar_Rendering_Cost
       of an avatar, based on values reported by nearby viewers.\nIf no data is available,
       -1 is returned.\nThe maximum render weight stored by the simulator is 500000.
@@ -2312,118 +2312,118 @@ constants:
     type: integer
     value: 24
   OBJECT_RETURN_PARCEL:
-    flag-semantics: [ReturnObjectsScope]
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 1
   OBJECT_RETURN_PARCEL_OWNER:
-    flag-semantics: [ReturnObjectsScope]
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 2
   OBJECT_RETURN_REGION:
-    flag-semantics: [ReturnObjectsScope]
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 4
   OBJECT_REZZER_KEY:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 32
   OBJECT_REZ_TIME:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Get the time when an object was rezzed.
     type: integer
     value: 45
   OBJECT_ROOT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the id of the root prim of the object requested.\nIf id is an avatar,
       return the id of the root prim of the linkset the avatar is sitting on (or the
       avatar's own id if the avatar is not sitting on an object within the region).
     type: integer
     value: 18
   OBJECT_ROT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's rotation.
     type: integer
     value: 4
   OBJECT_RUNNING_SCRIPT_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 9
   OBJECT_SCALE:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's size.
     type: integer
     value: 47
   OBJECT_SCRIPT_MEMORY:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 11
   OBJECT_SCRIPT_TIME:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 12
   OBJECT_SELECT_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of avatars
       selecting any part of the object
     type: integer
     value: 37
   OBJECT_SERVER_COST:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 14
   OBJECT_SIT_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of avatars
       sitting on the object
     type: integer
     value: 38
   OBJECT_STREAMING_COST:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 15
   OBJECT_TEMP_ATTACHED:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, indicating if object is a temp attachment.
     type: integer
     value: 34
   OBJECT_TEMP_ON_REZ:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if temporary is enabled or disabled on the
       object.
     type: integer
     value: 23
   OBJECT_TEXT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an objects hover text.
     type: integer
     value: 44
   OBJECT_TEXT_ALPHA:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the alpha of an objects hover text.
     type: integer
     value: 49
   OBJECT_TEXT_COLOR:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the color of an objects hover text.
     type: integer
     value: 48
   OBJECT_TOTAL_INVENTORY_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the total inventory count of the object.  The script and target
       object must be owned by the same owner
     type: integer
     value: 31
   OBJECT_TOTAL_SCRIPT_COUNT:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 10
@@ -2432,545 +2432,545 @@ constants:
     type: integer
     value: -1
   OBJECT_VELOCITY:
-    enum-semantics: [ObjectDetailsParam]
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's velocity.
     type: integer
     value: 5
   OPT_AVATAR:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for avatars.
     type: integer
     value: 1
   OPT_CHARACTER:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for pathfinding characters.
     type: integer
     value: 2
   OPT_EXCLUSION_VOLUME:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for exclusion volumes.
     type: integer
     value: 6
   OPT_LEGACY_LINKSET:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for movable obstacles, movable phantoms, physical, and volumedetect
       objects.
     type: integer
     value: 0
   OPT_MATERIAL_VOLUME:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for material volumes.
     type: integer
     value: 5
   OPT_OTHER:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for attachments, Linden trees, and grass.
     type: integer
     value: -1
   OPT_STATIC_OBSTACLE:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for static obstacles.
     type: integer
     value: 4
   OPT_WALKABLE:
-    enum-semantics: [ObjectDetailsPathfindingType]
+    member-of: [ObjectDetailsPathfindingType]
     tooltip: Returned for walkable objects.
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_ALPHA:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 2
   OVERRIDE_GLTF_BASE_ALPHA_MASK:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 4
   OVERRIDE_GLTF_BASE_ALPHA_MODE:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 1
   OVERRIDE_GLTF_BASE_DOUBLE_SIDED:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 5
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 8
   OVERRIDE_GLTF_METALLIC_FACTOR:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 6
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
-    enum-semantics: [PrimGLTFOverride]
+    member-of: [PrimGLTFOverride]
     tooltip: ''
     type: integer
     value: 7
   PARCEL_COUNT_GROUP:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 2
   PARCEL_COUNT_OTHER:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 3
   PARCEL_COUNT_OWNER:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 1
   PARCEL_COUNT_SELECTED:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 4
   PARCEL_COUNT_TEMP:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 5
   PARCEL_COUNT_TOTAL:
-    enum-semantics: [ParcelPrimCountCategory]
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 0
   PARCEL_DETAILS_AREA:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's area, in square meters. (5 chars.).
     type: integer
     value: 4
   PARCEL_DETAILS_DESC:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The description of the parcel. (127 chars).
     type: integer
     value: 1
   PARCEL_DETAILS_FLAGS:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: Flags set on the parcel
     type: integer
     value: 12
   PARCEL_DETAILS_GROUP:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel group's key. (36 chars.).
     type: integer
     value: 3
   PARCEL_DETAILS_ID:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's key. (36 chars.).
     type: integer
     value: 5
   PARCEL_DETAILS_LANDING_LOOKAT:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: Lookat vector set for teleport routing.
     type: integer
     value: 10
   PARCEL_DETAILS_LANDING_POINT:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's landing point, if any.
     type: integer
     value: 9
   PARCEL_DETAILS_NAME:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The name of the parcel. (63 chars.).
     type: integer
     value: 0
   PARCEL_DETAILS_OWNER:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel owner's key. (36 chars.).
     type: integer
     value: 2
   PARCEL_DETAILS_PRIM_CAPACITY:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's prim capacity.
     type: integer
     value: 7
   PARCEL_DETAILS_PRIM_USED:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The number of prims used on this parcel.
     type: integer
     value: 8
   PARCEL_DETAILS_SCRIPT_DANGER:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: There are restrictions on this parcel that may impact script execution.
     type: integer
     value: 13
   PARCEL_DETAILS_SEE_AVATARS:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's avatar visibility setting. (1 char.).
     type: integer
     value: 6
   PARCEL_DETAILS_TP_ROUTING:
-    enum-semantics: [ParcelDetailsParam]
+    member-of: [ParcelDetailsParam]
     tooltip: Parcel's teleport routing setting.
     type: integer
     value: 11
   PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x08000000'
   PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x4000000'
   PARCEL_FLAG_ALLOW_CREATE_OBJECTS:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x40'
   PARCEL_FLAG_ALLOW_DAMAGE:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x20'
   PARCEL_FLAG_ALLOW_FLY:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x1'
   PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x10000000'
   PARCEL_FLAG_ALLOW_GROUP_SCRIPTS:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x2000000'
   PARCEL_FLAG_ALLOW_LANDMARK:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x8'
   PARCEL_FLAG_ALLOW_SCRIPTS:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x2'
   PARCEL_FLAG_ALLOW_TERRAFORM:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x10'
   PARCEL_FLAG_LINDEN_HOMES:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     private: true
     tooltip: ''
     type: integer
     value: '0x800000'
   PARCEL_FLAG_LOCAL_SOUND_ONLY:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x8000'
   PARCEL_FLAG_RESTRICT_PUSHOBJECT:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x200000'
   PARCEL_FLAG_USE_ACCESS_GROUP:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   PARCEL_FLAG_USE_ACCESS_LIST:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x200'
   PARCEL_FLAG_USE_BAN_LIST:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x400'
   PARCEL_FLAG_USE_LAND_PASS_LIST:
-    flag-semantics: [ParcelFlag]
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x800'
   PARCEL_MEDIA_COMMAND_AGENT:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 7
   PARCEL_MEDIA_COMMAND_AUTO_ALIGN:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 9
   PARCEL_MEDIA_COMMAND_DESC:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media description.
     type: integer
     value: 12
   PARCEL_MEDIA_COMMAND_LOOP:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 3
   PARCEL_MEDIA_COMMAND_LOOP_SET:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Used to get or set the parcel's media looping variable.
     type: integer
     value: 13
   PARCEL_MEDIA_COMMAND_PAUSE:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 1
   PARCEL_MEDIA_COMMAND_PLAY:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 2
   PARCEL_MEDIA_COMMAND_SIZE:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media pixel resolution.
     type: integer
     value: 11
   PARCEL_MEDIA_COMMAND_STOP:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 0
   PARCEL_MEDIA_COMMAND_TEXTURE:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: ''
     type: integer
     value: 4
   PARCEL_MEDIA_COMMAND_TIME:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 6
   PARCEL_MEDIA_COMMAND_TYPE:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media MIME type (e.g. "text/html").
     type: integer
     value: 10
   PARCEL_MEDIA_COMMAND_UNLOAD:
-    enum-semantics: [ParcelMediaCommand]
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 8
   PARCEL_MEDIA_COMMAND_URL:
-    enum-semantics: [ParcelMediaCommand, ParcelMediaQuery]
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: ''
     type: integer
     value: 5
   PARCEL_SALE_AGENT:
-    enum-semantics: [ParcelSaleParam]
+    member-of: [ParcelSaleParam]
     tooltip: The agent authorized to purchase the parcel.
     type: integer
     value: 2
   PARCEL_SALE_OBJECTS:
-    enum-semantics: [ParcelSaleParam]
+    member-of: [ParcelSaleParam]
     tooltip: Are the objects on the parcel included in the sale?
     type: integer
     value: 3
   PARCEL_SALE_PRICE:
-    enum-semantics: [ParcelSaleParam]
+    member-of: [ParcelSaleParam]
     tooltip: The price of the parcel. If no authorized agent is set, must be greater than 0.
     type: integer
     value: 1
   PARCEL_SALE_OK:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The sale information was successfully set.
     type: integer
     value: 0
   PARCEL_SALE_ERROR_NO_PARCEL:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The parcel could not be found.
     type: integer
     value: 1
   PARCEL_SALE_ERROR_NO_PERMISSIONS:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The script does not have the required permissions to set the sale information.
     type: integer
     value: 2
   PARCEL_SALE_ERROR_IN_ESCROW:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The parcel is currently in escrow and cannot be set for sale.
     type: integer
     value: 3
   PARCEL_SALE_ERROR_INVALID_PRICE:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The price set for the parcel is invalid (e.g., less than or equal to 0).
     type: integer
     value: 4
   PARCEL_SALE_ERROR_BAD_PARAMS:
-    enum-semantics: [ParcelSaleError]
+    member-of: [ParcelSaleError]
     tooltip: The parameters provided to set the sale information are invalid.
     type: integer
     value: 5
   PASSIVE:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: Static in-world objects.
     type: integer
     value: '0x4'
   PASS_ALWAYS:
-    enum-semantics: [PassMode]
+    member-of: [PassMode]
     tooltip: Always pass the event.
     type: integer
     value: 1
   PASS_IF_NOT_HANDLED:
-    enum-semantics: [PassMode]
+    member-of: [PassMode]
     tooltip: Pass the event if there is no script handling the event in the prim.
     type: integer
     value: 0
   PASS_NEVER:
-    enum-semantics: [PassMode]
+    member-of: [PassMode]
     tooltip: Always pass the event.
     type: integer
     value: 2
   PATROL_PAUSE_AT_WAYPOINTS:
-    enum-semantics: [CharacterPatrolPointsParam]
+    member-of: [CharacterPatrolPointsParam]
     tooltip: ''
     type: integer
     value: 0
   PAYMENT_INFO_ON_FILE:
-    flag-semantics: [AgentDataPaymentInfo]
+    member-of: [AgentDataPaymentInfo]
     tooltip: ''
     type: integer
     value: 1
   PAYMENT_INFO_USED:
-    flag-semantics: [AgentDataPaymentInfo]
+    member-of: [AgentDataPaymentInfo]
     tooltip: ''
     type: integer
     value: 2
   PAY_DEFAULT:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: ''
     type: integer
     value: -2
   PAY_HIDE:
-    # not enum-semantics as you can pass any positive integer also
+    # not enum as you can pass any positive integer also
     tooltip: ''
     type: integer
     value: -1
   PERMISSION_DEBIT:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llGiveMoney
       or llTransferLindenDollars to debit the owners account.
     type: integer
     value: '0x00002'
   PERMISSION_TAKE_CONTROLS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: If this permission enabled, the object can successfully call the llTakeControls
       library call.
     type: integer
     value: '0x00004'
   PERMISSION_REMAP_CONTROLS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00008'
   PERMISSION_TRIGGER_ANIMATION:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llStartAnimation
       for the avatar that owns this.
     type: integer
     value: '0x00010'
   PERMISSION_ATTACH:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llAttachToAvatar
       to attach to the given avatar.
     type: integer
     value: '0x00020'
   PERMISSION_RELEASE_OWNERSHIP:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00040'
   PERMISSION_CHANGE_LINKS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llCreateLink,
       llBreakLink, and llBreakAllLinks to change links to other objects.
     type: integer
     value: '0x00080'
   PERMISSION_CHANGE_JOINTS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00100'
   PERMISSION_CHANGE_PERMISSIONS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00200'
   PERMISSION_TRACK_CAMERA:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x00400'
   PERMISSION_CONTROL_CAMERA:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x00800'
   PERMISSION_TELEPORT:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x01000'
   PERMISSION_SILENT_ESTATE_MANAGEMENT:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: A script with this permission does not notify the object owner when it
       modifies estate access rules via llManageEstateAccess.
     type: integer
     value: '0x04000'
   PERMISSION_OVERRIDE_ANIMATIONS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: Permission to override default animations.
     type: integer
     value: '0x08000'
   PERMISSION_RETURN_OBJECTS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x10000'
   PERMISSION_PRIVILEGED_LAND_ACCESS:
-    flag-semantics: [ScriptPermission]
+    member-of: [ScriptPermission]
     tooltip: Grants the script privileged access to land parcel functions, such as parcel sale.
     type: integer
     value: '0x80000'
   PERM_ALL:
-    flag-semantics: [AssetPermission]
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x7FFFFFFF'
   PERM_COPY:
-    flag-semantics: [AssetPermission]
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x8000'
   PERM_MODIFY:
-    flag-semantics: [AssetPermission]
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x4000'
   PERM_MOVE:
-    flag-semantics: [AssetPermission]
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x80000'
   PERM_TRANSFER:
-    flag-semantics: [AssetPermission]
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x2000'
@@ -2979,7 +2979,7 @@ constants:
     type: float
     value: '3.14159265'
   PING_PONG:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Play animation going forwards, then backwards.
     type: integer
     value: '0x8'
@@ -2988,13 +2988,13 @@ constants:
     type: float
     value: '1.57079633'
   PRIM_ALLOW_UNSIT:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for restricting manual standing for seated avatars in
       an experience.\nIgnored if the avatar was not seated via a call to llSitOnLink.
     type: integer
     value: 39
   PRIM_ALPHA_MODE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, integer alpha_mode,
       integer alpha_cutoff.\nDefines how the alpha channel of the diffuse texture
       should be rendered.\nValid options for alpha_mode are PRIM_ALPHA_MODE_BLEND,
@@ -3002,144 +3002,144 @@ constants:
     type: integer
     value: 38
   PRIM_ALPHA_MODE_BLEND:
-    enum-semantics: [PrimAlphaMode]
+    member-of: [PrimAlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as alpha-blended.
     type: integer
     value: 1
   PRIM_ALPHA_MODE_EMISSIVE:
-    enum-semantics: [PrimAlphaMode]
+    member-of: [PrimAlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as an emissivity mask.
     type: integer
     value: 3
   PRIM_ALPHA_MODE_MASK:
-    enum-semantics: [PrimAlphaMode]
+    member-of: [PrimAlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as fully opaque for alpha values
       above alpha_cutoff and fully transparent otherwise.
     type: integer
     value: 2
   PRIM_ALPHA_MODE_NONE:
-    enum-semantics: [PrimAlphaMode]
+    member-of: [PrimAlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be ignored.
     type: integer
     value: 0
   PRIM_BUMP_BARK:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 4
   PRIM_BUMP_BLOBS:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 12
   PRIM_BUMP_BRICKS:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 5
   PRIM_BUMP_BRIGHT:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 1
   PRIM_BUMP_CHECKER:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 6
   PRIM_BUMP_CONCRETE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 7
   PRIM_BUMP_DARK:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 2
   PRIM_BUMP_DISKS:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 10
   PRIM_BUMP_GRAVEL:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 11
   PRIM_BUMP_LARGETILE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 14
   PRIM_BUMP_NONE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 0
   PRIM_BUMP_SHINY:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 19
   PRIM_BUMP_SIDING:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 13
   PRIM_BUMP_STONE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 9
   PRIM_BUMP_STUCCO:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 15
   PRIM_BUMP_SUCTION:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 16
   PRIM_BUMP_TILE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 8
   PRIM_BUMP_WEAVE:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 17
   PRIM_BUMP_WOOD:
-    enum-semantics: [PrimBump]
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 3
   PRIM_CAST_SHADOWS:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     deprecated:
       reason: Not implemented.
     tooltip: ''
     type: integer
     value: 24
   PRIM_CLICK_ACTION:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[PRIM_CLICK_ACTION, integer CLICK_ACTION_*]'
     type: integer
     value: 43
   PRIM_COLLISION_SOUND:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Collision sound uuid and volume for this prim
     type: integer
     value: 53
   PRIM_COLOR:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [PRIM_COLOR, integer face, vector color, float alpha]
 
@@ -3149,17 +3149,17 @@ constants:
     type: integer
     value: 18
   PRIM_DAMAGE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Damage and damage type assigned to this prim.
     type: integer
     value: 51
   PRIM_DESC:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[PRIM_DESC, string description]'
     type: integer
     value: 28
   PRIM_FLEXIBLE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
 
@@ -3173,32 +3173,32 @@ constants:
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_FULLBRIGHT, integer face, integer boolean ]'
     type: integer
     value: 20
   PRIM_GLOW:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: 'PRIM_GLOW is used to get or set the glow status of the face.\n[ PRIM_GLOW, integer face, float intensity ]'
     type: integer
     value: 25
   PRIM_GLTF_ALPHA_MODE_BLEND:
-    enum-semantics: [PrimGLTFAlphaMode]
+    member-of: [PrimGLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "BLEND".
     type: integer
     value: 1
   PRIM_GLTF_ALPHA_MODE_MASK:
-    enum-semantics: [PrimGLTFAlphaMode]
+    member-of: [PrimGLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "MASK".
     type: integer
     value: 2
   PRIM_GLTF_ALPHA_MODE_OPAQUE:
-    enum-semantics: [PrimGLTFAlphaMode]
+    member-of: [PrimGLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "OPAQUE".
     type: integer
     value: 0
   PRIM_GLTF_BASE_COLOR:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer alpha_mode,
       float alpha_cutoff, boolean double_sided.\nValid options for alpha_mode are
@@ -3206,51 +3206,51 @@ constants:
     type: integer
     value: 48
   PRIM_GLTF_EMISSIVE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, vector color
     type: integer
     value: 46
   PRIM_GLTF_METALLIC_ROUGHNESS:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, float metallic_factor,
       float roughness_factor
     type: integer
     value: 47
   PRIM_GLTF_NORMAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 45
   PRIM_HEALTH:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Health value for this prim
     type: integer
     value: 52
   PRIM_HOLE_CIRCLE:
-    enum-semantics: [PrimTypeHole]
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x10'
   PRIM_HOLE_DEFAULT:
-    enum-semantics: [PrimTypeHole]
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x00'
   PRIM_HOLE_SQUARE:
-    enum-semantics: [PrimTypeHole]
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x20'
   PRIM_HOLE_TRIANGLE:
-    enum-semantics: [PrimTypeHole]
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x30'
   PRIM_LINK_TARGET:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_LINK_TARGET, integer link_target ]
 
@@ -3258,12 +3258,12 @@ constants:
     type: integer
     value: 34
   PRIM_MATERIAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_MATERIAL, integer PRIM_MATERIAL_* ]'
     type: integer
     value: 2
   PRIM_MATERIAL_DENSITY:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: DENSITY
@@ -3271,12 +3271,12 @@ constants:
     type: integer
     value: '0x1'
   PRIM_MATERIAL_FLESH:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 4
   PRIM_MATERIAL_FRICTION:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: FRICTION
@@ -3284,12 +3284,12 @@ constants:
     type: integer
     value: '0x2'
   PRIM_MATERIAL_GLASS:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 2
   PRIM_MATERIAL_GRAVITY_MULTIPLIER:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: GRAVITY_MULTIPLIER
@@ -3297,24 +3297,24 @@ constants:
     type: integer
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     deprecated:
       use: PRIM_FULLBRIGHT
     tooltip: ''
     type: integer
     value: 7
   PRIM_MATERIAL_METAL:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 1
   PRIM_MATERIAL_PLASTIC:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 5
   PRIM_MATERIAL_RESTITUTION:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     private: true
     deprecated:
       use: RESTITUTION
@@ -3322,84 +3322,84 @@ constants:
     type: integer
     value: '0x4'
   PRIM_MATERIAL_RUBBER:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 6
   PRIM_MATERIAL_STONE:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 0
   PRIM_MATERIAL_WOOD:
-    enum-semantics: [PrimMaterial]
+    member-of: [PrimMaterial]
     tooltip: ''
     type: integer
     value: 3
   PRIM_MEDIA_ALT_IMAGE_ENABLE:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets the default image state (the image that the user sees
       before a piece of media is active) for the chosen face. The default image is
       specified by Second Life's server for that media type.
     type: integer
     value: 0
   PRIM_MEDIA_AUTO_LOOP:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether auto-looping is enabled.
     type: integer
     value: 4
   PRIM_MEDIA_AUTO_PLAY:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether the media auto-plays when a Resident can view
       it.
     type: integer
     value: 5
   PRIM_MEDIA_AUTO_SCALE:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether auto-scaling is enabled. Auto-scaling forces
       the media to the full size of the texture.
     type: integer
     value: 6
   PRIM_MEDIA_AUTO_ZOOM:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether clicking the media triggers auto-zoom and
       auto-focus on the media.
     type: integer
     value: 7
   PRIM_MEDIA_CONTROLS:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the style of controls. Can be either PRIM_MEDIA_CONTROLS_STANDARD
       or PRIM_MEDIA_CONTROLS_MINI.
     type: integer
     value: 1
   PRIM_MEDIA_CONTROLS_MINI:
-    enum-semantics: [PrimMediaControl]
+    member-of: [PrimMediaControl]
     tooltip: Mini web navigation controls; does not include an address bar.
     type: integer
     value: 1
   PRIM_MEDIA_CONTROLS_STANDARD:
-    enum-semantics: [PrimMediaControl]
+    member-of: [PrimMediaControl]
     tooltip: Standard web navigation controls.
     type: integer
     value: 0
   PRIM_MEDIA_CURRENT_URL:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the current url displayed on the chosen face. Changing
       this URL causes navigation. 1024 characters Maximum.
     type: integer
     value: 2
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether the first click interaction is enabled.
     type: integer
     value: 8
   PRIM_MEDIA_HEIGHT_PIXELS:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the height of the media in pixels.
     type: integer
     value: 10
   PRIM_MEDIA_HOME_URL:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the home URL for the chosen face. 1024 characters maximum.
     type: integer
     value: 3
@@ -3428,69 +3428,69 @@ constants:
     type: integer
     value: 14
   PRIM_MEDIA_PERMS_CONTROL:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: 'Integer. Gets/Sets the permissions mask that control who can see the
       media control bar above the object:: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP,
       PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER'
     type: integer
     value: 14
   PRIM_MEDIA_PERMS_INTERACT:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: 'Integer. Gets/Sets the permissions mask that control who can interact
       with the object: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE,
       PRIM_MEDIA_PERM_OWNER'
     type: integer
     value: 13
   PRIM_MEDIA_PERM_ANYONE:
-    flag-semantics: [PrimMediaPerm]
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 4
   PRIM_MEDIA_PERM_GROUP:
-    flag-semantics: [PrimMediaPerm]
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 2
   PRIM_MEDIA_PERM_NONE:
-    flag-semantics: [PrimMediaPerm]
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 0
   PRIM_MEDIA_PERM_OWNER:
-    flag-semantics: [PrimMediaPerm]
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 1
   PRIM_MEDIA_WHITELIST:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the white-list as a string of escaped, comma-separated
       URLs. This string can hold up to 64 URLs or 1024 characters, whichever comes
       first.
     type: integer
     value: 12
   PRIM_MEDIA_WHITELIST_ENABLE:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether navigation is restricted to URLs in PRIM_MEDIA_WHITELIST.
     type: integer
     value: 11
   PRIM_MEDIA_WIDTH_PIXELS:
-    enum-semantics: [PrimMediaParam]
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the width of the media in pixels.
     type: integer
     value: 9
   PRIM_NAME:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_NAME, string name ]'
     type: integer
     value: 27
   PRIM_NORMAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 37
   PRIM_OMEGA:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_OMEGA, vector axis, float spinrate, float gain ]
 
@@ -3500,41 +3500,41 @@ constants:
     type: integer
     value: 32
   PRIM_PHANTOM:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PHANTOM, integer boolean ]'
     type: integer
     value: 5
   PRIM_PHYSICS:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PHYSICS, integer boolean ]'
     type: integer
     value: 3
   PRIM_PHYSICS_SHAPE_CONVEX:
-    enum-semantics: [PrimPhysicsShapeType]
+    member-of: [PrimPhysicsShapeType]
     tooltip: Use the convex hull of the prim shape for physics (this is the default
       for mesh objects).
     type: integer
     value: 2
   PRIM_PHYSICS_SHAPE_NONE:
-    enum-semantics: [PrimPhysicsShapeType]
+    member-of: [PrimPhysicsShapeType]
     tooltip: 'Ignore this prim in the physics shape. NB: This cannot be applied to
       the root prim.'
     type: integer
     value: 1
   PRIM_PHYSICS_SHAPE_PRIM:
-    enum-semantics: [PrimPhysicsShapeType]
+    member-of: [PrimPhysicsShapeType]
     tooltip: Use the normal prim shape for physics (this is the default for all non-mesh
       objects).
     type: integer
     value: 0
   PRIM_PHYSICS_SHAPE_TYPE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: "Allows you to set the physics shape type of a prim via lsl. Permitted\
       \ values are:\n\t\t\tPRIM_PHYSICS_SHAPE_NONE, PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_CONVEX"
     type: integer
     value: 30
   PRIM_POINT_LIGHT:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
 
@@ -3546,7 +3546,7 @@ constants:
     type: integer
     value: 23
   PRIM_POSITION:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POSITION, vector position ]
 
@@ -3554,7 +3554,7 @@ constants:
     type: integer
     value: 6
   PRIM_POS_LOCAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POS_LOCAL, vector position ]
 
@@ -3562,511 +3562,510 @@ constants:
     type: integer
     value: 33
   PRIM_PROJECTOR:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PROJECTOR, string texture, float fov, float focus, float ambiance ]'
     type: integer
     value: 42
   PRIM_REFLECTION_PROBE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Allows you to configure the object as a custom-placed reflection probe,
       for image-based lighting (IBL). Only objects in the influence volume of the
       reflection probe object are affected.
     type: integer
     value: 44
   PRIM_REFLECTION_PROBE_BOX:
-    flag-semantics: [PrimReflectionProbeType]
+    member-of: [PrimReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       is a box. When unset, the reflection probe is a sphere.
     type: integer
     value: 1
   PRIM_REFLECTION_PROBE_DYNAMIC:
-    flag-semantics: [PrimReflectionProbeType]
+    member-of: [PrimReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       includes avatars in IBL effects. When unset, the reflection probe excludes avatars.
     type: integer
     value: 2
   PRIM_REFLECTION_PROBE_MIRROR:
-    flag-semantics: [PrimReflectionProbeType]
+    member-of: [PrimReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       acts as a mirror.
     type: integer
     value: 4
   PRIM_RENDER_MATERIAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_RENDER_MATERIAL, integer face, string material ]'
     type: integer
     value: 49
   PRIM_ROTATION:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_ROT_LOCAL, rotation global_rot ]'
     type: integer
     value: 8
   PRIM_ROT_LOCAL:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_ROT_LOCAL, rotation local_rot ]'
     type: integer
     value: 29
   PRIM_SCRIPTED_SIT_ONLY:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for restricting manual sitting on this prim.\nSitting
       must be initiated via call to llSitOnLink.
     type: integer
     value: 40
   PRIM_SCULPT_FLAG_ANIMESH:
-    flag-semantics: [PrimTypeSculptFlag]
+    member-of: [PrimTypeSculptFlag]
     tooltip: Mesh is animated.
     type: integer
     value: 32
   PRIM_SCULPT_FLAG_INVERT:
-    flag-semantics: [PrimTypeSculptFlag]
+    member-of: [PrimTypeSculptFlag]
     tooltip: Render inside out (inverts the normals).
     type: integer
     value: 64
   PRIM_SCULPT_FLAG_MIRROR:
-    flag-semantics: [PrimTypeSculptFlag]
+    member-of: [PrimTypeSculptFlag]
     tooltip: Render an X axis mirror of the sculpty.
     type: integer
     value: 128
   PRIM_SCULPT_TYPE_CYLINDER:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 4
   PRIM_SCULPT_TYPE_MASK:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 7
   PRIM_SCULPT_TYPE_MESH:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 5
   PRIM_SCULPT_TYPE_PLANE:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 3
   PRIM_SCULPT_TYPE_SPHERE:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 1
   PRIM_SCULPT_TYPE_TORUS:
-    enum-semantics: [PrimTypeSculptType]
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 2
   PRIM_SHINY_HIGH:
-    enum-semantics: [PrimShiny]
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 3
   PRIM_SHINY_LOW:
-    enum-semantics: [PrimShiny]
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 1
   PRIM_SHINY_MEDIUM:
-    enum-semantics: [PrimShiny]
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 2
   PRIM_SHINY_NONE:
-    enum-semantics: [PrimShiny]
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 0
   PRIM_SIT_FLAGS:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 50
   PRIM_SIT_TARGET:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SIT_TARGET, integer boolean, vector offset, rotation rot ]'
     type: integer
     value: 41
   PRIM_SIZE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SIZE, vector size ]'
     type: integer
     value: 7
   PRIM_SLICE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SLICE, vector slice ]'
     type: integer
     value: 35
   PRIM_SPECULAR:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer glossy,
       integer environment
     type: integer
     value: 36
   PRIM_TEMP_ON_REZ:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 4
   PRIM_TEXGEN:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXGEN, integer face, PRIM_TEXGEN_* ]'
     type: integer
     value: 22
   PRIM_TEXGEN_DEFAULT:
-    enum-semantics: [PrimTexgen]
+    member-of: [PrimTexgen]
     tooltip: ''
     type: integer
     value: 0
   PRIM_TEXGEN_PLANAR:
-    enum-semantics: [PrimTexgen]
+    member-of: [PrimTexgen]
     tooltip: ''
     type: integer
     value: 1
   PRIM_TEXT:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXT, string text, vector color, float alpha ]'
     type: integer
     value: 26
   PRIM_TEXTURE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXTURE, integer face, string texture, vector repeats, vector offsets, float rotation_in_radians ]'
     type: integer
     value: 17
   PRIM_TYPE:
-    enum-semantics: [PrimParam]
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 9
   PRIM_TYPE_BOX:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 0
   PRIM_TYPE_CYLINDER:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 1
   PRIM_TYPE_PRISM:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 2
   PRIM_TYPE_RING:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 6
   PRIM_TYPE_SCULPT:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 7
   PRIM_TYPE_SPHERE:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 3
   PRIM_TYPE_TORUS:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 4
   PRIM_TYPE_TUBE:
-    enum-semantics: [PrimType]
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 5
   PROFILE_NONE:
-    enum-semantics: [ScriptProfileMode]
+    member-of: [ScriptProfileMode]
     tooltip: Disables profiling
     type: integer
     value: 0
   PROFILE_SCRIPT_MEMORY:
-    enum-semantics: [ScriptProfileMode]
+    member-of: [ScriptProfileMode]
     tooltip: Enables memory profiling
     type: integer
     value: 1
   PSYS_PART_BF_DEST_COLOR:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 2
   PSYS_PART_BF_ONE:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 0
   PSYS_PART_BF_ONE_MINUS_DEST_COLOR:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 4
   PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 9
   PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 5
   PSYS_PART_BF_SOURCE_ALPHA:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 7
   PSYS_PART_BF_SOURCE_COLOR:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 3
   PSYS_PART_BF_ZERO:
-    enum-semantics: [PrimParticleBlendFunc]
+    member-of: [PrimParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 1
   PSYS_PART_BLEND_FUNC_DEST:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: ''
     type: integer
     value: 25
   PSYS_PART_BLEND_FUNC_SOURCE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: ''
     type: integer
     value: 24
   PSYS_PART_BOUNCE_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: Particles bounce off of a plane at the objects Z height.
     type: integer
     value: '0x4'
   PSYS_PART_EMISSIVE_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: The particle glows.
     type: integer
     value: '0x100'
   PSYS_PART_END_ALPHA:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A float which determines the ending alpha of the object.
     type: integer
     value: 4
   PSYS_PART_END_COLOR:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A vector <r, g, b> which determines the ending color of the object.
     type: integer
     value: 3
   PSYS_PART_END_GLOW:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: ''
     type: integer
     value: 27
   PSYS_PART_END_SCALE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A vector <sx, sy, z>, which is the ending size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 6
   PSYS_PART_FLAGS:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Each particle that is emitted by the particle system is simulated based
       on the following flags. To use multiple flags, bitwise or (|) them together.
     type: integer
     value: 0
   PSYS_PART_FOLLOW_SRC_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: The particle position is relative to the source objects position.
     type: integer
     value: '0x10'
   PSYS_PART_FOLLOW_VELOCITY_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: The particle orientation is rotated so the vertical axis faces towards
       the particle velocity.
     type: integer
     value: '0x20'
   PSYS_PART_INTERP_COLOR_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: Interpolate both the color and alpha from the start value to the end
       value.
     type: integer
     value: '0x1'
   PSYS_PART_INTERP_SCALE_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: Interpolate the particle scale from the start value to the end value.
     type: integer
     value: '0x2'
   PSYS_PART_MAX_AGE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Age in seconds of a particle at which it dies.
     type: integer
     value: 7
   PSYS_PART_RIBBON_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: ''
     type: integer
     value: '0x400'
   PSYS_PART_START_ALPHA:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A float which determines the starting alpha of the object.
     type: integer
     value: 2
   PSYS_PART_START_COLOR:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A vector <r, g, b> which determines the starting color of the object.
     type: integer
     value: 1
   PSYS_PART_START_GLOW:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: ''
     type: integer
     value: 26
   PSYS_PART_START_SCALE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A vector <sx, sy, z>, which is the starting size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 5
   PSYS_PART_TARGET_LINEAR_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: ''
     type: integer
     value: '0x80'
   PSYS_PART_TARGET_POS_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: The particle heads towards the location of the target object as defined
       by PSYS_SRC_TARGET_KEY.
     type: integer
     value: '0x40'
   PSYS_PART_WIND_MASK:
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleFlag]
     tooltip: Particles have their velocity damped towards the wind velocity.
     type: integer
     value: '0x8'
   PSYS_SRC_ACCEL:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: A vector <x, y, z> which is the acceleration to apply on particles.
     type: integer
     value: 8
   PSYS_SRC_ANGLE_BEGIN:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Area in radians specifying where particles will NOT be created (for ANGLE
       patterns)
     type: integer
     value: 22
   PSYS_SRC_ANGLE_END:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Area in radians filled with particles (for ANGLE patterns) (if lower
       than PSYS_SRC_ANGLE_BEGIN, acts as PSYS_SRC_ANGLE_BEGIN itself, and PSYS_SRC_ANGLE_BEGIN
       acts as PSYS_SRC_ANGLE_END).
     type: integer
     value: 23
   PSYS_SRC_BURST_PART_COUNT:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: How many particles to release in a burst.
     type: integer
     value: 15
   PSYS_SRC_BURST_RADIUS:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: What distance from the center of the object to create the particles.
     type: integer
     value: 16
   PSYS_SRC_BURST_RATE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: How often to release a particle burst (float seconds).
     type: integer
     value: 13
   PSYS_SRC_BURST_SPEED_MAX:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Maximum speed that a particle should be moving.
     type: integer
     value: 18
   PSYS_SRC_BURST_SPEED_MIN:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Minimum speed that a particle should be moving.
     type: integer
     value: 17
   PSYS_SRC_INNERANGLE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: "Specifies the inner angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area specified will\
       \ NOT have particles in it."
     type: integer
     value: 10
   PSYS_SRC_MAX_AGE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: How long this particle system should last, 0.0 means forever.
     type: integer
     value: 19
   # These were present in the lexer, but not in the syntax file, they're marked private for consistency.
   # TODO: check if the private is actually warranted, it's likely not.
   PSYS_SRC_OBJ_REL_MASK:
-    enum-semantics: [PrimParticleParam]
-    flag-semantics: [PrimParticleFlag]
+    member-of: [PrimParticleParam]
     private: true
     tooltip: ''
     type: integer
     value: '0x1'
   PSYS_SRC_OMEGA:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: Sets the angular velocity to rotate the axis that SRC_PATTERN_ANGLE and
       SRC_PATTERN_ANGLE_CONE use.
     type: integer
     value: 21
   PSYS_SRC_OUTERANGLE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: "Specifies the outer angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area between the\
       \ outer and inner angle will be filled with particles."
     type: integer
     value: 11
   PSYS_SRC_PATTERN:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: "The pattern which is used to generate particles.\n\t\t\tUse one of the\
       \ following values: PSYS_SRC_PATTERN Values."
     type: integer
     value: 9
   PSYS_SRC_PATTERN_ANGLE:
-    flag-semantics: [PrimParticleSourcePattern]
+    member-of: [PrimParticleSourcePattern]
     tooltip: Shoot particles across a 2 dimensional area defined by the arc created
       from PSYS_SRC_OUTERANGLE. There will be an open area defined by PSYS_SRC_INNERANGLE
       within the larger arc.
     type: integer
     value: '0x04'
   PSYS_SRC_PATTERN_ANGLE_CONE:
-    flag-semantics: [PrimParticleSourcePattern]
+    member-of: [PrimParticleSourcePattern]
     tooltip: Shoot particles out in a 3 dimensional cone with an outer arc of PSYS_SRC_OUTERANGLE
       and an inner open area defined by PSYS_SRC_INNERANGLE.
     type: integer
     value: '0x08'
   PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY:
-    flag-semantics: [PrimParticleSourcePattern]
+    member-of: [PrimParticleSourcePattern]
     tooltip: ''
     type: integer
     value: '0x10'
   PSYS_SRC_PATTERN_DROP:
-    flag-semantics: [PrimParticleSourcePattern]
+    member-of: [PrimParticleSourcePattern]
     tooltip: Drop particles at the source position.
     type: integer
     value: '0x01'
   PSYS_SRC_PATTERN_EXPLODE:
-    flag-semantics: [PrimParticleSourcePattern]
+    member-of: [PrimParticleSourcePattern]
     tooltip: Shoot particles out in all directions, using the burst parameters.
     type: integer
     value: '0x02'
   PSYS_SRC_TARGET_KEY:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: The key of a target object to move towards if PSYS_PART_TARGET_POS_MASK
       is enabled.
     type: integer
     value: 20
   PSYS_SRC_TEXTURE:
-    enum-semantics: [PrimParticleParam]
+    member-of: [PrimParticleParam]
     tooltip: An asset name for the texture to use for the particles.
     type: integer
     value: 12
@@ -4077,95 +4076,95 @@ constants:
     type: integer
     value: 0
   PURSUIT_FUZZ_FACTOR:
-    enum-semantics: [CharacterPursueParam]
+    member-of: [CharacterPursueParam]
     tooltip: Selects a random destination near the offset.
     type: integer
     value: 3
   PURSUIT_GOAL_TOLERANCE:
-    enum-semantics: [CharacterPursueParam]
+    member-of: [CharacterPursueParam]
     tooltip: ''
     type: integer
     value: 5
   PURSUIT_INTERCEPT:
-    enum-semantics: [CharacterPursueParam]
+    member-of: [CharacterPursueParam]
     tooltip: Define whether the character attempts to predict the target's location.
     type: integer
     value: 4
   PURSUIT_OFFSET:
-    enum-semantics: [CharacterPursueParam]
+    member-of: [CharacterPursueParam]
     tooltip: Go to a position offset from the target.
     type: integer
     value: 1
   PU_EVADE_HIDDEN:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Triggered when an llEvade character thinks it has hidden from its pursuer.
     type: integer
     value: '0x07'
   PU_EVADE_SPOTTED:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Triggered when an llEvade character switches from hiding to running
     type: integer
     value: '0x08'
   PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 10
   PU_FAILURE_INVALID_GOAL:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Goal is not on the navigation-mesh and cannot be reached.
     type: integer
     value: '0x03'
   PU_FAILURE_INVALID_START:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Character cannot navigate from the current location - e.g., the character
       is off the navmesh or too high above it.
     type: integer
     value: '0x02'
   PU_FAILURE_NO_NAVMESH:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: This is a fatal error reported to a character when there is no navmesh
       for the region. This usually indicates a server failure and users should file
       a bug report and include the time and region in which they received this message.
     type: integer
     value: '0x09'
   PU_FAILURE_NO_VALID_DESTINATION:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: There is no good place for the character to go - e.g., it is patrolling
       and all the patrol points are now unreachable.
     type: integer
     value: '0x06'
   PU_FAILURE_OTHER:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 1000000
   PU_FAILURE_PARCEL_UNREACHABLE:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 11
   PU_FAILURE_TARGET_GONE:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Target (for llPursue or llEvade) can no longer be tracked - e.g., it
       left the region or is an avatar that is now more than about 30m outside the
       region.
     type: integer
     value: '0x05'
   PU_FAILURE_UNREACHABLE:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Goal is no longer reachable for some reason - e.g., an obstacle blocks
       the path.
     type: integer
     value: '0x04'
   PU_GOAL_REACHED:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Character has reached the goal and will stop or choose a new goal (if
       wandering).
     type: integer
     value: '0x01'
   PU_SLOWDOWN_DISTANCE_REACHED:
-    enum-semantics: [CharacterPathUpdateType]
+    member-of: [CharacterPathUpdateType]
     tooltip: Character is near current goal.
     type: integer
     value: '0x00'
@@ -4175,631 +4174,631 @@ constants:
     type: float
     value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
-    # not enum-semantics as it can return positive integers also
+    # not enum as it can return positive integers also
     tooltip: ''
     type: integer
     value: -3
   RCERR_SIM_PERF_LOW:
-    # not enum-semantics as it can return positive integers also
+    # not enum as it can return positive integers also
     tooltip: ''
     type: integer
     value: -2
   RCERR_UNKNOWN:
-    # not enum-semantics as it can return positive integers also
+    # not enum as it can return positive integers also
     tooltip: ''
     type: integer
     value: -1
   RC_DATA_FLAGS:
-    enum-semantics: [RayCastParam]
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 2
   RC_DETECT_PHANTOM:
-    enum-semantics: [RayCastParam]
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 1
   RC_GET_LINK_NUM:
-    flag-semantics: [RayCastData]
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 4
   RC_GET_NORMAL:
-    flag-semantics: [RayCastData]
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 1
   RC_GET_ROOT_KEY:
-    flag-semantics: [RayCastData]
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 2
   RC_MAX_HITS:
-    enum-semantics: [RayCastParam]
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 3
   RC_REJECT_AGENTS:
-    flag-semantics: [RayCastRejectType]
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 1
   RC_REJECT_LAND:
-    flag-semantics: [RayCastRejectType]
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 8
   RC_REJECT_NONPHYSICAL:
-    flag-semantics: [RayCastRejectType]
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 4
   RC_REJECT_PHYSICAL:
-    flag-semantics: [RayCastRejectType]
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 2
   RC_REJECT_TYPES:
-    enum-semantics: [RayCastParam]
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 0
   REGION_FLAG_ALLOW_DAMAGE:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x1'
   REGION_FLAG_ALLOW_DIRECT_TELEPORT:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x100000'
   REGION_FLAG_BLOCK_FLY:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x80000'
   REGION_FLAG_BLOCK_FLYOVER:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x8000000'
   REGION_FLAG_BLOCK_TERRAFORM:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x40'
   REGION_FLAG_DISABLE_COLLISIONS:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x1000'
   REGION_FLAG_DISABLE_PHYSICS:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x4000'
   REGION_FLAG_FIXED_SUN:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x10'
   REGION_FLAG_RESTRICT_PUSHOBJECT:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x400000'
   REGION_FLAG_SANDBOX:
-    flag-semantics: [RegionFlag]
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   REMOTE_DATA_CHANNEL:
-    enum-semantics: [RemoteDataEventType]
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 1
   REMOTE_DATA_REPLY:
-    enum-semantics: [RemoteDataEventType]
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 3
   REMOTE_DATA_REQUEST:
-    enum-semantics: [RemoteDataEventType]
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 2
   REQUIRE_LINE_OF_SIGHT:
-    enum-semantics: [CharacterPursueParam]
+    member-of: [CharacterPursueParam]
     tooltip: Define whether the character needs a line-of-sight to give chase.
     type: integer
     value: 2
   RESTITUTION:
-    flag-semantics: [ObjectPhysicsMaterialParam]
+    member-of: [ObjectPhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       0.0 and 1.0
     type: integer
     value: 4
   REVERSE:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Play animation in reverse direction.
     type: integer
     value: '0x4'
   REZ_ACCEL:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Acceleration forced applied to the rezzed object. [vector force, integer
       rel]
     type: integer
     value: 5
   REZ_DAMAGE:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Damage applied by the object when it collides with an agent. [float damage]
     type: integer
     value: 8
   REZ_DAMAGE_TYPE:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Set the damage type applied when this object collides. [integer damage_type]
     type: integer
     value: 12
   REZ_FLAGS:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Rez flags to set on the newly rezzed object. [integer flags]
     type: integer
     value: 1
   REZ_FLAG_BLOCK_GRAB_OBJECT:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Prevent grabbing the object.
     type: integer
     value: '0x0080'
   REZ_FLAG_DIE_ON_COLLIDE:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Object will die after its first collision.
     type: integer
     value: '0x0008'
   REZ_FLAG_DIE_ON_NOENTRY:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Object will die if it attempts to enter a parcel that it can not.
     type: integer
     value: '0x0010'
   REZ_FLAG_NO_COLLIDE_FAMILY:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Object will not trigger collision events with other objects created by
       the same rezzer.
     type: integer
     value: '0x0040'
   REZ_FLAG_NO_COLLIDE_OWNER:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Object will not trigger collision events with its owner.
     type: integer
     value: '0x0020'
   REZ_FLAG_PHANTOM:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Make the object phantom on rez.
     type: integer
     value: '0x0004'
   REZ_FLAG_PHYSICAL:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Make the object physical on rez.
     type: integer
     value: '0x0002'
   REZ_FLAG_TEMP:
-    flag-semantics: [ObjectRezFlag]
+    member-of: [ObjectRezFlag]
     tooltip: Flag the object as temp on rez.
     type: integer
     value: '0x0001'
   REZ_LOCK_AXES:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Prevent the object from rotating around some axes. [vector locks]
     type: integer
     value: 11
   REZ_OMEGA:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Omega applied to the rezzed object. [vector axis, integer rel, float
       spin, float gain]
     type: integer
     value: 7
   REZ_PARAM:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Integer value to pass to the object as its rez parameter. [integer param]
     type: integer
     value: 0
   REZ_PARAM_STRING:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: A string value to pass to the object as its rez parameter. [string param]
     type: integer
     value: 13
   REZ_POS:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Position at which to rez the new object. [vector position, integer rel,
       integer atroot]
     type: integer
     value: 2
   REZ_ROT:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Rotation applied to newly rezzed object. [rotation rot, integer rel]
     type: integer
     value: 3
   REZ_SOUND:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Sound attached to the rezzed object. [string name, float volume, integer
       loop]
     type: integer
     value: 9
   REZ_SOUND_COLLIDE:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Sound played by the object on a collision. [string name, float volume]
     type: integer
     value: 10
   REZ_TORQUE:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     private: true
     tooltip: ''
     type: integer
     value: 6
   REZ_VEL:
-    enum-semantics: [ObjectRezParam]
+    member-of: [ObjectRezParam]
     tooltip: Initial velocity of rezzed object. [vector vel, integer rel, integer
       inherit]
     type: integer
     value: 4
   ROTATE:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Animate texture rotation.
     type: integer
     value: '0x20'
   SCALE:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Animate the texture scale.
     type: integer
     value: '0x40'
   SCRIPTED:
-    flag-semantics: [SensorType]
+    member-of: [SensorType]
     tooltip: Scripted in-world objects.
     type: integer
     value: '0x8'
   SIM_STAT_ACTIVE_SCRIPT_COUNT:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Number of active scripts.
     type: integer
     value: 12
   SIM_STAT_AGENT_COUNT:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Number of agents in region.
     type: integer
     value: 10
   SIM_STAT_AGENT_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'agent' segment of simulation frame.
     type: integer
     value: 7
   SIM_STAT_AGENT_UPDATES:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Agent updates per second.
     type: integer
     value: 2
   SIM_STAT_AI_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent on AI step.
     type: integer
     value: 26
   SIM_STAT_ASSET_DOWNLOADS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Pending asset download count.
     type: integer
     value: 15
   SIM_STAT_ASSET_UPLOADS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Pending asset upload count.
     type: integer
     value: 16
   SIM_STAT_CHILD_AGENT_COUNT:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Number of child agents in region.
     type: integer
     value: 11
   SIM_STAT_FRAME_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Total frame time.
     type: integer
     value: 3
   SIM_STAT_IMAGE_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'image' segment of simulation frame.
     type: integer
     value: 8
   SIM_STAT_IO_PUMP_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Pump IO time.
     type: integer
     value: 24
   SIM_STAT_NET_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'network' segment of simulation frame.
     type: integer
     value: 4
   SIM_STAT_OTHER_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'other' segment of simulation frame.
     type: integer
     value: 5
   SIM_STAT_PACKETS_IN:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Packets in per second.
     type: integer
     value: 13
   SIM_STAT_PACKETS_OUT:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Packets out per second.
     type: integer
     value: 14
   SIM_STAT_PCT_CHARS_STEPPED:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Returns the % of pathfinding characters skipped each frame, averaged
       over the last minute.\nThe returned value corresponds to the "Characters Updated"
       stat in the viewer's Statistics Bar.
     type: integer
     value: 0
   SIM_STAT_PHYSICS_FPS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Physics simulation FPS.
     type: integer
     value: 1
   SIM_STAT_PHYSICS_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'physics' segment of simulation frame.
     type: integer
     value: 6
   SIM_STAT_PHYSICS_OTHER_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Physics other time.
     type: integer
     value: 20
   SIM_STAT_PHYSICS_SHAPE_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Physics shape update time.
     type: integer
     value: 19
   SIM_STAT_PHYSICS_STEP_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Physics step time.
     type: integer
     value: 18
   SIM_STAT_SCRIPT_EPS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Script events per second.
     type: integer
     value: 21
   SIM_STAT_SCRIPT_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'script' segment of simulation frame.
     type: integer
     value: 9
   SIM_STAT_SCRIPT_RUN_PCT:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Percent of scripts run during frame.
     type: integer
     value: 25
   SIM_STAT_SLEEP_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Time spent sleeping.
     type: integer
     value: 23
   SIM_STAT_SPARE_MS:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Spare time left after frame.
     type: integer
     value: 22
   SIM_STAT_UNACKED_BYTES:
-    enum-semantics: [SimulatorStat]
+    member-of: [SimulatorStat]
     tooltip: Total unacknowledged bytes.
     type: integer
     value: 17
   SIT_FLAG_ALLOW_UNSIT:
-    flag-semantics: [PrimSitFlag]
+    member-of: [PrimSitFlag]
     tooltip: The prim allows a seated avatar to stand up.
     type: integer
     value: '0x0002'
   SIT_FLAG_NO_COLLIDE:
-    flag-semantics: [PrimSitFlag]
+    member-of: [PrimSitFlag]
     tooltip: The seated avatar's hit box is disabled when seated on this prim.
     type: integer
     value: '0x0010'
   SIT_FLAG_NO_DAMAGE:
-    flag-semantics: [PrimSitFlag]
+    member-of: [PrimSitFlag]
     tooltip: Damage will not be forwarded to an avatar seated on this prim.
     type: integer
     value: '0x0020'
   SIT_FLAG_SCRIPTED_ONLY:
-    flag-semantics: [PrimSitFlag]
+    member-of: [PrimSitFlag]
     tooltip: An avatar may not manually sit on this prim.
     type: integer
     value: '0x0004'
   SIT_FLAG_SIT_TARGET:
-    flag-semantics: [PrimSitFlag]
+    member-of: [PrimSitFlag]
     tooltip: The prim has an explicitly set sit target.
     type: integer
     value: '0x0001'
   SIT_INVALID_AGENT:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Avatar ID did not specify a valid avatar.
     type: integer
     value: -4
   SIT_INVALID_LINK:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Link ID did not specify a valid prim in the linkset or resolved to multiple
       prims.
     type: integer
     value: -5
   SIT_INVALID_OBJECT:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Attempt to force an avatar to sit on an attachment or other invalid target.
     type: integer
     value: -7
   SIT_NOT_EXPERIENCE:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Attempt to force an avatar to sit outside an experience.
     type: integer
     value: -1
   SIT_NO_ACCESS:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Avatar does not have access to the parcel containing the target linkset
       of the forced sit.
     type: integer
     value: -6
   SIT_NO_EXPERIENCE_PERMISSION:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: Avatar has not granted permission to force sits.
     type: integer
     value: -2
   SIT_NO_SIT_TARGET:
-    enum-semantics: [PrimSitError]
+    member-of: [PrimSitError]
     tooltip: No available sit target in linkset for forced sit.
     type: integer
     value: -3
   SKY_ABSORPTION_CONFIG:
     private: true
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: ''
     type: integer
     value: 16
   SKY_AMBIENT:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: The ambient color of the environment
     type: integer
     value: 0
   SKY_BLUE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Blue settings for environment
     type: integer
     value: 22
   SKY_CLOUDS:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Settings controlling cloud density and configuration
     type: integer
     value: 2
   SKY_CLOUD_TEXTURE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Texture ID used by clouds
     type: integer
     value: 19
   SKY_DENSITY_PROFILE_COUNTS:
     private: true
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Counts for density profiles of each type.
     type: integer
     value: 3
   SKY_DOME:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Sky dome information.
     type: integer
     value: 4
   SKY_GAMMA:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: The gamma value applied to the scene.
     type: integer
     value: 5
   SKY_GLOW:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Glow color applied to the sun and moon.
     type: integer
     value: 6
   SKY_HAZE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Haze settings for environment
     type: integer
     value: 23
   SKY_LIGHT:
-    enum-semantics: [EnvironmentParamReadOnly]
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Miscellaneous lighting values.
     type: integer
     value: 8
   SKY_MIE_CONFIG:
     private: true
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: MIE scatting profile parameters.
     type: integer
     value: 17
   SKY_MOON:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental moon details.
     type: integer
     value: 9
   SKY_MOON_TEXTURE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental moon texture.
     type: integer
     value: 20
   SKY_PLANET:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Planet information used in rendering the sky.
     type: integer
     value: 10
   SKY_RAYLEIGH_CONFIG:
     private: true
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Rayleigh scatting profile parameters.
     type: integer
     value: 18
   SKY_REFLECTION_PROBE_AMBIANCE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Settings the ambience of the reflection probe.
     type: integer
     value: 24
   SKY_REFRACTION:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Sky refraction parameters for rainbows and optical effects.
     type: integer
     value: 11
   SKY_STAR_BRIGHTNESS:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Brightness value for the stars.
     type: integer
     value: 13
   SKY_SUN:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Detailed sun information
     type: integer
     value: 14
   SKY_SUN_TEXTURE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental sun texture
     type: integer
     value: 21
   SKY_TEXTURE_DEFAULTS:
-    enum-semantics: [EnvironmentParamReadOnly]
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Is the environment using the default textures.
     type: integer
     value: 1
   SKY_TRACKS:
-    enum-semantics: [EnvironmentParamReadOnly]
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Track elevations for this region.
     type: integer
     value: 15
   SMOOTH:
-    flag-semantics: [PrimTextureAnimMode]
+    member-of: [PrimTextureAnimMode]
     tooltip: Slide in the X direction, instead of playing separate frames.
     type: integer
     value: '0x10'
   SOUND_LOOP:
-    flag-semantics: [PlaySoundFlag]
+    member-of: [PlaySoundFlag]
     tooltip: Sound will loop until stopped.
     type: integer
     value: '0x01'
   SOUND_PLAY:
-    flag-semantics: [PlaySoundFlag]
+    member-of: [PlaySoundFlag]
     tooltip: Sound will play normally.
     type: integer
     value: '0x00'
   SOUND_SYNC:
-    flag-semantics: [PlaySoundFlag]
+    member-of: [PlaySoundFlag]
     tooltip: Sound will be synchronized with the nearest master.
     type: integer
     value: '0x04'
   SOUND_TRIGGER:
-    flag-semantics: [PlaySoundFlag]
+    member-of: [PlaySoundFlag]
     tooltip: Sound will be triggered at the prim's location and not attached.
     type: integer
     value: '0x02'
@@ -4808,7 +4807,7 @@ constants:
     type: float
     value: '1.41421356'
   STATUS_BLOCK_GRAB:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object can be grabbed.\nA grab is the default action
       when in third person, and is available as the hand tool in build mode. This
       is useful for physical objects that you don't want other people to be able to
@@ -4816,63 +4815,63 @@ constants:
     type: integer
     value: '0x40'
   STATUS_BLOCK_GRAB_OBJECT:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Prevent click-and-drag movement on all prims in the object.
     type: integer
     value: '0x400'
   STATUS_BOUNDS_ERROR:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Argument(s) passed to function had a bounds error.
     type: integer
     value: 1002
   STATUS_CAST_SHADOWS:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     deprecated:
       reason: Not implemented.
     tooltip: ''
     type: integer
     value: '0x200'
   STATUS_DIE_AT_EDGE:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object is returned to the owner's inventory if it
       wanders off the edge of the world.\nIt is useful to set this status TRUE for
       things like bullets or rockets. The default is TRUE
     type: integer
     value: '0x80'
   STATUS_DIE_AT_NO_ENTRY:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object dies if it attempts to enter a parcel that
       does not allow object entry or does not have enough capacity.\nIt is useful
       to set this status TRUE for things like bullets or rockets. The default is FALSE
     type: integer
     value: '0x800'
   STATUS_INTERNAL_ERROR:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: An internal error occurred.
     type: integer
     value: 1999
   STATUS_MALFORMED_PARAMS:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Function was called with malformed parameters.
     type: integer
     value: 1000
   STATUS_NOT_FOUND:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Object or other item was not found.
     type: integer
     value: 1003
   STATUS_NOT_SUPPORTED:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Feature not supported.
     type: integer
     value: 1004
   STATUS_OK:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Result of function call was a success.
     type: integer
     value: 0
   STATUS_PHANTOM:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Controls/indicates whether the object collides or not.\nSetting the value
       to TRUE makes the object non-colliding with all objects. It is a good idea to
       use this for most objects that move or rotate, but are non-physical. It is also
@@ -4880,28 +4879,28 @@ constants:
     type: integer
     value: '0x10'
   STATUS_PHYSICS:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: Controls/indicates whether the object moves physically.\nThis controls
       the same flag that the UI check-box for Physical controls. The default is FALSE.
     type: integer
     value: '0x1'
   STATUS_RETURN_AT_EDGE:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x100'
   STATUS_ROTATE_X:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x2'
   STATUS_ROTATE_Y:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x4'
   STATUS_ROTATE_Z:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: "Controls/indicates whether the object can physically rotate around\n\
       \t\t\tthe specific axis or not. This flag has no meaning\n\t\t\tfor non-physical\
       \ objects. Set the value to FALSE\n\t\t\tif you want to disable rotation around\
@@ -4912,144 +4911,144 @@ constants:
     type: integer
     value: '0x8'
   STATUS_SANDBOX:
-    flag-semantics: [ObjectStatusParam]
+    member-of: [ObjectStatusParam]
     tooltip: "Controls/indicates whether the object can cross region boundaries\n\t\
       \t\tand move more than 20 meters from its creation\n\t\t\tpoint. The default\
       \ if FALSE."
     type: integer
     value: '0x20'
   STATUS_TYPE_MISMATCH:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Argument(s) passed to function had a type mismatch.
     type: integer
     value: 1001
   STATUS_WHITELIST_FAILED:
-    enum-semantics: [PrimMediaError]
+    member-of: [PrimMediaError]
     tooltip: Whitelist Failed.
     type: integer
     value: 2001
   STRING_TRIM:
-    enum-semantics: [StringTrimType]
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x03'
   STRING_TRIM_HEAD:
-    enum-semantics: [StringTrimType]
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x01'
   STRING_TRIM_TAIL:
-    enum-semantics: [StringTrimType]
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x02'
   TARGETED_EMAIL_OBJECT_OWNER:
-    enum-semantics: [EmailTarget]
+    member-of: [EmailTarget]
     tooltip: Send email to the owner of the object
     type: integer
     value: '0x02'
   TARGETED_EMAIL_ROOT_CREATOR:
-    enum-semantics: [EmailTarget]
+    member-of: [EmailTarget]
     tooltip: Send email to the creator of the root object
     type: integer
     value: '0x01'
   TERRAIN_DETAIL_1:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 0
   TERRAIN_DETAIL_2:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 1
   TERRAIN_DETAIL_3:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 2
   TERRAIN_DETAIL_4:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 3
   TERRAIN_HEIGHT_RANGE_NE:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 7
   TERRAIN_HEIGHT_RANGE_NW:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 6
   TERRAIN_HEIGHT_RANGE_SE:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 5
   TERRAIN_HEIGHT_RANGE_SW:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 4
   TERRAIN_PBR_OFFSET_1:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 16
   TERRAIN_PBR_OFFSET_2:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 17
   TERRAIN_PBR_OFFSET_3:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 18
   TERRAIN_PBR_OFFSET_4:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 19
   TERRAIN_PBR_ROTATION_1:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 12
   TERRAIN_PBR_ROTATION_2:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 13
   TERRAIN_PBR_ROTATION_3:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 14
   TERRAIN_PBR_ROTATION_4:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 15
   TERRAIN_PBR_SCALE_1:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 8
   TERRAIN_PBR_SCALE_2:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 9
   TERRAIN_PBR_SCALE_3:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 10
   TERRAIN_PBR_SCALE_4:
-    enum-semantics: [GroundTextureParam]
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 11
@@ -5079,7 +5078,7 @@ constants:
     slua-type: uuid
     value: "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
   TOUCH_INVALID_FACE:
-    # not enum-semantics as it can return positive integers also
+    # not enum as it can return positive integers also
     tooltip: ''
     type: integer
     value: -1
@@ -5092,103 +5091,103 @@ constants:
     type: vector
     value: <0.0, 0.0, 0.0>
   TP_ROUTING_BLOCKED:
-    enum-semantics: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelDetailsTeleportRouting]
     tooltip: Direct teleporting is blocked on this parcel.
     type: integer
     value: 0
   TP_ROUTING_FREE:
-    enum-semantics: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelDetailsTeleportRouting]
     tooltip: Teleports are unrestricted on this parcel.
     type: integer
     value: 2
   TP_ROUTING_LANDINGP:
-    enum-semantics: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelDetailsTeleportRouting]
     tooltip: Teleports are routed to a landing point if set on this parcel.
     type: integer
     value: 1
   TRANSFER_BAD_OPTS:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: Invalid inventory options.
     type: integer
     value: -1
   TRANSFER_BAD_ROOT:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: The root path specified in TRANSFER_DEST contained an invalid directory
       or was reduced to nothing.
     type: integer
     value: -5
   TRANSFER_DEST:
-    enum-semantics: [GiveAgentInventoryParam]
+    member-of: [GiveAgentInventoryParam]
     tooltip: The root folder to transfer inventory into.
     type: integer
     value: 0
   TRANSFER_FLAGS:
-    enum-semantics: [GiveAgentInventoryParam]
+    member-of: [GiveAgentInventoryParam]
     tooltip: Flags to control the behavior of inventory transfer.
     type: integer
     value: 1
   TRANSFER_FLAG_COPY:
-    flag-semantics: [TransferOwnershipFlag]
+    member-of: [TransferOwnershipFlag]
     tooltip: Gives a copy of the object being transfered. Implies TRANSFER_FLAG_TAKE.
     type: integer
     value: '0x0004'
   TRANSFER_FLAG_RESERVED:
-    flag-semantics: [TransferOwnershipFlag]
+    member-of: [TransferOwnershipFlag]
     tooltip: Reserved for future expansion.
     type: integer
     value: '0x0001'
   TRANSFER_FLAG_TAKE:
-    flag-semantics: [TransferOwnershipFlag]
+    member-of: [TransferOwnershipFlag]
     tooltip: On a successful transfer, automatically takes the object into inventory.
     type: integer
     value: '0x0002'
   TRANSFER_NO_ATTACHMENT:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: Can not transfer ownership of an attached object.
     type: integer
     value: -7
   TRANSFER_NO_ITEMS:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: No items in the inventory list are eligible for transfer.
     type: integer
     value: -4
   TRANSFER_NO_PERMS:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: The object does not have transfer permissions.
     type: integer
     value: -6
   TRANSFER_NO_TARGET:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: Could not find the receiver in the current region.
     type: integer
     value: -2
   TRANSFER_OK:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: Inventory transfer offer was successfully made.
     type: integer
     value: 0
   TRANSFER_THROTTLE:
-    enum-semantics: [TransferError]
+    member-of: [TransferError]
     tooltip: Inventory throttle hit.
     type: integer
     value: -3
   TRAVERSAL_TYPE:
-    enum-semantics: [CharacterParam]
+    member-of: [CharacterParam]
     tooltip: One of TRAVERSAL_TYPE_FAST, TRAVERSAL_TYPE_SLOW, and TRAVERSAL_TYPE_NONE.
     type: integer
     value: 7
   TRAVERSAL_TYPE_FAST:
-    enum-semantics: [CharacterTraversalType]
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 1
   TRAVERSAL_TYPE_NONE:
-    enum-semantics: [CharacterTraversalType]
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 2
   TRAVERSAL_TYPE_SLOW:
-    enum-semantics: [CharacterTraversalType]
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 0
@@ -5202,49 +5201,49 @@ constants:
     type: float
     value: '6.28318530'
   TYPE_FLOAT:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"number"'
     tooltip: The list entry is a float.
     type: integer
     value: 2
   TYPE_INTEGER:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"number"'
     tooltip: The list entry is an integer.
     type: integer
     value: 1
   TYPE_INVALID:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: 'nil'
     tooltip: The list entry is invalid.
     type: integer
     value: 0
   TYPE_KEY:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"uuid"'
     tooltip: The list entry is a key.
     type: integer
     value: 4
   TYPE_ROTATION:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"quaternion"'
     tooltip: The list entry is a rotation.
     type: integer
     value: 6
   TYPE_STRING:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"string"'
     tooltip: The list entry is a string.
     type: integer
     value: 3
   TYPE_VECTOR:
-    enum-semantics: [ListEntryType]
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"vector"'
     tooltip: The list entry is a vector.
@@ -5259,7 +5258,7 @@ constants:
     type: string
     value: URL_REQUEST_GRANTED
   VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum (1.0) deflection of angular
       orientation. That is, its a simple scalar for modulating the strength of angular
       deflection such that the vehicles preferred axis of motion points toward its
@@ -5267,50 +5266,50 @@ constants:
     type: integer
     value: 32
   VEHICLE_ANGULAR_DEFLECTION_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The time-scale for exponential success of linear deflection deflection.
       Its another way to specify the strength of the vehicles tendency to reorient
       itself so that its preferred axis of motion agrees with its true velocity.
     type: integer
     value: 33
   VEHICLE_ANGULAR_FRICTION_TIMESCALE:
-    enum-semantics: [VehicleVectorParam]
+    member-of: [VehicleVectorParam]
     tooltip: "A vector of timescales for exponential decay of the vehicle's angular\
       \ velocity about its preferred axes of motion (at, left, up).\n\t\t\tRange =\
       \ [0.07, inf) seconds for each element of the vector."
     type: integer
     value: 17
   VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential decay of the angular motors magnitude.
     type: integer
     value: 35
   VEHICLE_ANGULAR_MOTOR_DIRECTION:
-    enum-semantics: [VehicleVectorParam]
+    member-of: [VehicleVectorParam]
     tooltip: The direction and magnitude (in preferred frame) of the vehicle's angular
       motor. The vehicle will accelerate (or decelerate if necessary) to match its
       velocity to its motor.
     type: integer
     value: 19
   VEHICLE_ANGULAR_MOTOR_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential approach to full angular motor velocity.
     type: integer
     value: 34
   VEHICLE_BANKING_EFFICIENCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between anti (-1.0), none (0.0), and maxmum (1.0) banking strength.
     type: integer
     value: 38
   VEHICLE_BANKING_MIX:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between static (0.0) and dynamic (1.0) banking. "Static" means
       the banking scales only with the angle of roll, whereas "dynamic" is a term
       that also scales with the vehicles linear speed.
     type: integer
     value: 39
   VEHICLE_BANKING_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for banking to exponentially approach its maximum effect.
       This is another way to scale the strength of the banking effect, however it
       affects the term that is proportional to the difference between what the banking
@@ -5318,333 +5317,333 @@ constants:
     type: integer
     value: 40
   VEHICLE_BUOYANCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum anti-gravity (1.0).
     type: integer
     value: 27
   VEHICLE_FLAG_BLOCK_INTERFERENCE:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Prevent other scripts from pushing vehicle.
     type: integer
     value: '0x400'
   VEHICLE_FLAG_CAMERA_DECOUPLED:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x200'
   VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Hover at global height.
     type: integer
     value: '0x10'
   VEHICLE_FLAG_HOVER_TERRAIN_ONLY:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Ignore water height when hovering.
     type: integer
     value: '0x8'
   VEHICLE_FLAG_HOVER_UP_ONLY:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Hover does not push down. Use this flag for hovering vehicles that should
       be able to jump above their hover height.
     type: integer
     value: '0x20'
   VEHICLE_FLAG_HOVER_WATER_ONLY:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Ignore terrain height when hovering.
     type: integer
     value: '0x4'
   VEHICLE_FLAG_LIMIT_MOTOR_UP:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: Prevents ground vehicles from motoring into the sky.
     type: integer
     value: '0x40'
   VEHICLE_FLAG_LIMIT_ROLL_ONLY:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: For vehicles with vertical attractor that want to be able to climb/dive,
       for instance, aeroplanes that want to use the banking feature.
     type: integer
     value: '0x2'
   VEHICLE_FLAG_MOUSELOOK_BANK:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   VEHICLE_FLAG_MOUSELOOK_STEER:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x80'
   VEHICLE_FLAG_NO_DEFLECTION_UP:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     tooltip: This flag prevents linear deflection parallel to world z-axis. This is
       useful for preventing ground vehicles with large linear deflection, like bumper
       cars, from climbing their linear deflection into the sky.
     type: integer
     value: '0x1'
   VEHICLE_FLAG_NO_FLY_UP:
-    flag-semantics: [VehicleFlag]
+    member-of: [VehicleFlag]
     deprecated:
       use: VEHICLE_FLAG_NO_DEFLECTION_UP
     tooltip: Old, changed to VEHICLE_FLAG_NO_DEFLECTION_UP
     type: integer
     value: '0x1'
   VEHICLE_HOVER_EFFICIENCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: 'A slider between minimum (0.0 = bouncy) and maximum (1.0 = fast as possible)
       damped motion of the hover behavior. '
     type: integer
     value: 25
   VEHICLE_HOVER_HEIGHT:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The height (above the terrain or water, or global) at which the vehicle
       will try to hover.
     type: integer
     value: 24
   VEHICLE_HOVER_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: Period of time (in seconds) for the vehicle to achieve its hover height.
     type: integer
     value: 26
   VEHICLE_LINEAR_DEFLECTION_EFFICIENCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum (1.0) deflection of linear
       velocity. That is, its a simple scalar for modulating the strength of linear
       deflection.
     type: integer
     value: 28
   VEHICLE_LINEAR_DEFLECTION_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential success of linear deflection deflection.
       It is another way to specify how much time it takes for the vehicle's linear
       velocity to be redirected to its preferred axis of motion.
     type: integer
     value: 29
   VEHICLE_LINEAR_FRICTION_TIMESCALE:
-    enum-semantics: [VehicleVectorParam]
+    member-of: [VehicleVectorParam]
     tooltip: "A vector of timescales for exponential decay of the vehicle's linear\
       \ velocity along its preferred axes of motion (at, left, up).\n\t\t\tRange =\
       \ [0.07, inf) seconds for each element of the vector."
     type: integer
     value: 16
   VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential decay of the linear motors magnitude.
     type: integer
     value: 31
   VEHICLE_LINEAR_MOTOR_DIRECTION:
-    enum-semantics: [VehicleVectorParam]
+    member-of: [VehicleVectorParam]
     tooltip: "The direction and magnitude (in preferred frame) of the vehicle's linear\
       \ motor. The vehicle will accelerate (or decelerate if necessary) to match its\
       \ velocity to its motor.\n\t\t\tRange of magnitude = [0, 30] meters/second."
     type: integer
     value: 18
   VEHICLE_LINEAR_MOTOR_OFFSET:
-    enum-semantics: [VehicleVectorParam]
+    member-of: [VehicleVectorParam]
     tooltip: ''
     type: integer
     value: 20
   VEHICLE_LINEAR_MOTOR_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential approach to full linear motor velocity.
     type: integer
     value: 30
   VEHICLE_REFERENCE_FRAME:
-    enum-semantics: [VehicleRotationParam]
+    member-of: [VehicleRotationParam]
     tooltip: A rotation of the vehicle's preferred axes of motion and orientation (at,
       left, up) with respect to the vehicle's local frame (x, y, z).
     type: integer
     value: 44
   VEHICLE_TYPE_AIRPLANE:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: Uses linear deflection for lift, no hover, and banking to turn.\nSee
       http://wiki.secondlife.com/wiki/VEHICLE_TYPE_AIRPLANE
     type: integer
     value: 4
   VEHICLE_TYPE_BALLOON:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: Hover, and friction, but no deflection.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BALLOON
     type: integer
     value: 5
   VEHICLE_TYPE_BOAT:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: Hovers over water with lots of friction and some anglar deflection.\nSee
       http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BOAT
     type: integer
     value: 3
   VEHICLE_TYPE_CAR:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: Another vehicle that bounces along the ground but needs the motors to
       be driven from external controls or timer events.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_CAR
     type: integer
     value: 2
   VEHICLE_TYPE_NONE:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: ''
     type: integer
     value: 0
   VEHICLE_TYPE_SLED:
-    enum-semantics: [VehicleType]
+    member-of: [VehicleType]
     tooltip: Simple vehicle that bumps along the ground, and likes to move along its
       local x-axis.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_SLED
     type: integer
     value: 1
   VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0 = wobbly) and maximum (1.0 = firm as possible)
       stability of the vehicle to keep itself upright.
     type: integer
     value: 36
   VEHICLE_VERTICAL_ATTRACTION_TIMESCALE:
-    enum-semantics: [VehicleFloatParam]
+    member-of: [VehicleFloatParam]
     tooltip: The period of wobble, or timescale for exponential approach, of the vehicle
       to rotate such that its preferred "up" axis is oriented along the world's "up"
       axis.
     type: integer
     value: 37
   VERTICAL:
-    enum-semantics: [CharacterOrientation]
+    member-of: [CharacterOrientation]
     tooltip: ''
     type: integer
     value: 0
   WANDER_PAUSE_AT_WAYPOINTS:
-    enum-semantics: [CharacterWanderWithinParam]
+    member-of: [CharacterWanderWithinParam]
     tooltip: ''
     type: integer
     value: 0
   WATER_BLUR_MULTIPLIER:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Blur factor.
     type: integer
     value: 100
   WATER_FOG:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Fog properties when underwater.
     type: integer
     value: 101
   WATER_FRESNEL:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Fresnel scattering applied to the surface of the water.
     type: integer
     value: 102
   WATER_NORMAL_SCALE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Scaling applied to the water normal map.
     type: integer
     value: 104
   WATER_NORMAL_TEXTURE:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Normal map used for environmental waves.
     type: integer
     value: 107
   WATER_REFRACTION:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Refraction factors when looking through the surface of the water.
     type: integer
     value: 105
   WATER_TEXTURE_DEFAULTS:
-    enum-semantics: [EnvironmentParamReadOnly]
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Is the environment using the default wave map.
     type: integer
     value: 103
   WATER_WAVE_DIRECTION:
-    enum-semantics: [EnvironmentParamReadOnly, EnvironmentParam]
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Vectors for the directions of the waves.
     type: integer
     value: 106
   XP_ERROR_EXPERIENCES_DISABLED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The region currently has experiences disabled.
     type: integer
     value: 2
   XP_ERROR_EXPERIENCE_DISABLED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The experience owner has temporarily disabled the experience.
     type: integer
     value: 8
   XP_ERROR_EXPERIENCE_SUSPENDED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The experience has been suspended by Linden Customer Support.
     type: integer
     value: 9
   XP_ERROR_INVALID_EXPERIENCE:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The script is associated with an experience that no longer exists.
     type: integer
     value: 7
   XP_ERROR_INVALID_PARAMETERS:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: One of the string arguments was too big to fit in the key-value store.
     type: integer
     value: 3
   XP_ERROR_KEY_NOT_FOUND:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The requested key does not exist.
     type: integer
     value: 14
   XP_ERROR_MATURITY_EXCEEDED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The content rating of the experience exceeds that of the region.
     type: integer
     value: 16
   XP_ERROR_NONE:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: No error was detected.
     type: integer
     value: 0
   XP_ERROR_NOT_FOUND:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The sim was unable to verify the validity of the experience. Retrying
       after a short wait is advised.
     type: integer
     value: 6
   XP_ERROR_NOT_PERMITTED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: This experience is not allowed to run by the requested agent.
     type: integer
     value: 4
   XP_ERROR_NOT_PERMITTED_LAND:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: This experience is not allowed to run on the current region.
     type: integer
     value: 17
   XP_ERROR_NO_EXPERIENCE:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: This script is not associated with an experience.
     type: integer
     value: 5
   XP_ERROR_QUOTA_EXCEEDED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: An attempted write data to the key-value store failed due to the data
       quota being met.
     type: integer
     value: 11
   XP_ERROR_REQUEST_PERM_TIMEOUT:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: Request timed out; permissions not modified.
     type: integer
     value: 18
   XP_ERROR_RETRY_UPDATE:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: A checked update failed due to an out of date request.
     type: integer
     value: 15
   XP_ERROR_STORAGE_EXCEPTION:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: Unable to communicate with the key-value store.
     type: integer
     value: 13
   XP_ERROR_STORE_DISABLED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The key-value store is currently disabled on this region.
     type: integer
     value: 12
   XP_ERROR_THROTTLED:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: The call failed due to too many recent calls.
     type: integer
     value: 1
   XP_ERROR_UNKNOWN_ERROR:
-    enum-semantics: [ExperienceError]
+    member-of: [ExperienceError]
     tooltip: Other unknown error.
     type: integer
     value: 10
@@ -6305,7 +6304,7 @@ functions:
     - AttachmentPoint:
         tooltip: ''
         type: integer
-        enum-semantics: AttachPoints
+        member-of: AttachPoints
     energy: 10.0
     func-id: 113
     return: void
@@ -7444,7 +7443,7 @@ functions:
     func-id: 206
     must-use: true
     return: integer
-    flag-semantics: AgentInfo
+    member-of: AgentInfo
     sleep: 0.0
     tooltip: "Returns an integer bit-field containing the agent information about\
       \ id.\\n\n                    Returns AGENT_FLYING, AGENT_ATTACHMENTS, AGENT_SCRIPTED,\
