@@ -226,6 +226,19 @@ enum CharacterType {
 enum CharacterWanderWithinParam {
   WANDER_PAUSE_AT_WAYPOINTS = 0
 };
+enum ClickAction {
+  NONE = 0 // deprecated
+  TOUCH = 0
+  SIT = 1
+  BUY = 2
+  PAY = 3
+  OPEN = 4
+  PLAY = 5
+  OPEN_MEDIA = 6
+  ZOOM = 7
+  DISABLED = 8
+  IGNORE = 9
+};
 enum ControlButton {
   FWD = 0x1
   BACK = 0x2
@@ -844,19 +857,6 @@ enum PrimBump {
   STUCCO = 15
   SUCTION = 16
   WEAVE = 17
-};
-enum PrimClickAction {
-  NONE = 0 // deprecated
-  TOUCH = 0
-  SIT = 1
-  BUY = 2
-  PAY = 3
-  OPEN = 4
-  PLAY = 5
-  OPEN_MEDIA = 6
-  ZOOM = 7
-  DISABLED = 8
-  IGNORE = 9
 };
 enum PrimGLTFAlphaMode {
   OPAQUE = 0

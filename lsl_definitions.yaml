@@ -117,6 +117,10 @@ enums:
   CharacterWanderWithinParam:
     type: enum
     tooltip: ''
+  ClickAction:
+    type: enum
+    prefix: CLICK_ACTION_
+    tooltip: ''
   ControlButton:
     type: flag
     prefix: CONTROL_
@@ -332,10 +336,6 @@ enums:
   PrimBump:
     type: enum
     prefix: PRIM_BUMP_
-    tooltip: ''
-  PrimClickAction:
-    type: enum
-    prefix: CLICK_ACTION_
     tooltip: ''
   PrimGLTFAlphaMode:
     type: enum
@@ -1190,22 +1190,22 @@ constants:
     type: integer
     value: 4
   CLICK_ACTION_BUY:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the buy dialog is opened.
     type: integer
     value: 2
   CLICK_ACTION_DISABLED:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: No click action. No touches detected or passed.
     type: integer
     value: 8
   CLICK_ACTION_IGNORE:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: No click action. Object is invisible to the mouse.
     type: integer
     value: 9
   CLICK_ACTION_NONE:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     deprecated:
       use: CLICK_ACTION_TOUCH
     tooltip: 'Performs the default action: when the prim is clicked, touch events
@@ -1213,37 +1213,37 @@ constants:
     type: integer
     value: 0
   CLICK_ACTION_OPEN:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the object inventory dialog is opened.
     type: integer
     value: 4
   CLICK_ACTION_OPEN_MEDIA:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is touched, the web media dialog is opened.
     type: integer
     value: 6
   CLICK_ACTION_PAY:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the pay dialog is opened.
     type: integer
     value: 3
   CLICK_ACTION_PLAY:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, html-on-a-prim is enabled?
     type: integer
     value: 5
   CLICK_ACTION_SIT:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the avatar sits upon it.
     type: integer
     value: 1
   CLICK_ACTION_TOUCH:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, touch events are triggered.
     type: integer
     value: 0
   CLICK_ACTION_ZOOM:
-    member-of: [PrimClickAction]
+    member-of: [ClickAction]
     tooltip: Zoom in on object when clicked.
     type: integer
     value: 7
