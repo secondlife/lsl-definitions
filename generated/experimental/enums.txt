@@ -385,6 +385,16 @@ enum GLTFAlphaMode {
   BLEND = 1
   MASK = 2
 };
+enum GLTFOverride {
+  BASE_COLOR_FACTOR = 1
+  BASE_ALPHA = 2
+  BASE_ALPHA_MODE = 3
+  BASE_ALPHA_MASK = 4
+  BASE_DOUBLE_SIDED = 5
+  METALLIC_FACTOR = 6
+  ROUGHNESS_FACTOR = 7
+  EMISSIVE_FACTOR = 8
+};
 enum GameControlAxis {
   LEFTX = 0
   LEFTY = 1
@@ -869,16 +879,6 @@ enum PrimBump {
   STUCCO = 15
   SUCTION = 16
   WEAVE = 17
-};
-enum PrimGLTFOverride {
-  BASE_COLOR_FACTOR = 1
-  BASE_ALPHA = 2
-  BASE_ALPHA_MODE = 3
-  BASE_ALPHA_MASK = 4
-  BASE_DOUBLE_SIDED = 5
-  METALLIC_FACTOR = 6
-  ROUGHNESS_FACTOR = 7
-  EMISSIVE_FACTOR = 8
 };
 enum PrimMaterial {
   STONE = 0

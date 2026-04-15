@@ -182,6 +182,10 @@ enums:
     type: enum
     prefix: PRIM_GLTF_ALPHA_MODE_
     tooltip: ''
+  GLTFOverride:
+    type: enum
+    prefix: OVERRIDE_GLTF_
+    tooltip: ''
   GroundTextureParam:
     type: enum
     prefix: TERRAIN_
@@ -351,10 +355,6 @@ enums:
   PrimBump:
     type: enum
     prefix: PRIM_BUMP_
-    tooltip: ''
-  PrimGLTFOverride:
-    type: enum
-    prefix: OVERRIDE_GLTF_
     tooltip: ''
   PrimMaterial:
     type: enum
@@ -2738,42 +2738,42 @@ constants:
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_ALPHA:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 2
   OVERRIDE_GLTF_BASE_ALPHA_MASK:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 4
   OVERRIDE_GLTF_BASE_ALPHA_MODE:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 1
   OVERRIDE_GLTF_BASE_DOUBLE_SIDED:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 5
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 8
   OVERRIDE_GLTF_METALLIC_FACTOR:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 6
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
-    member-of: [PrimGLTFOverride]
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 7
