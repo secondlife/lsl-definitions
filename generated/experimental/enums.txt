@@ -658,12 +658,6 @@ enum ObjectDetailsPathfindingType {
   MATERIAL_VOLUME = 5
   EXCLUSION_VOLUME = 6
 };
-enum ObjectPhysicsMaterialParam {
-  DENSITY = 0x1
-  FRICTION = 0x2
-  RESTITUTION = 0x4
-  GRAVITY_MULTIPLIER = 0x8
-};
 enum ObjectStatusParam {
   PHYSICS = 0x1
   ROTATE_X = 0x2
@@ -828,6 +822,12 @@ enum PassMode {
 enum PayButton {
   DEFAULT = -2
   HIDE = -1
+};
+enum PhysicsMaterialParam {
+  DENSITY = 0x1
+  FRICTION = 0x2
+  RESTITUTION = 0x4
+  GRAVITY_MULTIPLIER = 0x8
 };
 enum PhysicsShapeType {
   PRIM = 0

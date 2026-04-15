@@ -276,9 +276,6 @@ enums:
     type: enum
     prefix: OPT_
     tooltip: ''
-  ObjectPhysicsMaterialParam:
-    type: flag
-    tooltip: ''
   ObjectStatusParam:
     type: flag
     prefix: STATUS_
@@ -338,6 +335,9 @@ enums:
   PayButton:
     type: enum
     prefix: PAY_
+    tooltip: ''
+  PhysicsMaterialParam:
+    type: flag
     tooltip: ''
   PhysicsShapeType:
     type: enum
@@ -1511,7 +1511,7 @@ constants:
     type: float
     value: '0.017453293'
   DENSITY:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)
     type: integer
@@ -1667,7 +1667,7 @@ constants:
     type: integer
     value: 1
   FRICTION:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the friction value. Must be
       between 0.0 and 255.0
     type: integer
@@ -1824,7 +1824,7 @@ constants:
     type: integer
     value: 1
   GRAVITY_MULTIPLIER:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the gravity multiplier value.
       Must be between -1.0 and +28.0
     type: integer
@@ -3523,7 +3523,7 @@ constants:
     type: integer
     value: 2
   PRIM_MATERIAL_DENSITY:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     private: true
     deprecated:
       use: DENSITY
@@ -3536,7 +3536,7 @@ constants:
     type: integer
     value: 4
   PRIM_MATERIAL_FRICTION:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     private: true
     deprecated:
       use: FRICTION
@@ -3549,7 +3549,7 @@ constants:
     type: integer
     value: 2
   PRIM_MATERIAL_GRAVITY_MULTIPLIER:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     private: true
     deprecated:
       use: GRAVITY_MULTIPLIER
@@ -3574,7 +3574,7 @@ constants:
     type: integer
     value: 5
   PRIM_MATERIAL_RESTITUTION:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     private: true
     deprecated:
       use: RESTITUTION
@@ -4577,7 +4577,7 @@ constants:
     type: integer
     value: 2
   RESTITUTION:
-    member-of: [ObjectPhysicsMaterialParam]
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       0.0 and 1.0
     type: integer
