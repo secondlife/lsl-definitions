@@ -284,10 +284,6 @@ enums:
     type: enum
     prefix: PARCEL_DETAILS_
     tooltip: ''
-  ParcelDetailsTeleportRouting:
-    type: enum
-    prefix: TP_ROUTING_
-    tooltip: ''
   ParcelFlag:
     type: flag
     prefix: PARCEL_FLAG_
@@ -311,6 +307,10 @@ enums:
   ParcelSaleParam:
     type: enum
     prefix: PARCEL_SALE_
+    tooltip: ''
+  ParcelTeleportRouting:
+    type: enum
+    prefix: TP_ROUTING_
     tooltip: ''
   ParticleBlendFunc:
     type: enum
@@ -5351,17 +5351,17 @@ constants:
     type: vector
     value: <0.0, 0.0, 0.0>
   TP_ROUTING_BLOCKED:
-    member-of: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelTeleportRouting]
     tooltip: Direct teleporting is blocked on this parcel.
     type: integer
     value: 0
   TP_ROUTING_FREE:
-    member-of: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelTeleportRouting]
     tooltip: Teleports are unrestricted on this parcel.
     type: integer
     value: 2
   TP_ROUTING_LANDINGP:
-    member-of: [ParcelDetailsTeleportRouting]
+    member-of: [ParcelTeleportRouting]
     tooltip: Teleports are routed to a landing point if set on this parcel.
     type: integer
     value: 1

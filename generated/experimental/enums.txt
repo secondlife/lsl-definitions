@@ -688,11 +688,6 @@ enum ParcelDetailsParam {
   FLAGS = 12
   SCRIPT_DANGER = 13
 };
-enum ParcelDetailsTeleportRouting {
-  BLOCKED = 0
-  LANDINGP = 1
-  FREE = 2
-};
 enum ParcelFlag {
   ALLOW_FLY = 0x1
   ALLOW_SCRIPTS = 0x2
@@ -755,6 +750,11 @@ enum ParcelSaleParam {
   PRICE = 1
   AGENT = 2
   OBJECTS = 3
+};
+enum ParcelTeleportRouting {
+  BLOCKED = 0
+  LANDINGP = 1
+  FREE = 2
 };
 enum ParticleBlendFunc {
   ONE = 0
