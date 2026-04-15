@@ -275,6 +275,11 @@ enum DamageType {
   SONIC = 13
   EMOTIONAL = 14
 };
+enum DerezMode {
+  DIE = 0
+  MAKE_TEMP = 1
+  TO_INVENTORY = 2
+};
 enum DetectType {
   AGENT = 0x1
   AGENT_BY_LEGACY_NAME = 0x1
@@ -586,11 +591,6 @@ enum ModifyLandBrush {
   SMALL_BRUSH = 1 // deprecated
   MEDIUM_BRUSH = 2 // deprecated
   LARGE_BRUSH = 3 // deprecated
-};
-enum ObjectDerezMode {
-  DIE = 0
-  MAKE_TEMP = 1
-  TO_INVENTORY = 2
 };
 enum ObjectDetailsParam {
   NAME = 1

@@ -137,6 +137,10 @@ enums:
     type: enum
     prefix: DAMAGE_TYPE_
     tooltip: ''
+  DerezMode:
+    type: enum
+    prefix: DEREZ_
+    tooltip: ''
   DetectType:
     type: flag
     special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
@@ -263,10 +267,6 @@ enums:
   ModifyLandBrush:
     type: enum
     prefix: LAND_
-    tooltip: ''
-  ObjectDerezMode:
-    type: enum
-    prefix: DEREZ_
     tooltip: ''
   ObjectDetailsParam:
     type: enum
@@ -1517,17 +1517,17 @@ constants:
     type: integer
     value: 1
   DEREZ_DIE:
-    member-of: [ObjectDerezMode]
+    member-of: [DerezMode]
     tooltip: Causes the object to immediately die.
     type: integer
     value: 0
   DEREZ_MAKE_TEMP:
-    member-of: [ObjectDerezMode]
+    member-of: [DerezMode]
     tooltip: The object is made temporary and will be cleaned up at some later timer.
     type: integer
     value: 1
   DEREZ_TO_INVENTORY:
-    member-of: [ObjectDerezMode]
+    member-of: [DerezMode]
     tooltip: The object is returned to the inventory of the rezzer.
     type: integer
     value: 2
