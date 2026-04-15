@@ -41,6 +41,10 @@ enums:
     type: flag
     prefix: AGENT_LIST_
     tooltip: ''
+  AlphaMode:
+    type: enum
+    prefix: PRIM_ALPHA_MODE_
+    tooltip: ''
   AssetPermission:
     type: flag
     prefix: PERM_
@@ -347,10 +351,6 @@ enums:
     type: flag
     prefix: SOUND_
     special-members: [SOUND_PLAY] # zero
-    tooltip: ''
-  PrimAlphaMode:
-    type: enum
-    prefix: PRIM_ALPHA_MODE_
     tooltip: ''
   PrimBump:
     type: enum
@@ -3262,26 +3262,26 @@ constants:
     type: integer
     value: 38
   PRIM_ALPHA_MODE_BLEND:
-    member-of: [PrimAlphaMode]
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as alpha-blended.
     type: integer
     value: 1
   PRIM_ALPHA_MODE_EMISSIVE:
-    member-of: [PrimAlphaMode]
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as an emissivity mask.
     type: integer
     value: 3
   PRIM_ALPHA_MODE_MASK:
-    member-of: [PrimAlphaMode]
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as fully opaque for alpha values
       above alpha_cutoff and fully transparent otherwise.
     type: integer
     value: 2
   PRIM_ALPHA_MODE_NONE:
-    member-of: [PrimAlphaMode]
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be ignored.
     type: integer

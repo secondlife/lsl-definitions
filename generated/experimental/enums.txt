@@ -34,6 +34,12 @@ enum AgentListScope {
   PARCEL_OWNER = 0x2
   REGION = 0x4
 };
+enum AlphaMode {
+  NONE = 0
+  BLEND = 1
+  MASK = 2
+  EMISSIVE = 3
+};
 enum AssetPermission {
   TRANSFER = 0x2000
   MODIFY = 0x4000
@@ -853,12 +859,6 @@ enum PlaySoundFlag {
   LOOP = 0x1
   TRIGGER = 0x2
   SYNC = 0x4
-};
-enum PrimAlphaMode {
-  NONE = 0
-  BLEND = 1
-  MASK = 2
-  EMISSIVE = 3
 };
 enum PrimBump {
   NONE = 0
