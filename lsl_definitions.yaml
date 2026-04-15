@@ -178,6 +178,10 @@ enums:
     type: enum
     prefix: TRANSFER_
     tooltip: ''
+  GLTFAlphaMode:
+    type: enum
+    prefix: PRIM_GLTF_ALPHA_MODE_
+    tooltip: ''
   GroundTextureParam:
     type: enum
     prefix: TERRAIN_
@@ -347,10 +351,6 @@ enums:
   PrimBump:
     type: enum
     prefix: PRIM_BUMP_
-    tooltip: ''
-  PrimGLTFAlphaMode:
-    type: enum
-    prefix: PRIM_GLTF_ALPHA_MODE_
     tooltip: ''
   PrimGLTFOverride:
     type: enum
@@ -3443,17 +3443,17 @@ constants:
     type: integer
     value: 25
   PRIM_GLTF_ALPHA_MODE_BLEND:
-    member-of: [PrimGLTFAlphaMode]
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "BLEND".
     type: integer
     value: 1
   PRIM_GLTF_ALPHA_MODE_MASK:
-    member-of: [PrimGLTFAlphaMode]
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "MASK".
     type: integer
     value: 2
   PRIM_GLTF_ALPHA_MODE_OPAQUE:
-    member-of: [PrimGLTFAlphaMode]
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "OPAQUE".
     type: integer
     value: 0

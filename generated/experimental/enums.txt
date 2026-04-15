@@ -380,6 +380,11 @@ enum ExperienceError {
 enum Faces {
   ALL_SIDES = -1
 };
+enum GLTFAlphaMode {
+  OPAQUE = 0
+  BLEND = 1
+  MASK = 2
+};
 enum GameControlAxis {
   LEFTX = 0
   LEFTY = 1
@@ -864,11 +869,6 @@ enum PrimBump {
   STUCCO = 15
   SUCTION = 16
   WEAVE = 17
-};
-enum PrimGLTFAlphaMode {
-  OPAQUE = 0
-  BLEND = 1
-  MASK = 2
 };
 enum PrimGLTFOverride {
   BASE_COLOR_FACTOR = 1
