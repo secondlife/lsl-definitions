@@ -854,6 +854,11 @@ enum PayButton {
   DEFAULT = -2
   HIDE = -1
 };
+enum PhysicsShapeType {
+  PRIM = 0
+  NONE = 1
+  CONVEX = 2
+};
 enum PlaySoundFlag {
   PLAY = 0x0
   LOOP = 0x1
@@ -972,11 +977,6 @@ enum PrimParam {
   DAMAGE = 51
   HEALTH = 52
   COLLISION_SOUND = 53
-};
-enum PrimPhysicsShapeType {
-  PRIM = 0
-  NONE = 1
-  CONVEX = 2
 };
 enum PrimReflectionProbeType {
   BOX = 0x1

@@ -347,6 +347,10 @@ enums:
     type: enum
     prefix: PAY_
     tooltip: ''
+  PhysicsShapeType:
+    type: enum
+    prefix: PRIM_PHYSICS_SHAPE_
+    tooltip: ''
   PlaySoundFlag:
     type: flag
     prefix: SOUND_
@@ -380,10 +384,6 @@ enums:
   PrimParam:
     type: enum
     prefix: PRIM_
-    tooltip: ''
-  PrimPhysicsShapeType:
-    type: enum
-    prefix: PRIM_PHYSICS_SHAPE_
     tooltip: ''
   PrimReflectionProbeType:
     type: flag
@@ -3770,19 +3770,19 @@ constants:
     type: integer
     value: 3
   PRIM_PHYSICS_SHAPE_CONVEX:
-    member-of: [PrimPhysicsShapeType]
+    member-of: [PhysicsShapeType]
     tooltip: Use the convex hull of the prim shape for physics (this is the default
       for mesh objects).
     type: integer
     value: 2
   PRIM_PHYSICS_SHAPE_NONE:
-    member-of: [PrimPhysicsShapeType]
+    member-of: [PhysicsShapeType]
     tooltip: 'Ignore this prim in the physics shape. NB: This cannot be applied to
       the root prim.'
     type: integer
     value: 1
   PRIM_PHYSICS_SHAPE_PRIM:
-    member-of: [PrimPhysicsShapeType]
+    member-of: [PhysicsShapeType]
     tooltip: Use the normal prim shape for physics (this is the default for all non-mesh
       objects).
     type: integer
