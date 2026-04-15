@@ -394,9 +394,6 @@ enums:
     type: enum
     prefix: PRIM_TEXGEN_
     tooltip: ''
-  PrimTextureAnimMode:
-    type: flag
-    tooltip: ''
   PrimType:
     type: enum
     prefix: PRIM_TYPE_
@@ -465,6 +462,9 @@ enums:
   StringTrimType:
     type: enum
     prefix: STRING_TRIM_
+    tooltip: ''
+  TextureAnimMode:
+    type: flag
     tooltip: ''
   TransferError:
     type: enum
@@ -618,7 +618,7 @@ constants:
     type: integer
     value: -1
   ANIM_ON:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Texture animation is on.
     type: integer
     value: '0x1'
@@ -2320,7 +2320,7 @@ constants:
     type: integer
     value: 7
   LOOP:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Loop the texture animation.
     type: integer
     value: '0x2'
@@ -3228,7 +3228,7 @@ constants:
     type: float
     value: '3.14159265'
   PING_PONG:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Play animation going forwards, then backwards.
     type: integer
     value: '0x8'
@@ -4572,7 +4572,7 @@ constants:
     type: integer
     value: 4
   REVERSE:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Play animation in reverse direction.
     type: integer
     value: '0x4'
@@ -4694,12 +4694,12 @@ constants:
     type: integer
     value: 4
   ROTATE:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Animate texture rotation.
     type: integer
     value: '0x20'
   SCALE:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Animate the texture scale.
     type: integer
     value: '0x40'
@@ -5027,7 +5027,7 @@ constants:
     type: integer
     value: 15
   SMOOTH:
-    member-of: [PrimTextureAnimMode]
+    member-of: [TextureAnimMode]
     tooltip: Slide in the X direction, instead of playing separate frames.
     type: integer
     value: '0x10'

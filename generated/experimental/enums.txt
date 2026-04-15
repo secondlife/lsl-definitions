@@ -1002,15 +1002,6 @@ enum PrimTexgen {
   DEFAULT = 0
   PLANAR = 1
 };
-enum PrimTextureAnimMode {
-  ANIM_ON = 0x1
-  LOOP = 0x2
-  REVERSE = 0x4
-  PING_PONG = 0x8
-  SMOOTH = 0x10
-  ROTATE = 0x20
-  SCALE = 0x40
-};
 enum PrimType {
   BOX = 0
   CYLINDER = 1
@@ -1151,6 +1142,15 @@ enum StringTrimType {
   HEAD = 1
   TAIL = 2
   STRING_TRIM = 3
+};
+enum TextureAnimMode {
+  ANIM_ON = 0x1
+  LOOP = 0x2
+  REVERSE = 0x4
+  PING_PONG = 0x8
+  SMOOTH = 0x10
+  ROTATE = 0x20
+  SCALE = 0x40
 };
 enum TransferError {
   NO_ATTACHMENT = -7
