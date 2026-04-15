@@ -648,7 +648,7 @@ enum ObjectDetailsParam {
   PERMS = 53
   PERMS_COMBINED = 54
 };
-enum ObjectDetailsPathfindingType {
+enum ObjectPathfindingType {
   OTHER = -1
   LEGACY_LINKSET = 0
   AVATAR = 1

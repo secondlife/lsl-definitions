@@ -272,7 +272,7 @@ enums:
     type: enum
     prefix: OBJECT_
     tooltip: ''
-  ObjectDetailsPathfindingType:
+  ObjectPathfindingType:
     type: enum
     prefix: OPT_
     tooltip: ''
@@ -2697,43 +2697,43 @@ constants:
     type: integer
     value: 5
   OPT_AVATAR:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for avatars.
     type: integer
     value: 1
   OPT_CHARACTER:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for pathfinding characters.
     type: integer
     value: 2
   OPT_EXCLUSION_VOLUME:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for exclusion volumes.
     type: integer
     value: 6
   OPT_LEGACY_LINKSET:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for movable obstacles, movable phantoms, physical, and volumedetect
       objects.
     type: integer
     value: 0
   OPT_MATERIAL_VOLUME:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for material volumes.
     type: integer
     value: 5
   OPT_OTHER:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for attachments, Linden trees, and grass.
     type: integer
     value: -1
   OPT_STATIC_OBSTACLE:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for static obstacles.
     type: integer
     value: 4
   OPT_WALKABLE:
-    member-of: [ObjectDetailsPathfindingType]
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for walkable objects.
     type: integer
     value: 3
