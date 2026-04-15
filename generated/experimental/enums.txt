@@ -377,6 +377,9 @@ enum ExperienceError {
   NOT_PERMITTED_LAND = 17
   REQUEST_PERM_TIMEOUT = 18
 };
+enum Faces {
+  ALL_SIDES = -1
+};
 enum GameControlAxis {
   LEFTX = 0
   LEFTY = 1
@@ -1222,7 +1225,6 @@ enum VehicleVectorParam {
   ANGULAR_MOTOR_DIRECTION = 19
   LINEAR_MOTOR_OFFSET = 20
 };
-const integer ALL_SIDES = -1
 const integer COMBAT_CHANNEL = 2147483646
 const string COMBAT_LOG_ID = "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
 const integer DEBUG_CHANNEL = 2147483647

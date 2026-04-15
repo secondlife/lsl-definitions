@@ -159,6 +159,9 @@ enums:
     type: enum
     prefix: XP_ERROR_
     tooltip: ''
+  Faces:
+    type: enum
+    tooltip: 'Operate on one or more face numbers at a time.'
   GameControlAxis:
     type: enum
     prefix: GAME_CONTROL_AXIS_
@@ -215,11 +218,11 @@ enums:
   Link:
     type: enum
     prefix: LINK_
-    tooltip: 'Operate on one link number at a time'
+    tooltip: 'Operate on one link number at a time.'
   Links:
     type: enum
     prefix: LINK_
-    tooltip: 'Operate on one or more link numbers at a time'
+    tooltip: 'Operate on one or more link numbers at a time.'
   LinksetDataAction:
     type: enum
     prefix: LINKSETDATA_
@@ -621,7 +624,7 @@ constants:
     type: integer
     value: '0x80'
   ALL_SIDES:
-    # not enum as you can pass any positive integer also
+    member-of: [Faces]
     tooltip: ''
     type: integer
     value: -1
