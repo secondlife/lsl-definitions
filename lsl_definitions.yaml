@@ -23,8 +23,8 @@ llsd-lsl-syntax-version: 2
 enums:
 # This section documents the relationship between LSL's functions and constants.
 # Neither LSL nor Lua have real enums, nor is this a proposal to add them.
-# This is purely for the purpose of documentation generation,
-# and to have this data somewhere other than the LSL wiki.
+# This is purely for the purpose of documentation generation, and to
+# document these relationships somewhere other than the LSL wiki.
   AgentData:
     type: enum
     prefix: DATA_
