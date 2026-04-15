@@ -664,31 +664,6 @@ enum ObjectPhysicsMaterialParam {
   RESTITUTION = 0x4
   GRAVITY_MULTIPLIER = 0x8
 };
-enum ObjectRezFlag {
-  TEMP = 0x1
-  PHYSICAL = 0x2
-  PHANTOM = 0x4
-  DIE_ON_COLLIDE = 0x8
-  DIE_ON_NOENTRY = 0x10
-  NO_COLLIDE_OWNER = 0x20
-  NO_COLLIDE_FAMILY = 0x40
-  BLOCK_GRAB_OBJECT = 0x80
-};
-enum ObjectRezParam {
-  PARAM = 0
-  FLAGS = 1
-  POS = 2
-  ROT = 3
-  VEL = 4
-  ACCEL = 5
-  OMEGA = 7
-  DAMAGE = 8
-  SOUND = 9
-  SOUND_COLLIDE = 10
-  LOCK_AXES = 11
-  DAMAGE_TYPE = 12
-  PARAM_STRING = 13
-};
 enum ObjectStatusParam {
   PHYSICS = 0x1
   ROTATE_X = 0x2
@@ -1072,6 +1047,31 @@ enum ReturnObjectsScope {
   PARCEL = 0x1
   PARCEL_OWNER = 0x2
   REGION = 0x4
+};
+enum RezFlag {
+  TEMP = 0x1
+  PHYSICAL = 0x2
+  PHANTOM = 0x4
+  DIE_ON_COLLIDE = 0x8
+  DIE_ON_NOENTRY = 0x10
+  NO_COLLIDE_OWNER = 0x20
+  NO_COLLIDE_FAMILY = 0x40
+  BLOCK_GRAB_OBJECT = 0x80
+};
+enum RezParam {
+  PARAM = 0
+  FLAGS = 1
+  POS = 2
+  ROT = 3
+  VEL = 4
+  ACCEL = 5
+  OMEGA = 7
+  DAMAGE = 8
+  SOUND = 9
+  SOUND_COLLIDE = 10
+  LOCK_AXES = 11
+  DAMAGE_TYPE = 12
+  PARAM_STRING = 13
 };
 enum ScriptPermission {
   DEBIT = 0x2

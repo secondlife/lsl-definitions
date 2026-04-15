@@ -279,14 +279,6 @@ enums:
   ObjectPhysicsMaterialParam:
     type: flag
     tooltip: ''
-  ObjectRezFlag:
-    type: flag
-    prefix: REZ_FLAG_
-    tooltip: ''
-  ObjectRezParam:
-    type: enum
-    prefix: REZ_
-    tooltip: ''
   ObjectStatusParam:
     type: flag
     prefix: STATUS_
@@ -445,6 +437,14 @@ enums:
   ReturnObjectsScope:
     type: flag
     prefix: OBJECT_RETURN_
+    tooltip: ''
+  RezFlag:
+    type: flag
+    prefix: REZ_FLAG_
+    tooltip: ''
+  RezParam:
+    type: enum
+    prefix: REZ_
     tooltip: ''
   ScriptPermission:
     type: flag
@@ -4588,118 +4588,118 @@ constants:
     type: integer
     value: '0x4'
   REZ_ACCEL:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Acceleration forced applied to the rezzed object. [vector force, integer
       rel]
     type: integer
     value: 5
   REZ_DAMAGE:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Damage applied by the object when it collides with an agent. [float damage]
     type: integer
     value: 8
   REZ_DAMAGE_TYPE:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Set the damage type applied when this object collides. [integer damage_type]
     type: integer
     value: 12
   REZ_FLAGS:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Rez flags to set on the newly rezzed object. [integer flags]
     type: integer
     value: 1
   REZ_FLAG_BLOCK_GRAB_OBJECT:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Prevent grabbing the object.
     type: integer
     value: '0x0080'
   REZ_FLAG_DIE_ON_COLLIDE:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Object will die after its first collision.
     type: integer
     value: '0x0008'
   REZ_FLAG_DIE_ON_NOENTRY:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Object will die if it attempts to enter a parcel that it can not.
     type: integer
     value: '0x0010'
   REZ_FLAG_NO_COLLIDE_FAMILY:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Object will not trigger collision events with other objects created by
       the same rezzer.
     type: integer
     value: '0x0040'
   REZ_FLAG_NO_COLLIDE_OWNER:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Object will not trigger collision events with its owner.
     type: integer
     value: '0x0020'
   REZ_FLAG_PHANTOM:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Make the object phantom on rez.
     type: integer
     value: '0x0004'
   REZ_FLAG_PHYSICAL:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Make the object physical on rez.
     type: integer
     value: '0x0002'
   REZ_FLAG_TEMP:
-    member-of: [ObjectRezFlag]
+    member-of: [RezFlag]
     tooltip: Flag the object as temp on rez.
     type: integer
     value: '0x0001'
   REZ_LOCK_AXES:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Prevent the object from rotating around some axes. [vector locks]
     type: integer
     value: 11
   REZ_OMEGA:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Omega applied to the rezzed object. [vector axis, integer rel, float
       spin, float gain]
     type: integer
     value: 7
   REZ_PARAM:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Integer value to pass to the object as its rez parameter. [integer param]
     type: integer
     value: 0
   REZ_PARAM_STRING:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: A string value to pass to the object as its rez parameter. [string param]
     type: integer
     value: 13
   REZ_POS:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Position at which to rez the new object. [vector position, integer rel,
       integer atroot]
     type: integer
     value: 2
   REZ_ROT:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Rotation applied to newly rezzed object. [rotation rot, integer rel]
     type: integer
     value: 3
   REZ_SOUND:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Sound attached to the rezzed object. [string name, float volume, integer
       loop]
     type: integer
     value: 9
   REZ_SOUND_COLLIDE:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Sound played by the object on a collision. [string name, float volume]
     type: integer
     value: 10
   REZ_TORQUE:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     private: true
     tooltip: ''
     type: integer
     value: 6
   REZ_VEL:
-    member-of: [ObjectRezParam]
+    member-of: [RezParam]
     tooltip: Initial velocity of rezzed object. [vector vel, integer rel, integer
       inherit]
     type: integer
