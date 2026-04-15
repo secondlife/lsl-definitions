@@ -339,6 +339,10 @@ enums:
   PhysicsMaterialParam:
     type: flag
     tooltip: ''
+  PhysicsMaterialPreset:
+    type: enum
+    prefix: PRIM_MATERIAL_
+    tooltip: ''
   PhysicsShapeType:
     type: enum
     prefix: PRIM_PHYSICS_SHAPE_
@@ -351,10 +355,6 @@ enums:
   PrimBump:
     type: enum
     prefix: PRIM_BUMP_
-    tooltip: ''
-  PrimMaterial:
-    type: enum
-    prefix: PRIM_MATERIAL_
     tooltip: ''
   PrimMediaControl:
     type: enum
@@ -3531,7 +3531,7 @@ constants:
     type: integer
     value: '0x1'
   PRIM_MATERIAL_FLESH:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 4
@@ -3544,7 +3544,7 @@ constants:
     type: integer
     value: '0x2'
   PRIM_MATERIAL_GLASS:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 2
@@ -3557,19 +3557,19 @@ constants:
     type: integer
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     deprecated:
       use: PRIM_FULLBRIGHT
     tooltip: ''
     type: integer
     value: 7
   PRIM_MATERIAL_METAL:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 1
   PRIM_MATERIAL_PLASTIC:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 5
@@ -3582,17 +3582,17 @@ constants:
     type: integer
     value: '0x4'
   PRIM_MATERIAL_RUBBER:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 6
   PRIM_MATERIAL_STONE:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 0
   PRIM_MATERIAL_WOOD:
-    member-of: [PrimMaterial]
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 3

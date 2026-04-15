@@ -829,6 +829,16 @@ enum PhysicsMaterialParam {
   RESTITUTION = 0x4
   GRAVITY_MULTIPLIER = 0x8
 };
+enum PhysicsMaterialPreset {
+  STONE = 0
+  METAL = 1
+  GLASS = 2
+  WOOD = 3
+  FLESH = 4
+  PLASTIC = 5
+  RUBBER = 6
+  LIGHT = 7 // deprecated
+};
 enum PhysicsShapeType {
   PRIM = 0
   NONE = 1
@@ -859,16 +869,6 @@ enum PrimBump {
   STUCCO = 15
   SUCTION = 16
   WEAVE = 17
-};
-enum PrimMaterial {
-  STONE = 0
-  METAL = 1
-  GLASS = 2
-  WOOD = 3
-  FLESH = 4
-  PLASTIC = 5
-  RUBBER = 6
-  LIGHT = 7 // deprecated
 };
 enum PrimMediaControl {
   STANDARD = 0
