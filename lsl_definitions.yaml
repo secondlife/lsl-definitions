@@ -296,6 +296,22 @@ enums:
     type: enum
     prefix: PARCEL_SALE_
     tooltip: ''
+  ParticleBlendFunc:
+    type: enum
+    prefix: PSYS_PART_BF_
+    tooltip: ''
+  ParticleFlag:
+    type: flag
+    prefix: PSYS_PART_
+    tooltip: ''
+  ParticleParam:
+    type: enum
+    prefix: PSYS_
+    tooltip: ''
+  ParticleSourcePattern:
+    type: flag
+    prefix: PSYS_SRC_PATTERN_
+    tooltip: ''
   PassMode:
     type: enum
     prefix: PASS_
@@ -353,22 +369,6 @@ enums:
   PrimParam:
     type: enum
     prefix: PRIM_
-    tooltip: ''
-  PrimParticleBlendFunc:
-    type: enum
-    prefix: PSYS_PART_BF_
-    tooltip: ''
-  PrimParticleFlag:
-    type: flag
-    prefix: PSYS_PART_
-    tooltip: ''
-  PrimParticleParam:
-    type: enum
-    prefix: PSYS_
-    tooltip: ''
-  PrimParticleSourcePattern:
-    type: flag
-    prefix: PSYS_SRC_PATTERN_
     tooltip: ''
   PrimPhysicsShapeType:
     type: enum
@@ -4042,279 +4042,279 @@ constants:
     type: integer
     value: 1
   PSYS_PART_BF_DEST_COLOR:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 2
   PSYS_PART_BF_ONE:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 0
   PSYS_PART_BF_ONE_MINUS_DEST_COLOR:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 4
   PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 9
   PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 5
   PSYS_PART_BF_SOURCE_ALPHA:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 7
   PSYS_PART_BF_SOURCE_COLOR:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 3
   PSYS_PART_BF_ZERO:
-    member-of: [PrimParticleBlendFunc]
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 1
   PSYS_PART_BLEND_FUNC_DEST:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 25
   PSYS_PART_BLEND_FUNC_SOURCE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 24
   PSYS_PART_BOUNCE_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: Particles bounce off of a plane at the objects Z height.
     type: integer
     value: '0x4'
   PSYS_PART_EMISSIVE_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: The particle glows.
     type: integer
     value: '0x100'
   PSYS_PART_END_ALPHA:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A float which determines the ending alpha of the object.
     type: integer
     value: 4
   PSYS_PART_END_COLOR:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A vector <r, g, b> which determines the ending color of the object.
     type: integer
     value: 3
   PSYS_PART_END_GLOW:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 27
   PSYS_PART_END_SCALE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A vector <sx, sy, z>, which is the ending size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 6
   PSYS_PART_FLAGS:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Each particle that is emitted by the particle system is simulated based
       on the following flags. To use multiple flags, bitwise or (|) them together.
     type: integer
     value: 0
   PSYS_PART_FOLLOW_SRC_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: The particle position is relative to the source objects position.
     type: integer
     value: '0x10'
   PSYS_PART_FOLLOW_VELOCITY_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: The particle orientation is rotated so the vertical axis faces towards
       the particle velocity.
     type: integer
     value: '0x20'
   PSYS_PART_INTERP_COLOR_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: Interpolate both the color and alpha from the start value to the end
       value.
     type: integer
     value: '0x1'
   PSYS_PART_INTERP_SCALE_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: Interpolate the particle scale from the start value to the end value.
     type: integer
     value: '0x2'
   PSYS_PART_MAX_AGE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Age in seconds of a particle at which it dies.
     type: integer
     value: 7
   PSYS_PART_RIBBON_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: ''
     type: integer
     value: '0x400'
   PSYS_PART_START_ALPHA:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A float which determines the starting alpha of the object.
     type: integer
     value: 2
   PSYS_PART_START_COLOR:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A vector <r, g, b> which determines the starting color of the object.
     type: integer
     value: 1
   PSYS_PART_START_GLOW:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 26
   PSYS_PART_START_SCALE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A vector <sx, sy, z>, which is the starting size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 5
   PSYS_PART_TARGET_LINEAR_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: ''
     type: integer
     value: '0x80'
   PSYS_PART_TARGET_POS_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: The particle heads towards the location of the target object as defined
       by PSYS_SRC_TARGET_KEY.
     type: integer
     value: '0x40'
   PSYS_PART_WIND_MASK:
-    member-of: [PrimParticleFlag]
+    member-of: [ParticleFlag]
     tooltip: Particles have their velocity damped towards the wind velocity.
     type: integer
     value: '0x8'
   PSYS_SRC_ACCEL:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: A vector <x, y, z> which is the acceleration to apply on particles.
     type: integer
     value: 8
   PSYS_SRC_ANGLE_BEGIN:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Area in radians specifying where particles will NOT be created (for ANGLE
       patterns)
     type: integer
     value: 22
   PSYS_SRC_ANGLE_END:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Area in radians filled with particles (for ANGLE patterns) (if lower
       than PSYS_SRC_ANGLE_BEGIN, acts as PSYS_SRC_ANGLE_BEGIN itself, and PSYS_SRC_ANGLE_BEGIN
       acts as PSYS_SRC_ANGLE_END).
     type: integer
     value: 23
   PSYS_SRC_BURST_PART_COUNT:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: How many particles to release in a burst.
     type: integer
     value: 15
   PSYS_SRC_BURST_RADIUS:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: What distance from the center of the object to create the particles.
     type: integer
     value: 16
   PSYS_SRC_BURST_RATE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: How often to release a particle burst (float seconds).
     type: integer
     value: 13
   PSYS_SRC_BURST_SPEED_MAX:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Maximum speed that a particle should be moving.
     type: integer
     value: 18
   PSYS_SRC_BURST_SPEED_MIN:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Minimum speed that a particle should be moving.
     type: integer
     value: 17
   PSYS_SRC_INNERANGLE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: "Specifies the inner angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area specified will\
       \ NOT have particles in it."
     type: integer
     value: 10
   PSYS_SRC_MAX_AGE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: How long this particle system should last, 0.0 means forever.
     type: integer
     value: 19
   # These were present in the lexer, but not in the syntax file, they're marked private for consistency.
   # TODO: check if the private is actually warranted, it's likely not.
   PSYS_SRC_OBJ_REL_MASK:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     private: true
     tooltip: ''
     type: integer
     value: '0x1'
   PSYS_SRC_OMEGA:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: Sets the angular velocity to rotate the axis that SRC_PATTERN_ANGLE and
       SRC_PATTERN_ANGLE_CONE use.
     type: integer
     value: 21
   PSYS_SRC_OUTERANGLE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: "Specifies the outer angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area between the\
       \ outer and inner angle will be filled with particles."
     type: integer
     value: 11
   PSYS_SRC_PATTERN:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: "The pattern which is used to generate particles.\n\t\t\tUse one of the\
       \ following values: PSYS_SRC_PATTERN Values."
     type: integer
     value: 9
   PSYS_SRC_PATTERN_ANGLE:
-    member-of: [PrimParticleSourcePattern]
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles across a 2 dimensional area defined by the arc created
       from PSYS_SRC_OUTERANGLE. There will be an open area defined by PSYS_SRC_INNERANGLE
       within the larger arc.
     type: integer
     value: '0x04'
   PSYS_SRC_PATTERN_ANGLE_CONE:
-    member-of: [PrimParticleSourcePattern]
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles out in a 3 dimensional cone with an outer arc of PSYS_SRC_OUTERANGLE
       and an inner open area defined by PSYS_SRC_INNERANGLE.
     type: integer
     value: '0x08'
   PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY:
-    member-of: [PrimParticleSourcePattern]
+    member-of: [ParticleSourcePattern]
     tooltip: ''
     type: integer
     value: '0x10'
   PSYS_SRC_PATTERN_DROP:
-    member-of: [PrimParticleSourcePattern]
+    member-of: [ParticleSourcePattern]
     tooltip: Drop particles at the source position.
     type: integer
     value: '0x01'
   PSYS_SRC_PATTERN_EXPLODE:
-    member-of: [PrimParticleSourcePattern]
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles out in all directions, using the burst parameters.
     type: integer
     value: '0x02'
   PSYS_SRC_TARGET_KEY:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: The key of a target object to move towards if PSYS_PART_TARGET_POS_MASK
       is enabled.
     type: integer
     value: 20
   PSYS_SRC_TEXTURE:
-    member-of: [PrimParticleParam]
+    member-of: [ParticleParam]
     tooltip: An asset name for the texture to use for the particles.
     type: integer
     value: 12
