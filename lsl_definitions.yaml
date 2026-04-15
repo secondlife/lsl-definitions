@@ -215,7 +215,11 @@ enums:
   Link:
     type: enum
     prefix: LINK_
-    tooltip: ''
+    tooltip: 'Operate on one link number at a time'
+  Links:
+    type: enum
+    prefix: LINK_
+    tooltip: 'Operate on one or more link numbers at a time'
   LinksetDataAction:
     type: enum
     prefix: LINKSETDATA_
@@ -2248,28 +2252,28 @@ constants:
     type: integer
     value: 1
   LINK_ALL_CHILDREN:
-    member-of: [Link]
+    member-of: [Links]
     tooltip: This targets every object except the root in the linked set.
     type: integer
     value: -3
   LINK_ALL_OTHERS:
-    member-of: [Link]
+    member-of: [Links]
     tooltip: This targets every object in the linked set except the object with the
       script.
     type: integer
     value: -2
   LINK_ROOT:
-    member-of: [Link]
+    member-of: [Link, Links]
     tooltip: This targets the root of the linked set.
     type: integer
     value: 1
   LINK_SET:
-    member-of: [Link]
+    member-of: [Links]
     tooltip: This targets every object in the linked set.
     type: integer
     value: -1
   LINK_THIS:
-    member-of: [Link]
+    member-of: [Link, Links]
     tooltip: The link number of the prim containing the script.
     type: integer
     value: -4

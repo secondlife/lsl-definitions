@@ -503,6 +503,10 @@ enum KeyframedMotionParam {
 };
 enum Link {
   THIS = -4
+  ROOT = 1
+};
+enum Links {
+  THIS = -4
   ALL_CHILDREN = -3
   ALL_OTHERS = -2
   SET = -1
