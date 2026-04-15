@@ -978,11 +978,6 @@ enum PrimParam {
   HEALTH = 52
   COLLISION_SOUND = 53
 };
-enum PrimReflectionProbeType {
-  BOX = 0x1
-  DYNAMIC = 0x2
-  MIRROR = 0x4
-};
 enum PrimShiny {
   NONE = 0
   LOW = 1
@@ -1043,6 +1038,11 @@ enum RayCastRejectType {
   PHYSICAL = 0x2
   NONPHYSICAL = 0x4
   LAND = 0x8
+};
+enum ReflectionProbeType {
+  BOX = 0x1
+  DYNAMIC = 0x2
+  MIRROR = 0x4
 };
 enum RegionFlag {
   ALLOW_DAMAGE = 0x1

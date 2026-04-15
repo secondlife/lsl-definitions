@@ -385,10 +385,6 @@ enums:
     type: enum
     prefix: PRIM_
     tooltip: ''
-  PrimReflectionProbeType:
-    type: flag
-    prefix: PRIM_REFLECTION_PROBE_
-    tooltip: ''
   PrimShiny:
     type: enum
     prefix: PRIM_SHINY_
@@ -428,6 +424,10 @@ enums:
   RayCastRejectType:
     type: flag
     prefix: RC_REJECT_
+    tooltip: ''
+  ReflectionProbeType:
+    type: flag
+    prefix: PRIM_REFLECTION_PROBE_
     tooltip: ''
   RegionFlag:
     type: flag
@@ -3834,21 +3834,21 @@ constants:
     type: integer
     value: 44
   PRIM_REFLECTION_PROBE_BOX:
-    member-of: [PrimReflectionProbeType]
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       is a box. When unset, the reflection probe is a sphere.
     type: integer
     value: 1
   PRIM_REFLECTION_PROBE_DYNAMIC:
-    member-of: [PrimReflectionProbeType]
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       includes avatars in IBL effects. When unset, the reflection probe excludes avatars.
     type: integer
     value: 2
   PRIM_REFLECTION_PROBE_MIRROR:
-    member-of: [PrimReflectionProbeType]
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       acts as a mirror.
