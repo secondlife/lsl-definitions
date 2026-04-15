@@ -125,6 +125,10 @@ enums:
     type: enum
     prefix: DAMAGE_TYPE_
     tooltip: ''
+  DetectType:
+    type: flag
+    special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
+    tooltip: ''
   EmailTarget:
     type: enum
     prefix: TARGETED_EMAIL_
@@ -450,10 +454,6 @@ enums:
     type: enum
     prefix: PROFILE_
     tooltip: ''
-  SensorType:
-    type: flag
-    special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
-    tooltip: ''
   SimulatorData:
     type: enum
     prefix: DATA_SIM_
@@ -497,12 +497,12 @@ enums:
 
 constants:
   ACTIVE:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: Objects in world that are running a script or currently physically moving.
     type: integer
     value: '0x2'
   AGENT:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: Objects in world that are agents.
     type: integer
     value: '0x1'
@@ -537,12 +537,12 @@ constants:
     type: integer
     value: '0x800'
   AGENT_BY_LEGACY_NAME:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: ''
     type: integer
     value: '0x1'
   AGENT_BY_USERNAME:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: ''
     type: integer
     value: '0x10'
@@ -1356,7 +1356,7 @@ constants:
     type: integer
     value: '0x10'
   DAMAGEABLE:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: Objects in world that are able to process damage.
     type: integer
     value: '0x20'
@@ -3068,7 +3068,7 @@ constants:
     type: integer
     value: 5
   PASSIVE:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: Static in-world objects.
     type: integer
     value: '0x4'
@@ -4704,7 +4704,7 @@ constants:
     type: integer
     value: '0x40'
   SCRIPTED:
-    member-of: [SensorType]
+    member-of: [DetectType]
     tooltip: Scripted in-world objects.
     type: integer
     value: '0x8'

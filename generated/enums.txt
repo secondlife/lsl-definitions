@@ -256,6 +256,15 @@ enum DamageType {
   SONIC = 13
   EMOTIONAL = 14
 };
+enum DetectType {
+  AGENT = 0x1
+  AGENT_BY_LEGACY_NAME = 0x1
+  ACTIVE = 0x2
+  PASSIVE = 0x4
+  SCRIPTED = 0x8
+  AGENT_BY_USERNAME = 0x10
+  DAMAGEABLE = 0x20
+};
 enum EmailTarget {
   ROOT_CREATOR = 1
   OBJECT_OWNER = 2
@@ -1103,15 +1112,6 @@ enum ScriptPermission {
 enum ScriptProfileMode {
   NONE = 0
   SCRIPT_MEMORY = 1
-};
-enum SensorType {
-  AGENT = 0x1
-  AGENT_BY_LEGACY_NAME = 0x1
-  ACTIVE = 0x2
-  PASSIVE = 0x4
-  SCRIPTED = 0x8
-  AGENT_BY_USERNAME = 0x10
-  DAMAGEABLE = 0x20
 };
 enum SimulatorData {
   POS = 5
