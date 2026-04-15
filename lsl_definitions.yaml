@@ -382,14 +382,6 @@ enums:
     type: enum
     prefix: PRIM_SHINY_
     tooltip: ''
-  PrimSitError:
-    type: enum
-    prefix: SIT_
-    tooltip: ''
-  PrimSitFlag:
-    type: flag
-    prefix: SIT_FLAG_
-    tooltip: ''
   PrimTexgen:
     type: enum
     prefix: PRIM_TEXGEN_
@@ -458,6 +450,14 @@ enums:
   SimulatorStat:
     type: enum
     prefix: SIM_STAT_
+    tooltip: ''
+  SitError:
+    type: enum
+    prefix: SIT_
+    tooltip: ''
+  SitFlag:
+    type: flag
+    prefix: SIT_FLAG_
     tooltip: ''
   StringTrimType:
     type: enum
@@ -4846,64 +4846,64 @@ constants:
     type: integer
     value: 17
   SIT_FLAG_ALLOW_UNSIT:
-    member-of: [PrimSitFlag]
+    member-of: [SitFlag]
     tooltip: The prim allows a seated avatar to stand up.
     type: integer
     value: '0x0002'
   SIT_FLAG_NO_COLLIDE:
-    member-of: [PrimSitFlag]
+    member-of: [SitFlag]
     tooltip: The seated avatar's hit box is disabled when seated on this prim.
     type: integer
     value: '0x0010'
   SIT_FLAG_NO_DAMAGE:
-    member-of: [PrimSitFlag]
+    member-of: [SitFlag]
     tooltip: Damage will not be forwarded to an avatar seated on this prim.
     type: integer
     value: '0x0020'
   SIT_FLAG_SCRIPTED_ONLY:
-    member-of: [PrimSitFlag]
+    member-of: [SitFlag]
     tooltip: An avatar may not manually sit on this prim.
     type: integer
     value: '0x0004'
   SIT_FLAG_SIT_TARGET:
-    member-of: [PrimSitFlag]
+    member-of: [SitFlag]
     tooltip: The prim has an explicitly set sit target.
     type: integer
     value: '0x0001'
   SIT_INVALID_AGENT:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Avatar ID did not specify a valid avatar.
     type: integer
     value: -4
   SIT_INVALID_LINK:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Link ID did not specify a valid prim in the linkset or resolved to multiple
       prims.
     type: integer
     value: -5
   SIT_INVALID_OBJECT:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Attempt to force an avatar to sit on an attachment or other invalid target.
     type: integer
     value: -7
   SIT_NOT_EXPERIENCE:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Attempt to force an avatar to sit outside an experience.
     type: integer
     value: -1
   SIT_NO_ACCESS:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Avatar does not have access to the parcel containing the target linkset
       of the forced sit.
     type: integer
     value: -6
   SIT_NO_EXPERIENCE_PERMISSION:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: Avatar has not granted permission to force sits.
     type: integer
     value: -2
   SIT_NO_SIT_TARGET:
-    member-of: [PrimSitError]
+    member-of: [SitError]
     tooltip: No available sit target in linkset for forced sit.
     type: integer
     value: -3

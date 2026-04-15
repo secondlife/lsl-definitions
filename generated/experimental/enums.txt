@@ -982,22 +982,6 @@ enum PrimShiny {
   MEDIUM = 2
   HIGH = 3
 };
-enum PrimSitError {
-  INVALID_OBJECT = -7
-  NO_ACCESS = -6
-  INVALID_LINK = -5
-  INVALID_AGENT = -4
-  NO_SIT_TARGET = -3
-  NO_EXPERIENCE_PERMISSION = -2
-  NOT_EXPERIENCE = -1
-};
-enum PrimSitFlag {
-  SIT_TARGET = 0x1
-  ALLOW_UNSIT = 0x2
-  SCRIPTED_ONLY = 0x4
-  NO_COLLIDE = 0x10
-  NO_DAMAGE = 0x20
-};
 enum PrimTexgen {
   DEFAULT = 0
   PLANAR = 1
@@ -1137,6 +1121,22 @@ enum SimulatorStat {
   IO_PUMP_MS = 24
   SCRIPT_RUN_PCT = 25
   AI_MS = 26
+};
+enum SitError {
+  INVALID_OBJECT = -7
+  NO_ACCESS = -6
+  INVALID_LINK = -5
+  INVALID_AGENT = -4
+  NO_SIT_TARGET = -3
+  NO_EXPERIENCE_PERMISSION = -2
+  NOT_EXPERIENCE = -1
+};
+enum SitFlag {
+  SIT_TARGET = 0x1
+  ALLOW_UNSIT = 0x2
+  SCRIPTED_ONLY = 0x4
+  NO_COLLIDE = 0x10
+  NO_DAMAGE = 0x20
 };
 enum StringTrimType {
   HEAD = 1
