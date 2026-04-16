@@ -668,7 +668,7 @@ enum ObjectStatusParam {
   BLOCK_GRAB = 0x40
   DIE_AT_EDGE = 0x80
   RETURN_AT_EDGE = 0x100
-  CAST_SHADOWS = 0x200 // deprecated
+  CAST_SHADOWS = 0x200
   BLOCK_GRAB_OBJECT = 0x400
   DIE_AT_NO_ENTRY = 0x800
 };
