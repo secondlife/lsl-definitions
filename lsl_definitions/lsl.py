@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import ast
 import dataclasses
-import enum
 import re
+from enum import IntEnum
 from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
 
 import llsd
@@ -134,7 +135,8 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 }
 
 
-class LSLConstant(NamedTuple):
+@dataclasses.dataclass
+class LSLConstant:
     name: str
     type: LSLType
     slua_type: Optional[str]
@@ -149,14 +151,13 @@ class LSLConstant(NamedTuple):
     slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
+    member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
 
     @property
     def value_raw(self) -> str:
         """A LSL literal, except strings are stripped of start/end quotes (")
         All string escape sequences have been decoded into plain unicode code points
         """
-        import ast
-
         if self.type != LSLType.STRING:
             return self.value
         # convert unicode escapes from Luau format to Python format
@@ -215,6 +216,33 @@ class LSLConstant(NamedTuple):
             )
         except Exception as e:
             raise ValueError(f"In constant {self.name}: {e}") from e
+
+
+class LSLEnumType(StringEnum):
+    ENUM = "enum"
+    FLAG = "flag"
+
+
+@dataclasses.dataclass
+class LSLEnumMember:
+    name: str
+    value: int
+    constant: LSLConstant
+
+
+@dataclasses.dataclass
+class LSLEnum:
+    name: str
+    type: LSLEnumType
+    prefix: str
+    tooltip: str
+    deprecated: Deprecated | None
+    slua_deprecated: Deprecated | None
+    _special_members: set[str]
+    "Unusual members that break a validation rule"
+    members: list[LSLEnumMember] = dataclasses.field(default_factory=list)
+    by_name: dict[str, LSLEnumMember] = dataclasses.field(default_factory=dict)
+    by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
 
 
 @dataclasses.dataclass
@@ -456,6 +484,7 @@ class LSLFunction:
 class LSLDefinitions(NamedTuple):
     events: Dict[str, LSLEvent]
     functions: Dict[str, LSLFunction]
+    enums: Dict[str, LSLEnum]
     constants: Dict[str, LSLConstant]
     controls: dict
     types: dict
@@ -471,7 +500,7 @@ class LSLDefinitions(NamedTuple):
         )
 
 
-class LSLFunctionRanges(enum.IntEnum):
+class LSLFunctionRanges(IntEnum):
     SCRIPT_ID_ANIMATION_STATES = 500
     SCRIPT_ID_JSON = 510
     SCRIPT_ID_MAINT = 520
@@ -486,7 +515,7 @@ class LSLFunctionRanges(enum.IntEnum):
 
 class LSLDefinitionParser:
     def __init__(self):
-        self._definitions = LSLDefinitions({}, {}, {}, {}, {}, {})
+        self._definitions = LSLDefinitions({}, {}, {}, {}, {}, {}, {})
 
     def parse_file(self, name: str) -> LSLDefinitions:
         if name.endswith(".llsd"):
@@ -513,6 +542,8 @@ class LSLDefinitionParser:
         self._definitions.types.update(def_dict["types"])
 
         seen_func_ids = set()
+        for enum_name, enum_data in def_dict["enums"].items():
+            self._handle_enum(enum_name, enum_data)
         for event_name, event_data in def_dict["events"].items():
             self._handle_event(event_name, event_data)
         for func_name, func_data in def_dict["functions"].items():
@@ -525,6 +556,9 @@ class LSLDefinitionParser:
                 # This isn't a real constant, but it's in here for some reason, maybe syntax highlighting?
                 continue
             self._handle_constant(const_name, const_data)
+        for enum in self._definitions.enums.values():
+            for unused in enum._special_members:
+                raise ValueError(f"Enum {enum.name!r} has unused special member {unused!r}")
 
         rulesets = def_dict.get("rulesets", {})
         prim_params = rulesets.get("prim_params")
@@ -536,6 +570,23 @@ class LSLDefinitionParser:
         self._definitions.rulesets.update(rulesets)
 
         return self._definitions
+
+    def _handle_enum(self, enum_name: str, enum_data: dict) -> LSLEnum:
+        self._validate_identifier(enum_name)
+        enum = LSLEnum(
+            name=enum_name,
+            type=LSLEnumType(enum_data["type"]),
+            prefix=enum_data.get("prefix", ""),
+            tooltip=enum_data.get("tooltip", ""),
+            deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
+            slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
+            _special_members=set(enum_data.get("special-members", [])),
+        )
+
+        if enum.name in self._definitions.enums:
+            raise KeyError(f"{enum.name} is already defined")
+        self._definitions.enums[enum.name] = enum
+        return enum
 
     def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
         self._validate_identifier(event_name)
@@ -688,20 +739,69 @@ class LSLDefinitionParser:
                 seen.add(tag)
 
     def _handle_constant(self, const_name: str, const_data: dict) -> LSLConstant:
-        const = LSLConstant(
-            name=const_name,
-            type=LSLType(const_data["type"]),
-            slua_type=const_data.get("slua-type", None),
-            slua_removed=const_data.get("slua-removed", False),
-            value=str(const_data["value"]),
-            tooltip=const_data.get("tooltip", ""),
-            private=const_data.get("private", False),
-            deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(const_data.get("slua-deprecated", False)),
+        try:
+            const = LSLConstant(
+                name=const_name,
+                type=LSLType(const_data["type"]),
+                slua_type=const_data.get("slua-type", None),
+                slua_removed=const_data.get("slua-removed", False),
+                value=str(const_data["value"]),
+                tooltip=const_data.get("tooltip", ""),
+                private=const_data.get("private", False),
+                deprecated=Deprecated.from_definition(const_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(
+                    const_data.get("slua-deprecated", False)
+                ),
+            )
+            if const.type not in {"float", "integer", "string", "vector", "rotation"}:
+                raise ValueError(f"Invalid constant type {const.type}")
+            if const.name in self._definitions.constants:
+                raise KeyError(f"{const.name} is already defined")
+            self._definitions.constants[const.name] = const
+            for enum_name in const_data.get("member-of", []):
+                self._add_enum_member(enum_name, const)
+            return const
+        except Exception as e:
+            raise ValueError(f"In constant {const_name!r}: {e}") from e
+
+    def _add_enum_member(self, enum_name: str, const: LSLConstant) -> LSLEnumMember:
+        if const.type != LSLType.INTEGER:
+            raise ValueError("Only integer constants can be enum members")
+        enum: LSLEnum = self._definitions.enums.get(enum_name, None)
+        if enum is None:
+            raise ValueError(f"Unknown enum {enum_name!r}")
+        const.member_of.append(enum)
+        member = LSLEnumMember(
+            name=const.name.removeprefix(enum.prefix),
+            value=ast.literal_eval(const.value),
+            constant=const,
         )
-        if const.type not in {"float", "integer", "string", "vector", "rotation"}:
-            raise ValueError(f"Invalid constant type {const.type}")
-        if const.name in self._definitions.constants:
-            raise KeyError(f"{const.name} is already defined")
-        self._definitions.constants[const.name] = const
-        return const
+        if type(member.value) is not int:
+            raise ValueError(f"{const.value!r} is not an integer")
+        if member.name in enum.by_name:
+            raise KeyError(f"{member.name!r} is already a member of {enum.name!r}")
+        if enum.type == LSLEnumType.FLAG:
+            is_power_of_two = member.value > 0 and (member.value & (member.value - 1)) == 0
+            if not is_power_of_two:
+                if member.constant.name in enum._special_members:
+                    enum._special_members.remove(member.constant.name)
+                else:
+                    raise ValueError(f"Flag value {member.value:x} is not a power of two")
+        if const.private:
+            return member
+        if member.value in enum.by_value:
+            dup = enum.by_value[member.value]
+            if const.deprecated:
+                pass
+            elif dup.constant.deprecated:
+                pass
+            elif member.constant.name in enum._special_members:
+                enum._special_members.remove(member.constant.name)
+            else:
+                raise KeyError(
+                    f"Value {member.value} duplicates {enum.name}.{enum.by_value[member.value].name!r}"
+                )
+        enum.members.append(member)
+        enum.by_name[member.name] = member
+        enum.by_value[member.value] = member
+        return member

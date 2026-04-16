@@ -35,6 +35,7 @@ source_environment_tempfile="$stage/source_environment.sh"
 # Don't care about these, actually
 rm -rf "$stage/lsl_definitions/templated"
 rm -rf "$stage/lsl_definitions/cpp"
+rm -rf "$stage/lsl_definitions/experimental"
 # These only exist to keep the `git diff` sane
 rm "$stage/lsl_definitions/lua_keywords_pretty.xml"
 rm "$stage/lsl_definitions/lsl_keywords_pretty.xml"

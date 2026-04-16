@@ -1,0 +1,1283 @@
+// Dump of the enums just for testing. Feel free to remove this rule
+enum AgentData {
+  ONLINE = 1
+  NAME = 2
+  BORN = 3
+  RATING = 4
+  PAYINFO = 8
+  RESERVED_0 = 9
+};
+enum AgentDataPaymentInfo {
+  ON_FILE = 0x1
+  USED = 0x2
+};
+enum AgentInfo {
+  FLYING = 0x1
+  ATTACHMENTS = 0x2
+  SCRIPTED = 0x4
+  MOUSELOOK = 0x8
+  SITTING = 0x10
+  ON_OBJECT = 0x20
+  AWAY = 0x40
+  WALKING = 0x80
+  IN_AIR = 0x100
+  TYPING = 0x200
+  CROUCHING = 0x400
+  BUSY = 0x800
+  ALWAYS_RUN = 0x1000
+  AUTOPILOT = 0x2000
+  AUTOMATED = 0x4000
+  FLOATING_VIA_SCRIPTED_ATTACHMENT = 0x8000
+};
+enum AgentListScope {
+  PARCEL = 0x1
+  PARCEL_OWNER = 0x2
+  REGION = 0x4
+};
+enum AlphaMode {
+  NONE = 0
+  BLEND = 1
+  MASK = 2
+  EMISSIVE = 3
+};
+enum AssetPermission {
+  TRANSFER = 0x2000
+  MODIFY = 0x4000
+  COPY = 0x8000
+  MOVE = 0x80000
+  ALL = 0x7fffffff
+};
+enum AssetPermissionCategory {
+  BASE = 0
+  OWNER = 1
+  GROUP = 2
+  EVERYONE = 3
+  NEXT = 4
+};
+enum AssetPermissionCategoryFlag {
+  COMBINED = 0x10
+};
+enum AttachPoint {
+  ANY_HUD = -1
+  CHEST = 1
+  HEAD = 2
+  LSHOULDER = 3
+  RSHOULDER = 4
+  LHAND = 5
+  RHAND = 6
+  LFOOT = 7
+  RFOOT = 8
+  BACK = 9
+  PELVIS = 10
+  MOUTH = 11
+  CHIN = 12
+  LEAR = 13
+  REAR = 14
+  LEYE = 15
+  REYE = 16
+  NOSE = 17
+  RUARM = 18
+  RLARM = 19
+  LUARM = 20
+  LLARM = 21
+  RHIP = 22
+  RULEG = 23
+  RLLEG = 24
+  LHIP = 25
+  LULEG = 26
+  LLLEG = 27
+  BELLY = 28
+  LEFT_PEC = 29
+  RPEC = 29 // deprecated
+  LPEC = 30 // deprecated
+  RIGHT_PEC = 30
+  HUD_CENTER_2 = 31
+  HUD_TOP_RIGHT = 32
+  HUD_TOP_CENTER = 33
+  HUD_TOP_LEFT = 34
+  HUD_CENTER_1 = 35
+  HUD_BOTTOM_LEFT = 36
+  HUD_BOTTOM = 37
+  HUD_BOTTOM_RIGHT = 38
+  NECK = 39
+  AVATAR_CENTER = 40
+  LHAND_RING1 = 41
+  RHAND_RING1 = 42
+  TAIL_BASE = 43
+  TAIL_TIP = 44
+  LWING = 45
+  RWING = 46
+  FACE_JAW = 47
+  FACE_LEAR = 48
+  FACE_REAR = 49
+  FACE_LEYE = 50
+  FACE_REYE = 51
+  FACE_TONGUE = 52
+  GROIN = 53
+  HIND_LFOOT = 54
+  HIND_RFOOT = 55
+};
+enum AttachedListFilterFlag {
+  HUDS = 0x1
+};
+enum AttachedListFilterParam {
+  INCLUDE = 1
+  FLAGS = 2
+};
+enum CameraParam {
+  PITCH = 0
+  FOCUS_OFFSET = 1
+  POSITION_LAG = 5
+  FOCUS_LAG = 6
+  DISTANCE = 7
+  BEHINDNESS_ANGLE = 8
+  BEHINDNESS_LAG = 9
+  POSITION_THRESHOLD = 10
+  FOCUS_THRESHOLD = 11
+  ACTIVE = 12
+  POSITION = 13
+  FOCUS = 17
+  POSITION_LOCKED = 21
+  FOCUS_LOCKED = 22
+};
+enum ChangeType {
+  INVENTORY = 0x1
+  COLOR = 0x2
+  SHAPE = 0x4
+  SCALE = 0x8
+  TEXTURE = 0x10
+  LINK = 0x20
+  ALLOWED_DROP = 0x40
+  OWNER = 0x80
+  REGION = 0x100
+  TELEPORT = 0x200
+  REGION_START = 0x400
+  MEDIA = 0x800
+  RENDER_MATERIAL = 0x1000
+};
+enum CharacterAvoidanceMode {
+  NONE = 0
+  CHARACTERS = 1
+  DYNAMIC_OBSTACLES = 2
+};
+enum CharacterCommand {
+  STOP = 0
+  JUMP = 1
+  SMOOTH_STOP = 2
+};
+enum CharacterEvadeParam {
+};
+enum CharacterFleeFromParam {
+};
+enum CharacterNavigateParam {
+  FORCE_DIRECT_PATH = 1
+};
+enum CharacterOrientation {
+  VERTICAL = 0
+  HORIZONTAL = 1
+};
+enum CharacterParam {
+  DESIRED_SPEED = 1
+  RADIUS = 2
+  LENGTH = 3
+  ORIENTATION = 4
+  AVOIDANCE_MODE = 5
+  TYPE = 6
+  TRAVERSAL_TYPE = 7
+  MAX_ACCEL = 8
+  MAX_DECEL = 9
+  MAX_TURN_RADIUS = 10
+  DESIRED_TURN_SPEED = 12
+  MAX_SPEED = 13
+  ACCOUNT_FOR_SKIPPED_FRAMES = 14
+  STAY_WITHIN_PARCEL = 15
+};
+enum CharacterPathUpdateType {
+  SLOWDOWN_DISTANCE_REACHED = 0
+  GOAL_REACHED = 1
+  FAILURE_INVALID_START = 2
+  FAILURE_INVALID_GOAL = 3
+  FAILURE_UNREACHABLE = 4
+  FAILURE_TARGET_GONE = 5
+  FAILURE_NO_VALID_DESTINATION = 6
+  EVADE_HIDDEN = 7
+  EVADE_SPOTTED = 8
+  FAILURE_NO_NAVMESH = 9
+  FAILURE_DYNAMIC_PATHFINDING_DISABLED = 10
+  FAILURE_PARCEL_UNREACHABLE = 11
+  FAILURE_OTHER = 1000000
+};
+enum CharacterPatrolPointsParam {
+  PAUSE_AT_WAYPOINTS = 0
+};
+enum CharacterPursueParam {
+  OFFSET = 1
+  REQUIRE_LINE_OF_SIGHT = 2
+  FUZZ_FACTOR = 3
+  INTERCEPT = 4
+  GOAL_TOLERANCE = 5
+};
+enum CharacterTraversalType {
+  SLOW = 0
+  FAST = 1
+  NONE = 2
+};
+enum CharacterType {
+  A = 0
+  B = 1
+  C = 2
+  D = 3
+  NONE = 4
+};
+enum CharacterWanderWithinParam {
+  WANDER_PAUSE_AT_WAYPOINTS = 0
+};
+enum ClickAction {
+  NONE = 0
+  TOUCH = 0
+  SIT = 1
+  BUY = 2
+  PAY = 3
+  OPEN = 4
+  PLAY = 5
+  OPEN_MEDIA = 6
+  ZOOM = 7
+  DISABLED = 8
+  IGNORE = 9
+};
+enum ControlButton {
+  FWD = 0x1
+  BACK = 0x2
+  LEFT = 0x4
+  RIGHT = 0x8
+  UP = 0x10
+  DOWN = 0x20
+  ROT_LEFT = 0x100
+  ROT_RIGHT = 0x200
+  LBUTTON = 0x10000000
+  ML_LBUTTON = 0x40000000
+};
+enum DamageType {
+  IMPACT = -1
+  GENERIC = 0
+  ACID = 1
+  BLUDGEONING = 2
+  COLD = 3
+  ELECTRIC = 4
+  FIRE = 5
+  FORCE = 6
+  NECROTIC = 7
+  PIERCING = 8
+  POISON = 9
+  PSYCHIC = 10
+  RADIANT = 11
+  SLASHING = 12
+  SONIC = 13
+  EMOTIONAL = 14
+};
+enum DerezMode {
+  DIE = 0
+  MAKE_TEMP = 1
+  TO_INVENTORY = 2
+};
+enum DetectType {
+  AGENT = 0x1
+  AGENT_BY_LEGACY_NAME = 0x1
+  ACTIVE = 0x2
+  PASSIVE = 0x4
+  SCRIPTED = 0x8
+  AGENT_BY_USERNAME = 0x10
+  DAMAGEABLE = 0x20
+};
+enum EmailTarget {
+  ROOT_CREATOR = 1
+  OBJECT_OWNER = 2
+};
+enum EnvironmentError {
+  NO_PERMISSIONS = -9
+  THROTTLE = -8
+  NO_EXPERIENCE_LAND = -7
+  VALIDATION_FAIL = -6
+  INVALID_RULE = -5
+  INVALID_AGENT = -4
+  NO_ENVIRONMENT = -3
+  NO_EXPERIENCE_PERMISSION = -2
+  NOT_EXPERIENCE = -1
+};
+enum EnvironmentParam {
+  SKY_AMBIENT = 0
+  SKY_CLOUDS = 2
+  SKY_DOME = 4
+  SKY_GAMMA = 5
+  SKY_GLOW = 6
+  SKY_MOON = 9
+  SKY_PLANET = 10
+  SKY_REFRACTION = 11
+  SKY_STAR_BRIGHTNESS = 13
+  SKY_SUN = 14
+  SKY_CLOUD_TEXTURE = 19
+  SKY_MOON_TEXTURE = 20
+  SKY_SUN_TEXTURE = 21
+  SKY_BLUE = 22
+  SKY_HAZE = 23
+  SKY_REFLECTION_PROBE_AMBIANCE = 24
+  WATER_BLUR_MULTIPLIER = 100
+  WATER_FOG = 101
+  WATER_FRESNEL = 102
+  WATER_NORMAL_SCALE = 104
+  WATER_REFRACTION = 105
+  WATER_WAVE_DIRECTION = 106
+  WATER_NORMAL_TEXTURE = 107
+};
+enum EnvironmentParamReadOnly {
+  SKY_AMBIENT = 0
+  SKY_TEXTURE_DEFAULTS = 1
+  SKY_CLOUDS = 2
+  SKY_DOME = 4
+  SKY_GAMMA = 5
+  SKY_GLOW = 6
+  SKY_LIGHT = 8
+  SKY_MOON = 9
+  SKY_PLANET = 10
+  SKY_REFRACTION = 11
+  SKY_STAR_BRIGHTNESS = 13
+  SKY_SUN = 14
+  SKY_TRACKS = 15
+  SKY_CLOUD_TEXTURE = 19
+  SKY_MOON_TEXTURE = 20
+  SKY_SUN_TEXTURE = 21
+  SKY_BLUE = 22
+  SKY_HAZE = 23
+  SKY_REFLECTION_PROBE_AMBIANCE = 24
+  WATER_BLUR_MULTIPLIER = 100
+  WATER_FOG = 101
+  WATER_FRESNEL = 102
+  WATER_TEXTURE_DEFAULTS = 103
+  WATER_NORMAL_SCALE = 104
+  WATER_REFRACTION = 105
+  WATER_WAVE_DIRECTION = 106
+  WATER_NORMAL_TEXTURE = 107
+  ENVIRONMENT_DAYINFO = 200
+};
+enum EstateAccessParam {
+  ALLOWED_AGENT_ADD = 4
+  ALLOWED_AGENT_REMOVE = 8
+  ALLOWED_GROUP_ADD = 16
+  ALLOWED_GROUP_REMOVE = 32
+  BANNED_AGENT_ADD = 64
+  BANNED_AGENT_REMOVE = 128
+};
+enum ExperienceError {
+  NONE = 0
+  THROTTLED = 1
+  EXPERIENCES_DISABLED = 2
+  INVALID_PARAMETERS = 3
+  NOT_PERMITTED = 4
+  NO_EXPERIENCE = 5
+  NOT_FOUND = 6
+  INVALID_EXPERIENCE = 7
+  EXPERIENCE_DISABLED = 8
+  EXPERIENCE_SUSPENDED = 9
+  UNKNOWN_ERROR = 10
+  QUOTA_EXCEEDED = 11
+  STORE_DISABLED = 12
+  STORAGE_EXCEPTION = 13
+  KEY_NOT_FOUND = 14
+  RETRY_UPDATE = 15
+  MATURITY_EXCEEDED = 16
+  NOT_PERMITTED_LAND = 17
+  REQUEST_PERM_TIMEOUT = 18
+};
+enum Faces {
+  ALL_SIDES = -1
+};
+enum GLTFAlphaMode {
+  OPAQUE = 0
+  BLEND = 1
+  MASK = 2
+};
+enum GLTFOverride {
+  BASE_COLOR_FACTOR = 1
+  BASE_ALPHA = 2
+  BASE_ALPHA_MODE = 3
+  BASE_ALPHA_MASK = 4
+  BASE_DOUBLE_SIDED = 5
+  METALLIC_FACTOR = 6
+  ROUGHNESS_FACTOR = 7
+  EMISSIVE_FACTOR = 8
+};
+enum GameControlAxis {
+  LEFTX = 0
+  LEFTY = 1
+  RIGHTX = 2
+  RIGHTY = 3
+  TRIGGERLEFT = 4
+  TRIGGERRIGHT = 5
+};
+enum GameControlButton {
+  A = 0x1
+  B = 0x2
+  X = 0x4
+  Y = 0x8
+  BACK = 0x10
+  GUIDE = 0x20
+  START = 0x40
+  LEFTSTICK = 0x80
+  RIGHTSTICK = 0x100
+  LEFTSHOULDER = 0x200
+  RIGHTSHOULDER = 0x400
+  DPAD_UP = 0x800
+  DPAD_DOWN = 0x1000
+  DPAD_LEFT = 0x2000
+  DPAD_RIGHT = 0x4000
+  MISC1 = 0x8000
+  PADDLE1 = 0x10000
+  PADDLE2 = 0x20000
+  PADDLE3 = 0x40000
+  PADDLE4 = 0x80000
+  TOUCHPAD = 0x100000
+};
+enum GetClosestNavPointParam {
+  RADIUS = 0
+  STATIC = 1
+  CHARACTER_TYPE = 6
+};
+enum GiveAgentInventoryParam {
+  DEST = 0
+  FLAGS = 1
+};
+enum GroundTextureParam {
+  DETAIL_1 = 0
+  DETAIL_2 = 1
+  DETAIL_3 = 2
+  DETAIL_4 = 3
+  HEIGHT_RANGE_SW = 4
+  HEIGHT_RANGE_SE = 5
+  HEIGHT_RANGE_NW = 6
+  HEIGHT_RANGE_NE = 7
+  PBR_SCALE_1 = 8
+  PBR_SCALE_2 = 9
+  PBR_SCALE_3 = 10
+  PBR_SCALE_4 = 11
+  PBR_ROTATION_1 = 12
+  PBR_ROTATION_2 = 13
+  PBR_ROTATION_3 = 14
+  PBR_ROTATION_4 = 15
+  PBR_OFFSET_1 = 16
+  PBR_OFFSET_2 = 17
+  PBR_OFFSET_3 = 18
+  PBR_OFFSET_4 = 19
+};
+enum HTTPContentType {
+  TEXT = 0
+  HTML = 1
+  XML = 2
+  XHTML = 3
+  ATOM = 4
+  JSON = 5
+  LLSD = 6
+  FORM = 7
+  RSS = 8
+};
+enum HTTPRequestParam {
+  METHOD = 0
+  MIMETYPE = 1
+  BODY_MAXLENGTH = 2
+  VERIFY_CERT = 3
+  VERBOSE_THROTTLE = 4
+  CUSTOM_HEADER = 5
+  PRAGMA_NO_CACHE = 6
+  USER_AGENT = 7
+  ACCEPT = 8
+  EXTENDED_ERROR = 9
+};
+enum HTTPResponseError {
+  BODY_TRUNCATED = 0
+};
+enum InventoryType {
+  ALL = -1
+  NONE = -1
+  TEXTURE = 0
+  SOUND = 1
+  LANDMARK = 3
+  CLOTHING = 5
+  OBJECT = 6
+  NOTECARD = 7
+  SCRIPT = 10
+  BODYPART = 13
+  ANIMATION = 20
+  GESTURE = 21
+  SETTING = 56
+  MATERIAL = 57
+};
+enum KeyframedMotionCommand {
+  PLAY = 0
+  STOP = 1
+  PAUSE = 2
+};
+enum KeyframedMotionData {
+  ROTATION = 0x1
+  TRANSLATION = 0x2
+};
+enum KeyframedMotionMode {
+  FORWARD = 0
+  LOOP = 1
+  PING_PONG = 2
+  REVERSE = 3
+};
+enum KeyframedMotionParam {
+  COMMAND = 0
+  MODE = 1
+  DATA = 2
+};
+enum Link {
+  THIS = -4
+  ROOT = 1
+};
+enum Links {
+  THIS = -4
+  ALL_CHILDREN = -3
+  ALL_OTHERS = -2
+  SET = -1
+  ROOT = 1
+};
+enum LinksetDataAction {
+  RESET = 0
+  UPDATE = 1
+  DELETE = 2
+  MULTIDELETE = 3
+};
+enum LinksetDataError {
+  OK = 0
+  EMEMORY = 1
+  ENOKEY = 2
+  EPROTECTED = 3
+  NOTFOUND = 4
+  NOUPDATE = 5
+};
+enum ListEntryType {
+  INVALID = 0
+  INTEGER = 1
+  FLOAT = 2
+  STRING = 3
+  KEY = 4
+  VECTOR = 5
+  ROTATION = 6
+};
+enum ListStatisticsOperation {
+  RANGE = 0
+  MIN = 1
+  MAX = 2
+  MEAN = 3
+  MEDIAN = 4
+  STD_DEV = 5
+  SUM = 6
+  SUM_SQUARES = 7
+  NUM_COUNT = 8
+  GEOMETRIC_MEAN = 9
+};
+enum MapBeaconParam {
+  MAP = 1
+};
+enum ModifyLandAction {
+  LEVEL = 0
+  RAISE = 1
+  LOWER = 2
+  SMOOTH = 3
+  NOISE = 4
+  REVERT = 5
+};
+enum ModifyLandBrush {
+  SMALL_BRUSH = 1
+  MEDIUM_BRUSH = 2
+  LARGE_BRUSH = 3
+};
+enum ObjectDetailsParam {
+  NAME = 1
+  DESC = 2
+  POS = 3
+  ROT = 4
+  VELOCITY = 5
+  OWNER = 6
+  GROUP = 7
+  CREATOR = 8
+  RUNNING_SCRIPT_COUNT = 9
+  TOTAL_SCRIPT_COUNT = 10
+  SCRIPT_MEMORY = 11
+  SCRIPT_TIME = 12
+  PRIM_EQUIVALENCE = 13
+  SERVER_COST = 14
+  STREAMING_COST = 15
+  PHYSICS_COST = 16
+  CHARACTER_TIME = 17
+  ROOT = 18
+  ATTACHED_POINT = 19
+  PATHFINDING_TYPE = 20
+  PHYSICS = 21
+  PHANTOM = 22
+  TEMP_ON_REZ = 23
+  RENDER_WEIGHT = 24
+  HOVER_HEIGHT = 25
+  BODY_SHAPE_TYPE = 26
+  LAST_OWNER_ID = 27
+  CLICK_ACTION = 28
+  OMEGA = 29
+  PRIM_COUNT = 30
+  TOTAL_INVENTORY_COUNT = 31
+  REZZER_KEY = 32
+  GROUP_TAG = 33
+  TEMP_ATTACHED = 34
+  ATTACHED_SLOTS_AVAILABLE = 35
+  CREATION_TIME = 36
+  SELECT_COUNT = 37
+  SIT_COUNT = 38
+  ANIMATED_COUNT = 39
+  ANIMATED_SLOTS_AVAILABLE = 40
+  ACCOUNT_LEVEL = 41
+  MATERIAL = 42
+  MASS = 43
+  TEXT = 44
+  REZ_TIME = 45
+  LINK_NUMBER = 46
+  SCALE = 47
+  TEXT_COLOR = 48
+  TEXT_ALPHA = 49
+  HEALTH = 50
+  DAMAGE = 51
+  DAMAGE_TYPE = 52
+  PERMS = 53
+  PERMS_COMBINED = 54
+};
+enum ObjectPathfindingType {
+  OTHER = -1
+  LEGACY_LINKSET = 0
+  AVATAR = 1
+  CHARACTER = 2
+  WALKABLE = 3
+  STATIC_OBSTACLE = 4
+  MATERIAL_VOLUME = 5
+  EXCLUSION_VOLUME = 6
+};
+enum ObjectStatusParam {
+  PHYSICS = 0x1
+  ROTATE_X = 0x2
+  ROTATE_Y = 0x4
+  ROTATE_Z = 0x8
+  PHANTOM = 0x10
+  SANDBOX = 0x20
+  BLOCK_GRAB = 0x40
+  DIE_AT_EDGE = 0x80
+  RETURN_AT_EDGE = 0x100
+  CAST_SHADOWS = 0x200
+  BLOCK_GRAB_OBJECT = 0x400
+  DIE_AT_NO_ENTRY = 0x800
+};
+enum ParcelDetailsParam {
+  NAME = 0
+  DESC = 1
+  OWNER = 2
+  GROUP = 3
+  AREA = 4
+  ID = 5
+  SEE_AVATARS = 6
+  PRIM_CAPACITY = 7
+  PRIM_USED = 8
+  LANDING_POINT = 9
+  LANDING_LOOKAT = 10
+  TP_ROUTING = 11
+  FLAGS = 12
+  SCRIPT_DANGER = 13
+};
+enum ParcelFlag {
+  ALLOW_FLY = 0x1
+  ALLOW_SCRIPTS = 0x2
+  ALLOW_LANDMARK = 0x8
+  ALLOW_TERRAFORM = 0x10
+  ALLOW_DAMAGE = 0x20
+  ALLOW_CREATE_OBJECTS = 0x40
+  USE_ACCESS_GROUP = 0x100
+  USE_ACCESS_LIST = 0x200
+  USE_BAN_LIST = 0x400
+  USE_LAND_PASS_LIST = 0x800
+  LOCAL_SOUND_ONLY = 0x8000
+  RESTRICT_PUSHOBJECT = 0x200000
+  ALLOW_GROUP_SCRIPTS = 0x2000000
+  ALLOW_CREATE_GROUP_OBJECTS = 0x4000000
+  ALLOW_ALL_OBJECT_ENTRY = 0x8000000
+  ALLOW_GROUP_OBJECT_ENTRY = 0x10000000
+};
+enum ParcelMediaCommand {
+  STOP = 0
+  PAUSE = 1
+  PLAY = 2
+  LOOP = 3
+  TEXTURE = 4
+  URL = 5
+  TIME = 6
+  AGENT = 7
+  UNLOAD = 8
+  AUTO_ALIGN = 9
+  TYPE = 10
+  SIZE = 11
+  DESC = 12
+  LOOP_SET = 13
+};
+enum ParcelMediaQuery {
+  TEXTURE = 4
+  URL = 5
+  TYPE = 10
+  SIZE = 11
+  DESC = 12
+  LOOP_SET = 13
+};
+enum ParcelPrimCountCategory {
+  TOTAL = 0
+  OWNER = 1
+  GROUP = 2
+  OTHER = 3
+  SELECTED = 4
+  TEMP = 5
+};
+enum ParcelSaleError {
+  OK = 0
+  ERROR_NO_PARCEL = 1
+  ERROR_NO_PERMISSIONS = 2
+  ERROR_IN_ESCROW = 3
+  ERROR_INVALID_PRICE = 4
+  ERROR_BAD_PARAMS = 5
+};
+enum ParcelSaleParam {
+  PRICE = 1
+  AGENT = 2
+  OBJECTS = 3
+};
+enum ParcelTeleportRouting {
+  BLOCKED = 0
+  LANDINGP = 1
+  FREE = 2
+};
+enum ParticleBlendFunc {
+  ONE = 0
+  ZERO = 1
+  DEST_COLOR = 2
+  SOURCE_COLOR = 3
+  ONE_MINUS_DEST_COLOR = 4
+  ONE_MINUS_SOURCE_COLOR = 5
+  SOURCE_ALPHA = 7
+  ONE_MINUS_SOURCE_ALPHA = 9
+};
+enum ParticleFlag {
+  INTERP_COLOR_MASK = 0x1
+  INTERP_SCALE_MASK = 0x2
+  BOUNCE_MASK = 0x4
+  WIND_MASK = 0x8
+  FOLLOW_SRC_MASK = 0x10
+  FOLLOW_VELOCITY_MASK = 0x20
+  TARGET_POS_MASK = 0x40
+  TARGET_LINEAR_MASK = 0x80
+  EMISSIVE_MASK = 0x100
+  RIBBON_MASK = 0x400
+};
+enum ParticleParam {
+  PART_FLAGS = 0
+  PART_START_COLOR = 1
+  PART_START_ALPHA = 2
+  PART_END_COLOR = 3
+  PART_END_ALPHA = 4
+  PART_START_SCALE = 5
+  PART_END_SCALE = 6
+  PART_MAX_AGE = 7
+  SRC_ACCEL = 8
+  SRC_PATTERN = 9
+  SRC_INNERANGLE = 10
+  SRC_OUTERANGLE = 11
+  SRC_TEXTURE = 12
+  SRC_BURST_RATE = 13
+  SRC_BURST_PART_COUNT = 15
+  SRC_BURST_RADIUS = 16
+  SRC_BURST_SPEED_MIN = 17
+  SRC_BURST_SPEED_MAX = 18
+  SRC_MAX_AGE = 19
+  SRC_TARGET_KEY = 20
+  SRC_OMEGA = 21
+  SRC_ANGLE_BEGIN = 22
+  SRC_ANGLE_END = 23
+  PART_BLEND_FUNC_SOURCE = 24
+  PART_BLEND_FUNC_DEST = 25
+  PART_START_GLOW = 26
+  PART_END_GLOW = 27
+};
+enum ParticleSourcePattern {
+  DROP = 0x1
+  EXPLODE = 0x2
+  ANGLE = 0x4
+  ANGLE_CONE = 0x8
+  ANGLE_CONE_EMPTY = 0x10
+};
+enum PassMode {
+  IF_NOT_HANDLED = 0
+  ALWAYS = 1
+  NEVER = 2
+};
+enum PayButton {
+  DEFAULT = -2
+  HIDE = -1
+};
+enum PhysicsMaterialParam {
+  DENSITY = 0x1
+  FRICTION = 0x2
+  RESTITUTION = 0x4
+  GRAVITY_MULTIPLIER = 0x8
+};
+enum PhysicsMaterialPreset {
+  STONE = 0
+  METAL = 1
+  GLASS = 2
+  WOOD = 3
+  FLESH = 4
+  PLASTIC = 5
+  RUBBER = 6
+  LIGHT = 7
+};
+enum PhysicsShapeType {
+  PRIM = 0
+  NONE = 1
+  CONVEX = 2
+};
+enum PlaySoundFlag {
+  PLAY = 0x0
+  LOOP = 0x1
+  TRIGGER = 0x2
+  SYNC = 0x4
+};
+enum PrimBump {
+  NONE = 0
+  BRIGHT = 1
+  DARK = 2
+  WOOD = 3
+  BARK = 4
+  BRICKS = 5
+  CHECKER = 6
+  CONCRETE = 7
+  TILE = 8
+  STONE = 9
+  DISKS = 10
+  GRAVEL = 11
+  BLOBS = 12
+  SIDING = 13
+  LARGETILE = 14
+  STUCCO = 15
+  SUCTION = 16
+  WEAVE = 17
+};
+enum PrimMediaControl {
+  STANDARD = 0
+  MINI = 1
+};
+enum PrimMediaError {
+  OK = 0
+  MALFORMED_PARAMS = 1000
+  TYPE_MISMATCH = 1001
+  BOUNDS_ERROR = 1002
+  NOT_FOUND = 1003
+  NOT_SUPPORTED = 1004
+  INTERNAL_ERROR = 1999
+  WHITELIST_FAILED = 2001
+};
+enum PrimMediaParam {
+  ALT_IMAGE_ENABLE = 0
+  CONTROLS = 1
+  CURRENT_URL = 2
+  HOME_URL = 3
+  AUTO_LOOP = 4
+  AUTO_PLAY = 5
+  AUTO_SCALE = 6
+  AUTO_ZOOM = 7
+  FIRST_CLICK_INTERACT = 8
+  WIDTH_PIXELS = 9
+  HEIGHT_PIXELS = 10
+  WHITELIST_ENABLE = 11
+  WHITELIST = 12
+  PERMS_INTERACT = 13
+  PERMS_CONTROL = 14
+};
+enum PrimMediaPerm {
+  NONE = 0x0
+  OWNER = 0x1
+  GROUP = 0x2
+  ANYONE = 0x4
+};
+enum PrimParam {
+  MATERIAL = 2
+  PHYSICS = 3
+  TEMP_ON_REZ = 4
+  PHANTOM = 5
+  POSITION = 6
+  SIZE = 7
+  ROTATION = 8
+  TYPE = 9
+  TEXTURE = 17
+  COLOR = 18
+  BUMP_SHINY = 19
+  FULLBRIGHT = 20
+  FLEXIBLE = 21
+  TEXGEN = 22
+  POINT_LIGHT = 23
+  CAST_SHADOWS = 24 // deprecated
+  GLOW = 25
+  TEXT = 26
+  NAME = 27
+  DESC = 28
+  ROT_LOCAL = 29
+  PHYSICS_SHAPE_TYPE = 30
+  OMEGA = 32
+  POS_LOCAL = 33
+  LINK_TARGET = 34
+  SLICE = 35
+  SPECULAR = 36
+  NORMAL = 37
+  ALPHA_MODE = 38
+  ALLOW_UNSIT = 39
+  SCRIPTED_SIT_ONLY = 40
+  SIT_TARGET = 41
+  PROJECTOR = 42
+  CLICK_ACTION = 43
+  REFLECTION_PROBE = 44
+  GLTF_NORMAL = 45
+  GLTF_EMISSIVE = 46
+  GLTF_METALLIC_ROUGHNESS = 47
+  GLTF_BASE_COLOR = 48
+  RENDER_MATERIAL = 49
+  SIT_FLAGS = 50
+  DAMAGE = 51
+  HEALTH = 52
+  COLLISION_SOUND = 53
+};
+enum PrimShiny {
+  NONE = 0
+  LOW = 1
+  MEDIUM = 2
+  HIGH = 3
+};
+enum PrimTexgen {
+  DEFAULT = 0
+  PLANAR = 1
+};
+enum PrimType {
+  BOX = 0
+  CYLINDER = 1
+  PRISM = 2
+  SPHERE = 3
+  TORUS = 4
+  TUBE = 5
+  RING = 6
+  SCULPT = 7
+};
+enum PrimTypeHole {
+  DEFAULT = 0
+  CIRCLE = 16
+  SQUARE = 32
+  TRIANGLE = 48
+};
+enum PrimTypeSculptFlag {
+  ANIMESH = 0x20
+  INVERT = 0x40
+  MIRROR = 0x80
+};
+enum PrimTypeSculptType {
+  SPHERE = 1
+  TORUS = 2
+  PLANE = 3
+  CYLINDER = 4
+  MESH = 5
+  MASK = 7
+};
+enum RayCastData {
+  NORMAL = 0x1
+  ROOT_KEY = 0x2
+  LINK_NUM = 0x4
+};
+enum RayCastError {
+  CAST_TIME_EXCEEDED = -3
+  SIM_PERF_LOW = -2
+  UNKNOWN = -1
+};
+enum RayCastParam {
+  REJECT_TYPES = 0
+  DETECT_PHANTOM = 1
+  DATA_FLAGS = 2
+  MAX_HITS = 3
+};
+enum RayCastRejectType {
+  AGENTS = 0x1
+  PHYSICAL = 0x2
+  NONPHYSICAL = 0x4
+  LAND = 0x8
+};
+enum ReflectionProbeType {
+  BOX = 0x1
+  DYNAMIC = 0x2
+  MIRROR = 0x4
+};
+enum RegionFlag {
+  ALLOW_DAMAGE = 0x1
+  FIXED_SUN = 0x10
+  BLOCK_TERRAFORM = 0x40
+  SANDBOX = 0x100
+  DISABLE_COLLISIONS = 0x1000
+  DISABLE_PHYSICS = 0x4000
+  BLOCK_FLY = 0x80000
+  ALLOW_DIRECT_TELEPORT = 0x100000
+  RESTRICT_PUSHOBJECT = 0x400000
+  BLOCK_FLYOVER = 0x8000000
+};
+enum RemoteDataEventType {
+  CHANNEL = 1 // deprecated
+  REQUEST = 2 // deprecated
+  REPLY = 3 // deprecated
+};
+enum ReturnObjectsError {
+  THROTTLED = -5
+  RUNTIME_PERMISSIONS = -4
+  MALFORMED_PARAMS = -3
+  PARCEL_PERMISSIONS = -2
+  GENERIC = -1
+};
+enum ReturnObjectsScope {
+  PARCEL = 0x1
+  PARCEL_OWNER = 0x2
+  REGION = 0x4
+};
+enum RezFlag {
+  TEMP = 0x1
+  PHYSICAL = 0x2
+  PHANTOM = 0x4
+  DIE_ON_COLLIDE = 0x8
+  DIE_ON_NOENTRY = 0x10
+  NO_COLLIDE_OWNER = 0x20
+  NO_COLLIDE_FAMILY = 0x40
+  BLOCK_GRAB_OBJECT = 0x80
+};
+enum RezParam {
+  PARAM = 0
+  FLAGS = 1
+  POS = 2
+  ROT = 3
+  VEL = 4
+  ACCEL = 5
+  OMEGA = 7
+  DAMAGE = 8
+  SOUND = 9
+  SOUND_COLLIDE = 10
+  LOCK_AXES = 11
+  DAMAGE_TYPE = 12
+  PARAM_STRING = 13
+};
+enum ScriptPermission {
+  DEBIT = 0x2
+  TAKE_CONTROLS = 0x4
+  REMAP_CONTROLS = 0x8
+  TRIGGER_ANIMATION = 0x10
+  ATTACH = 0x20
+  RELEASE_OWNERSHIP = 0x40
+  CHANGE_LINKS = 0x80
+  CHANGE_JOINTS = 0x100
+  CHANGE_PERMISSIONS = 0x200
+  TRACK_CAMERA = 0x400
+  CONTROL_CAMERA = 0x800
+  TELEPORT = 0x1000
+  SILENT_ESTATE_MANAGEMENT = 0x4000
+  OVERRIDE_ANIMATIONS = 0x8000
+  RETURN_OBJECTS = 0x10000
+  PRIVILEGED_LAND_ACCESS = 0x80000
+};
+enum ScriptProfileMode {
+  NONE = 0
+  SCRIPT_MEMORY = 1
+};
+enum SimulatorData {
+  POS = 5
+  STATUS = 6
+  RATING = 7
+};
+enum SimulatorStat {
+  PCT_CHARS_STEPPED = 0
+  PHYSICS_FPS = 1
+  AGENT_UPDATES = 2
+  FRAME_MS = 3
+  NET_MS = 4
+  OTHER_MS = 5
+  PHYSICS_MS = 6
+  AGENT_MS = 7
+  IMAGE_MS = 8
+  SCRIPT_MS = 9
+  AGENT_COUNT = 10
+  CHILD_AGENT_COUNT = 11
+  ACTIVE_SCRIPT_COUNT = 12
+  PACKETS_IN = 13
+  PACKETS_OUT = 14
+  ASSET_DOWNLOADS = 15
+  ASSET_UPLOADS = 16
+  UNACKED_BYTES = 17
+  PHYSICS_STEP_MS = 18
+  PHYSICS_SHAPE_MS = 19
+  PHYSICS_OTHER_MS = 20
+  SCRIPT_EPS = 21
+  SPARE_MS = 22
+  SLEEP_MS = 23
+  IO_PUMP_MS = 24
+  SCRIPT_RUN_PCT = 25
+  AI_MS = 26
+};
+enum SitError {
+  INVALID_OBJECT = -7
+  NO_ACCESS = -6
+  INVALID_LINK = -5
+  INVALID_AGENT = -4
+  NO_SIT_TARGET = -3
+  NO_EXPERIENCE_PERMISSION = -2
+  NOT_EXPERIENCE = -1
+};
+enum SitFlag {
+  SIT_TARGET = 0x1
+  ALLOW_UNSIT = 0x2
+  SCRIPTED_ONLY = 0x4
+  NO_COLLIDE = 0x10
+  NO_DAMAGE = 0x20
+};
+enum StringTrimType {
+  HEAD = 1
+  TAIL = 2
+  STRING_TRIM = 3
+};
+enum TextureAnimMode {
+  ANIM_ON = 0x1
+  LOOP = 0x2
+  REVERSE = 0x4
+  PING_PONG = 0x8
+  SMOOTH = 0x10
+  ROTATE = 0x20
+  SCALE = 0x40
+};
+enum TransferError {
+  NO_ATTACHMENT = -7
+  NO_PERMS = -6
+  BAD_ROOT = -5
+  NO_ITEMS = -4
+  THROTTLE = -3
+  NO_TARGET = -2
+  BAD_OPTS = -1
+  OK = 0
+};
+enum TransferOwnershipFlag {
+  RESERVED = 0x1
+  TAKE = 0x2
+  COPY = 0x4
+};
+enum VehicleFlag {
+  NO_DEFLECTION_UP = 0x1
+  NO_FLY_UP = 0x1 // deprecated
+  LIMIT_ROLL_ONLY = 0x2
+  HOVER_WATER_ONLY = 0x4
+  HOVER_TERRAIN_ONLY = 0x8
+  HOVER_GLOBAL_HEIGHT = 0x10
+  HOVER_UP_ONLY = 0x20
+  LIMIT_MOTOR_UP = 0x40
+  MOUSELOOK_STEER = 0x80
+  MOUSELOOK_BANK = 0x100
+  CAMERA_DECOUPLED = 0x200
+  BLOCK_INTERFERENCE = 0x400
+};
+enum VehicleFloatParam {
+  HOVER_HEIGHT = 24
+  HOVER_EFFICIENCY = 25
+  HOVER_TIMESCALE = 26
+  BUOYANCY = 27
+  LINEAR_DEFLECTION_EFFICIENCY = 28
+  LINEAR_DEFLECTION_TIMESCALE = 29
+  LINEAR_MOTOR_TIMESCALE = 30
+  LINEAR_MOTOR_DECAY_TIMESCALE = 31
+  ANGULAR_DEFLECTION_EFFICIENCY = 32
+  ANGULAR_DEFLECTION_TIMESCALE = 33
+  ANGULAR_MOTOR_TIMESCALE = 34
+  ANGULAR_MOTOR_DECAY_TIMESCALE = 35
+  VERTICAL_ATTRACTION_EFFICIENCY = 36
+  VERTICAL_ATTRACTION_TIMESCALE = 37
+  BANKING_EFFICIENCY = 38
+  BANKING_MIX = 39
+  BANKING_TIMESCALE = 40
+};
+enum VehicleRotationParam {
+  REFERENCE_FRAME = 44
+};
+enum VehicleType {
+  NONE = 0
+  SLED = 1
+  CAR = 2
+  BOAT = 3
+  AIRPLANE = 4
+  BALLOON = 5
+};
+enum VehicleVectorParam {
+  LINEAR_FRICTION_TIMESCALE = 16
+  ANGULAR_FRICTION_TIMESCALE = 17
+  LINEAR_MOTOR_DIRECTION = 18
+  ANGULAR_MOTOR_DIRECTION = 19
+  LINEAR_MOTOR_OFFSET = 20
+};
+const integer COMBAT_CHANNEL = 2147483646
+const string COMBAT_LOG_ID = "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
+const integer DEBUG_CHANNEL = 2147483647
+const float DEG_TO_RAD = 0.017453293
+const string EOF = "\n\n\n"
+const integer FALSE = 0
+const string IMG_USE_BAKED_AUX1 = "9742065b-19b5-297c-858a-29711d539043"
+const string IMG_USE_BAKED_AUX2 = "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
+const string IMG_USE_BAKED_AUX3 = "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"
+const string IMG_USE_BAKED_EYES = "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"
+const string IMG_USE_BAKED_HAIR = "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"
+const string IMG_USE_BAKED_HEAD = "5a9f4a74-30f2-821c-b88d-70499d3e7183"
+const string IMG_USE_BAKED_LEFTARM = "ff62763f-d60a-9855-890b-0c96f8f8cd98"
+const string IMG_USE_BAKED_LEFTLEG = "8e915e25-31d1-cc95-ae08-d58a47488251"
+const string IMG_USE_BAKED_LOWER = "24daea5f-0539-cfcf-047f-fbc40b2786ba"
+const string IMG_USE_BAKED_SKIRT = "43529ce8-7faa-ad92-165a-bc4078371687"
+const string IMG_USE_BAKED_UPPER = "ae2de45c-d252-50b8-5c6e-19f39ce79317"
+const integer JSON_APPEND = -1
+const string JSON_ARRAY = "\u{FDD2}"
+const string JSON_DELETE = "\u{FDD8}"
+const string JSON_FALSE = "\u{FDD7}"
+const string JSON_INVALID = "\u{FDD0}"
+const string JSON_NULL = "\u{FDD5}"
+const string JSON_NUMBER = "\u{FDD3}"
+const string JSON_OBJECT = "\u{FDD1}"
+const string JSON_STRING = "\u{FDD4}"
+const string JSON_TRUE = "\u{FDD6}"
+const float LEGACY_MASS_FACTOR = 0.01 // private
+const string NAK = "\n\x15\n"
+const string NULL_KEY = "00000000-0000-0000-0000-000000000000"
+const integer OBJECT_UNKNOWN_DETAIL = -1
+const float PI = 3.14159265
+const float PI_BY_TWO = 1.57079633
+const integer PRIM_MEDIA_MAX_HEIGHT_PIXELS = 2048
+const integer PRIM_MEDIA_MAX_URL_LENGTH = 1024
+const integer PRIM_MEDIA_MAX_WHITELIST_COUNT = 64
+const integer PRIM_MEDIA_MAX_WHITELIST_SIZE = 1024
+const integer PRIM_MEDIA_MAX_WIDTH_PIXELS = 2048
+const integer PRIM_MEDIA_PARAM_MAX = 14
+const integer PUBLIC_CHANNEL = 0
+const float RAD_TO_DEG = 57.2957795
+const float SQRT2 = 1.41421356
+const string TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f"
+const string TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f"
+const string TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"
+const string TEXTURE_PLYWOOD = "89556747-24cb-43ed-920b-47caed15465f"
+const string TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
+const integer TOUCH_INVALID_FACE = -1
+const vector TOUCH_INVALID_TEXCOORD = <-1.0, -1.0, 0.0>
+const vector TOUCH_INVALID_VECTOR = <0.0, 0.0, 0.0>
+const integer TRUE = 1
+const float TWO_PI = 6.28318530
+const string URL_REQUEST_DENIED = "URL_REQUEST_DENIED"
+const string URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED"
+const rotation ZERO_ROTATION = <0.0, 0.0, 0.0, 1.0>
+const vector ZERO_VECTOR = <0.0, 0.0, 0.0>

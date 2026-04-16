@@ -3,7 +3,7 @@
 set -ex
 
 outdir="${1:-generated}"
-mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated"
+mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/experimental"
 
 DEFS="./lsl_definitions.yaml"
 SLUA="./slua_definitions.yaml"
@@ -34,3 +34,6 @@ $CMD $DEFS gen_tree_source_file "$outdir/cpp/lscript_tree.cpp"
 $CMD $DEFS gen_lexer_file ./templates/indra.in.l "$outdir/templated/indra.l"
 $CMD $DEFS gen_parser_file ./templates/indra.in.y "$outdir/templated/indra.y"
 $CMD $DEFS gen_mono_library_defs ./templates/LslLibrary.cs "$outdir/templated/LslLibrary.cs"
+
+# Experimental generators
+$CMD $DEFS gen_enums_txt "$outdir/experimental/enums.txt"

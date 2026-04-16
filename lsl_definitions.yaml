@@ -20,472 +20,1074 @@
 # increment only when the file format changes, not just the content
 # retain the "llsd-" prefix for compatibility...
 llsd-lsl-syntax-version: 2
+enums:
+# This section documents the relationship between LSL's functions and constants.
+# Neither LSL nor Lua have real enums, nor is this a proposal to add them.
+# This is purely for the purpose of documentation generation, and to
+# document these relationships somewhere other than the LSL wiki.
+  AgentData:
+    type: enum
+    prefix: DATA_
+    tooltip: ''
+  AgentDataPaymentInfo:
+    type: flag
+    prefix: PAYMENT_INFO_
+    tooltip: ''
+  AgentInfo:
+    type: flag
+    prefix: AGENT_
+    tooltip: ''
+  AgentListScope:
+    type: flag
+    prefix: AGENT_LIST_
+    tooltip: ''
+  AlphaMode:
+    type: enum
+    prefix: PRIM_ALPHA_MODE_
+    tooltip: ''
+  AssetPermission:
+    type: flag
+    prefix: PERM_
+    special-members: [PERM_ALL] # combination of other flags
+    tooltip: ''
+  AssetPermissionCategory:
+    type: enum
+    prefix: MASK_
+    tooltip: ''
+  AssetPermissionCategoryFlag:
+    type: flag
+    prefix: MASK_
+    tooltip: ''
+  AttachedListFilterFlag:
+    type: flag
+    prefix: FILTER_FLAG_
+    tooltip: ''
+  AttachedListFilterParam:
+    type: enum
+    prefix: FILTER_
+    tooltip: ''
+  AttachPoint:
+    type: enum
+    prefix: ATTACH_
+    tooltip: ''
+  CameraParam:
+    type: enum
+    prefix: CAMERA_
+    tooltip: ''
+  ChangeType:
+    type: flag
+    prefix: CHANGED_
+    tooltip: ''
+  CharacterAvoidanceMode:
+    type: enum
+    prefix: AVOID_
+    tooltip: ''
+  CharacterCommand:
+    type: enum
+    prefix: CHARACTER_CMD_
+    tooltip: ''
+  CharacterEvadeParam:
+    type: enum
+    tooltip: ''
+  CharacterFleeFromParam:
+    type: enum
+    tooltip: ''
+  CharacterNavigateParam:
+    type: enum
+    tooltip: ''
+  CharacterOrientation:
+    type: enum
+    tooltip: ''
+  CharacterParam:
+    type: enum
+    prefix: CHARACTER_
+    tooltip: ''
+  CharacterPathUpdateType:
+    type: enum
+    prefix: PU_
+    tooltip: ''
+  CharacterPatrolPointsParam:
+    type: enum
+    prefix: PATROL_
+    tooltip: ''
+  CharacterPursueParam:
+    type: enum
+    prefix: PURSUIT_
+    tooltip: ''
+  CharacterTraversalType:
+    type: enum
+    prefix: TRAVERSAL_TYPE_
+    tooltip: ''
+  CharacterType:
+    type: enum
+    prefix: CHARACTER_TYPE_
+    tooltip: ''
+  CharacterWanderWithinParam:
+    type: enum
+    tooltip: ''
+  ClickAction:
+    type: enum
+    prefix: CLICK_ACTION_
+    special-members: [CLICK_ACTION_TOUCH] # alias of CLICK_ACTION_TOUCH
+    tooltip: ''
+  ControlButton:
+    type: flag
+    prefix: CONTROL_
+    tooltip: ''
+  DamageType:
+    type: enum
+    prefix: DAMAGE_TYPE_
+    tooltip: ''
+  DerezMode:
+    type: enum
+    prefix: DEREZ_
+    tooltip: ''
+  DetectType:
+    type: flag
+    special-members: [AGENT_BY_LEGACY_NAME] # alias of AGENT
+    tooltip: ''
+  EmailTarget:
+    type: enum
+    prefix: TARGETED_EMAIL_
+    tooltip: ''
+  EnvironmentError:
+    type: enum
+    prefix: ENV_
+    tooltip: ''
+  EnvironmentParam:
+    type: enum
+    tooltip: ''
+  EnvironmentParamReadOnly:
+    type: enum
+    tooltip: ''
+  EstateAccessParam:
+    type: enum
+    prefix: ESTATE_ACCESS_
+    tooltip: ''
+  ExperienceError:
+    type: enum
+    prefix: XP_ERROR_
+    tooltip: ''
+  Faces:
+    type: enum
+    tooltip: 'Operate on one or more face numbers at a time.'
+  GameControlAxis:
+    type: enum
+    prefix: GAME_CONTROL_AXIS_
+    tooltip: ''
+  GameControlButton:
+    type: flag
+    prefix: GAME_CONTROL_BUTTON_
+    tooltip: ''
+  GetClosestNavPointParam:
+    type: enum
+    prefix: GCNP_
+    tooltip: ''
+  GiveAgentInventoryParam:
+    type: enum
+    prefix: TRANSFER_
+    tooltip: ''
+  GLTFAlphaMode:
+    type: enum
+    prefix: PRIM_GLTF_ALPHA_MODE_
+    tooltip: ''
+  GLTFOverride:
+    type: enum
+    prefix: OVERRIDE_GLTF_
+    tooltip: ''
+  GroundTextureParam:
+    type: enum
+    prefix: TERRAIN_
+    tooltip: ''
+  HTTPContentType:
+    type: enum
+    prefix: CONTENT_TYPE_
+    tooltip: ''
+  HTTPRequestParam:
+    type: enum
+    prefix: HTTP_
+    tooltip: ''
+  HTTPResponseError:
+    type: enum
+    prefix: HTTP_
+    tooltip: ''
+  InventoryType:
+    type: enum
+    prefix: INVENTORY_
+    special-members: [INVENTORY_NONE] # alias of INVENTORY_ALL
+    tooltip: ''
+  KeyframedMotionCommand:
+    type: enum
+    prefix: KFM_CMD_
+    tooltip: ''
+  KeyframedMotionData:
+    type: flag
+    prefix: KFM_
+    tooltip: ''
+  KeyframedMotionMode:
+    type: enum
+    prefix: KFM_
+    tooltip: ''
+  KeyframedMotionParam:
+    type: enum
+    prefix: KFM_
+    tooltip: ''
+  Link:
+    type: enum
+    prefix: LINK_
+    tooltip: 'Operate on one link number at a time.'
+  Links:
+    type: enum
+    prefix: LINK_
+    tooltip: 'Operate on one or more link numbers at a time.'
+  LinksetDataAction:
+    type: enum
+    prefix: LINKSETDATA_
+    tooltip: ''
+  LinksetDataError:
+    type: enum
+    prefix: LINKSETDATA_
+    tooltip: ''
+  ListEntryType:
+    type: enum
+    prefix: TYPE_
+    slua-deprecated: true
+    tooltip: ''
+  ListStatisticsOperation:
+    type: enum
+    prefix: LIST_STAT_
+    tooltip: ''
+  MapBeaconParam:
+    type: enum
+    prefix: BEACON_
+    tooltip: ''
+  ModifyLandAction:
+    type: enum
+    prefix: LAND_
+    tooltip: ''
+  ModifyLandBrush:
+    type: enum
+    prefix: LAND_
+    tooltip: ''
+  ObjectDetailsParam:
+    type: enum
+    prefix: OBJECT_
+    tooltip: ''
+  ObjectPathfindingType:
+    type: enum
+    prefix: OPT_
+    tooltip: ''
+  ObjectStatusParam:
+    type: flag
+    prefix: STATUS_
+    tooltip: ''
+  ParcelDetailsParam:
+    type: enum
+    prefix: PARCEL_DETAILS_
+    tooltip: ''
+  ParcelFlag:
+    type: flag
+    prefix: PARCEL_FLAG_
+    tooltip: ''
+  ParcelMediaCommand:
+    type: enum
+    prefix: PARCEL_MEDIA_COMMAND_
+    tooltip: ''
+  ParcelMediaQuery:
+    type: enum
+    prefix: PARCEL_MEDIA_COMMAND_
+    tooltip: ''
+  ParcelPrimCountCategory:
+    type: enum
+    prefix: PARCEL_COUNT_
+    tooltip: ''
+  ParcelSaleError:
+    type: enum
+    prefix: PARCEL_SALE_
+    tooltip: ''
+  ParcelSaleParam:
+    type: enum
+    prefix: PARCEL_SALE_
+    tooltip: ''
+  ParcelTeleportRouting:
+    type: enum
+    prefix: TP_ROUTING_
+    tooltip: ''
+  ParticleBlendFunc:
+    type: enum
+    prefix: PSYS_PART_BF_
+    tooltip: ''
+  ParticleFlag:
+    type: flag
+    prefix: PSYS_PART_
+    tooltip: ''
+  ParticleParam:
+    type: enum
+    prefix: PSYS_
+    tooltip: ''
+  ParticleSourcePattern:
+    type: flag
+    prefix: PSYS_SRC_PATTERN_
+    tooltip: ''
+  PassMode:
+    type: enum
+    prefix: PASS_
+    tooltip: ''
+  PayButton:
+    type: enum
+    prefix: PAY_
+    tooltip: ''
+  PhysicsMaterialParam:
+    type: flag
+    tooltip: ''
+  PhysicsMaterialPreset:
+    type: enum
+    prefix: PRIM_MATERIAL_
+    tooltip: ''
+  PhysicsShapeType:
+    type: enum
+    prefix: PRIM_PHYSICS_SHAPE_
+    tooltip: ''
+  PlaySoundFlag:
+    type: flag
+    prefix: SOUND_
+    special-members: [SOUND_PLAY] # zero
+    tooltip: ''
+  PrimBump:
+    type: enum
+    prefix: PRIM_BUMP_
+    tooltip: ''
+  PrimMediaControl:
+    type: enum
+    prefix: PRIM_MEDIA_CONTROLS_
+    tooltip: ''
+  PrimMediaError:
+    type: enum
+    prefix: STATUS_
+    tooltip: ''
+  PrimMediaParam:
+    type: enum
+    prefix: PRIM_MEDIA_
+    tooltip: ''
+  PrimMediaPerm:
+    type: flag
+    prefix: PRIM_MEDIA_PERM_
+    special-members: [PRIM_MEDIA_PERM_NONE] # zero
+    tooltip: ''
+  PrimParam:
+    type: enum
+    prefix: PRIM_
+    tooltip: ''
+  PrimShiny:
+    type: enum
+    prefix: PRIM_SHINY_
+    tooltip: ''
+  PrimTexgen:
+    type: enum
+    prefix: PRIM_TEXGEN_
+    tooltip: ''
+  PrimType:
+    type: enum
+    prefix: PRIM_TYPE_
+    tooltip: ''
+  PrimTypeHole:
+    type: enum
+    prefix: PRIM_HOLE_
+    tooltip: ''
+  PrimTypeSculptFlag:
+    type: flag
+    prefix: PRIM_SCULPT_FLAG_
+    tooltip: ''
+  PrimTypeSculptType:
+    type: enum
+    prefix: PRIM_SCULPT_TYPE_
+    tooltip: ''
+  RayCastData:
+    type: flag
+    prefix: RC_GET_
+    tooltip: ''
+  RayCastError:
+    type: enum
+    prefix: RCERR_
+    tooltip: ''
+  RayCastParam:
+    type: enum
+    prefix: RC_
+    tooltip: ''
+  RayCastRejectType:
+    type: flag
+    prefix: RC_REJECT_
+    tooltip: ''
+  ReflectionProbeType:
+    type: flag
+    prefix: PRIM_REFLECTION_PROBE_
+    tooltip: ''
+  RegionFlag:
+    type: flag
+    prefix: REGION_FLAG_
+    tooltip: ''
+  RemoteDataEventType:
+    type: enum
+    prefix: REMOTE_DATA_
+    deprecated: true
+    tooltip: ''
+  ReturnObjectsError:
+    type: enum
+    prefix: ERR_
+    tooltip: ''
+  ReturnObjectsScope:
+    type: flag
+    prefix: OBJECT_RETURN_
+    tooltip: ''
+  RezFlag:
+    type: flag
+    prefix: REZ_FLAG_
+    tooltip: ''
+  RezParam:
+    type: enum
+    prefix: REZ_
+    tooltip: ''
+  ScriptPermission:
+    type: flag
+    prefix: PERMISSION_
+    tooltip: ''
+  ScriptProfileMode:
+    type: enum
+    prefix: PROFILE_
+    tooltip: ''
+  SimulatorData:
+    type: enum
+    prefix: DATA_SIM_
+    tooltip: ''
+  SimulatorStat:
+    type: enum
+    prefix: SIM_STAT_
+    tooltip: ''
+  SitError:
+    type: enum
+    prefix: SIT_
+    tooltip: ''
+  SitFlag:
+    type: flag
+    prefix: SIT_FLAG_
+    tooltip: ''
+  StringTrimType:
+    type: enum
+    prefix: STRING_TRIM_
+    tooltip: ''
+  TextureAnimMode:
+    type: flag
+    tooltip: ''
+  TransferError:
+    type: enum
+    prefix: TRANSFER_
+    tooltip: ''
+  TransferOwnershipFlag:
+    type: flag
+    prefix: TRANSFER_FLAG_
+    tooltip: ''
+  VehicleFlag:
+    type: flag
+    prefix: VEHICLE_FLAG_
+    tooltip: ''
+  VehicleFloatParam:
+    type: enum
+    prefix: VEHICLE_
+    tooltip: ''
+  VehicleRotationParam:
+    type: enum
+    prefix: VEHICLE_
+    tooltip: ''
+  VehicleType:
+    type: enum
+    prefix: VEHICLE_TYPE_
+    tooltip: ''
+  VehicleVectorParam:
+    type: enum
+    prefix: VEHICLE_
+    tooltip: ''
+
 constants:
   ACTIVE:
+    member-of: [DetectType]
     tooltip: Objects in world that are running a script or currently physically moving.
     type: integer
     value: '0x2'
   AGENT:
+    member-of: [DetectType]
     tooltip: Objects in world that are agents.
     type: integer
     value: '0x1'
   AGENT_ALWAYS_RUN:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x1000'
   AGENT_ATTACHMENTS:
+    member-of: [AgentInfo]
     tooltip: The agent has attachments.
     type: integer
     value: '0x2'
   AGENT_AUTOMATED:
+    member-of: [AgentInfo]
     tooltip: The agent has been identified as a scripted agent
     type: integer
     value: '0x4000'
   AGENT_AUTOPILOT:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x2000'
   AGENT_AWAY:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x40'
   AGENT_BUSY:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x800'
   AGENT_BY_LEGACY_NAME:
+    member-of: [DetectType]
     tooltip: ''
     type: integer
     value: '0x1'
   AGENT_BY_USERNAME:
+    member-of: [DetectType]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_CROUCHING:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x400'
   AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT:
+    member-of: [AgentInfo]
     tooltip: The agent is floating via scripted attachment.
     type: integer
     value: '0x8000'
   AGENT_FLYING:
+    member-of: [AgentInfo]
     tooltip: The agent is flying.
     type: integer
     value: '0x1'
   AGENT_IN_AIR:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x100'
   AGENT_LIST_PARCEL:
+    member-of: [AgentListScope]
     tooltip: Agents on the same parcel where the script is running.
     type: integer
     value: 1
   AGENT_LIST_PARCEL_OWNER:
+    member-of: [AgentListScope]
     tooltip: Agents on any parcel in the region where the parcel owner is the same
       as the owner of the parcel under the scripted object.
     type: integer
     value: 2
   AGENT_LIST_REGION:
+    member-of: [AgentListScope]
     tooltip: All agents in the region.
     type: integer
     value: 4
   AGENT_MOUSELOOK:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x8'
   AGENT_ON_OBJECT:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x20'
   AGENT_SCRIPTED:
+    member-of: [AgentInfo]
     tooltip: The agent has scripted attachments.
     type: integer
     value: '0x4'
   AGENT_SITTING:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x10'
   AGENT_TYPING:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x200'
   AGENT_WALKING:
+    member-of: [AgentInfo]
     tooltip: ''
     type: integer
     value: '0x80'
   ALL_SIDES:
+    member-of: [Faces]
     tooltip: ''
     type: integer
     value: -1
   ANIM_ON:
+    member-of: [TextureAnimMode]
     tooltip: Texture animation is on.
     type: integer
     value: '0x1'
   ATTACH_ANY_HUD:
+    member-of: [AttachPoint]
     tooltip: Filtering for any HUD attachment.
     type: integer
     value: -1
   ATTACH_AVATAR_CENTER:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's geometric centre.
     type: integer
     value: 40
   ATTACH_BACK:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's back.
     type: integer
     value: 9
   ATTACH_BELLY:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's belly.
     type: integer
     value: 28
   ATTACH_CHEST:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's chest.
     type: integer
     value: 1
   ATTACH_CHIN:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's chin.
     type: integer
     value: 12
   ATTACH_FACE_JAW:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's jaw.
     type: integer
     value: 47
   ATTACH_FACE_LEAR:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ear (extended).
     type: integer
     value: 48
   ATTACH_FACE_LEYE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left eye (extended).
     type: integer
     value: 50
   ATTACH_FACE_REAR:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ear (extended).
     type: integer
     value: 49
   ATTACH_FACE_REYE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right eye (extended).
     type: integer
     value: 51
   ATTACH_FACE_TONGUE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tongue.
     type: integer
     value: 52
   ATTACH_GROIN:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's groin.
     type: integer
     value: 53
   ATTACH_HEAD:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's head.
     type: integer
     value: 2
   ATTACH_HIND_LFOOT:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hind foot.
     type: integer
     value: 54
   ATTACH_HIND_RFOOT:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hind foot.
     type: integer
     value: 55
   ATTACH_HUD_BOTTOM:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 37
   ATTACH_HUD_BOTTOM_LEFT:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 36
   ATTACH_HUD_BOTTOM_RIGHT:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 38
   ATTACH_HUD_CENTER_1:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 35
   ATTACH_HUD_CENTER_2:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 31
   ATTACH_HUD_TOP_CENTER:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 33
   ATTACH_HUD_TOP_LEFT:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 34
   ATTACH_HUD_TOP_RIGHT:
+    member-of: [AttachPoint]
     tooltip: ''
     type: integer
     value: 32
   ATTACH_LEAR:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ear.
     type: integer
     value: 13
   ATTACH_LEFT_PEC:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left pectoral.
     type: integer
     value: 29
   ATTACH_LEYE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left eye.
     type: integer
     value: 15
   ATTACH_LFOOT:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left foot.
     type: integer
     value: 7
   ATTACH_LHAND:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hand.
     type: integer
     value: 5
   ATTACH_LHAND_RING1:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left ring finger.
     type: integer
     value: 41
   ATTACH_LHIP:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left hip.
     type: integer
     value: 25
   ATTACH_LLARM:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left lower arm.
     type: integer
     value: 21
   ATTACH_LLLEG:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's lower left leg.
     type: integer
     value: 27
   ATTACH_LPEC:
     deprecated:
       use: ATTACH_RIGHT_PEC
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right pectoral. (Deprecated, use ATTACH_RIGHT_PEC)
     type: integer
     value: 30
   ATTACH_LSHOULDER:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left shoulder.
     type: integer
     value: 3
   ATTACH_LUARM:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left upper arm.
     type: integer
     value: 20
   ATTACH_LULEG:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's lower upper leg.
     type: integer
     value: 26
   ATTACH_LWING:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left wing.
     type: integer
     value: 45
   ATTACH_MOUTH:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's mouth.
     type: integer
     value: 11
   ATTACH_NECK:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's neck.
     type: integer
     value: 39
   ATTACH_NOSE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's nose.
     type: integer
     value: 17
   ATTACH_PELVIS:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's pelvis.
     type: integer
     value: 10
   ATTACH_REAR:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ear.
     type: integer
     value: 14
   ATTACH_REYE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right eye.
     type: integer
     value: 16
   ATTACH_RFOOT:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right foot.
     type: integer
     value: 8
   ATTACH_RHAND:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hand.
     type: integer
     value: 6
   ATTACH_RHAND_RING1:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right ring finger.
     type: integer
     value: 42
   ATTACH_RHIP:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right hip.
     type: integer
     value: 22
   ATTACH_RIGHT_PEC:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right pectoral.
     type: integer
     value: 30
   ATTACH_RLARM:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right lower arm.
     type: integer
     value: 19
   ATTACH_RLLEG:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right lower leg.
     type: integer
     value: 24
   ATTACH_RPEC:
     deprecated:
       use: ATTACH_LEFT_PEC
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's left pectoral. (deprecated, use ATTACH_LEFT_PEC)
     type: integer
     value: 29
   ATTACH_RSHOULDER:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right shoulder.
     type: integer
     value: 4
   ATTACH_RUARM:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right upper arm.
     type: integer
     value: 18
   ATTACH_RULEG:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right upper leg.
     type: integer
     value: 23
   ATTACH_RWING:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's right wing.
     type: integer
     value: 46
   ATTACH_TAIL_BASE:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tail base.
     type: integer
     value: 43
   ATTACH_TAIL_TIP:
+    member-of: [AttachPoint]
     tooltip: Attach to the avatar's tail tip.
     type: integer
     value: 44
   AVOID_CHARACTERS:
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 1
   AVOID_DYNAMIC_OBSTACLES:
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 2
   AVOID_NONE:
+    member-of: [CharacterAvoidanceMode]
     tooltip: ''
     type: integer
     value: 0
   BEACON_MAP:
+    member-of: [MapBeaconParam]
     tooltip: Cause llMapBeacon to optionally display and focus the world map on the
       avatar's viewer.
     type: integer
     value: 1
   CAMERA_ACTIVE:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 12
   CAMERA_BEHINDNESS_ANGLE:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 8
   CAMERA_BEHINDNESS_LAG:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 9
   CAMERA_DISTANCE:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 7
   CAMERA_FOCUS:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 17
   CAMERA_FOCUS_LAG:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 6
   CAMERA_FOCUS_LOCKED:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 22
   CAMERA_FOCUS_OFFSET:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 1
   CAMERA_FOCUS_THRESHOLD:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 11
   CAMERA_PITCH:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 0
   CAMERA_POSITION:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 13
   CAMERA_POSITION_LAG:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 5
   CAMERA_POSITION_LOCKED:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 21
   CAMERA_POSITION_THRESHOLD:
+    member-of: [CameraParam]
     tooltip: ''
     type: integer
     value: 10
   CHANGED_ALLOWED_DROP:
+    member-of: [ChangeType]
     tooltip: The object inventory has changed because an item was added through the
       llAllowInventoryDrop interface.
     type: integer
     value: '0x40'
   CHANGED_COLOR:
+    member-of: [ChangeType]
     tooltip: The object color has changed.
     type: integer
     value: '0x2'
   CHANGED_INVENTORY:
+    member-of: [ChangeType]
     tooltip: The object inventory has changed.
     type: integer
     value: '0x1'
   CHANGED_LINK:
+    member-of: [ChangeType]
     tooltip: The object has linked or its links were broken.
     type: integer
     value: '0x20'
   CHANGED_MEDIA:
+    member-of: [ChangeType]
     tooltip: ''
     type: integer
     value: '0x800'
   CHANGED_OWNER:
+    member-of: [ChangeType]
     tooltip: The object has changed ownership.
     type: integer
     value: '0x80'
   CHANGED_REGION:
+    member-of: [ChangeType]
     tooltip: The object has changed region.
     type: integer
     value: '0x100'
   CHANGED_REGION_START:
+    member-of: [ChangeType]
     tooltip: The region this object is in has just come online.
     type: integer
     value: '0x400'
   CHANGED_RENDER_MATERIAL:
+    member-of: [ChangeType]
     tooltip: The render material has changed.
     type: integer
     value: '0x1000'
   CHANGED_SCALE:
+    member-of: [ChangeType]
     tooltip: The object scale (size) has changed.
     type: integer
     value: '0x8'
   CHANGED_SHAPE:
+    member-of: [ChangeType]
     tooltip: The object base shape has changed, e.g., a box to a cylinder.
     type: integer
     value: '0x4'
   CHANGED_TELEPORT:
+    member-of: [ChangeType]
     tooltip: The avatar to whom this object is attached has teleported.
     type: integer
     value: '0x200'
   CHANGED_TEXTURE:
+    member-of: [ChangeType]
     tooltip: The texture offset, scale rotation, or simply the object texture has
       changed.
     type: integer
     value: '0x10'
   CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES:
+    member-of: [CharacterParam]
     tooltip: If set to false, character will not attempt to catch up on lost time
       when pathfinding performance is low, potentially providing more reliable movement
       (albeit while potentially appearing to be more stuttery). Default is true to
@@ -493,134 +1095,165 @@ constants:
     type: integer
     value: 14
   CHARACTER_AVOIDANCE_MODE:
+    member-of: [CharacterParam]
     tooltip: Allows you to specify that a character should not try to avoid other
       characters, should not try to avoid dynamic obstacles (relatively fast moving
       objects and avatars), or both.
     type: integer
     value: 5
   CHARACTER_CMD_JUMP:
+    member-of: [CharacterCommand]
     tooltip: Makes the character jump. Requires an additional parameter, the height
       to jump, between 0.1m and 2.0m. This must be provided as the first element of
       the llExecCharacterCmd option list.
     type: integer
     value: '0x01'
   CHARACTER_CMD_SMOOTH_STOP:
+    member-of: [CharacterCommand]
     tooltip: ''
     type: integer
     value: 2
   CHARACTER_CMD_STOP:
+    member-of: [CharacterCommand]
     tooltip: Stops any current pathfinding operation.
     type: integer
     value: '0x00'
   CHARACTER_DESIRED_SPEED:
+    member-of: [CharacterParam]
     tooltip: Speed of pursuit in meters per second.
     type: integer
     value: 1
   CHARACTER_DESIRED_TURN_SPEED:
+    member-of: [CharacterParam]
     tooltip: The character's maximum speed while turning about the Z axis. - Note
       that this is only loosely enforced.
     type: integer
     value: 12
   CHARACTER_LENGTH:
+    member-of: [CharacterParam]
     tooltip: Set collision capsule length - cannot be less than two times the radius.
     type: integer
     value: 3
   CHARACTER_MAX_ACCEL:
+    member-of: [CharacterParam]
     tooltip: The character's maximum acceleration rate.
     type: integer
     value: 8
   CHARACTER_MAX_DECEL:
+    member-of: [CharacterParam]
     tooltip: The character's maximum deceleration rate.
     type: integer
     value: 9
   CHARACTER_MAX_SPEED:
+    member-of: [CharacterParam]
     tooltip: The character's maximum speed.
     type: integer
     value: 13
   CHARACTER_MAX_TURN_RADIUS:
+    member-of: [CharacterParam]
     tooltip: The character's turn radius when travelling at CHARACTER_MAX_TURN_SPEED.
     type: integer
     value: 10
   CHARACTER_ORIENTATION:
+    member-of: [CharacterParam]
     tooltip: 'Valid options are: VERTICAL, HORIZONTAL.'
     type: integer
     value: 4
   CHARACTER_RADIUS:
+    member-of: [CharacterParam]
     tooltip: Set collision capsule radius.
     type: integer
     value: 2
   CHARACTER_STAY_WITHIN_PARCEL:
+    member-of: [CharacterParam]
     tooltip: Determines whether a character can leave its starting parcel.\nTakes
       a boolean parameter. If TRUE, the character cannot voluntarilly leave the parcel,
       but can return to it.
     type: integer
     value: 15
   CHARACTER_TYPE:
+    member-of: [CharacterParam, GetClosestNavPointParam]
     tooltip: Specifies which walk-ability coefficient will be used by this character.
     type: integer
     value: 6
   CHARACTER_TYPE_A:
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 0
   CHARACTER_TYPE_B:
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 1
   CHARACTER_TYPE_C:
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 2
   CHARACTER_TYPE_D:
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 3
   CHARACTER_TYPE_NONE:
+    member-of: [CharacterType]
     tooltip: ''
     type: integer
     value: 4
   CLICK_ACTION_BUY:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the buy dialog is opened.
     type: integer
     value: 2
   CLICK_ACTION_DISABLED:
+    member-of: [ClickAction]
     tooltip: No click action. No touches detected or passed.
     type: integer
     value: 8
   CLICK_ACTION_IGNORE:
+    member-of: [ClickAction]
     tooltip: No click action. Object is invisible to the mouse.
     type: integer
     value: 9
   CLICK_ACTION_NONE:
+    member-of: [ClickAction]
     tooltip: 'Performs the default action: when the prim is clicked, touch events
       are triggered.'
     type: integer
     value: 0
   CLICK_ACTION_OPEN:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the object inventory dialog is opened.
     type: integer
     value: 4
   CLICK_ACTION_OPEN_MEDIA:
+    member-of: [ClickAction]
     tooltip: When the prim is touched, the web media dialog is opened.
     type: integer
     value: 6
   CLICK_ACTION_PAY:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the pay dialog is opened.
     type: integer
     value: 3
   CLICK_ACTION_PLAY:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, html-on-a-prim is enabled?
     type: integer
     value: 5
   CLICK_ACTION_SIT:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, the avatar sits upon it.
     type: integer
     value: 1
   CLICK_ACTION_TOUCH:
+    member-of: [ClickAction]
     tooltip: When the prim is clicked, touch events are triggered.
     type: integer
     value: 0
   CLICK_ACTION_ZOOM:
+    member-of: [ClickAction]
     tooltip: Zoom in on object when clicked.
     type: integer
     value: 7
@@ -637,167 +1270,208 @@ constants:
     slua-type: uuid
     value: "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
   CONTENT_TYPE_ATOM:
+    member-of: [HTTPContentType]
     tooltip: '"application/atom+xml"'
     type: integer
     value: 4
   CONTENT_TYPE_FORM:
+    member-of: [HTTPContentType]
     tooltip: '"application/x-www-form-urlencoded"'
     type: integer
     value: 7
   CONTENT_TYPE_HTML:
+    member-of: [HTTPContentType]
     tooltip: '"text/html", only valid for embedded browsers on content owned by the
       person viewing. Falls back to "text/plain" otherwise.'
     type: integer
     value: 1
   CONTENT_TYPE_JSON:
+    member-of: [HTTPContentType]
     tooltip: '"application/json"'
     type: integer
     value: 5
   CONTENT_TYPE_LLSD:
+    member-of: [HTTPContentType]
     tooltip: '"application/llsd+xml"'
     type: integer
     value: 6
   CONTENT_TYPE_RSS:
+    member-of: [HTTPContentType]
     tooltip: '"application/rss+xml"'
     type: integer
     value: 8
   CONTENT_TYPE_TEXT:
+    member-of: [HTTPContentType]
     tooltip: '"text/plain"'
     type: integer
     value: 0
   CONTENT_TYPE_XHTML:
+    member-of: [HTTPContentType]
     tooltip: '"application/xhtml+xml"'
     type: integer
     value: 3
   CONTENT_TYPE_XML:
+    member-of: [HTTPContentType]
     tooltip: '"application/xml"'
     type: integer
     value: 2
   CONTROL_BACK:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move back control.
     type: integer
     value: '0x2'
   CONTROL_DOWN:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move down control.
     type: integer
     value: '0x20'
   CONTROL_FWD:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move forward control.
     type: integer
     value: '0x1'
   CONTROL_LBUTTON:
+    member-of: [ControlButton]
     tooltip: Test for the avatar left button control.
     type: integer
     value: '0x10000000'
   CONTROL_LEFT:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move left control.
     type: integer
     value: '0x4'
   CONTROL_ML_LBUTTON:
+    member-of: [ControlButton]
     tooltip: Test for the avatar left button control while in mouse look.
     type: integer
     value: '0x40000000'
   CONTROL_RIGHT:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move right control.
     type: integer
     value: '0x8'
   CONTROL_ROT_LEFT:
+    member-of: [ControlButton]
     tooltip: Test for the avatar rotate left control.
     type: integer
     value: '0x100'
   CONTROL_ROT_RIGHT:
+    member-of: [ControlButton]
     tooltip: Test for the avatar rotate right control.
     type: integer
     value: '0x200'
   CONTROL_UP:
+    member-of: [ControlButton]
     tooltip: Test for the avatar move up control.
     type: integer
     value: '0x10'
   DAMAGEABLE:
+    member-of: [DetectType]
     tooltip: Objects in world that are able to process damage.
     type: integer
     value: '0x20'
   DAMAGE_TYPE_ACID:
+    member-of: [DamageType]
     tooltip: Damage caused by a caustic substance, such as acid
     type: integer
     value: 1
   DAMAGE_TYPE_BLUDGEONING:
+    member-of: [DamageType]
     tooltip: Damage caused by a blunt object, such as a club.
     type: integer
     value: '2'
   DAMAGE_TYPE_COLD:
+    member-of: [DamageType]
     tooltip: Damage inflicted by exposure to extreme cold
     type: integer
     value: 3
   DAMAGE_TYPE_ELECTRIC:
+    member-of: [DamageType]
     tooltip: Damage caused by electricity.
     type: integer
     value: 4
   DAMAGE_TYPE_EMOTIONAL:
+    member-of: [DamageType]
     tooltip: ''
     type: integer
     value: 14
   DAMAGE_TYPE_FIRE:
+    member-of: [DamageType]
     tooltip: Damage inflicted by exposure to heat or flames.
     type: integer
     value: 5
   DAMAGE_TYPE_FORCE:
+    member-of: [DamageType]
     tooltip: Damage inflicted by a great force or impact.
     type: integer
     value: 6
   DAMAGE_TYPE_GENERIC:
+    member-of: [DamageType]
     tooltip: Generic or legacy damage.
     type: integer
     value: 0
   DAMAGE_TYPE_IMPACT:
+    member-of: [DamageType]
     tooltip: System damage generated by impact with land or a prim.
     type: integer
     value: -1
   DAMAGE_TYPE_NECROTIC:
+    member-of: [DamageType]
     tooltip: Damage caused by a direct assault on life-force
     type: integer
     value: 7
   DAMAGE_TYPE_PIERCING:
+    member-of: [DamageType]
     tooltip: Damage caused by a piercing object such as a bullet, spear, or arrow.
     type: integer
     value: 8
   DAMAGE_TYPE_POISON:
+    member-of: [DamageType]
     tooltip: Damage caused by poison.
     type: integer
     value: 9
   DAMAGE_TYPE_PSYCHIC:
+    member-of: [DamageType]
     tooltip: Damage caused by a direct assault on the mind.
     type: integer
     value: 10
   DAMAGE_TYPE_RADIANT:
+    member-of: [DamageType]
     tooltip: Damage caused by radiation or extreme light.
     type: integer
     value: 11
   DAMAGE_TYPE_SLASHING:
+    member-of: [DamageType]
     tooltip: Damage caused by a slashing object such as a sword or axe.
     type: integer
     value: 12
   DAMAGE_TYPE_SONIC:
+    member-of: [DamageType]
     tooltip: Damage caused by loud noises, like a Crash Worship concert.
     type: integer
     value: 13
   DATA_BORN:
+    member-of: [AgentData]
     tooltip: The date the agent was born, returned in ISO 8601 format of YYYY-MM-DD.
     type: integer
     value: 3
   DATA_NAME:
+    member-of: [AgentData]
     tooltip: The name of the agent.
     type: integer
     value: 2
   DATA_ONLINE:
+    member-of: [AgentData]
     tooltip: TRUE for online, FALSE for offline.
     type: integer
     value: 1
   DATA_PAYINFO:
+    member-of: [AgentData]
     tooltip: ''
     type: integer
     value: 8
   DATA_RATING:
+    member-of: [AgentData]
     tooltip: "Returns the agent ratings as a comma separated string of six integers.\
       \ They are:\n\t\t\t1) Positive rated behaviour\n\t\t\t2) Negative rated behaviour\n\
       \t\t\t3) Positive rated appearance\n\t\t\t4) Negative rated appearance\n\t\t\
@@ -805,18 +1479,22 @@ constants:
     type: integer
     value: 4
   DATA_RESERVED_0:
+    member-of: [AgentData]
     tooltip: "Reserved for Linden use."
     type: integer
     value: 9
   DATA_SIM_POS:
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 5
   DATA_SIM_RATING:
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 7
   DATA_SIM_STATUS:
+    member-of: [SimulatorData]
     tooltip: ''
     type: integer
     value: 6
@@ -832,59 +1510,73 @@ constants:
     type: float
     value: '0.017453293'
   DENSITY:
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       1.0 and 22587.0 (in Kg/m^3 -- see if you can figure out what 22587 represents)
     type: integer
     value: 1
   DEREZ_DIE:
+    member-of: [DerezMode]
     tooltip: Causes the object to immediately die.
     type: integer
     value: 0
   DEREZ_MAKE_TEMP:
+    member-of: [DerezMode]
     tooltip: The object is made temporary and will be cleaned up at some later timer.
     type: integer
     value: 1
   DEREZ_TO_INVENTORY:
+    member-of: [DerezMode]
     tooltip: The object is returned to the inventory of the rezzer.
     type: integer
     value: 2
   ENVIRONMENT_DAYINFO:
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Day length, offset and progression.
     type: integer
     value: 200
   ENV_INVALID_AGENT:
+    member-of: [EnvironmentError]
     tooltip: Could not find agent with the specified ID
     type: integer
     value: -4
   ENV_INVALID_RULE:
+    member-of: [EnvironmentError]
     tooltip: Attempted to change an unknown property.
     type: integer
     value: -5
   ENV_NOT_EXPERIENCE:
+    member-of: [EnvironmentError]
     tooltip: Attempt to change environments outside an experience.
     type: integer
     value: -1
   ENV_NO_ENVIRONMENT:
+    member-of: [EnvironmentError]
     tooltip: Could not find environmental settings in object inventory.
     type: integer
     value: -3
   ENV_NO_EXPERIENCE_LAND:
+    member-of: [EnvironmentError]
     tooltip: The experience has not been enabled on this land.
     type: integer
     value: -7
   ENV_NO_EXPERIENCE_PERMISSION:
+    member-of: [EnvironmentError]
     tooltip: Agent has not granted permission to change environments.
     type: integer
     value: -2
   ENV_NO_PERMISSIONS:
+    member-of: [EnvironmentError]
     tooltip: Script does not have permission to modify environment.
     type: integer
     value: -9
   ENV_THROTTLE:
+    member-of: [EnvironmentError]
     tooltip: Could not validate values for environment.
     type: integer
     value: -8
   ENV_VALIDATION_FAIL:
+    member-of: [EnvironmentError]
     tooltip: Could not validate values for environment.
     type: integer
     value: -6
@@ -893,46 +1585,57 @@ constants:
     type: string
     value: '\n\n\n'
   ERR_GENERIC:
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -1
   ERR_MALFORMED_PARAMS:
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -3
   ERR_PARCEL_PERMISSIONS:
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -2
   ERR_RUNTIME_PERMISSIONS:
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -4
   ERR_THROTTLED:
+    member-of: [ReturnObjectsError]
     tooltip: ''
     type: integer
     value: -5
   ESTATE_ACCESS_ALLOWED_AGENT_ADD:
+    member-of: [EstateAccessParam]
     tooltip: Add the agent to this estate's Allowed Residents list.
     type: integer
     value: 4
   ESTATE_ACCESS_ALLOWED_AGENT_REMOVE:
+    member-of: [EstateAccessParam]
     tooltip: Remove the agent from this estate's Allowed Residents list.
     type: integer
     value: 8
   ESTATE_ACCESS_ALLOWED_GROUP_ADD:
+    member-of: [EstateAccessParam]
     tooltip: Add the group to this estate's Allowed groups list.
     type: integer
     value: 16
   ESTATE_ACCESS_ALLOWED_GROUP_REMOVE:
+    member-of: [EstateAccessParam]
     tooltip: Remove the group from this estate's Allowed groups list.
     type: integer
     value: 32
   ESTATE_ACCESS_BANNED_AGENT_ADD:
+    member-of: [EstateAccessParam]
     tooltip: Add the agent to this estate's Banned residents list.
     type: integer
     value: 64
   ESTATE_ACCESS_BANNED_AGENT_REMOVE:
+    member-of: [EstateAccessParam]
     tooltip: Remove the agent from this estate's Banned residents list.
     type: integer
     value: 128
@@ -942,171 +1645,212 @@ constants:
     slua-removed: true
     value: 0
   FILTER_FLAGS:
+    member-of: [AttachedListFilterParam]
     tooltip: Flags to control returned attachments.
     type: integer
     value: 2
   FILTER_FLAG_HUDS:
+    member-of: [AttachedListFilterFlag]
     tooltip: Include HUDs with matching experience.
     type: integer
     value: '0x0001'
   FILTER_INCLUDE:
+    member-of: [AttachedListFilterParam]
     tooltip: Include attachment point.
     type: integer
     value: 1
   FORCE_DIRECT_PATH:
+    member-of: [CharacterNavigateParam]
     tooltip: Makes character navigate in a straight line toward position. May be set
       to TRUE or FALSE.
     type: integer
     value: 1
   FRICTION:
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the friction value. Must be
       between 0.0 and 255.0
     type: integer
     value: 2
   GAME_CONTROL_AXIS_LEFTX:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 1
   GAME_CONTROL_AXIS_RIGHTX:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 3
   GAME_CONTROL_AXIS_TRIGGERLEFT:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
+    member-of: [GameControlAxis]
     tooltip: ''
     type: integer
     value: 5
   GAME_CONTROL_BUTTON_A:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1'
   GAME_CONTROL_BUTTON_B:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x800'
   GAME_CONTROL_BUTTON_GUIDE:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8000'
   GAME_CONTROL_BUTTON_PADDLE1:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x80000'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100'
   GAME_CONTROL_BUTTON_START:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x40'
   GAME_CONTROL_BUTTON_TOUCHPAD:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x100000'
   GAME_CONTROL_BUTTON_X:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
+    member-of: [GameControlButton]
     tooltip: ''
     type: integer
     value: '0x8'
   GCNP_GET_WALKABILITY:
+    member-of: [GetClosestNavPointParam]
     private: true
     tooltip: ''
     type: integer
     value: '2'
   GCNP_RADIUS:
+    member-of: [GetClosestNavPointParam]
     tooltip: ''
     type: integer
     value: 0
   GCNP_STATIC:
+    member-of: [GetClosestNavPointParam]
     tooltip: ''
     type: integer
     value: 1
   GRAVITY_MULTIPLIER:
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the gravity multiplier value.
       Must be between -1.0 and +28.0
     type: integer
     value: 8
   HORIZONTAL:
+    member-of: [CharacterOrientation]
     tooltip: ''
     type: integer
     value: 1
   HTTP_ACCEPT:
+    member-of: [HTTPRequestParam]
     tooltip: "Provide a string value to be included in the HTTP\n            accepts\
       \ header value. This replaces the default Second Life HTTP accepts header."
     type: integer
     value: 8
   HTTP_BODY_MAXLENGTH:
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 2
   HTTP_BODY_TRUNCATED:
+    member-of: [HTTPResponseError]
     tooltip: ''
     type: integer
     value: 0
   HTTP_CUSTOM_HEADER:
+    member-of: [HTTPRequestParam]
     tooltip: Add an extra custom HTTP header to the request. The first string is the
       name of the parameter to change, e.g. "Pragma", and the second string is the
       value, e.g. "no-cache". Up to 8 custom headers may be configured per request.
@@ -1115,18 +1859,22 @@ constants:
     type: integer
     value: 5
   HTTP_EXTENDED_ERROR:
+    member-of: [HTTPRequestParam]
     tooltip: Report extended error information through http_response event.
     type: integer
     value: 9
   HTTP_METHOD:
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 0
   HTTP_MIMETYPE:
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 1
   HTTP_PRAGMA_NO_CACHE:
+    member-of: [HTTPRequestParam]
     tooltip: 'Allows enabling/disabling of the "Pragma: no-cache" header.\nUsage: [HTTP_PRAGMA_NO_CACHE,
       integer SendHeader]. When SendHeader is TRUE, the "Pragma: no-cache" header
       is sent by the script. This matches the default behavior. When SendHeader is
@@ -1134,15 +1882,18 @@ constants:
     type: integer
     value: 6
   HTTP_USER_AGENT:
+    member-of: [HTTPRequestParam]
     tooltip: "Provide a string value to be included in the HTTP\n            User-Agent\
       \ header value. This is appended to the default value."
     type: integer
     value: 7
   HTTP_VERBOSE_THROTTLE:
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 4
   HTTP_VERIFY_CERT:
+    member-of: [HTTPRequestParam]
     tooltip: ''
     type: integer
     value: 3
@@ -1202,58 +1953,72 @@ constants:
     slua-type: uuid
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
   INVENTORY_ALL:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: -1
   INVENTORY_ANIMATION:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 20
   INVENTORY_BODYPART:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 13
   INVENTORY_CLOTHING:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 5
   INVENTORY_GESTURE:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 21
   INVENTORY_LANDMARK:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 3
   INVENTORY_MATERIAL:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 57
   INVENTORY_NONE:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: -1
   INVENTORY_NOTECARD:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 7
   INVENTORY_OBJECT:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 6
   INVENTORY_SCRIPT:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 10
   INVENTORY_SETTING:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 56
   INVENTORY_SOUND:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 1
   INVENTORY_TEXTURE:
+    member-of: [InventoryType]
     tooltip: ''
     type: integer
     value: 0
@@ -1318,89 +2083,110 @@ constants:
     type: string
     value: '\u{FDD6}'
   KFM_CMD_PAUSE:
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 2
   KFM_CMD_PLAY:
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 0
   KFM_CMD_STOP:
+    member-of: [KeyframedMotionCommand]
     tooltip: For use with KFM_COMMAND.
     type: integer
     value: 1
   KFM_COMMAND:
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 0
   KFM_DATA:
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 2
   KFM_FORWARD:
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 0
   KFM_LOOP:
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 1
   KFM_MODE:
+    member-of: [KeyframedMotionParam]
     tooltip: ''
     type: integer
     value: 1
   KFM_PING_PONG:
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 2
   KFM_REVERSE:
+    member-of: [KeyframedMotionMode]
     tooltip: For use with KFM_MODE.
     type: integer
     value: 3
   KFM_ROTATION:
+    member-of: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 1
   KFM_TRANSLATION:
+    member-of: [KeyframedMotionData]
     tooltip: For use with KFM_DATA.
     type: integer
     value: 2
   LAND_LARGE_BRUSH:
+    member-of: [ModifyLandBrush]
     tooltip: 'Use a large brush size.\nNOTE: This value is incorrect, a large brush
       should be 2.'
     type: integer
     value: 3
   LAND_LEVEL:
+    member-of: [ModifyLandAction]
     tooltip: Action to level the land.
     type: integer
     value: 0
   LAND_LOWER:
+    member-of: [ModifyLandAction]
     tooltip: Action to lower the land.
     type: integer
     value: 2
   LAND_MEDIUM_BRUSH:
+    member-of: [ModifyLandBrush]
     tooltip: 'Use a medium brush size.\nNOTE: This value is incorrect, a medium brush
       should be 1.'
     type: integer
     value: 2
   LAND_NOISE:
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 4
   LAND_RAISE:
+    member-of: [ModifyLandAction]
     tooltip: Action to raise the land.
     type: integer
     value: 1
   LAND_REVERT:
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 5
   LAND_SMALL_BRUSH:
+    member-of: [ModifyLandBrush]
     tooltip: 'Use a small brush size.\nNOTE: This value is incorrect, a small brush
       should be 0.'
     type: integer
     value: 1
   LAND_SMOOTH:
+    member-of: [ModifyLandAction]
     tooltip: ''
     type: integer
     value: 3
@@ -1410,133 +2196,165 @@ constants:
     type: float
     value: '0.01'
   LINKSETDATA_DELETE:
+    member-of: [LinksetDataAction]
     tooltip: A name:value pair has been removed from the linkset datastore.
     type: integer
     value: 2
   LINKSETDATA_EMEMORY:
+    member-of: [LinksetDataError]
     tooltip: A name:value pair was too large to write to the linkset datastore.
     type: integer
     value: 1
   LINKSETDATA_ENOKEY:
+    member-of: [LinksetDataError]
     tooltip: The key supplied was empty.
     type: integer
     value: 2
   LINKSETDATA_EPROTECTED:
+    member-of: [LinksetDataError]
     tooltip: The name:value pair has been protected from overwrite in the linkset
       datastore.
     type: integer
     value: 3
   LINKSETDATA_MULTIDELETE:
+    member-of: [LinksetDataAction]
     tooltip: A CSV list of names removed from the linkset datastore.
     type: integer
     value: 3
   LINKSETDATA_NOTFOUND:
+    member-of: [LinksetDataError]
     tooltip: The named key was not found in the datastore.
     type: integer
     value: 4
   LINKSETDATA_NOUPDATE:
+    member-of: [LinksetDataError]
     tooltip: The value written to a name in the keystore is the same as the value
       already there.
     type: integer
     value: 5
   LINKSETDATA_OK:
+    member-of: [LinksetDataError]
     tooltip: The name:value pair was written to the datastore.
     type: integer
     value: 0
   LINKSETDATA_RESET:
+    member-of: [LinksetDataAction]
     tooltip: The linkset datastore has been reset.
     type: integer
     value: 0
   LINKSETDATA_UPDATE:
+    member-of: [LinksetDataAction]
     tooltip: A name:value pair in the linkset datastore has been changed or created.
     type: integer
     value: 1
   LINK_ALL_CHILDREN:
+    member-of: [Links]
     tooltip: This targets every object except the root in the linked set.
     type: integer
     value: -3
   LINK_ALL_OTHERS:
+    member-of: [Links]
     tooltip: This targets every object in the linked set except the object with the
       script.
     type: integer
     value: -2
   LINK_ROOT:
+    member-of: [Link, Links]
     tooltip: This targets the root of the linked set.
     type: integer
     value: 1
   LINK_SET:
+    member-of: [Links]
     tooltip: This targets every object in the linked set.
     type: integer
     value: -1
   LINK_THIS:
+    member-of: [Link, Links]
     tooltip: The link number of the prim containing the script.
     type: integer
     value: -4
   LIST_STAT_GEOMETRIC_MEAN:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 9
   LIST_STAT_MAX:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 2
   LIST_STAT_MEAN:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 3
   LIST_STAT_MEDIAN:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 4
   LIST_STAT_MIN:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 1
   LIST_STAT_NUM_COUNT:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 8
   LIST_STAT_RANGE:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 0
   LIST_STAT_STD_DEV:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 5
   LIST_STAT_SUM:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 6
   LIST_STAT_SUM_SQUARES:
+    member-of: [ListStatisticsOperation]
     tooltip: ''
     type: integer
     value: 7
   LOOP:
+    member-of: [TextureAnimMode]
     tooltip: Loop the texture animation.
     type: integer
     value: '0x2'
   MASK_BASE:
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 0
   MASK_COMBINED:
+    member-of: [AssetPermissionCategoryFlag]
     tooltip: Fold permissions for object inventory into results.
     type: integer
     value: '0x10'
   MASK_EVERYONE:
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 3
   MASK_GROUP:
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 2
   MASK_NEXT:
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 4
   MASK_OWNER:
+    member-of: [AssetPermissionCategory]
     tooltip: ''
     type: integer
     value: 1
@@ -1546,6 +2364,7 @@ constants:
     type: string
     value: '\n\x15\n'
   NAVIGATE_TO_GOAL_REACHED_DIST:
+    member-of: [CharacterNavigateParam]
     private: true
     tooltip: ''
     type: integer
@@ -1556,155 +2375,189 @@ constants:
     slua-type: uuid
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
+    member-of: [ObjectDetailsParam]
     tooltip: Retrieves the account level of an avatar.\nReturns 0 when the avatar
       has a basic account,\n 1 when the avatar has a premium account,\n 10 when the
       avatar has a premium plus account,\n or -1 if the object is not an avatar.
     type: integer
     value: 41
   OBJECT_ANIMATED_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of associated
       animated objects
     type: integer
     value: 39
   OBJECT_ANIMATED_SLOTS_AVAILABLE:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of additional
       animated object attachments allowed.
     type: integer
     value: 40
   OBJECT_ATTACHED_POINT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the attachment point to which the object is attached.\nReturns 0
       if the object is not an attachment (or is an avatar, etc).
     type: integer
     value: 19
   OBJECT_ATTACHED_SLOTS_AVAILABLE:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns the number of attachment slots available.\nReturns 0 if the object
       is not an avatar or none are available.
     type: integer
     value: 35
   OBJECT_BODY_SHAPE_TYPE:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the body type of the
       avatar, based on shape data.\nIf no data is available, -1.0 is returned.\nThis
       is normally between 0 and 1.0, with 0.5 and larger considered 'male'
     type: integer
     value: 26
   OBJECT_CHARACTER_TIME:
+    member-of: [ObjectDetailsParam]
     tooltip: Units in seconds
     type: integer
     value: 17
   OBJECT_CLICK_ACTION:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the click action.\nThe
       default is 0
     type: integer
     value: 28
   OBJECT_CREATION_TIME:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the time this object
       was created
     type: integer
     value: 36
   OBJECT_CREATOR:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's creator key. If id is an avatar, a NULL_KEY is returned.
     type: integer
     value: 8
   OBJECT_DAMAGE:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the damage value assigned to this object.
     type: integer
     value: 51
   OBJECT_DAMAGE_TYPE:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the damage type, if any, assigned to this object.
     type: integer
     value: 52
   OBJECT_DESC:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's description. If id is an avatar, an empty string is
       returned.
     type: integer
     value: 2
   OBJECT_GROUP:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the prims's group key. If id is an avatar, a NULL_KEY is returned.
     type: integer
     value: 7
   OBJECT_GROUP_TAG:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the agent's current group role tag. If id is an object, an empty
       is returned.
     type: integer
     value: 33
   OBJECT_HEALTH:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets current health value for the object.
     type: integer
     value: 50
   OBJECT_HOVER_HEIGHT:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get hover height of the
       avatar\nIf no data is available, 0.0 is returned.
     type: integer
     value: 25
   OBJECT_LAST_OWNER_ID:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's last owner ID.
     type: integer
     value: 27
   OBJECT_LINK_NUMBER:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's link number or 0 if unlinked.
     type: integer
     value: 46
   OBJECT_MASS:
+    member-of: [ObjectDetailsParam]
     tooltip: Get the object's mass
     type: integer
     value: 43
   OBJECT_MATERIAL:
+    member-of: [ObjectDetailsParam]
     tooltip: Get an object's material setting.
     type: integer
     value: 42
   OBJECT_NAME:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's name.
     type: integer
     value: 1
   OBJECT_OMEGA:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an object's angular velocity.
     type: integer
     value: 29
   OBJECT_OWNER:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an object's owner's key. If id is group owned, a NULL_KEY is returned.
     type: integer
     value: 6
   OBJECT_PATHFINDING_TYPE:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns the pathfinding setting of any object in the region. It returns
       an integer matching one of the OPT_* constants.
     type: integer
     value: 20
   OBJECT_PERMS:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the objects permissions
     type: integer
     value: 53
   OBJECT_PERMS_COMBINED:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's permissions including any inventory.
     type: integer
     value: 54
   OBJECT_PHANTOM:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if phantom is enabled or disabled on the object.\nIf
       id is an avatar or attachment, 0 is returned.
     type: integer
     value: 22
   OBJECT_PHYSICS:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if physics is enabled or disabled on the object.\nIf
       id is an avatar or attachment, 0 is returned.
     type: integer
     value: 21
   OBJECT_PHYSICS_COST:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 16
   OBJECT_POS:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's position in region coordinates.
     type: integer
     value: 3
   OBJECT_PRIM_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the prim count of the object.  The script and target object  must
       be owned by the same owner
     type: integer
     value: 30
   OBJECT_PRIM_EQUIVALENCE:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 13
   OBJECT_RENDER_WEIGHT:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the Avatar_Rendering_Cost
       of an avatar, based on values reported by nearby viewers.\nIf no data is available,
       -1 is returned.\nThe maximum render weight stored by the simulator is 500000.
@@ -1712,96 +2565,118 @@ constants:
     type: integer
     value: 24
   OBJECT_RETURN_PARCEL:
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 1
   OBJECT_RETURN_PARCEL_OWNER:
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 2
   OBJECT_RETURN_REGION:
+    member-of: [ReturnObjectsScope]
     tooltip: ''
     type: integer
     value: 4
   OBJECT_REZZER_KEY:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 32
   OBJECT_REZ_TIME:
+    member-of: [ObjectDetailsParam]
     tooltip: Get the time when an object was rezzed.
     type: integer
     value: 45
   OBJECT_ROOT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the id of the root prim of the object requested.\nIf id is an avatar,
       return the id of the root prim of the linkset the avatar is sitting on (or the
       avatar's own id if the avatar is not sitting on an object within the region).
     type: integer
     value: 18
   OBJECT_ROT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's rotation.
     type: integer
     value: 4
   OBJECT_RUNNING_SCRIPT_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 9
   OBJECT_SCALE:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's size.
     type: integer
     value: 47
   OBJECT_SCRIPT_MEMORY:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 11
   OBJECT_SCRIPT_TIME:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 12
   OBJECT_SELECT_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of avatars
       selecting any part of the object
     type: integer
     value: 37
   OBJECT_SERVER_COST:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 14
   OBJECT_SIT_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: This is a flag used with llGetObjectDetails to get the number of avatars
       sitting on the object
     type: integer
     value: 38
   OBJECT_STREAMING_COST:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 15
   OBJECT_TEMP_ATTACHED:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, indicating if object is a temp attachment.
     type: integer
     value: 34
   OBJECT_TEMP_ON_REZ:
+    member-of: [ObjectDetailsParam]
     tooltip: Returns boolean, detailing if temporary is enabled or disabled on the
       object.
     type: integer
     value: 23
   OBJECT_TEXT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets an objects hover text.
     type: integer
     value: 44
   OBJECT_TEXT_ALPHA:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the alpha of an objects hover text.
     type: integer
     value: 49
   OBJECT_TEXT_COLOR:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the color of an objects hover text.
     type: integer
     value: 48
   OBJECT_TOTAL_INVENTORY_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the total inventory count of the object.  The script and target
       object must be owned by the same owner
     type: integer
     value: 31
   OBJECT_TOTAL_SCRIPT_COUNT:
+    member-of: [ObjectDetailsParam]
     tooltip: ''
     type: integer
     value: 10
@@ -1810,438 +2685,545 @@ constants:
     type: integer
     value: -1
   OBJECT_VELOCITY:
+    member-of: [ObjectDetailsParam]
     tooltip: Gets the object's velocity.
     type: integer
     value: 5
   OPT_AVATAR:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for avatars.
     type: integer
     value: 1
   OPT_CHARACTER:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for pathfinding characters.
     type: integer
     value: 2
   OPT_EXCLUSION_VOLUME:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for exclusion volumes.
     type: integer
     value: 6
   OPT_LEGACY_LINKSET:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for movable obstacles, movable phantoms, physical, and volumedetect
       objects.
     type: integer
     value: 0
   OPT_MATERIAL_VOLUME:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for material volumes.
     type: integer
     value: 5
   OPT_OTHER:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for attachments, Linden trees, and grass.
     type: integer
     value: -1
   OPT_STATIC_OBSTACLE:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for static obstacles.
     type: integer
     value: 4
   OPT_WALKABLE:
+    member-of: [ObjectPathfindingType]
     tooltip: Returned for walkable objects.
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_ALPHA:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 2
   OVERRIDE_GLTF_BASE_ALPHA_MASK:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 4
   OVERRIDE_GLTF_BASE_ALPHA_MODE:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 3
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 1
   OVERRIDE_GLTF_BASE_DOUBLE_SIDED:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 5
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 8
   OVERRIDE_GLTF_METALLIC_FACTOR:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 6
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
+    member-of: [GLTFOverride]
     tooltip: ''
     type: integer
     value: 7
   PARCEL_COUNT_GROUP:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 2
   PARCEL_COUNT_OTHER:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 3
   PARCEL_COUNT_OWNER:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 1
   PARCEL_COUNT_SELECTED:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 4
   PARCEL_COUNT_TEMP:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 5
   PARCEL_COUNT_TOTAL:
+    member-of: [ParcelPrimCountCategory]
     tooltip: ''
     type: integer
     value: 0
   PARCEL_DETAILS_AREA:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's area, in square meters. (5 chars.).
     type: integer
     value: 4
   PARCEL_DETAILS_DESC:
+    member-of: [ParcelDetailsParam]
     tooltip: The description of the parcel. (127 chars).
     type: integer
     value: 1
   PARCEL_DETAILS_FLAGS:
+    member-of: [ParcelDetailsParam]
     tooltip: Flags set on the parcel
     type: integer
     value: 12
   PARCEL_DETAILS_GROUP:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel group's key. (36 chars.).
     type: integer
     value: 3
   PARCEL_DETAILS_ID:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's key. (36 chars.).
     type: integer
     value: 5
   PARCEL_DETAILS_LANDING_LOOKAT:
+    member-of: [ParcelDetailsParam]
     tooltip: Lookat vector set for teleport routing.
     type: integer
     value: 10
   PARCEL_DETAILS_LANDING_POINT:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's landing point, if any.
     type: integer
     value: 9
   PARCEL_DETAILS_NAME:
+    member-of: [ParcelDetailsParam]
     tooltip: The name of the parcel. (63 chars.).
     type: integer
     value: 0
   PARCEL_DETAILS_OWNER:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel owner's key. (36 chars.).
     type: integer
     value: 2
   PARCEL_DETAILS_PRIM_CAPACITY:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's prim capacity.
     type: integer
     value: 7
   PARCEL_DETAILS_PRIM_USED:
+    member-of: [ParcelDetailsParam]
     tooltip: The number of prims used on this parcel.
     type: integer
     value: 8
   PARCEL_DETAILS_SCRIPT_DANGER:
+    member-of: [ParcelDetailsParam]
     tooltip: There are restrictions on this parcel that may impact script execution.
     type: integer
     value: 13
   PARCEL_DETAILS_SEE_AVATARS:
+    member-of: [ParcelDetailsParam]
     tooltip: The parcel's avatar visibility setting. (1 char.).
     type: integer
     value: 6
   PARCEL_DETAILS_TP_ROUTING:
+    member-of: [ParcelDetailsParam]
     tooltip: Parcel's teleport routing setting.
     type: integer
     value: 11
   PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x08000000'
   PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x4000000'
   PARCEL_FLAG_ALLOW_CREATE_OBJECTS:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x40'
   PARCEL_FLAG_ALLOW_DAMAGE:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x20'
   PARCEL_FLAG_ALLOW_FLY:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x1'
   PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x10000000'
   PARCEL_FLAG_ALLOW_GROUP_SCRIPTS:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x2000000'
   PARCEL_FLAG_ALLOW_LANDMARK:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x8'
   PARCEL_FLAG_ALLOW_SCRIPTS:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x2'
   PARCEL_FLAG_ALLOW_TERRAFORM:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x10'
   PARCEL_FLAG_LINDEN_HOMES:
+    member-of: [ParcelFlag]
     private: true
     tooltip: ''
     type: integer
     value: '0x800000'
   PARCEL_FLAG_LOCAL_SOUND_ONLY:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x8000'
   PARCEL_FLAG_RESTRICT_PUSHOBJECT:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x200000'
   PARCEL_FLAG_USE_ACCESS_GROUP:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   PARCEL_FLAG_USE_ACCESS_LIST:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x200'
   PARCEL_FLAG_USE_BAN_LIST:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x400'
   PARCEL_FLAG_USE_LAND_PASS_LIST:
+    member-of: [ParcelFlag]
     tooltip: ''
     type: integer
     value: '0x800'
   PARCEL_MEDIA_COMMAND_AGENT:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 7
   PARCEL_MEDIA_COMMAND_AUTO_ALIGN:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 9
   PARCEL_MEDIA_COMMAND_DESC:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media description.
     type: integer
     value: 12
   PARCEL_MEDIA_COMMAND_LOOP:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 3
   PARCEL_MEDIA_COMMAND_LOOP_SET:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Used to get or set the parcel's media looping variable.
     type: integer
     value: 13
   PARCEL_MEDIA_COMMAND_PAUSE:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 1
   PARCEL_MEDIA_COMMAND_PLAY:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 2
   PARCEL_MEDIA_COMMAND_SIZE:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media pixel resolution.
     type: integer
     value: 11
   PARCEL_MEDIA_COMMAND_STOP:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 0
   PARCEL_MEDIA_COMMAND_TEXTURE:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: ''
     type: integer
     value: 4
   PARCEL_MEDIA_COMMAND_TIME:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 6
   PARCEL_MEDIA_COMMAND_TYPE:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Use this to get or set the parcel media MIME type (e.g. "text/html").
     type: integer
     value: 10
   PARCEL_MEDIA_COMMAND_UNLOAD:
+    member-of: [ParcelMediaCommand]
     tooltip: ''
     type: integer
     value: 8
   PARCEL_MEDIA_COMMAND_URL:
+    member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: ''
     type: integer
     value: 5
   PARCEL_SALE_AGENT:
+    member-of: [ParcelSaleParam]
     tooltip: The agent authorized to purchase the parcel.
     type: integer
     value: 2
   PARCEL_SALE_OBJECTS:
+    member-of: [ParcelSaleParam]
     tooltip: Are the objects on the parcel included in the sale?
     type: integer
     value: 3
   PARCEL_SALE_PRICE:
+    member-of: [ParcelSaleParam]
     tooltip: The price of the parcel. If no authorized agent is set, must be greater than 0.
     type: integer
     value: 1
   PARCEL_SALE_OK:
+    member-of: [ParcelSaleError]
     tooltip: The sale information was successfully set.
     type: integer
     value: 0
   PARCEL_SALE_ERROR_NO_PARCEL:
+    member-of: [ParcelSaleError]
     tooltip: The parcel could not be found.
     type: integer
     value: 1
   PARCEL_SALE_ERROR_NO_PERMISSIONS:
+    member-of: [ParcelSaleError]
     tooltip: The script does not have the required permissions to set the sale information.
     type: integer
     value: 2
   PARCEL_SALE_ERROR_IN_ESCROW:
+    member-of: [ParcelSaleError]
     tooltip: The parcel is currently in escrow and cannot be set for sale.
     type: integer
     value: 3
   PARCEL_SALE_ERROR_INVALID_PRICE:
+    member-of: [ParcelSaleError]
     tooltip: The price set for the parcel is invalid (e.g., less than or equal to 0).
     type: integer
     value: 4
   PARCEL_SALE_ERROR_BAD_PARAMS:
+    member-of: [ParcelSaleError]
     tooltip: The parameters provided to set the sale information are invalid.
     type: integer
     value: 5
   PASSIVE:
+    member-of: [DetectType]
     tooltip: Static in-world objects.
     type: integer
     value: '0x4'
   PASS_ALWAYS:
+    member-of: [PassMode]
     tooltip: Always pass the event.
     type: integer
     value: 1
   PASS_IF_NOT_HANDLED:
+    member-of: [PassMode]
     tooltip: Pass the event if there is no script handling the event in the prim.
     type: integer
     value: 0
   PASS_NEVER:
+    member-of: [PassMode]
     tooltip: Always pass the event.
     type: integer
     value: 2
   PATROL_PAUSE_AT_WAYPOINTS:
+    member-of: [CharacterPatrolPointsParam]
     tooltip: ''
     type: integer
     value: 0
   PAYMENT_INFO_ON_FILE:
+    member-of: [AgentDataPaymentInfo]
     tooltip: ''
     type: integer
     value: 1
   PAYMENT_INFO_USED:
+    member-of: [AgentDataPaymentInfo]
     tooltip: ''
     type: integer
     value: 2
   PAY_DEFAULT:
+    member-of: [PayButton]
     tooltip: ''
     type: integer
     value: -2
   PAY_HIDE:
+    member-of: [PayButton]
     tooltip: ''
     type: integer
     value: -1
   PERMISSION_DEBIT:
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llGiveMoney
       or llTransferLindenDollars to debit the owners account.
     type: integer
     value: '0x00002'
   PERMISSION_TAKE_CONTROLS:
+    member-of: [ScriptPermission]
     tooltip: If this permission enabled, the object can successfully call the llTakeControls
       library call.
     type: integer
     value: '0x00004'
   PERMISSION_REMAP_CONTROLS:
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00008'
   PERMISSION_TRIGGER_ANIMATION:
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llStartAnimation
       for the avatar that owns this.
     type: integer
     value: '0x00010'
   PERMISSION_ATTACH:
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llAttachToAvatar
       to attach to the given avatar.
     type: integer
     value: '0x00020'
   PERMISSION_RELEASE_OWNERSHIP:
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00040'
   PERMISSION_CHANGE_LINKS:
+    member-of: [ScriptPermission]
     tooltip: If this permission is enabled, the object can successfully call llCreateLink,
       llBreakLink, and llBreakAllLinks to change links to other objects.
     type: integer
     value: '0x00080'
   PERMISSION_CHANGE_JOINTS:
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00100'
   PERMISSION_CHANGE_PERMISSIONS:
+    member-of: [ScriptPermission]
     tooltip: (not yet implemented)
     type: integer
     value: '0x00200'
   PERMISSION_TRACK_CAMERA:
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x00400'
   PERMISSION_CONTROL_CAMERA:
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x00800'
   PERMISSION_TELEPORT:
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x01000'
   PERMISSION_SILENT_ESTATE_MANAGEMENT:
+    member-of: [ScriptPermission]
     tooltip: A script with this permission does not notify the object owner when it
       modifies estate access rules via llManageEstateAccess.
     type: integer
     value: '0x04000'
   PERMISSION_OVERRIDE_ANIMATIONS:
+    member-of: [ScriptPermission]
     tooltip: Permission to override default animations.
     type: integer
     value: '0x08000'
   PERMISSION_RETURN_OBJECTS:
+    member-of: [ScriptPermission]
     tooltip: ''
     type: integer
     value: '0x10000'
   PERMISSION_PRIVILEGED_LAND_ACCESS:
+    member-of: [ScriptPermission]
     tooltip: Grants the script privileged access to land parcel functions, such as parcel sale.
     type: integer
     value: '0x80000'
   PERM_ALL:
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x7FFFFFFF'
   PERM_COPY:
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x8000'
   PERM_MODIFY:
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x4000'
   PERM_MOVE:
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x80000'
   PERM_TRANSFER:
+    member-of: [AssetPermission]
     tooltip: ''
     type: integer
     value: '0x2000'
@@ -2250,6 +3232,7 @@ constants:
     type: float
     value: '3.14159265'
   PING_PONG:
+    member-of: [TextureAnimMode]
     tooltip: Play animation going forwards, then backwards.
     type: integer
     value: '0x8'
@@ -2258,11 +3241,13 @@ constants:
     type: float
     value: '1.57079633'
   PRIM_ALLOW_UNSIT:
+    member-of: [PrimParam]
     tooltip: Prim parameter for restricting manual standing for seated avatars in
       an experience.\nIgnored if the avatar was not seated via a call to llSitOnLink.
     type: integer
     value: 39
   PRIM_ALPHA_MODE:
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, integer alpha_mode,
       integer alpha_cutoff.\nDefines how the alpha channel of the diffuse texture
       should be rendered.\nValid options for alpha_mode are PRIM_ALPHA_MODE_BLEND,
@@ -2270,117 +3255,144 @@ constants:
     type: integer
     value: 38
   PRIM_ALPHA_MODE_BLEND:
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as alpha-blended.
     type: integer
     value: 1
   PRIM_ALPHA_MODE_EMISSIVE:
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as an emissivity mask.
     type: integer
     value: 3
   PRIM_ALPHA_MODE_MASK:
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be rendered as fully opaque for alpha values
       above alpha_cutoff and fully transparent otherwise.
     type: integer
     value: 2
   PRIM_ALPHA_MODE_NONE:
+    member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE.\nIndicates that the diffuse
       texture's alpha channel should be ignored.
     type: integer
     value: 0
   PRIM_BUMP_BARK:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 4
   PRIM_BUMP_BLOBS:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 12
   PRIM_BUMP_BRICKS:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 5
   PRIM_BUMP_BRIGHT:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 1
   PRIM_BUMP_CHECKER:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 6
   PRIM_BUMP_CONCRETE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 7
   PRIM_BUMP_DARK:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 2
   PRIM_BUMP_DISKS:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 10
   PRIM_BUMP_GRAVEL:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 11
   PRIM_BUMP_LARGETILE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 14
   PRIM_BUMP_NONE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 0
   PRIM_BUMP_SHINY:
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 19
   PRIM_BUMP_SIDING:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 13
   PRIM_BUMP_STONE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 9
   PRIM_BUMP_STUCCO:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 15
   PRIM_BUMP_SUCTION:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 16
   PRIM_BUMP_TILE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 8
   PRIM_BUMP_WEAVE:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 17
   PRIM_BUMP_WOOD:
+    member-of: [PrimBump]
     tooltip: ''
     type: integer
     value: 3
   PRIM_CAST_SHADOWS:
+    member-of: [PrimParam]
     deprecated:
       reason: Not implemented.
     tooltip: ''
     type: integer
     value: 24
   PRIM_CLICK_ACTION:
+    member-of: [PrimParam]
     tooltip: '[PRIM_CLICK_ACTION, integer CLICK_ACTION_*]'
     type: integer
     value: 43
   PRIM_COLLISION_SOUND:
+    member-of: [PrimParam]
     tooltip: Collision sound uuid and volume for this prim
     type: integer
     value: 53
   PRIM_COLOR:
+    member-of: [PrimParam]
     tooltip: |
       [PRIM_COLOR, integer face, vector color, float alpha]
 
@@ -2390,14 +3402,17 @@ constants:
     type: integer
     value: 18
   PRIM_DAMAGE:
+    member-of: [PrimParam]
     tooltip: Damage and damage type assigned to this prim.
     type: integer
     value: 51
   PRIM_DESC:
+    member-of: [PrimParam]
     tooltip: '[PRIM_DESC, string description]'
     type: integer
     value: 28
   PRIM_FLEXIBLE:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
 
@@ -2411,26 +3426,32 @@ constants:
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_FULLBRIGHT, integer face, integer boolean ]'
     type: integer
     value: 20
   PRIM_GLOW:
+    member-of: [PrimParam]
     tooltip: 'PRIM_GLOW is used to get or set the glow status of the face.\n[ PRIM_GLOW, integer face, float intensity ]'
     type: integer
     value: 25
   PRIM_GLTF_ALPHA_MODE_BLEND:
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "BLEND".
     type: integer
     value: 1
   PRIM_GLTF_ALPHA_MODE_MASK:
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "MASK".
     type: integer
     value: 2
   PRIM_GLTF_ALPHA_MODE_OPAQUE:
+    member-of: [GLTFAlphaMode]
     tooltip: Prim parameter setting for PRIM_GLTF_BASE_COLOR alpha mode "OPAQUE".
     type: integer
     value: 0
   PRIM_GLTF_BASE_COLOR:
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer alpha_mode,
       float alpha_cutoff, boolean double_sided.\nValid options for alpha_mode are
@@ -2438,42 +3459,51 @@ constants:
     type: integer
     value: 48
   PRIM_GLTF_EMISSIVE:
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, vector color
     type: integer
     value: 46
   PRIM_GLTF_METALLIC_ROUGHNESS:
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, float metallic_factor,
       float roughness_factor
     type: integer
     value: 47
   PRIM_GLTF_NORMAL:
+    member-of: [PrimParam]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 45
   PRIM_HEALTH:
+    member-of: [PrimParam]
     tooltip: Health value for this prim
     type: integer
     value: 52
   PRIM_HOLE_CIRCLE:
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x10'
   PRIM_HOLE_DEFAULT:
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x00'
   PRIM_HOLE_SQUARE:
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x20'
   PRIM_HOLE_TRIANGLE:
+    member-of: [PrimTypeHole]
     tooltip: ''
     type: integer
     value: '0x30'
   PRIM_LINK_TARGET:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_LINK_TARGET, integer link_target ]
 
@@ -2481,113 +3511,146 @@ constants:
     type: integer
     value: 34
   PRIM_MATERIAL:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_MATERIAL, integer PRIM_MATERIAL_* ]'
     type: integer
     value: 2
   PRIM_MATERIAL_DENSITY:
+    member-of: [PhysicsMaterialParam]
     private: true
+    deprecated:
+      use: DENSITY
     tooltip: ''
     type: integer
     value: '0x1'
   PRIM_MATERIAL_FLESH:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 4
   PRIM_MATERIAL_FRICTION:
+    member-of: [PhysicsMaterialParam]
     private: true
+    deprecated:
+      use: FRICTION
     tooltip: ''
     type: integer
     value: '0x2'
   PRIM_MATERIAL_GLASS:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 2
   PRIM_MATERIAL_GRAVITY_MULTIPLIER:
+    member-of: [PhysicsMaterialParam]
     private: true
+    deprecated:
+      use: GRAVITY_MULTIPLIER
     tooltip: ''
     type: integer
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 7
   PRIM_MATERIAL_METAL:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 1
   PRIM_MATERIAL_PLASTIC:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 5
   PRIM_MATERIAL_RESTITUTION:
+    member-of: [PhysicsMaterialParam]
     private: true
+    deprecated:
+      use: RESTITUTION
     tooltip: ''
     type: integer
     value: '0x4'
   PRIM_MATERIAL_RUBBER:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 6
   PRIM_MATERIAL_STONE:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 0
   PRIM_MATERIAL_WOOD:
+    member-of: [PhysicsMaterialPreset]
     tooltip: ''
     type: integer
     value: 3
   PRIM_MEDIA_ALT_IMAGE_ENABLE:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets the default image state (the image that the user sees
       before a piece of media is active) for the chosen face. The default image is
       specified by Second Life's server for that media type.
     type: integer
     value: 0
   PRIM_MEDIA_AUTO_LOOP:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether auto-looping is enabled.
     type: integer
     value: 4
   PRIM_MEDIA_AUTO_PLAY:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether the media auto-plays when a Resident can view
       it.
     type: integer
     value: 5
   PRIM_MEDIA_AUTO_SCALE:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether auto-scaling is enabled. Auto-scaling forces
       the media to the full size of the texture.
     type: integer
     value: 6
   PRIM_MEDIA_AUTO_ZOOM:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether clicking the media triggers auto-zoom and
       auto-focus on the media.
     type: integer
     value: 7
   PRIM_MEDIA_CONTROLS:
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the style of controls. Can be either PRIM_MEDIA_CONTROLS_STANDARD
       or PRIM_MEDIA_CONTROLS_MINI.
     type: integer
     value: 1
   PRIM_MEDIA_CONTROLS_MINI:
+    member-of: [PrimMediaControl]
     tooltip: Mini web navigation controls; does not include an address bar.
     type: integer
     value: 1
   PRIM_MEDIA_CONTROLS_STANDARD:
+    member-of: [PrimMediaControl]
     tooltip: Standard web navigation controls.
     type: integer
     value: 0
   PRIM_MEDIA_CURRENT_URL:
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the current url displayed on the chosen face. Changing
       this URL causes navigation. 1024 characters Maximum.
     type: integer
     value: 2
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether the first click interaction is enabled.
     type: integer
     value: 8
   PRIM_MEDIA_HEIGHT_PIXELS:
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the height of the media in pixels.
     type: integer
     value: 10
   PRIM_MEDIA_HOME_URL:
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the home URL for the chosen face. 1024 characters maximum.
     type: integer
     value: 3
@@ -2616,57 +3679,69 @@ constants:
     type: integer
     value: 14
   PRIM_MEDIA_PERMS_CONTROL:
+    member-of: [PrimMediaParam]
     tooltip: 'Integer. Gets/Sets the permissions mask that control who can see the
       media control bar above the object:: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP,
       PRIM_MEDIA_PERM_NONE, PRIM_MEDIA_PERM_OWNER'
     type: integer
     value: 14
   PRIM_MEDIA_PERMS_INTERACT:
+    member-of: [PrimMediaParam]
     tooltip: 'Integer. Gets/Sets the permissions mask that control who can interact
       with the object: PRIM_MEDIA_PERM_ANYONE, PRIM_MEDIA_PERM_GROUP, PRIM_MEDIA_PERM_NONE,
       PRIM_MEDIA_PERM_OWNER'
     type: integer
     value: 13
   PRIM_MEDIA_PERM_ANYONE:
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 4
   PRIM_MEDIA_PERM_GROUP:
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 2
   PRIM_MEDIA_PERM_NONE:
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 0
   PRIM_MEDIA_PERM_OWNER:
+    member-of: [PrimMediaPerm]
     tooltip: ''
     type: integer
     value: 1
   PRIM_MEDIA_WHITELIST:
+    member-of: [PrimMediaParam]
     tooltip: String. Gets/Sets the white-list as a string of escaped, comma-separated
       URLs. This string can hold up to 64 URLs or 1024 characters, whichever comes
       first.
     type: integer
     value: 12
   PRIM_MEDIA_WHITELIST_ENABLE:
+    member-of: [PrimMediaParam]
     tooltip: Boolean. Gets/Sets whether navigation is restricted to URLs in PRIM_MEDIA_WHITELIST.
     type: integer
     value: 11
   PRIM_MEDIA_WIDTH_PIXELS:
+    member-of: [PrimMediaParam]
     tooltip: Integer. Gets/Sets the width of the media in pixels.
     type: integer
     value: 9
   PRIM_NAME:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_NAME, string name ]'
     type: integer
     value: 27
   PRIM_NORMAL:
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 37
   PRIM_OMEGA:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_OMEGA, vector axis, float spinrate, float gain ]
 
@@ -2676,34 +3751,41 @@ constants:
     type: integer
     value: 32
   PRIM_PHANTOM:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PHANTOM, integer boolean ]'
     type: integer
     value: 5
   PRIM_PHYSICS:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PHYSICS, integer boolean ]'
     type: integer
     value: 3
   PRIM_PHYSICS_SHAPE_CONVEX:
+    member-of: [PhysicsShapeType]
     tooltip: Use the convex hull of the prim shape for physics (this is the default
       for mesh objects).
     type: integer
     value: 2
   PRIM_PHYSICS_SHAPE_NONE:
+    member-of: [PhysicsShapeType]
     tooltip: 'Ignore this prim in the physics shape. NB: This cannot be applied to
       the root prim.'
     type: integer
     value: 1
   PRIM_PHYSICS_SHAPE_PRIM:
+    member-of: [PhysicsShapeType]
     tooltip: Use the normal prim shape for physics (this is the default for all non-mesh
       objects).
     type: integer
     value: 0
   PRIM_PHYSICS_SHAPE_TYPE:
+    member-of: [PrimParam]
     tooltip: "Allows you to set the physics shape type of a prim via lsl. Permitted\
       \ values are:\n\t\t\tPRIM_PHYSICS_SHAPE_NONE, PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_CONVEX"
     type: integer
     value: 30
   PRIM_POINT_LIGHT:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
 
@@ -2715,6 +3797,7 @@ constants:
     type: integer
     value: 23
   PRIM_POSITION:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POSITION, vector position ]
 
@@ -2722,6 +3805,7 @@ constants:
     type: integer
     value: 6
   PRIM_POS_LOCAL:
+    member-of: [PrimParam]
     tooltip: |
       [ PRIM_POS_LOCAL, vector position ]
 
@@ -2729,415 +3813,510 @@ constants:
     type: integer
     value: 33
   PRIM_PROJECTOR:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_PROJECTOR, string texture, float fov, float focus, float ambiance ]'
     type: integer
     value: 42
   PRIM_REFLECTION_PROBE:
+    member-of: [PrimParam]
     tooltip: Allows you to configure the object as a custom-placed reflection probe,
       for image-based lighting (IBL). Only objects in the influence volume of the
       reflection probe object are affected.
     type: integer
     value: 44
   PRIM_REFLECTION_PROBE_BOX:
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       is a box. When unset, the reflection probe is a sphere.
     type: integer
     value: 1
   PRIM_REFLECTION_PROBE_DYNAMIC:
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       includes avatars in IBL effects. When unset, the reflection probe excludes avatars.
     type: integer
     value: 2
   PRIM_REFLECTION_PROBE_MIRROR:
+    member-of: [ReflectionProbeType]
     tooltip: This is a flag option used with llGetPrimitiveParams and related functions
       when the parameter is PRIM_REFLECTION_PROBE. When set, the reflection probe
       acts as a mirror.
     type: integer
     value: 4
   PRIM_RENDER_MATERIAL:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_RENDER_MATERIAL, integer face, string material ]'
     type: integer
     value: 49
   PRIM_ROTATION:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_ROT_LOCAL, rotation global_rot ]'
     type: integer
     value: 8
   PRIM_ROT_LOCAL:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_ROT_LOCAL, rotation local_rot ]'
     type: integer
     value: 29
   PRIM_SCRIPTED_SIT_ONLY:
+    member-of: [PrimParam]
     tooltip: Prim parameter for restricting manual sitting on this prim.\nSitting
       must be initiated via call to llSitOnLink.
     type: integer
     value: 40
   PRIM_SCULPT_FLAG_ANIMESH:
+    member-of: [PrimTypeSculptFlag]
     tooltip: Mesh is animated.
     type: integer
     value: 32
   PRIM_SCULPT_FLAG_INVERT:
+    member-of: [PrimTypeSculptFlag]
     tooltip: Render inside out (inverts the normals).
     type: integer
     value: 64
   PRIM_SCULPT_FLAG_MIRROR:
+    member-of: [PrimTypeSculptFlag]
     tooltip: Render an X axis mirror of the sculpty.
     type: integer
     value: 128
   PRIM_SCULPT_TYPE_CYLINDER:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 4
   PRIM_SCULPT_TYPE_MASK:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 7
   PRIM_SCULPT_TYPE_MESH:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 5
   PRIM_SCULPT_TYPE_PLANE:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 3
   PRIM_SCULPT_TYPE_SPHERE:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 1
   PRIM_SCULPT_TYPE_TORUS:
+    member-of: [PrimTypeSculptType]
     tooltip: ''
     type: integer
     value: 2
   PRIM_SHINY_HIGH:
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 3
   PRIM_SHINY_LOW:
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 1
   PRIM_SHINY_MEDIUM:
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 2
   PRIM_SHINY_NONE:
+    member-of: [PrimShiny]
     tooltip: ''
     type: integer
     value: 0
   PRIM_SIT_FLAGS:
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 50
   PRIM_SIT_TARGET:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SIT_TARGET, integer boolean, vector offset, rotation rot ]'
     type: integer
     value: 41
   PRIM_SIZE:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SIZE, vector size ]'
     type: integer
     value: 7
   PRIM_SLICE:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_SLICE, vector slice ]'
     type: integer
     value: 35
   PRIM_SPECULAR:
+    member-of: [PrimParam]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer glossy,
       integer environment
     type: integer
     value: 36
   PRIM_TEMP_ON_REZ:
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 4
   PRIM_TEXGEN:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXGEN, integer face, PRIM_TEXGEN_* ]'
     type: integer
     value: 22
   PRIM_TEXGEN_DEFAULT:
+    member-of: [PrimTexgen]
     tooltip: ''
     type: integer
     value: 0
   PRIM_TEXGEN_PLANAR:
+    member-of: [PrimTexgen]
     tooltip: ''
     type: integer
     value: 1
   PRIM_TEXT:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXT, string text, vector color, float alpha ]'
     type: integer
     value: 26
   PRIM_TEXTURE:
+    member-of: [PrimParam]
     tooltip: '[ PRIM_TEXTURE, integer face, string texture, vector repeats, vector offsets, float rotation_in_radians ]'
     type: integer
     value: 17
   PRIM_TYPE:
+    member-of: [PrimParam]
     tooltip: ''
     type: integer
     value: 9
   PRIM_TYPE_BOX:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 0
   PRIM_TYPE_CYLINDER:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 1
   PRIM_TYPE_PRISM:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 2
   PRIM_TYPE_RING:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 6
   PRIM_TYPE_SCULPT:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 7
   PRIM_TYPE_SPHERE:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 3
   PRIM_TYPE_TORUS:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 4
   PRIM_TYPE_TUBE:
+    member-of: [PrimType]
     tooltip: ''
     type: integer
     value: 5
   PROFILE_NONE:
+    member-of: [ScriptProfileMode]
     tooltip: Disables profiling
     type: integer
     value: 0
   PROFILE_SCRIPT_MEMORY:
+    member-of: [ScriptProfileMode]
     tooltip: Enables memory profiling
     type: integer
     value: 1
   PSYS_PART_BF_DEST_COLOR:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 2
   PSYS_PART_BF_ONE:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 0
   PSYS_PART_BF_ONE_MINUS_DEST_COLOR:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 4
   PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 9
   PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 5
   PSYS_PART_BF_SOURCE_ALPHA:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 7
   PSYS_PART_BF_SOURCE_COLOR:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 3
   PSYS_PART_BF_ZERO:
+    member-of: [ParticleBlendFunc]
     tooltip: ''
     type: integer
     value: 1
   PSYS_PART_BLEND_FUNC_DEST:
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 25
   PSYS_PART_BLEND_FUNC_SOURCE:
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 24
   PSYS_PART_BOUNCE_MASK:
+    member-of: [ParticleFlag]
     tooltip: Particles bounce off of a plane at the objects Z height.
     type: integer
     value: '0x4'
   PSYS_PART_EMISSIVE_MASK:
+    member-of: [ParticleFlag]
     tooltip: The particle glows.
     type: integer
     value: '0x100'
   PSYS_PART_END_ALPHA:
+    member-of: [ParticleParam]
     tooltip: A float which determines the ending alpha of the object.
     type: integer
     value: 4
   PSYS_PART_END_COLOR:
+    member-of: [ParticleParam]
     tooltip: A vector <r, g, b> which determines the ending color of the object.
     type: integer
     value: 3
   PSYS_PART_END_GLOW:
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 27
   PSYS_PART_END_SCALE:
+    member-of: [ParticleParam]
     tooltip: A vector <sx, sy, z>, which is the ending size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 6
   PSYS_PART_FLAGS:
+    member-of: [ParticleParam]
     tooltip: Each particle that is emitted by the particle system is simulated based
       on the following flags. To use multiple flags, bitwise or (|) them together.
     type: integer
     value: 0
   PSYS_PART_FOLLOW_SRC_MASK:
+    member-of: [ParticleFlag]
     tooltip: The particle position is relative to the source objects position.
     type: integer
     value: '0x10'
   PSYS_PART_FOLLOW_VELOCITY_MASK:
+    member-of: [ParticleFlag]
     tooltip: The particle orientation is rotated so the vertical axis faces towards
       the particle velocity.
     type: integer
     value: '0x20'
   PSYS_PART_INTERP_COLOR_MASK:
+    member-of: [ParticleFlag]
     tooltip: Interpolate both the color and alpha from the start value to the end
       value.
     type: integer
     value: '0x1'
   PSYS_PART_INTERP_SCALE_MASK:
+    member-of: [ParticleFlag]
     tooltip: Interpolate the particle scale from the start value to the end value.
     type: integer
     value: '0x2'
   PSYS_PART_MAX_AGE:
+    member-of: [ParticleParam]
     tooltip: Age in seconds of a particle at which it dies.
     type: integer
     value: 7
   PSYS_PART_RIBBON_MASK:
+    member-of: [ParticleFlag]
     tooltip: ''
     type: integer
     value: '0x400'
   PSYS_PART_START_ALPHA:
+    member-of: [ParticleParam]
     tooltip: A float which determines the starting alpha of the object.
     type: integer
     value: 2
   PSYS_PART_START_COLOR:
+    member-of: [ParticleParam]
     tooltip: A vector <r, g, b> which determines the starting color of the object.
     type: integer
     value: 1
   PSYS_PART_START_GLOW:
+    member-of: [ParticleParam]
     tooltip: ''
     type: integer
     value: 26
   PSYS_PART_START_SCALE:
+    member-of: [ParticleParam]
     tooltip: A vector <sx, sy, z>, which is the starting size of the particle billboard
       in meters (z is ignored).
     type: integer
     value: 5
   PSYS_PART_TARGET_LINEAR_MASK:
+    member-of: [ParticleFlag]
     tooltip: ''
     type: integer
     value: '0x80'
   PSYS_PART_TARGET_POS_MASK:
+    member-of: [ParticleFlag]
     tooltip: The particle heads towards the location of the target object as defined
       by PSYS_SRC_TARGET_KEY.
     type: integer
     value: '0x40'
   PSYS_PART_WIND_MASK:
+    member-of: [ParticleFlag]
     tooltip: Particles have their velocity damped towards the wind velocity.
     type: integer
     value: '0x8'
   PSYS_SRC_ACCEL:
+    member-of: [ParticleParam]
     tooltip: A vector <x, y, z> which is the acceleration to apply on particles.
     type: integer
     value: 8
   PSYS_SRC_ANGLE_BEGIN:
+    member-of: [ParticleParam]
     tooltip: Area in radians specifying where particles will NOT be created (for ANGLE
       patterns)
     type: integer
     value: 22
   PSYS_SRC_ANGLE_END:
+    member-of: [ParticleParam]
     tooltip: Area in radians filled with particles (for ANGLE patterns) (if lower
       than PSYS_SRC_ANGLE_BEGIN, acts as PSYS_SRC_ANGLE_BEGIN itself, and PSYS_SRC_ANGLE_BEGIN
       acts as PSYS_SRC_ANGLE_END).
     type: integer
     value: 23
   PSYS_SRC_BURST_PART_COUNT:
+    member-of: [ParticleParam]
     tooltip: How many particles to release in a burst.
     type: integer
     value: 15
   PSYS_SRC_BURST_RADIUS:
+    member-of: [ParticleParam]
     tooltip: What distance from the center of the object to create the particles.
     type: integer
     value: 16
   PSYS_SRC_BURST_RATE:
+    member-of: [ParticleParam]
     tooltip: How often to release a particle burst (float seconds).
     type: integer
     value: 13
   PSYS_SRC_BURST_SPEED_MAX:
+    member-of: [ParticleParam]
     tooltip: Maximum speed that a particle should be moving.
     type: integer
     value: 18
   PSYS_SRC_BURST_SPEED_MIN:
+    member-of: [ParticleParam]
     tooltip: Minimum speed that a particle should be moving.
     type: integer
     value: 17
   PSYS_SRC_INNERANGLE:
+    member-of: [ParticleParam]
     tooltip: "Specifies the inner angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area specified will\
       \ NOT have particles in it."
     type: integer
     value: 10
   PSYS_SRC_MAX_AGE:
+    member-of: [ParticleParam]
     tooltip: How long this particle system should last, 0.0 means forever.
     type: integer
     value: 19
   # These were present in the lexer, but not in the syntax file, they're marked private for consistency.
   # TODO: check if the private is actually warranted, it's likely not.
   PSYS_SRC_OBJ_REL_MASK:
+    member-of: [ParticleParam]
     private: true
     tooltip: ''
     type: integer
     value: '0x1'
   PSYS_SRC_OMEGA:
+    member-of: [ParticleParam]
     tooltip: Sets the angular velocity to rotate the axis that SRC_PATTERN_ANGLE and
       SRC_PATTERN_ANGLE_CONE use.
     type: integer
     value: 21
   PSYS_SRC_OUTERANGLE:
+    member-of: [ParticleParam]
     tooltip: "Specifies the outer angle of the arc created by the PSYS_SRC_PATTERN_ANGLE\
       \ or PSYS_SRC_PATTERN_ANGLE_CONE source pattern.\n\t\t\tThe area between the\
       \ outer and inner angle will be filled with particles."
     type: integer
     value: 11
   PSYS_SRC_PATTERN:
+    member-of: [ParticleParam]
     tooltip: "The pattern which is used to generate particles.\n\t\t\tUse one of the\
       \ following values: PSYS_SRC_PATTERN Values."
     type: integer
     value: 9
   PSYS_SRC_PATTERN_ANGLE:
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles across a 2 dimensional area defined by the arc created
       from PSYS_SRC_OUTERANGLE. There will be an open area defined by PSYS_SRC_INNERANGLE
       within the larger arc.
     type: integer
     value: '0x04'
   PSYS_SRC_PATTERN_ANGLE_CONE:
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles out in a 3 dimensional cone with an outer arc of PSYS_SRC_OUTERANGLE
       and an inner open area defined by PSYS_SRC_INNERANGLE.
     type: integer
     value: '0x08'
   PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY:
+    member-of: [ParticleSourcePattern]
     tooltip: ''
     type: integer
     value: '0x10'
   PSYS_SRC_PATTERN_DROP:
+    member-of: [ParticleSourcePattern]
     tooltip: Drop particles at the source position.
     type: integer
     value: '0x01'
   PSYS_SRC_PATTERN_EXPLODE:
+    member-of: [ParticleSourcePattern]
     tooltip: Shoot particles out in all directions, using the burst parameters.
     type: integer
     value: '0x02'
   PSYS_SRC_TARGET_KEY:
+    member-of: [ParticleParam]
     tooltip: The key of a target object to move towards if PSYS_PART_TARGET_POS_MASK
       is enabled.
     type: integer
     value: 20
   PSYS_SRC_TEXTURE:
+    member-of: [ParticleParam]
     tooltip: An asset name for the texture to use for the particles.
     type: integer
     value: 12
@@ -3148,78 +4327,95 @@ constants:
     type: integer
     value: 0
   PURSUIT_FUZZ_FACTOR:
+    member-of: [CharacterPursueParam]
     tooltip: Selects a random destination near the offset.
     type: integer
     value: 3
   PURSUIT_GOAL_TOLERANCE:
+    member-of: [CharacterPursueParam]
     tooltip: ''
     type: integer
     value: 5
   PURSUIT_INTERCEPT:
+    member-of: [CharacterPursueParam]
     tooltip: Define whether the character attempts to predict the target's location.
     type: integer
     value: 4
   PURSUIT_OFFSET:
+    member-of: [CharacterPursueParam]
     tooltip: Go to a position offset from the target.
     type: integer
     value: 1
   PU_EVADE_HIDDEN:
+    member-of: [CharacterPathUpdateType]
     tooltip: Triggered when an llEvade character thinks it has hidden from its pursuer.
     type: integer
     value: '0x07'
   PU_EVADE_SPOTTED:
+    member-of: [CharacterPathUpdateType]
     tooltip: Triggered when an llEvade character switches from hiding to running
     type: integer
     value: '0x08'
   PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED:
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 10
   PU_FAILURE_INVALID_GOAL:
+    member-of: [CharacterPathUpdateType]
     tooltip: Goal is not on the navigation-mesh and cannot be reached.
     type: integer
     value: '0x03'
   PU_FAILURE_INVALID_START:
+    member-of: [CharacterPathUpdateType]
     tooltip: Character cannot navigate from the current location - e.g., the character
       is off the navmesh or too high above it.
     type: integer
     value: '0x02'
   PU_FAILURE_NO_NAVMESH:
+    member-of: [CharacterPathUpdateType]
     tooltip: This is a fatal error reported to a character when there is no navmesh
       for the region. This usually indicates a server failure and users should file
       a bug report and include the time and region in which they received this message.
     type: integer
     value: '0x09'
   PU_FAILURE_NO_VALID_DESTINATION:
+    member-of: [CharacterPathUpdateType]
     tooltip: There is no good place for the character to go - e.g., it is patrolling
       and all the patrol points are now unreachable.
     type: integer
     value: '0x06'
   PU_FAILURE_OTHER:
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 1000000
   PU_FAILURE_PARCEL_UNREACHABLE:
+    member-of: [CharacterPathUpdateType]
     tooltip: ''
     type: integer
     value: 11
   PU_FAILURE_TARGET_GONE:
+    member-of: [CharacterPathUpdateType]
     tooltip: Target (for llPursue or llEvade) can no longer be tracked - e.g., it
       left the region or is an avatar that is now more than about 30m outside the
       region.
     type: integer
     value: '0x05'
   PU_FAILURE_UNREACHABLE:
+    member-of: [CharacterPathUpdateType]
     tooltip: Goal is no longer reachable for some reason - e.g., an obstacle blocks
       the path.
     type: integer
     value: '0x04'
   PU_GOAL_REACHED:
+    member-of: [CharacterPathUpdateType]
     tooltip: Character has reached the goal and will stop or choose a new goal (if
       wandering).
     type: integer
     value: '0x01'
   PU_SLOWDOWN_DISTANCE_REACHED:
+    member-of: [CharacterPathUpdateType]
     tooltip: Character is near current goal.
     type: integer
     value: '0x00'
@@ -3229,509 +4425,631 @@ constants:
     type: float
     value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -3
   RCERR_SIM_PERF_LOW:
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -2
   RCERR_UNKNOWN:
+    member-of: [RayCastError]
     tooltip: ''
     type: integer
     value: -1
   RC_DATA_FLAGS:
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 2
   RC_DETECT_PHANTOM:
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 1
   RC_GET_LINK_NUM:
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 4
   RC_GET_NORMAL:
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 1
   RC_GET_ROOT_KEY:
+    member-of: [RayCastData]
     tooltip: ''
     type: integer
     value: 2
   RC_MAX_HITS:
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 3
   RC_REJECT_AGENTS:
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 1
   RC_REJECT_LAND:
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 8
   RC_REJECT_NONPHYSICAL:
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 4
   RC_REJECT_PHYSICAL:
+    member-of: [RayCastRejectType]
     tooltip: ''
     type: integer
     value: 2
   RC_REJECT_TYPES:
+    member-of: [RayCastParam]
     tooltip: ''
     type: integer
     value: 0
   REGION_FLAG_ALLOW_DAMAGE:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x1'
   REGION_FLAG_ALLOW_DIRECT_TELEPORT:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x100000'
   REGION_FLAG_BLOCK_FLY:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x80000'
   REGION_FLAG_BLOCK_FLYOVER:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x8000000'
   REGION_FLAG_BLOCK_TERRAFORM:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x40'
   REGION_FLAG_DISABLE_COLLISIONS:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x1000'
   REGION_FLAG_DISABLE_PHYSICS:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x4000'
   REGION_FLAG_FIXED_SUN:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x10'
   REGION_FLAG_RESTRICT_PUSHOBJECT:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x400000'
   REGION_FLAG_SANDBOX:
+    member-of: [RegionFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   REMOTE_DATA_CHANNEL:
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 1
   REMOTE_DATA_REPLY:
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 3
   REMOTE_DATA_REQUEST:
+    member-of: [RemoteDataEventType]
     deprecated: true
     tooltip: ''
     type: integer
     value: 2
   REQUIRE_LINE_OF_SIGHT:
+    member-of: [CharacterPursueParam]
     tooltip: Define whether the character needs a line-of-sight to give chase.
     type: integer
     value: 2
   RESTITUTION:
+    member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the density value. Must be between
       0.0 and 1.0
     type: integer
     value: 4
   REVERSE:
+    member-of: [TextureAnimMode]
     tooltip: Play animation in reverse direction.
     type: integer
     value: '0x4'
   REZ_ACCEL:
+    member-of: [RezParam]
     tooltip: Acceleration forced applied to the rezzed object. [vector force, integer
       rel]
     type: integer
     value: 5
   REZ_DAMAGE:
+    member-of: [RezParam]
     tooltip: Damage applied by the object when it collides with an agent. [float damage]
     type: integer
     value: 8
   REZ_DAMAGE_TYPE:
+    member-of: [RezParam]
     tooltip: Set the damage type applied when this object collides. [integer damage_type]
     type: integer
     value: 12
   REZ_FLAGS:
+    member-of: [RezParam]
     tooltip: Rez flags to set on the newly rezzed object. [integer flags]
     type: integer
     value: 1
   REZ_FLAG_BLOCK_GRAB_OBJECT:
+    member-of: [RezFlag]
     tooltip: Prevent grabbing the object.
     type: integer
     value: '0x0080'
   REZ_FLAG_DIE_ON_COLLIDE:
+    member-of: [RezFlag]
     tooltip: Object will die after its first collision.
     type: integer
     value: '0x0008'
   REZ_FLAG_DIE_ON_NOENTRY:
+    member-of: [RezFlag]
     tooltip: Object will die if it attempts to enter a parcel that it can not.
     type: integer
     value: '0x0010'
   REZ_FLAG_NO_COLLIDE_FAMILY:
+    member-of: [RezFlag]
     tooltip: Object will not trigger collision events with other objects created by
       the same rezzer.
     type: integer
     value: '0x0040'
   REZ_FLAG_NO_COLLIDE_OWNER:
+    member-of: [RezFlag]
     tooltip: Object will not trigger collision events with its owner.
     type: integer
     value: '0x0020'
   REZ_FLAG_PHANTOM:
+    member-of: [RezFlag]
     tooltip: Make the object phantom on rez.
     type: integer
     value: '0x0004'
   REZ_FLAG_PHYSICAL:
+    member-of: [RezFlag]
     tooltip: Make the object physical on rez.
     type: integer
     value: '0x0002'
   REZ_FLAG_TEMP:
+    member-of: [RezFlag]
     tooltip: Flag the object as temp on rez.
     type: integer
     value: '0x0001'
   REZ_LOCK_AXES:
+    member-of: [RezParam]
     tooltip: Prevent the object from rotating around some axes. [vector locks]
     type: integer
     value: 11
   REZ_OMEGA:
+    member-of: [RezParam]
     tooltip: Omega applied to the rezzed object. [vector axis, integer rel, float
       spin, float gain]
     type: integer
     value: 7
   REZ_PARAM:
+    member-of: [RezParam]
     tooltip: Integer value to pass to the object as its rez parameter. [integer param]
     type: integer
     value: 0
   REZ_PARAM_STRING:
+    member-of: [RezParam]
     tooltip: A string value to pass to the object as its rez parameter. [string param]
     type: integer
     value: 13
   REZ_POS:
+    member-of: [RezParam]
     tooltip: Position at which to rez the new object. [vector position, integer rel,
       integer atroot]
     type: integer
     value: 2
   REZ_ROT:
+    member-of: [RezParam]
     tooltip: Rotation applied to newly rezzed object. [rotation rot, integer rel]
     type: integer
     value: 3
   REZ_SOUND:
+    member-of: [RezParam]
     tooltip: Sound attached to the rezzed object. [string name, float volume, integer
       loop]
     type: integer
     value: 9
   REZ_SOUND_COLLIDE:
+    member-of: [RezParam]
     tooltip: Sound played by the object on a collision. [string name, float volume]
     type: integer
     value: 10
   REZ_TORQUE:
+    member-of: [RezParam]
     private: true
     tooltip: ''
     type: integer
     value: 6
   REZ_VEL:
+    member-of: [RezParam]
     tooltip: Initial velocity of rezzed object. [vector vel, integer rel, integer
       inherit]
     type: integer
     value: 4
   ROTATE:
+    member-of: [TextureAnimMode]
     tooltip: Animate texture rotation.
     type: integer
     value: '0x20'
   SCALE:
+    member-of: [TextureAnimMode]
     tooltip: Animate the texture scale.
     type: integer
     value: '0x40'
   SCRIPTED:
+    member-of: [DetectType]
     tooltip: Scripted in-world objects.
     type: integer
     value: '0x8'
   SIM_STAT_ACTIVE_SCRIPT_COUNT:
+    member-of: [SimulatorStat]
     tooltip: Number of active scripts.
     type: integer
     value: 12
   SIM_STAT_AGENT_COUNT:
+    member-of: [SimulatorStat]
     tooltip: Number of agents in region.
     type: integer
     value: 10
   SIM_STAT_AGENT_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'agent' segment of simulation frame.
     type: integer
     value: 7
   SIM_STAT_AGENT_UPDATES:
+    member-of: [SimulatorStat]
     tooltip: Agent updates per second.
     type: integer
     value: 2
   SIM_STAT_AI_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent on AI step.
     type: integer
     value: 26
   SIM_STAT_ASSET_DOWNLOADS:
+    member-of: [SimulatorStat]
     tooltip: Pending asset download count.
     type: integer
     value: 15
   SIM_STAT_ASSET_UPLOADS:
+    member-of: [SimulatorStat]
     tooltip: Pending asset upload count.
     type: integer
     value: 16
   SIM_STAT_CHILD_AGENT_COUNT:
+    member-of: [SimulatorStat]
     tooltip: Number of child agents in region.
     type: integer
     value: 11
   SIM_STAT_FRAME_MS:
+    member-of: [SimulatorStat]
     tooltip: Total frame time.
     type: integer
     value: 3
   SIM_STAT_IMAGE_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'image' segment of simulation frame.
     type: integer
     value: 8
   SIM_STAT_IO_PUMP_MS:
+    member-of: [SimulatorStat]
     tooltip: Pump IO time.
     type: integer
     value: 24
   SIM_STAT_NET_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'network' segment of simulation frame.
     type: integer
     value: 4
   SIM_STAT_OTHER_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'other' segment of simulation frame.
     type: integer
     value: 5
   SIM_STAT_PACKETS_IN:
+    member-of: [SimulatorStat]
     tooltip: Packets in per second.
     type: integer
     value: 13
   SIM_STAT_PACKETS_OUT:
+    member-of: [SimulatorStat]
     tooltip: Packets out per second.
     type: integer
     value: 14
   SIM_STAT_PCT_CHARS_STEPPED:
+    member-of: [SimulatorStat]
     tooltip: Returns the % of pathfinding characters skipped each frame, averaged
       over the last minute.\nThe returned value corresponds to the "Characters Updated"
       stat in the viewer's Statistics Bar.
     type: integer
     value: 0
   SIM_STAT_PHYSICS_FPS:
+    member-of: [SimulatorStat]
     tooltip: Physics simulation FPS.
     type: integer
     value: 1
   SIM_STAT_PHYSICS_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'physics' segment of simulation frame.
     type: integer
     value: 6
   SIM_STAT_PHYSICS_OTHER_MS:
+    member-of: [SimulatorStat]
     tooltip: Physics other time.
     type: integer
     value: 20
   SIM_STAT_PHYSICS_SHAPE_MS:
+    member-of: [SimulatorStat]
     tooltip: Physics shape update time.
     type: integer
     value: 19
   SIM_STAT_PHYSICS_STEP_MS:
+    member-of: [SimulatorStat]
     tooltip: Physics step time.
     type: integer
     value: 18
   SIM_STAT_SCRIPT_EPS:
+    member-of: [SimulatorStat]
     tooltip: Script events per second.
     type: integer
     value: 21
   SIM_STAT_SCRIPT_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent in 'script' segment of simulation frame.
     type: integer
     value: 9
   SIM_STAT_SCRIPT_RUN_PCT:
+    member-of: [SimulatorStat]
     tooltip: Percent of scripts run during frame.
     type: integer
     value: 25
   SIM_STAT_SLEEP_MS:
+    member-of: [SimulatorStat]
     tooltip: Time spent sleeping.
     type: integer
     value: 23
   SIM_STAT_SPARE_MS:
+    member-of: [SimulatorStat]
     tooltip: Spare time left after frame.
     type: integer
     value: 22
   SIM_STAT_UNACKED_BYTES:
+    member-of: [SimulatorStat]
     tooltip: Total unacknowledged bytes.
     type: integer
     value: 17
   SIT_FLAG_ALLOW_UNSIT:
+    member-of: [SitFlag]
     tooltip: The prim allows a seated avatar to stand up.
     type: integer
     value: '0x0002'
   SIT_FLAG_NO_COLLIDE:
+    member-of: [SitFlag]
     tooltip: The seated avatar's hit box is disabled when seated on this prim.
     type: integer
     value: '0x0010'
   SIT_FLAG_NO_DAMAGE:
+    member-of: [SitFlag]
     tooltip: Damage will not be forwarded to an avatar seated on this prim.
     type: integer
     value: '0x0020'
   SIT_FLAG_SCRIPTED_ONLY:
+    member-of: [SitFlag]
     tooltip: An avatar may not manually sit on this prim.
     type: integer
     value: '0x0004'
   SIT_FLAG_SIT_TARGET:
+    member-of: [SitFlag]
     tooltip: The prim has an explicitly set sit target.
     type: integer
     value: '0x0001'
   SIT_INVALID_AGENT:
+    member-of: [SitError]
     tooltip: Avatar ID did not specify a valid avatar.
     type: integer
     value: -4
   SIT_INVALID_LINK:
+    member-of: [SitError]
     tooltip: Link ID did not specify a valid prim in the linkset or resolved to multiple
       prims.
     type: integer
     value: -5
   SIT_INVALID_OBJECT:
+    member-of: [SitError]
     tooltip: Attempt to force an avatar to sit on an attachment or other invalid target.
     type: integer
     value: -7
   SIT_NOT_EXPERIENCE:
+    member-of: [SitError]
     tooltip: Attempt to force an avatar to sit outside an experience.
     type: integer
     value: -1
   SIT_NO_ACCESS:
+    member-of: [SitError]
     tooltip: Avatar does not have access to the parcel containing the target linkset
       of the forced sit.
     type: integer
     value: -6
   SIT_NO_EXPERIENCE_PERMISSION:
+    member-of: [SitError]
     tooltip: Avatar has not granted permission to force sits.
     type: integer
     value: -2
   SIT_NO_SIT_TARGET:
+    member-of: [SitError]
     tooltip: No available sit target in linkset for forced sit.
     type: integer
     value: -3
   SKY_ABSORPTION_CONFIG:
     private: true
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: ''
     type: integer
     value: 16
   SKY_AMBIENT:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: The ambient color of the environment
     type: integer
     value: 0
   SKY_BLUE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Blue settings for environment
     type: integer
     value: 22
   SKY_CLOUDS:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Settings controlling cloud density and configuration
     type: integer
     value: 2
   SKY_CLOUD_TEXTURE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Texture ID used by clouds
     type: integer
     value: 19
   SKY_DENSITY_PROFILE_COUNTS:
     private: true
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Counts for density profiles of each type.
     type: integer
     value: 3
   SKY_DOME:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Sky dome information.
     type: integer
     value: 4
   SKY_GAMMA:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: The gamma value applied to the scene.
     type: integer
     value: 5
   SKY_GLOW:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Glow color applied to the sun and moon.
     type: integer
     value: 6
   SKY_HAZE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Haze settings for environment
     type: integer
     value: 23
   SKY_LIGHT:
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Miscellaneous lighting values.
     type: integer
     value: 8
   SKY_MIE_CONFIG:
     private: true
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: MIE scatting profile parameters.
     type: integer
     value: 17
   SKY_MOON:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental moon details.
     type: integer
     value: 9
   SKY_MOON_TEXTURE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental moon texture.
     type: integer
     value: 20
   SKY_PLANET:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Planet information used in rendering the sky.
     type: integer
     value: 10
   SKY_RAYLEIGH_CONFIG:
     private: true
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Rayleigh scatting profile parameters.
     type: integer
     value: 18
   SKY_REFLECTION_PROBE_AMBIANCE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Settings the ambience of the reflection probe.
     type: integer
     value: 24
   SKY_REFRACTION:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Sky refraction parameters for rainbows and optical effects.
     type: integer
     value: 11
   SKY_STAR_BRIGHTNESS:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Brightness value for the stars.
     type: integer
     value: 13
   SKY_SUN:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Detailed sun information
     type: integer
     value: 14
   SKY_SUN_TEXTURE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental sun texture
     type: integer
     value: 21
   SKY_TEXTURE_DEFAULTS:
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Is the environment using the default textures.
     type: integer
     value: 1
   SKY_TRACKS:
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Track elevations for this region.
     type: integer
     value: 15
   SMOOTH:
+    member-of: [TextureAnimMode]
     tooltip: Slide in the X direction, instead of playing separate frames.
     type: integer
     value: '0x10'
   SOUND_LOOP:
+    member-of: [PlaySoundFlag]
     tooltip: Sound will loop until stopped.
     type: integer
     value: '0x01'
   SOUND_PLAY:
+    member-of: [PlaySoundFlag]
     tooltip: Sound will play normally.
     type: integer
     value: '0x00'
   SOUND_SYNC:
+    member-of: [PlaySoundFlag]
     tooltip: Sound will be synchronized with the nearest master.
     type: integer
     value: '0x04'
   SOUND_TRIGGER:
+    member-of: [PlaySoundFlag]
     tooltip: Sound will be triggered at the prim's location and not attached.
     type: integer
     value: '0x02'
@@ -3740,6 +5058,7 @@ constants:
     type: float
     value: '1.41421356'
   STATUS_BLOCK_GRAB:
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object can be grabbed.\nA grab is the default action
       when in third person, and is available as the hand tool in build mode. This
       is useful for physical objects that you don't want other people to be able to
@@ -3747,50 +5066,61 @@ constants:
     type: integer
     value: '0x40'
   STATUS_BLOCK_GRAB_OBJECT:
+    member-of: [ObjectStatusParam]
     tooltip: Prevent click-and-drag movement on all prims in the object.
     type: integer
     value: '0x400'
   STATUS_BOUNDS_ERROR:
+    member-of: [PrimMediaError]
     tooltip: Argument(s) passed to function had a bounds error.
     type: integer
     value: 1002
   STATUS_CAST_SHADOWS:
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x200'
   STATUS_DIE_AT_EDGE:
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object is returned to the owner's inventory if it
       wanders off the edge of the world.\nIt is useful to set this status TRUE for
       things like bullets or rockets. The default is TRUE
     type: integer
     value: '0x80'
   STATUS_DIE_AT_NO_ENTRY:
+    member-of: [ObjectStatusParam]
     tooltip: Controls whether the object dies if it attempts to enter a parcel that
       does not allow object entry or does not have enough capacity.\nIt is useful
       to set this status TRUE for things like bullets or rockets. The default is FALSE
     type: integer
     value: '0x800'
   STATUS_INTERNAL_ERROR:
+    member-of: [PrimMediaError]
     tooltip: An internal error occurred.
     type: integer
     value: 1999
   STATUS_MALFORMED_PARAMS:
+    member-of: [PrimMediaError]
     tooltip: Function was called with malformed parameters.
     type: integer
     value: 1000
   STATUS_NOT_FOUND:
+    member-of: [PrimMediaError]
     tooltip: Object or other item was not found.
     type: integer
     value: 1003
   STATUS_NOT_SUPPORTED:
+    member-of: [PrimMediaError]
     tooltip: Feature not supported.
     type: integer
     value: 1004
   STATUS_OK:
+    member-of: [PrimMediaError]
     tooltip: Result of function call was a success.
     type: integer
     value: 0
   STATUS_PHANTOM:
+    member-of: [ObjectStatusParam]
     tooltip: Controls/indicates whether the object collides or not.\nSetting the value
       to TRUE makes the object non-colliding with all objects. It is a good idea to
       use this for most objects that move or rotate, but are non-physical. It is also
@@ -3798,23 +5128,28 @@ constants:
     type: integer
     value: '0x10'
   STATUS_PHYSICS:
+    member-of: [ObjectStatusParam]
     tooltip: Controls/indicates whether the object moves physically.\nThis controls
       the same flag that the UI check-box for Physical controls. The default is FALSE.
     type: integer
     value: '0x1'
   STATUS_RETURN_AT_EDGE:
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x100'
   STATUS_ROTATE_X:
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x2'
   STATUS_ROTATE_Y:
+    member-of: [ObjectStatusParam]
     tooltip: ''
     type: integer
     value: '0x4'
   STATUS_ROTATE_Z:
+    member-of: [ObjectStatusParam]
     tooltip: "Controls/indicates whether the object can physically rotate around\n\
       \t\t\tthe specific axis or not. This flag has no meaning\n\t\t\tfor non-physical\
       \ objects. Set the value to FALSE\n\t\t\tif you want to disable rotation around\
@@ -3825,116 +5160,144 @@ constants:
     type: integer
     value: '0x8'
   STATUS_SANDBOX:
+    member-of: [ObjectStatusParam]
     tooltip: "Controls/indicates whether the object can cross region boundaries\n\t\
       \t\tand move more than 20 meters from its creation\n\t\t\tpoint. The default\
       \ if FALSE."
     type: integer
     value: '0x20'
   STATUS_TYPE_MISMATCH:
+    member-of: [PrimMediaError]
     tooltip: Argument(s) passed to function had a type mismatch.
     type: integer
     value: 1001
   STATUS_WHITELIST_FAILED:
+    member-of: [PrimMediaError]
     tooltip: Whitelist Failed.
     type: integer
     value: 2001
   STRING_TRIM:
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x03'
   STRING_TRIM_HEAD:
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x01'
   STRING_TRIM_TAIL:
+    member-of: [StringTrimType]
     tooltip: ''
     type: integer
     value: '0x02'
   TARGETED_EMAIL_OBJECT_OWNER:
+    member-of: [EmailTarget]
     tooltip: Send email to the owner of the object
     type: integer
     value: '0x02'
   TARGETED_EMAIL_ROOT_CREATOR:
+    member-of: [EmailTarget]
     tooltip: Send email to the creator of the root object
     type: integer
     value: '0x01'
   TERRAIN_DETAIL_1:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 0
   TERRAIN_DETAIL_2:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 1
   TERRAIN_DETAIL_3:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 2
   TERRAIN_DETAIL_4:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 3
   TERRAIN_HEIGHT_RANGE_NE:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 7
   TERRAIN_HEIGHT_RANGE_NW:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 6
   TERRAIN_HEIGHT_RANGE_SE:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 5
   TERRAIN_HEIGHT_RANGE_SW:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 4
   TERRAIN_PBR_OFFSET_1:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 16
   TERRAIN_PBR_OFFSET_2:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 17
   TERRAIN_PBR_OFFSET_3:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 18
   TERRAIN_PBR_OFFSET_4:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 19
   TERRAIN_PBR_ROTATION_1:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 12
   TERRAIN_PBR_ROTATION_2:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 13
   TERRAIN_PBR_ROTATION_3:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 14
   TERRAIN_PBR_ROTATION_4:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 15
   TERRAIN_PBR_SCALE_1:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 8
   TERRAIN_PBR_SCALE_2:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 9
   TERRAIN_PBR_SCALE_3:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 10
   TERRAIN_PBR_SCALE_4:
+    member-of: [GroundTextureParam]
     tooltip: ''
     type: integer
     value: 11
@@ -3964,6 +5327,7 @@ constants:
     slua-type: uuid
     value: "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
   TOUCH_INVALID_FACE:
+    # not enum as it can return positive integers also
     tooltip: ''
     type: integer
     value: -1
@@ -3976,83 +5340,103 @@ constants:
     type: vector
     value: <0.0, 0.0, 0.0>
   TP_ROUTING_BLOCKED:
+    member-of: [ParcelTeleportRouting]
     tooltip: Direct teleporting is blocked on this parcel.
     type: integer
     value: 0
   TP_ROUTING_FREE:
+    member-of: [ParcelTeleportRouting]
     tooltip: Teleports are unrestricted on this parcel.
     type: integer
     value: 2
   TP_ROUTING_LANDINGP:
+    member-of: [ParcelTeleportRouting]
     tooltip: Teleports are routed to a landing point if set on this parcel.
     type: integer
     value: 1
   TRANSFER_BAD_OPTS:
+    member-of: [TransferError]
     tooltip: Invalid inventory options.
     type: integer
     value: -1
   TRANSFER_BAD_ROOT:
+    member-of: [TransferError]
     tooltip: The root path specified in TRANSFER_DEST contained an invalid directory
       or was reduced to nothing.
     type: integer
     value: -5
   TRANSFER_DEST:
+    member-of: [GiveAgentInventoryParam]
     tooltip: The root folder to transfer inventory into.
     type: integer
     value: 0
   TRANSFER_FLAGS:
+    member-of: [GiveAgentInventoryParam]
     tooltip: Flags to control the behavior of inventory transfer.
     type: integer
     value: 1
   TRANSFER_FLAG_COPY:
+    member-of: [TransferOwnershipFlag]
     tooltip: Gives a copy of the object being transfered. Implies TRANSFER_FLAG_TAKE.
     type: integer
     value: '0x0004'
   TRANSFER_FLAG_RESERVED:
+    member-of: [TransferOwnershipFlag]
     tooltip: Reserved for future expansion.
     type: integer
     value: '0x0001'
   TRANSFER_FLAG_TAKE:
+    member-of: [TransferOwnershipFlag]
     tooltip: On a successful transfer, automatically takes the object into inventory.
     type: integer
     value: '0x0002'
   TRANSFER_NO_ATTACHMENT:
+    member-of: [TransferError]
     tooltip: Can not transfer ownership of an attached object.
     type: integer
     value: -7
   TRANSFER_NO_ITEMS:
+    member-of: [TransferError]
     tooltip: No items in the inventory list are eligible for transfer.
     type: integer
     value: -4
   TRANSFER_NO_PERMS:
+    member-of: [TransferError]
     tooltip: The object does not have transfer permissions.
     type: integer
     value: -6
   TRANSFER_NO_TARGET:
+    member-of: [TransferError]
     tooltip: Could not find the receiver in the current region.
     type: integer
     value: -2
   TRANSFER_OK:
+    member-of: [TransferError]
     tooltip: Inventory transfer offer was successfully made.
     type: integer
     value: 0
   TRANSFER_THROTTLE:
+    member-of: [TransferError]
     tooltip: Inventory throttle hit.
     type: integer
     value: -3
   TRAVERSAL_TYPE:
+    member-of: [CharacterParam]
     tooltip: One of TRAVERSAL_TYPE_FAST, TRAVERSAL_TYPE_SLOW, and TRAVERSAL_TYPE_NONE.
     type: integer
     value: 7
   TRAVERSAL_TYPE_FAST:
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 1
   TRAVERSAL_TYPE_NONE:
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 2
   TRAVERSAL_TYPE_SLOW:
+    member-of: [CharacterTraversalType]
     tooltip: ''
     type: integer
     value: 0
@@ -4066,42 +5450,49 @@ constants:
     type: float
     value: '6.28318530'
   TYPE_FLOAT:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"number"'
     tooltip: The list entry is a float.
     type: integer
     value: 2
   TYPE_INTEGER:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"number"'
     tooltip: The list entry is an integer.
     type: integer
     value: 1
   TYPE_INVALID:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: 'nil'
     tooltip: The list entry is invalid.
     type: integer
     value: 0
   TYPE_KEY:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"uuid"'
     tooltip: The list entry is a key.
     type: integer
     value: 4
   TYPE_ROTATION:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"quaternion"'
     tooltip: The list entry is a rotation.
     type: integer
     value: 6
   TYPE_STRING:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"string"'
     tooltip: The list entry is a string.
     type: integer
     value: 3
   TYPE_VECTOR:
+    member-of: [ListEntryType]
     slua-deprecated:
       use: '"vector"'
     tooltip: The list entry is a vector.
@@ -4116,6 +5507,7 @@ constants:
     type: string
     value: URL_REQUEST_GRANTED
   VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum (1.0) deflection of angular
       orientation. That is, its a simple scalar for modulating the strength of angular
       deflection such that the vehicles preferred axis of motion points toward its
@@ -4123,42 +5515,50 @@ constants:
     type: integer
     value: 32
   VEHICLE_ANGULAR_DEFLECTION_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The time-scale for exponential success of linear deflection deflection.
       Its another way to specify the strength of the vehicles tendency to reorient
       itself so that its preferred axis of motion agrees with its true velocity.
     type: integer
     value: 33
   VEHICLE_ANGULAR_FRICTION_TIMESCALE:
+    member-of: [VehicleVectorParam]
     tooltip: "A vector of timescales for exponential decay of the vehicle's angular\
       \ velocity about its preferred axes of motion (at, left, up).\n\t\t\tRange =\
       \ [0.07, inf) seconds for each element of the vector."
     type: integer
     value: 17
   VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential decay of the angular motors magnitude.
     type: integer
     value: 35
   VEHICLE_ANGULAR_MOTOR_DIRECTION:
+    member-of: [VehicleVectorParam]
     tooltip: The direction and magnitude (in preferred frame) of the vehicle's angular
       motor. The vehicle will accelerate (or decelerate if necessary) to match its
       velocity to its motor.
     type: integer
     value: 19
   VEHICLE_ANGULAR_MOTOR_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential approach to full angular motor velocity.
     type: integer
     value: 34
   VEHICLE_BANKING_EFFICIENCY:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between anti (-1.0), none (0.0), and maxmum (1.0) banking strength.
     type: integer
     value: 38
   VEHICLE_BANKING_MIX:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between static (0.0) and dynamic (1.0) banking. "Static" means
       the banking scales only with the angle of roll, whereas "dynamic" is a term
       that also scales with the vehicles linear speed.
     type: integer
     value: 39
   VEHICLE_BANKING_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for banking to exponentially approach its maximum effect.
       This is another way to scale the strength of the banking effect, however it
       affects the term that is proportional to the difference between what the banking
@@ -4166,272 +5566,333 @@ constants:
     type: integer
     value: 40
   VEHICLE_BUOYANCY:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum anti-gravity (1.0).
     type: integer
     value: 27
   VEHICLE_FLAG_BLOCK_INTERFERENCE:
+    member-of: [VehicleFlag]
     tooltip: Prevent other scripts from pushing vehicle.
     type: integer
     value: '0x400'
   VEHICLE_FLAG_CAMERA_DECOUPLED:
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x200'
   VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT:
+    member-of: [VehicleFlag]
     tooltip: Hover at global height.
     type: integer
     value: '0x10'
   VEHICLE_FLAG_HOVER_TERRAIN_ONLY:
+    member-of: [VehicleFlag]
     tooltip: Ignore water height when hovering.
     type: integer
     value: '0x8'
   VEHICLE_FLAG_HOVER_UP_ONLY:
+    member-of: [VehicleFlag]
     tooltip: Hover does not push down. Use this flag for hovering vehicles that should
       be able to jump above their hover height.
     type: integer
     value: '0x20'
   VEHICLE_FLAG_HOVER_WATER_ONLY:
+    member-of: [VehicleFlag]
     tooltip: Ignore terrain height when hovering.
     type: integer
     value: '0x4'
   VEHICLE_FLAG_LIMIT_MOTOR_UP:
+    member-of: [VehicleFlag]
     tooltip: Prevents ground vehicles from motoring into the sky.
     type: integer
     value: '0x40'
   VEHICLE_FLAG_LIMIT_ROLL_ONLY:
+    member-of: [VehicleFlag]
     tooltip: For vehicles with vertical attractor that want to be able to climb/dive,
       for instance, aeroplanes that want to use the banking feature.
     type: integer
     value: '0x2'
   VEHICLE_FLAG_MOUSELOOK_BANK:
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x100'
   VEHICLE_FLAG_MOUSELOOK_STEER:
+    member-of: [VehicleFlag]
     tooltip: ''
     type: integer
     value: '0x80'
   VEHICLE_FLAG_NO_DEFLECTION_UP:
+    member-of: [VehicleFlag]
     tooltip: This flag prevents linear deflection parallel to world z-axis. This is
       useful for preventing ground vehicles with large linear deflection, like bumper
       cars, from climbing their linear deflection into the sky.
     type: integer
     value: '0x1'
   VEHICLE_FLAG_NO_FLY_UP:
+    member-of: [VehicleFlag]
     deprecated:
       use: VEHICLE_FLAG_NO_DEFLECTION_UP
     tooltip: Old, changed to VEHICLE_FLAG_NO_DEFLECTION_UP
     type: integer
     value: '0x1'
   VEHICLE_HOVER_EFFICIENCY:
+    member-of: [VehicleFloatParam]
     tooltip: 'A slider between minimum (0.0 = bouncy) and maximum (1.0 = fast as possible)
       damped motion of the hover behavior. '
     type: integer
     value: 25
   VEHICLE_HOVER_HEIGHT:
+    member-of: [VehicleFloatParam]
     tooltip: The height (above the terrain or water, or global) at which the vehicle
       will try to hover.
     type: integer
     value: 24
   VEHICLE_HOVER_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: Period of time (in seconds) for the vehicle to achieve its hover height.
     type: integer
     value: 26
   VEHICLE_LINEAR_DEFLECTION_EFFICIENCY:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0) and maximum (1.0) deflection of linear
       velocity. That is, its a simple scalar for modulating the strength of linear
       deflection.
     type: integer
     value: 28
   VEHICLE_LINEAR_DEFLECTION_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential success of linear deflection deflection.
       It is another way to specify how much time it takes for the vehicle's linear
       velocity to be redirected to its preferred axis of motion.
     type: integer
     value: 29
   VEHICLE_LINEAR_FRICTION_TIMESCALE:
+    member-of: [VehicleVectorParam]
     tooltip: "A vector of timescales for exponential decay of the vehicle's linear\
       \ velocity along its preferred axes of motion (at, left, up).\n\t\t\tRange =\
       \ [0.07, inf) seconds for each element of the vector."
     type: integer
     value: 16
   VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential decay of the linear motors magnitude.
     type: integer
     value: 31
   VEHICLE_LINEAR_MOTOR_DIRECTION:
+    member-of: [VehicleVectorParam]
     tooltip: "The direction and magnitude (in preferred frame) of the vehicle's linear\
       \ motor. The vehicle will accelerate (or decelerate if necessary) to match its\
       \ velocity to its motor.\n\t\t\tRange of magnitude = [0, 30] meters/second."
     type: integer
     value: 18
   VEHICLE_LINEAR_MOTOR_OFFSET:
+    member-of: [VehicleVectorParam]
     tooltip: ''
     type: integer
     value: 20
   VEHICLE_LINEAR_MOTOR_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The timescale for exponential approach to full linear motor velocity.
     type: integer
     value: 30
   VEHICLE_REFERENCE_FRAME:
+    member-of: [VehicleRotationParam]
     tooltip: A rotation of the vehicle's preferred axes of motion and orientation (at,
       left, up) with respect to the vehicle's local frame (x, y, z).
     type: integer
     value: 44
   VEHICLE_TYPE_AIRPLANE:
+    member-of: [VehicleType]
     tooltip: Uses linear deflection for lift, no hover, and banking to turn.\nSee
       http://wiki.secondlife.com/wiki/VEHICLE_TYPE_AIRPLANE
     type: integer
     value: 4
   VEHICLE_TYPE_BALLOON:
+    member-of: [VehicleType]
     tooltip: Hover, and friction, but no deflection.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BALLOON
     type: integer
     value: 5
   VEHICLE_TYPE_BOAT:
+    member-of: [VehicleType]
     tooltip: Hovers over water with lots of friction and some anglar deflection.\nSee
       http://wiki.secondlife.com/wiki/VEHICLE_TYPE_BOAT
     type: integer
     value: 3
   VEHICLE_TYPE_CAR:
+    member-of: [VehicleType]
     tooltip: Another vehicle that bounces along the ground but needs the motors to
       be driven from external controls or timer events.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_CAR
     type: integer
     value: 2
   VEHICLE_TYPE_NONE:
+    member-of: [VehicleType]
     tooltip: ''
     type: integer
     value: 0
   VEHICLE_TYPE_SLED:
+    member-of: [VehicleType]
     tooltip: Simple vehicle that bumps along the ground, and likes to move along its
       local x-axis.\nSee http://wiki.secondlife.com/wiki/VEHICLE_TYPE_SLED
     type: integer
     value: 1
   VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY:
+    member-of: [VehicleFloatParam]
     tooltip: A slider between minimum (0.0 = wobbly) and maximum (1.0 = firm as possible)
       stability of the vehicle to keep itself upright.
     type: integer
     value: 36
   VEHICLE_VERTICAL_ATTRACTION_TIMESCALE:
+    member-of: [VehicleFloatParam]
     tooltip: The period of wobble, or timescale for exponential approach, of the vehicle
       to rotate such that its preferred "up" axis is oriented along the world's "up"
       axis.
     type: integer
     value: 37
   VERTICAL:
+    member-of: [CharacterOrientation]
     tooltip: ''
     type: integer
     value: 0
   WANDER_PAUSE_AT_WAYPOINTS:
+    member-of: [CharacterWanderWithinParam]
     tooltip: ''
     type: integer
     value: 0
   WATER_BLUR_MULTIPLIER:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Blur factor.
     type: integer
     value: 100
   WATER_FOG:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Fog properties when underwater.
     type: integer
     value: 101
   WATER_FRESNEL:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Fresnel scattering applied to the surface of the water.
     type: integer
     value: 102
   WATER_NORMAL_SCALE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Scaling applied to the water normal map.
     type: integer
     value: 104
   WATER_NORMAL_TEXTURE:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Normal map used for environmental waves.
     type: integer
     value: 107
   WATER_REFRACTION:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Refraction factors when looking through the surface of the water.
     type: integer
     value: 105
   WATER_TEXTURE_DEFAULTS:
+    member-of: [EnvironmentParamReadOnly]
     tooltip: Is the environment using the default wave map.
     type: integer
     value: 103
   WATER_WAVE_DIRECTION:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Vectors for the directions of the waves.
     type: integer
     value: 106
   XP_ERROR_EXPERIENCES_DISABLED:
+    member-of: [ExperienceError]
     tooltip: The region currently has experiences disabled.
     type: integer
     value: 2
   XP_ERROR_EXPERIENCE_DISABLED:
+    member-of: [ExperienceError]
     tooltip: The experience owner has temporarily disabled the experience.
     type: integer
     value: 8
   XP_ERROR_EXPERIENCE_SUSPENDED:
+    member-of: [ExperienceError]
     tooltip: The experience has been suspended by Linden Customer Support.
     type: integer
     value: 9
   XP_ERROR_INVALID_EXPERIENCE:
+    member-of: [ExperienceError]
     tooltip: The script is associated with an experience that no longer exists.
     type: integer
     value: 7
   XP_ERROR_INVALID_PARAMETERS:
+    member-of: [ExperienceError]
     tooltip: One of the string arguments was too big to fit in the key-value store.
     type: integer
     value: 3
   XP_ERROR_KEY_NOT_FOUND:
+    member-of: [ExperienceError]
     tooltip: The requested key does not exist.
     type: integer
     value: 14
   XP_ERROR_MATURITY_EXCEEDED:
+    member-of: [ExperienceError]
     tooltip: The content rating of the experience exceeds that of the region.
     type: integer
     value: 16
   XP_ERROR_NONE:
+    member-of: [ExperienceError]
     tooltip: No error was detected.
     type: integer
     value: 0
   XP_ERROR_NOT_FOUND:
+    member-of: [ExperienceError]
     tooltip: The sim was unable to verify the validity of the experience. Retrying
       after a short wait is advised.
     type: integer
     value: 6
   XP_ERROR_NOT_PERMITTED:
+    member-of: [ExperienceError]
     tooltip: This experience is not allowed to run by the requested agent.
     type: integer
     value: 4
   XP_ERROR_NOT_PERMITTED_LAND:
+    member-of: [ExperienceError]
     tooltip: This experience is not allowed to run on the current region.
     type: integer
     value: 17
   XP_ERROR_NO_EXPERIENCE:
+    member-of: [ExperienceError]
     tooltip: This script is not associated with an experience.
     type: integer
     value: 5
   XP_ERROR_QUOTA_EXCEEDED:
+    member-of: [ExperienceError]
     tooltip: An attempted write data to the key-value store failed due to the data
       quota being met.
     type: integer
     value: 11
   XP_ERROR_REQUEST_PERM_TIMEOUT:
+    member-of: [ExperienceError]
     tooltip: Request timed out; permissions not modified.
     type: integer
     value: 18
   XP_ERROR_RETRY_UPDATE:
+    member-of: [ExperienceError]
     tooltip: A checked update failed due to an out of date request.
     type: integer
     value: 15
   XP_ERROR_STORAGE_EXCEPTION:
+    member-of: [ExperienceError]
     tooltip: Unable to communicate with the key-value store.
     type: integer
     value: 13
   XP_ERROR_STORE_DISABLED:
+    member-of: [ExperienceError]
     tooltip: The key-value store is currently disabled on this region.
     type: integer
     value: 12
   XP_ERROR_THROTTLED:
+    member-of: [ExperienceError]
     tooltip: The call failed due to too many recent calls.
     type: integer
     value: 1
   XP_ERROR_UNKNOWN_ERROR:
+    member-of: [ExperienceError]
     tooltip: Other unknown error.
     type: integer
     value: 10

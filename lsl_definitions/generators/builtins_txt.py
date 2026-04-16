@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from lsl_definitions.generators.base import register
-from lsl_definitions.lsl import LSLDefinitions, LSLType
+from lsl_definitions.lsl import LSLDefinitions, LSLEnumType, LSLType
 
 
 @register("gen_builtins_txt")
@@ -31,5 +31,36 @@ def gen_builtins_txt(definitions: LSLDefinitions) -> str:
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         args_str = ", ".join(f"{x.type!s} {x.name}" for x in event.arguments)
         builtins_str += f"event {event.name}( {args_str} )\n"
+
+    return builtins_str
+
+
+@register("gen_enums_txt")
+def gen_enums_txt(definitions: LSLDefinitions) -> str:
+    builtins_str = "// Dump of the enums just for testing. Feel free to remove this rule\n"
+
+    for enum in sorted(definitions.enums.values(), key=lambda x: x.name):
+        builtins_str += f"enum {enum.name!s} {{\n"
+        for member in sorted(enum.members, key=lambda x: x.value):
+            builtins_str += f"  {member.name} = "
+            if enum.type == LSLEnumType.FLAG:
+                builtins_str += f"0x{member.value:x}"
+            else:
+                builtins_str += f"{member.value}"
+            if member.constant.private:
+                builtins_str += " // private"
+            if member.constant.deprecated:
+                builtins_str += " // deprecated"
+            builtins_str += "\n"
+        builtins_str += "};\n"
+
+    for const in sorted(definitions.constants.values(), key=lambda x: x.name):
+        if not const.member_of:
+            builtins_str += f"const {const.type!s} {const.name} = {const.lsl_doc_literal}"
+            if const.private:
+                builtins_str += " // private"
+            if const.deprecated:
+                builtins_str += " // deprecated"
+            builtins_str += "\n"
 
     return builtins_str
