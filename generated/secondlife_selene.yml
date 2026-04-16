@@ -1173,11 +1173,23 @@ globals:
     property: read-only
     type: number
     description: For use with KFM_DATA.
+  LAND_BRUSH_LARGE:
+    property: read-only
+    type: number
+    description: Use a large brush size.
+  LAND_BRUSH_MEDIUM:
+    property: read-only
+    type: number
+    description: Use a medium brush size.
+  LAND_BRUSH_SMALL:
+    property: read-only
+    type: number
+    description: Use a small brush size
   LAND_LARGE_BRUSH:
     property: read-only
     type: number
     description: 'Use a large brush size.\nNOTE: This value is incorrect, a large
-      brush should be 2.'
+      brush should be 2. Use LAND_BRUSH_LARGE instead'
   LAND_LEVEL:
     property: read-only
     type: number
@@ -1190,7 +1202,7 @@ globals:
     property: read-only
     type: number
     description: 'Use a medium brush size.\nNOTE: This value is incorrect, a medium
-      brush should be 1.'
+      brush should be 1. Use LAND_BRUSH_MEDIUM instead'
   LAND_NOISE:
     property: read-only
     type: number
@@ -1205,7 +1217,7 @@ globals:
     property: read-only
     type: number
     description: 'Use a small brush size.\nNOTE: This value is incorrect, a small
-      brush should be 0.'
+      brush should be 0. Use LAND_BRUSH_SMALL instead'
   LAND_SMOOTH:
     property: read-only
     type: number
