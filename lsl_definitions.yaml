@@ -128,7 +128,6 @@ enums:
   ClickAction:
     type: enum
     prefix: CLICK_ACTION_
-    special-members: [CLICK_ACTION_TOUCH] # alias of CLICK_ACTION_NONE
     tooltip: ''
   ControlButton:
     type: flag
@@ -1218,6 +1217,8 @@ constants:
     value: 9
   CLICK_ACTION_NONE:
     member-of: [ClickAction]
+    deprecated:
+      use: CLICK_ACTION_TOUCH
     tooltip: 'Performs the default action: when the prim is clicked, touch events
       are triggered.'
     type: integer

@@ -233,7 +233,7 @@ enum CharacterWanderWithinParam {
   WANDER_PAUSE_AT_WAYPOINTS = 0
 };
 enum ClickAction {
-  NONE = 0
+  NONE = 0 // deprecated
   TOUCH = 0
   SIT = 1
   BUY = 2
