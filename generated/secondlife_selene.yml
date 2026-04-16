@@ -4404,6 +4404,8 @@ globals:
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises
       an error if JSON is invalid.
+  llprim.ParamsSetter:
+    property: read-only
   math.pi:
     property: read-only
     type: number
@@ -15543,3 +15545,408 @@ structs:
       args:
       - type: function
       description: Unregisters a timer callback. Returns true if found and removed.
+  ParamsSetterType:
+    targetLink:
+      method: true
+      args:
+      - type: number
+    physicsMaterial:
+      method: true
+      args:
+      - type: number
+    physics:
+      method: true
+      args:
+      - type: bool
+    tempOnRez:
+      method: true
+      args:
+      - type: bool
+    phantom:
+      method: true
+      args:
+      - type: bool
+    pos:
+      method: true
+      args:
+      - type:
+          display: vector
+    size:
+      method: true
+      args:
+      - type:
+          display: vector
+    rot:
+      method: true
+      args:
+      - type:
+          display: quaternion
+    primTypeBox:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+    primTypeCylinder:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+    primTypePrism:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+    primTypeSphere:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+    primTypeTorus:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+      - type: number
+      - type: number
+    primTypeTube:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+      - type: number
+      - type: number
+    primTypeRing:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+      - type: number
+      - type: number
+    primTypeSculpt:
+      method: true
+      args:
+      - type: string
+      - type: number
+    texture:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+    color:
+      method: true
+      args:
+      - type: number
+      - type:
+          display: vector
+      - type: number
+    bumpShiny:
+      method: true
+      args:
+      - type: number
+      - type: number
+      - type: number
+    fullbright:
+      method: true
+      args:
+      - type: number
+      - type: bool
+    flexible:
+      method: true
+      args:
+      - type: bool
+      - type: number
+      - type: number
+      - type: number
+      - type: number
+      - type: number
+      - type:
+          display: vector
+    texgen:
+      method: true
+      args:
+      - type: number
+      - type: number
+    pointLight:
+      method: true
+      args:
+      - type: bool
+      - type:
+          display: vector
+      - type: number
+      - type: number
+      - type: number
+    glow:
+      method: true
+      args:
+      - type: number
+      - type: number
+    text:
+      method: true
+      args:
+      - type: string
+      - type:
+          display: vector
+      - type: number
+    name:
+      method: true
+      args:
+      - type: string
+    description:
+      method: true
+      args:
+      - type: string
+    rotLocal:
+      method: true
+      args:
+      - type:
+          display: quaternion
+    physicsShapeType:
+      method: true
+      args:
+      - type: number
+    omega:
+      method: true
+      args:
+      - type:
+          display: vector
+      - type: number
+      - type: number
+    posLocal:
+      method: true
+      args:
+      - type:
+          display: vector
+    slice:
+      method: true
+      args:
+      - type:
+          display: vector
+    specular:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+      - type:
+          display: vector
+      - type: number
+      - type: number
+    normal:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector
+      - type:
+          display: vector
+      - type: number
+    alphaMode:
+      method: true
+      args:
+      - type: number
+      - type: number
+      - type: number
+    allowUnsit:
+      method: true
+      args:
+      - type: bool
+    scriptedSitOnly:
+      method: true
+      args:
+      - type: bool
+    sitTarget:
+      method: true
+      args:
+      - type: bool
+      - type:
+          display: vector
+      - type:
+          display: quaternion
+    projector:
+      method: true
+      args:
+      - type: string
+      - type: number
+      - type: number
+      - type: number
+    clickAction:
+      method: true
+      args:
+      - type: number
+    reflectionProbe:
+      method: true
+      args:
+      - type: bool
+      - type: number
+      - type: number
+      - type: number
+    gltfNormal:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector | string
+      - type:
+          display: vector | string
+      - type:
+          display: number | string
+    gltfEmissive:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector | string
+      - type:
+          display: vector | string
+      - type:
+          display: number | string
+      - type:
+          display: vector | string
+    gltfMetallicRoughness:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector | string
+      - type:
+          display: vector | string
+      - type:
+          display: number | string
+      - type:
+          display: number | string
+      - type:
+          display: number | string
+    gltfBaseColor:
+      method: true
+      args:
+      - type: number
+      - type: string
+      - type:
+          display: vector | string
+      - type:
+          display: vector | string
+      - type:
+          display: number | string
+      - type:
+          display: vector | string
+      - type:
+          display: number | string
+      - type:
+          display: number | string
+      - type:
+          display: number | string
+      - type:
+          display: boolean | string
+    renderMaterial:
+      method: true
+      args:
+      - type: number
+      - type: string
+    sitFlags:
+      method: true
+      args:
+      - type: number
+    damage:
+      method: true
+      args:
+      - type: number
+      - type: number
+    health:
+      method: true
+      args:
+      - type: number
+    collisionSound:
+      method: true
+      args:
+      - type: string
+      - type: number
+    apply:
+      method: true
+      args:
+      - type: number
+        required: false
+    new:
+      method: true
+      args: []

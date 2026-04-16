@@ -22,7 +22,6 @@ from lsl_definitions.utils import Deprecated, remove_nones
 @register("slua_lsp_defs")
 def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua definitions for Luau Language Server"""
-    slua_definitions.generate_ll_modules(definitions)
     ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
     llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
 
@@ -82,7 +81,6 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     """Generate SLua standard library for Selene linter
     https://kampfkarren.github.io/selene/usage/std.html
     """
-    slua_definitions.generate_ll_modules(definitions)
     classes = {c.name: c for c in slua_definitions.base_classes + slua_definitions.classes}
     type_aliases = {a.name: a for a in slua_definitions.type_aliases}
 
@@ -101,12 +99,23 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     def selene_type(type_str: str, default="any") -> str | dict | None:
         if type_str.endswith("?"):
             type_str = type_str[:-1]
+        # GLTF-clearable params are encoded as ``<base> | ""``. Selene args can't
+        # be unions, so collapse to the base type if selene accepts a bare string
+        # there; otherwise emit a display-only hint mentioning both forms.
+        clear_sentinel = ' | ""'
+        if type_str.endswith(clear_sentinel):
+            base_str = type_str[: -len(clear_sentinel)]
+            base = selene_type(base_str, default=None)
+            if base == "string":
+                return "string"
+            return {"display": f"{base_str} | string"}
         type_map = {
             "boolean": "bool",
             "boolean | number": "bool",
             "number": "number",
             "string": "string",
             "string | uuid": "string",
+            "(string | uuid)": "string",
             "buffer": {"display": "buffer"},
             "uuid": {"display": "uuid"},
             "vector": {"display": "vector"},
