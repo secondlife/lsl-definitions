@@ -1619,8 +1619,6 @@ export type rotation = quaternion</string>
          </map>
          <key>CLICK_ACTION_NONE</key>
          <map>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>tooltip</key>
             <string>Performs the default action: when the prim is clicked, touch events are triggered.</string>
             <key>type</key>
