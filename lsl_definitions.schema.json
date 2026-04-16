@@ -62,7 +62,7 @@
                 "minItems": 2,
                 "prefixItems": [
                     {
-                        "enum": ["integer", "boolean", "vector", "rotation", "float", "string", "asset"],
+                        "enum": ["integer", "link", "boolean", "vector", "rotation", "float", "string", "asset"],
                         "markdownDescription": "The parameter type."
                     },
                     {
@@ -447,32 +447,44 @@
             },
             "type": "object"
         },
-        "rulesets": {
+        "builder-rulesets": {
             "additionalProperties": false,
+            "markdownDescription": "Rulesets that codegen into fluent-builder SLua classes (ordered rule+value setters, face-target, discriminator variants).",
             "type": "object",
             "properties": {
-                "prim_params": {
+                "prim-params": {
                     "additionalProperties": false,
                     "type": "object",
                     "required": ["rules"],
                     "properties": {
+                        "enum": {
+                            "markdownDescription": "Name of the LSL enum whose members are the rule constants. The enum's `prefix` is stripped off each rule name to derive builder method names; every key under `rules` must be a member of this enum.",
+                            "pattern": "^[A-Z][A-Za-z0-9]*$",
+                            "type": "string"
+                        },
                         "rules": {
                             "additionalProperties": false,
                             "type": "object",
                             "patternProperties": {
-                                "^PRIM_[A-Z0-9_]+$": {
+                                "^[A-Z][A-Z0-9_]*$": {
                                     "additionalProperties": false,
                                     "type": "object",
                                     "required": ["params"],
                                     "dependentRequired": {
-                                        "variants_on": ["variants"],
-                                        "variants": ["variants_on"]
+                                        "variants-on": ["variants", "variant-enum"],
+                                        "variants": ["variants-on", "variant-enum"],
+                                        "variant-enum": ["variants", "variants-on"]
                                     },
                                     "properties": {
-                                        "face_target": {
+                                        "face-target": {
                                             "const": true,
                                             "markdownDescription": "This rule targets a specific face.",
                                             "type": "boolean"
+                                        },
+                                        "method-name": {
+                                            "markdownDescription": "Override the derived SLua builder method name.",
+                                            "pattern": "^[a-z][A-Za-z0-9]*$",
+                                            "type": "string"
                                         },
                                         "nullable": {
                                             "const": true,
@@ -480,9 +492,14 @@
                                             "type": "boolean"
                                         },
                                         "params": { "$ref": "#/$defs/rulesetParamArray" },
-                                        "variants_on": {
+                                        "variants-on": {
                                             "markdownDescription": "Name of the discriminator parameter (must appear in `params`).",
                                             "pattern": "^[a-z_]+$",
+                                            "type": "string"
+                                        },
+                                        "variant-enum": {
+                                            "markdownDescription": "Name of the LSL enum whose members key into each variant's `applies-to`.",
+                                            "pattern": "^[A-Z][A-Za-z0-9]*$",
                                             "type": "string"
                                         },
                                         "variants": {
@@ -490,12 +507,12 @@
                                             "items": {
                                                 "additionalProperties": false,
                                                 "type": "object",
-                                                "required": ["applies_to", "params"],
+                                                "required": ["applies-to", "params"],
                                                 "properties": {
-                                                    "applies_to": {
-                                                        "markdownDescription": "Constant names for which this variant applies.",
+                                                    "applies-to": {
+                                                        "markdownDescription": "Members of the rule's `variant-enum` for which this variant applies.",
                                                         "items": {
-                                                            "pattern": "^PRIM_[A-Z0-9_]+$",
+                                                            "pattern": "^[A-Z][A-Z0-9_]*$",
                                                             "type": "string"
                                                         },
                                                         "minItems": 1,
@@ -524,7 +541,7 @@
         "functions",
         "llsd-lsl-syntax-version",
         "types",
-        "rulesets"
+        "builder-rulesets"
     ],
     "title": "Second Life LSL Definitions",
     "type": "object"

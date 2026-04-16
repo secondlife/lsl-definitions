@@ -295,6 +295,12 @@
         "documentation": "Decodes a JSON string to a Lua value, preserving SL types. Raises an error if JSON is invalid.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
+    "@sl-slua/global/llprim": {
+        "documentation": "Utilities for working with prims / objects"
+    },
+    "@sl-slua/global/llprim.ParamsSetter": {
+        "documentation": ""
+    },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
         "learn_more_link": "https://luau.org/library/#math-library"

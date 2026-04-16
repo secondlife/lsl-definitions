@@ -1177,6 +1177,9 @@ modules:
     comment: A constant to pass for an empty object to json encode.
     type: '{}'
     value: 'setmetatable({}, lljson.object_mt}'
+- name: llprim
+  comment: Utilities for working with prims / objects
+  # This module is currently populated dynamically
 - name: math
   comment: Mathematical functions library.
   functions:
