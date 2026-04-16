@@ -5624,6 +5624,8 @@ Used to get or set multiple links with a single PrimParameters call.
          </map>
          <key>PRIM_MATERIAL_LIGHT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>

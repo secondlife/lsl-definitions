@@ -3572,6 +3572,8 @@ constants:
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
     member-of: [PhysicsMaterialPreset]
+    deprecated:
+      use: PRIM_FULLBRIGHT
     tooltip: ''
     type: integer
     value: 7
