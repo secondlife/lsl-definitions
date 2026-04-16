@@ -588,9 +588,9 @@ enum ModifyLandAction {
   REVERT = 5
 };
 enum ModifyLandBrush {
-  SMALL_BRUSH = 1 // deprecated
-  MEDIUM_BRUSH = 2 // deprecated
-  LARGE_BRUSH = 3 // deprecated
+  SMALL_BRUSH = 1
+  MEDIUM_BRUSH = 2
+  LARGE_BRUSH = 3
 };
 enum ObjectDetailsParam {
   NAME = 1
