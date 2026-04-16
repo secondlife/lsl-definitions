@@ -267,7 +267,7 @@ enums:
     tooltip: ''
   ModifyLandBrush:
     type: enum
-    prefix: LAND_
+    prefix: LAND_BRUSH_
     tooltip: ''
   ObjectDetailsParam:
     type: enum
