@@ -8165,6 +8165,8 @@ vector position - position in local coordinates
          </map>
          <key>STATUS_CAST_SHADOWS</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
