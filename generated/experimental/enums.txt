@@ -837,7 +837,7 @@ enum PhysicsMaterialPreset {
   FLESH = 4
   PLASTIC = 5
   RUBBER = 6
-  LIGHT = 7 // deprecated
+  LIGHT = 7
 };
 enum PhysicsShapeType {
   PRIM = 0
