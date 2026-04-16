@@ -267,7 +267,7 @@ enums:
     tooltip: ''
   ModifyLandBrush:
     type: enum
-    prefix: LAND_
+    prefix: LAND_BRUSH_
     tooltip: ''
   ObjectDetailsParam:
     type: enum
@@ -2142,10 +2142,27 @@ constants:
     tooltip: For use with KFM_DATA.
     type: integer
     value: 2
+  LAND_BRUSH_LARGE:
+    member-of: [ModifyLandBrush]
+    tooltip: Use a large brush size.
+    type: integer
+    value: 2
+  LAND_BRUSH_MEDIUM:
+    member-of: [ModifyLandBrush]
+    tooltip: Use a medium brush size.
+    type: integer
+    value: 1
+  LAND_BRUSH_SMALL:
+    member-of: [ModifyLandBrush]
+    tooltip: Use a small brush size
+    type: integer
+    value: 0
   LAND_LARGE_BRUSH:
     member-of: [ModifyLandBrush]
+    deprecated:
+      use: LAND_BRUSH_LARGE
     tooltip: 'Use a large brush size.\nNOTE: This value is incorrect, a large brush
-      should be 2.'
+      should be 2. Use LAND_BRUSH_LARGE instead'
     type: integer
     value: 3
   LAND_LEVEL:
@@ -2160,8 +2177,10 @@ constants:
     value: 2
   LAND_MEDIUM_BRUSH:
     member-of: [ModifyLandBrush]
+    deprecated:
+      use: LAND_BRUSH_MEDIUM
     tooltip: 'Use a medium brush size.\nNOTE: This value is incorrect, a medium brush
-      should be 1.'
+      should be 1. Use LAND_BRUSH_MEDIUM instead'
     type: integer
     value: 2
   LAND_NOISE:
@@ -2181,8 +2200,10 @@ constants:
     value: 5
   LAND_SMALL_BRUSH:
     member-of: [ModifyLandBrush]
+    deprecated:
+      use: LAND_BRUSH_SMALL
     tooltip: 'Use a small brush size.\nNOTE: This value is incorrect, a small brush
-      should be 0.'
+      should be 0. Use LAND_BRUSH_SMALL instead'
     type: integer
     value: 1
   LAND_SMOOTH:

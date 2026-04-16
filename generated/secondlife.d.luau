@@ -1843,6 +1843,9 @@ declare KFM_PING_PONG: number
 declare KFM_REVERSE: number
 declare KFM_ROTATION: number
 declare KFM_TRANSLATION: number
+declare LAND_BRUSH_LARGE: number
+declare LAND_BRUSH_MEDIUM: number
+declare LAND_BRUSH_SMALL: number
 declare LAND_LARGE_BRUSH: number
 declare LAND_LEVEL: number
 declare LAND_LOWER: number

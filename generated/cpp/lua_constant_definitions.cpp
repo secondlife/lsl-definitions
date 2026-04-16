@@ -946,6 +946,15 @@
     luaSL_pushnativeinteger(L, 2);
     lua_setglobal(L, "KFM_TRANSLATION");
 
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "LAND_BRUSH_LARGE");
+
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "LAND_BRUSH_MEDIUM");
+
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "LAND_BRUSH_SMALL");
+
     luaSL_pushnativeinteger(L, 3);
     lua_setglobal(L, "LAND_LARGE_BRUSH");
 

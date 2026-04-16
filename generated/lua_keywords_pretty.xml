@@ -3239,10 +3239,39 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>2</string>
          </map>
-         <key>LAND_LARGE_BRUSH</key>
+         <key>LAND_BRUSH_LARGE</key>
          <map>
             <key>tooltip</key>
-            <string>Use a large brush size.\nNOTE: This value is incorrect, a large brush should be 2.</string>
+            <string>Use a large brush size.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2</string>
+         </map>
+         <key>LAND_BRUSH_MEDIUM</key>
+         <map>
+            <key>tooltip</key>
+            <string>Use a medium brush size.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1</string>
+         </map>
+         <key>LAND_BRUSH_SMALL</key>
+         <map>
+            <key>tooltip</key>
+            <string>Use a small brush size</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0</string>
+         </map>
+         <key>LAND_LARGE_BRUSH</key>
+         <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Use a large brush size.\nNOTE: This value is incorrect, a large brush should be 2. Use LAND_BRUSH_LARGE instead</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -3268,8 +3297,10 @@ export type rotation = quaternion</string>
          </map>
          <key>LAND_MEDIUM_BRUSH</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string>Use a medium brush size.\nNOTE: This value is incorrect, a medium brush should be 1.</string>
+            <string>Use a medium brush size.\nNOTE: This value is incorrect, a medium brush should be 1. Use LAND_BRUSH_MEDIUM instead</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -3304,8 +3335,10 @@ export type rotation = quaternion</string>
          </map>
          <key>LAND_SMALL_BRUSH</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string>Use a small brush size.\nNOTE: This value is incorrect, a small brush should be 0.</string>
+            <string>Use a small brush size.\nNOTE: This value is incorrect, a small brush should be 0. Use LAND_BRUSH_SMALL instead</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>

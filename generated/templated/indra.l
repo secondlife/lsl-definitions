@@ -320,6 +320,9 @@
 "KFM_REVERSE" { count(); yylval.ival = 3; return(INTEGER_CONSTANT); }
 "KFM_ROTATION" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
 "KFM_TRANSLATION" { count(); yylval.ival = 2; return(INTEGER_CONSTANT); }
+"LAND_BRUSH_LARGE" { count(); yylval.ival = 2; return(INTEGER_CONSTANT); }
+"LAND_BRUSH_MEDIUM" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
+"LAND_BRUSH_SMALL" { count(); yylval.ival = 0; return(INTEGER_CONSTANT); }
 "LAND_LARGE_BRUSH" { count(); yylval.ival = 3; return(INTEGER_CONSTANT); }
 "LAND_LEVEL" { count(); yylval.ival = 0; return(INTEGER_CONSTANT); }
 "LAND_LOWER" { count(); yylval.ival = 2; return(INTEGER_CONSTANT); }

@@ -5903,8 +5903,17 @@
     "@sl-slua/global/KFM_TRANSLATION": {
         "documentation": "Value: 2<br>For use with KFM_DATA."
     },
+    "@sl-slua/global/LAND_BRUSH_LARGE": {
+        "documentation": "Value: 2<br>Use a large brush size."
+    },
+    "@sl-slua/global/LAND_BRUSH_MEDIUM": {
+        "documentation": "Value: 1<br>Use a medium brush size."
+    },
+    "@sl-slua/global/LAND_BRUSH_SMALL": {
+        "documentation": "Value: 0<br>Use a small brush size"
+    },
     "@sl-slua/global/LAND_LARGE_BRUSH": {
-        "documentation": "Value: 3<br>Use a large brush size.<br>NOTE: This value is incorrect, a large brush should be 2."
+        "documentation": "Value: 3<br>Use a large brush size.<br>NOTE: This value is incorrect, a large brush should be 2. Use LAND_BRUSH_LARGE instead"
     },
     "@sl-slua/global/LAND_LEVEL": {
         "documentation": "Value: 0<br>Action to level the land."
@@ -5913,7 +5922,7 @@
         "documentation": "Value: 2<br>Action to lower the land."
     },
     "@sl-slua/global/LAND_MEDIUM_BRUSH": {
-        "documentation": "Value: 2<br>Use a medium brush size.<br>NOTE: This value is incorrect, a medium brush should be 1."
+        "documentation": "Value: 2<br>Use a medium brush size.<br>NOTE: This value is incorrect, a medium brush should be 1. Use LAND_BRUSH_MEDIUM instead"
     },
     "@sl-slua/global/LAND_NOISE": {
         "documentation": "Value: 4"
@@ -5925,7 +5934,7 @@
         "documentation": "Value: 5"
     },
     "@sl-slua/global/LAND_SMALL_BRUSH": {
-        "documentation": "Value: 1<br>Use a small brush size.<br>NOTE: This value is incorrect, a small brush should be 0."
+        "documentation": "Value: 1<br>Use a small brush size.<br>NOTE: This value is incorrect, a small brush should be 0. Use LAND_BRUSH_SMALL instead"
     },
     "@sl-slua/global/LAND_SMOOTH": {
         "documentation": "Value: 3"
