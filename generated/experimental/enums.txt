@@ -671,7 +671,7 @@ enum ObjectStatusParam {
   BLOCK_GRAB = 0x40
   DIE_AT_EDGE = 0x80
   RETURN_AT_EDGE = 0x100
-  CAST_SHADOWS = 0x200
+  CAST_SHADOWS = 0x200 // deprecated
   BLOCK_GRAB_OBJECT = 0x400
   DIE_AT_NO_ENTRY = 0x800
 };
@@ -840,7 +840,7 @@ enum PhysicsMaterialPreset {
   FLESH = 4
   PLASTIC = 5
   RUBBER = 6
-  LIGHT = 7
+  LIGHT = 7 // deprecated
 };
 enum PhysicsShapeType {
   PRIM = 0

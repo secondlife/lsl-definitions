@@ -128,7 +128,7 @@ enums:
   ClickAction:
     type: enum
     prefix: CLICK_ACTION_
-    special-members: [CLICK_ACTION_TOUCH] # alias of CLICK_ACTION_TOUCH
+    special-members: [CLICK_ACTION_TOUCH] # alias of CLICK_ACTION_NONE
     tooltip: ''
   ControlButton:
     type: flag
@@ -3572,6 +3572,8 @@ constants:
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
     member-of: [PhysicsMaterialPreset]
+    deprecated:
+      use: PRIM_FULLBRIGHT
     tooltip: ''
     type: integer
     value: 7
@@ -5098,6 +5100,8 @@ constants:
     value: 1002
   STATUS_CAST_SHADOWS:
     member-of: [ObjectStatusParam]
+    deprecated:
+      reason: Not implemented.
     tooltip: ''
     type: integer
     value: '0x200'
