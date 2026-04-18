@@ -14506,10 +14506,9 @@ rulesets:
       PRIM_PROJECTOR:
         params:
           # This should almost certainly have asset semantics, but the server
-          # appears to only allow `string`, though stringified UUID is fine?
-          # Will need to fix that, but we need `asset` here since the `get`
-          # may still return a UUID.
-          - [ asset, texture ]
+          # appears to only allow `string`, and llGetPrimitiveParams has a bug:
+          # https://feedback.secondlife.com/scripting-features/p/make-prim-projector-readable
+          - [ string, texture ]
           - [ float, fov ]
           - [ float, focus ]
           - [ float, ambiance ]
