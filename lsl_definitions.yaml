@@ -14506,8 +14506,9 @@ rulesets:
       PRIM_PROJECTOR:
         params:
           # This should almost certainly have asset semantics, but the server
-          # appears to only allow `string`, and llGetPrimitiveParams has a bug:
+          # appears to only allow `string`, and llGetPrimitiveParams does not allow reading:
           # https://feedback.secondlife.com/scripting-features/p/make-prim-projector-readable
+          # https://community.secondlife.com/forums/topic/486118-only-set-ambiance-on-prim_projector#comment-2446570
           - [ string, texture ]
           - [ float, fov ]
           - [ float, focus ]
