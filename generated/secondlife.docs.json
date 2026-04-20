@@ -299,13 +299,33 @@
         "documentation": "Mathematical functions library.",
         "learn_more_link": "https://luau.org/library/#math-library"
     },
-    "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>The value of pi",
-        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
+    "@sl-slua/global/math.e": {
+        "documentation": "Value: 2.718281828459045<br>The base of the natural logarithm.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#e"
     },
     "@sl-slua/global/math.huge": {
-        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity)",
+        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity). 1/0.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#huge"
+    },
+    "@sl-slua/global/math.nan": {
+        "documentation": "Value: nan<br>A number representing an error (not a number). 0/0.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#nan"
+    },
+    "@sl-slua/global/math.phi": {
+        "documentation": "Value: 1.618033988749895<br>The golden ratio. (1 + math.sqrt(5))/2.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#phi"
+    },
+    "@sl-slua/global/math.pi": {
+        "documentation": "Value: 3.141592653589793<br>The ratio of a circle's circumference to its diameter. math.tau/2.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
+    },
+    "@sl-slua/global/math.sqrt2": {
+        "documentation": "Value: 1.4142135623730951<br>The square root of 2. math.sqrt(2).",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt2"
+    },
+    "@sl-slua/global/math.tau": {
+        "documentation": "Value: 6.283185307179586<br>The ratio of a circle's circumference to its radius. math.pi*2.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tau"
     },
     "@sl-slua/global/math.abs": {
         "documentation": "Returns the absolute value of n.",
