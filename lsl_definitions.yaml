@@ -5969,6 +5969,7 @@ events:
     - Changed:
         tooltip: ''
         type: integer
+        enum-semantics: ChangeType
     tooltip: Triggered when various events change the object. The change argument
       will be a bit-field of CHANGED_* constants.
   collision:
@@ -6009,9 +6010,11 @@ events:
     - Levels:
         tooltip: ''
         type: integer
+        enum-semantics: ControlButton
     - Edges:
         tooltip: ''
         type: integer
+        enum-semantics: ControlButton
     tooltip: "Once a script has the ability to grab control inputs from the avatar,\
       \ this event will be used to pass the commands into the script.\n\t\t\tThe levels\
       \ and edges are bit-fields of control constants."
@@ -6061,6 +6064,7 @@ events:
         tooltip: One of the XP_ERROR_... constants describing the reason why the Experience
           permissions were denied for the agent.
         type: integer
+        enum-semantics: ExperienceError
     tooltip: Describes why the Experience permissions were denied for the agent.
   final_damage:
     arguments:
@@ -6078,6 +6082,7 @@ events:
     - buttons:
         tooltip: 32-bit mask of buttons pressed
         type: integer
+        enum-semantics: GameControlButton
     - axes:
         tooltip: Six float values in range [-1, 1]
         type: list
@@ -6154,6 +6159,7 @@ events:
     - action:
         tooltip: ''
         type: integer
+        enum-semantics: LinksetDataAction
     - name:
         tooltip: ''
         type: string
@@ -6240,6 +6246,7 @@ events:
     - Type:
         tooltip: ''
         type: integer
+        enum-semantics: CharacterPathUpdateType
     - Reserved:
         tooltip: ''
         type: list
@@ -6250,6 +6257,7 @@ events:
     - EventType:
         tooltip: ''
         type: integer
+        enum-semantics: RemoteDataEventType
     - ChannelID:
         tooltip: ''
         type: key
@@ -6272,6 +6280,7 @@ events:
     - PermissionFlags:
         tooltip: ''
         type: integer
+        enum: ScriptPermission
     tooltip: "Scripts need permission from either the owner or the avatar they wish\
       \ to act on before they may perform certain functions, such as debiting money\
       \ from their owners account, triggering an animation on an avatar, or capturing\
@@ -6578,6 +6587,7 @@ functions:
     - AttachmentPoint:
         tooltip: ''
         type: integer
+        enum-semantics: AttachPoint
     energy: 10.0
     func-id: 113
     return: void
@@ -6591,6 +6601,7 @@ functions:
     - AttachPoint:
         tooltip: Valid attachment point or ATTACH_* constant.
         type: integer
+        enum-semantics: AttachPoint
     energy: 10.0
     func-id: 391
     return: void
@@ -6606,6 +6617,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag.'
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 376
     must-use: true
@@ -6702,6 +6714,7 @@ functions:
     - LinkNumber:
         tooltip: ''
         type: integer
+        enum-semantics: Links
     energy: 10.0
     func-id: 142
     return: void
@@ -6814,12 +6827,15 @@ functions:
     - Link:
         tooltip: ''
         type: integer
+        enum-semantics: Links
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: Faces
     energy: 10.0
     func-id: 373
     return: integer
+    enum-semantics: PrimMediaError
     sleep: 0.0
     tooltip: Clears (deletes) the media and all parameters from the given Face on
       the linked prim.\nReturns an integer that is a STATUS_* flag, which details
@@ -6829,9 +6845,11 @@ functions:
     - Face:
         tooltip: Number of side to clear.
         type: integer
+        enum-semantics: Faces
     energy: 10.0
     func-id: 352
     return: integer
+    enum-semantics: PrimMediaError
     sleep: 1.0
     tooltip: Clears (deletes) the media and all parameters from the given Face.\nReturns
       an integer that is a STATUS_* flag which details the success/failure of the
@@ -6999,6 +7017,7 @@ functions:
     - type:
         tooltip: Damage type to inflict on this target.
         type: integer
+        enum-semantics: DamageType
     energy: 10.0
     func-id: 671
     return: void
@@ -7109,6 +7128,7 @@ functions:
     - flags:
         tooltip: Flags for derez behavior.
         type: integer
+        enum-semantics: DerezMode
     energy: 10.0
     func-id: 509
     return: integer
@@ -7372,6 +7392,7 @@ functions:
     func-id: 34
     must-use: true
     return: integer
+    enum-semantics: DetectType
     detected-semantics: true
     sleep: 0.0
     tooltip: "Returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object.\\\
@@ -7542,6 +7563,7 @@ functions:
     - Command:
         tooltip: Command to send.
         type: integer
+        enum-semantics: CharacterCommand
     - Options:
         tooltip: Height for CHARACTER_CMD_JUMP.
         type: list
@@ -7716,6 +7738,7 @@ functions:
     func-id: 206
     must-use: true
     return: integer
+    enum-semantics: AgentInfo
     sleep: 0.0
     tooltip: "Returns an integer bit-field containing the agent information about\
       \ id.\\n\n                    Returns AGENT_FLYING, AGENT_ATTACHMENTS, AGENT_SCRIPTED,\
@@ -7740,6 +7763,7 @@ functions:
     - Scope:
         tooltip: The scope (region, parcel, parcel same owner) to return agents for.
         type: integer
+        enum-semantics: AgentListScope
     - Options:
         tooltip: List of options to apply. Current unused.
         type: list
@@ -7771,6 +7795,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: Faces
     energy: 10.0
     func-id: 50
     must-use: true
@@ -7835,6 +7860,7 @@ functions:
     func-id: 224
     must-use: true
     return: integer
+    enum-semantics: AttachPoint
     sleep: 0.0
     tooltip: Returns the object's attachment point, or 0 if not attached.
   llGetAttachedList:
@@ -7959,6 +7985,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: Faces
     energy: 10.0
     func-id: 52
     must-use: true
@@ -8074,6 +8101,7 @@ functions:
     - Error:
         tooltip: An Experience error code to translate.
         type: integer
+        enum-semantics: ExperienceError
     energy: 10.0
     experience: true
     func-id: 603
@@ -8223,6 +8251,7 @@ functions:
     - InventoryType:
         tooltip: Inventory item type
         type: integer
+        enum-semantics: InventoryType
     - Index:
         tooltip: Index number of inventory item.
         type: integer
@@ -8239,6 +8268,7 @@ functions:
     - InventoryType:
         tooltip: Inventory item type
         type: integer
+        enum-semantics: InventoryType
     energy: 10.0
     func-id: 146
     must-use: true
@@ -8254,10 +8284,12 @@ functions:
     - BitMask:
         tooltip: MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE or MASK_NEXT
         type: integer
+        enum-semantics: AssetPermissionCategory
     energy: 10.0
     func-id: 289
     must-use: true
     return: integer
+    enum-semantics: AssetPermission
     sleep: 0.0
     tooltip: Returns the requested permission mask for the inventory item.\nReturns
       the requested permission mask for the inventory item defined by InventoryItem.
@@ -8272,6 +8304,7 @@ functions:
     func-id: 301
     must-use: true
     return: integer
+    enum-semantics: InventoryType
     sleep: 0.0
     tooltip: Returns the type of the named inventory item.\nLike all inventory functions,
       llGetInventoryType is case-sensitive.
@@ -8301,6 +8334,7 @@ functions:
     - LinkNumber:
         tooltip: ''
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 144
     must-use: true
@@ -8314,9 +8348,11 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Link
     - Face:
         tooltip: The prim's side number
         type: integer
+        enum-semantics: Faces
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -8336,6 +8372,7 @@ functions:
     - LinkNumber:
         tooltip: ''
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 145
     must-use: true
@@ -8360,6 +8397,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag.'
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 357
     must-use: true
@@ -8373,6 +8411,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag.'
         type: integer
+        enum-semantics: Link
     - Parameters:
         tooltip: PRIM_* flags.
         type: list
@@ -8395,10 +8434,12 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag.'
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 551
     must-use: true
     return: integer
+    enum-semantics: SitFlag
     sleep: 0.0
     tooltip: Returns the sit flags set on the specified prim in a linkset.
   llGetListEntryType:
@@ -8418,6 +8459,7 @@ functions:
     native: true
     pure: true
     return: integer
+    enum-semantics: ListEntryType
     sleep: 0.0
     tooltip: Returns the type of the index entry in the list (TYPE_INTEGER, TYPE_FLOAT,
       TYPE_STRING, TYPE_KEY, TYPE_VECTOR, TYPE_ROTATION, or TYPE_INVALID if index
@@ -8653,6 +8695,7 @@ functions:
     - link_no:
         tooltip: Link number to retrieve
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 532
     must-use: true
@@ -8687,10 +8730,12 @@ functions:
         tooltip: Category is one of MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE,
           or MASK_NEXT
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 287
     must-use: true
     return: integer
+    enum-semantics: AssetPermissionCategory
     sleep: 0.0
     tooltip: Returns the permission mask of the requested category for the object.
   llGetObjectPrimCount:
@@ -8765,6 +8810,7 @@ functions:
     func-id: 317
     must-use: true
     return: integer
+    enum-semantics: ParcelFlag
     sleep: 0.0
     tooltip: Returns a mask of the parcel flags (PARCEL_FLAG_*) for the parcel that
       includes the point Position.\nReturns a bit-field specifying the parcel flags
@@ -8805,6 +8851,7 @@ functions:
     - Category:
         tooltip: A PARCEL_COUNT_* flag.
         type: integer
+        enum-semantics: ParcelPrimCountCategory
     - SimWide:
         tooltip: Boolean. If FALSE then the return is the maximum prims supported
           by the parcel. If TRUE then it is the combined number of prims on all parcels
@@ -8844,6 +8891,7 @@ functions:
     func-id: 138
     must-use: true
     return: integer
+    enum-semantics: ScriptPermission
     sleep: 0.0
     tooltip: Returns an integer bitmask of the permissions that have been granted
       to the script.  Individual permissions can be determined using a bit-wise "and"
@@ -8881,6 +8929,7 @@ functions:
     - Face:
         tooltip: face number
         type: integer
+        enum-semantics: Faces
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -8961,6 +9010,7 @@ functions:
     func-id: 318
     must-use: true
     return: integer
+    enum-semantics: llGetRegionFlag
     sleep: 0.0
     tooltip: Returns the region flags (REGION_FLAG_*) for the region the object is
       in.\nReturns a bit-field specifying the region flags (REGION_FLAG_*) for the
@@ -9031,6 +9081,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 760
     must-use: true
@@ -9113,6 +9164,7 @@ functions:
     - StatType:
         tooltip: Statistic type.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 415
     must-use: true
