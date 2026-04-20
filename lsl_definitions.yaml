@@ -9306,6 +9306,8 @@ functions:
       is the torque (if the script is physical).
   llGetUnixTime:
     arguments: []
+    slua-deprecated:
+      use: os.time
     energy: 10.0
     func-id: 316
     must-use: true
