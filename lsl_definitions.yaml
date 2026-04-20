@@ -8300,7 +8300,7 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
-      the current UTC date as YYYY-MM-DD.
+      the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.
     categories:
       - time
   llGetDayLength:
@@ -9885,7 +9885,8 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+    tooltip: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n
+      Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds'
     categories:
       - time
   llGetTorque:
@@ -9902,6 +9903,9 @@ functions:
       - physics
   llGetUnixTime:
     arguments: []
+    slua-deprecated:
+      use: os.time
+      reason: Int32 will wrap on 2038-01-19
     energy: 10.0
     func-id: 316
     must-use: true

@@ -19567,7 +19567,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD.</string>
+            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.</string>
          </map>
          <key>ll.GetDayLength</key>
          <map>
@@ -21767,7 +21767,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.</string>
+            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds</string>
          </map>
          <key>ll.GetTorque</key>
          <map>
@@ -21788,6 +21788,8 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
