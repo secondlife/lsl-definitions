@@ -121,7 +121,8 @@ def expand_spp_builder(lsl: "LSLDefinitions") -> BuilderSpec:
                 )
             )
     return BuilderSpec(
-        class_name="ParamsSetterType",
+        # The "class name" is global, so we don't want it to be ambiguous
+        class_name="PrimParamsSetterType",
         module_entry="ParamsSetter",
         module_name="llprim",
         methods=methods,

@@ -219,7 +219,7 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Timer management class for scheduling periodic and one-time callbacks</string>
          </map>
-         <key>ParamsSetterType</key>
+         <key>PrimParamsSetterType</key>
          <map>
             <key>tooltip</key>
             <string></string>
@@ -327,7 +327,7 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
-            <string>ParamsSetterTypeMeta</string>
+            <string>PrimParamsSetterTypeMeta</string>
          </map>
          <key>math.huge</key>
          <map>

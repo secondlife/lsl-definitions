@@ -15545,7 +15545,7 @@ structs:
       args:
       - type: function
       description: Unregisters a timer callback. Returns true if found and removed.
-  ParamsSetterType:
+  PrimParamsSetterType:
     targetLink:
       method: true
       args:
@@ -15554,11 +15554,11 @@ structs:
       method: true
       args:
       - type: number
-    physics:
+    physical:
       method: true
       args:
       - type: bool
-    tempOnRez:
+    temporary:
       method: true
       args:
       - type: bool
@@ -15713,7 +15713,7 @@ structs:
       - type:
           display: vector
       - type: number
-    bumpShiny:
+    shinyBump:
       method: true
       args:
       - type: number

@@ -14348,11 +14348,13 @@ builder-rulesets:
         params:
           - [ integer, flag ]
       PHYSICS:
+        method-name: 'physical'
         params:
           # Note that we use "asset" and "boolean" types to denote places where
           # `asset-semantics` or `bool-semantics` would apply.
           - [ boolean, enabled ]
       TEMP_ON_REZ:
+        method-name: 'temporary'
         params:
           - [ boolean, enabled ]
       PHANTOM:
@@ -14371,8 +14373,7 @@ builder-rulesets:
           - [ rotation, rot ]
       TYPE:
         params:
-          # TODO: something so we can express an enum-like relationship,
-          #  this actually only accepts ints that are `PRIM_TYPE_*` consts.
+          # TODO: express an enum-like relationship here?
           - [ integer, prim_type ]
         variants-on: prim_type
         variant-enum: PrimType
@@ -14423,6 +14424,8 @@ builder-rulesets:
           - [ float, alpha ]
       BUMP_SHINY:
         face-target: true
+        # Neither name is very good, but at least this makes sense
+        method-name: 'shinyBump'
         params:
           - [ integer, shiny ]
           - [ integer, bump ]
