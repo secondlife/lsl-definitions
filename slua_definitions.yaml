@@ -2683,8 +2683,8 @@ builtin-functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to assign the value to.
-    type: "{[any]: any} | string"
+    comment: The table or string to compute the length of.
+    type: "{[K]: V} | string"
   return-type: number
   fastcall: true
 - name: select
