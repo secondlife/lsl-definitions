@@ -700,7 +700,7 @@ declare ll: {
   GetTimeOfDay: () -> number,
   GetTimestamp: () -> string,
   GetTorque: () -> vector,
-  GetUnixTime: () -> number,
+  GetUnixTime: @[deprecated {use='os.time', reason='Int32 will wrap on 2038-01-19'}]() -> number,
   GetUsedMemory: () -> number,
   GetUsername: (AvatarID: uuid) -> string,
   GetVel: () -> vector,
