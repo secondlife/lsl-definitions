@@ -9791,6 +9791,7 @@ functions:
     - StatusFlag:
         tooltip: A STATUS_* flag
         type: integer
+        enum-semantics: ObjectStatusParam
     energy: 10.0
     func-id: 46
     must-use: true
@@ -9852,9 +9853,10 @@ functions:
       - parcel_appearance
   llGetTexture:
     arguments:
-    - Face:
+    - face:
         tooltip: ''
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 57
     must-use: true
@@ -9871,6 +9873,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 178
     must-use: true
@@ -9885,6 +9888,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 180
     must-use: true
@@ -9899,6 +9903,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 179
     must-use: true
@@ -10054,6 +10059,7 @@ functions:
     energy: 10.0
     func-id: 517
     return: integer
+    enum-semantics: TransferError
     sleep: 3.0
     tooltip: Give InventoryItems to the specified agent as a new folder of items,
       as permitted by the permissions system. The target must be an agent.
@@ -10367,9 +10373,11 @@ functions:
     - link:
         tooltip: Link number to check.
         type: integer
+        enum-semantics: Link
     - face:
         tooltip: Side to check for a PBR material. Use ALL_SIDES to check for all.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 559
     must-use: true
@@ -10558,6 +10566,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     - Volume:
         tooltip: The volume to set.
         type: float
@@ -10575,6 +10584,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     - Rules:
         tooltip: Particle system rules list in the format [ rule1, data1, rule2, data2
           . . . ruleN, dataN ]
@@ -10597,6 +10607,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     - Sound:
         tooltip: ''
         type: string
@@ -10607,6 +10618,7 @@ functions:
     - Flags:
         tooltip: ''
         type: integer
+        enum-semantics: PlaySoundFlag
     energy: 10.0
     func-id: 533
     return: void
@@ -10623,6 +10635,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     - QueueEnable:
         tooltip: 'Boolean, sound queuing for the linked prim: TRUE enables, FALSE
           disables (default).'
@@ -10642,6 +10655,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     - radius:
         tooltip: Maximum distance that sounds can be heard.
         type: float
@@ -10659,6 +10673,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag of the prim.'
         type: integer
+        enum-semantics: Link
     - Offset:
         tooltip: Position for the sit target, relative to the prim's position.
         type: vector
@@ -10681,6 +10696,7 @@ functions:
         tooltip: 'Link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_*
           flag'
         type: integer
+        enum-semantics: Links
     energy: 10.0
     func-id: 534
     return: void
@@ -10736,6 +10752,7 @@ functions:
     energy: 10.0
     func-id: 652
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes a name:value pair from the linkset's datastore.
     categories:
@@ -10773,6 +10790,7 @@ functions:
     energy: 10.0
     func-id: 660
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes a name:value pair from the linkset's datastore.
     categories:
@@ -10878,6 +10896,7 @@ functions:
     energy: 10.0
     func-id: 650
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Sets a name:value pair in the linkset's datastore
     categories:
@@ -10898,6 +10917,7 @@ functions:
     energy: 10.0
     func-id: 658
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Sets a name:value pair in the linkset's datastore
     categories:
@@ -11422,6 +11442,7 @@ functions:
     - Operation:
         tooltip: One of LIST_STAT_* values
         type: integer
+        enum-semantics: ListStatisticsOperation
     - ListVariable:
         tooltip: Variable to analyze.
         type: list
@@ -11818,6 +11839,7 @@ functions:
     - Action:
         tooltip: One of the ESTATE_ACCESS_ALLOWED_* actions.
         type: integer
+        enum-semantics: EstateAccessParam
     - AvatarID:
         tooltip: UUID of the avatar or group to act upon.
         type: key
@@ -11883,6 +11905,7 @@ functions:
     - LinkNumber:
         tooltip: ''
         type: integer
+        enum-semantics: Links
     - Number:
         tooltip: ''
         type: integer
@@ -11940,9 +11963,11 @@ functions:
     - Action:
         tooltip: LAND_LEVEL, LAND_RAISE, LAND_LOWER, LAND_SMOOTH, LAND_NOISE or LAND_REVERT
         type: integer
+        enum-semantics: ModifyLandAction
     - Area:
         tooltip: 0, 1, 2 (2m x 2m, 4m x 4m, or 8m x 8m)
         type: integer
+        enum-semantics: ModifyLandBrush
     energy: 10.0
     func-id: 159
     return: void
