@@ -7802,7 +7802,7 @@ functions:
     - face:
         tooltip: The face number to clear.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 373
     return: integer
@@ -7820,7 +7820,7 @@ functions:
     - face:
         tooltip: The face number (side) to clear.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 352
     return: integer
@@ -8912,7 +8912,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 50
     must-use: true
@@ -9154,7 +9154,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 52
     must-use: true
@@ -10035,7 +10035,7 @@ functions:
     func-id: 287
     must-use: true
     return: integer
-    enum-semantics: AssetPermissionCategory
+    enum-semantics: {enums: [AssetPermissionCategory, AssetPermissionCategoryFlag]}
     sleep: 0.0
     tooltip: Returns an integer bitfield representing the permission mask of the
       specified category for the object containing the script.
@@ -10455,7 +10455,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 760
     must-use: true
@@ -10557,7 +10557,7 @@ functions:
     - stat_type:
         tooltip: The SIM_STAT_* flag of the statistic to retrieve.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 415
     must-use: true
@@ -10701,7 +10701,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 57
     must-use: true
@@ -10719,7 +10719,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 178
     must-use: true
@@ -10735,7 +10735,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 180
     must-use: true
@@ -10751,7 +10751,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 179
     must-use: true
@@ -11242,7 +11242,7 @@ functions:
     - face:
         tooltip: The face number (or ALL_SIDES) of the prim to inspect.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 559
     must-use: true
@@ -12878,7 +12878,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 55
     return: void
@@ -14146,7 +14146,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 56
     return: void
@@ -14268,7 +14268,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 54
     return: void
@@ -14463,7 +14463,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 51
     return: void
@@ -14599,7 +14599,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 49
     return: void
@@ -14816,7 +14816,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 274
     return: void
@@ -14860,7 +14860,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 140
     return: void
@@ -14878,7 +14878,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: Faces
     - params:
         tooltip: A list of overrides and their corresponding values to set.
         type: list
@@ -14900,7 +14900,7 @@ functions:
     - face:
         tooltip: The face number (side) of the prim.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: Faces
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
@@ -14972,7 +14972,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 762
     return: void
@@ -15014,7 +15014,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 329
     return: void
@@ -15037,7 +15037,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: Faces
     - sizex:
         tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
@@ -15256,7 +15256,7 @@ functions:
     - face:
         tooltip: The face number (side) of the prim.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: Faces
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
@@ -15350,7 +15350,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 761
     return: void
@@ -15501,7 +15501,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 53
     return: void
@@ -15519,7 +15519,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: Faces
     - sizex:
         tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
