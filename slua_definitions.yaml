@@ -1585,6 +1585,8 @@ modules:
   functions:
   - name: clock
     comment: Returns a high-precision timestamp in seconds for measuring durations.
+      Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script time slice).
+      6-11x slower to look up than ll.GetTime.
     parameters: []
     return-type: number
     must-use: true
