@@ -10631,6 +10631,7 @@ functions:
     - status:
         tooltip: The single STATUS_* flag to check.
         type: integer
+        enum-semantics: ObjectStatusParam
     energy: 10.0
     func-id: 46
     must-use: true
@@ -10697,6 +10698,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 57
     must-use: true
@@ -10714,6 +10716,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 178
     must-use: true
@@ -10729,6 +10732,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 180
     must-use: true
@@ -10744,6 +10748,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 179
     must-use: true
@@ -10906,6 +10911,7 @@ functions:
     energy: 10.0
     func-id: 517
     return: integer
+    enum-semantics: TransferError
     sleep: 3.0
     tooltip: Gives the specified inventory items to the agent as a new folder named
       folder, as permitted by the permissions system. Customizes the transfer
@@ -11229,9 +11235,11 @@ functions:
     - link:
         tooltip: The link number (or LINK_* flag) of the prim to inspect.
         type: integer
+        enum-semantics: Link
     - face:
         tooltip: The face number (or ALL_SIDES) of the prim to inspect.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 559
     must-use: true
@@ -11416,6 +11424,7 @@ functions:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag of the
           prim to adjust.
         type: integer
+        enum-semantics: Links
     - volume:
         tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -11432,6 +11441,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - rules:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
@@ -11449,6 +11459,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - sound:
         tooltip: The name of a sound in the prim's inventory, or a UUID.
         type: string
@@ -11459,6 +11470,7 @@ functions:
     - flags:
         tooltip: Bitwise flags (combination of SOUND_*) controlling the sound playback.
         type: integer
+        enum-semantics: PlaySoundFlag
     energy: 10.0
     func-id: 533
     return: void
@@ -11474,6 +11486,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - queue:
         tooltip: Boolean. If TRUE, sound queuing is enabled; if FALSE, it is disabled.
         type: integer
@@ -11491,6 +11504,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - radius:
         tooltip: The maximum distance in meters at which the sounds can be heard.
         type: float
@@ -11507,6 +11521,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Link
     - offset:
         tooltip: The offset position vector in local prim coordinates.
         type: vector
@@ -11528,6 +11543,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     energy: 10.0
     func-id: 534
     return: void
@@ -11586,6 +11602,7 @@ functions:
     energy: 10.0
     func-id: 652
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes the unprotected key-value pair specified by name from the
       linkset's datastore, triggering a linkset_data event.
@@ -11624,6 +11641,7 @@ functions:
     energy: 10.0
     func-id: 660
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes the protected key-value pair specified by name from the
       linkset's datastore using the passphrase pass, triggering a linkset_data
@@ -11739,6 +11757,7 @@ functions:
     energy: 10.0
     func-id: 650
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Creates or updates an unprotected key-value pair (name and value) in
       the linkset's datastore. Returns an integer success or failure code.
@@ -11760,6 +11779,7 @@ functions:
     energy: 10.0
     func-id: 658
     return: integer
+    enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Creates or updates a protected key-value pair (name and value) in the
       linkset's datastore using the passphrase pass. Returns an integer success
@@ -12275,6 +12295,7 @@ functions:
     - operation:
         tooltip: The LIST_STAT_* constant of the statistical operation to perform.
         type: integer
+        enum-semantics: ListStatisticsOperation
     - src:
         tooltip: The list of floats and integers to analyze.
         type: list
@@ -12653,6 +12674,7 @@ functions:
     - action:
         tooltip: An ESTATE_ACCESS_* action flag specifying the operation to perform.
         type: integer
+        enum-semantics: EstateAccessParam
     - avatar:
         tooltip: The UUID of the avatar or group to add or remove.
         type: key
@@ -12716,6 +12738,7 @@ functions:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag
           controlling which prim(s) receive the message.
         type: integer
+        enum-semantics: Links
     - num:
         tooltip: An integer value passed as the second parameter of the link_message
           event.
@@ -12776,9 +12799,11 @@ functions:
         tooltip: The LAND_* action flag to perform (e.g., LAND_LEVEL, LAND_RAISE,
           LAND_LOWER, LAND_SMOOTH, LAND_NOISE, or LAND_REVERT).
         type: integer
+        enum-semantics: ModifyLandAction
     - brush:
         tooltip: The brush size (0, 1, or 2, representing 2m x 2m, 4m x 4m, or 8m x 8m).
         type: integer
+        enum-semantics: ModifyLandBrush
     energy: 10.0
     func-id: 159
     return: void
