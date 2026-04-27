@@ -9278,7 +9278,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   llGetTimeOfDay:
     arguments: []
     energy: 10.0

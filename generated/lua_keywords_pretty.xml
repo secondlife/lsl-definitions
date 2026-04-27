@@ -14343,7 +14343,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a high-precision timestamp in seconds for measuring durations.</string>
+            <string>Returns a high-precision timestamp in seconds for measuring durations. Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script time slice). 6-11x slower to look up than ll.GetTime.</string>
          </map>
          <key>os.date</key>
          <map>
@@ -21718,7 +21718,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime.</string>
+            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s (1 server frame), and is 6-11x faster to look up than lua's os.clock</string>
          </map>
          <key>ll.GetTimeOfDay</key>
          <map>

@@ -4629,6 +4629,8 @@ globals:
     args: []
     must_use: true
     description: Returns a high-precision timestamp in seconds for measuring durations.
+      Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script
+      time slice). 6-11x slower to look up than ll.GetTime.
   os.date:
     args:
     - type: string
@@ -6754,7 +6756,8 @@ globals:
     args: []
     must_use: true
     description: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   ll.GetTimeOfDay:
     args: []
     must_use: true
@@ -11420,11 +11423,13 @@ globals:
   llcompat.GetTime:
     deprecated:
       message: Returns the time in seconds since the last region reset, script reset,
-        or call to either llResetTime or llGetAndResetTime.
+        or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+        (1 server frame), and is 6-11x faster to look up than lua's os.clock
     args: []
     must_use: true
     description: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   llcompat.GetTimeOfDay:
     deprecated:
       message: Returns the time in seconds since environmental midnight on the parcel.
