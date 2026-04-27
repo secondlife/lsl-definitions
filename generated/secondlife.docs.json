@@ -5579,6 +5579,9 @@
     "@sl-slua/global/ENV_NO_PERMISSIONS": {
         "documentation": "Value: -9<br>Script does not have permission to modify environment."
     },
+    "@sl-slua/global/ENV_OK": {
+        "documentation": "Value: 1<br>Environment modified successfully."
+    },
     "@sl-slua/global/ENV_THROTTLE": {
         "documentation": "Value: -8<br>Could not validate values for environment."
     },
