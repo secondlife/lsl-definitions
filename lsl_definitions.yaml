@@ -41,6 +41,9 @@ enums:
     type: flag
     prefix: AGENT_LIST_
     tooltip: ''
+  AgentRotFlags:
+    type: flag
+    tooltip: 'None defined yet'
   AlphaMode:
     type: enum
     prefix: PRIM_ALPHA_MODE_
@@ -12875,6 +12878,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 55
     return: void
@@ -13495,6 +13499,7 @@ functions:
     - flags:
         tooltip: A bitwise mask of VEHICLE_FLAG_* constants to disable.
         type: integer
+        enum-semantics: Vehiclelags
     energy: 10.0
     func-id: 237
     return: void
@@ -13522,6 +13527,7 @@ functions:
     experience: true
     func-id: 713
     return: integer
+    enum-semantics: EnvironmentError
     sleep: 0.0
     tooltip: Replaces the region and parcel environment seen by the specified
       agent_id as part of an experience, transitioning the settings over
@@ -13556,6 +13562,7 @@ functions:
     energy: 10.0
     func-id: 718
     return: integer
+    enum-semantics: EnvironmentError
     sleep: 0.0
     tooltip: Replaces the environment on the parcel containing position (or the
       entire region if position is <-1.0, -1.0, -1.0>) for the specified
@@ -13598,6 +13605,7 @@ functions:
     - data:
         tooltip: The DATA_* category flag of the requested information.
         type: integer
+        enum-semantics: AgentData
     energy: 10.0
     func-id: 155
     return: key
@@ -13668,6 +13676,7 @@ functions:
     - permissions:
         tooltip: The bitfield containing the PERMISSION_* constants to request.
         type: integer
+        enum-semantics: ScriptPermission
     energy: 10.0
     func-id: 136
     return: void
@@ -13698,6 +13707,7 @@ functions:
     - data:
         tooltip: The DATA_SIM_* flag of the requested simulator data.
         type: integer
+        enum-semantics: SimulatorData
     energy: 10.0
     func-id: 293
     return: key
@@ -13828,6 +13838,7 @@ functions:
     energy: 10.0
     func-id: 520
     return: integer
+    enum-semantics: ReturnObjectsError
     sleep: 0.0
     requires-permission:
       - PERMISSION_RETURN_OBJECTS
@@ -13846,9 +13857,11 @@ functions:
         tooltip: The OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL,
           OBJECT_RETURN_PARCEL_OWNER, or OBJECT_RETURN_REGION).
         type: integer
+        enum-semantics: ReturnObjectsScope
     energy: 10.0
     func-id: 521
     return: integer
+    enum-semantics: ReturnObjectsError
     sleep: 0.0
     requires-permission:
       - PERMISSION_RETURN_OBJECTS
@@ -14133,6 +14146,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 56
     return: void
@@ -14254,6 +14268,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 54
     return: void
@@ -14287,6 +14302,7 @@ functions:
         tooltip: The PROFILE_* flag (such as PROFILE_NONE or PROFILE_SCRIPT_MEMORY) to
           set the profiling state.
         type: integer
+        enum-semantics: ScriptProfileMode
     energy: 10.0
     func-id: 367
     return: void
@@ -14334,6 +14350,7 @@ functions:
         tooltip: The integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
           AGENT_BY_USERNAME, ACTIVE, PASSIVE, or SCRIPTED (0 for no filter).
         type: integer
+        enum-semantics: DetectType
     - radius:
         tooltip: The maximum distance in meters to scan (range [0.0, 96.0]).
         type: float
@@ -14374,6 +14391,7 @@ functions:
         tooltip: The integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
           AGENT_BY_USERNAME, ACTIVE, PASSIVE, or SCRIPTED (0 for no filter).
         type: integer
+        enum-semantics: DetectType
     - radius:
         tooltip: The maximum distance in meters to scan (range [0.0, 96.0]).
         type: float
@@ -14408,6 +14426,7 @@ functions:
     experience: true
     func-id: 714
     return: integer
+    enum-semantics: EnvironmentError
     sleep: 0.0
     tooltip: Sets an individual agent's environmental settings using the attributes
       in params over a duration of transition seconds. Must be used as part of
@@ -14425,6 +14444,7 @@ functions:
     - flags:
         tooltip: Flags to configure the rotation behavior.
         type: integer
+        enum-semantics: AgentRotFlags
     energy: 10.0
     func-id: 515
     return: void
@@ -14443,6 +14463,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 51
     return: void
@@ -14557,6 +14578,7 @@ functions:
     - action:
         tooltip: The CLICK_ACTION_* flag representing the action to apply.
         type: integer
+        enum-semantics: ClickAction
     energy: 10.0
     func-id: 333
     return: void
@@ -14577,6 +14599,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 49
     return: void
@@ -14595,6 +14618,7 @@ functions:
         tooltip: The CONTENT_TYPE_* constant representing the Internet media type to
           use.
         type: integer
+        enum-semantics: HTTPContentType
     energy: 10.0
     func-id: 374
     return: void
@@ -14635,6 +14659,7 @@ functions:
     energy: 10.0
     func-id: 717
     return: integer
+    enum-semantics: EnvironmentError
     sleep: 0.0
     tooltip: Overrides the environmental settings at position for a parcel (or
       region if position is <-1.0, -1.0, z>) using the parameters in params.
@@ -14743,9 +14768,11 @@ functions:
     - category:
         tooltip: The MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
         type: integer
+        enum-semantics: AssetPermissionCategory
     - value:
         tooltip: The bitfield of permissions (PERM_* flags) to set.
         type: integer
+        enum-semantics: AssetPermission
     energy: 10.0
     func-id: 290
     god-mode: true
@@ -14782,12 +14809,14 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - alpha:
         tooltip: The transparency value to set, from 0.0 (clear) to 1.0 (solid).
         type: float
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 274
     return: void
@@ -14801,6 +14830,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Link
     - eye:
         tooltip: The eye offset position vector in local coordinates relative to the
           prim.
@@ -14823,12 +14853,14 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - color:
         tooltip: The color vector in RGB <R, G, B> (values from 0.0 to 1.0).
         type: vector
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 140
     return: void
@@ -14842,9 +14874,11 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     - params:
         tooltip: A list of overrides and their corresponding values to set.
         type: list
@@ -14862,9 +14896,11 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Link
     - face:
         tooltip: The face number (side) of the prim.
         type: integer
+        enum-semantics: FACES
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
@@ -14872,6 +14908,7 @@ functions:
     energy: 10.0
     func-id: 371
     return: integer
+    enum-semantics: PrimMediaError
     sleep: 0.0
     tooltip: Sets the media parameters specified by params on face of the linked
       prim link without a script delay. Returns an integer STATUS_* flag
@@ -14886,6 +14923,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - rules:
         tooltip: A list of PRIM_* rules and data to apply.
         type: list
@@ -14907,6 +14945,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - rules:
         tooltip: A list of PRIM_* rules and data to apply.
         type: list
@@ -14925,6 +14964,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - material:
         tooltip: The name of a material in the prim's inventory, or a UUID.
         type: string
@@ -14932,6 +14972,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 762
     return: void
@@ -14947,9 +14988,11 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - flags:
         tooltip: A bitfield of sit flags (SIT_FLAG_*) to apply.
         type: integer
+        enum-semantics: SitFlag
     energy: 10.0
     func-id: 550
     return: void
@@ -14963,6 +15006,7 @@ functions:
     - link:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        enum-semantics: Links
     - texture:
         tooltip: The name of a texture in the prim's inventory, or a UUID.
         type: string
@@ -14970,6 +15014,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 329
     return: void
@@ -14984,12 +15029,15 @@ functions:
         tooltip: The link number (1 for root, >1 for children) or a LINK_* flag to
           animate.
         type: integer
+        enum-semantics: Links
     - mode:
         tooltip: The bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
         type: integer
+        enum-semantics: TextureAnimMode
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     - sizex:
         tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
@@ -15079,9 +15127,11 @@ functions:
     - mask:
         tooltip: The MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
         type: integer
+        enum-semantics: AssetPermissionCategory
     - value:
         tooltip: The bitfield of permissions (PERM_* flags) to set.
         type: integer
+        enum-semantics: AssetPermission
     energy: 10.0
     func-id: 288
     god-mode: true
@@ -15106,6 +15156,7 @@ functions:
     energy: 10.0
     func-id: 561
     return: integer
+    enum-semantics: ParcelSaleError
     sleep: 0.0
     requires-permission:
       - PERMISSION_PRIVILEGED_LAND_ACCESS
@@ -15137,6 +15188,7 @@ functions:
         tooltip: The default price integer shown in the text field (can accept PAY_*
           constants or positive values).
         type: integer
+        enum-semantics: PayButton
     - quick_pay_buttons:
         tooltip: A list of four integer values or PAY_* constants specifying the button
           payment choices.
@@ -15158,6 +15210,7 @@ functions:
         tooltip: The bitwise mask combination specifying which of the floats (DENSITY,
           FRICTION, RESTITUTION, or GRAVITY_MULTIPLIER) to apply.
         type: integer
+        enum-semantics: PhysicsMaterialParam
     - gravity_multiplier:
         tooltip: The gravity multiplier float value (range [-1.0, +28.0], default is
           1.0).
@@ -15203,6 +15256,7 @@ functions:
     - face:
         tooltip: The face number (side) of the prim.
         type: integer
+        enum-semantics: FACES
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
@@ -15210,6 +15264,7 @@ functions:
     energy: 10.0
     func-id: 350
     return: integer
+    enum-semantics: PrimMediaError
     sleep: 1.0
     tooltip: Sets the media parameters specified by params on the designated face of
       the prim. Returns an integer STATUS_* flag detailing success or failure.
@@ -15295,6 +15350,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 761
     return: void
@@ -15400,6 +15456,7 @@ functions:
     - status:
         tooltip: The bitmask representing the STATUS_* flag(s) to change.
         type: integer
+        enum-semantics: ObjectStatusParam
     - value:
         tooltip: Boolean. If TRUE, enables the status; if FALSE, disables it.
         type: integer
@@ -15444,6 +15501,7 @@ functions:
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     energy: 10.0
     func-id: 53
     return: void
@@ -15457,9 +15515,11 @@ functions:
     - mode:
         tooltip: The bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
         type: integer
+        enum-semantics: TextureAnimMode
     - face:
         tooltip: The face number or ALL_SIDES.
         type: integer
+        enum-semantics: FACES
     - sizex:
         tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
@@ -15543,6 +15603,7 @@ functions:
     - flags:
         tooltip: A bitwise mask of VEHICLE_FLAG_* constants to enable.
         type: integer
+        enum-semantics: VehicleFlag
     energy: 10.0
     func-id: 236
     return: void
@@ -15555,6 +15616,7 @@ functions:
     - param:
         tooltip: The VEHICLE_* float parameter constant to set.
         type: integer
+        enum-semantics: VehicleFloatParam
     - value:
         tooltip: The float value to set.
         type: float
@@ -15570,6 +15632,7 @@ functions:
     - param:
         tooltip: The VEHICLE_* rotation parameter constant to set.
         type: integer
+        enum-semantics: VehicleRotationParam
     - rot:
         tooltip: The rotation value to set.
         type: rotation
@@ -15585,6 +15648,7 @@ functions:
     - type:
         tooltip: The VEHICLE_TYPE_* constant to set.
         type: integer
+        enum-semantics: VehicleType
     energy: 10.0
     func-id: 232
     return: void
@@ -15597,6 +15661,7 @@ functions:
     - param:
         tooltip: The VEHICLE_* vector parameter constant to set.
         type: integer
+        enum-semantics: VehicleVectorParam
     - vec:
         tooltip: The vector value to set.
         type: vector
@@ -15696,10 +15761,12 @@ functions:
     - link:
         tooltip: The link number for the prim containing the desired sit target.
         type: integer
+        enum-semantics: Link
     energy: 10.0
     func-id: 503
     experience: true
     return: integer
+    enum-semantics: SitError
     sleep: 0.0
     tooltip: Forces the avatar specified by agent_id (who must be participating in
       the experience) to sit on the sit target of the prim indicated by link. If
@@ -15969,6 +16036,7 @@ functions:
         tooltip: The trim type flag (STRING_TRIM_HEAD, STRING_TRIM_TAIL, or
           STRING_TRIM).
         type: integer
+        enum-semantics: StringTrimType
     energy: 10.0
     func-id: 330
     pure: true
@@ -16019,6 +16087,7 @@ functions:
     - controls:
         tooltip: The bitfield of CONTROL_* flags to intercept.
         type: integer
+        enum-semantics: ControlButton
     - accept:
         tooltip: Boolean. Determines whether control events are generated to trigger
           script handlers.
@@ -16120,6 +16189,7 @@ functions:
         tooltip: The target constant (e.g., TARGETED_EMAIL_OBJECT_OWNER or
           TARGETED_EMAIL_ROOT_CREATOR).
         type: integer
+        enum-semantics: EmailTarget
     - subject:
         tooltip: The subject of the email.
         type: string
@@ -16292,12 +16362,14 @@ functions:
         tooltip: Flags controlling the transfer type (such as TRANSFER_FLAG_COPY or
           TRANSFER_FLAG_TAKE).
         type: integer
+        enum-semantics: TransferOwnershipFlag
     - options:
         tooltip: Extra options applied to the transfer (currently unused).
         type: list
     energy: 10.0
     func-id: 519
     return: integer
+    enum-semantics: TransferError
     sleep: 0.0
     tooltip: Transfers ownership of the object (or a copy of it, depending on flags)
       to the avatar agent_id. Returns an integer indicating the success or
