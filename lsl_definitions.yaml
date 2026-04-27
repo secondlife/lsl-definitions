@@ -61,6 +61,13 @@ enums:
     type: flag
     prefix: MASK_
     tooltip: ''
+  AssetPermissionCategoryOrFlag:
+    type: both
+    enum: AssetPermissionCategory
+    flag: AssetPermissionCategoryFlag
+    mask: "0x7"
+    prefix: MASK_
+    tooltip: ''
   AttachedListFilterFlag:
     type: flag
     prefix: FILTER_FLAG_
@@ -173,6 +180,7 @@ enums:
     tooltip: ''
   Faces:
     type: enum
+    other-values: true
     tooltip: 'Operate on one or more face numbers at a time.'
   GameControlAxis:
     type: enum
@@ -237,10 +245,12 @@ enums:
     tooltip: ''
   Link:
     type: enum
+    other-values: true
     prefix: LINK_
     tooltip: 'Operate on one link number at a time.'
   Links:
     type: enum
+    other-values: true
     prefix: LINK_
     tooltip: 'Operate on one or more link numbers at a time.'
   LinksetDataAction:
@@ -339,6 +349,7 @@ enums:
   PayButton:
     type: enum
     prefix: PAY_
+    other-values: true
     tooltip: ''
   PhysicsMaterialParam:
     type: flag
@@ -405,6 +416,13 @@ enums:
     type: enum
     prefix: PRIM_SCULPT_TYPE_
     tooltip: ''
+  PrimTypeSculpt:
+    type: both
+    enum: PrimTypeSculptType
+    flag: PrimTypeSculptFlag
+    mask: PRIM_SCULPT_TYPE_MASK
+    prefix: PRIM_SCULPT_
+    tooltip: ''
   RayCastData:
     type: flag
     prefix: RC_GET_
@@ -412,6 +430,7 @@ enums:
   RayCastError:
     type: enum
     prefix: RCERR_
+    other-values: true
     tooltip: ''
   RayCastParam:
     type: enum
@@ -437,6 +456,7 @@ enums:
   ReturnObjectsError:
     type: enum
     prefix: ERR_
+    other-values: true
     tooltip: ''
   ReturnObjectsScope:
     type: flag
@@ -469,6 +489,7 @@ enums:
   SitError:
     type: enum
     prefix: SIT_
+    other-values: true  # just 1 for success. Why isn't
     tooltip: ''
   SitFlag:
     type: flag
