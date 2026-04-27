@@ -6834,7 +6834,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 373
     return: integer
@@ -6848,7 +6848,7 @@ functions:
     - Face:
         tooltip: Number of side to clear.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 352
     return: integer
@@ -7798,7 +7798,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 50
     must-use: true
@@ -7988,7 +7988,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 52
     must-use: true
@@ -8355,7 +8355,7 @@ functions:
     - Face:
         tooltip: The prim's side number
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -8738,7 +8738,7 @@ functions:
     func-id: 287
     must-use: true
     return: integer
-    enum-semantics: AssetPermissionCategory
+    enum-semantics: {enums: [AssetPermissionCategory, AssetPermissionCategoryFlag]}
     sleep: 0.0
     tooltip: Returns the permission mask of the requested category for the object.
   llGetObjectPrimCount:
@@ -8932,7 +8932,7 @@ functions:
     - Face:
         tooltip: face number
         type: integer
-        enum-semantics: Faces
+        enum-semantics: {enums: [Faces], other-values: true}
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -9084,7 +9084,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 760
     must-use: true
@@ -9167,7 +9167,7 @@ functions:
     - StatType:
         tooltip: Statistic type.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 415
     must-use: true
@@ -9284,7 +9284,7 @@ functions:
     - face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 57
     must-use: true
@@ -9298,7 +9298,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 178
     must-use: true
@@ -9310,7 +9310,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 180
     must-use: true
@@ -9322,7 +9322,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 179
     must-use: true
@@ -9721,7 +9721,7 @@ functions:
     - face:
         tooltip: Side to check for a PBR material. Use ALL_SIDES to check for all.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 559
     must-use: true
@@ -11169,7 +11169,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 55
     return: void
@@ -12228,7 +12228,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 56
     return: void
@@ -12333,7 +12333,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 54
     return: void
@@ -12496,7 +12496,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 51
     return: void
@@ -12606,7 +12606,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 49
     return: void
@@ -12785,7 +12785,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 274
     return: void
@@ -12826,7 +12826,7 @@ functions:
     - Face:
         tooltip: Side number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 140
     return: void
@@ -12842,7 +12842,7 @@ functions:
     - face:
         tooltip: Side to check for a PBR material. Use ALL_SIDES to check for all.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     - options:
         tooltip: List of individual overrides to set.
         type: list
@@ -12860,7 +12860,7 @@ functions:
     - Face:
         tooltip: Face number.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     - Parameters:
         tooltip: A set of name/value pairs (in no particular order)
         type: list
@@ -12923,7 +12923,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 762
     return: void
@@ -12960,7 +12960,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 329
     return: void
@@ -12981,7 +12981,7 @@ functions:
     - Face:
         tooltip: Specifies which object face to animate or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     - SizeX:
         tooltip: Horizontal frames (ignored for ROTATE and SCALE).
         type: integer
@@ -13108,7 +13108,7 @@ functions:
     - Price:
         tooltip: The default price shown in the text input field.
         type: integer
-        enum-semantics: PayButton
+        enum-semantics: {enums: [PayButton], other-values: true}
     - QuickButtons:
         tooltip: Specifies the 4 payment values shown in the payment dialog's buttons
           (or PAY_HIDE).
@@ -13168,7 +13168,7 @@ functions:
     - Face:
         tooltip: Face number
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     - MediaParameters:
         tooltip: A set of name/value pairs (in no particular order)
         type: list
@@ -13243,7 +13243,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 761
     return: void
@@ -13364,7 +13364,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     energy: 10.0
     func-id: 53
     return: void
@@ -13380,7 +13380,7 @@ functions:
     - Face:
         tooltip: Face number or ALL_SIDES.
         type: integer
-        enum-semantics: FACES
+        enum-semantics: {enums: [Faces], other-values: true}
     - SizeX:
         tooltip: Horizontal frames (ignored for ROTATE and SCALE).
         type: integer
