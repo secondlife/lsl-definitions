@@ -41,6 +41,9 @@ enums:
     type: flag
     prefix: AGENT_LIST_
     tooltip: ''
+  AgentListParam:
+    type: param-dict
+    tooltip: 'None defined yet'
   AgentRotFlags:
     type: flag
     tooltip: 'None defined yet'
@@ -98,10 +101,10 @@ enums:
     tooltip: ''
   CharacterEvadeParam:
     type: enum
-    tooltip: ''
+    tooltip: 'No options yet.'
   CharacterFleeFromParam:
     type: enum
-    tooltip: ''
+    tooltip: 'No options yet.'
   CharacterNavigateParam:
     type: enum
     tooltip: ''
@@ -182,6 +185,9 @@ enums:
     type: enum
     other-values: true
     tooltip: 'Operate on one or more face numbers at a time.'
+  FindNotecardTextParam:
+    type: param-dict
+    tooltip: 'No options yet.'
   GameControlAxis:
     type: enum
     prefix: GAME_CONTROL_AXIS_
@@ -193,6 +199,9 @@ enums:
   GetClosestNavPointParam:
     type: enum
     prefix: GCNP_
+    tooltip: ''
+  GetStaticPathParam:
+    type: param-dict
     tooltip: ''
   GiveAgentInventoryParam:
     type: enum
@@ -510,6 +519,10 @@ enums:
     type: flag
     prefix: TRANSFER_FLAG_
     tooltip: ''
+  TransferOwnershipParam:
+    type: param-dict
+    prefix: TRANSFER_
+    tooltip: 'No options yet.'
   VehicleFlag:
     type: flag
     prefix: VEHICLE_FLAG_
@@ -1255,7 +1268,7 @@ constants:
     type: integer
     value: 15
   CHARACTER_TYPE:
-    member-of: [CharacterParam, GetClosestNavPointParam]
+    member-of: [CharacterParam, GetClosestNavPointParam, GetStaticPathParam]
     tooltip: Specifies the preferred surface and terrain terrain-type for the
       character (default is CHARACTER_TYPE_NONE). Used to describe preferred
       surfaces rather than behavior (e.g., cows prefer type B, sheep herded
@@ -6924,6 +6937,7 @@ events:
     - metadata:
         tooltip: A list of HTTP_* constants and response headers metadata.
         type: list
+        param-semantics: HTTPResponseError
     - body:
         tooltip: The string payload of the received response body.
         type: string
@@ -7721,6 +7735,7 @@ functions:
     - options:
         tooltip: A list of option flags and their parameters to configure the raycast.
         type: list
+        param-semantics: RayCastParam
     energy: 10.0
     func-id: 363
     must-use: true
@@ -7988,6 +8003,7 @@ functions:
         tooltip: A list of key-value pairs specifying the character's configuration
           options.
         type: list
+        param-semantics: CharacterParam
     energy: 10.0
     func-id: 399
     return: void
@@ -8659,6 +8675,7 @@ functions:
     - options:
         tooltip: No options currently available (should be empty list).
         type: list
+        param-semantics: CharacterEvadeParam
     energy: 10.0
     func-id: 407
     return: void
@@ -8679,6 +8696,7 @@ functions:
         tooltip: A list of options for the command (e.g., jump height for
           CHARACTER_CMD_JUMP).
         type: list
+        param-semantics: CharacterCommand
     energy: 10.0
     func-id: 404
     return: void
@@ -8719,6 +8737,7 @@ functions:
         tooltip: A list of options to control the search (currently unused, should be
           []).
         type: list
+        param-semantics: FindNotecardTextParam
     energy: 10.0
     func-id: 507
     must-use: true
@@ -8752,6 +8771,7 @@ functions:
     - options:
         tooltip: A list of options for future expansion (unused, should be []).
         type: list
+        param-semantics: FindNotecardTextParam
     energy: 10.0
     func-id: 508
     must-use: true
@@ -8777,6 +8797,7 @@ functions:
     - options:
         tooltip: No options currently available (should be empty list).
         type: list
+        param-semantics: CharacterFleeFromParam
     energy: 10.0
     func-id: 402
     return: void
@@ -8901,6 +8922,7 @@ functions:
     - options:
         tooltip: A list of options to apply (currently unused).
         type: list
+        param-semantics: AgentListParam
     energy: 10.0
     func-id: 412
     must-use: true
@@ -9046,6 +9068,7 @@ functions:
     - options:
         tooltip: A list of options to filter the returned attachments.
         type: list
+        param-semantics: AttachedListFilterParam
     energy: 10.0
     func-id: 518
     must-use: true
@@ -9159,6 +9182,7 @@ functions:
     - options:
         tooltip: A list of GCNP_* flags and parameters to configure the search limits.
         type: list
+        param-semantics: GetClosestNavPointParam
     energy: 10.0
     func-id: 408
     must-use: true
@@ -9279,11 +9303,13 @@ functions:
     - params:
         tooltip: A list of environmental attributes to retrieve.
         type: list
+        param-get-semantics: EnvironmentParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 711
     must-use: true
     return: list
+    param-get-semantics: EnvironmentParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -9606,11 +9632,13 @@ functions:
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
         type: list
+        param-get-semantics: PrimMediaParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 372
     must-use: true
     return: list
+    param-get-semantics: PrimMediaParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -9671,11 +9699,13 @@ functions:
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
         type: list
+        param-get-semantics: PrimParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 354
     must-use: true
     return: list
+    param-get-semantics: PrimParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -9985,11 +10015,13 @@ functions:
     - params:
         tooltip: A list of OBJECT_* flags specifying the attributes to retrieve.
         type: list
+        param-get-semantics: ObjectDetailsParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 332
     must-use: true
     return: list
+    param-get-semantics: ObjectDetailsParam
     sleep: 0.0
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
@@ -10123,11 +10155,13 @@ functions:
     - params:
         tooltip: A list of PARCEL_DETAILS_* flags specifying the attributes to retrieve.
         type: list
+        param-get-semantics: ParcelDetails
         slua-type: "{number}"
     energy: 10.0
     func-id: 327
     must-use: true
     return: list
+    param-get-semantics: ParcelDetails
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -10284,11 +10318,13 @@ functions:
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
         type: list
+        param-get-semantics: PrimMediaParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 351
     must-use: true
     return: list
+    param-get-semantics: PrimMediaParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 1.0
@@ -10304,11 +10340,13 @@ functions:
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
         type: list
+        param-get-semantics: PrimParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 279
     must-use: true
     return: list
+    param-get-semantics: PrimParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.2
@@ -10639,6 +10677,7 @@ functions:
         tooltip: A list specifying the CHARACTER_TYPE parameter (defaults to
           CHARACTER_TYPE_NONE).
         type: list
+        param-semantics: GetStaticPathParam
     energy: 10.0
     func-id: 413
     must-use: true
@@ -10932,6 +10971,7 @@ functions:
     - options:
         tooltip: A list of options to configure the inventory transfer.
         type: list
+        param-semantics: GiveAgentInventoryParam
     energy: 10.0
     func-id: 517
     return: integer
@@ -11138,6 +11178,7 @@ functions:
     - parameters:
         tooltip: A list of HTTP_* configuration flags and value pairs.
         type: list
+        param-semantics: HTTPRequestParam
     - body:
         tooltip: The string contents of the request body.
         type: string
@@ -11469,6 +11510,7 @@ functions:
     - rules:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
+        param-semantics: ParticleParam
     energy: 10.0
     func-id: 355
     return: void
@@ -12724,6 +12766,7 @@ functions:
     - options:
         tooltip: A list of options to configure the map beacon.
         type: list
+        param-semantics: MapBeaconParam
     energy: 10.0
     func-id: 516
     return: void
@@ -12879,6 +12922,7 @@ functions:
         tooltip: A list of parameters to configure pathfinding behavior (currently only
           FORCE_DIRECT_PATH is supported).
         type: list
+        param-semantics: CharacterNavigateParam
     energy: 10.0
     func-id: 398
     return: void
@@ -12996,6 +13040,7 @@ functions:
         tooltip: A list containing integer PARCEL_MEDIA_COMMAND_* flags and their
           corresponding parameters.
         type: list
+        param-semantics: ParcelMediaCommand
     energy: 10.0
     func-id: 298
     return: void
@@ -13012,11 +13057,13 @@ functions:
     - query:
         tooltip: A list of PARCEL_MEDIA_COMMAND_* attributes to query.
         type: list
+        param-get-semantics: ParcelMediaQuery
         slua-type: "{number}"
     energy: 10.0
     func-id: 299
     must-use: true
     return: list
+    param-get-semantics: ParcelMediaQuery
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 2.0
@@ -13082,6 +13129,7 @@ functions:
     - rules:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
+        param-semantics: ParticleParam
     energy: 10.0
     func-id: 229
     return: void
@@ -13132,6 +13180,7 @@ functions:
         tooltip: A list of PATROL_* flags and parameters to configure the patrol
           behavior.
         type: list
+        param-semantics: CharacterPatrolPointsParam
     energy: 10.0
     func-id: 403
     return: void
@@ -13235,6 +13284,7 @@ functions:
     - options:
         tooltip: A list of options to configure pursuit behavior.
         type: list
+        param-semantics: CharacterPursueParam
     energy: 10.0
     func-id: 400
     return: void
@@ -13959,6 +14009,7 @@ functions:
     - params:
         tooltip: A list of REZ_* parameters to configure the rezzed object's attributes.
         type: list
+        param-semantics: RezParam
     energy: 200.0
     func-id: 544
     return: key
@@ -14443,6 +14494,7 @@ functions:
     - params:
         tooltip: A list of environmental parameters to apply.
         type: list
+        param-semantics: EnvironmentParam
     energy: 10.0
     experience: true
     func-id: 714
@@ -14582,6 +14634,7 @@ functions:
     - rules:
         tooltip: A strided list of rules and data pairs configuring the camera.
         type: list
+        param-semantics: CameraParam
     energy: 10.0
     func-id: 313
     return: void
@@ -14677,6 +14730,7 @@ functions:
         tooltip: A list of environmental attributes and values to apply (or empty to
           clear).
         type: list
+        param-semantics: EnvironmentParam
     energy: 10.0
     func-id: 717
     return: integer
@@ -14750,6 +14804,7 @@ functions:
     - changes:
         tooltip: A list of terrain detail properties and values to change.
         type: list
+        param-semantics: GroundTextureParam
     energy: 10.0
     func-id: 558
     return: integer
@@ -14814,6 +14869,7 @@ functions:
     - options:
         tooltip: A list of options (KFM_* constants) to modify playback behavior.
         type: list
+        param-semantics: KeyframedMotionParam
     energy: 10.0
     func-id: 394
     return: void
@@ -14903,6 +14959,7 @@ functions:
     - params:
         tooltip: A list of overrides and their corresponding values to set.
         type: list
+        param-semantics: GLTFOverride
     energy: 10.0
     func-id: 560
     return: void
@@ -14926,6 +14983,7 @@ functions:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
         type: list
+        param-semantics: PrimMediaParam
     energy: 10.0
     func-id: 371
     return: integer
@@ -14948,6 +15006,7 @@ functions:
     - rules:
         tooltip: A list of PRIM_* rules and data to apply.
         type: list
+        param-semantics: PrimParam
     deprecated:
       use: ll.SetLinkPrimitiveParamsFast
       selene-replace: ["ll.SetLinkPrimitiveParamsFast(%...)"]
@@ -14970,6 +15029,7 @@ functions:
     - rules:
         tooltip: A list of PRIM_* rules and data to apply.
         type: list
+        param-semantics: PrimParam
     energy: 10.0
     func-id: 353
     return: void
@@ -15174,6 +15234,7 @@ functions:
         tooltip: A list of options to configure the sale (e.g., price, authorized buyer,
           and object inclusion).
         type: list
+        param-semantics: ParcelSaleParam
     energy: 10.0
     func-id: 561
     return: integer
@@ -15209,11 +15270,11 @@ functions:
         tooltip: The default price integer shown in the text field (can accept PAY_*
           constants or positive values).
         type: integer
-        enum-semantics: PayButton
     - quick_pay_buttons:
         tooltip: A list of four integer values or PAY_* constants specifying the button
           payment choices.
         type: list
+        param-semantics: PayButton
         slua-type: "{number}"
     energy: 10.0
     func-id: 302
@@ -15282,6 +15343,7 @@ functions:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
         type: list
+        param-semantics: PrimMediaParam
     energy: 10.0
     func-id: 350
     return: integer
@@ -15318,6 +15380,7 @@ functions:
     - rules:
         tooltip: A list of PRIM_* rules and data to apply.
         type: list
+        param-semantics: PrimParam
     deprecated:
       use: ll.SetLinkPrimitiveParamsFast
       selene-replace: ["ll.SetLinkPrimitiveParamsFast(%...)"]
@@ -16387,6 +16450,7 @@ functions:
     - options:
         tooltip: Extra options applied to the transfer (currently unused).
         type: list
+        param-semantics: TransferOwnershipParam
     energy: 10.0
     func-id: 519
     return: integer
@@ -16474,6 +16538,7 @@ functions:
         tooltip: A list of key-value pairs specifying the character's new configuration
           options (takes same constants as llCreateCharacter).
         type: list
+        param-semantics: CharacterParam
     energy: 10.0
     func-id: 406
     return: void
@@ -16630,6 +16695,7 @@ functions:
         tooltip: A list of WANDER_* flags and parameters to configure the wander
           behavior.
         type: list
+        param-semantics: CharacterWanderWithinParam
     energy: 10.0
     func-id: 401
     return: void
