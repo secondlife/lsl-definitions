@@ -15865,60 +15865,50 @@ structs:
       - type: number
       - type: string
       - type:
-          display: vector | string
+          display: vector
       - type:
-          display: vector | string
-      - type:
-          display: number | string
+          display: vector
+      - type: number
     gltfEmissive:
       method: true
       args:
       - type: number
       - type: string
       - type:
-          display: vector | string
+          display: vector
       - type:
-          display: vector | string
+          display: vector
+      - type: number
       - type:
-          display: number | string
-      - type:
-          display: vector | string
+          display: vector
     gltfMetallicRoughness:
       method: true
       args:
       - type: number
       - type: string
       - type:
-          display: vector | string
+          display: vector
       - type:
-          display: vector | string
-      - type:
-          display: number | string
-      - type:
-          display: number | string
-      - type:
-          display: number | string
+          display: vector
+      - type: number
+      - type: number
+      - type: number
     gltfBaseColor:
       method: true
       args:
       - type: number
       - type: string
       - type:
-          display: vector | string
+          display: vector
       - type:
-          display: vector | string
+          display: vector
+      - type: number
       - type:
-          display: number | string
-      - type:
-          display: vector | string
-      - type:
-          display: number | string
-      - type:
-          display: number | string
-      - type:
-          display: number | string
-      - type:
-          display: boolean | string
+          display: vector
+      - type: number
+      - type: number
+      - type: number
+      - type: bool
     renderMaterial:
       method: true
       args:

@@ -99,16 +99,14 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     def selene_type(type_str: str, default="any") -> str | dict | None:
         if type_str.endswith("?"):
             type_str = type_str[:-1]
+
         # GLTF-clearable params are encoded as ``<base> | ""``. Selene args can't
         # be unions, so collapse to the base type if selene accepts a bare string
         # there; otherwise emit a display-only hint mentioning both forms.
         clear_sentinel = ' | ""'
         if type_str.endswith(clear_sentinel):
-            base_str = type_str[: -len(clear_sentinel)]
-            base = selene_type(base_str, default=None)
-            if base == "string":
-                return "string"
-            return {"display": f"{base_str} | string"}
+            type_str = type_str[: -len(clear_sentinel)]
+
         type_map = {
             "boolean": "bool",
             "boolean | number": "bool",
