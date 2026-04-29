@@ -3837,6 +3837,9 @@ constants:
     value: 33
   PRIM_PROJECTOR:
     member-of: [PrimParam]
+    # llGetPrimitiveParams cannot read PRIM_PROJECTOR:
+    # https://feedback.secondlife.com/scripting-features/p/make-prim-projector-readable
+    # https://community.secondlife.com/forums/topic/486118-only-set-ambiance-on-prim_projector#comment-2446570
     tooltip: '[ PRIM_PROJECTOR, string texture, float fov, float focus, float ambiance ]'
     type: integer
     value: 42
@@ -14507,9 +14510,10 @@ rulesets:
         params:
           # This should almost certainly have asset semantics, but the server
           # appears to only allow `string`, though stringified UUID is fine?
-          # Will need to fix that, but we need `asset` here since the `get`
-          # may still return a UUID.
-          - [ asset, texture ]
+          # Will need to fix that. Also, llGetPrimitiveParams does not allow reading:
+          # https://feedback.secondlife.com/scripting-features/p/make-prim-projector-readable
+          # https://community.secondlife.com/forums/topic/486118-only-set-ambiance-on-prim_projector#comment-2446570
+          - [ string, texture ]
           - [ float, fov ]
           - [ float, focus ]
           - [ float, ambiance ]
