@@ -732,6 +732,7 @@ const integer ENV_NO_ENVIRONMENT = -3
 const integer ENV_NO_EXPERIENCE_LAND = -7
 const integer ENV_NO_EXPERIENCE_PERMISSION = -2
 const integer ENV_NO_PERMISSIONS = -9
+const integer ENV_OK = 1
 const integer ENV_THROTTLE = -8
 const integer ENV_VALIDATION_FAIL = -6
 const string EOF = "\n\n\n"

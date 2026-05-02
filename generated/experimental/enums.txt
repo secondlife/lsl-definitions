@@ -303,6 +303,7 @@ enum EnvironmentError {
   NO_ENVIRONMENT = -3
   NO_EXPERIENCE_PERMISSION = -2
   NOT_EXPERIENCE = -1
+  OK = 1
 };
 enum EnvironmentParam {
   SKY_AMBIENT = 0

@@ -209,6 +209,7 @@ constexpr int32_t LSL_GEN_ENV_NO_ENVIRONMENT = -3;
 constexpr int32_t LSL_GEN_ENV_NO_EXPERIENCE_LAND = -7;
 constexpr int32_t LSL_GEN_ENV_NO_EXPERIENCE_PERMISSION = -2;
 constexpr int32_t LSL_GEN_ENV_NO_PERMISSIONS = -9;
+constexpr int32_t LSL_GEN_ENV_OK = 1;
 constexpr int32_t LSL_GEN_ENV_THROTTLE = -8;
 constexpr int32_t LSL_GEN_ENV_VALIDATION_FAIL = -6;
 constexpr char * LSL_GEN_EOF = "\n\n\n";

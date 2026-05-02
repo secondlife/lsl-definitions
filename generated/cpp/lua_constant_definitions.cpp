@@ -619,6 +619,9 @@
     luaSL_pushnativeinteger(L, -9);
     lua_setglobal(L, "ENV_NO_PERMISSIONS");
 
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "ENV_OK");
+
     luaSL_pushnativeinteger(L, -8);
     lua_setglobal(L, "ENV_THROTTLE");
 
