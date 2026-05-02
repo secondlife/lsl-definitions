@@ -209,7 +209,7 @@ export type PrimParamsSetterTypeMeta = {
   allowUnsit: <T>(self: T & PrimParamsSetterType, allowed: boolean) -> T,
   scriptedSitOnly: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
   sitTarget: <T>(self: T & PrimParamsSetterType, active: boolean, offset: vector, rot: quaternion) -> T,
-  projector: <T>(self: T & PrimParamsSetterType, texture: (string | uuid), fov: number, focus: number, ambiance: number) -> T,
+  projector: <T>(self: T & PrimParamsSetterType, texture: string, fov: number, focus: number, ambiance: number) -> T,
   clickAction: <T>(self: T & PrimParamsSetterType, action: number) -> T,
   reflectionProbe: <T>(self: T & PrimParamsSetterType, enabled: boolean, ambiance: number, clip_distance: number, flags: number) -> T,
   gltfNormal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "") -> T,
