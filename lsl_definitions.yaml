@@ -7987,7 +7987,7 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
-      the current UTC date as YYYY-MM-DD.
+      the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.
   llGetDayLength:
     arguments: []
     energy: 10.0
@@ -9281,7 +9281,8 @@ functions:
     return: float
     sleep: 0.0
     tooltip: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   llGetTimeOfDay:
     arguments: []
     energy: 10.0
@@ -9297,7 +9298,8 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+    tooltip: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n
+      Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds'
   llGetTorque:
     arguments: []
     energy: 10.0
@@ -9309,6 +9311,9 @@ functions:
       is the torque (if the script is physical).
   llGetUnixTime:
     arguments: []
+    slua-deprecated:
+      use: os.time
+      reason: Int32 will wrap on 2038-01-19
     energy: 10.0
     func-id: 316
     must-use: true

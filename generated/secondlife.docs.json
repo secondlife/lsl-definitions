@@ -466,7 +466,7 @@
         "learn_more_link": "https://luau.org/library/#os-library"
     },
     "@sl-slua/global/os.clock": {
-        "documentation": "Returns a high-precision timestamp in seconds for measuring durations.",
+        "documentation": "Returns a high-precision timestamp in seconds for measuring durations. Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script time slice). 6-11x slower to look up than ll.GetTime.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/os#clock"
     },
     "@sl-slua/global/os.date": {
@@ -1246,7 +1246,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetCreator"
     },
     "@sl-slua/global/ll.GetDate": {
-        "documentation": "Returns the current date in the UTC time zone in the format YYYY-MM-DD.<br>Returns the current UTC date as YYYY-MM-DD.",
+        "documentation": "Returns the current date in the UTC time zone in the format YYYY-MM-DD.<br>Returns the current UTC date as YYYY-MM-DD. Equivilant to os.date(\"%Y-%m-%d\") in lua.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetDate"
     },
     "@sl-slua/global/ll.GetDayLength": {
@@ -1674,7 +1674,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTextureScale"
     },
     "@sl-slua/global/ll.GetTime": {
-        "documentation": "Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime.",
+        "documentation": "Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s (1 server frame), and is 6-11x faster to look up than lua's os.clock",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTime"
     },
     "@sl-slua/global/ll.GetTimeOfDay": {
@@ -1682,7 +1682,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTimeOfDay"
     },
     "@sl-slua/global/ll.GetTimestamp": {
-        "documentation": "Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.",
+        "documentation": "Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.<br> Almost equivilant to os.date(\"%Y-%m-%dT%XZ\") in lua, except for the milliseconds",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTimestamp"
     },
     "@sl-slua/global/ll.GetTorque": {
@@ -3313,7 +3313,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetCreator"
     },
     "@sl-slua/global/llcompat.GetDate": {
-        "documentation": "Returns the current date in the UTC time zone in the format YYYY-MM-DD.<br>Returns the current UTC date as YYYY-MM-DD.",
+        "documentation": "Returns the current date in the UTC time zone in the format YYYY-MM-DD.<br>Returns the current UTC date as YYYY-MM-DD. Equivilant to os.date(\"%Y-%m-%d\") in lua.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetDate"
     },
     "@sl-slua/global/llcompat.GetDayLength": {
@@ -3741,7 +3741,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTextureScale"
     },
     "@sl-slua/global/llcompat.GetTime": {
-        "documentation": "Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime.",
+        "documentation": "Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s (1 server frame), and is 6-11x faster to look up than lua's os.clock",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTime"
     },
     "@sl-slua/global/llcompat.GetTimeOfDay": {
@@ -3749,7 +3749,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTimeOfDay"
     },
     "@sl-slua/global/llcompat.GetTimestamp": {
-        "documentation": "Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.",
+        "documentation": "Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.<br> Almost equivilant to os.date(\"%Y-%m-%dT%XZ\") in lua, except for the milliseconds",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetTimestamp"
     },
     "@sl-slua/global/llcompat.GetTorque": {

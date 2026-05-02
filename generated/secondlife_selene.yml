@@ -4631,6 +4631,8 @@ globals:
     args: []
     must_use: true
     description: Returns a high-precision timestamp in seconds for measuring durations.
+      Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script
+      time slice). 6-11x slower to look up than ll.GetTime.
   os.date:
     args:
     - type: string
@@ -6079,7 +6081,7 @@ globals:
     args: []
     must_use: true
     description: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
-      the current UTC date as YYYY-MM-DD.
+      the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.
   ll.GetDayLength:
     args: []
     must_use: true
@@ -6756,7 +6758,8 @@ globals:
     args: []
     must_use: true
     description: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   ll.GetTimeOfDay:
     args: []
     must_use: true
@@ -6764,13 +6767,16 @@ globals:
   ll.GetTimestamp:
     args: []
     must_use: true
-    description: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+    description: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n
+      Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds'
   ll.GetTorque:
     args: []
     must_use: true
     description: Returns the torque (if the script is physical).\nReturns a vector
       that is the torque (if the script is physical).
   ll.GetUnixTime:
+    deprecated:
+      message: Use 'os.time' instead. Int32 will wrap on 2038-01-19
     args: []
     must_use: true
     description: Returns the number of seconds elapsed since 00:00 hours, Jan 1, 1970
@@ -10388,11 +10394,11 @@ globals:
   llcompat.GetDate:
     deprecated:
       message: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
-        the current UTC date as YYYY-MM-DD.
+        the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.
     args: []
     must_use: true
     description: Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns
-      the current UTC date as YYYY-MM-DD.
+      the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.
   llcompat.GetDayLength:
     deprecated:
       message: Returns the number of seconds in a day on this parcel.
@@ -11419,11 +11425,13 @@ globals:
   llcompat.GetTime:
     deprecated:
       message: Returns the time in seconds since the last region reset, script reset,
-        or call to either llResetTime or llGetAndResetTime.
+        or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+        (1 server frame), and is 6-11x faster to look up than lua's os.clock
     args: []
     must_use: true
     description: Returns the time in seconds since the last region reset, script reset,
-      or call to either llResetTime or llGetAndResetTime.
+      or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s
+      (1 server frame), and is 6-11x faster to look up than lua's os.clock
   llcompat.GetTimeOfDay:
     deprecated:
       message: Returns the time in seconds since environmental midnight on the parcel.
@@ -11432,10 +11440,12 @@ globals:
     description: Returns the time in seconds since environmental midnight on the parcel.
   llcompat.GetTimestamp:
     deprecated:
-      message: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+      message: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n
+        Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds'
     args: []
     must_use: true
-    description: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.'
+    description: 'Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n
+      Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds'
   llcompat.GetTorque:
     deprecated:
       message: Returns the torque (if the script is physical).\nReturns a vector that

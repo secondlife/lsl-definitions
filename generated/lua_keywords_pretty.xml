@@ -14362,7 +14362,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a high-precision timestamp in seconds for measuring durations.</string>
+            <string>Returns a high-precision timestamp in seconds for measuring durations. Has a resolution of 0.0001s (222 ticks per server frame, 3 ticks per script time slice). 6-11x slower to look up than ll.GetTime.</string>
          </map>
          <key>os.date</key>
          <map>
@@ -19549,7 +19549,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD.</string>
+            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.</string>
          </map>
          <key>ll.GetDayLength</key>
          <map>
@@ -21721,7 +21721,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime.</string>
+            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s (1 server frame), and is 6-11x faster to look up than lua's os.clock</string>
          </map>
          <key>ll.GetTimeOfDay</key>
          <map>
@@ -21749,7 +21749,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.</string>
+            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds</string>
          </map>
          <key>ll.GetTorque</key>
          <map>
@@ -21770,6 +21770,8 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>

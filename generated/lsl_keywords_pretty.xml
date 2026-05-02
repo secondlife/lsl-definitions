@@ -13017,7 +13017,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD.</string>
+            <string>Returns the current date in the UTC time zone in the format YYYY-MM-DD.\nReturns the current UTC date as YYYY-MM-DD. Equivilant to os.date("%Y-%m-%d") in lua.</string>
          </map>
          <key>llGetDayLength</key>
          <map>
@@ -15203,7 +15203,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime.</string>
+            <string>Returns the time in seconds since the last region reset, script reset, or call to either llResetTime or llGetAndResetTime. Has a resolution of 0.022s (1 server frame), and is 6-11x faster to look up than lua's os.clock</string>
          </map>
          <key>llGetTimeOfDay</key>
          <map>
@@ -15231,7 +15231,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.</string>
+            <string>Returns a time-stamp (UTC time zone) in the format: YYYY-MM-DDThh:mm:ss.ff..fZ.\n Almost equivilant to os.date("%Y-%m-%dT%XZ") in lua, except for the milliseconds</string>
          </map>
          <key>llGetTorque</key>
          <map>
