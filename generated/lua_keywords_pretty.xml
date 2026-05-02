@@ -10870,9 +10870,9 @@ vector position - position in local coordinates
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to assign the value to.</string>
+                     <string>The table or string to compute the length of.</string>
                      <key>type</key>
-                     <string>{[any]: any} | string</string>
+                     <string>{[K]: V} | string</string>
                   </map>
                </map>
             </array>
