@@ -1851,6 +1851,10 @@ modules:
     - name: s
       comment: Input string.
       type: string
+    deprecated:
+      use: ll.ToLower
+      reason: Unicode handling.
+      selene-replace: ["ll.ToLower(%1)"]
     return-type: string
     must-use: true
   - name: match
@@ -1951,6 +1955,10 @@ modules:
     - name: s
       comment: Input string.
       type: string
+    deprecated:
+      use: ll.ToUpper
+      reason: Unicode handling.
+      selene-replace: ["ll.ToUpper(%1)"]
     return-type: string
     must-use: true
 - name: table
