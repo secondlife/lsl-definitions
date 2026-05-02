@@ -169,6 +169,66 @@ declare extern type LLTimers with
   function off(self, callback: LLTimerCallback): boolean
 end
 
+export type PrimParamsSetterTypeMeta = {
+  __index: PrimParamsSetterTypeMeta,
+  targetLink: <T>(self: T & PrimParamsSetterType, link_target: number) -> T,
+  physicsMaterial: <T>(self: T & PrimParamsSetterType, flag: number) -> T,
+  physical: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  temporary: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  phantom: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  pos: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
+  size: <T>(self: T & PrimParamsSetterType, size: vector) -> T,
+  rot: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
+  primTypeBox: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeCylinder: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypePrism: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeSphere: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, dimple: vector) -> T,
+  primTypeTorus: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeTube: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeRing: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeSculpt: <T>(self: T & PrimParamsSetterType, texture: (string | uuid), sculpt_type: number) -> T,
+  texture: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  color: <T>(self: T & PrimParamsSetterType, face: number, color: vector, alpha: number) -> T,
+  shinyBump: <T>(self: T & PrimParamsSetterType, face: number, shiny: number, bump: number) -> T,
+  fullbright: <T>(self: T & PrimParamsSetterType, face: number, enabled: boolean) -> T,
+  flexible: <T>(self: T & PrimParamsSetterType, enabled: boolean, softness: number, gravity: number, friction: number, wind: number, tension: number, force: vector) -> T,
+  texgen: <T>(self: T & PrimParamsSetterType, face: number, mode: number) -> T,
+  pointLight: <T>(self: T & PrimParamsSetterType, enabled: boolean, linear_color: vector, intensity: number, radius: number, falloff: number) -> T,
+  glow: <T>(self: T & PrimParamsSetterType, face: number, intensity: number) -> T,
+  text: <T>(self: T & PrimParamsSetterType, text: string, color: vector, alpha: number) -> T,
+  name: <T>(self: T & PrimParamsSetterType, name: string) -> T,
+  description: <T>(self: T & PrimParamsSetterType, description: string) -> T,
+  rotLocal: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
+  physicsShapeType: <T>(self: T & PrimParamsSetterType, shape_type: number) -> T,
+  omega: <T>(self: T & PrimParamsSetterType, axis: vector, spinrate: number, gain: number) -> T,
+  posLocal: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
+  slice: <T>(self: T & PrimParamsSetterType, slice: vector) -> T,
+  specular: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number, color: vector, glossiness: number, environment: number) -> T,
+  normal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  alphaMode: <T>(self: T & PrimParamsSetterType, face: number, alpha_mode: number, mask_cutoff: number) -> T,
+  allowUnsit: <T>(self: T & PrimParamsSetterType, allowed: boolean) -> T,
+  scriptedSitOnly: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  sitTarget: <T>(self: T & PrimParamsSetterType, active: boolean, offset: vector, rot: quaternion) -> T,
+  projector: <T>(self: T & PrimParamsSetterType, texture: string, fov: number, focus: number, ambiance: number) -> T,
+  clickAction: <T>(self: T & PrimParamsSetterType, action: number) -> T,
+  reflectionProbe: <T>(self: T & PrimParamsSetterType, enabled: boolean, ambiance: number, clip_distance: number, flags: number) -> T,
+  gltfNormal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "") -> T,
+  gltfEmissive: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_emissive_tint: vector | "") -> T,
+  gltfMetallicRoughness: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", metallic_factor: number | "", roughness_factor: number | "") -> T,
+  gltfBaseColor: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_color: vector | "", alpha: number | "", gltf_alpha_mode: number | "", alpha_mask_cutoff: number | "", double_sided: boolean | "") -> T,
+  renderMaterial: <T>(self: T & PrimParamsSetterType, face: number, render_material: (string | uuid)) -> T,
+  sitFlags: <T>(self: T & PrimParamsSetterType, flags: number) -> T,
+  damage: <T>(self: T & PrimParamsSetterType, damage: number, damage_type: number) -> T,
+  health: <T>(self: T & PrimParamsSetterType, health: number) -> T,
+  collisionSound: <T>(self: T & PrimParamsSetterType, sound: (string | uuid), volume: number) -> T,
+  apply: (self: PrimParamsSetterType, link: number?) -> (),
+  new: () -> PrimParamsSetterType,
+}
+
+export type PrimParamsSetterType = typeof(
+  setmetatable((nil :: any) :: {any}, (nil :: any) :: PrimParamsSetterTypeMeta)
+)
+
 
 declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 declare loadstring: nil
@@ -293,6 +353,15 @@ declare lljson: {
   decode: (json: string, options: LLJsonDecodeOptions?) -> any,
   slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
   sldecode: (json: string, options: LLJsonDecodeOptions?) -> any,
+}
+
+
+---------------------------
+-- Global Table: llprim
+---------------------------
+
+declare llprim: {
+  ParamsSetter: PrimParamsSetterTypeMeta,
 }
 
 

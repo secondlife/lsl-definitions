@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, Any, List, Optional, Set, TextIO
 import llsd
 import yaml
 
+from lsl_definitions.rulesets import BuilderMethod, BuilderSpec, expand_spp_builder
 from lsl_definitions.utils import Deprecated, remove_worthless
 
 if TYPE_CHECKING:
@@ -210,17 +211,42 @@ class SLuaClassDeclaration:
     properties: List[SLuaProperty]
     methods: List[SLuaFunction]
     comment: str = ""
+    instance_type: Optional[str] = None
+    export: bool = False
+    """Only meaningful when `instance_type` is set."""
 
     def to_keywords_dict(self) -> dict:
         return {"tooltip": self.comment}
 
     def write_luau_def(self, f: TextIO) -> None:
+        if self.instance_type is None:
+            self._write_extern_type_def(f)
+        else:
+            self._write_metatable_def(f)
+
+    def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()}\n")
         for func in self.methods:
             func.write_luau_global_def(f, indent=1)
         f.write("end\n\n")
+
+    def _write_metatable_def(self, f: TextIO) -> None:
+        export_str = "export " if self.export else ""
+        mt_name = f"{self.name}Meta"
+        f.write(f"{export_str}type {mt_name} = {{\n")
+        f.write(f"  __index: {mt_name},\n")
+        for prop in self.properties:
+            f.write(f"  {prop.to_luau_def()},\n")
+        for func in self.methods:
+            func.write_luau_table_def(f, indent=1)
+        f.write("}\n\n")
+        f.write(f"{export_str}type {self.name} = typeof(\n")
+        f.write(
+            f"  setmetatable((nil :: any) :: {self.instance_type}, (nil :: any) :: {mt_name})\n"
+        )
+        f.write(")\n\n")
 
 
 @dataclasses.dataclass
@@ -328,6 +354,14 @@ class SLuaDefinitions:
                 raise ValueError(f"{type_param!r} is already defined")
             known_types.add(type_param)
         return known_types
+
+    def finalize(self, lsl: "LSLDefinitions") -> None:
+        """Enrich this SLuaDefinitions with content derived from the LSL definitions.
+
+        Call exactly once after parsing, before handing off to any generator.
+        """
+        self.generate_ll_modules(lsl)
+        self._generate_spp_builder_class(lsl)
 
     def generate_ll_modules(self, lsl: "LSLDefinitions", solverV2: bool = True) -> None:
         """
@@ -530,6 +564,70 @@ class SLuaDefinitions:
                 private=const.private,
             )
             self.global_constants.append(prop)
+
+    def _generate_spp_builder_class(self, lsl: "LSLDefinitions") -> None:
+        """Expand the `prim-params` ruleset into the fluent SPP builder class and attach it to self."""
+
+        # TODO: Eh. Maybe this is too builder-specific and shouldn't be here?
+        #  How many rulesets will we want to expose through a fluent builder API?
+        #  Just SPP and KFM?
+        def make_fluent_method(builder_spec: BuilderSpec, method: BuilderMethod) -> SLuaFunction:
+            parameters = [SLuaParameter(name="self", type=f"T & {builder_spec.class_name}")]
+            if method.face_target:
+                # Face is required even on nullable rules.
+                parameters.append(SLuaParameter(name="face", type="number"))
+            for param in method.params:
+                slua_type = param.type.luau_type
+                if method.nullable:
+                    # Nullable is represented through a blank string
+                    slua_type = f'{slua_type} | ""'
+                parameters.append(SLuaParameter(name=param.name, type=slua_type))
+            return SLuaFunction(
+                name=method.name,
+                type_parameters=["T"],
+                parameters=parameters,
+                return_type="T",
+            )
+
+        spec = expand_spp_builder(lsl)
+        methods: List[SLuaFunction] = [make_fluent_method(spec, m) for m in spec.methods]
+        methods.append(
+            SLuaFunction(
+                name="apply",
+                parameters=[
+                    SLuaParameter(name="self", type=spec.class_name),
+                    SLuaParameter(name="link", type="number?"),
+                ],
+            )
+        )
+        methods.append(
+            SLuaFunction(
+                name="new",
+                parameters=[],
+                return_type=spec.class_name,
+            )
+        )
+        self.classes.append(
+            SLuaClassDeclaration(
+                name=spec.class_name,
+                properties=[],
+                methods=methods,
+                # These generally wrap heterogeneous lists for LSL APIs,
+                # type them as such so `table.clone()` and `table.freeze()`
+                # and such still work
+                instance_type="{any}",
+                export=True,
+            )
+        )
+        self.type_names.add(spec.class_name)
+
+        builder_prop = SLuaProperty(
+            name=spec.module_entry,
+            type=f"{spec.class_name}Meta",
+        )
+        # We assume that the module we place this in is pre-existing
+        builder_module = [m for m in self.modules if m.name == spec.module_name][0]
+        builder_module.constants.append(builder_prop)
 
 
 class SLuaDefinitionParser:

@@ -219,6 +219,11 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Timer management class for scheduling periodic and one-time callbacks</string>
          </map>
+         <key>PrimParamsSetterType</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+         </map>
       </map>
       <key>constants</key>
       <map>
@@ -316,6 +321,13 @@ export type rotation = quaternion</string>
             <string>A constant to return from a reviver/replacer replacer function to omit this item.</string>
             <key>type</key>
             <string>any</string>
+         </map>
+         <key>llprim.ParamsSetter</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>PrimParamsSetterTypeMeta</string>
          </map>
          <key>math.huge</key>
          <map>
@@ -13302,6 +13314,13 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Encodes a Lua value as JSON, preserving SL types. Use tight to encode more compactly. Raises an error if value contains unsupported types.</string>
          </map>
+         <key>llprim</key>
+         <map>
+            <key>energy</key>
+            <real>-1.0</real>
+            <key>tooltip</key>
+            <string>Utilities for working with prims / objects</string>
+         </map>
          <key>math</key>
          <map>
             <key>energy</key>
@@ -19217,22 +19236,6 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Returns the alpha value of Face.\nReturns the 'alpha' of the given face. If face is ALL_SIDES the value returned is the mean average of all faces.</string>
-         </map>
-         <key>ll.GetAndResetTime</key>
-         <map>
-            <key>arguments</key>
-            <array>
-            </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>number</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Returns the script time in seconds and then resets the script timer to zero.\nGets the time in seconds since starting and resets the time to zero.</string>
          </map>
          <key>ll.GetAnimation</key>
          <map>
@@ -26700,22 +26703,6 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Resets the script.</string>
          </map>
-         <key>ll.ResetTime</key>
-         <map>
-            <key>arguments</key>
-            <array>
-            </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>()</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Sets the time to zero.\nSets the internal timer to zero.</string>
-         </map>
          <key>ll.ReturnObjectsByID</key>
          <map>
             <key>arguments</key>
@@ -28763,31 +28750,6 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Sets the rotation of a child prim relative to the root prim.</string>
          </map>
-         <key>ll.SetMemoryLimit</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>Limit</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string>The amount to reserve, which must be less than the allowed maximum (currently 64KB) and not already have been exceeded.</string>
-                     <key>type</key>
-                     <string>number</string>
-                  </map>
-               </map>
-            </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>boolean</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Requests Limit bytes to be reserved for this script.\nReturns TRUE or FALSE indicating whether the limit was set successfully.\nThis function has no effect if the script is running in the LSO VM.</string>
-         </map>
          <key>ll.SetObjectDesc</key>
          <map>
             <key>arguments</key>
@@ -29525,31 +29487,6 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Animates a texture by setting the texture scale and offset.\nMode is a bitmask of animation options.\nFace specifies which object face to animate.\nSizeX and SizeY specify the number of horizontal and vertical frames.Start specifes the animation start point.\nLength specifies the animation duration.\nRate specifies the animation playback rate.</string>
-         </map>
-         <key>ll.SetTimerEvent</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>Rate</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>number</string>
-                  </map>
-               </map>
-            </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>()</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Causes the timer event to be triggered every Rate seconds.\n Passing in 0.0 stops further timer events.</string>
          </map>
          <key>ll.SetTorque</key>
          <map>

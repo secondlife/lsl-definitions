@@ -98,6 +98,7 @@ def main():
     if parsed_args.needs_slua:
         slua_parser = SLuaDefinitionParser()
         slua_definitions = slua_parser.parse_file(parsed_args.slua_definitions)
+        slua_definitions.finalize(definitions)
 
     # Build kwargs from parsed args based on function signature
     # This is a bit like how `click` works, but worse and janky.
