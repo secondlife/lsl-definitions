@@ -7448,6 +7448,9 @@
     "@sl-slua/global/SIT_NO_SIT_TARGET": {
         "documentation": "Value: -3<br>No available sit target in linkset for forced sit."
     },
+    "@sl-slua/global/SIT_OK": {
+        "documentation": "Value: 1<br>Avatar seated successfully."
+    },
     "@sl-slua/global/SKY_AMBIENT": {
         "documentation": "Value: 0<br>The ambient color of the environment"
     },

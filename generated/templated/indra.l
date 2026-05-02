@@ -842,6 +842,7 @@
 "SIT_NO_ACCESS" { count(); yylval.ival = -6; return(INTEGER_CONSTANT); }
 "SIT_NO_EXPERIENCE_PERMISSION" { count(); yylval.ival = -2; return(INTEGER_CONSTANT); }
 "SIT_NO_SIT_TARGET" { count(); yylval.ival = -3; return(INTEGER_CONSTANT); }
+"SIT_OK" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
 "SKY_ABSORPTION_CONFIG" { count(); yylval.ival = 16; return(INTEGER_CONSTANT); }
 "SKY_AMBIENT" { count(); yylval.ival = 0; return(INTEGER_CONSTANT); }
 "SKY_BLUE" { count(); yylval.ival = 22; return(INTEGER_CONSTANT); }

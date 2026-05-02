@@ -1364,6 +1364,7 @@ const integer SIT_NOT_EXPERIENCE = -1
 const integer SIT_NO_ACCESS = -6
 const integer SIT_NO_EXPERIENCE_PERMISSION = -2
 const integer SIT_NO_SIT_TARGET = -3
+const integer SIT_OK = 1
 const integer SKY_ABSORPTION_CONFIG = 16
 const integer SKY_AMBIENT = 0
 const integer SKY_BLUE = 22

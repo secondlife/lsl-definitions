@@ -3199,6 +3199,10 @@ globals:
     property: read-only
     type: number
     description: No available sit target in linkset for forced sit.
+  SIT_OK:
+    property: read-only
+    type: number
+    description: Avatar seated successfully.
   SKY_AMBIENT:
     property: read-only
     type: number

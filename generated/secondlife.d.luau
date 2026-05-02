@@ -2425,6 +2425,7 @@ declare SIT_NOT_EXPERIENCE: number
 declare SIT_NO_ACCESS: number
 declare SIT_NO_EXPERIENCE_PERMISSION: number
 declare SIT_NO_SIT_TARGET: number
+declare SIT_OK: number
 declare SKY_AMBIENT: number
 declare SKY_BLUE: number
 declare SKY_CLOUDS: number
