@@ -7682,6 +7682,10 @@ functions:
     - Magnitude:
         tooltip: ''
         type: float
+    slua-deprecated:
+      use: math.random
+      reason: Double precision; integers.
+      selene-replace: ["math.random() * %1"]
     energy: 10.0
     func-id: 8
     must-use: true

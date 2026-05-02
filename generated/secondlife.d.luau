@@ -635,7 +635,7 @@ declare ll: {
   FleeFrom: (Source: vector, Distance: number, Options: list) -> (),
   Floor: @[deprecated {use='math.floor', reason='Fastcall.'}](Value: number) -> number,
   ForceMouselook: (Enable: boolean | number) -> (),
-  Frand: (Magnitude: number) -> number,
+  Frand: @[deprecated {use='math.random', reason='Double precision; integers.'}](Magnitude: number) -> number,
   GenerateKey: () -> uuid,
   GetAccel: () -> vector,
   GetAgentInfo: (AvatarID: uuid) -> number,
