@@ -790,7 +790,9 @@ class LSLDefinitionParser:
             raise ValueError(f"Unknown enum {enum_name!r}")
         const.member_of.append(enum)
         member = LSLEnumMember(
-            name=const.name.removeprefix(enum.prefix),
+            name=const.name[len(enum.prefix) :]
+            if const.name.startswith(enum.prefix)
+            else const.name,
             value=ast.literal_eval(const.value),
             constant=const,
         )
