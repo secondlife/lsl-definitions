@@ -7849,10 +7849,10 @@ functions:
     func-id: 523
     must-use: true
     return: list
-    slua-return: '{uuid}'
+    slua-return: '{uuid} | {string}'
     sleep: 0.0
     tooltip: Returns a list of keys of all visible (not HUD) attachments on the avatar
-      identified by the ID argument
+      identified by the ID argument, or a list containing 1 string on error.
   llGetAttachedListFiltered:
     arguments:
     - AgentID:
@@ -7865,9 +7865,9 @@ functions:
     func-id: 518
     must-use: true
     return: list
-    slua-return: '{uuid}'
+    slua-return: '{uuid} | {string}'
     sleep: 0.0
-    tooltip: Retrieves a list of attachments on an avatar.
+    tooltip: Retrieves a list of attachments on an avatar, or a list containing 1 string on error.
   llGetBoundingBox:
     arguments:
     - ID:

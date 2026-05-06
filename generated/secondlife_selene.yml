@@ -6008,14 +6008,15 @@ globals:
         display: uuid
     must_use: true
     description: Returns a list of keys of all visible (not HUD) attachments on the
-      avatar identified by the ID argument
+      avatar identified by the ID argument, or a list containing 1 string on error.
   ll.GetAttachedListFiltered:
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachments on an avatar.
+    description: Retrieves a list of attachments on an avatar, or a list containing
+      1 string on error.
   ll.GetBoundingBox:
     args:
     - type:
@@ -10274,22 +10275,24 @@ globals:
   llcompat.GetAttachedList:
     deprecated:
       message: Returns a list of keys of all visible (not HUD) attachments on the
-        avatar identified by the ID argument
+        avatar identified by the ID argument, or a list containing 1 string on error.
     args:
     - type:
         display: uuid
     must_use: true
     description: Returns a list of keys of all visible (not HUD) attachments on the
-      avatar identified by the ID argument
+      avatar identified by the ID argument, or a list containing 1 string on error.
   llcompat.GetAttachedListFiltered:
     deprecated:
-      message: Retrieves a list of attachments on an avatar.
+      message: Retrieves a list of attachments on an avatar, or a list containing
+        1 string on error.
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachments on an avatar.
+    description: Retrieves a list of attachments on an avatar, or a list containing
+      1 string on error.
   llcompat.GetBoundingBox:
     deprecated:
       message: Returns the bounding box around the object (including any linked prims)
