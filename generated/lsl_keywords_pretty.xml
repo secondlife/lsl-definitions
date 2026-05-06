@@ -12809,7 +12809,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument</string>
+            <string>Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument, or a list containing 1 string on error</string>
          </map>
          <key>llGetAttachedListFiltered</key>
          <map>

@@ -1202,7 +1202,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/ll.GetAttachedList": {
-        "documentation": "Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument",
+        "documentation": "Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument, or a list containing 1 string on error",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/ll.GetAttachedListFiltered": {
@@ -3269,7 +3269,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/llcompat.GetAttachedList": {
-        "documentation": "Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument",
+        "documentation": "Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument, or a list containing 1 string on error",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/llcompat.GetAttachedListFiltered": {
