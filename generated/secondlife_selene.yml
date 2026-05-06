@@ -819,6 +819,10 @@ globals:
     property: read-only
     type: number
     description: Script does not have permission to modify environment.
+  ENV_OK:
+    property: read-only
+    type: number
+    description: Environment modified successfully.
   ENV_THROTTLE:
     property: read-only
     type: number

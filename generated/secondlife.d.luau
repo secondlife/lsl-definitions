@@ -1804,6 +1804,7 @@ declare ENV_NO_ENVIRONMENT: number
 declare ENV_NO_EXPERIENCE_LAND: number
 declare ENV_NO_EXPERIENCE_PERMISSION: number
 declare ENV_NO_PERMISSIONS: number
+declare ENV_OK: number
 declare ENV_THROTTLE: number
 declare ENV_VALIDATION_FAIL: number
 declare EOF: string

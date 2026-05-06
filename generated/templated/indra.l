@@ -211,6 +211,7 @@
 "ENV_NO_EXPERIENCE_LAND" { count(); yylval.ival = -7; return(INTEGER_CONSTANT); }
 "ENV_NO_EXPERIENCE_PERMISSION" { count(); yylval.ival = -2; return(INTEGER_CONSTANT); }
 "ENV_NO_PERMISSIONS" { count(); yylval.ival = -9; return(INTEGER_CONSTANT); }
+"ENV_OK" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
 "ENV_THROTTLE" { count(); yylval.ival = -8; return(INTEGER_CONSTANT); }
 "ENV_VALIDATION_FAIL" { count(); yylval.ival = -6; return(INTEGER_CONSTANT); }
 "EOF" { yylval.sval = new char[4]; strcpy(yylval.sval, "\n\n\n"); return(STRING_CONSTANT); }

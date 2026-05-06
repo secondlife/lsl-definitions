@@ -1570,6 +1570,11 @@ constants:
     tooltip: Script does not have permission to modify environment.
     type: integer
     value: -9
+  ENV_OK:
+    member-of: [EnvironmentError]
+    tooltip: Environment modified successfully.
+    type: integer
+    value: 1
   ENV_THROTTLE:
     member-of: [EnvironmentError]
     tooltip: Could not validate values for environment.
