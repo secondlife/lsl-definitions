@@ -2515,6 +2515,9 @@
     luaSL_pushnativeinteger(L, -3);
     lua_setglobal(L, "SIT_NO_SIT_TARGET");
 
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "SIT_OK");
+
     luaSL_pushnativeinteger(L, 16);
     lua_setglobal(L, "SKY_ABSORPTION_CONFIG");
 

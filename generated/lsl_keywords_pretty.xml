@@ -7631,6 +7631,15 @@ vector position - position in local coordinates
             <key>value</key>
             <string>-3</string>
          </map>
+         <key>SIT_OK</key>
+         <map>
+            <key>tooltip</key>
+            <string>Avatar seated successfully.</string>
+            <key>type</key>
+            <string>integer</string>
+            <key>value</key>
+            <string>1</string>
+         </map>
          <key>SKY_AMBIENT</key>
          <map>
             <key>tooltip</key>

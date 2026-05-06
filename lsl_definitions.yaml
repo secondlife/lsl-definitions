@@ -4940,6 +4940,11 @@ constants:
     tooltip: No available sit target in linkset for forced sit.
     type: integer
     value: -3
+  SIT_OK:
+    member-of: [SitError]
+    tooltip: Avatar seated successfully.
+    type: integer
+    value: 1
   SKY_ABSORPTION_CONFIG:
     private: true
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]

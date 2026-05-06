@@ -842,6 +842,7 @@ constexpr int32_t LSL_GEN_SIT_NOT_EXPERIENCE = -1;
 constexpr int32_t LSL_GEN_SIT_NO_ACCESS = -6;
 constexpr int32_t LSL_GEN_SIT_NO_EXPERIENCE_PERMISSION = -2;
 constexpr int32_t LSL_GEN_SIT_NO_SIT_TARGET = -3;
+constexpr int32_t LSL_GEN_SIT_OK = 1;
 constexpr int32_t LSL_GEN_SKY_ABSORPTION_CONFIG = 16;
 constexpr int32_t LSL_GEN_SKY_AMBIENT = 0;
 constexpr int32_t LSL_GEN_SKY_BLUE = 22;
