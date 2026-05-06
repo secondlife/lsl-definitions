@@ -19341,7 +19341,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument, or a list containing 1 string on error</string>
+            <string>Returns a list of keys of all visible (not HUD) attachments on the avatar identified by the ID argument, or a list containing 1 string on error.</string>
          </map>
          <key>ll.GetAttachedListFiltered</key>
          <map>
@@ -19369,11 +19369,11 @@ Returns true if result is non-zero.</string>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{uuid}</string>
+            <string>{uuid} | {string}</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Retrieves a list of attachments on an avatar.</string>
+            <string>Retrieves a list of attachments on an avatar, or a list containing 1 string on error.</string>
          </map>
          <key>ll.GetBoundingBox</key>
          <map>
