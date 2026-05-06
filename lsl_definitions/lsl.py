@@ -488,7 +488,7 @@ class LSLDefinitions(NamedTuple):
     constants: Dict[str, LSLConstant]
     controls: dict
     types: dict
-    rulesets: dict
+    builder_rulesets: dict
 
     @property
     def reserved_words(self) -> Set[str]:
@@ -560,14 +560,20 @@ class LSLDefinitionParser:
             for unused in enum._special_members:
                 raise ValueError(f"Enum {enum.name!r} has unused special member {unused!r}")
 
-        rulesets = def_dict.get("rulesets", {})
-        prim_params = rulesets.get("prim_params")
-        if prim_params is not None:
-            for rule_name, rule_data in prim_params["rules"].items():
-                if rule_name not in self._definitions.constants:
-                    raise ValueError(f"prim_params rule {rule_name!r} is not a known constant")
-                self._validate_rule_variants(rule_name, rule_data)
-        self._definitions.rulesets.update(rulesets)
+        builder_rulesets = def_dict.get("builder-rulesets", {})
+        for ruleset_name, ruleset_data in builder_rulesets.items():
+            enum_name = ruleset_data["enum"]
+            if enum_name not in self._definitions.enums:
+                raise ValueError(f"{ruleset_name} references unknown enum {enum_name!r}")
+            rule_enum = self._definitions.enums[enum_name]
+            for rule_name, rule_data in ruleset_data["rules"].items():
+                if rule_name not in rule_enum.by_name:
+                    raise ValueError(
+                        f"{ruleset_name} rule {rule_name!r} is not a member of "
+                        f"its ruleset's declared enum {enum_name!r}"
+                    )
+                self._validate_builder_rule_variants(ruleset_name, rule_name, rule_data)
+        self._definitions.builder_rulesets.update(builder_rulesets)
 
         return self._definitions
 
@@ -709,32 +715,44 @@ class LSLDefinitionParser:
         if name in self._definitions.reserved_words:
             raise KeyError(f"{name!r} is a reserved name")
 
-    def _validate_rule_variants(self, rule_name: str, rule_data: dict) -> None:
-        variants_on = rule_data.get("variants_on")
+    def _validate_builder_rule_variants(
+        self, ruleset_name: str, rule_name: str, rule_data: dict
+    ) -> None:
+        # Validates builder-ruleset semantics _as LSL_. SLua-side translation to
+        # builder methods lives in `lsl_definitions.rulesets` and assumes this has passed.
+        variants_on = rule_data.get("variants-on")
         variants = rule_data.get("variants")
-        if variants_on is None and variants is None:
+        variant_enum_name = rule_data.get("variant-enum")
+        if variants_on is None and variants is None and variant_enum_name is None:
             return
-        if variants_on is None or variants is None:
+        if variants_on is None or variants is None or variant_enum_name is None:
             raise ValueError(
-                f"prim_params rule {rule_name!r} must define both `variants_on` and `variants`, or neither"
+                f"{ruleset_name} rule {rule_name!r} must define all of "
+                f"`variants-on`, `variants`, and `variant-enum`, or none"
             )
         param_names = {p[1] for p in rule_data["params"]}
         if variants_on not in param_names:
             raise ValueError(
-                f"prim_params rule {rule_name!r} has variants_on={variants_on!r}, "
+                f"{ruleset_name} rule {rule_name!r} has variants-on={variants_on!r}, "
                 f"which is not one of its params {sorted(param_names)}"
             )
+        if variant_enum_name not in self._definitions.enums:
+            raise ValueError(
+                f"{ruleset_name} rule {rule_name!r} references unknown variant-enum "
+                f"{variant_enum_name!r}"
+            )
+        variant_enum = self._definitions.enums[variant_enum_name]
         seen: Set[str] = set()
         for variant in variants:
-            for tag in variant["applies_to"]:
-                if tag not in self._definitions.constants:
+            for tag in variant["applies-to"]:
+                if tag not in variant_enum.by_name:
                     raise ValueError(
-                        f"prim_params rule {rule_name!r} variant applies_to {tag!r}, "
-                        f"which is not a known constant"
+                        f"{ruleset_name} rule {rule_name!r} variant applies-to {tag!r}, "
+                        f"which is not a member of {variant_enum_name!r}"
                     )
                 if tag in seen:
                     raise ValueError(
-                        f"prim_params rule {rule_name!r} has {tag!r} in multiple variants"
+                        f"{ruleset_name} rule {rule_name!r} has {tag!r} in multiple variants"
                     )
                 seen.add(tag)
 
@@ -772,7 +790,9 @@ class LSLDefinitionParser:
             raise ValueError(f"Unknown enum {enum_name!r}")
         const.member_of.append(enum)
         member = LSLEnumMember(
-            name=const.name.removeprefix(enum.prefix),
+            name=const.name[len(enum.prefix) :]
+            if const.name.startswith(enum.prefix)
+            else const.name,
             value=ast.literal_eval(const.value),
             constant=const,
         )

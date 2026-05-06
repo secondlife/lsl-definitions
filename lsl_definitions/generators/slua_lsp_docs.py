@@ -102,7 +102,6 @@ class DocBuilder:
 @register("slua_lsp_docs")
 def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua standard library for Luau LSP docs.json"""
-    slua_definitions.generate_ll_modules(definitions)
     builder = DocBuilder()
 
     # Duplicate quaternion module as rotation. The callable aspect of quaternion
