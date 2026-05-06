@@ -32,3 +32,6 @@ stage/
 # We want them generated and packaged, we just aren't so interested in their diffs.
 /generated/lsl_keywords.xml
 /generated/lua_keywords.xml
+
+# Editors
+.vscode
