@@ -5,7 +5,7 @@ from __future__ import annotations
 import abc
 import dataclasses
 import re
-from typing import TYPE_CHECKING, Any, List, Optional, Set, TextIO
+from typing import TYPE_CHECKING, Any, List, Set, TextIO
 
 import llsd
 import yaml
@@ -54,7 +54,7 @@ class SLuaParameter:
     """
 
     name: str
-    type: Optional[str] = None
+    type: str | None = None
     selene_type: Any = None
     """a custom Selene type for this parameter, in case auto-detection fails"""
     comment: str = ""
@@ -211,7 +211,7 @@ class SLuaClassDeclaration:
     properties: List[SLuaProperty]
     methods: List[SLuaFunction]
     comment: str = ""
-    instance_type: Optional[str] = None
+    instance_type: str | None = None
     export: bool = False
     """Only meaningful when `instance_type` is set."""
 
@@ -254,7 +254,7 @@ class SLuaModule:
     """Module declaration with constants and functions"""
 
     name: str
-    callable: Optional[SLuaFunction]
+    callable: SLuaFunction | None
     constants: List[SLuaProperty]
     functions: List[SLuaFunction]
     comment: str = ""
@@ -591,43 +591,10 @@ class SLuaDefinitions:
 
         spec = expand_spp_builder(lsl)
         methods: List[SLuaFunction] = [make_fluent_method(spec, m) for m in spec.methods]
-        methods.append(
-            SLuaFunction(
-                name="apply",
-                parameters=[
-                    SLuaParameter(name="self", type=spec.class_name),
-                    SLuaParameter(name="link", type="number?"),
-                ],
-            )
-        )
-        methods.append(
-            SLuaFunction(
-                name="new",
-                parameters=[],
-                return_type=spec.class_name,
-            )
-        )
-        self.classes.append(
-            SLuaClassDeclaration(
-                name=spec.class_name,
-                properties=[],
-                methods=methods,
-                # These generally wrap heterogeneous lists for LSL APIs,
-                # type them as such so `table.clone()` and `table.freeze()`
-                # and such still work
-                instance_type="{any}",
-                export=True,
-            )
-        )
-        self.type_names.add(spec.class_name)
 
-        builder_prop = SLuaProperty(
-            name=spec.module_entry,
-            type=f"{spec.class_name}Meta",
-        )
-        # We assume that the module we place this in is pre-existing
-        builder_module = [m for m in self.modules if m.name == spec.module_name][0]
-        builder_module.constants.append(builder_prop)
+        # We assume that the class we place this in is pre-existing
+        builder_class = [m for m in self.classes if m.name == spec.class_name][0]
+        builder_class.methods.extend(methods)
 
 
 class SLuaDefinitionParser:
@@ -734,6 +701,8 @@ class SLuaDefinitionParser:
     def _validate_class(self, data: dict) -> SLuaClassDeclaration:
         class_ = SLuaClassDeclaration(
             name=data["name"],
+            instance_type=data.get("instance-type", None),
+            export=data.get("export", False),
             comment=data.get("comment", ""),
             properties=[],
             methods=[],
@@ -741,6 +710,9 @@ class SLuaDefinitionParser:
         try:
             self._validate_identifier(class_.name)
             self._validate_scope(class_.name, self._type_names)
+            if class_.instance_type is not None:
+                self._validate_scope(f"{class_.name}Meta", self._type_names)
+                self._validate_type(class_.instance_type)
             class_scope: Set[str] = set()
             class_.properties = [
                 self._validate_property(prop, class_scope) for prop in data.get("properties", [])

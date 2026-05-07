@@ -200,6 +200,12 @@
             "additionalProperties": false,
             "properties": {
                 "name": { "$ref": "#/$defs/identifier" },
+                "instance-type": { "$ref": "#/$defs/type" },
+                "export": {
+                    "const": true,
+                    "markdownDescription": "Whether this type is available to users. Only applicable if instance-type is specified.",
+                    "type": "boolean"
+                },
                 "properties": {
                     "items": { "$ref": "#/$defs/property" },
                     "type": "array"

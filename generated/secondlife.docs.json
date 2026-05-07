@@ -299,7 +299,7 @@
         "documentation": "Utilities for working with prims / objects"
     },
     "@sl-slua/global/llprim.ParamsSetter": {
-        "documentation": ""
+        "documentation": "Value: PrimParamsSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
     },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
