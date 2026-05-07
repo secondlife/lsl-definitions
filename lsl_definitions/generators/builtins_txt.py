@@ -73,6 +73,15 @@ def gen_enum_users(definitions: LSLDefinitions) -> str:
     # List of all enum users. Feel free to remove this rule
     out = {enum.name: [] for enum in sorted(definitions.enums.values(), key=lambda x: x.name)}
 
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+        for arg in event.arguments:
+            if arg.enum_semantics:
+                out[arg.enum_semantics.name].append(event.name)
+            if arg.param_semantics:
+                out[arg.param_semantics.name].append(event.name)
+            if arg.param_get_semantics:
+                out[arg.param_get_semantics.name].append(event.name)
+
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for arg in func.arguments:
             if arg.enum_semantics:

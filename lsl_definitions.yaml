@@ -6334,7 +6334,7 @@ events:
     - PermissionFlags:
         tooltip: ''
         type: integer
-        enum: ScriptPermission
+        enum-semantics: ScriptPermission
     tooltip: "Scripts need permission from either the owner or the avatar they wish\
       \ to act on before they may perform certain functions, such as debiting money\
       \ from their owners account, triggering an animation on an avatar, or capturing\

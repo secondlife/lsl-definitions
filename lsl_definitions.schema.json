@@ -128,6 +128,65 @@
                 }
             ]
         },
+        "arguments": {
+            "items": {
+                "additionalProperties": false,
+                "patternProperties": {
+                    "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "asset-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
+                                "type": "boolean"
+                            },
+                            "bool-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's integer value represents a boolean value.",
+                                "type": "boolean"
+                            },
+                            "index-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
+                                "type": "boolean"
+                            },
+                            "enum-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's integer value represents an enum value.",
+                                "type": "string"
+                            },
+                            "param-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's list value represents a parameter list to set.",
+                                "type": "string"
+                            },
+                            "param-get-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's list value represents a parameter list to get.",
+                                "type": "string"
+                            },
+                            "tooltip": {
+                                "markdownDescription": "A brief description of this function argument.",
+                                "type": "string"
+                            },
+                            "type": { "$ref": "#/$defs/lslType" },
+                            "slua-type": {
+                                "markdownDescription": "A more specific argument type for slua type-checking.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "type"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "markdownDescription": "An array of function arguments.",
+            "type": "array",
+            "uniqueItems": true
+        },
         "rulesetParamArray": {
             "items": {
                 "items": false,
@@ -276,31 +335,7 @@
                 "^[a-z_]+$": {
                     "additionalProperties": false,
                     "properties": {
-                        "arguments": {
-                            "items": {
-                                "additionalProperties": false,
-                                "patternProperties": {
-                                    "^(?:[A-Za-z]+(?:_[A-Za-z]+)*)$": {
-                                        "properties": {
-                                            "tooltip": {
-                                                "markdownDescription": "A brief description of this event argument.",
-                                                "type": "string"
-                                            },
-                                            "type": { "$ref": "#/$defs/lslType" }
-                                        },
-                                        "required": [
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "markdownDescription": "An array of event arguments.",
-                            "minItems": 0,
-                            "type": "array",
-                            "uniqueItems": true
-                        },
+                        "arguments": { "$ref": "#/$defs/arguments" },
                         "detected-semantics": {
                             "const": true,
                             "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
@@ -345,65 +380,7 @@
                             "type": "array",
                             "uniqueItems": true
                         },
-                        "arguments": {
-                            "items": {
-                                "additionalProperties": false,
-                                "patternProperties": {
-                                    "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
-                                        "additionalProperties": false,
-                                        "properties": {
-                                            "asset-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
-                                                "type": "boolean"
-                                            },
-                                            "bool-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a boolean value.",
-                                                "type": "boolean"
-                                            },
-                                            "index-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
-                                                "type": "boolean"
-                                            },
-                                            "enum-semantics": {
-                                                "pattern": "^[A-Z][A-Za-z]+$",
-                                                "markdownDescription": "This function argument's integer value represents an enum value.",
-                                                "type": "string"
-                                            },
-                                            "param-semantics": {
-                                                "pattern": "^[A-Z][A-Za-z]+$",
-                                                "markdownDescription": "This function argument's list value represents a parameter list to set.",
-                                                "type": "string"
-                                            },
-                                            "param-get-semantics": {
-                                                "pattern": "^[A-Z][A-Za-z]+$",
-                                                "markdownDescription": "This function argument's list value represents a parameter list to get.",
-                                                "type": "string"
-                                            },
-                                            "tooltip": {
-                                                "markdownDescription": "A brief description of this function argument.",
-                                                "type": "string"
-                                            },
-                                            "type": { "$ref": "#/$defs/lslType" },
-                                            "slua-type": {
-                                                "markdownDescription": "A more specific argument type for slua type-checking.",
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "markdownDescription": "An array of function arguments.",
-                            "type": "array",
-                            "uniqueItems": true
-                        },
+                        "arguments": { "$ref": "#/$defs/arguments" },
                         "bool-semantics": {
                             "const": true,
                             "markdownDescription": "The returned integer value represents a boolean value.",
