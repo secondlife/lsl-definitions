@@ -241,14 +241,14 @@ class LSLEnum:
     tooltip: str
     deprecated: Deprecated | None
     slua_deprecated: Deprecated | None
+    _special_members: set[str]
+    "Unusual members that break a validation rule"
     enum: LSLEnum | None = None
     "the enum component of an enum+flag"
     flag: LSLEnum | None = None
     "the flag component of an enum+flag"
     mask: str | None = None
     "the mask for the enum component of an enum+flag"
-    _special_members: set[str]
-    "Unusual members that break a validation rule"
     members: list[LSLEnumMember] = dataclasses.field(default_factory=list)
     by_name: dict[str, LSLEnumMember] = dataclasses.field(default_factory=dict)
     by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
@@ -354,8 +354,8 @@ class LSLFunction:
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
-    enum_semantics: LSLEnum | None = None
-    param_semantics: LSLEnum | None = None
+    enum_semantics: LSLEnum | None
+    param_semantics: LSLEnum | None
     detected_semantics: bool
     type_arguments: List[str]
     arguments: List[LSLArgument]
@@ -612,8 +612,8 @@ class LSLDefinitionParser:
                 _special_members=set(enum_data.get("special-members", [])),
             )
             if enum.type == LSLEnumType.ENUM_FLAG:
-                enum.enum = self._resolve_enum(enum_data["enum"], enum.name)
-                enum.flag = self._resolve_enum(enum_data["flag"], enum.name)
+                enum.enum = self._resolve_enum(enum_data["enum"])
+                enum.flag = self._resolve_enum(enum_data["flag"])
                 enum.mask = enum_data["mask"]
                 if enum.enum.type != LSLEnumType.ENUM:
                     raise ValueError(f"{enum.enum.name!r} is not of type enum")
@@ -638,8 +638,7 @@ class LSLDefinitionParser:
                 name=event_name,
                 tooltip=event_data.get("tooltip", ""),
                 arguments=[
-                    self._handle_argument(event_name, arg)
-                    for arg in (event_data.get("arguments") or [])
+                    self._handle_argument(arg) for arg in (event_data.get("arguments") or [])
                 ],
                 private=event_data.get("private", False),
                 deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
@@ -674,8 +673,7 @@ class LSLDefinitionParser:
                 slua_type=func_data.get("slua-return", None),
                 type_arguments=func_data.get("type-arguments", []),
                 arguments=[
-                    self._handle_argument(func_name, arg)
-                    for arg in (func_data.get("arguments") or [])
+                    self._handle_argument(arg) for arg in (func_data.get("arguments") or [])
                 ],
                 private=func_data.get("private", False),
                 god_mode=func_data.get("god-mode", False),
@@ -689,6 +687,8 @@ class LSLDefinitionParser:
                 index_semantics=bool(func_data.get("index-semantics", False)),
                 bool_semantics=bool(func_data.get("bool-semantics", False)),
                 detected_semantics=bool(func_data.get("detected-semantics", False)),
+                enum_semantics=None,
+                param_semantics=None,
             )
 
             if func.name in self._definitions.functions:
@@ -714,7 +714,7 @@ class LSLDefinitionParser:
                     LSLEnumType.ENUM_FLAG,
                 }:
                     raise ValueError(
-                        f"{func.name}'s enum has type {func.enum_semantics.type!r}, not enum or flag"
+                        f"{func.enum_semantics.name} has type {func.enum_semantics.type!r}, not enum or flag"
                     )
             if func_data.get("param-semantics"):
                 func.param_semantics = self._resolve_enum(func_data["param-semantics"])
@@ -727,7 +727,7 @@ class LSLDefinitionParser:
                     LSLEnumType.PARAM_LIST,
                 }:
                     raise ValueError(
-                        f"{func.name}'s param list has type {func.param_semantics.type!r}, not param"
+                        f"{func.param_semantics.name} has type {func.param_semantics.type!r}, not param"
                     )
 
             if (
@@ -764,6 +764,8 @@ class LSLDefinitionParser:
             asset_semantics=bool(arg_data.get("asset-semantics", False)),
             bool_semantics=bool(arg_data.get("bool-semantics", False)),
             index_semantics=bool(arg_data.get("index-semantics", False)),
+            enum_semantics=None,
+            param_semantics=None,
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.asset_semantics and arg.type != LSLType.STRING:
@@ -782,7 +784,7 @@ class LSLDefinitionParser:
                 LSLEnumType.ENUM_FLAG,
             }:
                 raise ValueError(
-                    f"{arg_name}'s enum has type {arg.enum_semantics.type!r}, not enum or flag"
+                    f"{arg.enum_semantics.name} has type {arg.enum_semantics.type!r}, not enum or flag"
                 )
         if arg_data.get("param-semantics"):
             arg.param_semantics = self._resolve_enum(arg_data["param-semantics"])
@@ -790,7 +792,7 @@ class LSLDefinitionParser:
                 raise ValueError(f"{arg_name} has param semantics, but type is {arg.type!r}")
             if arg.param_semantics.type not in {LSLEnumType.PARAM_DICT, LSLEnumType.PARAM_LIST}:
                 raise ValueError(
-                    f"{arg_name}'s param list has type {arg.param_semantics.type!r}, not param"
+                    f"{arg.param_semantics.name} has type {arg.param_semantics.type!r}, not param"
                 )
         if (
             sum(

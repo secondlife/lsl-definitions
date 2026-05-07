@@ -65,7 +65,7 @@ enums:
     prefix: MASK_
     tooltip: ''
   AssetPermissionCategoryOrFlag:
-    type: both
+    type: enum+flag
     enum: AssetPermissionCategory
     flag: AssetPermissionCategoryFlag
     mask: "0x7"
@@ -76,7 +76,7 @@ enums:
     prefix: FILTER_FLAG_
     tooltip: ''
   AttachedListFilterParam:
-    type: enum
+    type: param-dict
     prefix: FILTER_
     tooltip: ''
   AttachPoint:
@@ -84,7 +84,7 @@ enums:
     prefix: ATTACH_
     tooltip: ''
   CameraParam:
-    type: enum
+    type: param-dict
     prefix: CAMERA_
     tooltip: ''
   ChangeType:
@@ -100,19 +100,19 @@ enums:
     prefix: CHARACTER_CMD_
     tooltip: ''
   CharacterEvadeParam:
-    type: enum
+    type: param-dict
     tooltip: 'No options yet.'
   CharacterFleeFromParam:
-    type: enum
+    type: param-dict
     tooltip: 'No options yet.'
   CharacterNavigateParam:
-    type: enum
+    type: param-dict
     tooltip: ''
   CharacterOrientation:
     type: enum
     tooltip: ''
   CharacterParam:
-    type: enum
+    type: param-dict
     prefix: CHARACTER_
     tooltip: ''
   CharacterPathUpdateType:
@@ -120,11 +120,11 @@ enums:
     prefix: PU_
     tooltip: ''
   CharacterPatrolPointsParam:
-    type: enum
+    type: param-dict
     prefix: PATROL_
     tooltip: ''
   CharacterPursueParam:
-    type: enum
+    type: param-dict
     prefix: PURSUIT_
     tooltip: ''
   CharacterTraversalType:
@@ -136,7 +136,7 @@ enums:
     prefix: CHARACTER_TYPE_
     tooltip: ''
   CharacterWanderWithinParam:
-    type: enum
+    type: param-dict
     tooltip: ''
   ClickAction:
     type: enum
@@ -168,13 +168,13 @@ enums:
     prefix: ENV_
     tooltip: ''
   EnvironmentParam:
-    type: enum
+    type: param-dict
     tooltip: ''
   EnvironmentParamReadOnly:
-    type: enum
+    type: param-dict
     tooltip: ''
   EstateAccessParam:
-    type: enum
+    type: param-dict
     prefix: ESTATE_ACCESS_
     tooltip: ''
   ExperienceError:
@@ -197,14 +197,14 @@ enums:
     prefix: GAME_CONTROL_BUTTON_
     tooltip: ''
   GetClosestNavPointParam:
-    type: enum
+    type: param-dict
     prefix: GCNP_
     tooltip: ''
   GetStaticPathParam:
     type: param-dict
     tooltip: ''
   GiveAgentInventoryParam:
-    type: enum
+    type: param-dict
     prefix: TRANSFER_
     tooltip: ''
   GLTFAlphaMode:
@@ -216,7 +216,7 @@ enums:
     prefix: OVERRIDE_GLTF_
     tooltip: ''
   GroundTextureParam:
-    type: enum
+    type: param-dict
     prefix: TERRAIN_
     tooltip: ''
   HTTPContentType:
@@ -224,11 +224,11 @@ enums:
     prefix: CONTENT_TYPE_
     tooltip: ''
   HTTPRequestParam:
-    type: enum
+    type: param-dict
     prefix: HTTP_
     tooltip: ''
   HTTPResponseError:
-    type: enum
+    type: param-dict
     prefix: HTTP_
     tooltip: ''
   InventoryType:
@@ -249,7 +249,7 @@ enums:
     prefix: KFM_
     tooltip: ''
   KeyframedMotionParam:
-    type: enum
+    type: param-dict
     prefix: KFM_
     tooltip: ''
   Link:
@@ -280,7 +280,7 @@ enums:
     prefix: LIST_STAT_
     tooltip: ''
   MapBeaconParam:
-    type: enum
+    type: param-dict
     prefix: BEACON_
     tooltip: ''
   ModifyLandAction:
@@ -292,7 +292,7 @@ enums:
     prefix: LAND_BRUSH_
     tooltip: ''
   ObjectDetailsParam:
-    type: enum
+    type: param-dict
     prefix: OBJECT_
     tooltip: ''
   ObjectPathfindingType:
@@ -300,11 +300,11 @@ enums:
     prefix: OPT_
     tooltip: ''
   ObjectStatusParam:
-    type: flag
+    type: param-dict
     prefix: STATUS_
     tooltip: ''
   ParcelDetailsParam:
-    type: enum
+    type: param-dict
     prefix: PARCEL_DETAILS_
     tooltip: ''
   ParcelFlag:
@@ -328,7 +328,7 @@ enums:
     prefix: PARCEL_SALE_
     tooltip: ''
   ParcelSaleParam:
-    type: enum
+    type: param-dict
     prefix: PARCEL_SALE_
     tooltip: ''
   ParcelTeleportRouting:
@@ -344,7 +344,7 @@ enums:
     prefix: PSYS_PART_
     tooltip: ''
   ParticleParam:
-    type: enum
+    type: param-dict
     prefix: PSYS_
     tooltip: ''
   ParticleSourcePattern:
@@ -389,7 +389,7 @@ enums:
     prefix: STATUS_
     tooltip: ''
   PrimMediaParam:
-    type: enum
+    type: param-dict
     prefix: PRIM_MEDIA_
     tooltip: ''
   PrimMediaPerm:
@@ -398,7 +398,11 @@ enums:
     special-members: [PRIM_MEDIA_PERM_NONE] # zero
     tooltip: ''
   PrimParam:
-    type: enum
+    type: param-list
+    prefix: PRIM_
+    tooltip: ''
+  PrimParamGet:
+    type: param-dict
     prefix: PRIM_
     tooltip: ''
   PrimShiny:
@@ -426,7 +430,7 @@ enums:
     prefix: PRIM_SCULPT_TYPE_
     tooltip: ''
   PrimTypeSculpt:
-    type: both
+    type: enum+flag
     enum: PrimTypeSculptType
     flag: PrimTypeSculptFlag
     mask: PRIM_SCULPT_TYPE_MASK
@@ -442,7 +446,7 @@ enums:
     other-values: true
     tooltip: ''
   RayCastParam:
-    type: enum
+    type: param-dict
     prefix: RC_
     tooltip: ''
   RayCastRejectType:
@@ -476,7 +480,7 @@ enums:
     prefix: REZ_FLAG_
     tooltip: ''
   RezParam:
-    type: enum
+    type: param-dict
     prefix: REZ_
     tooltip: ''
   ScriptPermission:
@@ -498,7 +502,6 @@ enums:
   SitError:
     type: enum
     prefix: SIT_
-    other-values: true  # just 1 for success. Why isn't
     tooltip: ''
   SitFlag:
     type: flag
@@ -3304,13 +3307,13 @@ constants:
     type: float
     value: '1.57079633'
   PRIM_ALLOW_UNSIT:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for restricting manual standing for seated avatars in
       an experience.\nIgnored if the avatar was not seated via a call to llSitOnLink.
     type: integer
     value: 39
   PRIM_ALPHA_MODE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for materials using integer face, integer alpha_mode,
       integer alpha_cutoff.\nDefines how the alpha channel of the diffuse texture
       should be rendered.\nValid options for alpha_mode are PRIM_ALPHA_MODE_BLEND,
@@ -3398,7 +3401,7 @@ constants:
     type: integer
     value: 0
   PRIM_BUMP_SHINY:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: ''
     type: integer
     value: 19
@@ -3438,24 +3441,24 @@ constants:
     type: integer
     value: 3
   PRIM_CAST_SHADOWS:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     deprecated:
       reason: Not implemented.
     tooltip: ''
     type: integer
     value: 24
   PRIM_CLICK_ACTION:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[PRIM_CLICK_ACTION, integer CLICK_ACTION_*]'
     type: integer
     value: 43
   PRIM_COLLISION_SOUND:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Collision sound uuid and volume for this prim
     type: integer
     value: 53
   PRIM_COLOR:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [PRIM_COLOR, integer face, vector color, float alpha]
 
@@ -3465,17 +3468,17 @@ constants:
     type: integer
     value: 18
   PRIM_DAMAGE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Damage and damage type assigned to this prim.
     type: integer
     value: 51
   PRIM_DESC:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[PRIM_DESC, string description]'
     type: integer
     value: 28
   PRIM_FLEXIBLE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [ PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force ]
 
@@ -3489,12 +3492,12 @@ constants:
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_FULLBRIGHT, integer face, integer boolean ]'
     type: integer
     value: 20
   PRIM_GLOW:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: 'PRIM_GLOW is used to get or set the glow status of the face.\n[ PRIM_GLOW, integer face, float intensity ]'
     type: integer
     value: 25
@@ -3514,7 +3517,7 @@ constants:
     type: integer
     value: 0
   PRIM_GLTF_BASE_COLOR:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer alpha_mode,
       float alpha_cutoff, boolean double_sided.\nValid options for alpha_mode are
@@ -3522,26 +3525,26 @@ constants:
     type: integer
     value: 48
   PRIM_GLTF_EMISSIVE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, vector color
     type: integer
     value: 46
   PRIM_GLTF_METALLIC_ROUGHNESS:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians, float metallic_factor,
       float roughness_factor
     type: integer
     value: 47
   PRIM_GLTF_NORMAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for GLTF materials using integer face, string texture,
       vector repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 45
   PRIM_HEALTH:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Health value for this prim
     type: integer
     value: 52
@@ -3574,7 +3577,7 @@ constants:
     type: integer
     value: 34
   PRIM_MATERIAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_MATERIAL, integer PRIM_MATERIAL_* ]'
     type: integer
     value: 2
@@ -3795,18 +3798,18 @@ constants:
     type: integer
     value: 9
   PRIM_NAME:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_NAME, string name ]'
     type: integer
     value: 27
   PRIM_NORMAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians
     type: integer
     value: 37
   PRIM_OMEGA:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [ PRIM_OMEGA, vector axis, float spinrate, float gain ]
 
@@ -3816,12 +3819,12 @@ constants:
     type: integer
     value: 32
   PRIM_PHANTOM:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_PHANTOM, integer boolean ]'
     type: integer
     value: 5
   PRIM_PHYSICS:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_PHYSICS, integer boolean ]'
     type: integer
     value: 3
@@ -3844,13 +3847,13 @@ constants:
     type: integer
     value: 0
   PRIM_PHYSICS_SHAPE_TYPE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: "Allows you to set the physics shape type of a prim via lsl. Permitted\
       \ values are:\n\t\t\tPRIM_PHYSICS_SHAPE_NONE, PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_CONVEX"
     type: integer
     value: 30
   PRIM_POINT_LIGHT:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [ PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff ]
 
@@ -3862,7 +3865,7 @@ constants:
     type: integer
     value: 23
   PRIM_POSITION:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [ PRIM_POSITION, vector position ]
 
@@ -3870,7 +3873,7 @@ constants:
     type: integer
     value: 6
   PRIM_POS_LOCAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: |
       [ PRIM_POS_LOCAL, vector position ]
 
@@ -3886,7 +3889,7 @@ constants:
     type: integer
     value: 42
   PRIM_REFLECTION_PROBE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Allows you to configure the object as a custom-placed reflection probe,
       for image-based lighting (IBL). Only objects in the influence volume of the
       reflection probe object are affected.
@@ -3914,22 +3917,22 @@ constants:
     type: integer
     value: 4
   PRIM_RENDER_MATERIAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_RENDER_MATERIAL, integer face, string material ]'
     type: integer
     value: 49
   PRIM_ROTATION:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_ROT_LOCAL, rotation global_rot ]'
     type: integer
     value: 8
   PRIM_ROT_LOCAL:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_ROT_LOCAL, rotation local_rot ]'
     type: integer
     value: 29
   PRIM_SCRIPTED_SIT_ONLY:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for restricting manual sitting on this prim.\nSitting
       must be initiated via call to llSitOnLink.
     type: integer
@@ -4000,39 +4003,39 @@ constants:
     type: integer
     value: 0
   PRIM_SIT_FLAGS:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: ''
     type: integer
     value: 50
   PRIM_SIT_TARGET:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_SIT_TARGET, integer boolean, vector offset, rotation rot ]'
     type: integer
     value: 41
   PRIM_SIZE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_SIZE, vector size ]'
     type: integer
     value: 7
   PRIM_SLICE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_SLICE, vector slice ]'
     type: integer
     value: 35
   PRIM_SPECULAR:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for materials using integer face, string texture, vector
       repeats, vector offsets, float rotation_in_radians, vector color, integer glossy,
       integer environment
     type: integer
     value: 36
   PRIM_TEMP_ON_REZ:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: ''
     type: integer
     value: 4
   PRIM_TEXGEN:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_TEXGEN, integer face, PRIM_TEXGEN_* ]'
     type: integer
     value: 22
@@ -4047,17 +4050,17 @@ constants:
     type: integer
     value: 1
   PRIM_TEXT:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_TEXT, string text, vector color, float alpha ]'
     type: integer
     value: 26
   PRIM_TEXTURE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: '[ PRIM_TEXTURE, integer face, string texture, vector repeats, vector offsets, float rotation_in_radians ]'
     type: integer
     value: 17
   PRIM_TYPE:
-    member-of: [PrimParam]
+    member-of: [PrimParam, PrimParamGet]
     tooltip: ''
     type: integer
     value: 9
@@ -6970,7 +6973,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 373
     return: integer
@@ -6988,7 +6991,7 @@ functions:
     - Face:
         tooltip: Number of side to clear.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 352
     return: integer
@@ -8104,7 +8107,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 50
     must-use: true
@@ -8344,7 +8347,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 52
     must-use: true
@@ -8778,7 +8781,7 @@ functions:
     - Face:
         tooltip: The prim's side number
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -8854,13 +8857,13 @@ functions:
     - Parameters:
         tooltip: PRIM_* flags.
         type: list
-        param-get-semantics: PrimParam
+        param-get-semantics: PrimParamGet
         slua-type: "{number}"
     energy: 10.0
     func-id: 354
     must-use: true
     return: list
-    param-get-semantics: PrimParam
+    param-get-semantics: PrimParamGet
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -9479,7 +9482,7 @@ functions:
     - Face:
         tooltip: face number
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - Parameters:
         tooltip: A list of PRIM_MEDIA_* property constants to return values of.
         type: list
@@ -9505,13 +9508,13 @@ functions:
     - Parameters:
         tooltip: PRIM_* flags and face parameters
         type: list
-        param-get-semantics: PrimParam
+        param-get-semantics: PrimParamGet
         slua-type: "{number}"
     energy: 10.0
     func-id: 279
     must-use: true
     return: list
-    param-get-semantics: PrimParam
+    param-get-semantics: PrimParamGet
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.2
@@ -9676,7 +9679,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 760
     must-use: true
@@ -9778,7 +9781,7 @@ functions:
     - StatType:
         tooltip: Statistic type.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 415
     must-use: true
@@ -9919,7 +9922,7 @@ functions:
     - face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 57
     must-use: true
@@ -9936,7 +9939,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 178
     must-use: true
@@ -9951,7 +9954,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 180
     must-use: true
@@ -9966,7 +9969,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 179
     must-use: true
@@ -10442,7 +10445,7 @@ functions:
     - face:
         tooltip: Side to check for a PBR material. Use ALL_SIDES to check for all.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 559
     must-use: true
@@ -12104,7 +12107,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 55
     return: void
@@ -13392,7 +13395,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 56
     return: void
@@ -13515,7 +13518,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 54
     return: void
@@ -13704,7 +13707,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 51
     return: void
@@ -13840,7 +13843,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 49
     return: void
@@ -14053,7 +14056,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 274
     return: void
@@ -14100,7 +14103,7 @@ functions:
     - Face:
         tooltip: Side number or ALL_SIDES.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 140
     return: void
@@ -14119,7 +14122,7 @@ functions:
     - face:
         tooltip: Side to check for a PBR material. Use ALL_SIDES to check for all.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - options:
         tooltip: List of individual overrides to set.
         type: list
@@ -14141,7 +14144,7 @@ functions:
     - Face:
         tooltip: Face number.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - Parameters:
         tooltip: A set of name/value pairs (in no particular order)
         type: list
@@ -14220,7 +14223,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 762
     return: void
@@ -14263,7 +14266,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 329
     return: void
@@ -14287,7 +14290,7 @@ functions:
     - Face:
         tooltip: Specifies which object face to animate or ALL_SIDES.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - SizeX:
         tooltip: Horizontal frames (ignored for ROTATE and SCALE).
         type: integer
@@ -14510,7 +14513,7 @@ functions:
     - Face:
         tooltip: Face number
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - MediaParameters:
         tooltip: A set of name/value pairs (in no particular order)
         type: list
@@ -14607,7 +14610,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 761
     return: void
@@ -14757,7 +14760,7 @@ functions:
     - Face:
         tooltip: ''
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     energy: 10.0
     func-id: 53
     return: void
@@ -14776,7 +14779,7 @@ functions:
     - Face:
         tooltip: Face number or ALL_SIDES.
         type: integer
-        enum-semantics: {enums: [Faces], other-values: true}
+        enum-semantics: Faces
     - SizeX:
         tooltip: Horizontal frames (ignored for ROTATE and SCALE).
         type: integer
