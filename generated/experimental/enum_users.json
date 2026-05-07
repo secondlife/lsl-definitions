@@ -1,0 +1,355 @@
+{
+  "AgentData": [
+    "llRequestAgentData"
+  ],
+  "AgentDataPaymentInfo": [],
+  "AgentInfo": [],
+  "AgentListParam": [
+    "llGetAgentList"
+  ],
+  "AgentListScope": [
+    "llGetAgentList"
+  ],
+  "AgentRotFlags": [
+    "llSetAgentRot"
+  ],
+  "AlphaMode": [],
+  "AssetPermission": [
+    "llSetInventoryPermMask",
+    "llSetObjectPermMask"
+  ],
+  "AssetPermissionCategory": [
+    "llGetInventoryPermMask",
+    "llSetInventoryPermMask",
+    "llSetObjectPermMask"
+  ],
+  "AssetPermissionCategoryFlag": [],
+  "AssetPermissionCategoryOrFlag": [],
+  "AttachPoint": [
+    "llAttachToAvatar",
+    "llAttachToAvatarTemp"
+  ],
+  "AttachedListFilterFlag": [],
+  "AttachedListFilterParam": [
+    "llGetAttachedListFiltered"
+  ],
+  "CameraParam": [
+    "llSetCameraParams"
+  ],
+  "ChangeType": [],
+  "CharacterAvoidanceMode": [],
+  "CharacterCommand": [
+    "llExecCharacterCmd"
+  ],
+  "CharacterEvadeParam": [
+    "llEvade"
+  ],
+  "CharacterFleeFromParam": [
+    "llFleeFrom"
+  ],
+  "CharacterNavigateParam": [
+    "llNavigateTo"
+  ],
+  "CharacterOrientation": [],
+  "CharacterParam": [
+    "llCreateCharacter",
+    "llUpdateCharacter"
+  ],
+  "CharacterPathUpdateType": [],
+  "CharacterPatrolPointsParam": [
+    "llPatrolPoints"
+  ],
+  "CharacterPursueParam": [
+    "llPursue"
+  ],
+  "CharacterTraversalType": [],
+  "CharacterType": [],
+  "CharacterWanderWithinParam": [
+    "llWanderWithin"
+  ],
+  "ClickAction": [
+    "llSetClickAction"
+  ],
+  "ControlButton": [
+    "llTakeControls"
+  ],
+  "DamageType": [
+    "llDamage"
+  ],
+  "DerezMode": [
+    "llDerezObject"
+  ],
+  "DetectType": [
+    "llSensor",
+    "llSensorRepeat"
+  ],
+  "EmailTarget": [
+    "llTargetedEmail"
+  ],
+  "EnvironmentError": [],
+  "EnvironmentParam": [
+    "llGetEnvironment",
+    "llSetAgentEnvironment",
+    "llSetEnvironment"
+  ],
+  "EnvironmentParamReadOnly": [],
+  "EstateAccessParam": [
+    "llManageEstateAccess"
+  ],
+  "ExperienceError": [
+    "llGetExperienceErrorMessage"
+  ],
+  "Faces": [
+    "llClearLinkMedia",
+    "llClearPrimMedia",
+    "llGetAlpha",
+    "llGetColor",
+    "llGetLinkMedia",
+    "llGetPrimMediaParams",
+    "llGetRenderMaterial",
+    "llGetSimStats",
+    "llGetTexture",
+    "llGetTextureOffset",
+    "llGetTextureRot",
+    "llGetTextureScale",
+    "llIsLinkGLTFMaterial",
+    "llOffsetTexture",
+    "llRotateTexture",
+    "llScaleTexture",
+    "llSetAlpha",
+    "llSetColor",
+    "llSetLinkAlpha",
+    "llSetLinkColor",
+    "llSetLinkGLTFOverrides",
+    "llSetLinkMedia",
+    "llSetLinkRenderMaterial",
+    "llSetLinkTexture",
+    "llSetLinkTextureAnim",
+    "llSetPrimMediaParams",
+    "llSetRenderMaterial",
+    "llSetTexture",
+    "llSetTextureAnim"
+  ],
+  "FindNotecardTextParam": [
+    "llFindNotecardTextCount",
+    "llFindNotecardTextSync"
+  ],
+  "GLTFAlphaMode": [],
+  "GLTFOverride": [
+    "llSetLinkGLTFOverrides"
+  ],
+  "GameControlAxis": [],
+  "GameControlButton": [],
+  "GetClosestNavPointParam": [
+    "llGetClosestNavPoint"
+  ],
+  "GetStaticPathParam": [
+    "llGetStaticPath"
+  ],
+  "GiveAgentInventoryParam": [
+    "llGiveAgentInventory"
+  ],
+  "GroundTextureParam": [
+    "llSetGroundTexture"
+  ],
+  "HTTPContentType": [
+    "llSetContentType"
+  ],
+  "HTTPRequestParam": [
+    "llHTTPRequest"
+  ],
+  "HTTPResponseError": [],
+  "InventoryType": [
+    "llGetInventoryName",
+    "llGetInventoryNumber"
+  ],
+  "KeyframedMotionCommand": [],
+  "KeyframedMotionData": [],
+  "KeyframedMotionMode": [],
+  "KeyframedMotionParam": [
+    "llSetKeyframedMotion"
+  ],
+  "Link": [
+    "llAvatarOnLinkSitTarget",
+    "llGetLinkKey",
+    "llGetLinkMedia",
+    "llGetLinkName",
+    "llGetLinkNumberOfSides",
+    "llGetLinkPrimitiveParams",
+    "llGetLinkSitFlags",
+    "llGetObjectLinkKey",
+    "llGetObjectPermMask",
+    "llIsLinkGLTFMaterial",
+    "llLinkSitTarget",
+    "llSetLinkCamera",
+    "llSetLinkMedia",
+    "llSitOnLink"
+  ],
+  "Links": [
+    "llBreakLink",
+    "llClearLinkMedia",
+    "llLinkAdjustSoundVolume",
+    "llLinkParticleSystem",
+    "llLinkPlaySound",
+    "llLinkSetSoundQueueing",
+    "llLinkSetSoundRadius",
+    "llLinkStopSound",
+    "llMessageLinked",
+    "llSetLinkAlpha",
+    "llSetLinkColor",
+    "llSetLinkGLTFOverrides",
+    "llSetLinkPrimitiveParams",
+    "llSetLinkPrimitiveParamsFast",
+    "llSetLinkRenderMaterial",
+    "llSetLinkSitFlags",
+    "llSetLinkTexture",
+    "llSetLinkTextureAnim"
+  ],
+  "LinksetDataAction": [],
+  "LinksetDataError": [],
+  "ListEntryType": [],
+  "ListStatisticsOperation": [
+    "llListStatistics"
+  ],
+  "MapBeaconParam": [
+    "llMapBeacon"
+  ],
+  "ModifyLandAction": [
+    "llModifyLand"
+  ],
+  "ModifyLandBrush": [
+    "llModifyLand"
+  ],
+  "ObjectDetailsParam": [
+    "llGetObjectDetails"
+  ],
+  "ObjectPathfindingType": [],
+  "ObjectStatusParam": [
+    "llGetStatus",
+    "llSetStatus"
+  ],
+  "ParcelDetailsParam": [
+    "llGetParcelDetails"
+  ],
+  "ParcelFlag": [],
+  "ParcelMediaCommand": [
+    "llParcelMediaCommandList"
+  ],
+  "ParcelMediaQuery": [
+    "llParcelMediaQuery"
+  ],
+  "ParcelPrimCountCategory": [
+    "llGetParcelPrimCount"
+  ],
+  "ParcelSaleError": [],
+  "ParcelSaleParam": [
+    "llSetParcelForSale"
+  ],
+  "ParcelTeleportRouting": [],
+  "ParticleBlendFunc": [],
+  "ParticleFlag": [],
+  "ParticleParam": [
+    "llLinkParticleSystem",
+    "llParticleSystem"
+  ],
+  "ParticleSourcePattern": [],
+  "PassMode": [],
+  "PayButton": [
+    "llSetPayPrice"
+  ],
+  "PhysicsMaterialParam": [
+    "llSetPhysicsMaterial"
+  ],
+  "PhysicsMaterialPreset": [],
+  "PhysicsShapeType": [],
+  "PlaySoundFlag": [
+    "llLinkPlaySound"
+  ],
+  "PrimBump": [],
+  "PrimMediaControl": [],
+  "PrimMediaError": [],
+  "PrimMediaParam": [
+    "llGetLinkMedia",
+    "llGetPrimMediaParams",
+    "llSetLinkMedia",
+    "llSetPrimMediaParams"
+  ],
+  "PrimMediaPerm": [],
+  "PrimParam": [
+    "llSetLinkPrimitiveParams",
+    "llSetLinkPrimitiveParamsFast",
+    "llSetPrimitiveParams"
+  ],
+  "PrimParamGet": [
+    "llGetLinkPrimitiveParams",
+    "llGetPrimitiveParams"
+  ],
+  "PrimShiny": [],
+  "PrimTexgen": [],
+  "PrimType": [],
+  "PrimTypeHole": [],
+  "PrimTypeSculpt": [],
+  "PrimTypeSculptFlag": [],
+  "PrimTypeSculptType": [],
+  "RayCastData": [],
+  "RayCastError": [],
+  "RayCastParam": [
+    "llCastRay"
+  ],
+  "RayCastRejectType": [],
+  "ReflectionProbeType": [],
+  "RegionFlag": [],
+  "RemoteDataEventType": [],
+  "ReturnObjectsError": [],
+  "ReturnObjectsScope": [
+    "llReturnObjectsByOwner"
+  ],
+  "RezFlag": [],
+  "RezParam": [
+    "llRezObjectWithParams"
+  ],
+  "ScriptPermission": [
+    "llRequestPermissions"
+  ],
+  "ScriptProfileMode": [
+    "llScriptProfiler"
+  ],
+  "SimulatorData": [
+    "llRequestSimulatorData"
+  ],
+  "SimulatorStat": [],
+  "SitError": [],
+  "SitFlag": [
+    "llSetLinkSitFlags"
+  ],
+  "StringTrimType": [
+    "llStringTrim"
+  ],
+  "TextureAnimMode": [
+    "llSetLinkTextureAnim",
+    "llSetTextureAnim"
+  ],
+  "TransferError": [],
+  "TransferOwnershipFlag": [
+    "llTransferOwnership"
+  ],
+  "TransferOwnershipParam": [
+    "llTransferOwnership"
+  ],
+  "VehicleFlag": [
+    "llRemoveVehicleFlags",
+    "llSetVehicleFlags"
+  ],
+  "VehicleFloatParam": [
+    "llSetVehicleFloatParam"
+  ],
+  "VehicleRotationParam": [
+    "llSetVehicleRotationParam"
+  ],
+  "VehicleType": [
+    "llSetVehicleType"
+  ],
+  "VehicleVectorParam": [
+    "llSetVehicleVectorParam"
+  ]
+}
