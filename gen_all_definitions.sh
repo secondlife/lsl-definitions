@@ -37,3 +37,4 @@ $CMD $DEFS gen_mono_library_defs ./templates/LslLibrary.cs "$outdir/templated/Ls
 
 # Experimental generators
 $CMD $DEFS gen_enums_txt "$outdir/experimental/enums.txt"
+$CMD $DEFS gen_enum_users "$outdir/experimental/enum_users.json"

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions, LSLEnumType, LSLType
 
@@ -64,3 +66,20 @@ def gen_enums_txt(definitions: LSLDefinitions) -> str:
             builtins_str += "\n"
 
     return builtins_str
+
+
+@register("gen_enum_users")
+def gen_enum_users(definitions: LSLDefinitions) -> str:
+    # List of all enum users. Feel free to remove this rule
+    out = {enum.name: [] for enum in sorted(definitions.enums.values(), key=lambda x: x.name)}
+
+    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+        for arg in func.arguments:
+            if arg.enum_semantics:
+                out[arg.enum_semantics.name].append(func.name)
+            if arg.param_semantics:
+                out[arg.param_semantics.name].append(func.name)
+            if arg.param_get_semantics:
+                out[arg.param_get_semantics.name].append(func.name)
+
+    return json.dumps(out, indent=2)
