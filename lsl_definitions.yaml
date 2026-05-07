@@ -174,7 +174,7 @@ enums:
     type: param-dict
     tooltip: ''
   EstateAccessParam:
-    type: param-dict
+    type: enum
     prefix: ESTATE_ACCESS_
     tooltip: ''
   ExperienceError:
@@ -212,7 +212,7 @@ enums:
     prefix: PRIM_GLTF_ALPHA_MODE_
     tooltip: ''
   GLTFOverride:
-    type: enum
+    type: param-dict
     prefix: OVERRIDE_GLTF_
     tooltip: ''
   GroundTextureParam:
@@ -300,7 +300,7 @@ enums:
     prefix: OPT_
     tooltip: ''
   ObjectStatusParam:
-    type: param-dict
+    type: flag
     prefix: STATUS_
     tooltip: ''
   ParcelDetailsParam:
@@ -312,11 +312,11 @@ enums:
     prefix: PARCEL_FLAG_
     tooltip: ''
   ParcelMediaCommand:
-    type: enum
+    type: param-dict
     prefix: PARCEL_MEDIA_COMMAND_
     tooltip: ''
   ParcelMediaQuery:
-    type: enum
+    type: param-dict
     prefix: PARCEL_MEDIA_COMMAND_
     tooltip: ''
   ParcelPrimCountCategory:
@@ -356,7 +356,7 @@ enums:
     prefix: PASS_
     tooltip: ''
   PayButton:
-    type: enum
+    type: param-list
     prefix: PAY_
     other-values: true
     tooltip: ''
@@ -7839,7 +7839,6 @@ functions:
     - Options:
         tooltip: Height for CHARACTER_CMD_JUMP.
         type: list
-        param-semantics: CharacterCommand
     energy: 10.0
     func-id: 404
     return: void
@@ -9250,7 +9249,7 @@ functions:
     func-id: 287
     must-use: true
     return: integer
-    enum-semantics: {enums: [AssetPermissionCategory, AssetPermissionCategoryFlag]}
+    enum-semantics: AssetPermissionCategoryOrFlag
     sleep: 0.0
     tooltip: Returns the permission mask of the requested category for the object.
     categories:
@@ -9317,13 +9316,13 @@ functions:
     - ParcelDetails:
         tooltip: List of details requested for the specified parcel location.
         type: list
-        param-get-semantics: ParcelDetails
+        param-get-semantics: ParcelDetailsParam
         slua-type: "{number}"
     energy: 10.0
     func-id: 327
     must-use: true
     return: list
-    param-get-semantics: ParcelDetails
+    param-get-semantics: ParcelDetailsParam
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -9587,7 +9586,7 @@ functions:
     func-id: 318
     must-use: true
     return: integer
-    enum-semantics: llGetRegionFlag
+    enum-semantics: RegionFlag
     sleep: 0.0
     tooltip: Returns the region flags (REGION_FLAG_*) for the region the object is
       in.\nReturns a bit-field specifying the region flags (REGION_FLAG_*) for the
@@ -9919,7 +9918,7 @@ functions:
       - parcel_appearance
   llGetTexture:
     arguments:
-    - face:
+    - Face:
         tooltip: ''
         type: integer
         enum-semantics: Faces
@@ -12743,7 +12742,7 @@ functions:
     - Vehiclelags:
         tooltip: ''
         type: integer
-        enum-semantics: Vehiclelags
+        enum-semantics: VehicleFlag
     energy: 10.0
     func-id: 237
     return: void

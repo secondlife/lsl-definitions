@@ -29,10 +29,14 @@ enum AgentInfo {
   AUTOMATED = 0x4000
   FLOATING_VIA_SCRIPTED_ATTACHMENT = 0x8000
 };
+enum AgentListParam {
+};
 enum AgentListScope {
   PARCEL = 0x1
   PARCEL_OWNER = 0x2
   REGION = 0x4
+};
+enum AgentRotFlags {
 };
 enum AlphaMode {
   NONE = 0
@@ -56,6 +60,8 @@ enum AssetPermissionCategory {
 };
 enum AssetPermissionCategoryFlag {
   COMBINED = 0x10
+};
+enum AssetPermissionCategoryOrFlag {
 };
 enum AttachPoint {
   ANY_HUD = -1
@@ -392,6 +398,8 @@ enum ExperienceError {
 enum Faces {
   ALL_SIDES = -1
 };
+enum FindNotecardTextParam {
+};
 enum GLTFAlphaMode {
   OPAQUE = 0
   BLEND = 1
@@ -441,6 +449,9 @@ enum GameControlButton {
 enum GetClosestNavPointParam {
   RADIUS = 0
   STATIC = 1
+  CHARACTER_TYPE = 6
+};
+enum GetStaticPathParam {
   CHARACTER_TYPE = 6
 };
 enum GiveAgentInventoryParam {
@@ -957,6 +968,50 @@ enum PrimParam {
   HEALTH = 52
   COLLISION_SOUND = 53
 };
+enum PrimParamGet {
+  MATERIAL = 2
+  PHYSICS = 3
+  TEMP_ON_REZ = 4
+  PHANTOM = 5
+  POSITION = 6
+  SIZE = 7
+  ROTATION = 8
+  TYPE = 9
+  TEXTURE = 17
+  COLOR = 18
+  BUMP_SHINY = 19
+  FULLBRIGHT = 20
+  FLEXIBLE = 21
+  TEXGEN = 22
+  POINT_LIGHT = 23
+  CAST_SHADOWS = 24 // deprecated
+  GLOW = 25
+  TEXT = 26
+  NAME = 27
+  DESC = 28
+  ROT_LOCAL = 29
+  PHYSICS_SHAPE_TYPE = 30
+  OMEGA = 32
+  POS_LOCAL = 33
+  SLICE = 35
+  SPECULAR = 36
+  NORMAL = 37
+  ALPHA_MODE = 38
+  ALLOW_UNSIT = 39
+  SCRIPTED_SIT_ONLY = 40
+  SIT_TARGET = 41
+  CLICK_ACTION = 43
+  REFLECTION_PROBE = 44
+  GLTF_NORMAL = 45
+  GLTF_EMISSIVE = 46
+  GLTF_METALLIC_ROUGHNESS = 47
+  GLTF_BASE_COLOR = 48
+  RENDER_MATERIAL = 49
+  SIT_FLAGS = 50
+  DAMAGE = 51
+  HEALTH = 52
+  COLLISION_SOUND = 53
+};
 enum PrimShiny {
   NONE = 0
   LOW = 1
@@ -982,6 +1037,8 @@ enum PrimTypeHole {
   CIRCLE = 16
   SQUARE = 32
   TRIANGLE = 48
+};
+enum PrimTypeSculpt {
 };
 enum PrimTypeSculptFlag {
   ANIMESH = 0x20
@@ -1178,6 +1235,8 @@ enum TransferOwnershipFlag {
   RESERVED = 0x1
   TAKE = 0x2
   COPY = 0x4
+};
+enum TransferOwnershipParam {
 };
 enum VehicleFlag {
   NO_DEFLECTION_UP = 0x1

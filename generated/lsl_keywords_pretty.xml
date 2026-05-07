@@ -19033,7 +19033,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>Options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>No options available at this time.</string>
+                     <string></string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -24641,7 +24641,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>Options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>No options available at this time.</string>
+                     <string></string>
                      <key>type</key>
                      <string>list</string>
                   </map>

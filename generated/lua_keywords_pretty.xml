@@ -25621,7 +25621,7 @@ Returns true if result is non-zero.</string>
                   <key>Options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>No options available at this time.</string>
+                     <string></string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -31183,7 +31183,7 @@ Returns true if result is non-zero.</string>
                   <key>Options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>No options available at this time.</string>
+                     <string></string>
                      <key>type</key>
                      <string>list</string>
                   </map>

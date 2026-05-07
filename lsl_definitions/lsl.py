@@ -269,7 +269,9 @@ class LSLArgument:
     enum_semantics: LSLEnum | None
     """Represents an enum or flag integer"""
     param_semantics: LSLEnum | None
-    """Represents a parameter list"""
+    """Represents a parameter list to set"""
+    param_get_semantics: LSLEnum | None
+    """Represents a parameter list to retrieve"""
 
     def compute_slua_type(self, event: bool = False) -> str:
         if self.slua_type is not None:
@@ -355,7 +357,7 @@ class LSLFunction:
     index_semantics: bool
     bool_semantics: bool
     enum_semantics: LSLEnum | None
-    param_semantics: LSLEnum | None
+    param_get_semantics: LSLEnum | None
     detected_semantics: bool
     type_arguments: List[str]
     arguments: List[LSLArgument]
@@ -688,7 +690,7 @@ class LSLDefinitionParser:
                 bool_semantics=bool(func_data.get("bool-semantics", False)),
                 detected_semantics=bool(func_data.get("detected-semantics", False)),
                 enum_semantics=None,
-                param_semantics=None,
+                param_get_semantics=None,
             )
 
             if func.name in self._definitions.functions:
@@ -716,32 +718,26 @@ class LSLDefinitionParser:
                     raise ValueError(
                         f"{func.enum_semantics.name} has type {func.enum_semantics.type!r}, not enum or flag"
                     )
-            if func_data.get("param-semantics"):
-                func.param_semantics = self._resolve_enum(func_data["param-semantics"])
+            if func_data.get("param-get-semantics"):
+                func.param_get_semantics = self._resolve_enum(func_data["param-get-semantics"])
                 if func.ret_type != LSLType.LIST:
                     raise ValueError(
                         f"{func.name} has param semantics, but ret type is {func.ret_type!r}"
                     )
-                if func.param_semantics.type not in {
-                    LSLEnumType.PARAM_DICT,
-                    LSLEnumType.PARAM_LIST,
-                }:
+                if func.param_get_semantics.type != LSLEnumType.PARAM_DICT:
                     raise ValueError(
-                        f"{func.param_semantics.name} has type {func.param_semantics.type!r}, not param"
+                        f"{func.param_get_semantics.name} has type {func.param_get_semantics.type!r}, not param"
                     )
+                if sum(1 for arg in func.arguments if arg.param_get_semantics) != 1:
+                    raise ValueError("Must have exactly one argument with param-get semantics")
 
-            if (
-                sum(
-                    bool(x)
-                    for x in [
-                        func.bool_semantics,
-                        func.index_semantics,
-                        func.enum_semantics,
-                        func.param_semantics,
-                    ]
-                )
-                > 1
-            ):
+            all_semantics = [
+                func.bool_semantics,
+                func.index_semantics,
+                func.enum_semantics,
+                # func.param_get_semantics, # TODO: add once parameters can mark their own semantics
+            ]
+            if sum(bool(x) for x in all_semantics) > 1:
                 raise ValueError("Can't have multiple return semantics")
 
             self._validate_args(func)
@@ -766,6 +762,7 @@ class LSLDefinitionParser:
             index_semantics=bool(arg_data.get("index-semantics", False)),
             enum_semantics=None,
             param_semantics=None,
+            param_get_semantics=None,
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.asset_semantics and arg.type != LSLType.STRING:
@@ -794,19 +791,23 @@ class LSLDefinitionParser:
                 raise ValueError(
                     f"{arg.param_semantics.name} has type {arg.param_semantics.type!r}, not param"
                 )
-        if (
-            sum(
-                bool(x)
-                for x in [
-                    arg.asset_semantics,
-                    arg.bool_semantics,
-                    arg.index_semantics,
-                    arg.enum_semantics,
-                    arg.param_semantics,
-                ]
-            )
-            > 1
-        ):
+        if arg_data.get("param-get-semantics"):
+            arg.param_get_semantics = self._resolve_enum(arg_data["param-get-semantics"])
+            if arg.type != LSLType.LIST:
+                raise ValueError(f"{arg_name} has param-get semantics, but type is {arg.type!r}")
+            if arg.param_get_semantics.type != LSLEnumType.PARAM_DICT:
+                raise ValueError(
+                    f"{arg.param_get_semantics.name} has type {arg.param_get_semantics.type!r}, not param-dict"
+                )
+        all_semantics = [
+            arg.asset_semantics,
+            arg.bool_semantics,
+            arg.index_semantics,
+            arg.enum_semantics,
+            arg.param_semantics,
+            arg.param_get_semantics,
+        ]
+        if sum(bool(x) for x in all_semantics) > 1:
             raise ValueError(f"{arg_name} cannot have multiple semantics")
         return arg
 
