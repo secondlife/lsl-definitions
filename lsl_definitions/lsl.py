@@ -6,7 +6,7 @@ import ast
 import dataclasses
 import re
 from enum import IntEnum
-from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
+from typing import TYPE_CHECKING, Dict, List, NamedTuple, Set, Union
 
 import llsd
 import yaml
@@ -139,7 +139,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 class LSLConstant:
     name: str
     type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     slua_removed: bool
     value: str
     """A LSL literal, except:
@@ -221,6 +221,9 @@ class LSLConstant:
 class LSLEnumType(StringEnum):
     ENUM = "enum"
     FLAG = "flag"
+    ENUM_FLAG = "enum+flag"
+    PARAM_DICT = "param-dict"
+    PARAM_LIST = "param-list"
 
 
 @dataclasses.dataclass
@@ -238,6 +241,12 @@ class LSLEnum:
     tooltip: str
     deprecated: Deprecated | None
     slua_deprecated: Deprecated | None
+    enum: LSLEnum | None = None
+    "the enum component of an enum+flag"
+    flag: LSLEnum | None = None
+    "the flag component of an enum+flag"
+    mask: str | None = None
+    "the mask for the enum component of an enum+flag"
     _special_members: set[str]
     "Unusual members that break a validation rule"
     members: list[LSLEnumMember] = dataclasses.field(default_factory=list)
@@ -249,13 +258,18 @@ class LSLEnum:
 class LSLArgument:
     name: str
     type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     tooltip: str
     index_semantics: bool
+    """Represents a list index integer"""
     asset_semantics: bool
     """Represents an asset name or uuid"""
     bool_semantics: bool
     """Represents a boolean"""
+    enum_semantics: LSLEnum | None
+    """Represents an enum or flag integer"""
+    param_semantics: LSLEnum | None
+    """Represents a parameter list"""
 
     def compute_slua_type(self, event: bool = False) -> str:
         if self.slua_type is not None:
@@ -336,10 +350,12 @@ class LSLFunction:
     energy: float
     sleep: float
     ret_type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
+    enum_semantics: LSLEnum | None = None
+    param_semantics: LSLEnum | None = None
     detected_semantics: bool
     type_arguments: List[str]
     arguments: List[LSLArgument]
@@ -577,101 +593,168 @@ class LSLDefinitionParser:
 
         return self._definitions
 
-    def _handle_enum(self, enum_name: str, enum_data: dict) -> LSLEnum:
-        self._validate_identifier(enum_name)
-        enum = LSLEnum(
-            name=enum_name,
-            type=LSLEnumType(enum_data["type"]),
-            prefix=enum_data.get("prefix", ""),
-            tooltip=enum_data.get("tooltip", ""),
-            deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
-            _special_members=set(enum_data.get("special-members", [])),
-        )
+    def _resolve_enum(self, enum_name: str) -> LSLEnum:
+        try:
+            return self._definitions.enums[enum_name]
+        except KeyError:
+            raise KeyError(f"Unknown enum {enum_name!r}")
 
-        if enum.name in self._definitions.enums:
-            raise KeyError(f"{enum.name} is already defined")
-        self._definitions.enums[enum.name] = enum
-        return enum
+    def _handle_enum(self, enum_name: str, enum_data: dict) -> LSLEnum:
+        try:
+            self._validate_identifier(enum_name)
+            enum = LSLEnum(
+                name=enum_name,
+                type=LSLEnumType(enum_data["type"]),
+                prefix=enum_data.get("prefix", ""),
+                tooltip=enum_data.get("tooltip", ""),
+                deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
+                _special_members=set(enum_data.get("special-members", [])),
+            )
+            if enum.type == LSLEnumType.ENUM_FLAG:
+                enum.enum = self._resolve_enum(enum_data["enum"], enum.name)
+                enum.flag = self._resolve_enum(enum_data["flag"], enum.name)
+                enum.mask = enum_data["mask"]
+                if enum.enum.type != LSLEnumType.ENUM:
+                    raise ValueError(f"{enum.enum.name!r} is not of type enum")
+                if enum.flag.type != LSLEnumType.FLAG:
+                    raise ValueError(f"{enum.flag.name!r} is not of type flag")
+            elif "enum" in enum_data or "flag" in enum_data or "mask" in enum_data:
+                raise ValueError(
+                    f"{enum_name!r} is not an enum+flag, but has enum/flag/mask fields"
+                )
+
+            if enum.name in self._definitions.enums:
+                raise KeyError(f"{enum.name} is already defined")
+            self._definitions.enums[enum.name] = enum
+            return enum
+        except Exception as e:
+            raise ValueError(f"In enum {enum_name!r}: {e}") from e
 
     def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
-        self._validate_identifier(event_name)
-        event = LSLEvent(
-            name=event_name,
-            tooltip=event_data.get("tooltip", ""),
-            arguments=[
-                self._handle_argument(event_name, arg)
-                for arg in (event_data.get("arguments") or [])
-            ],
-            private=event_data.get("private", False),
-            deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(event_data.get("slua-deprecated", False)),
-            slua_removed=event_data.get("slua-removed", False),
-            detected_semantics=event_data.get("detected-semantics", False),
-        )
+        try:
+            self._validate_identifier(event_name)
+            event = LSLEvent(
+                name=event_name,
+                tooltip=event_data.get("tooltip", ""),
+                arguments=[
+                    self._handle_argument(event_name, arg)
+                    for arg in (event_data.get("arguments") or [])
+                ],
+                private=event_data.get("private", False),
+                deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(
+                    event_data.get("slua-deprecated", False)
+                ),
+                slua_removed=event_data.get("slua-removed", False),
+                detected_semantics=event_data.get("detected-semantics", False),
+            )
 
-        if event.name in self._definitions.events:
-            raise KeyError(f"{event.name} is already defined")
-        self._validate_args(event)
+            if event.name in self._definitions.events:
+                raise KeyError(f"{event.name} is already defined")
+            self._validate_args(event)
 
-        self._definitions.events[event.name] = event
-        return event
+            self._definitions.events[event.name] = event
+            return event
+        except Exception as e:
+            raise ValueError(f"In event {event_name!r}: {e}") from e
 
     def _handle_function(self, func_name: str, func_data: dict) -> LSLFunction:
-        self._validate_identifier(func_name)
-        func = LSLFunction(
-            name=func_name,
-            tooltip=func_data.get("tooltip", ""),
-            # These do actually need to be floats.
-            energy=float(func_data["energy"] or "0.0"),
-            sleep=float(func_data["sleep"] or "0.0"),
-            # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
-            mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
-            ret_type=LSLType(func_data["return"]),
-            slua_type=func_data.get("slua-return", None),
-            type_arguments=func_data.get("type-arguments", []),
-            arguments=[
-                self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
-            ],
-            private=func_data.get("private", False),
-            god_mode=func_data.get("god-mode", False),
-            deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
-            slua_removed=func_data.get("slua-removed", False),
-            func_id=func_data["func-id"],
-            pure=func_data.get("pure", False),
-            must_use=func_data.get("must-use", False),
-            native=func_data.get("native", False),
-            index_semantics=bool(func_data.get("index-semantics", False)),
-            bool_semantics=bool(func_data.get("bool-semantics", False)),
-            detected_semantics=bool(func_data.get("detected-semantics", False)),
-        )
-
-        if func.name in self._definitions.functions:
-            raise KeyError(f"{func.name} is already defined")
-
-        if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-            raise ValueError(
-                f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
-            )
-        if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-            raise ValueError(
-                f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
+        try:
+            self._validate_identifier(func_name)
+            func = LSLFunction(
+                name=func_name,
+                tooltip=func_data.get("tooltip", ""),
+                # These do actually need to be floats.
+                energy=float(func_data["energy"] or "0.0"),
+                sleep=float(func_data["sleep"] or "0.0"),
+                # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
+                mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
+                ret_type=LSLType(func_data["return"]),
+                slua_type=func_data.get("slua-return", None),
+                type_arguments=func_data.get("type-arguments", []),
+                arguments=[
+                    self._handle_argument(func_name, arg)
+                    for arg in (func_data.get("arguments") or [])
+                ],
+                private=func_data.get("private", False),
+                god_mode=func_data.get("god-mode", False),
+                deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
+                slua_removed=func_data.get("slua-removed", False),
+                func_id=func_data["func-id"],
+                pure=func_data.get("pure", False),
+                must_use=func_data.get("must-use", False),
+                native=func_data.get("native", False),
+                index_semantics=bool(func_data.get("index-semantics", False)),
+                bool_semantics=bool(func_data.get("bool-semantics", False)),
+                detected_semantics=bool(func_data.get("detected-semantics", False)),
             )
 
-        if func.bool_semantics and func.index_semantics:
-            raise ValueError(f"Can't have both bool and index semantics for {func.name}")
+            if func.name in self._definitions.functions:
+                raise KeyError(f"{func.name} is already defined")
 
-        self._validate_args(func)
+            if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
+                raise ValueError(
+                    f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
+                )
+            if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
+                raise ValueError(
+                    f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
+                )
+            if func_data.get("enum-semantics"):
+                func.enum_semantics = self._resolve_enum(func_data["enum-semantics"])
+                if func.ret_type != LSLType.INTEGER:
+                    raise ValueError(
+                        f"{func.name} has enum semantics, but ret type is {func.ret_type!r}"
+                    )
+                if func.enum_semantics.type not in {
+                    LSLEnumType.ENUM,
+                    LSLEnumType.FLAG,
+                    LSLEnumType.ENUM_FLAG,
+                }:
+                    raise ValueError(
+                        f"{func.name}'s enum has type {func.enum_semantics.type!r}, not enum or flag"
+                    )
+            if func_data.get("param-semantics"):
+                func.param_semantics = self._resolve_enum(func_data["param-semantics"])
+                if func.ret_type != LSLType.LIST:
+                    raise ValueError(
+                        f"{func.name} has param semantics, but ret type is {func.ret_type!r}"
+                    )
+                if func.param_semantics.type not in {
+                    LSLEnumType.PARAM_DICT,
+                    LSLEnumType.PARAM_LIST,
+                }:
+                    raise ValueError(
+                        f"{func.name}'s param list has type {func.param_semantics.type!r}, not param"
+                    )
 
-        self._definitions.functions[func.name] = func
-        return func
+            if (
+                sum(
+                    bool(x)
+                    for x in [
+                        func.bool_semantics,
+                        func.index_semantics,
+                        func.enum_semantics,
+                        func.param_semantics,
+                    ]
+                )
+                > 1
+            ):
+                raise ValueError("Can't have multiple return semantics")
 
-    @staticmethod
-    def _handle_argument(func_name: str, arg_dict: dict) -> LSLArgument:
+            self._validate_args(func)
+
+            self._definitions.functions[func.name] = func
+            return func
+        except Exception as e:
+            raise ValueError(f"In function {func_name!r}: {e}") from e
+
+    def _handle_argument(self, arg_dict: dict) -> LSLArgument:
         if len(arg_dict) != 1:
             # Arguments are meant to be an array of single-element dicts to keep order.
-            raise ValueError(f"Expected {func_name}'s {arg_dict!r} to only have one element")
+            raise ValueError(f"Expected {arg_dict!r} to only have one element")
 
         arg_name, arg_data = list(arg_dict.items())[0]
         arg = LSLArgument(
@@ -684,17 +767,45 @@ class LSLDefinitionParser:
             tooltip=arg_data.get("tooltip", ""),
         )
         if arg.asset_semantics and arg.type != LSLType.STRING:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has asset semantics, but type is {arg.type!r}"
-            )
+            raise ValueError(f"{arg_name} has asset semantics, but type is {arg.type!r}")
         if arg.bool_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has bool semantics, but type is {arg.type!r}"
-            )
+            raise ValueError(f"{arg_name} has bool semantics, but type is {arg.type!r}")
         if arg.index_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"
+            raise ValueError(f"{arg_name} has index semantics, but type is {arg.type!r}")
+        if arg_data.get("enum-semantics"):
+            arg.enum_semantics = self._resolve_enum(arg_data["enum-semantics"])
+            if arg.type != LSLType.INTEGER:
+                raise ValueError(f"{arg_name} has enum semantics, but type is {arg.type!r}")
+            if arg.enum_semantics.type not in {
+                LSLEnumType.ENUM,
+                LSLEnumType.FLAG,
+                LSLEnumType.ENUM_FLAG,
+            }:
+                raise ValueError(
+                    f"{arg_name}'s enum has type {arg.enum_semantics.type!r}, not enum or flag"
+                )
+        if arg_data.get("param-semantics"):
+            arg.param_semantics = self._resolve_enum(arg_data["param-semantics"])
+            if arg.type != LSLType.LIST:
+                raise ValueError(f"{arg_name} has param semantics, but type is {arg.type!r}")
+            if arg.param_semantics.type not in {LSLEnumType.PARAM_DICT, LSLEnumType.PARAM_LIST}:
+                raise ValueError(
+                    f"{arg_name}'s param list has type {arg.param_semantics.type!r}, not param"
+                )
+        if (
+            sum(
+                bool(x)
+                for x in [
+                    arg.asset_semantics,
+                    arg.bool_semantics,
+                    arg.index_semantics,
+                    arg.enum_semantics,
+                    arg.param_semantics,
+                ]
             )
+            > 1
+        ):
+            raise ValueError(f"{arg_name} cannot have multiple semantics")
         return arg
 
     def _validate_args(self, obj: Union[LSLEvent, LSLFunction]) -> None:
@@ -785,9 +896,7 @@ class LSLDefinitionParser:
     def _add_enum_member(self, enum_name: str, const: LSLConstant) -> LSLEnumMember:
         if const.type != LSLType.INTEGER:
             raise ValueError("Only integer constants can be enum members")
-        enum: LSLEnum = self._definitions.enums.get(enum_name, None)
-        if enum is None:
-            raise ValueError(f"Unknown enum {enum_name!r}")
+        enum: LSLEnum = self._resolve_enum(enum_name)
         const.member_of.append(enum)
         member = LSLEnumMember(
             name=const.name[len(enum.prefix) :]
