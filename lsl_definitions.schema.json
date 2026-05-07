@@ -161,7 +161,12 @@
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
-                        "type": { "enum": ["enum", "flag"] },
+                        "type": { "enum": ["enum", "flag", "enum+flag", "param-dict", "param-list"] },
+                        "other-values": {
+                            "const": true,
+                            "markdownDescription": "This parameter accepts values outside the defined enum.",
+                            "type": "boolean"
+                        },
                         "prefix": {
                             "type": "string",
                             "pattern": "^[A-Z]+[A-Z_]*$",
@@ -169,6 +174,20 @@
                         },
                         "deprecated": { "$ref": "#/$defs/deprecated" },
                         "slua-deprecated": { "$ref": "#/$defs/deprecated" },
+                        "enum": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "The flag portion of this enum+flag."
+                        },
+                        "flag": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "The flag portion of this enum+flag."
+                        },
+                        "mask": {
+                            "type": "string",
+                            "markdownDescription": "The mask to extract the enum portion of this enum+flag."
+                        },
                         "special-members": {
                             "markdownDescription": "Valid member names whose value violates the validation rules",
                             "type": "array",
@@ -348,6 +367,21 @@
                                                 "markdownDescription": "This function argument's integer value represents a zero-based index.",
                                                 "type": "boolean"
                                             },
+                                            "enum-semantics": {
+                                                "pattern": "^[A-Z][A-Za-z]+$",
+                                                "markdownDescription": "This function argument's integer value represents an enum value.",
+                                                "type": "string"
+                                            },
+                                            "param-semantics": {
+                                                "pattern": "^[A-Z][A-Za-z]+$",
+                                                "markdownDescription": "This function argument's list value represents a parameter list to set.",
+                                                "type": "string"
+                                            },
+                                            "param-get-semantics": {
+                                                "pattern": "^[A-Z][A-Za-z]+$",
+                                                "markdownDescription": "This function argument's list value represents a parameter list to get.",
+                                                "type": "string"
+                                            },
                                             "tooltip": {
                                                 "markdownDescription": "A brief description of this function argument.",
                                                 "type": "string"
@@ -384,6 +418,11 @@
                         "energy": {
                             "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "The script energy consumed by this function."
+                        },
+                        "enum-semantics": {
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "This function's integer return value represents an enum value.",
+                            "type": "string"
                         },
                         "experience": {
                             "const": true,
@@ -423,6 +462,11 @@
                             "const": true,
                             "markdownDescription": "This function must use a native implementation for non-LSO VMs.",
                             "type": "boolean"
+                        },
+                        "param-get-semantics": {
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "This function's list return value represents a list to requested parameter values.",
+                            "type": "string"
                         },
                         "private": {
                             "const": true,
