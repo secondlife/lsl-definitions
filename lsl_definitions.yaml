@@ -7166,7 +7166,7 @@ events:
     - perm:
         tooltip: The bitfield of currently granted permissions (PERMISSION_* flags).
         type: integer
-        enum: ScriptPermission
+        enum-semantics: ScriptPermission
     tooltip: Triggered when an agent grants or denies runtime permissions requested
       by llRequestPermissions. Passes the active integer permissions bitfield
       perm (returns 0 if no permissions are currently granted).
