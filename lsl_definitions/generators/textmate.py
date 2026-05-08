@@ -159,7 +159,7 @@ def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
         LSL_FLOW_CONTROL_REGEX=crunch_regex_strings(["default", "event","print"] + [c for c in definitions.controls.keys()]),
         LSL_TYPES_REGEX=crunch_regex_strings([t for t in definitions.types.keys()]),
         LSL_EVENTS_REGEX=crunch_regex_strings([e for e in definitions.events.keys()]),
-        
+
         LSL_FUNCTIONS_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if not func.private and not func.deprecated and not func.god_mode]),
         LSL_FUNCTIONS_GOD_MODE_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if func.god_mode]),
         LSL_FUNCTIONS_DEPRECATED_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if func.deprecated]),
