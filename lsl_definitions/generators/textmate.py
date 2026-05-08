@@ -75,9 +75,6 @@ class Trie():
 def encode_json_unquoted(s):
     return json.dumps(s)[1:-1]
 
-def get_LSL_constants(definitions: LSLDefinitions, slua: bool = False) -> dict:
-    constants = [f"{c.name}" for c in definitions.constants.values() if (slua and not c.slua_removed) or (not slua)]
-    return crunch_regex_strings(constants)
 
 def crunch_regex_strings(strings: list[str]) -> str:
     trie = Trie()
@@ -89,10 +86,6 @@ def crunch_regex_strings(strings: list[str]) -> str:
 @register("syntax_textmate_slua")
 def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua TextMate Syntax Files."""
-
-    def get_LL_module_functions(definitions: LSLDefinitions) -> dict:
-        functions = [f"{f.name[2:]}" for f in definitions.functions.values() if not f.slua_removed and not f.private and not f.deprecated]
-        return crunch_regex_strings(functions)
 
     def get_slua_global_functions(definitions: SLuaDefinitions) -> dict:
         global_functions = [f"{f.name}" for f in definitions.global_functions if not f.local_only and not f.slua_removed]
@@ -109,7 +102,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         if len(constants) > 0:
             constants = f"(\\.{constants})?"
         return f"{module.name}{constants}"
-
+ 
     def get_slua_global_constants(definitions: SLuaDefinitions) -> str:
         constants = [get_slua_global_constants_for_module(m) for m in definitions.modules]
         constants.sort()
@@ -124,6 +117,10 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         if len(functions) < 1:
             return None
         return f"{module.name}\\.(?:{functions})"
+    
+    def get_LL_constants(slua_definitions: SLuaDefinitions) -> dict:
+        constants = [f"{c.name}" for c in slua_definitions.global_constants]
+        return crunch_regex_strings(constants)
 
     def get_slua_modules(definitions: SLuaDefinitions) -> str:
         modules = [get_slua_module_regex(m) for m in definitions.modules]
@@ -131,13 +128,31 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         modules.sort()
         return "|".join(modules)
 
+    def get_LL_module_functions(definitions: SLuaDefinitions) -> dict:
+        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only]
+        return crunch_regex_strings(functions)
+
+    def get_slua_global_types(definitions: SLuaDefinitions) -> str:
+        missing_types = ["nil","symbol", "userdata"]
+        builtin_types = [t for t in definitions.builtin_types.keys()]
+        base_classes = [f"{b.name}" for b in definitions.base_classes]
+        type_aliases = [f"{t.name}" for t in definitions.type_aliases]
+        return "|".join(missing_types + builtin_types + base_classes + type_aliases)
+
+    def get_slua_metamethods(definitions: SLuaDefinitions) -> str:
+        metamethods = [f"{m[2:]}" for m in definitions.metamethods.keys()]
+        metamethods = "|".join(metamethods)
+        return f"__(?:{metamethods})"
 
     inserts = dict(
         SLUA_GLOBAL_FUNCTIONS_REGEX=get_slua_global_functions(slua_definitions),
         SLUA_GLOBAL_MODULES_REGEX=get_slua_modules(slua_definitions),
         SLUA_GLOBAL_CONSTANTS_REGEX=get_slua_global_constants(slua_definitions),
-        SLUA_GLOBAL_LSL_CONSTANTS_REGEX=get_LSL_constants(definitions, slua=True),
-        SLUA_GLOBAL_LL_MODULE_REGEX=get_LL_module_functions(definitions),
+        SLUA_GLOBAL_LSL_CONSTANTS_REGEX=get_LL_constants(slua_definitions),
+        SLUA_GLOBAL_LL_MODULE_REGEX=get_LL_module_functions(slua_definitions),
+        # nil|string|number|boolean|thread|userdata|symbol|vector|buffer|unknown|never|any
+        SLUA_GLOBAL_TYPES_REGEX=get_slua_global_types(slua_definitions),
+        SLUA_METAMETHODS_REGEX=get_slua_metamethods(slua_definitions),
     )
 
     _base, ext = os.path.splitext(template_path)

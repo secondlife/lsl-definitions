@@ -216,7 +216,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>\b(__add|__call|__concat|__div|__eq|__index|__le|__len|__lt|__metatable|__mod|__mode|__mul|__newindex|__pow|__sub|__tostring|__unm|__iter|__idiv)\b</string>
+            <string>\b($SLUA_METAMETHODS_REGEX)\b</string>
             <key>name</key>
             <string>variable.language.metamethod.luau</string>
           </dict>
@@ -676,7 +676,7 @@
             <key>name</key>
             <string>variable.language.metamethod.luau</string>
             <key>match</key>
-            <string>(?&lt;=[^.]\.|:)\b(__add|__call|__concat|__div|__eq|__index|__le|__len|__lt|__metatable|__mod|__mode|__mul|__newindex|__pow|__sub|__tostring|__unm)\b</string>
+            <string>(?&lt;=[^.]\.|:)\b($SLUA_METAMETHODS_REGEX)\b</string>
           </dict>
           <dict>
             <key>name</key>
@@ -1237,7 +1237,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>\b(nil|string|number|boolean|thread|userdata|symbol|vector|buffer|unknown|never|any)\b</string>
+            <string>\b($SLUA_GLOBAL_TYPES_REGEX)\b</string>
             <key>name</key>
             <string>support.type.primitive.luau</string>
           </dict>

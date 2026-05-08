@@ -327,6 +327,25 @@
                 }
             },
             "type": "object"
+        },
+        "metamethods": {
+            "items": { "$ref": "#/$defs/function" },
+            "additionalProperties": false,
+            "patternProperties": {
+                "^[a-z]*": {
+                    "properties": {
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this type.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
         }
     },
     "required": [
@@ -340,7 +359,8 @@
         "controls",
         "builtin-types",
         "builtin-constants",
-        "builtin-functions"
+        "builtin-functions",
+        "metamethods"
     ],
     "title": "Second Life SLua Definitions",
     "type": "object"

@@ -144,7 +144,7 @@
             ]
           },
           {
-            "match": "\\b(__add|__call|__concat|__div|__eq|__index|__le|__len|__lt|__metatable|__mod|__mode|__mul|__newindex|__pow|__sub|__tostring|__unm|__iter|__idiv)\\b",
+            "match": "\\b($SLUA_METAMETHODS_REGEX)\\b",
             "name": "variable.language.metamethod.luau"
           },
           {
@@ -384,7 +384,7 @@
         "patterns": [
           {
             "name": "support.function.luau",
-            "match": "(?<![^.]\\.|:)\\b(assert|error|gcinfo|getmetatable|ipairs|newproxy|next|pairs|pcall|print|rawequal|rawset|require|select|setmetatable|tonumber|tostring|type|typeof|unpack|xpcall|$SLUA_GLOBAL_FUNCTIONS_REGEX)\\b"
+            "match": "(?<![^.]\\.|:)\\b($SLUA_GLOBAL_FUNCTIONS_REGEX)\\b"
           },
           {
             "name": "constant.language.luau",
@@ -436,7 +436,7 @@
           },
           {
             "name": "variable.language.metamethod.luau",
-            "match": "(?<=[^.]\\.|:)\\b(__add|__call|__concat|__div|__eq|__index|__le|__len|__lt|__metatable|__mod|__mode|__mul|__newindex|__pow|__sub|__tostring|__unm)\\b"
+            "match": "(?<=[^.]\\.|:)\\b($SLUA_METAMETHODS_REGEX)\\b"
           },
           {
             "name": "keyword.other.unit.luau",
@@ -803,7 +803,7 @@
             "name": "constant.language.boolean.true.luau"
           },
           {
-            "match": "\\b(nil|string|number|boolean|thread|userdata|symbol|vector|buffer|unknown|never|any)\\b",
+            "match": "\\b($SLUA_GLOBAL_TYPES_REGEX)\\b",
             "name": "support.type.primitive.luau"
           },
           {
