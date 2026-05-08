@@ -3,7 +3,7 @@
 set -ex
 
 outdir="${1:-generated}"
-mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/experimental"
+mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/experimental" "$outdir/syntax"
 
 DEFS="./lsl_definitions.yaml"
 SLUA="./slua_definitions.yaml"
