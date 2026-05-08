@@ -579,7 +579,7 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
         return ToArrayListNoCopy(llDetectedDamageInternal(Number));
     }
     """
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         template = f.read()
 
     new_defs = ""
@@ -736,24 +736,24 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions) -> str:
 
     binding_file_code = """
 extern "C"
-{
+{{
 #include <mono/metadata/metadata.h>
 #include <mono/metadata/object.h>
 #include <mono/jit/jit.h>
-}
+}}
 
 #include "llscriptexecutemono.h"
 #include "llmonointerfacehelpers.h"
 
 typedef void (*PtrType)();
 
-%s
+{}
 
 void mono_internal_call_init_generated()
-{
-%s
-}
-""" % (functions, binding_calls)
+{{
+{}
+}}
+""".format(functions, binding_calls)
     return binding_file_code
 
 

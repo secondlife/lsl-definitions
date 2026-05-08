@@ -28,14 +28,16 @@ _LEXER_BLACKLIST = {
 @register("gen_lexer_file")
 def gen_lexer_file(definitions: LSLDefinitions, template_path: str) -> str:
     """Generate lexer bits for indra.in.l"""
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         lexer_template = f.read()
 
     generated_events = ""
     for event in definitions.events.values():
         if event.name in _LEXER_BLACKLIST:
             continue
-        generated_events += '"%s" { count(); return(%s); }\n' % (event.name, event.name.upper())
+        generated_events += '"{}" {{ count(); return({}); }}\n'.format(
+            event.name, event.name.upper()
+        )
     lexer_template = splice_str(lexer_template, _LEXER_EVENT_COMMENT, generated_events)
 
     generated_constants = ""
@@ -109,7 +111,7 @@ def _event_to_class_name(event: LSLEvent) -> str:
 @register("gen_parser_file")
 def gen_parser_file(definitions: LSLDefinitions, template_path: str) -> str:
     """Generate parser bits for indra.in.y"""
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         parser_template: str = f.read()
 
     generated_event_tokens = ""

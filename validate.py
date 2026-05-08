@@ -1,5 +1,4 @@
 #!/bin/env python3
-# coding: utf-8
 
 
 import json
@@ -10,9 +9,9 @@ import yaml
 
 
 def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
-    with open(schema_filename, "r", encoding="utf-8") as schema_file:
+    with open(schema_filename, encoding="utf-8") as schema_file:
         schemadata = json.load(schema_file)
-    with open(yaml_filename, "r", encoding="utf-8") as yaml_file:
+    with open(yaml_filename, encoding="utf-8") as yaml_file:
         yamldata = yaml.safe_load(yaml_file)
 
     try:
