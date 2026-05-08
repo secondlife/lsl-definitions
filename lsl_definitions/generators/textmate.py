@@ -2,7 +2,7 @@ from __future__ import annotations
 from asyncio import constants
 
 from lsl_definitions.lsl import LSLDefinitions, LSLType
-from lsl_definitions.slua import SLuaDefinitions, SLuaModule
+from lsl_definitions.slua import SLuaDefinitions, SLuaModule, SLuaProperty, SLuaClassDeclaration
 from lsl_definitions.generators.base import register
 
 from string import Template
@@ -87,6 +87,16 @@ def crunch_regex_strings(strings: list[str]) -> str:
 def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua TextMate Syntax Files."""
 
+    quaternion_module = slua_definitions.get_module("quaternion")
+    rotation_module = SLuaModule(
+        name="rotation",
+        comment=quaternion_module.comment,
+        callable=quaternion_module.callable,
+        constants=quaternion_module.constants,
+        functions=quaternion_module.functions,
+    )
+    slua_definitions.modules.append(rotation_module)
+
     def get_slua_global_functions(definitions: SLuaDefinitions) -> dict:
         global_functions = [f"{f.name}" for f in definitions.global_functions if not f.local_only and not f.slua_removed]
         builtin_functions = [f"{f.name}" for f in definitions.builtin_functions if not f.local_only and not f.slua_removed]
@@ -144,6 +154,33 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         metamethods = "|".join(metamethods)
         return f"__(?:{metamethods})"
 
+
+    def get_LL_variable_functions_for_variable(variable: SLuaProperty, definitions: SLuaDefinitions) -> str:
+        clss = definitions.get_class(variable.type)
+        if clss is None:
+            return []
+        return [f"{variable.name}:{m.name}" for m in clss.methods if not m.private and not m.local_only]
+
+    def get_LL_variable_functions(definitions: SLuaDefinitions) -> str:
+        functions = [];
+        for v in definitions.global_variables:
+            functions.extend(get_LL_variable_functions_for_variable(v, slua_definitions))
+        functions.sort()
+        return crunch_regex_strings(functions)
+
+    def get_LL_variables_for_variable(variable: SLuaProperty, definitions: SLuaDefinitions) -> str:
+        clss = definitions.get_class(variable.type)
+        if clss is None:
+            return []
+        return [f"{variable.name}.{p.name}" for p in clss.properties if not p.private]
+
+    def get_LL_variables(definitions: SLuaDefinitions) -> str:
+        variables = []
+        for v in definitions.global_variables:
+            variables.extend(get_LL_variables_for_variable(v, definitions))
+        variables.sort()
+        return crunch_regex_strings(variables)
+
     inserts = dict(
         SLUA_GLOBAL_FUNCTIONS_REGEX=get_slua_global_functions(slua_definitions),
         SLUA_GLOBAL_MODULES_REGEX=get_slua_modules(slua_definitions),
@@ -153,6 +190,8 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         # nil|string|number|boolean|thread|userdata|symbol|vector|buffer|unknown|never|any
         SLUA_GLOBAL_TYPES_REGEX=get_slua_global_types(slua_definitions),
         SLUA_METAMETHODS_REGEX=get_slua_metamethods(slua_definitions),
+        SLUA_GLOBAL_LL_VARIABLE_FUNCTIONS_REGEX=get_LL_variable_functions(slua_definitions),
+        SLUA_GLOBAL_LL_VARIABLES_REGEX=get_LL_variables(slua_definitions),
     )
 
     _base, ext = os.path.splitext(template_path)

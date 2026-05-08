@@ -337,7 +337,16 @@ class SLuaDefinitions:
     )
 
     def get_module(self, name: str) -> SLuaModule:
-        return next(m for m in self.modules if m.name == name)
+        for m in self.modules:
+            if m.name == name:
+                return m
+        return None
+    
+    def get_class(self, name: str) -> Optional[SLuaClassDeclaration]:
+        for c in self.classes:
+            if c.name == name:
+                return c
+        return None
 
     def validate_type(self, type_str: str, known_type_names: Set[str] | None = None) -> str:
         """Validate that a type string only references known types."""

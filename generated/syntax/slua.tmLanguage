@@ -586,7 +586,7 @@
             <key>name</key>
             <string>support.function.luau</string>
             <key>match</key>
-            <string>(?&lt;![^.]\.|:)\b(assert|dangerouslyexecuterequiredmodule|error|gcinfo|getmetatable|ipairs|newproxy|next|pairs|pcall|print|quaternion|rawequal|rawget|rawlen|rawset|require|select|setmetatable|tonumber|toquaternion|torotation|tostring|touuid|tovector|type|typeof|unpack|uuid|vector|xpcall)\b</string>
+            <string>(?&lt;![^.]\.|:)\b(assert|dangerouslyexecuterequiredmodule|error|gcinfo|getmetatable|ipairs|newproxy|next|pairs|pcall|print|quaternion|rawequal|rawget|rawlen|rawset|require|rotation|select|setmetatable|tonumber|toquaternion|torotation|tostring|touuid|tovector|type|typeof|unpack|uuid|vector|xpcall)\b</string>
           </dict>
           <dict>
             <key>name</key>
@@ -598,7 +598,7 @@
             <key>name</key>
             <string>support.function.luau</string>
             <key>match</key>
-            <string>(?&lt;![^.]\.|:)\b(bit32\.(?:arshift|band|bnot|bor|btest|bxor|byteswap|countlz|countrz|extract|lrotate|lshift|replace|rrotate|rshift|s32|smul)|buffer\.(?:copy|create|fill|fromstring|len|readbits|readf32|readf64|readi16|readi32|readi8|readstring|readu16|readu32|readu8|tostring|writebits|writef32|writef64|writei16|writei32|writei8|writestring|writeu16|writeu32|writeu8)|coroutine\.(?:close|create|isyieldable|resume|running|status|wrap|yield)|debug\.(?:info|traceback)|llbase64\.(?:decode|encode)|lljson\.(?:decode|encode|sldecode|slencode)|math\.(?:abs|acos|asin|atan|atan2|ceil|clamp|cos|cosh|deg|exp|floor|fmod|frexp|isfinite|isinf|isnan|ldexp|lerp|log|log10|map|max|min|modf|noise|pow|rad|random|randomseed|round|sign|sin|sinh|sqrt|tan|tanh)|os\.(?:clock|date|difftime|time)|quaternion\.(?:conjugate|create|dot|magnitude|normalize|slerp|tofwd|toleft|toup)|string\.(?:byte|char|find|format|gmatch|gsub|len|lower|match|pack|packsize|rep|reverse|split|sub|unpack|upper)|table\.(?:append|clear|clone|concat|create|extend|find|foreach|foreachi|freeze|getn|insert|isfrozen|maxn|move|pack|remove|shrink|sort|unpack)|utf8\.(?:char|codepoint|codes|len|offset)|uuid\.(?:create)|vector\.(?:abs|angle|ceil|clamp|create|cross|dot|floor|lerp|magnitude|max|min|normalize|sign))\b</string>
+            <string>(?&lt;![^.]\.|:)\b(bit32\.(?:arshift|band|bnot|bor|btest|bxor|byteswap|countlz|countrz|extract|lrotate|lshift|replace|rrotate|rshift|s32|smul)|buffer\.(?:copy|create|fill|fromstring|len|readbits|readf32|readf64|readi16|readi32|readi8|readstring|readu16|readu32|readu8|tostring|writebits|writef32|writef64|writei16|writei32|writei8|writestring|writeu16|writeu32|writeu8)|coroutine\.(?:close|create|isyieldable|resume|running|status|wrap|yield)|debug\.(?:info|traceback)|llbase64\.(?:decode|encode)|lljson\.(?:decode|encode|sldecode|slencode)|math\.(?:abs|acos|asin|atan|atan2|ceil|clamp|cos|cosh|deg|exp|floor|fmod|frexp|isfinite|isinf|isnan|ldexp|lerp|log|log10|map|max|min|modf|noise|pow|rad|random|randomseed|round|sign|sin|sinh|sqrt|tan|tanh)|os\.(?:clock|date|difftime|time)|quaternion\.(?:conjugate|create|dot|magnitude|normalize|slerp|tofwd|toleft|toup)|rotation\.(?:conjugate|create|dot|magnitude|normalize|slerp|tofwd|toleft|toup)|string\.(?:byte|char|find|format|gmatch|gsub|len|lower|match|pack|packsize|rep|reverse|split|sub|unpack|upper)|table\.(?:append|clear|clone|concat|create|extend|find|foreach|foreachi|freeze|getn|insert|isfrozen|maxn|move|pack|remove|shrink|sort|unpack)|utf8\.(?:char|codepoint|codes|len|offset)|uuid\.(?:create)|vector\.(?:abs|angle|ceil|clamp|create|cross|dot|floor|lerp|magnitude|max|min|normalize|sign))\b</string>
           </dict>
           <dict>
             <key>name</key>
@@ -608,9 +608,21 @@
           </dict>
           <dict>
             <key>name</key>
+            <string>support.function.luau</string>
+            <key>match</key>
+            <string>(?&lt;![^.]\.|:)\b(LL(?:Events:(?:eventNames|handlers|o(?:ff|n(?:ce)?))|Timers:(?:every|o(?:ff|nce))))\b</string>
+          </dict>
+          <dict>
+            <key>name</key>
             <string>support.constant.luau</string>
             <key>match</key>
-            <string>(?&lt;![^.]\.|:)\bbit32|buffer|coroutine|debug|ll|llbase64|llcompat|lljson(\.array_mt|empty_array|empty_object|null|object_mt|remove)?|llprim(\.ParamsSetter)?|math(\.huge|pi)?|os|quaternion(\.identity)?|string|table|utf8(\.charpattern)?|uuid|vector(\.one|zero)?\b</string>
+            <string>(?&lt;![^.]\.|:)\bbit32|buffer|coroutine|debug|ll|llbase64|llcompat|lljson(\.array_mt|empty_array|empty_object|null|object_mt|remove)?|llprim(\.ParamsSetter)?|math(\.huge|pi)?|os|quaternion(\.identity)?|rotation(\.identity)?|string|table|utf8(\.charpattern)?|uuid|vector(\.one|zero)?\b</string>
+          </dict>
+          <dict>
+            <key>name</key>
+            <string>support.constant.luau</string>
+            <key>match</key>
+            <string>(?&lt;![^.]\.|:)\b(LLEvents\.(?:at(?:_(?:rot_target|target)|tach)|c(?:hanged|o(?:llision(?:_(?:end|start))?|ntrol))|dataserver|e(?:mail|xperience_permissions(?:_denied)?)|final_damage|game_control|http_re(?:quest|sponse)|l(?:and_collision(?:_(?:end|start))?|i(?:nk(?:_message|set_data)|sten))|mo(?:ney|ving_(?:end|start))|no(?:_sensor|t_at_(?:rot_target|target))|o(?:bject_rez|n_(?:d(?:amage|eath)|rez))|path_update|r(?:emote_data|un_time_permissions)|sensor|t(?:imer|ouch(?:_(?:end|start))?|ransaction_result)))\b</string>
           </dict>
           <dict>
             <key>name</key>
