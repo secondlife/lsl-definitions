@@ -259,7 +259,7 @@ class SLuaModule:
     """Module declaration with constants and functions"""
 
     name: str
-    callable: Optional[SLuaFunction] = None
+    callable: Optional[SLuaFunction]
     constants: List[SLuaProperty]
     functions: List[SLuaFunction]
     comment: str = ""
