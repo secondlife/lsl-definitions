@@ -331,10 +331,10 @@
         "metamethods": {
             "additionalProperties": false,
             "patternProperties": {
-                "^[a-z]*": {
+                "^__[a-z]*": {
                     "properties": {
                         "tooltip": {
-                            "markdownDescription": "A brief description of this type.",
+                            "markdownDescription": "A brief description of this metamethod.",
                             "type": "string"
                         }
                     },
