@@ -329,7 +329,6 @@
             "type": "object"
         },
         "metamethods": {
-            "items": { "$ref": "#/$defs/function" },
             "additionalProperties": false,
             "patternProperties": {
                 "^[a-z]*": {
