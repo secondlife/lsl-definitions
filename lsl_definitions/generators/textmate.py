@@ -102,7 +102,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         if len(constants) > 0:
             constants = f"(\\.{constants})?"
         return f"{module.name}{constants}"
- 
+
     def get_slua_global_constants(definitions: SLuaDefinitions) -> str:
         constants = [get_slua_global_constants_for_module(m) for m in definitions.modules]
         constants.sort()
@@ -117,7 +117,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         if len(functions) < 1:
             return None
         return f"{module.name}\\.(?:{functions})"
-    
+
     def get_LL_constants(slua_definitions: SLuaDefinitions) -> dict:
         constants = [f"{c.name}" for c in slua_definitions.global_constants]
         return crunch_regex_strings(constants)
