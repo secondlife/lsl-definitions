@@ -2848,7 +2848,7 @@ metamethods:
   __eq:
     tooltip: "Overload method for == operator."
   __index:
-    tooltip: "Method called when table is indexed."
+    tooltip: "Method or table called when table is indexed."
   __le:
     tooltip: "Overload method for <= operator."
   __len:
