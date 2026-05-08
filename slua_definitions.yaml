@@ -2880,4 +2880,4 @@ metamethods:
   __tojson:
     tooltip: "Called by lljson encode and slencode to encode the value as JSON."
   __jsonhint:
-    tooltip: 'String property used by lljson.encode. Must be one of "array" or "object"."
+    tooltip: 'String property used by lljson.encode. Must be one of "array" or "object".'
