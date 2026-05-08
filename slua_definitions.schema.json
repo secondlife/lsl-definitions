@@ -210,6 +210,10 @@
                     "items": { "$ref": "#/$defs/property" },
                     "type": "array"
                 },
+                "functions": {
+                    "items": { "$ref": "#/$defs/function" },
+                    "type": "array"
+                },
                 "methods": {
                     "items": { "$ref": "#/$defs/function" },
                     "type": "array"

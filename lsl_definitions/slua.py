@@ -209,6 +209,7 @@ class SLuaClassDeclaration:
 
     name: str
     properties: List[SLuaProperty]
+    functions: List[SLuaFunction]
     methods: List[SLuaFunction]
     comment: str = ""
     instance_type: str | None = None
@@ -228,6 +229,8 @@ class SLuaClassDeclaration:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()}\n")
+        for func in self.functions:
+            func.write_luau_global_def(f, indent=1)
         for func in self.methods:
             func.write_luau_global_def(f, indent=1)
         f.write("end\n\n")
@@ -239,6 +242,8 @@ class SLuaClassDeclaration:
         f.write(f"  __index: {mt_name},\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()},\n")
+        for func in self.functions:
+            func.write_luau_table_def(f, indent=1)
         for func in self.methods:
             func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")
@@ -705,6 +710,7 @@ class SLuaDefinitionParser:
             export=data.get("export", False),
             comment=data.get("comment", ""),
             properties=[],
+            functions=[],
             methods=[],
         )
         try:
@@ -716,6 +722,9 @@ class SLuaDefinitionParser:
             class_scope: Set[str] = set()
             class_.properties = [
                 self._validate_property(prop, class_scope) for prop in data.get("properties", [])
+            ]
+            class_.functions = [
+                self._validate_function(method, class_scope) for method in data.get("functions", [])
             ]
             class_.methods = [
                 self._validate_function(method, class_scope, class_name=class_.name)

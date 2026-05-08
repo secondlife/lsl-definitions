@@ -15961,6 +15961,5 @@ structs:
       - type: string
       - type: number
     new:
-      property: read-only
-      type: function
+      args: []
       description: Create an empty list with PrimParamsSetterTypeMeta as metatable

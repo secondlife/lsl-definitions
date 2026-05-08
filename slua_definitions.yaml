@@ -322,6 +322,11 @@ classes:
   comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   instance-type: '{any}'
   export: true
+  functions:
+  - name: new
+    comment: Create an empty list with PrimParamsSetterTypeMeta as metatable
+    parameters: []
+    return-type: PrimParamsSetterType
   methods: # This class is currently populated dynamically
   - name: apply
     comment: Call ll.SetLinkPrimitiveParamsFast with my instance list
@@ -331,10 +336,6 @@ classes:
     - name: link
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
-  properties:
-  - name: new
-    comment: Create an empty list with PrimParamsSetterTypeMeta as metatable
-    type: () -> PrimParamsSetterType
 global-variables:
 - name: rotation
   comment: rotation is an alias for quaternion.
