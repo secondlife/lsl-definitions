@@ -19,6 +19,13 @@ $CMD $DEFS slua_lsp_docs $SLUA "$outdir/secondlife.docs.json"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
 $CMD $DEFS slua_selene $SLUA "$outdir/secondlife_selene.yml"
 
+# Syntax highlighting
+$CMD $DEFS syntax_textmate_slua ./templates/syntax/slua.tmLanguage $SLUA "$outdir/syntax/slua.tmLanguage"
+$CMD $DEFS syntax_textmate_slua ./templates/syntax/slua.tmLanguage.json $SLUA "$outdir/syntax/slua.tmLanguage.json"
+
+$CMD $DEFS syntax_textmate_lsl ./templates/syntax/lsl.tmLanguage "$outdir/syntax/lsl.tmLanguage"
+$CMD $DEFS syntax_textmate_lsl ./templates/syntax/lsl.tmLanguage.json "$outdir/syntax/lsl.tmLanguage.json"
+
 # C++ snippets
 $CMD $DEFS gen_cpp_constants "$outdir/cpp/lllslconstants_generated.h"
 $CMD $DEFS gen_lscript_library_defs "$outdir/cpp/lscript_library_defs.cpp"
