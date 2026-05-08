@@ -5,7 +5,7 @@ from __future__ import annotations
 import abc
 import dataclasses
 import re
-from typing import TYPE_CHECKING, Any, List, Set, TextIO
+from typing import TYPE_CHECKING, Any, List, Optional, Set, TextIO
 
 import llsd
 import yaml
@@ -54,7 +54,7 @@ class SLuaParameter:
     """
 
     name: str
-    type: str | None = None
+    type: Optional[str] = None
     selene_type: Any = None
     """a custom Selene type for this parameter, in case auto-detection fails"""
     comment: str = ""
@@ -212,7 +212,7 @@ class SLuaClassDeclaration:
     functions: List[SLuaFunction]
     methods: List[SLuaFunction]
     comment: str = ""
-    instance_type: str | None = None
+    instance_type: Optional[str] = None
     export: bool = False
     """Only meaningful when `instance_type` is set."""
 
@@ -259,7 +259,7 @@ class SLuaModule:
     """Module declaration with constants and functions"""
 
     name: str
-    callable: SLuaFunction | None
+    callable: Optional[SLuaFunction] = None
     constants: List[SLuaProperty]
     functions: List[SLuaFunction]
     comment: str = ""
