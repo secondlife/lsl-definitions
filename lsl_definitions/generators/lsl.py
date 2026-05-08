@@ -26,7 +26,7 @@ def gen_constant_lsl_script(definitions: LSLDefinitions) -> str:
         event_handlers += f"{event.name}("
         event_handlers += ", ".join(f"{str(x.type)} _{i}" for i, x in enumerate(event.arguments))
         event_handlers += "){}\n"
-    return "list l = [%s];\ndefault{\n%s\n}" % (joined_names, event_handlers)
+    return f"list l = [{joined_names}];\ndefault{{\n{event_handlers}\n}}"
 
 
 @register("gen_func_call_scripts")
