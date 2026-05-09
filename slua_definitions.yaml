@@ -1899,6 +1899,7 @@ modules:
       default-value: 0
     return-type: number
     must-use: true
+    checked: true
   - name: pow
     comment: Returns base to the power of exponent.
     parameters:
@@ -1935,6 +1936,7 @@ modules:
       default-value: nil
     return-type: number
     must-use: true
+    checked: true
     variants:
       - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
         parameters: []
@@ -1963,6 +1965,7 @@ modules:
     return-type: ()
     deprecated:
       reason: Disabled in SLua.
+    checked: true
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
