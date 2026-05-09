@@ -238,7 +238,7 @@ declare getfenv: nil
 declare function getmetatable(obj: any): {[any]: any}?
 declare function ipairs<V>(t: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
-declare function newproxy(mt: boolean?): any
+declare @checked function newproxy(mt: boolean?): any
 declare function next<K, V>(t: {[K]: V}, i: K?): (K, V)?
 declare function pairs<K, V>(t: {[K]: V}): (({[K], V}, K) -> (K?, V), {[K], V}, K)
 declare function pcall<A..., R...>(f: (A...) -> R..., A...): (boolean, R...)
@@ -247,7 +247,7 @@ declare function rawequal(a: any, b: any): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?
 declare function rawlen<K, V>(t: {[K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
-declare function require(target: string): any -- magic type
+declare @checked function require(target: string): any -- magic type
 declare function select(i: string | number, ...any): any -- magic type
 declare setfenv: nil
 declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): () -- magic type
@@ -267,23 +267,23 @@ declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., e: (E) -> R2.
 ---------------------------
 
 declare bit32: {
-  arshift: (n: number, i: number) -> number,
-  band: (...number) -> number,
-  bnot: (n: number) -> number,
-  bor: (...number) -> number,
-  bxor: (...number) -> number,
-  btest: (...number) -> boolean,
-  extract: (n: number, field: number, width: number?) -> number,
-  lrotate: (n: number, i: number) -> number,
-  lshift: (n: number, i: number) -> number,
-  replace: (n: number, v: number, field: number, width: number?) -> number,
-  rrotate: (n: number, i: number) -> number,
-  rshift: (n: number, i: number) -> number,
+  arshift: @checked (n: number, i: number) -> number,
+  band: @checked (...number) -> number,
+  bnot: @checked (n: number) -> number,
+  bor: @checked (...number) -> number,
+  bxor: @checked (...number) -> number,
+  btest: @checked (...number) -> boolean,
+  extract: @checked (n: number, field: number, width: number?) -> number,
+  lrotate: @checked (n: number, i: number) -> number,
+  lshift: @checked (n: number, i: number) -> number,
+  replace: @checked (n: number, v: number, field: number, width: number?) -> number,
+  rrotate: @checked (n: number, i: number) -> number,
+  rshift: @checked (n: number, i: number) -> number,
   s32: (n: number) -> number,
   smul: (a: number, b: number) -> number,
-  countlz: (n: number) -> number,
-  countrz: (n: number) -> number,
-  byteswap: (n: number) -> number,
+  countlz: @checked (n: number) -> number,
+  countrz: @checked (n: number) -> number,
+  byteswap: @checked (n: number) -> number,
 }
 
 
@@ -292,32 +292,32 @@ declare bit32: {
 ---------------------------
 
 declare buffer: {
-  create: (size: number) -> buffer,
-  fromstring: (str: string) -> buffer,
-  tostring: (b: buffer) -> string,
-  readi8: (b: buffer, offset: number) -> number,
-  readu8: (b: buffer, offset: number) -> number,
-  readi16: (b: buffer, offset: number) -> number,
-  readu16: (b: buffer, offset: number) -> number,
-  readi32: (b: buffer, offset: number) -> number,
-  readu32: (b: buffer, offset: number) -> number,
-  readf32: (b: buffer, offset: number) -> number,
-  readf64: (b: buffer, offset: number) -> number,
-  writei8: (b: buffer, offset: number, value: number) -> (),
-  writeu8: (b: buffer, offset: number, value: number) -> (),
-  writei16: (b: buffer, offset: number, value: number) -> (),
-  writeu16: (b: buffer, offset: number, value: number) -> (),
-  writei32: (b: buffer, offset: number, value: number) -> (),
-  writeu32: (b: buffer, offset: number, value: number) -> (),
-  writef32: (b: buffer, offset: number, value: number) -> (),
-  writef64: (b: buffer, offset: number, value: number) -> (),
-  readstring: (b: buffer, offset: number, count: number) -> string,
-  writestring: (b: buffer, offset: number, value: string, count: number?) -> (),
-  len: (b: buffer) -> number,
-  copy: (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
-  fill: (b: buffer, offset: number, value: number, count: number?) -> (),
-  readbits: (b: buffer, bitOffset: number, bitCount: number) -> number,
-  writebits: (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
+  create: @checked (size: number) -> buffer,
+  fromstring: @checked (str: string) -> buffer,
+  tostring: @checked (b: buffer) -> string,
+  readi8: @checked (b: buffer, offset: number) -> number,
+  readu8: @checked (b: buffer, offset: number) -> number,
+  readi16: @checked (b: buffer, offset: number) -> number,
+  readu16: @checked (b: buffer, offset: number) -> number,
+  readi32: @checked (b: buffer, offset: number) -> number,
+  readu32: @checked (b: buffer, offset: number) -> number,
+  readf32: @checked (b: buffer, offset: number) -> number,
+  readf64: @checked (b: buffer, offset: number) -> number,
+  writei8: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu8: @checked (b: buffer, offset: number, value: number) -> (),
+  writei16: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu16: @checked (b: buffer, offset: number, value: number) -> (),
+  writei32: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef64: @checked (b: buffer, offset: number, value: number) -> (),
+  readstring: @checked (b: buffer, offset: number, count: number) -> string,
+  writestring: @checked (b: buffer, offset: number, value: string, count: number?) -> (),
+  len: @checked (b: buffer) -> number,
+  copy: @checked (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
+  fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
+  readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
+  writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
 }
 
 
@@ -329,11 +329,11 @@ declare coroutine: {
   create: (f: (...any) -> ...any) -> thread,
   resume: (co: thread, ...any) -> (boolean, ...any),
   running: () -> thread?,
-  status: (co: thread) -> "running" | "suspended" | "normal" | "dead",
+  status: @checked (co: thread) -> "running" | "suspended" | "normal" | "dead",
   wrap: (f: (...any) -> ...any) -> (...any) -> ...any,
   yield: (...any) -> ...any,
   isyieldable: () -> boolean,
-  close: (co: thread) -> (boolean, string?),
+  close: @checked (co: thread) -> (boolean, string?),
 }
 
 
@@ -395,43 +395,43 @@ declare llprim: {
 declare math: {
   pi: number,
   huge: number,
-  abs: (n: number) -> number,
-  acos: (n: number) -> number,
-  asin: (n: number) -> number,
-  atan: (n: number) -> number,
-  atan2: (y: number, x: number) -> number,
-  ceil: (n: number) -> number,
-  clamp: (n: number, min: number, max: number) -> number,
-  cos: (n: number) -> number,
-  cosh: (n: number) -> number,
-  deg: (n: number) -> number,
-  exp: (n: number) -> number,
-  floor: (n: number) -> number,
-  fmod: (x: number, y: number) -> number,
-  frexp: (n: number) -> (number, number),
-  ldexp: (s: number, e: number) -> number,
-  lerp: (a: number, b: number, t: number) -> number,
-  log: (n: number, base: number?) -> number,
-  log10: (n: number) -> number,
+  abs: @checked (n: number) -> number,
+  acos: @checked (n: number) -> number,
+  asin: @checked (n: number) -> number,
+  atan: @checked (n: number) -> number,
+  atan2: @checked (y: number, x: number) -> number,
+  ceil: @checked (n: number) -> number,
+  clamp: @checked (n: number, min: number, max: number) -> number,
+  cos: @checked (n: number) -> number,
+  cosh: @checked (n: number) -> number,
+  deg: @checked (n: number) -> number,
+  exp: @checked (n: number) -> number,
+  floor: @checked (n: number) -> number,
+  fmod: @checked (x: number, y: number) -> number,
+  frexp: @checked (n: number) -> (number, number),
+  ldexp: @checked (s: number, e: number) -> number,
+  lerp: @checked (a: number, b: number, t: number) -> number,
+  log: @checked (n: number, base: number?) -> number,
+  log10: @checked (n: number) -> number,
   map: (n: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
-  max: (n: number, ...number) -> number,
-  min: (n: number, ...number) -> number,
-  modf: (n: number) -> (number, number),
+  max: @checked (n: number, ...number) -> number,
+  min: @checked (n: number, ...number) -> number,
+  modf: @checked (n: number) -> (number, number),
   noise: (x: number, y: number?, z: number?) -> number,
-  pow: (base: number, exponent: number) -> number,
-  rad: (n: number) -> number,
+  pow: @checked (base: number, exponent: number) -> number,
+  rad: @checked (n: number) -> number,
   random: (min: number?, max: number?) -> number,
   randomseed: @[deprecated {reason='Disabled in SLua.'}](seed: number) -> (),
-  round: (n: number) -> number,
-  sign: (n: number) -> number,
-  sin: (n: number) -> number,
-  sinh: (n: number) -> number,
-  sqrt: (n: number) -> number,
-  tan: (n: number) -> number,
-  tanh: (n: number) -> number,
-  isnan: (n: number) -> boolean,
-  isinf: (n: number) -> boolean,
-  isfinite: (n: number) -> boolean,
+  round: @checked (n: number) -> number,
+  sign: @checked (n: number) -> number,
+  sin: @checked (n: number) -> number,
+  sinh: @checked (n: number) -> number,
+  sqrt: @checked (n: number) -> number,
+  tan: @checked (n: number) -> number,
+  tanh: @checked (n: number) -> number,
+  isnan: @checked (n: number) -> boolean,
+  isinf: @checked (n: number) -> boolean,
+  isfinite: @checked (n: number) -> boolean,
 }
 
 
@@ -527,11 +527,11 @@ declare table: {
 
 declare utf8: {
   charpattern: string,
-  char: (...number) -> string,
-  codes: (s: string) -> ((string, number) -> (number, number), string, number),
-  codepoint: (s: string, i: number?, j: number?) -> ...number,
-  len: (s: string, i: number?, j: number?) -> (number?, number?),
-  offset: (s: string, n: number, i: number?) -> number?,
+  char: @checked (...number) -> string,
+  codes: @checked (s: string) -> ((string, number) -> (number, number), string, number),
+  codepoint: @checked (s: string, i: number?, j: number?) -> ...number,
+  len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
+  offset: @checked (s: string, n: number, i: number?) -> number?,
 }
 
 
@@ -551,20 +551,20 @@ declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
 declare vector: ((x: number, y: number, z: number?) -> vector) & {
   zero: vector,
   one: vector,
-  create: (x: number, y: number, z: number?) -> vector,
-  magnitude: (v: vector) -> number,
-  normalize: (v: vector) -> vector,
-  cross: (a: vector, b: vector) -> vector,
-  dot: (a: vector, b: vector) -> number,
-  angle: (a: vector, b: vector, axis: vector?) -> number,
-  floor: (v: vector) -> vector,
-  ceil: (v: vector) -> vector,
-  abs: (v: vector) -> vector,
-  sign: (v: vector) -> vector,
-  clamp: (v: vector, min: vector, max: vector) -> vector,
-  max: (v: vector, ...vector) -> vector,
-  min: (v: vector, ...vector) -> vector,
-  lerp: (a: vector, b: vector, t: number) -> vector,
+  create: @checked (x: number, y: number, z: number?) -> vector,
+  magnitude: @checked (v: vector) -> number,
+  normalize: @checked (v: vector) -> vector,
+  cross: @checked (a: vector, b: vector) -> vector,
+  dot: @checked (a: vector, b: vector) -> number,
+  angle: @checked (a: vector, b: vector, axis: vector?) -> number,
+  floor: @checked (v: vector) -> vector,
+  ceil: @checked (v: vector) -> vector,
+  abs: @checked (v: vector) -> vector,
+  sign: @checked (v: vector) -> vector,
+  clamp: @checked (v: vector, min: vector, max: vector) -> vector,
+  max: @checked (v: vector, ...vector) -> vector,
+  min: @checked (v: vector, ...vector) -> vector,
+  lerp: @checked (a: vector, b: vector, t: number) -> vector,
 }
 
 declare rotation: typeof(quaternion)

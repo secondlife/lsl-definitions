@@ -760,6 +760,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
+    checked: true
   - name: lrotate
     comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
@@ -1151,6 +1152,7 @@ modules:
       type: number
     return-type: string
     must-use: true
+    checked: true
   - name: writestring
     comment: Writes data from a string into the buffer at the specified offset.
     parameters:
@@ -1168,6 +1170,7 @@ modules:
       comment: Number of bytes to write (optional).
       type: number?
     return-type: ()
+    checked: true
   - name: len
     comment: Returns the size of the buffer in bytes.
     parameters:
@@ -1176,6 +1179,7 @@ modules:
       type: buffer
     return-type: number
     must-use: true
+    checked: true
   - name: copy
     comment: Copies bytes from the source buffer into the target buffer.
     parameters:
@@ -1196,6 +1200,7 @@ modules:
       comment: Number of bytes to copy (optional).
       type: number?
     return-type: ()
+    checked: true
   - name: fill
     comment: Fills the buffer with the specified value starting at the given offset.
     parameters:
@@ -1213,6 +1218,7 @@ modules:
       comment: Number of bytes to fill (optional).
       type: number?
     return-type: ()
+    checked: true
   - name: readbits
     comment: Reads up to 32 bits from the buffer at the given offset.
     parameters:
@@ -1227,6 +1233,7 @@ modules:
       type: number
     return-type: number
     must-use: true
+    checked: true
   - name: writebits
     comment: Writes up to 32 bits to the buffer at the given offset.
     parameters:
@@ -1244,6 +1251,7 @@ modules:
       comment: Source of bits to write.
       type: number
     return-type: ()
+    checked: true
 - name: coroutine
   comment: Coroutine manipulation library.
   functions:
@@ -2742,6 +2750,7 @@ modules:
       type: vector?
     return-type: number
     must-use: true
+    checked: true
   - name: floor
     comment: Applies math.floor to each component of the vector.
     parameters:

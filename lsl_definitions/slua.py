@@ -113,20 +113,26 @@ class SLuaFunction(SLuaFunctionBase):
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     magic_type: bool = False
     """The typechecker has custom logic for this function."""
+    checked: bool = False
+    """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
-    def deprecated_string(self) -> str:
-        if self.deprecated is None:
-            return ""
-        params: list[str] = []
-        if self.deprecated.use:
-            params.append(f"use={self.deprecated.use!r}")
-        if self.deprecated.reason:
-            params.append(f"reason={self.deprecated.reason!r}")
-        if params:
-            return f"@[deprecated {{{', '.join(params)}}}]"
-        return "@deprecated "
+    def annotation_string(self) -> str:
+        annotation = ""
+        if self.checked:
+            annotation += "@checked "
+        if self.deprecated is not None:
+            params: list[str] = []
+            if self.deprecated.use:
+                params.append(f"use={self.deprecated.use!r}")
+            if self.deprecated.reason:
+                params.append(f"reason={self.deprecated.reason!r}")
+            if params:
+                annotation += f"@[deprecated {{{', '.join(params)}}}]"
+            else:
+                annotation += "@deprecated "
+        return annotation
 
     def to_keywords_dict(self) -> dict:
         return remove_worthless(
@@ -158,7 +164,7 @@ class SLuaFunction(SLuaFunctionBase):
             self.write_luau_table_def(f, indent, suffix="")
         else:
             f.write(f"{'  ' * indent}")
-            f.write(self.deprecated_string)
+            f.write(self.annotation_string)
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string)
@@ -170,7 +176,7 @@ class SLuaFunction(SLuaFunctionBase):
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
         f.write(f"{'  ' * indent}{self.name}: ")
-        f.write(self.deprecated_string)
+        f.write(self.annotation_string)
         if not self.overloads:
             f.write(self.type_def_string)
         else:
@@ -770,6 +776,7 @@ class SLuaDefinitionParser:
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
                 magic_type=data.get("magic-type", False),
+                checked=data.get("checked", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
