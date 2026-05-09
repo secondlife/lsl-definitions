@@ -315,7 +315,7 @@ declare function rawequal<T1, T2>(a: T1, b: T2): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?
 declare function rawlen<K, V>(t: {[K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
--- declare function require(target: any): any -- magic type
+-- declare @checked function require(target: any): any -- magic type
 -- declare function select<A...>(i: string | number, ...: A...): ...any -- magic type
 declare setfenv: nil
 -- declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT> -- builtin, magic type
@@ -552,23 +552,23 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 ---------------------------
 
 declare string: {
-  byte: (s: string, i: number?, j: number?) -> ...number, -- builtin
-  char: (...number) -> string, -- builtin
-  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
-  format: (formatstring: string, ...any) -> string, -- builtin, magic type
-  gmatch: (s: string, pattern: string) -> () -> ...string, -- builtin, magic type
+  byte: @checked (s: string, i: number?, j: number?) -> ...number, -- builtin
+  char: @checked (...number) -> string, -- builtin
+  find: @checked (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
+  format: @checked (formatstring: string, ...any) -> string, -- builtin, magic type
+  gmatch: @checked (s: string, pattern: string) -> () -> ...string, -- builtin, magic type
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
-  len: (s: string) -> number, -- builtin
-  lower: (s: string) -> string, -- builtin
-  match: (s: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
+  len: @checked (s: string) -> number, -- builtin
+  lower: @checked (s: string) -> string, -- builtin
+  match: @checked (s: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
   pack: (fmt: string, ...any) -> string, -- builtin
-  packsize: (fmt: string) -> number, -- builtin
-  rep: (s: string, n: number) -> string, -- builtin
-  reverse: (s: string) -> string, -- builtin
-  split: (s: string, separator: string?) -> {string}, -- builtin
-  sub: (s: string, i: number, j: number?) -> string, -- builtin
-  unpack: (fmt: string, s: string, init: number?) -> ...any, -- builtin
-  upper: (s: string) -> string, -- builtin
+  packsize: @checked (fmt: string) -> number, -- builtin
+  rep: @checked (s: string, n: number) -> string, -- builtin
+  reverse: @checked (s: string) -> string, -- builtin
+  split: @checked (s: string, separator: string?) -> {string}, -- builtin
+  sub: @checked (s: string, i: number, j: number?) -> string, -- builtin
+  unpack: @checked (fmt: string, s: string, init: number?) -> ...any, -- builtin
+  upper: @checked (s: string) -> string, -- builtin
 }
 
 --]]

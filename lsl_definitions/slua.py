@@ -188,7 +188,7 @@ class SLuaFunction(SLuaFunctionBase):
     @property
     def annotation_string(self) -> str:
         annotation = ""
-        if self.checked:
+        if self.typechecker_flags.checked:
             annotation += "@checked "
         if self.deprecated is not None:
             params: list[str] = []
