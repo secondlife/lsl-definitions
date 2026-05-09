@@ -239,7 +239,12 @@
                 "^(?:[a-z]+)$": {
                     "additionalProperties": false,
                     "properties": {
-                        "deprecated": { "$ref": "#/$defs/deprecated" },
+                        "deprecated": {
+                            "$comment": "Do not use #/$defs/deprecated; controls section is copied verbatim to keywords_lsl.xml.",
+                            "const": true,
+                            "markdownDescription": "This keyword has been deprecated.",
+                            "type": "boolean"
+                        },
                         "tooltip": {
                             "markdownDescription": "A brief description of this control (keyword).",
                             "type": "string"
