@@ -240,11 +240,6 @@
                     "additionalProperties": false,
                     "properties": {
                         "deprecated": { "$ref": "#/$defs/deprecated" },
-                        "invalid": {
-                            "const": true,
-                            "markdownDescription": "Document this keyword as invalid.",
-                            "type": "boolean"
-                        },
                         "tooltip": {
                             "markdownDescription": "A brief description of this control (keyword).",
                             "type": "string"

@@ -15808,7 +15808,6 @@ controls:
   else:
     tooltip: if / else block\nif (<condition>) {\n...\n[} else [if (<condition>) {\n...]]\n}
   event:
-    invalid: true
     deprecated: true
     tooltip: Undefined reserved word.
   for:
@@ -15819,7 +15818,6 @@ controls:
   jump:
     tooltip: jump statement\njump <label>
   print:
-    invalid: true
     deprecated: true
     tooltip: Prints text to stdout on the server.
   return:
