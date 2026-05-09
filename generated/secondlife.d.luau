@@ -472,23 +472,23 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 ---------------------------
 
 declare string: {
-  byte: (s: string, i: number?, j: number?) -> ...number,
-  char: (...number) -> string,
-  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- magic type
-  format: (formatstring: string, ...any) -> string, -- magic type
-  gmatch: (s: string, pattern: string) -> () -> ...string, -- magic type
+  byte: @checked (s: string, i: number?, j: number?) -> ...number,
+  char: @checked (...number) -> string,
+  find: @checked (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- magic type
+  format: @checked (formatstring: string, ...any) -> string, -- magic type
+  gmatch: @checked (s: string, pattern: string) -> () -> ...string, -- magic type
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number),
-  len: (s: string) -> number,
-  lower: (s: string) -> string,
-  match: (s: string, pattern: string, init: number?) -> ...string, -- magic type
+  len: @checked (s: string) -> number,
+  lower: @checked (s: string) -> string,
+  match: @checked (s: string, pattern: string, init: number?) -> ...string, -- magic type
   pack: (fmt: string, ...any) -> string,
-  packsize: (fmt: string) -> number,
-  rep: (s: string, n: number) -> string,
-  reverse: (s: string) -> string,
-  split: (s: string, separator: string?) -> {string},
-  sub: (s: string, i: number, j: number?) -> string,
-  unpack: (fmt: string, s: string, init: number?) -> ...any,
-  upper: (s: string) -> string,
+  packsize: @checked (fmt: string) -> number,
+  rep: @checked (s: string, n: number) -> string,
+  reverse: @checked (s: string) -> string,
+  split: @checked (s: string, separator: string?) -> {string},
+  sub: @checked (s: string, i: number, j: number?) -> string,
+  unpack: @checked (fmt: string, s: string, init: number?) -> ...any,
+  upper: @checked (s: string) -> string,
 }
 
 

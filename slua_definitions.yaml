@@ -2107,6 +2107,7 @@ modules:
     return-type: '...number'
     must-use: true
     fastcall: true
+    checked: true
   - name: char
     comment: Returns a string containing characters for the given byte values.
     parameters:
@@ -2117,6 +2118,7 @@ modules:
     return-type: string
     must-use: true
     fastcall: true
+    checked: true
   - name: find
     comment: Finds the first instance of the pattern in the string.
     parameters:
@@ -2135,6 +2137,7 @@ modules:
     return-type: (number?, number?, ...string)
     must-use: true
     magic-type: true
+    checked: true
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
@@ -2148,6 +2151,7 @@ modules:
     return-type: string
     must-use: true
     magic-type: true
+    checked: true
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
@@ -2160,6 +2164,7 @@ modules:
     return-type: () -> ...string
     must-use: true
     magic-type: true
+    checked: true
   - name: gsub
     comment: Performs pattern-based substitution in a string.
     parameters:
@@ -2186,6 +2191,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
+    checked: true
   - name: lower
     comment: Returns a lowercase version of the input string.
     parameters:
@@ -2194,6 +2200,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    checked: true
   - name: match
     comment: Finds and returns matches for a pattern in the input string.
     parameters:
@@ -2209,6 +2216,7 @@ modules:
     return-type: '...string'
     must-use: true
     magic-type: true
+    checked: true
   - name: pack
     comment: Packs values into a binary string.
     parameters:
@@ -2228,6 +2236,7 @@ modules:
       type: string
     return-type: number
     must-use: true
+    checked: true
   - name: rep
     comment: Returns the input string repeated a given number of times.
     parameters:
@@ -2239,6 +2248,7 @@ modules:
       type: number
     return-type: string
     must-use: true
+    checked: true
   - name: reverse
     comment: Returns the input string with bytes in reverse order.
     parameters:
@@ -2247,6 +2257,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    checked: true
   - name: split
     comment: Splits a string by separator. Returns a list of substrings.
     parameters:
@@ -2258,6 +2269,7 @@ modules:
       type: string?
     return-type: '{string}'
     must-use: true
+    checked: true
   - name: sub
     comment: Returns a substring from the given range.
     parameters:
@@ -2273,6 +2285,7 @@ modules:
     return-type: string
     must-use: true
     fastcall: true
+    checked: true
   - name: unpack
     comment: Decodes a binary string using a pack format.
     parameters:
@@ -2287,6 +2300,7 @@ modules:
       type: number?
     return-type: '...any'
     must-use: true
+    checked: true
   - name: upper
     comment: Returns an uppercase version of the input string.
     parameters:
@@ -2295,6 +2309,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    checked: true
 - name: table
   comment: Table manipulation library. Tables are collections of key-value pairs.
   functions:
