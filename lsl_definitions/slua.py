@@ -307,6 +307,7 @@ class SLuaModule:
 declare {self.name}: """)
         if self.callable:
             f.write("(")
+            f.write(self.callable.annotation_string)
             f.write(self.callable.type_def_string)
             f.write(") & ")
         f.write("{\n")
@@ -776,7 +777,7 @@ class SLuaDefinitionParser:
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
                 magic_type=data.get("magic-type", False),
-                checked=data.get("checked", False),
+                checked=data.get("checked-type", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
