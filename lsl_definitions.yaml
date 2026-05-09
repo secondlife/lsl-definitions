@@ -15807,6 +15807,10 @@ controls:
     tooltip: do / while loop\ndo {\n...\n} while (<condition>);
   else:
     tooltip: if / else block\nif (<condition>) {\n...\n[} else [if (<condition>) {\n...]]\n}
+  event:
+    invalid: true
+    deprecated: true
+    tooltip: Undefined reserved word.
   for:
     tooltip: for loop\nfor (<initializer>; <condition>; <post-iteration-statement>)\n{
       ...\n}
@@ -15814,6 +15818,10 @@ controls:
     tooltip: if / else block\nif (<condition>) {\n...\n[} else [if (<condition>) {\n...]]\n}
   jump:
     tooltip: jump statement\njump <label>
+  print:
+    invalid: true
+    deprecated: true
+    tooltip: Prints text to stdout on the server.
   return:
     tooltip: Leave current event or function.\nreturn [<variable>];\nOptionally pass
       back a variable's value, from a function.
