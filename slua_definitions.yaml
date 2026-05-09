@@ -2864,7 +2864,7 @@ metamethods:
   __mul:
     tooltip: "Overload method for * operator."
   __newindex:
-    tooltip: "Method called when table is indexed with an assignment."
+    tooltip: "Method or table called when table is indexed with an assignment."
   __pow:
     tooltip: "Overload method for ^ operator."
   __sub:
