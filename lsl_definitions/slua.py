@@ -373,6 +373,7 @@ class SLuaModule:
 declare {self.name}: """)
         if self.callable:
             f.write("(")
+            f.write(self.callable.annotation_string)
             f.write(self.callable.type_def_string)
             f.write(") & ")
         f.write("{\n")
