@@ -1760,6 +1760,7 @@ modules:
       type: number?
     return-type: number
     must-use: true
+    checked: true
   - name: pow
     comment: Returns base to the power of exponent.
     parameters:
@@ -1794,6 +1795,7 @@ modules:
       type: number?
     return-type: number
     must-use: true
+    checked: true
   - name: randomseed
     comment: Sets the seed for the random number generator.
     parameters:
@@ -1804,6 +1806,7 @@ modules:
     deprecated:
       reason: Disabled in SLua.
     must-use: true
+    checked: true
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
