@@ -190,6 +190,9 @@
                 "magic-type": {
                     "const": true,
                     "markdownDescription": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
+                "checked-type": {
+                    "const": true,
+                    "markdownDescription": "This function's run-time type checks match the typechecker. Functions with checked types report the same errors in --!strict and --!nonstrict modes.",
                     "type": "boolean"
                 },
                 "comment": {
