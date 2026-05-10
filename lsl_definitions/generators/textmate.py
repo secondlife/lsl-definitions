@@ -146,7 +146,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         missing_types = ["nil","symbol", "userdata"]
         builtin_types = [t for t in definitions.builtin_types.keys()]
         base_classes = [f"{b.name}" for b in definitions.base_classes]
-        type_aliases = [f"{t.name}" for t in definitions.type_aliases] if t.export
+        type_aliases = [f"{t.name}" for t in definitions.type_aliases if t.export]
         return "|".join(missing_types + builtin_types + base_classes + type_aliases)
 
     def get_slua_metamethods(definitions: SLuaDefinitions) -> str:

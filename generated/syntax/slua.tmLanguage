@@ -734,7 +734,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>==|~=|!=|&lt;=?|&gt;=?</string>
+            <string>==|~=|&lt;=?|&gt;=?</string>
             <key>name</key>
             <string>keyword.operator.comparison.luau</string>
           </dict>
@@ -1249,7 +1249,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>\b(nil|symbol|userdata|any|boolean|buffer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|LLDetectedEventName|LLNonDetectedEventName|LLEventName|LLEventHandler|LLDetectedEventHandler|LLTimerEveryCallback|LLTimerOnceCallback|LLTimerCallback|DateTypeArg|DateTypeResult|LLJsonEncodeOptions|LLJsonDecodeReviverWithoutPath|LLJsonDecodeOptionsWithoutPath|LLJsonDecodeOptionsWithPath|LLJsonDecodeOptions)\b</string>
+            <string>\b(nil|symbol|userdata|any|boolean|buffer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult)\b</string>
             <key>name</key>
             <string>support.type.primitive.luau</string>
           </dict>

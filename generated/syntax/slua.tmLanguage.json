@@ -475,7 +475,7 @@
       "operator": {
         "patterns": [
           {
-            "match": "==|~=|!=|<=?|>=?",
+            "match": "==|~=|<=?|>=?",
             "name": "keyword.operator.comparison.luau"
           },
           {
@@ -811,7 +811,7 @@
             "name": "constant.language.boolean.true.luau"
           },
           {
-            "match": "\\b(nil|symbol|userdata|any|boolean|buffer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|LLDetectedEventName|LLNonDetectedEventName|LLEventName|LLEventHandler|LLDetectedEventHandler|LLTimerEveryCallback|LLTimerOnceCallback|LLTimerCallback|DateTypeArg|DateTypeResult|LLJsonEncodeOptions|LLJsonDecodeReviverWithoutPath|LLJsonDecodeOptionsWithoutPath|LLJsonDecodeOptionsWithPath|LLJsonDecodeOptions)\\b",
+            "match": "\\b(nil|symbol|userdata|any|boolean|buffer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult)\\b",
             "name": "support.type.primitive.luau"
           },
           {
