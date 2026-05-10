@@ -1476,6 +1476,7 @@ modules:
       selene-type: string
     return-type: string
     must-use: true
+    checked-type: true
   - name: decode
     comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
       The output is truncated at the first decoding error.
@@ -1500,6 +1501,7 @@ modules:
       default-value: false
     return-type: string
     must-use: true
+    checked-type: true
 - name: lljson
   comment: JSON encoding/decoding library for Second Life.
   functions:
@@ -2159,6 +2161,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
+    checked-type: true
   functions:
   - name: create
     comment: Creates a new quaternion with the given component values.
@@ -2177,6 +2180,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
+    checked-type: true
   - name: normalize
     comment: Computes the normalized version (unit quaternion) of the quaternion.
     parameters:
@@ -2185,6 +2189,7 @@ modules:
       type: quaternion
     return-type: quaternion
     must-use: true
+    checked-type: true
   - name: magnitude
     comment: Computes the magnitude of the quaternion.
     parameters:
@@ -2193,6 +2198,7 @@ modules:
       type: quaternion
     return-type: number
     must-use: true
+    checked-type: true
   - name: dot
     comment: Computes the dot product of two quaternions.
     parameters:
@@ -2204,6 +2210,7 @@ modules:
       type: quaternion
     return-type: number
     must-use: true
+    checked-type: true
   - name: slerp
     comment: Spherical linear interpolation from a to b using factor t.
     parameters:
@@ -2218,6 +2225,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
+    checked-type: true
   - name: conjugate
     comment: Computes the conjugate of the quaternion.
     parameters:
@@ -2226,6 +2234,7 @@ modules:
       type: quaternion
     return-type: quaternion
     must-use: true
+    checked-type: true
   - name: tofwd
     comment: Computes the forward vector from the quaternion.
     parameters:
@@ -2234,6 +2243,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
+    checked-type: true
   - name: toleft
     comment: Computes the left vector from the quaternion.
     parameters:
@@ -2242,6 +2252,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
+    checked-type: true
   - name: toup
     comment: Computes the up vector from the quaternion.
     parameters:
@@ -2250,6 +2261,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
+    checked-type: true
   constants:
   - name: identity
     comment: Identity quaternion constant.
@@ -2850,6 +2862,7 @@ modules:
       type: string? | buffer | uuid
     return-type: uuid
     must-use: true
+    checked-type: true
   functions:
   - name: create
     comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
@@ -2860,6 +2873,7 @@ modules:
       type: string? | buffer | uuid
     return-type: uuid
     must-use: true
+    checked-type: true
 - name: vector
   comment: Vector manipulation library.
   callable:
