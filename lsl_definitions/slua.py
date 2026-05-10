@@ -298,7 +298,19 @@ class SLuaModule:
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
+    def workaround_annotated_callable_bug(self) -> None:
+        """
+        Workaround this bug by removing all checked annotations
+        https://github.com/luau-lang/luau/issues/2384
+        """
+        if self.callable is None:
+            return  # no issue
+        self.callable.checked = False
+        for func in self.functions:
+            func.checked = False
+
     def write_luau_def(self, f: TextIO) -> None:
+        # self.workaround_annotated_callable_bug()
         f.write(f"""
 ---------------------------
 -- Global Table: {self.name}
