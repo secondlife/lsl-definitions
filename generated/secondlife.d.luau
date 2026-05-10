@@ -279,8 +279,8 @@ declare bit32: {
   replace: @checked (n: number, v: number, field: number, width: number?) -> number,
   rrotate: @checked (n: number, i: number) -> number,
   rshift: @checked (n: number, i: number) -> number,
-  s32: (n: number) -> number,
-  smul: (a: number, b: number) -> number,
+  s32: @checked (n: number) -> number,
+  smul: @checked (a: number, b: number) -> number,
   countlz: @checked (n: number) -> number,
   countrz: @checked (n: number) -> number,
   byteswap: @checked (n: number) -> number,
@@ -413,7 +413,7 @@ declare math: {
   lerp: @checked (a: number, b: number, t: number) -> number,
   log: @checked (n: number, base: number?) -> number,
   log10: @checked (n: number) -> number,
-  map: (n: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
+  map: @checked (n: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
   max: @checked (n: number, ...number) -> number,
   min: @checked (n: number, ...number) -> number,
   modf: @checked (n: number) -> (number, number),
@@ -548,7 +548,7 @@ declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
 -- Global Table: vector
 ---------------------------
 
-declare vector: ((x: number, y: number, z: number?) -> vector) & {
+declare vector: (@checked (x: number, y: number, z: number?) -> vector) & {
   zero: vector,
   one: vector,
   create: @checked (x: number, y: number, z: number?) -> vector,

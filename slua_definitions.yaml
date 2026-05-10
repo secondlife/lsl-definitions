@@ -837,6 +837,7 @@ modules:
       type: number
     return-type: number
     must-use: true
+    checked-type: true
   - name: smul
     comment: Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary.
       Avoids precision loss ascociated with float64 multiplication. Compatible with LSL integer multiplication.
@@ -849,6 +850,7 @@ modules:
       type: number
     return-type: number
     must-use: true
+    checked-type: true
   - name: countlz
     comment: Count leading zeros
     parameters:
@@ -1708,6 +1710,7 @@ modules:
       type: number
     return-type: number
     must-use: true
+    checked-type: true
   - name: max
     comment: Returns the maximum value from the given numbers.
     parameters:
