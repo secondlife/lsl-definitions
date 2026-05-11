@@ -372,6 +372,7 @@ classes:
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
     return-type: ()
+    checked-type: true
 global-variables:
 - name: rotation
   comment: rotation is an alias for quaternion.

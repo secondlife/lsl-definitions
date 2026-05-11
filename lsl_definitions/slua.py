@@ -697,6 +697,7 @@ class SLuaDefinitions:
                 type_parameters=["T"],
                 parameters=parameters,
                 return_type="T",
+                checked_type=True,
             )
 
         spec = expand_spp_builder(lsl)
