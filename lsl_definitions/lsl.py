@@ -552,9 +552,6 @@ class LSLDefinitionParser:
                 raise ValueError(f"Func ID {func.func_id} was re-used by {func!r}")
             seen_func_ids.add(func.func_id)
         for const_name, const_data in def_dict["constants"].items():
-            if const_name == "default":
-                # This isn't a real constant, but it's in here for some reason, maybe syntax highlighting?
-                continue
             self._handle_constant(const_name, const_data)
         for enum in self._definitions.enums.values():
             for unused in enum._special_members:
