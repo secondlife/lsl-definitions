@@ -532,17 +532,17 @@ declare os: {
 -- Global Table: quaternion
 ---------------------------
 
-declare quaternion: (@checked (x: number, y: number, z: number, s: number) -> quaternion) & {
+declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion) & {
   identity: quaternion,
-  create: @checked (x: number, y: number, z: number, s: number) -> quaternion,
-  normalize: @checked (q: quaternion) -> quaternion,
-  magnitude: @checked (q: quaternion) -> number,
-  dot: @checked (a: quaternion, b: quaternion) -> number,
-  slerp: @checked (a: quaternion, b: quaternion, t: number) -> quaternion,
-  conjugate: @checked (q: quaternion) -> quaternion,
-  tofwd: @checked (q: quaternion) -> vector,
-  toleft: @checked (q: quaternion) -> vector,
-  toup: @checked (q: quaternion) -> vector,
+  create: (x: number, y: number, z: number, s: number) -> quaternion,
+  normalize: (q: quaternion) -> quaternion,
+  magnitude: (q: quaternion) -> number,
+  dot: (a: quaternion, b: quaternion) -> number,
+  slerp: (a: quaternion, b: quaternion, t: number) -> quaternion,
+  conjugate: (q: quaternion) -> quaternion,
+  tofwd: (q: quaternion) -> vector,
+  toleft: (q: quaternion) -> vector,
+  toup: (q: quaternion) -> vector,
 }
 
 --[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match
@@ -620,8 +620,8 @@ declare utf8: {
 -- Global Table: uuid
 ---------------------------
 
-declare uuid: (@checked (value: string? | buffer | uuid) -> uuid) & {
-  create: @checked (value: string? | buffer | uuid) -> uuid,
+declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
+  create: (value: string? | buffer | uuid) -> uuid,
 }
 
 
@@ -629,7 +629,7 @@ declare uuid: (@checked (value: string? | buffer | uuid) -> uuid) & {
 -- Global Table: vector
 ---------------------------
 
-declare vector: (@checked (x: number, y: number, z: number?) -> vector) & {
+declare vector: ((x: number, y: number, z: number?) -> vector) & {
   zero: vector,
   one: vector,
   create: (x: number, y: number, z: number?) -> vector,
