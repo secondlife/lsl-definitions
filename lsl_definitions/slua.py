@@ -233,10 +233,19 @@ class SLuaClassDeclaration:
         return {"tooltip": self.comment}
 
     def write_luau_def(self, f: TextIO) -> None:
+        self._workaround_annotated_callable_bug()
         if self.instance_type is None:
             self._write_extern_type_def(f)
         else:
             self._write_metatable_def(f)
+
+    def _workaround_annotated_callable_bug(self) -> None:
+        """
+        Workaround this bug by removing all checked annotations
+        https://github.com/luau-lang/luau/issues/2384
+        """
+        for func in self.methods:
+            func.checked_type = False
 
     def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
@@ -298,7 +307,7 @@ class SLuaModule:
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
-    def workaround_annotated_callable_bug(self) -> None:
+    def _workaround_annotated_callable_bug(self) -> None:
         """
         Workaround this bug by removing all checked annotations
         https://github.com/luau-lang/luau/issues/2384
@@ -310,7 +319,7 @@ class SLuaModule:
             func.checked_type = False
 
     def write_luau_def(self, f: TextIO) -> None:
-        self.workaround_annotated_callable_bug()
+        self._workaround_annotated_callable_bug()
         f.write(f"""
 ---------------------------
 -- Global Table: {self.name}
