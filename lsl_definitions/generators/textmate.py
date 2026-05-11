@@ -143,7 +143,8 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         return crunch_regex_strings(functions)
 
     def get_slua_global_types(definitions: SLuaDefinitions) -> str:
-        missing_types = ["nil","symbol", "userdata"]
+        # Missing types that are not documented in builtins, classes or aliases
+        missing_types = ["nil"]
         builtin_types = [t for t in definitions.builtin_types.keys()]
         base_classes = [f"{b.name}" for b in definitions.base_classes]
         type_aliases = [f"{t.name}" for t in definitions.type_aliases if t.export]
@@ -215,12 +216,12 @@ def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
         LSL_EVENTS_REGEX=crunch_regex_strings([e for e in definitions.events.keys()]),
 
         LSL_FUNCTIONS_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if not func.private and not func.deprecated and not func.god_mode]),
-        LSL_FUNCTIONS_GOD_MODE_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if func.god_mode]),
-        LSL_FUNCTIONS_DEPRECATED_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if func.deprecated]),
-        LSL_FUNCTIONS_ILLEGAL_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if func.private]),
+        LSL_FUNCTIONS_GOD_MODE_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.god_mode]),
+        LSL_FUNCTIONS_DEPRECATED_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.deprecated]),
+        LSL_FUNCTIONS_ILLEGAL_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.private]),
 
-        LSL_FUNCTION_CONSTANTS_REGEX=crunch_regex_strings([f"{name}" for name, const in definitions.constants.items() if not const.private and not const.deprecated]),
-        LSL_CONSTANTS_DEPRECATED_REGEX=crunch_regex_strings([f"{name}" for name, const in definitions.constants.items() if not const.private and const.deprecated]),
+        LSL_FUNCTION_CONSTANTS_REGEX=crunch_regex_strings([name for name, const in definitions.constants.items() if not const.private and not const.deprecated]),
+        LSL_CONSTANTS_DEPRECATED_REGEX=crunch_regex_strings([name for name, const in definitions.constants.items() if not const.private and const.deprecated]),
     )
 
     _base, ext = os.path.splitext(template_path)
