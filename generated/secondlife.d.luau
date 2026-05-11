@@ -453,17 +453,17 @@ declare os: {
 -- Global Table: quaternion
 ---------------------------
 
-declare quaternion: (@checked (x: number, y: number, z: number, s: number) -> quaternion) & {
+declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion) & {
   identity: quaternion,
-  create: @checked (x: number, y: number, z: number, s: number) -> quaternion,
-  normalize: @checked (q: quaternion) -> quaternion,
-  magnitude: @checked (q: quaternion) -> number,
-  dot: @checked (a: quaternion, b: quaternion) -> number,
-  slerp: @checked (a: quaternion, b: quaternion, t: number) -> quaternion,
-  conjugate: @checked (q: quaternion) -> quaternion,
-  tofwd: @checked (q: quaternion) -> vector,
-  toleft: @checked (q: quaternion) -> vector,
-  toup: @checked (q: quaternion) -> vector,
+  create: (x: number, y: number, z: number, s: number) -> quaternion,
+  normalize: (q: quaternion) -> quaternion,
+  magnitude: (q: quaternion) -> number,
+  dot: (a: quaternion, b: quaternion) -> number,
+  slerp: (a: quaternion, b: quaternion, t: number) -> quaternion,
+  conjugate: (q: quaternion) -> quaternion,
+  tofwd: (q: quaternion) -> vector,
+  toleft: (q: quaternion) -> vector,
+  toup: (q: quaternion) -> vector,
 }
 
 
@@ -539,8 +539,8 @@ declare utf8: {
 -- Global Table: uuid
 ---------------------------
 
-declare uuid: (@checked (value: string? | buffer | uuid) -> uuid) & {
-  create: @checked (value: string? | buffer | uuid) -> uuid,
+declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
+  create: (value: string? | buffer | uuid) -> uuid,
 }
 
 
@@ -548,23 +548,23 @@ declare uuid: (@checked (value: string? | buffer | uuid) -> uuid) & {
 -- Global Table: vector
 ---------------------------
 
-declare vector: (@checked (x: number, y: number, z: number?) -> vector) & {
+declare vector: ((x: number, y: number, z: number?) -> vector) & {
   zero: vector,
   one: vector,
-  create: @checked (x: number, y: number, z: number?) -> vector,
-  magnitude: @checked (v: vector) -> number,
-  normalize: @checked (v: vector) -> vector,
-  cross: @checked (a: vector, b: vector) -> vector,
-  dot: @checked (a: vector, b: vector) -> number,
-  angle: @checked (a: vector, b: vector, axis: vector?) -> number,
-  floor: @checked (v: vector) -> vector,
-  ceil: @checked (v: vector) -> vector,
-  abs: @checked (v: vector) -> vector,
-  sign: @checked (v: vector) -> vector,
-  clamp: @checked (v: vector, min: vector, max: vector) -> vector,
-  max: @checked (v: vector, ...vector) -> vector,
-  min: @checked (v: vector, ...vector) -> vector,
-  lerp: @checked (a: vector, b: vector, t: number) -> vector,
+  create: (x: number, y: number, z: number?) -> vector,
+  magnitude: (v: vector) -> number,
+  normalize: (v: vector) -> vector,
+  cross: (a: vector, b: vector) -> vector,
+  dot: (a: vector, b: vector) -> number,
+  angle: (a: vector, b: vector, axis: vector?) -> number,
+  floor: (v: vector) -> vector,
+  ceil: (v: vector) -> vector,
+  abs: (v: vector) -> vector,
+  sign: (v: vector) -> vector,
+  clamp: (v: vector, min: vector, max: vector) -> vector,
+  max: (v: vector, ...vector) -> vector,
+  min: (v: vector, ...vector) -> vector,
+  lerp: (a: vector, b: vector, t: number) -> vector,
 }
 
 declare rotation: typeof(quaternion)

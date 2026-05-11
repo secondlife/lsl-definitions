@@ -310,7 +310,7 @@ class SLuaModule:
             func.checked_type = False
 
     def write_luau_def(self, f: TextIO) -> None:
-        # self.workaround_annotated_callable_bug()
+        self.workaround_annotated_callable_bug()
         f.write(f"""
 ---------------------------
 -- Global Table: {self.name}
