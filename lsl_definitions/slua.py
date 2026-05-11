@@ -371,9 +371,9 @@ class SLuaModule:
         """
         if self.callable is None:
             return  # no issue
-        self.callable.checked = False
+        self.callable.typechecker_flags.checked = False
         for func in self.functions:
-            func.checked = False
+            func.typechecker_flags.checked = False
 
     def write_luau_def(self, f: TextIO) -> None:
         # self.workaround_annotated_callable_bug()
