@@ -113,14 +113,14 @@ class SLuaFunction(SLuaFunctionBase):
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
     magic_type: bool = False
     """The typechecker has custom logic for this function."""
-    checked: bool = False
+    checked_type: bool = False
     """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
     def annotation_string(self) -> str:
         annotation = ""
-        if self.checked:
+        if self.checked_type:
             annotation += "@checked "
         if self.deprecated is not None:
             params: list[str] = []
@@ -305,9 +305,9 @@ class SLuaModule:
         """
         if self.callable is None:
             return  # no issue
-        self.callable.checked = False
+        self.callable.checked_type = False
         for func in self.functions:
-            func.checked = False
+            func.checked_type = False
 
     def write_luau_def(self, f: TextIO) -> None:
         # self.workaround_annotated_callable_bug()
@@ -789,7 +789,7 @@ class SLuaDefinitionParser:
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
                 magic_type=data.get("magic-type", False),
-                checked=data.get("checked-type", False),
+                checked_type=data.get("checked-type", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
