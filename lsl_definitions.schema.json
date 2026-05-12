@@ -237,7 +237,14 @@
             "additionalProperties": false,
             "patternProperties": {
                 "^(?:[a-z]+)$": {
+                    "additionalProperties": false,
                     "properties": {
+                        "deprecated": {
+                            "$comment": "Do not use #/$defs/deprecated; controls section is copied verbatim to keywords_lsl.xml.",
+                            "const": true,
+                            "markdownDescription": "This keyword has been deprecated.",
+                            "type": "boolean"
+                        },
                         "tooltip": {
                             "markdownDescription": "A brief description of this control (keyword).",
                             "type": "string"
@@ -505,6 +512,7 @@
             "markdownDescription": "The valid LSL storage types:\n\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
             "patternProperties": {
                 "^(?:float|integer|key|list|quaternion|rotation|string|vector)$": {
+                    "additionalProperties": false,
                     "properties": {
                         "private": {
                             "const": true,
