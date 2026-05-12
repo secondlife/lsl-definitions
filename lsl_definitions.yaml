@@ -7089,6 +7089,9 @@ functions:
     experience: true
     func-id: 387
     return: key
+    dataserver-semantics: csv
+    - boolean
+    - string
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction to create a key-value\
       \ pair. Will fail with XP_ERROR_STORAGE_EXCEPTION if the key already exists.\
@@ -7147,6 +7150,10 @@ functions:
     experience: true
     func-id: 600
     return: key
+    dataserver-semantics: 
+    - boolean
+    - integer
+    - integer
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction the request the\
       \ used and total amount of data allocated for the Experience. The dataserver\
@@ -7181,6 +7188,9 @@ functions:
     experience: true
     func-id: 390
     return: key
+    dataserver-semantics: csv
+    - boolean
+    - string
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction to delete a key-value\
       \ pair. The dataserver callback will be executed with the key returned from\
@@ -7818,6 +7828,7 @@ functions:
     func-id: 507
     must-use: true
     return: key
+    dataserver-semantics: integer
     sleep: 0.0
     tooltip: "Searches the text of a cached notecard for lines containing the given\
       \ pattern and returns the \n            number of matches found through a dataserver\
@@ -8973,6 +8984,7 @@ functions:
     energy: 10.0
     func-id: 217
     return: key
+    dataserver-semantics: string
     sleep: 0.1
     tooltip: Returns LineNumber from NotecardName via the dataserver event. The line
       index starts at zero in LSL, one in Lua.\nIf the requested line is passed the
@@ -9014,6 +9026,7 @@ functions:
     energy: 10.0
     func-id: 276
     return: key
+    dataserver-semantics: integer
     sleep: 0.1
     tooltip: Returns the number of lines contained within a notecard via the dataserver
       event.\nThe key returned by this function is a query ID for identifying the
@@ -10438,6 +10451,9 @@ functions:
     experience: true
     func-id: 601
     return: key
+    dataserver-semantics: csv
+    - boolean
+    - integer
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction the request the\
       \ number of keys in the data store. The dataserver callback will be executed\
@@ -10465,6 +10481,9 @@ functions:
     experience: true
     func-id: 602
     return: key
+    dataserver-semantics: csv
+    - boolean
+    - key
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction the request a\
       \ number of keys from the data store. The dataserver callback will be executed\
@@ -12347,6 +12366,9 @@ functions:
     experience: true
     func-id: 388
     return: key
+    dataserver-semantics: csv
+    - boolean
+    - string
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction to retrieve the\
       \ value associated with the key given. Will fail with XP_ERROR_KEY_NOT_FOUND\
@@ -12685,6 +12707,7 @@ functions:
     energy: 10.0
     func-id: 155
     return: key
+    dataserver-semantics: param
     sleep: 0.1
     tooltip: Requests data about AvatarID. When data is available the dataserver event
       will be raised.\nThis function requests data about an avatar. If and when the
@@ -12703,6 +12726,7 @@ functions:
     energy: 10.0
     func-id: 361
     return: key
+    dataserver-semantics: string
     sleep: 0.0
     tooltip: Requests the display name of the agent. When the display name is available
       the dataserver event will be raised.\nThe avatar identified does not need to
@@ -12747,6 +12771,7 @@ functions:
     energy: 10.0
     func-id: 156
     return: key
+    dataserver-semantics: vector
     sleep: 1.0
     tooltip: Requests data for the named InventoryItem.\nWhen data is available, the
       dataserver event will be raised with the key returned from this function in
@@ -12800,6 +12825,7 @@ functions:
     energy: 10.0
     func-id: 293
     return: key
+    dataserver-semantics: param
     sleep: 1.0
     tooltip: Requests the specified Data about RegionName. When the specified data
       is available, the dataserver event is raised.\nData should use one of the DATA_SIM_*
@@ -12829,6 +12855,7 @@ functions:
     energy: 10.0
     func-id: 525
     return: key
+    dataserver-semantics: key
     sleep: 0.0
     tooltip: Look up Agent ID for the named agent using a historical name.
     categories:
@@ -12843,6 +12870,7 @@ functions:
     energy: 10.0
     func-id: 359
     return: key
+    dataserver-semantics: string
     sleep: 0.0
     tooltip: Requests single-word user-name of an avatar. When data is available the
       dataserver event will be raised.\nRequests the user-name of the identified agent.
@@ -15494,6 +15522,9 @@ functions:
     experience: true
     func-id: 389
     return: key
+    dataserver-semantics: csv
+    - boolean
+    -fridge
     sleep: 0.0
     tooltip: "\n                   Starts an asychronous transaction to update the\
       \ value associated with the key given. The dataserver callback will be executed\
