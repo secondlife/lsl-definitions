@@ -15818,8 +15818,7 @@ controls:
   jump:
     tooltip: jump statement\njump <label>
   print:
-    deprecated: true
-    tooltip: Prints text to stdout on the server. For internal use only.
+    tooltip: Say the given variable to the owner. Only works on 2025 VM.
   return:
     tooltip: Leave current event or function.\nreturn [<variable>];\nOptionally pass
       back a variable's value, from a function.
