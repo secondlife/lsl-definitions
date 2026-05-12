@@ -370,6 +370,11 @@
                             "type": "array",
                             "uniqueItems": true
                         },
+                        "asset-semantics": {
+                            "const": true,
+                            "markdownDescription": "The returned string value represents an asset name or uuid.",
+                            "type": "boolean"
+                        },
                         "bool-semantics": {
                             "const": true,
                             "markdownDescription": "The returned integer value represents a boolean value.",

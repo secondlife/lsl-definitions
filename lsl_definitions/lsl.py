@@ -340,6 +340,7 @@ class LSLFunction:
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
+    asset_semantics: bool
     detected_semantics: bool
     type_arguments: List[str]
     arguments: List[LSLArgument]
@@ -641,6 +642,7 @@ class LSLDefinitionParser:
             native=func_data.get("native", False),
             index_semantics=bool(func_data.get("index-semantics", False)),
             bool_semantics=bool(func_data.get("bool-semantics", False)),
+            asset_semantics=bool(func_data.get("asset-semantics", False)),
             detected_semantics=bool(func_data.get("detected-semantics", False)),
         )
 
@@ -654,6 +656,10 @@ class LSLDefinitionParser:
         if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
             raise ValueError(
                 f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
+            )
+        if func.asset_semantics and func.ret_type not in (LSLType.STRING, LSLType.LIST):
+            raise ValueError(
+                f"{func.name} has ret with asset semantics, but ret type is {func.ret_type!r}"
             )
 
         if func.bool_semantics and func.index_semantics:
