@@ -209,6 +209,7 @@ class SLuaClassDeclaration:
 
     name: str
     properties: List[SLuaProperty]
+    functions: List[SLuaFunction]
     methods: List[SLuaFunction]
     comment: str = ""
     instance_type: Optional[str] = None
@@ -228,6 +229,8 @@ class SLuaClassDeclaration:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()}\n")
+        for func in self.functions:
+            func.write_luau_global_def(f, indent=1)
         for func in self.methods:
             func.write_luau_global_def(f, indent=1)
         f.write("end\n\n")
@@ -239,6 +242,8 @@ class SLuaClassDeclaration:
         f.write(f"  __index: {mt_name},\n")
         for prop in self.properties:
             f.write(f"  {prop.to_luau_def()},\n")
+        for func in self.functions:
+            func.write_luau_table_def(f, indent=1)
         for func in self.methods:
             func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")
@@ -591,43 +596,10 @@ class SLuaDefinitions:
 
         spec = expand_spp_builder(lsl)
         methods: List[SLuaFunction] = [make_fluent_method(spec, m) for m in spec.methods]
-        methods.append(
-            SLuaFunction(
-                name="apply",
-                parameters=[
-                    SLuaParameter(name="self", type=spec.class_name),
-                    SLuaParameter(name="link", type="number?"),
-                ],
-            )
-        )
-        methods.append(
-            SLuaFunction(
-                name="new",
-                parameters=[],
-                return_type=spec.class_name,
-            )
-        )
-        self.classes.append(
-            SLuaClassDeclaration(
-                name=spec.class_name,
-                properties=[],
-                methods=methods,
-                # These generally wrap heterogeneous lists for LSL APIs,
-                # type them as such so `table.clone()` and `table.freeze()`
-                # and such still work
-                instance_type="{any}",
-                export=True,
-            )
-        )
-        self.type_names.add(spec.class_name)
 
-        builder_prop = SLuaProperty(
-            name=spec.module_entry,
-            type=f"{spec.class_name}Meta",
-        )
-        # We assume that the module we place this in is pre-existing
-        builder_module = [m for m in self.modules if m.name == spec.module_name][0]
-        builder_module.constants.append(builder_prop)
+        # We assume that the class we place this in is pre-existing
+        builder_class = [m for m in self.classes if m.name == spec.class_name][0]
+        builder_class.methods.extend(methods)
 
 
 class SLuaDefinitionParser:
@@ -734,16 +706,25 @@ class SLuaDefinitionParser:
     def _validate_class(self, data: dict) -> SLuaClassDeclaration:
         class_ = SLuaClassDeclaration(
             name=data["name"],
+            instance_type=data.get("instance-type", None),
+            export=data.get("export", False),
             comment=data.get("comment", ""),
             properties=[],
+            functions=[],
             methods=[],
         )
         try:
             self._validate_identifier(class_.name)
             self._validate_scope(class_.name, self._type_names)
+            if class_.instance_type is not None:
+                self._validate_scope(f"{class_.name}Meta", self._type_names)
+                self._validate_type(class_.instance_type)
             class_scope: Set[str] = set()
             class_.properties = [
                 self._validate_property(prop, class_scope) for prop in data.get("properties", [])
+            ]
+            class_.functions = [
+                self._validate_function(method, class_scope) for method in data.get("functions", [])
             ]
             class_.methods = [
                 self._validate_function(method, class_scope, class_name=class_.name)

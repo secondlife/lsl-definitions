@@ -318,6 +318,24 @@ classes:
     - name: callback
       type: LLTimerCallback
     return-type: boolean
+- name: PrimParamsSetterType
+  comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
+  instance-type: '{any}'
+  export: true
+  functions:
+  - name: new
+    comment: Create an empty list with PrimParamsSetterTypeMeta as metatable
+    parameters: []
+    return-type: PrimParamsSetterType
+  methods: # This class is currently populated dynamically
+  - name: apply
+    comment: Call ll.SetLinkPrimitiveParamsFast with my instance list
+    parameters:
+    - name: self
+      type: PrimParamsSetterType
+    - name: link
+      type: number?
+      comment: Link number to target, or LINK_THIS if not specified
 global-variables:
 - name: rotation
   comment: rotation is an alias for quaternion.
@@ -1179,7 +1197,11 @@ modules:
     value: 'setmetatable({}, lljson.object_mt}'
 - name: llprim
   comment: Utilities for working with prims / objects
-  # This module is currently populated dynamically
+  constants:
+  - name: ParamsSetter
+    comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
+    type: PrimParamsSetterTypeMeta
+    value: PrimParamsSetterTypeMeta
 - name: math
   comment: Mathematical functions library.
   functions:

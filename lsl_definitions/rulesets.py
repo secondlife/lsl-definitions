@@ -60,8 +60,6 @@ class BuilderMethod:
 @dataclasses.dataclass(frozen=True)
 class BuilderSpec:
     class_name: str
-    module_entry: str
-    module_name: str
     methods: List[BuilderMethod]
 
 
@@ -123,7 +121,5 @@ def expand_spp_builder(lsl: "LSLDefinitions") -> BuilderSpec:
     return BuilderSpec(
         # The "class name" is global, so we don't want it to be ambiguous
         class_name="PrimParamsSetterType",
-        module_entry="ParamsSetter",
-        module_name="llprim",
         methods=methods,
     )

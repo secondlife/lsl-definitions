@@ -222,7 +222,7 @@ export type rotation = quaternion</string>
          <key>PrimParamsSetterType</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast</string>
          </map>
       </map>
       <key>constants</key>
@@ -325,8 +325,10 @@ export type rotation = quaternion</string>
          <key>llprim.ParamsSetter</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast</string>
             <key>type</key>
+            <string>PrimParamsSetterTypeMeta</string>
+            <key>value</key>
             <string>PrimParamsSetterTypeMeta</string>
          </map>
          <key>math.huge</key>

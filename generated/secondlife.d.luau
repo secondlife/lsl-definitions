@@ -171,6 +171,8 @@ end
 
 export type PrimParamsSetterTypeMeta = {
   __index: PrimParamsSetterTypeMeta,
+  new: () -> PrimParamsSetterType,
+  apply: (self: PrimParamsSetterType, link: number?) -> (),
   targetLink: <T>(self: T & PrimParamsSetterType, link_target: number) -> T,
   physicsMaterial: <T>(self: T & PrimParamsSetterType, flag: number) -> T,
   physical: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
@@ -221,8 +223,6 @@ export type PrimParamsSetterTypeMeta = {
   damage: <T>(self: T & PrimParamsSetterType, damage: number, damage_type: number) -> T,
   health: <T>(self: T & PrimParamsSetterType, health: number) -> T,
   collisionSound: <T>(self: T & PrimParamsSetterType, sound: (string | uuid), volume: number) -> T,
-  apply: (self: PrimParamsSetterType, link: number?) -> (),
-  new: () -> PrimParamsSetterType,
 }
 
 export type PrimParamsSetterType = typeof(

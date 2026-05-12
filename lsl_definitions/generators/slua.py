@@ -181,6 +181,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         fields = {}
         for method in class_.methods:
             fields[method.name] = selene_function(method, method=True)
+        for func in class_.functions:
+            fields[func.name] = selene_function(func, method=False)
         for prop in class_.properties:
             fields[prop.name] = selene_property(prop)
         return fields

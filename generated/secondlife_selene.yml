@@ -4414,6 +4414,7 @@ globals:
       an error if JSON is invalid.
   llprim.ParamsSetter:
     property: read-only
+    description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   math.pi:
     property: read-only
     type: number
@@ -15567,6 +15568,12 @@ structs:
       - type: function
       description: Unregisters a timer callback. Returns true if found and removed.
   PrimParamsSetterType:
+    apply:
+      method: true
+      args:
+      - type: number
+        required: false
+      description: Call ll.SetLinkPrimitiveParamsFast with my instance list
     targetLink:
       method: true
       args:
@@ -15953,11 +15960,6 @@ structs:
       args:
       - type: string
       - type: number
-    apply:
-      method: true
-      args:
-      - type: number
-        required: false
     new:
-      method: true
       args: []
+      description: Create an empty list with PrimParamsSetterTypeMeta as metatable
