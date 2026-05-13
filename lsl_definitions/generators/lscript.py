@@ -21,7 +21,7 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
     func_defs = ""
     for func in definitions.functions.values():
         if func.arguments:
-            args_def = '"%s"' % "".join(x.type.meta.library_abbr for x in func.arguments)
+            args_def = '"{}"'.format("".join(x.type.meta.library_abbr for x in func.arguments))
         else:
             # Using `nullptr` instead of `""` saves a worthless array alloc inside `runllib_common()`.
             args_def = "nullptr"
@@ -30,7 +30,7 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
             # Using `nullptr` instead of `""` saves a worthless alloc inside `runllib_common()`.
             ret_def = "nullptr"
         else:
-            ret_def = '"%s"' % func.ret_type.meta.library_abbr
+            ret_def = f'"{func.ret_type.meta.library_abbr}"'
 
         func_defs += (
             f'dangerousAddFunction({func.func_id}, "{func.name}", {ret_def}, {args_def}, '
@@ -734,7 +734,7 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions) -> str:
             f" fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_{impl_name})));\n"
         )
 
-    binding_file_code = """
+    binding_file_code = f"""
 extern "C"
 {{
 #include <mono/metadata/metadata.h>
@@ -747,13 +747,13 @@ extern "C"
 
 typedef void (*PtrType)();
 
-{}
+{functions}
 
 void mono_internal_call_init_generated()
 {{
-{}
+{binding_calls}
 }}
-""".format(functions, binding_calls)
+"""
     return binding_file_code
 
 
@@ -777,15 +777,12 @@ def gen_lscript_interface(definitions: LSLDefinitions) -> str:
         # Bind to LSO VM
         assign_execs += f'    gScriptLibrary.assignExec("{func.name}", {impl_name});\n'
 
-    function_code = (
-        """
+    function_code = f"""
 void task_lscript_init_generated()
-{
-%s
-}
+{{
+{assign_execs}
+}}
 """
-        % assign_execs
-    )
     return function_code
 
 
@@ -826,24 +823,24 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
             prelude += "    }\n"
 
         binding = """
-{"%(func_name)s", [](lua_State *L) {
-    LLScriptLibData args[%(num_args)d];
-    const LSCRIPTType types[] = {%(arg_types)s};
+{{"{func_name}", [](lua_State *L) {{
+    LLScriptLibData args[{num_args:d}];
+    const LSCRIPTType types[] = {{{arg_types}}};
     // Convert the arguments to LLScriptLibData, throwing if not possible.
-    extract_lua_args(L, %(num_args)d, types, args);
-%(prelude)s
-    return call_lib_func_lua(L, %(func_id)d, %(num_args)d, args, %(ret_type)s, %(bool_semantics)s, %(index_semantics)s);
-}}
-        """ % {
-            "num_args": len(func.arguments),
-            "ret_type": func.ret_type.meta.lst_name,
-            "arg_types": ", ".join(a.type.meta.lst_name for a in func.arguments),
-            "func_id": func.func_id,
-            "func_name": func_name,
-            "prelude": prelude if prelude.strip() else "    // no prelude",
-            "index_semantics": "false" if not func.index_semantics else "!compat_mode",
-            "bool_semantics": "false" if not func.bool_semantics else "!compat_mode",
-        }
+    extract_lua_args(L, {num_args:d}, types, args);
+{prelude}
+    return call_lib_func_lua(L, {func_id:d}, {num_args:d}, args, {ret_type}, {bool_semantics}, {index_semantics});
+}}}}
+        """.format(
+            num_args=len(func.arguments),
+            ret_type=func.ret_type.meta.lst_name,
+            arg_types=", ".join(a.type.meta.lst_name for a in func.arguments),
+            func_id=func.func_id,
+            func_name=func_name,
+            prelude=prelude if prelude.strip() else "    // no prelude",
+            index_semantics="false" if not func.index_semantics else "!compat_mode",
+            bool_semantics="false" if not func.bool_semantics else "!compat_mode",
+        )
         bindings.append(binding)
 
     return ",".join(bindings)
