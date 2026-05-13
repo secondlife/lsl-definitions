@@ -1,17 +1,28 @@
+# Attributions
+
 ## lsl.tmLanguage
 
-Was adapted from https://github.com/textmate/secondlife-lsl.tmbundle with it's license
+Was adapted from
 
+ - https://github.com/textmate/secondlife-lsl.tmbundle
+ 
+### License
+
+```
 Permission to copy, use, modify, sell and distribute this
 software is granted. This software is provided "as is" without
 express or implied warranty, and with no claim as to its
 suitability for any purpose.
+```
 
 ## slua.tmLanguage and slua.tmLangauge.json
 
-Most of these files was addapted from the work of Copyright holders Listed below.
+Most of these files was addapted from the works below.
+ - https://github.com/JohnnyMorganz/Luau.tmLanguage
+ - https://github.com/NightrainsRbx/RobloxLsp/blob/master/syntaxes/lua.tmLanguage.json
 
-===
+
+### Licenses
 
 Copyright (c) JohnnyMorganz All rights reserved.
 

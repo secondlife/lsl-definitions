@@ -6,7 +6,7 @@
     <array>
       <string>The source of this file is https://github.com/secondlife/lsl-definitions/tree/main/generated/syntax/slua.tmLanguage</string>
       <string>If you want to provide a fix or improvement, contributions are welcome here https://github.com/secondlife/lsl-definitions</string>
-      <string>Large portions of this template were adapted from the work by JohnnyMorganz here https://github.com/JohnnyMorganz/Luau.tmLanguage</string>
+      <string>Large portions of this file were adapted from the work of others see https://github.com/secondlife/lsl-definitions/tree/main/templates/syntax/LICENSE.md</string>
     </array>
     <key>name</key>
     <string>SLua</string>
