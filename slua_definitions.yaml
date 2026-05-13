@@ -450,6 +450,14 @@ functions:
   return-type: (((A...) -> any)?, string?)
   slua-removed: true
 
+- name: newproxy
+  comment: Creates a new untyped userdata object with an optional metatable.
+  parameters:
+  - name: mt
+    comment: Optional boolean to create a modifiable metatable.
+    type: boolean?
+  return-type: any
+
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
   type-parameters: [K, V]
@@ -461,13 +469,6 @@ functions:
     comment: Optional key to start traversal after.
     type: K?
   return-type: (K, V)?
-- name: newproxy
-  comment: Creates a new untyped userdata object with an optional metatable.
-  parameters:
-  - name: mt
-    comment: Optional boolean to create a modifiable metatable.
-    type: boolean?
-  return-type: any
 
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
@@ -589,14 +590,6 @@ functions:
   return-type: ()
   fastcall: true
 
-- name: toquaternion
-  comment: Converts a string to a quaternion, returns nil if invalid
-  parameters:
-  - name: val
-    type: string? | quaternion
-    selene-type: string
-  return-type: quaternion?
-
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
@@ -608,6 +601,15 @@ functions:
     type: number?
   return-type: number?
   fastcall: true
+  must-use: true
+
+- name: toquaternion
+  comment: Converts a string to a quaternion, returns nil if invalid
+  parameters:
+  - name: val
+    type: string? | quaternion
+    selene-type: string
+  return-type: quaternion?
   must-use: true
 
 - name: torotation
