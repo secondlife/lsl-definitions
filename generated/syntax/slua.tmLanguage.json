@@ -1,9 +1,8 @@
 {
   "information_for_contributors": [
     "The source of this file is https://github.com/secondlife/lsl-definitions/tree/main/generated/syntax/slua.tmLanguage.json",
-    "If you want to provide a fix or improvement, please create a pull request against the original repository.",
-    "Once accepted there, we are happy to receive an update request.",
-    "Large portions of this template were adapted from the work by JohnnyMorganz for the Luau tmLanguage syntax files"
+    "If you want to provide a fix or improvement, contributions are welcome here https://github.com/secondlife/lsl-definitions",
+    "Large portions of this template were adapted from the work here https://github.com/JohnnyMorganz/Luau.tmLanguage"
   ],
   "name": "Luau",
   "scopeName": "source.luau",

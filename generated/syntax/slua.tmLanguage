@@ -5,9 +5,8 @@
     <key>information_for_contributors</key>
     <array>
       <string>The source of this file is https://github.com/secondlife/lsl-definitions/tree/main/generated/syntax/slua.tmLanguage</string>
-      <string>If you want to provide a fix or improvement, please create a pull request against the original repository.</string>
-      <string>Once accepted there, we are happy to receive an update request.</string>
-      <string>Large portions of this template were adapted from the work by JohnnyMorganz for the Luau tmLanguage syntax files</string>
+      <string>If you want to provide a fix or improvement, contributions are welcome here https://github.com/secondlife/lsl-definitions</string>
+      <string>Large portions of this template were adapted from the work by JohnnyMorganz here https://github.com/JohnnyMorganz/Luau.tmLanguage</string>
     </array>
     <key>name</key>
     <string>SLua</string>
