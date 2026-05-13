@@ -347,7 +347,6 @@ global-variables:
   comment: Timer management singleton for scheduling periodic and one-time callbacks.
   type: LLTimers
 functions:
-
 - name: assert
   comment: Checks if the value is truthy; if not, raises an error with the optional message.
   type-parameters: [T]
@@ -360,7 +359,6 @@ functions:
     type: string?
   return-type: T
   fastcall: true
-
 - name: collectgarbage
   comment: Run the garbage collector
   parameters:
@@ -375,14 +373,12 @@ functions:
       selene-type: string
     return-type: number
   local-only: true
-
 - name: dangerouslyexecuterequiredmodule
   comment: Dangerously executes a required module function
   parameters:
   - name: f
     type: (...any) -> ...any
   return-type: '...any'
-
 - name: error
   comment: Raises an error with the specified object and optional call stack level.
   parameters:
@@ -396,7 +392,6 @@ functions:
 - name: gcinfo
   comment: Returns the total heap size in kilobytes.
   return-type: number
-
 - name: getfenv
   comment: Get the scoped environment for the given function.
   parameters:
@@ -405,7 +400,6 @@ functions:
     selene-type: function
   return-type: '{[string]: any}'
   slua-removed: true
-
 - name: getmetatable
   comment: Returns the metatable for the specified object.
   parameters:
@@ -414,7 +408,6 @@ functions:
     type: any
   return-type: "{[any]: any}?"
   fastcall: true
-
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
     Intended to be used with tools/graphanalyze.py
@@ -429,7 +422,6 @@ functions:
   - name: path
     type: string
   local-only: true
-
 - name: ipairs
   comment: Returns an iterator for numeric key-value pairs in the table.
   type-parameters: [V]
@@ -438,7 +430,6 @@ functions:
     comment: The table to iterate over.
     type: "{V}"
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
-
 - name: loadstring
   comment: Compile Luau code into a function.
   type-parameters: [A...]
@@ -449,7 +440,6 @@ functions:
     type: string?
   return-type: (((A...) -> any)?, string?)
   slua-removed: true
-
 - name: newproxy
   comment: Creates a new untyped userdata object with an optional metatable.
   parameters:
@@ -457,7 +447,6 @@ functions:
     comment: Optional boolean to create a modifiable metatable.
     type: boolean?
   return-type: any
-
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
   type-parameters: [K, V]
@@ -469,7 +458,6 @@ functions:
     comment: Optional key to start traversal after.
     type: K?
   return-type: (K, V)?
-
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -489,7 +477,6 @@ functions:
     comment: Arguments to pass to the function.
     type: A...
   return-type: (boolean, R...)
-
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
   parameters:
@@ -497,7 +484,6 @@ functions:
     comment: Arguments to print to standard output.
     type: ...any
   return-type: ()
-
 - name: rawequal
   comment: Returns true if a and b have the same type and value.
   parameters:
@@ -521,7 +507,6 @@ functions:
     type: K
   return-type: V?
   fastcall: true
-
 - name: rawlen
   comment: Returns the length of a table or string bypassing metatables.
   type-parameters: [K, V]
@@ -531,7 +516,6 @@ functions:
     type: "{[K]: V} | string"
   return-type: number
   fastcall: true
-
 - name: rawset
   comment: Assigns a value to a table field bypassing metatables.
   type-parameters: [K, V]
@@ -547,7 +531,6 @@ functions:
     type: V
   return-type: "{[K]: V}"
   fastcall: true
-
 - name: require
   comment: Execute the named external module.
   parameters:
@@ -555,7 +538,6 @@ functions:
     comment: The name of the external module.
     type: string
   return-type: any
-
 - name: select
   comment: Returns a subset of arguments or the number of arguments.
   parameters:
@@ -567,7 +549,6 @@ functions:
     type: ...any
   return-type: any
   fastcall: true
-
 - name: setfenv
   comment: Set the scoped environment for the given function.
   parameters:
@@ -577,7 +558,6 @@ functions:
   - name: env
     type: '{[string]: any}'
   slua-removed: true
-
 - name: setmetatable
   comment: Changes the metatable for the given table.
   parameters:
@@ -589,7 +569,6 @@ functions:
     type: "{ [any]: any }?"
   return-type: ()
   fastcall: true
-
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
@@ -602,7 +581,6 @@ functions:
   return-type: number?
   fastcall: true
   must-use: true
-
 - name: toquaternion
   comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
@@ -611,7 +589,6 @@ functions:
     selene-type: string
   return-type: quaternion?
   must-use: true
-
 - name: torotation
   comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
@@ -620,7 +597,6 @@ functions:
     selene-type: string
   return-type: quaternion?
   must-use: true
-
 - name: tostring
   comment: Converts the input object to a string.
   parameters:
@@ -629,7 +605,6 @@ functions:
     type: any
   return-type: string
   fastcall: true
-
 - name: touuid
   comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
     nil if the string is not a valid UUID, or the the buffer is
@@ -648,7 +623,6 @@ functions:
     selene-type: string
   return-type: vector?
   must-use: true
-
 - name: type
   comment: Returns the type of the object as a string.
   parameters:
@@ -667,7 +641,6 @@ functions:
   return-type: string
   must-use: true
   fastcall: true
-
 - name: unpack
   comment: Returns values from an array in the specified index range.
   type-parameters: [V]
@@ -683,7 +656,6 @@ functions:
     type: number?
   return-type: ...V
   fastcall: true
-
 - name: xpcall
   comment: Calls function f with parameters args, handling errors with e if they occur.
   type-parameters: [E, A..., R1..., R2...]
@@ -698,8 +670,6 @@ functions:
     comment: Arguments to pass to the function.
     type: A...
   return-type: (boolean, R1...)
-
-
 modules:
 - name: bit32
   comment: Bitwise operations library.
