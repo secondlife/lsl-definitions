@@ -17,7 +17,7 @@ def gen_constant_lsl_script(definitions: LSLDefinitions) -> str:
 
     This can be done by looking at the bytecode of the compiled script.
     """
-    keys = ['"%s"' % x for x in definitions.constants.keys()]
+    keys = [f'"{x}"' for x in definitions.constants.keys()]
     joined_names = ", \n".join(itertools.chain(*zip(keys, definitions.constants.keys())))
 
     # Generate some stub event handlers as well

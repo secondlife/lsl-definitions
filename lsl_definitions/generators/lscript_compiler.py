@@ -35,9 +35,7 @@ def gen_lexer_file(definitions: LSLDefinitions, template_path: str) -> str:
     for event in definitions.events.values():
         if event.name in _LEXER_BLACKLIST:
             continue
-        generated_events += '"{}" {{ count(); return({}); }}\n'.format(
-            event.name, event.name.upper()
-        )
+        generated_events += f'"{event.name}" {{ count(); return({event.name.upper()}); }}\n'
     lexer_template = splice_str(lexer_template, _LEXER_EVENT_COMMENT, generated_events)
 
     generated_constants = ""
@@ -123,15 +121,12 @@ def gen_parser_file(definitions: LSLDefinitions, template_path: str) -> str:
         if event.name not in _PARSER_TYPES_BLACKLIST:
             generated_event_tokens += f"%token    {event.name.upper()}\n"
             generated_event_types += f"%type<event>    {event.name}\n"
-            generated_event_switch += (
-                """
-    | %s compound_statement {
+            generated_event_switch += f"""
+    | {event.name} compound_statement {{
         $$ = new LLScriptEventHandler(gLine, gColumn, $1, $2);
         gAllocationManager->addAllocation($$);
-    }
+    }}
 """
-                % event.name
-            )
         if event.name not in _PARSER_DEFINITIONS_BLACKLIST:
             generated_event_definitions += f"{event.name}\n"
             generated_event_definitions += f"    : {event.name.upper()} '(' "
@@ -160,7 +155,7 @@ def gen_parser_file(definitions: LSLDefinitions, template_path: str) -> str:
                 arg_idx += 3
 
             event_class = _event_to_class_name(event)
-            arg_str = ", ".join("id%d" % x for x in range(0, len(event.arguments)))
+            arg_str = ", ".join(f"id{x}" for x in range(0, len(event.arguments)))
             if arg_str:
                 arg_str = ", " + arg_str
             generated_event_definitions += (
