@@ -346,13 +346,21 @@ global-variables:
 - name: LLTimers
   comment: Timer management singleton for scheduling periodic and one-time callbacks.
   type: LLTimers
-global-functions:
-- name: dangerouslyexecuterequiredmodule
-  comment: Dangerously executes a required module function
+functions:
+
+- name: assert
+  comment: Checks if the value is truthy; if not, raises an error with the optional message.
+  type-parameters: [T]
   parameters:
-  - name: f
-    type: (...any) -> ...any
-  return-type: '...any'
+  - name: value
+    comment: The value to check for truthiness.
+    type: T?
+  - name: message
+    comment: Optional error message to display if the value is not truthy.
+    type: string?
+  return-type: T
+  fastcall: true
+
 - name: collectgarbage
   comment: Run the garbage collector
   parameters:
@@ -367,16 +375,28 @@ global-functions:
       selene-type: string
     return-type: number
   local-only: true
-- name: loadstring
-  comment: Compile Luau code into a function.
-  type-parameters: [A...]
+
+- name: dangerouslyexecuterequiredmodule
+  comment: Dangerously executes a required module function
   parameters:
-  - name: src
-    type: string
-  - name: chunkname
-    type: string?
-  return-type: (((A...) -> any)?, string?)
-  slua-removed: true
+  - name: f
+    type: (...any) -> ...any
+  return-type: '...any'
+
+- name: error
+  comment: Raises an error with the specified object and optional call stack level.
+  parameters:
+  - name: obj
+    comment: The error object to raise.
+    type: any
+  - name: level
+    comment: Optional level to attribute the error to in the call stack.
+    type: number?
+  return-type: never
+- name: gcinfo
+  comment: Returns the total heap size in kilobytes.
+  return-type: number
+
 - name: getfenv
   comment: Get the scoped environment for the given function.
   parameters:
@@ -385,6 +405,16 @@ global-functions:
     selene-type: function
   return-type: '{[string]: any}'
   slua-removed: true
+
+- name: getmetatable
+  comment: Returns the metatable for the specified object.
+  parameters:
+  - name: obj
+    comment: The object to get the metatable for.
+    type: any
+  return-type: "{[any]: any}?"
+  fastcall: true
+
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
     Intended to be used with tools/graphanalyze.py
@@ -399,6 +429,144 @@ global-functions:
   - name: path
     type: string
   local-only: true
+
+- name: ipairs
+  comment: Returns an iterator for numeric key-value pairs in the table.
+  type-parameters: [V]
+  parameters:
+  - name: t
+    comment: The table to iterate over.
+    type: "{V}"
+  return-type: "(({V}, number) -> (number?, V), {V}, number)"
+
+- name: loadstring
+  comment: Compile Luau code into a function.
+  type-parameters: [A...]
+  parameters:
+  - name: src
+    type: string
+  - name: chunkname
+    type: string?
+  return-type: (((A...) -> any)?, string?)
+  slua-removed: true
+
+- name: next
+  comment: Returns the next key-value pair in the table traversal order.
+  type-parameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to traverse.
+    type: "{[K]: V}"
+  - name: i
+    comment: Optional key to start traversal after.
+    type: K?
+  return-type: (K, V)?
+- name: newproxy
+  comment: Creates a new untyped userdata object with an optional metatable.
+  parameters:
+  - name: mt
+    comment: Optional boolean to create a modifiable metatable.
+    type: boolean?
+  return-type: any
+
+- name: pairs
+  comment: Returns an iterator for all key-value pairs in the table.
+  type-parameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to iterate over.
+    type: "{[K]: V}"
+  return-type: "(({[K], V}, K) -> (K?, V), {[K], V}, K)"
+- name: pcall
+  comment: Calls function f with parameters args, returning success and function results or an error.
+  type-parameters: [A..., R...]
+  parameters:
+  - name: f
+    comment: A function to be called.
+    type: (A...) -> R...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  return-type: (boolean, R...)
+
+- name: print
+  comment: Prints all arguments to standard output using Tab as a separator.
+  parameters:
+  - name: ...
+    comment: Arguments to print to standard output.
+    type: ...any
+  return-type: ()
+
+- name: rawequal
+  comment: Returns true if a and b have the same type and value.
+  parameters:
+  - name: a
+    comment: First object to compare.
+    type: any
+  - name: b
+    comment: Second object to compare.
+    type: any
+  return-type: boolean
+  fastcall: true
+- name: rawget
+  comment: Performs a table lookup bypassing metatables.
+  type-parameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to perform the lookup on.
+    type: "{[K]: V}"
+  - name: k
+    comment: The key to look up in the table.
+    type: K
+  return-type: V?
+  fastcall: true
+
+- name: rawlen
+  comment: Returns the length of a table or string bypassing metatables.
+  type-parameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table or string to compute the length of.
+    type: "{[K]: V} | string"
+  return-type: number
+  fastcall: true
+
+- name: rawset
+  comment: Assigns a value to a table field bypassing metatables.
+  type-parameters: [K, V]
+  parameters:
+  - name: t
+    comment: The table to assign the value to.
+    type: "{[K]: V}"
+  - name: k
+    comment: The key to assign the value to.
+    type: K
+  - name: v
+    comment: The value to assign.
+    type: V
+  return-type: "{[K]: V}"
+  fastcall: true
+
+- name: require
+  comment: Execute the named external module.
+  parameters:
+  - name: target
+    comment: The name of the external module.
+    type: string
+  return-type: any
+
+- name: select
+  comment: Returns a subset of arguments or the number of arguments.
+  parameters:
+  - name: i
+    comment: The index or '#' to count arguments.
+    type: string | number
+  - name: ...
+    comment: The arguments to select from.
+    type: ...any
+  return-type: any
+  fastcall: true
+
 - name: setfenv
   comment: Set the scoped environment for the given function.
   parameters:
@@ -408,6 +576,58 @@ global-functions:
   - name: env
     type: '{[string]: any}'
   slua-removed: true
+
+- name: setmetatable
+  comment: Changes the metatable for the given table.
+  parameters:
+  - name: t
+    comment: The table to set the metatable for.
+    type: "{ [any]: any }"
+  - name: mt
+    comment: The metatable to set.
+    type: "{ [any]: any }?"
+  return-type: ()
+  fastcall: true
+
+- name: toquaternion
+  comment: Converts a string to a quaternion, returns nil if invalid
+  parameters:
+  - name: val
+    type: string? | quaternion
+    selene-type: string
+  return-type: quaternion?
+
+- name: tonumber
+  comment: Converts the input string to a number in the specified base.
+  parameters:
+  - name: s
+    comment: The string to convert to a number.
+    type: string
+  - name: base
+    comment: Optional base for the conversion.
+    type: number?
+  return-type: number?
+  fastcall: true
+  must-use: true
+
+- name: torotation
+  comment: Converts a string to a rotation (quaternion), returns nil if invalid
+  parameters:
+  - name: val
+    type: string? | quaternion
+    selene-type: string
+  return-type: quaternion?
+  must-use: true
+
+- name: tostring
+  comment: Converts the input object to a string.
+  parameters:
+  - name: obj
+    comment: The object to convert to a string.
+    type: any
+  return-type: string
+  fastcall: true
+
 - name: touuid
   comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
     nil if the string is not a valid UUID, or the the buffer is
@@ -426,22 +646,58 @@ global-functions:
     selene-type: string
   return-type: vector?
   must-use: true
-- name: toquaternion
-  comment: Converts a string to a quaternion, returns nil if invalid
+
+- name: type
+  comment: Returns the type of the object as a string.
   parameters:
-  - name: val
-    type: string? | quaternion
-    selene-type: string
-  return-type: quaternion?
+  - name: obj
+    comment: The object to get the type of.
+    type: any
+  return-type: string
   must-use: true
-- name: torotation
-  comment: Converts a string to a rotation (quaternion), returns nil if invalid
+  fastcall: true
+- name: typeof
+  comment: Returns the type of the object, including custom userdata types.
   parameters:
-  - name: val
-    type: string? | quaternion
-    selene-type: string
-  return-type: quaternion?
+  - name: obj
+    comment: The object to get the type of.
+    type: any
+  return-type: string
   must-use: true
+  fastcall: true
+
+- name: unpack
+  comment: Returns values from an array in the specified index range.
+  type-parameters: [V]
+  parameters:
+  - name: a
+    comment: Array from which to extract values.
+    type: "{V}"
+  - name: f
+    comment: Starting index (optional, defaults to 1).
+    type: number?
+  - name: t
+    comment: "Ending index (optional, defaults to #a)."
+    type: number?
+  return-type: ...V
+  fastcall: true
+
+- name: xpcall
+  comment: Calls function f with parameters args, handling errors with e if they occur.
+  type-parameters: [E, A..., R1..., R2...]
+  parameters:
+  - name: f
+    comment: A function to be called.
+    type: (A...) -> R1...
+  - name: e
+    comment: Error handler function.
+    type: (E) -> R2...
+  - name: ...
+    comment: Arguments to pass to the function.
+    type: A...
+  return-type: (boolean, R1...)
+
+
 modules:
 - name: bit32
   comment: Bitwise operations library.
@@ -2608,234 +2864,6 @@ builtin-constants:
   - name: _VERSION
     type: string
     value: '"Luau"'
-builtin-functions:
-- name: assert
-  comment: Checks if the value is truthy; if not, raises an error with the optional message.
-  type-parameters: [T]
-  parameters:
-  - name: value
-    comment: The value to check for truthiness.
-    type: T?
-  - name: message
-    comment: Optional error message to display if the value is not truthy.
-    type: string?
-  return-type: T
-  fastcall: true
-- name: error
-  comment: Raises an error with the specified object and optional call stack level.
-  parameters:
-  - name: obj
-    comment: The error object to raise.
-    type: any
-  - name: level
-    comment: Optional level to attribute the error to in the call stack.
-    type: number?
-  return-type: never
-- name: gcinfo
-  comment: Returns the total heap size in kilobytes.
-  return-type: number
-- name: getmetatable
-  comment: Returns the metatable for the specified object.
-  parameters:
-  - name: obj
-    comment: The object to get the metatable for.
-    type: any
-  return-type: "{[any]: any}?"
-  fastcall: true
-- name: next
-  comment: Returns the next key-value pair in the table traversal order.
-  type-parameters: [K, V]
-  parameters:
-  - name: t
-    comment: The table to traverse.
-    type: "{[K]: V}"
-  - name: i
-    comment: Optional key to start traversal after.
-    type: K?
-  return-type: (K, V)?
-- name: newproxy
-  comment: Creates a new untyped userdata object with an optional metatable.
-  parameters:
-  - name: mt
-    comment: Optional boolean to create a modifiable metatable.
-    type: boolean?
-  return-type: any
-- name: print
-  comment: Prints all arguments to standard output using Tab as a separator.
-  parameters:
-  - name: ...
-    comment: Arguments to print to standard output.
-    type: ...any
-  return-type: ()
-- name: rawequal
-  comment: Returns true if a and b have the same type and value.
-  parameters:
-  - name: a
-    comment: First object to compare.
-    type: any
-  - name: b
-    comment: Second object to compare.
-    type: any
-  return-type: boolean
-  fastcall: true
-- name: rawget
-  comment: Performs a table lookup bypassing metatables.
-  type-parameters: [K, V]
-  parameters:
-  - name: t
-    comment: The table to perform the lookup on.
-    type: "{[K]: V}"
-  - name: k
-    comment: The key to look up in the table.
-    type: K
-  return-type: V?
-  fastcall: true
-- name: rawset
-  comment: Assigns a value to a table field bypassing metatables.
-  type-parameters: [K, V]
-  parameters:
-  - name: t
-    comment: The table to assign the value to.
-    type: "{[K]: V}"
-  - name: k
-    comment: The key to assign the value to.
-    type: K
-  - name: v
-    comment: The value to assign.
-    type: V
-  return-type: "{[K]: V}"
-  fastcall: true
-- name: rawlen
-  comment: Returns the length of a table or string bypassing metatables.
-  type-parameters: [K, V]
-  parameters:
-  - name: t
-    comment: The table or string to compute the length of.
-    type: "{[K]: V} | string"
-  return-type: number
-  fastcall: true
-- name: select
-  comment: Returns a subset of arguments or the number of arguments.
-  parameters:
-  - name: i
-    comment: The index or '#' to count arguments.
-    type: string | number
-  - name: ...
-    comment: The arguments to select from.
-    type: ...any
-  return-type: any
-  fastcall: true
-- name: setmetatable
-  comment: Changes the metatable for the given table.
-  parameters:
-  - name: t
-    comment: The table to set the metatable for.
-    type: "{ [any]: any }"
-  - name: mt
-    comment: The metatable to set.
-    type: "{ [any]: any }?"
-  return-type: ()
-  fastcall: true
-- name: tonumber
-  comment: Converts the input string to a number in the specified base.
-  parameters:
-  - name: s
-    comment: The string to convert to a number.
-    type: string
-  - name: base
-    comment: Optional base for the conversion.
-    type: number?
-  return-type: number?
-  fastcall: true
-- name: tostring
-  comment: Converts the input object to a string.
-  parameters:
-  - name: obj
-    comment: The object to convert to a string.
-    type: any
-  return-type: string
-  fastcall: true
-- name: type
-  comment: Returns the type of the object as a string.
-  parameters:
-  - name: obj
-    comment: The object to get the type of.
-    type: any
-  return-type: string
-  must-use: true
-  fastcall: true
-- name: typeof
-  comment: Returns the type of the object, including custom userdata types.
-  parameters:
-  - name: obj
-    comment: The object to get the type of.
-    type: any
-  return-type: string
-  must-use: true
-  fastcall: true
-- name: ipairs
-  comment: Returns an iterator for numeric key-value pairs in the table.
-  type-parameters: [V]
-  parameters:
-  - name: t
-    comment: The table to iterate over.
-    type: "{V}"
-  return-type: "(({V}, number) -> (number?, V), {V}, number)"
-- name: pairs
-  comment: Returns an iterator for all key-value pairs in the table.
-  type-parameters: [K, V]
-  parameters:
-  - name: t
-    comment: The table to iterate over.
-    type: "{[K]: V}"
-  return-type: "(({[K], V}, K) -> (K?, V), {[K], V}, K)"
-- name: pcall
-  comment: Calls function f with parameters args, returning success and function results or an error.
-  type-parameters: [A..., R...]
-  parameters:
-  - name: f
-    comment: A function to be called.
-    type: (A...) -> R...
-  - name: ...
-    comment: Arguments to pass to the function.
-    type: A...
-  return-type: (boolean, R...)
-- name: xpcall
-  comment: Calls function f with parameters args, handling errors with e if they occur.
-  type-parameters: [E, A..., R1..., R2...]
-  parameters:
-  - name: f
-    comment: A function to be called.
-    type: (A...) -> R1...
-  - name: e
-    comment: Error handler function.
-    type: (E) -> R2...
-  - name: ...
-    comment: Arguments to pass to the function.
-    type: A...
-  return-type: (boolean, R1...)
-- name: require
-  comment: Execute the named external module.
-  parameters:
-  - name: target
-    comment: The name of the external module.
-    type: string
-  return-type: any
-- name: unpack
-  comment: Returns values from an array in the specified index range.
-  type-parameters: [V]
-  parameters:
-  - name: a
-    comment: Array from which to extract values.
-    type: "{V}"
-  - name: f
-    comment: Starting index (optional, defaults to 1).
-    type: number?
-  - name: t
-    comment: "Ending index (optional, defaults to #a)."
-    type: number?
-  return-type: ...V
-  fastcall: true
 metamethods:
   __add:
     tooltip: "Overload method for + operator."
