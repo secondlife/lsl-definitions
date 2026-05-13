@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+# ruff: noqa: UP031  # Allow % formatting
 import re
 
 from lsl_definitions.generators.base import register
@@ -21,7 +22,7 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
     func_defs = ""
     for func in definitions.functions.values():
         if func.arguments:
-            args_def = '"{}"'.format("".join(x.type.meta.library_abbr for x in func.arguments))
+            args_def = f'"{"".join(x.type.meta.library_abbr for x in func.arguments)}"'
         else:
             # Using `nullptr` instead of `""` saves a worthless array alloc inside `runllib_common()`.
             args_def = "nullptr"
@@ -734,26 +735,26 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions) -> str:
             f" fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_{impl_name})));\n"
         )
 
-    binding_file_code = f"""
+    binding_file_code = """
 extern "C"
-{{
+{
 #include <mono/metadata/metadata.h>
 #include <mono/metadata/object.h>
 #include <mono/jit/jit.h>
-}}
+}
 
 #include "llscriptexecutemono.h"
 #include "llmonointerfacehelpers.h"
 
 typedef void (*PtrType)();
 
-{functions}
+%s
 
 void mono_internal_call_init_generated()
-{{
-{binding_calls}
-}}
-"""
+{
+%s
+}
+""" % (functions, binding_calls)
     return binding_file_code
 
 
@@ -777,12 +778,15 @@ def gen_lscript_interface(definitions: LSLDefinitions) -> str:
         # Bind to LSO VM
         assign_execs += f'    gScriptLibrary.assignExec("{func.name}", {impl_name});\n'
 
-    function_code = f"""
+    function_code = (
+        """
 void task_lscript_init_generated()
-{{
-{assign_execs}
-}}
+{
+%s
+}
 """
+        % assign_execs
+    )
     return function_code
 
 
@@ -823,24 +827,24 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
             prelude += "    }\n"
 
         binding = """
-{{"{func_name}", [](lua_State *L) {{
-    LLScriptLibData args[{num_args:d}];
-    const LSCRIPTType types[] = {{{arg_types}}};
+{"%(func_name)s", [](lua_State *L) {
+    LLScriptLibData args[%(num_args)d];
+    const LSCRIPTType types[] = {%(arg_types)s};
     // Convert the arguments to LLScriptLibData, throwing if not possible.
-    extract_lua_args(L, {num_args:d}, types, args);
-{prelude}
-    return call_lib_func_lua(L, {func_id:d}, {num_args:d}, args, {ret_type}, {bool_semantics}, {index_semantics});
-}}}}
-        """.format(
-            num_args=len(func.arguments),
-            ret_type=func.ret_type.meta.lst_name,
-            arg_types=", ".join(a.type.meta.lst_name for a in func.arguments),
-            func_id=func.func_id,
-            func_name=func_name,
-            prelude=prelude if prelude.strip() else "    // no prelude",
-            index_semantics="false" if not func.index_semantics else "!compat_mode",
-            bool_semantics="false" if not func.bool_semantics else "!compat_mode",
-        )
+    extract_lua_args(L, %(num_args)d, types, args);
+%(prelude)s
+    return call_lib_func_lua(L, %(func_id)d, %(num_args)d, args, %(ret_type)s, %(bool_semantics)s, %(index_semantics)s);
+}}
+        """ % {
+            "num_args": len(func.arguments),
+            "ret_type": func.ret_type.meta.lst_name,
+            "arg_types": ", ".join(a.type.meta.lst_name for a in func.arguments),
+            "func_id": func.func_id,
+            "func_name": func_name,
+            "prelude": prelude if prelude.strip() else "    // no prelude",
+            "index_semantics": "false" if not func.index_semantics else "!compat_mode",
+            "bool_semantics": "false" if not func.bool_semantics else "!compat_mode",
+        }
         bindings.append(binding)
 
     return ",".join(bindings)
