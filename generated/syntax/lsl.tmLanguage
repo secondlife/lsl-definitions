@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>information_for_contributors</key>
+    <array>
+      <string>The source of this file is https://github.com/secondlife/lsl-definitions/tree/main/generated/syntax/lsl.tmLanguage</string>
+      <string>If you want to provide a fix or improvement, please create a pull request against the original repository.</string>
+      <string>Once accepted there, we are happy to receive an update request.</string>
+      <string>Large portions of this template were adapted from the work here https://github.com/textmate/secondlife-lsl.tmbundle</string>
+    </array>
+	<key>name</key>
+	<string>Second Life LSL</string>
+	<key>scopeName</key>
+	<string>source.lsl</string>
+	<key>keyEquivalent</key>
+	<string>^~L</string>
 	<key>fileTypes</key>
 	<array>
 		<string>lsl</string>
@@ -10,10 +23,6 @@
 		<string>lslo</string>
 		<string>esl</string>
 	</array>
-	<key>keyEquivalent</key>
-	<string>^~L</string>
-	<key>name</key>
-	<string>Second Life LSL</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -390,9 +399,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>scopeName</key>
-	<string>source.lsl</string>
-	<key>uuid</key>
-	<string>21B2E01B-B911-4B99-975E-4787BEAE6697</string>
 </dict>
 </plist>
