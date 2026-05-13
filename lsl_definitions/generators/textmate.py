@@ -211,7 +211,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
 def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
 
     inserts = dict(
-        LSL_FLOW_CONTROL_REGEX=crunch_regex_strings(["default", "event","print"] + [c for c in definitions.controls.keys()]),
+        LSL_FLOW_CONTROL_REGEX=crunch_regex_strings([c for c in definitions.controls.keys()]),
         LSL_TYPES_REGEX=crunch_regex_strings([t for t in definitions.types.keys()]),
         LSL_EVENTS_REGEX=crunch_regex_strings([e for e in definitions.events.keys()]),
 
