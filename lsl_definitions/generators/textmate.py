@@ -9,12 +9,37 @@ from string import Template
 
 import os
 import json
+
+## Trie Code
+
+# Original Perl module: Regexp::Trie
+# Original Copyright (C) 2006 by Dan Kogai
+#
+# This Python translation is a derivative work based on Regexp::Trie
+# Copyright (c) 2010 by rex
+# Copyright (c) 2017 by fcicq, atiking and EricDuminil
+
+# This Python code is licensed under the Artistic License 2.0 (AL2.0).
+# A copy of the Artistic License 2.0 can be found at:
+# https://opensource.org/licenses/Artistic-2.0
+#
+# Original source: https://metacpan.org/pod/Regexp::Trie
+#
+#author:         rex
+#blog:           http://iregex.org
+#filename        trie.py
+#created:        2010-08-01 20:24
+#source uri:     http://iregex.org/blog/trie-in-python.html
+
+# escape bug fix by fcicq @ 2012.8.19
+# python3 compatible by EricDuminil @ 2017.03.
+
+# found at https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
 import re
 
-
 class Trie():
-    """Regex::Trie in Python. Creates a Trie out of a list of words. The trie can be exported to a Regex pattern.
-    The corresponding Regex should match much faster than a simple Regex union."""
+    """Regexp::Trie in python. Creates a Trie out of a list of words. The trie can be exported to a Regexp pattern.
+    The corresponding Regexp should match much faster than a simple Regexp union."""
 
     def __init__(self):
         self.data = {}
@@ -71,6 +96,8 @@ class Trie():
 
     def pattern(self):
         return self._pattern(self.dump())
+        
+## End of Trie Code
 
 def encode_json_unquoted(s):
     return json.dumps(s)[1:-1]
