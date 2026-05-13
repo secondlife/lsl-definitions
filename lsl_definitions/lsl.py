@@ -6,7 +6,7 @@ import ast
 import dataclasses
 import re
 from enum import IntEnum
-from typing import TYPE_CHECKING, Dict, List, NamedTuple, Optional, Set, Union
+from typing import TYPE_CHECKING, NamedTuple
 
 import llsd
 import yaml
@@ -33,7 +33,7 @@ class LSLType(StringEnum):
     LIST = "list"
 
     @property
-    def meta(self) -> "LSLTypeMeta":
+    def meta(self) -> LSLTypeMeta:
         return _TYPE_META_MAP[self]
 
 
@@ -51,7 +51,7 @@ class LSLTypeMeta(NamedTuple):
 _CS_TYPE_MODULE = "[ScriptTypes]LindenLab.SecondLife"
 
 
-_TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
+_TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
     LSLType.VOID: LSLTypeMeta(
         cil_name="void",
         lso_size=0,
@@ -139,7 +139,7 @@ _TYPE_META_MAP: Dict[LSLType, LSLTypeMeta] = {
 class LSLConstant:
     name: str
     type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     slua_removed: bool
     value: str
     """A LSL literal, except:
@@ -202,7 +202,7 @@ class LSLConstant:
         )
 
     # TODO: This is a bit smelly, move it to `SLuaDefinitions`.
-    def to_slua_dict(self, slua: "SLuaDefinitions") -> dict:
+    def to_slua_dict(self, slua: SLuaDefinitions) -> dict:
         try:
             return remove_worthless(
                 {
@@ -249,7 +249,7 @@ class LSLEnum:
 class LSLArgument:
     name: str
     type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     tooltip: str
     index_semantics: bool
     asset_semantics: bool
@@ -273,7 +273,7 @@ class LSLArgument:
 @dataclasses.dataclass
 class LSLEvent:
     name: str
-    arguments: List[LSLArgument]
+    arguments: list[LSLArgument]
     tooltip: str
     private: bool
     deprecated: Deprecated | None
@@ -298,7 +298,7 @@ class LSLEvent:
             }
         )
 
-    def to_slua_dict(self, slua: "SLuaDefinitions") -> dict:
+    def to_slua_dict(self, slua: SLuaDefinitions) -> dict:
         try:
             if self.detected_semantics:
                 arguments = [
@@ -336,13 +336,13 @@ class LSLFunction:
     energy: float
     sleep: float
     ret_type: LSLType
-    slua_type: Optional[str]
+    slua_type: str | None
     god_mode: bool
     index_semantics: bool
     bool_semantics: bool
     detected_semantics: bool
-    type_arguments: List[str]
-    arguments: List[LSLArgument]
+    type_arguments: list[str]
+    arguments: list[LSLArgument]
     tooltip: str
     private: bool
     """
@@ -451,7 +451,7 @@ class LSLFunction:
             tooltip = tooltip.replace("-1", "nil")
         return tooltip
 
-    def to_slua_dict(self, slua: "SLuaDefinitions") -> dict:
+    def to_slua_dict(self, slua: SLuaDefinitions) -> dict:
         try:
             known_types = slua.validate_type_params(self.type_arguments)
             return remove_worthless(
@@ -482,16 +482,16 @@ class LSLFunction:
 
 
 class LSLDefinitions(NamedTuple):
-    events: Dict[str, LSLEvent]
-    functions: Dict[str, LSLFunction]
-    enums: Dict[str, LSLEnum]
-    constants: Dict[str, LSLConstant]
+    events: dict[str, LSLEvent]
+    functions: dict[str, LSLFunction]
+    enums: dict[str, LSLEnum]
+    constants: dict[str, LSLConstant]
     controls: dict
     types: dict
     builder_rulesets: dict
 
     @property
-    def reserved_words(self) -> Set[str]:
+    def reserved_words(self) -> set[str]:
         """Words that may not be used as identifiers (case-sensitive)"""
         return (
             set(self.controls.keys())
@@ -694,8 +694,8 @@ class LSLDefinitionParser:
             )
         return arg
 
-    def _validate_args(self, obj: Union[LSLEvent, LSLFunction]) -> None:
-        unique_arg_names = set(a.name for a in obj.arguments)
+    def _validate_args(self, obj: LSLEvent | LSLFunction) -> None:
+        unique_arg_names = {a.name for a in obj.arguments}
         if len(unique_arg_names) != len(obj.arguments):
             raise KeyError(f"Duplicate argument names in {obj.name}")
         for name in unique_arg_names:
@@ -739,7 +739,7 @@ class LSLDefinitionParser:
                 f"{variant_enum_name!r}"
             )
         variant_enum = self._definitions.enums[variant_enum_name]
-        seen: Set[str] = set()
+        seen: set[str] = set()
         for variant in variants:
             for tag in variant["applies-to"]:
                 if tag not in variant_enum.by_name:
