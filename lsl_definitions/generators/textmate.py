@@ -1,43 +1,39 @@
 from __future__ import annotations
-from asyncio import constants
 
-from lsl_definitions.lsl import LSLDefinitions, LSLType
-from lsl_definitions.slua import SLuaDefinitions, SLuaModule, SLuaProperty, SLuaClassDeclaration
-from lsl_definitions.generators.base import register
-
+import json
+import os
+import re
 from string import Template
 
-import os
-import json
+from lsl_definitions.generators.base import register
+from lsl_definitions.lsl import LSLDefinitions
+from lsl_definitions.slua import SLuaDefinitions, SLuaModule, SLuaProperty
 
 ## Trie Code
-
 # Original Perl module: Regexp::Trie
 # Original Copyright (C) 2006 by Dan Kogai
 #
 # This Python translation is a derivative work based on Regexp::Trie
 # Copyright (c) 2010 by rex
 # Copyright (c) 2017 by fcicq, atiking and EricDuminil
-
 # This Python code is licensed under the Artistic License 2.0 (AL2.0).
 # A copy of the Artistic License 2.0 can be found at:
 # https://opensource.org/licenses/Artistic-2.0
 #
 # Original source: https://metacpan.org/pod/Regexp::Trie
 #
-#author:         rex
-#blog:           http://iregex.org
-#filename        trie.py
-#created:        2010-08-01 20:24
-#source uri:     http://iregex.org/blog/trie-in-python.html
-
+# author:         rex
+# blog:           http://iregex.org
+# filename        trie.py
+# created:        2010-08-01 20:24
+# source uri:     http://iregex.org/blog/trie-in-python.html
 # escape bug fix by fcicq @ 2012.8.19
 # python3 compatible by EricDuminil @ 2017.03.
-
 # found at https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
-import re
+# Modifications for formatting and styleguide compliance
 
-class Trie():
+
+class Trie:
     """Regexp::Trie in python. Creates a Trie out of a list of words. The trie can be exported to a Regexp pattern.
     The corresponding Regexp should match much faster than a simple Regexp union."""
 
@@ -49,7 +45,7 @@ class Trie():
         for char in word:
             ref[char] = char in ref and ref[char] or {}
             ref = ref[char]
-        ref[''] = 1
+        ref[""] = 1
 
     def dump(self):
         return self.data
@@ -80,7 +76,7 @@ class Trie():
             if len(cc) == 1:
                 alt.append(cc[0])
             else:
-                alt.append('[' + ''.join(cc) + ']')
+                alt.append("[" + "".join(cc) + "]")
 
         if len(alt) == 1:
             result = alt[0]
@@ -97,7 +93,9 @@ class Trie():
     def pattern(self):
         return self._pattern(self.dump())
 
+
 ## End of Trie Code
+
 
 def encode_json_unquoted(s):
     return json.dumps(s)[1:-1]
@@ -110,8 +108,11 @@ def crunch_regex_strings(strings: list[str]) -> str:
         trie.add(string)
     return trie.pattern()
 
+
 @register("syntax_textmate_slua")
-def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_definitions: SLuaDefinitions) -> str:
+def gen_textmate_slua(
+    definitions: LSLDefinitions, template_path: str, slua_definitions: SLuaDefinitions
+) -> str:
     """Generate SLua TextMate Syntax Files."""
 
     quaternion_module = slua_definitions.get_module("quaternion")
@@ -125,8 +126,16 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
     slua_definitions.modules.append(rotation_module)
 
     def get_slua_global_functions(definitions: SLuaDefinitions) -> dict:
-        global_functions = [f"{f.name}" for f in definitions.global_functions if not f.local_only and not f.slua_removed]
-        builtin_functions = [f"{f.name}" for f in definitions.builtin_functions if not f.local_only and not f.slua_removed]
+        global_functions = [
+            f"{f.name}"
+            for f in definitions.global_functions
+            if not f.local_only and not f.slua_removed
+        ]
+        builtin_functions = [
+            f"{f.name}"
+            for f in definitions.builtin_functions
+            if not f.local_only and not f.slua_removed
+        ]
         callable_tables = [f"{m.name}" for m in definitions.modules if m.callable is not None]
         functions = global_functions + builtin_functions + callable_tables
         functions.sort()
@@ -166,11 +175,22 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         return "|".join(modules)
 
     def get_LL_module_functions(definitions: SLuaDefinitions) -> dict:
-        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None]
+        functions = [
+            f"{f.name}"
+            for f in definitions.get_module("ll").functions
+            if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None
+        ]
         return crunch_regex_strings(functions)
 
     def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> dict:
-        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only and not f.slua_removed and f.deprecated is not None]
+        functions = [
+            f"{f.name}"
+            for f in definitions.get_module("ll").functions
+            if not f.private
+            and not f.local_only
+            and not f.slua_removed
+            and f.deprecated is not None
+        ]
         return crunch_regex_strings(functions)
 
     def get_slua_global_types(definitions: SLuaDefinitions) -> str:
@@ -186,15 +206,18 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         metamethods = "|".join(metamethods)
         return f"__(?:{metamethods})"
 
-
-    def get_LL_variable_functions_for_variable(variable: SLuaProperty, definitions: SLuaDefinitions) -> str:
+    def get_LL_variable_functions_for_variable(
+        variable: SLuaProperty, definitions: SLuaDefinitions
+    ) -> str:
         clss = definitions.get_class(variable.type)
         if clss is None:
             return []
-        return [f"{variable.name}:{m.name}" for m in clss.methods if not m.private and not m.local_only]
+        return [
+            f"{variable.name}:{m.name}" for m in clss.methods if not m.private and not m.local_only
+        ]
 
     def get_LL_variable_functions(definitions: SLuaDefinitions) -> str:
-        functions = [];
+        functions = []
         for v in definitions.global_variables:
             functions.extend(get_LL_variable_functions_for_variable(v, slua_definitions))
         functions.sort()
@@ -239,21 +262,43 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         else:
             raise ValueError(f"Unsupported template extension: {ext}")
 
+
 @register("syntax_textmate_lsl")
 def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
-
     inserts = dict(
         LSL_FLOW_CONTROL_REGEX=crunch_regex_strings([c for c in definitions.controls.keys()]),
         LSL_TYPES_REGEX=crunch_regex_strings([t for t in definitions.types.keys()]),
         LSL_EVENTS_REGEX=crunch_regex_strings([e for e in definitions.events.keys()]),
-
-        LSL_FUNCTIONS_REGEX=crunch_regex_strings([f"{name}" for name, func in definitions.functions.items() if not func.private and not func.deprecated and not func.god_mode]),
-        LSL_FUNCTIONS_GOD_MODE_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.god_mode]),
-        LSL_FUNCTIONS_DEPRECATED_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.deprecated]),
-        LSL_FUNCTIONS_ILLEGAL_REGEX=crunch_regex_strings([name for name, func in definitions.functions.items() if func.private]),
-
-        LSL_FUNCTION_CONSTANTS_REGEX=crunch_regex_strings([name for name, const in definitions.constants.items() if not const.private and not const.deprecated]),
-        LSL_CONSTANTS_DEPRECATED_REGEX=crunch_regex_strings([name for name, const in definitions.constants.items() if not const.private and const.deprecated]),
+        LSL_FUNCTIONS_REGEX=crunch_regex_strings(
+            [
+                f"{name}"
+                for name, func in definitions.functions.items()
+                if not func.private and not func.deprecated and not func.god_mode
+            ]
+        ),
+        LSL_FUNCTIONS_GOD_MODE_REGEX=crunch_regex_strings(
+            [name for name, func in definitions.functions.items() if func.god_mode]
+        ),
+        LSL_FUNCTIONS_DEPRECATED_REGEX=crunch_regex_strings(
+            [name for name, func in definitions.functions.items() if func.deprecated]
+        ),
+        LSL_FUNCTIONS_ILLEGAL_REGEX=crunch_regex_strings(
+            [name for name, func in definitions.functions.items() if func.private]
+        ),
+        LSL_FUNCTION_CONSTANTS_REGEX=crunch_regex_strings(
+            [
+                name
+                for name, const in definitions.constants.items()
+                if not const.private and not const.deprecated
+            ]
+        ),
+        LSL_CONSTANTS_DEPRECATED_REGEX=crunch_regex_strings(
+            [
+                name
+                for name, const in definitions.constants.items()
+                if not const.private and const.deprecated
+            ]
+        ),
     )
 
     _base, ext = os.path.splitext(template_path)

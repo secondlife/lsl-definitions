@@ -328,7 +328,6 @@ class SLuaDefinitions:
     global_variables: List[SLuaProperty]
     global_constants: List[SLuaProperty]
 
-
     # All known type names, populated by parser
     type_names: Set[str] = dataclasses.field(default_factory=set)
 
@@ -341,7 +340,7 @@ class SLuaDefinitions:
             if m.name == name:
                 return m
         return None
-    
+
     def get_class(self, name: str) -> Optional[SLuaClassDeclaration]:
         for c in self.classes:
             if c.name == name:

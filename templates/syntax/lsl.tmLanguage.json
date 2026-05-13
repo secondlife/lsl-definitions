@@ -142,13 +142,13 @@
     ],
     "repository": {
         "comments": {
-			"patterns": 
+			"patterns":
 			[
 				{
 					"begin":"/\\*",
-					"beginCaptures": 
+					"beginCaptures":
 					{
-						"0": 
+						"0":
 						{
 							"name": "punctuation.definition.comment.begin.lsl"
 						}
@@ -156,7 +156,7 @@
 					"end": "\\*/",
 					"endCaptures": {
 						"0": {
-							"name": 
+							"name":
 							"punctuation.definition.comment.end.lsl"
 						}
 					},
@@ -185,9 +185,9 @@
 				}
 			]
 		},
-		"numeric": 
+		"numeric":
 		{
-			"patterns": 
+			"patterns":
 			[
 				{
 					"match": "\\b0(x|X)[0-9a-fA-F]+\\b",
@@ -207,9 +207,9 @@
 				}
 			]
 		},
-		"round-brackets": 
+		"round-brackets":
 		{
-			"patterns": 
+			"patterns":
 			[
 				{
 					"begin": "\\{",
