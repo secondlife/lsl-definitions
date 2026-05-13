@@ -66,7 +66,7 @@ class Trie:
                 try:
                     recurse = self._pattern(data[char])
                     alt.append(self.quote(char) + recurse)
-                except:
+                except (KeyError, TypeError):
                     cc.append(self.quote(char))
             else:
                 q = 1
