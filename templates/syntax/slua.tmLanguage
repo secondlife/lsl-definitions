@@ -608,6 +608,12 @@
           </dict>
           <dict>
             <key>name</key>
+            <string>invalid.deprecated.support.function.luau</string>
+            <key>match</key>
+            <string>(?&lt;![^.]\.|:)\b(ll\.$SLUA_GLOBAL_LL_MODULE_DEPRECATED_REGEX)\b</string>
+          </dict>
+          <dict>
+            <key>name</key>
             <string>support.function.luau</string>
             <key>match</key>
             <string>(?&lt;![^.]\.|:)\b($SLUA_GLOBAL_LL_VARIABLE_FUNCTIONS_REGEX)\b</string>

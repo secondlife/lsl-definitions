@@ -96,7 +96,7 @@ class Trie():
 
     def pattern(self):
         return self._pattern(self.dump())
-        
+
 ## End of Trie Code
 
 def encode_json_unquoted(s):
@@ -166,7 +166,11 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         return "|".join(modules)
 
     def get_LL_module_functions(definitions: SLuaDefinitions) -> dict:
-        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only]
+        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None]
+        return crunch_regex_strings(functions)
+
+    def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> dict:
+        functions = [f"{f.name}" for f in definitions.get_module("ll").functions if not f.private and not f.local_only and not f.slua_removed and f.deprecated is not None]
         return crunch_regex_strings(functions)
 
     def get_slua_global_types(definitions: SLuaDefinitions) -> str:
@@ -215,6 +219,7 @@ def gen_textmate_slua(definitions: LSLDefinitions, template_path: str, slua_defi
         SLUA_GLOBAL_CONSTANTS_REGEX=get_slua_global_constants(slua_definitions),
         SLUA_GLOBAL_LSL_CONSTANTS_REGEX=get_LL_constants(slua_definitions),
         SLUA_GLOBAL_LL_MODULE_REGEX=get_LL_module_functions(slua_definitions),
+        SLUA_GLOBAL_LL_MODULE_DEPRECATED_REGEX=get_LL_module_deprecated_functions(slua_definitions),
         # nil|string|number|boolean|thread|userdata|symbol|vector|buffer|unknown|never|any
         SLUA_GLOBAL_TYPES_REGEX=get_slua_global_types(slua_definitions),
         SLUA_METAMETHODS_REGEX=get_slua_metamethods(slua_definitions),

@@ -345,6 +345,10 @@
             "match": "(?<![^.]\\.|:)\\b(ll\\.$SLUA_GLOBAL_LL_MODULE_REGEX)\\b"
           },
           {
+            "name": "invalid.deprecated.support.function.luau",
+            "match": "(?<![^.]\\.|:)\\b(ll\\.$SLUA_GLOBAL_LL_MODULE_DEPRECATED_REGEX)\\b"
+          },
+          {
             "name": "support.function.luau",
             "match": "(?<![^.]\\.|:)\\b($SLUA_GLOBAL_LL_VARIABLE_FUNCTIONS_REGEX)\\b"
           },
