@@ -2138,7 +2138,6 @@ modules:
       type: ...any
     return-type: string
     must-use: true
-    magic-type: true
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
@@ -2366,6 +2365,7 @@ modules:
       type: ...V
     return-type: '{ n: number, [number]: V }'
     must-use: true
+    magic-type: true
   - name: unpack
     comment: Unpacks array elements into multiple return values.
     type-parameters: [V]

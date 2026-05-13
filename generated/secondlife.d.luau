@@ -481,7 +481,7 @@ declare string: {
   len: (s: string) -> number,
   lower: (s: string) -> string,
   match: (s: string, pattern: string, init: number?) -> ...string, -- magic type
-  pack: (fmt: string, ...any) -> string, -- magic type
+  pack: (fmt: string, ...any) -> string,
   packsize: (fmt: string) -> number,
   rep: (s: string, n: number) -> string,
   reverse: (s: string) -> string,
@@ -508,7 +508,7 @@ declare table: {
   extend: <V>(a: {V}, b: {V}) -> {V},
   remove: <V>(a: {V}, i: number?) -> V?,
   sort: <V>(a: {V}, f: ((a: V, b: V) -> boolean)?) -> (),
-  pack: <V>(...V) -> { n: number, [number]: V },
+  pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
   unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
   create: <V>(n: number, v: V?) -> {V},
