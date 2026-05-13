@@ -18,6 +18,7 @@ $CMD $DEFS slua_lsp_defs $SLUA "$outdir/secondlife.d.luau"
 $CMD $DEFS slua_lsp_docs $SLUA "$outdir/secondlife.docs.json"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
 $CMD $DEFS slua_selene $SLUA "$outdir/secondlife_selene.yml"
+$CMD $DEFS slua_embedded_builtin_definitions ./templates/EmbeddedBuiltinDefinitions.cpp $SLUA "$outdir/cpp/EmbeddedBuiltinDefinitions.cpp"
 
 # C++ snippets
 $CMD $DEFS gen_cpp_constants "$outdir/cpp/lllslconstants_generated.h"
