@@ -111,6 +111,8 @@ class SLuaFunction(SLuaFunctionBase):
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
+    magic_type: bool = False
+    """The typechecker has custom logic for this function."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
@@ -160,7 +162,10 @@ class SLuaFunction(SLuaFunctionBase):
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string)
-            f.write(f": {self.return_type}\n")
+            f.write(f": {self.return_type}")
+            if self.magic_type:
+                f.write(" -- magic type")
+            f.write("\n")
 
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
@@ -176,6 +181,8 @@ class SLuaFunction(SLuaFunctionBase):
                 f.write(overload.type_def_string)
             f.write(")")
         f.write(suffix)
+        if self.magic_type:
+            f.write(" -- magic type")
         f.write("\n")
 
 
@@ -762,6 +769,7 @@ class SLuaDefinitionParser:
                 local_only=data.get("local-only", False),
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
+                magic_type=data.get("magic-type", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)

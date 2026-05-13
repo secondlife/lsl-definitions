@@ -359,6 +359,7 @@ functions:
     type: string?
   return-type: T
   fastcall: true
+  magic-type: true
 - name: collectgarbage
   comment: Run the garbage collector
   parameters:
@@ -538,6 +539,7 @@ functions:
     comment: The name of the external module.
     type: string
   return-type: any
+  magic-type: true
 - name: select
   comment: Returns a subset of arguments or the number of arguments.
   parameters:
@@ -549,6 +551,7 @@ functions:
     type: ...any
   return-type: any
   fastcall: true
+  magic-type: true
 - name: setfenv
   comment: Set the scoped environment for the given function.
   parameters:
@@ -569,6 +572,7 @@ functions:
     type: "{ [any]: any }?"
   return-type: ()
   fastcall: true
+  magic-type: true
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
@@ -2048,6 +2052,7 @@ modules:
       type: boolean?
     return-type: (number?, number?, ...string)
     must-use: true
+    magic-type: true
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
@@ -2060,6 +2065,7 @@ modules:
       optional: false
     return-type: string
     must-use: true
+    magic-type: true
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
@@ -2071,6 +2077,7 @@ modules:
       type: string
     return-type: () -> ...string
     must-use: true
+    magic-type: true
   - name: gsub
     comment: Performs pattern-based substitution in a string.
     parameters:
@@ -2119,6 +2126,7 @@ modules:
       type: number?
     return-type: '...string'
     must-use: true
+    magic-type: true
   - name: pack
     comment: Packs values into a binary string.
     parameters:
@@ -2130,6 +2138,7 @@ modules:
       type: ...any
     return-type: string
     must-use: true
+    magic-type: true
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
@@ -2449,6 +2458,7 @@ modules:
       type: table # should be: generic table. See #56
       selene-type: table
     return-type: table
+    magic-type: true
   - name: isfrozen
     comment: Returns true if a table is frozen.
     parameters:
@@ -2467,6 +2477,7 @@ modules:
       selene-type: table
     return-type: table
     must-use: true
+    magic-type: true
 - name: utf8
   comment: UTF-8 support library.
   functions:

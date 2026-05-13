@@ -230,7 +230,7 @@ export type PrimParamsSetterType = typeof(
 )
 
 
-declare function assert<T>(value: T?, message: string?): T
+declare function assert<T>(value: T?, message: string?): T -- magic type
 declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 declare function error(obj: any, level: number?): never
 declare function gcinfo(): number
@@ -247,10 +247,10 @@ declare function rawequal(a: any, b: any): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?
 declare function rawlen<K, V>(t: {[K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
-declare function require(target: string): any
-declare function select(i: string | number, ...any): any
+declare function require(target: string): any -- magic type
+declare function select(i: string | number, ...any): any -- magic type
 declare setfenv: nil
-declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): ()
+declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): () -- magic type
 declare function tonumber(s: string, base: number?): number?
 declare function toquaternion(val: string? | quaternion): quaternion?
 declare function torotation(val: string? | quaternion): quaternion?
@@ -474,14 +474,14 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 declare string: {
   byte: (s: string, i: number?, j: number?) -> ...number,
   char: (...number) -> string,
-  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string),
-  format: (formatstring: string, ...any) -> string,
-  gmatch: (s: string, pattern: string) -> () -> ...string,
+  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- magic type
+  format: (formatstring: string, ...any) -> string, -- magic type
+  gmatch: (s: string, pattern: string) -> () -> ...string, -- magic type
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number),
   len: (s: string) -> number,
   lower: (s: string) -> string,
-  match: (s: string, pattern: string, init: number?) -> ...string,
-  pack: (fmt: string, ...any) -> string,
+  match: (s: string, pattern: string, init: number?) -> ...string, -- magic type
+  pack: (fmt: string, ...any) -> string, -- magic type
   packsize: (fmt: string) -> number,
   rep: (s: string, n: number) -> string,
   reverse: (s: string) -> string,
@@ -515,9 +515,9 @@ declare table: {
   find: <V>(t: {V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
-  freeze: <table>(t: table) -> table,
+  freeze: <table>(t: table) -> table, -- magic type
   isfrozen: (t: {}) -> boolean,
-  clone: <table>(t: table) -> table,
+  clone: <table>(t: table) -> table, -- magic type
 }
 
 
