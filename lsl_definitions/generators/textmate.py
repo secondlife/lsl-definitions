@@ -126,18 +126,10 @@ def gen_textmate_slua(
     slua_definitions.modules.append(rotation_module)
 
     def get_slua_global_functions(definitions: SLuaDefinitions) -> dict:
-        global_functions = [
-            f"{f.name}"
-            for f in definitions.global_functions
-            if not f.local_only and not f.slua_removed
+        functions = [
+            f"{f.name}" for f in definitions.functions if not f.local_only and not f.slua_removed
         ]
-        builtin_functions = [
-            f"{f.name}"
-            for f in definitions.builtin_functions
-            if not f.local_only and not f.slua_removed
-        ]
-        callable_tables = [f"{m.name}" for m in definitions.modules if m.callable is not None]
-        functions = global_functions + builtin_functions + callable_tables
+        functions += [f"{m.name}" for m in definitions.modules if m.callable is not None]
         functions.sort()
         return "|".join(functions)
 

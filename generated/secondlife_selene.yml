@@ -4033,6 +4033,7 @@ globals:
     - type: string
     - type: number
       required: false
+    must_use: true
     description: Converts the input string to a number in the specified base.
   toquaternion:
     args:

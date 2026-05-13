@@ -315,7 +315,6 @@ class SLuaDefinitions:
     builtin_types: dict  # same structure as LSLDefinitions.types
     metamethods: dict  # name: {tooltip: str}
     builtin_constants: List[SLuaProperty]
-    builtin_functions: List[SLuaFunction]
 
     # 2. SLua base classes. These only depend on Luau builtins
     base_classes: List[SLuaClassDeclaration]
@@ -323,7 +322,7 @@ class SLuaDefinitions:
 
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
-    global_functions: List[SLuaFunction]
+    functions: List[SLuaFunction]
     modules: List[SLuaModule]
     global_variables: List[SLuaProperty]
     global_constants: List[SLuaProperty]
@@ -654,10 +653,6 @@ class SLuaDefinitionParser:
             self._validate_property(const, self._global_scope, const=True)
             for const in def_dict["builtin-constants"]
         ]
-        builtin_functions = [
-            self._validate_function(func, self._global_scope)
-            for func in def_dict["builtin-functions"]
-        ]
 
         # 2. SLua base classes
         base_classes = [self._validate_class(class_) for class_ in def_dict["base-classes"]]
@@ -665,9 +660,8 @@ class SLuaDefinitionParser:
 
         # 3. SLua standard library
         classes = [self._validate_class(class_) for class_ in def_dict["classes"]]
-        global_functions = [
-            self._validate_function(func, self._global_scope)
-            for func in def_dict["global-functions"]
+        functions = [
+            self._validate_function(func, self._global_scope) for func in def_dict["functions"]
         ]
         modules = [self._validate_module(module) for module in def_dict["modules"]]
         global_variables = [
@@ -680,11 +674,10 @@ class SLuaDefinitionParser:
             builtin_types=builtin_types,
             metamethods=metamethods,
             builtin_constants=builtin_constants,
-            builtin_functions=builtin_functions,
             base_classes=base_classes,
             type_aliases=type_aliases,
             classes=classes,
-            global_functions=global_functions,
+            functions=functions,
             modules=modules,
             global_variables=global_variables,
             global_constants=[],
