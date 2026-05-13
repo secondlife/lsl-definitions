@@ -3929,19 +3929,125 @@ globals:
     struct: quaternion
   ZERO_VECTOR:
     struct: vector
+  assert:
+    args:
+    - type: any
+      required: false
+    - type: string
+      required: false
+    description: Checks if the value is truthy; if not, raises an error with the optional
+      message.
   dangerouslyexecuterequiredmodule:
     args:
     - type: function
     description: Dangerously executes a required module function
-  loadstring:
-    removed: true
-    description: loadstring is removed in SLua.
+  error:
+    args:
+    - type: any
+    - type: number
+      required: false
+    description: Raises an error with the specified object and optional call stack
+      level.
+  gcinfo:
+    args: []
+    description: Returns the total heap size in kilobytes.
   getfenv:
     removed: true
     description: getfenv is removed in SLua.
+  getmetatable:
+    args:
+    - type: any
+    description: Returns the metatable for the specified object.
+  ipairs:
+    args:
+    - type: table
+    description: Returns an iterator for numeric key-value pairs in the table.
+  loadstring:
+    removed: true
+    description: loadstring is removed in SLua.
+  newproxy:
+    args:
+    - type: bool
+      required: false
+    description: Creates a new untyped userdata object with an optional metatable.
+  next:
+    args:
+    - type: table
+    - type: any
+      required: false
+    description: Returns the next key-value pair in the table traversal order.
+  pairs:
+    args:
+    - type: table
+    description: Returns an iterator for all key-value pairs in the table.
+  pcall:
+    args:
+    - type: function
+    - type: any
+    description: Calls function f with parameters args, returning success and function
+      results or an error.
+  print:
+    args:
+    - type: '...'
+    description: Prints all arguments to standard output using Tab as a separator.
+  rawequal:
+    args:
+    - type: any
+    - type: any
+    description: Returns true if a and b have the same type and value.
+  rawget:
+    args:
+    - type: table
+    - type: any
+    description: Performs a table lookup bypassing metatables.
+  rawlen:
+    args:
+    - type: any
+    description: Returns the length of a table or string bypassing metatables.
+  rawset:
+    args:
+    - type: table
+    - type: any
+    - type: any
+    description: Assigns a value to a table field bypassing metatables.
+  require:
+    args:
+    - type: string
+    description: Execute the named external module.
+  select:
+    args:
+    - type: any
+    - type: '...'
+    description: Returns a subset of arguments or the number of arguments.
   setfenv:
     removed: true
     description: setfenv is removed in SLua.
+  setmetatable:
+    args:
+    - type: table
+    - type: table
+      required: false
+    description: Changes the metatable for the given table.
+  tonumber:
+    args:
+    - type: string
+    - type: number
+      required: false
+    description: Converts the input string to a number in the specified base.
+  toquaternion:
+    args:
+    - type: string
+    must_use: true
+    description: Converts a string to a quaternion, returns nil if invalid
+  torotation:
+    args:
+    - type: string
+    must_use: true
+    description: Converts a string to a rotation (quaternion), returns nil if invalid
+  tostring:
+    args:
+    - type: any
+    description: Converts the input object to a string.
   touuid:
     args:
     - type: string
@@ -3954,16 +4060,31 @@ globals:
     - type: string
     must_use: true
     description: Converts a string to a vector, returns nil if invalid
-  toquaternion:
+  type:
     args:
-    - type: string
+    - type: any
     must_use: true
-    description: Converts a string to a quaternion, returns nil if invalid
-  torotation:
+    description: Returns the type of the object as a string.
+  typeof:
     args:
-    - type: string
+    - type: any
     must_use: true
-    description: Converts a string to a rotation (quaternion), returns nil if invalid
+    description: Returns the type of the object, including custom userdata types.
+  unpack:
+    args:
+    - type: table
+    - type: number
+      required: false
+    - type: number
+      required: false
+    description: Returns values from an array in the specified index range.
+  xpcall:
+    args:
+    - type: function
+    - type: function
+    - type: any
+    description: Calls function f with parameters args, handling errors with e if
+      they occur.
   bit32.arshift:
     args:
     - type: number

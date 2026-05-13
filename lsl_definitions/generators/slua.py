@@ -226,9 +226,9 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
         if not const.private:
             selene["globals"][const.name] = selene_property(const)
-    # for func in slua_definitions.builtinFunctions:
-    #     selene["globals"][func.name] = func.to_selene_dict()
-    for func in slua_definitions.global_functions:
+    for func in sorted(
+        slua_definitions.builtin_functions + slua_definitions.global_functions, key=lambda x: x.name
+    ):
         if not func.private and not func.local_only:
             selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
