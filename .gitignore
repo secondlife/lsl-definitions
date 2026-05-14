@@ -20,6 +20,7 @@ __pycache__/
 *.egg-info/
 .ruff_cache/
 .venv/
+.trusted_ai_user
 
 build
 dist/
