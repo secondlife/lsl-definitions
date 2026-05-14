@@ -14,6 +14,7 @@ Thank you for your interest in contributing to the LSL definitions repository! T
 - **New function requests** - this repository defines existing LSL functionality only
 - **Language feature proposals** - new LSL capabilities are decided through official Second Life channels
 - **API changes** - modifications to function signatures or behavior
+- **AI-assisted PRs** - See [AGENTS.md](AGENTS.md). You may _only_ use AI if you're already an established contributor.
 
 ## How to Contribute
 
@@ -45,6 +46,7 @@ validate-lsl-definitions-via-jsonschema
 - **Keep changes focused** - one improvement per PR when possible
 - **Maintain consistency** with existing formatting and style
 - **Include examples** if you're improving documentation
+- **No AI Prose in PRs or commit messages** - You as a human must describe to other humans what has been done.
 
 ## Questions or Suggestions?
 
