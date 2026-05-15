@@ -111,6 +111,8 @@ class SLuaFunction(SLuaFunctionBase):
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
+    magic_type: bool = False
+    """The typechecker has custom logic for this function."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
@@ -160,7 +162,10 @@ class SLuaFunction(SLuaFunctionBase):
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string)
-            f.write(f": {self.return_type}\n")
+            f.write(f": {self.return_type}")
+            if self.magic_type:
+                f.write(" -- magic type")
+            f.write("\n")
 
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
@@ -176,6 +181,8 @@ class SLuaFunction(SLuaFunctionBase):
                 f.write(overload.type_def_string)
             f.write(")")
         f.write(suffix)
+        if self.magic_type:
+            f.write(" -- magic type")
         f.write("\n")
 
 
@@ -313,8 +320,8 @@ class SLuaDefinitions:
     # 1. Luau builtins. Typecheckers already know about these
     controls: dict  # same structure as LSLDefinitions.controls
     builtin_types: dict  # same structure as LSLDefinitions.types
+    metamethods: dict  # name: {tooltip: str}
     builtin_constants: List[SLuaProperty]
-    builtin_functions: List[SLuaFunction]
 
     # 2. SLua base classes. These only depend on Luau builtins
     base_classes: List[SLuaClassDeclaration]
@@ -322,7 +329,7 @@ class SLuaDefinitions:
 
     # 3. SLua standard library. Depends on base classes
     classes: List[SLuaClassDeclaration]
-    global_functions: List[SLuaFunction]
+    functions: List[SLuaFunction]
     modules: List[SLuaModule]
     global_variables: List[SLuaProperty]
     global_constants: List[SLuaProperty]
@@ -333,6 +340,18 @@ class SLuaDefinitions:
     _TYPE_SEPERATORS_RE = re.compile(
         r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
     )
+
+    def get_module(self, name: str) -> SLuaModule:
+        for m in self.modules:
+            if m.name == name:
+                return m
+        return None
+
+    def get_class(self, name: str) -> Optional[SLuaClassDeclaration]:
+        for c in self.classes:
+            if c.name == name:
+                return c
+        return None
 
     def validate_type(self, type_str: str, known_type_names: Set[str] | None = None) -> str:
         """Validate that a type string only references known types."""
@@ -605,6 +624,7 @@ class SLuaDefinitions:
 class SLuaDefinitionParser:
     def __init__(self):
         self._type_names: Set[str] = set()
+        self._metamethods: Set[str] = set()
         self._global_scope: Set[str] = set()
 
     def parse_file(self, name: str) -> SLuaDefinitions:
@@ -628,6 +648,9 @@ class SLuaDefinitionParser:
         builtin_types = dict(def_dict["builtin-types"])
         self._type_names.update(builtin_types.keys())
 
+        metamethods = dict(def_dict["metamethods"])
+        self._metamethods.update(metamethods.keys())
+
         controls = dict(def_dict["controls"])
         self._global_scope.update(controls.keys())
 
@@ -637,10 +660,6 @@ class SLuaDefinitionParser:
             self._validate_property(const, self._global_scope, const=True)
             for const in def_dict["builtin-constants"]
         ]
-        builtin_functions = [
-            self._validate_function(func, self._global_scope)
-            for func in def_dict["builtin-functions"]
-        ]
 
         # 2. SLua base classes
         base_classes = [self._validate_class(class_) for class_ in def_dict["base-classes"]]
@@ -648,9 +667,8 @@ class SLuaDefinitionParser:
 
         # 3. SLua standard library
         classes = [self._validate_class(class_) for class_ in def_dict["classes"]]
-        global_functions = [
-            self._validate_function(func, self._global_scope)
-            for func in def_dict["global-functions"]
+        functions = [
+            self._validate_function(func, self._global_scope) for func in def_dict["functions"]
         ]
         modules = [self._validate_module(module) for module in def_dict["modules"]]
         global_variables = [
@@ -661,12 +679,12 @@ class SLuaDefinitionParser:
         return SLuaDefinitions(
             controls=controls,
             builtin_types=builtin_types,
+            metamethods=metamethods,
             builtin_constants=builtin_constants,
-            builtin_functions=builtin_functions,
             base_classes=base_classes,
             type_aliases=type_aliases,
             classes=classes,
-            global_functions=global_functions,
+            functions=functions,
             modules=modules,
             global_variables=global_variables,
             global_constants=[],
@@ -751,6 +769,7 @@ class SLuaDefinitionParser:
                 local_only=data.get("local-only", False),
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
+                magic_type=data.get("magic-type", False),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)

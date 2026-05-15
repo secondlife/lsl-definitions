@@ -230,14 +230,37 @@ export type PrimParamsSetterType = typeof(
 )
 
 
+declare function assert<T>(value: T?, message: string?): T -- magic type
 declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
-declare loadstring: nil
+declare function error(obj: any, level: number?): never
+declare function gcinfo(): number
 declare getfenv: nil
+declare function getmetatable(obj: any): {[any]: any}?
+declare function ipairs<V>(t: {V}): (({V}, number) -> (number?, V), {V}, number)
+declare loadstring: nil
+declare function newproxy(mt: boolean?): any
+declare function next<K, V>(t: {[K]: V}, i: K?): (K, V)?
+declare function pairs<K, V>(t: {[K]: V}): (({[K], V}, K) -> (K?, V), {[K], V}, K)
+declare function pcall<A..., R...>(f: (A...) -> R..., A...): (boolean, R...)
+declare function print(...any): ()
+declare function rawequal(a: any, b: any): boolean
+declare function rawget<K, V>(t: {[K]: V}, k: K): V?
+declare function rawlen<K, V>(t: {[K]: V} | string): number
+declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
+declare function require(target: string): any -- magic type
+declare function select(i: string | number, ...any): any -- magic type
 declare setfenv: nil
-declare function touuid(val: string? | buffer | uuid): uuid?
-declare function tovector(val: string? | vector): vector?
+declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): () -- magic type
+declare function tonumber(s: string, base: number?): number?
 declare function toquaternion(val: string? | quaternion): quaternion?
 declare function torotation(val: string? | quaternion): quaternion?
+declare function tostring(obj: any): string
+declare function touuid(val: string? | buffer | uuid): uuid?
+declare function tovector(val: string? | vector): vector?
+declare function type(obj: any): string
+declare function typeof(obj: any): string
+declare function unpack<V>(a: {V}, f: number?, t: number?): ...V
+declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., e: (E) -> R2..., A...): (boolean, R1...)
 
 ---------------------------
 -- Global Table: bit32
@@ -451,13 +474,13 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 declare string: {
   byte: (s: string, i: number?, j: number?) -> ...number,
   char: (...number) -> string,
-  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string),
-  format: (formatstring: string, ...any) -> string,
-  gmatch: (s: string, pattern: string) -> () -> ...string,
+  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- magic type
+  format: (formatstring: string, ...any) -> string, -- magic type
+  gmatch: (s: string, pattern: string) -> () -> ...string, -- magic type
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number),
   len: (s: string) -> number,
   lower: (s: string) -> string,
-  match: (s: string, pattern: string, init: number?) -> ...string,
+  match: (s: string, pattern: string, init: number?) -> ...string, -- magic type
   pack: (fmt: string, ...any) -> string,
   packsize: (fmt: string) -> number,
   rep: (s: string, n: number) -> string,
@@ -485,16 +508,16 @@ declare table: {
   extend: <V>(a: {V}, b: {V}) -> {V},
   remove: <V>(a: {V}, i: number?) -> V?,
   sort: <V>(a: {V}, f: ((a: V, b: V) -> boolean)?) -> (),
-  pack: <V>(...V) -> { n: number, [number]: V },
+  pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
   unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
   create: <V>(n: number, v: V?) -> {V},
   find: <V>(t: {V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
-  freeze: <table>(t: table) -> table,
+  freeze: <table>(t: table) -> table, -- magic type
   isfrozen: (t: {}) -> boolean,
-  clone: <table>(t: table) -> table,
+  clone: <table>(t: table) -> table, -- magic type
 }
 
 
