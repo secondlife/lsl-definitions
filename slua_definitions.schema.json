@@ -187,6 +187,14 @@
                     "description": "See https://github.com/secondlife/slua/blob/main/Common/include/Luau/Bytecode.h#L542",
                     "type": "boolean"
                 },
+                "magic-type": {
+                    "const": true,
+                    "markdownDescription": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
+                "checked-type": {
+                    "const": true,
+                    "markdownDescription": "This function's run-time type checks match the typechecker. Functions with checked types report the same errors in --!strict and --!nonstrict modes.",
+                    "type": "boolean"
+                },
                 "comment": {
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"
@@ -272,7 +280,7 @@
             "items": { "$ref": "#/$defs/property" },
             "type": "array"
         },
-        "global-functions": {
+        "functions": {
             "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
@@ -286,10 +294,6 @@
         },
         "builtin-constants": {
             "items": { "$ref": "#/$defs/property" },
-            "type": "array"
-        },
-        "builtin-functions": {
-            "items": { "$ref": "#/$defs/function" },
             "type": "array"
         },
         "controls": {
@@ -327,6 +331,24 @@
                 }
             },
             "type": "object"
+        },
+        "metamethods": {
+            "additionalProperties": false,
+            "patternProperties": {
+                "^__[a-z]*": {
+                    "properties": {
+                        "tooltip": {
+                            "markdownDescription": "A brief description of this metamethod.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tooltip"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
         }
     },
     "required": [
@@ -334,13 +356,13 @@
         "base-classes",
         "type-aliases",
         "classes",
-        "global-functions",
+        "functions",
         "modules",
         "constants",
         "controls",
         "builtin-types",
         "builtin-constants",
-        "builtin-functions"
+        "metamethods"
     ],
     "title": "Second Life SLua Definitions",
     "type": "object"
