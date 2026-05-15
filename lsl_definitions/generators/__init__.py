@@ -9,6 +9,7 @@ from lsl_definitions.generators import (
     lsl,
     slua,
     slua_lsp_docs,
+    textmate,
 )
 from lsl_definitions.generators.base import GENERATORS, register
 
@@ -22,4 +23,5 @@ __all__ = [
     "lsl",
     "slua",
     "slua_lsp_docs",
+    "textmate",
 ]

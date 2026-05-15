@@ -313,6 +313,7 @@ class SLuaDefinitions:
     # 1. Luau builtins. Typecheckers already know about these
     controls: dict  # same structure as LSLDefinitions.controls
     builtin_types: dict  # same structure as LSLDefinitions.types
+    metamethods: dict  # name: {tooltip: str}
     builtin_constants: List[SLuaProperty]
     builtin_functions: List[SLuaFunction]
 
@@ -333,6 +334,18 @@ class SLuaDefinitions:
     _TYPE_SEPERATORS_RE = re.compile(
         r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
     )
+
+    def get_module(self, name: str) -> SLuaModule:
+        for m in self.modules:
+            if m.name == name:
+                return m
+        return None
+
+    def get_class(self, name: str) -> Optional[SLuaClassDeclaration]:
+        for c in self.classes:
+            if c.name == name:
+                return c
+        return None
 
     def validate_type(self, type_str: str, known_type_names: Set[str] | None = None) -> str:
         """Validate that a type string only references known types."""
@@ -605,6 +618,7 @@ class SLuaDefinitions:
 class SLuaDefinitionParser:
     def __init__(self):
         self._type_names: Set[str] = set()
+        self._metamethods: Set[str] = set()
         self._global_scope: Set[str] = set()
 
     def parse_file(self, name: str) -> SLuaDefinitions:
@@ -627,6 +641,9 @@ class SLuaDefinitionParser:
         # 1. Luau builtins
         builtin_types = dict(def_dict["builtin-types"])
         self._type_names.update(builtin_types.keys())
+
+        metamethods = dict(def_dict["metamethods"])
+        self._metamethods.update(metamethods.keys())
 
         controls = dict(def_dict["controls"])
         self._global_scope.update(controls.keys())
@@ -661,6 +678,7 @@ class SLuaDefinitionParser:
         return SLuaDefinitions(
             controls=controls,
             builtin_types=builtin_types,
+            metamethods=metamethods,
             builtin_constants=builtin_constants,
             builtin_functions=builtin_functions,
             base_classes=base_classes,
