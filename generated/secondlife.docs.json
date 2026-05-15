@@ -1,6 +1,69 @@
 {
+    "@sl-slua/global/assert": {
+        "documentation": "Checks if the value is truthy; if not, raises an error with the optional message."
+    },
     "@sl-slua/global/dangerouslyexecuterequiredmodule": {
         "documentation": "Dangerously executes a required module function"
+    },
+    "@sl-slua/global/error": {
+        "documentation": "Raises an error with the specified object and optional call stack level."
+    },
+    "@sl-slua/global/gcinfo": {
+        "documentation": "Returns the total heap size in kilobytes."
+    },
+    "@sl-slua/global/getmetatable": {
+        "documentation": "Returns the metatable for the specified object."
+    },
+    "@sl-slua/global/ipairs": {
+        "documentation": "Returns an iterator for numeric key-value pairs in the table."
+    },
+    "@sl-slua/global/newproxy": {
+        "documentation": "Creates a new untyped userdata object with an optional metatable."
+    },
+    "@sl-slua/global/next": {
+        "documentation": "Returns the next key-value pair in the table traversal order."
+    },
+    "@sl-slua/global/pairs": {
+        "documentation": "Returns an iterator for all key-value pairs in the table."
+    },
+    "@sl-slua/global/pcall": {
+        "documentation": "Calls function f with parameters args, returning success and function results or an error."
+    },
+    "@sl-slua/global/print": {
+        "documentation": "Prints all arguments to standard output using Tab as a separator."
+    },
+    "@sl-slua/global/rawequal": {
+        "documentation": "Returns true if a and b have the same type and value."
+    },
+    "@sl-slua/global/rawget": {
+        "documentation": "Performs a table lookup bypassing metatables."
+    },
+    "@sl-slua/global/rawlen": {
+        "documentation": "Returns the length of a table or string bypassing metatables."
+    },
+    "@sl-slua/global/rawset": {
+        "documentation": "Assigns a value to a table field bypassing metatables."
+    },
+    "@sl-slua/global/require": {
+        "documentation": "Execute the named external module."
+    },
+    "@sl-slua/global/select": {
+        "documentation": "Returns a subset of arguments or the number of arguments."
+    },
+    "@sl-slua/global/setmetatable": {
+        "documentation": "Changes the metatable for the given table."
+    },
+    "@sl-slua/global/tonumber": {
+        "documentation": "Converts the input string to a number in the specified base."
+    },
+    "@sl-slua/global/toquaternion": {
+        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+    },
+    "@sl-slua/global/torotation": {
+        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+    },
+    "@sl-slua/global/tostring": {
+        "documentation": "Converts the input object to a string."
     },
     "@sl-slua/global/touuid": {
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the the buffer is shorter than 16 bytes."
@@ -8,11 +71,17 @@
     "@sl-slua/global/tovector": {
         "documentation": "Converts a string to a vector, returns nil if invalid"
     },
-    "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+    "@sl-slua/global/type": {
+        "documentation": "Returns the type of the object as a string."
     },
-    "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+    "@sl-slua/global/typeof": {
+        "documentation": "Returns the type of the object, including custom userdata types."
+    },
+    "@sl-slua/global/unpack": {
+        "documentation": "Returns values from an array in the specified index range."
+    },
+    "@sl-slua/global/xpcall": {
+        "documentation": "Calls function f with parameters args, handling errors with e if they occur."
     },
     "@sl-slua/global/bit32": {
         "documentation": "Bitwise operations library.",

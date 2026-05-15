@@ -230,14 +230,37 @@ export type PrimParamsSetterType = typeof(
 )
 
 
+declare function assert<T>(value: T?, message: string?): T
 declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
-declare loadstring: nil
+declare function error(obj: any, level: number?): never
+declare function gcinfo(): number
 declare getfenv: nil
+declare function getmetatable(obj: any): {[any]: any}?
+declare function ipairs<V>(t: {V}): (({V}, number) -> (number?, V), {V}, number)
+declare loadstring: nil
+declare function newproxy(mt: boolean?): any
+declare function next<K, V>(t: {[K]: V}, i: K?): (K, V)?
+declare function pairs<K, V>(t: {[K]: V}): (({[K], V}, K) -> (K?, V), {[K], V}, K)
+declare function pcall<A..., R...>(f: (A...) -> R..., A...): (boolean, R...)
+declare function print(...any): ()
+declare function rawequal(a: any, b: any): boolean
+declare function rawget<K, V>(t: {[K]: V}, k: K): V?
+declare function rawlen<K, V>(t: {[K]: V} | string): number
+declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
+declare function require(target: string): any
+declare function select(i: string | number, ...any): any
 declare setfenv: nil
-declare function touuid(val: string? | buffer | uuid): uuid?
-declare function tovector(val: string? | vector): vector?
+declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): ()
+declare function tonumber(s: string, base: number?): number?
 declare function toquaternion(val: string? | quaternion): quaternion?
 declare function torotation(val: string? | quaternion): quaternion?
+declare function tostring(obj: any): string
+declare function touuid(val: string? | buffer | uuid): uuid?
+declare function tovector(val: string? | vector): vector?
+declare function type(obj: any): string
+declare function typeof(obj: any): string
+declare function unpack<V>(a: {V}, f: number?, t: number?): ...V
+declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., e: (E) -> R2..., A...): (boolean, R1...)
 
 ---------------------------
 -- Global Table: bit32
