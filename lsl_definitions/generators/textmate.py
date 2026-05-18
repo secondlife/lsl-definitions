@@ -3,95 +3,56 @@ from __future__ import annotations
 import json
 import os
 import re
+from dataclasses import dataclass
 from string import Template
 
 from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions
 from lsl_definitions.slua import SLuaDefinitions, SLuaModule, SLuaProperty
 
-## Trie Code
-# Original Perl module: Regexp::Trie
-# Original Copyright (C) 2006 by Dan Kogai
-#
-# This Python translation is a derivative work based on Regexp::Trie
-# Copyright (c) 2010 by rex
-# Copyright (c) 2017 by fcicq, atiking and EricDuminil
-# This Python code is licensed under the Artistic License 2.0 (AL2.0).
-# A copy of the Artistic License 2.0 can be found at:
-# https://opensource.org/licenses/Artistic-2.0
-#
-# Original source: https://metacpan.org/pod/Regexp::Trie
-#
-# author:         rex
-# blog:           http://iregex.org
-# filename        trie.py
-# created:        2010-08-01 20:24
-# source uri:     http://iregex.org/blog/trie-in-python.html
-# escape bug fix by fcicq @ 2012.8.19
-# python3 compatible by EricDuminil @ 2017.03.
-# found at https://gist.github.com/EricDuminil/8faabc2f3de82b24e5a371b6dc0fd1e0
-# Modifications for formatting and styleguide compliance
 
-
+@dataclass
 class Trie:
-    """Regexp::Trie in python. Creates a Trie out of a list of words. The trie can be exported to a Regexp pattern.
-    The corresponding Regexp should match much faster than a simple Regexp union."""
+    value: str = ""
+    child: Trie | None = None
+    next: Trie | None = None
+    count: int = 0
 
-    def __init__(self):
-        self.data = {}
+    def add(self, s: str) -> None:
+        if s == "":
+            self.count += 1
+            return
+        elif s[0] == self.value:
+            if self.child is None:
+                self.child = Trie()
+            return self.child.add(s[1:])
+        elif self.next is None:
+            self.next = Trie(value=s[0])
+        elif s[0] < self.next.value:
+            self.next = Trie(value=s[0], next=self.next)
+        return self.next.add(s)
 
-    def add(self, word):
-        ref = self.data
-        for char in word:
-            ref[char] = char in ref and ref[char] or {}
-            ref = ref[char]
-        ref[""] = 1
-
-    def dump(self):
-        return self.data
-
-    def quote(self, char):
-        return re.escape(char)
-
-    def _pattern(self, pData):
-        data = pData
-        if "" in data and len(data.keys()) == 1:
-            return None
-
-        alt = []
-        cc = []
-        q = 0
-        for char in sorted(data.keys()):
-            if isinstance(data[char], dict):
-                try:
-                    recurse = self._pattern(data[char])
-                    alt.append(self.quote(char) + recurse)
-                except (KeyError, TypeError):
-                    cc.append(self.quote(char))
-            else:
-                q = 1
-        cconly = not len(alt) > 0
-
-        if len(cc) > 0:
-            if len(cc) == 1:
-                alt.append(cc[0])
-            else:
-                alt.append("[" + "".join(cc) + "]")
-
-        if len(alt) == 1:
-            result = alt[0]
+    def _patterns(self, patterns: list[str]) -> list[str]:
+        """Iterate one level of the trie"""
+        if self.count:
+            patterns.append("")
+        if self.child:
+            patterns.append(re.escape(self.value) + self.child.pattern())
+        if self.next:
+            return self.next._patterns(patterns)
         else:
-            result = "(?:" + "|".join(alt) + ")"
+            return patterns
 
-        if q:
-            if cconly:
-                result += "?"
-            else:
-                result = "(?:%s)?" % result
-        return result
-
-    def pattern(self):
-        return self._pattern(self.dump())
+    def pattern(self) -> str:
+        patterns = self._patterns([])
+        if len(patterns) == 0:
+            raise ValueError("no entries")
+        elif len(patterns) == 1:
+            return patterns[0]
+        # elif patterns[0] == "":
+        #     return f"(?:{'|'.join(patterns[1:])})?"
+        else:
+            return f"(?:{'|'.join(patterns)})"
 
 
 ## End of Trie Code
