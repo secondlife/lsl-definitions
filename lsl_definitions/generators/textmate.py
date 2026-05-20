@@ -86,7 +86,7 @@ def gen_textmate_slua(
     )
     slua_definitions.modules.append(rotation_module)
 
-    def get_slua_global_functions(definitions: SLuaDefinitions) -> dict:
+    def get_slua_global_functions(definitions: SLuaDefinitions) -> str:
         global_functions = [
             f"{f.name}"
             for f in definitions.global_functions
@@ -125,7 +125,7 @@ def gen_textmate_slua(
             return None
         return f"{module.name}\\.(?:{functions})"
 
-    def get_LL_constants(slua_definitions: SLuaDefinitions) -> dict:
+    def get_LL_constants(slua_definitions: SLuaDefinitions) -> str:
         constants = [f"{c.name}" for c in slua_definitions.global_constants]
         return crunch_regex_strings(constants)
 
@@ -135,7 +135,7 @@ def gen_textmate_slua(
         modules.sort()
         return "|".join(modules)
 
-    def get_LL_module_functions(definitions: SLuaDefinitions) -> dict:
+    def get_LL_module_functions(definitions: SLuaDefinitions) -> str:
         functions = [
             f"{f.name}"
             for f in definitions.get_module("ll").functions
@@ -143,7 +143,7 @@ def gen_textmate_slua(
         ]
         return crunch_regex_strings(functions)
 
-    def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> dict:
+    def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> str:
         functions = [
             f"{f.name}"
             for f in definitions.get_module("ll").functions
