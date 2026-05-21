@@ -9052,6 +9052,7 @@ functions:
     must-use: true
     return: list
     slua-return: "{string}"
+    asset-semantics: true
     sleep: 0.0
     tooltip: Returns a list of names of playing animations for an object.\nReturns
       a list of names of all playing animations for the current object.
@@ -9568,6 +9569,7 @@ functions:
     func-id: 760
     must-use: true
     return: string
+    asset-semantics: true
     sleep: 0.0
     tooltip: Returns a string that is the render material on face (the inventory name
       if it is a material in the prim's inventory, otherwise the key).\nReturns the
@@ -9807,6 +9809,7 @@ functions:
     func-id: 57
     must-use: true
     return: string
+    asset-semantics: true
     sleep: 0.0
     tooltip: Returns a string that is the texture on face (the inventory name if it
       is a texture in the prim's inventory, otherwise the key).\nReturns the texture
