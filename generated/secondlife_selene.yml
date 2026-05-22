@@ -4870,14 +4870,11 @@ globals:
     must_use: true
     description: 'Returns the number of bytes in the string. Identical to #s'
   string.lower:
-    deprecated:
-      message: Use 'll.ToLower' instead. Unicode handling.
-      replace:
-      - ll.ToLower(%1)
     args:
     - type: string
     must_use: true
-    description: Returns a lowercase version of the input string.
+    description: Returns a lowercase version of the input string. Only works with
+      ASCII. Use ll.ToLower for strings that may contain Unicode.
   string.match:
     args:
     - type: string
@@ -4932,14 +4929,11 @@ globals:
     must_use: true
     description: Decodes a binary string using a pack format.
   string.upper:
-    deprecated:
-      message: Use 'll.ToUpper' instead. Unicode handling.
-      replace:
-      - ll.ToUpper(%1)
     args:
     - type: string
     must_use: true
-    description: Returns an uppercase version of the input string.
+    description: Returns an uppercase version of the input string. Only works with
+      ASCII. Use ll.ToUpper for strings that may contain Unicode.
   table.concat:
     args:
     - type: table

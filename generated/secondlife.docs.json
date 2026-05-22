@@ -597,7 +597,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#len"
     },
     "@sl-slua/global/string.lower": {
-        "documentation": "Returns a lowercase version of the input string.",
+        "documentation": "Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
@@ -633,7 +633,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
-        "documentation": "Returns an uppercase version of the input string.",
+        "documentation": "Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#upper"
     },
     "@sl-slua/global/table": {

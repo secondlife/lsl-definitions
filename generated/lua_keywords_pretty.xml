@@ -15056,8 +15056,6 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -15065,7 +15063,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a lowercase version of the input string.</string>
+            <string>Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.</string>
          </map>
          <key>string.match</key>
          <map>
@@ -15346,8 +15344,6 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
             </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -15355,7 +15351,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an uppercase version of the input string.</string>
+            <string>Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.</string>
          </map>
          <key>table</key>
          <map>
