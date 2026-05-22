@@ -7,6 +7,30 @@
       <string>The source of this file is https://github.com/secondlife/lsl-definitions/tree/main/generated/syntax/slua.tmLanguage</string>
       <string>If you want to provide a fix or improvement, contributions are welcome here https://github.com/secondlife/lsl-definitions</string>
       <string>Large portions of this file were adapted from the work of others. See https://github.com/secondlife/lsl-definitions/tree/main/templates/syntax/LICENSE.md</string>
+      <string/>
+      <string>Copyright (c) 2018 最萌小汐                                                      </string>
+      <string>Copyright (c) Microsoft Corporation All rights reserved.                        </string>
+      <string>Copyright (c) JohnnyMorganz All rights reserved.                                </string>
+      <string>                                                                                </string>
+      <string>MIT License                                                                     </string>
+      <string>                                                                                </string>
+      <string>Permission is hereby granted, free of charge, to any person obtaining a copy    </string>
+      <string>of this software and associated documentation files (the "Software"), to deal   </string>
+      <string>in the Software without restriction, including without limitation the rights    </string>
+      <string>to use, copy, modify, merge, publish, distribute, sublicense, and/or sell       </string>
+      <string>copies of the Software, and to permit persons to whom the Software is           </string>
+      <string>furnished to do so, subject to the following conditions:                        </string>
+      <string>                                                                                </string>
+      <string>The above copyright notice and this permission notice shall be included in all  </string>
+      <string>copies or substantial portions of the Software.                                 </string>
+      <string>                                                                                </string>
+      <string>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR      </string>
+      <string>IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,        </string>
+      <string>FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE     </string>
+      <string>AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER          </string>
+      <string>LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,   </string>
+      <string>OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   </string>
+      <string>SOFTWARE.                                                                       </string>
     </array>
     <key>name</key>
     <string>SLua</string>
