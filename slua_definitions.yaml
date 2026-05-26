@@ -2836,3 +2836,48 @@ builtin-functions:
     type: number?
   return-type: ...V
   fastcall: true
+metamethods:
+  __add:
+    tooltip: "Overload method for + operator."
+  __call:
+    tooltip: "Method called when table is called as a function."
+  __concat:
+    tooltip: "Overload method for .. operator."
+  __div:
+    tooltip: "Overload method for / operator."
+  __eq:
+    tooltip: "Overload method for == operator."
+  __index:
+    tooltip: "Method or table called when table is indexed."
+  __le:
+    tooltip: "Overload method for <= operator."
+  __len:
+    tooltip: "Overload method for # operator."
+  __lt:
+    tooltip: "Overload method for < operator."
+  __metatable:
+    tooltip: "Override the table returned by getmetatable and cause setmetatable to raise an error."
+  __mod:
+    tooltip: "Overload method for % operator."
+  __mode:
+    tooltip: "Controls weak mapping of table valid returns are 'k' for keys and 'v' for values or 'kv' for both."
+  __mul:
+    tooltip: "Overload method for * operator."
+  __newindex:
+    tooltip: "Method or table called when table is indexed with an assignment."
+  __pow:
+    tooltip: "Overload method for ^ operator."
+  __sub:
+    tooltip: "Overload method for - operator."
+  __tostring:
+    tooltip: "Method called by tostring to convert the value to a string."
+  __unm:
+    tooltip: "Overload method for - as unaryoperator."
+  __iter:
+    tooltip: "Method called to iterate over the table."
+  __idiv:
+    tooltip: "Overload method for // operator."
+  __tojson:
+    tooltip: "Called by lljson encode and slencode to encode the value as JSON."
+  __jsonhint:
+    tooltip: 'String property used by lljson.encode. Must be one of "array" or "object".'
