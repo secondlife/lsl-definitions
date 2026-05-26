@@ -466,6 +466,7 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
   toup: (q: quaternion) -> vector,
 }
 
+--[[ commented out to avoid shadowing magic functions find, format, gmatch, and match
 
 ---------------------------
 -- Global Table: string
@@ -491,6 +492,7 @@ declare string: {
   upper: (s: string) -> string, -- builtin
 }
 
+--]]
 
 ---------------------------
 -- Global Table: table
