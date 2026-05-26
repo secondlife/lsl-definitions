@@ -359,7 +359,7 @@ functions:
     type: string?
   return-type: T
   fastcall: true
-  magic-type: true
+  typechecker: {magic: true}
 - name: collectgarbage
   comment: Run the garbage collector
   parameters:
@@ -411,6 +411,7 @@ functions:
     type: T
     selene-type: table
   return-type: getmetatable<T>
+  typechecker: {builtin: true}
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -462,6 +463,7 @@ functions:
     comment: Optional key to start traversal after.
     type: K?
   return-type: (K?, V)
+  typechecker: {builtin: true}
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -470,6 +472,7 @@ functions:
     comment: The table to iterate over.
     type: "{[K]: V}"
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
+  typechecker: {builtin: true}
 - name: pcall
   comment: Calls function f with parameters args, returning success and function results or an error.
   type-parameters: [A..., R...]
@@ -544,7 +547,7 @@ functions:
     comment: The name of the external module.
     type: any
   return-type: any
-  magic-type: true
+  typechecker: {magic: true}
 - name: select
   comment: Returns a subset of arguments or the number of arguments.
   type-parameters: [A...]
@@ -557,7 +560,7 @@ functions:
     type: A...
   return-type: ...any
   fastcall: true
-  magic-type: true
+  typechecker: {magic: true}
 - name: setfenv
   comment: Set the scoped environment for the given function.
   type-parameters: [T..., R...]
@@ -583,7 +586,7 @@ functions:
     selene-type: table
   return-type: setmetatable<T, MT>
   fastcall: true
-  magic-type: true
+  typechecker: {builtin: true, magic: true}
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
@@ -2040,6 +2043,7 @@ modules:
     return-type: '...number'
     must-use: true
     fastcall: true
+    typechecker: {builtin: true}
   - name: char
     comment: Returns a string containing characters for the given byte values.
     parameters:
@@ -2050,6 +2054,7 @@ modules:
     return-type: string
     must-use: true
     fastcall: true
+    typechecker: {builtin: true}
   - name: find
     comment: Finds the first instance of the pattern in the string.
     parameters:
@@ -2067,7 +2072,7 @@ modules:
       type: boolean?
     return-type: (number?, number?, ...string)
     must-use: true
-    magic-type: true
+    typechecker: {builtin: true, magic: true}
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
@@ -2080,7 +2085,7 @@ modules:
       optional: false
     return-type: string
     must-use: true
-    magic-type: true
+    typechecker: {builtin: true, magic: true}
   - name: gmatch
     comment: Returns an iterator function for pattern matches
     parameters:
@@ -2092,7 +2097,7 @@ modules:
       type: string
     return-type: () -> ...string
     must-use: true
-    magic-type: true
+    typechecker: {builtin: true, magic: true}
   - name: gsub
     comment: Performs pattern-based substitution in a string.
     parameters:
@@ -2110,6 +2115,7 @@ modules:
       type: number?
     return-type: (string, number)
     must-use: true
+    typechecker: {builtin: true}
   - name: len
     comment: "Returns the number of bytes in the string. Identical to #s"
     parameters:
@@ -2119,6 +2125,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
+    typechecker: {builtin: true}
   - name: lower
     comment: Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.
     parameters:
@@ -2127,6 +2134,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    typechecker: {builtin: true}
   - name: match
     comment: Finds and returns matches for a pattern in the input string.
     parameters:
@@ -2141,7 +2149,7 @@ modules:
       type: number?
     return-type: '...string'
     must-use: true
-    magic-type: true
+    typechecker: {builtin: true, magic: true}
   - name: pack
     comment: Packs values into a binary string.
     parameters:
@@ -2153,6 +2161,7 @@ modules:
       type: ...any
     return-type: string
     must-use: true
+    typechecker: {builtin: true}
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
@@ -2161,6 +2170,7 @@ modules:
       type: string
     return-type: number
     must-use: true
+    typechecker: {builtin: true}
   - name: rep
     comment: Returns the input string repeated a given number of times.
     parameters:
@@ -2172,6 +2182,7 @@ modules:
       type: number
     return-type: string
     must-use: true
+    typechecker: {builtin: true}
   - name: reverse
     comment: Returns the input string with bytes in reverse order.
     parameters:
@@ -2180,6 +2191,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    typechecker: {builtin: true}
   - name: split
     comment: Splits a string by separator. Returns a list of substrings.
     parameters:
@@ -2191,6 +2203,7 @@ modules:
       type: string?
     return-type: '{string}'
     must-use: true
+    typechecker: {builtin: true}
   - name: sub
     comment: Returns a substring from the given range.
     parameters:
@@ -2206,6 +2219,7 @@ modules:
     return-type: string
     must-use: true
     fastcall: true
+    typechecker: {builtin: true}
   - name: unpack
     comment: Decodes a binary string using a pack format.
     parameters:
@@ -2220,6 +2234,7 @@ modules:
       type: number?
     return-type: '...any'
     must-use: true
+    typechecker: {builtin: true}
   - name: upper
     comment: Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.
     parameters:
@@ -2228,6 +2243,7 @@ modules:
       type: string
     return-type: string
     must-use: true
+    typechecker: {builtin: true}
 - name: table
   comment: Table manipulation library. Tables are collections of key-value pairs.
   functions:
@@ -2380,7 +2396,7 @@ modules:
       type: ...V
     return-type: '{ n: number, [number]: V }'
     must-use: true
-    magic-type: true
+    typechecker: {magic: true}
   - name: unpack
     comment: Unpacks array elements into multiple return values.
     type-parameters: [V]
@@ -2473,7 +2489,7 @@ modules:
       type: table # should be: generic table. See #56
       selene-type: table
     return-type: table
-    magic-type: true
+    typechecker: {magic: true}
   - name: isfrozen
     comment: Returns true if a table is frozen.
     parameters:
@@ -2492,7 +2508,7 @@ modules:
       selene-type: table
     return-type: table
     must-use: true
-    magic-type: true
+    typechecker: {magic: true}
 - name: utf8
   comment: UTF-8 support library.
   functions:
