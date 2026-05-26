@@ -4873,7 +4873,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a lowercase version of the input string.
+    description: Returns a lowercase version of the input string. Only works with
+      ASCII. Use ll.ToLower for strings that may contain Unicode.
   string.match:
     args:
     - type: string
@@ -4931,7 +4932,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns an uppercase version of the input string.
+    description: Returns an uppercase version of the input string. Only works with
+      ASCII. Use ll.ToUpper for strings that may contain Unicode.
   table.concat:
     args:
     - type: table
