@@ -54,6 +54,8 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for func in slua_definitions.functions:
         if func.private or func.local_only:
             continue
+        if not func.typechecker_flags.fully_defined:
+            defs.write("-- ")
         defs.write("declare ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):

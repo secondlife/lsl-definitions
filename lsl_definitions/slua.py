@@ -77,6 +77,30 @@ class SLuaParameter:
 
 
 @dataclasses.dataclass
+class SLuaTypecheckerFlags:
+    """Flags specific to the internals of luau-analyze and luau-lsp."""
+
+    builtin: bool = False
+    """This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp."""
+    magic: bool = False
+    """The typechecker has custom logic for this function."""
+
+    @property
+    def fully_defined(self) -> bool:
+        """True if this function is fully defined and won't cause issues for the typechecker."""
+        return not self.builtin and not self.magic
+
+    @property
+    def comment_string(self) -> str:
+        comments = []
+        if self.builtin:
+            comments.append("builtin")
+        if self.magic:
+            comments.append("magic type")
+        return " -- " + ", ".join(comments) if comments else ""
+
+
+@dataclasses.dataclass
 class SLuaFunctionBase(abc.ABC):
     name: str = ""
     type_parameters: List[str] = dataclasses.field(default_factory=list)
@@ -115,8 +139,10 @@ class SLuaFunction(SLuaFunctionBase):
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
-    magic_type: bool = False
-    """The typechecker has custom logic for this function."""
+    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
+        default_factory=SLuaTypecheckerFlags
+    )
+    """Flags specific to the internals of luau-analyze and luau-lsp."""
     overloads: List[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
@@ -167,8 +193,7 @@ class SLuaFunction(SLuaFunctionBase):
             f.write(self.type_parameters_string)
             f.write(self.parameters_string(declaration=True))
             f.write(f": {self.return_type}")
-            if self.magic_type:
-                f.write(" -- magic type")
+            f.write(self.typechecker_flags.comment_string)
             f.write("\n")
 
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
@@ -185,8 +210,7 @@ class SLuaFunction(SLuaFunctionBase):
                 f.write(overload.type_def_string)
             f.write(")")
         f.write(suffix)
-        if self.magic_type:
-            f.write(" -- magic type")
+        f.write(self.typechecker_flags.comment_string)
         f.write("\n")
 
 
@@ -777,7 +801,7 @@ class SLuaDefinitionParser:
                 local_only=data.get("local-only", False),
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
-                magic_type=data.get("magic-type", False),
+                typechecker_flags=SLuaTypecheckerFlags(**data.get("typechecker", {})),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)

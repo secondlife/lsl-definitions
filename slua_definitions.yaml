@@ -411,7 +411,7 @@ functions:
     type: T
     selene-type: table
   return-type: getmetatable<T>
-  typechecker: {builtin: true}
+  typechecker: {builtin: true}  # builtin due to FFlag::LuauSolverV2
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -463,7 +463,7 @@ functions:
     comment: Optional key to start traversal after.
     type: K?
   return-type: (K?, V)
-  typechecker: {builtin: true}
+  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -472,7 +472,7 @@ functions:
     comment: The table to iterate over.
     type: "{[K]: V}"
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
-  typechecker: {builtin: true}
+  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pcall
   comment: Calls function f with parameters args, returning success and function results or an error.
   type-parameters: [A..., R...]
@@ -586,7 +586,7 @@ functions:
     selene-type: table
   return-type: setmetatable<T, MT>
   fastcall: true
-  typechecker: {builtin: true, magic: true}
+  typechecker: {builtin: true, magic: true}  # builtin due to FFlag::LuauSolverV2
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
