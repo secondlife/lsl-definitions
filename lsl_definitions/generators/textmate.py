@@ -87,23 +87,15 @@ def gen_textmate_slua(
     slua_definitions.modules.append(rotation_module)
 
     def get_slua_global_functions(definitions: SLuaDefinitions) -> str:
-        global_functions = [
-            f"{f.name}"
-            for f in definitions.global_functions
-            if not f.local_only and not f.slua_removed
+        functions = [
+            f.name for f in definitions.functions if not f.local_only and not f.slua_removed
         ]
-        builtin_functions = [
-            f"{f.name}"
-            for f in definitions.builtin_functions
-            if not f.local_only and not f.slua_removed
-        ]
-        callable_tables = [f"{m.name}" for m in definitions.modules if m.callable is not None]
-        functions = global_functions + builtin_functions + callable_tables
+        functions += [m.name for m in definitions.modules if m.callable is not None]
         functions.sort()
         return "|".join(functions)
 
     def get_slua_global_constants_for_module(module: SLuaModule) -> str:
-        constants = [f"{c.name}" for c in module.constants if not c.private]
+        constants = [c.name for c in module.constants if not c.private]
         constants.sort()
         constants = "|".join(constants)
         if len(constants) > 0:
@@ -118,7 +110,7 @@ def gen_textmate_slua(
     def get_slua_module_regex(module: SLuaModule) -> str:
         if module.name in {"ll", "llcompat"}:
             return None
-        functions = [f"{f.name}" for f in module.functions if not f.private and not f.local_only]
+        functions = [f.name for f in module.functions if not f.private and not f.local_only]
         functions.sort()
         functions = "|".join(functions)
         if len(functions) < 1:
@@ -126,7 +118,7 @@ def gen_textmate_slua(
         return f"{module.name}\\.(?:{functions})"
 
     def get_LL_constants(slua_definitions: SLuaDefinitions) -> str:
-        constants = [f"{c.name}" for c in slua_definitions.global_constants]
+        constants = [c.name for c in slua_definitions.global_constants]
         return crunch_regex_strings(constants)
 
     def get_slua_modules(definitions: SLuaDefinitions) -> str:
@@ -137,7 +129,7 @@ def gen_textmate_slua(
 
     def get_LL_module_functions(definitions: SLuaDefinitions) -> str:
         functions = [
-            f"{f.name}"
+            f.name
             for f in definitions.get_module("ll").functions
             if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None
         ]
@@ -145,7 +137,7 @@ def gen_textmate_slua(
 
     def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> str:
         functions = [
-            f"{f.name}"
+            f.name
             for f in definitions.get_module("ll").functions
             if not f.private
             and not f.local_only
@@ -158,8 +150,8 @@ def gen_textmate_slua(
         # Missing types that are not documented in builtins, classes or aliases
         missing_types = ["nil"]
         builtin_types = [t for t in definitions.builtin_types.keys()]
-        base_classes = [f"{b.name}" for b in definitions.base_classes]
-        type_aliases = [f"{t.name}" for t in definitions.type_aliases if t.export]
+        base_classes = [b.name for b in definitions.base_classes]
+        type_aliases = [t.name for t in definitions.type_aliases if t.export]
         return "|".join(missing_types + builtin_types + base_classes + type_aliases)
 
     def get_slua_metamethods(definitions: SLuaDefinitions) -> str:
@@ -232,7 +224,7 @@ def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
         LSL_EVENTS_REGEX=crunch_regex_strings(list(definitions.events.keys())),
         LSL_FUNCTIONS_REGEX=crunch_regex_strings(
             [
-                f"{name}"
+                name
                 for name, func in definitions.functions.items()
                 if not func.private and not func.deprecated and not func.god_mode
             ]

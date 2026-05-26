@@ -51,7 +51,7 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for func in slua_definitions.global_functions:
+    for func in slua_definitions.functions:
         if func.private or func.local_only:
             continue
         defs.write("declare ")
@@ -226,9 +226,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
         if not const.private:
             selene["globals"][const.name] = selene_property(const)
-    # for func in slua_definitions.builtinFunctions:
-    #     selene["globals"][func.name] = func.to_selene_dict()
-    for func in slua_definitions.global_functions:
+    for func in sorted(slua_definitions.functions, key=lambda x: x.name):
         if not func.private and not func.local_only:
             selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):

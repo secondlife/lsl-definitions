@@ -119,10 +119,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #     for const in slua_definitions.globalVariables:
     #         if not const.private and const.name != "rotation":
     #             selene["globals"][const.name] = selene_property(const)
-    # builtin docs are unused if generated
-    # for func in slua_definitions.builtinFunctions:
-    #     builder.add_function(func)
-    for func in slua_definitions.global_functions:
+    for func in slua_definitions.functions:
         if not func.private and not func.local_only and not func.slua_removed:
             builder.add_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
