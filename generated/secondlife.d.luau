@@ -251,7 +251,7 @@ declare function require(target: any): any
 declare function select<A...>(i: string | number, ...: A...): ...any
 declare setfenv: nil
 declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT>
-declare function tonumber(value: string, base: number?): number?
+declare function tonumber(value: string? | number, base: number?): number?
 declare function toquaternion(value: string? | quaternion): quaternion?
 declare function torotation(value: string? | quaternion): quaternion?
 declare function tostring<T>(value: T): string

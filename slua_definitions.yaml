@@ -585,7 +585,8 @@ functions:
   parameters:
   - name: value
     comment: The string to convert to a number.
-    type: string
+    type: string? | number
+    selene-type: string
   - name: base
     comment: Optional base for the conversion.
     type: number?

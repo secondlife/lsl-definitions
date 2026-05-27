@@ -11143,7 +11143,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The string to convert to a number.</string>
                      <key>type</key>
-                     <string>string</string>
+                     <string>string? | number</string>
                   </map>
                </map>
                <map>
