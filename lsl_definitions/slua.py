@@ -83,7 +83,11 @@ class SLuaTypecheckerFlags:
     builtin: bool = False
     """This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp."""
     magic: bool = False
-    """The typechecker has custom logic for this function."""
+    """
+    The typechecker has custom logic for this function.
+    For examples of each magic function, see the comments of
+    https://github.com/secondlife/lsl-definitions/pull/130
+    """
 
     @property
     def fully_defined(self) -> bool:
