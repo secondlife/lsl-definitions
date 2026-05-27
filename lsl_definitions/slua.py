@@ -311,7 +311,7 @@ class SLuaClassDeclaration:
         https://github.com/luau-lang/luau/issues/2384
         """
         for func in self.methods:
-            func.checked_type = False
+            func.typechecker_flags.checked = False
 
     def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
@@ -706,7 +706,7 @@ class SLuaDefinitions:
                 type_parameters=["T"],
                 parameters=parameters,
                 return_type="T",
-                checked_type=True,
+                typechecker_flags=SLuaTypecheckerFlags(checked=True),
             )
 
         spec = expand_spp_builder(lsl)

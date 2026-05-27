@@ -306,7 +306,7 @@ declare getfenv: nil
 -- declare function getmetatable<T>(obj: T): getmetatable<T> -- builtin
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
-declare function newproxy(mt: boolean?): any
+declare @checked function newproxy(mt: boolean?): any
 -- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
 -- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
 declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...)
@@ -360,32 +360,32 @@ declare bit32: {
 ---------------------------
 
 declare buffer: {
-  create: (size: number) -> buffer,
-  fromstring: (str: string) -> buffer,
-  tostring: (b: buffer) -> string,
-  readi8: (b: buffer, offset: number) -> number,
-  readu8: (b: buffer, offset: number) -> number,
-  readi16: (b: buffer, offset: number) -> number,
-  readu16: (b: buffer, offset: number) -> number,
-  readi32: (b: buffer, offset: number) -> number,
-  readu32: (b: buffer, offset: number) -> number,
-  readf32: (b: buffer, offset: number) -> number,
-  readf64: (b: buffer, offset: number) -> number,
-  writei8: (b: buffer, offset: number, value: number) -> (),
-  writeu8: (b: buffer, offset: number, value: number) -> (),
-  writei16: (b: buffer, offset: number, value: number) -> (),
-  writeu16: (b: buffer, offset: number, value: number) -> (),
-  writei32: (b: buffer, offset: number, value: number) -> (),
-  writeu32: (b: buffer, offset: number, value: number) -> (),
-  writef32: (b: buffer, offset: number, value: number) -> (),
-  writef64: (b: buffer, offset: number, value: number) -> (),
-  readstring: (b: buffer, offset: number, count: number) -> string,
-  writestring: (b: buffer, offset: number, value: string, count: number?) -> (),
-  len: (b: buffer) -> number,
-  copy: (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
-  fill: (b: buffer, offset: number, value: number, count: number?) -> (),
-  readbits: (b: buffer, bitOffset: number, bitCount: number) -> number,
-  writebits: (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
+  create: @checked (size: number) -> buffer,
+  fromstring: @checked (str: string) -> buffer,
+  tostring: @checked (b: buffer) -> string,
+  readi8: @checked (b: buffer, offset: number) -> number,
+  readu8: @checked (b: buffer, offset: number) -> number,
+  readi16: @checked (b: buffer, offset: number) -> number,
+  readu16: @checked (b: buffer, offset: number) -> number,
+  readi32: @checked (b: buffer, offset: number) -> number,
+  readu32: @checked (b: buffer, offset: number) -> number,
+  readf32: @checked (b: buffer, offset: number) -> number,
+  readf64: @checked (b: buffer, offset: number) -> number,
+  writei8: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu8: @checked (b: buffer, offset: number, value: number) -> (),
+  writei16: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu16: @checked (b: buffer, offset: number, value: number) -> (),
+  writei32: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef64: @checked (b: buffer, offset: number, value: number) -> (),
+  readstring: @checked (b: buffer, offset: number, count: number) -> string,
+  writestring: @checked (b: buffer, offset: number, value: string, count: number?) -> (),
+  len: @checked (b: buffer) -> number,
+  copy: @checked (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
+  fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
+  readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
+  writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
 }
 
 
@@ -397,11 +397,11 @@ declare coroutine: {
   create: (f: (...any) -> ...any) -> thread,
   resume: (co: thread, ...any) -> (boolean, ...any),
   running: () -> thread?,
-  status: (co: thread) -> "running" | "suspended" | "normal" | "dead",
+  status: @checked (co: thread) -> "running" | "suspended" | "normal" | "dead",
   wrap: (f: (...any) -> ...any) -> (...any) -> ...any,
   yield: (...any) -> ...any,
   isyieldable: () -> boolean,
-  close: (co: thread) -> (boolean, string?),
+  close: @checked (co: thread) -> (boolean, string?),
 }
 
 
@@ -608,11 +608,11 @@ declare table: {
 
 declare utf8: {
   charpattern: string,
-  char: (...number) -> string,
-  codes: (s: string) -> ((string, number) -> (number, number), string, number),
-  codepoint: (s: string, i: number?, j: number?) -> ...number,
-  len: (s: string, i: number?, j: number?) -> (number?, number?),
-  offset: (s: string, n: number, i: number?) -> number?,
+  char: @checked (...number) -> string,
+  codes: @checked (s: string) -> ((string, number) -> (number, number), string, number),
+  codepoint: @checked (s: string, i: number?, j: number?) -> ...number,
+  len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
+  offset: @checked (s: string, n: number, i: number?) -> number?,
 }
 
 

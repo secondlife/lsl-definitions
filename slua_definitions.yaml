@@ -372,7 +372,7 @@ classes:
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
     return-type: ()
-    checked-type: true
+    typechecker: {checked: true}
 global-variables:
 - name: rotation
   comment: rotation is an alias for quaternion.
@@ -440,7 +440,7 @@ functions:
     type: '((...any) -> ...any) | number'
     selene-type: function
   return-type: '{[string]: any}'
-  checked-type: true
+  typechecker: {checked: true}
   slua-removed: true
 - name: getmetatable
   comment: "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
@@ -493,7 +493,7 @@ functions:
     type: boolean?
     default-value: false
   return-type: any
-  checked-type: true
+  typechecker: {checked: true}
 - name: next
   comment: Returns the next key-value pair in the table traversal order. If the index is nil or omitted, returns the first pair.
   type-parameters: [K, V]
@@ -761,7 +761,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: band
     comment: Performs a bitwise AND operation on input numbers.
     parameters:
@@ -771,7 +771,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: bnot
     comment: Returns the bitwise negation of the input number.
     parameters:
@@ -781,7 +781,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: bor
     comment: Performs a bitwise OR operation on input numbers.
     parameters:
@@ -791,7 +791,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: bxor
     comment: Performs a bitwise XOR operation on input numbers.
     parameters:
@@ -801,7 +801,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: btest
     comment: |-
       Performs a bitwise AND operation on input numbers.
@@ -813,7 +813,7 @@ modules:
     return-type: boolean
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: extract
     comment: "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
@@ -830,7 +830,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: lrotate
     comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
@@ -843,7 +843,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: lshift
     comment: "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
@@ -856,7 +856,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: replace
     comment: "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
@@ -876,7 +876,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: rrotate
     comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
     parameters:
@@ -889,7 +889,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: rshift
     comment: "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
@@ -902,7 +902,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: s32
     comment: Wrap this number from float64 range to signed int32 range and truncate to integer.
       Makes integer arithmetic compatible with LSL.
@@ -912,7 +912,7 @@ modules:
       type: number
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: smul
     comment: Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary.
       Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.
@@ -925,7 +925,7 @@ modules:
       type: number
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: countlz
     comment: Count leading zeros.
     parameters:
@@ -935,7 +935,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: countrz
     comment: Count trailing zeros.
     parameters:
@@ -945,7 +945,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: byteswap
     comment: Swap byte order.
     parameters:
@@ -955,7 +955,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
 - name: buffer
   comment: Buffer manipulation library for binary data.
   functions:
@@ -967,7 +967,7 @@ modules:
       type: number
     return-type: buffer
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: fromstring
     comment: Creates a buffer initialized to the contents of the string.
     parameters:
@@ -976,7 +976,7 @@ modules:
       type: string
     return-type: buffer
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: tostring
     comment: Returns the buffer data as a string.
     parameters:
@@ -985,7 +985,7 @@ modules:
       type: buffer
     return-type: string
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readi8
     comment: Reads a signed 8-bit integer from the buffer at the given offset.
     parameters:
@@ -998,7 +998,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readu8
     comment: Reads an unsigned 8-bit integer from the buffer at the given offset.
     parameters:
@@ -1011,7 +1011,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readi16
     comment: Reads a signed 16-bit integer from the buffer at the given offset.
     parameters:
@@ -1024,7 +1024,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readu16
     comment: Reads an unsigned 16-bit integer from the buffer at the given offset.
     parameters:
@@ -1037,7 +1037,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readi32
     comment: Reads a signed 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1050,7 +1050,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1063,7 +1063,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readf32
     comment: Reads a 32-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -1076,7 +1076,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readf64
     comment: Reads a 64-bit floating-point number from the buffer at the given offset.
     parameters:
@@ -1089,7 +1089,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writei8
     comment: Writes a signed 8-bit integer to the buffer at the given offset.
     parameters:
@@ -1105,7 +1105,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writeu8
     comment: Writes an unsigned 8-bit integer to the buffer at the given offset.
     parameters:
@@ -1121,7 +1121,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writei16
     comment: Writes a signed 16-bit integer to the buffer at the given offset.
     parameters:
@@ -1137,7 +1137,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writeu16
     comment: Writes an unsigned 16-bit integer to the buffer at the given offset.
     parameters:
@@ -1153,7 +1153,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writei32
     comment: Writes a signed 32-bit integer to the buffer at the given offset.
     parameters:
@@ -1169,7 +1169,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writeu32
     comment: Writes an unsigned 32-bit integer to the buffer at the given offset.
     parameters:
@@ -1185,7 +1185,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writef32
     comment: Writes a 32-bit floating-point number to the buffer at the given offset.
     parameters:
@@ -1201,7 +1201,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writef64
     comment: Writes a 64-bit floating-point number to the buffer at the given offset.
     parameters:
@@ -1217,7 +1217,7 @@ modules:
       type: number
     return-type: ()
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: readstring
     comment: Reads a string of the given length from the buffer at the specified offset.
     parameters:
@@ -1232,7 +1232,7 @@ modules:
       type: number
     return-type: string
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writestring
     comment: Writes data from a string into the buffer at the specified offset.
     parameters:
@@ -1251,7 +1251,7 @@ modules:
       type: number?
       default-value: '#value'
     return-type: ()
-    checked-type: true
+    typechecker: {checked: true}
   - name: len
     comment: Returns the size of the buffer in bytes.
     parameters:
@@ -1260,7 +1260,7 @@ modules:
       type: buffer
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: copy
     comment: Copies bytes from the source buffer into the target buffer.
     parameters:
@@ -1283,7 +1283,7 @@ modules:
       type: number?
       default-value: 'buffer.len(source) - sourceOffset'
     return-type: ()
-    checked-type: true
+    typechecker: {checked: true}
   - name: fill
     comment: Fills the buffer with the specified value starting at the given offset.
     parameters:
@@ -1302,7 +1302,7 @@ modules:
       type: number?
       default-value: 'buffer.len(b) - offset'
     return-type: ()
-    checked-type: true
+    typechecker: {checked: true}
   - name: readbits
     comment: Reads up to 32 bits from the buffer at the given offset.
     parameters:
@@ -1317,7 +1317,7 @@ modules:
       type: number
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: writebits
     comment: Writes up to 32 bits to the buffer at the given offset.
     parameters:
@@ -1335,7 +1335,7 @@ modules:
       comment: Source of bits to write.
       type: number
     return-type: ()
-    checked-type: true
+    typechecker: {checked: true}
 - name: coroutine
   comment: Coroutine manipulation library.
   functions:
@@ -1370,7 +1370,7 @@ modules:
       type: thread
     return-type: '"running" | "suspended" | "normal" | "dead"'
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: wrap
     comment: Creates a coroutine and returns a function that resumes it.
     parameters:
@@ -1398,7 +1398,7 @@ modules:
       comment: Coroutine to close.
       type: thread
     return-type: (boolean, string?)
-    checked-type: true
+    typechecker: {checked: true}
 - name: debug
   comment: Debug library for introspection.
   functions:
@@ -1477,7 +1477,7 @@ modules:
       selene-type: string
     return-type: string
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: decode
     comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
       The output is truncated at the first decoding error.
@@ -1502,7 +1502,7 @@ modules:
       default-value: false
     return-type: string
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
 - name: lljson
   comment: JSON encoding/decoding library for Second Life.
   functions:
@@ -1634,7 +1634,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: acos
     comment: Returns the arc cosine of n in radians.
     parameters:
@@ -1644,7 +1644,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: asin
     comment: Returns the arc sine of n in radians.
     parameters:
@@ -1654,7 +1654,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: atan
     comment: Returns the arc tangent of n in radians.
     parameters:
@@ -1664,7 +1664,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: atan2
     comment: "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter."
     parameters:
@@ -1677,7 +1677,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: ceil
     comment: Returns the smallest integer larger than or equal to n.
     parameters:
@@ -1687,7 +1687,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: clamp
     comment: Returns n clamped between min and max. Raises an error if min is greater than max.
     parameters:
@@ -1703,7 +1703,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: cos
     comment: Returns the cosine of n. n is in radians.
     parameters:
@@ -1713,7 +1713,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: cosh
     comment: Returns the hyperbolic cosine of n.
     parameters:
@@ -1723,7 +1723,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: deg
     comment: Converts n from radians to degrees.
     parameters:
@@ -1733,7 +1733,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: exp
     comment: Returns the base-e exponent of n.
     parameters:
@@ -1743,7 +1743,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: floor
     comment: Returns the largest integer smaller than or equal to n.
     parameters:
@@ -1753,7 +1753,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: fmod
     comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
@@ -1766,7 +1766,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: frexp
     comment: Returns m and e such that n = m * 2^e.
     parameters:
@@ -1776,7 +1776,7 @@ modules:
     return-type: (number, number)
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: ldexp
     comment: Returns s * 2^e.
     parameters:
@@ -1789,7 +1789,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -1805,7 +1805,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: log
     comment: Returns the logarithm of n in the given base, defaults to e.
     parameters:
@@ -1819,7 +1819,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: log10
     comment: Returns the base-10 logarithm of n.
     parameters:
@@ -1829,7 +1829,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: map
     comment: Maps n from input range to output range.
     parameters:
@@ -1850,7 +1850,7 @@ modules:
       type: number
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: max
     comment: Returns the maximum value from the given numbers.
     parameters:
@@ -1864,7 +1864,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: min
     comment: Returns the minimum value from the given numbers.
     parameters:
@@ -1878,7 +1878,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: modf
     comment: Returns the integer and fractional parts of n.
     parameters:
@@ -1888,7 +1888,7 @@ modules:
     return-type: (number, number)
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: noise
     comment: "Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0]."
     parameters:
@@ -1905,7 +1905,7 @@ modules:
       default-value: 0
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: pow
     comment: Returns base to the power of exponent.
     parameters:
@@ -1918,7 +1918,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: rad
     comment: Converts n from degrees to radians.
     parameters:
@@ -1928,7 +1928,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: random
     comment: Returns a random number within the given range.
     parameters:
@@ -1942,7 +1942,7 @@ modules:
       default-value: nil
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
     variants:
       - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
         parameters: []
@@ -1971,7 +1971,7 @@ modules:
     return-type: ()
     deprecated:
       reason: Disabled in SLua.
-    checked-type: true
+    typechecker: {checked: true}
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
@@ -1981,7 +1981,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: sign
     comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
     parameters:
@@ -1991,7 +1991,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: sin
     comment: Returns the sine of n. n is in radians.
     parameters:
@@ -2001,7 +2001,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: sinh
     comment: Returns the hyperbolic sine of n.
     parameters:
@@ -2011,7 +2011,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: sqrt
     comment: Returns the square root of n.
     parameters:
@@ -2021,7 +2021,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: tan
     comment: Returns the tangent of n. n is in radians.
     parameters:
@@ -2031,7 +2031,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: tanh
     comment: Returns the hyperbolic tangent of n.
     parameters:
@@ -2041,7 +2041,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: isnan
     comment: Returns true if n is NaN.
     parameters:
@@ -2051,7 +2051,7 @@ modules:
     return-type: boolean
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: isinf
     comment: Returns true if n is infinite.
     parameters:
@@ -2061,7 +2061,7 @@ modules:
     return-type: boolean
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: isfinite
     comment: Returns true if n is finite.
     parameters:
@@ -2071,7 +2071,7 @@ modules:
     return-type: boolean
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   constants:
   - name: pi
     comment: Value of pi.
@@ -2162,7 +2162,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   functions:
   - name: create
     comment: Creates a new quaternion with the given component values.
@@ -2181,7 +2181,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: normalize
     comment: Computes the normalized version (unit quaternion) of the quaternion.
     parameters:
@@ -2190,7 +2190,7 @@ modules:
       type: quaternion
     return-type: quaternion
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: magnitude
     comment: Computes the magnitude of the quaternion.
     parameters:
@@ -2199,7 +2199,7 @@ modules:
       type: quaternion
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: dot
     comment: Computes the dot product of two quaternions.
     parameters:
@@ -2211,7 +2211,7 @@ modules:
       type: quaternion
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: slerp
     comment: Spherical linear interpolation from a to b using factor t.
     parameters:
@@ -2226,7 +2226,7 @@ modules:
       type: number
     return-type: quaternion
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: conjugate
     comment: Computes the conjugate of the quaternion.
     parameters:
@@ -2235,7 +2235,7 @@ modules:
       type: quaternion
     return-type: quaternion
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: tofwd
     comment: Computes the forward vector from the quaternion.
     parameters:
@@ -2244,7 +2244,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: toleft
     comment: Computes the left vector from the quaternion.
     parameters:
@@ -2253,7 +2253,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: toup
     comment: Computes the up vector from the quaternion.
     parameters:
@@ -2262,7 +2262,7 @@ modules:
       type: quaternion
     return-type: vector
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   constants:
   - name: identity
     comment: Identity quaternion constant.
@@ -2784,7 +2784,7 @@ modules:
       type: ...number
       optional: false
     return-type: string
-    checked-type: true
+    typechecker: {checked: true}
   - name: codes
     comment: Returns an iterator that produces
       the byte offset and Unicode codepoint for each character in the string.
@@ -2794,7 +2794,7 @@ modules:
       type: string
     return-type: ((string, number) -> (number, number), string, number)
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: codepoint
     comment: Returns the Unicode codepoints in the specified range of the string.
     parameters:
@@ -2811,7 +2811,7 @@ modules:
       default-value: i
     return-type: '...number'
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: len
     comment: Returns the number of Unicode codepoints in the specified range of the string,
       or nil and error index.
@@ -2829,7 +2829,7 @@ modules:
       default-value: '#s'
     return-type: (number?, number?)
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: offset
     comment: Returns the byte offset of the nth Unicode codepoint in the string.
     parameters:
@@ -2845,7 +2845,7 @@ modules:
       default-value: 'if n >= 0 then 1 else #s + 1'
     return-type: number?
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   constants:
   - name: charpattern
     comment: Pattern that matches exactly one UTF-8 byte sequence.
@@ -2863,7 +2863,7 @@ modules:
       type: string? | buffer | uuid
     return-type: uuid
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   functions:
   - name: create
     comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
@@ -2874,7 +2874,7 @@ modules:
       type: string? | buffer | uuid
     return-type: uuid
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
 - name: vector
   comment: Vector manipulation library.
   callable:
@@ -2895,7 +2895,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   functions:
   - name: create
     comment: Creates a new vector with the given component values.
@@ -2913,7 +2913,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: magnitude
     comment: Computes the magnitude of the vector.
     parameters:
@@ -2923,7 +2923,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: normalize
     comment: Computes the normalized version (unit vector) of the vector.
     parameters:
@@ -2933,7 +2933,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: cross
     comment: Computes the cross product of two vectors.
     parameters:
@@ -2946,7 +2946,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: dot
     comment: Computes the dot product of two vectors.
     parameters:
@@ -2959,7 +2959,7 @@ modules:
     return-type: number
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: angle
     comment: Computes the angle between two vectors in radians.
       The axis, if specified, is used to determine the sign of the angle.
@@ -2976,7 +2976,7 @@ modules:
       default-value: nil
     return-type: number
     must-use: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: floor
     comment: Applies math.floor to each component of the vector.
     parameters:
@@ -2986,7 +2986,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: ceil
     comment: Applies math.ceil to each component of the vector.
     parameters:
@@ -2996,7 +2996,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: abs
     comment: Applies math.abs to each component of the vector.
     parameters:
@@ -3006,7 +3006,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: sign
     comment: Applies math.sign to each component of the vector.
     parameters:
@@ -3016,7 +3016,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: clamp
     comment: Clamps each component of the vector between min and max values.
     parameters:
@@ -3032,7 +3032,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: max
     comment: Applies math.max to each component of the vectors.
     parameters:
@@ -3045,7 +3045,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: min
     comment: Applies math.min to each component of the vectors.
     parameters:
@@ -3058,7 +3058,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   - name: lerp
     comment: Linearly interpolates between a and b using factor t.
     parameters:
@@ -3074,7 +3074,7 @@ modules:
     return-type: vector
     must-use: true
     fastcall: true
-    checked-type: true
+    typechecker: {checked: true}
   constants:
   - name: zero
     comment: Constant vector with all components set to 0.
