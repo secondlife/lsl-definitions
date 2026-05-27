@@ -85,7 +85,7 @@ class SLuaTypecheckerFlags:
     magic: bool = False
     """
     The typechecker has custom logic for this function.
-    For examples of each magic function, see the comments of
+    For examples of each magic type function, see the comments of
     https://github.com/secondlife/lsl-definitions/pull/130
     """
 

@@ -63,7 +63,7 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
             continue
         if module.name == "string":
             defs.write(
-                "--[[ commented out to avoid shadowing magic functions find, format, gmatch, and match\n"
+                "--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match\n"
             )
         module.write_luau_def(defs)
         if module.name == "string":

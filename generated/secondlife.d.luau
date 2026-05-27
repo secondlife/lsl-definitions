@@ -466,7 +466,7 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
   toup: (q: quaternion) -> vector,
 }
 
---[[ commented out to avoid shadowing magic functions find, format, gmatch, and match
+--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match
 
 ---------------------------
 -- Global Table: string
