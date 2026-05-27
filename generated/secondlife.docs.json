@@ -8062,5 +8062,11 @@
     },
     "@sl-slua/global/ZERO_VECTOR": {
         "documentation": "Value: vector(0.0, 0.0, 0.0)"
+    },
+    "@sl-slua/global/_G": {
+        "documentation": "Value: {}<br>The table of Lua builtin globals."
+    },
+    "@sl-slua/global/_VERSION": {
+        "documentation": "Value: \"Luau\""
     }
 }

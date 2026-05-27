@@ -2630,3 +2630,5 @@ declare XP_ERROR_THROTTLED: number
 declare XP_ERROR_UNKNOWN_ERROR: number
 declare ZERO_ROTATION: quaternion
 declare ZERO_VECTOR: vector
+declare _G: any
+declare _VERSION: string

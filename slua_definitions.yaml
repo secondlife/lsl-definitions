@@ -2755,7 +2755,14 @@ modules:
   # auto-generated from lsl_definitions.yaml
   comment: Like ll, but exactly matches LSL semantics.
 # auto-generated from lsl_definitions.yaml
-constants: []
+constants:
+- name: "_G"
+  comment: The table of Lua builtin globals.
+  type: any
+  value: '{}'
+- name: _VERSION
+  type: string
+  value: '"Luau"'
 
 # Everything below here is only for keywords.xml generation, not typechecking
 controls:
@@ -2829,13 +2836,6 @@ builtin-constants:
     comment: "Lua false: Boolean false value."
     type: boolean
     value: 'false'
-  - name: _G
-    comment: The table of Lua builtin globals.
-    type: '{[string]: any}'
-    value: '{}'
-  - name: _VERSION
-    type: string
-    value: '"Luau"'
 metamethods:
   __add:
     tooltip: "Overload method for + operator."
