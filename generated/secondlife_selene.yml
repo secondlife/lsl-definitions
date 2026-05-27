@@ -3956,7 +3956,7 @@ globals:
     description: getfenv is removed in SLua.
   getmetatable:
     args:
-    - type: any
+    - type: table
     description: Returns the metatable for the specified object.
   ipairs:
     args:
@@ -4026,7 +4026,6 @@ globals:
     args:
     - type: table
     - type: table
-      required: false
     description: Changes the metatable for the given table.
   tonumber:
     args:

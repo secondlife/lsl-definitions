@@ -10685,6 +10685,10 @@ vector position - position in local coordinates
          </map>
          <key>getmetatable</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -10693,14 +10697,14 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The object to get the metatable for.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>{[any]: any}?</string>
+            <string>getmetatable&lt;T&gt;</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -11094,6 +11098,11 @@ vector position - position in local coordinates
          </map>
          <key>setmetatable</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+               <string>MT</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -11102,7 +11111,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The table to set the metatable for.</string>
                      <key>type</key>
-                     <string>{ [any]: any }</string>
+                     <string>T</string>
                   </map>
                </map>
                <map>
@@ -11111,14 +11120,14 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The metatable to set.</string>
                      <key>type</key>
-                     <string>{ [any]: any }?</string>
+                     <string>MT</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>()</string>
+            <string>setmetatable&lt;T, MT&gt;</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>

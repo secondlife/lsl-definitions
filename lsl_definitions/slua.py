@@ -848,7 +848,7 @@ class SLuaDefinitionParser:
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
+        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
     )
 
     def _validate_type(self, type_str: str, known_type_names: Set[str] | None = None) -> str:

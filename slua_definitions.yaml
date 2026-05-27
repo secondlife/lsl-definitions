@@ -403,11 +403,13 @@ functions:
   slua-removed: true
 - name: getmetatable
   comment: Returns the metatable for the specified object.
+  type-parameters: [T]
   parameters:
   - name: obj
     comment: The object to get the metatable for.
-    type: any
-  return-type: "{[any]: any}?"
+    type: T
+    selene-type: table
+  return-type: getmetatable<T>
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -566,14 +568,17 @@ functions:
   slua-removed: true
 - name: setmetatable
   comment: Changes the metatable for the given table.
+  type-parameters: [T, MT]
   parameters:
   - name: t
     comment: The table to set the metatable for.
-    type: "{ [any]: any }"
+    type: T
+    selene-type: table
   - name: mt
     comment: The metatable to set.
-    type: "{ [any]: any }?"
-  return-type: ()
+    type: MT
+    selene-type: table
+  return-type: setmetatable<T, MT>
   fastcall: true
 - name: tonumber
   comment: Converts the input string to a number in the specified base.

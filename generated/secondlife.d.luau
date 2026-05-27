@@ -235,7 +235,7 @@ declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 declare function error<T>(message: T, level: number?): never
 declare function gcinfo(): number
 declare getfenv: nil
-declare function getmetatable(obj: any): {[any]: any}?
+declare function getmetatable<T>(obj: T): getmetatable<T>
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
 declare function newproxy(mt: boolean?): any
@@ -250,7 +250,7 @@ declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
 declare function require(target: any): any
 declare function select<A...>(i: string | number, ...: A...): ...any
 declare setfenv: nil
-declare function setmetatable(t: { [any]: any }, mt: { [any]: any }?): ()
+declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT>
 declare function tonumber(value: string, base: number?): number?
 declare function toquaternion(value: string? | quaternion): quaternion?
 declare function torotation(value: string? | quaternion): quaternion?
