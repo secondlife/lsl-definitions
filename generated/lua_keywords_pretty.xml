@@ -10592,7 +10592,7 @@ vector position - position in local coordinates
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>errorMessage</key>
                   <map>
                      <key>tooltip</key>
                      <string>Optional error message to display if the value is not truthy.</string>
@@ -10635,15 +10635,19 @@ vector position - position in local coordinates
          </map>
          <key>error</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
-                  <key>obj</key>
+                  <key>message</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The error object to raise.</string>
+                     <string>The error message to raise.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T</string>
                   </map>
                </map>
                <map>
@@ -10711,7 +10715,7 @@ vector position - position in local coordinates
             <key>arguments</key>
             <array>
                <map>
-                  <key>t</key>
+                  <key>tab</key>
                   <map>
                      <key>tooltip</key>
                      <string>The table to iterate over.</string>
@@ -10783,7 +10787,7 @@ vector position - position in local coordinates
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>(K, V)?</string>
+            <string>(K?, V)</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -10811,7 +10815,7 @@ vector position - position in local coordinates
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>(({[K], V}, K) -&gt; (K?, V), {[K], V}, K)</string>
+            <string>(({[K]: V}, K?) -&gt; (K?, V), {[K]: V}, K)</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -10856,6 +10860,10 @@ vector position - position in local coordinates
          </map>
          <key>print</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -10864,7 +10872,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>Arguments to print to standard output.</string>
                      <key>type</key>
-                     <string>...any</string>
+                     <string>T...</string>
                   </map>
                </map>
             </array>
@@ -10879,6 +10887,11 @@ vector position - position in local coordinates
          </map>
          <key>rawequal</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T1</string>
+               <string>T2</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -10887,7 +10900,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>First object to compare.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T1</string>
                   </map>
                </map>
                <map>
@@ -10896,7 +10909,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>Second object to compare.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T2</string>
                   </map>
                </map>
             </array>
@@ -11030,7 +11043,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The name of the external module.</string>
                      <key>type</key>
-                     <string>string</string>
+                     <string>any</string>
                   </map>
                </map>
             </array>
@@ -11045,6 +11058,10 @@ vector position - position in local coordinates
          </map>
          <key>select</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>A...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -11062,14 +11079,14 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The arguments to select from.</string>
                      <key>type</key>
-                     <string>...any</string>
+                     <string>A...</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>any</string>
+            <string>...any</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -11112,7 +11129,7 @@ vector position - position in local coordinates
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>value</key>
                   <map>
                      <key>tooltip</key>
                      <string>The string to convert to a number.</string>
@@ -11144,7 +11161,7 @@ vector position - position in local coordinates
             <key>arguments</key>
             <array>
                <map>
-                  <key>val</key>
+                  <key>value</key>
                   <map>
                      <key>tooltip</key>
                      <string></string>
@@ -11167,7 +11184,7 @@ vector position - position in local coordinates
             <key>arguments</key>
             <array>
                <map>
-                  <key>val</key>
+                  <key>value</key>
                   <map>
                      <key>tooltip</key>
                      <string></string>
@@ -11187,15 +11204,19 @@ vector position - position in local coordinates
          </map>
          <key>tostring</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
-                  <key>obj</key>
+                  <key>value</key>
                   <map>
                      <key>tooltip</key>
                      <string>The object to convert to a string.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T</string>
                   </map>
                </map>
             </array>
@@ -11256,6 +11277,10 @@ vector position - position in local coordinates
          </map>
          <key>type</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -11264,7 +11289,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The object to get the type of.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T</string>
                   </map>
                </map>
             </array>
@@ -11279,6 +11304,10 @@ vector position - position in local coordinates
          </map>
          <key>typeof</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>T</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -11287,7 +11316,7 @@ vector position - position in local coordinates
                      <key>tooltip</key>
                      <string>The object to get the type of.</string>
                      <key>type</key>
-                     <string>any</string>
+                     <string>T</string>
                   </map>
                </map>
             </array>
@@ -11309,7 +11338,7 @@ vector position - position in local coordinates
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>tab</key>
                   <map>
                      <key>tooltip</key>
                      <string>Array from which to extract values.</string>
@@ -11318,7 +11347,7 @@ vector position - position in local coordinates
                   </map>
                </map>
                <map>
-                  <key>f</key>
+                  <key>i</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting index (optional, defaults to 1).</string>
@@ -11327,7 +11356,7 @@ vector position - position in local coordinates
                   </map>
                </map>
                <map>
-                  <key>t</key>
+                  <key>j</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending index (optional, defaults to #a).</string>
@@ -11366,7 +11395,7 @@ vector position - position in local coordinates
                   </map>
                </map>
                <map>
-                  <key>e</key>
+                  <key>err</key>
                   <map>
                      <key>tooltip</key>
                      <string>Error handler function.</string>

@@ -3983,7 +3983,7 @@ globals:
   pcall:
     args:
     - type: function
-    - type: any
+    - type: '...'
     description: Calls function f with parameters args, returning success and function
       results or an error.
   print:
@@ -4012,7 +4012,7 @@ globals:
     description: Assigns a value to a table field bypassing metatables.
   require:
     args:
-    - type: string
+    - type: any
     description: Execute the named external module.
   select:
     args:
@@ -4083,7 +4083,7 @@ globals:
     args:
     - type: function
     - type: function
-    - type: any
+    - type: '...'
     description: Calls function f with parameters args, handling errors with e if
       they occur.
   bit32.arshift:
