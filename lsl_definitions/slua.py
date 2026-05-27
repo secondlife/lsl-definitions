@@ -62,11 +62,16 @@ class SLuaParameter:
     observes: Literal["read-write", "read", "write"] | None = None
     """See https://kampfkarren.github.io/selene/usage/std.html#observes."""
 
-    def to_luau_def(self) -> str:
+    def to_luau_def(self, declaration: bool = False) -> str:
         if self.type is None:
             return self.name
         elif self.name == "...":
-            return self.type
+            if not declaration:
+                return self.type
+            elif self.type.startswith("..."):
+                return f"...: {self.type[3:]}"
+            else:
+                return f"...: {self.type}"
         else:
             return f"{self.name}: {self.type}"
 
@@ -85,13 +90,12 @@ class SLuaFunctionBase(abc.ABC):
             return ""
         return "<" + ", ".join(self.type_parameters) + ">"
 
-    @property
-    def parameters_string(self) -> str:
-        return "(" + ", ".join(p.to_luau_def() for p in self.parameters) + ")"
+    def parameters_string(self, declaration: bool = False) -> str:
+        return "(" + ", ".join(p.to_luau_def(declaration) for p in self.parameters) + ")"
 
     @property
     def type_def_string(self) -> str:
-        return self.type_parameters_string + self.parameters_string + " -> " + self.return_type
+        return self.type_parameters_string + self.parameters_string() + " -> " + self.return_type
 
 
 @dataclasses.dataclass
@@ -159,7 +163,7 @@ class SLuaFunction(SLuaFunctionBase):
             f.write(self.deprecated_string)
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
-            f.write(self.parameters_string)
+            f.write(self.parameters_string(declaration=True))
             f.write(f": {self.return_type}\n")
 
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
@@ -848,7 +852,7 @@ class SLuaDefinitionParser:
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
+        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
     )
 
     def _validate_type(self, type_str: str, known_type_names: Set[str] | None = None) -> str:

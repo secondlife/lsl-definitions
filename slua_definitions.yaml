@@ -354,7 +354,7 @@ functions:
   - name: value
     comment: The value to check for truthiness.
     type: T?
-  - name: message
+  - name: errorMessage
     comment: Optional error message to display if the value is not truthy.
     type: string?
   return-type: T
@@ -381,10 +381,11 @@ functions:
   return-type: '...any'
 - name: error
   comment: Raises an error with the specified object and optional call stack level.
+  type-parameters: [T]
   parameters:
-  - name: obj
-    comment: The error object to raise.
-    type: any
+  - name: message
+    comment: The error message to raise.
+    type: T
   - name: level
     comment: Optional level to attribute the error to in the call stack.
     type: number?
@@ -402,11 +403,13 @@ functions:
   slua-removed: true
 - name: getmetatable
   comment: Returns the metatable for the specified object.
+  type-parameters: [T]
   parameters:
   - name: obj
     comment: The object to get the metatable for.
-    type: any
-  return-type: "{[any]: any}?"
+    type: T
+    selene-type: table
+  return-type: getmetatable<T>
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -426,7 +429,7 @@ functions:
   comment: Returns an iterator for numeric key-value pairs in the table.
   type-parameters: [V]
   parameters:
-  - name: t
+  - name: tab
     comment: The table to iterate over.
     type: "{V}"
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
@@ -457,7 +460,7 @@ functions:
   - name: i
     comment: Optional key to start traversal after.
     type: K?
-  return-type: (K, V)?
+  return-type: (K?, V)
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -465,7 +468,7 @@ functions:
   - name: t
     comment: The table to iterate over.
     type: "{[K]: V}"
-  return-type: "(({[K], V}, K) -> (K?, V), {[K], V}, K)"
+  return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
 - name: pcall
   comment: Calls function f with parameters args, returning success and function results or an error.
   type-parameters: [A..., R...]
@@ -479,20 +482,22 @@ functions:
   return-type: (boolean, R...)
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
+  type-parameters: [T...]
   parameters:
   - name: ...
     comment: Arguments to print to standard output.
-    type: ...any
+    type: T...
   return-type: ()
 - name: rawequal
   comment: Returns true if a and b have the same type and value.
+  type-parameters: [T1, T2]
   parameters:
   - name: a
     comment: First object to compare.
-    type: any
+    type: T1
   - name: b
     comment: Second object to compare.
-    type: any
+    type: T2
   return-type: boolean
   fastcall: true
 - name: rawget
@@ -536,45 +541,52 @@ functions:
   parameters:
   - name: target
     comment: The name of the external module.
-    type: string
+    type: any
   return-type: any
 - name: select
   comment: Returns a subset of arguments or the number of arguments.
+  type-parameters: [A...]
   parameters:
   - name: i
     comment: The index or '#' to count arguments.
     type: string | number
   - name: ...
     comment: The arguments to select from.
-    type: ...any
-  return-type: any
+    type: A...
+  return-type: ...any
   fastcall: true
 - name: setfenv
   comment: Set the scoped environment for the given function.
+  type-parameters: [T..., R...]
   parameters:
   - name: target
-    type: '((...any) -> ...any) | number'
+    type: 'number | (T...) -> R...'
     selene-type: function
   - name: env
     type: '{[string]: any}'
+  return-type: ((T...) -> R...)?
   slua-removed: true
 - name: setmetatable
   comment: Changes the metatable for the given table.
+  type-parameters: [T, MT]
   parameters:
   - name: t
     comment: The table to set the metatable for.
-    type: "{ [any]: any }"
+    type: T
+    selene-type: table
   - name: mt
     comment: The metatable to set.
-    type: "{ [any]: any }?"
-  return-type: ()
+    type: MT
+    selene-type: table
+  return-type: setmetatable<T, MT>
   fastcall: true
 - name: tonumber
   comment: Converts the input string to a number in the specified base.
   parameters:
-  - name: s
+  - name: value
     comment: The string to convert to a number.
-    type: string
+    type: string? | number
+    selene-type: string
   - name: base
     comment: Optional base for the conversion.
     type: number?
@@ -584,7 +596,7 @@ functions:
 - name: toquaternion
   comment: Converts a string to a quaternion, returns nil if invalid
   parameters:
-  - name: val
+  - name: value
     type: string? | quaternion
     selene-type: string
   return-type: quaternion?
@@ -592,17 +604,18 @@ functions:
 - name: torotation
   comment: Converts a string to a rotation (quaternion), returns nil if invalid
   parameters:
-  - name: val
+  - name: value
     type: string? | quaternion
     selene-type: string
   return-type: quaternion?
   must-use: true
 - name: tostring
   comment: Converts the input object to a string.
+  type-parameters: [T]
   parameters:
-  - name: obj
+  - name: value
     comment: The object to convert to a string.
-    type: any
+    type: T
   return-type: string
   fastcall: true
 - name: touuid
@@ -625,19 +638,21 @@ functions:
   must-use: true
 - name: type
   comment: Returns the type of the object as a string.
+  type-parameters: [T]
   parameters:
   - name: obj
     comment: The object to get the type of.
-    type: any
+    type: T
   return-type: string
   must-use: true
   fastcall: true
 - name: typeof
   comment: Returns the type of the object, including custom userdata types.
+  type-parameters: [T]
   parameters:
   - name: obj
     comment: The object to get the type of.
-    type: any
+    type: T
   return-type: string
   must-use: true
   fastcall: true
@@ -645,13 +660,13 @@ functions:
   comment: Returns values from an array in the specified index range.
   type-parameters: [V]
   parameters:
-  - name: a
+  - name: tab
     comment: Array from which to extract values.
     type: "{V}"
-  - name: f
+  - name: i
     comment: Starting index (optional, defaults to 1).
     type: number?
-  - name: t
+  - name: j
     comment: "Ending index (optional, defaults to #a)."
     type: number?
   return-type: ...V
@@ -663,7 +678,7 @@ functions:
   - name: f
     comment: A function to be called.
     type: (A...) -> R1...
-  - name: e
+  - name: err
     comment: Error handler function.
     type: (E) -> R2...
   - name: ...

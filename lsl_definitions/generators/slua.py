@@ -125,14 +125,14 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             return type_map[type_str]
         if type_str in type_aliases:
             return type_aliases[type_str].selene_type
-        if type_str.startswith("..."):
-            return "..."
         if type_str.startswith("{") and type_str.endswith("}"):
             return "table"
         if "|" in type_str:
             return default
         if "->" in type_str:
             return "function"
+        if "..." in type_str:
+            return "..."
         return default
 
     def selene_property(prop: SLuaProperty) -> dict:

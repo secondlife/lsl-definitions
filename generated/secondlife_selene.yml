@@ -3962,7 +3962,7 @@ globals:
     description: getfenv is removed in SLua.
   getmetatable:
     args:
-    - type: any
+    - type: table
     description: Returns the metatable for the specified object.
   ipairs:
     args:
@@ -3989,7 +3989,7 @@ globals:
   pcall:
     args:
     - type: function
-    - type: any
+    - type: '...'
     description: Calls function f with parameters args, returning success and function
       results or an error.
   print:
@@ -4018,7 +4018,7 @@ globals:
     description: Assigns a value to a table field bypassing metatables.
   require:
     args:
-    - type: string
+    - type: any
     description: Execute the named external module.
   select:
     args:
@@ -4032,7 +4032,6 @@ globals:
     args:
     - type: table
     - type: table
-      required: false
     description: Changes the metatable for the given table.
   tonumber:
     args:
@@ -4089,7 +4088,7 @@ globals:
     args:
     - type: function
     - type: function
-    - type: any
+    - type: '...'
     description: Calls function f with parameters args, handling errors with e if
       they occur.
   bit32.arshift:
