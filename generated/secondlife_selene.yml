@@ -3929,6 +3929,12 @@ globals:
     struct: quaternion
   ZERO_VECTOR:
     struct: vector
+  _G:
+    property: read-only
+    description: The table of Lua builtin globals.
+  _VERSION:
+    property: read-only
+    type: string
   assert:
     args:
     - type: any

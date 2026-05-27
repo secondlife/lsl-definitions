@@ -659,6 +659,10 @@ class SLuaDefinitionParser:
         type_aliases = [self._validate_type_alias(alias) for alias in def_dict["type-aliases"]]
 
         # 3. SLua standard library
+        global_constants = [
+            self._validate_property(const, self._global_scope, const=True)
+            for const in def_dict["constants"]
+        ]
         classes = [self._validate_class(class_) for class_ in def_dict["classes"]]
         functions = [
             self._validate_function(func, self._global_scope) for func in def_dict["functions"]
@@ -680,7 +684,7 @@ class SLuaDefinitionParser:
             functions=functions,
             modules=modules,
             global_variables=global_variables,
-            global_constants=[],
+            global_constants=global_constants,
             type_names=self._type_names,
         )
 
