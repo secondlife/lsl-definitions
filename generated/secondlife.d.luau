@@ -306,7 +306,7 @@ declare getfenv: nil
 -- declare function getmetatable<T>(obj: T): getmetatable<T> -- builtin
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
-declare @checked function newproxy(mt: boolean?): any
+@checked declare function newproxy(mt: boolean?): any
 -- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
 -- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
 declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...)
@@ -315,7 +315,7 @@ declare function rawequal<T1, T2>(a: T1, b: T2): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?
 declare function rawlen<K, V>(t: {[K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
--- declare @checked function require(target: any): any -- magic type
+-- @checked declare function require(target: any): any -- magic type
 -- declare function select<A...>(i: string | number, ...: A...): ...any -- magic type
 declare setfenv: nil
 -- declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT> -- builtin, magic type

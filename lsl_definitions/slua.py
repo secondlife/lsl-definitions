@@ -226,13 +226,15 @@ class SLuaFunction(SLuaFunctionBase):
     def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
         if self.slua_removed:
-            f.write(f"{self.name}: nil\n")
+            f.write(f"declare {self.name}: nil\n")
         elif self.overloads:
             # the function format can't handle overloads
             self.write_luau_table_def(f, indent, suffix="")
         else:
             f.write(f"{'  ' * indent}")
             f.write(self.annotation_string)
+            if indent == 0:
+                f.write("declare ")
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string(declaration=True))
