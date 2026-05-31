@@ -190,6 +190,23 @@
                 "comment": {
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"
+                },
+                "typechecker": {
+                    "type": "object",
+                    "description": "Flags specific to the internals of luau-analyze and luau-lsp.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "builtin": {
+                            "const": true,
+                            "description": "This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp.",
+                            "type": "boolean"
+                        },
+                        "magic": {
+                            "const": true,
+                            "description": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
+                            "type": "boolean"
+                        }
+                    }
                 }
             },
             "required": ["name"],

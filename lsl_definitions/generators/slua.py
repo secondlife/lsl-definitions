@@ -54,12 +54,20 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for func in slua_definitions.functions:
         if func.private or func.local_only:
             continue
+        if not func.typechecker_flags.fully_defined:
+            defs.write("-- ")
         defs.write("declare ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue
+        if module.name == "string":
+            defs.write(
+                "--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match\n"
+            )
         module.write_luau_def(defs)
+        if module.name == "string":
+            defs.write("--]]\n")
     for var in slua_definitions.global_variables:
         defs.write("declare ")
         defs.write(var.to_luau_def())
