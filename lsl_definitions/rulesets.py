@@ -1,12 +1,13 @@
 """
-Ruleset-to-Luau codegen. Currently the only ruleset modeled is `prim-params`,
-expanded into the fluent SPP builder.
+Ruleset-to-Luau codegen. Supports any named ruleset declared under
+builder-rulesets in lsl_definitions.yaml. The fluent SPP builder for
+`prim-params` is the reference implementation.
 """
 
 from __future__ import annotations
 
 import dataclasses
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional, Set
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -63,6 +64,20 @@ class BuilderSpec:
     methods: list[BuilderMethod]
 
 
+@dataclasses.dataclass(frozen=True)
+class MemberDescriptor:
+    """Descriptor for a single property in an enum-membership-derived builder."""
+
+    strict_name: str
+    """Always-valid property name (prefix stripped, lowercased)."""
+    pretty_name: Optional[str]
+    """Pretty alias, or None if reverted due to collision."""
+    tag: int
+    """Numeric value of the originating constant (the rule tag)."""
+    value_type: str
+    """Semantic type from the value-type annotation (e.g. 'float', 'vector')."""
+
+
 def _method_name(*parts: str) -> str:
     # ("COLOR",) -> "color", ("GLTF_BASE_COLOR",) -> "gltfBaseColor";
     # ("PRIM_", "TYPE", "BOX") -> "primTypeBox".
@@ -78,11 +93,13 @@ def _build_params(raw_params: list[tuple[str, str]]) -> list[BuilderMethodParam]
     ]
 
 
-def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
-    # Translates the `prim-params` ruleset into SLua builder methods. The
-    # LSL-side semantic validation already ran in
-    # `LSLDefinitionParser._validate_builder_rule_variants`.
-    ruleset = lsl.builder_rulesets["prim-params"]
+def expand_builder(lsl: LSLDefinitions, ruleset_name: str, class_name: str) -> BuilderSpec:
+    """Expand any named builder-ruleset into a BuilderSpec.
+
+    LSL-side semantic validation is assumed to have already run via
+    LSLDefinitionParser._validate_builder_rule_variants.
+    """
+    ruleset = lsl.builder_rulesets[ruleset_name]
     rule_enum = lsl.enums[ruleset["enum"]]
 
     methods: list[BuilderMethod] = []
@@ -120,6 +137,74 @@ def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
             )
     return BuilderSpec(
         # The "class name" is global, so we don't want it to be ambiguous
-        class_name="PrimParamsSetterType",
+        class_name=class_name,
         methods=methods,
     )
+
+
+def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
+    """Compatibility wrapper. Expands the prim-params ruleset into the SPP builder."""
+    return expand_builder(lsl, "prim-params", "PrimParamsSetterType")
+
+
+def expand_member_params(
+    lsl: LSLDefinitions,
+    enum_name: str,
+    filler_tokens: Set[str],
+) -> List[MemberDescriptor]:
+    """Derive a sorted, collision-resolved list of property descriptors from
+    the constants that are members of *enum_name*.
+
+    Pass 1 produces strict names by stripping the enum prefix and lowercasing.
+    Pass 2 produces pretty aliases by removing *filler_tokens*.
+    If two pretty aliases collide, both revert to their strict names.
+    Fails hard if any two strict names are identical.
+    """
+    enum = lsl.enums[enum_name]
+    candidates = sorted(
+        (
+            c
+            for c in lsl.constants.values()
+            if any(e.name == enum_name for e in c.member_of) and not c.private
+        ),
+        key=lambda c: int(c.value, 0),
+    )
+
+    rows: List[tuple] = []
+    for const in candidates:
+        strict = const.name.removeprefix(enum.prefix).lower()
+        if const.value_type is None:
+            raise ValueError(
+                f"Constant {const.name!r} is a member of {enum_name!r} "
+                f"but has no value-type annotation."
+            )
+        rows.append((strict, int(const.value, 0), const.value_type))
+
+    # Hard-fail on strict name collisions (implies a data error).
+    strict_names = [r[0] for r in rows]
+    dupes = {n for n in strict_names if strict_names.count(n) > 1}
+    if dupes:
+        raise ValueError(f"Strict name collision(s) in {enum_name}: {sorted(dupes)}")
+
+    # Pass 2: pretty aliases.
+    def _pretty(strict: str) -> str:
+        tokens = [t for t in strict.split("_") if t not in filler_tokens]
+        return "_".join(tokens) if tokens else strict
+
+    pretties = [_pretty(strict) for strict, _, _ in rows]
+    colliding = {p for p in pretties if pretties.count(p) > 1}
+
+    return [
+        MemberDescriptor(
+            strict_name=strict,
+            pretty_name=None if pretty in colliding else pretty,
+            tag=tag,
+            value_type=vt,
+        )
+        for (strict, tag, vt), pretty in zip(rows, pretties)
+    ]
+
+
+def expand_particle_params(lsl: LSLDefinitions) -> List[MemberDescriptor]:
+    """Expand ParticleParam members with the standard particle filler tokens."""
+    return expand_member_params(lsl, "ParticleParam", {"part", "src"})

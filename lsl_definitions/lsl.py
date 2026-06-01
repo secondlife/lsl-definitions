@@ -153,6 +153,7 @@ class LSLConstant:
     private: bool
     """Whether this should this be included in the syntax file"""
     member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
+    value_type: Optional[str] = None
 
     @property
     def value_raw(self) -> str:
@@ -782,6 +783,7 @@ class LSLDefinitionParser:
                 slua_deprecated=Deprecated.from_definition(
                     const_data.get("slua-deprecated", False)
                 ),
+                value_type=const_data.get("value-type", None),
             )
             if const.type not in {"float", "integer", "string", "vector", "rotation"}:
                 raise ValueError(f"Invalid constant type {const.type}")
