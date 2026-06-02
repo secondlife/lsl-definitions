@@ -459,7 +459,7 @@
                         },
                         "param-get-semantics": {
                             "pattern": "^[A-Z][A-Za-z]+$",
-                            "markdownDescription": "This function's list return value represents a list to requested parameter values.",
+                            "markdownDescription": "This function's list return value represents a list of the requested parameter values.",
                             "type": "string"
                         },
                         "private": {
