@@ -826,8 +826,7 @@ constants:
     deprecated:
       use: ATTACH_RIGHT_PEC
     member-of: [AttachPoint]
-    tooltip: Attachment point for the avatar's right pectoral (deprecated, use
-      ATTACH_RIGHT_PEC).
+    tooltip: Attachment point for the avatar's right pectoral (deprecated, use ATTACH_RIGHT_PEC).
     type: integer
     value: 30
   ATTACH_LSHOULDER:
@@ -920,8 +919,7 @@ constants:
     deprecated:
       use: ATTACH_LEFT_PEC
     member-of: [AttachPoint]
-    tooltip: Attachment point for the avatar's left pectoral (deprecated, use
-      ATTACH_LEFT_PEC).
+    tooltip: Attachment point for the avatar's left pectoral (deprecated, use ATTACH_LEFT_PEC).
     type: integer
     value: 29
   ATTACH_RSHOULDER:
@@ -956,17 +954,17 @@ constants:
     value: 44
   AVOID_CHARACTERS:
     member-of: [CharacterAvoidanceMode]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1
   AVOID_DYNAMIC_OBSTACLES:
     member-of: [CharacterAvoidanceMode]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2
   AVOID_NONE:
     member-of: [CharacterAvoidanceMode]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 0
   BEACON_MAP:
@@ -1476,7 +1474,7 @@ constants:
     value: 4
   DAMAGE_TYPE_EMOTIONAL:
     member-of: [DamageType]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 14
   DAMAGE_TYPE_FIRE:
@@ -1796,143 +1794,143 @@ constants:
     value: 2
   GAME_CONTROL_AXIS_LEFTX:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1
   GAME_CONTROL_AXIS_RIGHTX:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 3
   GAME_CONTROL_AXIS_TRIGGERLEFT:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
     member-of: [GameControlAxis]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 5
   GAME_CONTROL_BUTTON_A:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x1'
   GAME_CONTROL_BUTTON_B:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x10'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x800'
   GAME_CONTROL_BUTTON_GUIDE:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x20'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x8000'
   GAME_CONTROL_BUTTON_PADDLE1:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x80000'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x100'
   GAME_CONTROL_BUTTON_START:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x40'
   GAME_CONTROL_BUTTON_TOUCHPAD:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x100000'
   GAME_CONTROL_BUTTON_X:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
     member-of: [GameControlButton]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x8'
   GCNP_GET_WALKABILITY:
     member-of: [GetClosestNavPointParam]
     private: true
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '2'
   GCNP_RADIUS:
@@ -2034,57 +2032,57 @@ constants:
     type: integer
     value: 3
   IMG_USE_BAKED_AUX1:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "9742065b-19b5-297c-858a-29711d539043"
   IMG_USE_BAKED_AUX2:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
   IMG_USE_BAKED_AUX3:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"
   IMG_USE_BAKED_EYES:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"
   IMG_USE_BAKED_HAIR:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"
   IMG_USE_BAKED_HEAD:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "5a9f4a74-30f2-821c-b88d-70499d3e7183"
   IMG_USE_BAKED_LEFTARM:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "ff62763f-d60a-9855-890b-0c96f8f8cd98"
   IMG_USE_BAKED_LEFTLEG:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "8e915e25-31d1-cc95-ae08-d58a47488251"
   IMG_USE_BAKED_LOWER:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "24daea5f-0539-cfcf-047f-fbc40b2786ba"
   IMG_USE_BAKED_SKIRT:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "43529ce8-7faa-ad92-165a-bc4078371687"
   IMG_USE_BAKED_UPPER:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
@@ -2389,7 +2387,7 @@ constants:
     value: 3
   LEGACY_MASS_FACTOR:
     private: true
-    tooltip: ""
+    tooltip: ''
     type: float
     value: '0.01'
   LINKSETDATA_DELETE:
@@ -2585,7 +2583,7 @@ constants:
   NAVIGATE_TO_GOAL_REACHED_DIST:
     member-of: [CharacterNavigateParam]
     private: true
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2
   NULL_KEY:
@@ -2981,8 +2979,8 @@ constants:
     value: 6
   OPT_LEGACY_LINKSET:
     member-of: [ObjectPathfindingType]
-    tooltip: Returned for movable obstacles, movable phantoms, physical, and
-      volumedetect objects.
+    tooltip: Returned for movable obstacles, movable phantoms, physical, and volumedetect
+      objects.
     type: integer
     value: 0
   OPT_MATERIAL_VOLUME:
@@ -3243,7 +3241,7 @@ constants:
   PARCEL_FLAG_LINDEN_HOMES:
     member-of: [ParcelFlag]
     private: true
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x800000'
   PARCEL_FLAG_LOCAL_SOUND_ONLY:
@@ -3920,7 +3918,7 @@ constants:
     private: true
     deprecated:
       use: DENSITY
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x1'
   PRIM_MATERIAL_FLESH:
@@ -3933,7 +3931,7 @@ constants:
     private: true
     deprecated:
       use: FRICTION
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x2'
   PRIM_MATERIAL_GLASS:
@@ -3946,7 +3944,7 @@ constants:
     private: true
     deprecated:
       use: GRAVITY_MULTIPLIER
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x8'
   PRIM_MATERIAL_LIGHT:
@@ -3973,7 +3971,7 @@ constants:
     private: true
     deprecated:
       use: RESTITUTION
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x4'
   PRIM_MATERIAL_RUBBER:
@@ -4061,27 +4059,27 @@ constants:
     type: integer
     value: 3
   PRIM_MEDIA_MAX_HEIGHT_PIXELS:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2048
   PRIM_MEDIA_MAX_URL_LENGTH:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1024
   PRIM_MEDIA_MAX_WHITELIST_COUNT:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 64
   PRIM_MEDIA_MAX_WHITELIST_SIZE:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1024
   PRIM_MEDIA_MAX_WIDTH_PIXELS:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2048
   PRIM_MEDIA_PARAM_MAX:
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 14
   PRIM_MEDIA_PERMS_CONTROL:
@@ -4098,22 +4096,22 @@ constants:
     value: 13
   PRIM_MEDIA_PERM_ANYONE:
     member-of: [PrimMediaPerm]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 4
   PRIM_MEDIA_PERM_GROUP:
     member-of: [PrimMediaPerm]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2
   PRIM_MEDIA_PERM_NONE:
     member-of: [PrimMediaPerm]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 0
   PRIM_MEDIA_PERM_OWNER:
     member-of: [PrimMediaPerm]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1
   PRIM_MEDIA_WHITELIST:
@@ -4735,7 +4733,7 @@ constants:
   PSYS_SRC_OBJ_REL_MASK:
     member-of: [ParticleParam]
     private: true
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: '0x1'
   PSYS_SRC_OMEGA:
@@ -5225,7 +5223,7 @@ constants:
   REZ_TORQUE:
     member-of: [RezParam]
     private: true
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 6
   REZ_VEL:
@@ -5476,7 +5474,7 @@ constants:
   SKY_ABSORPTION_CONFIG:
     private: true
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 16
   SKY_AMBIENT:
@@ -5944,7 +5942,7 @@ constants:
     slua-type: uuid
     value: "5748decc-f629-461c-9a36-a35a221fe21f"
   TEXTURE_DEFAULT:
-    tooltip: ""
+    tooltip: ''
     type: string
     slua-type: uuid
     value: "89556747-24cb-43ed-920b-47caed15465f"
@@ -6082,17 +6080,17 @@ constants:
     value: 7
   TRAVERSAL_TYPE_FAST:
     member-of: [CharacterTraversalType]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 1
   TRAVERSAL_TYPE_NONE:
     member-of: [CharacterTraversalType]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 2
   TRAVERSAL_TYPE_SLOW:
     member-of: [CharacterTraversalType]
-    tooltip: ""
+    tooltip: ''
     type: integer
     value: 0
   'TRUE':
@@ -6156,11 +6154,11 @@ constants:
     type: integer
     value: 5
   URL_REQUEST_DENIED:
-    tooltip: ""
+    tooltip: ''
     type: string
     value: URL_REQUEST_DENIED
   URL_REQUEST_GRANTED:
-    tooltip: ""
+    tooltip: ''
     type: string
     value: URL_REQUEST_GRANTED
   VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY:
