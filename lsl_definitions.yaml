@@ -2318,17 +2318,17 @@ constants:
     value: 2
   LAND_BRUSH_LARGE:
     member-of: [ModifyLandBrush]
-    tooltip: Use a large brush size.
+    tooltip: Use a large brush size (8m x 8m).
     type: integer
     value: 2
   LAND_BRUSH_MEDIUM:
     member-of: [ModifyLandBrush]
-    tooltip: Use a medium brush size.
+    tooltip: Use a medium brush size (4m x 4m)..
     type: integer
     value: 1
   LAND_BRUSH_SMALL:
     member-of: [ModifyLandBrush]
-    tooltip: Use a small brush size.
+    tooltip: Use a small brush size (2m x 2m).
     type: integer
     value: 0
   LAND_LARGE_BRUSH:
@@ -3800,9 +3800,12 @@ constants:
     value: 53
   PRIM_COLOR:
     member-of: [PrimParam]
-    tooltip: Prim parameter [PRIM_COLOR, integer face, vector color, float alpha] to
-      get or set the Blinn-Phong color (RGB vector) and opacity (float alpha
-      from 0.0 to 1.0) of a face.
+    tooltip: |
+      Prim parameter to get or set the Blinn-Phong color and opacity of a face.
+
+      integer face – face number or ALL_SIDES
+      vector color – color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+      float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)
     type: integer
     value: 18
   PRIM_DAMAGE:
@@ -3819,9 +3822,16 @@ constants:
     value: 28
   PRIM_FLEXIBLE:
     member-of: [PrimParam]
-    tooltip: Prim parameter [PRIM_FLEXIBLE, integer boolean, integer softness, float
-      gravity, float friction, float wind, float tension, vector force] to get
-      or set the prim's flexible configuration.
+    tooltip: |
+      Prim parameter to get or set the prim's flexible configuration.
+
+      integer boolean – TRUE enables, FALSE disables
+      integer softness – ranges from 0 to 3
+      float gravity – ranges from -10.0 to 10.0
+      float friction – ranges from 0.0 to 10.0
+      float wind – ranges from 0.0 to 10.0
+      float tension – ranges from 0.0 to 10.0
+      vector force
     type: integer
     value: 21
   PRIM_FULLBRIGHT:
@@ -4165,9 +4175,12 @@ constants:
     value: 37
   PRIM_OMEGA:
     member-of: [PrimParam]
-    tooltip: Prim parameter [PRIM_OMEGA, vector axis, float spinrate, float gain] to
-      get, set, or disable a client-side physical-like rotation (analogous to
-      llTargetOmega).
+    tooltip: |
+      Prim parameter to get, set, or disable a client-side physical-like rotation (analogous to llTargetOmega).
+
+      vector axis – arbitrary axis to rotate the object around
+      float spinrate – rate of rotation in radians per second
+      float gain – also modulates the final spinrate and disables the rotation behavior if zero
     type: integer
     value: 32
   PRIM_PHANTOM:
@@ -4211,9 +4224,15 @@ constants:
     value: 30
   PRIM_POINT_LIGHT:
     member-of: [PrimParam]
-    tooltip: Prim parameter [PRIM_POINT_LIGHT, integer boolean, vector linear_color,
-      float intensity, float radius, float falloff] to configure local lighting.
+    tooltip: |
+      Prim parameter to configure local lighting.
       Accepts color in linear space (use llsRGB2Linear to convert from sRGB).
+
+      integer boolean – TRUE enables, FALSE disables
+      vector linear_color – linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)
+      float intensity – ranges from 0.0 to 1.0
+      float radius – ranges from 0.1 to 20.0
+      float falloff – ranges from 0.01 to 2.0
     type: integer
     value: 23
   PRIM_POSITION:
@@ -5486,7 +5505,7 @@ constants:
     value: -3
   SIT_OK:
     member-of: [SitError]
-    tooltip: Avatar seated successfully.
+    tooltip: Sit error code indicating that the avatar was seated successfully.
     type: integer
     value: 1
   SKY_ABSORPTION_CONFIG:
@@ -5733,7 +5752,9 @@ constants:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default FALSE) that makes the entire object
       phantom/non-colliding when set to TRUE, allowing avatars and objects to
-      pass through it.
+      pass through it. It is a good idea to
+      use this for most objects that move or rotate, but are non-physical. It is also
+      useful for simulating volumetric lighting.
     type: integer
     value: '0x10'
   STATUS_PHYSICS:
@@ -5751,22 +5772,24 @@ constants:
   STATUS_ROTATE_X:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default TRUE) that allows physical rotation on the
-      object's local X-axis. Setting to FALSE prevents physical rotation on this
-      axis.
+      object's local X-axis. Setting to FALSE prevents physical rotation around
+      the local X-axis. For example, a sit-and-spin
+      device spins around the Z axis (up) but not around the X or Y axes.
     type: integer
     value: '0x2'
   STATUS_ROTATE_Y:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default TRUE) that allows physical rotation on the
-      object's local Y-axis. Setting to FALSE prevents physical rotation on this
-      axis.
+      object's local Y-axis. Setting to FALSE prevents physical rotation around
+      the local X-axis. For example, a sit-and-spin
+      device spins around the Z axis (up) but not around the X or Y axes.
     type: integer
     value: '0x4'
   STATUS_ROTATE_Z:
     member-of: [ObjectStatusParam]
-    tooltip: Status flag (default TRUE for physical objects) that allows physical
-      rotation on the object's local Z-axis. Setting to FALSE prevents physical
-      rotation on this axis.
+    tooltip: Status flag (default TRUE) that allows physical rotation on the
+      object's local Z-axis. Setting to FALSE prevents physical rotation around
+      the local Z-axis.
     type: integer
     value: '0x8'
   STATUS_SANDBOX:
@@ -6225,12 +6248,12 @@ constants:
     tooltip: Vehicle float parameter (range -1.0 to 1.0) controlling banking
       efficiency, where negative values lean out of turns and positive values
       lean into turns. This parameter makes banking affect steering; use angular
-      motors to bank.
+      motors to bank. 0.0 means no banking.
     type: integer
     value: 38
   VEHICLE_BANKING_MIX:
     member-of: [VehicleFloatParam]
-    tooltip: Vehicle float parameter (range 0.0 to 1.0) controlling the mix between
+    tooltip: Vehicle float parameter (range 0.0 (static) to 1.0) (dynamic) controlling the mix between
       static banking (scales only with roll angle) and dynamic banking
       (additionally scales with linear speed).
     type: integer
@@ -6239,6 +6262,9 @@ constants:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter specifying the exponential timescale for the
       banking behavior to take full effect.
+      This is another way to scale the strength of the banking effect, however it
+      affects the term that is proportional to the difference between what the banking
+      behavior is trying to do, and what the vehicle is actually doing.
     type: integer
     value: 40
   VEHICLE_BUOYANCY:
@@ -6345,13 +6371,16 @@ constants:
   VEHICLE_LINEAR_DEFLECTION_EFFICIENCY:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter (range 0.0 to 1.0) modulating the efficiency
-      and strength of linear deflection.
+      and strength of linear deflection. That is, its a simple scalar for modulating
+      the strength of linear deflection.
     type: integer
     value: 28
   VEHICLE_LINEAR_DEFLECTION_TIMESCALE:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter specifying the exponential timescale for the
       vehicle to redirect its linear velocity along its preferred X-axis.
+      It is another way to specify how much time it takes for the vehicle's linear
+      velocity to be redirected to its preferred axis of motion.
     type: integer
     value: 29
   VEHICLE_LINEAR_FRICTION_TIMESCALE:
