@@ -5521,8 +5521,10 @@ Used to get or set multiple links with a single PrimParameters call.
          </map>
          <key>PRIM_MEDIA_FIRST_CLICK_INTERACT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string>Boolean. Gets/Sets whether the first click interaction is enabled.</string>
+            <string>Boolean. Gets or sets whether the first-click interaction is enabled. Note: This flag is non-functional.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>

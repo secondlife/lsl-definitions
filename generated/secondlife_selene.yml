@@ -2262,7 +2262,8 @@ globals:
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     property: read-only
     type: number
-    description: Boolean. Gets/Sets whether the first click interaction is enabled.
+    description: 'Boolean. Gets or sets whether the first-click interaction is enabled.
+      Note: This flag is non-functional.'
   PRIM_MEDIA_HEIGHT_PIXELS:
     property: read-only
     type: number
