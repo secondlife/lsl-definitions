@@ -5438,8 +5438,10 @@ Used to get or set multiple links with a single PrimParameters call.
          </map>
          <key>PRIM_MEDIA_ALT_IMAGE_ENABLE</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string>Boolean. Gets/Sets the default image state (the image that the user sees before a piece of media is active) for the chosen face. The default image is specified by Second Life's server for that media type.</string>
+            <string>Boolean. Gets or sets the default image state (the image a user sees before media is active) on a face. The default is specified by the server for that media type. Note: This flag is not currently implemented.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>

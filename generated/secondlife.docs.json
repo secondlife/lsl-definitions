@@ -6792,7 +6792,7 @@
         "documentation": "Value: 3"
     },
     "@sl-slua/global/PRIM_MEDIA_ALT_IMAGE_ENABLE": {
-        "documentation": "Value: 0<br>Boolean. Gets/Sets the default image state (the image that the user sees before a piece of media is active) for the chosen face. The default image is specified by Second Life's server for that media type."
+        "documentation": "Value: 0<br>Boolean. Gets or sets the default image state (the image a user sees before media is active) on a face. The default is specified by the server for that media type. Note: This flag is not currently implemented."
     },
     "@sl-slua/global/PRIM_MEDIA_AUTO_LOOP": {
         "documentation": "Value: 4<br>Boolean. Gets/Sets whether auto-looping is enabled."

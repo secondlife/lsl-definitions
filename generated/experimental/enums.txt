@@ -891,7 +891,7 @@ enum PrimMediaError {
   WHITELIST_FAILED = 2001
 };
 enum PrimMediaParam {
-  ALT_IMAGE_ENABLE = 0
+  ALT_IMAGE_ENABLE = 0 // deprecated
   CONTROLS = 1
   CURRENT_URL = 2
   HOME_URL = 3
