@@ -5982,13 +5982,13 @@
         "documentation": "Value: 2<br>Specifies that translation data is included in the moves list for llSetKeyframedMotion."
     },
     "@sl-slua/global/LAND_BRUSH_LARGE": {
-        "documentation": "Value: 2<br>Use a large brush size."
+        "documentation": "Value: 2<br>Use a large brush size (8m x 8m)."
     },
     "@sl-slua/global/LAND_BRUSH_MEDIUM": {
-        "documentation": "Value: 1<br>Use a medium brush size."
+        "documentation": "Value: 1<br>Use a medium brush size (4m x 4m).."
     },
     "@sl-slua/global/LAND_BRUSH_SMALL": {
-        "documentation": "Value: 0<br>Use a small brush size."
+        "documentation": "Value: 0<br>Use a small brush size (2m x 2m)."
     },
     "@sl-slua/global/LAND_LARGE_BRUSH": {
         "documentation": "Value: 3<br>Legacy large brush size (8m x 8m). Note: This constant value is incorrect; use LAND_BRUSH_LARGE instead."
@@ -6708,7 +6708,7 @@
         "documentation": "Value: 53<br>Prim parameter to set the collision sound UUID and volume level for the prim."
     },
     "@sl-slua/global/PRIM_COLOR": {
-        "documentation": "Value: 18<br>Prim parameter [PRIM_COLOR, integer face, vector color, float alpha] to get or set the Blinn-Phong color (RGB vector) and opacity (float alpha from 0.0 to 1.0) of a face."
+        "documentation": "Value: 18<br>Prim parameter to get or set the Blinn-Phong color and opacity of a face.<br><br>integer face \u2013 face number or ALL_SIDES<br>vector color \u2013 color in RGB <R, G, B> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)<br>float alpha \u2013 from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)"
     },
     "@sl-slua/global/PRIM_DAMAGE": {
         "documentation": "Value: 51<br>Prim parameter used to get or set the damage amount and damage type delivered by the prim on collision."
@@ -6717,7 +6717,7 @@
         "documentation": "Value: 28<br>Prim parameter [PRIM_DESC, string description] to get or set the prim's description (equivalent to llGetObjectDesc/llSetObjectDesc)."
     },
     "@sl-slua/global/PRIM_FLEXIBLE": {
-        "documentation": "Value: 21<br>Prim parameter [PRIM_FLEXIBLE, integer boolean, integer softness, float gravity, float friction, float wind, float tension, vector force] to get or set the prim's flexible configuration."
+        "documentation": "Value: 21<br>Prim parameter to get or set the prim's flexible configuration.<br><br>integer boolean \u2013 TRUE enables, FALSE disables<br>integer softness \u2013 ranges from 0 to 3<br>float gravity \u2013 ranges from -10.0 to 10.0<br>float friction \u2013 ranges from 0.0 to 10.0<br>float wind \u2013 ranges from 0.0 to 10.0<br>float tension \u2013 ranges from 0.0 to 10.0<br>vector force"
     },
     "@sl-slua/global/PRIM_FULLBRIGHT": {
         "documentation": "Value: 20<br>Prim parameter [PRIM_FULLBRIGHT, integer face, integer boolean] to get or set whether full-bright rendering is enabled on the specified face."
@@ -6879,7 +6879,7 @@
         "documentation": "Value: 37<br>Prim parameter to get or set the Blinn-Phong normal map texture settings of a face. Requires face, texture, repeats, offsets, and rotation_in_radians arguments."
     },
     "@sl-slua/global/PRIM_OMEGA": {
-        "documentation": "Value: 32<br>Prim parameter [PRIM_OMEGA, vector axis, float spinrate, float gain] to get, set, or disable a client-side physical-like rotation (analogous to llTargetOmega)."
+        "documentation": "Value: 32<br>Prim parameter to get, set, or disable a client-side physical-like rotation (analogous to llTargetOmega).<br><br>vector axis \u2013 arbitrary axis to rotate the object around<br>float spinrate \u2013 rate of rotation in radians per second<br>float gain \u2013 also modulates the final spinrate and disables the rotation behavior if zero"
     },
     "@sl-slua/global/PRIM_PHANTOM": {
         "documentation": "Value: 5<br>Prim parameter [PRIM_PHANTOM, integer boolean] to get or set whether phantom status is enabled."
@@ -6900,7 +6900,7 @@
         "documentation": "Value: 30<br>Prim parameter used to get or set the type of shape the physics engine uses for the prim (PRIM_PHYSICS_SHAPE_NONE, _PRIM, or _CONVEX). Mainly used for physics optimization."
     },
     "@sl-slua/global/PRIM_POINT_LIGHT": {
-        "documentation": "Value: 23<br>Prim parameter [PRIM_POINT_LIGHT, integer boolean, vector linear_color, float intensity, float radius, float falloff] to configure local lighting. Accepts color in linear space (use llsRGB2Linear to convert from sRGB)."
+        "documentation": "Value: 23<br>Prim parameter to configure local lighting.<br>Accepts color in linear space (use llsRGB2Linear to convert from sRGB).<br><br>integer boolean \u2013 TRUE enables, FALSE disables<br>vector linear_color \u2013 linear color in RGB <R, G, B&> (<0.0, 0.0, 0.0> = black, <1.0, 1.0, 1.0> = white)<br>float intensity \u2013 ranges from 0.0 to 1.0<br>float radius \u2013 ranges from 0.1 to 20.0<br>float falloff \u2013 ranges from 0.01 to 2.0"
     },
     "@sl-slua/global/PRIM_POSITION": {
         "documentation": "Value: 6<br>Prim parameter [PRIM_POSITION, vector position] to get or set the position of the prim in region coordinates (or local coordinates depending on the script context)."
@@ -7527,7 +7527,7 @@
         "documentation": "Value: -3<br>Sit error code indicating that no open or available sit target could be found in the linkset."
     },
     "@sl-slua/global/SIT_OK": {
-        "documentation": "Value: 1<br>Avatar seated successfully."
+        "documentation": "Value: 1<br>Sit error code indicating that the avatar was seated successfully."
     },
     "@sl-slua/global/SKY_AMBIENT": {
         "documentation": "Value: 0<br>Environmental setting for the ambient color used in the scene."
@@ -7638,7 +7638,7 @@
         "documentation": "Value: 0<br>Status code indicating the function call completed successfully."
     },
     "@sl-slua/global/STATUS_PHANTOM": {
-        "documentation": "Value: 0x10<br>Status flag (default FALSE) that makes the entire object phantom/non-colliding when set to TRUE, allowing avatars and objects to pass through it."
+        "documentation": "Value: 0x10<br>Status flag (default FALSE) that makes the entire object phantom/non-colliding when set to TRUE, allowing avatars and objects to pass through it. It is a good idea to use this for most objects that move or rotate, but are non-physical. It is also useful for simulating volumetric lighting."
     },
     "@sl-slua/global/STATUS_PHYSICS": {
         "documentation": "Value: 0x1<br>Status flag (default FALSE) that controls whether the object responds to physical interactions, gravity, and forces."
@@ -7647,13 +7647,13 @@
         "documentation": "Value: 0x100<br>Status flag causing the object to be returned to its owner when it goes off-world, overriding STATUS_DIE_AT_EDGE."
     },
     "@sl-slua/global/STATUS_ROTATE_X": {
-        "documentation": "Value: 0x2<br>Status flag (default TRUE) that allows physical rotation on the object's local X-axis. Setting to FALSE prevents physical rotation on this axis."
+        "documentation": "Value: 0x2<br>Status flag (default TRUE) that allows physical rotation on the object's local X-axis. Setting to FALSE prevents physical rotation around the local X-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes."
     },
     "@sl-slua/global/STATUS_ROTATE_Y": {
-        "documentation": "Value: 0x4<br>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation on this axis."
+        "documentation": "Value: 0x4<br>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation around the local X-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes."
     },
     "@sl-slua/global/STATUS_ROTATE_Z": {
-        "documentation": "Value: 0x8<br>Status flag (default TRUE for physical objects) that allows physical rotation on the object's local Z-axis. Setting to FALSE prevents physical rotation on this axis."
+        "documentation": "Value: 0x8<br>Status flag (default TRUE) that allows physical rotation on the object's local Z-axis. Setting to FALSE prevents physical rotation around the local Z-axis."
     },
     "@sl-slua/global/STATUS_SANDBOX": {
         "documentation": "Value: 0x20<br>Status flag (default FALSE) that restricts the object's physical movement to within its creation region and a short distance (10 to 20 meters) from its creation point to prevent it from escaping."
@@ -7872,13 +7872,13 @@
         "documentation": "Value: 34<br>Vehicle float parameter specifying the exponential timescale for the vehicle's angular motor to achieve full power and velocity."
     },
     "@sl-slua/global/VEHICLE_BANKING_EFFICIENCY": {
-        "documentation": "Value: 38<br>Vehicle float parameter (range -1.0 to 1.0) controlling banking efficiency, where negative values lean out of turns and positive values lean into turns. This parameter makes banking affect steering; use angular motors to bank."
+        "documentation": "Value: 38<br>Vehicle float parameter (range -1.0 to 1.0) controlling banking efficiency, where negative values lean out of turns and positive values lean into turns. This parameter makes banking affect steering; use angular motors to bank. 0.0 means no banking."
     },
     "@sl-slua/global/VEHICLE_BANKING_MIX": {
-        "documentation": "Value: 39<br>Vehicle float parameter (range 0.0 to 1.0) controlling the mix between static banking (scales only with roll angle) and dynamic banking (additionally scales with linear speed)."
+        "documentation": "Value: 39<br>Vehicle float parameter (range 0.0 (static) to 1.0) (dynamic) controlling the mix between static banking (scales only with roll angle) and dynamic banking (additionally scales with linear speed)."
     },
     "@sl-slua/global/VEHICLE_BANKING_TIMESCALE": {
-        "documentation": "Value: 40<br>Vehicle float parameter specifying the exponential timescale for the banking behavior to take full effect."
+        "documentation": "Value: 40<br>Vehicle float parameter specifying the exponential timescale for the banking behavior to take full effect. This is another way to scale the strength of the banking effect, however it affects the term that is proportional to the difference between what the banking behavior is trying to do, and what the vehicle is actually doing."
     },
     "@sl-slua/global/VEHICLE_BUOYANCY": {
         "documentation": "Value: 27<br>Vehicle float parameter (range -1.0 to 1.0) defining buoyancy, where -1.0 represents double gravity and 1.0 represents full anti-gravity."
@@ -7929,10 +7929,10 @@
         "documentation": "Value: 26<br>Vehicle float parameter specifying the timescale (period of time in seconds) for the vehicle to achieve its hover height."
     },
     "@sl-slua/global/VEHICLE_LINEAR_DEFLECTION_EFFICIENCY": {
-        "documentation": "Value: 28<br>Vehicle float parameter (range 0.0 to 1.0) modulating the efficiency and strength of linear deflection."
+        "documentation": "Value: 28<br>Vehicle float parameter (range 0.0 to 1.0) modulating the efficiency and strength of linear deflection. That is, its a simple scalar for modulating the strength of linear deflection."
     },
     "@sl-slua/global/VEHICLE_LINEAR_DEFLECTION_TIMESCALE": {
-        "documentation": "Value: 29<br>Vehicle float parameter specifying the exponential timescale for the vehicle to redirect its linear velocity along its preferred X-axis."
+        "documentation": "Value: 29<br>Vehicle float parameter specifying the exponential timescale for the vehicle to redirect its linear velocity along its preferred X-axis. It is another way to specify how much time it takes for the vehicle's linear velocity to be redirected to its preferred axis of motion."
     },
     "@sl-slua/global/VEHICLE_LINEAR_FRICTION_TIMESCALE": {
         "documentation": "Value: 16<br>Vehicle vector parameter specifying the timescales (range [0.07, infinity) seconds per axis) for the exponential decay of linear velocity along the vehicle's preferred axes (at, left, up)."
