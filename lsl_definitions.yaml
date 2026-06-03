@@ -3156,7 +3156,9 @@ constants:
     value: '0x00004'
   PERMISSION_REMAP_CONTROLS:
     member-of: [ScriptPermission]
-    tooltip: (not yet implemented)
+    deprecated:
+      reason: Not implemented.
+    tooltip: (Not yet implemented)
     type: integer
     value: '0x00008'
   PERMISSION_TRIGGER_ANIMATION:
@@ -3173,7 +3175,9 @@ constants:
     value: '0x00020'
   PERMISSION_RELEASE_OWNERSHIP:
     member-of: [ScriptPermission]
-    tooltip: (not yet implemented)
+    deprecated:
+      reason: Not implemented.
+    tooltip: (Not yet implemented)
     type: integer
     value: '0x00040'
   PERMISSION_CHANGE_LINKS:
@@ -3184,12 +3188,16 @@ constants:
     value: '0x00080'
   PERMISSION_CHANGE_JOINTS:
     member-of: [ScriptPermission]
-    tooltip: (not yet implemented)
+    deprecated:
+      reason: Not implemented.
+    tooltip: (Not yet implemented)
     type: integer
     value: '0x00100'
   PERMISSION_CHANGE_PERMISSIONS:
     member-of: [ScriptPermission]
-    tooltip: (not yet implemented)
+    deprecated:
+      reason: Not implemented.
+    tooltip: (Not yet implemented)
     type: integer
     value: '0x00200'
   PERMISSION_TRACK_CAMERA:
