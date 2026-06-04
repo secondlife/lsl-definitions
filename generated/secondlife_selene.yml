@@ -1899,7 +1899,7 @@ globals:
   PERMISSION_CHANGE_JOINTS:
     property: read-only
     type: number
-    description: (not yet implemented)
+    description: (Not yet implemented)
   PERMISSION_CHANGE_LINKS:
     property: read-only
     type: number
@@ -1908,7 +1908,7 @@ globals:
   PERMISSION_CHANGE_PERMISSIONS:
     property: read-only
     type: number
-    description: (not yet implemented)
+    description: (Not yet implemented)
   PERMISSION_CONTROL_CAMERA:
     property: read-only
     type: number
@@ -1929,11 +1929,11 @@ globals:
   PERMISSION_RELEASE_OWNERSHIP:
     property: read-only
     type: number
-    description: (not yet implemented)
+    description: (Not yet implemented)
   PERMISSION_REMAP_CONTROLS:
     property: read-only
     type: number
-    description: (not yet implemented)
+    description: (Not yet implemented)
   PERMISSION_RETURN_OBJECTS:
     property: read-only
     type: number

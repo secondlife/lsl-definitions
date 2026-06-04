@@ -6549,13 +6549,13 @@
         "documentation": "Value: 0x00020<br>If this permission is enabled, the object can successfully call llAttachToAvatar to attach to the given avatar."
     },
     "@sl-slua/global/PERMISSION_CHANGE_JOINTS": {
-        "documentation": "Value: 0x00100<br>(not yet implemented)"
+        "documentation": "Value: 0x00100<br>(Not yet implemented)"
     },
     "@sl-slua/global/PERMISSION_CHANGE_LINKS": {
         "documentation": "Value: 0x00080<br>If this permission is enabled, the object can successfully call llCreateLink, llBreakLink, and llBreakAllLinks to change links to other objects."
     },
     "@sl-slua/global/PERMISSION_CHANGE_PERMISSIONS": {
-        "documentation": "Value: 0x00200<br>(not yet implemented)"
+        "documentation": "Value: 0x00200<br>(Not yet implemented)"
     },
     "@sl-slua/global/PERMISSION_CONTROL_CAMERA": {
         "documentation": "Value: 0x00800"
@@ -6570,10 +6570,10 @@
         "documentation": "Value: 0x80000<br>Grants the script privileged access to land parcel functions, such as parcel sale."
     },
     "@sl-slua/global/PERMISSION_RELEASE_OWNERSHIP": {
-        "documentation": "Value: 0x00040<br>(not yet implemented)"
+        "documentation": "Value: 0x00040<br>(Not yet implemented)"
     },
     "@sl-slua/global/PERMISSION_REMAP_CONTROLS": {
-        "documentation": "Value: 0x00008<br>(not yet implemented)"
+        "documentation": "Value: 0x00008<br>(Not yet implemented)"
     },
     "@sl-slua/global/PERMISSION_RETURN_OBJECTS": {
         "documentation": "Value: 0x10000"
