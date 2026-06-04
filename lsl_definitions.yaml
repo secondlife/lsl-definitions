@@ -150,6 +150,7 @@ enums:
   DamageType:
     type: enum
     prefix: DAMAGE_TYPE_
+    other-values: true
     tooltip: ''
   DerezMode:
     type: enum
@@ -168,10 +169,10 @@ enums:
     prefix: ENV_
     tooltip: ''
   EnvironmentParam:
-    type: param-dict
+    type: param-list
     tooltip: ''
   EnvironmentParamReadOnly:
-    type: param-dict
+    type: param-list
     tooltip: ''
   EstateAccessParam:
     type: enum
@@ -480,7 +481,7 @@ enums:
     prefix: REZ_FLAG_
     tooltip: ''
   RezParam:
-    type: param-dict
+    type: param-list
     prefix: REZ_
     tooltip: ''
   ScriptPermission:
