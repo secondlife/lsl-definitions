@@ -3689,10 +3689,7 @@ constants:
     value: 2
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     member-of: [PrimMediaParam]
-    deprecated:
-      reason: Not implemented.
-    tooltip: "Boolean. Gets or sets whether the first-click interaction is enabled.
-      Note: This flag is non-functional."
+    tooltip: Boolean. Gets/Sets whether the first click interaction is enabled.
     type: integer
     value: 8
   PRIM_MEDIA_HEIGHT_PIXELS:

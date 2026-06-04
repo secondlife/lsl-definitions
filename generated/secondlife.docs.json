@@ -6819,7 +6819,7 @@
         "documentation": "Value: 2<br>String. Gets/Sets the current url displayed on the chosen face. Changing this URL causes navigation. 1024 characters Maximum."
     },
     "@sl-slua/global/PRIM_MEDIA_FIRST_CLICK_INTERACT": {
-        "documentation": "Value: 8<br>Boolean. Gets or sets whether the first-click interaction is enabled. Note: This flag is non-functional."
+        "documentation": "Value: 8<br>Boolean. Gets/Sets whether the first click interaction is enabled."
     },
     "@sl-slua/global/PRIM_MEDIA_HEIGHT_PIXELS": {
         "documentation": "Value: 10<br>Integer. Gets/Sets the height of the media in pixels."
