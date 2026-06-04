@@ -4071,8 +4071,11 @@ constants:
     value: 2
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     member-of: [PrimMediaParam]
-    tooltip: "Boolean. Gets or sets whether the first-click interaction is enabled.
-      Note: This flag is non-functional."
+    tooltip: >-
+      Boolean. Gets or sets what happens when someone click on a playing, but unfocused media face:
+      TRUE: Does the same thing a focused media face does, and forwards the click to the web browser.
+      FALSE: Focuses the media prim so that future clicks are forwarded to the web browser.
+      Note: This flag only works on HUDs. All other media faces always behave as if this flag is FALSE.
     type: integer
     value: 8
   PRIM_MEDIA_HEIGHT_PIXELS:
