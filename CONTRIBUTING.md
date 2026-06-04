@@ -20,24 +20,42 @@ Thank you for your interest in contributing to the LSL definitions repository! T
 
  1. **Fork** this repository
  2. **Create a branch** for your changes (`git checkout -b improve-documentation`)
- 3. **Make your changes** to `lsl_definitions.yaml`
- 4. **Test** that your YAML is valid (See [Running validation locally](#running-validation-locally))
+ 3. **Make your changes** to `lsl_definitions.yaml` and `slua_definitions.yaml`
+ 4. **Build** and validate the generated files. See [Building the generated files](#running-validation-locally))
  5. **Commit** your changes with a clear message
  6. **Push** to your fork and **submit a pull request**
 
-## Running validation locally
+## Building the generated files
+
+Most changes to the yaml scripts will result in changes to the generated files. Please run the build step before submitting a pull request
 
 Validation is done with python and the validate.py script you will need to setup a python virtual environment and install the dependancies
 
 ### Setup
+
+Before you can build the generated files, you need to set up a python virtual environment and install the dependancies
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install ".[validate]"
+pip install ".[validate]" pre-commit
 ```
-Now you should be able to run the validation script as specified in the `pyproject.toml`
+
+### Building
+
+Update any generated files that your edits will modify:
 ```bash
+source .venv/bin/activate
+bash gen_all_definitions.sh
+```
+
+### Validating (optional)
+
+Make sure any changes you made pass the automated checks:
+```bash
+source .venv/bin/activate
 validate-lsl-definitions-via-jsonschema
+pre-commit run --all
 ```
 
 ## Pull Request Guidelines
@@ -46,6 +64,7 @@ validate-lsl-definitions-via-jsonschema
 - **Keep changes focused** - one improvement per PR when possible
 - **Maintain consistency** with existing formatting and style
 - **Include examples** if you're improving documentation
+- **Run** the generated file builder
 - **No AI Prose in PRs or commit messages** - You as a human must describe to other humans what has been done.
 
 ## Questions or Suggestions?
