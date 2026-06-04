@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+# ruff: noqa: UP031  # Allow % formatting
 import re
 
 from lsl_definitions.generators.base import register
@@ -21,7 +22,7 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
     func_defs = ""
     for func in definitions.functions.values():
         if func.arguments:
-            args_def = '"%s"' % "".join(x.type.meta.library_abbr for x in func.arguments)
+            args_def = f'"{"".join(x.type.meta.library_abbr for x in func.arguments)}"'
         else:
             # Using `nullptr` instead of `""` saves a worthless array alloc inside `runllib_common()`.
             args_def = "nullptr"
@@ -30,7 +31,7 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
             # Using `nullptr` instead of `""` saves a worthless alloc inside `runllib_common()`.
             ret_def = "nullptr"
         else:
-            ret_def = '"%s"' % func.ret_type.meta.library_abbr
+            ret_def = f'"{func.ret_type.meta.library_abbr}"'
 
         func_defs += (
             f'dangerousAddFunction({func.func_id}, "{func.name}", {ret_def}, {args_def}, '
@@ -579,7 +580,7 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
         return ToArrayListNoCopy(llDetectedDamageInternal(Number));
     }
     """
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         template = f.read()
 
     new_defs = ""

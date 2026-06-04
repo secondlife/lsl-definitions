@@ -6,7 +6,7 @@ expanded into the fluent SPP builder.
 from __future__ import annotations
 
 import dataclasses
-from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -20,7 +20,7 @@ class BuilderParamType:
     luau_type: str
 
 
-_RULESET_TYPES: Dict[str, BuilderParamType] = {
+_RULESET_TYPES: dict[str, BuilderParamType] = {
     t.name: t
     for t in [
         BuilderParamType("integer", "number"),
@@ -50,17 +50,17 @@ class BuilderMethod:
     """Owning ruleset rule, prefix stripped (e.g. `COLOR` or `TYPE`)"""
     rule_tag: int
     """Int value of `rule_name`"""
-    variant_tag: Optional[int]
+    variant_tag: int | None
     """`None` for non-variant rules, int value of the variant constant otherwise"""
     face_target: bool
     nullable: bool
-    params: List[BuilderMethodParam]
+    params: list[BuilderMethodParam]
 
 
 @dataclasses.dataclass(frozen=True)
 class BuilderSpec:
     class_name: str
-    methods: List[BuilderMethod]
+    methods: list[BuilderMethod]
 
 
 def _method_name(*parts: str) -> str:
@@ -70,7 +70,7 @@ def _method_name(*parts: str) -> str:
     return words[0].lower() + "".join(w.capitalize() for w in words[1:])
 
 
-def _build_params(raw_params: List[Tuple[str, str]]) -> List[BuilderMethodParam]:
+def _build_params(raw_params: list[tuple[str, str]]) -> list[BuilderMethodParam]:
     """`raw_params` comes from YAML as a list of `[type_name, arg_name]` pairs."""
     return [
         BuilderMethodParam(name=arg_name, type=_RULESET_TYPES[type_name])
@@ -78,14 +78,14 @@ def _build_params(raw_params: List[Tuple[str, str]]) -> List[BuilderMethodParam]
     ]
 
 
-def expand_spp_builder(lsl: "LSLDefinitions") -> BuilderSpec:
+def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
     # Translates the `prim-params` ruleset into SLua builder methods. The
     # LSL-side semantic validation already ran in
     # `LSLDefinitionParser._validate_builder_rule_variants`.
     ruleset = lsl.builder_rulesets["prim-params"]
     rule_enum = lsl.enums[ruleset["enum"]]
 
-    methods: List[BuilderMethod] = []
+    methods: list[BuilderMethod] = []
     for rule_name, rule in ruleset["rules"].items():
         face_target = bool(rule.get("face-target"))
         nullable = bool(rule.get("nullable"))

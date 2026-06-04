@@ -7,7 +7,7 @@ import enum
 import os
 import os.path
 import stat
-from typing import Iterable, Sequence, TypeVar, Union
+from typing import Iterable, Sequence, TypeVar
 
 
 @dataclasses.dataclass
@@ -19,7 +19,7 @@ class Deprecated:
     selene_replace: list[str] | None = None
 
     @classmethod
-    def from_definition(cls, definition: dict | bool) -> "Deprecated | None":
+    def from_definition(cls, definition: dict | bool) -> Deprecated | None:
         if definition is False:
             return None
         if definition is True:
@@ -118,7 +118,7 @@ def is_uuid(val: str) -> bool:
     return bool(re.match(r"\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\Z", val))
 
 
-def write_if_different(filename: str, data: Union[bytes, str]):
+def write_if_different(filename: str, data: bytes | str):
     """
     Write, but not if it would change mtime needlessly
 

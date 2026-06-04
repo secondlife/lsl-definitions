@@ -205,7 +205,7 @@ def gen_textmate_slua(
 
     _base, ext = os.path.splitext(template_path)
 
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         template = Template(f.read())
         if ext == ".tmLanguage":
             return template.safe_substitute(inserts)
@@ -256,7 +256,7 @@ def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
 
     _base, ext = os.path.splitext(template_path)
 
-    with open(template_path, "r") as f:
+    with open(template_path) as f:
         template = Template(f.read())
         if ext == ".tmLanguage":
             return template.safe_substitute(inserts)
