@@ -735,7 +735,10 @@ class LSLDefinitionParser:
                     raise ValueError(
                         f"{func.name} has param semantics, but ret type is {func.ret_type!r}"
                     )
-                if func.param_get_semantics.type != LSLEnumType.PARAM_DICT:
+                if func.param_get_semantics.type not in {
+                    LSLEnumType.PARAM_DICT,
+                    LSLEnumType.PARAM_LIST,
+                }:
                     raise ValueError(
                         f"{func.param_get_semantics.name} has type {func.param_get_semantics.type!r}, not param"
                     )
@@ -806,9 +809,9 @@ class LSLDefinitionParser:
             arg.param_get_semantics = self._resolve_enum(arg_data["param-get-semantics"])
             if arg.type != LSLType.LIST:
                 raise ValueError(f"{arg_name} has param-get semantics, but type is {arg.type!r}")
-            if arg.param_get_semantics.type != LSLEnumType.PARAM_DICT:
+            if arg.param_get_semantics.type not in {LSLEnumType.PARAM_DICT, LSLEnumType.PARAM_LIST}:
                 raise ValueError(
-                    f"{arg.param_get_semantics.name} has type {arg.param_get_semantics.type!r}, not param-dict"
+                    f"{arg.param_get_semantics.name} has type {arg.param_get_semantics.type!r}, not param"
                 )
         all_semantics = [
             arg.asset_semantics,

@@ -403,7 +403,7 @@ enums:
     prefix: PRIM_
     tooltip: ''
   PrimParamGet:
-    type: param-dict
+    type: param-list
     prefix: PRIM_
     tooltip: ''
   PrimShiny:
