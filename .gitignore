@@ -36,3 +36,4 @@ stage/
 
 # Editors
 .vscode
+*.code-workspace

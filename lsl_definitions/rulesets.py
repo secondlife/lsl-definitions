@@ -172,7 +172,9 @@ def expand_member_params(
 
     rows: List[tuple] = []
     for const in candidates:
-        strict = const.name.removeprefix(enum.prefix).lower()
+        name = const.name
+        prefix = enum.prefix
+        strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
         if const.value_type is None:
             raise ValueError(
                 f"Constant {const.name!r} is a member of {enum_name!r} "
@@ -205,6 +207,12 @@ def expand_member_params(
     ]
 
 
-def expand_particle_params(lsl: LSLDefinitions) -> List[MemberDescriptor]:
-    """Expand ParticleParam members with the standard particle filler tokens."""
-    return expand_member_params(lsl, "ParticleParam", {"part", "src"})
+def expand_table_ruleset(lsl: LSLDefinitions, ruleset_name: str) -> List[MemberDescriptor]:
+    """Expand a type:table builder-ruleset into a sorted property descriptor list.
+
+    Reads ``enum`` and ``filler-tokens`` from the yaml entry.
+    """
+    ruleset = lsl.builder_rulesets[ruleset_name]
+    enum_name = ruleset["enum"]
+    filler_tokens = set(ruleset.get("filler-tokens", []))
+    return expand_member_params(lsl, enum_name, filler_tokens)

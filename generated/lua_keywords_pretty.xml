@@ -219,6 +219,11 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Timer management class for scheduling periodic and one-time callbacks</string>
          </map>
+         <key>ParticleParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Particle system parameter table. Set properties and call apply() to emit particles.</string>
+         </map>
          <key>PrimParamsSetterType</key>
          <map>
             <key>tooltip</key>

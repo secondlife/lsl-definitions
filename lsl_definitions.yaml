@@ -16705,6 +16705,7 @@ controls:
 # details, media, environment, KFM options, prim-param reads) aren't modeled yet.
 builder-rulesets:
   prim-params:
+    type: builder
     enum: PrimParam
     rules:
       # PRIM_TYPE_LEGACY intentionally omitted, it has very annoying semantics,
@@ -16970,3 +16971,15 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  particle-params:
+    type: table
+    enum: ParticleParam
+    filler-tokens: [part, src]
+    flag-enum: ParticleFlag
+    flag-field: flags
+    flag-mask: _MASK
+    lua-module: llparticle
+    lua-type: ParticleParams
+    apply-fn: ParticleSystem
+    apply-link-fn: LinkParticleSystem

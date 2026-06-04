@@ -7,6 +7,7 @@ import re
 
 from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions, LSLFunction, LSLType
+from lsl_definitions.rulesets import expand_table_ruleset
 from lsl_definitions.utils import is_uuid, splice_str, to_c_str
 
 
@@ -881,6 +882,111 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
         binding += f'\n    lua_setglobal(L, "{to_c_str(const.name)}");\n'
         bindings.append(binding)
     return "\n".join(bindings)
+
+
+@register("gen_fluent_builder_descriptors")
+def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
+    """Generate FluentParamDescriptor arrays and init calls for all type:table builder-rulesets.
+
+    Reads each ruleset's metadata (enum, filler-tokens, apply-fn, apply-link-fn,
+    lua-module, lua-type) from lsl_definitions.yaml.  The resulting C++ fragment is
+    meant to be #include'd directly inside init_fluent_builders(lua_State* L).
+    """
+    _semantic_map = {
+        "integer": "i",
+        "float": "f",
+        "string": "s",
+        "vector": "v",
+        "rotation": "r",
+        "boolean": "b",
+        "asset": "a",
+        "key": "k",
+    }
+
+    sections = []
+    for ruleset_name, ruleset_data in definitions.builder_rulesets.items():
+        if ruleset_data.get("type", "builder") != "table":
+            continue
+
+        enum_name = ruleset_data["enum"]
+        lua_module = ruleset_data["lua-module"]
+        lua_type = ruleset_data["lua-type"]
+        apply_fn = ruleset_data["apply-fn"]
+        apply_link_fn = ruleset_data["apply-link-fn"]
+
+        # Descriptor array/def names derived from the enum name.
+        # e.g. ParticleParam -> kParticleParamsDescs, kParticleParamsDef
+        array_name = f"k{enum_name}sDescs"
+        def_name = f"k{enum_name}sDef"
+
+        desc_lines = []
+        for desc in expand_table_ruleset(definitions, ruleset_name):
+            name = desc.pretty_name if desc.pretty_name else desc.strict_name
+            sem = _semantic_map[desc.value_type]
+            desc_lines.append(f"    {{\"{name}\", '{sem}', {desc.tag}}},")
+
+        body = "\n".join(desc_lines)
+        section = (
+            f"// {ruleset_name}\n"
+            f"static const FluentParamDescriptor {array_name}[] = {{\n{body}\n}};\n"
+            f"static FluentBuilderDef* {def_name} = fluent_builder_def_build(\n"
+            f'    "{apply_fn}", "{apply_link_fn}",\n'
+            f"    {array_name}, std::size({array_name}));\n"
+            f'slua_open_fluent_builder(L, "{lua_module}", "{lua_type}", {def_name});'
+        )
+
+        flag_enum_name = ruleset_data.get("flag-enum")
+        flag_field = ruleset_data.get("flag-field")
+        if flag_enum_name and flag_field:
+            flag_enum = definitions.enums[flag_enum_name]
+            filler_tokens = set(ruleset_data.get("filler-tokens", []))
+            prefix = flag_enum.prefix
+
+            # Find field_tag from the already-computed param descriptors.
+            field_tag = None
+            for desc in expand_table_ruleset(definitions, ruleset_name):
+                eff_name = desc.pretty_name if desc.pretty_name else desc.strict_name
+                if eff_name == flag_field:
+                    field_tag = desc.tag
+                    break
+            if field_tag is None:
+                raise ValueError(
+                    f"{ruleset_name}: flag-field '{flag_field}' not found in descriptor list"
+                )
+
+            # Enumerate flag constants sorted by numeric value.
+            flag_consts = sorted(
+                (
+                    c
+                    for c in definitions.constants.values()
+                    if any(e.name == flag_enum_name for e in c.member_of) and not c.private
+                ),
+                key=lambda c: int(c.value, 0),
+            )
+
+            flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
+
+            flag_array_name = f"k{enum_name}FlagDescs"
+            flag_lines = []
+            for const in flag_consts:
+                name = const.name
+                strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
+                if flag_suffix and strict.endswith(flag_suffix):
+                    strict = strict[: -len(flag_suffix)]
+                tokens = [t for t in strict.split("_") if t not in filler_tokens]
+                prop_name = "_".join(tokens) if tokens else strict
+                mask = int(const.value, 0)
+                flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
+
+            flag_body = "\n".join(flag_lines)
+            section += (
+                f"\nstatic const FluentFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
+                f"fluent_builder_def_add_flags({def_name}, {flag_array_name}, std::size({flag_array_name}));"
+            )
+
+        sections.append(section)
+
+    return "\n\n".join(sections)
 
 
 @register("gen_lscript_library_bind_pure")

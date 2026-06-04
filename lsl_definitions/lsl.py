@@ -571,14 +571,15 @@ class LSLDefinitionParser:
             enum_name = ruleset_data["enum"]
             if enum_name not in self._definitions.enums:
                 raise ValueError(f"{ruleset_name} references unknown enum {enum_name!r}")
-            rule_enum = self._definitions.enums[enum_name]
-            for rule_name, rule_data in ruleset_data["rules"].items():
-                if rule_name not in rule_enum.by_name:
-                    raise ValueError(
-                        f"{ruleset_name} rule {rule_name!r} is not a member of "
-                        f"its ruleset's declared enum {enum_name!r}"
-                    )
-                self._validate_builder_rule_variants(ruleset_name, rule_name, rule_data)
+            if ruleset_data.get("type", "builder") == "builder":
+                rule_enum = self._definitions.enums[enum_name]
+                for rule_name, rule_data in ruleset_data["rules"].items():
+                    if rule_name not in rule_enum.by_name:
+                        raise ValueError(
+                            f"{ruleset_name} rule {rule_name!r} is not a member of "
+                            f"its ruleset's declared enum {enum_name!r}"
+                        )
+                    self._validate_builder_rule_variants(ruleset_name, rule_name, rule_data)
         self._definitions.builder_rulesets.update(builder_rulesets)
 
         return self._definitions

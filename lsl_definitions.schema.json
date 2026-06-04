@@ -214,21 +214,73 @@
         "builderRuleset": {
             "additionalProperties": false,
             "type": "object",
-            "required": ["rules"],
+            "required": ["type", "enum"],
             "properties": {
+                "type": {
+                    "markdownDescription": "The kind of fluent interface this ruleset generates. `builder` produces setter methods (SPP-style); `table` produces property-assignment tables with an `apply()` dispatch.",
+                    "type": "string",
+                    "enum": ["builder", "table"]
+                },
                 "enum": {
-                    "markdownDescription": "Name of the LSL enum whose members are the rule constants. The enum's `prefix` is stripped off each rule name to derive builder method names; every key under `rules` must be a member of this enum.",
-                    "pattern": "^[A-Z][A-Za-z0-9]*$",
-                    "type": "string"
+                    "markdownDescription": "Name of the LSL enum backing this ruleset. For `builder` rulesets, the enum's `prefix` is stripped from rule constant names to derive method names, and every key under `rules` must be a member of this enum. For `table` rulesets, members of this enum map directly to table properties.",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
                 },
                 "rules": {
+                    "markdownDescription": "(`builder` only) Map of rule constant names to their rule definitions.",
                     "additionalProperties": false,
                     "type": "object",
                     "patternProperties": {
                         "^[A-Z][A-Z0-9_]*$": { "$ref": "#/$defs/builderRule" }
                     }
+                },
+                "filler-tokens": {
+                    "markdownDescription": "(`table` optional) Tokens stripped from member names when generating pretty property aliases.",
+                    "type": "array",
+                    "items": { "type": "string", "pattern": "^[a-z]+$" }
+                },
+                "flag-enum": {
+                    "markdownDescription": "(`table` optional) Name of the LSL flag enum whose bits are exposed as boolean properties.",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "flag-field": {
+                    "markdownDescription": "(`table` optional) Name of the integer property that `flag-enum` bits are ORed into.",
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "flag-mask": {
+                    "markdownDescription": "(`table` optional) Suffix (e.g. `_MASK`) stripped from each flag constant name before tokenizing into a property name.",
+                    "type": "string",
+                    "pattern": "^_[A-Z]+$"
+                },
+                "lua-module": {
+                    "markdownDescription": "(`table` only) Lua global module name (e.g. `llparticle`).",
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "lua-type": {
+                    "markdownDescription": "(`table` only) Lua type name within the module (e.g. `ParticleParams`).",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "apply-fn": {
+                    "markdownDescription": "(`table` only) `ll.*` function called by `apply()` with no link number (e.g. `ParticleSystem`).",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "apply-link-fn": {
+                    "markdownDescription": "(`table` only) `ll.*` function called by `apply(linkNumber)` (e.g. `LinkParticleSystem`).",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
                 }
-            }
+            },
+            "if": {
+                "properties": { "type": { "const": "builder" } },
+                "required": ["type"]
+            },
+            "then": { "required": ["rules"] },
+            "else": { "required": ["lua-module", "lua-type", "apply-fn", "apply-link-fn"] }
         }
     },
     "additionalProperties": false,
