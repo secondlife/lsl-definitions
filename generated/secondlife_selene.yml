@@ -2831,7 +2831,7 @@ globals:
       but unfocused media face: TRUE: Does the same thing a focused media face does,
       and forwards the click to the web browser. FALSE: Focuses the media prim so
       that future clicks are forwarded to the web browser. Note: Viewer settings affect
-      this flag. It works most reliably on HUDs.'
+      this flag. It works by default on most prims.'
   PRIM_MEDIA_HEIGHT_PIXELS:
     property: read-only
     type: number

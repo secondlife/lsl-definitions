@@ -6819,7 +6819,7 @@
         "documentation": "Value: 2<br>String. Gets or sets the current URL displayed on the chosen face (maximum 1024 characters). Changing this URL triggers media navigation."
     },
     "@sl-slua/global/PRIM_MEDIA_FIRST_CLICK_INTERACT": {
-        "documentation": "Value: 8<br>Boolean. Gets or sets what happens when someone click on a playing, but unfocused media face: TRUE: Does the same thing a focused media face does, and forwards the click to the web browser. FALSE: Focuses the media prim so that future clicks are forwarded to the web browser. Note: Viewer settings affect this flag. It works most reliably on HUDs."
+        "documentation": "Value: 8<br>Boolean. Gets or sets what happens when someone click on a playing, but unfocused media face: TRUE: Does the same thing a focused media face does, and forwards the click to the web browser. FALSE: Focuses the media prim so that future clicks are forwarded to the web browser. Note: Viewer settings affect this flag. It works by default on most prims."
     },
     "@sl-slua/global/PRIM_MEDIA_HEIGHT_PIXELS": {
         "documentation": "Value: 10<br>Integer. Gets or sets the height of the media in pixels."
