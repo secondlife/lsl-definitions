@@ -5655,7 +5655,7 @@
         "documentation": "Value: -9<br>The script lacks permissions to modify the environment at this location, or an attempt was made to remove altitude track 0 or 1."
     },
     "@sl-slua/global/ENV_OK": {
-        "documentation": "Value: 1<br>Environment modified successfully."
+        "documentation": "Value: 1<br>The agent, parcel, or region will attempt to change the applied environment."
     },
     "@sl-slua/global/ENV_THROTTLE": {
         "documentation": "Value: -8<br>The scripts have exceeded the throttle limit. Wait and retry the request."
@@ -7527,7 +7527,7 @@
         "documentation": "Value: -3<br>Sit error code indicating that no open or available sit target could be found in the linkset."
     },
     "@sl-slua/global/SIT_OK": {
-        "documentation": "Value: 1<br>Sit error code indicating that the avatar was seated successfully."
+        "documentation": "Value: 1<br>Sit error code indicating that the agent was seated successfully."
     },
     "@sl-slua/global/SKY_AMBIENT": {
         "documentation": "Value: 0<br>Environmental setting for the ambient color used in the scene."

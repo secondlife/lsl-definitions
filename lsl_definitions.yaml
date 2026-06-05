@@ -1674,7 +1674,7 @@ constants:
     value: -9
   ENV_OK:
     member-of: [EnvironmentError]
-    tooltip: Environment modified successfully.
+    tooltip: The agent, parcel, or region will attempt to change the applied environment.
     type: integer
     value: 1
   ENV_THROTTLE:
@@ -5508,7 +5508,7 @@ constants:
     value: -3
   SIT_OK:
     member-of: [SitError]
-    tooltip: Sit error code indicating that the avatar was seated successfully.
+    tooltip: Sit error code indicating that the agent was seated successfully.
     type: integer
     value: 1
   SKY_ABSORPTION_CONFIG:

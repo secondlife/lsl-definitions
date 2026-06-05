@@ -965,7 +965,7 @@ globals:
   ENV_OK:
     property: read-only
     type: number
-    description: Environment modified successfully.
+    description: The agent, parcel, or region will attempt to change the applied environment.
   ENV_THROTTLE:
     property: read-only
     type: number
@@ -3990,7 +3990,7 @@ globals:
   SIT_OK:
     property: read-only
     type: number
-    description: Sit error code indicating that the avatar was seated successfully.
+    description: Sit error code indicating that the agent was seated successfully.
   SKY_AMBIENT:
     property: read-only
     type: number
