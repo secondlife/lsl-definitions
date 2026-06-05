@@ -8295,7 +8295,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>STATUS_ROTATE_Y</key>
          <map>
             <key>tooltip</key>
-            <string>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation around the local X-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes.</string>
+            <string>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation around the local Y-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>

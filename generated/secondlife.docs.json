@@ -7650,7 +7650,7 @@
         "documentation": "Value: 0x2<br>Status flag (default TRUE) that allows physical rotation on the object's local X-axis. Setting to FALSE prevents physical rotation around the local X-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes."
     },
     "@sl-slua/global/STATUS_ROTATE_Y": {
-        "documentation": "Value: 0x4<br>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation around the local X-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes."
+        "documentation": "Value: 0x4<br>Status flag (default TRUE) that allows physical rotation on the object's local Y-axis. Setting to FALSE prevents physical rotation around the local Y-axis. For example, a sit-and-spin device spins around the Z axis (up) but not around the X or Y axes."
     },
     "@sl-slua/global/STATUS_ROTATE_Z": {
         "documentation": "Value: 0x8<br>Status flag (default TRUE) that allows physical rotation on the object's local Z-axis. Setting to FALSE prevents physical rotation around the local Z-axis."

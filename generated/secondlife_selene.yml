@@ -4200,7 +4200,7 @@ globals:
     property: read-only
     type: number
     description: Status flag (default TRUE) that allows physical rotation on the object's
-      local Y-axis. Setting to FALSE prevents physical rotation around the local X-axis.
+      local Y-axis. Setting to FALSE prevents physical rotation around the local Y-axis.
       For example, a sit-and-spin device spins around the Z axis (up) but not around
       the X or Y axes.
   STATUS_ROTATE_Z:
