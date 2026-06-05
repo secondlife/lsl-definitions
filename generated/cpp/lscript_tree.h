@@ -1,9 +1,9 @@
 class LLScriptFinalDamageEvent : public LLScriptEvent
 {
 public:
-    LLScriptFinalDamageEvent(S32 line, S32 col, LLScriptIdentifier *count)
+    LLScriptFinalDamageEvent(S32 line, S32 col, LLScriptIdentifier *num_detected)
         : LLScriptEvent(line, col, LSTT_FINAL_DAMAGE)
-        , mCount(count)
+        , mNumDetected(num_detected)
     {
     }
 
@@ -17,16 +17,16 @@ public:
                  LLScriptScopeEntry *entry, S32 entrycount, LLScriptLibData **ldata);
     S32 getSize();
 
-    LLScriptIdentifier *mCount;
+    LLScriptIdentifier *mNumDetected;
 };
 
 class LLScriptGameControlEvent : public LLScriptEvent
 {
 public:
-    LLScriptGameControlEvent(S32 line, S32 col, LLScriptIdentifier *id, LLScriptIdentifier *buttons, LLScriptIdentifier *axes)
+    LLScriptGameControlEvent(S32 line, S32 col, LLScriptIdentifier *id, LLScriptIdentifier *button_levels, LLScriptIdentifier *axes)
         : LLScriptEvent(line, col, LSTT_GAME_CONTROL)
         , mId(id)
-        , mButtons(buttons)
+        , mButtonLevels(button_levels)
         , mAxes(axes)
     {
     }
@@ -42,16 +42,16 @@ public:
     S32 getSize();
 
     LLScriptIdentifier *mId;
-    LLScriptIdentifier *mButtons;
+    LLScriptIdentifier *mButtonLevels;
     LLScriptIdentifier *mAxes;
 };
 
 class LLScriptOnDamageEvent : public LLScriptEvent
 {
 public:
-    LLScriptOnDamageEvent(S32 line, S32 col, LLScriptIdentifier *count)
+    LLScriptOnDamageEvent(S32 line, S32 col, LLScriptIdentifier *num_detected)
         : LLScriptEvent(line, col, LSTT_ON_DAMAGE)
-        , mCount(count)
+        , mNumDetected(num_detected)
     {
     }
 
@@ -65,7 +65,7 @@ public:
                  LLScriptScopeEntry *entry, S32 entrycount, LLScriptLibData **ldata);
     S32 getSize();
 
-    LLScriptIdentifier *mCount;
+    LLScriptIdentifier *mNumDetected;
 };
 
 class LLScriptOnDeathEvent : public LLScriptEvent
