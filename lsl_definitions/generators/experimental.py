@@ -69,3 +69,26 @@ def gen_category_functions(definitions: LSLDefinitions) -> str:
     categories = {k: categories[k] for k in sorted(categories.keys())}
     yaml.safe_dump(categories, file, sort_keys=False, width=200)
     return file.getvalue()
+
+
+@register("gen_category_docs")
+def gen_category_docs(definitions: LSLDefinitions) -> str:
+    file = io.StringIO()
+    file.write("# Functions by category\n")
+    categories = {}
+
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+        for category in event.categories:
+            builtins_str = f"{event.name}{event.args_str}"
+            builtins_str += lsl_annotations(event)
+            categories.setdefault(category, []).append(builtins_str)
+
+    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+        for category in func.categories:
+            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type!s}"
+            builtins_str += lsl_annotations(func)
+            categories.setdefault(category, []).append(builtins_str)
+
+    categories = {k: categories[k] for k in sorted(categories.keys())}
+    yaml.safe_dump(categories, file, sort_keys=False, width=200)
+    return file.getvalue()
