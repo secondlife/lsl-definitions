@@ -1,5 +1,6 @@
 # Functions by category
 asset_permissions:
+- llGetInventoryPermMask
 - llGetObjectPermMask
 - llSetInventoryPermMask
 - llSetObjectPermMask
@@ -937,6 +938,7 @@ string:
 - llToLower
 - llToUpper
 teleport:
+- llMapDestination
 - llTeleportAgent
 - llTeleportAgentGlobalCoords
 - llTeleportAgentHome
