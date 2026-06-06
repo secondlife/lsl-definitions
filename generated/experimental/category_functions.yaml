@@ -1,11 +1,13 @@
 # Functions by category
 asset_permissions:
+- changed
 - llGetInventoryPermMask
 - llGetObjectPermMask
 - llSetInventoryPermMask
 - llSetObjectPermMask
 - llTransferOwnership
 attachments:
+- attach
 - llAttachToAvatar
 - llAttachToAvatarTemp
 - llDetachFromAvatar
@@ -13,6 +15,10 @@ attachments:
 - llGetAttachedList
 - llGetAttachedListFiltered
 avatar:
+- control
+- experience_permissions
+- experience_permissions_denied
+- game_control
 - llAgentInExperience
 - llAttachToAvatar
 - llAttachToAvatarTemp
@@ -71,6 +77,8 @@ avatar_animation:
 - llStartAnimation
 - llStopAnimation
 avatar_communication:
+- email
+- listen
 - llDialog
 - llEmail
 - llInstantMessage
@@ -108,6 +116,7 @@ camera:
 - llTakeCamera
 - llWorldPosToHUD
 chat:
+- listen
 - llDialog
 - llListen
 - llListenControl
@@ -119,6 +128,9 @@ chat:
 - llTextBox
 - llWhisper
 combat:
+- final_damage
+- on_damage
+- on_death
 - llAdjustDamage
 - llDamage
 - llDetectedDamage
@@ -160,6 +172,7 @@ data_conversion:
 - llXorBase64Strings
 - llXorBase64StringsCorrect
 data_storage:
+- linkset_data
 - llCreateKeyValue
 - llDataSizeKeyValue
 - llDeleteKeyValue
@@ -186,6 +199,7 @@ data_storage:
 - llReadKeyValue
 - llUpdateKeyValue
 dataserver:
+- dataserver
 - llCreateKeyValue
 - llDataSizeKeyValue
 - llDeleteKeyValue
@@ -203,6 +217,16 @@ dataserver:
 - llRequestUsername
 - llUpdateKeyValue
 detected:
+- collision
+- collision_end
+- collision_start
+- final_damage
+- no_sensor
+- on_damage
+- sensor
+- touch
+- touch_end
+- touch_start
 - llAdjustDamage
 - llDetectedDamage
 - llDetectedGrab
@@ -234,6 +258,8 @@ effects:
 - llSetText
 - llSetTextureAnim
 experience:
+- experience_permissions
+- experience_permissions_denied
 - llAgentInExperience
 - llClearExperience
 - llClearExperiencePermissions
@@ -261,6 +287,8 @@ experience_data:
 - llReadKeyValue
 - llUpdateKeyValue
 input:
+- control
+- game_control
 - llReleaseControls
 - llSetClickAction
 - llTakeControls
@@ -283,6 +311,8 @@ land_moderation:
 - llReturnObjectsByOwner
 - llTeleportAgentHome
 linkset:
+- changed
+- linkset_data
 - llAvatarOnLinkSitTarget
 - llBreakAllLinks
 - llBreakLink
@@ -333,6 +363,7 @@ linkset:
 - llSetObjectPermMask
 - llSetStatus
 linkset_data:
+- linkset_data
 - llLinksetDataAvailable
 - llLinksetDataCountFound
 - llLinksetDataCountKeys
@@ -437,6 +468,7 @@ math_trig:
 - llSin
 - llTan
 media:
+- changed
 - llClearLinkMedia
 - llClearPrimMedia
 - llGetLinkMedia
@@ -454,11 +486,19 @@ media:
 - llSetPrimMediaParams
 - llSetPrimURL
 money:
+- money
+- transaction_result
 - llGiveMoney
 - llSetClickAction
 - llSetPayPrice
 - llTransferLindenDollars
 movement:
+- at_rot_target
+- at_target
+- moving_end
+- moving_start
+- not_at_rot_target
+- not_at_target
 - llApplyImpulse
 - llApplyRotationalImpulse
 - llGetOmega
@@ -557,6 +597,9 @@ particles:
 - llLinkParticleSystem
 - llParticleSystem
 pathfinding:
+- moving_end
+- moving_start
+- path_update
 - llCreateCharacter
 - llDeleteCharacter
 - llEvade
@@ -570,6 +613,9 @@ pathfinding:
 - llUpdateCharacter
 - llWanderWithin
 permissions:
+- experience_permissions
+- experience_permissions_denied
+- run_time_permissions
 - llClearCameraParams
 - llForceMouselook
 - llGetAnimation
@@ -598,6 +644,12 @@ permissions:
 - llTransferLindenDollars
 - llWorldPosToHUD
 physics:
+- collision
+- collision_end
+- collision_start
+- land_collision
+- land_collision_end
+- land_collision_start
 - llApplyImpulse
 - llApplyRotationalImpulse
 - llCastRay
@@ -688,6 +740,7 @@ prim:
 - llSetTextureAnim
 - llSitTarget
 prim_appearance:
+- changed
 - llGetAlpha
 - llGetColor
 - llGetLinkNumberOfSides
@@ -725,6 +778,7 @@ prim_appearance:
 - llSetTextureAnim
 - llsRGB2Linear
 prim_inventory:
+- changed
 - llAllowInventoryDrop
 - llDerezObject
 - llGetInventoryAcquireTime
@@ -752,6 +806,7 @@ prim_inventory:
 - llSetRemoteScriptAccessPin
 - llSetScriptState
 prim_media:
+- changed
 - llClearLinkMedia
 - llClearPrimMedia
 - llGetLinkMedia
@@ -791,6 +846,7 @@ quaternion:
 - llRot2Up
 - llRotBetween
 region:
+- changed
 - llCloud
 - llEdgeOfWorld
 - llGetAgentList
@@ -828,6 +884,8 @@ region_appearance:
 - llReplaceAgentEnvironment
 - llSetAgentEnvironment
 rez:
+- object_rez
+- on_rez
 - llDerezObject
 - llDie
 - llGetStartParameter
@@ -839,6 +897,11 @@ rez:
 - llRezObject
 - llRezObjectWithParams
 script:
+- changed
+- on_rez
+- state_entry
+- state_exit
+- timer
 - llGetAndResetTime
 - llGetEnergy
 - llGetFreeMemory
@@ -865,6 +928,11 @@ script:
 - llSetTimerEvent
 - llSleep
 script_communication:
+- http_request
+- http_response
+- link_message
+- listen
+- remote_data
 - llCloseRemoteDataChannel
 - llGetNextEmail
 - llHTTPRequest
@@ -885,6 +953,11 @@ script_communication:
 - llShout
 - llWhisper
 sensor:
+- collision
+- collision_end
+- collision_start
+- no_sensor
+- sensor
 - llCastRay
 - llCollisionFilter
 - llPassCollisions
@@ -893,6 +966,7 @@ sensor:
 - llSensorRepeat
 - llVolumeDetect
 sit:
+- changed
 - llAvatarOnLinkSitTarget
 - llAvatarOnSitTarget
 - llGetLinkSitFlags
@@ -938,11 +1012,13 @@ string:
 - llToLower
 - llToUpper
 teleport:
+- changed
 - llMapDestination
 - llTeleportAgent
 - llTeleportAgentGlobalCoords
 - llTeleportAgentHome
 time:
+- timer
 - llGetDate
 - llGetDayLength
 - llGetDayOffset
@@ -957,6 +1033,9 @@ time:
 - llSetTimerEvent
 - llSleep
 touch:
+- touch
+- touch_end
+- touch_start
 - llDetectedGrab
 - llDetectedTouchBinormal
 - llDetectedTouchFace
@@ -968,6 +1047,9 @@ touch:
 - llSetClickAction
 - llSetTouchText
 user_interface:
+- touch
+- touch_end
+- touch_start
 - llDialog
 - llLoadURL
 - llMapBeacon
@@ -1003,6 +1085,8 @@ vehicles:
 - llSetVehicleType
 - llSetVehicleVectorParam
 web:
+- http_request
+- http_response
 - llEscapeURL
 - llGetFreeURLs
 - llGetHTTPHeader

@@ -51,6 +51,10 @@ def gen_category_functions(definitions: LSLDefinitions) -> str:
     file.write("# Functions by category\n")
     categories = {}
 
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+        for category in event.categories:
+            categories.setdefault(category, []).append(event.name)
+
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for category in func.categories:
             categories.setdefault(category, []).append(func.name)
