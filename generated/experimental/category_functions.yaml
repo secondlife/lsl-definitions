@@ -1,1053 +1,1018 @@
 # Functions by category
-llAbs:
-- llAbs
-llAcos:
-- llAcos
-llAddToLandBanList:
-- llAddToLandBanList
-llAddToLandPassList:
-- llAddToLandPassList
-llAdjustDamage:
-- llAdjustDamage
-llAdjustSoundVolume:
-- llAdjustSoundVolume
-llAgentInExperience:
-- llAgentInExperience
-llAllowInventoryDrop:
-- llAllowInventoryDrop
-llAngleBetween:
-- llAngleBetween
-llApplyImpulse:
-- llApplyImpulse
-llApplyRotationalImpulse:
-- llApplyRotationalImpulse
-llAsin:
-- llAsin
-llAtan2:
-- llAtan2
-llAttachToAvatar:
-- llAttachToAvatar
-llAttachToAvatarTemp:
-- llAttachToAvatarTemp
-llAvatarOnLinkSitTarget:
-- llAvatarOnLinkSitTarget
-llAvatarOnSitTarget:
-- llAvatarOnSitTarget
-llAxes2Rot:
-- llAxes2Rot
-llAxisAngle2Rot:
-- llAxisAngle2Rot
-llBase64ToInteger:
-- llBase64ToInteger
-llBase64ToString:
-- llBase64ToString
-llBreakAllLinks:
-- llBreakAllLinks
-llBreakLink:
-- llBreakLink
-llCSV2List:
-- llCSV2List
-llCastRay:
-- llCastRay
-llCeil:
-- llCeil
-llChar:
-- llChar
-llClearCameraParams:
-- llClearCameraParams
-llClearExperience:
-- llClearExperience
-llClearExperiencePermissions:
-- llClearExperiencePermissions
-llClearLinkMedia:
-- llClearLinkMedia
-llClearPrimMedia:
-- llClearPrimMedia
-llCloseRemoteDataChannel:
-- llCloseRemoteDataChannel
-llCloud:
-- llCloud
-llCollisionFilter:
-- llCollisionFilter
-llCollisionSound:
-- llCollisionSound
-llCollisionSprite:
-- llCollisionSprite
-llComputeHash:
-- llComputeHash
-llCos:
-- llCos
-llCreateCharacter:
-- llCreateCharacter
-llCreateKeyValue:
-- llCreateKeyValue
-llCreateLink:
-- llCreateLink
-llDamage:
-- llDamage
-llDataSizeKeyValue:
-- llDataSizeKeyValue
-llDeleteCharacter:
-- llDeleteCharacter
-llDeleteKeyValue:
-- llDeleteKeyValue
-llDeleteSubList:
-- llDeleteSubList
-llDeleteSubString:
-- llDeleteSubString
-llDerezObject:
-- llDerezObject
-llDetachFromAvatar:
-- llDetachFromAvatar
-llDetectedDamage:
-- llDetectedDamage
-llDetectedGrab:
-- llDetectedGrab
-llDetectedGroup:
-- llDetectedGroup
-llDetectedKey:
-- llDetectedKey
-llDetectedLinkNumber:
-- llDetectedLinkNumber
-llDetectedName:
-- llDetectedName
-llDetectedOwner:
-- llDetectedOwner
-llDetectedPos:
-- llDetectedPos
-llDetectedRezzer:
-- llDetectedRezzer
-llDetectedRot:
-- llDetectedRot
-llDetectedTouchBinormal:
-- llDetectedTouchBinormal
-llDetectedTouchFace:
-- llDetectedTouchFace
-llDetectedTouchNormal:
-- llDetectedTouchNormal
-llDetectedTouchPos:
-- llDetectedTouchPos
-llDetectedTouchST:
-- llDetectedTouchST
-llDetectedTouchUV:
-- llDetectedTouchUV
-llDetectedType:
-- llDetectedType
-llDetectedVel:
-- llDetectedVel
-llDialog:
-- llDialog
-llDie:
-- llDie
-llDumpList2String:
-- llDumpList2String
-llEdgeOfWorld:
-- llEdgeOfWorld
-llEjectFromLand:
-- llEjectFromLand
-llEmail:
-- llEmail
-llEscapeURL:
-- llEscapeURL
-llEuler2Rot:
-- llEuler2Rot
-llEvade:
-- llEvade
-llExecCharacterCmd:
-- llExecCharacterCmd
-llFabs:
-- llFabs
-llFindNotecardTextCount:
-- llFindNotecardTextCount
-llFindNotecardTextSync:
-- llFindNotecardTextSync
-llFleeFrom:
-- llFleeFrom
-llFloor:
-- llFloor
-llForceMouselook:
-- llForceMouselook
-llFrand:
-- llFrand
-llGenerateKey:
-- llGenerateKey
-llGetAccel:
-- llGetAccel
-llGetAgentInfo:
-- llGetAgentInfo
-llGetAgentLanguage:
-- llGetAgentLanguage
-llGetAgentList:
-- llGetAgentList
-llGetAgentSize:
-- llGetAgentSize
-llGetAlpha:
-- llGetAlpha
-llGetAndResetTime:
-- llGetAndResetTime
-llGetAnimation:
-- llGetAnimation
-llGetAnimationList:
-- llGetAnimationList
-llGetAnimationOverride:
-- llGetAnimationOverride
-llGetAttached:
-- llGetAttached
-llGetAttachedList:
-- llGetAttachedList
-llGetAttachedListFiltered:
-- llGetAttachedListFiltered
-llGetBoundingBox:
-- llGetBoundingBox
-llGetCameraAspect:
-- llGetCameraAspect
-llGetCameraFOV:
-- llGetCameraFOV
-llGetCameraPos:
-- llGetCameraPos
-llGetCameraRot:
-- llGetCameraRot
-llGetCenterOfMass:
-- llGetCenterOfMass
-llGetClosestNavPoint:
-- llGetClosestNavPoint
-llGetColor:
-- llGetColor
-llGetCreator:
-- llGetCreator
-llGetDate:
-- llGetDate
-llGetDayLength:
-- llGetDayLength
-llGetDayOffset:
-- llGetDayOffset
-llGetDisplayName:
-- llGetDisplayName
-llGetEnergy:
-- llGetEnergy
-llGetEnv:
-- llGetEnv
-llGetEnvironment:
-- llGetEnvironment
-llGetExperienceDetails:
-- llGetExperienceDetails
-llGetExperienceErrorMessage:
-- llGetExperienceErrorMessage
-llGetExperienceList:
-- llGetExperienceList
-llGetForce:
-- llGetForce
-llGetFreeMemory:
-- llGetFreeMemory
-llGetFreeURLs:
-- llGetFreeURLs
-llGetGMTclock:
-- llGetGMTclock
-llGetGeometricCenter:
-- llGetGeometricCenter
-llGetHTTPHeader:
-- llGetHTTPHeader
-llGetHealth:
-- llGetHealth
-llGetInventoryAcquireTime:
-- llGetInventoryAcquireTime
-llGetInventoryCreator:
-- llGetInventoryCreator
-llGetInventoryDesc:
-- llGetInventoryDesc
-llGetInventoryKey:
-- llGetInventoryKey
-llGetInventoryName:
-- llGetInventoryName
-llGetInventoryNumber:
-- llGetInventoryNumber
-llGetInventoryPermMask:
-- llGetInventoryPermMask
-llGetInventoryType:
-- llGetInventoryType
-llGetKey:
-- llGetKey
-llGetLandOwnerAt:
-- llGetLandOwnerAt
-llGetLinkKey:
-- llGetLinkKey
-llGetLinkMedia:
-- llGetLinkMedia
-llGetLinkName:
-- llGetLinkName
-llGetLinkNumber:
-- llGetLinkNumber
-llGetLinkNumberOfSides:
-- llGetLinkNumberOfSides
-llGetLinkPrimitiveParams:
-- llGetLinkPrimitiveParams
-llGetLinkSitFlags:
-- llGetLinkSitFlags
-llGetListEntryType:
-- llGetListEntryType
-llGetListLength:
-- llGetListLength
-llGetLocalPos:
-- llGetLocalPos
-llGetLocalRot:
-- llGetLocalRot
-llGetMass:
-- llGetMass
-llGetMassMKS:
-- llGetMassMKS
-llGetMaxScaleFactor:
-- llGetMaxScaleFactor
-llGetMemoryLimit:
-- llGetMemoryLimit
-llGetMinScaleFactor:
-- llGetMinScaleFactor
-llGetMoonDirection:
-- llGetMoonDirection
-llGetMoonRotation:
-- llGetMoonRotation
-llGetNextEmail:
-- llGetNextEmail
-llGetNotecardLine:
-- llGetNotecardLine
-llGetNotecardLineSync:
-- llGetNotecardLineSync
-llGetNumberOfNotecardLines:
-- llGetNumberOfNotecardLines
-llGetNumberOfPrims:
-- llGetNumberOfPrims
-llGetNumberOfSides:
-- llGetNumberOfSides
-llGetObjectAnimationNames:
-- llGetObjectAnimationNames
-llGetObjectDesc:
-- llGetObjectDesc
-llGetObjectDetails:
-- llGetObjectDetails
-llGetObjectLinkKey:
-- llGetObjectLinkKey
-llGetObjectMass:
-- llGetObjectMass
-llGetObjectName:
-- llGetObjectName
-llGetObjectPermMask:
+asset_permissions:
 - llGetObjectPermMask
-llGetObjectPrimCount:
-- llGetObjectPrimCount
-llGetOmega:
-- llGetOmega
-llGetOwner:
-- llGetOwner
-llGetOwnerKey:
-- llGetOwnerKey
-llGetParcelDetails:
-- llGetParcelDetails
-llGetParcelFlags:
-- llGetParcelFlags
-llGetParcelMaxPrims:
-- llGetParcelMaxPrims
-llGetParcelMusicURL:
-- llGetParcelMusicURL
-llGetParcelPrimCount:
-- llGetParcelPrimCount
-llGetParcelPrimOwners:
-- llGetParcelPrimOwners
-llGetPermissions:
-- llGetPermissions
-llGetPermissionsKey:
-- llGetPermissionsKey
-llGetPhysicsMaterial:
-- llGetPhysicsMaterial
-llGetPos:
-- llGetPos
-llGetPrimMediaParams:
-- llGetPrimMediaParams
-llGetPrimitiveParams:
-- llGetPrimitiveParams
-llGetRegionAgentCount:
-- llGetRegionAgentCount
-llGetRegionCorner:
-- llGetRegionCorner
-llGetRegionDayLength:
-- llGetRegionDayLength
-llGetRegionDayOffset:
-- llGetRegionDayOffset
-llGetRegionFPS:
-- llGetRegionFPS
-llGetRegionFlags:
-- llGetRegionFlags
-llGetRegionMoonDirection:
-- llGetRegionMoonDirection
-llGetRegionMoonRotation:
-- llGetRegionMoonRotation
-llGetRegionName:
-- llGetRegionName
-llGetRegionSunDirection:
-- llGetRegionSunDirection
-llGetRegionSunRotation:
-- llGetRegionSunRotation
-llGetRegionTimeDilation:
-- llGetRegionTimeDilation
-llGetRegionTimeOfDay:
-- llGetRegionTimeOfDay
-llGetRenderMaterial:
-- llGetRenderMaterial
-llGetRootPosition:
-- llGetRootPosition
-llGetRootRotation:
-- llGetRootRotation
-llGetRot:
-- llGetRot
-llGetSPMaxMemory:
-- llGetSPMaxMemory
-llGetScale:
-- llGetScale
-llGetScriptName:
-- llGetScriptName
-llGetScriptState:
-- llGetScriptState
-llGetSimStats:
-- llGetSimStats
-llGetSimulatorHostname:
-- llGetSimulatorHostname
-llGetStartParameter:
-- llGetStartParameter
-llGetStartString:
-- llGetStartString
-llGetStaticPath:
-- llGetStaticPath
-llGetStatus:
-- llGetStatus
-llGetSubString:
-- llGetSubString
-llGetSunDirection:
-- llGetSunDirection
-llGetSunRotation:
-- llGetSunRotation
-llGetTexture:
-- llGetTexture
-llGetTextureOffset:
-- llGetTextureOffset
-llGetTextureRot:
-- llGetTextureRot
-llGetTextureScale:
-- llGetTextureScale
-llGetTime:
-- llGetTime
-llGetTimeOfDay:
-- llGetTimeOfDay
-llGetTimestamp:
-- llGetTimestamp
-llGetTorque:
-- llGetTorque
-llGetUnixTime:
-- llGetUnixTime
-llGetUsedMemory:
-- llGetUsedMemory
-llGetUsername:
-- llGetUsername
-llGetVel:
-- llGetVel
-llGetVisualParams:
-- llGetVisualParams
-llGetWallclock:
-- llGetWallclock
-llGiveAgentInventory:
-- llGiveAgentInventory
-llGiveInventory:
-- llGiveInventory
-llGiveInventoryList:
-- llGiveInventoryList
-llGiveMoney:
-- llGiveMoney
-llGodLikeRezObject:
-- llGodLikeRezObject
-llGround:
-- llGround
-llGroundContour:
-- llGroundContour
-llGroundNormal:
-- llGroundNormal
-llGroundRepel:
-- llGroundRepel
-llGroundSlope:
-- llGroundSlope
-llHMAC:
-- llHMAC
-llHTTPRequest:
-- llHTTPRequest
-llHTTPResponse:
-- llHTTPResponse
-llHash:
-- llHash
-llInsertString:
-- llInsertString
-llInstantMessage:
-- llInstantMessage
-llIntegerToBase64:
-- llIntegerToBase64
-llIsFriend:
-- llIsFriend
-llIsLinkGLTFMaterial:
-- llIsLinkGLTFMaterial
-llJson2List:
-- llJson2List
-llJsonGetValue:
-- llJsonGetValue
-llJsonSetValue:
-- llJsonSetValue
-llJsonValueType:
-- llJsonValueType
-llKey2Name:
-- llKey2Name
-llKeyCountKeyValue:
-- llKeyCountKeyValue
-llKeysKeyValue:
-- llKeysKeyValue
-llLinear2sRGB:
-- llLinear2sRGB
-llLinkAdjustSoundVolume:
-- llLinkAdjustSoundVolume
-llLinkParticleSystem:
-- llLinkParticleSystem
-llLinkPlaySound:
-- llLinkPlaySound
-llLinkSetSoundQueueing:
-- llLinkSetSoundQueueing
-llLinkSetSoundRadius:
-- llLinkSetSoundRadius
-llLinkSitTarget:
-- llLinkSitTarget
-llLinkStopSound:
-- llLinkStopSound
-llLinksetDataAvailable:
-- llLinksetDataAvailable
-llLinksetDataCountFound:
-- llLinksetDataCountFound
-llLinksetDataCountKeys:
-- llLinksetDataCountKeys
-llLinksetDataDelete:
-- llLinksetDataDelete
-llLinksetDataDeleteFound:
-- llLinksetDataDeleteFound
-llLinksetDataDeleteProtected:
-- llLinksetDataDeleteProtected
-llLinksetDataFindKeys:
-- llLinksetDataFindKeys
-llLinksetDataListKeys:
-- llLinksetDataListKeys
-llLinksetDataRead:
-- llLinksetDataRead
-llLinksetDataReadProtected:
-- llLinksetDataReadProtected
-llLinksetDataReset:
-- llLinksetDataReset
-llLinksetDataWrite:
-- llLinksetDataWrite
-llLinksetDataWriteProtected:
-- llLinksetDataWriteProtected
-llList2CSV:
-- llList2CSV
-llList2Float:
-- llList2Float
-llList2Integer:
-- llList2Integer
-llList2Json:
-- llList2Json
-llList2Key:
-- llList2Key
-llList2List:
-- llList2List
-llList2ListSlice:
-- llList2ListSlice
-llList2ListStrided:
-- llList2ListStrided
-llList2Rot:
-- llList2Rot
-llList2String:
-- llList2String
-llList2Vector:
-- llList2Vector
-llListFindList:
-- llListFindList
-llListFindListNext:
-- llListFindListNext
-llListFindStrided:
-- llListFindStrided
-llListInsertList:
-- llListInsertList
-llListRandomize:
-- llListRandomize
-llListReplaceList:
-- llListReplaceList
-llListSort:
-- llListSort
-llListSortStrided:
-- llListSortStrided
-llListStatistics:
-- llListStatistics
-llListen:
-- llListen
-llListenControl:
-- llListenControl
-llListenRemove:
-- llListenRemove
-llLoadURL:
-- llLoadURL
-llLog:
-- llLog
-llLog10:
-- llLog10
-llLookAt:
-- llLookAt
-llLoopSound:
-- llLoopSound
-llLoopSoundMaster:
-- llLoopSoundMaster
-llLoopSoundSlave:
-- llLoopSoundSlave
-llMD5String:
-- llMD5String
-llMakeExplosion:
-- llMakeExplosion
-llMakeFire:
-- llMakeFire
-llMakeFountain:
-- llMakeFountain
-llMakeSmoke:
-- llMakeSmoke
-llManageEstateAccess:
-- llManageEstateAccess
-llMapBeacon:
-- llMapBeacon
-llMapDestination:
-- llMapDestination
-llMessageLinked:
-- llMessageLinked
-llMinEventDelay:
-- llMinEventDelay
-llModPow:
-- llModPow
-llModifyLand:
-- llModifyLand
-llMoveToTarget:
-- llMoveToTarget
-llName2Key:
-- llName2Key
-llNavigateTo:
-- llNavigateTo
-llOffsetTexture:
-- llOffsetTexture
-llOpenFloater:
-- llOpenFloater
-llOpenRemoteDataChannel:
-- llOpenRemoteDataChannel
-llOrd:
-- llOrd
-llOverMyLand:
-- llOverMyLand
-llOwnerSay:
-- llOwnerSay
-llParcelMediaCommandList:
-- llParcelMediaCommandList
-llParcelMediaQuery:
-- llParcelMediaQuery
-llParseString2List:
-- llParseString2List
-llParseStringKeepNulls:
-- llParseStringKeepNulls
-llParticleSystem:
-- llParticleSystem
-llPassCollisions:
-- llPassCollisions
-llPassTouches:
-- llPassTouches
-llPatrolPoints:
-- llPatrolPoints
-llPlaySound:
-- llPlaySound
-llPlaySoundSlave:
-- llPlaySoundSlave
-llPointAt:
-- llPointAt
-llPow:
-- llPow
-llPreloadSound:
-- llPreloadSound
-llPursue:
-- llPursue
-llPushObject:
-- llPushObject
-llReadKeyValue:
-- llReadKeyValue
-llRefreshPrimURL:
-- llRefreshPrimURL
-llRegionSay:
-- llRegionSay
-llRegionSayTo:
-- llRegionSayTo
-llReleaseCamera:
-- llReleaseCamera
-llReleaseControls:
-- llReleaseControls
-llReleaseURL:
-- llReleaseURL
-llRemoteDataReply:
-- llRemoteDataReply
-llRemoteDataSetRegion:
-- llRemoteDataSetRegion
-llRemoteLoadScript:
-- llRemoteLoadScript
-llRemoteLoadScriptPin:
-- llRemoteLoadScriptPin
-llRemoveFromLandBanList:
-- llRemoveFromLandBanList
-llRemoveFromLandPassList:
-- llRemoveFromLandPassList
-llRemoveInventory:
-- llRemoveInventory
-llRemoveVehicleFlags:
-- llRemoveVehicleFlags
-llReplaceAgentEnvironment:
-- llReplaceAgentEnvironment
-llReplaceEnvironment:
-- llReplaceEnvironment
-llReplaceSubString:
-- llReplaceSubString
-llRequestAgentData:
-- llRequestAgentData
-llRequestDisplayName:
-- llRequestDisplayName
-llRequestExperiencePermissions:
-- llRequestExperiencePermissions
-llRequestInventoryData:
-- llRequestInventoryData
-llRequestPermissions:
-- llRequestPermissions
-llRequestSecureURL:
-- llRequestSecureURL
-llRequestSimulatorData:
-- llRequestSimulatorData
-llRequestURL:
-- llRequestURL
-llRequestUserKey:
-- llRequestUserKey
-llRequestUsername:
-- llRequestUsername
-llResetAnimationOverride:
-- llResetAnimationOverride
-llResetLandBanList:
-- llResetLandBanList
-llResetLandPassList:
-- llResetLandPassList
-llResetOtherScript:
-- llResetOtherScript
-llResetScript:
-- llResetScript
-llResetTime:
-- llResetTime
-llReturnObjectsByID:
-- llReturnObjectsByID
-llReturnObjectsByOwner:
-- llReturnObjectsByOwner
-llRezAtRoot:
-- llRezAtRoot
-llRezObject:
-- llRezObject
-llRezObjectWithParams:
-- llRezObjectWithParams
-llRot2Angle:
-- llRot2Angle
-llRot2Axis:
-- llRot2Axis
-llRot2Euler:
-- llRot2Euler
-llRot2Fwd:
-- llRot2Fwd
-llRot2Left:
-- llRot2Left
-llRot2Up:
-- llRot2Up
-llRotBetween:
-- llRotBetween
-llRotLookAt:
-- llRotLookAt
-llRotTarget:
-- llRotTarget
-llRotTargetRemove:
-- llRotTargetRemove
-llRotateTexture:
-- llRotateTexture
-llRound:
-- llRound
-llSHA1String:
-- llSHA1String
-llSHA256String:
-- llSHA256String
-llSameGroup:
-- llSameGroup
-llSay:
-- llSay
-llScaleByFactor:
-- llScaleByFactor
-llScaleTexture:
-- llScaleTexture
-llScriptDanger:
-- llScriptDanger
-llScriptProfiler:
-- llScriptProfiler
-llSendRemoteData:
-- llSendRemoteData
-llSensor:
-- llSensor
-llSensorRemove:
-- llSensorRemove
-llSensorRepeat:
-- llSensorRepeat
-llSetAgentEnvironment:
-- llSetAgentEnvironment
-llSetAgentRot:
-- llSetAgentRot
-llSetAlpha:
-- llSetAlpha
-llSetAngularVelocity:
-- llSetAngularVelocity
-llSetAnimationOverride:
-- llSetAnimationOverride
-llSetBuoyancy:
-- llSetBuoyancy
-llSetCameraAtOffset:
-- llSetCameraAtOffset
-llSetCameraEyeOffset:
-- llSetCameraEyeOffset
-llSetCameraParams:
-- llSetCameraParams
-llSetClickAction:
-- llSetClickAction
-llSetColor:
-- llSetColor
-llSetContentType:
-- llSetContentType
-llSetDamage:
-- llSetDamage
-llSetEnvironment:
-- llSetEnvironment
-llSetExperienceKey:
-- llSetExperienceKey
-llSetForce:
-- llSetForce
-llSetForceAndTorque:
-- llSetForceAndTorque
-llSetGroundTexture:
-- llSetGroundTexture
-llSetHoverHeight:
-- llSetHoverHeight
-llSetInventoryPermMask:
 - llSetInventoryPermMask
-llSetKeyframedMotion:
-- llSetKeyframedMotion
-llSetLinkAlpha:
-- llSetLinkAlpha
-llSetLinkCamera:
-- llSetLinkCamera
-llSetLinkColor:
-- llSetLinkColor
-llSetLinkGLTFOverrides:
-- llSetLinkGLTFOverrides
-llSetLinkMedia:
-- llSetLinkMedia
-llSetLinkPrimitiveParams:
-- llSetLinkPrimitiveParams
-llSetLinkPrimitiveParamsFast:
-- llSetLinkPrimitiveParamsFast
-llSetLinkRenderMaterial:
-- llSetLinkRenderMaterial
-llSetLinkSitFlags:
-- llSetLinkSitFlags
-llSetLinkTexture:
-- llSetLinkTexture
-llSetLinkTextureAnim:
-- llSetLinkTextureAnim
-llSetLocalRot:
-- llSetLocalRot
-llSetMemoryLimit:
-- llSetMemoryLimit
-llSetObjectDesc:
-- llSetObjectDesc
-llSetObjectName:
-- llSetObjectName
-llSetObjectPermMask:
 - llSetObjectPermMask
-llSetParcelForSale:
-- llSetParcelForSale
-llSetParcelMusicURL:
-- llSetParcelMusicURL
-llSetPayPrice:
-- llSetPayPrice
-llSetPhysicsMaterial:
-- llSetPhysicsMaterial
-llSetPos:
-- llSetPos
-llSetPrimMediaParams:
-- llSetPrimMediaParams
-llSetPrimURL:
-- llSetPrimURL
-llSetPrimitiveParams:
-- llSetPrimitiveParams
-llSetRegionPos:
-- llSetRegionPos
-llSetRemoteScriptAccessPin:
-- llSetRemoteScriptAccessPin
-llSetRenderMaterial:
-- llSetRenderMaterial
-llSetRot:
-- llSetRot
-llSetScale:
-- llSetScale
-llSetScriptState:
-- llSetScriptState
-llSetSitText:
-- llSetSitText
-llSetSoundQueueing:
-- llSetSoundQueueing
-llSetSoundRadius:
-- llSetSoundRadius
-llSetStatus:
-- llSetStatus
-llSetText:
-- llSetText
-llSetTexture:
-- llSetTexture
-llSetTextureAnim:
-- llSetTextureAnim
-llSetTimerEvent:
-- llSetTimerEvent
-llSetTorque:
-- llSetTorque
-llSetTouchText:
-- llSetTouchText
-llSetVehicleFlags:
-- llSetVehicleFlags
-llSetVehicleFloatParam:
-- llSetVehicleFloatParam
-llSetVehicleRotationParam:
-- llSetVehicleRotationParam
-llSetVehicleType:
-- llSetVehicleType
-llSetVehicleVectorParam:
-- llSetVehicleVectorParam
-llSetVelocity:
-- llSetVelocity
-llShout:
-- llShout
-llSignRSA:
-- llSignRSA
-llSin:
-- llSin
-llSitOnLink:
-- llSitOnLink
-llSitTarget:
-- llSitTarget
-llSleep:
-- llSleep
-llSound:
-- llSound
-llSoundPreload:
-- llSoundPreload
-llSqrt:
-- llSqrt
-llStartAnimation:
-- llStartAnimation
-llStartObjectAnimation:
-- llStartObjectAnimation
-llStopAnimation:
-- llStopAnimation
-llStopHover:
-- llStopHover
-llStopLookAt:
-- llStopLookAt
-llStopMoveToTarget:
-- llStopMoveToTarget
-llStopObjectAnimation:
-- llStopObjectAnimation
-llStopPointAt:
-- llStopPointAt
-llStopSound:
-- llStopSound
-llStringLength:
-- llStringLength
-llStringToBase64:
-- llStringToBase64
-llStringTrim:
-- llStringTrim
-llSubStringIndex:
-- llSubStringIndex
-llTakeCamera:
-- llTakeCamera
-llTakeControls:
-- llTakeControls
-llTan:
-- llTan
-llTarget:
-- llTarget
-llTargetOmega:
-- llTargetOmega
-llTargetRemove:
-- llTargetRemove
-llTargetedEmail:
-- llTargetedEmail
-llTeleportAgent:
-- llTeleportAgent
-llTeleportAgentGlobalCoords:
-- llTeleportAgentGlobalCoords
-llTeleportAgentHome:
-- llTeleportAgentHome
-llTextBox:
-- llTextBox
-llToLower:
-- llToLower
-llToUpper:
-- llToUpper
-llTransferLindenDollars:
-- llTransferLindenDollars
-llTransferOwnership:
 - llTransferOwnership
-llTriggerSound:
-- llTriggerSound
-llTriggerSoundLimited:
-- llTriggerSoundLimited
-llUnSit:
+attachments:
+- llAttachToAvatar
+- llAttachToAvatarTemp
+- llDetachFromAvatar
+- llGetAttached
+- llGetAttachedList
+- llGetAttachedListFiltered
+avatar:
+- llAgentInExperience
+- llAttachToAvatar
+- llAttachToAvatarTemp
+- llAvatarOnLinkSitTarget
+- llAvatarOnSitTarget
+- llClearCameraParams
+- llDetachFromAvatar
+- llDetectedOwner
+- llForceMouselook
+- llGetAgentInfo
+- llGetAgentLanguage
+- llGetAgentList
+- llGetAgentSize
+- llGetAnimation
+- llGetAnimationList
+- llGetAnimationOverride
+- llGetAttachedList
+- llGetAttachedListFiltered
+- llGetCameraAspect
+- llGetCameraFOV
+- llGetCameraPos
+- llGetCameraRot
+- llGetDisplayName
+- llGetPermissionsKey
+- llGetUsername
+- llGetVisualParams
+- llGiveMoney
+- llIsFriend
+- llName2Key
+- llReleaseCamera
+- llReleaseControls
+- llReplaceAgentEnvironment
+- llRequestAgentData
+- llRequestDisplayName
+- llRequestExperiencePermissions
+- llRequestUserKey
+- llRequestUsername
+- llSetAgentEnvironment
+- llSetAgentRot
+- llSetCameraParams
+- llStartAnimation
+- llStopAnimation
+- llTakeCamera
+- llTakeControls
+- llTeleportAgent
+- llTeleportAgentGlobalCoords
+- llTeleportAgentHome
 - llUnSit
-llUnescapeURL:
-- llUnescapeURL
-llUpdateCharacter:
-- llUpdateCharacter
-llUpdateKeyValue:
-- llUpdateKeyValue
-llVecDist:
-- llVecDist
-llVecMag:
-- llVecMag
-llVecNorm:
-- llVecNorm
-llVerifyRSA:
-- llVerifyRSA
-llVolumeDetect:
-- llVolumeDetect
-llWanderWithin:
-- llWanderWithin
-llWater:
-- llWater
-llWhisper:
-- llWhisper
-llWind:
-- llWind
-llWorldPosToHUD:
 - llWorldPosToHUD
-llXorBase64:
+avatar_animation:
+- llGetAnimation
+- llGetAnimationList
+- llGetAnimationOverride
+- llResetAnimationOverride
+- llSetAnimationOverride
+- llStartAnimation
+- llStopAnimation
+avatar_communication:
+- llDialog
+- llEmail
+- llInstantMessage
+- llListen
+- llListenControl
+- llListenRemove
+- llLoadURL
+- llMapBeacon
+- llMapDestination
+- llOpenFloater
+- llOwnerSay
+- llRegionSayTo
+- llSay
+- llSetText
+- llShout
+- llTargetedEmail
+- llTextBox
+- llWhisper
+avatar_inventory:
+- llGiveAgentInventory
+- llGiveInventory
+- llGiveInventoryList
+camera:
+- llClearCameraParams
+- llForceMouselook
+- llGetCameraAspect
+- llGetCameraFOV
+- llGetCameraPos
+- llGetCameraRot
+- llReleaseCamera
+- llSetCameraAtOffset
+- llSetCameraEyeOffset
+- llSetCameraParams
+- llSetLinkCamera
+- llTakeCamera
+- llWorldPosToHUD
+chat:
+- llDialog
+- llListen
+- llListenControl
+- llListenRemove
+- llRegionSay
+- llRegionSayTo
+- llSay
+- llShout
+- llTextBox
+- llWhisper
+combat:
+- llAdjustDamage
+- llDamage
+- llDetectedDamage
+- llGetHealth
+- llRezObjectWithParams
+- llSetDamage
+cryptography:
+- llComputeHash
+- llHMAC
+- llHash
+- llMD5String
+- llSHA1String
+- llSHA256String
+- llSignRSA
+- llVerifyRSA
+data_conversion:
+- llBase64ToInteger
+- llBase64ToString
+- llCSV2List
+- llDumpList2String
+- llIntegerToBase64
+- llJson2List
+- llJsonGetValue
+- llJsonSetValue
+- llJsonValueType
+- llLinear2sRGB
+- llList2CSV
+- llList2Float
+- llList2Integer
+- llList2Json
+- llList2Key
+- llList2Rot
+- llList2String
+- llList2Vector
+- llParseString2List
+- llParseStringKeepNulls
+- llStringToBase64
 - llXorBase64
-llXorBase64Strings:
 - llXorBase64Strings
-llXorBase64StringsCorrect:
 - llXorBase64StringsCorrect
-llsRGB2Linear:
+data_storage:
+- llCreateKeyValue
+- llDataSizeKeyValue
+- llDeleteKeyValue
+- llFindNotecardTextCount
+- llFindNotecardTextSync
+- llGetNotecardLine
+- llGetNotecardLineSync
+- llGetNumberOfNotecardLines
+- llKeyCountKeyValue
+- llKeysKeyValue
+- llLinksetDataAvailable
+- llLinksetDataCountFound
+- llLinksetDataCountKeys
+- llLinksetDataDelete
+- llLinksetDataDeleteFound
+- llLinksetDataDeleteProtected
+- llLinksetDataFindKeys
+- llLinksetDataListKeys
+- llLinksetDataRead
+- llLinksetDataReadProtected
+- llLinksetDataReset
+- llLinksetDataWrite
+- llLinksetDataWriteProtected
+- llReadKeyValue
+- llUpdateKeyValue
+dataserver:
+- llCreateKeyValue
+- llDataSizeKeyValue
+- llDeleteKeyValue
+- llFindNotecardTextCount
+- llGetNotecardLine
+- llGetNumberOfNotecardLines
+- llKeyCountKeyValue
+- llKeysKeyValue
+- llReadKeyValue
+- llRequestAgentData
+- llRequestDisplayName
+- llRequestInventoryData
+- llRequestSimulatorData
+- llRequestUserKey
+- llRequestUsername
+- llUpdateKeyValue
+detected:
+- llAdjustDamage
+- llDetectedDamage
+- llDetectedGrab
+- llDetectedGroup
+- llDetectedKey
+- llDetectedLinkNumber
+- llDetectedName
+- llDetectedOwner
+- llDetectedPos
+- llDetectedRezzer
+- llDetectedRot
+- llDetectedTouchBinormal
+- llDetectedTouchFace
+- llDetectedTouchNormal
+- llDetectedTouchPos
+- llDetectedTouchST
+- llDetectedTouchUV
+- llDetectedType
+- llDetectedVel
+effects:
+- llCollisionSprite
+- llLinkParticleSystem
+- llMakeExplosion
+- llMakeFire
+- llMakeFountain
+- llMakeSmoke
+- llParticleSystem
+- llSetLinkTextureAnim
+- llSetText
+- llSetTextureAnim
+experience:
+- llAgentInExperience
+- llClearExperience
+- llClearExperiencePermissions
+- llCreateKeyValue
+- llDataSizeKeyValue
+- llDeleteKeyValue
+- llGetExperienceDetails
+- llGetExperienceErrorMessage
+- llGetExperienceList
+- llKeyCountKeyValue
+- llKeysKeyValue
+- llReadKeyValue
+- llReplaceAgentEnvironment
+- llRequestExperiencePermissions
+- llSetAgentEnvironment
+- llSetExperienceKey
+- llSitOnLink
+- llUpdateKeyValue
+experience_data:
+- llCreateKeyValue
+- llDataSizeKeyValue
+- llDeleteKeyValue
+- llKeyCountKeyValue
+- llKeysKeyValue
+- llReadKeyValue
+- llUpdateKeyValue
+input:
+- llReleaseControls
+- llSetClickAction
+- llTakeControls
+json:
+- llJson2List
+- llJsonGetValue
+- llJsonSetValue
+- llJsonValueType
+- llList2Json
+land_moderation:
+- llAddToLandBanList
+- llAddToLandPassList
+- llEjectFromLand
+- llManageEstateAccess
+- llRemoveFromLandBanList
+- llRemoveFromLandPassList
+- llResetLandBanList
+- llResetLandPassList
+- llReturnObjectsByID
+- llReturnObjectsByOwner
+- llTeleportAgentHome
+linkset:
+- llAvatarOnLinkSitTarget
+- llBreakAllLinks
+- llBreakLink
+- llClearLinkMedia
+- llCreateLink
+- llGetLinkKey
+- llGetLinkMedia
+- llGetLinkName
+- llGetLinkNumberOfSides
+- llGetLinkPrimitiveParams
+- llGetLinkSitFlags
+- llGetMass
+- llGetMassMKS
+- llGetMaxScaleFactor
+- llGetMinScaleFactor
+- llGetNumberOfPrims
+- llGetObjectPermMask
+- llGetOwner
+- llGetRootPosition
+- llGetRootRotation
+- llGetStatus
+- llIsLinkGLTFMaterial
+- llLinkSitTarget
+- llLinksetDataAvailable
+- llLinksetDataCountFound
+- llLinksetDataCountKeys
+- llLinksetDataDelete
+- llLinksetDataDeleteFound
+- llLinksetDataDeleteProtected
+- llLinksetDataFindKeys
+- llLinksetDataListKeys
+- llLinksetDataRead
+- llLinksetDataReadProtected
+- llLinksetDataReset
+- llLinksetDataWrite
+- llLinksetDataWriteProtected
+- llScaleByFactor
+- llSetLinkAlpha
+- llSetLinkColor
+- llSetLinkGLTFOverrides
+- llSetLinkMedia
+- llSetLinkPrimitiveParams
+- llSetLinkPrimitiveParamsFast
+- llSetLinkRenderMaterial
+- llSetLinkSitFlags
+- llSetLinkTexture
+- llSetLinkTextureAnim
+- llSetObjectPermMask
+- llSetStatus
+linkset_data:
+- llLinksetDataAvailable
+- llLinksetDataCountFound
+- llLinksetDataCountKeys
+- llLinksetDataDelete
+- llLinksetDataDeleteFound
+- llLinksetDataDeleteProtected
+- llLinksetDataFindKeys
+- llLinksetDataListKeys
+- llLinksetDataRead
+- llLinksetDataReadProtected
+- llLinksetDataReset
+- llLinksetDataWrite
+- llLinksetDataWriteProtected
+list:
+- llDeleteSubList
+- llGetListEntryType
+- llGetListLength
+- llList2CSV
+- llList2Float
+- llList2Integer
+- llList2Json
+- llList2Key
+- llList2List
+- llList2ListSlice
+- llList2ListStrided
+- llList2Rot
+- llList2String
+- llList2Vector
+- llListFindList
+- llListFindListNext
+- llListFindStrided
+- llListInsertList
+- llListRandomize
+- llListReplaceList
+- llListSort
+- llListSortStrided
+- llListStatistics
+math:
+- llAbs
+- llAcos
+- llAngleBetween
+- llAsin
+- llAtan2
+- llAxes2Rot
+- llAxisAngle2Rot
+- llCeil
+- llCos
+- llEuler2Rot
+- llFabs
+- llFloor
+- llFrand
+- llLinear2sRGB
+- llListStatistics
+- llLog
+- llLog10
+- llModPow
+- llPow
+- llRot2Angle
+- llRot2Axis
+- llRot2Euler
+- llRot2Fwd
+- llRot2Left
+- llRot2Up
+- llRotBetween
+- llRound
+- llSin
+- llSqrt
+- llTan
+- llVecDist
+- llVecMag
+- llVecNorm
 - llsRGB2Linear
+math_3d:
+- llAngleBetween
+- llAxes2Rot
+- llAxisAngle2Rot
+- llEuler2Rot
+- llRot2Angle
+- llRot2Axis
+- llRot2Euler
+- llRot2Fwd
+- llRot2Left
+- llRot2Up
+- llRotBetween
+- llVecDist
+- llVecMag
+- llVecNorm
+math_trig:
+- llAcos
+- llAngleBetween
+- llAsin
+- llAtan2
+- llAxes2Rot
+- llAxisAngle2Rot
+- llCos
+- llRot2Angle
+- llRot2Axis
+- llRot2Fwd
+- llRot2Left
+- llRot2Up
+- llRotBetween
+- llSin
+- llTan
+media:
+- llClearLinkMedia
+- llClearPrimMedia
+- llGetLinkMedia
+- llGetPrimMediaParams
+- llHTTPResponse
+- llParcelMediaCommandList
+- llParcelMediaQuery
+- llRefreshPrimURL
+- llReleaseURL
+- llRequestSecureURL
+- llRequestURL
+- llSetContentType
+- llSetLinkMedia
+- llSetParcelMusicURL
+- llSetPrimMediaParams
+- llSetPrimURL
+money:
+- llGiveMoney
+- llSetClickAction
+- llSetPayPrice
+- llTransferLindenDollars
+movement:
+- llApplyImpulse
+- llApplyRotationalImpulse
+- llGetOmega
+- llGetTorque
+- llGetVel
+- llLookAt
+- llMoveToTarget
+- llPointAt
+- llPushObject
+- llRotLookAt
+- llRotTarget
+- llRotTargetRemove
+- llSetAgentRot
+- llSetAngularVelocity
+- llSetForce
+- llSetForceAndTorque
+- llSetHoverHeight
+- llSetKeyframedMotion
+- llSetLocalRot
+- llSetPos
+- llSetRegionPos
+- llSetRot
+- llSetTorque
+- llSetVelocity
+- llStopHover
+- llStopLookAt
+- llStopMoveToTarget
+- llStopPointAt
+- llTarget
+- llTargetOmega
+- llTargetRemove
+notecard:
+- llFindNotecardTextCount
+- llFindNotecardTextSync
+- llGetNotecardLine
+- llGetNotecardLineSync
+- llGetNumberOfNotecardLines
+object:
+- llGetBoundingBox
+- llGetCenterOfMass
+- llGetObjectDetails
+- llGetObjectLinkKey
+- llGetObjectMass
+- llGetObjectPrimCount
+- llGetOwnerKey
+- llKey2Name
+- llSameGroup
+object_animation:
+- llGetObjectAnimationNames
+- llStartObjectAnimation
+- llStopObjectAnimation
+parcel:
+- llAddToLandBanList
+- llAddToLandPassList
+- llEjectFromLand
+- llGetAgentList
+- llGetEnvironment
+- llGetLandOwnerAt
+- llGetMoonDirection
+- llGetMoonRotation
+- llGetParcelDetails
+- llGetParcelFlags
+- llGetParcelMaxPrims
+- llGetParcelMusicURL
+- llGetParcelPrimCount
+- llGetParcelPrimOwners
+- llGetSunDirection
+- llGetSunRotation
+- llOverMyLand
+- llParcelMediaCommandList
+- llParcelMediaQuery
+- llRemoveFromLandBanList
+- llRemoveFromLandPassList
+- llReplaceEnvironment
+- llResetLandBanList
+- llResetLandPassList
+- llScriptDanger
+- llSetEnvironment
+- llSetParcelForSale
+- llSetParcelMusicURL
+parcel_appearance:
+- llGetEnvironment
+- llGetMoonDirection
+- llGetMoonRotation
+- llGetSunDirection
+- llGetSunRotation
+- llReplaceAgentEnvironment
+- llReplaceEnvironment
+- llSetAgentEnvironment
+- llSetEnvironment
+parcel_media:
+- llParcelMediaCommandList
+- llParcelMediaQuery
+- llSetParcelMusicURL
+particles:
+- llLinkParticleSystem
+- llParticleSystem
+pathfinding:
+- llCreateCharacter
+- llDeleteCharacter
+- llEvade
+- llExecCharacterCmd
+- llFleeFrom
+- llGetClosestNavPoint
+- llGetStaticPath
+- llNavigateTo
+- llPatrolPoints
+- llPursue
+- llUpdateCharacter
+- llWanderWithin
+permissions:
+- llClearCameraParams
+- llForceMouselook
+- llGetAnimation
+- llGetAnimationList
+- llGetAnimationOverride
+- llGetCameraAspect
+- llGetCameraFOV
+- llGetCameraPos
+- llGetCameraRot
+- llGetPermissions
+- llGetPermissionsKey
+- llGiveMoney
+- llReleaseCamera
+- llReleaseControls
+- llRequestExperiencePermissions
+- llRequestPermissions
+- llResetAnimationOverride
+- llSetAnimationOverride
+- llSetCameraParams
+- llStartAnimation
+- llStopAnimation
+- llTakeCamera
+- llTakeControls
+- llTeleportAgent
+- llTeleportAgentGlobalCoords
+- llTransferLindenDollars
+- llWorldPosToHUD
+physics:
+- llApplyImpulse
+- llApplyRotationalImpulse
+- llCastRay
+- llCollisionFilter
+- llCollisionSound
+- llGetAccel
+- llGetCenterOfMass
+- llGetForce
+- llGetGeometricCenter
+- llGetMass
+- llGetMassMKS
+- llGetObjectMass
+- llGetOmega
+- llGetPhysicsMaterial
+- llGetStatus
+- llGetTorque
+- llGetVel
+- llLookAt
+- llMoveToTarget
+- llPassCollisions
+- llPointAt
+- llPushObject
+- llRemoveVehicleFlags
+- llRotLookAt
+- llRotTarget
+- llRotTargetRemove
+- llSetAgentRot
+- llSetAngularVelocity
+- llSetBuoyancy
+- llSetForce
+- llSetForceAndTorque
+- llSetHoverHeight
+- llSetKeyframedMotion
+- llSetPhysicsMaterial
+- llSetStatus
+- llSetTorque
+- llSetVelocity
+- llStopHover
+- llStopLookAt
+- llStopMoveToTarget
+- llStopPointAt
+- llTargetOmega
+- llVolumeDetect
+prim:
+- llAvatarOnSitTarget
+- llClearPrimMedia
+- llGetAlpha
+- llGetColor
+- llGetCreator
+- llGetKey
+- llGetLinkNumber
+- llGetLocalPos
+- llGetLocalRot
+- llGetNumberOfSides
+- llGetObjectDesc
+- llGetObjectName
+- llGetPhysicsMaterial
+- llGetPos
+- llGetPrimMediaParams
+- llGetPrimitiveParams
+- llGetRenderMaterial
+- llGetRot
+- llGetScale
+- llGetTexture
+- llGetTextureOffset
+- llGetTextureRot
+- llGetTextureScale
+- llOffsetTexture
+- llRemoteLoadScriptPin
+- llRotateTexture
+- llScaleTexture
+- llSetAlpha
+- llSetColor
+- llSetLocalRot
+- llSetObjectDesc
+- llSetObjectName
+- llSetPhysicsMaterial
+- llSetPos
+- llSetPrimMediaParams
+- llSetPrimURL
+- llSetPrimitiveParams
+- llSetRegionPos
+- llSetRenderMaterial
+- llSetRot
+- llSetScale
+- llSetSitText
+- llSetTexture
+- llSetTextureAnim
+- llSitTarget
+prim_appearance:
+- llGetAlpha
+- llGetColor
+- llGetLinkNumberOfSides
+- llGetLinkPrimitiveParams
+- llGetMaxScaleFactor
+- llGetMinScaleFactor
+- llGetNumberOfSides
+- llGetPrimitiveParams
+- llGetRenderMaterial
+- llGetTexture
+- llGetTextureOffset
+- llGetTextureRot
+- llGetTextureScale
+- llIsLinkGLTFMaterial
+- llLinear2sRGB
+- llOffsetTexture
+- llRotateTexture
+- llScaleByFactor
+- llScaleTexture
+- llSetAlpha
+- llSetColor
+- llSetLinkAlpha
+- llSetLinkColor
+- llSetLinkGLTFOverrides
+- llSetLinkPrimitiveParams
+- llSetLinkPrimitiveParamsFast
+- llSetLinkRenderMaterial
+- llSetLinkTexture
+- llSetLinkTextureAnim
+- llSetPrimitiveParams
+- llSetRenderMaterial
+- llSetScale
+- llSetText
+- llSetTexture
+- llSetTextureAnim
+- llsRGB2Linear
+prim_inventory:
+- llAllowInventoryDrop
+- llDerezObject
+- llGetInventoryAcquireTime
+- llGetInventoryCreator
+- llGetInventoryDesc
+- llGetInventoryKey
+- llGetInventoryName
+- llGetInventoryNumber
+- llGetInventoryPermMask
+- llGetInventoryType
+- llGetScriptName
+- llGetScriptState
+- llGiveInventory
+- llGiveInventoryList
+- llGodLikeRezObject
+- llRemoteLoadScript
+- llRemoteLoadScriptPin
+- llRemoveInventory
+- llRequestInventoryData
+- llResetOtherScript
+- llRezAtRoot
+- llRezObject
+- llRezObjectWithParams
+- llSetInventoryPermMask
+- llSetRemoteScriptAccessPin
+- llSetScriptState
+prim_media:
+- llClearLinkMedia
+- llClearPrimMedia
+- llGetLinkMedia
+- llGetPrimMediaParams
+- llHTTPResponse
+- llRefreshPrimURL
+- llSetContentType
+- llSetLinkMedia
+- llSetPrimMediaParams
+- llSetPrimURL
+prim_properties:
+- llGetObjectDesc
+- llGetObjectDetails
+- llGetObjectName
+- llGetPrimitiveParams
+- llSetClickAction
+- llSetLinkPrimitiveParams
+- llSetLinkPrimitiveParamsFast
+- llSetObjectDesc
+- llSetObjectName
+- llSetPayPrice
+- llSetPhysicsMaterial
+- llSetPrimitiveParams
+- llSetStatus
+- llSetText
+- llSetTouchText
+quaternion:
+- llAngleBetween
+- llAxes2Rot
+- llAxisAngle2Rot
+- llEuler2Rot
+- llRot2Angle
+- llRot2Axis
+- llRot2Euler
+- llRot2Fwd
+- llRot2Left
+- llRot2Up
+- llRotBetween
+region:
+- llCloud
+- llEdgeOfWorld
+- llGetAgentList
+- llGetEnv
+- llGetRegionAgentCount
+- llGetRegionCorner
+- llGetRegionDayLength
+- llGetRegionDayOffset
+- llGetRegionFPS
+- llGetRegionFlags
+- llGetRegionMoonDirection
+- llGetRegionMoonRotation
+- llGetRegionName
+- llGetRegionSunDirection
+- llGetRegionSunRotation
+- llGetRegionTimeDilation
+- llGetRegionTimeOfDay
+- llGetSimStats
+- llGetSimulatorHostname
+- llGround
+- llGroundContour
+- llGroundNormal
+- llGroundRepel
+- llGroundSlope
+- llModifyLand
+- llRequestSimulatorData
+- llSetGroundTexture
+- llWater
+- llWind
+region_appearance:
+- llGetRegionMoonDirection
+- llGetRegionMoonRotation
+- llGetRegionSunDirection
+- llGetRegionSunRotation
+- llReplaceAgentEnvironment
+- llSetAgentEnvironment
+rez:
+- llDerezObject
+- llDie
+- llGetStartParameter
+- llGetStartString
+- llGodLikeRezObject
+- llReturnObjectsByID
+- llReturnObjectsByOwner
+- llRezAtRoot
+- llRezObject
+- llRezObjectWithParams
+script:
+- llGetAndResetTime
+- llGetEnergy
+- llGetFreeMemory
+- llGetFreeURLs
+- llGetMemoryLimit
+- llGetSPMaxMemory
+- llGetScriptName
+- llGetScriptState
+- llGetStartParameter
+- llGetStartString
+- llGetTime
+- llGetUsedMemory
+- llMinEventDelay
+- llRemoteLoadScript
+- llRemoteLoadScriptPin
+- llResetOtherScript
+- llResetScript
+- llResetTime
+- llScriptDanger
+- llScriptProfiler
+- llSetMemoryLimit
+- llSetRemoteScriptAccessPin
+- llSetScriptState
+- llSetTimerEvent
+- llSleep
+script_communication:
+- llCloseRemoteDataChannel
+- llGetNextEmail
+- llHTTPRequest
+- llHTTPResponse
+- llListen
+- llListenControl
+- llListenRemove
+- llMessageLinked
+- llOpenRemoteDataChannel
+- llRegionSay
+- llRegionSayTo
+- llRemoteDataReply
+- llRemoteDataSetRegion
+- llRequestSecureURL
+- llRequestURL
+- llSay
+- llSendRemoteData
+- llShout
+- llWhisper
+sensor:
+- llCastRay
+- llCollisionFilter
+- llPassCollisions
+- llSensor
+- llSensorRemove
+- llSensorRepeat
+- llVolumeDetect
+sit:
+- llAvatarOnLinkSitTarget
+- llAvatarOnSitTarget
+- llGetLinkSitFlags
+- llLinkSitTarget
+- llSetLinkCamera
+- llSetLinkSitFlags
+- llSetSitText
+- llSitOnLink
+- llSitTarget
+- llUnSit
+sound:
+- llAdjustSoundVolume
+- llCollisionSound
+- llCollisionSprite
+- llLinkAdjustSoundVolume
+- llLinkPlaySound
+- llLinkSetSoundQueueing
+- llLinkSetSoundRadius
+- llLinkStopSound
+- llLoopSound
+- llLoopSoundMaster
+- llLoopSoundSlave
+- llPlaySound
+- llPlaySoundSlave
+- llPreloadSound
+- llSetSoundQueueing
+- llSetSoundRadius
+- llSound
+- llSoundPreload
+- llStopSound
+- llTriggerSound
+- llTriggerSoundLimited
+string:
+- llChar
+- llDeleteSubString
+- llGetSubString
+- llInsertString
+- llOrd
+- llReplaceSubString
+- llStringLength
+- llStringTrim
+- llSubStringIndex
+- llToLower
+- llToUpper
+teleport:
+- llTeleportAgent
+- llTeleportAgentGlobalCoords
+- llTeleportAgentHome
+time:
+- llGetDate
+- llGetDayLength
+- llGetDayOffset
+- llGetGMTclock
+- llGetRegionDayLength
+- llGetRegionDayOffset
+- llGetRegionTimeOfDay
+- llGetTimeOfDay
+- llGetTimestamp
+- llGetUnixTime
+- llGetWallclock
+- llSetTimerEvent
+- llSleep
+touch:
+- llDetectedGrab
+- llDetectedTouchBinormal
+- llDetectedTouchFace
+- llDetectedTouchNormal
+- llDetectedTouchPos
+- llDetectedTouchST
+- llDetectedTouchUV
+- llPassTouches
+- llSetClickAction
+- llSetTouchText
+user_interface:
+- llDialog
+- llLoadURL
+- llMapBeacon
+- llMapDestination
+- llSetClickAction
+- llSetPayPrice
+- llSetSitText
+- llSetTouchText
+- llTextBox
+- llWorldPosToHUD
+uuid:
+- llDetectedKey
+- llGenerateKey
+- llGetKey
+- llGetLinkKey
+- llGetObjectLinkKey
+- llGetOwner
+- llGetOwnerKey
+- llRequestUserKey
+vector:
+- llRot2Axis
+- llRot2Fwd
+- llRot2Left
+- llRot2Up
+- llVecDist
+- llVecMag
+- llVecNorm
+vehicles:
+- llRemoveVehicleFlags
+- llSetVehicleFlags
+- llSetVehicleFloatParam
+- llSetVehicleRotationParam
+- llSetVehicleType
+- llSetVehicleVectorParam
+web:
+- llEscapeURL
+- llGetFreeURLs
+- llGetHTTPHeader
+- llHTTPRequest
+- llHTTPResponse
+- llLoadURL
+- llRefreshPrimURL
+- llReleaseURL
+- llRequestSecureURL
+- llRequestURL
+- llSetContentType
+- llSetLinkMedia
+- llSetPrimMediaParams
+- llSetPrimURL
+- llUnescapeURL

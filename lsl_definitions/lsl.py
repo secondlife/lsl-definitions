@@ -345,6 +345,7 @@ class LSLFunction:
     type_arguments: list[str]
     arguments: list[LSLArgument]
     tooltip: str
+    categories: list[str]
     private: bool
     """
     Whether or not to include this in the public-facing syntax LLSD.
@@ -619,7 +620,8 @@ class LSLDefinitionParser:
         self._validate_identifier(func_name)
         func = LSLFunction(
             name=func_name,
-            tooltip=func_data.get("tooltip", ""),
+            tooltip=func_data["tooltip"],
+            categories=func_data["categories"],
             # These do actually need to be floats.
             energy=float(func_data["energy"] or "0.0"),
             sleep=float(func_data["sleep"] or "0.0"),

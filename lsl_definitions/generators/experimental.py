@@ -52,7 +52,9 @@ def gen_category_functions(definitions: LSLDefinitions) -> str:
     categories = {}
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
-        categories.setdefault(func.name, []).append(func.name)
+        for category in func.categories:
+            categories.setdefault(category, []).append(func.name)
 
+    categories = {k: categories[k] for k in sorted(categories.keys())}
     yaml.safe_dump(categories, file, sort_keys=False)
     return file.getvalue()
