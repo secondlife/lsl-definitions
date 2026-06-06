@@ -81,13 +81,17 @@ def gen_category_docs(definitions: LSLDefinitions) -> str:
         for category in event.categories:
             builtins_str = f"{event.name}{event.args_str}"
             builtins_str += lsl_annotations(event)
-            categories.setdefault(category, []).append(builtins_str)
+            docs = {arg.name: arg.tooltip for arg in event.arguments}
+            docs["tooltip"] = event.tooltip
+            categories.setdefault(category, {})[builtins_str] = docs
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for category in func.categories:
             builtins_str = f"{func.name}{func.args_str} -> {func.ret_type!s}"
             builtins_str += lsl_annotations(func)
-            categories.setdefault(category, []).append(builtins_str)
+            docs = {arg.name: arg.tooltip for arg in func.arguments}
+            docs["tooltip"] = func.tooltip
+            categories.setdefault(category, {})[builtins_str] = docs
 
     categories = {k: categories[k] for k in sorted(categories.keys())}
     yaml.safe_dump(categories, file, sort_keys=False, width=200)
