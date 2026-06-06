@@ -14,6 +14,15 @@ from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions, LSLEnumType
 
 
+def lsl_annotations(member) -> str:
+    annotations = ""
+    if member.private:
+        annotations += " // private"
+    if member.deprecated:
+        annotations += " // deprecated"
+    return annotations
+
+
 @register("gen_enums_txt")
 def gen_enums_txt(definitions: LSLDefinitions) -> str:
     builtins_str = "// Dump of the enums just for testing. Feel free to remove this rule\n"
@@ -26,20 +35,14 @@ def gen_enums_txt(definitions: LSLDefinitions) -> str:
                 builtins_str += f"0x{member.value:x}"
             else:
                 builtins_str += f"{member.value}"
-            if member.constant.private:
-                builtins_str += " // private"
-            if member.constant.deprecated:
-                builtins_str += " // deprecated"
+            builtins_str += lsl_annotations(member.constant)
             builtins_str += "\n"
         builtins_str += "};\n"
 
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
         if not const.member_of:
             builtins_str += f"const {const.type!s} {const.name} = {const.lsl_doc_literal}"
-            if const.private:
-                builtins_str += " // private"
-            if const.deprecated:
-                builtins_str += " // deprecated"
+            builtins_str += lsl_annotations(const)
             builtins_str += "\n"
 
     return builtins_str
@@ -53,12 +56,16 @@ def gen_category_functions(definitions: LSLDefinitions) -> str:
 
     for event in sorted(definitions.events.values(), key=lambda x: x.name):
         for category in event.categories:
-            categories.setdefault(category, []).append(event.name)
+            builtins_str = f"{event.name}{event.args_str}"
+            builtins_str += lsl_annotations(event)
+            categories.setdefault(category, []).append(builtins_str)
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for category in func.categories:
-            categories.setdefault(category, []).append(func.name)
+            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type!s}"
+            builtins_str += lsl_annotations(func)
+            categories.setdefault(category, []).append(builtins_str)
 
     categories = {k: categories[k] for k in sorted(categories.keys())}
-    yaml.safe_dump(categories, file, sort_keys=False)
+    yaml.safe_dump(categories, file, sort_keys=False, width=200)
     return file.getvalue()

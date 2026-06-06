@@ -278,6 +278,10 @@ class LSLFunctionBase(abc.ABC):
     tooltip: str
     categories: list[str]
 
+    @property
+    def args_str(self) -> str:
+        return "( " + ", ".join(f"{x.type!s} {x.name}" for x in self.arguments) + " )"
+
 
 @dataclasses.dataclass
 class LSLEvent(LSLFunctionBase):
