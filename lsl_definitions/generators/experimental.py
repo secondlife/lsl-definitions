@@ -6,6 +6,10 @@ as document generators do not live in this repositary, but do use this data.
 
 from __future__ import annotations
 
+import io
+
+import yaml
+
 from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions, LSLEnumType
 
@@ -39,3 +43,16 @@ def gen_enums_txt(definitions: LSLDefinitions) -> str:
             builtins_str += "\n"
 
     return builtins_str
+
+
+@register("gen_category_functions")
+def gen_category_functions(definitions: LSLDefinitions) -> str:
+    file = io.StringIO()
+    file.write("# Functions by category\n")
+    categories = {}
+
+    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+        categories.setdefault(func.name, []).append(func.name)
+
+    yaml.safe_dump(categories, file, sort_keys=False)
+    return file.getvalue()
