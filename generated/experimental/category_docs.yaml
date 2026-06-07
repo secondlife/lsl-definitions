@@ -626,8 +626,8 @@ data_conversion:
     src: Source string to parse.
     separators: A list of up to 8 strings representing separators to be discarded.
     spacers: A list of up to 8 strings representing spacers to be preserved in the list.
-    tooltip: Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries
-      each.
+    tooltip: Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up
+      to 8 string entries each.
   llStringToBase64( string str ) -> string:
     str: Source string to encode.
     tooltip: Returns the Base64 representation string of str, interpreting it as a UTF-8 byte sequence.
@@ -3625,39 +3625,39 @@ sound:
     tooltip: Plays the specified sound once at volume, centered at the object but not attached, restricted to the axis-aligned bounding box defined by the coordinates top_north_east and bottom_south_west.
 string:
   llChar( integer val ) -> string:
-    val: Unicode value to convert into a character string.
-    tooltip: Constructs and returns a single-character string representing the supplied Unicode value val.
+    val: Unicode codepoint integer (ordinal) to convert.
+    tooltip: Constructs and returns a single-character string from the given Unicode codepoint ordinal.
   llDeleteSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to modify.
-    start_index: Starting index of the substring to remove (inclusive).
-    end_index: Ending index of the substring to remove (inclusive).
+    start_index: Starting codepoint index of the substring to remove (inclusive).
+    end_index: Ending codepoint index of the substring to remove (inclusive).
     tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
       excludes the specified range.
   llGetSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to slice.
-    start_index: Zero-based start index (inclusive).
-    end_index: Zero-based end index (inclusive).
-    tooltip: Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring
-      is the excluded range.
+    start_index: Starting codepoint index (inclusive).
+    end_index: Ending codepoint index (inclusive).
+    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end. If start is greater than end, the substring is the excluded
+      range.
   llInsertString( string dst, integer pos, string src ) -> string:
     dst: Target destination string.
-    pos: Zero-based position index where insertion starts.
+    pos: Codepoint index where insertion starts.
     src: Source string to insert.
-    tooltip: Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.
+    tooltip: Returns a copy of dst with src inserted at codepoint index pos.
   llOrd( string val, integer index ) -> integer:
-    val: Source string containing the character.
-    index: Zero-based index of the character to convert.
-    tooltip: Returns the integer Unicode (ordinal) value of the character at index in the string val.
+    val: Source string.
+    index: Codepoint index of the character to convert.
+    tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index in the string val.
   llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string:
     src: Original source string to search.
     pattern: Substring pattern to find and replace.
-    replacement_pattern: New substring used to replace the pattern.
+    replacement_pattern: New substring that replaces the pattern.
     count: Maximum number of replacements to make (0 for all, positive for left-to-right, negative for right-to-left).
-    tooltip: Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right,
-      while negative counts process right-to-left.
+    tooltip: Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts
+      process right-to-left.
   llStringLength( string str ) -> integer:
     str: String to measure.
-    tooltip: Returns an integer representing the number of characters in the string str (excluding the null terminator).
+    tooltip: Returns the number of unicode codepoints in the string.
   llStringTrim( string src, integer type ) -> string:
     src: String to trim.
     type: Trim type flag (STRING_TRIM_HEAD, STRING_TRIM_TAIL, or STRING_TRIM).
@@ -3665,13 +3665,13 @@ string:
   llSubStringIndex( string source, string pattern ) -> integer:
     source: Source string to search within.
     pattern: Substring pattern to search for.
-    tooltip: Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.
+    tooltip: Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.
   llToLower( string src ) -> string:
     src: Source string to convert.
-    tooltip: Returns a copy of the string src converted entirely to lowercase.
+    tooltip: Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.
   llToUpper( string src ) -> string:
     src: Source string to convert.
-    tooltip: Returns a copy of the string src converted entirely to uppercase.
+    tooltip: Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.
 teleport:
   changed( integer change ):
     change: A bitfield of CHANGED_* constants representing what changed.

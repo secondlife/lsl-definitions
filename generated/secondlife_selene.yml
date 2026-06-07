@@ -5960,14 +5960,14 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the numeric code of every byte in the input string within
-      the given range.
+    description: Returns the numeric code of every byte in the range i..j in the source
+      string.
   string.char:
     args:
     - type: '...'
       required: true
     must_use: true
-    description: Returns a string containing characters for the given byte values.
+    description: Constructs and returns a string from the given byte integers.
   string.find:
     args:
     - type: string
@@ -5977,9 +5977,9 @@ globals:
     - type: bool
       required: false
     must_use: true
-    description: Finds the first instance of the pattern in the string. Returns the
-      start and end indices of the first match, followed by any captured substrings.
-      Returns nil if no match is found.
+    description: Returns the start and end byte indices of the first occurrence of
+      pattern inside the string s, followed by any regex-captured substrings. Returns
+      nil if not found.
   string.format:
     args:
     - type: string
@@ -5992,7 +5992,8 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns an iterator function for pattern matches.
+    description: Returns an iterator function of all occurences of the regex pattern
+      inside the source string.
   string.gsub:
     args:
     - type: string
@@ -6001,9 +6002,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Performs pattern-based substitution in a string. Returns a copy of
-      the string with substitutions made, followed by the total number of substitutions
-      that occurred.
+    description: Returns a copy of s with maxn occurrences of the regex pattern replaced
+      by repl, followed by the total number of substitutions that occurred. repl can
+      be a string, function, or table.
   string.len:
     args:
     - type: string
@@ -6013,8 +6014,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a lowercase version of the input string. Only works with
-      ASCII. Use ll.ToLower for strings that may contain Unicode.
+    description: Returns a lowercase copy of the source string. Only converts ASCII
+      characters. Use ll.ToLower for strings that may contain Unicode.
   string.match:
     args:
     - type: string
@@ -6022,8 +6023,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Finds and returns matches for a pattern in the input string. Returns
-      nil if no match is found.
+    description: Returns all occurences of the regex pattern inside the source string.
+      Returns nil if no match is found.
   string.pack:
     args:
     - type: string
@@ -6040,13 +6041,13 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the input string repeated n times. Returns an empty string
+    description: Returns the source string repeated n times. Returns an empty string
       if n is zero or negative.
   string.reverse:
     args:
     - type: string
     must_use: true
-    description: Returns the input string with bytes in reverse order.
+    description: Returns a copy of the source string with bytes in reverse order.
   string.split:
     args:
     - type: string
@@ -6063,7 +6064,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns a substring from the given range.
+    description: Returns a copy of the substring from s within the inclusive byte
+      range i..j. Negative indices count backward from the end.
   string.unpack:
     args:
     - type: string
@@ -6076,8 +6078,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns an uppercase version of the input string. Only works with
-      ASCII. Use ll.ToUpper for strings that may contain Unicode.
+    description: Returns an uppercase copy of the source string. Only converts ASCII
+      characters. Use ll.ToUpper for strings that may contain Unicode.
   table.concat:
     args:
     - type: table
@@ -6237,13 +6239,14 @@ globals:
     args:
     - type: '...'
       required: true
-    description: Creates a string from Unicode codepoints.
+    description: Constructs and returns a string from the given Unicode codepoint
+      ordinals.
   utf8.codes:
     args:
     - type: string
     must_use: true
     description: Returns an iterator that produces the byte offset and Unicode codepoint
-      for each character in the string.
+      for each character in the source string.
   utf8.codepoint:
     args:
     - type: string
@@ -6252,7 +6255,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the Unicode codepoints in the specified range of the string.
+    description: Returns the ordinals (Unicode copepoint integers) of the characters
+      in the inclusive byte range i..j in the source string.
   utf8.len:
     args:
     - type: string
@@ -6261,8 +6265,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the number of Unicode codepoints in the specified range of
-      the string, or nil and error index.
+    description: Returns the number of Unicode codepoints in the inclusive byte range
+      i..j of the source string. If the string is not utf8, returns (nil, error index)
+      instead.
   utf8.offset:
     args:
     - type: string
@@ -6615,8 +6620,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Constructs and returns a single-character string representing the
-      supplied Unicode value val.
+    description: Constructs and returns a single-character string from the given Unicode
+      codepoint ordinal.
   ll.ClearCameraParams:
     args: []
     description: Resets all camera parameters to default values and turns off scripted
@@ -7823,9 +7828,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the substring from src within the inclusive range
-      specified by the start and end indices. Negative indices count backward from
-      the end. If start is greater than end, the substring is the excluded range.
+    description: Returns a copy of the substring from src within the inclusive codepoint
+      range start..end. Negative indices count backward from the end. If start is
+      greater than end, the substring is the excluded range.
   ll.GetSunDirection:
     args: []
     must_use: true
@@ -8044,8 +8049,7 @@ globals:
     - type: number
     - type: string
     must_use: true
-    description: Returns a new string representing dst with src inserted starting
-      at the zero-based index pos. Note that this operation does not modify dst itself.
+    description: Returns a copy of dst with src inserted at codepoint index pos.
   ll.InstantMessage:
     args:
     - type:
@@ -8734,8 +8738,8 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the integer Unicode (ordinal) value of the character at index
-      in the string val.
+    description: Returns the ordinal (Unicode copepoint integer) of the character
+      at index in the string val.
   ll.OverMyLand:
     args:
     - type:
@@ -8780,9 +8784,9 @@ globals:
     - type: table
     - type: table
     must_use: true
-    description: Breaks the string src into a list, discarding separators and keeping
-      spacers, while preserving empty null values (unlike llParseString2List). separators
-      and spacers accept up to 8 string entries each.
+    description: Breaks the string src into a list of substrings, discarding separators
+      and keeping spacers, while preserving empty null values (unlike llParseString2List).
+      separators and spacers accept up to 8 string entries each.
   ll.ParticleSystem:
     args:
     - type: table
@@ -8981,9 +8985,9 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns a new string representing src with count occurrences of pattern
-      replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-      positive counts process left-to-right, while negative counts process right-to-left.
+    description: Returns a copy of src with count occurrences of pattern replaced
+      by replacement_pattern. Setting count to 0 replaces all occurrences; positive
+      counts process left-to-right, while negative counts process right-to-left.
   ll.RequestAgentData:
     args:
     - type:
@@ -9879,8 +9883,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns an integer representing the number of characters in the string
-      str (excluding the null terminator).
+    description: Returns the number of unicode codepoints in the string.
   ll.StringToBase64:
     deprecated:
       message: Use 'llbase64.encode' instead.
@@ -9904,8 +9907,8 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns the zero-based index of the first instance of the pattern
-      substring inside the string source. Returns nil if not found.
+    description: Returns the codepoint index of the first occurrence of pattern inside
+      the string source. Returns nil if not found. No regex.
   ll.TakeCamera:
     deprecated:
       message: Use 'll.SetCameraParams' instead.
@@ -10006,12 +10009,14 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to lowercase.
+    description: Returns a lowercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   ll.ToUpper:
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to uppercase.
+    description: Returns an uppercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   ll.TransferLindenDollars:
     args:
     - type:
@@ -10471,13 +10476,13 @@ globals:
       toward positive infinity).
   llcompat.Char:
     deprecated:
-      message: Constructs and returns a single-character string representing the supplied
-        Unicode value val.
+      message: Constructs and returns a single-character string from the given Unicode
+        codepoint ordinal.
     args:
     - type: number
     must_use: true
-    description: Constructs and returns a single-character string representing the
-      supplied Unicode value val.
+    description: Constructs and returns a single-character string from the given Unicode
+      codepoint ordinal.
   llcompat.ClearCameraParams:
     deprecated:
       message: Resets all camera parameters to default values and turns off scripted
@@ -12224,17 +12229,17 @@ globals:
       flag status is enabled for the object.
   llcompat.GetSubString:
     deprecated:
-      message: Returns a copy of the substring from src within the inclusive range
-        specified by the start and end indices. Negative indices count backward from
-        the end. If start is greater than end, the substring is the excluded range.
+      message: Returns a copy of the substring from src within the inclusive codepoint
+        range start..end. Negative indices count backward from the end. If start is
+        greater than end, the substring is the excluded range.
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the substring from src within the inclusive range
-      specified by the start and end indices. Negative indices count backward from
-      the end. If start is greater than end, the substring is the excluded range.
+    description: Returns a copy of the substring from src within the inclusive codepoint
+      range start..end. Negative indices count backward from the end. If start is
+      greater than end, the substring is the excluded range.
   llcompat.GetSunDirection:
     deprecated:
       message: Returns a normalized vector representing the current direction of the
@@ -12556,15 +12561,13 @@ globals:
       val (returns 0 if the string is empty).
   llcompat.InsertString:
     deprecated:
-      message: Returns a new string representing dst with src inserted starting at
-        the zero-based index pos. Note that this operation does not modify dst itself.
+      message: Returns a copy of dst with src inserted at codepoint index pos.
     args:
     - type: string
     - type: number
     - type: string
     must_use: true
-    description: Returns a new string representing dst with src inserted starting
-      at the zero-based index pos. Note that this operation does not modify dst itself.
+    description: Returns a copy of dst with src inserted at codepoint index pos.
   llcompat.InstantMessage:
     deprecated:
       message: Sends an instant message containing message to the user identified
@@ -13431,14 +13434,14 @@ globals:
       triggering a remote_data event with the channel ID once available.
   llcompat.Ord:
     deprecated:
-      message: Returns the integer Unicode (ordinal) value of the character at index
-        in the string val.
+      message: Returns the ordinal (Unicode copepoint integer) of the character at
+        index in the string val.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns the integer Unicode (ordinal) value of the character at index
-      in the string val.
+    description: Returns the ordinal (Unicode copepoint integer) of the character
+      at index in the string val.
   llcompat.OverMyLand:
     deprecated:
       message: Returns TRUE if the avatar or object specified by key id is over land
@@ -13493,17 +13496,17 @@ globals:
       accept up to 8 string entries each.
   llcompat.ParseStringKeepNulls:
     deprecated:
-      message: Breaks the string src into a list, discarding separators and keeping
-        spacers, while preserving empty null values (unlike llParseString2List). separators
-        and spacers accept up to 8 string entries each.
+      message: Breaks the string src into a list of substrings, discarding separators
+        and keeping spacers, while preserving empty null values (unlike llParseString2List).
+        separators and spacers accept up to 8 string entries each.
     args:
     - type: string
     - type: table
     - type: table
     must_use: true
-    description: Breaks the string src into a list, discarding separators and keeping
-      spacers, while preserving empty null values (unlike llParseString2List). separators
-      and spacers accept up to 8 string entries each.
+    description: Breaks the string src into a list of substrings, discarding separators
+      and keeping spacers, while preserving empty null values (unlike llParseString2List).
+      separators and spacers accept up to 8 string entries each.
   llcompat.ParticleSystem:
     deprecated:
       message: Creates or updates a particle system on the prim containing the script
@@ -13765,18 +13768,18 @@ globals:
       the parcel or estate management rights.
   llcompat.ReplaceSubString:
     deprecated:
-      message: Returns a new string representing src with count occurrences of pattern
-        replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-        positive counts process left-to-right, while negative counts process right-to-left.
+      message: Returns a copy of src with count occurrences of pattern replaced by
+        replacement_pattern. Setting count to 0 replaces all occurrences; positive
+        counts process left-to-right, while negative counts process right-to-left.
     args:
     - type: string
     - type: string
     - type: string
     - type: number
     must_use: true
-    description: Returns a new string representing src with count occurrences of pattern
-      replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-      positive counts process left-to-right, while negative counts process right-to-left.
+    description: Returns a copy of src with count occurrences of pattern replaced
+      by replacement_pattern. Setting count to 0 replaces all occurrences; positive
+      counts process left-to-right, while negative counts process right-to-left.
   llcompat.RequestAgentData:
     deprecated:
       message: Asynchronously requests the specified data category (DATA_*) about
@@ -15055,13 +15058,11 @@ globals:
     description: Stops playback of the currently playing attached sound.
   llcompat.StringLength:
     deprecated:
-      message: Returns an integer representing the number of characters in the string
-        str (excluding the null terminator).
+      message: Returns the number of unicode codepoints in the string.
     args:
     - type: string
     must_use: true
-    description: Returns an integer representing the number of characters in the string
-      str (excluding the null terminator).
+    description: Returns the number of unicode codepoints in the string.
   llcompat.StringToBase64:
     deprecated:
       message: Returns the Base64 representation string of str, interpreting it as
@@ -15085,14 +15086,14 @@ globals:
       to the specified trim type.
   llcompat.SubStringIndex:
     deprecated:
-      message: (Index semantics) Returns the zero-based index of the first instance
-        of the pattern substring inside the string source. Returns -1 if not found.
+      message: (Index semantics) Returns the codepoint index of the first occurrence
+        of pattern inside the string source. Returns -1 if not found. No regex.
     args:
     - type: string
     - type: string
     must_use: true
-    description: (Index semantics) Returns the zero-based index of the first instance
-      of the pattern substring inside the string source. Returns -1 if not found.
+    description: (Index semantics) Returns the codepoint index of the first occurrence
+      of pattern inside the string source. Returns -1 if not found. No regex.
   llcompat.TakeCamera:
     deprecated:
       message: Deprecated (use llSetCameraParams instead). Formerly used to take control
@@ -15226,18 +15227,22 @@ globals:
       Submitting text chats the input string on channel as if said by the avatar.
   llcompat.ToLower:
     deprecated:
-      message: Returns a copy of the string src converted entirely to lowercase.
+      message: Returns a lowercase copy of the string src. Converts all unicode characters,
+        not just ASCII.
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to lowercase.
+    description: Returns a lowercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   llcompat.ToUpper:
     deprecated:
-      message: Returns a copy of the string src converted entirely to uppercase.
+      message: Returns an uppercase copy of the string src. Converts all unicode characters,
+        not just ASCII.
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to uppercase.
+    description: Returns an uppercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   llcompat.TransferLindenDollars:
     deprecated:
       message: Transfers amount of L$ from the script owner to the destination avatar,

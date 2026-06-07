@@ -14954,7 +14954,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -14963,7 +14963,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14972,7 +14972,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional, defaults to i).</string>
+                     <string>Ending byte index (inclusive), or i if omitted (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14985,7 +14985,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the numeric code of every byte in the input string within the given range.</string>
+            <string>Returns the numeric code of every byte in the range i..j in the source string.</string>
          </map>
          <key>string.char</key>
          <map>
@@ -14995,7 +14995,7 @@ Returns true if result is non-zero.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Byte values to convert to string.</string>
+                     <string>Byte integers to convert.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -15008,7 +15008,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string containing characters for the given byte values.</string>
+            <string>Constructs and returns a string from the given byte integers.</string>
          </map>
          <key>string.find</key>
          <map>
@@ -15018,7 +15018,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to search within.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15058,7 +15058,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Finds the first instance of the pattern in the string. Returns the start and end indices of the first match, followed by any captured substrings. Returns nil if no match is found.</string>
+            <string>Returns the start and end byte indices of the first occurrence of pattern inside the string s, followed by any regex-captured substrings. Returns nil if not found.</string>
          </map>
          <key>string.format</key>
          <map>
@@ -15100,7 +15100,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to search within.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15109,7 +15109,7 @@ Returns true if result is non-zero.</string>
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Pattern to search for.</string>
+                     <string>Regex pattern to search for.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15122,7 +15122,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an iterator function for pattern matches.</string>
+            <string>Returns an iterator function of all occurences of the regex pattern inside the source string.</string>
          </map>
          <key>string.gsub</key>
          <map>
@@ -15132,7 +15132,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Original source string to search.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15141,7 +15141,7 @@ Returns true if result is non-zero.</string>
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Pattern to replace.</string>
+                     <string>Regex pattern to find and replace.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15150,7 +15150,7 @@ Returns true if result is non-zero.</string>
                   <key>repl</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Replacement string, function, or table.</string>
+                     <string>String, function, or table that to replaces the pattern.</string>
                      <key>type</key>
                      <string>string | { [string]: string } | (...string) -&gt; string</string>
                   </map>
@@ -15159,7 +15159,7 @@ Returns true if result is non-zero.</string>
                   <key>maxn</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Maximum replacements (optional, defaults to nil).</string>
+                     <string>Maximum number of replacements to make (all if omitted) (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15172,7 +15172,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Performs pattern-based substitution in a string. Returns a copy of the string with substitutions made, followed by the total number of substitutions that occurred.</string>
+            <string>Returns a copy of s with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.</string>
          </map>
          <key>string.len</key>
          <map>
@@ -15182,7 +15182,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>String to measure.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15205,7 +15205,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to convert.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15218,7 +15218,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.</string>
+            <string>Returns a lowercase copy of the source string. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.</string>
          </map>
          <key>string.match</key>
          <map>
@@ -15228,7 +15228,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to search within.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15237,7 +15237,7 @@ Returns true if result is non-zero.</string>
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Pattern to match.</string>
+                     <string>Regex pattern to search for.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15246,7 +15246,7 @@ Returns true if result is non-zero.</string>
                   <key>init</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to 1).</string>
+                     <string>Byte index to start at, or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15259,7 +15259,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Finds and returns matches for a pattern in the input string. Returns nil if no match is found.</string>
+            <string>Returns all occurences of the regex pattern inside the source string. Returns nil if no match is found.</string>
          </map>
          <key>string.pack</key>
          <map>
@@ -15324,7 +15324,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to repeat.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15333,7 +15333,7 @@ Returns true if result is non-zero.</string>
                   <key>n</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of times to repeat the string.</string>
+                     <string>Number of times to repeat the source string.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -15346,7 +15346,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the input string repeated n times. Returns an empty string if n is zero or negative.</string>
+            <string>Returns the source string repeated n times. Returns an empty string if n is zero or negative.</string>
          </map>
          <key>string.reverse</key>
          <map>
@@ -15356,7 +15356,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to reverse.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15369,7 +15369,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the input string with bytes in reverse order.</string>
+            <string>Returns a copy of the source string with bytes in reverse order.</string>
          </map>
          <key>string.split</key>
          <map>
@@ -15379,7 +15379,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to parse.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15411,7 +15411,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to slice.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15420,7 +15420,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index. Supports negative indexing.</string>
+                     <string>Starting byte index (inclusive).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -15429,7 +15429,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index. Supports negative indexing (optional, defaults to #s).</string>
+                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #s).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15442,7 +15442,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a substring from the given range.</string>
+            <string>Returns a copy of the substring from s within the inclusive byte range i..j. Negative indices count backward from the end.</string>
          </map>
          <key>string.unpack</key>
          <map>
@@ -15470,7 +15470,7 @@ Returns true if result is non-zero.</string>
                   <key>init</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to 1).</string>
+                     <string>Starting index, or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15493,7 +15493,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to convert.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15506,7 +15506,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.</string>
+            <string>Returns an uppercase copy of the source string. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.</string>
          </map>
          <key>table</key>
          <map>
@@ -16248,7 +16248,7 @@ Returns true if result is non-zero.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Unicode codepoints.</string>
+                     <string>Unicode codepoint integers (ordinals) to convert.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -16261,7 +16261,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates a string from Unicode codepoints.</string>
+            <string>Constructs and returns a string from the given Unicode codepoint ordinals.</string>
          </map>
          <key>utf8.codepoint</key>
          <map>
@@ -16271,7 +16271,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -16302,7 +16302,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the Unicode codepoints in the specified range of the string.</string>
+            <string>Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range i..j in the source string.</string>
          </map>
          <key>utf8.codes</key>
          <map>
@@ -16312,7 +16312,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -16325,7 +16325,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string.</string>
+            <string>Returns an iterator that produces the byte offset and Unicode codepoint for each character in the source string.</string>
          </map>
          <key>utf8.len</key>
          <map>
@@ -16335,7 +16335,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>Source string to measure.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -16344,7 +16344,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16353,7 +16353,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional, defaults to #s).</string>
+                     <string>Ending byte index (inclusive), or the end of the string if omitted (optional, defaults to #s).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16366,7 +16366,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the number of Unicode codepoints in the specified range of the string, or nil and error index.</string>
+            <string>Returns the number of Unicode codepoints in the inclusive byte range i..j of the source string. If the string is not utf8, returns (nil, error index) instead.</string>
          </map>
          <key>utf8.offset</key>
          <map>
@@ -16376,7 +16376,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input string.</string>
+                     <string>String to index.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -16385,7 +16385,7 @@ Returns true if result is non-zero.</string>
                   <key>n</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Character position.</string>
+                     <string>Character index.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -16394,7 +16394,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to if n &gt;= 0 then 1 else #s + 1).</string>
+                     <string>Starting byte index, or 1 if omitted (optional, defaults to if n &gt;= 0 then 1 else #s + 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -17645,7 +17645,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Unicode value to convert into a character string.</string>
+                     <string>Unicode codepoint integer (ordinal) to convert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17658,7 +17658,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Constructs and returns a single-character string representing the supplied Unicode value val.</string>
+            <string>Constructs and returns a single-character string from the given Unicode codepoint ordinal.</string>
          </map>
          <key>ll.ClearCameraParams</key>
          <map>
@@ -18177,7 +18177,7 @@ Returns true if result is non-zero.</string>
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index of the substring to remove (inclusive).</string>
+                     <string>Starting codepoint index of the substring to remove (inclusive).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -18186,7 +18186,7 @@ Returns true if result is non-zero.</string>
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index of the substring to remove (inclusive).</string>
+                     <string>Ending codepoint index of the substring to remove (inclusive).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21712,7 +21712,7 @@ Returns true if result is non-zero.</string>
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based start index (inclusive).</string>
+                     <string>Starting codepoint index (inclusive).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21721,7 +21721,7 @@ Returns true if result is non-zero.</string>
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based end index (inclusive).</string>
+                     <string>Ending codepoint index (inclusive).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21734,7 +21734,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
          </map>
          <key>ll.GetSunDirection</key>
          <map>
@@ -22510,7 +22510,7 @@ Returns true if result is non-zero.</string>
                   <key>pos</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based position index where insertion starts.</string>
+                     <string>Codepoint index where insertion starts.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -22532,7 +22532,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.</string>
+            <string>Returns a copy of dst with src inserted at codepoint index pos.</string>
          </map>
          <key>ll.InstantMessage</key>
          <map>
@@ -25458,7 +25458,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Source string containing the character.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25467,7 +25467,7 @@ Returns true if result is non-zero.</string>
                   <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based index of the character to convert.</string>
+                     <string>Codepoint index of the character to convert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25480,7 +25480,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the integer Unicode (ordinal) value of the character at index in the string val.</string>
+            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val.</string>
          </map>
          <key>ll.OverMyLand</key>
          <map>
@@ -25656,7 +25656,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
+            <string>Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
          </map>
          <key>ll.ParticleSystem</key>
          <map>
@@ -26481,7 +26481,7 @@ Returns true if result is non-zero.</string>
                   <key>replacement_pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>New substring used to replace the pattern.</string>
+                     <string>New substring that replaces the pattern.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -26503,7 +26503,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
+            <string>Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
          </map>
          <key>ll.RequestAgentData</key>
          <map>
@@ -30313,7 +30313,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the number of characters in the string str (excluding the null terminator).</string>
+            <string>Returns the number of unicode codepoints in the string.</string>
          </map>
          <key>ll.StringToBase64</key>
          <map>
@@ -30402,7 +30402,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns nil if not found.</string>
+            <string>Returns the codepoint index of the first occurrence of pattern inside the string source. Returns nil if not found. No regex.</string>
          </map>
          <key>ll.TakeCamera</key>
          <map>
@@ -30817,7 +30817,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to lowercase.</string>
+            <string>Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>ll.ToUpper</key>
          <map>
@@ -30840,7 +30840,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to uppercase.</string>
+            <string>Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>ll.TransferLindenDollars</key>
          <map>
