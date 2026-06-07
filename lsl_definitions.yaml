@@ -6815,12 +6815,12 @@ events:
       - attachments
   changed:
     arguments:
-    - change:
-        tooltip: A bitfield of CHANGED_* constants representing what changed.
+    - changes:
+        tooltip: A bitfield of CHANGED_* flags representing what changed.
         type: integer
         enum-semantics: ChangeType
     tooltip: Triggered when various properties of the object change. The parameter
-      change is a bitfield of CHANGED_* constants.
+      changes is a bitfield of CHANGED_* flags.
     categories:
       - asset_permissions
       - linkset
@@ -8267,7 +8267,7 @@ functions:
     - id:
         tooltip: UUID of the object in the region to derez.
         type: key
-    - flag:
+    - flags:
         tooltip: Derez behavior flags matching DEREZ_* constants.
         type: integer
         enum-semantics: DerezMode
@@ -9550,8 +9550,8 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-      representing when the inventory item was placed inside the prim.
+    tooltip: Returns the time when the item was placed in the prim's inventory, as
+      a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
     categories:
       - prim_inventory
   llGetInventoryCreator:
@@ -9577,13 +9577,12 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Returns a string containing the description of the specified inventory
-      item.
+    tooltip: Returns the description string of the specified inventory item.
     categories:
       - prim_inventory
   llGetInventoryKey:
     arguments:
-    - name:
+    - item:
         tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
@@ -9591,7 +9590,7 @@ functions:
     must-use: true
     return: key
     sleep: 0.0
-    tooltip: Returns the key (UUID) of the specified inventory name.
+    tooltip: Returns the key (UUID) of the specified inventory item.
     categories:
       - prim_inventory
   llGetInventoryName:
@@ -9600,8 +9599,8 @@ functions:
         tooltip: INVENTORY_* type constant of the item.
         type: integer
         enum-semantics: InventoryType
-    - number:
-        tooltip: Index number of the item of that type, starting from 0.
+    - index:
+        tooltip: Index of the item of that type.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9610,7 +9609,7 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns the name of the inventory item of the specified type
-      (INVENTORY_*) at the index number.
+      (INVENTORY_*) at the specified inventory index.
     categories:
       - prim_inventory
   llGetInventoryNumber:
@@ -9624,8 +9623,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the quantity of items of the specified
-      type (INVENTORY_*) in the prim's inventory.
+    tooltip: Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.
     categories:
       - prim_inventory
   llGetInventoryPermMask:
@@ -11043,14 +11041,13 @@ functions:
   llGiveAgentInventory:
     arguments:
     - agent:
-        tooltip: UUID of the receiving agent in the region.
+        tooltip: UUID of the target agent in the same region.
         type: key
     - folder:
-        tooltip: Name of the destination folder to be created in the agent's
-          inventory.
+        tooltip: Name of the destination folder to be created
         type: string
-    - inventory:
-        tooltip: A list of inventory items to transfer.
+    - items:
+        tooltip: The names of the items in the prim's inventory to transfer.
         type: list
         slua-type: "{string}"
     - options:
@@ -11067,20 +11064,21 @@ functions:
       using options.
     categories:
       - avatar_inventory
+      - prim_inventory
   llGiveInventory:
     arguments:
-    - destination:
-        tooltip: UUID of the destination avatar or prim.
+    - target:
+        tooltip: UUID of the target agent or prim.
         type: key
-    - inventory:
-        tooltip: Name of the item in the prim's inventory.
+    - item:
+        tooltip: Name of the item in the prim's inventory to transfer.
         type: string
     energy: 10.0
     func-id: 150
     return: void
     sleep: 0.0
-    tooltip: Gives the specified inventory item to the destination, as permitted by
-      the permissions system. The destination can be any agent, or an object
+    tooltip: Gives the specified inventory item to the target, as permitted by
+      the permissions system. The target can be any agent or an object
       located in the same region.
     categories:
       - avatar_inventory
@@ -11088,14 +11086,14 @@ functions:
   llGiveInventoryList:
     arguments:
     - target:
-        tooltip: UUID of the target avatar or prim in the same region.
+        tooltip: UUID of the target agent or prim in the same region.
         type: key
     - folder:
         tooltip: Name of the destination folder to be created (ignored if the target
           is an object).
         type: string
-    - inventory:
-        tooltip: A list of names representing items in the prim's inventory.
+    - items:
+        tooltip: The names of the items in the prim's inventory to transfer.
         type: list
         slua-type: "{string}"
     energy: 10.0
@@ -11133,7 +11131,7 @@ functions:
       - permissions
   llGodLikeRezObject:
     arguments:
-    - inventory:
+    - id:
         tooltip: Asset UUID of the object to rez.
         type: key
     - pos:
@@ -11145,7 +11143,7 @@ functions:
     god-mode: true
     return: void
     sleep: 0.0
-    tooltip: Rezzes an object directly from a UUID specified by inventory at the
+    tooltip: Rezzes an object directly from a UUID specified by id at the
       position pos, provided the owner has the god-bit set.
     categories:
       - prim_inventory
@@ -13562,14 +13560,16 @@ functions:
     - target:
         tooltip: UUID of the target prim.
         type: key
-    - name:
+    - script:
         tooltip: Name of the script in the prim's inventory.
         type: string
     - running:
-        tooltip: Whether the script should start running.
+        tooltip: Boolean. If TRUE, sets the copied script to run immediately; if FALSE,
+          leaves it stopped.
         type: integer
     - start_param:
-        tooltip: Start parameter passed to the script.
+        tooltip: Integer start parameter passed to the copied script (readable via
+          llGetStartParameter).
         type: integer
     deprecated: true
     energy: 10.0
@@ -13586,11 +13586,11 @@ functions:
     - target:
         tooltip: UUID of the target prim in the same region.
         type: key
-    - name:
+    - script:
         tooltip: Name of the script in the prim's inventory.
         type: string
     - pin:
-        tooltip: Integer PIN code (must match the PIN set on the target via
+        tooltip: Integer PIN code (must match the PIN set on the ObjectID via
           llSetRemoteScriptAccessPin).
         type: integer
     - running:
@@ -13606,7 +13606,7 @@ functions:
     func-id: 253
     return: void
     sleep: 3.0
-    tooltip: Copies the script name into target, setting it running (if running is
+    tooltip: Copies the script into target, setting it running (if running is
       TRUE) with the start_param, provided the script owner has modify
       permissions on target and target's PIN matches pin (set via
       llSetRemoteScriptAccessPin).
@@ -13812,14 +13812,14 @@ functions:
       - permissions
   llRequestInventoryData:
     arguments:
-    - name:
+    - item:
         tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 156
     return: key
     sleep: 1.0
-    tooltip: Asynchronously requests data for the inventory item specified by name,
+    tooltip: Asynchronously requests data for the named inventory item,
       triggering a dataserver event. Currently, only landmark items are
       supported (which return local region coordinates). Returns a key query
       handle.
@@ -13957,14 +13957,14 @@ functions:
       - parcel
   llResetOtherScript:
     arguments:
-    - name:
+    - script:
         tooltip: Name of the target script in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 249
     return: void
     sleep: 0.0
-    tooltip: Resets the script name located in the prim's inventory.
+    tooltip: Resets the named script name in the prim's inventory.
     categories:
       - prim_inventory
       - script
@@ -14032,20 +14032,20 @@ functions:
       - rez
   llRezAtRoot:
     arguments:
-    - inventory:
-        tooltip: Name of the object in the prim's inventory.
+    - item:
+        tooltip: Name of the object in the prim's inventory to rez.
         type: string
-    - position:
+    - pos:
         tooltip: Position vector in region coordinates where the root of the object
           will be placed.
         type: vector
-    - velocity:
+    - vel:
         tooltip: Initial velocity vector for the rezzed object.
         type: vector
     - rot:
         tooltip: Initial rotation of the rezzed object.
         type: rotation
-    - param:
+    - start_param:
         tooltip: Start parameter passed to the rezzed object's on_rez event
           (accessible via llGetStartParameter).
         type: integer
@@ -14053,16 +14053,16 @@ functions:
     func-id: 286
     return: void
     sleep: 0.1
-    tooltip: Instantiates the inventory object at position moving at velocity,
-      rotated to rot with its root prim centered exactly on position, passing
-      param as the on_rez start parameter.
+    tooltip: Instantiates the named inventory object with the root prim at pos with velocity vel and rotation
+      rot, passing start_param as the on_rez start parameter. The vel parameter is
+      ignored if the rezzed object is non-physical.
     categories:
       - prim_inventory
       - rez
   llRezObject:
     arguments:
-    - inventory:
-        tooltip: Name of the object in the prim's inventory.
+    - item:
+        tooltip: Name of the object in the prim's inventory to rez.
         type: string
     - pos:
         tooltip: Position vector in region coordinates where the center of the
@@ -14074,7 +14074,7 @@ functions:
     - rot:
         tooltip: Initial rotation of the rezzed object.
         type: rotation
-    - param:
+    - start_param:
         tooltip: Start parameter passed to the rezzed object's on_rez event
           (accessible via llGetStartParameter).
         type: integer
@@ -14082,7 +14082,7 @@ functions:
     func-id: 104
     return: void
     sleep: 0.1
-    tooltip: Instantiates the inventory object at pos with velocity vel and rotation
+    tooltip: Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation
       rot, passing param as the on_rez start parameter. The vel parameter is
       ignored if the rezzed object is non-physical.
     categories:
@@ -14090,20 +14090,20 @@ functions:
       - rez
   llRezObjectWithParams:
     arguments:
-    - inventory:
-        tooltip: Name of the object in the prim's inventory.
+    - item:
+        tooltip: Name of the object in the prim's inventory to rez.
         type: string
-    - params:
-        tooltip: A list of REZ_* parameters to configure the rezzed object's attributes.
+    - options:
+        tooltip: A list of REZ_* options to configure the rezzed object's attributes.
         type: list
         param-semantics: RezParam
     energy: 200.0
     func-id: 544
     return: key
     sleep: 0.1
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's
       position unless REZ_POS is specified) using the initial set of parameters
-      specified in params. Returns the key of the rezzed object, or a blank key
+      specified in options. Returns the key of the rezzed object, or a blank key
       on failure.
     categories:
       - combat
@@ -15564,7 +15564,7 @@ functions:
       - prim_appearance
   llSetScriptState:
     arguments:
-    - name:
+    - script:
         tooltip: Name of the script in the prim's inventory.
         type: string
     - running:
@@ -15575,7 +15575,7 @@ functions:
     func-id: 148
     return: void
     sleep: 0.0
-    tooltip: Sets the running state of the script name in the prim's inventory. If
+    tooltip: Sets the running state of the named script in the prim's inventory. If
       running is TRUE, the script is enabled; if FALSE, it is disabled.
     categories:
       - prim_inventory
@@ -16529,8 +16529,8 @@ functions:
       - permissions
   llTransferOwnership:
     arguments:
-    - agent_id:
-        tooltip: UUID of the avatar to receive ownership of the object.
+    - agent:
+        tooltip: UUID of the agent to receive ownership of the object.
         type: key
     - flags:
         tooltip: Flags controlling the transfer type (such as TRANSFER_FLAG_COPY or
@@ -16546,8 +16546,8 @@ functions:
     return: integer
     enum-semantics: TransferError
     sleep: 0.0
-    tooltip: Transfers ownership of the object (or a copy of it, depending on flags)
-      to the avatar agent_id. Returns an integer indicating the success or
+    tooltip: Transfers ownership of the object (or a copy of it, depending on Flags)
+      to the specified agent. Returns an integer indicating the success or
       failure of the transfer.
     categories:
       - asset_permissions
