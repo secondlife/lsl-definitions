@@ -1555,7 +1555,7 @@ const rotation ZERO_ROTATION = <0.0, 0.0, 0.0, 1.0>
 const vector ZERO_VECTOR = <0.0, 0.0, 0.0>
 event at_rot_target( integer handle, rotation targetrot, rotation ourrot )
 event at_target( integer tnum, vector targetpos, vector ourpos )
-event attach( key id )
+event attach( key avatar )
 event changed( integer changes )
 event collision( integer num_detected )
 event collision_end( integer num_detected )

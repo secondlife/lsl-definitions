@@ -1283,11 +1283,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/ll.GetAttachedList": {
-        "documentation": "Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/ll.GetAttachedListFiltered": {
-        "documentation": "Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedListFiltered"
     },
     "@sl-slua/global/ll.GetBoundingBox": {
@@ -3350,11 +3350,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/llcompat.GetAttachedList": {
-        "documentation": "Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/llcompat.GetAttachedListFiltered": {
-        "documentation": "Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedListFiltered"
     },
     "@sl-slua/global/llcompat.GetBoundingBox": {

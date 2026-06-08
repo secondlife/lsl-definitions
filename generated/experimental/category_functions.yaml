@@ -7,7 +7,7 @@ asset_permissions:
 - llSetObjectPermMask( integer group, integer flags ) -> void
 - llTransferOwnership( key agent, integer flags, list options ) -> integer
 attachments:
-- attach( key id )
+- attach( key avatar )
 - llAttachToAvatar( integer attach_point ) -> void
 - llAttachToAvatarTemp( integer attach_point ) -> void
 - llDetachFromAvatar(  ) -> void

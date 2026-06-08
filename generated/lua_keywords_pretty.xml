@@ -9679,7 +9679,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>arguments</key>
             <array>
                <map>
-                  <key>id</key>
+                  <key>avatar</key>
                   <map>
                      <key>tooltip</key>
                      <string>UUID of the avatar the object is attached to, or NULL_KEY if detached.</string>
@@ -9689,7 +9689,7 @@ float falloff – ranges from 0.01 to 2.0
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if detached.</string>
+            <string>Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.</string>
          </map>
          <key>changed</key>
          <map>
@@ -19492,7 +19492,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.</string>
+            <string>Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.</string>
          </map>
          <key>ll.GetAttachedListFiltered</key>
          <map>
@@ -19524,7 +19524,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.</string>
+            <string>Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.</string>
          </map>
          <key>ll.GetBoundingBox</key>
          <map>

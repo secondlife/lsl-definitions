@@ -182,7 +182,7 @@ end
 declare extern type LLEvents with
   at_rot_target: ((handle: number, targetrot: quaternion, ourrot: quaternion) -> ())?
   at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
-  attach: ((id: uuid) -> ())?
+  attach: ((avatar: uuid) -> ())?
   changed: ((changes: number) -> ())?
   collision: LLDetectedEventHandler?
   collision_end: LLDetectedEventHandler?
