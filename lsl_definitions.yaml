@@ -6910,7 +6910,7 @@ events:
   email:
     arguments:
     - time:
-        tooltip: Timestamp of when the email was received.
+        tooltip: Timestamp of when the email was received, in (string)llGetUnixTime() format.
         type: string
     - address:
         tooltip: Email address of the sender.
@@ -6918,16 +6918,16 @@ events:
     - subject:
         tooltip: Subject of the email.
         type: string
-    - message:
+    - msg:
         tooltip: Body text of the email.
         type: string
     - num_left:
-        tooltip: Number of pending emails still waiting in the queue.
+        tooltip: Number of emails still waiting in the queue.
         type: integer
-    tooltip: Triggered when an email sent to this script's address arrives. num_left
-      indicates the number of pending emails remaining in the queue.
+    tooltip: Receive an email requested by llGetNextEmail(). NumberRemaining
+      indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.
     categories:
-      - avatar_communication
+      - script_communication
   experience_permissions:
     arguments:
     - agent_id:
@@ -7104,17 +7104,17 @@ events:
         type: integer
         enum-semantics: Channel
     - name:
-        tooltip: Name of the sending prim or the legacy name of the sending avatar.
+        tooltip: Name of the sending prim or the legacy name of the sending agent.
         type: string
     - id:
-        tooltip: UUID of the sending avatar or prim.
+        tooltip: UUID of the sending agent or prim.
         type: key
-    - message:
+    - msg:
         tooltip: Spoken text string.
         type: string
     tooltip: Triggered when a chat message matching active llListen filters is
       received on channel. Passes the sender's name and UUID key id, along with
-      the spoken message string.
+      the spoken string msg.
     categories:
       - avatar_communication
       - chat
@@ -8619,10 +8619,10 @@ functions:
       - detected
   llDialog:
     arguments:
-    - avatar:
-        tooltip: UUID of the avatar in the same region.
+    - agent:
+        tooltip: UUID of the agent in the same region.
         type: key
-    - message:
+    - msg:
         tooltip: Text message to display in the dialog box.
         type: string
     - buttons:
@@ -8630,16 +8630,18 @@ functions:
         type: list
         slua-type: "{string}"
     - channel:
-        tooltip: Output chat channel (any integer value) where button clicks are
+        tooltip: Output chat channel (any 32-bit signed integer value) where button clicks are
           chatted.
         type: integer
     energy: 10.0
     func-id: 247
     return: void
     sleep: 1.0
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar,
-      displaying message along with up to 12 choice buttons. Clicking a button
+    tooltip: Shows a dialog box on the screen of the specified agent,
+      displaying msg along with up to 12 choice buttons. Clicking a button
       chats its label on channel.
+      The chat originates at the object's position, but uses the agent's name and UUID,
+      so it can be heard as long as the agent is still in the region.
     categories:
       - avatar_communication
       - chat
@@ -8714,16 +8716,19 @@ functions:
     - subject:
         tooltip: Subject of the email.
         type: string
-    - message:
+    - msg:
         tooltip: Message body of the email.
         type: string
     energy: 10.0
     func-id: 119
     return: void
     sleep: 20.0
-    tooltip: Sends an email to address with subject and message.
+    tooltip: Sends an email with the given destination address, subject, and body msg.
+      The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
+      This can be used for script communication; see llGetNextEmail()
     categories:
       - avatar_communication
+      - script_communication
   llEscapeURL:
     arguments:
     - url:
@@ -9969,17 +9974,20 @@ functions:
   llGetNextEmail:
     arguments:
     - address:
-        tooltip: Sender email address filter.
+        tooltip: Sender email address filter, or "" for any address.
         type: string
     - subject:
-        tooltip: Email subject filter.
+        tooltip: Email subject filter, or "" for any subject.
         type: string
     energy: 10.0
     func-id: 120
     return: void
     sleep: 0.0
-    tooltip: Requests the next queued email matching the specified sender address
-      and subject filters via the email event.
+    tooltip: |-
+      Requests the next queued email via the email event. Emails must
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+      2. Be sent from the specified sender Address (or any address if blank)
+      3. Have the specified subject Subject (or any subject if blank)
     categories:
       - script_communication
   llGetNotecardLine:
@@ -11332,17 +11340,17 @@ functions:
       - string
   llInstantMessage:
     arguments:
-    - user:
-        tooltip: UUID of the destination user.
+    - agent:
+        tooltip: UUID of the destination agent.
         type: key
-    - message:
+    - msg:
         tooltip: Text message string to send.
         type: string
     energy: 10.0
     func-id: 118
     return: void
     sleep: 2.0
-    tooltip: Sends an instant message containing message to the user identified by
+    tooltip: Sends an instant message containing msg to the agent identified by
       their key.
     categories:
       - avatar_communication
@@ -12459,16 +12467,16 @@ functions:
   llListen:
     arguments:
     - channel:
-        tooltip: Input chat channel to listen on (any integer from -2147483648 to
-          2147483647).
+        tooltip: Chat channel (any 32-bit signed integer value) to listen on.
+          Exact range is -2147483648 to 2147483647.
         type: integer
         enum-semantics: Channel
     - name:
-        tooltip: Specific prim name or avatar legacy name to filter by (or empty
+        tooltip: Specific prim name or agent legacy name to filter by (or empty
           string for no filter).
         type: string
     - id:
-        tooltip: Specific avatar or prim UUID to filter by (or NULL_KEY for no
+        tooltip: Specific agent or prim UUID to filter by (or NULL_KEY for no
           filter).
         type: key
     - msg:
@@ -13103,7 +13111,7 @@ functions:
   llOwnerSay:
     arguments:
     - msg:
-        tooltip: Text message string to send.
+        tooltip: Text message string to send to the object owner.
         type: string
     slua-deprecated:
       use: "print"
@@ -13436,7 +13444,7 @@ functions:
   llRegionSay:
     arguments:
     - channel:
-        tooltip: Output chat channel to broadcast on (must be non-zero).
+        tooltip: Chat channel (any 32-bit signed integer value except zero) to chat the message on.
         type: integer
         enum-semantics: ChannelNonPublic
     - msg:
@@ -13446,18 +13454,18 @@ functions:
     func-id: 331
     return: void
     sleep: 0.0
-    tooltip: Broadcasts the message msg on channel to the entire region (heard by
-      any script listening on that channel; channel 0 is not permitted).
+    tooltip: Broadcasts the message msg to all scripts listening on channel Channel
+      within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.
     categories:
       - chat
       - script_communication
   llRegionSayTo:
     arguments:
     - target:
-        tooltip: UUID of the destination avatar or prim in the same region.
+        tooltip: UUID of the target agent or prim in the same region.
         type: key
     - channel:
-        tooltip: Output chat channel (any integer value).
+        tooltip: Chat channel (any 32-bit signed integer value) to chat the message on.
         type: integer
     - msg:
         tooltip: Text message string to send.
@@ -13466,8 +13474,8 @@ functions:
     func-id: 364
     return: void
     sleep: 0.0
-    tooltip: Sends the message msg on channel privately to the targeted avatar or
-      object (if within the region). If target is an avatar and channel is
+    tooltip: Sends the message msg on Channel privately to the targeted agent or
+      object (if within the region). If target is an agent and channel is
       non-zero, the message can also be heard by any attachments worn by the
       avatar.
     categories:
@@ -14377,20 +14385,20 @@ functions:
   llSay:
     arguments:
     - channel:
-        tooltip: Integer chat channel to transmit the message on.
+        tooltip: Chat channel (any 32-bit signed integer value) to chat the message on.
         type: integer
         enum-semantics: Channel
     - msg:
-        tooltip: Text message string to transmit.
+        tooltip: Text message string to broadcast.
         type: string
     energy: 10.0
     func-id: 23
     return: void
     sleep: 0.0
-    tooltip: Says the text message msg on the specified channel. The message can be
-      heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and
-      DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for
-      script-to-script communication.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel
+      within llGetEnv("chat_range"), which is 20m on most regions.
+      Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
     categories:
       - avatar_communication
       - chat
@@ -15865,20 +15873,20 @@ functions:
   llShout:
     arguments:
     - channel:
-        tooltip: Integer chat channel to shout the message on.
+        tooltip: Chat channel (any 32-bit signed integer value) to shout the message on.
         type: integer
         enum-semantics: Channel
     - msg:
-        tooltip: Text message string to transmit.
+        tooltip: Text message string to broadcast.
         type: string
     energy: 10.0
     func-id: 24
     return: void
     sleep: 0.0
-    tooltip: Shouts the text message msg on the specified channel. The message can
-      be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to
-      communicate with scripts.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel
+      within llGetEnv("shout_range"), which is 100m on most regions.
+      Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
     categories:
       - avatar_communication
       - chat
@@ -16364,15 +16372,16 @@ functions:
     - subject:
         tooltip: Subject of the email.
         type: string
-    - message:
+    - msg:
         tooltip: Email message body.
         type: string
     energy: 10.0
     func-id: 750
     return: void
     sleep: 20.0
-    tooltip: Sends an email containing subject and message to the target (which can
-      designate the owner or creator of the object).
+    tooltip: Sends an email to with the given subject subject and body msg
+      to the target (which can designate the owner or creator of the object).
+      The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
     categories:
       - avatar_communication
   llTeleportAgent:
@@ -16454,15 +16463,15 @@ functions:
       - teleport
   llTextBox:
     arguments:
-    - avatar:
-        tooltip: UUID of the avatar in the same region.
+    - agent:
+        tooltip: UUID of the agent in the same region.
         type: key
-    - message:
+    - msg:
         tooltip: Text message to display in the text box.
         type: string
     - channel:
-        tooltip: Output chat channel (any integer value) where the input text is
-          chatted.
+        tooltip: Output chat channel (any 32-bit signed integer value) where
+          the input text is chatted.
         type: integer
         enum-semantics: Channel
     energy: 10.0
@@ -16470,9 +16479,10 @@ functions:
     mono-sleep: 0.0
     return: void
     sleep: 1.0
-    tooltip: Opens an input text box dialog displaying message to the avatar.
-      Submitting text chats the input string on channel as if said by the
-      avatar.
+    tooltip: Opens an input text box dialog displaying msg to the agent.
+      Submitting text chats the input string on channel as if said by the agent.
+      The chat originates at the object's position, but uses the agent's name and UUID,
+      so it can be heard as long as the agent is still in the region.
     categories:
       - avatar_communication
       - chat
@@ -16813,20 +16823,20 @@ functions:
   llWhisper:
     arguments:
     - channel:
-        tooltip: Integer chat channel to whisper the message on.
+        tooltip: Chat channel (any 32-bit signed integer value) to whisper the message on.
         type: integer
         enum-semantics: Channel
     - msg:
-        tooltip: Text message string to transmit.
+        tooltip: Text message string to broadcast.
         type: string
     energy: 10.0
     func-id: 22
     return: void
     sleep: 0.0
-    tooltip: Whispers the text message msg on the specified channel. The message can
-      be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to
-      communicate with scripts.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel
+      within llGetEnv("whisper_range"), which is 10m on most regions.
+      Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
     categories:
       - avatar_communication
       - chat

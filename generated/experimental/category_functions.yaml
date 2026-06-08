@@ -77,11 +77,10 @@ avatar_animation:
 - llStartAnimation( string anim ) -> void
 - llStopAnimation( string anim ) -> void
 avatar_communication:
-- email( string time, string address, string subject, string message, integer num_left )
-- listen( integer channel, string name, key id, string message )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
-- llEmail( string address, string subject, string message ) -> void
-- llInstantMessage( key user, string message ) -> void
+- listen( integer channel, string name, key id, string msg )
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
+- llEmail( string address, string subject, string msg ) -> void
+- llInstantMessage( key agent, string msg ) -> void
 - llListen( integer channel, string name, key id, string msg ) -> integer
 - llListenControl( integer handle, integer active ) -> void
 - llListenRemove( integer handle ) -> void
@@ -94,8 +93,8 @@ avatar_communication:
 - llSay( integer channel, string msg ) -> void
 - llSetText( string text, vector color, float alpha ) -> void
 - llShout( integer channel, string msg ) -> void
-- llTargetedEmail( integer target, string subject, string message ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTargetedEmail( integer target, string subject, string msg ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWhisper( integer channel, string msg ) -> void
 avatar_inventory:
 - llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer
@@ -116,8 +115,8 @@ camera:
 - llTakeCamera( key avatar ) -> void // deprecated
 - llWorldPosToHUD( vector world_pos ) -> vector
 chat:
-- listen( integer channel, string name, key id, string message )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- listen( integer channel, string name, key id, string msg )
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
 - llListen( integer channel, string name, key id, string msg ) -> integer
 - llListenControl( integer handle, integer active ) -> void
 - llListenRemove( integer handle ) -> void
@@ -125,7 +124,7 @@ chat:
 - llRegionSayTo( key target, integer channel, string msg ) -> void
 - llSay( integer channel, string msg ) -> void
 - llShout( integer channel, string msg ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWhisper( integer channel, string msg ) -> void
 combat:
 - final_damage( integer num_detected )
@@ -929,12 +928,14 @@ script:
 - llSetTimerEvent( float sec ) -> void
 - llSleep( float sec ) -> void
 script_communication:
+- email( string time, string address, string subject, string msg, integer num_left )
 - http_request( key request_id, string method, string body )
 - http_response( key request_id, integer status, list metadata, string body )
 - link_message( integer sender_num, integer num, string str, key id )
-- listen( integer channel, string name, key id, string message )
+- listen( integer channel, string name, key id, string msg )
 - remote_data( integer event_type, key channel, key message_id, string sender, integer idata, string sdata ) // deprecated
 - llCloseRemoteDataChannel( key channel ) -> void // deprecated
+- llEmail( string address, string subject, string msg ) -> void
 - llGetNextEmail( string address, string subject ) -> void
 - llHTTPRequest( string url, list parameters, string body ) -> key
 - llHTTPResponse( key request_id, integer status, string body ) -> void
@@ -1051,7 +1052,7 @@ user_interface:
 - touch( integer num_detected )
 - touch_end( integer num_detected )
 - touch_start( integer num_detected )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
 - llLoadURL( key avatar, string message, string url ) -> void
 - llMapBeacon( string region_name, vector pos, list options ) -> void
 - llMapDestination( string simname, vector pos, vector look_at ) -> void
@@ -1059,7 +1060,7 @@ user_interface:
 - llSetPayPrice( integer price, list quick_pay_buttons ) -> void
 - llSetSitText( string text ) -> void
 - llSetTouchText( string text ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWorldPosToHUD( vector world_pos ) -> vector
 uuid:
 - llDetectedKey( integer number ) -> key

@@ -4966,7 +4966,9 @@ globals:
   print:
     args:
     - type: '...'
-    description: Prints all arguments to standard output using Tab as a separator.
+    description: Sends all arguments as text privately to the object owner, separated
+      by 4 spaces. The owner must be currently in the same region for the message
+      to be received.
   rawequal:
     args:
     - type: any
@@ -6952,9 +6954,10 @@ globals:
     - type: string
     - type: table
     - type: number
-    description: Shows a dialog box on the screen of the avatar specified by avatar,
-      displaying message along with up to 12 choice buttons. Clicking a button chats
-      its label on channel.
+    description: Shows a dialog box on the screen of the specified agent, displaying
+      msg along with up to 12 choice buttons. Clicking a button chats its label on
+      channel. The chat originates at the object's position, but uses the agent's
+      name and UUID, so it can be heard as long as the agent is still in the region.
   ll.Die:
     args: []
     description: Deletes the entire object containing the script (the object does
@@ -6987,7 +6990,9 @@ globals:
     - type: string
     - type: string
     - type: string
-    description: Sends an email to address with subject and message.
+    description: Sends an email with the given destination address, subject, and body
+      msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can
+      be used for script communication; see llGetNextEmail()
   ll.EscapeURL:
     args:
     - type: string
@@ -7497,8 +7502,13 @@ globals:
     args:
     - type: string
     - type: string
-    description: Requests the next queued email matching the specified sender address
-      and subject filters via the email event.
+    description: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   ll.GetNotecardLine:
     args:
     - type: string
@@ -8063,8 +8073,8 @@ globals:
     - type:
         display: uuid
     - type: string
-    description: Sends an instant message containing message to the user identified
-      by their key.
+    description: Sends an instant message containing msg to the agent identified by
+      their key.
   ll.IntegerToBase64:
     args:
     - type: number
@@ -8885,16 +8895,17 @@ globals:
     args:
     - type: number
     - type: string
-    description: Broadcasts the message msg on channel to the entire region (heard
-      by any script listening on that channel; channel 0 is not permitted).
+    description: Broadcasts the message msg to all scripts listening on channel Channel
+      within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive
+      the message.
   ll.RegionSayTo:
     args:
     - type:
         display: uuid
     - type: number
     - type: string
-    description: Sends the message msg on channel privately to the targeted avatar
-      or object (if within the region). If target is an avatar and channel is non-zero,
+    description: Sends the message msg on Channel privately to the targeted agent
+      or object (if within the region). If target is an agent and channel is non-zero,
       the message can also be heard by any attachments worn by the avatar.
   ll.ReleaseCamera:
     deprecated:
@@ -9251,10 +9262,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Says the text message msg on the specified channel. The message can
-      be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-      (2147483647) are not visible to avatars and can be used for script-to-script
-      communication.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("chat_range"), which is 20m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.ScaleByFactor:
     args:
     - type: number
@@ -9768,10 +9779,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Shouts the text message msg on the specified channel. The message
-      can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("shout_range"), which is 100m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.SignRSA:
     args:
     - type: string
@@ -9970,8 +9981,9 @@ globals:
     - type: number
     - type: string
     - type: string
-    description: Sends an email containing subject and message to the target (which
-      can designate the owner or creator of the object).
+    description: Sends an email to with the given subject subject and body msg to
+      the target (which can designate the owner or creator of the object). The email
+      will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
   ll.TeleportAgent:
     args:
     - type:
@@ -10011,8 +10023,10 @@ globals:
         display: uuid
     - type: string
     - type: number
-    description: Opens an input text box dialog displaying message to the avatar.
-      Submitting text chats the input string on channel as if said by the avatar.
+    description: Opens an input text box dialog displaying msg to the agent. Submitting
+      text chats the input string on channel as if said by the agent. The chat originates
+      at the object's position, but uses the agent's name and UUID, so it can be heard
+      as long as the agent is still in the region.
   ll.ToLower:
     args:
     - type: string
@@ -10159,10 +10173,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Whispers the text message msg on the specified channel. The message
-      can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.Wind:
     args:
     - type:
@@ -10913,18 +10927,20 @@ globals:
       index.
   llcompat.Dialog:
     deprecated:
-      message: Shows a dialog box on the screen of the avatar specified by avatar,
-        displaying message along with up to 12 choice buttons. Clicking a button chats
-        its label on channel.
+      message: Shows a dialog box on the screen of the specified agent, displaying
+        msg along with up to 12 choice buttons. Clicking a button chats its label
+        on channel. The chat originates at the object's position, but uses the agent's
+        name and UUID, so it can be heard as long as the agent is still in the region.
     args:
     - type:
         display: uuid
     - type: string
     - type: table
     - type: number
-    description: Shows a dialog box on the screen of the avatar specified by avatar,
-      displaying message along with up to 12 choice buttons. Clicking a button chats
-      its label on channel.
+    description: Shows a dialog box on the screen of the specified agent, displaying
+      msg along with up to 12 choice buttons. Clicking a button chats its label on
+      channel. The chat originates at the object's position, but uses the agent's
+      name and UUID, so it can be heard as long as the agent is still in the region.
   llcompat.Die:
     deprecated:
       message: Deletes the entire object containing the script (the object does not
@@ -10967,12 +10983,16 @@ globals:
       owner (group or resident).
   llcompat.Email:
     deprecated:
-      message: Sends an email to address with subject and message.
+      message: Sends an email with the given destination address, subject, and body
+        msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This
+        can be used for script communication; see llGetNextEmail()
     args:
     - type: string
     - type: string
     - type: string
-    description: Sends an email to address with subject and message.
+    description: Sends an email with the given destination address, subject, and body
+      msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can
+      be used for script communication; see llGetNextEmail()
   llcompat.EscapeURL:
     deprecated:
       message: Returns a string representing the escaped/encoded version of url, replacing
@@ -11720,13 +11740,23 @@ globals:
       if no custom parcel environment is set.
   llcompat.GetNextEmail:
     deprecated:
-      message: Requests the next queued email matching the specified sender address
-        and subject filters via the email event.
+      message: 'Requests the next queued email via the email event. Emails must
+
+        1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+        2. Be sent from the specified sender Address (or any address if blank)
+
+        3. Have the specified subject Subject (or any subject if blank)'
     args:
     - type: string
     - type: string
-    description: Requests the next queued email matching the specified sender address
-      and subject filters via the email event.
+    description: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   llcompat.GetNotecardLine:
     deprecated:
       message: Asynchronously requests the line index line of the notecard name from
@@ -12578,14 +12608,14 @@ globals:
     description: Returns a copy of dst with src inserted at the given codepoint index.
   llcompat.InstantMessage:
     deprecated:
-      message: Sends an instant message containing message to the user identified
-        by their key.
+      message: Sends an instant message containing msg to the agent identified by
+        their key.
     args:
     - type:
         display: uuid
     - type: string
-    description: Sends an instant message containing message to the user identified
-      by their key.
+    description: Sends an instant message containing msg to the agent identified by
+      their key.
   llcompat.IntegerToBase64:
     deprecated:
       message: Returns an 8-character Base64 string representing the big-endian encoded
@@ -13637,25 +13667,27 @@ globals:
       prim's faces (currently non-functional).
   llcompat.RegionSay:
     deprecated:
-      message: Broadcasts the message msg on channel to the entire region (heard by
-        any script listening on that channel; channel 0 is not permitted).
+      message: Broadcasts the message msg to all scripts listening on channel Channel
+        within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can
+        receive the message.
     args:
     - type: number
     - type: string
-    description: Broadcasts the message msg on channel to the entire region (heard
-      by any script listening on that channel; channel 0 is not permitted).
+    description: Broadcasts the message msg to all scripts listening on channel Channel
+      within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive
+      the message.
   llcompat.RegionSayTo:
     deprecated:
-      message: Sends the message msg on channel privately to the targeted avatar or
-        object (if within the region). If target is an avatar and channel is non-zero,
+      message: Sends the message msg on Channel privately to the targeted agent or
+        object (if within the region). If target is an agent and channel is non-zero,
         the message can also be heard by any attachments worn by the avatar.
     args:
     - type:
         display: uuid
     - type: number
     - type: string
-    description: Sends the message msg on channel privately to the targeted avatar
-      or object (if within the region). If target is an avatar and channel is non-zero,
+    description: Sends the message msg on Channel privately to the targeted agent
+      or object (if within the region). If target is an agent and channel is non-zero,
       the message can also be heard by any attachments worn by the avatar.
   llcompat.ReleaseCamera:
     deprecated:
@@ -14147,17 +14179,17 @@ globals:
       script; returns FALSE otherwise.
   llcompat.Say:
     deprecated:
-      message: Says the text message msg on the specified channel. The message can
-        be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-        (2147483647) are not visible to avatars and can be used for script-to-script
-        communication.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("chat_range"), which is 20m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Says the text message msg on the specified channel. The message can
-      be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-      (2147483647) are not visible to avatars and can be used for script-to-script
-      communication.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("chat_range"), which is 20m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.ScaleByFactor:
     deprecated:
       message: Attempts to uniformly resize the entire object by scaling_factor, maintaining
@@ -14909,17 +14941,17 @@ globals:
       region directional vector. Has no effect on non-physical objects.
   llcompat.Shout:
     deprecated:
-      message: Shouts the text message msg on the specified channel. The message can
-        be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and
-        DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-        with scripts.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("shout_range"), which is 100m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Shouts the text message msg on the specified channel. The message
-      can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("shout_range"), which is 100m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.SignRSA:
     deprecated:
       message: Returns the Base64-encoded RSA signature of msg using the PEM-formatted
@@ -15166,14 +15198,16 @@ globals:
       with llTarget.
   llcompat.TargetedEmail:
     deprecated:
-      message: Sends an email containing subject and message to the target (which
-        can designate the owner or creator of the object).
+      message: Sends an email to with the given subject subject and body msg to the
+        target (which can designate the owner or creator of the object). The email
+        will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
     args:
     - type: number
     - type: string
     - type: string
-    description: Sends an email containing subject and message to the target (which
-      can designate the owner or creator of the object).
+    description: Sends an email to with the given subject subject and body msg to
+      the target (which can designate the owner or creator of the object). The email
+      will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
   llcompat.TeleportAgent:
     deprecated:
       message: Teleports the owning agent (who must grant PERMISSION_TELEPORT) to
@@ -15223,15 +15257,19 @@ globals:
       a God Summons).
   llcompat.TextBox:
     deprecated:
-      message: Opens an input text box dialog displaying message to the avatar. Submitting
-        text chats the input string on channel as if said by the avatar.
+      message: Opens an input text box dialog displaying msg to the agent. Submitting
+        text chats the input string on channel as if said by the agent. The chat originates
+        at the object's position, but uses the agent's name and UUID, so it can be
+        heard as long as the agent is still in the region.
     args:
     - type:
         display: uuid
     - type: string
     - type: number
-    description: Opens an input text box dialog displaying message to the avatar.
-      Submitting text chats the input string on channel as if said by the avatar.
+    description: Opens an input text box dialog displaying msg to the agent. Submitting
+      text chats the input string on channel as if said by the agent. The chat originates
+      at the object's position, but uses the agent's name and UUID, so it can be heard
+      as long as the agent is still in the region.
   llcompat.ToLower:
     deprecated:
       message: Returns a lowercase copy of the string src. Converts all unicode characters,
@@ -15424,17 +15462,17 @@ globals:
       prim's position offset by the vector offset.
   llcompat.Whisper:
     deprecated:
-      message: Whispers the text message msg on the specified channel. The message
-        can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-        and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-        with scripts.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Whispers the text message msg on the specified channel. The message
-      can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.Wind:
     deprecated:
       message: Returns a vector representing the wind velocity at the prim's position
@@ -16019,8 +16057,9 @@ structs:
     email:
       property: override-fields
       type: function
-      description: Triggered when an email sent to this script's address arrives.
-        num_left indicates the number of pending emails remaining in the queue.
+      description: Receive an email requested by llGetNextEmail(). NumberRemaining
+        indicates the number of emails remaining in the queue for llGetNextEmail()
+        to retrieve.
     experience_permissions:
       property: override-fields
       type: function
@@ -16085,7 +16124,7 @@ structs:
       type: function
       description: Triggered when a chat message matching active llListen filters
         is received on channel. Passes the sender's name and UUID key id, along with
-        the spoken message string.
+        the spoken string msg.
     money:
       property: override-fields
       type: function
