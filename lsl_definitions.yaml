@@ -8908,7 +8908,7 @@ functions:
       - script
   llGetAnimation:
     arguments:
-    - id:
+    - avatar:
         tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
@@ -8917,7 +8917,7 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a string representing the name of the currently playing
-      locomotion animation for the avatar specified by id.
+      locomotion animation for the specified avatar.
     categories:
       - avatar
       - avatar_animation
@@ -9894,7 +9894,7 @@ functions:
     slua-return: "{string}"
     asset-semantics: true
     sleep: 0.0
-    tooltip: Returns a list of strings representing the names of all active
+    tooltip: Returns a list of strings representing the names or UUIDs of all active
       animations currently playing on the object.
     categories:
       - object_animation
@@ -15732,8 +15732,8 @@ functions:
   llStartAnimation:
     arguments:
     - anim:
-        tooltip: Name of an animation in the prim's inventory, or a built-in
-          animation.
+        tooltip: Name of the animation in the prim's inventory, or the built-in
+          animation name.
         type: string
     energy: 10.0
     func-id: 129
@@ -15751,7 +15751,8 @@ functions:
   llStartObjectAnimation:
     arguments:
     - anim:
-        tooltip: Name of an animation in the current object's inventory.
+        tooltip: Name of the animation in the prim's inventory, or the built-in
+          animation name.
         type: string
     energy: 10.0
     func-id: 504
@@ -15764,8 +15765,8 @@ functions:
   llStopAnimation:
     arguments:
     - anim:
-        tooltip: Name of an animation in the prim's inventory, a UUID of an
-          animation, or a built-in animation name.
+        tooltip: Name of the animation in the prim's inventory, the UUID of the
+          animation, or the built-in animation name.
         type: string
         asset-semantics: true
     energy: 10.0
@@ -15816,8 +15817,8 @@ functions:
   llStopObjectAnimation:
     arguments:
     - anim:
-        tooltip: Name of an animation in the current object's inventory, or an
-          animation UUID.
+        tooltip: Name of the animation in the prim's inventory, the UUID of the
+          animation, or the built-in animation name.
         type: string
         asset-semantics: true
     energy: 10.0

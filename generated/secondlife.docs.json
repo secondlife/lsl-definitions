@@ -1255,7 +1255,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAlpha"
     },
     "@sl-slua/global/ll.GetAnimation": {
-        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.",
+        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the specified avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAnimation"
     },
     "@sl-slua/global/ll.GetAnimationList": {
@@ -1515,7 +1515,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfSides"
     },
     "@sl-slua/global/ll.GetObjectAnimationNames": {
-        "documentation": "Returns a list of strings representing the names of all active animations currently playing on the object.",
+        "documentation": "Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectAnimationNames"
     },
     "@sl-slua/global/ll.GetObjectDesc": {
@@ -3322,7 +3322,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAndResetTime"
     },
     "@sl-slua/global/llcompat.GetAnimation": {
-        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.",
+        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the specified avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAnimation"
     },
     "@sl-slua/global/llcompat.GetAnimationList": {
@@ -3582,7 +3582,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfSides"
     },
     "@sl-slua/global/llcompat.GetObjectAnimationNames": {
-        "documentation": "Returns a list of strings representing the names of all active animations currently playing on the object.",
+        "documentation": "Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectAnimationNames"
     },
     "@sl-slua/global/llcompat.GetObjectDesc": {

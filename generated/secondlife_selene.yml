@@ -7051,7 +7051,7 @@ globals:
         display: uuid
     must_use: true
     description: Returns a string representing the name of the currently playing locomotion
-      animation for the avatar specified by id.
+      animation for the specified avatar.
   ll.GetAnimationList:
     args:
     - type:
@@ -7457,8 +7457,8 @@ globals:
   ll.GetObjectAnimationNames:
     args: []
     must_use: true
-    description: Returns a list of strings representing the names of all active animations
-      currently playing on the object.
+    description: Returns a list of strings representing the names or UUIDs of all
+      active animations currently playing on the object.
   ll.GetObjectDesc:
     args: []
     must_use: true
@@ -11092,13 +11092,13 @@ globals:
   llcompat.GetAnimation:
     deprecated:
       message: Returns a string representing the name of the currently playing locomotion
-        animation for the avatar specified by id.
+        animation for the specified avatar.
     args:
     - type:
         display: uuid
     must_use: true
     description: Returns a string representing the name of the currently playing locomotion
-      animation for the avatar specified by id.
+      animation for the specified avatar.
   llcompat.GetAnimationList:
     deprecated:
       message: Returns a list of keys (UUIDs) representing all active animations currently
@@ -11701,12 +11701,12 @@ globals:
       of the prim containing the script.
   llcompat.GetObjectAnimationNames:
     deprecated:
-      message: Returns a list of strings representing the names of all active animations
-        currently playing on the object.
+      message: Returns a list of strings representing the names or UUIDs of all active
+        animations currently playing on the object.
     args: []
     must_use: true
-    description: Returns a list of strings representing the names of all active animations
-      currently playing on the object.
+    description: Returns a list of strings representing the names or UUIDs of all
+      active animations currently playing on the object.
   llcompat.GetObjectDesc:
     deprecated:
       message: Returns a string containing the description of the specific prim containing

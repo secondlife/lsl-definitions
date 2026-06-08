@@ -106,9 +106,9 @@ avatar:
   llGetAgentSize( key avatar ) -> vector:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a vector representing the estimated bounding box size of the specified avatar, or ZERO_VECTOR if they are not in the same region.
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -202,10 +202,10 @@ avatar:
     rules: A strided list of rules and data pairs configuring the camera.
     tooltip: Sets multiple camera parameters simultaneously using the list of rules. Requires the PERMISSION_CONTROL_CAMERA runtime permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
   llTakeCamera( key avatar ) -> void // deprecated:
@@ -242,9 +242,9 @@ avatar:
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
       runtime permission.
 avatar_animation:
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -259,10 +259,10 @@ avatar_animation:
     anim: Name of an animation in the prim's inventory, or a built-in animation name.
     tooltip: Overrides the default animation for anim_state with anim (which must be in the object's inventory or a built-in animation). Requires the PERMISSION_OVERRIDE_ANIMATIONS permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
 avatar_communication:
@@ -2027,12 +2027,12 @@ object:
     tooltip: Returns TRUE if the agent or object specified by uuid is in the same region (simulator) and shares the same active group as the prim containing the script; returns FALSE otherwise.
 object_animation:
   llGetObjectAnimationNames(  ) -> list:
-    tooltip: Returns a list of strings representing the names of all active animations currently playing on the object.
+    tooltip: Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.
   llStartObjectAnimation( string anim ) -> void:
-    anim: Name of an animation in the current object's inventory.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the specified animation anim (inventory or built-in) on the rigged mesh object associated with the current script.
   llStopObjectAnimation( string anim ) -> void:
-    anim: Name of an animation in the current object's inventory, or an animation UUID.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the rigged mesh object associated with the current script.
 parcel:
   llAddToLandBanList( key avatar, float hours ) -> void:
@@ -2270,9 +2270,9 @@ permissions:
   llForceMouselook( integer mouselook ) -> void:
     mouselook: Boolean. If TRUE, forces a sitting avatar into mouselook; if FALSE, allows them to keep their current camera mode.
     tooltip: Sets whether any avatar sitting on this prim is forced into mouselook mode. Setting mouselook to TRUE forces the mode; FALSE (default) allows the avatar to keep their current camera mode.
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -2321,10 +2321,10 @@ permissions:
     rules: A strided list of rules and data pairs configuring the camera.
     tooltip: Sets multiple camera parameters simultaneously using the list of rules. Requires the PERMISSION_CONTROL_CAMERA runtime permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
   llTakeCamera( key avatar ) -> void // deprecated:
