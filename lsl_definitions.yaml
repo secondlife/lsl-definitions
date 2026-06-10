@@ -2508,6 +2508,11 @@ constants:
     tooltip: Gets the object's link number or 0 if unlinked.
     type: integer
     value: 46
+  OBJECT_LOCKED:
+    member-of: [ObjectDetailsParam]
+    tooltip: Returns boolean, indicating if object is locked.
+    type: integer
+    value: 55
   OBJECT_MASS:
     member-of: [ObjectDetailsParam]
     tooltip: Get the object's mass
@@ -2715,6 +2720,11 @@ constants:
     tooltip: Gets the object's velocity.
     type: integer
     value: 5
+  OBJECT_VOLUME_DETECT:
+    member-of: [ObjectDetailsParam]
+    tooltip: Returns boolean, indicating if object is VolumeDetect.
+    type: integer
+    value: 56
   OPT_AVATAR:
     member-of: [ObjectPathfindingType]
     tooltip: Returned for avatars.

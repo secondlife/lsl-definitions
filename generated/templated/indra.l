@@ -388,6 +388,7 @@
 "OBJECT_HOVER_HEIGHT" { count(); yylval.ival = 25; return(INTEGER_CONSTANT); }
 "OBJECT_LAST_OWNER_ID" { count(); yylval.ival = 27; return(INTEGER_CONSTANT); }
 "OBJECT_LINK_NUMBER" { count(); yylval.ival = 46; return(INTEGER_CONSTANT); }
+"OBJECT_LOCKED" { count(); yylval.ival = 55; return(INTEGER_CONSTANT); }
 "OBJECT_MASS" { count(); yylval.ival = 43; return(INTEGER_CONSTANT); }
 "OBJECT_MATERIAL" { count(); yylval.ival = 42; return(INTEGER_CONSTANT); }
 "OBJECT_NAME" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
@@ -427,6 +428,7 @@
 "OBJECT_TOTAL_SCRIPT_COUNT" { count(); yylval.ival = 10; return(INTEGER_CONSTANT); }
 "OBJECT_UNKNOWN_DETAIL" { count(); yylval.ival = -1; return(INTEGER_CONSTANT); }
 "OBJECT_VELOCITY" { count(); yylval.ival = 5; return(INTEGER_CONSTANT); }
+"OBJECT_VOLUME_DETECT" { count(); yylval.ival = 56; return(INTEGER_CONSTANT); }
 "OPT_AVATAR" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
 "OPT_CHARACTER" { count(); yylval.ival = 2; return(INTEGER_CONSTANT); }
 "OPT_EXCLUSION_VOLUME" { count(); yylval.ival = 6; return(INTEGER_CONSTANT); }

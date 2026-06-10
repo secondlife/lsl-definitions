@@ -651,6 +651,8 @@ enum ObjectDetailsParam {
   DAMAGE_TYPE = 52
   PERMS = 53
   PERMS_COMBINED = 54
+  LOCKED = 55
+  VOLUME_DETECT = 56
 };
 enum ObjectPathfindingType {
   OTHER = -1

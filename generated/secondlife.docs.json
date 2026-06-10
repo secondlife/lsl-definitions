@@ -6176,6 +6176,9 @@
     "@sl-slua/global/OBJECT_LINK_NUMBER": {
         "documentation": "Value: 46<br>Gets the object's link number or 0 if unlinked."
     },
+    "@sl-slua/global/OBJECT_LOCKED": {
+        "documentation": "Value: 55<br>Returns boolean, indicating if object is locked."
+    },
     "@sl-slua/global/OBJECT_MASS": {
         "documentation": "Value: 43<br>Get the object's mass"
     },
@@ -6292,6 +6295,9 @@
     },
     "@sl-slua/global/OBJECT_VELOCITY": {
         "documentation": "Value: 5<br>Gets the object's velocity."
+    },
+    "@sl-slua/global/OBJECT_VOLUME_DETECT": {
+        "documentation": "Value: 56<br>Returns boolean, indicating if object is VolumeDetect."
     },
     "@sl-slua/global/OPT_AVATAR": {
         "documentation": "Value: 1<br>Returned for avatars."
