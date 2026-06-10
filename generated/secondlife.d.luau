@@ -2003,6 +2003,7 @@ declare OBJECT_HEALTH: number
 declare OBJECT_HOVER_HEIGHT: number
 declare OBJECT_LAST_OWNER_ID: number
 declare OBJECT_LINK_NUMBER: number
+declare OBJECT_LOCKED: number
 declare OBJECT_MASS: number
 declare OBJECT_MATERIAL: number
 declare OBJECT_NAME: number
@@ -2042,6 +2043,7 @@ declare OBJECT_TOTAL_INVENTORY_COUNT: number
 declare OBJECT_TOTAL_SCRIPT_COUNT: number
 declare OBJECT_UNKNOWN_DETAIL: number
 declare OBJECT_VELOCITY: number
+declare OBJECT_VOLUME_DETECT: number
 declare OPT_AVATAR: number
 declare OPT_CHARACTER: number
 declare OPT_EXCLUSION_VOLUME: number

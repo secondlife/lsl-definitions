@@ -1438,6 +1438,10 @@ globals:
     property: read-only
     type: number
     description: Gets the object's link number or 0 if unlinked.
+  OBJECT_LOCKED:
+    property: read-only
+    type: number
+    description: Returns boolean, indicating if object is locked.
   OBJECT_MASS:
     property: read-only
     type: number
@@ -1596,6 +1600,10 @@ globals:
     property: read-only
     type: number
     description: Gets the object's velocity.
+  OBJECT_VOLUME_DETECT:
+    property: read-only
+    type: number
+    description: Returns boolean, indicating if object is VolumeDetect.
   OPT_AVATAR:
     property: read-only
     type: number

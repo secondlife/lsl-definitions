@@ -1150,6 +1150,9 @@
     luaSL_pushnativeinteger(L, 46);
     lua_setglobal(L, "OBJECT_LINK_NUMBER");
 
+    luaSL_pushnativeinteger(L, 55);
+    lua_setglobal(L, "OBJECT_LOCKED");
+
     luaSL_pushnativeinteger(L, 43);
     lua_setglobal(L, "OBJECT_MASS");
 
@@ -1266,6 +1269,9 @@
 
     luaSL_pushnativeinteger(L, 5);
     lua_setglobal(L, "OBJECT_VELOCITY");
+
+    luaSL_pushnativeinteger(L, 56);
+    lua_setglobal(L, "OBJECT_VOLUME_DETECT");
 
     luaSL_pushnativeinteger(L, 1);
     lua_setglobal(L, "OPT_AVATAR");
