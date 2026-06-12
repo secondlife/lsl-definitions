@@ -6177,7 +6177,7 @@
         "documentation": "Value: 46<br>Flag used with llGetObjectDetails to get the index of the prim within its linkset, or 0 if unlinked."
     },
     "@sl-slua/global/OBJECT_LOCKED": {
-        "documentation": "Value: 55<br>Returns boolean, indicating if object is locked."
+        "documentation": "Value: 55<br>Flag used with llGetObjectDetails to get a boolean, indicating if the object is locked."
     },
     "@sl-slua/global/OBJECT_MASS": {
         "documentation": "Value: 43<br>Flag used with llGetObjectDetails to retrieve the total mass (in kilograms) of the object's linkset."
@@ -6297,7 +6297,7 @@
         "documentation": "Value: 5<br>Flag used with llGetObjectDetails to get the velocity vector of the target object."
     },
     "@sl-slua/global/OBJECT_VOLUME_DETECT": {
-        "documentation": "Value: 56<br>Returns boolean, indicating if object is VolumeDetect."
+        "documentation": "Value: 56<br>Flag used with llGetObjectDetails to get a boolean, indicating if the object is VolumeDetect."
     },
     "@sl-slua/global/OPT_AVATAR": {
         "documentation": "Value: 1<br>Returned for avatars."

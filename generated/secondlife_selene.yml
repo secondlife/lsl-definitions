@@ -1749,7 +1749,8 @@ globals:
   OBJECT_LOCKED:
     property: read-only
     type: number
-    description: Returns boolean, indicating if object is locked.
+    description: Flag used with llGetObjectDetails to get a boolean, indicating if
+      the object is locked.
   OBJECT_MASS:
     property: read-only
     type: number
@@ -1954,7 +1955,8 @@ globals:
   OBJECT_VOLUME_DETECT:
     property: read-only
     type: number
-    description: Returns boolean, indicating if object is VolumeDetect.
+    description: Flag used with llGetObjectDetails to get a boolean, indicating if
+      the object is VolumeDetect.
   OPT_AVATAR:
     property: read-only
     type: number

@@ -2723,7 +2723,7 @@ constants:
     value: 46
   OBJECT_LOCKED:
     member-of: [ObjectDetailsParam]
-    tooltip: Returns boolean, indicating if object is locked.
+    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the object is locked.
     type: integer
     value: 55
   OBJECT_MASS:
@@ -2969,7 +2969,7 @@ constants:
     value: 5
   OBJECT_VOLUME_DETECT:
     member-of: [ObjectDetailsParam]
-    tooltip: Returns boolean, indicating if object is VolumeDetect.
+    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the object is VolumeDetect.
     type: integer
     value: 56
   OPT_AVATAR:

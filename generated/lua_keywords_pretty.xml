@@ -3829,7 +3829,7 @@ export type rotation = quaternion</string>
          <key>OBJECT_LOCKED</key>
          <map>
             <key>tooltip</key>
-            <string>Returns boolean, indicating if object is locked.</string>
+            <string>Flag used with llGetObjectDetails to get a boolean, indicating if the object is locked.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -4189,7 +4189,7 @@ export type rotation = quaternion</string>
          <key>OBJECT_VOLUME_DETECT</key>
          <map>
             <key>tooltip</key>
-            <string>Returns boolean, indicating if object is VolumeDetect.</string>
+            <string>Flag used with llGetObjectDetails to get a boolean, indicating if the object is VolumeDetect.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
