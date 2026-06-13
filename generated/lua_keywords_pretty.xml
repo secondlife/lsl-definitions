@@ -270,7 +270,7 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>{}</string>
             <key>value</key>
-            <string>setmetatable({}, lljson.array_mt}</string>
+            <string>setmetatable({}, lljson.array_mt)</string>
          </map>
          <key>lljson.empty_object</key>
          <map>
@@ -279,7 +279,7 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>{}</string>
             <key>value</key>
-            <string>setmetatable({}, lljson.object_mt}</string>
+            <string>setmetatable({}, lljson.object_mt)</string>
          </map>
          <key>lljson.null</key>
          <map>
@@ -11285,7 +11285,7 @@ vector position - position in local coordinates
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the the buffer is shorter than 16 bytes.</string>
+            <string>Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes.</string>
          </map>
          <key>tovector</key>
          <map>
@@ -11394,7 +11394,7 @@ vector position - position in local coordinates
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional, defaults to #a).</string>
+                     <string>Ending index (optional, defaults to #tab).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11455,7 +11455,7 @@ vector position - position in local coordinates
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Calls function f with parameters args, handling errors with e if they occur.</string>
+            <string>Calls function f with parameters args, handling errors with err if they occur.</string>
          </map>
          <key>bit32</key>
          <map>
@@ -11922,7 +11922,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Wrap this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatable with LSL.</string>
+            <string>Wrap this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatible with LSL.</string>
          </map>
          <key>bit32.smul</key>
          <map>
@@ -11954,7 +11954,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss ascociated with float64 multiplication. Compatible with LSL integer multiplication.</string>
+            <string>Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.</string>
          </map>
          <key>buffer</key>
          <map>
@@ -13041,7 +13041,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the currently running coroutine, or nil if called from in the main coroutine.</string>
+            <string>Returns the currently running coroutine, or nil if called from the main coroutine.</string>
          </map>
          <key>coroutine.status</key>
          <map>
@@ -16339,7 +16339,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the the buffer is shorter than 16 bytes. Alias of uuid.create.</string>
+            <string>Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the buffer is shorter than 16 bytes. Alias of uuid.create.</string>
          </map>
          <key>uuid.create</key>
          <map>
@@ -16362,7 +16362,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the the buffer is shorter than 16 bytes.</string>
+            <string>Creates a new uuid from a string, buffer, or existing uuid. Throws an error if the string is not a valid UUID, or the buffer is shorter than 16 bytes.</string>
          </map>
          <key>vector</key>
          <map>
@@ -16787,7 +16787,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Applies math.max to each component of the vectors.</string>
+            <string>Applies math.min to each component of the vectors.</string>
          </map>
          <key>vector.normalize</key>
          <map>

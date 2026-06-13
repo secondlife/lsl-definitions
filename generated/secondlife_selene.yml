@@ -4067,8 +4067,7 @@ globals:
     - type: string
     must_use: true
     description: Creates a new uuid from a string, buffer, or existing uuid. Returns
-      nil if the string is not a valid UUID, or the the buffer is shorter than 16
-      bytes.
+      nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes.
   tovector:
     args:
     - type: string
@@ -4097,7 +4096,7 @@ globals:
     - type: function
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, handling errors with e if
+    description: Calls function f with parameters args, handling errors with err if
       they occur.
   bit32.arshift:
     args:
@@ -4186,14 +4185,14 @@ globals:
     - type: number
     must_use: true
     description: Wrap this number from float64 range to signed int32 range and truncate
-      to integer. Makes integer arithmetic compatable with LSL.
+      to integer. Makes integer arithmetic compatible with LSL.
   bit32.smul:
     args:
     - type: number
     - type: number
     must_use: true
     description: Multiplies two signed 32-bit integers. Returns the result as a signed
-      32-bit integer, wrapping as necessary. Avoids precision loss ascociated with
+      32-bit integer, wrapping as necessary. Avoids precision loss associated with
       float64 multiplication. Compatible with LSL integer multiplication.
   bit32.countlz:
     args:
@@ -4380,10 +4379,10 @@ globals:
     args:
     - type:
         display: buffer
+      observes: write
     - type: number
     - type:
         display: buffer
-      observes: write
     - type: number
       required: false
     - type: number
@@ -4431,8 +4430,8 @@ globals:
   coroutine.running:
     args: []
     must_use: true
-    description: Returns the currently running coroutine, or nil if called from in
-      the main coroutine.
+    description: Returns the currently running coroutine, or nil if called from the
+      main coroutine.
   coroutine.status:
     args:
     - type:
@@ -4719,7 +4718,6 @@ globals:
       message: Disabled in SLua.
     args:
     - type: number
-    must_use: true
     description: Sets the seed for the random number generator.
   math.round:
     args:
@@ -5127,12 +5125,14 @@ globals:
   table.extend:
     args:
     - type: table
+      observes: write
     - type: table
     description: 'Appends all elements from one array to the end of another. Shorthand
       for table.move(b, 1, #b, #a+1, a)'
   table.remove:
     args:
     - type: table
+      observes: write
     - type: number
       required: false
     description: Removes and returns the element at the specified index from the array,
@@ -5140,6 +5140,7 @@ globals:
   table.sort:
     args:
     - type: table
+      observes: write
     - type: function
       required: false
     description: Sorts an array in place.
@@ -5256,15 +5257,15 @@ globals:
     - type: any
     must_use: true
     description: Creates a new uuid from a string, buffer, or existing uuid. Throws
-      an error if the string is not a valid UUID, or the the buffer is shorter than
-      16 bytes. Alias of uuid.create.
+      an error if the string is not a valid UUID, or the buffer is shorter than 16
+      bytes. Alias of uuid.create.
   uuid.create:
     args:
     - type: any
     must_use: true
     description: Creates a new uuid from a string, buffer, or existing uuid. Throws
-      an error if the string is not a valid UUID, or the the buffer is shorter than
-      16 bytes.
+      an error if the string is not a valid UUID, or the buffer is shorter than 16
+      bytes.
   vector:
     args:
     - type: number
@@ -5374,7 +5375,7 @@ globals:
         display: vector
     - type: '...'
     must_use: true
-    description: Applies math.max to each component of the vectors.
+    description: Applies math.min to each component of the vectors.
   vector.lerp:
     args:
     - type:
@@ -15082,8 +15083,7 @@ structs:
     bytes:
       property: read-only
       type: string
-      description: Returns the raw 16-byte binary string of the UUID, or nil if the
-        UUID is not in a compressed state
+      description: Returns the raw 16-byte binary string of the UUID
   vector:
     __add:
       method: true
