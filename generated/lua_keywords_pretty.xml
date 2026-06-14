@@ -14951,7 +14951,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string.</string>
@@ -14960,7 +14960,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>i</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
@@ -14969,7 +14969,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>j</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending byte index (inclusive), or i if omitted (optional, defaults to i).</string>
@@ -14985,7 +14985,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the numeric code of every byte in the range i..j in the source string.</string>
+            <string>Returns the numeric code of every byte in the range start..end in the string src.</string>
          </map>
          <key>string.char</key>
          <map>
@@ -15015,7 +15015,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to search within.</string>
@@ -15033,10 +15033,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>init</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Index to start the search from. Supports negative indexing (optional, defaults to 1).</string>
+                     <string>Byte index to start the search from, or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15058,14 +15058,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the start and end byte indices of the first occurrence of pattern inside the string s, followed by any regex-captured substrings. Returns nil if not found.</string>
+            <string>Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Returns nil if not found.</string>
          </map>
          <key>string.format</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>formatstring</key>
+                  <key>format_string</key>
                   <map>
                      <key>tooltip</key>
                      <string>Format string.</string>
@@ -15097,7 +15097,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to search within.</string>
@@ -15122,14 +15122,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an iterator function of all occurences of the regex pattern inside the source string.</string>
+            <string>Returns an iterator function of all occurences of the regex pattern inside the string src.</string>
          </map>
          <key>string.gsub</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Original source string to search.</string>
@@ -15172,14 +15172,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of s with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.</string>
+            <string>Returns a copy of src with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.</string>
          </map>
          <key>string.len</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>str</key>
                   <map>
                      <key>tooltip</key>
                      <string>String to measure.</string>
@@ -15195,14 +15195,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the number of bytes in the string. Identical to #s.</string>
+            <string>Returns the number of bytes in the string. Identical to #str.</string>
          </map>
          <key>string.lower</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to convert.</string>
@@ -15218,14 +15218,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a lowercase copy of the source string. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.</string>
+            <string>Returns a lowercase copy of the string src. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.</string>
          </map>
          <key>string.match</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to search within.</string>
@@ -15259,14 +15259,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns all occurences of the regex pattern inside the source string. Returns nil if no match is found.</string>
+            <string>Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.</string>
          </map>
          <key>string.pack</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>fmt</key>
+                  <key>format_string</key>
                   <map>
                      <key>tooltip</key>
                      <string>Pack format string.</string>
@@ -15298,7 +15298,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>fmt</key>
+                  <key>format_string</key>
                   <map>
                      <key>tooltip</key>
                      <string>Pack format string.</string>
@@ -15321,7 +15321,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to repeat.</string>
@@ -15330,7 +15330,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>n</key>
+                  <key>count</key>
                   <map>
                      <key>tooltip</key>
                      <string>Number of times to repeat the source string.</string>
@@ -15346,14 +15346,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the source string repeated n times. Returns an empty string if n is zero or negative.</string>
+            <string>Returns the string src repeated n times. Returns an empty string if n is zero or negative.</string>
          </map>
          <key>string.reverse</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to reverse.</string>
@@ -15369,14 +15369,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the source string with bytes in reverse order.</string>
+            <string>Returns a copy of the string src with bytes in reverse order.</string>
          </map>
          <key>string.split</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to parse.</string>
@@ -15408,7 +15408,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to slice.</string>
@@ -15417,7 +15417,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>i</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting byte index (inclusive).</string>
@@ -15426,10 +15426,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>j</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #s).</string>
+                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #sub).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15442,14 +15442,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from s within the inclusive byte range i..j. Negative indices count backward from the end.</string>
+            <string>Returns a copy of the substring from src within the inclusive byte range start..end. Negative indices count backward from the end.</string>
          </map>
          <key>string.unpack</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>fmt</key>
+                  <key>format_string</key>
                   <map>
                      <key>tooltip</key>
                      <string>Pack format string.</string>
@@ -15458,7 +15458,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Encoded string.</string>
@@ -15490,7 +15490,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to convert.</string>
@@ -15506,7 +15506,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an uppercase copy of the source string. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.</string>
+            <string>Returns an uppercase copy of the string src. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.</string>
          </map>
          <key>table</key>
          <map>
@@ -16268,7 +16268,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string.</string>
@@ -16277,19 +16277,19 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>i</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
                </map>
                <map>
-                  <key>j</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional, defaults to i).</string>
+                     <string>Ending byte index (inclusive), or i if omitted (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16302,14 +16302,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range i..j in the source string.</string>
+            <string>Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start..end in the string src.</string>
          </map>
          <key>utf8.codes</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string.</string>
@@ -16325,14 +16325,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an iterator that produces the byte offset and Unicode codepoint for each character in the source string.</string>
+            <string>Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string src.</string>
          </map>
          <key>utf8.len</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>str</key>
                   <map>
                      <key>tooltip</key>
                      <string>Source string to measure.</string>
@@ -16341,7 +16341,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>i</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
@@ -16350,7 +16350,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>j</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending byte index (inclusive), or the end of the string if omitted (optional, defaults to #s).</string>
@@ -16366,14 +16366,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the number of Unicode codepoints in the inclusive byte range i..j of the source string. If the string is not utf8, returns (nil, error index) instead.</string>
+            <string>Returns the number of Unicode codepoints in the inclusive byte range start..end of the string src. If the string is not utf8, returns (nil, error index) instead.</string>
          </map>
          <key>utf8.offset</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>str</key>
                   <map>
                      <key>tooltip</key>
                      <string>String to index.</string>
@@ -16391,7 +16391,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>i</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting byte index, or 1 if omitted (optional, defaults to if n &gt;= 0 then 1 else #s + 1).</string>

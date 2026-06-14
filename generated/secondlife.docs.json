@@ -650,7 +650,7 @@
         "learn_more_link": "https://luau.org/library/#string-library"
     },
     "@sl-slua/global/string.byte": {
-        "documentation": "Returns the numeric code of every byte in the range i..j in the source string.",
+        "documentation": "Returns the numeric code of every byte in the range start..end in the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#byte"
     },
     "@sl-slua/global/string.char": {
@@ -658,7 +658,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#char"
     },
     "@sl-slua/global/string.find": {
-        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string s, followed by any regex-captured substrings. Returns nil if not found.",
+        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Returns nil if not found.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#find"
     },
     "@sl-slua/global/string.format": {
@@ -666,23 +666,23 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#format"
     },
     "@sl-slua/global/string.gmatch": {
-        "documentation": "Returns an iterator function of all occurences of the regex pattern inside the source string.",
+        "documentation": "Returns an iterator function of all occurences of the regex pattern inside the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gmatch"
     },
     "@sl-slua/global/string.gsub": {
-        "documentation": "Returns a copy of s with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.",
+        "documentation": "Returns a copy of src with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gsub"
     },
     "@sl-slua/global/string.len": {
-        "documentation": "Returns the number of bytes in the string. Identical to #s.",
+        "documentation": "Returns the number of bytes in the string. Identical to #str.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#len"
     },
     "@sl-slua/global/string.lower": {
-        "documentation": "Returns a lowercase copy of the source string. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.",
+        "documentation": "Returns a lowercase copy of the string src. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Returns all occurences of the regex pattern inside the source string. Returns nil if no match is found.",
+        "documentation": "Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -694,11 +694,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#packsize"
     },
     "@sl-slua/global/string.rep": {
-        "documentation": "Returns the source string repeated n times. Returns an empty string if n is zero or negative.",
+        "documentation": "Returns the string src repeated n times. Returns an empty string if n is zero or negative.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#rep"
     },
     "@sl-slua/global/string.reverse": {
-        "documentation": "Returns a copy of the source string with bytes in reverse order.",
+        "documentation": "Returns a copy of the string src with bytes in reverse order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#reverse"
     },
     "@sl-slua/global/string.split": {
@@ -706,7 +706,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#split"
     },
     "@sl-slua/global/string.sub": {
-        "documentation": "Returns a copy of the substring from s within the inclusive byte range i..j. Negative indices count backward from the end.",
+        "documentation": "Returns a copy of the substring from src within the inclusive byte range start..end. Negative indices count backward from the end.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
@@ -714,7 +714,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
-        "documentation": "Returns an uppercase copy of the source string. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.",
+        "documentation": "Returns an uppercase copy of the string src. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#upper"
     },
     "@sl-slua/global/table": {
@@ -814,15 +814,15 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#char"
     },
     "@sl-slua/global/utf8.codes": {
-        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the source string.",
+        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codes"
     },
     "@sl-slua/global/utf8.codepoint": {
-        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range i..j in the source string.",
+        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start..end in the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codepoint"
     },
     "@sl-slua/global/utf8.len": {
-        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range i..j of the source string. If the string is not utf8, returns (nil, error index) instead.",
+        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range start..end of the string src. If the string is not utf8, returns (nil, error index) instead.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#len"
     },
     "@sl-slua/global/utf8.offset": {

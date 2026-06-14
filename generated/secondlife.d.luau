@@ -552,23 +552,23 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 ---------------------------
 
 declare string: {
-  byte: @checked (s: string, i: number?, j: number?) -> ...number, -- builtin
+  byte: @checked (src: string, start: number?, end_: number?) -> ...number, -- builtin
   char: @checked (...number) -> string, -- builtin
-  find: @checked (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
-  format: @checked (formatstring: string, ...any) -> string, -- builtin, magic type
-  gmatch: @checked (s: string, pattern: string) -> () -> ...string, -- builtin, magic type
-  gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
-  len: @checked (s: string) -> number, -- builtin
-  lower: @checked (s: string) -> string, -- builtin
-  match: @checked (s: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
-  pack: (fmt: string, ...any) -> string, -- builtin
-  packsize: @checked (fmt: string) -> number, -- builtin
-  rep: @checked (s: string, n: number) -> string, -- builtin
-  reverse: @checked (s: string) -> string, -- builtin
-  split: @checked (s: string, separator: string?) -> {string}, -- builtin
-  sub: @checked (s: string, i: number, j: number?) -> string, -- builtin
-  unpack: @checked (fmt: string, s: string, init: number?) -> ...any, -- builtin
-  upper: @checked (s: string) -> string, -- builtin
+  find: @checked (src: string, pattern: string, start: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
+  format: @checked (format_string: string, ...any) -> string, -- builtin, magic type
+  gmatch: @checked (src: string, pattern: string) -> () -> ...string, -- builtin, magic type
+  gsub: (src: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
+  len: @checked (str: string) -> number, -- builtin
+  lower: @checked (src: string) -> string, -- builtin
+  match: @checked (src: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
+  pack: (format_string: string, ...any) -> string, -- builtin
+  packsize: @checked (format_string: string) -> number, -- builtin
+  rep: @checked (src: string, count: number) -> string, -- builtin
+  reverse: @checked (src: string) -> string, -- builtin
+  split: @checked (src: string, separator: string?) -> {string}, -- builtin
+  sub: @checked (src: string, start: number, end_: number?) -> string, -- builtin
+  unpack: @checked (format_string: string, src: string, init: number?) -> ...any, -- builtin
+  upper: @checked (src: string) -> string, -- builtin
 }
 
 --]]
@@ -609,10 +609,10 @@ declare table: {
 declare utf8: {
   charpattern: string,
   char: @checked (...number) -> string,
-  codes: @checked (s: string) -> ((string, number) -> (number, number), string, number),
-  codepoint: @checked (s: string, i: number?, j: number?) -> ...number,
-  len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
-  offset: @checked (s: string, n: number, i: number?) -> number?,
+  codes: @checked (src: string) -> ((string, number) -> (number, number), string, number),
+  codepoint: @checked (src: string, start: number?, end_: number?) -> ...number,
+  len: @checked (str: string, start: number?, end_: number?) -> (number?, number?),
+  offset: @checked (str: string, n: number, start: number?) -> number?,
 }
 
 

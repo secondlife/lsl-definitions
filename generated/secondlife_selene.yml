@@ -5960,8 +5960,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the numeric code of every byte in the range i..j in the source
-      string.
+    description: Returns the numeric code of every byte in the range start..end in
+      the string src.
   string.char:
     args:
     - type: '...'
@@ -5978,7 +5978,7 @@ globals:
       required: false
     must_use: true
     description: Returns the start and end byte indices of the first occurrence of
-      pattern inside the string s, followed by any regex-captured substrings. Returns
+      pattern inside the string src, followed by any regex-captured substrings. Returns
       nil if not found.
   string.format:
     args:
@@ -5993,7 +5993,7 @@ globals:
     - type: string
     must_use: true
     description: Returns an iterator function of all occurences of the regex pattern
-      inside the source string.
+      inside the string src.
   string.gsub:
     args:
     - type: string
@@ -6002,20 +6002,20 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns a copy of s with maxn occurrences of the regex pattern replaced
-      by repl, followed by the total number of substitutions that occurred. repl can
-      be a string, function, or table.
+    description: Returns a copy of src with maxn occurrences of the regex pattern
+      replaced by repl, followed by the total number of substitutions that occurred.
+      repl can be a string, function, or table.
   string.len:
     args:
     - type: string
     must_use: true
-    description: 'Returns the number of bytes in the string. Identical to #s.'
+    description: 'Returns the number of bytes in the string. Identical to #str.'
   string.lower:
     args:
     - type: string
     must_use: true
-    description: Returns a lowercase copy of the source string. Only converts ASCII
-      characters. Use ll.ToLower for strings that may contain Unicode.
+    description: Returns a lowercase copy of the string src. Only converts ASCII characters.
+      Use ll.ToLower for strings that may contain Unicode.
   string.match:
     args:
     - type: string
@@ -6023,7 +6023,7 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns all occurences of the regex pattern inside the source string.
+    description: Returns all occurences of the regex pattern inside the string src.
       Returns nil if no match is found.
   string.pack:
     args:
@@ -6041,13 +6041,13 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the source string repeated n times. Returns an empty string
+    description: Returns the string src repeated n times. Returns an empty string
       if n is zero or negative.
   string.reverse:
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the source string with bytes in reverse order.
+    description: Returns a copy of the string src with bytes in reverse order.
   string.split:
     args:
     - type: string
@@ -6064,8 +6064,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns a copy of the substring from s within the inclusive byte
-      range i..j. Negative indices count backward from the end.
+    description: Returns a copy of the substring from src within the inclusive byte
+      range start..end. Negative indices count backward from the end.
   string.unpack:
     args:
     - type: string
@@ -6078,7 +6078,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns an uppercase copy of the source string. Only converts ASCII
+    description: Returns an uppercase copy of the string src. Only converts ASCII
       characters. Use ll.ToUpper for strings that may contain Unicode.
   table.concat:
     args:
@@ -6246,7 +6246,7 @@ globals:
     - type: string
     must_use: true
     description: Returns an iterator that produces the byte offset and Unicode codepoint
-      for each character in the source string.
+      for each character in the string src.
   utf8.codepoint:
     args:
     - type: string
@@ -6256,7 +6256,7 @@ globals:
       required: false
     must_use: true
     description: Returns the ordinals (Unicode copepoint integers) of the characters
-      in the inclusive byte range i..j in the source string.
+      in the inclusive byte range start..end in the string src.
   utf8.len:
     args:
     - type: string
@@ -6266,8 +6266,8 @@ globals:
       required: false
     must_use: true
     description: Returns the number of Unicode codepoints in the inclusive byte range
-      i..j of the source string. If the string is not utf8, returns (nil, error index)
-      instead.
+      start..end of the string src. If the string is not utf8, returns (nil, error
+      index) instead.
   utf8.offset:
     args:
     - type: string

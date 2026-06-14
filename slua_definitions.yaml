@@ -2273,16 +2273,16 @@ modules:
   functions:
   - name: byte
     comment: Returns the numeric code of every byte
-      in the range i..j in the source string.
+      in the range start..end in the string src.
     parameters:
-    - name: s
+    - name: src
       comment: Source string.
       type: string
-    - name: i
+    - name: start
       comment: Starting byte index (inclusive), or 1 if omitted.
       type: number?
       default-value: 1
-    - name: j
+    - name: end
       comment: Ending byte index (inclusive), or i if omitted.
       type: number?
       default-value: i
@@ -2303,16 +2303,16 @@ modules:
     typechecker: {builtin: true, checked: true}
   - name: find
     comment: Returns the start and end byte indices of the first occurrence of pattern
-      inside the string s, followed by any regex-captured substrings. Returns nil if not found.
+      inside the string src, followed by any regex-captured substrings. Returns nil if not found.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to search within.
       type: string
     - name: pattern
       comment: Pattern to search for.
       type: string
-    - name: init
-      comment: Index to start the search from. Supports negative indexing.
+    - name: start
+      comment: Byte index to start the search from, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     - name: plain
@@ -2325,7 +2325,7 @@ modules:
   - name: format
     comment: Formats input values into a string using printf-style format specifiers.
     parameters:
-    - name: formatstring
+    - name: format_string
       comment: Format string.
       type: string
     - name: ...
@@ -2336,9 +2336,9 @@ modules:
     must-use: true
     typechecker: {builtin: true, magic: true, checked: true}
   - name: gmatch
-    comment: Returns an iterator function of all occurences of the regex pattern inside the source string.
+    comment: Returns an iterator function of all occurences of the regex pattern inside the string src.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to search within.
       type: string
     - name: pattern
@@ -2348,10 +2348,10 @@ modules:
     must-use: true
     typechecker: {builtin: true, magic: true, checked: true}
   - name: gsub
-    comment: Returns a copy of s with maxn occurrences of the regex pattern
+    comment: Returns a copy of src with maxn occurrences of the regex pattern
       replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.
     parameters:
-    - name: s
+    - name: src
       comment: Original source string to search.
       type: string
     - name: pattern
@@ -2368,9 +2368,9 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: len
-    comment: "Returns the number of bytes in the string. Identical to #s."
+    comment: "Returns the number of bytes in the string. Identical to #str."
     parameters:
-    - name: s
+    - name: str
       comment: String to measure.
       type: string
     return-type: number
@@ -2378,19 +2378,19 @@ modules:
     fastcall: true
     typechecker: {builtin: true, checked: true}
   - name: lower
-    comment: Returns a lowercase copy of the source string.
+    comment: Returns a lowercase copy of the string src.
       Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to convert.
       type: string
     return-type: string
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: match
-    comment: Returns all occurences of the regex pattern inside the source string. Returns nil if no match is found.
+    comment: Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to search within.
       type: string
     - name: pattern
@@ -2406,7 +2406,7 @@ modules:
   - name: pack
     comment: Packs values into a binary string.
     parameters:
-    - name: fmt
+    - name: format_string
       comment: Pack format string.
       type: string
     - name: ...
@@ -2418,28 +2418,28 @@ modules:
   - name: packsize
     comment: Returns the size of a packed string for the given format.
     parameters:
-    - name: fmt
+    - name: format_string
       comment: Pack format string.
       type: string
     return-type: number
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: rep
-    comment: Returns the source string repeated n times. Returns an empty string if n is zero or negative.
+    comment: Returns the string src repeated n times. Returns an empty string if n is zero or negative.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to repeat.
       type: string
-    - name: "n"
+    - name: count
       comment: Number of times to repeat the source string.
       type: number
     return-type: string
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: reverse
-    comment: Returns a copy of the source string with bytes in reverse order.
+    comment: Returns a copy of the string src with bytes in reverse order.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to reverse.
       type: string
     return-type: string
@@ -2448,7 +2448,7 @@ modules:
   - name: split
     comment: 'Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.'
     parameters:
-    - name: s
+    - name: src
       comment: Source string to parse.
       type: string
     - name: separator
@@ -2459,19 +2459,19 @@ modules:
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: sub
-    comment: Returns a copy of the substring from s within the inclusive byte range
-      i..j. Negative indices count backward from the end.
+    comment: Returns a copy of the substring from src within the inclusive byte range
+      start..end. Negative indices count backward from the end.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to slice.
       type: string
-    - name: i
+    - name: start
       comment: Starting byte index (inclusive).
       type: number
-    - name: j
+    - name: end
       comment: Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing.
       type: number?
-      default-value: '#s'
+      default-value: '#sub'
     return-type: string
     must-use: true
     fastcall: true
@@ -2479,10 +2479,10 @@ modules:
   - name: unpack
     comment: Decodes a binary string using a pack format.
     parameters:
-    - name: fmt
+    - name: format_string
       comment: Pack format string.
       type: string
-    - name: s
+    - name: src
       comment: Encoded string.
       type: string
     - name: init
@@ -2493,10 +2493,10 @@ modules:
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: upper
-    comment: Returns an uppercase copy of the source string.
+    comment: Returns an uppercase copy of the string src.
       Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.
     parameters:
-    - name: s
+    - name: src
       comment: Source string to convert.
       type: string
     return-type: string
@@ -2793,9 +2793,9 @@ modules:
     typechecker: {checked: true}
   - name: codes
     comment: Returns an iterator that produces
-      the byte offset and Unicode codepoint for each character in the source string.
+      the byte offset and Unicode codepoint for each character in the string src.
     parameters:
-    - name: s
+    - name: src
       comment: Source string.
       type: string
     return-type: ((string, number) -> (number, number), string, number)
@@ -2803,34 +2803,34 @@ modules:
     typechecker: {checked: true}
   - name: codepoint
     comment: Returns the ordinals (Unicode copepoint integers) of the characters
-      in the inclusive byte range i..j in the source string.
+      in the inclusive byte range start..end in the string src.
     parameters:
-    - name: s
+    - name: src
       comment: Source string.
       type: string
-    - name: i
-      comment: Starting index.
+    - name: start
+      comment: Starting byte index (inclusive), or 1 if omitted.
       type: number?
       default-value: 1
-    - name: j
-      comment: Ending index.
+    - name: end
+      comment: Ending byte index (inclusive), or i if omitted.
       type: number?
       default-value: i
     return-type: '...number'
     must-use: true
     typechecker: {checked: true}
   - name: len
-    comment: Returns the number of Unicode codepoints in the inclusive byte range i..j
-      of the source string. If the string is not utf8, returns (nil, error index) instead.
+    comment: Returns the number of Unicode codepoints in the inclusive byte range start..end
+      of the string src. If the string is not utf8, returns (nil, error index) instead.
     parameters:
-    - name: s
+    - name: str
       comment: Source string to measure.
       type: string
-    - name: i
+    - name: start
       comment: Starting byte index (inclusive), or 1 if omitted.
       type: number?
       default-value: 1
-    - name: j
+    - name: end
       comment: Ending byte index (inclusive), or the end of the string if omitted.
       type: number?
       default-value: '#s'
@@ -2840,13 +2840,13 @@ modules:
   - name: offset
     comment: Returns the byte offset of the nth Unicode codepoint in the string.
     parameters:
-    - name: s
+    - name: str
       comment: String to index.
       type: string
     - name: n
       comment: Character index.
       type: number
-    - name: i
+    - name: start
       comment: Starting byte index, or 1 if omitted.
       type: number?
       default-value: 'if n >= 0 then 1 else #s + 1'
