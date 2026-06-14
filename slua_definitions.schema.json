@@ -341,20 +341,71 @@
             },
             "type": "object"
         },
+        "metamethod-overload": {
+            "markdownDescription": "An alternative type or signature for a metamethod.",
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "markdownDescription": "A brief description of this overload.",
+                    "type": "string"
+                },
+                "type-parameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "type": {
+                    "markdownDescription": "The type of this overload.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "return-type": { "$ref": "#/$defs/type" }
+            },
+            "required": [],
+            "type": "object"
+        },
+        "metamethod-definition": {
+            "markdownDescription": "A metamethod signature and description.",
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "markdownDescription": "A brief description of this metamethod.",
+                    "type": "string"
+                },
+                "type-parameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "type": {
+                    "markdownDescription": "The type of this main entry.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "return-type": { "$ref": "#/$defs/type" },
+                "overloads": {
+                    "items": { "$ref": "#/$defs/metamethod-overload" },
+                    "type": "array"
+                }
+            },
+            "required": [],
+            "type": "object"
+        },
         "metamethods": {
             "additionalProperties": false,
             "patternProperties": {
-                "^__[a-z]*": {
-                    "properties": {
-                        "tooltip": {
-                            "markdownDescription": "A brief description of this metamethod.",
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "tooltip"
-                    ],
-                    "type": "object"
+                "^__[a-z]+$": {
+                    "$ref": "#/$defs/metamethod-definition"
                 }
             },
             "type": "object"
