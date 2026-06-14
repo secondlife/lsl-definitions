@@ -2884,7 +2884,8 @@ metamethods:
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
-        type: me      comment: "The left operand of the addition."
+        type: me
+        comment: "The left operand of the addition."
       - name: right
         type: any
         comment: "The right operand of the addition."
