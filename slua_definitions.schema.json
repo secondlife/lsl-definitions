@@ -114,6 +114,10 @@
                 "comment": {
                     "markdownDescription": "A brief description of this parameter.",
                     "type": "string"
+                },
+                "default-value": {
+                    "markdownDescription": "The default value of this parameter when omitted.",
+                    "type": ["string", "number", "boolean", "null"]
                 }
             },
             "required": ["name"],
