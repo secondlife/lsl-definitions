@@ -265,23 +265,16 @@
             "required": ["name", "comment"],
             "type": "object"
         },
-        "metamethod-overload": {
-            "markdownDescription": "An alternative type or signature for a metamethod.",
+        "metamethod-variant": {
+            "markdownDescription": "An alternative structure or shape for a metamethod.",
             "additionalProperties": false,
             "properties": {
                 "comment": {
-                    "markdownDescription": "A brief description of this overload.",
+                    "markdownDescription": "A brief description of this variant.",
                     "type": "string"
                 },
-                "type-parameters": {
-                    "items": {
-                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
-                        "type": "string"
-                     },
-                    "type": "array"
-                },
                 "type": {
-                    "markdownDescription": "The type of this overload.",
+                    "markdownDescription": "The type of this specific variant.",
                     "type": "string"
                 },
                 "parameters": {
@@ -290,13 +283,18 @@
                 },
                 "return-type": { "$ref": "#/$defs/type" }
             },
-            "required": [],
+            "required": ["type"],
             "type": "object"
         },
         "metamethod-definition": {
             "markdownDescription": "A metamethod signature and description.",
             "additionalProperties": false,
             "properties": {
+                "name": {
+                    "markdownDescription": "The name of the metamethod.",
+                    "pattern": "^__[a-z]+$",
+                    "type": "string"
+                },
                 "comment": {
                     "markdownDescription": "A brief description of this metamethod.",
                     "type": "string"
@@ -309,7 +307,7 @@
                     "type": "array"
                 },
                 "type": {
-                    "markdownDescription": "The type of this main entry.",
+                    "markdownDescription": "The combined or primary type of this metamethod.",
                     "type": "string"
                 },
                 "parameters": {
@@ -317,12 +315,12 @@
                     "type": "array"
                 },
                 "return-type": { "$ref": "#/$defs/type" },
-                "overloads": {
-                    "items": { "$ref": "#/$defs/metamethod-overload" },
+                "variants": {
+                    "items": { "$ref": "#/$defs/metamethod-variant" },
                     "type": "array"
                 }
             },
-            "required": [],
+            "required": ["name"],
             "type": "object"
         }
     },
