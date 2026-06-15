@@ -1408,7 +1408,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
-      default-value: nil
+      default-value: '{allow_sparse=false, skip_tojson=false, replacer=nil}'
     return-type: string
     must-use: true
   - name: decode
@@ -1419,7 +1419,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
-      default-value: nil
+      default-value: '{track_path=false, reviver=nil}'
     return-type: any
     must-use: true
   - name: slencode
@@ -1430,7 +1430,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
-      default-value: nil
+      default-value: '{allow_sparse=false, skip_tojson=false, tight=false, replacer=nil}'
     return-type: string
     must-use: true
   - name: sldecode
@@ -1441,7 +1441,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
-      default-value: nil
+      default-value: '{track_path=false, reviver=nil}'
     return-type: any
     must-use: true
   constants:
@@ -1763,7 +1763,7 @@ modules:
     - name: min
       comment: Minimum value of the range (optional).
       type: number?
-      default-value: 1
+      default-value: nil
     - name: max
       comment: Maximum value of the range (optional).
       type: number?
