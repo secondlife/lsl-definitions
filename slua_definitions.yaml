@@ -2973,7 +2973,7 @@ metamethods:
         return-type: any
   - name: __iter
     comment: "Called before generalized iteration begins on a table or userdata. Returns an iterator generator function, a state object, and an initial control variable."
-    type-parameters: [S, K, V...]    
+    type-parameters: [S, K, V...]
     type: "<S, K, V...>(self: any) -> ((S, K) -> (K?, V...), S, K)"
     parameters:
       - name: self
@@ -3121,4 +3121,4 @@ metamethods:
         type: any
         comment: "The value being negated."
     return-type: any
-    
+
