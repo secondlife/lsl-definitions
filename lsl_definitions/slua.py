@@ -61,6 +61,7 @@ class SLuaParameter:
     optional: bool | None = None
     observes: Literal["read-write", "read", "write"] | None = None
     """See https://kampfkarren.github.io/selene/usage/std.html#observes."""
+    default_value: Any = None
 
     def to_luau_def(self, declaration: bool = False) -> str:
         if self.type is None:
@@ -796,7 +797,7 @@ class SLuaDefinitionParser:
                 name=data["name"],
                 type_parameters=data.get("type-parameters", []),
                 parameters=[
-                    SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                    SLuaParameter(selene_type=p.pop("selene-type", None), default_value=p.pop("default-value", None), **p)
                     for p in data.get("parameters", [])
                 ],
                 return_type=data.get("return-type", "()"),
@@ -817,7 +818,7 @@ class SLuaDefinitionParser:
                     name=func.name,
                     type_parameters=overload_data.get("type-parameters", []),
                     parameters=[
-                        SLuaParameter(selene_type=p.pop("selene-type", None), **p)
+                        SLuaParameter(selene_type=p.pop("selene-type", None), default_value=p.pop("default-value", None), **p)
                         for p in overload_data.get("parameters", [])
                     ],
                     return_type=overload_data.get("return-type", "()"),
