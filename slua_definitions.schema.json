@@ -399,13 +399,8 @@
             },
             "type": "object"
         },
-        "metamethods": {
-            "additionalProperties": false,
-            "patternProperties": {
-                "^__[a-z]+$": {
-                    "$ref": "#/$defs/metamethod-definition"
-                }
-            },
+    "metamethods": {
+            "items": { "$ref": "#/$defs/metamethod-definition" },
             "type": "array"
         }
     },
