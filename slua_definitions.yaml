@@ -357,6 +357,7 @@ functions:
   - name: errorMessage
     comment: Optional error message to display if the value is not truthy.
     type: string?
+    default-value: '"assertion failed!"'
   return-type: T
   fastcall: true
   typechecker: {magic: true}
@@ -390,6 +391,7 @@ functions:
   - name: level
     comment: Optional level to attribute the error to in the call stack.
     type: number?
+    default-value: 1
   return-type: never
 - name: gcinfo
   comment: Returns the total heap size in kilobytes.
@@ -451,6 +453,7 @@ functions:
   - name: mt
     comment: Optional boolean to create a modifiable metatable.
     type: boolean?
+    default-value: false
   return-type: any
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
@@ -462,6 +465,7 @@ functions:
   - name: i
     comment: Optional key to start traversal after.
     type: K?
+    default-value: nil
   return-type: (K?, V)
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pairs
@@ -597,6 +601,7 @@ functions:
   - name: base
     comment: Optional base for the conversion.
     type: number?
+    default-value: 10
   return-type: number?
   fastcall: true
   must-use: true
@@ -673,9 +678,11 @@ functions:
   - name: i
     comment: Starting index (optional, defaults to 1).
     type: number?
+    default-value: 1
   - name: j
     comment: "Ending index (optional, defaults to #a)."
     type: number?
+    default-value: '#tab'
   return-type: ...V
   fastcall: true
 - name: xpcall
@@ -766,6 +773,7 @@ modules:
       type: number
     - name: width
       type: number?
+      default-value: 1
     return-type: number
     must-use: true
     fastcall: true
@@ -804,6 +812,7 @@ modules:
       type: number
     - name: width
       type: number?
+      default-value: 1
     return-type: number
     must-use: true
     fastcall: true
@@ -1149,6 +1158,7 @@ modules:
     - name: count
       comment: Number of bytes to write (optional).
       type: number?
+      default-value: '#value'
     return-type: ()
   - name: len
     comment: Returns the size of the buffer in bytes.
@@ -1174,9 +1184,11 @@ modules:
     - name: sourceOffset
       comment: Offset in source buffer (optional).
       type: number?
+      default-value: 0
     - name: count
       comment: Number of bytes to copy (optional).
       type: number?
+      default-value: 'buffer.len(b) - sourceOffset'
     return-type: ()
   - name: fill
     comment: Fills the buffer with the specified value starting at the given offset.
@@ -1194,6 +1206,7 @@ modules:
     - name: count
       comment: Number of bytes to fill (optional).
       type: number?
+      default-value: 'buffer.len(b) - offset'
     return-type: ()
   - name: readbits
     comment: Reads up to 32 bits from the buffer at the given offset.
@@ -1332,9 +1345,11 @@ modules:
       - name: message
         comment: Optional message prepended to the traceback.
         type: string?
+        default-value: nil
       - name: level
         comment: Optional stack level to start traceback.
         type: number?
+        default-value: 1
       return-type: string
     parameters:
     - name: co
@@ -1344,9 +1359,11 @@ modules:
     - name: msg
       comment: Optional message prepended to the traceback.
       type: string?
+      default-value: nil
     - name: level
       comment: Optional stack level to start traceback.
       type: number?
+      default-value: 1
     return-type: string
     must-use: true
 - name: llbase64
@@ -1377,6 +1394,7 @@ modules:
     - name: asBuffer
       type: false?
       selene-type: bool
+      default-value: false
     return-type: string
     must-use: true
 - name: lljson
@@ -1390,6 +1408,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
+      default-value: nil
     return-type: string
     must-use: true
   - name: decode
@@ -1400,6 +1419,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
+      default-value: nil
     return-type: any
     must-use: true
   - name: slencode
@@ -1410,6 +1430,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
+      default-value: nil
     return-type: string
     must-use: true
   - name: sldecode
@@ -1420,6 +1441,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
+      default-value: nil
     return-type: any
     must-use: true
   constants:
@@ -1630,6 +1652,7 @@ modules:
     - name: base
       comment: Base of the logarithm (default is e).
       type: number?
+      default-value: 'math.e'
     return-type: number
     must-use: true
     fastcall: true
@@ -1706,9 +1729,11 @@ modules:
     - name: "y"
       comment: Y coordinate for the noise function (default is 0).
       type: number?
+      default-value: 0
     - name: z
       comment: Z coordinate for the noise function (default is 0).
       type: number?
+      default-value: 0
     return-type: number
     must-use: true
   - name: pow
@@ -1738,9 +1763,11 @@ modules:
     - name: min
       comment: Minimum value of the range (optional).
       type: number?
+      default-value: 1
     - name: max
       comment: Maximum value of the range (optional).
       type: number?
+      default-value: nil
     return-type: number
     must-use: true
   - name: randomseed
@@ -1868,9 +1895,11 @@ modules:
     - name: formatString
       comment: Optional format string for the date representation.
       type: string?
+      default-value: '"%c"'
     - name: t
       comment: Optional timestamp to format; defaults to the current time.
       type: number?
+      default-value: 'os.time()'
     return-type: string
     overloads:
     - parameters:
@@ -1880,6 +1909,7 @@ modules:
       - name: t
         comment: Optional timestamp to format; defaults to the current time.
         type: number?
+        default-value: 'os.time()'
       return-type: DateTypeResult
     must-use: true
   - name: difftime
@@ -2037,9 +2067,11 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: i
     return-type: '...number'
     must-use: true
     fastcall: true
@@ -2067,9 +2099,11 @@ modules:
     - name: init
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: plain
       comment: Perform raw search (optional).
       type: boolean?
+      default-value: false
     return-type: (number?, number?, ...string)
     must-use: true
     typechecker: {builtin: true, magic: true}
@@ -2113,6 +2147,7 @@ modules:
     - name: maxn
       comment: Maximum replacements (optional).
       type: number?
+      default-value: nil
     return-type: (string, number)
     must-use: true
     typechecker: {builtin: true}
@@ -2147,6 +2182,7 @@ modules:
     - name: init
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     return-type: '...string'
     must-use: true
     typechecker: {builtin: true, magic: true}
@@ -2201,6 +2237,7 @@ modules:
     - name: separator
       comment: Separator to split on. Default is ","
       type: string?
+      default-value: '","'
     return-type: '{string}'
     must-use: true
     typechecker: {builtin: true}
@@ -2216,6 +2253,7 @@ modules:
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: '#s'
     return-type: string
     must-use: true
     fastcall: true
@@ -2232,6 +2270,7 @@ modules:
     - name: init
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     return-type: '...any'
     must-use: true
     typechecker: {builtin: true}
@@ -2256,12 +2295,15 @@ modules:
     - name: sep
       comment: Separator string (optional).
       type: string?
+      default-value: '""'
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: '#a'
     return-type: string
     must-use: true
   - name: foreach
@@ -2375,6 +2417,7 @@ modules:
     - name: i
       comment: "Index to remove (default: the last one)."
       type: number?
+      default-value: '#a'
     return-type: V?
   - name: sort
     comment: Sorts an array in place.
@@ -2386,6 +2429,7 @@ modules:
     - name: f
       comment: Comparison function.
       type: '((a: V, b: V) -> boolean)?'
+      default-value: nil
     return-type: ()
   - name: pack
     comment: Packs multiple arguments into a new array with length field n.
@@ -2407,9 +2451,11 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: '#a'
     return-type: '...V'
     must-use: true
     fastcall: true
@@ -2432,6 +2478,7 @@ modules:
     - name: dest
       comment: Destination array (optional).
       type: '{V}?'
+      default-value: src
       observes: write
     return-type: '{V}'
   - name: create
@@ -2444,6 +2491,7 @@ modules:
     - name: v
       comment: Value to prefill elements with (optional).
       type: V?
+      default-value: nil
     return-type: '{V}'
     must-use: true
   - name: find
@@ -2459,6 +2507,7 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     return-type: number?
     must-use: true
   - name: clear
@@ -2479,6 +2528,7 @@ modules:
     - name: shrink_sparse
       comment: Allow moving sparse array elements to hash table storage.
       type: boolean?
+      default-value: false
     return-type: '{V}'
   - name: freeze
     comment: Freezes a table, making it read-only.
@@ -2538,9 +2588,11 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: i
     return-type: '...number'
     must-use: true
   - name: len
@@ -2553,9 +2605,11 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 1
     - name: j
       comment: Ending index (optional).
       type: number?
+      default-value: '#s'
     return-type: (number?, number?)
     must-use: true
   - name: offset
@@ -2570,6 +2624,7 @@ modules:
     - name: i
       comment: Starting index (optional).
       type: number?
+      default-value: 'if n >= 0 then 1 else #s + 1'
     return-type: number?
     must-use: true
   constants:
@@ -2615,6 +2670,7 @@ modules:
     - name: z
       comment: Z component of the vector (optional).
       type: number?
+      default-value: 0
     return-type: vector
     must-use: true
     fastcall: true
@@ -2631,6 +2687,7 @@ modules:
     - name: z
       comment: Z component of the vector (optional).
       type: number?
+      default-value: 0
     return-type: vector
     must-use: true
     fastcall: true
@@ -2689,6 +2746,7 @@ modules:
     - name: axis
       comment: Axis to determine the sign of the angle (optional).
       type: vector?
+      default-value: nil
     return-type: number
     must-use: true
   - name: floor
