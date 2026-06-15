@@ -2879,7 +2879,7 @@ builtin-constants:
     type: boolean
     value: 'false'
 metamethods:
-  __add:
+  - name: __add
     comment: "Defines behaviour for the addition (+) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -2890,7 +2890,7 @@ metamethods:
         type: any
         comment: "The right operand of the addition."
     return-type: any
-  __call:
+  - name: __call
     comment: "Called when the table or object is called as if it were a function."
     type-parameters: [A..., R...]
     type: "<A..., R...>(self: any, A...) -> R..."
@@ -2902,7 +2902,7 @@ metamethods:
         type: "A..."
         comment: "The arguments passed to the call."
     return-type: "R..."
-  __concat:
+  - name: __concat
     comment: "Defines behaviour for the concatenation (..) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -2913,7 +2913,7 @@ metamethods:
         type: any
         comment: "The right operand or object to concatenate."
     return-type: any
-  __div:
+  - name: __div
     comment: "Defines behaviour for the division (/) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -2924,7 +2924,7 @@ metamethods:
         type: any
         comment: "The right operand of the division (divisor)."
     return-type: any
-  __eq:
+  - name: __eq
     comment: "Defines behaviour for the equality (==) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
@@ -2935,7 +2935,7 @@ metamethods:
         type: any
         comment: "The second value to compare."
     return-type: boolean
-  __idiv:
+  - name: __idiv
     comment: "Defines behaviour for the floor division (//) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -2946,9 +2946,9 @@ metamethods:
         type: any
         comment: "The right operand of the floor division."
     return-type: any
-  __index:
+    - name: __index
     comment: "Called when looking up a key that does not exist in the table."
-    type: "(self: table, key: any) -> any"
+    type: "((self: table, key: any) -> any) | { [any]: any }"
     parameters:
       - name: self
         type: table
@@ -2957,11 +2957,21 @@ metamethods:
         type: any
         comment: "The key that was not found in the table."
     return-type: any
-    overloads:
+    variants:
+      - comment: "Called as a function fallback when looking up a key that does not exist in the table."
+        type: "(self: table, key: any) -> any"
+        parameters:
+          - name: self
+            type: table
+            comment: "The table being accessed."
+          - name: key
+            type: any
+            comment: "The key that was not found in the table."
+        return-type: any
       - comment: "A fallback dictionary/table used to search for missing keys."
         type: "{ [any]: any }"
         return-type: any
-  __iter:
+  - name: __iter
     comment: "Called before generalized iteration begins on a table or userdata. Returns an iterator generator function, a state object, and an initial control variable."
     type-parameters: [S, K, V...]    
     type: "<S, K, V...>(self: any) -> ((S, K) -> (K?, V...), S, K)"
@@ -2970,10 +2980,10 @@ metamethods:
         type: table
         comment: "The table or object undergoing iteration."
     return-type: "((state: S, index: K) -> (K?, V...), S, K)"
-  __jsonhint:
+  - name: __jsonhint
     comment: "String property used by lljson.encode to enforce table formatting rules."
     type: '"array" | "object"'
-  __le:
+  - name: __le
     comment: "Defines behaviour for the less-than-or-equal-to (<=) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
@@ -2984,7 +2994,7 @@ metamethods:
         type: any
         comment: "The right operand of the comparison."
     return-type: boolean
-  __len:
+  - name: __len
     comment: "Defines behaviour for the length (#) operator."
     type: "(self: any) -> number"
     parameters:
@@ -2992,7 +3002,7 @@ metamethods:
         type: any
         comment: "The object whose length is being measured."
     return-type: number
-  __lt:
+  - name: __lt
     comment: "Defines behaviour for the less-than (<) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
@@ -3003,10 +3013,10 @@ metamethods:
         type: any
         comment: "The right operand of the comparison."
     return-type: boolean
-  __metatable:
+  - name: __metatable
     comment: "Protects the metatable. If present, getmetatable returns this value, and setmetatable will raise an error."
     type: any
-  __mod:
+  - name: __mod
     comment: "Defines behaviour for the modulo (%) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -3017,10 +3027,10 @@ metamethods:
         type: any
         comment: "The right operand (divisor)."
     return-type: any
-  __mode:
+  - name: __mode
     comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
     type: '"k" | "v" | "kv" | "vk"'
-  __mul:
+  - name: __mul
     comment: "Defines behaviour for the multiplication (*) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -3031,9 +3041,9 @@ metamethods:
         type: any
         comment: "The right operand of the multiplication."
     return-type: any
-  __newindex:
+  - name: __newindex
     comment: "Called when assigning a value to a key that does not exist in the table."
-    type: "(self: table, key: any, value: any) -> ()"
+    type: "((self: table, key: any, value: any) -> ()) | { [any]: any }"
     parameters:
       - name: self
         type: table
@@ -3045,11 +3055,24 @@ metamethods:
         type: any
         comment: "The value being assigned to the key."
     return-type: "()"
-    overloads:
+    variants:
+      - comment: "Called as a function fallback when assigning a value to a key that does not exist in the table."
+        type: "(self: table, key: any, value: any) -> ()"
+        parameters:
+          - name: self
+            type: table
+            comment: "The table undergoing assignment."
+          - name: key
+            type: any
+            comment: "The key being created."
+          - name: value
+            type: any
+            comment: "The value being assigned to the key."
+        return-type: "()"
       - comment: "A fallback dictionary/table where new key-value assignments are forwarded."
         type: "{ [any]: any }"
         return-type: "()"
-  __pow:
+  - name: __pow
     comment: "Defines behaviour for the exponentiation (^) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -3060,7 +3083,7 @@ metamethods:
         type: any
         comment: "The exponent value."
     return-type: any
-  __sub:
+  - name: __sub
     comment: "Defines behaviour for the subtraction (-) operator."
     type: "(left: any, right: any) -> any"
     parameters:
@@ -3071,7 +3094,7 @@ metamethods:
         type: any
         comment: "The right operand of the subtraction (subtrahend)."
     return-type: any
-  __tojson:
+  - name: __tojson
     comment: "Called during JSON serialization (with lljson.encode or lljson.slencode). Returns an alternative representation of the table to be serialized in its place."
     type: '(self: table, ctx: { mode: "json" | "sljson", tight: boolean }) -> any'
     parameters:
@@ -3082,7 +3105,7 @@ metamethods:
         type: '{ mode: "json" | "sljson", tight: boolean }'
         comment: "Context table containing metadata about the current serialization process, including 'mode' ('json' or 'sljson') and 'tight' (boolean)."
     return-type: any
-  __tostring:
+  - name: __tostring
     comment: "Called by tostring to convert the value to a string."
     type: "(self: any) -> string"
     parameters:
@@ -3090,7 +3113,7 @@ metamethods:
         type: any
         comment: "The object being converted to a string."
     return-type: string
-  __unm:
+  - name: __unm
     comment: "Defines behaviour for the unary negation (-) operator."
     type: "(self: any) -> any"
     parameters:
@@ -3098,4 +3121,4 @@ metamethods:
         type: any
         comment: "The value being negated."
     return-type: any
-
+    
