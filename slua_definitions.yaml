@@ -2946,7 +2946,7 @@ metamethods:
         type: any
         comment: "The right operand of the floor division."
     return-type: any
-    - name: __index
+  - name: __index
     comment: "Called when looking up a key that does not exist in the table."
     type: "((self: table, key: any) -> any) | { [any]: any }"
     parameters:
