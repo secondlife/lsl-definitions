@@ -399,7 +399,7 @@
             },
             "type": "object"
         },
-    "metamethods": {
+        "metamethods": {
             "items": { "$ref": "#/$defs/metamethod-definition" },
             "type": "array"
         }
