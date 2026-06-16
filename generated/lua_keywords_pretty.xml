@@ -198,6 +198,11 @@ export type DateTypeResult = {
   isdst: boolean?,
 }</string>
          </map>
+         <key>ParticleParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Particle system parameter table. Pass to llprim.ParticleSystem() to emit particles.</string>
+         </map>
          <key>list</key>
          <map>
             <key>tooltip</key>
@@ -218,11 +223,6 @@ export type rotation = quaternion</string>
          <map>
             <key>tooltip</key>
             <string>Timer management class for scheduling periodic and one-time callbacks</string>
-         </map>
-         <key>ParticleParams</key>
-         <map>
-            <key>tooltip</key>
-            <string>Particle system parameter table. Set properties and call apply() to emit particles.</string>
          </map>
          <key>PrimParamsSetterType</key>
          <map>
@@ -13363,6 +13363,38 @@ Returns true if result is non-zero.</string>
             <real>-1.0</real>
             <key>tooltip</key>
             <string>Utilities for working with prims / objects</string>
+         </map>
+         <key>llprim.ParticleSystem</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>ParticleParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>link</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>()</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
          </map>
          <key>math</key>
          <map>

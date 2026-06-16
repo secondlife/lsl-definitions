@@ -152,6 +152,8 @@ class LSLConstant:
     slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
+    pretty_name: Optional[str] = None
+    """Optional override for the auto-generated property alias in table-ruleset APIs."""
     member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
     value_type: Optional[str] = None
 
@@ -785,6 +787,7 @@ class LSLDefinitionParser:
                     const_data.get("slua-deprecated", False)
                 ),
                 value_type=const_data.get("value-type", None),
+                pretty_name=const_data.get("pretty-name", None),
             )
             if const.type not in {"float", "integer", "string", "vector", "rotation"}:
                 raise ValueError(f"Invalid constant type {const.type}")

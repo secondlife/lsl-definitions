@@ -180,7 +180,7 @@ def expand_member_params(
                 f"Constant {const.name!r} is a member of {enum_name!r} "
                 f"but has no value-type annotation."
             )
-        rows.append((strict, int(const.value, 0), const.value_type))
+        rows.append((strict, int(const.value, 0), const.value_type, const.pretty_name))
 
     # Hard-fail on strict name collisions (implies a data error).
     strict_names = [r[0] for r in rows]
@@ -189,21 +189,41 @@ def expand_member_params(
         raise ValueError(f"Strict name collision(s) in {enum_name}: {sorted(dupes)}")
 
     # Pass 2: pretty aliases.
-    def _pretty(strict: str) -> str:
+    # A constant's pretty_name field takes priority over the filler-token derivation.
+    def _pretty(strict: str, override: Optional[str]) -> str:
+        if override is not None:
+            return override
         tokens = [t for t in strict.split("_") if t not in filler_tokens]
         return "_".join(tokens) if tokens else strict
 
-    pretties = [_pretty(strict) for strict, _, _ in rows]
-    colliding = {p for p in pretties if pretties.count(p) > 1}
+    pretties = [_pretty(strict, override) for strict, _, _, override in rows]
+
+    # Hard-fail if any pretty name is duplicated and at least one side is an explicit
+    # override (author error — cannot silently revert an intentional name).
+    pretty_counts: dict[str, int] = {}
+    for p in pretties:
+        pretty_counts[p] = pretty_counts.get(p, 0) + 1
+    for (_, _, _, override), p in zip(rows, pretties):
+        if pretty_counts[p] > 1 and override is not None:
+            raise ValueError(
+                f"pretty-name collision in {enum_name}: '{p}' is used by multiple constants"
+            )
+
+    # Auto-derived names that collide revert to strict names instead of erroring.
+    colliding = {
+        p
+        for (_, _, _, override), p in zip(rows, pretties)
+        if override is None and pretty_counts[p] > 1
+    }
 
     return [
         MemberDescriptor(
             strict_name=strict,
-            pretty_name=None if pretty in colliding else pretty,
+            pretty_name=None if (override is None and pretty in colliding) else pretty,
             tag=tag,
             value_type=vt,
         )
-        for (strict, tag, vt), pretty in zip(rows, pretties)
+        for (strict, tag, vt, override), pretty in zip(rows, pretties)
     ]
 
 

@@ -264,13 +264,13 @@
                     "type": "string",
                     "pattern": "^[A-Z][A-Za-z0-9]*$"
                 },
-                "apply-fn": {
-                    "markdownDescription": "(`table` only) `ll.*` function called by `apply()` with no link number (e.g. `ParticleSystem`).",
+                "lua-fn": {
+                    "markdownDescription": "(`table` only) Lua function name exposed in `lua-module` (e.g. `ParticleSystem`).",
                     "type": "string",
-                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                    "pattern": "^[A-Za-z][a-zA-Z0-9]*$"
                 },
-                "apply-link-fn": {
-                    "markdownDescription": "(`table` only) `ll.*` function called by `apply(linkNumber)` (e.g. `LinkParticleSystem`).",
+                "dispatch-fn": {
+                    "markdownDescription": "(`table` only) `ll.*` function name whose signature drives code generation (e.g. `LinkParticleSystem`). Must take a list as its last argument.",
                     "type": "string",
                     "pattern": "^[A-Z][A-Za-z0-9]*$"
                 }
@@ -280,7 +280,7 @@
                 "required": ["type"]
             },
             "then": { "required": ["rules"] },
-            "else": { "required": ["lua-module", "lua-type", "apply-fn", "apply-link-fn"] }
+            "else": { "required": ["lua-module", "lua-type", "lua-fn", "dispatch-fn"] }
         }
     },
     "additionalProperties": false,
@@ -357,6 +357,11 @@
                         "value-type": {
                             "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types.",
                             "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key"]
+                        },
+                        "pretty-name": {
+                            "markdownDescription": "Override the auto-generated property alias for this constant when used as a table-ruleset key. Must be a valid Lua identifier (lowercase, underscores).",
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]*$"
                         }
                     },
                     "required": [

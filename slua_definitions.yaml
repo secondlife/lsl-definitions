@@ -237,6 +237,11 @@ type-aliases:
   comment: Configuration options for lljson decoding
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: ParticleParams
+  comment: Particle system parameter table. Pass to llprim.ParticleSystem() to emit particles.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -317,27 +322,6 @@ classes:
     - name: callback
       type: LLTimerCallback
     return-type: boolean
-- name: ParticleParams
-  comment: Particle system parameter table. Set properties and call apply() to emit particles.
-  instance-type: '{}'
-  export: true
-  properties: []  # injected at generation time from expand_table_ruleset("particle-params")
-  functions:
-  - name: new
-    comment: Create a new ParticleParams, optionally bulk-initializing from a table.
-    parameters:
-    - name: init
-      type: '{[string]: any}?'
-    return-type: ParticleParams
-  methods:
-  - name: apply
-    comment: Emit the particle system. Omit linkNumber to call ll.ParticleSystem, or pass a link number for ll.LinkParticleSystem.
-    parameters:
-    - name: self
-      type: ParticleParams
-    - name: linkNumber
-      type: number?
-    return-type: '()'
 - name: PrimParamsSetterType
   comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   instance-type: '{any}'
@@ -1473,6 +1457,15 @@ modules:
     comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
+  functions:
+  - name: ParticleSystem
+    comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
+    parameters:
+    - name: params
+      type: ParticleParams?
+    - name: link
+      type: number?
+    return-type: '()'
 - name: math
   comment: Mathematical functions library.
   functions:

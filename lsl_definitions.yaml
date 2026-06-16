@@ -326,7 +326,7 @@ enums:
     prefix: PSYS_
     tooltip: ''
   ParticleSourcePattern:
-    type: flag
+    type: enum
     prefix: PSYS_SRC_PATTERN_
     tooltip: ''
   PassMode:
@@ -4598,6 +4598,7 @@ constants:
     value: '0x100'
   PSYS_PART_END_ALPHA:
     member-of: [ParticleParam]
+    pretty-name: alpha_end
     tooltip: Float parameter that determines the ending alpha (transparency) of the
       particles.
     type: integer
@@ -4605,6 +4606,7 @@ constants:
     value-type: float
   PSYS_PART_END_COLOR:
     member-of: [ParticleParam]
+    pretty-name: color_end
     tooltip: Vector parameter <r, g, b> that determines the ending color of the
       particles.
     type: integer
@@ -4612,12 +4614,14 @@ constants:
     value-type: vector
   PSYS_PART_END_GLOW:
     member-of: [ParticleParam]
+    pretty-name: glow_end
     tooltip: Float parameter that determines the ending glow value of the particles.
     type: integer
     value: 27
     value-type: float
   PSYS_PART_END_SCALE:
     member-of: [ParticleParam]
+    pretty-name: scale_end
     tooltip: Vector parameter <sx, sy, z> defining the ending size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
@@ -4646,12 +4650,14 @@ constants:
     value: '0x20'
   PSYS_PART_INTERP_COLOR_MASK:
     member-of: [ParticleFlag]
+    pretty-name: color_interp
     tooltip: Particle flag causing the particle's color and alpha to smoothly
       interpolate from their START values to their END values over its lifetime.
     type: integer
     value: '0x1'
   PSYS_PART_INTERP_SCALE_MASK:
     member-of: [ParticleFlag]
+    pretty-name: scale_interp
     tooltip: Particle flag causing the particle's size/scale to transition from its
       START setting to its END setting over its lifetime.
     type: integer
@@ -4674,6 +4680,7 @@ constants:
     value: '0x400'
   PSYS_PART_START_ALPHA:
     member-of: [ParticleParam]
+    pretty-name: alpha_begin
     tooltip: Float parameter that determines the starting alpha (transparency) of
       the particles.
     type: integer
@@ -4681,6 +4688,7 @@ constants:
     value-type: float
   PSYS_PART_START_COLOR:
     member-of: [ParticleParam]
+    pretty-name: color_begin
     tooltip: Vector parameter <r, g, b> that determines the starting color of the
       particles.
     type: integer
@@ -4688,12 +4696,14 @@ constants:
     value-type: vector
   PSYS_PART_START_GLOW:
     member-of: [ParticleParam]
+    pretty-name: glow_begin
     tooltip: Float parameter that determines the starting glow value of the particles.
     type: integer
     value: 26
     value-type: float
   PSYS_PART_START_SCALE:
     member-of: [ParticleParam]
+    pretty-name: scale_begin
     tooltip: Vector parameter <sx, sy, z> defining the starting size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
@@ -4778,6 +4788,7 @@ constants:
     value-type: float
   PSYS_SRC_INNERANGLE:
     member-of: [ParticleParam]
+    pretty-name: angle_inner
     tooltip: Float parameter specifying the inner angle of the arc for ANGLE or
       ANGLE_CONE patterns. The specified inner area will not contain particles.
     type: integer
@@ -4807,6 +4818,7 @@ constants:
     value-type: vector
   PSYS_SRC_OUTERANGLE:
     member-of: [ParticleParam]
+    pretty-name: angle_outer
     tooltip: Float parameter specifying the outer angle of the arc for ANGLE or
       ANGLE_CONE patterns. The area between the outer and inner angles is filled
       with particles.
@@ -16979,7 +16991,7 @@ builder-rulesets:
     flag-enum: ParticleFlag
     flag-field: flags
     flag-mask: _MASK
-    lua-module: llparticle
+    lua-module: llprim
+    lua-fn: ParticleSystem
     lua-type: ParticleParams
-    apply-fn: ParticleSystem
-    apply-link-fn: LinkParticleSystem
+    dispatch-fn: LinkParticleSystem

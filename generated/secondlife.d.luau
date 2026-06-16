@@ -85,6 +85,45 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type ParticleParams = {
+  flags: number?,
+  color_begin: vector?,
+  alpha_begin: number?,
+  color_end: vector?,
+  alpha_end: number?,
+  scale_begin: vector?,
+  scale_end: vector?,
+  part_max_age: number?,
+  accel: vector?,
+  pattern: number?,
+  angle_inner: number?,
+  angle_outer: number?,
+  texture: (string | uuid)?,
+  burst_rate: number?,
+  burst_count: number?,
+  burst_radius: number?,
+  burst_speed_min: number?,
+  burst_speed_max: number?,
+  src_max_age: number?,
+  target_key: (string | uuid)?,
+  omega: vector?,
+  angle_begin: number?,
+  angle_end: number?,
+  blend_func_source: number?,
+  blend_func_dest: number?,
+  glow_begin: number?,
+  glow_end: number?,
+  color_interp: boolean?,
+  scale_interp: boolean?,
+  bounce: boolean?,
+  wind: boolean?,
+  follow: boolean?,
+  follow_velocity: boolean?,
+  target_pos: boolean?,
+  target_linear: boolean?,
+  emissive: boolean?,
+  ribbon: boolean?,
+}
 
 declare extern type DetectedEvent with
   index: number
@@ -168,53 +207,6 @@ declare extern type LLTimers with
   function once(self, seconds: number, callback: LLTimerOnceCallback): LLTimerCallback
   function off(self, callback: LLTimerCallback): boolean
 end
-
-export type ParticleParamsMeta = {
-  __index: ParticleParamsMeta,
-  flags: number?,
-  start_color: vector?,
-  start_alpha: number?,
-  end_color: vector?,
-  end_alpha: number?,
-  start_scale: vector?,
-  end_scale: vector?,
-  part_max_age: number?,
-  accel: vector?,
-  pattern: number?,
-  innerangle: number?,
-  outerangle: number?,
-  texture: (string | uuid)?,
-  burst_rate: number?,
-  burst_count: number?,
-  burst_radius: number?,
-  burst_speed_min: number?,
-  burst_speed_max: number?,
-  src_max_age: number?,
-  target_key: (string | uuid)?,
-  omega: vector?,
-  angle_begin: number?,
-  angle_end: number?,
-  blend_func_source: number?,
-  blend_func_dest: number?,
-  start_glow: number?,
-  end_glow: number?,
-  interp_color: boolean?,
-  interp_scale: boolean?,
-  bounce: boolean?,
-  wind: boolean?,
-  follow: boolean?,
-  follow_velocity: boolean?,
-  target_pos: boolean?,
-  target_linear: boolean?,
-  emissive: boolean?,
-  ribbon: boolean?,
-  new: (init: {[string]: any}?) -> ParticleParams,
-  apply: (self: ParticleParams, linkNumber: number?) -> (),
-}
-
-export type ParticleParams = typeof(
-  setmetatable((nil :: any) :: {}, (nil :: any) :: ParticleParamsMeta)
-)
 
 export type PrimParamsSetterTypeMeta = {
   __index: PrimParamsSetterTypeMeta,
@@ -432,6 +424,7 @@ declare lljson: {
 
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
+  ParticleSystem: (params: ParticleParams?, link: number?) -> (),
 }
 
 

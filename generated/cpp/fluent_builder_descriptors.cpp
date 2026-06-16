@@ -1,17 +1,17 @@
 // particle-params
 static const FluentParamDescriptor kParticleParamsDescs[] = {
     {"flags", 'i', 0},
-    {"start_color", 'v', 1},
-    {"start_alpha", 'f', 2},
-    {"end_color", 'v', 3},
-    {"end_alpha", 'f', 4},
-    {"start_scale", 'v', 5},
-    {"end_scale", 'v', 6},
+    {"color_begin", 'v', 1},
+    {"alpha_begin", 'f', 2},
+    {"color_end", 'v', 3},
+    {"alpha_end", 'f', 4},
+    {"scale_begin", 'v', 5},
+    {"scale_end", 'v', 6},
     {"part_max_age", 'f', 7},
     {"accel", 'v', 8},
     {"pattern", 'i', 9},
-    {"innerangle", 'f', 10},
-    {"outerangle", 'f', 11},
+    {"angle_inner", 'f', 10},
+    {"angle_outer", 'f', 11},
     {"texture", 'a', 12},
     {"burst_rate", 'f', 13},
     {"burst_count", 'i', 15},
@@ -25,16 +25,12 @@ static const FluentParamDescriptor kParticleParamsDescs[] = {
     {"angle_end", 'f', 23},
     {"blend_func_source", 'i', 24},
     {"blend_func_dest", 'i', 25},
-    {"start_glow", 'f', 26},
-    {"end_glow", 'f', 27},
+    {"glow_begin", 'f', 26},
+    {"glow_end", 'f', 27},
 };
-static FluentBuilderDef* kParticleParamsDef = fluent_builder_def_build(
-    "ParticleSystem", "LinkParticleSystem",
-    kParticleParamsDescs, std::size(kParticleParamsDescs));
-slua_open_fluent_builder(L, "llparticle", "ParticleParams", kParticleParamsDef);
 static const FluentFlagDescriptor kParticleParamFlagDescs[] = {
-    {"interp_color", 0x1, 0},
-    {"interp_scale", 0x2, 0},
+    {"color_interp", 0x1, 0},
+    {"scale_interp", 0x2, 0},
     {"bounce", 0x4, 0},
     {"wind", 0x8, 0},
     {"follow", 0x10, 0},
@@ -44,4 +40,21 @@ static const FluentFlagDescriptor kParticleParamFlagDescs[] = {
     {"emissive", 0x100, 0},
     {"ribbon", 0x400, 0},
 };
-fluent_builder_def_add_flags(kParticleParamsDef, kParticleParamFlagDescs, std::size(kParticleParamFlagDescs));
+static FluentBuilderDef* kParticleParamsDef = []() {
+    auto* d = fluent_builder_def_build(kParticleParamsDescs, std::size(kParticleParamsDescs));
+    fluent_builder_def_add_flags(d, kParticleParamFlagDescs, std::size(kParticleParamFlagDescs));
+    return d;
+}();
+auto particle_system = [](lua_State* L) -> int {
+    const auto* def = (const FluentBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+    int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);
+    slua_fluent_serialize(L, 1, def);
+    int rules_idx = lua_gettop(L);
+    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+    lua_rawgetfield(L, -1, "LinkParticleSystem");
+    lua_pushinteger(L, link);
+    lua_pushvalue(L, rules_idx);
+    lua_call(L, 2, 0);
+    return 0;
+};
+slua_register_fluent_fn(L, "llprim", "ParticleSystem", particle_system, kParticleParamsDef);

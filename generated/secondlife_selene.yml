@@ -5507,6 +5507,14 @@ globals:
   llprim.ParamsSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
+  llprim.ParticleSystem:
+    args:
+    - type: table
+      required: false
+    - type: number
+      required: false
+    description: Emit a particle system from a ParticleParams table. Omit link to
+      apply to the current prim.
   math.pi:
     property: read-only
     type: number
@@ -16106,137 +16114,6 @@ structs:
       args:
       - type: function
       description: Unregisters a timer callback. Returns true if found and removed.
-  ParticleParams:
-    apply:
-      method: true
-      args:
-      - type: number
-        required: false
-      description: Emit the particle system. Omit linkNumber to call ll.ParticleSystem,
-        or pass a link number for ll.LinkParticleSystem.
-    new:
-      args:
-      - type: table
-        required: false
-      description: Create a new ParticleParams, optionally bulk-initializing from
-        a table.
-    flags:
-      property: full-write
-      type: number
-    start_color:
-      property: full-write
-      type:
-        display: vector
-    start_alpha:
-      property: full-write
-      type: number
-    end_color:
-      property: full-write
-      type:
-        display: vector
-    end_alpha:
-      property: full-write
-      type: number
-    start_scale:
-      property: full-write
-      type:
-        display: vector
-    end_scale:
-      property: full-write
-      type:
-        display: vector
-    part_max_age:
-      property: full-write
-      type: number
-    accel:
-      property: full-write
-      type:
-        display: vector
-    pattern:
-      property: full-write
-      type: number
-    innerangle:
-      property: full-write
-      type: number
-    outerangle:
-      property: full-write
-      type: number
-    texture:
-      property: full-write
-      type: string
-    burst_rate:
-      property: full-write
-      type: number
-    burst_count:
-      property: full-write
-      type: number
-    burst_radius:
-      property: full-write
-      type: number
-    burst_speed_min:
-      property: full-write
-      type: number
-    burst_speed_max:
-      property: full-write
-      type: number
-    src_max_age:
-      property: full-write
-      type: number
-    target_key:
-      property: full-write
-      type: string
-    omega:
-      property: full-write
-      type:
-        display: vector
-    angle_begin:
-      property: full-write
-      type: number
-    angle_end:
-      property: full-write
-      type: number
-    blend_func_source:
-      property: full-write
-      type: number
-    blend_func_dest:
-      property: full-write
-      type: number
-    start_glow:
-      property: full-write
-      type: number
-    end_glow:
-      property: full-write
-      type: number
-    interp_color:
-      property: full-write
-      type: bool
-    interp_scale:
-      property: full-write
-      type: bool
-    bounce:
-      property: full-write
-      type: bool
-    wind:
-      property: full-write
-      type: bool
-    follow:
-      property: full-write
-      type: bool
-    follow_velocity:
-      property: full-write
-      type: bool
-    target_pos:
-      property: full-write
-      type: bool
-    target_linear:
-      property: full-write
-      type: bool
-    emissive:
-      property: full-write
-      type: bool
-    ribbon:
-      property: full-write
-      type: bool
   PrimParamsSetterType:
     apply:
       method: true

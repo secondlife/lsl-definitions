@@ -886,11 +886,16 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
 
 @register("gen_fluent_builder_descriptors")
 def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
-    """Generate FluentParamDescriptor arrays and init calls for all type:table builder-rulesets.
+    """Generate FluentParamDescriptor arrays and dispatch wrappers for all type:table rulesets.
 
-    Reads each ruleset's metadata (enum, filler-tokens, apply-fn, apply-link-fn,
-    lua-module, lua-type) from lsl_definitions.yaml.  The resulting C++ fragment is
-    meant to be #include'd directly inside init_fluent_builders(lua_State* L).
+    For each ruleset, inspects the signature of ll{dispatch-fn} to determine whether
+    a link parameter is needed, then emits:
+      - FluentParamDescriptor array
+      - FluentFlagDescriptor array (if flag-enum present)
+      - fluent_builder_def_build / fluent_builder_def_add_flags calls (as a static initializer)
+      - a lambda dispatch wrapper
+      - a slua_register_fluent_fn call
+    The resulting fragment is #include'd inside init_fluent_builders(lua_State* L).
     """
     _semantic_map = {
         "integer": "i",
@@ -903,6 +908,100 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         "key": "k",
     }
 
+    def _inspect_dispatch_fn(dispatch_fn_name: str):
+        """Inspect ll{dispatch_fn_name}'s argument list.
+
+        Returns (prefix_args, has_link) where prefix_args is a list of
+        (name: str, is_link: bool) tuples for each non-list prefix arg in LL order.
+        Raises ValueError for unsupported signatures (non-integer prefix args,
+        or list not last).
+        """
+        full_name = "ll" + dispatch_fn_name
+        func = definitions.functions.get(full_name)
+        if func is None:
+            raise ValueError(f"dispatch-fn '{full_name}' not found in definitions")
+
+        args = func.arguments
+        if not args or args[-1].type != LSLType.LIST:
+            last = args[-1].type if args else "no args"
+            raise ValueError(f"{full_name}: last argument must be list, got {last}")
+
+        prefix_args = args[:-1]
+        result = []
+        has_link = False
+        for arg in prefix_args:
+            if arg.type != LSLType.INTEGER:
+                raise ValueError(
+                    f"{full_name}: unsupported non-integer prefix arg '{arg.name}' "
+                    f"(type {arg.type}). Only integer prefix args are supported; "
+                    f"hand-write this wrapper using slua_fluent_serialize() directly."
+                )
+            is_link = "link" in arg.name.lower()
+            if is_link:
+                has_link = True
+            result.append((arg.name, is_link))
+        return result, has_link
+
+    def _lua_fn_to_cpp_name(lua_fn: str) -> str:
+        """Convert camelCase Lua function name to snake_case C++ variable name.
+        e.g. particleSystem -> particle_system
+        """
+        return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", lua_fn).lower()
+
+    def _build_wrapper(cpp_name: str, dispatch_fn: str, prefix_args: list, has_link: bool) -> str:
+        """Emit a C++ lambda that reads Lua args, serializes params, and calls ll.dispatch_fn.
+
+        Lua stack layout:
+          1 .. N   : non-link integer args (in LL order, skipping link)
+          N+1      : params table
+          N+2      : link (optional, if has_link)
+        LL call order: original LL order (link, non-link args, rules list).
+        """
+        non_link_count = sum(1 for _, is_link in prefix_args if not is_link)
+        params_lua_pos = non_link_count + 1
+        link_lua_pos = params_lua_pos + 1
+        total_ll_args = len(prefix_args) + 1  # prefix args + rules list
+
+        lines = []
+
+        # Read non-link args from Lua stack (positions 1..N, in LL order).
+        lua_pos = 1
+        for arg_name, is_link in prefix_args:
+            if not is_link:
+                lines.append(f"    int {arg_name.lower()} = luaL_checkinteger(L, {lua_pos});")
+                lua_pos += 1
+
+        # Read optional link arg (last Lua position).
+        if has_link:
+            lines.append(
+                f"    int link = lua_isnoneornil(L, {link_lua_pos}) "
+                f"? SLUA_LINK_THIS : luaL_checkinteger(L, {link_lua_pos});"
+            )
+
+        # Serialize params table into a flat rules list.
+        lines.append(f"    slua_fluent_serialize(L, {params_lua_pos}, def);")
+        lines.append("    int rules_idx = lua_gettop(L);")
+
+        # Dispatch to ll.* in original LL order.
+        lines.append('    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");')
+        lines.append(f'    lua_rawgetfield(L, -1, "{dispatch_fn}");')
+        for arg_name, is_link in prefix_args:
+            if is_link:
+                lines.append("    lua_pushinteger(L, link);")
+            else:
+                lines.append(f"    lua_pushinteger(L, {arg_name.lower()});")
+        lines.append("    lua_pushvalue(L, rules_idx);")
+        lines.append(f"    lua_call(L, {total_ll_args}, 0);")
+        lines.append("    return 0;")
+
+        body = "\n".join(lines)
+        return (
+            f"auto {cpp_name} = [](lua_State* L) -> int {{\n"
+            f"    const auto* def = (const FluentBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));\n"
+            f"{body}\n"
+            f"}};"
+        )
+
     sections = []
     for ruleset_name, ruleset_data in definitions.builder_rulesets.items():
         if ruleset_data.get("type", "builder") != "table":
@@ -910,9 +1009,11 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
 
         enum_name = ruleset_data["enum"]
         lua_module = ruleset_data["lua-module"]
-        lua_type = ruleset_data["lua-type"]
-        apply_fn = ruleset_data["apply-fn"]
-        apply_link_fn = ruleset_data["apply-link-fn"]
+        lua_fn = ruleset_data["lua-fn"]
+        dispatch_fn = ruleset_data["dispatch-fn"]
+
+        prefix_args, has_link = _inspect_dispatch_fn(dispatch_fn)
+        cpp_name = _lua_fn_to_cpp_name(lua_fn)
 
         # Descriptor array/def names derived from the enum name.
         # e.g. ParticleParam -> kParticleParamsDescs, kParticleParamsDef
@@ -925,14 +1026,10 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             sem = _semantic_map[desc.value_type]
             desc_lines.append(f"    {{\"{name}\", '{sem}', {desc.tag}}},")
 
-        body = "\n".join(desc_lines)
+        param_body = "\n".join(desc_lines)
         section = (
             f"// {ruleset_name}\n"
-            f"static const FluentParamDescriptor {array_name}[] = {{\n{body}\n}};\n"
-            f"static FluentBuilderDef* {def_name} = fluent_builder_def_build(\n"
-            f'    "{apply_fn}", "{apply_link_fn}",\n'
-            f"    {array_name}, std::size({array_name}));\n"
-            f'slua_open_fluent_builder(L, "{lua_module}", "{lua_type}", {def_name});'
+            f"static const FluentParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
         )
 
         flag_enum_name = ruleset_data.get("flag-enum")
@@ -965,24 +1062,45 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             )
 
             flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
-
             flag_array_name = f"k{enum_name}FlagDescs"
             flag_lines = []
             for const in flag_consts:
-                name = const.name
-                strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
-                if flag_suffix and strict.endswith(flag_suffix):
-                    strict = strict[: -len(flag_suffix)]
-                tokens = [t for t in strict.split("_") if t not in filler_tokens]
-                prop_name = "_".join(tokens) if tokens else strict
+                if const.pretty_name:
+                    prop_name = const.pretty_name
+                else:
+                    name = const.name
+                    strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
+                    if flag_suffix and strict.endswith(flag_suffix):
+                        strict = strict[: -len(flag_suffix)]
+                    tokens = [t for t in strict.split("_") if t not in filler_tokens]
+                    prop_name = "_".join(tokens) if tokens else strict
                 mask = int(const.value, 0)
                 flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
 
             flag_body = "\n".join(flag_lines)
             section += (
-                f"\nstatic const FluentFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
-                f"fluent_builder_def_add_flags({def_name}, {flag_array_name}, std::size({flag_array_name}));"
+                f"static const FluentFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
             )
+
+            # Build def and add flags in a single static initializer so it is safe
+            # to call init_fluent_builders more than once.
+            section += (
+                f"static FluentBuilderDef* {def_name} = []() {{\n"
+                f"    auto* d = fluent_builder_def_build({array_name}, std::size({array_name}));\n"
+                f"    fluent_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
+                f"    return d;\n"
+                f"}}();\n"
+            )
+        else:
+            section += (
+                f"static FluentBuilderDef* {def_name} = "
+                f"fluent_builder_def_build({array_name}, std::size({array_name}));\n"
+            )
+
+        section += _build_wrapper(cpp_name, dispatch_fn, prefix_args, has_link) + "\n"
+        section += (
+            f'slua_register_fluent_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
+        )
 
         sections.append(section)
 

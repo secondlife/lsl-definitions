@@ -370,6 +370,9 @@
     "@sl-slua/global/llprim.ParamsSetter": {
         "documentation": "Value: PrimParamsSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
     },
+    "@sl-slua/global/llprim.ParticleSystem": {
+        "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
+    },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
         "learn_more_link": "https://luau.org/library/#math-library"
