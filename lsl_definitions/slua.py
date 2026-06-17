@@ -680,7 +680,7 @@ class SLuaDefinitionParser:
         builtin_types = dict(def_dict["builtin-types"])
         self._type_names.update(builtin_types.keys())
 
-        metamethods = dict(def_dict["metamethods"])
+        metamethods = {m["name"]: m for m in def_dict["metamethods"]}
         self._metamethods.update(metamethods.keys())
 
         controls = dict(def_dict["controls"])
