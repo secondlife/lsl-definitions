@@ -9631,9 +9631,9 @@ functions:
     - item:
         tooltip: Name of the item in the prim's inventory.
         type: string
-    - category:
-        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
-          MASK_EVERYONE, or MASK_NEXT).
+    - group:
+        tooltip: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+          MASK_EVERYONE, or MASK_NEXT) to get.
         type: integer
         enum-semantics: AssetPermissionCategory
     energy: 10.0
@@ -9642,15 +9642,14 @@ functions:
     return: integer
     enum-semantics: AssetPermission
     sleep: 0.0
-    tooltip: Returns an integer bitfield representing the permission category mask
-      of the specified inventory item.
+    tooltip: Returns the specified item's permission flags for the specified group.
     categories:
       - asset_permissions
       - prim_inventory
   llGetInventoryType:
     arguments:
-    - name:
-        tooltip: Name of the inventory item.
+    - item:
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 301
@@ -9658,8 +9657,7 @@ functions:
     return: integer
     enum-semantics: InventoryType
     sleep: 0.0
-    tooltip: Returns an integer representing the INVENTORY_* type of the named
-      inventory item.
+    tooltip: Returns an integer representing the INVENTORY_* type of the named inventory item.
     categories:
       - prim_inventory
   llGetKey:
@@ -10162,9 +10160,9 @@ functions:
       - prim_properties
   llGetObjectPermMask:
     arguments:
-    - category:
-        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
-          MASK_EVERYONE, or MASK_NEXT).
+    - group:
+        tooltip: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+          MASK_EVERYONE, or MASK_NEXT) to get.
         type: integer
         enum-semantics: AssetPermissionCategoryOrFlag
     energy: 10.0
@@ -10173,8 +10171,7 @@ functions:
     return: integer
     enum-semantics: AssetPermission
     sleep: 0.0
-    tooltip: Returns an integer bitfield representing the permission mask of the
-      specified category for the object containing the script.
+    tooltip: Returns the script's object's permission flags for the specified group.
     categories:
       - asset_permissions
       - linkset
@@ -14929,11 +14926,12 @@ functions:
     - item:
         tooltip: Name of the item in the prim's inventory.
         type: string
-    - category:
-        tooltip: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
+    - group:
+        tooltip: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+          MASK_EVERYONE, or MASK_NEXT) to set.
         type: integer
         enum-semantics: AssetPermissionCategory
-    - value:
+    - flags:
         tooltip: Bitfield of permissions (PERM_* flags) to set.
         type: integer
         enum-semantics: AssetPermission
@@ -14942,8 +14940,7 @@ functions:
     god-mode: true
     return: void
     sleep: 0.0
-    tooltip: Sets the specified permission category of the inventory item to the
-      value permissions mask.
+    tooltip: Sets the specified item's permission flags for the specified group.
     categories:
       - asset_permissions
       - prim_inventory
@@ -15293,11 +15290,12 @@ functions:
       - prim_properties
   llSetObjectPermMask:
     arguments:
-    - mask:
-        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
+    - group:
+        tooltip: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+          MASK_EVERYONE, or MASK_NEXT) to set.
         type: integer
         enum-semantics: AssetPermissionCategory
-    - value:
+    - flags:
         tooltip: Bitfield of permissions (PERM_* flags) to set.
         type: integer
         enum-semantics: AssetPermission
@@ -15306,8 +15304,7 @@ functions:
     god-mode: true
     return: void
     sleep: 0.0
-    tooltip: Sets the specified permission mask category to value on the root object
-      containing the script.
+    tooltip: Sets the scripts's object's permission flags for the specified group.
     categories:
       - asset_permissions
       - linkset
