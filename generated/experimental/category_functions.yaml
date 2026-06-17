@@ -1,376 +1,376 @@
 # Functions by category
 asset_permissions:
-- changed( integer Changed )
-- llGetInventoryPermMask( string InventoryItem, integer BitMask ) -> integer
-- llGetObjectPermMask( integer Category ) -> integer
-- llSetInventoryPermMask( string InventoryItem, integer PermissionFlag, integer PermissionMask ) -> void
-- llSetObjectPermMask( integer PermissionFlag, integer PermissionMask ) -> void
-- llTransferOwnership( key AgentID, integer Flags, list Params ) -> integer
+- changed( integer change )
+- llGetInventoryPermMask( string item, integer category ) -> integer
+- llGetObjectPermMask( integer category ) -> integer
+- llSetInventoryPermMask( string item, integer category, integer value ) -> void
+- llSetObjectPermMask( integer mask, integer value ) -> void
+- llTransferOwnership( key agent_id, integer flags, list options ) -> integer
 attachments:
-- attach( key AvatarID )
-- llAttachToAvatar( integer AttachmentPoint ) -> void
-- llAttachToAvatarTemp( integer AttachPoint ) -> void
+- attach( key id )
+- llAttachToAvatar( integer attach_point ) -> void
+- llAttachToAvatarTemp( integer attach_point ) -> void
 - llDetachFromAvatar(  ) -> void
 - llGetAttached(  ) -> integer
-- llGetAttachedList( key ID ) -> list
-- llGetAttachedListFiltered( key AgentID, list Options ) -> list
+- llGetAttachedList( key avatar ) -> list
+- llGetAttachedListFiltered( key avatar, list options ) -> list
 avatar:
-- control( key AvatarID, integer Levels, integer Edges )
+- control( key id, integer level, integer edge )
 - experience_permissions( key agent_id )
-- experience_permissions_denied( key agent_id, integer Reason )
-- game_control( key id, integer buttons, list axes )
-- llAgentInExperience( key AgentID ) -> integer
-- llAttachToAvatar( integer AttachmentPoint ) -> void
-- llAttachToAvatarTemp( integer AttachPoint ) -> void
-- llAvatarOnLinkSitTarget( integer LinkNumber ) -> key
+- experience_permissions_denied( key agent_id, integer reason )
+- game_control( key id, integer button_levels, list axes )
+- llAgentInExperience( key agent ) -> integer
+- llAttachToAvatar( integer attach_point ) -> void
+- llAttachToAvatarTemp( integer attach_point ) -> void
+- llAvatarOnLinkSitTarget( integer link ) -> key
 - llAvatarOnSitTarget(  ) -> key
 - llClearCameraParams(  ) -> void
 - llDetachFromAvatar(  ) -> void
-- llDetectedOwner( integer Number ) -> key
-- llForceMouselook( integer Enable ) -> void
-- llGetAgentInfo( key AvatarID ) -> integer
-- llGetAgentLanguage( key AvatarID ) -> string
-- llGetAgentList( integer Scope, list Options ) -> list
-- llGetAgentSize( key AvatarID ) -> vector
-- llGetAnimation( key AvatarID ) -> string
-- llGetAnimationList( key AvatarID ) -> list
-- llGetAnimationOverride( string AnimationState ) -> string
-- llGetAttachedList( key ID ) -> list
-- llGetAttachedListFiltered( key AgentID, list Options ) -> list
+- llDetectedOwner( integer number ) -> key
+- llForceMouselook( integer mouselook ) -> void
+- llGetAgentInfo( key id ) -> integer
+- llGetAgentLanguage( key avatar ) -> string
+- llGetAgentList( integer scope, list options ) -> list
+- llGetAgentSize( key avatar ) -> vector
+- llGetAnimation( key id ) -> string
+- llGetAnimationList( key avatar ) -> list
+- llGetAnimationOverride( string anim_state ) -> string
+- llGetAttachedList( key avatar ) -> list
+- llGetAttachedListFiltered( key avatar, list options ) -> list
 - llGetCameraAspect(  ) -> float
 - llGetCameraFOV(  ) -> float
 - llGetCameraPos(  ) -> vector
 - llGetCameraRot(  ) -> rotation
-- llGetDisplayName( key AvatarID ) -> string
+- llGetDisplayName( key id ) -> string
 - llGetPermissionsKey(  ) -> key
-- llGetUsername( key AvatarID ) -> string
-- llGetVisualParams( key ID, list Parameters ) -> list
-- llGiveMoney( key AvatarID, integer Amount ) -> integer
+- llGetUsername( key id ) -> string
+- llGetVisualParams( key agentid, list params ) -> list
+- llGiveMoney( key destination, integer amount ) -> integer
 - llIsFriend( key agent_id ) -> integer
-- llName2Key( string Name ) -> key
-- llReleaseCamera( key AvatarID ) -> void // deprecated
+- llName2Key( string name ) -> key
+- llReleaseCamera( key avatar ) -> void // deprecated
 - llReleaseControls(  ) -> void
 - llReplaceAgentEnvironment( key agent_id, float transition, string environment ) -> integer
-- llRequestAgentData( key AvatarID, integer Data ) -> key
-- llRequestDisplayName( key AvatarID ) -> key
-- llRequestExperiencePermissions( key AgentID, string unused ) -> void
-- llRequestUserKey( string Name ) -> key
-- llRequestUsername( key AvatarID ) -> key
-- llSetAgentEnvironment( key agent_id, float transition, list Settings ) -> integer
+- llRequestAgentData( key id, integer data ) -> key
+- llRequestDisplayName( key id ) -> key
+- llRequestExperiencePermissions( key agent, string name ) -> void
+- llRequestUserKey( string username ) -> key
+- llRequestUsername( key id ) -> key
+- llSetAgentEnvironment( key agent_id, float transition, list params ) -> integer
 - llSetAgentRot( rotation rot, integer flags ) -> void
-- llSetCameraParams( list Parameters ) -> void
-- llStartAnimation( string Animation ) -> void
-- llStopAnimation( string Animation ) -> void
-- llTakeCamera( key AvatarID ) -> void // deprecated
-- llTakeControls( integer Controls, integer Accept, integer PassOn ) -> void
-- llTeleportAgent( key AvatarID, string LandmarkName, vector Position, vector LookAtPoint ) -> void
-- llTeleportAgentGlobalCoords( key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint ) -> void
-- llTeleportAgentHome( key AvatarID ) -> void
-- llUnSit( key AvatarID ) -> void
+- llSetCameraParams( list rules ) -> void
+- llStartAnimation( string anim ) -> void
+- llStopAnimation( string anim ) -> void
+- llTakeCamera( key avatar ) -> void // deprecated
+- llTakeControls( integer controls, integer accept, integer pass_on ) -> void
+- llTeleportAgent( key agent, string landmark, vector position, vector look_at ) -> void
+- llTeleportAgentGlobalCoords( key agent, vector global_coordinates, vector region_coordinates, vector look_at ) -> void
+- llTeleportAgentHome( key avatar ) -> void
+- llUnSit( key id ) -> void
 - llWorldPosToHUD( vector world_pos ) -> vector
 avatar_animation:
-- llGetAnimation( key AvatarID ) -> string
-- llGetAnimationList( key AvatarID ) -> list
-- llGetAnimationOverride( string AnimationState ) -> string
-- llResetAnimationOverride( string AnimationState ) -> void
-- llSetAnimationOverride( string AnimationState, string AnimationName ) -> void
-- llStartAnimation( string Animation ) -> void
-- llStopAnimation( string Animation ) -> void
+- llGetAnimation( key id ) -> string
+- llGetAnimationList( key avatar ) -> list
+- llGetAnimationOverride( string anim_state ) -> string
+- llResetAnimationOverride( string anim_state ) -> void
+- llSetAnimationOverride( string anim_state, string anim ) -> void
+- llStartAnimation( string anim ) -> void
+- llStopAnimation( string anim ) -> void
 avatar_communication:
-- email( string Time, string Address, string Subject, string Body, integer NumberRemaining )
-- listen( integer Channel, string Name, key ID, string Text )
-- llDialog( key AvatarID, string Text, list Buttons, integer Channel ) -> void
-- llEmail( string Address, string Subject, string Text ) -> void
-- llInstantMessage( key AvatarID, string Text ) -> void
-- llListen( integer Channel, string SpeakersName, key SpeakersID, string Text ) -> integer
-- llListenControl( integer ChannelHandle, integer Active ) -> void
-- llListenRemove( integer ChannelHandle ) -> void
-- llLoadURL( key AvatarID, string Text, string URL ) -> void
-- llMapBeacon( string RegionName, vector Position, list Options ) -> void
-- llMapDestination( string RegionName, vector Position, vector Direction ) -> void
+- email( string time, string address, string subject, string message, integer num_left )
+- listen( integer channel, string name, key id, string message )
+- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- llEmail( string address, string subject, string message ) -> void
+- llInstantMessage( key user, string message ) -> void
+- llListen( integer channel, string name, key id, string msg ) -> integer
+- llListenControl( integer handle, integer active ) -> void
+- llListenRemove( integer handle ) -> void
+- llLoadURL( key avatar, string message, string url ) -> void
+- llMapBeacon( string region_name, vector pos, list options ) -> void
+- llMapDestination( string simname, vector pos, vector look_at ) -> void
 - llOpenFloater( string floater_name, string url, list params ) -> integer
-- llOwnerSay( string Text ) -> void
-- llRegionSayTo( key TargetID, integer Channel, string Text ) -> void
-- llSay( integer Channel, string Text ) -> void
-- llSetText( string Text, vector Color, float Opacity ) -> void
-- llShout( integer Channel, string Text ) -> void
-- llTargetedEmail( integer Target, string Subject, string Text ) -> void
-- llTextBox( key AvatarID, string Text, integer Channel ) -> void
-- llWhisper( integer Channel, string Text ) -> void
+- llOwnerSay( string msg ) -> void
+- llRegionSayTo( key target, integer channel, string msg ) -> void
+- llSay( integer channel, string msg ) -> void
+- llSetText( string text, vector color, float alpha ) -> void
+- llShout( integer channel, string msg ) -> void
+- llTargetedEmail( integer target, string subject, string message ) -> void
+- llTextBox( key avatar, string message, integer channel ) -> void
+- llWhisper( integer channel, string msg ) -> void
 avatar_inventory:
-- llGiveAgentInventory( key AgentID, string FolderName, list InventoryItems, list Options ) -> integer
-- llGiveInventory( key TargetID, string InventoryItem ) -> void
-- llGiveInventoryList( key TargetID, string FolderName, list InventoryItems ) -> void
+- llGiveAgentInventory( key agent, string folder, list inventory, list options ) -> integer
+- llGiveInventory( key destination, string inventory ) -> void
+- llGiveInventoryList( key target, string folder, list inventory ) -> void
 camera:
 - llClearCameraParams(  ) -> void
-- llForceMouselook( integer Enable ) -> void
+- llForceMouselook( integer mouselook ) -> void
 - llGetCameraAspect(  ) -> float
 - llGetCameraFOV(  ) -> float
 - llGetCameraPos(  ) -> vector
 - llGetCameraRot(  ) -> rotation
-- llReleaseCamera( key AvatarID ) -> void // deprecated
-- llSetCameraAtOffset( vector Offset ) -> void
-- llSetCameraEyeOffset( vector Offset ) -> void
-- llSetCameraParams( list Parameters ) -> void
-- llSetLinkCamera( integer LinkNumber, vector EyeOffset, vector LookOffset ) -> void
-- llTakeCamera( key AvatarID ) -> void // deprecated
+- llReleaseCamera( key avatar ) -> void // deprecated
+- llSetCameraAtOffset( vector offset ) -> void
+- llSetCameraEyeOffset( vector offset ) -> void
+- llSetCameraParams( list rules ) -> void
+- llSetLinkCamera( integer link, vector eye, vector at ) -> void
+- llTakeCamera( key avatar ) -> void // deprecated
 - llWorldPosToHUD( vector world_pos ) -> vector
 chat:
-- listen( integer Channel, string Name, key ID, string Text )
-- llDialog( key AvatarID, string Text, list Buttons, integer Channel ) -> void
-- llListen( integer Channel, string SpeakersName, key SpeakersID, string Text ) -> integer
-- llListenControl( integer ChannelHandle, integer Active ) -> void
-- llListenRemove( integer ChannelHandle ) -> void
-- llRegionSay( integer Channel, string Text ) -> void
-- llRegionSayTo( key TargetID, integer Channel, string Text ) -> void
-- llSay( integer Channel, string Text ) -> void
-- llShout( integer Channel, string Text ) -> void
-- llTextBox( key AvatarID, string Text, integer Channel ) -> void
-- llWhisper( integer Channel, string Text ) -> void
+- listen( integer channel, string name, key id, string message )
+- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- llListen( integer channel, string name, key id, string msg ) -> integer
+- llListenControl( integer handle, integer active ) -> void
+- llListenRemove( integer handle ) -> void
+- llRegionSay( integer channel, string msg ) -> void
+- llRegionSayTo( key target, integer channel, string msg ) -> void
+- llSay( integer channel, string msg ) -> void
+- llShout( integer channel, string msg ) -> void
+- llTextBox( key avatar, string message, integer channel ) -> void
+- llWhisper( integer channel, string msg ) -> void
 combat:
-- final_damage( integer count )
-- on_damage( integer count )
+- final_damage( integer num_detected )
+- on_damage( integer num_detected )
 - on_death(  )
-- llAdjustDamage( integer Number, float Damage ) -> void
-- llDamage( key target, float damage, integer type ) -> void
-- llDetectedDamage( integer Number ) -> list
-- llGetHealth( key ID ) -> float
-- llRezObjectWithParams( string InventoryItem, list Params ) -> key
-- llSetDamage( float Damage ) -> void
+- llAdjustDamage( integer number, float new_damage ) -> void
+- llDamage( key target, float damage, integer damage_type ) -> void
+- llDetectedDamage( integer number ) -> list
+- llGetHealth( key id ) -> float
+- llRezObjectWithParams( string inventory, list params ) -> key
+- llSetDamage( float damage ) -> void
 cryptography:
-- llComputeHash( string Message, string Algorithm ) -> string
-- llHMAC( string Key, string Message, string Algorithm ) -> string
-- llHash( string value ) -> integer
-- llMD5String( string Text, integer Nonce ) -> string
-- llSHA1String( string Text ) -> string
-- llSHA256String( string text ) -> string
-- llSignRSA( string PrivateKey, string Message, string Algorithm ) -> string
-- llVerifyRSA( string PublicKey, string Message, string Signature, string Algorithm ) -> integer
+- llComputeHash( string message, string algorithm ) -> string
+- llHMAC( string private_key, string msg, string algorithm ) -> string
+- llHash( string val ) -> integer
+- llMD5String( string src, integer nonce ) -> string
+- llSHA1String( string src ) -> string
+- llSHA256String( string src ) -> string
+- llSignRSA( string private_key, string msg, string algorithm ) -> string
+- llVerifyRSA( string public_key, string msg, string signature, string algorithm ) -> integer
 data_conversion:
-- llBase64ToInteger( string Text ) -> integer
-- llBase64ToString( string Text ) -> string
-- llCSV2List( string Text ) -> list
-- llDumpList2String( list Source, string Separator ) -> string
-- llIntegerToBase64( integer Value ) -> string
-- llJson2List( string JSON ) -> list
-- llJsonGetValue( string JSON, list Specifiers ) -> string
-- llJsonSetValue( string JSON, list Specifiers, string Value ) -> string
-- llJsonValueType( string JSON, list Specifiers ) -> string
+- llBase64ToInteger( string str ) -> integer
+- llBase64ToString( string str ) -> string
+- llCSV2List( string src ) -> list
+- llDumpList2String( list src, string separator ) -> string
+- llIntegerToBase64( integer number ) -> string
+- llJson2List( string src ) -> list
+- llJsonGetValue( string json, list specifiers ) -> string
+- llJsonSetValue( string json, list specifiers, string value ) -> string
+- llJsonValueType( string json, list specifiers ) -> string
 - llLinear2sRGB( vector color ) -> vector
-- llList2CSV( list ListVariable ) -> string
-- llList2Float( list ListVariable, integer Index ) -> float
-- llList2Integer( list ListVariable, integer Index ) -> integer
-- llList2Json( string JsonType, list Values ) -> string
-- llList2Key( list ListVariable, integer Index ) -> key
-- llList2Rot( list ListVariable, integer Index ) -> rotation
-- llList2String( list ListVariable, integer Index ) -> string
-- llList2Vector( list ListVariable, integer Index ) -> vector
-- llParseString2List( string Text, list Separators, list Spacers ) -> list
-- llParseStringKeepNulls( string Text, list Separators, list Spacers ) -> list
-- llStringToBase64( string Text ) -> string
-- llXorBase64( string Text1, string Text2 ) -> string
-- llXorBase64Strings( string Text1, string Text2 ) -> string // deprecated
-- llXorBase64StringsCorrect( string Text1, string Text2 ) -> string // deprecated
+- llList2CSV( list src ) -> string
+- llList2Float( list src, integer index ) -> float
+- llList2Integer( list src, integer index ) -> integer
+- llList2Json( string type, list values ) -> string
+- llList2Key( list src, integer index ) -> key
+- llList2Rot( list src, integer index ) -> rotation
+- llList2String( list src, integer index ) -> string
+- llList2Vector( list src, integer index ) -> vector
+- llParseString2List( string src, list separators, list spacers ) -> list
+- llParseStringKeepNulls( string src, list separators, list spacers ) -> list
+- llStringToBase64( string str ) -> string
+- llXorBase64( string str1, string str2 ) -> string
+- llXorBase64Strings( string str1, string str2 ) -> string // deprecated
+- llXorBase64StringsCorrect( string str1, string str2 ) -> string // deprecated
 data_storage:
 - linkset_data( integer action, string name, string value )
-- llCreateKeyValue( string Key, string Value ) -> key
+- llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
-- llDeleteKeyValue( string Key ) -> key
-- llFindNotecardTextCount( string NotecardName, string Pattern, list Options ) -> key
-- llFindNotecardTextSync( string NotecardName, string Pattern, integer StartMatch, integer Count, list Options ) -> list
-- llGetNotecardLine( string NotecardName, integer LineNumber ) -> key
-- llGetNotecardLineSync( string NotecardName, integer LineNumber ) -> string
-- llGetNumberOfNotecardLines( string NotecardName ) -> key
+- llDeleteKeyValue( string k ) -> key
+- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list
+- llGetNotecardLine( string name, integer line ) -> key
+- llGetNotecardLineSync( string name, integer line ) -> string
+- llGetNumberOfNotecardLines( string name ) -> key
 - llKeyCountKeyValue(  ) -> key
-- llKeysKeyValue( integer First, integer Count ) -> key
+- llKeysKeyValue( integer first, integer count ) -> key
 - llLinksetDataAvailable(  ) -> integer
-- llLinksetDataCountFound( string search ) -> integer
+- llLinksetDataCountFound( string pattern ) -> integer
 - llLinksetDataCountKeys(  ) -> integer
 - llLinksetDataDelete( string name ) -> integer
-- llLinksetDataDeleteFound( string search, string pass ) -> list
+- llLinksetDataDeleteFound( string pattern, string pass ) -> list
 - llLinksetDataDeleteProtected( string name, string pass ) -> integer
-- llLinksetDataFindKeys( string search, integer start, integer count ) -> list
+- llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list
 - llLinksetDataListKeys( integer start, integer count ) -> list
 - llLinksetDataRead( string name ) -> string
 - llLinksetDataReadProtected( string name, string pass ) -> string
 - llLinksetDataReset(  ) -> void
 - llLinksetDataWrite( string name, string value ) -> integer
 - llLinksetDataWriteProtected( string name, string value, string pass ) -> integer
-- llReadKeyValue( string Key ) -> key
-- llUpdateKeyValue( string Key, string Value, integer Checked, string OriginalValue ) -> key
+- llReadKeyValue( string k ) -> key
+- llUpdateKeyValue( string k, string v, integer checked, string original_value ) -> key
 dataserver:
-- dataserver( key RequestID, string Data )
-- llCreateKeyValue( string Key, string Value ) -> key
+- dataserver( key queryid, string data )
+- llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
-- llDeleteKeyValue( string Key ) -> key
-- llFindNotecardTextCount( string NotecardName, string Pattern, list Options ) -> key
-- llGetNotecardLine( string NotecardName, integer LineNumber ) -> key
-- llGetNumberOfNotecardLines( string NotecardName ) -> key
+- llDeleteKeyValue( string k ) -> key
+- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llGetNotecardLine( string name, integer line ) -> key
+- llGetNumberOfNotecardLines( string name ) -> key
 - llKeyCountKeyValue(  ) -> key
-- llKeysKeyValue( integer First, integer Count ) -> key
-- llReadKeyValue( string Key ) -> key
-- llRequestAgentData( key AvatarID, integer Data ) -> key
-- llRequestDisplayName( key AvatarID ) -> key
-- llRequestInventoryData( string InventoryItem ) -> key
-- llRequestSimulatorData( string RegionName, integer Data ) -> key
-- llRequestUserKey( string Name ) -> key
-- llRequestUsername( key AvatarID ) -> key
-- llUpdateKeyValue( string Key, string Value, integer Checked, string OriginalValue ) -> key
+- llKeysKeyValue( integer first, integer count ) -> key
+- llReadKeyValue( string k ) -> key
+- llRequestAgentData( key id, integer data ) -> key
+- llRequestDisplayName( key id ) -> key
+- llRequestInventoryData( string name ) -> key
+- llRequestSimulatorData( string region, integer data ) -> key
+- llRequestUserKey( string username ) -> key
+- llRequestUsername( key id ) -> key
+- llUpdateKeyValue( string k, string v, integer checked, string original_value ) -> key
 detected:
-- collision( integer NumberOfCollisions )
-- collision_end( integer NumberOfCollisions )
-- collision_start( integer NumberOfCollisions )
-- final_damage( integer count )
+- collision( integer num_detected )
+- collision_end( integer num_detected )
+- collision_start( integer num_detected )
+- final_damage( integer num_detected )
 - no_sensor(  )
-- on_damage( integer count )
-- sensor( integer NumberDetected )
-- touch( integer NumberOfTouches )
-- touch_end( integer NumberOfTouches )
-- touch_start( integer NumberOfTouches )
-- llAdjustDamage( integer Number, float Damage ) -> void
-- llDetectedDamage( integer Number ) -> list
-- llDetectedGrab( integer Number ) -> vector
-- llDetectedGroup( integer Number ) -> integer
-- llDetectedKey( integer Number ) -> key
-- llDetectedLinkNumber( integer Number ) -> integer
-- llDetectedName( integer Number ) -> string
-- llDetectedOwner( integer Number ) -> key
-- llDetectedPos( integer Number ) -> vector
-- llDetectedRezzer( integer Number ) -> key
-- llDetectedRot( integer Number ) -> rotation
-- llDetectedTouchBinormal( integer Index ) -> vector
-- llDetectedTouchFace( integer Index ) -> integer
-- llDetectedTouchNormal( integer Index ) -> vector
-- llDetectedTouchPos( integer Index ) -> vector
-- llDetectedTouchST( integer Index ) -> vector
-- llDetectedTouchUV( integer Index ) -> vector
-- llDetectedType( integer Number ) -> integer
-- llDetectedVel( integer Number ) -> vector
+- on_damage( integer num_detected )
+- sensor( integer num_detected )
+- touch( integer num_detected )
+- touch_end( integer num_detected )
+- touch_start( integer num_detected )
+- llAdjustDamage( integer number, float new_damage ) -> void
+- llDetectedDamage( integer number ) -> list
+- llDetectedGrab( integer number ) -> vector
+- llDetectedGroup( integer number ) -> integer
+- llDetectedKey( integer number ) -> key
+- llDetectedLinkNumber( integer number ) -> integer
+- llDetectedName( integer item ) -> string
+- llDetectedOwner( integer number ) -> key
+- llDetectedPos( integer number ) -> vector
+- llDetectedRezzer( integer number ) -> key
+- llDetectedRot( integer number ) -> rotation
+- llDetectedTouchBinormal( integer index ) -> vector
+- llDetectedTouchFace( integer index ) -> integer
+- llDetectedTouchNormal( integer index ) -> vector
+- llDetectedTouchPos( integer index ) -> vector
+- llDetectedTouchST( integer index ) -> vector
+- llDetectedTouchUV( integer index ) -> vector
+- llDetectedType( integer number ) -> integer
+- llDetectedVel( integer number ) -> vector
 effects:
-- llCollisionSprite( string ImpactSprite ) -> void // deprecated
-- llLinkParticleSystem( integer LinkNumber, list Rules ) -> void
-- llMakeExplosion( integer Particles, float Scale, float Velocity, float Lifetime, float Arc, string Texture, vector Offset ) -> void // deprecated
-- llMakeFire( integer Particles, float Scale, float Velocity, float Lifetime, float Arc, string Texture, vector Offset ) -> void // deprecated
-- llMakeFountain( integer Particles, float Scale, float Velocity, float Lifetime, float Arc, integer Bounce, string Texture, vector Offset, float Bounce_Offset ) -> void // deprecated
-- llMakeSmoke( integer Particles, float Scale, float Velocity, float Lifetime, float Arc, string Texture, vector Offset ) -> void // deprecated
-- llParticleSystem( list Parameters ) -> void
-- llSetLinkTextureAnim( integer LinkNumber, integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
-- llSetText( string Text, vector Color, float Opacity ) -> void
-- llSetTextureAnim( integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
+- llCollisionSprite( string impact_sprite ) -> void // deprecated
+- llLinkParticleSystem( integer link, list rules ) -> void
+- llMakeExplosion( integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset ) -> void // deprecated
+- llMakeFire( integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset ) -> void // deprecated
+- llMakeFountain( integer particles, float scale, float vel, float lifetime, float arc, integer bounce, string texture, vector offset, float bounce_offset ) -> void // deprecated
+- llMakeSmoke( integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset ) -> void // deprecated
+- llParticleSystem( list rules ) -> void
+- llSetLinkTextureAnim( integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
+- llSetText( string text, vector color, float alpha ) -> void
+- llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
 experience:
 - experience_permissions( key agent_id )
-- experience_permissions_denied( key agent_id, integer Reason )
-- llAgentInExperience( key AgentID ) -> integer
-- llClearExperience( key AgentID, key ExperienceID ) -> void // private // deprecated
-- llClearExperiencePermissions( key AgentID ) -> void // private // deprecated
-- llCreateKeyValue( string Key, string Value ) -> key
+- experience_permissions_denied( key agent_id, integer reason )
+- llAgentInExperience( key agent ) -> integer
+- llClearExperience( key agentid, key experienceid ) -> void // private // deprecated
+- llClearExperiencePermissions( key agentid ) -> void // private // deprecated
+- llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
-- llDeleteKeyValue( string Key ) -> key
-- llGetExperienceDetails( key ExperienceID ) -> list
-- llGetExperienceErrorMessage( integer Error ) -> string
-- llGetExperienceList( key AgentID ) -> list // private // deprecated
+- llDeleteKeyValue( string k ) -> key
+- llGetExperienceDetails( key experience_id ) -> list
+- llGetExperienceErrorMessage( integer error ) -> string
+- llGetExperienceList( key agentid ) -> list // private // deprecated
 - llKeyCountKeyValue(  ) -> key
-- llKeysKeyValue( integer First, integer Count ) -> key
-- llReadKeyValue( string Key ) -> key
+- llKeysKeyValue( integer first, integer count ) -> key
+- llReadKeyValue( string k ) -> key
 - llReplaceAgentEnvironment( key agent_id, float transition, string environment ) -> integer
-- llRequestExperiencePermissions( key AgentID, string unused ) -> void
-- llSetAgentEnvironment( key agent_id, float transition, list Settings ) -> integer
-- llSetExperienceKey( key ExperienceID ) -> integer // private // deprecated
-- llSitOnLink( key AvatarID, integer LinkID ) -> integer
-- llUpdateKeyValue( string Key, string Value, integer Checked, string OriginalValue ) -> key
+- llRequestExperiencePermissions( key agent, string name ) -> void
+- llSetAgentEnvironment( key agent_id, float transition, list params ) -> integer
+- llSetExperienceKey( key experienceid ) -> integer // private // deprecated
+- llSitOnLink( key agent_id, integer link ) -> integer
+- llUpdateKeyValue( string k, string v, integer checked, string original_value ) -> key
 experience_data:
-- llCreateKeyValue( string Key, string Value ) -> key
+- llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
-- llDeleteKeyValue( string Key ) -> key
+- llDeleteKeyValue( string k ) -> key
 - llKeyCountKeyValue(  ) -> key
-- llKeysKeyValue( integer First, integer Count ) -> key
-- llReadKeyValue( string Key ) -> key
-- llUpdateKeyValue( string Key, string Value, integer Checked, string OriginalValue ) -> key
+- llKeysKeyValue( integer first, integer count ) -> key
+- llReadKeyValue( string k ) -> key
+- llUpdateKeyValue( string k, string v, integer checked, string original_value ) -> key
 input:
-- control( key AvatarID, integer Levels, integer Edges )
-- game_control( key id, integer buttons, list axes )
+- control( key id, integer level, integer edge )
+- game_control( key id, integer button_levels, list axes )
 - llReleaseControls(  ) -> void
-- llSetClickAction( integer Action ) -> void
-- llTakeControls( integer Controls, integer Accept, integer PassOn ) -> void
+- llSetClickAction( integer action ) -> void
+- llTakeControls( integer controls, integer accept, integer pass_on ) -> void
 json:
-- llJson2List( string JSON ) -> list
-- llJsonGetValue( string JSON, list Specifiers ) -> string
-- llJsonSetValue( string JSON, list Specifiers, string Value ) -> string
-- llJsonValueType( string JSON, list Specifiers ) -> string
-- llList2Json( string JsonType, list Values ) -> string
+- llJson2List( string src ) -> list
+- llJsonGetValue( string json, list specifiers ) -> string
+- llJsonSetValue( string json, list specifiers, string value ) -> string
+- llJsonValueType( string json, list specifiers ) -> string
+- llList2Json( string type, list values ) -> string
 land_moderation:
-- llAddToLandBanList( key ID, float Hours ) -> void
-- llAddToLandPassList( key ID, float Hours ) -> void
-- llEjectFromLand( key AvatarID ) -> void
-- llManageEstateAccess( integer Action, key AvatarID ) -> integer
-- llRemoveFromLandBanList( key AvatarID ) -> void
-- llRemoveFromLandPassList( key AvatarID ) -> void
+- llAddToLandBanList( key avatar, float hours ) -> void
+- llAddToLandPassList( key avatar, float hours ) -> void
+- llEjectFromLand( key avatar ) -> void
+- llManageEstateAccess( integer action, key avatar ) -> integer
+- llRemoveFromLandBanList( key avatar ) -> void
+- llRemoveFromLandPassList( key avatar ) -> void
 - llResetLandBanList(  ) -> void
 - llResetLandPassList(  ) -> void
-- llReturnObjectsByID( list ObjectIDs ) -> integer
-- llReturnObjectsByOwner( key ID, integer Scope ) -> integer
-- llTeleportAgentHome( key AvatarID ) -> void
+- llReturnObjectsByID( list objects ) -> integer
+- llReturnObjectsByOwner( key owner, integer scope ) -> integer
+- llTeleportAgentHome( key avatar ) -> void
 linkset:
-- changed( integer Changed )
+- changed( integer change )
 - linkset_data( integer action, string name, string value )
-- llAvatarOnLinkSitTarget( integer LinkNumber ) -> key
+- llAvatarOnLinkSitTarget( integer link ) -> key
 - llBreakAllLinks(  ) -> void
-- llBreakLink( integer LinkNumber ) -> void
-- llClearLinkMedia( integer Link, integer Face ) -> integer
-- llCreateLink( key TargetPrim, integer Parent ) -> void
-- llGetLinkKey( integer LinkNumber ) -> key
-- llGetLinkMedia( integer LinkNumber, integer Face, list Parameters ) -> list
-- llGetLinkName( integer LinkNumber ) -> string
-- llGetLinkNumberOfSides( integer LinkNumber ) -> integer
-- llGetLinkPrimitiveParams( integer LinkNumber, list Parameters ) -> list
-- llGetLinkSitFlags( integer LinkNumber ) -> integer
+- llBreakLink( integer link ) -> void
+- llClearLinkMedia( integer link, integer face ) -> integer
+- llCreateLink( key target, integer parent ) -> void
+- llGetLinkKey( integer link ) -> key
+- llGetLinkMedia( integer link, integer face, list params ) -> list
+- llGetLinkName( integer link ) -> string
+- llGetLinkNumberOfSides( integer link ) -> integer
+- llGetLinkPrimitiveParams( integer link, list params ) -> list
+- llGetLinkSitFlags( integer link ) -> integer
 - llGetMass(  ) -> float
 - llGetMassMKS(  ) -> float
 - llGetMaxScaleFactor(  ) -> float
 - llGetMinScaleFactor(  ) -> float
 - llGetNumberOfPrims(  ) -> integer
-- llGetObjectPermMask( integer Category ) -> integer
+- llGetObjectPermMask( integer category ) -> integer
 - llGetOwner(  ) -> key
 - llGetRootPosition(  ) -> vector
 - llGetRootRotation(  ) -> rotation
-- llGetStatus( integer StatusFlag ) -> integer
+- llGetStatus( integer status ) -> integer
 - llIsLinkGLTFMaterial( integer link, integer face ) -> integer
-- llLinkSitTarget( integer LinkNumber, vector Offset, rotation Rotation ) -> void
+- llLinkSitTarget( integer link, vector offset, rotation rot ) -> void
 - llLinksetDataAvailable(  ) -> integer
-- llLinksetDataCountFound( string search ) -> integer
+- llLinksetDataCountFound( string pattern ) -> integer
 - llLinksetDataCountKeys(  ) -> integer
 - llLinksetDataDelete( string name ) -> integer
-- llLinksetDataDeleteFound( string search, string pass ) -> list
+- llLinksetDataDeleteFound( string pattern, string pass ) -> list
 - llLinksetDataDeleteProtected( string name, string pass ) -> integer
-- llLinksetDataFindKeys( string search, integer start, integer count ) -> list
+- llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list
 - llLinksetDataListKeys( integer start, integer count ) -> list
 - llLinksetDataRead( string name ) -> string
 - llLinksetDataReadProtected( string name, string pass ) -> string
 - llLinksetDataReset(  ) -> void
 - llLinksetDataWrite( string name, string value ) -> integer
 - llLinksetDataWriteProtected( string name, string value, string pass ) -> integer
-- llScaleByFactor( float ScalingFactor ) -> integer
-- llSetLinkAlpha( integer LinkNumber, float Opacity, integer Face ) -> void
-- llSetLinkColor( integer LinkNumber, vector Color, integer Face ) -> void
-- llSetLinkGLTFOverrides( integer link, integer face, list options ) -> void
-- llSetLinkMedia( integer Link, integer Face, list Parameters ) -> integer
-- llSetLinkPrimitiveParams( integer LinkNumber, list Parameters ) -> void // deprecated
-- llSetLinkPrimitiveParamsFast( integer LinkNumber, list Parameters ) -> void
-- llSetLinkRenderMaterial( integer LinkNumber, string RenderMaterial, integer Face ) -> void
-- llSetLinkSitFlags( integer LinkNumber, integer Flags ) -> void
-- llSetLinkTexture( integer LinkNumber, string Texture, integer Face ) -> void
-- llSetLinkTextureAnim( integer LinkNumber, integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
-- llSetObjectPermMask( integer PermissionFlag, integer PermissionMask ) -> void
-- llSetStatus( integer Status, integer Value ) -> void
+- llScaleByFactor( float scaling_factor ) -> integer
+- llSetLinkAlpha( integer link, float alpha, integer face ) -> void
+- llSetLinkColor( integer link, vector color, integer face ) -> void
+- llSetLinkGLTFOverrides( integer link, integer face, list params ) -> void
+- llSetLinkMedia( integer link, integer face, list params ) -> integer
+- llSetLinkPrimitiveParams( integer link, list rules ) -> void // deprecated
+- llSetLinkPrimitiveParamsFast( integer link, list rules ) -> void
+- llSetLinkRenderMaterial( integer link, string material, integer face ) -> void
+- llSetLinkSitFlags( integer link, integer flags ) -> void
+- llSetLinkTexture( integer link, string texture, integer face ) -> void
+- llSetLinkTextureAnim( integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
+- llSetObjectPermMask( integer mask, integer value ) -> void
+- llSetStatus( integer status, integer value ) -> void
 linkset_data:
 - linkset_data( integer action, string name, string value )
 - llLinksetDataAvailable(  ) -> integer
-- llLinksetDataCountFound( string search ) -> integer
+- llLinksetDataCountFound( string pattern ) -> integer
 - llLinksetDataCountKeys(  ) -> integer
 - llLinksetDataDelete( string name ) -> integer
-- llLinksetDataDeleteFound( string search, string pass ) -> list
+- llLinksetDataDeleteFound( string pattern, string pass ) -> list
 - llLinksetDataDeleteProtected( string name, string pass ) -> integer
-- llLinksetDataFindKeys( string search, integer start, integer count ) -> list
+- llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list
 - llLinksetDataListKeys( integer start, integer count ) -> list
 - llLinksetDataRead( string name ) -> string
 - llLinksetDataReadProtected( string name, string pass ) -> string
@@ -378,326 +378,326 @@ linkset_data:
 - llLinksetDataWrite( string name, string value ) -> integer
 - llLinksetDataWriteProtected( string name, string value, string pass ) -> integer
 list:
-- llDeleteSubList( list Source, integer Start, integer End ) -> list
-- llGetListEntryType( list ListVariable, integer Index ) -> integer
-- llGetListLength( list ListVariable ) -> integer
-- llList2CSV( list ListVariable ) -> string
-- llList2Float( list ListVariable, integer Index ) -> float
-- llList2Integer( list ListVariable, integer Index ) -> integer
-- llList2Json( string JsonType, list Values ) -> string
-- llList2Key( list ListVariable, integer Index ) -> key
-- llList2List( list ListVariable, integer Start, integer End ) -> list
-- llList2ListSlice( list ListVariable, integer Start, integer End, integer Stride, integer slice_index ) -> list
-- llList2ListStrided( list ListVariable, integer Start, integer End, integer Stride ) -> list
-- llList2Rot( list ListVariable, integer Index ) -> rotation
-- llList2String( list ListVariable, integer Index ) -> string
-- llList2Vector( list ListVariable, integer Index ) -> vector
-- llListFindList( list ListVariable, list Find ) -> integer
-- llListFindListNext( list ListVariable, list Find, integer Instance ) -> integer
-- llListFindStrided( list ListVariable, list Find, integer Start, integer End, integer Stride ) -> integer
-- llListInsertList( list Target, list ListVariable, integer Position ) -> list
-- llListRandomize( list ListVariable, integer Stride ) -> list
-- llListReplaceList( list Target, list ListVariable, integer Start, integer End ) -> list
-- llListSort( list ListVariable, integer Stride, integer Ascending ) -> list
-- llListSortStrided( list ListVariable, integer Stride, integer Sortkey, integer Ascending ) -> list
-- llListStatistics( integer Operation, list ListVariable ) -> float
+- llDeleteSubList( list src, integer start, integer end ) -> list
+- llGetListEntryType( list src, integer index ) -> integer
+- llGetListLength( list src ) -> integer
+- llList2CSV( list src ) -> string
+- llList2Float( list src, integer index ) -> float
+- llList2Integer( list src, integer index ) -> integer
+- llList2Json( string type, list values ) -> string
+- llList2Key( list src, integer index ) -> key
+- llList2List( list src, integer start, integer end ) -> list
+- llList2ListSlice( list src, integer start, integer end, integer stride, integer slice_index ) -> list
+- llList2ListStrided( list src, integer start, integer end, integer stride ) -> list
+- llList2Rot( list src, integer index ) -> rotation
+- llList2String( list src, integer index ) -> string
+- llList2Vector( list src, integer index ) -> vector
+- llListFindList( list src, list test ) -> integer
+- llListFindListNext( list src, list test, integer instance ) -> integer
+- llListFindStrided( list src, list test, integer start, integer end, integer stride ) -> integer
+- llListInsertList( list dest, list src, integer start ) -> list
+- llListRandomize( list src, integer stride ) -> list
+- llListReplaceList( list dest, list src, integer start, integer end ) -> list
+- llListSort( list src, integer stride, integer ascending ) -> list
+- llListSortStrided( list src, integer stride, integer stride_index, integer ascending ) -> list
+- llListStatistics( integer operation, list src ) -> float
 math:
-- llAbs( integer Value ) -> integer
-- llAcos( float Value ) -> float
-- llAngleBetween( rotation Rot1, rotation Rot2 ) -> float
-- llAsin( float Value ) -> float
+- llAbs( integer val ) -> integer
+- llAcos( float val ) -> float
+- llAngleBetween( rotation a, rotation b ) -> float
+- llAsin( float val ) -> float
 - llAtan2( float y, float x ) -> float
-- llAxes2Rot( vector Forward, vector Left, vector Up ) -> rotation
-- llAxisAngle2Rot( vector Axis, float Angle ) -> rotation
-- llCeil( float Value ) -> integer
-- llCos( float Theta ) -> float
-- llEuler2Rot( vector Vector ) -> rotation
-- llFabs( float Value ) -> float
-- llFloor( float Value ) -> integer
-- llFrand( float Magnitude ) -> float
+- llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
+- llAxisAngle2Rot( vector axis, float angle ) -> rotation
+- llCeil( float val ) -> integer
+- llCos( float theta ) -> float
+- llEuler2Rot( vector v ) -> rotation
+- llFabs( float val ) -> float
+- llFloor( float val ) -> integer
+- llFrand( float mag ) -> float
 - llLinear2sRGB( vector color ) -> vector
-- llListStatistics( integer Operation, list ListVariable ) -> float
-- llLog( float Value ) -> float
-- llLog10( float Value ) -> float
-- llModPow( integer Value, integer Power, integer Modulus ) -> integer
-- llPow( float Value, float Exponent ) -> float
-- llRot2Angle( rotation Rotation ) -> float
-- llRot2Axis( rotation Rotation ) -> vector
-- llRot2Euler( rotation Rotation ) -> vector
-- llRot2Fwd( rotation Rotation ) -> vector
-- llRot2Left( rotation Rotation ) -> vector
-- llRot2Up( rotation Rotation ) -> vector
-- llRotBetween( vector Vector1, vector Vector2 ) -> rotation
-- llRound( float Value ) -> integer
-- llSin( float Theta ) -> float
-- llSqrt( float Value ) -> float
-- llTan( float Theta ) -> float
-- llVecDist( vector Location1, vector Location2 ) -> float
-- llVecMag( vector Vector ) -> float
-- llVecNorm( vector Vector ) -> vector
+- llListStatistics( integer operation, list src ) -> float
+- llLog( float val ) -> float
+- llLog10( float val ) -> float
+- llModPow( integer a, integer b, integer c ) -> integer
+- llPow( float base, float exponent ) -> float
+- llRot2Angle( rotation rot ) -> float
+- llRot2Axis( rotation rot ) -> vector
+- llRot2Euler( rotation quat ) -> vector
+- llRot2Fwd( rotation q ) -> vector
+- llRot2Left( rotation q ) -> vector
+- llRot2Up( rotation q ) -> vector
+- llRotBetween( vector start, vector end ) -> rotation
+- llRound( float val ) -> integer
+- llSin( float theta ) -> float
+- llSqrt( float val ) -> float
+- llTan( float theta ) -> float
+- llVecDist( vector vec_a, vector vec_b ) -> float
+- llVecMag( vector vec ) -> float
+- llVecNorm( vector vec ) -> vector
 - llsRGB2Linear( vector srgb ) -> vector
 math_3d:
-- llAngleBetween( rotation Rot1, rotation Rot2 ) -> float
-- llAxes2Rot( vector Forward, vector Left, vector Up ) -> rotation
-- llAxisAngle2Rot( vector Axis, float Angle ) -> rotation
-- llEuler2Rot( vector Vector ) -> rotation
-- llRot2Angle( rotation Rotation ) -> float
-- llRot2Axis( rotation Rotation ) -> vector
-- llRot2Euler( rotation Rotation ) -> vector
-- llRot2Fwd( rotation Rotation ) -> vector
-- llRot2Left( rotation Rotation ) -> vector
-- llRot2Up( rotation Rotation ) -> vector
-- llRotBetween( vector Vector1, vector Vector2 ) -> rotation
-- llVecDist( vector Location1, vector Location2 ) -> float
-- llVecMag( vector Vector ) -> float
-- llVecNorm( vector Vector ) -> vector
+- llAngleBetween( rotation a, rotation b ) -> float
+- llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
+- llAxisAngle2Rot( vector axis, float angle ) -> rotation
+- llEuler2Rot( vector v ) -> rotation
+- llRot2Angle( rotation rot ) -> float
+- llRot2Axis( rotation rot ) -> vector
+- llRot2Euler( rotation quat ) -> vector
+- llRot2Fwd( rotation q ) -> vector
+- llRot2Left( rotation q ) -> vector
+- llRot2Up( rotation q ) -> vector
+- llRotBetween( vector start, vector end ) -> rotation
+- llVecDist( vector vec_a, vector vec_b ) -> float
+- llVecMag( vector vec ) -> float
+- llVecNorm( vector vec ) -> vector
 math_trig:
-- llAcos( float Value ) -> float
-- llAngleBetween( rotation Rot1, rotation Rot2 ) -> float
-- llAsin( float Value ) -> float
+- llAcos( float val ) -> float
+- llAngleBetween( rotation a, rotation b ) -> float
+- llAsin( float val ) -> float
 - llAtan2( float y, float x ) -> float
-- llAxes2Rot( vector Forward, vector Left, vector Up ) -> rotation
-- llAxisAngle2Rot( vector Axis, float Angle ) -> rotation
-- llCos( float Theta ) -> float
-- llRot2Angle( rotation Rotation ) -> float
-- llRot2Axis( rotation Rotation ) -> vector
-- llRot2Fwd( rotation Rotation ) -> vector
-- llRot2Left( rotation Rotation ) -> vector
-- llRot2Up( rotation Rotation ) -> vector
-- llRotBetween( vector Vector1, vector Vector2 ) -> rotation
-- llSin( float Theta ) -> float
-- llTan( float Theta ) -> float
+- llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
+- llAxisAngle2Rot( vector axis, float angle ) -> rotation
+- llCos( float theta ) -> float
+- llRot2Angle( rotation rot ) -> float
+- llRot2Axis( rotation rot ) -> vector
+- llRot2Fwd( rotation q ) -> vector
+- llRot2Left( rotation q ) -> vector
+- llRot2Up( rotation q ) -> vector
+- llRotBetween( vector start, vector end ) -> rotation
+- llSin( float theta ) -> float
+- llTan( float theta ) -> float
 media:
-- changed( integer Changed )
-- llClearLinkMedia( integer Link, integer Face ) -> integer
-- llClearPrimMedia( integer Face ) -> integer
-- llGetLinkMedia( integer LinkNumber, integer Face, list Parameters ) -> list
-- llGetPrimMediaParams( integer Face, list Parameters ) -> list
-- llHTTPResponse( key HTTPRequestID, integer Status, string Body ) -> void
-- llParcelMediaCommandList( list CommandList ) -> void
-- llParcelMediaQuery( list QueryList ) -> list
+- changed( integer change )
+- llClearLinkMedia( integer link, integer face ) -> integer
+- llClearPrimMedia( integer face ) -> integer
+- llGetLinkMedia( integer link, integer face, list params ) -> list
+- llGetPrimMediaParams( integer face, list params ) -> list
+- llHTTPResponse( key request_id, integer status, string body ) -> void
+- llParcelMediaCommandList( list commandList ) -> void
+- llParcelMediaQuery( list query ) -> list
 - llRefreshPrimURL(  ) -> void // deprecated
-- llReleaseURL( string URL ) -> void
+- llReleaseURL( string url ) -> void
 - llRequestSecureURL(  ) -> key
 - llRequestURL(  ) -> key
-- llSetContentType( key HTTPRequestID, integer ContentType ) -> void
-- llSetLinkMedia( integer Link, integer Face, list Parameters ) -> integer
-- llSetParcelMusicURL( string URL ) -> void
-- llSetPrimMediaParams( integer Face, list MediaParameters ) -> integer
-- llSetPrimURL( string URL ) -> void // deprecated
+- llSetContentType( key request_id, integer content_type ) -> void
+- llSetLinkMedia( integer link, integer face, list params ) -> integer
+- llSetParcelMusicURL( string url ) -> void
+- llSetPrimMediaParams( integer face, list params ) -> integer
+- llSetPrimURL( string url ) -> void // deprecated
 money:
-- money( key Payer, integer Amount )
-- transaction_result( key RequestID, integer Success, string Message )
-- llGiveMoney( key AvatarID, integer Amount ) -> integer
-- llSetClickAction( integer Action ) -> void
-- llSetPayPrice( integer Price, list QuickButtons ) -> void
-- llTransferLindenDollars( key AvatarID, integer Amount ) -> key
+- money( key id, integer amount )
+- transaction_result( key id, integer success, string data )
+- llGiveMoney( key destination, integer amount ) -> integer
+- llSetClickAction( integer action ) -> void
+- llSetPayPrice( integer price, list quick_pay_buttons ) -> void
+- llTransferLindenDollars( key destination, integer amount ) -> key
 movement:
-- at_rot_target( integer TargetNumber, rotation TargetRotation, rotation CurrentRotation )
-- at_target( integer TargetNumber, vector TargetPosition, vector CurrentPosition )
+- at_rot_target( integer handle, rotation targetrot, rotation ourrot )
+- at_target( integer tnum, vector targetpos, vector ourpos )
 - moving_end(  )
 - moving_start(  )
 - not_at_rot_target(  )
 - not_at_target(  )
-- llApplyImpulse( vector Force, integer Local ) -> void
-- llApplyRotationalImpulse( vector Force, integer Local ) -> void
+- llApplyImpulse( vector momentum, integer local ) -> void
+- llApplyRotationalImpulse( vector force, integer local ) -> void
 - llGetOmega(  ) -> vector
 - llGetTorque(  ) -> vector
 - llGetVel(  ) -> vector
-- llLookAt( vector Target, float Strength, float Damping ) -> void
-- llMoveToTarget( vector Target, float Tau ) -> void
-- llPointAt( vector Point ) -> void // private // deprecated
-- llPushObject( key ObjectID, vector Impulse, vector AngularImpulse, integer Local ) -> void
-- llRotLookAt( rotation Rotation, float Strength, float Damping ) -> void
-- llRotTarget( rotation Rotation, float LeeWay ) -> integer
-- llRotTargetRemove( integer Handle ) -> void
+- llLookAt( vector target, float strength, float damping ) -> void
+- llMoveToTarget( vector target, float tau ) -> void
+- llPointAt( vector pos ) -> void // private // deprecated
+- llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void
+- llRotLookAt( rotation target_direction, float strength, float damping ) -> void
+- llRotTarget( rotation rot, float error ) -> integer
+- llRotTargetRemove( integer handle ) -> void
 - llSetAgentRot( rotation rot, integer flags ) -> void
-- llSetAngularVelocity( vector AngVel, integer Local ) -> void
-- llSetForce( vector Force, integer Local ) -> void
-- llSetForceAndTorque( vector Force, vector Torque, integer Local ) -> void
-- llSetHoverHeight( float Height, integer Water, float Tau ) -> void
-- llSetKeyframedMotion( list Keyframes, list Options ) -> void
-- llSetLocalRot( rotation Rotation ) -> void
-- llSetPos( vector Position ) -> void
-- llSetRegionPos( vector Position ) -> integer
-- llSetRot( rotation Rotation ) -> void
-- llSetTorque( vector Torque, integer Local ) -> void
-- llSetVelocity( vector Velocity, integer Local ) -> void
+- llSetAngularVelocity( vector initial_omega, integer local ) -> void
+- llSetForce( vector force, integer local ) -> void
+- llSetForceAndTorque( vector force, vector torque, integer local ) -> void
+- llSetHoverHeight( float height, integer water, float tau ) -> void
+- llSetKeyframedMotion( list keyframes, list options ) -> void
+- llSetLocalRot( rotation rot ) -> void
+- llSetPos( vector pos ) -> void
+- llSetRegionPos( vector position ) -> integer
+- llSetRot( rotation rot ) -> void
+- llSetTorque( vector torque, integer local ) -> void
+- llSetVelocity( vector velocity, integer local ) -> void
 - llStopHover(  ) -> void
 - llStopLookAt(  ) -> void
 - llStopMoveToTarget(  ) -> void
 - llStopPointAt(  ) -> void // private // deprecated
-- llTarget( vector Position, float Range ) -> integer
-- llTargetOmega( vector Axis, float SpinRate, float Gain ) -> void
-- llTargetRemove( integer Target ) -> void
+- llTarget( vector position, float range ) -> integer
+- llTargetOmega( vector axis, float spinrate, float gain ) -> void
+- llTargetRemove( integer handle ) -> void
 notecard:
-- llFindNotecardTextCount( string NotecardName, string Pattern, list Options ) -> key
-- llFindNotecardTextSync( string NotecardName, string Pattern, integer StartMatch, integer Count, list Options ) -> list
-- llGetNotecardLine( string NotecardName, integer LineNumber ) -> key
-- llGetNotecardLineSync( string NotecardName, integer LineNumber ) -> string
-- llGetNumberOfNotecardLines( string NotecardName ) -> key
+- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list
+- llGetNotecardLine( string name, integer line ) -> key
+- llGetNotecardLineSync( string name, integer line ) -> string
+- llGetNumberOfNotecardLines( string name ) -> key
 object:
-- llGetBoundingBox( key ID ) -> list
+- llGetBoundingBox( key object ) -> list
 - llGetCenterOfMass(  ) -> vector
-- llGetObjectDetails( key ID, list Parameters ) -> list
-- llGetObjectLinkKey( key id, integer link_no ) -> key
-- llGetObjectMass( key ID ) -> float
-- llGetObjectPrimCount( key ObjectID ) -> integer
-- llGetOwnerKey( key ObjectID ) -> key
-- llKey2Name( key ID ) -> string
-- llSameGroup( key ID ) -> integer
+- llGetObjectDetails( key id, list params ) -> list
+- llGetObjectLinkKey( key object_id, integer link ) -> key
+- llGetObjectMass( key id ) -> float
+- llGetObjectPrimCount( key prim ) -> integer
+- llGetOwnerKey( key id ) -> key
+- llKey2Name( key id ) -> string
+- llSameGroup( key uuid ) -> integer
 object_animation:
 - llGetObjectAnimationNames(  ) -> list
-- llStartObjectAnimation( string Animation ) -> void
-- llStopObjectAnimation( string Animation ) -> void
+- llStartObjectAnimation( string anim ) -> void
+- llStopObjectAnimation( string anim ) -> void
 parcel:
-- llAddToLandBanList( key ID, float Hours ) -> void
-- llAddToLandPassList( key ID, float Hours ) -> void
-- llEjectFromLand( key AvatarID ) -> void
-- llGetAgentList( integer Scope, list Options ) -> list
-- llGetEnvironment( vector Position, list EnvParams ) -> list
-- llGetLandOwnerAt( vector Position ) -> key
+- llAddToLandBanList( key avatar, float hours ) -> void
+- llAddToLandPassList( key avatar, float hours ) -> void
+- llEjectFromLand( key avatar ) -> void
+- llGetAgentList( integer scope, list options ) -> list
+- llGetEnvironment( vector pos, list params ) -> list
+- llGetLandOwnerAt( vector pos ) -> key
 - llGetMoonDirection(  ) -> vector
 - llGetMoonRotation(  ) -> rotation
-- llGetParcelDetails( vector Position, list ParcelDetails ) -> list
-- llGetParcelFlags( vector Position ) -> integer
-- llGetParcelMaxPrims( vector Position, integer SimWide ) -> integer
+- llGetParcelDetails( vector pos, list params ) -> list
+- llGetParcelFlags( vector pos ) -> integer
+- llGetParcelMaxPrims( vector pos, integer sim_wide ) -> integer
 - llGetParcelMusicURL(  ) -> string
-- llGetParcelPrimCount( vector Position, integer Category, integer SimWide ) -> integer
-- llGetParcelPrimOwners( vector Position ) -> list
+- llGetParcelPrimCount( vector pos, integer category, integer sim_wide ) -> integer
+- llGetParcelPrimOwners( vector pos ) -> list
 - llGetSunDirection(  ) -> vector
 - llGetSunRotation(  ) -> rotation
-- llOverMyLand( key ID ) -> integer
-- llParcelMediaCommandList( list CommandList ) -> void
-- llParcelMediaQuery( list QueryList ) -> list
-- llRemoveFromLandBanList( key AvatarID ) -> void
-- llRemoveFromLandPassList( key AvatarID ) -> void
+- llOverMyLand( key id ) -> integer
+- llParcelMediaCommandList( list commandList ) -> void
+- llParcelMediaQuery( list query ) -> list
+- llRemoveFromLandBanList( key avatar ) -> void
+- llRemoveFromLandPassList( key avatar ) -> void
 - llReplaceEnvironment( vector position, string environment, integer track_no, integer day_length, integer day_offset ) -> integer
 - llResetLandBanList(  ) -> void
 - llResetLandPassList(  ) -> void
-- llScriptDanger( vector Position ) -> integer
-- llSetEnvironment( vector Position, list EnvParams ) -> integer
+- llScriptDanger( vector pos ) -> integer
+- llSetEnvironment( vector position, list params ) -> integer
 - llSetParcelForSale( integer ForSale, list Options ) -> integer
-- llSetParcelMusicURL( string URL ) -> void
+- llSetParcelMusicURL( string url ) -> void
 parcel_appearance:
-- llGetEnvironment( vector Position, list EnvParams ) -> list
+- llGetEnvironment( vector pos, list params ) -> list
 - llGetMoonDirection(  ) -> vector
 - llGetMoonRotation(  ) -> rotation
 - llGetSunDirection(  ) -> vector
 - llGetSunRotation(  ) -> rotation
 - llReplaceAgentEnvironment( key agent_id, float transition, string environment ) -> integer
 - llReplaceEnvironment( vector position, string environment, integer track_no, integer day_length, integer day_offset ) -> integer
-- llSetAgentEnvironment( key agent_id, float transition, list Settings ) -> integer
-- llSetEnvironment( vector Position, list EnvParams ) -> integer
+- llSetAgentEnvironment( key agent_id, float transition, list params ) -> integer
+- llSetEnvironment( vector position, list params ) -> integer
 parcel_media:
-- llParcelMediaCommandList( list CommandList ) -> void
-- llParcelMediaQuery( list QueryList ) -> list
-- llSetParcelMusicURL( string URL ) -> void
+- llParcelMediaCommandList( list commandList ) -> void
+- llParcelMediaQuery( list query ) -> list
+- llSetParcelMusicURL( string url ) -> void
 particles:
-- llLinkParticleSystem( integer LinkNumber, list Rules ) -> void
-- llParticleSystem( list Parameters ) -> void
+- llLinkParticleSystem( integer link, list rules ) -> void
+- llParticleSystem( list rules ) -> void
 pathfinding:
 - moving_end(  )
 - moving_start(  )
-- path_update( integer Type, list Reserved )
-- llCreateCharacter( list Options ) -> void
+- path_update( integer type, list reserved )
+- llCreateCharacter( list options ) -> void
 - llDeleteCharacter(  ) -> void
-- llEvade( key TargetID, list Options ) -> void
-- llExecCharacterCmd( integer Command, list Options ) -> void
-- llFleeFrom( vector Source, float Distance, list Options ) -> void
-- llGetClosestNavPoint( vector Point, list Options ) -> list
-- llGetStaticPath( vector Start, vector End, float Radius, list Parameters ) -> list
-- llNavigateTo( vector Location, list Options ) -> void
-- llPatrolPoints( list Points, list Options ) -> void
-- llPursue( key TargetID, list Options ) -> void
-- llUpdateCharacter( list Options ) -> void
-- llWanderWithin( vector Origin, vector Area, list Options ) -> void
+- llEvade( key target, list options ) -> void
+- llExecCharacterCmd( integer command, list options ) -> void
+- llFleeFrom( vector position, float distance, list options ) -> void
+- llGetClosestNavPoint( vector point, list options ) -> list
+- llGetStaticPath( vector start, vector end, float radius, list params ) -> list
+- llNavigateTo( vector pos, list options ) -> void
+- llPatrolPoints( list patrolPoints, list options ) -> void
+- llPursue( key target, list options ) -> void
+- llUpdateCharacter( list options ) -> void
+- llWanderWithin( vector origin, vector dist, list options ) -> void
 permissions:
 - experience_permissions( key agent_id )
-- experience_permissions_denied( key agent_id, integer Reason )
-- run_time_permissions( integer PermissionFlags )
+- experience_permissions_denied( key agent_id, integer reason )
+- run_time_permissions( integer perm )
 - llClearCameraParams(  ) -> void
-- llForceMouselook( integer Enable ) -> void
-- llGetAnimation( key AvatarID ) -> string
-- llGetAnimationList( key AvatarID ) -> list
-- llGetAnimationOverride( string AnimationState ) -> string
+- llForceMouselook( integer mouselook ) -> void
+- llGetAnimation( key id ) -> string
+- llGetAnimationList( key avatar ) -> list
+- llGetAnimationOverride( string anim_state ) -> string
 - llGetCameraAspect(  ) -> float
 - llGetCameraFOV(  ) -> float
 - llGetCameraPos(  ) -> vector
 - llGetCameraRot(  ) -> rotation
 - llGetPermissions(  ) -> integer
 - llGetPermissionsKey(  ) -> key
-- llGiveMoney( key AvatarID, integer Amount ) -> integer
-- llReleaseCamera( key AvatarID ) -> void // deprecated
+- llGiveMoney( key destination, integer amount ) -> integer
+- llReleaseCamera( key avatar ) -> void // deprecated
 - llReleaseControls(  ) -> void
-- llRequestExperiencePermissions( key AgentID, string unused ) -> void
-- llRequestPermissions( key AvatarID, integer PermissionMask ) -> void
-- llResetAnimationOverride( string AnimationState ) -> void
-- llSetAnimationOverride( string AnimationState, string AnimationName ) -> void
-- llSetCameraParams( list Parameters ) -> void
-- llStartAnimation( string Animation ) -> void
-- llStopAnimation( string Animation ) -> void
-- llTakeCamera( key AvatarID ) -> void // deprecated
-- llTakeControls( integer Controls, integer Accept, integer PassOn ) -> void
-- llTeleportAgent( key AvatarID, string LandmarkName, vector Position, vector LookAtPoint ) -> void
-- llTeleportAgentGlobalCoords( key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint ) -> void
-- llTransferLindenDollars( key AvatarID, integer Amount ) -> key
+- llRequestExperiencePermissions( key agent, string name ) -> void
+- llRequestPermissions( key agent, integer permissions ) -> void
+- llResetAnimationOverride( string anim_state ) -> void
+- llSetAnimationOverride( string anim_state, string anim ) -> void
+- llSetCameraParams( list rules ) -> void
+- llStartAnimation( string anim ) -> void
+- llStopAnimation( string anim ) -> void
+- llTakeCamera( key avatar ) -> void // deprecated
+- llTakeControls( integer controls, integer accept, integer pass_on ) -> void
+- llTeleportAgent( key agent, string landmark, vector position, vector look_at ) -> void
+- llTeleportAgentGlobalCoords( key agent, vector global_coordinates, vector region_coordinates, vector look_at ) -> void
+- llTransferLindenDollars( key destination, integer amount ) -> key
 - llWorldPosToHUD( vector world_pos ) -> vector
 physics:
-- collision( integer NumberOfCollisions )
-- collision_end( integer NumberOfCollisions )
-- collision_start( integer NumberOfCollisions )
-- land_collision( vector Position )
-- land_collision_end( vector Position )
-- land_collision_start( vector Position )
-- llApplyImpulse( vector Force, integer Local ) -> void
-- llApplyRotationalImpulse( vector Force, integer Local ) -> void
-- llCastRay( vector Start, vector End, list Options ) -> list
-- llCollisionFilter( string ObjectName, key ObjectID, integer Accept ) -> void
-- llCollisionSound( string ImpactSound, float ImpactVolume ) -> void
+- collision( integer num_detected )
+- collision_end( integer num_detected )
+- collision_start( integer num_detected )
+- land_collision( vector pos )
+- land_collision_end( vector pos )
+- land_collision_start( vector pos )
+- llApplyImpulse( vector momentum, integer local ) -> void
+- llApplyRotationalImpulse( vector force, integer local ) -> void
+- llCastRay( vector start, vector end, list options ) -> list
+- llCollisionFilter( string name, key id, integer accept ) -> void
+- llCollisionSound( string impact_sound, float impact_volume ) -> void
 - llGetAccel(  ) -> vector
 - llGetCenterOfMass(  ) -> vector
 - llGetForce(  ) -> vector
 - llGetGeometricCenter(  ) -> vector
 - llGetMass(  ) -> float
 - llGetMassMKS(  ) -> float
-- llGetObjectMass( key ID ) -> float
+- llGetObjectMass( key id ) -> float
 - llGetOmega(  ) -> vector
 - llGetPhysicsMaterial(  ) -> list
-- llGetStatus( integer StatusFlag ) -> integer
+- llGetStatus( integer status ) -> integer
 - llGetTorque(  ) -> vector
 - llGetVel(  ) -> vector
-- llLookAt( vector Target, float Strength, float Damping ) -> void
-- llMoveToTarget( vector Target, float Tau ) -> void
-- llPassCollisions( integer Pass ) -> void
-- llPointAt( vector Point ) -> void // private // deprecated
-- llPushObject( key ObjectID, vector Impulse, vector AngularImpulse, integer Local ) -> void
-- llRemoveVehicleFlags( integer Vehiclelags ) -> void
-- llRotLookAt( rotation Rotation, float Strength, float Damping ) -> void
-- llRotTarget( rotation Rotation, float LeeWay ) -> integer
-- llRotTargetRemove( integer Handle ) -> void
+- llLookAt( vector target, float strength, float damping ) -> void
+- llMoveToTarget( vector target, float tau ) -> void
+- llPassCollisions( integer pass ) -> void
+- llPointAt( vector pos ) -> void // private // deprecated
+- llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void
+- llRemoveVehicleFlags( integer flags ) -> void
+- llRotLookAt( rotation target_direction, float strength, float damping ) -> void
+- llRotTarget( rotation rot, float error ) -> integer
+- llRotTargetRemove( integer handle ) -> void
 - llSetAgentRot( rotation rot, integer flags ) -> void
-- llSetAngularVelocity( vector AngVel, integer Local ) -> void
-- llSetBuoyancy( float Buoyancy ) -> void
-- llSetForce( vector Force, integer Local ) -> void
-- llSetForceAndTorque( vector Force, vector Torque, integer Local ) -> void
-- llSetHoverHeight( float Height, integer Water, float Tau ) -> void
-- llSetKeyframedMotion( list Keyframes, list Options ) -> void
-- llSetPhysicsMaterial( integer MaterialBits, float GravityMultiplier, float Restitution, float Friction, float Density ) -> void
-- llSetStatus( integer Status, integer Value ) -> void
-- llSetTorque( vector Torque, integer Local ) -> void
-- llSetVelocity( vector Velocity, integer Local ) -> void
+- llSetAngularVelocity( vector initial_omega, integer local ) -> void
+- llSetBuoyancy( float buoyancy ) -> void
+- llSetForce( vector force, integer local ) -> void
+- llSetForceAndTorque( vector force, vector torque, integer local ) -> void
+- llSetHoverHeight( float height, integer water, float tau ) -> void
+- llSetKeyframedMotion( list keyframes, list options ) -> void
+- llSetPhysicsMaterial( integer mask, float gravity_multiplier, float restitution, float friction, float density ) -> void
+- llSetStatus( integer status, integer value ) -> void
+- llSetTorque( vector torque, integer local ) -> void
+- llSetVelocity( vector velocity, integer local ) -> void
 - llStopHover(  ) -> void
 - llStopLookAt(  ) -> void
 - llStopMoveToTarget(  ) -> void
 - llStopPointAt(  ) -> void // private // deprecated
-- llTargetOmega( vector Axis, float SpinRate, float Gain ) -> void
-- llVolumeDetect( integer DetectEnabled ) -> void
+- llTargetOmega( vector axis, float spinrate, float gain ) -> void
+- llVolumeDetect( integer detect ) -> void
 prim:
 - llAvatarOnSitTarget(  ) -> key
-- llClearPrimMedia( integer Face ) -> integer
-- llGetAlpha( integer Face ) -> float
-- llGetColor( integer Face ) -> vector
+- llClearPrimMedia( integer face ) -> integer
+- llGetAlpha( integer face ) -> float
+- llGetColor( integer face ) -> vector
 - llGetCreator(  ) -> key
 - llGetKey(  ) -> key
 - llGetLinkNumber(  ) -> integer
@@ -708,149 +708,149 @@ prim:
 - llGetObjectName(  ) -> string
 - llGetPhysicsMaterial(  ) -> list
 - llGetPos(  ) -> vector
-- llGetPrimMediaParams( integer Face, list Parameters ) -> list
-- llGetPrimitiveParams( list Parameters ) -> list
-- llGetRenderMaterial( integer Face ) -> string
+- llGetPrimMediaParams( integer face, list params ) -> list
+- llGetPrimitiveParams( list params ) -> list
+- llGetRenderMaterial( integer face ) -> string
 - llGetRot(  ) -> rotation
 - llGetScale(  ) -> vector
-- llGetTexture( integer Face ) -> string
-- llGetTextureOffset( integer Face ) -> vector
-- llGetTextureRot( integer Face ) -> float
-- llGetTextureScale( integer Face ) -> vector
-- llOffsetTexture( float OffsetS, float OffsetT, integer Face ) -> void
-- llRemoteLoadScriptPin( key ObjectID, string ScriptName, integer PIN, integer Running, integer StartParameter ) -> void
-- llRotateTexture( float Radians, integer Face ) -> void
-- llScaleTexture( float Horizontal, float Vertical, integer Face ) -> void
-- llSetAlpha( float Opacity, integer Face ) -> void
-- llSetColor( vector Color, integer Face ) -> void
-- llSetLocalRot( rotation Rotation ) -> void
-- llSetObjectDesc( string Description ) -> void
-- llSetObjectName( string Name ) -> void
-- llSetPhysicsMaterial( integer MaterialBits, float GravityMultiplier, float Restitution, float Friction, float Density ) -> void
-- llSetPos( vector Position ) -> void
-- llSetPrimMediaParams( integer Face, list MediaParameters ) -> integer
-- llSetPrimURL( string URL ) -> void // deprecated
-- llSetPrimitiveParams( list Parameters ) -> void // deprecated
-- llSetRegionPos( vector Position ) -> integer
-- llSetRenderMaterial( string Material, integer Face ) -> void
-- llSetRot( rotation Rotation ) -> void
-- llSetScale( vector Scale ) -> void
-- llSetSitText( string Text ) -> void
-- llSetTexture( string Texture, integer Face ) -> void
-- llSetTextureAnim( integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
-- llSitTarget( vector Offset, rotation Rotation ) -> void
+- llGetTexture( integer face ) -> string
+- llGetTextureOffset( integer face ) -> vector
+- llGetTextureRot( integer face ) -> float
+- llGetTextureScale( integer face ) -> vector
+- llOffsetTexture( float u, float v, integer face ) -> void
+- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
+- llRotateTexture( float angle, integer face ) -> void
+- llScaleTexture( float u, float v, integer face ) -> void
+- llSetAlpha( float alpha, integer face ) -> void
+- llSetColor( vector color, integer face ) -> void
+- llSetLocalRot( rotation rot ) -> void
+- llSetObjectDesc( string description ) -> void
+- llSetObjectName( string name ) -> void
+- llSetPhysicsMaterial( integer mask, float gravity_multiplier, float restitution, float friction, float density ) -> void
+- llSetPos( vector pos ) -> void
+- llSetPrimMediaParams( integer face, list params ) -> integer
+- llSetPrimURL( string url ) -> void // deprecated
+- llSetPrimitiveParams( list rules ) -> void // deprecated
+- llSetRegionPos( vector position ) -> integer
+- llSetRenderMaterial( string material, integer face ) -> void
+- llSetRot( rotation rot ) -> void
+- llSetScale( vector size ) -> void
+- llSetSitText( string text ) -> void
+- llSetTexture( string texture, integer face ) -> void
+- llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
+- llSitTarget( vector offset, rotation rot ) -> void
 prim_appearance:
-- changed( integer Changed )
-- llGetAlpha( integer Face ) -> float
-- llGetColor( integer Face ) -> vector
-- llGetLinkNumberOfSides( integer LinkNumber ) -> integer
-- llGetLinkPrimitiveParams( integer LinkNumber, list Parameters ) -> list
+- changed( integer change )
+- llGetAlpha( integer face ) -> float
+- llGetColor( integer face ) -> vector
+- llGetLinkNumberOfSides( integer link ) -> integer
+- llGetLinkPrimitiveParams( integer link, list params ) -> list
 - llGetMaxScaleFactor(  ) -> float
 - llGetMinScaleFactor(  ) -> float
 - llGetNumberOfSides(  ) -> integer
-- llGetPrimitiveParams( list Parameters ) -> list
-- llGetRenderMaterial( integer Face ) -> string
-- llGetTexture( integer Face ) -> string
-- llGetTextureOffset( integer Face ) -> vector
-- llGetTextureRot( integer Face ) -> float
-- llGetTextureScale( integer Face ) -> vector
+- llGetPrimitiveParams( list params ) -> list
+- llGetRenderMaterial( integer face ) -> string
+- llGetTexture( integer face ) -> string
+- llGetTextureOffset( integer face ) -> vector
+- llGetTextureRot( integer face ) -> float
+- llGetTextureScale( integer face ) -> vector
 - llIsLinkGLTFMaterial( integer link, integer face ) -> integer
 - llLinear2sRGB( vector color ) -> vector
-- llOffsetTexture( float OffsetS, float OffsetT, integer Face ) -> void
-- llRotateTexture( float Radians, integer Face ) -> void
-- llScaleByFactor( float ScalingFactor ) -> integer
-- llScaleTexture( float Horizontal, float Vertical, integer Face ) -> void
-- llSetAlpha( float Opacity, integer Face ) -> void
-- llSetColor( vector Color, integer Face ) -> void
-- llSetLinkAlpha( integer LinkNumber, float Opacity, integer Face ) -> void
-- llSetLinkColor( integer LinkNumber, vector Color, integer Face ) -> void
-- llSetLinkGLTFOverrides( integer link, integer face, list options ) -> void
-- llSetLinkPrimitiveParams( integer LinkNumber, list Parameters ) -> void // deprecated
-- llSetLinkPrimitiveParamsFast( integer LinkNumber, list Parameters ) -> void
-- llSetLinkRenderMaterial( integer LinkNumber, string RenderMaterial, integer Face ) -> void
-- llSetLinkTexture( integer LinkNumber, string Texture, integer Face ) -> void
-- llSetLinkTextureAnim( integer LinkNumber, integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
-- llSetPrimitiveParams( list Parameters ) -> void // deprecated
-- llSetRenderMaterial( string Material, integer Face ) -> void
-- llSetScale( vector Scale ) -> void
-- llSetText( string Text, vector Color, float Opacity ) -> void
-- llSetTexture( string Texture, integer Face ) -> void
-- llSetTextureAnim( integer Mode, integer Face, integer SizeX, integer SizeY, float Start, float Length, float Rate ) -> void
+- llOffsetTexture( float u, float v, integer face ) -> void
+- llRotateTexture( float angle, integer face ) -> void
+- llScaleByFactor( float scaling_factor ) -> integer
+- llScaleTexture( float u, float v, integer face ) -> void
+- llSetAlpha( float alpha, integer face ) -> void
+- llSetColor( vector color, integer face ) -> void
+- llSetLinkAlpha( integer link, float alpha, integer face ) -> void
+- llSetLinkColor( integer link, vector color, integer face ) -> void
+- llSetLinkGLTFOverrides( integer link, integer face, list params ) -> void
+- llSetLinkPrimitiveParams( integer link, list rules ) -> void // deprecated
+- llSetLinkPrimitiveParamsFast( integer link, list rules ) -> void
+- llSetLinkRenderMaterial( integer link, string material, integer face ) -> void
+- llSetLinkTexture( integer link, string texture, integer face ) -> void
+- llSetLinkTextureAnim( integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
+- llSetPrimitiveParams( list rules ) -> void // deprecated
+- llSetRenderMaterial( string material, integer face ) -> void
+- llSetScale( vector size ) -> void
+- llSetText( string text, vector color, float alpha ) -> void
+- llSetTexture( string texture, integer face ) -> void
+- llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
 - llsRGB2Linear( vector srgb ) -> vector
 prim_inventory:
-- changed( integer Changed )
-- llAllowInventoryDrop( integer Flag ) -> void
-- llDerezObject( key ID, integer flags ) -> integer
-- llGetInventoryAcquireTime( string InventoryItem ) -> string
-- llGetInventoryCreator( string InventoryItem ) -> key
-- llGetInventoryDesc( string InventoryItem ) -> string
-- llGetInventoryKey( string InventoryItem ) -> key
-- llGetInventoryName( integer InventoryType, integer Index ) -> string
-- llGetInventoryNumber( integer InventoryType ) -> integer
-- llGetInventoryPermMask( string InventoryItem, integer BitMask ) -> integer
-- llGetInventoryType( string InventoryItem ) -> integer
+- changed( integer change )
+- llAllowInventoryDrop( integer add ) -> void
+- llDerezObject( key id, integer flag ) -> integer
+- llGetInventoryAcquireTime( string item ) -> string
+- llGetInventoryCreator( string item ) -> key
+- llGetInventoryDesc( string item ) -> string
+- llGetInventoryKey( string name ) -> key
+- llGetInventoryName( integer type, integer number ) -> string
+- llGetInventoryNumber( integer type ) -> integer
+- llGetInventoryPermMask( string item, integer category ) -> integer
+- llGetInventoryType( string name ) -> integer
 - llGetScriptName(  ) -> string
-- llGetScriptState( string ScriptName ) -> integer
-- llGiveInventory( key TargetID, string InventoryItem ) -> void
-- llGiveInventoryList( key TargetID, string FolderName, list InventoryItems ) -> void
-- llGodLikeRezObject( key InventoryItemID, vector Position ) -> void
-- llRemoteLoadScript( key Target, string ScriptName, integer Unknown1, integer Unknown2 ) -> void // private // deprecated
-- llRemoteLoadScriptPin( key ObjectID, string ScriptName, integer PIN, integer Running, integer StartParameter ) -> void
-- llRemoveInventory( string InventoryItem ) -> void
-- llRequestInventoryData( string InventoryItem ) -> key
-- llResetOtherScript( string ScriptName ) -> void
-- llRezAtRoot( string InventoryItem, vector Position, vector Velocity, rotation Rotation, integer StartParameter ) -> void
-- llRezObject( string InventoryItem, vector Position, vector Velocity, rotation Rotation, integer StartParameter ) -> void
-- llRezObjectWithParams( string InventoryItem, list Params ) -> key
-- llSetInventoryPermMask( string InventoryItem, integer PermissionFlag, integer PermissionMask ) -> void
-- llSetRemoteScriptAccessPin( integer PIN ) -> void
-- llSetScriptState( string ScriptName, integer Running ) -> void
+- llGetScriptState( string script ) -> integer
+- llGiveInventory( key destination, string inventory ) -> void
+- llGiveInventoryList( key target, string folder, list inventory ) -> void
+- llGodLikeRezObject( key inventory, vector pos ) -> void
+- llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated
+- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
+- llRemoveInventory( string item ) -> void
+- llRequestInventoryData( string name ) -> key
+- llResetOtherScript( string name ) -> void
+- llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void
+- llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void
+- llRezObjectWithParams( string inventory, list params ) -> key
+- llSetInventoryPermMask( string item, integer category, integer value ) -> void
+- llSetRemoteScriptAccessPin( integer pin ) -> void
+- llSetScriptState( string name, integer running ) -> void
 prim_media:
-- changed( integer Changed )
-- llClearLinkMedia( integer Link, integer Face ) -> integer
-- llClearPrimMedia( integer Face ) -> integer
-- llGetLinkMedia( integer LinkNumber, integer Face, list Parameters ) -> list
-- llGetPrimMediaParams( integer Face, list Parameters ) -> list
-- llHTTPResponse( key HTTPRequestID, integer Status, string Body ) -> void
+- changed( integer change )
+- llClearLinkMedia( integer link, integer face ) -> integer
+- llClearPrimMedia( integer face ) -> integer
+- llGetLinkMedia( integer link, integer face, list params ) -> list
+- llGetPrimMediaParams( integer face, list params ) -> list
+- llHTTPResponse( key request_id, integer status, string body ) -> void
 - llRefreshPrimURL(  ) -> void // deprecated
-- llSetContentType( key HTTPRequestID, integer ContentType ) -> void
-- llSetLinkMedia( integer Link, integer Face, list Parameters ) -> integer
-- llSetPrimMediaParams( integer Face, list MediaParameters ) -> integer
-- llSetPrimURL( string URL ) -> void // deprecated
+- llSetContentType( key request_id, integer content_type ) -> void
+- llSetLinkMedia( integer link, integer face, list params ) -> integer
+- llSetPrimMediaParams( integer face, list params ) -> integer
+- llSetPrimURL( string url ) -> void // deprecated
 prim_properties:
 - llGetObjectDesc(  ) -> string
-- llGetObjectDetails( key ID, list Parameters ) -> list
+- llGetObjectDetails( key id, list params ) -> list
 - llGetObjectName(  ) -> string
-- llGetPrimitiveParams( list Parameters ) -> list
-- llSetClickAction( integer Action ) -> void
-- llSetLinkPrimitiveParams( integer LinkNumber, list Parameters ) -> void // deprecated
-- llSetLinkPrimitiveParamsFast( integer LinkNumber, list Parameters ) -> void
-- llSetObjectDesc( string Description ) -> void
-- llSetObjectName( string Name ) -> void
-- llSetPayPrice( integer Price, list QuickButtons ) -> void
-- llSetPhysicsMaterial( integer MaterialBits, float GravityMultiplier, float Restitution, float Friction, float Density ) -> void
-- llSetPrimitiveParams( list Parameters ) -> void // deprecated
-- llSetStatus( integer Status, integer Value ) -> void
-- llSetText( string Text, vector Color, float Opacity ) -> void
-- llSetTouchText( string Text ) -> void
+- llGetPrimitiveParams( list params ) -> list
+- llSetClickAction( integer action ) -> void
+- llSetLinkPrimitiveParams( integer link, list rules ) -> void // deprecated
+- llSetLinkPrimitiveParamsFast( integer link, list rules ) -> void
+- llSetObjectDesc( string description ) -> void
+- llSetObjectName( string name ) -> void
+- llSetPayPrice( integer price, list quick_pay_buttons ) -> void
+- llSetPhysicsMaterial( integer mask, float gravity_multiplier, float restitution, float friction, float density ) -> void
+- llSetPrimitiveParams( list rules ) -> void // deprecated
+- llSetStatus( integer status, integer value ) -> void
+- llSetText( string text, vector color, float alpha ) -> void
+- llSetTouchText( string text ) -> void
 quaternion:
-- llAngleBetween( rotation Rot1, rotation Rot2 ) -> float
-- llAxes2Rot( vector Forward, vector Left, vector Up ) -> rotation
-- llAxisAngle2Rot( vector Axis, float Angle ) -> rotation
-- llEuler2Rot( vector Vector ) -> rotation
-- llRot2Angle( rotation Rotation ) -> float
-- llRot2Axis( rotation Rotation ) -> vector
-- llRot2Euler( rotation Rotation ) -> vector
-- llRot2Fwd( rotation Rotation ) -> vector
-- llRot2Left( rotation Rotation ) -> vector
-- llRot2Up( rotation Rotation ) -> vector
-- llRotBetween( vector Vector1, vector Vector2 ) -> rotation
+- llAngleBetween( rotation a, rotation b ) -> float
+- llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
+- llAxisAngle2Rot( vector axis, float angle ) -> rotation
+- llEuler2Rot( vector v ) -> rotation
+- llRot2Angle( rotation rot ) -> float
+- llRot2Axis( rotation rot ) -> vector
+- llRot2Euler( rotation quat ) -> vector
+- llRot2Fwd( rotation q ) -> vector
+- llRot2Left( rotation q ) -> vector
+- llRot2Up( rotation q ) -> vector
+- llRotBetween( vector start, vector end ) -> rotation
 region:
-- changed( integer Changed )
-- llCloud( vector Offset ) -> float // deprecated
-- llEdgeOfWorld( vector Position, vector Direction ) -> integer
-- llGetAgentList( integer Scope, list Options ) -> list
-- llGetEnv( string DataRequest ) -> string
+- changed( integer change )
+- llCloud( vector offset ) -> float // deprecated
+- llEdgeOfWorld( vector pos, vector dir ) -> integer
+- llGetAgentList( integer scope, list options ) -> list
+- llGetEnv( string name ) -> string
 - llGetRegionAgentCount(  ) -> integer
 - llGetRegionCorner(  ) -> vector
 - llGetRegionDayLength(  ) -> integer
@@ -864,41 +864,41 @@ region:
 - llGetRegionSunRotation(  ) -> rotation
 - llGetRegionTimeDilation(  ) -> float
 - llGetRegionTimeOfDay(  ) -> float
-- llGetSimStats( integer StatType ) -> float
+- llGetSimStats( integer stat_type ) -> float
 - llGetSimulatorHostname(  ) -> string
-- llGround( vector Offset ) -> float
-- llGroundContour( vector Offset ) -> vector
-- llGroundNormal( vector Offset ) -> vector
-- llGroundRepel( float Height, integer Water, float Tau ) -> void
-- llGroundSlope( vector Offset ) -> vector
-- llModifyLand( integer Action, integer Area ) -> void
-- llRequestSimulatorData( string RegionName, integer Data ) -> key
-- llSetGroundTexture( list Changes ) -> integer
-- llWater( vector Offset ) -> float
-- llWind( vector Offset ) -> vector
+- llGround( vector offset ) -> float
+- llGroundContour( vector offset ) -> vector
+- llGroundNormal( vector offset ) -> vector
+- llGroundRepel( float height, integer water, float tau ) -> void
+- llGroundSlope( vector offset ) -> vector
+- llModifyLand( integer action, integer brush ) -> void
+- llRequestSimulatorData( string region, integer data ) -> key
+- llSetGroundTexture( list changes ) -> integer
+- llWater( vector offset ) -> float
+- llWind( vector offset ) -> vector
 region_appearance:
 - llGetRegionMoonDirection(  ) -> vector
 - llGetRegionMoonRotation(  ) -> rotation
 - llGetRegionSunDirection(  ) -> vector
 - llGetRegionSunRotation(  ) -> rotation
 - llReplaceAgentEnvironment( key agent_id, float transition, string environment ) -> integer
-- llSetAgentEnvironment( key agent_id, float transition, list Settings ) -> integer
+- llSetAgentEnvironment( key agent_id, float transition, list params ) -> integer
 rez:
-- object_rez( key RezzedObjectsID )
-- on_rez( integer StartParameter )
-- llDerezObject( key ID, integer flags ) -> integer
+- object_rez( key id )
+- on_rez( integer start_param )
+- llDerezObject( key id, integer flag ) -> integer
 - llDie(  ) -> void
 - llGetStartParameter(  ) -> integer
 - llGetStartString(  ) -> string
-- llGodLikeRezObject( key InventoryItemID, vector Position ) -> void
-- llReturnObjectsByID( list ObjectIDs ) -> integer
-- llReturnObjectsByOwner( key ID, integer Scope ) -> integer
-- llRezAtRoot( string InventoryItem, vector Position, vector Velocity, rotation Rotation, integer StartParameter ) -> void
-- llRezObject( string InventoryItem, vector Position, vector Velocity, rotation Rotation, integer StartParameter ) -> void
-- llRezObjectWithParams( string InventoryItem, list Params ) -> key
+- llGodLikeRezObject( key inventory, vector pos ) -> void
+- llReturnObjectsByID( list objects ) -> integer
+- llReturnObjectsByOwner( key owner, integer scope ) -> integer
+- llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void
+- llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void
+- llRezObjectWithParams( string inventory, list params ) -> key
 script:
-- changed( integer Changed )
-- on_rez( integer StartParameter )
+- changed( integer change )
+- on_rez( integer start_param )
 - state_entry(  )
 - state_exit(  )
 - timer(  )
@@ -909,114 +909,114 @@ script:
 - llGetMemoryLimit(  ) -> integer
 - llGetSPMaxMemory(  ) -> integer
 - llGetScriptName(  ) -> string
-- llGetScriptState( string ScriptName ) -> integer
+- llGetScriptState( string script ) -> integer
 - llGetStartParameter(  ) -> integer
 - llGetStartString(  ) -> string
 - llGetTime(  ) -> float
 - llGetUsedMemory(  ) -> integer
-- llMinEventDelay( float Delay ) -> void
-- llRemoteLoadScript( key Target, string ScriptName, integer Unknown1, integer Unknown2 ) -> void // private // deprecated
-- llRemoteLoadScriptPin( key ObjectID, string ScriptName, integer PIN, integer Running, integer StartParameter ) -> void
-- llResetOtherScript( string ScriptName ) -> void
+- llMinEventDelay( float delay ) -> void
+- llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated
+- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
+- llResetOtherScript( string name ) -> void
 - llResetScript(  ) -> void
 - llResetTime(  ) -> void
-- llScriptDanger( vector Position ) -> integer
-- llScriptProfiler( integer State ) -> void
-- llSetMemoryLimit( integer Limit ) -> integer
-- llSetRemoteScriptAccessPin( integer PIN ) -> void
-- llSetScriptState( string ScriptName, integer Running ) -> void
-- llSetTimerEvent( float Rate ) -> void
-- llSleep( float Time ) -> void
+- llScriptDanger( vector pos ) -> integer
+- llScriptProfiler( integer flags ) -> void
+- llSetMemoryLimit( integer limit ) -> integer
+- llSetRemoteScriptAccessPin( integer pin ) -> void
+- llSetScriptState( string name, integer running ) -> void
+- llSetTimerEvent( float sec ) -> void
+- llSleep( float sec ) -> void
 script_communication:
-- http_request( key HTTPRequestID, string HTTPMethod, string Body )
-- http_response( key HTTPRequestID, integer Status, list Metadata, string Body )
-- link_message( integer SendersLink, integer Value, string Text, key ID )
-- listen( integer Channel, string Name, key ID, string Text )
-- remote_data( integer EventType, key ChannelID, key MessageID, string Sender, integer IData, string SData ) // deprecated
-- llCloseRemoteDataChannel( key ChannelID ) -> void // deprecated
-- llGetNextEmail( string Address, string Subject ) -> void
-- llHTTPRequest( string URL, list Parameters, string Body ) -> key
-- llHTTPResponse( key HTTPRequestID, integer Status, string Body ) -> void
-- llListen( integer Channel, string SpeakersName, key SpeakersID, string Text ) -> integer
-- llListenControl( integer ChannelHandle, integer Active ) -> void
-- llListenRemove( integer ChannelHandle ) -> void
-- llMessageLinked( integer LinkNumber, integer Number, string Text, key ID ) -> void
+- http_request( key request_id, string method, string body )
+- http_response( key request_id, integer status, list metadata, string body )
+- link_message( integer sender_num, integer num, string str, key id )
+- listen( integer channel, string name, key id, string message )
+- remote_data( integer event_type, key channel, key message_id, string sender, integer idata, string sdata ) // deprecated
+- llCloseRemoteDataChannel( key channel ) -> void // deprecated
+- llGetNextEmail( string address, string subject ) -> void
+- llHTTPRequest( string url, list parameters, string body ) -> key
+- llHTTPResponse( key request_id, integer status, string body ) -> void
+- llListen( integer channel, string name, key id, string msg ) -> integer
+- llListenControl( integer handle, integer active ) -> void
+- llListenRemove( integer handle ) -> void
+- llMessageLinked( integer link, integer num, string str, key id ) -> void
 - llOpenRemoteDataChannel(  ) -> void // deprecated
-- llRegionSay( integer Channel, string Text ) -> void
-- llRegionSayTo( key TargetID, integer Channel, string Text ) -> void
-- llRemoteDataReply( key ChannelID, key MessageID, string sData, integer iData ) -> void // deprecated
+- llRegionSay( integer channel, string msg ) -> void
+- llRegionSayTo( key target, integer channel, string msg ) -> void
+- llRemoteDataReply( key channel, key message_id, string sdata, integer idata ) -> void // deprecated
 - llRemoteDataSetRegion(  ) -> void // deprecated
 - llRequestSecureURL(  ) -> key
 - llRequestURL(  ) -> key
-- llSay( integer Channel, string Text ) -> void
-- llSendRemoteData( key ChannelID, string Destination, integer Value, string Text ) -> key // deprecated
-- llShout( integer Channel, string Text ) -> void
-- llWhisper( integer Channel, string Text ) -> void
+- llSay( integer channel, string msg ) -> void
+- llSendRemoteData( key channel, string dest, integer idata, string sdata ) -> key // deprecated
+- llShout( integer channel, string msg ) -> void
+- llWhisper( integer channel, string msg ) -> void
 sensor:
-- collision( integer NumberOfCollisions )
-- collision_end( integer NumberOfCollisions )
-- collision_start( integer NumberOfCollisions )
+- collision( integer num_detected )
+- collision_end( integer num_detected )
+- collision_start( integer num_detected )
 - no_sensor(  )
-- sensor( integer NumberDetected )
-- llCastRay( vector Start, vector End, list Options ) -> list
-- llCollisionFilter( string ObjectName, key ObjectID, integer Accept ) -> void
-- llPassCollisions( integer Pass ) -> void
-- llSensor( string Name, key ID, integer Type, float Range, float Arc ) -> void
+- sensor( integer num_detected )
+- llCastRay( vector start, vector end, list options ) -> list
+- llCollisionFilter( string name, key id, integer accept ) -> void
+- llPassCollisions( integer pass ) -> void
+- llSensor( string name, key id, integer type, float radius, float arc ) -> void
 - llSensorRemove(  ) -> void
-- llSensorRepeat( string Name, key ID, integer Type, float Range, float Arc, float Rate ) -> void
-- llVolumeDetect( integer DetectEnabled ) -> void
+- llSensorRepeat( string name, key id, integer type, float radius, float arc, float rate ) -> void
+- llVolumeDetect( integer detect ) -> void
 sit:
-- changed( integer Changed )
-- llAvatarOnLinkSitTarget( integer LinkNumber ) -> key
+- changed( integer change )
+- llAvatarOnLinkSitTarget( integer link ) -> key
 - llAvatarOnSitTarget(  ) -> key
-- llGetLinkSitFlags( integer LinkNumber ) -> integer
-- llLinkSitTarget( integer LinkNumber, vector Offset, rotation Rotation ) -> void
-- llSetLinkCamera( integer LinkNumber, vector EyeOffset, vector LookOffset ) -> void
-- llSetLinkSitFlags( integer LinkNumber, integer Flags ) -> void
-- llSetSitText( string Text ) -> void
-- llSitOnLink( key AvatarID, integer LinkID ) -> integer
-- llSitTarget( vector Offset, rotation Rotation ) -> void
-- llUnSit( key AvatarID ) -> void
+- llGetLinkSitFlags( integer link ) -> integer
+- llLinkSitTarget( integer link, vector offset, rotation rot ) -> void
+- llSetLinkCamera( integer link, vector eye, vector at ) -> void
+- llSetLinkSitFlags( integer link, integer flags ) -> void
+- llSetSitText( string text ) -> void
+- llSitOnLink( key agent_id, integer link ) -> integer
+- llSitTarget( vector offset, rotation rot ) -> void
+- llUnSit( key id ) -> void
 sound:
-- llAdjustSoundVolume( float Volume ) -> void
-- llCollisionSound( string ImpactSound, float ImpactVolume ) -> void
-- llCollisionSprite( string ImpactSprite ) -> void // deprecated
-- llLinkAdjustSoundVolume( integer LinkNumber, float Volume ) -> void
-- llLinkPlaySound( integer LinkNumber, string Sound, float Volume, integer Flags ) -> void
-- llLinkSetSoundQueueing( integer LinkNumber, integer QueueEnable ) -> void
-- llLinkSetSoundRadius( integer LinkNumber, float radius ) -> void
-- llLinkStopSound( integer LinkNumber ) -> void
-- llLoopSound( string Sound, float Volume ) -> void
-- llLoopSoundMaster( string Sound, float Volume ) -> void
-- llLoopSoundSlave( string Sound, float Volume ) -> void
-- llPlaySound( string Sound, float Volume ) -> void
-- llPlaySoundSlave( string Sound, float Volume ) -> void
-- llPreloadSound( string Sound ) -> void
-- llSetSoundQueueing( integer QueueEnable ) -> void
-- llSetSoundRadius( float Radius ) -> void
-- llSound( string Sound, float Volume, integer Queue, integer Loop ) -> void // deprecated
-- llSoundPreload( string Sound ) -> void // deprecated
+- llAdjustSoundVolume( float volume ) -> void
+- llCollisionSound( string impact_sound, float impact_volume ) -> void
+- llCollisionSprite( string impact_sprite ) -> void // deprecated
+- llLinkAdjustSoundVolume( integer link, float volume ) -> void
+- llLinkPlaySound( integer link, string sound, float volume, integer flags ) -> void
+- llLinkSetSoundQueueing( integer link, integer queue ) -> void
+- llLinkSetSoundRadius( integer link, float radius ) -> void
+- llLinkStopSound( integer link ) -> void
+- llLoopSound( string sound, float volume ) -> void
+- llLoopSoundMaster( string sound, float volume ) -> void
+- llLoopSoundSlave( string sound, float volume ) -> void
+- llPlaySound( string sound, float volume ) -> void
+- llPlaySoundSlave( string sound, float volume ) -> void
+- llPreloadSound( string sound ) -> void
+- llSetSoundQueueing( integer queue ) -> void
+- llSetSoundRadius( float radius ) -> void
+- llSound( string sound, float volume, integer queue, integer loop ) -> void // deprecated
+- llSoundPreload( string sound ) -> void // deprecated
 - llStopSound(  ) -> void
-- llTriggerSound( string Sound, float Volume ) -> void
-- llTriggerSoundLimited( string Sound, float Volume, vector TNE, vector BSW ) -> void
+- llTriggerSound( string sound, float volume ) -> void
+- llTriggerSoundLimited( string sound, float volume, vector top_north_east, vector bottom_south_west ) -> void
 string:
-- llChar( integer value ) -> string
-- llDeleteSubString( string Source, integer Start, integer End ) -> string
-- llGetSubString( string String, integer Start, integer End ) -> string
-- llInsertString( string TargetVariable, integer Position, string SourceVariable ) -> string
-- llOrd( string value, integer index ) -> integer
-- llReplaceSubString( string InitialString, string SubString, string NewSubString, integer Count ) -> string
-- llStringLength( string Text ) -> integer
-- llStringTrim( string Text, integer TrimType ) -> string
-- llSubStringIndex( string Text, string Sequence ) -> integer
-- llToLower( string Text ) -> string
-- llToUpper( string Text ) -> string
+- llChar( integer val ) -> string
+- llDeleteSubString( string src, integer start, integer end ) -> string
+- llGetSubString( string src, integer start, integer end ) -> string
+- llInsertString( string dst, integer pos, string src ) -> string
+- llOrd( string val, integer index ) -> integer
+- llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string
+- llStringLength( string str ) -> integer
+- llStringTrim( string src, integer type ) -> string
+- llSubStringIndex( string source, string pattern ) -> integer
+- llToLower( string src ) -> string
+- llToUpper( string src ) -> string
 teleport:
-- changed( integer Changed )
-- llMapDestination( string RegionName, vector Position, vector Direction ) -> void
-- llTeleportAgent( key AvatarID, string LandmarkName, vector Position, vector LookAtPoint ) -> void
-- llTeleportAgentGlobalCoords( key AvatarID, vector GlobalPosition, vector RegionPosition, vector LookAtPoint ) -> void
-- llTeleportAgentHome( key AvatarID ) -> void
+- changed( integer change )
+- llMapDestination( string simname, vector pos, vector look_at ) -> void
+- llTeleportAgent( key agent, string landmark, vector position, vector look_at ) -> void
+- llTeleportAgentGlobalCoords( key agent, vector global_coordinates, vector region_coordinates, vector look_at ) -> void
+- llTeleportAgentHome( key avatar ) -> void
 time:
 - timer(  )
 - llGetDate(  ) -> string
@@ -1030,75 +1030,75 @@ time:
 - llGetTimestamp(  ) -> string
 - llGetUnixTime(  ) -> integer
 - llGetWallclock(  ) -> float
-- llSetTimerEvent( float Rate ) -> void
-- llSleep( float Time ) -> void
+- llSetTimerEvent( float sec ) -> void
+- llSleep( float sec ) -> void
 touch:
-- touch( integer NumberOfTouches )
-- touch_end( integer NumberOfTouches )
-- touch_start( integer NumberOfTouches )
-- llDetectedGrab( integer Number ) -> vector
-- llDetectedTouchBinormal( integer Index ) -> vector
-- llDetectedTouchFace( integer Index ) -> integer
-- llDetectedTouchNormal( integer Index ) -> vector
-- llDetectedTouchPos( integer Index ) -> vector
-- llDetectedTouchST( integer Index ) -> vector
-- llDetectedTouchUV( integer Index ) -> vector
-- llPassTouches( integer Pass ) -> void
-- llSetClickAction( integer Action ) -> void
-- llSetTouchText( string Text ) -> void
+- touch( integer num_detected )
+- touch_end( integer num_detected )
+- touch_start( integer num_detected )
+- llDetectedGrab( integer number ) -> vector
+- llDetectedTouchBinormal( integer index ) -> vector
+- llDetectedTouchFace( integer index ) -> integer
+- llDetectedTouchNormal( integer index ) -> vector
+- llDetectedTouchPos( integer index ) -> vector
+- llDetectedTouchST( integer index ) -> vector
+- llDetectedTouchUV( integer index ) -> vector
+- llPassTouches( integer pass ) -> void
+- llSetClickAction( integer action ) -> void
+- llSetTouchText( string text ) -> void
 user_interface:
-- touch( integer NumberOfTouches )
-- touch_end( integer NumberOfTouches )
-- touch_start( integer NumberOfTouches )
-- llDialog( key AvatarID, string Text, list Buttons, integer Channel ) -> void
-- llLoadURL( key AvatarID, string Text, string URL ) -> void
-- llMapBeacon( string RegionName, vector Position, list Options ) -> void
-- llMapDestination( string RegionName, vector Position, vector Direction ) -> void
-- llSetClickAction( integer Action ) -> void
-- llSetPayPrice( integer Price, list QuickButtons ) -> void
-- llSetSitText( string Text ) -> void
-- llSetTouchText( string Text ) -> void
-- llTextBox( key AvatarID, string Text, integer Channel ) -> void
+- touch( integer num_detected )
+- touch_end( integer num_detected )
+- touch_start( integer num_detected )
+- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- llLoadURL( key avatar, string message, string url ) -> void
+- llMapBeacon( string region_name, vector pos, list options ) -> void
+- llMapDestination( string simname, vector pos, vector look_at ) -> void
+- llSetClickAction( integer action ) -> void
+- llSetPayPrice( integer price, list quick_pay_buttons ) -> void
+- llSetSitText( string text ) -> void
+- llSetTouchText( string text ) -> void
+- llTextBox( key avatar, string message, integer channel ) -> void
 - llWorldPosToHUD( vector world_pos ) -> vector
 uuid:
-- llDetectedKey( integer Number ) -> key
+- llDetectedKey( integer number ) -> key
 - llGenerateKey(  ) -> key
 - llGetKey(  ) -> key
-- llGetLinkKey( integer LinkNumber ) -> key
-- llGetObjectLinkKey( key id, integer link_no ) -> key
+- llGetLinkKey( integer link ) -> key
+- llGetObjectLinkKey( key object_id, integer link ) -> key
 - llGetOwner(  ) -> key
-- llGetOwnerKey( key ObjectID ) -> key
-- llRequestUserKey( string Name ) -> key
+- llGetOwnerKey( key id ) -> key
+- llRequestUserKey( string username ) -> key
 vector:
-- llRot2Axis( rotation Rotation ) -> vector
-- llRot2Fwd( rotation Rotation ) -> vector
-- llRot2Left( rotation Rotation ) -> vector
-- llRot2Up( rotation Rotation ) -> vector
-- llVecDist( vector Location1, vector Location2 ) -> float
-- llVecMag( vector Vector ) -> float
-- llVecNorm( vector Vector ) -> vector
+- llRot2Axis( rotation rot ) -> vector
+- llRot2Fwd( rotation q ) -> vector
+- llRot2Left( rotation q ) -> vector
+- llRot2Up( rotation q ) -> vector
+- llVecDist( vector vec_a, vector vec_b ) -> float
+- llVecMag( vector vec ) -> float
+- llVecNorm( vector vec ) -> vector
 vehicles:
-- llRemoveVehicleFlags( integer Vehiclelags ) -> void
-- llSetVehicleFlags( integer Flags ) -> void
-- llSetVehicleFloatParam( integer ParameterName, float ParameterValue ) -> void
-- llSetVehicleRotationParam( integer ParameterName, rotation ParameterValue ) -> void
-- llSetVehicleType( integer Type ) -> void
-- llSetVehicleVectorParam( integer ParameterName, vector ParameterValue ) -> void
+- llRemoveVehicleFlags( integer flags ) -> void
+- llSetVehicleFlags( integer flags ) -> void
+- llSetVehicleFloatParam( integer param, float value ) -> void
+- llSetVehicleRotationParam( integer param, rotation rot ) -> void
+- llSetVehicleType( integer type ) -> void
+- llSetVehicleVectorParam( integer param, vector vec ) -> void
 web:
-- http_request( key HTTPRequestID, string HTTPMethod, string Body )
-- http_response( key HTTPRequestID, integer Status, list Metadata, string Body )
-- llEscapeURL( string URL ) -> string
+- http_request( key request_id, string method, string body )
+- http_response( key request_id, integer status, list metadata, string body )
+- llEscapeURL( string url ) -> string
 - llGetFreeURLs(  ) -> integer
-- llGetHTTPHeader( key HTTPRequestID, string Header ) -> string
-- llHTTPRequest( string URL, list Parameters, string Body ) -> key
-- llHTTPResponse( key HTTPRequestID, integer Status, string Body ) -> void
-- llLoadURL( key AvatarID, string Text, string URL ) -> void
+- llGetHTTPHeader( key request_id, string header ) -> string
+- llHTTPRequest( string url, list parameters, string body ) -> key
+- llHTTPResponse( key request_id, integer status, string body ) -> void
+- llLoadURL( key avatar, string message, string url ) -> void
 - llRefreshPrimURL(  ) -> void // deprecated
-- llReleaseURL( string URL ) -> void
+- llReleaseURL( string url ) -> void
 - llRequestSecureURL(  ) -> key
 - llRequestURL(  ) -> key
-- llSetContentType( key HTTPRequestID, integer ContentType ) -> void
-- llSetLinkMedia( integer Link, integer Face, list Parameters ) -> integer
-- llSetPrimMediaParams( integer Face, list MediaParameters ) -> integer
-- llSetPrimURL( string URL ) -> void // deprecated
-- llUnescapeURL( string URL ) -> string
+- llSetContentType( key request_id, integer content_type ) -> void
+- llSetLinkMedia( integer link, integer face, list params ) -> integer
+- llSetPrimMediaParams( integer face, list params ) -> integer
+- llSetPrimURL( string url ) -> void // deprecated
+- llUnescapeURL( string url ) -> string
