@@ -18,7 +18,7 @@ namespace LindenLab.SecondLife
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static Quaternion llAxisAngle2Rot(Vector axis, float angle);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int llDerezObject(Key id, int flag);
+        public extern static int llDerezObject(Key id, int flags);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static object[] llDetectedDamageInternal(int number);
 
@@ -52,10 +52,10 @@ namespace LindenLab.SecondLife
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static string llGetStartString();
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int llGiveAgentInventoryInternal(Key agent, string folder, object[] inventory, int inventory_len, object[] options, int options_len);
+        public extern static int llGiveAgentInventoryInternal(Key agent, string folder, object[] items, int items_len, object[] options, int options_len);
 
-        public static int llGiveAgentInventory(Key agent, string folder, ArrayList inventory, ArrayList options) {
-            return llGiveAgentInventoryInternal(agent, folder, ToArrayNoCopy(inventory), inventory.Count, ToArrayNoCopy(options), options.Count);
+        public static int llGiveAgentInventory(Key agent, string folder, ArrayList items, ArrayList options) {
+            return llGiveAgentInventoryInternal(agent, folder, ToArrayNoCopy(items), items.Count, ToArrayNoCopy(options), options.Count);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -98,10 +98,10 @@ namespace LindenLab.SecondLife
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static int llTransferOwnershipInternal(Key agent_id, int flags, object[] options, int options_len);
+        public extern static int llTransferOwnershipInternal(Key agent, int flags, object[] options, int options_len);
 
-        public static int llTransferOwnership(Key agent_id, int flags, ArrayList options) {
-            return llTransferOwnershipInternal(agent_id, flags, ToArrayNoCopy(options), options.Count);
+        public static int llTransferOwnership(Key agent, int flags, ArrayList options) {
+            return llTransferOwnershipInternal(agent, flags, ToArrayNoCopy(options), options.Count);
         }
 
 

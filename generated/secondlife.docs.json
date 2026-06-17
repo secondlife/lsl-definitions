@@ -1391,7 +1391,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetHealth"
     },
     "@sl-slua/global/ll.GetInventoryAcquireTime": {
-        "documentation": "Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.",
+        "documentation": "Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form \"YYYY-MM-DDThh:mm:ssZ\"",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryAcquireTime"
     },
     "@sl-slua/global/ll.GetInventoryCreator": {
@@ -1399,23 +1399,23 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryCreator"
     },
     "@sl-slua/global/ll.GetInventoryDesc": {
-        "documentation": "Returns a string containing the description of the specified inventory item.",
+        "documentation": "Returns the description string of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryDesc"
     },
     "@sl-slua/global/ll.GetInventoryKey": {
-        "documentation": "Returns the key (UUID) of the specified inventory name.",
+        "documentation": "Returns the key (UUID) of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryKey"
     },
     "@sl-slua/global/ll.GetInventoryName": {
-        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.",
+        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryName"
     },
     "@sl-slua/global/ll.GetInventoryNumber": {
-        "documentation": "Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.",
+        "documentation": "Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryNumber"
     },
     "@sl-slua/global/ll.GetInventoryPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission category mask of the specified inventory item.",
+        "documentation": "Returns the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryPermMask"
     },
     "@sl-slua/global/ll.GetInventoryType": {
@@ -1551,7 +1551,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectName"
     },
     "@sl-slua/global/ll.GetObjectPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.",
+        "documentation": "Returns the script's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectPermMask"
     },
     "@sl-slua/global/ll.GetObjectPrimCount": {
@@ -1799,7 +1799,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveAgentInventory"
     },
     "@sl-slua/global/ll.GiveInventory": {
-        "documentation": "Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.",
+        "documentation": "Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveInventory"
     },
     "@sl-slua/global/ll.GiveInventoryList": {
@@ -1811,7 +1811,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveMoney"
     },
     "@sl-slua/global/ll.GodLikeRezObject": {
-        "documentation": "Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.",
+        "documentation": "Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGodLikeRezObject"
     },
     "@sl-slua/global/ll.Ground": {
@@ -2279,7 +2279,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteDataSetRegion"
     },
     "@sl-slua/global/ll.RemoteLoadScriptPin": {
-        "documentation": "Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
+        "documentation": "Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteLoadScriptPin"
     },
     "@sl-slua/global/ll.RemoveFromLandBanList": {
@@ -2323,7 +2323,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestExperiencePermissions"
     },
     "@sl-slua/global/ll.RequestInventoryData": {
-        "documentation": "Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
+        "documentation": "Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestInventoryData"
     },
     "@sl-slua/global/ll.RequestPermissions": {
@@ -2363,7 +2363,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetLandPassList"
     },
     "@sl-slua/global/ll.ResetOtherScript": {
-        "documentation": "Resets the script name located in the prim's inventory.",
+        "documentation": "Resets the named script name in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetOtherScript"
     },
     "@sl-slua/global/ll.ResetScript": {
@@ -2379,15 +2379,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReturnObjectsByOwner"
     },
     "@sl-slua/global/ll.RezAtRoot": {
-        "documentation": "Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.",
+        "documentation": "Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezAtRoot"
     },
     "@sl-slua/global/ll.RezObject": {
-        "documentation": "Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
+        "documentation": "Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObject"
     },
     "@sl-slua/global/ll.RezObjectWithParams": {
-        "documentation": "Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.",
+        "documentation": "Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/ll.Rot2Angle": {
@@ -2559,7 +2559,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetHoverHeight"
     },
     "@sl-slua/global/ll.SetInventoryPermMask": {
-        "documentation": "Sets the specified permission category of the inventory item to the value permissions mask.",
+        "documentation": "Sets the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetInventoryPermMask"
     },
     "@sl-slua/global/ll.SetKeyframedMotion": {
@@ -2623,7 +2623,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectName"
     },
     "@sl-slua/global/ll.SetObjectPermMask": {
-        "documentation": "Sets the specified permission mask category to value on the root object containing the script.",
+        "documentation": "Sets the scripts's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectPermMask"
     },
     "@sl-slua/global/ll.SetParcelForSale": {
@@ -2679,7 +2679,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScale"
     },
     "@sl-slua/global/ll.SetScriptState": {
-        "documentation": "Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
+        "documentation": "Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScriptState"
     },
     "@sl-slua/global/ll.SetSitText": {
@@ -2883,7 +2883,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferLindenDollars"
     },
     "@sl-slua/global/ll.TransferOwnership": {
-        "documentation": "Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.",
+        "documentation": "Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferOwnership"
     },
     "@sl-slua/global/ll.TriggerSound": {
@@ -3458,7 +3458,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetHealth"
     },
     "@sl-slua/global/llcompat.GetInventoryAcquireTime": {
-        "documentation": "Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.",
+        "documentation": "Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form \"YYYY-MM-DDThh:mm:ssZ\"",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryAcquireTime"
     },
     "@sl-slua/global/llcompat.GetInventoryCreator": {
@@ -3466,23 +3466,23 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryCreator"
     },
     "@sl-slua/global/llcompat.GetInventoryDesc": {
-        "documentation": "Returns a string containing the description of the specified inventory item.",
+        "documentation": "Returns the description string of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryDesc"
     },
     "@sl-slua/global/llcompat.GetInventoryKey": {
-        "documentation": "Returns the key (UUID) of the specified inventory name.",
+        "documentation": "Returns the key (UUID) of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryKey"
     },
     "@sl-slua/global/llcompat.GetInventoryName": {
-        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.",
+        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryName"
     },
     "@sl-slua/global/llcompat.GetInventoryNumber": {
-        "documentation": "Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.",
+        "documentation": "Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryNumber"
     },
     "@sl-slua/global/llcompat.GetInventoryPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission category mask of the specified inventory item.",
+        "documentation": "Returns the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryPermMask"
     },
     "@sl-slua/global/llcompat.GetInventoryType": {
@@ -3618,7 +3618,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectName"
     },
     "@sl-slua/global/llcompat.GetObjectPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.",
+        "documentation": "Returns the script's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectPermMask"
     },
     "@sl-slua/global/llcompat.GetObjectPrimCount": {
@@ -3866,7 +3866,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveAgentInventory"
     },
     "@sl-slua/global/llcompat.GiveInventory": {
-        "documentation": "Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.",
+        "documentation": "Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveInventory"
     },
     "@sl-slua/global/llcompat.GiveInventoryList": {
@@ -3878,7 +3878,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveMoney"
     },
     "@sl-slua/global/llcompat.GodLikeRezObject": {
-        "documentation": "Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.",
+        "documentation": "Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGodLikeRezObject"
     },
     "@sl-slua/global/llcompat.Ground": {
@@ -4346,7 +4346,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteDataSetRegion"
     },
     "@sl-slua/global/llcompat.RemoteLoadScriptPin": {
-        "documentation": "Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
+        "documentation": "Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteLoadScriptPin"
     },
     "@sl-slua/global/llcompat.RemoveFromLandBanList": {
@@ -4390,7 +4390,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestExperiencePermissions"
     },
     "@sl-slua/global/llcompat.RequestInventoryData": {
-        "documentation": "Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
+        "documentation": "Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestInventoryData"
     },
     "@sl-slua/global/llcompat.RequestPermissions": {
@@ -4430,7 +4430,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetLandPassList"
     },
     "@sl-slua/global/llcompat.ResetOtherScript": {
-        "documentation": "Resets the script name located in the prim's inventory.",
+        "documentation": "Resets the named script name in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetOtherScript"
     },
     "@sl-slua/global/llcompat.ResetScript": {
@@ -4450,15 +4450,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReturnObjectsByOwner"
     },
     "@sl-slua/global/llcompat.RezAtRoot": {
-        "documentation": "Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.",
+        "documentation": "Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezAtRoot"
     },
     "@sl-slua/global/llcompat.RezObject": {
-        "documentation": "Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
+        "documentation": "Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObject"
     },
     "@sl-slua/global/llcompat.RezObjectWithParams": {
-        "documentation": "Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.",
+        "documentation": "Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/llcompat.Rot2Angle": {
@@ -4630,7 +4630,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetHoverHeight"
     },
     "@sl-slua/global/llcompat.SetInventoryPermMask": {
-        "documentation": "Sets the specified permission category of the inventory item to the value permissions mask.",
+        "documentation": "Sets the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetInventoryPermMask"
     },
     "@sl-slua/global/llcompat.SetKeyframedMotion": {
@@ -4698,7 +4698,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectName"
     },
     "@sl-slua/global/llcompat.SetObjectPermMask": {
-        "documentation": "Sets the specified permission mask category to value on the root object containing the script.",
+        "documentation": "Sets the scripts's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectPermMask"
     },
     "@sl-slua/global/llcompat.SetParcelForSale": {
@@ -4754,7 +4754,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScale"
     },
     "@sl-slua/global/llcompat.SetScriptState": {
-        "documentation": "Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
+        "documentation": "Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScriptState"
     },
     "@sl-slua/global/llcompat.SetSitText": {
@@ -4962,7 +4962,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferLindenDollars"
     },
     "@sl-slua/global/llcompat.TransferOwnership": {
-        "documentation": "Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.",
+        "documentation": "Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferOwnership"
     },
     "@sl-slua/global/llcompat.TriggerSound": {

@@ -9696,17 +9696,17 @@ float falloff – ranges from 0.01 to 2.0
             <key>arguments</key>
             <array>
                <map>
-                  <key>change</key>
+                  <key>changes</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A bitfield of CHANGED_* constants representing what changed.</string>
+                     <string>A bitfield of CHANGED_* flags representing what changed.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.</string>
+            <string>Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.</string>
          </map>
          <key>collision</key>
          <map>
@@ -18215,7 +18215,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>flag</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Derez behavior flags matching DEREZ_* constants.</string>
@@ -20014,7 +20014,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.</string>
+            <string>Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"</string>
          </map>
          <key>ll.GetInventoryCreator</key>
          <map>
@@ -20060,14 +20060,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string containing the description of the specified inventory item.</string>
+            <string>Returns the description string of the specified inventory item.</string>
          </map>
          <key>ll.GetInventoryKey</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the item in the prim's inventory.</string>
@@ -20083,7 +20083,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the key (UUID) of the specified inventory name.</string>
+            <string>Returns the key (UUID) of the specified inventory item.</string>
          </map>
          <key>ll.GetInventoryName</key>
          <map>
@@ -20099,10 +20099,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>number</key>
+                  <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Index number of the item of that type, starting from 0.</string>
+                     <string>Index of the item of that type.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -20115,7 +20115,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.</string>
+            <string>Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.</string>
          </map>
          <key>ll.GetInventoryNumber</key>
          <map>
@@ -20138,7 +20138,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.</string>
+            <string>Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.</string>
          </map>
          <key>ll.GetInventoryPermMask</key>
          <map>
@@ -20154,10 +20154,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -20170,17 +20170,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer bitfield representing the permission category mask of the specified inventory item.</string>
+            <string>Returns the specified item's permission flags for the specified group.</string>
          </map>
          <key>ll.GetInventoryType</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the inventory item.</string>
+                     <string>Name of the item in the prim's inventory.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -20877,10 +20877,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -20893,7 +20893,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.</string>
+            <string>Returns the script's object's permission flags for the specified group.</string>
          </map>
          <key>ll.GetObjectPrimCount</key>
          <map>
@@ -22033,7 +22033,7 @@ Returns true if result is non-zero.</string>
                   <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the receiving agent in the region.</string>
+                     <string>UUID of the target agent in the same region.</string>
                      <key>type</key>
                      <string>uuid</string>
                   </map>
@@ -22042,16 +22042,16 @@ Returns true if result is non-zero.</string>
                   <key>folder</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the destination folder to be created in the agent's inventory.</string>
+                     <string>Name of the destination folder to be created</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>items</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of inventory items to transfer.</string>
+                     <string>The names of the items in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>{string}</string>
                   </map>
@@ -22080,19 +22080,19 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>destination</key>
+                  <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination avatar or prim.</string>
+                     <string>UUID of the target agent or prim.</string>
                      <key>type</key>
                      <string>uuid</string>
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the item in the prim's inventory.</string>
+                     <string>Name of the item in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -22105,7 +22105,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.</string>
+            <string>Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.</string>
          </map>
          <key>ll.GiveInventoryList</key>
          <map>
@@ -22115,7 +22115,7 @@ Returns true if result is non-zero.</string>
                   <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the target avatar or prim in the same region.</string>
+                     <string>UUID of the target agent or prim in the same region.</string>
                      <key>type</key>
                      <string>uuid</string>
                   </map>
@@ -22130,10 +22130,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>items</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of names representing items in the prim's inventory.</string>
+                     <string>The names of the items in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>{string}</string>
                   </map>
@@ -22185,7 +22185,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>id</key>
                   <map>
                      <key>tooltip</key>
                      <string>Asset UUID of the object to rez.</string>
@@ -22212,7 +22212,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.</string>
+            <string>Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.</string>
          </map>
          <key>ll.Ground</key>
          <map>
@@ -26218,7 +26218,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the script in the prim's inventory.</string>
@@ -26230,7 +26230,7 @@ Returns true if result is non-zero.</string>
                   <key>pin</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).</string>
+                     <string>Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -26261,7 +26261,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>3.0</real>
             <key>tooltip</key>
-            <string>Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).</string>
+            <string>Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).</string>
          </map>
          <key>ll.RemoveFromLandBanList</key>
          <map>
@@ -26597,7 +26597,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the item in the prim's inventory.</string>
@@ -26613,7 +26613,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.</string>
+            <string>Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.</string>
          </map>
          <key>ll.RequestPermissions</key>
          <map>
@@ -26809,7 +26809,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the target script in the prim's inventory.</string>
@@ -26825,7 +26825,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Resets the script name located in the prim's inventory.</string>
+            <string>Resets the named script name in the prim's inventory.</string>
          </map>
          <key>ll.ResetScript</key>
          <map>
@@ -26901,16 +26901,16 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>position</key>
+                  <key>pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Position vector in region coordinates where the root of the object will be placed.</string>
@@ -26919,7 +26919,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>velocity</key>
+                  <key>vel</key>
                   <map>
                      <key>tooltip</key>
                      <string>Initial velocity vector for the rezzed object.</string>
@@ -26937,7 +26937,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>param</key>
+                  <key>start_param</key>
                   <map>
                      <key>tooltip</key>
                      <string>Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).</string>
@@ -26953,17 +26953,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.</string>
+            <string>Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
          </map>
          <key>ll.RezObject</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -26996,7 +26996,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>param</key>
+                  <key>start_param</key>
                   <map>
                      <key>tooltip</key>
                      <string>Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).</string>
@@ -27012,26 +27012,26 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
+            <string>Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
          </map>
          <key>ll.RezObjectWithParams</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>params</key>
+                  <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of REZ_* parameters to configure the rezzed object's attributes.</string>
+                     <string>A list of REZ_* options to configure the rezzed object's attributes.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -27044,7 +27044,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.</string>
+            <string>Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.</string>
          </map>
          <key>ll.Rot2Angle</key>
          <map>
@@ -28333,16 +28333,16 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>value</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Bitfield of permissions (PERM_* flags) to set.</string>
@@ -28360,7 +28360,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the specified permission category of the inventory item to the value permissions mask.</string>
+            <string>Sets the specified item's permission flags for the specified group.</string>
          </map>
          <key>ll.SetKeyframedMotion</key>
          <map>
@@ -28939,16 +28939,16 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>mask</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>value</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Bitfield of permissions (PERM_* flags) to set.</string>
@@ -28966,7 +28966,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the specified permission mask category to value on the root object containing the script.</string>
+            <string>Sets the scripts's object's permission flags for the specified group.</string>
          </map>
          <key>ll.SetParcelForSale</key>
          <map>
@@ -29348,7 +29348,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the script in the prim's inventory.</string>
@@ -29373,7 +29373,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.</string>
+            <string>Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.</string>
          </map>
          <key>ll.SetSitText</key>
          <map>
@@ -30879,10 +30879,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>agent_id</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar to receive ownership of the object.</string>
+                     <string>UUID of the agent to receive ownership of the object.</string>
                      <key>type</key>
                      <string>uuid</string>
                   </map>
@@ -30913,7 +30913,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.</string>
+            <string>Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.</string>
          </map>
          <key>ll.TriggerSound</key>
          <map>
