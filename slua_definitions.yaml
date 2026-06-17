@@ -68,8 +68,7 @@ base-classes:
     comment: Returns true if the UUID is not the null UUID (all zeros)
     type: boolean
   - name: bytes
-    comment: Returns the raw 16-byte binary string of the UUID, or nil if the UUID
-      is not in a compressed state
+    comment: Returns the raw 16-byte binary string of the UUID
     type: string
 - name: vector
   comment: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
@@ -336,6 +335,7 @@ classes:
     - name: link
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
+    return-type: ()
 global-variables:
 - name: rotation
   comment: rotation is an alias for quaternion.
@@ -627,7 +627,7 @@ functions:
   fastcall: true
 - name: touuid
   comment: Creates a new uuid from a string, buffer, or existing uuid. Returns
-    nil if the string is not a valid UUID, or the the buffer is
+    nil if the string is not a valid UUID, or the buffer is
     shorter than 16 bytes.
   parameters:
   - name: val
@@ -674,12 +674,12 @@ functions:
     comment: Starting index (optional, defaults to 1).
     type: number?
   - name: j
-    comment: "Ending index (optional, defaults to #a)."
+    comment: "Ending index (optional, defaults to #tab)."
     type: number?
   return-type: ...V
   fastcall: true
 - name: xpcall
-  comment: Calls function f with parameters args, handling errors with e if they occur.
+  comment: Calls function f with parameters args, handling errors with err if they occur.
   type-parameters: [E, A..., R1..., R2...]
   parameters:
   - name: f
@@ -833,7 +833,7 @@ modules:
     fastcall: true
   - name: s32
     comment: Wrap this number from float64 range to signed int32 range and truncate to integer.
-      Makes integer arithmetic compatable with LSL.
+      Makes integer arithmetic compatible with LSL.
     parameters:
     - name: "n"
       comment: Number to truncate.
@@ -842,7 +842,7 @@ modules:
     must-use: true
   - name: smul
     comment: Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary.
-      Avoids precision loss ascociated with float64 multiplication. Compatible with LSL integer multiplication.
+      Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.
     parameters:
     - name: a
       comment: Left factor.
@@ -1164,13 +1164,13 @@ modules:
     - name: target
       comment: Target buffer to copy into.
       type: buffer
+      observes: write
     - name: targetOffset
       comment: Offset in target buffer.
       type: number
     - name: source
       comment: Source buffer to copy from.
       type: buffer
-      observes: write
     - name: sourceOffset
       comment: Offset in source buffer (optional).
       type: number?
@@ -1248,7 +1248,7 @@ modules:
       type: ...any
     return-type: (boolean, ...any)
   - name: running
-    comment: Returns the currently running coroutine, or nil if called from in the main coroutine.
+    comment: Returns the currently running coroutine, or nil if called from the main coroutine.
     parameters: []
     return-type: thread?
     must-use: true
@@ -1440,11 +1440,11 @@ modules:
   - name: empty_array
     comment: A constant to pass for an empty array to json encode.
     type: '{}'
-    value: 'setmetatable({}, lljson.array_mt}'
+    value: 'setmetatable({}, lljson.array_mt)'
   - name: empty_object
     comment: A constant to pass for an empty object to json encode.
     type: '{}'
-    value: 'setmetatable({}, lljson.object_mt}'
+    value: 'setmetatable({}, lljson.object_mt)'
 - name: llprim
   comment: Utilities for working with prims / objects
   constants:
@@ -1752,7 +1752,6 @@ modules:
     return-type: ()
     deprecated:
       reason: Disabled in SLua.
-    must-use: true
   - name: round
     comment: Rounds n to the nearest integer.
     parameters:
@@ -2360,6 +2359,7 @@ modules:
     - name: a
       comment: Array to be appended to.
       type: '{V}'
+      observes: write
     - name: b
       comment: Array to append.
       type: '{V}'
@@ -2372,6 +2372,7 @@ modules:
     - name: a
       comment: Array to remove from.
       type: '{V}'
+      observes: write
     - name: i
       comment: "Index to remove (default: the last one)."
       type: number?
@@ -2383,6 +2384,7 @@ modules:
     - name: a
       comment: Array to be sorted.
       type: '{V}'
+      observes: write
     - name: f
       comment: Comparison function.
       type: '((a: V, b: V) -> boolean)?'
@@ -2582,7 +2584,7 @@ modules:
   callable:
     name: uuid
     comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
-      an error if the string is not a valid UUID, or the the buffer is
+      an error if the string is not a valid UUID, or the buffer is
       shorter than 16 bytes. Alias of uuid.create.
     parameters:
     - name: value
@@ -2592,7 +2594,7 @@ modules:
   functions:
   - name: create
     comment: Creates a new uuid from a string, buffer, or existing uuid. Throws
-      an error if the string is not a valid UUID, or the the buffer is
+      an error if the string is not a valid UUID, or the buffer is
       shorter than 16 bytes.
     parameters:
     - name: value
@@ -2755,7 +2757,7 @@ modules:
     must-use: true
     fastcall: true
   - name: min
-    comment: Applies math.max to each component of the vectors.
+    comment: Applies math.min to each component of the vectors.
     parameters:
     - name: v
       comment: Input vector.

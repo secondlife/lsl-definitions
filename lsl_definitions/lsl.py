@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import abc
 import ast
 import dataclasses
 import re
@@ -271,10 +272,19 @@ class LSLArgument:
 
 
 @dataclasses.dataclass
-class LSLEvent:
+class LSLFunctionBase(abc.ABC):
     name: str
     arguments: list[LSLArgument]
     tooltip: str
+    categories: list[str]
+
+    @property
+    def args_str(self) -> str:
+        return "( " + ", ".join(f"{x.type!s} {x.name}" for x in self.arguments) + " )"
+
+
+@dataclasses.dataclass
+class LSLEvent(LSLFunctionBase):
     private: bool
     deprecated: Deprecated | None
     slua_deprecated: Deprecated | None
@@ -331,8 +341,7 @@ class LSLEvent:
 
 
 @dataclasses.dataclass
-class LSLFunction:
-    name: str
+class LSLFunction(LSLFunctionBase):
     energy: float
     sleep: float
     ret_type: LSLType
@@ -343,8 +352,6 @@ class LSLFunction:
     asset_semantics: bool
     detected_semantics: bool
     type_arguments: list[str]
-    arguments: list[LSLArgument]
-    tooltip: str
     private: bool
     """
     Whether or not to include this in the public-facing syntax LLSD.
@@ -597,6 +604,7 @@ class LSLDefinitionParser:
         event = LSLEvent(
             name=event_name,
             tooltip=event_data.get("tooltip", ""),
+            categories=event_data["categories"],
             arguments=[
                 self._handle_argument(event_name, arg)
                 for arg in (event_data.get("arguments") or [])
@@ -619,7 +627,8 @@ class LSLDefinitionParser:
         self._validate_identifier(func_name)
         func = LSLFunction(
             name=func_name,
-            tooltip=func_data.get("tooltip", ""),
+            tooltip=func_data["tooltip"],
+            categories=func_data["categories"],
             # These do actually need to be floats.
             energy=float(func_data["energy"] or "0.0"),
             sleep=float(func_data["sleep"] or "0.0"),
