@@ -3,6 +3,7 @@
 # Import all generator modules to trigger @register decorators
 from lsl_definitions.generators import (
     builtins_txt,
+    experimental,
     keywords,
     lscript,
     lscript_compiler,
@@ -17,6 +18,7 @@ __all__ = [
     "GENERATORS",
     "register",
     "builtins_txt",
+    "experimental",
     "keywords",
     "lscript",
     "lscript_compiler",

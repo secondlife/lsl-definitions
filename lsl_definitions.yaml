@@ -6662,6 +6662,8 @@ events:
         type: rotation
     tooltip: This event is triggered when a script comes within a defined angle of
       a target rotation. The range and rotation are set by a call to llRotTarget.
+    categories:
+      - movement
   at_target:
     arguments:
     - TargetNumber:
@@ -6675,6 +6677,8 @@ events:
         type: vector
     tooltip: This event is triggered when the scripted object comes within a defined
       range of the target position, defined by the llTarget function call.
+    categories:
+      - movement
   attach:
     arguments:
     - AvatarID:
@@ -6683,6 +6687,8 @@ events:
     tooltip: This event is triggered whenever an object is attached or detached from
       an avatar. If it is attached, the key of the avatar it is attached to is passed
       in, otherwise NULL_KEY is.
+    categories:
+      - attachments
   changed:
     arguments:
     - Changed:
@@ -6690,6 +6696,17 @@ events:
         type: integer
     tooltip: Triggered when various events change the object. The change argument
       will be a bit-field of CHANGED_* constants.
+    categories:
+      - asset_permissions
+      - linkset
+      - media
+      - prim_appearance
+      - prim_inventory
+      - prim_media
+      - region
+      - teleport
+      - script  # TODO: move all but "script" to the constants
+      - sit
   collision:
     arguments:
     - NumberOfCollisions:
@@ -6700,6 +6717,10 @@ events:
       \ the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
       \ the llDetected* functions."
+    categories:
+      - detected
+      - physics
+      - sensor
   collision_end:
     arguments:
     - NumberOfCollisions:
@@ -6710,6 +6731,10 @@ events:
       \ with the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
       \ the llDetected* library functions."
+    categories:
+      - detected
+      - physics
+      - sensor
   collision_start:
     arguments:
     - NumberOfCollisions:
@@ -6720,6 +6745,10 @@ events:
       \ with the object the script is attached to.\n\t\t\tThe number of detected objects\
       \ is passed to the script. Information on those objects may be gathered via\
       \ the llDetected* library functions."
+    categories:
+      - detected
+      - physics
+      - sensor
   control:
     arguments:
     - AvatarID:
@@ -6734,6 +6763,9 @@ events:
     tooltip: "Once a script has the ability to grab control inputs from the avatar,\
       \ this event will be used to pass the commands into the script.\n\t\t\tThe levels\
       \ and edges are bit-fields of control constants."
+    categories:
+      - avatar
+      - input
   dataserver:
     arguments:
     - RequestID:
@@ -6745,6 +6777,8 @@ events:
     tooltip: "This event is triggered when the requested data is returned to the script.\n\
       \t\t\tData may be requested by the llRequestAgentData, llRequestInventoryData,\
       \ and llGetNotecardLine function calls, for example."
+    categories:
+      - dataserver
   email:
     arguments:
     - Time:
@@ -6765,12 +6799,18 @@ events:
     tooltip: "This event is triggered when an email sent to this script arrives.\n\
       \t\t\tThe number remaining tells how many more emails are known to be still\
       \ pending."
+    categories:
+      - avatar_communication
   experience_permissions:
     arguments:
     - agent_id:
         tooltip: ID of the agent approving permission for the Experience.
         type: key
     tooltip: Triggered when an agent has approved an experience permissions request.
+    categories:
+      - avatar
+      - experience
+      - permissions
   experience_permissions_denied:
     arguments:
     - agent_id:
@@ -6781,6 +6821,10 @@ events:
           permissions were denied for the agent.
         type: integer
     tooltip: Describes why the Experience permissions were denied for the agent.
+    categories:
+      - avatar
+      - experience
+      - permissions
   final_damage:
     arguments:
     - count:
@@ -6789,6 +6833,9 @@ events:
     detected-semantics: true
     tooltip: Triggered as damage is applied to an avatar or task, after all on_damage
       events have been processed.
+    categories:
+      - combat
+      - detected
   game_control:
     arguments:
     - id:
@@ -6802,6 +6849,9 @@ events:
         type: list
         slua-type: "{number}"
     tooltip: This event is raised when game controller input changes.
+    categories:
+      - avatar
+      - input
   http_request:
     arguments:
     - HTTPRequestID:
@@ -6814,6 +6864,9 @@ events:
         tooltip: ''
         type: string
     tooltip: Triggered when task receives an HTTP request.
+    categories:
+      - script_communication
+      - web
   http_response:
     arguments:
     - HTTPRequestID:
@@ -6830,6 +6883,9 @@ events:
         type: string
     tooltip: This event handler is invoked when an HTTP response is received for a
       pending llHTTPRequest request or if a pending request fails or times out.
+    categories:
+      - script_communication
+      - web
   land_collision:
     arguments:
     - Position:
@@ -6837,6 +6893,8 @@ events:
         type: vector
     tooltip: This event is raised when the object the script is attached to is colliding
       with the ground.
+    categories:
+      - physics
   land_collision_end:
     arguments:
     - Position:
@@ -6844,6 +6902,8 @@ events:
         type: vector
     tooltip: This event is raised when the object the script is attached to stops
       colliding with the ground.
+    categories:
+      - physics
   land_collision_start:
     arguments:
     - Position:
@@ -6851,6 +6911,8 @@ events:
         type: vector
     tooltip: This event is raised when the object the script is attached to begins
       to collide with the ground.
+    categories:
+      - physics
   link_message:
     arguments:
     - SendersLink:
@@ -6868,6 +6930,8 @@ events:
         slua-type: string
     tooltip: Triggered when object receives a link message via llMessageLinked function
       call.
+    categories:
+      - script_communication
   linkset_data:
     arguments:
     - action:
@@ -6880,6 +6944,10 @@ events:
         tooltip: ''
         type: string
     tooltip: Triggered when a script modifies the linkset datastore.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
   listen:
     arguments:
     - Channel:
@@ -6900,6 +6968,10 @@ events:
       \ public chat channel that all avatars see as chat text. Channels 1 through\
       \ 2,147,483,648 are private channels that are not sent to avatars but other\
       \ scripts can listen on those channels."
+    categories:
+      - avatar_communication
+      - chat
+      - script_communication
   money:
     arguments:
     - Payer:
@@ -6910,24 +6982,39 @@ events:
         type: integer
     tooltip: This event is triggered when a resident has given an amount of Linden
       dollars to the object.
+    categories:
+      - money
   moving_end:
     arguments: []
     tooltip: Triggered whenever an object with this script stops moving.
+    categories:
+      - movement
+      - pathfinding
   moving_start:
     arguments: []
     tooltip: Triggered whenever an object with this script starts moving.
+    categories:
+      - movement
+      - pathfinding
   no_sensor:
     arguments: []
     tooltip: This event is raised when sensors are active, via the llSensor function
       call, but are not sensing anything.
+    categories:
+      - detected
+      - sensor
   not_at_rot_target:
     arguments: []
     tooltip: When a target is set via the llRotTarget function call, but the script
       is outside the specified angle this event is raised.
+    categories:
+      - movement
   not_at_target:
     arguments: []
     tooltip: When a target is set via the llTarget library call, but the script is
       outside the specified range this event is raised.
+    categories:
+      - movement
   object_rez:
     arguments:
     - RezzedObjectsID:
@@ -6936,6 +7023,8 @@ events:
     tooltip: Triggered when an object rezzes another object from its inventory via
       the llRezObject, or similar, functions. The id is the globally unique key for
       the object rezzed.
+    categories:
+      - rez
   on_damage:
     arguments:
     - count:
@@ -6943,9 +7032,14 @@ events:
         type: integer
     detected-semantics: true
     tooltip: Triggered when an avatar or object receives damage.
+    categories:
+      - combat
+      - detected
   on_death:
     arguments: []
     tooltip: Triggered when an avatar reaches 0 health.
+    categories:
+      - combat
   on_rez:
     arguments:
     - StartParameter:
@@ -6954,6 +7048,9 @@ events:
     tooltip: Triggered whenever an object is rezzed from inventory or by another object.
       The start parameter is passed in from the llRezObject call, or zero if from
       inventory.
+    categories:
+      - rez
+      - script
   path_update:
     arguments:
     - Type:
@@ -6964,6 +7061,8 @@ events:
         type: list
     tooltip: This event is called to inform the script of changes within the object's
       path-finding status.
+    categories:
+      - pathfinding
   remote_data:
     arguments:
     - EventType:
@@ -6986,6 +7085,8 @@ events:
         type: string
     deprecated: true
     tooltip: This event is deprecated.
+    categories:
+      - script_communication
   run_time_permissions:
     arguments:
     - PermissionFlags:
@@ -6998,6 +7099,8 @@ events:
       \ these permissions and the various permissions integer constants can be supplied.\n\
       \t\t\tThe integer returned to this event handler contains the current set of\
       \ permissions flags, so if permissions equal 0 then no permissions are set."
+    categories:
+      - permissions
   sensor:
     arguments:
     - NumberDetected:
@@ -7008,22 +7111,32 @@ events:
       \ llSensor command are detected.\n\t\t\tThe number of detected objects is passed\
       \ to the script in the parameter. Information on those objects may be gathered\
       \ via the llDetected* functions."
+    categories:
+      - detected
+      - sensor
   state_entry:
     arguments: []
     tooltip: The state_entry event occurs whenever a new state is entered, including
       at program start, and is always the first event handled.
     slua-removed: true
+    categories:
+      - script
   state_exit:
     arguments: []
     slua-removed: true
     tooltip: The state_exit event occurs whenever the state command is used to transition
       to another state. It is handled before the new states state_entry event.
+    categories:
+      - script
   timer:
     arguments: []
     slua-deprecated:
       use: LLTimers
     tooltip: This event is raised at regular intervals set by the llSetTimerEvent
       library function.
+    categories:
+      - script
+      - time
   touch:
     arguments:
     - NumberOfTouches:
@@ -7034,6 +7147,10 @@ events:
       \ is attached to.\n\t\t\tThe number of touching objects is passed to the script\
       \ in the parameter.\n\t\t\tInformation on those objects may be gathered via\
       \ the llDetected* library functions."
+    categories:
+      - detected
+      - touch
+      - user_interface
   touch_end:
     arguments:
     - NumberOfTouches:
@@ -7044,6 +7161,10 @@ events:
       \ is attached to. The number of touches is passed to the script in the parameter.\n\
       \t\t\tInformation on those objects may be gathered via the llDetected* library\
       \ functions."
+    categories:
+      - detected
+      - touch
+      - user_interface
   touch_start:
     arguments:
     - NumberOfTouches:
@@ -7054,6 +7175,10 @@ events:
       \ is attached to. The number of touches is passed to the script in the parameter.\n\
       \t\t\tInformation on those objects may be gathered via the llDetected() library\
       \ functions."
+    categories:
+      - detected
+      - touch
+      - user_interface
   transaction_result:
     arguments:
     - RequestID:
@@ -7067,6 +7192,8 @@ events:
         tooltip: ''
         type: string
     tooltip: Triggered by llTransferLindenDollars() function.
+    categories:
+      - money
 functions:
 
 #  <key>: is the LSL name for the function.
@@ -9334,6 +9461,7 @@ functions:
       If item is not in the object's inventory, llGetInventoryPermMask returns FALSE
       and causes the object to say "No item named '<item>'", where "<item>" is item.
     categories:
+      - asset_permissions
       - prim_inventory
   llGetInventoryType:
     arguments:
@@ -12534,6 +12662,7 @@ functions:
       avatar, or during touch events.\nDirection currently has no effect.
     categories:
       - avatar_communication
+      - teleport
       - user_interface
   llMessageLinked:
     arguments:
