@@ -3123,4 +3123,3 @@ metamethods:
         type: any
         comment: "The value being negated."
     return-type: any
-
