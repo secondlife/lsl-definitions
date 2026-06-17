@@ -58,3 +58,38 @@ auto particle_system = [](lua_State* L) -> int {
     return 0;
 };
 slua_register_fluent_fn(L, "llprim", "ParticleSystem", particle_system, kParticleParamsDef);
+
+// prim-media-params
+static const FluentParamDescriptor kPrimMediaParamsDescs[] = {
+    {"alt_image_enable", 'b', 0},
+    {"controls", 'i', 1},
+    {"current_url", 's', 2},
+    {"home_url", 's', 3},
+    {"auto_loop", 'b', 4},
+    {"auto_play", 'b', 5},
+    {"auto_scale", 'b', 6},
+    {"auto_zoom", 'b', 7},
+    {"first_click_interact", 'b', 8},
+    {"width_pixels", 'i', 9},
+    {"height_pixels", 'i', 10},
+    {"whitelist_enable", 'b', 11},
+    {"whitelist", 's', 12},
+    {"perms_interact", 'i', 13},
+    {"perms_control", 'i', 14},
+};
+static FluentBuilderDef* kPrimMediaParamsDef = fluent_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
+auto set_media = [](lua_State* L) -> int {
+    const auto* def = (const FluentBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+    int face = luaL_checkinteger(L, 1);
+    int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
+    slua_fluent_serialize(L, 2, def);
+    int rules_idx = lua_gettop(L);
+    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+    lua_rawgetfield(L, -1, "SetLinkMedia");
+    lua_pushinteger(L, link);
+    lua_pushinteger(L, face);
+    lua_pushvalue(L, rules_idx);
+    lua_call(L, 3, 0);
+    return 0;
+};
+slua_register_fluent_fn(L, "llprim", "SetMedia", set_media, kPrimMediaParamsDef);

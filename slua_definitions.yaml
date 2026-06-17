@@ -242,6 +242,11 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
+- name: MediaParams
+  comment: Prim face media parameter table. Pass to llprim.SetMedia() to configure media on a face.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
+  selene-type: table
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -1458,7 +1463,7 @@ modules:
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
   functions:
-  - name: ParticleSystem
+  - name: particleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
     - name: params
@@ -1466,6 +1471,16 @@ modules:
     - name: link
       type: number?
     return-type: '()'
+  - name: setMedia
+    comment: Configure media on a specific face. Omit link to apply to the current prim.
+    parameters:
+    - name: face
+      type: number
+    - name: params
+      type: MediaParams?
+    - name: link
+      type: number?
+    return-type: number
 - name: math
   comment: Mathematical functions library.
   functions:

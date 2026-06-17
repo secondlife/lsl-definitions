@@ -5515,6 +5515,15 @@ globals:
       required: false
     description: Emit a particle system from a ParticleParams table. Omit link to
       apply to the current prim.
+  llprim.SetMedia:
+    args:
+    - type: number
+    - type: table
+      required: false
+    - type: number
+      required: false
+    description: Configure media on a specific face. Omit link to apply to the current
+      prim.
   math.pi:
     property: read-only
     type: number

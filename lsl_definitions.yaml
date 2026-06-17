@@ -4024,35 +4024,41 @@ constants:
       for that media type. Note: This flag is not currently implemented."
     type: integer
     value: 0
+    value-type: boolean
   PRIM_MEDIA_AUTO_LOOP:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-looping is enabled for the face media.
     type: integer
     value: 4
+    value-type: boolean
   PRIM_MEDIA_AUTO_PLAY:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media auto-plays when a resident is able
       to view it.
     type: integer
     value: 5
+    value-type: boolean
   PRIM_MEDIA_AUTO_SCALE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-scaling is enabled, which forces the
       media to fill the entire texture size.
     type: integer
     value: 6
+    value-type: boolean
   PRIM_MEDIA_AUTO_ZOOM:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether clicking the media triggers auto-zoom and
       auto-focus.
     type: integer
     value: 7
+    value-type: boolean
   PRIM_MEDIA_CONTROLS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the style of media controls (can be set to
       PRIM_MEDIA_CONTROLS_STANDARD or PRIM_MEDIA_CONTROLS_MINI).
     type: integer
     value: 1
+    value-type: integer
   PRIM_MEDIA_CONTROLS_MINI:
     member-of: [PrimMediaControl]
     tooltip: Mini web navigation controls constant; does not include an address bar.
@@ -4069,6 +4075,7 @@ constants:
       (maximum 1024 characters). Changing this URL triggers media navigation.
     type: integer
     value: 2
+    value-type: string
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: >-
@@ -4078,17 +4085,20 @@ constants:
       Note: Viewer settings affect this flag. It works by default on most prims.
     type: integer
     value: 8
+    value-type: boolean
   PRIM_MEDIA_HEIGHT_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the height of the media in pixels.
     type: integer
     value: 10
+    value-type: integer
   PRIM_MEDIA_HOME_URL:
     member-of: [PrimMediaParam]
     tooltip: String. Gets or sets the home URL for the chosen face (maximum 1024
       characters).
     type: integer
     value: 3
+    value-type: string
   PRIM_MEDIA_MAX_HEIGHT_PIXELS:
     tooltip: ''
     type: integer
@@ -4119,12 +4129,14 @@ constants:
       media control bar (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 14
+    value-type: integer
   PRIM_MEDIA_PERMS_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the permissions mask controlling who can interact
       with the media (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 13
+    value-type: integer
   PRIM_MEDIA_PERM_ANYONE:
     member-of: [PrimMediaPerm]
     tooltip: ''
@@ -4152,17 +4164,20 @@ constants:
       comes first).
     type: integer
     value: 12
+    value-type: string
   PRIM_MEDIA_WHITELIST_ENABLE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media navigation is restricted to the
       URLs listed in PRIM_MEDIA_WHITELIST.
     type: integer
     value: 11
+    value-type: boolean
   PRIM_MEDIA_WIDTH_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the width of the media in pixels.
     type: integer
     value: 9
+    value-type: integer
   PRIM_NAME:
     member-of: [PrimParam]
     tooltip: Prim parameter [PRIM_NAME, string name] to get or set the prim's name
@@ -16992,6 +17007,14 @@ builder-rulesets:
     flag-field: flags
     flag-mask: _MASK
     lua-module: llprim
-    lua-fn: ParticleSystem
+    lua-fn: particleSystem
     lua-type: ParticleParams
     dispatch-fn: LinkParticleSystem
+
+  prim-media-params:
+    type: table
+    enum: PrimMediaParam
+    lua-module: llprim
+    lua-fn: setMedia
+    lua-type: MediaParams
+    dispatch-fn: SetLinkMedia

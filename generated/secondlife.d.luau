@@ -124,6 +124,23 @@ export type ParticleParams = {
   emissive: boolean?,
   ribbon: boolean?,
 }
+export type MediaParams = {
+  alt_image_enable: boolean?,
+  controls: number?,
+  current_url: string?,
+  home_url: string?,
+  auto_loop: boolean?,
+  auto_play: boolean?,
+  auto_scale: boolean?,
+  auto_zoom: boolean?,
+  first_click_interact: boolean?,
+  width_pixels: number?,
+  height_pixels: number?,
+  whitelist_enable: boolean?,
+  whitelist: string?,
+  perms_interact: number?,
+  perms_control: number?,
+}
 
 declare extern type DetectedEvent with
   index: number
@@ -425,6 +442,7 @@ declare lljson: {
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
   ParticleSystem: (params: ParticleParams?, link: number?) -> (),
+  SetMedia: (face: number, params: MediaParams?, link: number?) -> number,
 }
 
 

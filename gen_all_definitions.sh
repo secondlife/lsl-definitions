@@ -7,7 +7,7 @@ mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/experimental" "$ou
 
 DEFS="./lsl_definitions.yaml"
 SLUA="./slua_definitions.yaml"
-CMD="python gen_definitions.py"
+CMD="$(command -v python3 || command -v python) gen_definitions.py"
 
 # Viewer outputs
 $CMD $DEFS syntax "$outdir/lsl_keywords.xml"

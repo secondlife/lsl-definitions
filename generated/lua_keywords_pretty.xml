@@ -198,6 +198,11 @@ export type DateTypeResult = {
   isdst: boolean?,
 }</string>
          </map>
+         <key>MediaParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Prim face media parameter table. Pass to llprim.SetMedia() to configure media on a face.</string>
+         </map>
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>
@@ -13395,6 +13400,47 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
+         </map>
+         <key>llprim.SetMedia</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>face</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number</string>
+                  </map>
+               </map>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>MediaParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>link</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>number</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Configure media on a specific face. Omit link to apply to the current prim.</string>
          </map>
          <key>math</key>
          <map>
