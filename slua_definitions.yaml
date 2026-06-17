@@ -2882,7 +2882,7 @@ builtin-constants:
     value: 'false'
 metamethods:
   - name: __add
-    comment: "Defines behaviour for the addition (+) operator."
+    comment: "Defines behavior for the addition (+) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -2905,7 +2905,7 @@ metamethods:
         comment: "The arguments passed to the call."
     return-type: "R..."
   - name: __concat
-    comment: "Defines behaviour for the concatenation (..) operator."
+    comment: "Defines behavior for the concatenation (..) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -2916,7 +2916,7 @@ metamethods:
         comment: "The right operand or object to concatenate."
     return-type: any
   - name: __div
-    comment: "Defines behaviour for the division (/) operator."
+    comment: "Defines behavior for the division (/) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -2927,7 +2927,7 @@ metamethods:
         comment: "The right operand of the division (divisor)."
     return-type: any
   - name: __eq
-    comment: "Defines behaviour for the equality (==) operator."
+    comment: "Defines behavior for the equality (==) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
       - name: left
@@ -2938,7 +2938,7 @@ metamethods:
         comment: "The second value to compare."
     return-type: boolean
   - name: __idiv
-    comment: "Defines behaviour for the floor division (//) operator."
+    comment: "Defines behavior for the floor division (//) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -2980,13 +2980,13 @@ metamethods:
     parameters:
       - name: self
         type: table
-        comment: "The table or object undergoing iteration."
+        comment: "The table or object being iterated."
     return-type: "((state: S, index: K) -> (K?, V...), S, K)"
   - name: __jsonhint
     comment: "String property used by lljson.encode to enforce table formatting rules."
     type: '"array" | "object"'
   - name: __le
-    comment: "Defines behaviour for the less-than-or-equal-to (<=) operator."
+    comment: "Defines behavior for the less-than-or-equal-to (<=) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
       - name: left
@@ -2997,7 +2997,7 @@ metamethods:
         comment: "The right operand of the comparison."
     return-type: boolean
   - name: __len
-    comment: "Defines behaviour for the length (#) operator."
+    comment: "Defines behavior for the length (#) operator."
     type: "(self: any) -> number"
     parameters:
       - name: self
@@ -3005,7 +3005,7 @@ metamethods:
         comment: "The object whose length is being measured."
     return-type: number
   - name: __lt
-    comment: "Defines behaviour for the less-than (<) operator."
+    comment: "Defines behavior for the less-than (<) operator."
     type: "(left: any, right: any) -> boolean"
     parameters:
       - name: left
@@ -3019,7 +3019,7 @@ metamethods:
     comment: "Protects the metatable. If present, getmetatable returns this value, and setmetatable will raise an error."
     type: any
   - name: __mod
-    comment: "Defines behaviour for the modulo (%) operator."
+    comment: "Defines behavior for the modulo (%) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -3033,7 +3033,7 @@ metamethods:
     comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
     type: '"k" | "v" | "kv" | "vk"'
   - name: __mul
-    comment: "Defines behaviour for the multiplication (*) operator."
+    comment: "Defines behavior for the multiplication (*) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -3049,7 +3049,7 @@ metamethods:
     parameters:
       - name: self
         type: table
-        comment: "The table undergoing assignment."
+        comment: "The table being assigned."
       - name: key
         type: any
         comment: "The key being created."
@@ -3063,7 +3063,7 @@ metamethods:
         parameters:
           - name: self
             type: table
-            comment: "The table undergoing assignment."
+            comment: "The table being assigned."
           - name: key
             type: any
             comment: "The key being created."
@@ -3075,7 +3075,7 @@ metamethods:
         type: "{ [any]: any }"
         return-type: "()"
   - name: __pow
-    comment: "Defines behaviour for the exponentiation (^) operator."
+    comment: "Defines behavior for the exponentiation (^) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -3086,7 +3086,7 @@ metamethods:
         comment: "The exponent value."
     return-type: any
   - name: __sub
-    comment: "Defines behaviour for the subtraction (-) operator."
+    comment: "Defines behavior for the subtraction (-) operator."
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
@@ -3116,7 +3116,7 @@ metamethods:
         comment: "The object being converted to a string."
     return-type: string
   - name: __unm
-    comment: "Defines behaviour for the unary negation (-) operator."
+    comment: "Defines behavior for the unary negation (-) operator."
     type: "(self: any) -> any"
     parameters:
       - name: self
