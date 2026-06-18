@@ -3117,9 +3117,9 @@ metamethods:
     return-type: string
   - name: __unm
     comment: "Defines behavior for the unary negation (-) operator."
-    type: "(self: any) -> any"
+    type: "(self: table) -> any"
     parameters:
       - name: self
-        type: any
+        type: table
         comment: "The value being negated."
     return-type: any
