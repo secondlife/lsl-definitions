@@ -2895,10 +2895,10 @@ metamethods:
   - name: __call
     comment: "Called when the table or object is called as if it were a function."
     type-parameters: [A..., R...]
-    type: "<A..., R...>(self: table, A...) -> R..."
+    type: "<A..., R...>(self: {}, A...) -> R..."
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The table being invoked."
       - name: ...
         type: "A..."
@@ -2950,10 +2950,10 @@ metamethods:
     return-type: any
   - name: __index
     comment: "Called when looking up a key that does not exist in the table."
-    type: "((self: table, key: any) -> any) | { [any]: any }"
+    type: "((self: {}, key: any) -> any) | { [any]: any }"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The table being accessed."
       - name: key
         type: any
@@ -2961,10 +2961,10 @@ metamethods:
     return-type: any
     variants:
       - comment: "Called as a function fallback when looking up a key that does not exist in the table."
-        type: "(self: table, key: any) -> any"
+        type: "(self: {}, key: any) -> any"
         parameters:
           - name: self
-            type: table
+            type: '{}'
             comment: "The table being accessed."
           - name: key
             type: any
@@ -2976,10 +2976,10 @@ metamethods:
   - name: __iter
     comment: "Called before generalized iteration begins on a table or userdata. Returns an iterator generator function, a state object, and an initial control variable."
     type-parameters: [S, K, V...]
-    type: "<S, K, V...>(self: table) -> ((state: S, index: K) -> (K?, V...), S, K)"
+    type: "<S, K, V...>(self: {}) -> ((state: S, index: K) -> (K?, V...), S, K)"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The table or object being iterated."
     return-type: "((state: S, index: K) -> (K?, V...), S, K)"
   - name: __jsonhint
@@ -2998,10 +2998,10 @@ metamethods:
     return-type: boolean
   - name: __len
     comment: "Defines behavior for the length (#) operator."
-    type: "(self: table) -> number"
+    type: "(self: {}) -> number"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The object whose length is being measured."
     return-type: number
   - name: __lt
@@ -3045,10 +3045,10 @@ metamethods:
     return-type: any
   - name: __newindex
     comment: "Called when assigning a value to a key that does not exist in the table."
-    type: "((self: table, key: any, value: any) -> ()) | { [any]: any }"
+    type: "((self: {}, key: any, value: any) -> ()) | { [any]: any }"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The table being assigned."
       - name: key
         type: any
@@ -3059,10 +3059,10 @@ metamethods:
     return-type: "()"
     variants:
       - comment: "Called as a function fallback when assigning a value to a key that does not exist in the table."
-        type: "(self: table, key: any, value: any) -> ()"
+        type: "(self: {}, key: any, value: any) -> ()"
         parameters:
           - name: self
-            type: table
+            type: '{}'
             comment: "The table being assigned."
           - name: key
             type: any
@@ -3098,10 +3098,10 @@ metamethods:
     return-type: any
   - name: __tojson
     comment: "Called during JSON serialization (with lljson.encode or lljson.slencode). Returns an alternative representation of the table to be serialized in its place."
-    type: '(self: table, ctx: { mode: "json" | "sljson", tight: boolean }) -> any'
+    type: '(self: {}, ctx: { mode: "json" | "sljson", tight: boolean }) -> any'
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The table being serialized."
       - name: ctx
         type: '{ mode: "json" | "sljson", tight: boolean }'
@@ -3109,17 +3109,17 @@ metamethods:
     return-type: any
   - name: __tostring
     comment: "Called by tostring to convert the value to a string."
-    type: "(self: table) -> string"
+    type: "(self: {}) -> string"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The object being converted to a string."
     return-type: string
   - name: __unm
     comment: "Defines behavior for the unary negation (-) operator."
-    type: "(self: table) -> any"
+    type: "(self: {}) -> any"
     parameters:
       - name: self
-        type: table
+        type: '{}'
         comment: "The value being negated."
     return-type: any
