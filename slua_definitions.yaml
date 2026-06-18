@@ -2886,7 +2886,7 @@ metamethods:
     type: "(left: any, right: any) -> any"
     parameters:
       - name: left
-        type: me
+        type: any
         comment: "The left operand of the addition."
       - name: right
         type: any
@@ -2895,7 +2895,7 @@ metamethods:
   - name: __call
     comment: "Called when the table or object is called as if it were a function."
     type-parameters: [A..., R...]
-    type: "<A..., R...>(self: any, A...) -> R..."
+    type: "<A..., R...>(self: table, A...) -> R..."
     parameters:
       - name: self
         type: table
@@ -2976,7 +2976,7 @@ metamethods:
   - name: __iter
     comment: "Called before generalized iteration begins on a table or userdata. Returns an iterator generator function, a state object, and an initial control variable."
     type-parameters: [S, K, V...]
-    type: "<S, K, V...>(self: any) -> ((S, K) -> (K?, V...), S, K)"
+    type: "<S, K, V...>(self: table) -> ((state: S, index: K) -> (K?, V...), S, K)"
     parameters:
       - name: self
         type: table
@@ -3031,7 +3031,7 @@ metamethods:
     return-type: any
   - name: __mode
     comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
-    type: '"k" | "v" | "kv" | "vk"'
+    type: '"k" | "v" | "kv"
   - name: __mul
     comment: "Defines behavior for the multiplication (*) operator."
     type: "(left: any, right: any) -> any"
