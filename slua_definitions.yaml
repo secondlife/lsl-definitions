@@ -2998,10 +2998,10 @@ metamethods:
     return-type: boolean
   - name: __len
     comment: "Defines behavior for the length (#) operator."
-    type: "(self: any) -> number"
+    type: "(self: table) -> number"
     parameters:
       - name: self
-        type: any
+        type: table
         comment: "The object whose length is being measured."
     return-type: number
   - name: __lt
@@ -3109,10 +3109,10 @@ metamethods:
     return-type: any
   - name: __tostring
     comment: "Called by tostring to convert the value to a string."
-    type: "(self: any) -> string"
+    type: "(self: table) -> string"
     parameters:
       - name: self
-        type: any
+        type: table
         comment: "The object being converted to a string."
     return-type: string
   - name: __unm
