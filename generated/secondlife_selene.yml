@@ -449,23 +449,23 @@ globals:
   CHANGED_ALLOWED_DROP:
     property: read-only
     type: number
-    description: The object inventory changed because a user other than the owner
-      (or the owner if the object is no-mod) added an item. This is only possible
-      if enabled via llAllowInventoryDrop.
+    description: Object inventory changed because a user other than the owner (or
+      the owner if the object is no-mod) added an item. This is only possible if enabled
+      via llAllowInventoryDrop.
   CHANGED_COLOR:
     property: read-only
     type: number
-    description: The object's Blinn-Phong color or alpha parameters have changed.
+    description: Object's Blinn-Phong color or alpha parameters have changed.
   CHANGED_INVENTORY:
     property: read-only
     type: number
-    description: The prim inventory has changed by someone who has modification rights
+    description: Prim inventory has changed by someone who has modification rights
       to it.
   CHANGED_LINK:
     property: read-only
     type: number
-    description: The number of prims making up the object or avatars seated on it
-      has changed. Also occurs when duplicating a linked object or when a prim changes
+    description: Number of prims making up the object or avatars seated on it has
+      changed. Also occurs when duplicating a linked object or when a prim changes
       type or shape. Does not trigger on attach/detach, sit/unsit in attachments,
       or single prim duplication.
   CHANGED_MEDIA:
@@ -475,45 +475,45 @@ globals:
   CHANGED_OWNER:
     property: read-only
     type: number
-    description: The object has changed owners. Triggers in the original object when
-      a user takes it, copies it, or deeds it to a group, and in the new object when
+    description: Object has changed owners. Triggers in the original object when a
+      user takes it, copies it, or deeds it to a group, and in the new object when
       it is first rezzed.
   CHANGED_REGION:
     property: read-only
     type: number
-    description: The object has changed regions by crossing a boundary or teleporting
+    description: Object has changed regions by crossing a boundary or teleporting
       (if attached). Triggers only in the root prim of a linkset.
   CHANGED_REGION_START:
     property: read-only
     type: number
-    description: The region containing this object has just come online.
+    description: Region containing this object has just come online.
   CHANGED_RENDER_MATERIAL:
     property: read-only
     type: number
-    description: The render material (prim material ID or material overrides) has
-      changed on one or more faces.
+    description: Render material (prim material ID or material overrides) has changed
+      on one or more faces.
   CHANGED_SCALE:
     property: read-only
     type: number
-    description: The prim scale of at least one prim in the linked object has changed.
+    description: Prim scale of at least one prim in the linked object has changed.
       Only the root prim receives this event.
   CHANGED_SHAPE:
     property: read-only
     type: number
-    description: The prim base shape (PRIM_TYPE, such as box, prism, torus, taper,
-      twist, or cut) has changed.
+    description: Prim base shape (PRIM_TYPE, such as box, prism, torus, taper, twist,
+      or cut) has changed.
   CHANGED_TELEPORT:
     property: read-only
     type: number
-    description: The avatar this object is attached to has teleported. Triggers only
-      in the root prim of an attachment. Does not occur for child prims or 'sit teleports'.
+    description: Avatar this object is attached to has teleported. Triggers only in
+      the root prim of an attachment. Does not occur for child prims or 'sit teleports'.
       If scripts are disabled at the destination, the event queues and triggers after
       moving to a script-enabled parcel.
   CHANGED_TEXTURE:
     property: read-only
     type: number
-    description: The prim texture parameters (shine/bump settings, repeats, flip,
-      rotation, offset, or texture) have changed.
+    description: Prim texture parameters (shine/bump settings, repeats, flip, rotation,
+      offset, or texture) have changed.
   CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES:
     property: read-only
     type: number
@@ -683,9 +683,9 @@ globals:
       on this channel can monitor the combat log.
   COMBAT_LOG_ID:
     struct: uuid
-    description: The ID used by all combat log messages sent from the region to the
-      COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive only
-      system-generated combat log messages.
+    description: ID used by all combat log messages sent from the region to the COMBAT_CHANNEL.
+      Scripts can filter llListen calls with this ID to receive only system-generated
+      combat log messages.
   CONTENT_TYPE_ATOM:
     property: read-only
     type: number
@@ -901,7 +901,7 @@ globals:
   DEG_TO_RAD:
     property: read-only
     type: number
-    description: The constant 0.017453293 (precise value is PI/180). Multiply a value
+    description: Constant 0.017453293 (precise value is PI/180). Multiply a value
       in degrees by this number to convert it to radians.
   DENSITY:
     property: read-only
@@ -947,30 +947,29 @@ globals:
   ENV_NO_ENVIRONMENT:
     property: read-only
     type: number
-    description: The environmental settings inventory object could not be found, or
-      there is no environment on this parcel to modify.
+    description: Environmental settings inventory object could not be found, or there
+      is no environment on this parcel to modify.
   ENV_NO_EXPERIENCE_LAND:
     property: read-only
     type: number
-    description: The experience has not been enabled or cannot run on the land.
+    description: Experience has not been enabled or cannot run on the land.
   ENV_NO_EXPERIENCE_PERMISSION:
     property: read-only
     type: number
-    description: The agent has not granted permission to change environments.
+    description: Agent has not granted permission to change environments.
   ENV_NO_PERMISSIONS:
     property: read-only
     type: number
-    description: The script lacks permissions to modify the environment at this location,
+    description: Script lacks permissions to modify the environment at this location,
       or an attempt was made to remove altitude track 0 or 1.
   ENV_OK:
     property: read-only
     type: number
-    description: The agent, parcel, or region will attempt to change the applied environment.
+    description: Agent, parcel, or region will attempt to change the applied environment.
   ENV_THROTTLE:
     property: read-only
     type: number
-    description: The scripts have exceeded the throttle limit. Wait and retry the
-      request.
+    description: Scripts have exceeded the throttle limit. Wait and retry the request.
   ENV_VALIDATION_FAIL:
     property: read-only
     type: number
@@ -2486,9 +2485,9 @@ globals:
   PI:
     property: read-only
     type: number
-    description: The mathematical constant Pi (3.14159265), representing the number
-      of radians in a half circle (semi-circle). When used in sensor functions, it
-      specifies a full sphere scan.
+    description: Mathematical constant Pi (3.14159265), representing the number of
+      radians in a half circle (semi-circle). When used in sensor functions, it specifies
+      a full sphere scan.
   PING_PONG:
     property: read-only
     type: number
@@ -2497,9 +2496,8 @@ globals:
   PI_BY_TWO:
     property: read-only
     type: number
-    description: The constant Pi/2 (1.57079633), representing the number of radians
-      in a quarter circle. When used in sensor functions, it specifies a hemisphere
-      scan.
+    description: Constant Pi/2 (1.57079633), representing the number of radians in
+      a quarter circle. When used in sensor functions, it specifies a hemisphere scan.
   PRIM_ALLOW_UNSIT:
     property: read-only
     type: number
@@ -3547,8 +3545,8 @@ globals:
   RAD_TO_DEG:
     property: read-only
     type: number
-    description: The constant 57.2957795 (precise value is 180/PI). Multiply a value
-      in radians by this number to convert it to degrees.
+    description: Constant 57.2957795 (precise value is 180/PI). Multiply a value in
+      radians by this number to convert it to degrees.
   RCERR_CAST_TIME_EXCEEDED:
     property: read-only
     type: number
@@ -4119,7 +4117,7 @@ globals:
   SQRT2:
     property: read-only
     type: number
-    description: The mathematical constant representing the square root of 2 (1.41421356).
+    description: Mathematical constant representing the square root of 2 (1.41421356).
   STATUS_BLOCK_GRAB:
     property: read-only
     type: number
@@ -4369,19 +4367,19 @@ globals:
       works for PBR textures.
   TEXTURE_BLANK:
     struct: uuid
-    description: The asset UUID representing the default 'Blank' texture.
+    description: Asset UUID representing the default 'Blank' texture.
   TEXTURE_DEFAULT:
     struct: uuid
   TEXTURE_MEDIA:
     struct: uuid
-    description: The asset UUID representing the default 'Default Media' texture.
+    description: Asset UUID representing the default 'Default Media' texture.
   TEXTURE_PLYWOOD:
     struct: uuid
-    description: The asset UUID representing the default 'Plywood' texture.
+    description: Asset UUID representing the default 'Plywood' texture.
   TEXTURE_TRANSPARENT:
     struct: uuid
-    description: The asset UUID representing the '*Default Transparent Texture' in
-      the library (included with viewers).
+    description: Asset UUID representing the '*Default Transparent Texture' in the
+      library (included with viewers).
   TOUCH_INVALID_FACE:
     property: read-only
     type: number
@@ -4491,8 +4489,8 @@ globals:
   TWO_PI:
     property: read-only
     type: number
-    description: The mathematical constant representing the number of radians in a
-      full circle (6.28318530, twice the value of PI).
+    description: Mathematical constant representing the number of radians in a full
+      circle (6.28318530, twice the value of PI).
   TYPE_FLOAT:
     property: read-only
     type: number
@@ -4807,19 +4805,19 @@ globals:
   XP_ERROR_EXPERIENCES_DISABLED:
     property: read-only
     type: number
-    description: The region currently has experiences disabled.
+    description: Region currently has experiences disabled.
   XP_ERROR_EXPERIENCE_DISABLED:
     property: read-only
     type: number
-    description: The experience owner has temporarily disabled the experience.
+    description: Experience owner has temporarily disabled the experience.
   XP_ERROR_EXPERIENCE_SUSPENDED:
     property: read-only
     type: number
-    description: The experience has been suspended by Linden Lab customer support.
+    description: Experience has been suspended by Linden Lab customer support.
   XP_ERROR_INVALID_EXPERIENCE:
     property: read-only
     type: number
-    description: The script is associated with an experience that no longer exists.
+    description: Script is associated with an experience that no longer exists.
   XP_ERROR_INVALID_PARAMETERS:
     property: read-only
     type: number
@@ -4827,11 +4825,11 @@ globals:
   XP_ERROR_KEY_NOT_FOUND:
     property: read-only
     type: number
-    description: The requested key does not exist.
+    description: Requested key does not exist.
   XP_ERROR_MATURITY_EXCEEDED:
     property: read-only
     type: number
-    description: The content rating of the experience exceeds that of the region.
+    description: Content rating of the experience exceeds that of the region.
   XP_ERROR_NONE:
     property: read-only
     type: number
@@ -4839,7 +4837,7 @@ globals:
   XP_ERROR_NOT_FOUND:
     property: read-only
     type: number
-    description: The sim was unable to verify the validity of the experience. Retrying
+    description: Sim was unable to verify the validity of the experience. Retrying
       after a short wait is advised.
   XP_ERROR_NOT_PERMITTED:
     property: read-only
@@ -4849,8 +4847,8 @@ globals:
   XP_ERROR_NOT_PERMITTED_LAND:
     property: read-only
     type: number
-    description: The experience is blocked or not enabled for this land, or is not
-      allowed to run in the current region.
+    description: Experience is blocked or not enabled for this land, or is not allowed
+      to run in the current region.
   XP_ERROR_NO_EXPERIENCE:
     property: read-only
     type: number
@@ -4863,8 +4861,8 @@ globals:
   XP_ERROR_REQUEST_PERM_TIMEOUT:
     property: read-only
     type: number
-    description: The request for experience permissions was ignored and the request
-      timed out without modification.
+    description: Request for experience permissions was ignored and the request timed
+      out without modification.
   XP_ERROR_RETRY_UPDATE:
     property: read-only
     type: number
@@ -4877,11 +4875,11 @@ globals:
   XP_ERROR_STORE_DISABLED:
     property: read-only
     type: number
-    description: The key-value store is currently disabled on this region.
+    description: Key-value store is currently disabled on this region.
   XP_ERROR_THROTTLED:
     property: read-only
     type: number
-    description: The call failed due to too many recent calls.
+    description: Call failed due to too many recent calls.
   XP_ERROR_UNKNOWN_ERROR:
     property: read-only
     type: number
