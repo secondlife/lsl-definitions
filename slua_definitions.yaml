@@ -352,7 +352,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: value
-    comment: The value to check for truthiness.
+    comment: Value to check for truthiness.
     type: T?
   - name: errorMessage
     comment: Optional error message to display if the value is not truthy.
@@ -385,7 +385,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: message
-    comment: The error message to raise.
+    comment: Error message to raise.
     type: T
   - name: level
     comment: Optional level to attribute the error to in the call stack.
@@ -407,7 +407,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the metatable for.
+    comment: Object to get the metatable for.
     type: T
     selene-type: table
   return-type: getmetatable<T>
@@ -432,7 +432,7 @@ functions:
   type-parameters: [V]
   parameters:
   - name: tab
-    comment: The table to iterate over.
+    comment: Table to iterate over.
     type: "{V}"
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
 - name: loadstring
@@ -457,7 +457,7 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to traverse.
+    comment: Table to traverse.
     type: "{[K]: V}"
   - name: i
     comment: Optional key to start traversal after.
@@ -469,7 +469,7 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to iterate over.
+    comment: Table to iterate over.
     type: "{[K]: V}"
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
@@ -509,10 +509,10 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to perform the lookup on.
+    comment: Table to perform the lookup on.
     type: "{[K]: V}"
   - name: k
-    comment: The key to look up in the table.
+    comment: Key to look up in the table.
     type: K
   return-type: V?
   fastcall: true
@@ -521,7 +521,7 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table or string to compute the length of.
+    comment: Table or string to compute the length of.
     type: "{[K]: V} | string"
   return-type: number
   fastcall: true
@@ -530,13 +530,13 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to assign the value to.
+    comment: Table to assign the value to.
     type: "{[K]: V}"
   - name: k
-    comment: The key to assign the value to.
+    comment: Key to assign the value to.
     type: K
   - name: v
-    comment: The value to assign.
+    comment: Value to assign.
     type: V
   return-type: "{[K]: V}"
   fastcall: true
@@ -544,7 +544,7 @@ functions:
   comment: Execute the named external module.
   parameters:
   - name: target
-    comment: The name of the external module.
+    comment: Name of the external module.
     type: any
   return-type: any
   typechecker: {magic: true}
@@ -553,10 +553,10 @@ functions:
   type-parameters: [A...]
   parameters:
   - name: i
-    comment: The index or '#' to count arguments.
+    comment: Index or '#' to count arguments.
     type: string | number
   - name: ...
-    comment: The arguments to select from.
+    comment: Arguments to select from.
     type: A...
   return-type: ...any
   fastcall: true
@@ -577,11 +577,11 @@ functions:
   type-parameters: [T, MT]
   parameters:
   - name: t
-    comment: The table to set the metatable for.
+    comment: Table to set the metatable for.
     type: T
     selene-type: table
   - name: mt
-    comment: The metatable to set.
+    comment: Metatable to set.
     type: MT
     selene-type: table
   return-type: setmetatable<T, MT>
@@ -591,7 +591,7 @@ functions:
   comment: Converts the input string to a number in the specified base.
   parameters:
   - name: value
-    comment: The string to convert to a number.
+    comment: String to convert to a number.
     type: string? | number
     selene-type: string
   - name: base
@@ -621,7 +621,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: value
-    comment: The object to convert to a string.
+    comment: Object to convert to a string.
     type: T
   return-type: string
   fastcall: true
@@ -648,7 +648,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the type of.
+    comment: Object to get the type of.
     type: T
   return-type: string
   must-use: true
@@ -658,7 +658,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the type of.
+    comment: Object to get the type of.
     type: T
   return-type: string
   must-use: true
@@ -1241,7 +1241,7 @@ modules:
     comment: Resumes a coroutine, returning true and results if successful, or false and an error.
     parameters:
     - name: co
-      comment: The coroutine to resume.
+      comment: Coroutine to resume.
       type: thread
     - name: ...
       comment: Arguments to pass to the coroutine.
@@ -1256,7 +1256,7 @@ modules:
     comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
     parameters:
     - name: co
-      comment: The coroutine to check status of.
+      comment: Coroutine to check status of.
       type: thread
     return-type: '"running" | "suspended" | "normal" | "dead"'
     must-use: true
@@ -1284,7 +1284,7 @@ modules:
     comment: Closes a coroutine, returning true if successful or false and an error.
     parameters:
     - name: co
-      comment: The coroutine to close.
+      comment: Coroutine to close.
       type: thread
     return-type: (boolean, string?)
 - name: debug
@@ -1496,10 +1496,10 @@ modules:
       the quadrant.
     parameters:
     - name: "y"
-      comment: The y-coordinate.
+      comment: Y-coordinate.
       type: number
     - name: x
-      comment: The x-coordinate.
+      comment: X-coordinate.
       type: number
     return-type: number
     must-use: true
@@ -1517,7 +1517,7 @@ modules:
     comment: Returns n clamped between min and max.
     parameters:
     - name: "n"
-      comment: The value to be clamped.
+      comment: Value to be clamped.
       type: number
     - name: min
       comment: Minimum allowable value.
@@ -1577,10 +1577,10 @@ modules:
     comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
     - name: x
-      comment: The dividend.
+      comment: Dividend.
       type: number
     - name: "y"
-      comment: The divisor.
+      comment: Divisor.
       type: number
     return-type: number
     must-use: true
@@ -1598,10 +1598,10 @@ modules:
     comment: Returns s * 2^e.
     parameters:
     - name: s
-      comment: The significand.
+      comment: Significand.
       type: number
     - name: e
-      comment: The exponent.
+      comment: Exponent.
       type: number
     return-type: number
     must-use: true
@@ -1844,7 +1844,7 @@ modules:
     fastcall: true
   constants:
   - name: pi
-    comment: The value of pi
+    comment: Value of pi
     type: number
     value: 3.141592653589793
   - name: huge
@@ -2801,7 +2801,7 @@ modules:
 # auto-generated from lsl_definitions.yaml
 constants:
 - name: "_G"
-  comment: The table of Lua builtin globals.
+  comment: Table of Lua builtin globals.
   type: any
   value: '{}'
 - name: _VERSION

@@ -325,7 +325,7 @@ export type rotation = quaternion</string>
          <key>math.pi</key>
          <map>
             <key>tooltip</key>
-            <string>The value of pi</string>
+            <string>Value of pi</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -9571,7 +9571,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>_G</key>
          <map>
             <key>tooltip</key>
-            <string>The table of Lua builtin globals.</string>
+            <string>Table of Lua builtin globals.</string>
             <key>type</key>
             <string>any</string>
             <key>value</key>
@@ -10566,7 +10566,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The value to check for truthiness.</string>
+                     <string>Value to check for truthiness.</string>
                      <key>type</key>
                      <string>T?</string>
                   </map>
@@ -10625,7 +10625,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>message</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The error message to raise.</string>
+                     <string>Error message to raise.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -10675,7 +10675,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>obj</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The object to get the metatable for.</string>
+                     <string>Object to get the metatable for.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -10702,7 +10702,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>tab</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to iterate over.</string>
+                     <string>Table to iterate over.</string>
                      <key>type</key>
                      <string>{V}</string>
                   </map>
@@ -10753,7 +10753,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to traverse.</string>
+                     <string>Table to traverse.</string>
                      <key>type</key>
                      <string>{[K]: V}</string>
                   </map>
@@ -10790,7 +10790,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to iterate over.</string>
+                     <string>Table to iterate over.</string>
                      <key>type</key>
                      <string>{[K]: V}</string>
                   </map>
@@ -10919,7 +10919,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to perform the lookup on.</string>
+                     <string>Table to perform the lookup on.</string>
                      <key>type</key>
                      <string>{[K]: V}</string>
                   </map>
@@ -10928,7 +10928,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>k</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The key to look up in the table.</string>
+                     <string>Key to look up in the table.</string>
                      <key>type</key>
                      <string>K</string>
                   </map>
@@ -10956,7 +10956,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table or string to compute the length of.</string>
+                     <string>Table or string to compute the length of.</string>
                      <key>type</key>
                      <string>{[K]: V} | string</string>
                   </map>
@@ -10984,7 +10984,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to assign the value to.</string>
+                     <string>Table to assign the value to.</string>
                      <key>type</key>
                      <string>{[K]: V}</string>
                   </map>
@@ -10993,7 +10993,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>k</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The key to assign the value to.</string>
+                     <string>Key to assign the value to.</string>
                      <key>type</key>
                      <string>K</string>
                   </map>
@@ -11002,7 +11002,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>v</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The value to assign.</string>
+                     <string>Value to assign.</string>
                      <key>type</key>
                      <string>V</string>
                   </map>
@@ -11025,7 +11025,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The name of the external module.</string>
+                     <string>Name of the external module.</string>
                      <key>type</key>
                      <string>any</string>
                   </map>
@@ -11052,7 +11052,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The index or '#' to count arguments.</string>
+                     <string>Index or '#' to count arguments.</string>
                      <key>type</key>
                      <string>string | number</string>
                   </map>
@@ -11061,7 +11061,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The arguments to select from.</string>
+                     <string>Arguments to select from.</string>
                      <key>type</key>
                      <string>A...</string>
                   </map>
@@ -11089,7 +11089,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The table to set the metatable for.</string>
+                     <string>Table to set the metatable for.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -11098,7 +11098,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>mt</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The metatable to set.</string>
+                     <string>Metatable to set.</string>
                      <key>type</key>
                      <string>MT</string>
                   </map>
@@ -11121,7 +11121,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The string to convert to a number.</string>
+                     <string>String to convert to a number.</string>
                      <key>type</key>
                      <string>string? | number</string>
                   </map>
@@ -11203,7 +11203,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The object to convert to a string.</string>
+                     <string>Object to convert to a string.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -11276,7 +11276,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>obj</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The object to get the type of.</string>
+                     <string>Object to get the type of.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -11303,7 +11303,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>obj</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The object to get the type of.</string>
+                     <string>Object to get the type of.</string>
                      <key>type</key>
                      <string>T</string>
                   </map>
@@ -12899,7 +12899,7 @@ Returns true if result is non-zero.</string>
                   <key>co</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The coroutine to close.</string>
+                     <string>Coroutine to close.</string>
                      <key>type</key>
                      <string>thread</string>
                   </map>
@@ -12959,7 +12959,7 @@ Returns true if result is non-zero.</string>
                   <key>co</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The coroutine to resume.</string>
+                     <string>Coroutine to resume.</string>
                      <key>type</key>
                      <string>thread</string>
                   </map>
@@ -13005,7 +13005,7 @@ Returns true if result is non-zero.</string>
                   <key>co</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The coroutine to check status of.</string>
+                     <string>Coroutine to check status of.</string>
                      <key>type</key>
                      <string>thread</string>
                   </map>
@@ -13466,7 +13466,7 @@ Returns true if result is non-zero.</string>
                   <key>y</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The y-coordinate.</string>
+                     <string>Y-coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13475,7 +13475,7 @@ Returns true if result is non-zero.</string>
                   <key>x</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The x-coordinate.</string>
+                     <string>X-coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13521,7 +13521,7 @@ Returns true if result is non-zero.</string>
                   <key>n</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The value to be clamped.</string>
+                     <string>Value to be clamped.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13677,7 +13677,7 @@ Returns true if result is non-zero.</string>
                   <key>x</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The dividend.</string>
+                     <string>Dividend.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13686,7 +13686,7 @@ Returns true if result is non-zero.</string>
                   <key>y</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The divisor.</string>
+                     <string>Divisor.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13801,7 +13801,7 @@ Returns true if result is non-zero.</string>
                   <key>s</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The significand.</string>
+                     <string>Significand.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13810,7 +13810,7 @@ Returns true if result is non-zero.</string>
                   <key>e</key>
                   <map>
                      <key>tooltip</key>
-                     <string>The exponent.</string>
+                     <string>Exponent.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>

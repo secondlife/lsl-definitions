@@ -375,7 +375,7 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>The value of pi",
+        "documentation": "Value: 3.141592653589793<br>Value of pi",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
@@ -8070,7 +8070,7 @@
         "documentation": "Value: vector(0.0, 0.0, 0.0)<br>A vector constant representing <0.0, 0.0, 0.0>. This is the default value for vector variables."
     },
     "@sl-slua/global/_G": {
-        "documentation": "Value: {}<br>The table of Lua builtin globals."
+        "documentation": "Value: {}<br>Table of Lua builtin globals."
     },
     "@sl-slua/global/_VERSION": {
         "documentation": "Value: \"Luau\""

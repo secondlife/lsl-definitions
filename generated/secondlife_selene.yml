@@ -4895,7 +4895,7 @@ globals:
       value for vector variables.
   _G:
     property: read-only
-    description: The table of Lua builtin globals.
+    description: Table of Lua builtin globals.
   _VERSION:
     property: read-only
     type: string
@@ -5508,7 +5508,7 @@ globals:
   math.pi:
     property: read-only
     type: number
-    description: The value of pi
+    description: Value of pi
   math.huge:
     property: read-only
     type: number
