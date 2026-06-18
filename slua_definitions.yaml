@@ -2928,13 +2928,13 @@ metamethods:
     return-type: any
   - name: __eq
     comment: "Defines behavior for the equality (==) operator."
-    type: "(left: any, right: any) -> boolean"
+    type: "(left: {}, right: {}) -> boolean"
     parameters:
       - name: left
-        type: any
+        type: '{}'
         comment: "The first value to compare."
       - name: right
-        type: any
+        type: '{}'
         comment: "The second value to compare."
     return-type: boolean
   - name: __idiv
@@ -2987,13 +2987,13 @@ metamethods:
     type: '"array" | "object"'
   - name: __le
     comment: "Defines behavior for the less-than-or-equal-to (<=) operator."
-    type: "(left: any, right: any) -> boolean"
+    type: "(left: {}, right: {}) -> boolean"
     parameters:
       - name: left
-        type: any
+        type: '{}'
         comment: "The left operand of the comparison."
       - name: right
-        type: any
+        type: '{}'
         comment: "The right operand of the comparison."
     return-type: boolean
   - name: __len
@@ -3006,13 +3006,13 @@ metamethods:
     return-type: number
   - name: __lt
     comment: "Defines behavior for the less-than (<) operator."
-    type: "(left: any, right: any) -> boolean"
+    type: "(left: {}, right: {}) -> boolean"
     parameters:
       - name: left
-        type: any
+        type: '{}'
         comment: "The left operand of the comparison."
       - name: right
-        type: any
+        type: '{}'
         comment: "The right operand of the comparison."
     return-type: boolean
   - name: __metatable
