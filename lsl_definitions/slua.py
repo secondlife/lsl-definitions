@@ -76,6 +76,20 @@ class SLuaParameter:
         else:
             return f"{self.name}: {self.type}"
 
+    @property
+    def formatted_comment(self) -> str:
+        if self.default_value is not None:
+            if isinstance(self.default_value, bool):
+                default_str = str(self.default_value).lower()
+            else:
+                default_str = str(self.default_value)
+            suffix = f"(optional, defaults to {default_str})"
+            if self.comment:
+                base_comment = self.comment[:-1] if self.comment.endswith(".") else self.comment
+                return f"{base_comment} {suffix}."
+            return f"{suffix}."
+        return self.comment
+
 
 @dataclasses.dataclass
 class SLuaTypecheckerFlags:
@@ -170,7 +184,7 @@ class SLuaFunction(SLuaFunctionBase):
                 "arguments": [
                     {
                         a.name: {
-                            "tooltip": a.comment,
+                            "tooltip": a.formatted_comment,
                             "type": a.type,
                         }
                     }
@@ -797,7 +811,11 @@ class SLuaDefinitionParser:
                 name=data["name"],
                 type_parameters=data.get("type-parameters", []),
                 parameters=[
-                    SLuaParameter(selene_type=p.pop("selene-type", None), default_value=p.pop("default-value", None), **p)
+                    SLuaParameter(
+                        selene_type=p.pop("selene-type", None),
+                        default_value=p.pop("default-value", None),
+                        **p,
+                    )
                     for p in data.get("parameters", [])
                 ],
                 return_type=data.get("return-type", "()"),
@@ -818,7 +836,11 @@ class SLuaDefinitionParser:
                     name=func.name,
                     type_parameters=overload_data.get("type-parameters", []),
                     parameters=[
-                        SLuaParameter(selene_type=p.pop("selene-type", None), default_value=p.pop("default-value", None), **p)
+                        SLuaParameter(
+                            selene_type=p.pop("selene-type", None),
+                            default_value=p.pop("default-value", None),
+                            **p,
+                        )
                         for p in overload_data.get("parameters", [])
                     ],
                     return_type=overload_data.get("return-type", "()"),

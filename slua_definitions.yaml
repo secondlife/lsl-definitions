@@ -355,7 +355,7 @@ functions:
     comment: The value to check for truthiness.
     type: T?
   - name: errorMessage
-    comment: Optional error message to display if the value is not truthy.
+    comment: Error message to display if the value is not truthy.
     type: string?
     default-value: '"assertion failed!"'
   return-type: T
@@ -389,7 +389,7 @@ functions:
     comment: The error message to raise.
     type: T
   - name: level
-    comment: Optional level to attribute the error to in the call stack.
+    comment: Level to attribute the error to in the call stack.
     type: number?
     default-value: 1
   return-type: never
@@ -451,7 +451,7 @@ functions:
   comment: Creates a new untyped userdata object with an optional metatable.
   parameters:
   - name: mt
-    comment: Optional boolean to create a modifiable metatable.
+    comment: Boolean to create a modifiable metatable.
     type: boolean?
     default-value: false
   return-type: any
@@ -463,7 +463,7 @@ functions:
     comment: The table to traverse.
     type: "{[K]: V}"
   - name: i
-    comment: Optional key to start traversal after.
+    comment: Key to start traversal after.
     type: K?
     default-value: nil
   return-type: (K?, V)
@@ -599,7 +599,7 @@ functions:
     type: string? | number
     selene-type: string
   - name: base
-    comment: Optional base for the conversion.
+    comment: Base for the conversion.
     type: number?
     default-value: 10
   return-type: number?
@@ -676,11 +676,11 @@ functions:
     comment: Array from which to extract values.
     type: "{V}"
   - name: i
-    comment: Starting index (optional, defaults to 1).
+    comment: Starting index.
     type: number?
     default-value: 1
   - name: j
-    comment: "Ending index (optional, defaults to #a)."
+    comment: "Ending index."
     type: number?
     default-value: '#tab'
   return-type: ...V
@@ -1156,7 +1156,7 @@ modules:
       comment: String to write.
       type: string
     - name: count
-      comment: Number of bytes to write (optional).
+      comment: Number of bytes to write.
       type: number?
       default-value: '#value'
     return-type: ()
@@ -1182,11 +1182,11 @@ modules:
       type: buffer
       observes: write
     - name: sourceOffset
-      comment: Offset in source buffer (optional).
+      comment: Offset in source buffer.
       type: number?
       default-value: 0
     - name: count
-      comment: Number of bytes to copy (optional).
+      comment: Number of bytes to copy.
       type: number?
       default-value: 'buffer.len(b) - sourceOffset'
     return-type: ()
@@ -1204,7 +1204,7 @@ modules:
       comment: Value to fill with.
       type: number
     - name: count
-      comment: Number of bytes to fill (optional).
+      comment: Number of bytes to fill.
       type: number?
       default-value: 'buffer.len(b) - offset'
     return-type: ()
@@ -1343,11 +1343,11 @@ modules:
     - comment: Returns a string with a traceback of the current call stack
       parameters:
       - name: message
-        comment: Optional message prepended to the traceback.
+        comment: Message prepended to the traceback.
         type: string?
         default-value: nil
       - name: level
-        comment: Optional stack level to start traceback.
+        comment: Stack level to start traceback.
         type: number?
         default-value: 1
       return-type: string
@@ -1357,11 +1357,11 @@ modules:
       type: thread
       optional: true
     - name: msg
-      comment: Optional message prepended to the traceback.
+      comment: Message prepended to the traceback.
       type: string?
       default-value: nil
     - name: level
-      comment: Optional stack level to start traceback.
+      comment: Stack level to start traceback.
       type: number?
       default-value: 1
     return-type: string
@@ -1650,7 +1650,7 @@ modules:
       comment: A number to compute logarithm.
       type: number
     - name: base
-      comment: Base of the logarithm (default is e).
+      comment: Base of the logarithm.
       type: number?
       default-value: 'math.e'
     return-type: number
@@ -1727,11 +1727,11 @@ modules:
       comment: X coordinate for the noise function.
       type: number
     - name: "y"
-      comment: Y coordinate for the noise function (default is 0).
+      comment: Y coordinate for the noise function.
       type: number?
       default-value: 0
     - name: z
-      comment: Z coordinate for the noise function (default is 0).
+      comment: Z coordinate for the noise function.
       type: number?
       default-value: 0
     return-type: number
@@ -1761,11 +1761,11 @@ modules:
     comment: Returns a random number within the given range.
     parameters:
     - name: min
-      comment: Minimum value of the range (optional).
+      comment: Minimum value of the range.
       type: number?
       default-value: nil
     - name: max
-      comment: Maximum value of the range (optional).
+      comment: Maximum value of the range.
       type: number?
       default-value: nil
     return-type: number
@@ -1893,11 +1893,11 @@ modules:
     comment: Returns a table or string representation of the time based on the provided format.
     parameters:
     - name: formatString
-      comment: Optional format string for the date representation.
+      comment: Format string for the date representation.
       type: string?
       default-value: '"%c"'
     - name: t
-      comment: Optional timestamp to format; defaults to the current time.
+      comment: Timestamp to format; defaults to the current time.
       type: number?
       default-value: 'os.time()'
     return-type: string
@@ -1907,7 +1907,7 @@ modules:
         comment: Optional format string for the date representation.
         type: '"*t" | "!*t"'
       - name: t
-        comment: Optional timestamp to format; defaults to the current time.
+        comment: Timestamp to format; defaults to the current time.
         type: number?
         default-value: 'os.time()'
       return-type: DateTypeResult
@@ -2065,11 +2065,11 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: i
     return-type: '...number'
@@ -2097,11 +2097,11 @@ modules:
       comment: Pattern to search for.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: plain
-      comment: Perform raw search (optional).
+      comment: Perform raw search.
       type: boolean?
       default-value: false
     return-type: (number?, number?, ...string)
@@ -2145,7 +2145,7 @@ modules:
       comment: Replacement string, function, or table.
       type: 'string | { [string]: string } | (...string) -> string'
     - name: maxn
-      comment: Maximum replacements (optional).
+      comment: Maximum replacements.
       type: number?
       default-value: nil
     return-type: (string, number)
@@ -2180,7 +2180,7 @@ modules:
       comment: Pattern to match.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     return-type: '...string'
@@ -2235,7 +2235,7 @@ modules:
       comment: Input string.
       type: string
     - name: separator
-      comment: Separator to split on. Default is ","
+      comment: Separator to split on.
       type: string?
       default-value: '","'
     return-type: '{string}'
@@ -2251,7 +2251,7 @@ modules:
       comment: Starting index.
       type: number
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: '#s'
     return-type: string
@@ -2268,7 +2268,7 @@ modules:
       comment: Encoded string.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     return-type: '...any'
@@ -2293,15 +2293,15 @@ modules:
       comment: Array of strings.
       type: '{string | number}'
     - name: sep
-      comment: Separator string (optional).
+      comment: Separator string.
       type: string?
       default-value: '""'
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: '#a'
     return-type: string
@@ -2415,7 +2415,7 @@ modules:
       comment: Array to remove from.
       type: '{V}'
     - name: i
-      comment: "Index to remove (default: the last one)."
+      comment: "Index to remove."
       type: number?
       default-value: '#a'
     return-type: V?
@@ -2449,11 +2449,11 @@ modules:
       comment: Array to unpack.
       type: '{V}'
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: '#a'
     return-type: '...V'
@@ -2476,7 +2476,7 @@ modules:
       comment: Destination index.
       type: number
     - name: dest
-      comment: Destination array (optional).
+      comment: Destination array.
       type: '{V}?'
       default-value: src
       observes: write
@@ -2489,7 +2489,7 @@ modules:
       comment: Number of elements to allocate.
       type: number
     - name: v
-      comment: Value to prefill elements with (optional).
+      comment: Value to prefill elements with.
       type: V?
       default-value: nil
     return-type: '{V}'
@@ -2505,7 +2505,7 @@ modules:
       comment: Value to search for.
       type: V
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     return-type: number?
@@ -2586,11 +2586,11 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: i
     return-type: '...number'
@@ -2603,11 +2603,11 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
       default-value: '#s'
     return-type: (number?, number?)
@@ -2622,7 +2622,7 @@ modules:
       comment: Character position.
       type: number
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
       default-value: 'if n >= 0 then 1 else #s + 1'
     return-type: number?
@@ -2668,7 +2668,7 @@ modules:
       comment: Y component of the vector.
       type: number
     - name: z
-      comment: Z component of the vector (optional).
+      comment: Z component of the vector.
       type: number?
       default-value: 0
     return-type: vector
@@ -2685,7 +2685,7 @@ modules:
       comment: Y component of the vector.
       type: number
     - name: z
-      comment: Z component of the vector (optional).
+      comment: Z component of the vector.
       type: number?
       default-value: 0
     return-type: vector
@@ -2744,7 +2744,7 @@ modules:
       comment: Right input vector.
       type: vector
     - name: axis
-      comment: Axis to determine the sign of the angle (optional).
+      comment: Axis to determine the sign of the angle.
       type: vector?
       default-value: nil
     return-type: number

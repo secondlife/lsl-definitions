@@ -10621,7 +10621,7 @@ vector position - position in local coordinates
                   <key>errorMessage</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional error message to display if the value is not truthy.</string>
+                     <string>Error message to display if the value is not truthy (optional, defaults to "assertion failed!").</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -10680,7 +10680,7 @@ vector position - position in local coordinates
                   <key>level</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional level to attribute the error to in the call stack.</string>
+                     <string>Level to attribute the error to in the call stack (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -10771,7 +10771,7 @@ vector position - position in local coordinates
                   <key>mt</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional boolean to create a modifiable metatable.</string>
+                     <string>Boolean to create a modifiable metatable (optional, defaults to false).</string>
                      <key>type</key>
                      <string>boolean?</string>
                   </map>
@@ -10808,7 +10808,7 @@ vector position - position in local coordinates
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional key to start traversal after.</string>
+                     <string>Key to start traversal after (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>K?</string>
                   </map>
@@ -11176,7 +11176,7 @@ vector position - position in local coordinates
                   <key>base</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional base for the conversion.</string>
+                     <string>Base for the conversion (optional, defaults to 10).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11394,7 +11394,7 @@ vector position - position in local coordinates
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional, defaults to #a).</string>
+                     <string>Ending index (optional, defaults to #tab).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11708,7 +11708,7 @@ Returns true if result is non-zero.</string>
                   <key>width</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11822,7 +11822,7 @@ Returns true if result is non-zero.</string>
                   <key>width</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11998,7 +11998,7 @@ Returns true if result is non-zero.</string>
                   <key>sourceOffset</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Offset in source buffer (optional).</string>
+                     <string>Offset in source buffer (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -12007,7 +12007,7 @@ Returns true if result is non-zero.</string>
                   <key>count</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of bytes to copy (optional).</string>
+                     <string>Number of bytes to copy (optional, defaults to buffer.len(b) - sourceOffset).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -12080,7 +12080,7 @@ Returns true if result is non-zero.</string>
                   <key>count</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of bytes to fill (optional).</string>
+                     <string>Number of bytes to fill (optional, defaults to buffer.len(b) - offset).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -12792,7 +12792,7 @@ Returns true if result is non-zero.</string>
                   <key>count</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of bytes to write (optional).</string>
+                     <string>Number of bytes to write (optional, defaults to #value).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -13177,7 +13177,7 @@ Returns true if result is non-zero.</string>
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional message prepended to the traceback.</string>
+                     <string>Message prepended to the traceback (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -13186,7 +13186,7 @@ Returns true if result is non-zero.</string>
                   <key>level</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional stack level to start traceback.</string>
+                     <string>Stack level to start traceback (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -13225,7 +13225,7 @@ Returns true if result is non-zero.</string>
                   <key>asBuffer</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to false).</string>
                      <key>type</key>
                      <string>false?</string>
                   </map>
@@ -13287,7 +13287,7 @@ Returns true if result is non-zero.</string>
                   <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to {track_path=false, reviver=nil}).</string>
                      <key>type</key>
                      <string>LLJsonDecodeOptions?</string>
                   </map>
@@ -13319,7 +13319,7 @@ Returns true if result is non-zero.</string>
                   <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to {allow_sparse=false, skip_tojson=false, replacer=nil}).</string>
                      <key>type</key>
                      <string>LLJsonEncodeOptions?</string>
                   </map>
@@ -13351,7 +13351,7 @@ Returns true if result is non-zero.</string>
                   <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to {track_path=false, reviver=nil}).</string>
                      <key>type</key>
                      <string>LLJsonDecodeOptions?</string>
                   </map>
@@ -13383,7 +13383,7 @@ Returns true if result is non-zero.</string>
                   <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string></string>
+                     <string>(optional, defaults to {allow_sparse=false, skip_tojson=false, tight=false, replacer=nil}).</string>
                      <key>type</key>
                      <string>LLJsonEncodeOptions?</string>
                   </map>
@@ -13929,7 +13929,7 @@ Returns true if result is non-zero.</string>
                   <key>base</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Base of the logarithm (default is e).</string>
+                     <string>Base of the logarithm (optional, defaults to math.e).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14130,7 +14130,7 @@ Returns true if result is non-zero.</string>
                   <key>y</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Y coordinate for the noise function (default is 0).</string>
+                     <string>Y coordinate for the noise function (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14139,7 +14139,7 @@ Returns true if result is non-zero.</string>
                   <key>z</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Z coordinate for the noise function (default is 0).</string>
+                     <string>Z coordinate for the noise function (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14217,7 +14217,7 @@ Returns true if result is non-zero.</string>
                   <key>min</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Minimum value of the range (optional).</string>
+                     <string>Minimum value of the range (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14226,7 +14226,7 @@ Returns true if result is non-zero.</string>
                   <key>max</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Maximum value of the range (optional).</string>
+                     <string>Maximum value of the range (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14456,7 +14456,7 @@ Returns true if result is non-zero.</string>
                   <key>formatString</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional format string for the date representation.</string>
+                     <string>Format string for the date representation (optional, defaults to "%c").</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -14465,7 +14465,7 @@ Returns true if result is non-zero.</string>
                   <key>t</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Optional timestamp to format; defaults to the current time.</string>
+                     <string>Timestamp to format; defaults to the current time (optional, defaults to os.time()).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14872,7 +14872,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14881,7 +14881,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14945,7 +14945,7 @@ Returns true if result is non-zero.</string>
                   <key>init</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14954,7 +14954,7 @@ Returns true if result is non-zero.</string>
                   <key>plain</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Perform raw search (optional).</string>
+                     <string>Perform raw search (optional, defaults to false).</string>
                      <key>type</key>
                      <string>boolean?</string>
                   </map>
@@ -15068,7 +15068,7 @@ Returns true if result is non-zero.</string>
                   <key>maxn</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Maximum replacements (optional).</string>
+                     <string>Maximum replacements (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15155,7 +15155,7 @@ Returns true if result is non-zero.</string>
                   <key>init</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15297,7 +15297,7 @@ Returns true if result is non-zero.</string>
                   <key>separator</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Separator to split on. Default is ","</string>
+                     <string>Separator to split on (optional, defaults to ",").</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -15338,7 +15338,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to #s).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15379,7 +15379,7 @@ Returns true if result is non-zero.</string>
                   <key>init</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15527,7 +15527,7 @@ Returns true if result is non-zero.</string>
                   <key>sep</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Separator string (optional).</string>
+                     <string>Separator string (optional, defaults to "").</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -15536,7 +15536,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15545,7 +15545,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to #a).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15581,7 +15581,7 @@ Returns true if result is non-zero.</string>
                   <key>v</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Value to prefill elements with (optional).</string>
+                     <string>Value to prefill elements with (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>V?</string>
                   </map>
@@ -15662,7 +15662,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15947,7 +15947,7 @@ Returns true if result is non-zero.</string>
                   <key>dest</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Destination array (optional).</string>
+                     <string>Destination array (optional, defaults to src).</string>
                      <key>type</key>
                      <string>{V}?</string>
                   </map>
@@ -16010,7 +16010,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Index to remove (default: the last one).</string>
+                     <string>Index to remove (optional, defaults to #a).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16046,7 +16046,7 @@ Returns true if result is non-zero.</string>
                   <key>shrink_sparse</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Allow moving sparse array elements to hash table storage.</string>
+                     <string>Allow moving sparse array elements to hash table storage (optional, defaults to false).</string>
                      <key>type</key>
                      <string>boolean?</string>
                   </map>
@@ -16082,7 +16082,7 @@ Returns true if result is non-zero.</string>
                   <key>f</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Comparison function.</string>
+                     <string>Comparison function (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>((a: V, b: V) -&gt; boolean)?</string>
                   </map>
@@ -16118,7 +16118,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16127,7 +16127,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to #a).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16189,7 +16189,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16198,7 +16198,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16253,7 +16253,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16262,7 +16262,7 @@ Returns true if result is non-zero.</string>
                   <key>j</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index (optional).</string>
+                     <string>Ending index (optional, defaults to #s).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16303,7 +16303,7 @@ Returns true if result is non-zero.</string>
                   <key>i</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index (optional).</string>
+                     <string>Starting index (optional, defaults to if n &gt;= 0 then 1 else #s + 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16390,7 +16390,7 @@ Returns true if result is non-zero.</string>
                   <key>z</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Z component of the vector (optional).</string>
+                     <string>Z component of the vector (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16454,7 +16454,7 @@ Returns true if result is non-zero.</string>
                   <key>axis</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Axis to determine the sign of the angle (optional).</string>
+                     <string>Axis to determine the sign of the angle (optional, defaults to nil).</string>
                      <key>type</key>
                      <string>vector?</string>
                   </map>
@@ -16559,7 +16559,7 @@ Returns true if result is non-zero.</string>
                   <key>z</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Z component of the vector (optional).</string>
+                     <string>Z component of the vector (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
