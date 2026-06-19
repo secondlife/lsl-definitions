@@ -162,7 +162,7 @@
           ]
         },
         {
-          "match": "\\b(__(?:add|call|concat|div|eq|index|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tostring|unm|iter|idiv|tojson|jsonhint))\\b",
+          "match": "\\b(__(?:add|call|concat|div|eq|idiv|index|iter|jsonhint|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tojson|tostring|unm))\\b",
           "name": "variable.language.metamethod.luau"
         },
         {
@@ -418,7 +418,7 @@
         },
         {
           "name": "variable.language.metamethod.luau",
-          "match": "(?<=[^.]\\.|:)\\b(__(?:add|call|concat|div|eq|index|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tostring|unm|iter|idiv|tojson|jsonhint))\\b"
+          "match": "(?<=[^.]\\.|:)\\b(__(?:add|call|concat|div|eq|idiv|index|iter|jsonhint|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tojson|tostring|unm))\\b"
         },
         {
           "name": "keyword.other.unit.luau",

@@ -307,8 +307,13 @@
                         "tooltip": {
                             "markdownDescription": "A brief description of this event.",
                             "type": "string"
-                        }
-                    }
+                        },
+                        "categories": { "$ref": "#/$defs/functionCategories" }
+                    },
+                    "required": [
+                        "tooltip",
+                        "categories"
+                    ]
                 }
             },
             "type": "object"
@@ -496,9 +501,7 @@
                             "markdownDescription": "A brief description of this function.",
                             "type": "string"
                         },
-                        "categories": {
-                            "$ref": "#/$defs/functionCategories"
-                        }
+                        "categories": { "$ref": "#/$defs/functionCategories" }
                     },
                     "required": [
                         "tooltip",
