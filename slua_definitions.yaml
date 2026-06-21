@@ -3031,7 +3031,7 @@ metamethods:
     return-type: any
   - name: __mode
     comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
-    type: '"k" | "v" | "kv"
+    type: '"k" | "v" | "kv"'
   - name: __mul
     comment: "Defines behavior for the multiplication (*) operator."
     type: "(left: any, right: any) -> any"
