@@ -996,6 +996,11 @@ constants:
     tooltip: Sets how far away the camera wants to be from its target.
     type: integer
     value: 7
+    values:
+    - meters
+        value-type: float
+        range: [0.5, 50]
+        default: 3.0
   CAMERA_FOCUS:
     member-of: [CameraParam]
     tooltip: Sets camera focus (target position) in region coordinates.
@@ -2619,6 +2624,9 @@ constants:
       (e.g., an avatar or unattached object).
     type: integer
     value: 19
+    value-type: integer
+    open-enum: AttachPoint
+    details: 'local: llGetAttached; max chars: 11'
   OBJECT_ATTACHED_SLOTS_AVAILABLE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get an avatar's available
@@ -3743,6 +3751,16 @@ constants:
       settings of a face.
     type: integer
     value: 19
+    values:
+    - face
+        value-type:integer
+        get-arg: true
+    - shiny:
+        value-type:integer
+        enum: PrimShiny
+    - bump:
+        value-type:integer
+        enum: PrimBump
   PRIM_BUMP_SIDING:
     member-of: [PrimBump]
     tooltip: "Face bump mapping setting: siding."
@@ -4502,6 +4520,12 @@ constants:
       prim (sculpty) or mesh of a specific type.
     type: integer
     value: 7
+    values:
+    - map
+        value-type: asset
+    - type
+        value-type: integer
+        enum: [PrimTypeSculptType,PrimTypeSculptFlag]
   PRIM_TYPE_SPHERE:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a sphere and
@@ -4623,6 +4647,8 @@ constants:
       particles. Multiple flags can be combined using bitwise OR (|).
     type: integer
     value: 0
+    value-type: integer
+    enum : ParticleFlag
   PSYS_PART_FOLLOW_SRC_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing particle positions to remain relative to the
@@ -5564,6 +5590,13 @@ constants:
     tooltip: "Environmental setting for sun and moon glow parameters: size and focus."
     type: integer
     value: 6
+    values:
+    - glow_size:
+        value-type: float
+        range: [0.2, 40]
+    - glow_focus:
+        value-type: float
+        range: [-10, 10]  
   SKY_HAZE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the values used to calculate the light
@@ -6854,11 +6887,13 @@ events:
         tooltip: A 32-bit mask representing the buttons currently held down on the
           controller.
         type: integer
+        enum: GameControlButton
     - axes:
         tooltip: A list of six float values in the range [-1.0, 1.0] representing
           controller axes.
         type: list
         slua-type: "{number}"
+        used-enum: GameControlAxis
     tooltip: Triggered when a compatible viewer sends game controller input changes
       for the avatar specified by id. Only triggers for scripts in attachments
       or seats.
@@ -13769,9 +13804,11 @@ functions:
         tooltip: OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL,
           OBJECT_RETURN_PARCEL_OWNER, or OBJECT_RETURN_REGION).
         type: integer
+        enum: ReturnObjectsScope
     energy: 10.0
     func-id: 521
     return: integer
+    enum: ReturnObjectsError
     sleep: 0.0
     requires-permission:
       - PERMISSION_RETURN_OBJECTS
@@ -14257,13 +14294,16 @@ functions:
         tooltip: Integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
           AGENT_BY_USERNAME, ACTIVE, PASSIVE, or SCRIPTED (0 for no filter).
         type: integer
+        enum: DetectType
     - radius:
         tooltip: Maximum distance in meters to scan (range [0.0, 96.0]).
         type: float
+        range: [0.0, 96.0]
     - arc:
         tooltip: Maximum angle in radians relative to the local X-axis to scan
           (range [0.0, PI]).
         type: float
+        range: [0.0, PI]
     energy: 10.0
     func-id: 28
     return: void
@@ -14746,12 +14786,14 @@ functions:
     - link:
         tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
+        open-enum: Links
     - color:
         tooltip: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
         type: vector
     - face:
         tooltip: Face number or ALL_SIDES.
         type: integer
+        open-enum: Faces
     energy: 10.0
     func-id: 140
     return: void
