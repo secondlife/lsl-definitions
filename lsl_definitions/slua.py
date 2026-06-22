@@ -26,6 +26,8 @@ _TABLE_RULESET_TYPE_MAP: dict[str, str] = {
     "string": "string",
     "key": "(string | uuid)",
     "asset": "(string | uuid)",
+    "string-csv": "{string}",
+    "string-map": "{[string]: string}",
 }
 
 if TYPE_CHECKING:

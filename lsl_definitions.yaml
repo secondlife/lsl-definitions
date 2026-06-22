@@ -1978,11 +1978,13 @@ constants:
     value: 0
   HTTP_CUSTOM_HEADER:
     member-of: [HTTPRequestParam]
-    tooltip: Adds a custom HTTP header (name and value pair) to the request. Up to 8
-      custom headers can be configured per request. Some default or sensitive
-      headers are blocked for security reasons.
+    tooltip: Adds custom HTTP headers to the request (up to 8 per request). At
+      the SLua level, provide a string-keyed table mapping header names to
+      values; the serializer emits one HTTP_CUSTOM_HEADER/key/value triple per
+      entry. Some default or sensitive headers are blocked for security reasons.
     type: integer
     value: 5
+    value-type: string-map
   HTTP_EXTENDED_ERROR:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, llHTTPRequest always returns a key. If an error occurs
@@ -4159,12 +4161,13 @@ constants:
     value: 1
   PRIM_MEDIA_WHITELIST:
     member-of: [PrimMediaParam]
-    tooltip: String. Gets or sets the whitelist as a string of escaped,
-      comma-separated URLs (supports up to 64 URLs or 1024 characters, whichever
-      comes first).
+    tooltip: Gets or sets the media whitelist as an array of URL strings (up to
+      64 URLs or 1024 characters, whichever comes first). At the SLua level,
+      provide a {string} array; the serializer encodes it as an escaped,
+      comma-separated string for the underlying LSL API.
     type: integer
     value: 12
-    value-type: string
+    value-type: string-csv
   PRIM_MEDIA_WHITELIST_ENABLE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media navigation is restricted to the

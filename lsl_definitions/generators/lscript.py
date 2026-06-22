@@ -7,7 +7,7 @@ import re
 
 from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLDefinitions, LSLFunction, LSLType
-from lsl_definitions.rulesets import expand_table_ruleset
+from lsl_definitions.rulesets import _VALUE_TYPE_TO_SEMANTIC, expand_table_ruleset
 from lsl_definitions.utils import is_uuid, splice_str, to_c_str
 
 
@@ -47,6 +47,93 @@ _MONO_CS_LIBRARY_DEFS_COMMENT = "/* GENERATED FUNCTION BINDINGS */"
 # since we don't really know if they did anything weird in their implementation or definition (maybe differing
 # energy / sleep values.) Better to leave them alone and only generate new functions.
 # For testing, we omit from this blacklist `llAxisAngle2Rot` and `llListSortStrided`, and manually verify the output.
+# C# reserved keywords that must be escaped with @ when used as identifiers
+_CS_RESERVED_KEYWORDS = {
+    "abstract",
+    "as",
+    "base",
+    "bool",
+    "break",
+    "byte",
+    "case",
+    "catch",
+    "char",
+    "checked",
+    "class",
+    "const",
+    "continue",
+    "decimal",
+    "default",
+    "delegate",
+    "do",
+    "double",
+    "else",
+    "enum",
+    "event",
+    "explicit",
+    "extern",
+    "false",
+    "finally",
+    "fixed",
+    "float",
+    "for",
+    "foreach",
+    "goto",
+    "if",
+    "implicit",
+    "in",
+    "int",
+    "interface",
+    "internal",
+    "is",
+    "lock",
+    "long",
+    "namespace",
+    "new",
+    "null",
+    "object",
+    "operator",
+    "out",
+    "override",
+    "params",
+    "private",
+    "protected",
+    "public",
+    "readonly",
+    "ref",
+    "return",
+    "sbyte",
+    "sealed",
+    "short",
+    "sizeof",
+    "stackalloc",
+    "static",
+    "string",
+    "struct",
+    "switch",
+    "this",
+    "throw",
+    "true",
+    "try",
+    "typeof",
+    "uint",
+    "ulong",
+    "unchecked",
+    "unsafe",
+    "ushort",
+    "using",
+    "virtual",
+    "void",
+    "volatile",
+    "while",
+}
+
+
+def _cs_ident(name: str) -> str:
+    """Escape a C# reserved keyword by prefixing with @."""
+    return f"@{name}" if name in _CS_RESERVED_KEYWORDS else name
+
+
 _OLD_FUNC_BLACKLIST = {
     "llGiveInventory",
     "llModPow",
@@ -597,10 +684,10 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
             args_strs = []
             for arg in func.arguments:
                 if arg.type == LSLType.LIST:
-                    args_strs.append(f"object[] {arg.name}")
+                    args_strs.append(f"object[] {_cs_ident(arg.name)}")
                     args_strs.append(f"int {arg.name}_len")
                 else:
-                    args_strs.append(f"{arg.type.meta.cs_name} {arg.name}")
+                    args_strs.append(f"{arg.type.meta.cs_name} {_cs_ident(arg.name)}")
 
             args_str = ", ".join(args_strs)
             new_defs += (
@@ -608,7 +695,9 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
             )
 
             # Now for the wrapper implementation
-            args_str = ", ".join(f"{a.type.meta.cs_name} {a.name}" for a in func.arguments)
+            args_str = ", ".join(
+                f"{a.type.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
+            )
             new_defs += (
                 f"        public static {func.ret_type.meta.cs_name} {func.name}({args_str}) {{\n"
             )
@@ -616,10 +705,10 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
             call_args = []
             for arg in func.arguments:
                 if arg.type == LSLType.LIST:
-                    call_args.append(f"ToArrayNoCopy({arg.name})")
-                    call_args.append(f"{arg.name}.Count")
+                    call_args.append(f"ToArrayNoCopy({_cs_ident(arg.name)})")
+                    call_args.append(f"{_cs_ident(arg.name)}.Count")
                 else:
-                    call_args.append(arg.name)
+                    call_args.append(_cs_ident(arg.name))
 
             call_expr = f"{func.name}Internal({', '.join(call_args)})"
             if func.ret_type == LSLType.LIST:
@@ -633,7 +722,9 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
                 new_defs += f"            return {call_expr};\n"
             new_defs += "        }\n\n"
         else:
-            args_str = ", ".join(f"{a.type.meta.cs_name} {a.name}" for a in func.arguments)
+            args_str = ", ".join(
+                f"{a.type.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
+            )
             new_defs += f"        public extern static {func.ret_type.meta.cs_name} {func.name}({args_str});\n"
 
     return splice_str(template, _MONO_CS_LIBRARY_DEFS_COMMENT, new_defs)
@@ -897,16 +988,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
       - a slua_register_fluent_fn call
     The resulting fragment is #include'd inside init_fluent_builders(lua_State* L).
     """
-    _semantic_map = {
-        "integer": "i",
-        "float": "f",
-        "string": "s",
-        "vector": "v",
-        "rotation": "r",
-        "boolean": "b",
-        "asset": "a",
-        "key": "k",
-    }
+    _semantic_map = _VALUE_TYPE_TO_SEMANTIC
 
     def _inspect_dispatch_fn(dispatch_fn_name: str):
         """Inspect ll{dispatch_fn_name}'s argument list.
@@ -940,7 +1022,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             if is_link:
                 has_link = True
             result.append((arg.name, is_link))
-        return result, has_link
+        return result, has_link, func.ret_type
 
     def _lua_fn_to_cpp_name(lua_fn: str) -> str:
         """Convert camelCase Lua function name to snake_case C++ variable name.
@@ -948,7 +1030,9 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         """
         return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", lua_fn).lower()
 
-    def _build_wrapper(cpp_name: str, dispatch_fn: str, prefix_args: list, has_link: bool) -> str:
+    def _build_wrapper(
+        cpp_name: str, dispatch_fn: str, prefix_args: list, has_link: bool, ret_type: LSLType
+    ) -> str:
         """Emit a C++ lambda that reads Lua args, serializes params, and calls ll.dispatch_fn.
 
         Lua stack layout:
@@ -991,8 +1075,9 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             else:
                 lines.append(f"    lua_pushinteger(L, {arg_name.lower()});")
         lines.append("    lua_pushvalue(L, rules_idx);")
-        lines.append(f"    lua_call(L, {total_ll_args}, 0);")
-        lines.append("    return 0;")
+        nresults = 0 if ret_type == LSLType.VOID else 1
+        lines.append(f"    lua_call(L, {total_ll_args}, {nresults});")
+        lines.append(f"    return {nresults};")
 
         body = "\n".join(lines)
         return (
@@ -1012,7 +1097,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         lua_fn = ruleset_data["lua-fn"]
         dispatch_fn = ruleset_data["dispatch-fn"]
 
-        prefix_args, has_link = _inspect_dispatch_fn(dispatch_fn)
+        prefix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
         cpp_name = _lua_fn_to_cpp_name(lua_fn)
 
         # Descriptor array/def names derived from the enum name.
@@ -1097,7 +1182,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
                 f"fluent_builder_def_build({array_name}, std::size({array_name}));\n"
             )
 
-        section += _build_wrapper(cpp_name, dispatch_fn, prefix_args, has_link) + "\n"
+        section += _build_wrapper(cpp_name, dispatch_fn, prefix_args, has_link, ret_type) + "\n"
         section += (
             f'slua_register_fluent_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
         )

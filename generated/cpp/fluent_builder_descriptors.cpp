@@ -89,7 +89,7 @@ auto set_media = [](lua_State* L) -> int {
     lua_pushinteger(L, link);
     lua_pushinteger(L, face);
     lua_pushvalue(L, rules_idx);
-    lua_call(L, 3, 0);
-    return 0;
+    lua_call(L, 3, 1);
+    return 1;
 };
 slua_register_fluent_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);

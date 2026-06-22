@@ -7,7 +7,7 @@ builder-rulesets in lsl_definitions.yaml. The fluent SPP builder for
 from __future__ import annotations
 
 import dataclasses
-from typing import TYPE_CHECKING, List, Optional, Set
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from lsl_definitions.lsl import LSLDefinitions
@@ -33,6 +33,22 @@ _RULESET_TYPES: dict[str, BuilderParamType] = {
         BuilderParamType("boolean", "boolean"),
         BuilderParamType("asset", "(string | uuid)"),
     ]
+}
+
+# Maps value-type annotation string → FluentParamDescriptor semantic char.
+# Consumed by any code that builds a C array of FluentParamDescriptor from
+# a MemberDescriptor list.
+_VALUE_TYPE_TO_SEMANTIC: dict[str, str] = {
+    "integer": "i",
+    "float": "f",
+    "string": "s",
+    "vector": "v",
+    "rotation": "r",
+    "boolean": "b",
+    "asset": "a",
+    "key": "k",
+    "string-csv": "C",
+    "string-map": "M",
 }
 
 
@@ -70,7 +86,7 @@ class MemberDescriptor:
 
     strict_name: str
     """Always-valid property name (prefix stripped, lowercased)."""
-    pretty_name: Optional[str]
+    pretty_name: str | None
     """Pretty alias, or None if reverted due to collision."""
     tag: int
     """Numeric value of the originating constant (the rule tag)."""
@@ -150,8 +166,8 @@ def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
 def expand_member_params(
     lsl: LSLDefinitions,
     enum_name: str,
-    filler_tokens: Set[str],
-) -> List[MemberDescriptor]:
+    filler_tokens: set[str],
+) -> list[MemberDescriptor]:
     """Derive a sorted, collision-resolved list of property descriptors from
     the constants that are members of *enum_name*.
 
@@ -170,7 +186,7 @@ def expand_member_params(
         key=lambda c: int(c.value, 0),
     )
 
-    rows: List[tuple] = []
+    rows: list[tuple] = []
     for const in candidates:
         name = const.name
         prefix = enum.prefix
@@ -190,7 +206,7 @@ def expand_member_params(
 
     # Pass 2: pretty aliases.
     # A constant's pretty_name field takes priority over the filler-token derivation.
-    def _pretty(strict: str, override: Optional[str]) -> str:
+    def _pretty(strict: str, override: str | None) -> str:
         if override is not None:
             return override
         tokens = [t for t in strict.split("_") if t not in filler_tokens]
@@ -227,7 +243,7 @@ def expand_member_params(
     ]
 
 
-def expand_table_ruleset(lsl: LSLDefinitions, ruleset_name: str) -> List[MemberDescriptor]:
+def expand_table_ruleset(lsl: LSLDefinitions, ruleset_name: str) -> list[MemberDescriptor]:
     """Expand a type:table builder-ruleset into a sorted property descriptor list.
 
     Reads ``enum`` and ``filler-tokens`` from the yaml entry.
