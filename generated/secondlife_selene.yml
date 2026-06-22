@@ -1179,9 +1179,10 @@ globals:
   HTTP_CUSTOM_HEADER:
     property: read-only
     type: number
-    description: Adds a custom HTTP header (name and value pair) to the request. Up
-      to 8 custom headers can be configured per request. Some default or sensitive
-      headers are blocked for security reasons.
+    description: Adds custom HTTP headers to the request (up to 8 per request). At
+      the SLua level, provide a string-keyed table mapping header names to values;
+      the serializer emits one HTTP_CUSTOM_HEADER/key/value triple per entry. Some
+      default or sensitive headers are blocked for security reasons.
   HTTP_EXTENDED_ERROR:
     property: read-only
     type: number
@@ -2886,8 +2887,10 @@ globals:
   PRIM_MEDIA_WHITELIST:
     property: read-only
     type: number
-    description: String. Gets or sets the whitelist as a string of escaped, comma-separated
-      URLs (supports up to 64 URLs or 1024 characters, whichever comes first).
+    description: Gets or sets the media whitelist as an array of URL strings (up to
+      64 URLs or 1024 characters, whichever comes first). At the SLua level, provide
+      a {string} array; the serializer encodes it as an escaped, comma-separated string
+      for the underlying LSL API.
   PRIM_MEDIA_WHITELIST_ENABLE:
     property: read-only
     type: number
@@ -5507,7 +5510,7 @@ globals:
   llprim.ParamsSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.ParticleSystem:
+  llprim.particleSystem:
     args:
     - type: table
       required: false
@@ -5515,7 +5518,7 @@ globals:
       required: false
     description: Emit a particle system from a ParticleParams table. Omit link to
       apply to the current prim.
-  llprim.SetMedia:
+  llprim.setMedia:
     args:
     - type: number
     - type: table

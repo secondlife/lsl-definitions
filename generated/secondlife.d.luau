@@ -137,7 +137,7 @@ export type MediaParams = {
   width_pixels: number?,
   height_pixels: number?,
   whitelist_enable: boolean?,
-  whitelist: string?,
+  whitelist: {string}?,
   perms_interact: number?,
   perms_control: number?,
 }
@@ -441,8 +441,8 @@ declare lljson: {
 
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
-  ParticleSystem: (params: ParticleParams?, link: number?) -> (),
-  SetMedia: (face: number, params: MediaParams?, link: number?) -> number,
+  particleSystem: (params: ParticleParams?, link: number?) -> (),
+  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
 }
 
 

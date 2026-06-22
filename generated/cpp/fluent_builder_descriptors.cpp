@@ -57,7 +57,7 @@ auto particle_system = [](lua_State* L) -> int {
     lua_call(L, 2, 0);
     return 0;
 };
-slua_register_fluent_fn(L, "llprim", "ParticleSystem", particle_system, kParticleParamsDef);
+slua_register_fluent_fn(L, "llprim", "particleSystem", particle_system, kParticleParamsDef);
 
 // prim-media-params
 static const FluentParamDescriptor kPrimMediaParamsDescs[] = {
@@ -73,7 +73,7 @@ static const FluentParamDescriptor kPrimMediaParamsDescs[] = {
     {"width_pixels", 'i', 9},
     {"height_pixels", 'i', 10},
     {"whitelist_enable", 'b', 11},
-    {"whitelist", 's', 12},
+    {"whitelist", 'C', 12},
     {"perms_interact", 'i', 13},
     {"perms_control", 'i', 14},
 };
@@ -92,4 +92,4 @@ auto set_media = [](lua_State* L) -> int {
     lua_call(L, 3, 0);
     return 0;
 };
-slua_register_fluent_fn(L, "llprim", "SetMedia", set_media, kPrimMediaParamsDef);
+slua_register_fluent_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);
