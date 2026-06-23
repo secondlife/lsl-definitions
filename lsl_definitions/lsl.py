@@ -152,10 +152,10 @@ class LSLConstant:
     slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
-    pretty_name: Optional[str] = None
+    pretty_name: str | None = None
     """Optional override for the auto-generated property alias in table-ruleset APIs."""
     member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
-    value_type: Optional[str] = None
+    value_type: str | None = None
 
     @property
     def value_raw(self) -> str:
