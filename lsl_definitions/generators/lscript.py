@@ -1070,7 +1070,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         for arg_name, arg_type in suffix_args:
             suffix_lua_positions[arg_name] = lua_pos
             if arg_type == LSLType.INTEGER:
-                lines.append(f"    int {arg_name.lower()}_s = luaL_checkinteger(L, {lua_pos});")
+                lines.append(f"    int {arg_name.lower()}_s = luaL_optinteger(L, {lua_pos}, 0);")
             lua_pos += 1
 
         # Read optional link arg (comes after suffix args on the Lua stack).
@@ -1102,10 +1102,27 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
 
         # Push suffix args in LL order.
         for arg_name, arg_type in suffix_args:
+            pos = suffix_lua_positions[arg_name]
             if arg_type == LSLType.INTEGER:
                 lines.append(f"    lua_pushinteger(L, {arg_name.lower()}_s);")
+            elif arg_type == LSLType.FLOAT:
+                lines.append(
+                    f"    if (lua_isnoneornil(L, {pos})) lua_pushnumber(L, 0.0); else lua_pushvalue(L, {pos});"
+                )
+            elif arg_type in (LSLType.STRING, LSLType.KEY):
+                lines.append(
+                    f'    if (lua_isnoneornil(L, {pos})) lua_pushliteral(L, ""); else lua_pushvalue(L, {pos});'
+                )
+            elif arg_type == LSLType.VECTOR:
+                lines.append(
+                    f"    if (lua_isnoneornil(L, {pos})) lua_pushvector(L, 0.0f, 0.0f, 0.0f); else lua_pushvalue(L, {pos});"
+                )
+            elif arg_type == LSLType.ROTATION:
+                lines.append(
+                    f"    if (lua_isnoneornil(L, {pos})) luaSL_pushquaternion(L, 0.0f, 0.0f, 0.0f, 1.0f); else lua_pushvalue(L, {pos});"
+                )
             else:
-                lines.append(f"    lua_pushvalue(L, {suffix_lua_positions[arg_name]});")
+                lines.append(f"    lua_pushvalue(L, {pos});")
 
         nresults = 0 if ret_type == LSLType.VOID else 1
         lines.append(f"    lua_call(L, {total_ll_args}, {nresults});")
