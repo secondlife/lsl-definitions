@@ -49,6 +49,7 @@ _VALUE_TYPE_TO_SEMANTIC: dict[str, str] = {
     "key": "k",
     "string-csv": "C",
     "string-map": "M",
+    "string-multi": "N",
 }
 
 

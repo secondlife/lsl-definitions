@@ -993,10 +993,11 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
     def _inspect_dispatch_fn(dispatch_fn_name: str):
         """Inspect ll{dispatch_fn_name}'s argument list.
 
-        Returns (prefix_args, has_link) where prefix_args is a list of
-        (name: str, is_link: bool) tuples for each non-list prefix arg in LL order.
-        Raises ValueError for unsupported signatures (non-integer prefix args,
-        or list not last).
+        Returns (prefix_args, suffix_args, has_link, ret_type) where:
+          prefix_args: list of (name, lsl_type, is_link) for args before the list
+          suffix_args: list of (name, lsl_type) for args after the list
+          has_link: whether any prefix arg is a link integer
+        Raises ValueError if no list argument is found.
         """
         full_name = "ll" + dispatch_fn_name
         func = definitions.functions.get(full_name)
@@ -1004,25 +1005,22 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             raise ValueError(f"dispatch-fn '{full_name}' not found in definitions")
 
         args = func.arguments
-        if not args or args[-1].type != LSLType.LIST:
-            last = args[-1].type if args else "no args"
-            raise ValueError(f"{full_name}: last argument must be list, got {last}")
+        # Find the list argument — it may appear anywhere in the signature.
+        list_idx = next((i for i, a in enumerate(args) if a.type == LSLType.LIST), None)
+        if list_idx is None:
+            raise ValueError(f"{full_name}: no list argument found in signature")
 
-        prefix_args = args[:-1]
-        result = []
+        prefix_result = []
         has_link = False
-        for arg in prefix_args:
-            if arg.type != LSLType.INTEGER:
-                raise ValueError(
-                    f"{full_name}: unsupported non-integer prefix arg '{arg.name}' "
-                    f"(type {arg.type}). Only integer prefix args are supported; "
-                    f"hand-write this wrapper using slua_fluent_serialize() directly."
-                )
-            is_link = "link" in arg.name.lower()
+        for arg in args[:list_idx]:
+            is_link = arg.type == LSLType.INTEGER and "link" in arg.name.lower()
             if is_link:
                 has_link = True
-            result.append((arg.name, is_link))
-        return result, has_link, func.ret_type
+            prefix_result.append((arg.name, arg.type, is_link))
+
+        suffix_result = [(arg.name, arg.type) for arg in args[list_idx + 1 :]]
+
+        return prefix_result, suffix_result, has_link, func.ret_type
 
     def _lua_fn_to_cpp_name(lua_fn: str) -> str:
         """Convert camelCase Lua function name to snake_case C++ variable name.
@@ -1031,31 +1029,51 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", lua_fn).lower()
 
     def _build_wrapper(
-        cpp_name: str, dispatch_fn: str, prefix_args: list, has_link: bool, ret_type: LSLType
+        cpp_name: str,
+        dispatch_fn: str,
+        prefix_args: list,
+        suffix_args: list,
+        has_link: bool,
+        ret_type: LSLType,
     ) -> str:
         """Emit a C++ lambda that reads Lua args, serializes params, and calls ll.dispatch_fn.
 
         Lua stack layout:
-          1 .. N   : non-link integer args (in LL order, skipping link)
-          N+1      : params table
-          N+2      : link (optional, if has_link)
-        LL call order: original LL order (link, non-link args, rules list).
+          1 .. P   : non-link prefix args (in LL order, skipping link)
+          P+1      : params table
+          P+2 ..   : suffix args (in LL order)
+          last     : link (optional, if has_link)
+        LL call order: original LL order (prefix args, rules list, suffix args).
         """
-        non_link_count = sum(1 for _, is_link in prefix_args if not is_link)
-        params_lua_pos = non_link_count + 1
-        link_lua_pos = params_lua_pos + 1
-        total_ll_args = len(prefix_args) + 1  # prefix args + rules list
+        non_link_prefix_count = sum(1 for _, _, is_link in prefix_args if not is_link)
+        params_lua_pos = non_link_prefix_count + 1
+        suffix_start_lua_pos = params_lua_pos + 1
+        link_lua_pos = suffix_start_lua_pos + len(suffix_args)
+        total_ll_args = len(prefix_args) + 1 + len(suffix_args)  # prefix + rules + suffix
 
         lines = []
 
-        # Read non-link args from Lua stack (positions 1..N, in LL order).
+        # Read non-link INTEGER prefix args into C variables (positions 1..P, in LL order).
+        # Non-integer prefix args stay on the Lua stack and are pushed by value later.
         lua_pos = 1
-        for arg_name, is_link in prefix_args:
+        prefix_lua_positions: dict[str, int] = {}
+        for arg_name, arg_type, is_link in prefix_args:
             if not is_link:
-                lines.append(f"    int {arg_name.lower()} = luaL_checkinteger(L, {lua_pos});")
+                prefix_lua_positions[arg_name] = lua_pos
+                if arg_type == LSLType.INTEGER:
+                    lines.append(f"    int {arg_name.lower()} = luaL_checkinteger(L, {lua_pos});")
                 lua_pos += 1
 
-        # Read optional link arg (last Lua position).
+        # Similarly for suffix args (start after the params table slot).
+        lua_pos += 1  # skip params_lua_pos
+        suffix_lua_positions: dict[str, int] = {}
+        for arg_name, arg_type in suffix_args:
+            suffix_lua_positions[arg_name] = lua_pos
+            if arg_type == LSLType.INTEGER:
+                lines.append(f"    int {arg_name.lower()}_s = luaL_checkinteger(L, {lua_pos});")
+            lua_pos += 1
+
+        # Read optional link arg (comes after suffix args on the Lua stack).
         if has_link:
             lines.append(
                 f"    int link = lua_isnoneornil(L, {link_lua_pos}) "
@@ -1069,12 +1087,26 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         # Dispatch to ll.* in original LL order.
         lines.append('    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");')
         lines.append(f'    lua_rawgetfield(L, -1, "{dispatch_fn}");')
-        for arg_name, is_link in prefix_args:
+
+        # Push prefix args in LL order.
+        for arg_name, arg_type, is_link in prefix_args:
             if is_link:
                 lines.append("    lua_pushinteger(L, link);")
-            else:
+            elif arg_type == LSLType.INTEGER:
                 lines.append(f"    lua_pushinteger(L, {arg_name.lower()});")
+            else:
+                lines.append(f"    lua_pushvalue(L, {prefix_lua_positions[arg_name]});")
+
+        # Push the serialized rules list.
         lines.append("    lua_pushvalue(L, rules_idx);")
+
+        # Push suffix args in LL order.
+        for arg_name, arg_type in suffix_args:
+            if arg_type == LSLType.INTEGER:
+                lines.append(f"    lua_pushinteger(L, {arg_name.lower()}_s);")
+            else:
+                lines.append(f"    lua_pushvalue(L, {suffix_lua_positions[arg_name]});")
+
         nresults = 0 if ret_type == LSLType.VOID else 1
         lines.append(f"    lua_call(L, {total_ll_args}, {nresults});")
         lines.append(f"    return {nresults};")
@@ -1093,12 +1125,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             continue
 
         enum_name = ruleset_data["enum"]
-        lua_module = ruleset_data["lua-module"]
-        lua_fn = ruleset_data["lua-fn"]
-        dispatch_fn = ruleset_data["dispatch-fn"]
-
-        prefix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
-        cpp_name = _lua_fn_to_cpp_name(lua_fn)
+        dispatch_fn = ruleset_data.get("dispatch-fn")
 
         # Descriptor array/def names derived from the enum name.
         # e.g. ParticleParam -> kParticleParamsDescs, kParticleParamsDef
@@ -1182,10 +1209,18 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
                 f"fluent_builder_def_build({array_name}, std::size({array_name}));\n"
             )
 
-        section += _build_wrapper(cpp_name, dispatch_fn, prefix_args, has_link, ret_type) + "\n"
-        section += (
-            f'slua_register_fluent_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
-        )
+        if dispatch_fn is not None:
+            lua_module = ruleset_data["lua-module"]
+            lua_fn = ruleset_data["lua-fn"]
+            prefix_args, suffix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
+            cpp_name = _lua_fn_to_cpp_name(lua_fn)
+            section += (
+                _build_wrapper(cpp_name, dispatch_fn, prefix_args, suffix_args, has_link, ret_type)
+                + "\n"
+            )
+            section += (
+                f'slua_register_fluent_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
+            )
 
         sections.append(section)
 

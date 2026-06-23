@@ -280,7 +280,11 @@
                 "required": ["type"]
             },
             "then": { "required": ["rules"] },
-            "else": { "required": ["lua-module", "lua-type", "lua-fn", "dispatch-fn"] }
+            "else": {
+                "required": ["enum", "lua-type"],
+                "if": { "required": ["dispatch-fn"] },
+                "then": { "required": ["lua-module", "lua-fn"] }
+            }
         }
     },
     "additionalProperties": false,
@@ -356,7 +360,7 @@
                         },
                         "value-type": {
                             "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types. 'string-csv' accepts a {string} array and serializes it as an escaped comma-separated string. 'string-map' accepts a {[string]: string} table and emits one tag/key/value triple per entry.",
-                            "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map"]
+                            "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map", "string-multi"]
                         },
                         "pretty-name": {
                             "markdownDescription": "Override the auto-generated property alias for this constant when used as a table-ruleset key. Must be a valid Lua identifier (lowercase, underscores).",

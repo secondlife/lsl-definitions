@@ -1964,6 +1964,7 @@ constants:
       with unlisted content types will return status 415.
     type: integer
     value: 8
+    value-type: string-multi
   HTTP_BODY_MAXLENGTH:
     member-of: [HTTPRequestParam]
     tooltip: "Sets the maximum (UTF-8 encoded) byte length of the HTTP response
@@ -1971,6 +1972,7 @@ constants:
       bytes, LSO Max: 4096 bytes)."
     type: integer
     value: 2
+    value-type: integer
   HTTP_BODY_TRUNCATED:
     member-of: [HTTPResponseError]
     tooltip: Indicates the response body truncation point in bytes.
@@ -1992,12 +1994,14 @@ constants:
       JSON block) is reported through the http_response event using that key.
     type: integer
     value: 9
+    value-type: boolean
   HTTP_METHOD:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the HTTP method ('GET', 'POST', 'PUT', or 'DELETE') for the
       request.
     type: integer
     value: 0
+    value-type: string
   HTTP_MIMETYPE:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the request Content-Type MIME type. Text types should define
@@ -2005,6 +2009,7 @@ constants:
       'application/x-www-form-urlencoded' to emulate HTML forms.
     type: integer
     value: 1
+    value-type: string
   HTTP_PRAGMA_NO_CACHE:
     member-of: [HTTPRequestParam]
     tooltip: "Controls whether the 'Pragma: no-cache' header is sent with the HTTP
@@ -2012,6 +2017,7 @@ constants:
       FALSE, it is omitted."
     type: integer
     value: 6
+    value-type: boolean
   HTTP_USER_AGENT:
     member-of: [HTTPRequestParam]
     tooltip: Appends a custom string to the default LSL User-Agent header value.
@@ -2019,6 +2025,7 @@ constants:
       not allowed and will cause a script error; use hyphens instead.
     type: integer
     value: 7
+    value-type: string
   HTTP_VERBOSE_THROTTLE:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, shouts error messages to DEBUG_CHANNEL if the outgoing
@@ -2026,6 +2033,7 @@ constants:
       suppressed.
     type: integer
     value: 4
+    value-type: boolean
   HTTP_VERIFY_CERT:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, the server's SSL certificate must be verifiable using a
@@ -2033,6 +2041,7 @@ constants:
       SSL certificate is accepted.
     type: integer
     value: 3
+    value-type: boolean
   IMG_USE_BAKED_AUX1:
     tooltip: ''
     type: string
@@ -17001,6 +17010,15 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  http-params:
+    type: table
+    enum: HTTPRequestParam
+    filler-tokens: [http]
+    lua-type: HttpRequestParams
+    lua-module: llhttp
+    lua-fn: request
+    dispatch-fn: HTTPRequest
 
   particle-params:
     type: table
