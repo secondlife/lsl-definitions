@@ -23,6 +23,7 @@ _TABLE_RULESET_TYPE_MAP: dict[str, str] = {
     "integer": "number",
     "boolean": "boolean",
     "vector": "vector",
+    "rotation": "rotation",
     "string": "string",
     "key": "(string | uuid)",
     "asset": "(string | uuid)",

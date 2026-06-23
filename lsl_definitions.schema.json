@@ -270,7 +270,7 @@
                     "pattern": "^[A-Za-z][a-zA-Z0-9]*$"
                 },
                 "dispatch-fn": {
-                    "markdownDescription": "(`table` only) `ll.*` function name whose signature drives code generation (e.g. `LinkParticleSystem`). Must take a list as its last argument.",
+                    "markdownDescription": "(`table` only) `ll.*` function name whose signature drives code generation (e.g. `LinkParticleSystem`). Must take a list argument (not necessarily last).",
                     "type": "string",
                     "pattern": "^[A-Z][A-Za-z0-9]*$"
                 }

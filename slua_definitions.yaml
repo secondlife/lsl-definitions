@@ -238,17 +238,17 @@ type-aliases:
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
 - name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.ParticleSystem() to emit particles.
+  comment: Particle system parameter table. Pass to llprim.particleSystem() to emit particles.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
 - name: MediaParams
-  comment: Prim face media parameter table. Pass to llprim.SetMedia() to configure media on a face.
+  comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
   selene-type: table
 - name: HttpRequestParams
-  comment: HTTP request parameter table. Pass to ll.httpRequest() to configure an HTTP request.
+  comment: HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
   selene-type: table
