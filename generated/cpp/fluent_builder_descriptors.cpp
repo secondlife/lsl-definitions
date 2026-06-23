@@ -1,3 +1,31 @@
+// http-params
+static const FluentParamDescriptor kHTTPRequestParamsDescs[] = {
+    {"method", 's', 0},
+    {"mimetype", 's', 1},
+    {"body_maxlength", 'i', 2},
+    {"verify_cert", 'b', 3},
+    {"verbose_throttle", 'b', 4},
+    {"custom_header", 'M', 5},
+    {"pragma_no_cache", 'b', 6},
+    {"user_agent", 's', 7},
+    {"accept", 'N', 8},
+    {"extended_error", 'b', 9},
+};
+static FluentBuilderDef* kHTTPRequestParamsDef = fluent_builder_def_build(kHTTPRequestParamsDescs, std::size(kHTTPRequestParamsDescs));
+auto request = [](lua_State* L) -> int {
+    const auto* def = (const FluentBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+    slua_fluent_serialize(L, 2, def);
+    int rules_idx = lua_gettop(L);
+    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+    lua_rawgetfield(L, -1, "HTTPRequest");
+    lua_pushvalue(L, 1);
+    lua_pushvalue(L, rules_idx);
+    lua_pushvalue(L, 3);
+    lua_call(L, 3, 1);
+    return 1;
+};
+slua_register_fluent_fn(L, "llhttp", "request", request, kHTTPRequestParamsDef);
+
 // particle-params
 static const FluentParamDescriptor kParticleParamsDescs[] = {
     {"flags", 'i', 0},

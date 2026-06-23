@@ -141,6 +141,18 @@ export type MediaParams = {
   perms_interact: number?,
   perms_control: number?,
 }
+export type HttpRequestParams = {
+  method: string?,
+  mimetype: string?,
+  body_maxlength: number?,
+  verify_cert: boolean?,
+  verbose_throttle: boolean?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  accept: {string}?,
+  extended_error: boolean?,
+}
 
 declare extern type DetectedEvent with
   index: number
@@ -414,6 +426,15 @@ declare llbase64: {
   encode: (data: string | buffer) -> string,
   decode: ((data: string, asBuffer: false?) -> string)
     & ((data: string, asBuffer: true) -> buffer),
+}
+
+
+---------------------------
+-- Global Table: llhttp
+---------------------------
+
+declare llhttp: {
+  request: (url: string, params: HttpRequestParams?, body: string?) -> uuid,
 }
 
 
