@@ -20,7 +20,7 @@ auto request = [](lua_State* L) -> int {
     lua_rawgetfield(L, -1, "HTTPRequest");
     lua_pushvalue(L, 1);
     lua_pushvalue(L, rules_idx);
-    lua_pushvalue(L, 3);
+    if (lua_isnoneornil(L, 3)) lua_pushliteral(L, ""); else lua_pushvalue(L, 3);
     lua_call(L, 3, 1);
     return 1;
 };
