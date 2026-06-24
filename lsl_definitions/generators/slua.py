@@ -22,8 +22,8 @@ from lsl_definitions.utils import Deprecated, remove_nones
 @register("slua_lsp_defs")
 def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
     """Generate SLua definitions for Luau Language Server"""
-    ll_module = [m for m in slua_definitions.modules if m.name == "ll"][0]
-    llcompat_module = [m for m in slua_definitions.modules if m.name == "llcompat"][0]
+    ll_module = slua_definitions.modules["ll"]
+    llcompat_module = slua_definitions.modules["llcompat"]
 
     defs = io.StringIO()
     defs.write("""-- Second Life SLua (Server Lua) definitions file for luau-lsp.
@@ -37,12 +37,12 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
 
     # 1. Luau builtins unneeded. Luau-lsp already know about these
     # 2. SLua base classes. These only depend on Luau builtins
-    classes = slua_definitions.base_classes + slua_definitions.classes
+    classes = list(slua_definitions.base_classes.values()) + list(slua_definitions.classes.values())
     classes.sort(key=lambda x: x.name)
     for class_ in (class_ for class_ in classes if class_.name[0].islower()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for alias in slua_definitions.type_aliases:
+    for alias in slua_definitions.type_aliases.values():
         defs.write(alias.to_luau_def())
         defs.write("\n")
     defs.write("\n")
@@ -51,13 +51,13 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for class_ in (class_ for class_ in classes if class_.name[0].isupper()):
         class_.write_luau_def(defs)
     defs.write("\n")
-    for func in slua_definitions.functions:
+    for func in slua_definitions.functions.values():
         if func.private or func.local_only:
             continue
         if not func.typechecker_flags.fully_defined:
             defs.write("-- ")
         func.write_luau_global_def(defs)
-    for module in sorted(slua_definitions.modules, key=lambda x: x.name):
+    for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue
         if module.name == "string":
@@ -67,13 +67,13 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         module.write_luau_def(defs)
         if module.name == "string":
             defs.write("--]]\n")
-    for var in slua_definitions.global_variables:
+    for var in slua_definitions.global_variables.values():
         defs.write("declare ")
         defs.write(var.to_luau_def())
         defs.write("\n")
     ll_module.write_luau_def(defs)
     llcompat_module.write_luau_def(defs)
-    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants.values(), key=lambda x: x.name):
         if const.private:
             continue
         defs.write("declare ")
@@ -88,8 +88,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     """Generate SLua standard library for Selene linter
     https://kampfkarren.github.io/selene/usage/std.html
     """
-    classes = {c.name: c for c in slua_definitions.base_classes + slua_definitions.classes}
-    type_aliases = {a.name: a for a in slua_definitions.type_aliases}
+    classes = {**slua_definitions.base_classes, **slua_definitions.classes}
 
     file = io.StringIO()
     file.write("""# Second Life SLua (Server Lua) standard library definition file for selene.
@@ -130,8 +129,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         }
         if type_str in type_map:
             return type_map[type_str]
-        if type_str in type_aliases:
-            return type_aliases[type_str].selene_type
+        if type_str in slua_definitions.type_aliases:
+            return slua_definitions.type_aliases[type_str].selene_type
         if (type_str.startswith("{") and type_str.endswith("}")) or type_str.startswith("list |"):
             return "table"
         if "|" in type_str:
@@ -186,11 +185,11 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
 
     def selene_class(class_: SLuaClassDeclaration) -> dict:
         fields = {}
-        for method in class_.methods:
+        for method in class_.methods.values():
             fields[method.name] = selene_function(method, method=True)
-        for func in class_.functions:
+        for func in class_.functions.values():
             fields[func.name] = selene_function(func, method=False)
-        for prop in class_.properties:
+        for prop in class_.properties.values():
             fields[prop.name] = selene_property(prop)
         return fields
 
@@ -202,7 +201,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             {
                 f"{module.name}.{const.name}": selene_property(const)
                 # for func in sorted(self.functions, key=lambda x: x.name)
-                for const in module.constants
+                for const in module.constants.values()
                 if not const.private
             }
         )
@@ -210,7 +209,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             {
                 f"{module.name}.{func.name}": selene_function(func)
                 # for func in sorted(self.functions, key=lambda x: x.name)
-                for func in module.functions
+                for func in module.functions.values()
                 if not func.private and not func.local_only
             }
         )
@@ -218,34 +217,33 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
 
     # Duplicate quaternion module as rotation. The callable aspect of quaternion
     # prevents us from being able to de-duplicate this with structs.
-    modules = {m.name: m for m in slua_definitions.modules}
-    modules["rotation"] = SLuaModule(
+    slua_definitions.modules["rotation"] = SLuaModule(
         name="rotation",
-        comment=modules["quaternion"].comment,
-        callable=modules["quaternion"].callable,
-        constants=modules["quaternion"].constants,
-        functions=modules["quaternion"].functions,
+        comment=slua_definitions.modules["quaternion"].comment,
+        callable=slua_definitions.modules["quaternion"].callable,
+        constants=slua_definitions.modules["quaternion"].constants,
+        functions=slua_definitions.modules["quaternion"].functions,
     )
 
-    for const in slua_definitions.global_variables:
+    for const in slua_definitions.global_variables.values():
         if not const.private and const.name != "rotation":
             selene["globals"][const.name] = selene_property(const)
-    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants.values(), key=lambda x: x.name):
         if not const.private:
             selene["globals"][const.name] = selene_property(const)
-    for func in sorted(slua_definitions.functions, key=lambda x: x.name):
+    for func in sorted(slua_definitions.functions.values(), key=lambda x: x.name):
         if not func.private and not func.local_only:
             selene["globals"][func.name] = selene_function(func)
-    for module in sorted(modules.values(), key=lambda x: x.name):
+    for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             selene["globals"].update(selene_module(module))
-    selene["globals"].update(selene_module(modules["ll"]))
-    selene["globals"].update(selene_module(modules["llcompat"]))
+    selene["globals"].update(selene_module(slua_definitions.modules["ll"]))
+    selene["globals"].update(selene_module(slua_definitions.modules["llcompat"]))
     for class_ in classes.values():
         selene["structs"][class_.name] = selene_class(class_)
 
     # Fix up LLEvents argument types
-    event_names = [m for m in slua_definitions.type_aliases if m.name == "LLEventName"][
+    event_names = [m for m in slua_definitions.type_aliases.values() if m.name == "LLEventName"][
         0
     ].selene_type
     for method_name in ["on", "once", "off", "handlers"]:

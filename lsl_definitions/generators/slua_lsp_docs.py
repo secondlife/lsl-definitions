@@ -90,11 +90,11 @@ class DocBuilder:
                 learn_more_link=doc_url(module.name, None),
             )
         # for const in sorted(self.constants, key=lambda x: x.name)
-        for const in module.constants:
+        for const in module.constants.values():
             if not const.private:
                 self.add_constant(const, module=module.name)
         # for func in sorted(self.functions, key=lambda x: x.name)
-        for func in module.functions:
+        for func in module.functions.values():
             if not func.private and not func.local_only:
                 self.add_function(func, module=module.name)
 
@@ -106,31 +106,30 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
 
     # Duplicate quaternion module as rotation. The callable aspect of quaternion
     # prevents us from being able to de-duplicate this with structs.
-    modules = {m.name: m for m in slua_definitions.modules}
-    modules["rotation"] = SLuaModule(
+    slua_definitions.modules["rotation"] = SLuaModule(
         name="rotation",
-        comment=modules["quaternion"].comment,
-        callable=modules["quaternion"].callable,
-        constants=modules["quaternion"].constants,
-        functions=modules["quaternion"].functions,
+        comment=slua_definitions.modules["quaternion"].comment,
+        callable=slua_definitions.modules["quaternion"].callable,
+        constants=slua_definitions.modules["quaternion"].constants,
+        functions=slua_definitions.modules["quaternion"].functions,
     )
 
     # class docs are unused if generated
     #     for const in slua_definitions.globalVariables:
     #         if not const.private and const.name != "rotation":
     #             selene["globals"][const.name] = selene_property(const)
-    for func in slua_definitions.functions:
+    for func in slua_definitions.functions.values():
         if not func.private and not func.local_only and not func.slua_removed:
             builder.add_function(func)
-    for module in sorted(modules.values(), key=lambda x: x.name):
+    for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
             builder.add_module(module)
-    builder.add_module(modules["ll"])
-    builder.add_module(modules["llcompat"])
+    builder.add_module(slua_definitions.modules["ll"])
+    builder.add_module(slua_definitions.modules["llcompat"])
     # builtin docs are unused if generated
     # for const in slua_definitions.builtin_constants:
     #     builder.add_constant(const)
-    for const in sorted(slua_definitions.global_constants, key=lambda x: x.name):
+    for const in sorted(slua_definitions.global_constants.values(), key=lambda x: x.name):
         if not const.private:
             builder.add_constant(const)
     # class docs are unused if generated

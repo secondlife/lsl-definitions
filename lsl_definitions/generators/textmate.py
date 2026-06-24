@@ -76,7 +76,7 @@ def gen_textmate_slua(
 ) -> str:
     """Generate SLua TextMate Syntax Files."""
 
-    quaternion_module = slua_definitions.get_module("quaternion")
+    quaternion_module = slua_definitions.modules["quaternion"]
     rotation_module = SLuaModule(
         name="rotation",
         comment=quaternion_module.comment,
@@ -84,18 +84,20 @@ def gen_textmate_slua(
         constants=quaternion_module.constants,
         functions=quaternion_module.functions,
     )
-    slua_definitions.modules.append(rotation_module)
+    slua_definitions.modules[rotation_module.name] = rotation_module
 
     def get_slua_global_functions(definitions: SLuaDefinitions) -> str:
         functions = [
-            f.name for f in definitions.functions if not f.local_only and not f.slua_removed
+            f.name
+            for f in definitions.functions.values()
+            if not f.local_only and not f.slua_removed
         ]
-        functions += [m.name for m in definitions.modules if m.callable is not None]
+        functions += [m.name for m in definitions.modules.values() if m.callable is not None]
         functions.sort()
         return "|".join(functions)
 
     def get_slua_global_constants_for_module(module: SLuaModule) -> str:
-        constants = [c.name for c in module.constants if not c.private]
+        constants = [c.name for c in module.constants.values() if not c.private]
         constants.sort()
         constants = "|".join(constants)
         if len(constants) > 0:
@@ -103,14 +105,16 @@ def gen_textmate_slua(
         return f"{module.name}{constants}"
 
     def get_slua_global_constants(definitions: SLuaDefinitions) -> str:
-        constants = [get_slua_global_constants_for_module(m) for m in definitions.modules]
+        constants = [get_slua_global_constants_for_module(m) for m in definitions.modules.values()]
         constants.sort()
         return "|".join(constants)
 
     def get_slua_module_regex(module: SLuaModule) -> str:
         if module.name in {"ll", "llcompat"}:
             return None
-        functions = [f.name for f in module.functions if not f.private and not f.local_only]
+        functions = [
+            f.name for f in module.functions.values() if not f.private and not f.local_only
+        ]
         functions.sort()
         functions = "|".join(functions)
         if len(functions) < 1:
@@ -118,11 +122,11 @@ def gen_textmate_slua(
         return f"{module.name}\\.(?:{functions})"
 
     def get_LL_constants(slua_definitions: SLuaDefinitions) -> str:
-        constants = [c.name for c in slua_definitions.global_constants]
+        constants = [c.name for c in slua_definitions.global_constants.values()]
         return crunch_regex_strings(constants)
 
     def get_slua_modules(definitions: SLuaDefinitions) -> str:
-        modules = [get_slua_module_regex(m) for m in definitions.modules]
+        modules = [get_slua_module_regex(m) for m in definitions.modules.values()]
         modules = [m for m in modules if m is not None]
         modules.sort()
         return "|".join(modules)
@@ -130,7 +134,7 @@ def gen_textmate_slua(
     def get_LL_module_functions(definitions: SLuaDefinitions) -> str:
         functions = [
             f.name
-            for f in definitions.get_module("ll").functions
+            for f in definitions.modules["ll"].functions.values()
             if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None
         ]
         return crunch_regex_strings(functions)
@@ -138,7 +142,7 @@ def gen_textmate_slua(
     def get_LL_module_deprecated_functions(definitions: SLuaDefinitions) -> str:
         functions = [
             f.name
-            for f in definitions.get_module("ll").functions
+            for f in definitions.modules["ll"].functions.values()
             if not f.private
             and not f.local_only
             and not f.slua_removed
@@ -149,9 +153,9 @@ def gen_textmate_slua(
     def get_slua_global_types(definitions: SLuaDefinitions) -> str:
         # Missing types that are not documented in builtins, classes or aliases
         missing_types = ["nil"]
-        builtin_types = [t for t in definitions.builtin_types.keys()]
-        base_classes = [b.name for b in definitions.base_classes]
-        type_aliases = [t.name for t in definitions.type_aliases if t.export]
+        builtin_types = list(definitions.builtin_types.keys())
+        base_classes = list(definitions.base_classes.keys())
+        type_aliases = [t.name for t in definitions.type_aliases.values() if t.export]
         return "|".join(missing_types + builtin_types + base_classes + type_aliases)
 
     def get_slua_metamethods(definitions: SLuaDefinitions) -> str:
@@ -162,29 +166,31 @@ def gen_textmate_slua(
     def get_LL_variable_functions_for_variable(
         variable: SLuaProperty, definitions: SLuaDefinitions
     ) -> str:
-        clss = definitions.get_class(variable.type)
+        clss = definitions.classes.get(variable.type, None)
         if clss is None:
             return []
         return [
-            f"{variable.name}:{m.name}" for m in clss.methods if not m.private and not m.local_only
+            f"{variable.name}:{m.name}"
+            for m in clss.methods.values()
+            if not m.private and not m.local_only
         ]
 
     def get_LL_variable_functions(definitions: SLuaDefinitions) -> str:
         functions = []
-        for v in definitions.global_variables:
+        for v in definitions.global_variables.values():
             functions.extend(get_LL_variable_functions_for_variable(v, slua_definitions))
         functions.sort()
         return crunch_regex_strings(functions)
 
     def get_LL_variables_for_variable(variable: SLuaProperty, definitions: SLuaDefinitions) -> str:
-        clss = definitions.get_class(variable.type)
+        clss = definitions.classes.get(variable.type, None)
         if clss is None:
             return []
-        return [f"{variable.name}.{p.name}" for p in clss.properties if not p.private]
+        return [f"{variable.name}.{p.name}" for p in clss.properties.values() if not p.private]
 
     def get_LL_variables(definitions: SLuaDefinitions) -> str:
         variables = []
-        for v in definitions.global_variables:
+        for v in definitions.global_variables.values():
             variables.extend(get_LL_variables_for_variable(v, definitions))
         variables.sort()
         return crunch_regex_strings(variables)
