@@ -256,3 +256,36 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
     noalias_dumper.ignore_aliases = lambda self, data: True
     yaml.dump(selene, file, sort_keys=False, Dumper=noalias_dumper)
     return file.getvalue()
+
+
+@register("slua_definitions")
+def gen_slua_definitions(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
+    """Generate SLua definitions file"""
+    quaternion_module = slua_definitions.get_module("quaternion")
+    rotation_module = SLuaModule(
+        name="rotation",
+        comment=quaternion_module.comment,
+        callable=quaternion_module.callable,
+        constants=quaternion_module.constants,
+        functions=quaternion_module.functions,
+    )
+    slua_definitions.modules.append(rotation_module)
+
+    file = io.StringIO()
+    file.write(
+        """# Second Life SLua (Server Lua) standard library definitions
+#
+# increment only when the file format changes, not just the content
+"""
+    )
+
+    noalias_dumper = yaml.dumper.SafeDumper
+    noalias_dumper.ignore_aliases = lambda self, data: True
+    yaml.dump(
+        slua_definitions.to_definition_dict(),
+        file,
+        Dumper=noalias_dumper,
+        sort_keys=False,
+    )
+
+    return file.getvalue()
