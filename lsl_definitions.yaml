@@ -7306,7 +7306,6 @@ functions:
 #    god-mode: If true, this function can only be executed in god mode.
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
-#    index-semantics: If true then the returned integer from this function represents 0 based index
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
   llAbs:
     arguments:
@@ -7386,8 +7385,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the damage event to modify.
-        type: integer
-        index-semantics: true
+        type: index
     - new_damage:
         tooltip: New damage value to be applied or distributed after on_damage
           processing.
@@ -8129,12 +8127,10 @@ functions:
         slua-type: '{T}'
     - start_index:
         tooltip: Starting index of the slice to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Ending index of the slice to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.remove
       reason: Unnecessary table copying.
@@ -8159,12 +8155,10 @@ functions:
         type: string
     - start_index:
         tooltip: Starting index of the substring to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Ending index of the substring to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 95
     pure: true
@@ -8213,8 +8207,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 554
     must-use: true
@@ -8231,8 +8224,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 37
     must-use: true
@@ -8249,8 +8241,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 39
     must-use: true
@@ -8266,8 +8257,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 32
     must-use: true
@@ -8283,8 +8273,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 40
     # Note that the return does NOT have index semantics, link numbers are already one-indexed (sort of)
@@ -8302,8 +8291,7 @@ functions:
     arguments:
     - item:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 31
     must-use: true
@@ -8318,8 +8306,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 33
     must-use: true
@@ -8335,8 +8322,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 35
     must-use: true
@@ -8352,8 +8338,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 553
     must-use: true
@@ -8368,8 +8353,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 38
     must-use: true
@@ -8384,8 +8368,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 341
     must-use: true
@@ -8403,8 +8386,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 338
     # NOTE: We can't change face number indexing easily because it's part of the viewer, so no index semantics for ret...
@@ -8421,8 +8403,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 340
     must-use: true
@@ -8439,8 +8420,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 339
     must-use: true
@@ -8457,8 +8437,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 342
     must-use: true
@@ -8476,8 +8455,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 337
     must-use: true
@@ -8496,8 +8474,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 34
     must-use: true
@@ -8513,8 +8490,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 36
     must-use: true
@@ -8750,8 +8726,7 @@ functions:
     - start:
         tooltip: Number of match results to skip before returning (0 to start at the
           first match).
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of matches to return (if 0, returns the first 64
           matches).
@@ -8762,9 +8737,8 @@ functions:
     energy: 10.0
     func-id: 508
     must-use: true
-    return: list
     # There are list indices in the return value!
-    index-semantics: true
+    return: {lsl: list, index: true}
     sleep: 0.0
     tooltip: Synchronously searches a cached notecard name for lines containing
       pattern, returning a list of line and column numbers. Returns a list
@@ -9489,8 +9463,7 @@ functions:
         type: integer
     - number:
         tooltip: Index number of the item of that type, starting from 0.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 147
     must-use: true
@@ -9692,8 +9665,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: typeof
       selene-replace: ["typeof(%1[%2])" ]
@@ -9860,8 +9832,7 @@ functions:
         type: asset
     - line:
         tooltip: Zero-based line number to request.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 217
     return: key
@@ -9880,8 +9851,7 @@ functions:
         type: asset
     - line:
         tooltip: Zero-based line number to request.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 549
     must-use: true
@@ -10632,12 +10602,10 @@ functions:
         type: string
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 94
     pure: true
@@ -11146,8 +11114,7 @@ functions:
         type: string
     - pos:
         tooltip: Zero-based position index where insertion starts.
-        type: integer
-        index-semantics: true
+        type: index
     - src:
         tooltip: Source string to insert.
         type: string
@@ -11250,7 +11217,7 @@ functions:
           value.
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
         type: list
     slua-deprecated:
       use: lljson.decode
@@ -11276,7 +11243,7 @@ functions:
         type: list
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
     - value:
         tooltip: New value to set, or the JSON_DELETE constant to delete the
           targeted element.
@@ -11305,7 +11272,7 @@ functions:
         tooltip: A list of key names or array indices specifying the path to the value.
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
         type: list
     slua-deprecated:
       reason: Use 'lljson.decode' and 'typeof' instead. Also, the indices are
@@ -11354,8 +11321,7 @@ functions:
     arguments:
     - first:
         tooltip: Zero-based start index of the keys to retrieve.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Number of keys to retrieve.
         type: integer
@@ -11616,8 +11582,7 @@ functions:
         type: string
     - start:
         tooltip: Zero-based start index of the matching keys to return.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           matching keys).
@@ -11639,8 +11604,7 @@ functions:
     arguments:
     - start:
         tooltip: Zero-based start index of the keys to return.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           keys).
@@ -11767,8 +11731,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'tonumber' instead.
       selene-replace: ["tonumber(%1[%2]) or 0" ]
@@ -11790,8 +11753,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]', 'tonumber', and 'math.modf' instead.
       selene-replace: ["math.modf(tonumber(%1[%2]) or 0)" ]
@@ -11836,8 +11798,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'touuid' instead.
       selene-replace: ["touuid(%1[%2]) or NULL_KEY" ]
@@ -11862,12 +11823,10 @@ functions:
         slua-type: '{T}'
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use 'unpack' (fastcall) or 'table.move' instead. Prefer structured
         tables over strided lists.
@@ -11893,20 +11852,17 @@ functions:
         slua-type: '{T}'
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
     - slice_index:
         tooltip: Zero-based element index within each stride to extract (negatives
           count backward from the end of the stride).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Prefer structured tables over strided lists.
     energy: 10.0
@@ -11929,12 +11885,9 @@ functions:
         slua-type: '{T}'
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
@@ -11957,8 +11910,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: '[]'
       selene-replace: ["%1[%2]" ]
@@ -11981,8 +11933,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'tostring' instead.
       selene-replace: ["tostring(%1[%2])" ]
@@ -12004,8 +11955,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: '[]'
       selene-replace: ["%1[%2]" ]
@@ -12035,8 +11985,7 @@ functions:
     energy: 10.0
     func-id: 201
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the first instance of list test within the
       list src (returns -1 if not found).
@@ -12052,8 +12001,7 @@ functions:
         type: list
     - instance:
         tooltip: Zero-based occurrence index of the match to find.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.find
       reason: Prefer dictionaries or single-item searches.
@@ -12061,8 +12009,7 @@ functions:
     energy: 10.0
     func-id: 803
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the specified instance of list test within
       the list src (returns -1 if not found).
@@ -12078,12 +12025,10 @@ functions:
         type: list
     - start_index:
         tooltip: Zero-based start index of the range to search.
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index of the range to search.
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride in the list.
         type: integer
@@ -12092,8 +12037,7 @@ functions:
     energy: 10.0
     func-id: 800
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the first instance of list test in the
       strided list src within the range from start to end (stepping through by
@@ -12113,8 +12057,7 @@ functions:
         slua-type: '{T}'
     - start:
         tooltip: Zero-based index where insertion begins.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.insert
       reason: Unnecessary table copying. Fastcall.
@@ -12166,12 +12109,10 @@ functions:
         slua-type: '{T}'
     - start_index:
         tooltip: Zero-based start index (inclusive) of the replaced range.
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive) of the replaced range.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: 't[n] = x'
       reason: Unnecessary table copying.
@@ -12225,8 +12166,7 @@ functions:
     - stride_index:
         tooltip: Zero-based index of the element within each stride to use as the
           sort key (negatives count backward from the end of the stride).
-        type: integer
-        index-semantics: true
+        type: index
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
           descending order.
@@ -12864,8 +12804,7 @@ functions:
         type: string
     - index:
         tooltip: Zero-based index of the character to convert.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 527
     pure: true
@@ -15895,8 +15834,7 @@ functions:
     energy: 10.0
     func-id: 181
     pure: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the zero-based index of the first instance of the pattern
       substring inside the string source. Returns -1 if not found.
