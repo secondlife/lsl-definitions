@@ -60,8 +60,8 @@ class SLuaProperty:
         }
 
     def to_luau_def(self, extern: bool = False) -> str:
-        modifiers = "read " if extern and self.modifiable == "read-only" else ""
-        return f"{modifiers}{self.name}: {self.type}"
+        attributes = "read " if extern and self.modifiable == "read-only" else ""
+        return f"{attributes}{self.name}: {self.type}"
 
 
 @dataclasses.dataclass
