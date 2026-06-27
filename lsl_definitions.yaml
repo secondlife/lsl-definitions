@@ -16524,7 +16524,7 @@ builder-rulesets:
         # Make this more obviously verb-y since it's a meta-command
         method-name: "targetLink"
         params:
-          - [ link, link_target ]
+          - [ integer, link_target ]
       MATERIAL:
         # Otherwise this is _very_ easy to confuse with render materials
         method-name: 'physicsMaterial'

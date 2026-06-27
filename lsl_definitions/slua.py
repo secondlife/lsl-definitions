@@ -668,7 +668,7 @@ class SLuaDefinitions:
                 # Face is required even on nullable rules.
                 parameters.append(SLuaParameter(name="face", type="number"))
             for param in method.params:
-                slua_type = param.type.luau_type
+                slua_type = param.type.luau
                 if method.nullable:
                     # Nullable is represented through a blank string
                     slua_type = f'{slua_type} | ""'

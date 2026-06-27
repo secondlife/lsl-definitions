@@ -7,33 +7,8 @@ builder-rulesets in lsl_definitions.yaml. The fluent SPP builder for
 from __future__ import annotations
 
 import dataclasses
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from lsl_definitions.lsl import LSLDefinitions
-
-
-@dataclasses.dataclass(frozen=True)
-class BuilderParamType:
-    """Abstract user-facing input type, maps to a Luau type definition"""
-
-    name: str
-    luau_type: str
-
-
-_RULESET_TYPES: dict[str, BuilderParamType] = {
-    t.name: t
-    for t in [
-        BuilderParamType("integer", "number"),
-        BuilderParamType("link", "number"),
-        BuilderParamType("float", "number"),
-        BuilderParamType("string", "string"),
-        BuilderParamType("vector", "vector"),
-        BuilderParamType("rotation", "quaternion"),
-        BuilderParamType("boolean", "boolean"),
-        BuilderParamType("asset", "(string | uuid)"),
-    ]
-}
+from lsl_definitions.lsl import LSLDefinitions, LSLTypeSemantics
 
 # Maps value-type annotation string -> RulesetParamDescriptor semantic char.
 # Consumed by any code that builds a C array of RulesetParamDescriptor from
@@ -56,7 +31,7 @@ _VALUE_TYPE_TO_SEMANTIC: dict[str, str] = {
 @dataclasses.dataclass(frozen=True)
 class BuilderMethodParam:
     name: str
-    type: BuilderParamType
+    type: LSLTypeSemantics
 
 
 @dataclasses.dataclass(frozen=True)
@@ -105,7 +80,7 @@ def _method_name(*parts: str) -> str:
 def _build_params(raw_params: list[tuple[str, str]]) -> list[BuilderMethodParam]:
     """`raw_params` comes from YAML as a list of `[type_name, arg_name]` pairs."""
     return [
-        BuilderMethodParam(name=arg_name, type=_RULESET_TYPES[type_name])
+        BuilderMethodParam(name=arg_name, type=LSLTypeSemantics.PRESETS[type_name])
         for type_name, arg_name in raw_params
     ]
 

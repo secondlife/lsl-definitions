@@ -281,7 +281,7 @@ class LSLTypeSemantics:
         if not (sum(all_semantics) == 1 or (lsl is LSLType.LIST and sum(all_semantics) == 2)):
             raise ValueError("Must have exactly one semantic")
         semantics_index = next(i for i, x in enumerate(all_semantics) if x)
-        self.type = (
+        self.name = (
             LSLExtendedType.VOID,
             LSLExtendedType.ASSET,
             LSLExtendedType.BOOLEAN,
@@ -290,12 +290,12 @@ class LSLTypeSemantics:
             LSLExtendedType.PARAM,
             LSLExtendedType.PARAM_GET,
         )[semantics_index]
-        if self.type is LSLExtendedType.VOID:
+        if self.name is LSLExtendedType.VOID:
             self.lsl = lsl
-            self.type = LSLExtendedType(lsl)
+            self.name = LSLExtendedType(lsl)
         else:
-            self.lsl = self.type.lsl
-        self.luau = luau or self.type.luau
+            self.lsl = self.name.lsl
+        self.luau = luau or self.name.luau
 
         self.asset = asset
         self.boolean = boolean
@@ -503,11 +503,11 @@ class LSLFunction(LSLFunctionBase):
             return self.name[2:]
 
     def compute_slua_type(self, llcompat=False) -> str:
-        if self.ret_type.type == LSLExtendedType.INDEX:
+        if self.ret_type.name == LSLExtendedType.INDEX:
             return "number" if llcompat else "number?"
-        if self.ret_type.type == LSLExtendedType.BOOLEAN:
+        if self.ret_type.name == LSLExtendedType.BOOLEAN:
             return "number" if llcompat else "boolean"
-        if self.ret_type.type == LSLExtendedType.ASSET:
+        if self.ret_type.name == LSLExtendedType.ASSET:
             return "string"
         return self.ret_type.luau
 
