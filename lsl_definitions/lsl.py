@@ -503,10 +503,10 @@ class LSLFunction(LSLFunctionBase):
             return self.name[2:]
 
     def compute_slua_type(self, llcompat=False) -> str:
-        if not llcompat and self.ret_type.type == LSLExtendedType.INDEX:
-            return "number?"
-        if not llcompat and self.ret_type.type == LSLExtendedType.BOOLEAN:
-            return "boolean"
+        if self.ret_type.type == LSLExtendedType.INDEX:
+            return "number" if llcompat else "number?"
+        if self.ret_type.type == LSLExtendedType.BOOLEAN:
+            return "number" if llcompat else "boolean"
         if self.ret_type.type == LSLExtendedType.ASSET:
             return "string"
         return self.ret_type.luau
