@@ -7273,8 +7273,7 @@ events:
         type: key
     - success:
         tooltip: Boolean. TRUE if the L$ transfer succeeded, FALSE otherwise.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - data:
         tooltip: Contains a CSV string of transaction info on success, or an error
           string on failure.
@@ -7308,7 +7307,6 @@ functions:
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
 #    index-semantics: If true then the returned integer from this function represents 0 based index
-#    bool-semantics: If true then the returned integer represents a boolean 1 or 0
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
   llAbs:
     arguments:
@@ -7426,8 +7424,7 @@ functions:
     experience: true
     func-id: 392
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the specified agent is in the experience and the
       experience can run in the current region/location; returns FALSE
@@ -7441,8 +7438,7 @@ functions:
         tooltip: Boolean. If TRUE, allows anyone to drop inventory items into the prim
           (even without modify rights). If FALSE, restricts inventory dropping
           to those with modify permissions.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 176
     return: void
@@ -7480,8 +7476,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, momentum is treated as a local directional vector; if
           FALSE, it is treated as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 72
     return: void
@@ -7500,8 +7495,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, the force is treated as a local directional vector;
           if FALSE, it is treated as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 73
     return: void
@@ -7920,8 +7914,7 @@ functions:
     - accept:
         tooltip: Boolean. If TRUE, only collisions matching the name and id filters are
           processed; if FALSE, matching collisions are excluded.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 110
     return: void
@@ -8052,8 +8045,7 @@ functions:
     - parent:
         tooltip: Boolean. If TRUE, the script's object becomes the root prim; if FALSE,
           target becomes the root.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 141
     return: void
@@ -8194,8 +8186,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 509
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Derezzes (deletes or returns) a targeted object in the region
       previously rezzed by a script in this linkset, returning TRUE on success
@@ -8263,8 +8254,7 @@ functions:
     energy: 10.0
     func-id: 39
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     detected-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if the detected object or avatar specified by number has
@@ -8601,8 +8591,7 @@ functions:
     energy: 10.0
     func-id: 205
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Checks if the border reached along the vector dir from the vector pos
       is the edge of the world (i.e., has no neighboring simulator). Returns
@@ -8827,8 +8816,7 @@ functions:
     - mouselook:
         tooltip: Boolean. If TRUE, forces a sitting avatar into mouselook; if FALSE,
           allows them to keep their current camera mode.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 294
     return: void
@@ -9296,9 +9284,8 @@ functions:
     energy: 10.0
     func-id: 711
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the current environment parameters for the
       parcel or region at pos, retrieved in the order specified by params.
@@ -9614,9 +9601,8 @@ functions:
     energy: 10.0
     func-id: 372
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the media parameters of the specified face on
       the linked prim link, retrieved in the order requested by params.
@@ -9676,9 +9662,8 @@ functions:
     energy: 10.0
     func-id: 354
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list of primitive parameters requested in params for the
       linked prim specified by link (equivalent to llGetPrimitiveParams).
@@ -9982,10 +9967,9 @@ functions:
     energy: 10.0
     func-id: 332
     must-use: true
-    return: list
-    sleep: 0.0
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
+    sleep: 0.0
     tooltip: Returns a list containing the requested parameters of the specified
       avatar or object id, retrieved in the order requested by params.
     categories:
@@ -10117,9 +10101,8 @@ functions:
     energy: 10.0
     func-id: 327
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the requested parcel details specified by
       params (retrieved in the same order) for the parcel at the vector pos.
@@ -10148,8 +10131,7 @@ functions:
         tooltip: Boolean. If TRUE, returns the combined land impact limit for all
           parcels owned by the parcel owner in the region; if FALSE, returns
           only the limit for the specified parcel.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 326
     must-use: true
@@ -10184,8 +10166,7 @@ functions:
         tooltip: Boolean. If TRUE, searches all parcels in the region owned by the
           targeted parcel's owner; if FALSE, searches only the specified
           parcel.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 325
     must-use: true
@@ -10274,9 +10255,8 @@ functions:
     energy: 10.0
     func-id: 351
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 1.0
     tooltip: Returns a list containing the media parameters of the specified face,
       retrieved in the order requested by params. Returns an empty list if no
@@ -10294,9 +10274,8 @@ functions:
     energy: 10.0
     func-id: 279
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.2
     tooltip: Returns a list of primitive attribute values matching the requested
       params list.
@@ -10547,8 +10526,7 @@ functions:
     energy: 10.0
     func-id: 250
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns a boolean integer indicating whether the specified script in
       the prim's inventory is running (returns TRUE if running, FALSE
@@ -10640,8 +10618,7 @@ functions:
     energy: 10.0
     func-id: 46
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns a boolean integer indicating whether the specified status flag
       status is enabled for the object.
@@ -11054,8 +11031,7 @@ functions:
     - water:
         tooltip: Boolean. If TRUE, damp relative to the higher of land and water; if
           FALSE, damp relative to land only.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - tau:
         tooltip: Timescale in seconds to critically damp the movement.
         type: float
@@ -11222,8 +11198,7 @@ functions:
     energy: 10.0
     func-id: 542
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if agent_id and the owner of the script are friends, and
       FALSE otherwise.
@@ -11240,8 +11215,7 @@ functions:
     energy: 10.0
     func-id: 559
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Checks the specified face on the linked prim link. Returns TRUE if the
       face material is a PBR render material, or FALSE if it uses Blinn-Phong
@@ -11480,8 +11454,7 @@ functions:
         type: integer
     - queue:
         tooltip: Boolean. If TRUE, sound queuing is enabled; if FALSE, it is disabled.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 537
     return: void
@@ -12227,8 +12200,7 @@ functions:
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
           descending order.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 184
     must-use: true
@@ -12258,8 +12230,7 @@ functions:
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
           descending order.
-        type: integer
-        bool-semantics: true
+        type: boolean
     slua-deprecated:
       use: table.sort
       reason: Prefer structured tables over strided lists.
@@ -12329,8 +12300,7 @@ functions:
         type: integer
     - active:
         tooltip: Boolean. If TRUE, activates the listener; if FALSE, deactivates it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 26
     return: void
@@ -12655,8 +12625,7 @@ functions:
         type: key
     energy: 10.0
     func-id: 393
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Adds or removes agents from the estate's access or ban lists, or groups
       from the estate's group access list, specified by the action. Returns TRUE
@@ -12914,8 +12883,7 @@ functions:
     energy: 10.0
     func-id: 215
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the avatar or object specified by key id is over land
       owned by the script owner, or FALSE otherwise.
@@ -12963,9 +12931,8 @@ functions:
     energy: 10.0
     func-id: 299
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 2.0
     tooltip: Queries the media properties of the parcel containing the script,
       returning a list of values in the order requested by query. Only works if
@@ -13042,8 +13009,7 @@ functions:
     arguments:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 166
     return: void
@@ -13058,8 +13024,7 @@ functions:
     arguments:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 154
     return: void
@@ -13202,8 +13167,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, forces are applied relative to the target's local
           axes; if FALSE, relative to region axes.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 165
     return: void
@@ -13403,8 +13367,7 @@ functions:
     - running:
         tooltip: Boolean. If TRUE, sets the copied script to run immediately; if FALSE,
           leaves it stopped.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - start_param:
         tooltip: Integer start parameter passed to the copied script (readable via
           llGetStartParameter).
@@ -14162,8 +14125,7 @@ functions:
     energy: 10.0
     func-id: 219
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the agent or object specified by uuid is in the same
       region (simulator) and shares the same active group as the prim containing
@@ -14198,8 +14160,7 @@ functions:
         type: float
     energy: 10.0
     func-id: 592
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Attempts to uniformly resize the entire object by scaling_factor,
       maintaining size-position ratios of the prims. Fails if the linkset is
@@ -14239,8 +14200,7 @@ functions:
     energy: 10.0
     func-id: 246
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the vector position pos is over public land, sandbox
       land, land restricting edit/build permissions, or land that disables
@@ -14428,8 +14388,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE,
           as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 379
     return: void
@@ -14631,8 +14590,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a
           global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 64
     return: void
@@ -14654,8 +14612,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, force and torque are treated as local vectors; if
           FALSE, as global region vectors.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 76
     return: void
@@ -14687,8 +14644,7 @@ functions:
         type: float
     - water:
         tooltip: Boolean. If TRUE, hovers above water too; if FALSE, water is ignored.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - tau:
         tooltip: Timescale in seconds to critically damp the movement.
         type: float
@@ -15004,8 +14960,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 369
-    return: integer
-    bool-semantics: true
+    return: boolean
     slua-removed: true
     sleep: 0.0
     tooltip: Requests that limit bytes are reserved for the script. Returns TRUE on
@@ -15062,8 +15017,7 @@ functions:
     - ForSale:
         tooltip: Boolean. If TRUE, puts the parcel up for sale; if FALSE, removes it
           from sale.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - Options:
         tooltip: A list of options to configure the sale (e.g., price, authorized buyer,
           and object inclusion).
@@ -15228,8 +15182,7 @@ functions:
         type: vector
     energy: 10.0
     func-id: 397
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Tries to move the entire object so that its root prim is within 0.1m of
       the vector position (underground positions are set to ground level).
@@ -15305,8 +15258,7 @@ functions:
         type: string
     - running:
         tooltip: Boolean. If TRUE, enables the script; if FALSE, disables it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 148
     return: void
@@ -15335,8 +15287,7 @@ functions:
     arguments:
     - queue:
         tooltip: Boolean. If TRUE, sound queuing is enabled; if FALSE, it is disabled.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 208
     return: void
@@ -15366,8 +15317,7 @@ functions:
         type: integer
     - value:
         tooltip: Boolean. If TRUE, enables the status; if FALSE, disables it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 45
     return: void
@@ -15474,8 +15424,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a
           global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 74
     return: void
@@ -15578,8 +15527,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, velocity is treated as a local directional vector; if
           FALSE, as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 378
     return: void
@@ -15715,12 +15663,10 @@ functions:
     - queue:
         tooltip: Boolean. If TRUE, queues the sound; if FALSE, interrupts the currently
           playing sound.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - loop:
         tooltip: Boolean. If TRUE, loops the sound.
-        type: integer
-        bool-semantics: true
+        type: boolean
     deprecated:
       use: ll.PlaySound
       selene-replace: ["ll.PlaySound(%1, %2)", "ll.LoopSound(%1, %2)"]
@@ -15981,13 +15927,11 @@ functions:
     - accept:
         tooltip: Boolean. Determines whether control events are generated to trigger
           script handlers.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - pass_on:
         tooltip: Boolean. If TRUE, the keys also perform their default functions; if
           FALSE, default actions are suppressed.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 111
     return: void
@@ -16357,8 +16301,7 @@ functions:
     - checked:
         tooltip: Boolean. If TRUE, requires the existing value to match original_value
           to complete the update; if FALSE, creates the key if needed.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - original_value:
         tooltip: String value to compare against the existing value in the
           datastore.
@@ -16455,8 +16398,7 @@ functions:
     energy: 10.0
     func-id: 540
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the Base64-formatted signature is verified as valid for
       the message msg when using the digest algorithm and public_key. Returns
@@ -16468,8 +16410,7 @@ functions:
     - detect:
         tooltip: Boolean. If TRUE, enables VolumeDetect; if FALSE (default), disables
           it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 248
     return: void
@@ -16731,8 +16672,6 @@ builder-rulesets:
       PHYSICS:
         method-name: 'physical'
         params:
-          # Note that we use "asset" and "boolean" types to denote places where
-          # 'asset-semantics' or 'bool-semantics' would apply.
           - [ boolean, enabled ]
       TEMP_ON_REZ:
         method-name: 'temporary'
