@@ -3134,6 +3134,10 @@ controls:
     tooltip: "Lua local keyword: declares a local variable or function."
   export:
     tooltip: "Luau export keyword: declares a type that can be used outside this module."
+  read:
+    tooltip: "Luau read keyword: declares a type field is read-only."
+  write:
+    tooltip: "Luau write keyword: declares a type field is write-only."
   in:
     tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
   not:
