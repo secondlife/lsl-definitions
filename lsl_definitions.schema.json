@@ -172,8 +172,8 @@
                 "minItems": 2,
                 "prefixItems": [
                     {
-                        "enum": ["integer", "link", "boolean", "vector", "rotation", "float", "string", "asset"],
-                        "markdownDescription": "The parameter type."
+                        "markdownDescription": "The parameter type.",
+                        "$ref": "#/$defs/typeSemantics"
                     },
                     {
                         "markdownDescription": "The parameter name.",
