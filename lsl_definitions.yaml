@@ -1336,8 +1336,7 @@ constants:
     tooltip: ID used by all combat log messages sent from the region to the
       COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive
       only system-generated combat log messages.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
   CONTENT_TYPE_ATOM:
     member-of: [HTTPContentType]
@@ -2045,58 +2044,47 @@ constants:
     value-type: boolean
   IMG_USE_BAKED_AUX1:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "9742065b-19b5-297c-858a-29711d539043"
   IMG_USE_BAKED_AUX2:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
   IMG_USE_BAKED_AUX3:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"
   IMG_USE_BAKED_EYES:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"
   IMG_USE_BAKED_HAIR:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"
   IMG_USE_BAKED_HEAD:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "5a9f4a74-30f2-821c-b88d-70499d3e7183"
   IMG_USE_BAKED_LEFTARM:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "ff62763f-d60a-9855-890b-0c96f8f8cd98"
   IMG_USE_BAKED_LEFTLEG:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8e915e25-31d1-cc95-ae08-d58a47488251"
   IMG_USE_BAKED_LOWER:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "24daea5f-0539-cfcf-047f-fbc40b2786ba"
   IMG_USE_BAKED_SKIRT:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "43529ce8-7faa-ad92-165a-bc4078371687"
   IMG_USE_BAKED_UPPER:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
   INVENTORY_ALL:
     member-of: [InventoryType]
@@ -2600,8 +2588,7 @@ constants:
     value: 2
   NULL_KEY:
     tooltip: A special string constant used as a null or empty key value.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
     member-of: [ObjectDetailsParam]
@@ -6051,29 +6038,24 @@ constants:
     value: 11
   TEXTURE_BLANK:
     tooltip: Asset UUID representing the default 'Blank' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "5748decc-f629-461c-9a36-a35a221fe21f"
   TEXTURE_DEFAULT:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_MEDIA:
     tooltip: Asset UUID representing the default 'Default Media' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"
   TEXTURE_PLYWOOD:
     tooltip: Asset UUID representing the default 'Plywood' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_TRANSPARENT:
     tooltip: Asset UUID representing the '*Default Transparent Texture' in the
       library (included with viewers).
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
   TOUCH_INVALID_FACE:
     # not enum as it can return positive integers also
@@ -6926,8 +6908,7 @@ events:
     - axes:
         tooltip: A list of six float values in the range [-1.0, 1.0] representing
           controller axes.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     tooltip: Triggered when a compatible viewer sends game controller input changes
       for the avatar specified by id. Only triggers for scripts in attachments
       or seats.
@@ -7012,8 +6993,7 @@ events:
         type: string
     - id:
         tooltip: A key value passed from the sending script.
-        type: key
-        slua-type: string
+        type: {lsl: key, luau: string}
     tooltip: Triggered when the script receives a link message from sender_num,
       containing the parameters num, str, and id sent via llMessageLinked.
     categories:
@@ -7291,7 +7271,6 @@ functions:
 #    mono-sleep: Sleep in the mono script runtime
 #    return: Return type of the function.
 #    slua-return: More specific return type for slua type-checking.
-#    slua-type: More specific argument type for slua type-checking.
 #    type-arguments: An array of strings naming the type variables used for generic type-checking this slua function.
 #    arguments: An array of maps of maps describing the parameters to this function.
 #    tooltip: A brief description of this function. Map of maps is used to retain ordering.
@@ -8123,8 +8102,7 @@ functions:
     arguments:
     - src:
         tooltip: Source list to copy and modify.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Starting index of the slice to remove (inclusive).
         type: index
@@ -8511,8 +8489,7 @@ functions:
         type: string
     - buttons:
         tooltip: A list of up to 12 strings representing button labels.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     - channel:
         tooltip: Output chat channel (any integer value) where button clicks are
           chatted.
@@ -9253,8 +9230,7 @@ functions:
         type: vector
     - params:
         tooltip: A list of environmental attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 711
     must-use: true
@@ -9569,8 +9545,7 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 372
     must-use: true
@@ -9630,8 +9605,7 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 354
     must-use: true
@@ -9932,8 +9906,7 @@ functions:
         type: key
     - params:
         tooltip: A list of OBJECT_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 332
     must-use: true
@@ -10066,8 +10039,7 @@ functions:
         type: vector
     - params:
         tooltip: A list of PARCEL_DETAILS_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 327
     must-use: true
@@ -10220,8 +10192,7 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 351
     must-use: true
@@ -10239,8 +10210,7 @@ functions:
     arguments:
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 279
     must-use: true
@@ -10813,8 +10783,7 @@ functions:
         type: key
     - params:
         tooltip: A list of visual parameter IDs or names to retrieve values for.
-        type: list
-        slua-type: "{number | string}"
+        type: {lsl: list, luau: "{number | string}"}
     energy: 10.0
     func-id: 530
     must-use: true
@@ -10848,8 +10817,7 @@ functions:
         type: string
     - inventory:
         tooltip: A list of inventory items to transfer.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     - options:
         tooltip: A list of options to configure the inventory transfer.
         type: list
@@ -10891,8 +10859,7 @@ functions:
         type: string
     - inventory:
         tooltip: A list of names representing items in the prim's inventory.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     energy: 10.0
     func-id: 231
     return: void
@@ -11819,8 +11786,7 @@ functions:
     arguments:
     - src:
         tooltip: Source list to slice.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
         type: index
@@ -11848,8 +11814,7 @@ functions:
     arguments:
     - src:
         tooltip: Source strided list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
         type: index
@@ -11881,8 +11846,7 @@ functions:
     arguments:
     - src:
         tooltip: Source strided list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
     - end_index:
@@ -12049,12 +12013,10 @@ functions:
     arguments:
     - dest:
         tooltip: Target destination list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - src:
         tooltip: Source list to insert.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start:
         tooltip: Zero-based index where insertion begins.
         type: index
@@ -12080,8 +12042,7 @@ functions:
     arguments:
     - src:
         tooltip: Source list to randomize.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Size of each randomized block (defaults to 1 if less than 1).
         type: integer
@@ -12101,12 +12062,10 @@ functions:
     arguments:
     - dest:
         tooltip: Target destination list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - src:
         tooltip: Source list to insert.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive) of the replaced range.
         type: index
@@ -12133,8 +12092,7 @@ functions:
     arguments:
     - src:
         tooltip: List to be sorted.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
@@ -12158,8 +12116,7 @@ functions:
     arguments:
     - src:
         tooltip: List to be sorted.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
@@ -12628,12 +12585,10 @@ functions:
         type: integer
     - str:
         tooltip: A string value passed as the third parameter of the link_message event.
-        type: string
-        slua-type: string | uuid
+        type: {lsl: string, luau: string | uuid}
     - id:
         tooltip: A key value passed as the fourth parameter of the link_message event.
-        type: key
-        slua-type: string | uuid
+        type: {lsl: key, luau: string | uuid}
     energy: 10.0
     func-id: 164
     return: void
@@ -12865,8 +12820,7 @@ functions:
     arguments:
     - query:
         tooltip: A list of PARCEL_MEDIA_COMMAND_* attributes to query.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 299
     must-use: true
@@ -12887,13 +12841,11 @@ functions:
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     - spacers:
         tooltip: A list of up to 8 strings representing spacers to be preserved in the
           list.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     energy: 10.0
     func-id: 214
     pure: true
@@ -12912,13 +12864,11 @@ functions:
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     - spacers:
         tooltip: A list of up to 8 strings representing spacers to be preserved in the
           list.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     energy: 10.0
     func-id: 285
     pure: true
@@ -12977,8 +12927,7 @@ functions:
     arguments:
     - patrolPoints:
         tooltip: A list of at least two position vectors representing the patrol path.
-        type: list
-        slua-type: "{vector}"
+        type: {lsl: list, luau: "{vector}"}
     - options:
         tooltip: A list of PATROL_* flags and parameters to configure the patrol
           behavior.
@@ -13692,8 +13641,7 @@ functions:
     arguments:
     - objects:
         tooltip: A list of object UUID keys to return.
-        type: list
-        slua-type: "{uuid}"
+        type: {lsl: list, luau: "{uuid}"}
     energy: 10.0
     func-id: 520
     return: integer
@@ -14998,8 +14946,7 @@ functions:
     - quick_pay_buttons:
         tooltip: A list of four integer values or PAY_* constants specifying the button
           payment choices.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 302
     return: void
