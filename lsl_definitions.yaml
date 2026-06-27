@@ -7270,7 +7270,6 @@ functions:
 #    sleep: Additional sleep time imposed by the script after this function completes.
 #    mono-sleep: Sleep in the mono script runtime
 #    return: Return type of the function.
-#    slua-return: More specific return type for slua type-checking.
 #    type-arguments: An array of strings naming the type variables used for generic type-checking this slua function.
 #    arguments: An array of maps of maps describing the parameters to this function.
 #    tooltip: A brief description of this function. Map of maps is used to retain ordering.
@@ -7706,8 +7705,7 @@ functions:
     energy: 10.0
     func-id: 196
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Parses the comma-separated string src and returns it as a list.
     categories:
@@ -8117,8 +8115,7 @@ functions:
     func-id: 193
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src with the slice from start to end
       (inclusive) removed. Negative indices count backward from the end of the
@@ -8859,8 +8856,7 @@ functions:
     energy: 10.0
     func-id: 412
     must-use: true
-    return: list
-    slua-return: "{uuid}"
+    return: {lsl: list, luau: "{uuid}"}
     sleep: 0.0
     tooltip: Requests a list of avatar UUID keys for agents currently in the region,
       limited by scope. Returns a list of keys or a list containing an error
@@ -8933,8 +8929,7 @@ functions:
     energy: 10.0
     func-id: 266
     must-use: true
-    return: list
-    slua-return: "{uuid}"
+    return: {lsl: list, luau: "{uuid}"}
     sleep: 0.0
     tooltip: Returns a list of keys (UUIDs) representing all active animations
       currently playing on the specified avatar.
@@ -8982,8 +8977,7 @@ functions:
     energy: 10.0
     func-id: 523
     must-use: true
-    return: list
-    slua-return: '{uuid} | {string}'
+    return: {lsl: list, luau: '{uuid} | {string}'}
     sleep: 0.0
     tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible
       (non-HUD) attachments worn by the specified avatar, in the order they were
@@ -9002,8 +8996,7 @@ functions:
     energy: 10.0
     func-id: 518
     must-use: true
-    return: list
-    slua-return: '{uuid} | {string}'
+    return: {lsl: list, luau: '{uuid} | {string}'}
     sleep: 0.0
     tooltip: Retrieves a list of attachment object keys worn by avatar in the order
       they were attached, filtered by options. Returns a list containing an
@@ -9019,8 +9012,7 @@ functions:
     energy: 10.0
     func-id: 277
     must-use: true
-    return: list
-    slua-return: '{vector}'
+    return: {lsl: list, luau: '{vector}'}
     sleep: 0.0
     tooltip: Returns the bounding box of object (including any linked prims)
       relative to its root prim in local coordinates, formatted as [ (vector)
@@ -9115,8 +9107,7 @@ functions:
     energy: 10.0
     func-id: 408
     must-use: true
-    return: list
-    slua-return: "{vector}"
+    return: {lsl: list, luau: "{vector}"}
     sleep: 0.0
     tooltip: Returns a list containing the closest vector position on the navigation
       mesh (navmesh) to the specified point (expressed in region-local space),
@@ -9284,8 +9275,7 @@ functions:
     func-id: 410
     private: true
     must-use: true
-    return: list
-    slua-return: '{uuid}'
+    return: {lsl: list, luau: '{uuid}'}
     sleep: 0.0
     tooltip: ""
     categories:
@@ -10165,8 +10155,7 @@ functions:
     energy: 10.0
     func-id: 381
     must-use: true
-    return: list
-    slua-return: "{number}"
+    return: {lsl: list, luau: "{number}"}
     sleep: 0.0
     tooltip: Returns a list of the format [float gravity_multiplier, float
       restitution, float friction, float density] detailing the physical
@@ -10787,8 +10776,7 @@ functions:
     energy: 10.0
     func-id: 530
     must-use: true
-    return: list
-    slua-return: '{number | ""}'
+    return: {lsl: list, luau: '{number | ""}'}
     sleep: 0.0
     tooltip: Returns a list containing the values of the visual parameters requested
       in params for the agent specified by agentid.
@@ -11513,8 +11501,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 662
-    return: list
-    slua-return: "{number}"
+    return: {lsl: list, luau: "{number}"}
     sleep: 0.0
     tooltip: Deletes all keys in the datastore matching the regular expression
       pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and
@@ -11557,8 +11544,7 @@ functions:
     energy: 10.0
     func-id: 657
     must-use: true
-    return: list
-    slua-return: "{string}"
+    return: {lsl: list, luau: "{string}"}
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
       datastore that match the regular expression pattern, starting at index
@@ -11579,8 +11565,7 @@ functions:
     energy: 10.0
     func-id: 656
     must-use: true
-    return: list
-    slua-return: "{string}"
+    return: {lsl: list, luau: "{string}"}
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
       datastore, starting at index start (returns all keys if count < 1).
@@ -11801,8 +11786,7 @@ functions:
     func-id: 192
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing the subset of entries from src within the
       inclusive range specified by the start and end indices. Negative indices
@@ -11833,8 +11817,7 @@ functions:
     energy: 10.0
     func-id: 801
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a list containing the slice_index'th element of every stride
       within the inclusive range from start to end in the strided list src.
@@ -11860,8 +11843,7 @@ functions:
     energy: 10.0
     func-id: 198
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing the first element of every stride in the
       strided list src within the inclusive range from start to end.
@@ -12030,8 +12012,7 @@ functions:
     func-id: 200
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing all elements of dest with the elements of
       src inserted starting at index start. Does not modify dest itself.
@@ -12049,8 +12030,7 @@ functions:
     energy: 10.0
     func-id: 197
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a randomized copy of the list src by blocks of size stride. If
       the list length is not perfectly divisible by stride, no randomization
@@ -12080,8 +12060,7 @@ functions:
     func-id: 296
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list dest with the inclusive range from start to
       end removed, and the elements of src inserted in its place at start.
@@ -12103,8 +12082,7 @@ functions:
     energy: 10.0
     func-id: 184
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src, sorted into blocks of stride in
       ascending order (if ascending is TRUE) or descending order (if FALSE).
@@ -12134,8 +12112,7 @@ functions:
     energy: 10.0
     func-id: 802
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src sorted into blocks of stride by the
       element at stride_index in each block. Sorted in ascending order (if
@@ -12849,8 +12826,7 @@ functions:
     energy: 10.0
     func-id: 214
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Breaks the string src into a list of substrings, discarding any
       separators, keeping spacers, and omitting any empty null values.
@@ -12872,8 +12848,7 @@ functions:
     energy: 10.0
     func-id: 285
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Breaks the string src into a list, discarding separators and keeping
       spacers, while preserving empty null values (unlike llParseString2List).
