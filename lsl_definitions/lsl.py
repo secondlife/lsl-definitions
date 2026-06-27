@@ -342,7 +342,7 @@ class LSLFunctionBase(abc.ABC):
 
     @property
     def args_str(self) -> str:
-        return "( " + ", ".join(f"{x.type!s} {x.name}" for x in self.arguments) + " )"
+        return "( " + ", ".join(f"{x.type.lsl!s} {x.name}" for x in self.arguments) + " )"
 
 
 @dataclasses.dataclass
