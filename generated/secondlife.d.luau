@@ -419,6 +419,26 @@ declare debug: {
 
 
 ---------------------------
+-- Global Table: integer
+---------------------------
+
+declare integer: {
+  arshift: @checked (n: number, i: number) -> number,
+  band: @checked (...number) -> number,
+  bnot: @checked (n: number) -> number,
+  bor: @checked (...number) -> number,
+  bxor: @checked (...number) -> number,
+  btest: @checked (...number) -> boolean,
+  extract: @checked (n: number, field: number, width: number?) -> number,
+  lrotate: @checked (n: number, i: number) -> number,
+  lshift: @checked (n: number, i: number) -> number,
+  replace: @checked (n: number, v: number, field: number, width: number?) -> number,
+  rrotate: @checked (n: number, i: number) -> number,
+  rshift: @checked (n: number, i: number) -> number,
+}
+
+
+---------------------------
 -- Global Table: llbase64
 ---------------------------
 
