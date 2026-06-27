@@ -149,32 +149,32 @@ def gen_lexer_file(definitions: LSLDefinitions, template_path: str) -> str:
         if const.name in _LEXER_BLACKLIST:
             continue
 
-        if const.type in (LSLType.VECTOR, LSLType.ROTATION):
+        if const.type.lsl in (LSLType.VECTOR, LSLType.ROTATION):
             # We can't easily generate constant definitions for these, they
             # _must_ be manually defined in the parser as well. Just generate the boilerplate
             # to pull in their definition from the parser.
             generated_constants += _LEXER_COORD_TEMPLATE % {"name": const.name}
-        elif const.type == LSLType.FLOAT:
+        elif const.type.lsl == LSLType.FLOAT:
             generated_constants += _LEXER_NUMERIC_TEMPLATE % (
                 const.name,
                 "f",
                 const.value + "f",
                 "FP_CONSTANT",
             )
-        elif const.type == LSLType.INTEGER:
+        elif const.type.lsl == LSLType.INTEGER:
             generated_constants += _LEXER_NUMERIC_TEMPLATE % (
                 const.name,
                 "i",
                 const.value,
                 "INTEGER_CONSTANT",
             )
-        elif const.type == LSLType.STRING:
+        elif const.type.lsl == LSLType.STRING:
             value_raw = const.value_raw
             c_str = to_c_str(value_raw)
             c_str_len = len(value_raw.encode("utf8")) + 1
             generated_constants += _LEXER_STR_TEMPLATE % (const.name, c_str_len, c_str)
         else:
-            raise ValueError(f"Unknown constant type {const.type!r}")
+            raise ValueError(f"Unknown constant type {const.type.lsl!r}")
     lexer_template = splice_str(lexer_template, _LEXER_CONST_COMMENT, generated_constants)
 
     return lexer_template
@@ -242,7 +242,7 @@ def gen_parser_file(definitions: LSLDefinitions, template_path: str) -> str:
             for arg in event.arguments:
                 if not first_arg:
                     generated_event_definitions += " ',' "
-                type_token = str(arg.type).upper()
+                type_token = str(arg.type.lsl).upper()
                 type_token = {
                     "KEY": "LLKEY",
                     "ROTATION": "QUATERNION",
@@ -474,7 +474,7 @@ def gen_tree_source_file(definitions: LSLDefinitions) -> str:
         first_scope_entry = None
         for arg in event.arguments:
             emit_cil += (
-                f'        fprintf(fp, "{", " if emit_cil else ""}{arg.type.meta.cil_name} ");\n'
+                f'        fprintf(fp, "{", " if emit_cil else ""}{arg.type.lsl.meta.cil_name} ");\n'
             )
             emit_cil += f"        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n"
 
@@ -487,12 +487,12 @@ def gen_tree_source_file(definitions: LSLDefinitions) -> str:
 
             resource_scope_entries += f"                {id_scope_entry}->mOffset = (S32)count;\n"
             resource_scope_entries += (
-                f"                {id_scope_entry}->mSize = {arg.type.meta.lso_size};\n"
+                f"                {id_scope_entry}->mSize = {arg.type.lsl.meta.lso_size};\n"
             )
             resource_scope_entries += f"                count += {id_scope_entry}->mSize;\n"
 
             emit_assembly += (
-                f'        fprintf(fp, "{", " if emit_assembly else ""}{arg.type!s} ");\n'
+                f'        fprintf(fp, "{", " if emit_assembly else ""}{arg.type.lsl!s} ");\n'
             )
             emit_assembly += f"        {_arg_to_member_name(arg)}{_RECURSE_BOILERPLATE}\n"
 
@@ -504,7 +504,7 @@ def gen_tree_source_file(definitions: LSLDefinitions) -> str:
         }}
         else
         {{
-            {member_name}->mScopeEntry = scope->addEntry({member_name}->mName, LIT_VARIABLE, {arg.type.meta.lst_name});
+            {member_name}->mScopeEntry = scope->addEntry({member_name}->mName, LIT_VARIABLE, {arg.type.lsl.meta.lst_name});
         }}
 """
 
@@ -517,7 +517,7 @@ def gen_tree_source_file(definitions: LSLDefinitions) -> str:
             "class_name": _event_to_class_name(event),
             "event_name": event.name,
             "default_recurse": default_recurse,
-            "event_size": sum(x.type.meta.lso_size for x in event.arguments),
+            "event_size": sum(x.type.lsl.meta.lso_size for x in event.arguments),
             "first_scope_entry": first_scope_entry or "false",
             "resource_scope_entries": resource_scope_entries,
             "event_debug_info": event_debug_info,
@@ -536,13 +536,13 @@ def gen_cpp_constants(definitions: LSLDefinitions) -> str:
     for const in definitions.constants.values():
         # We don't want to generate these since they create a dependency on llmath
         # and their constexpr-ness is suspect.
-        if const.type in (LSLType.ROTATION, LSLType.VECTOR):
+        if const.type.lsl in (LSLType.ROTATION, LSLType.VECTOR):
             continue
 
-        cpp_constants += f"constexpr {const.type.meta.cpp_name} LSL_GEN_{const.name.upper()} = "
-        if const.type == LSLType.STRING:
+        cpp_constants += f"constexpr {const.type.lsl.meta.cpp_name} LSL_GEN_{const.name.upper()} = "
+        if const.type.lsl == LSLType.STRING:
             cpp_constants += f'"{to_c_str(const.value_raw)}"'
-        elif const.type in (LSLType.INTEGER, LSLType.FLOAT):
+        elif const.type.lsl in (LSLType.INTEGER, LSLType.FLOAT):
             cpp_constants += const.value_raw
         cpp_constants += ";\n"
 

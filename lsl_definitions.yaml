@@ -11832,6 +11832,7 @@ functions:
         type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
         type: index

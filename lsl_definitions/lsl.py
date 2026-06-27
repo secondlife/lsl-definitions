@@ -454,9 +454,9 @@ class LSLFunction(LSLFunctionBase):
     def need_compat(self) -> bool:
         """Whether this function needs a "compat" wrapper with an upvalue to handle SLua fixups"""
         return (
-            self.bool_semantics
-            or self.index_semantics
-            or any(a.index_semantics for a in self.arguments)
+            self.ret_type.boolean
+            or self.ret_type.index
+            or any(a.type.index for a in self.arguments)
         )
 
     def to_dict(self, include_internal: bool = False) -> dict:
