@@ -33,8 +33,12 @@
         "typeSemantics": {
             "oneOf": [
                 {
-                    "description": "A plain lsl type, or a zero-argument semantic type",
-                    "enum": ["float", "integer", "key", "list", "rotation", "string", "vector", "asset", "boolean", "index"]
+                    "description": "A plain lsl type",
+                    "$ref": "#/$defs/lslType"
+                },
+                {
+                    "description": "A zero-argument semantic type",
+                    "enum": ["asset", "boolean", "index"]
                 },
                 {
                     "type": "object",
