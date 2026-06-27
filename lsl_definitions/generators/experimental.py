@@ -41,7 +41,7 @@ def gen_enums_txt(definitions: LSLDefinitions) -> str:
 
     for const in sorted(definitions.constants.values(), key=lambda x: x.name):
         if not const.member_of:
-            builtins_str += f"const {const.type!s} {const.name} = {const.lsl_doc_literal}"
+            builtins_str += f"const {const.type.lsl!s} {const.name} = {const.lsl_doc_literal}"
             builtins_str += lsl_annotations(const)
             builtins_str += "\n"
 
@@ -62,7 +62,7 @@ def gen_category_functions(definitions: LSLDefinitions) -> str:
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for category in func.categories:
-            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type!s}"
+            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type.lsl!s}"
             builtins_str += lsl_annotations(func)
             categories.setdefault(category, []).append(builtins_str)
 
@@ -87,7 +87,7 @@ def gen_category_docs(definitions: LSLDefinitions) -> str:
 
     for func in sorted(definitions.functions.values(), key=lambda x: x.name):
         for category in func.categories:
-            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type!s}"
+            builtins_str = f"{func.name}{func.args_str} -> {func.ret_type.lsl!s}"
             builtins_str += lsl_annotations(func)
             docs = {arg.name: arg.tooltip for arg in func.arguments}
             docs["tooltip"] = func.tooltip
