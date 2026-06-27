@@ -249,6 +249,87 @@ class LSLEnum:
     by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
 
 
+class LSLExtendedType(StringEnum):
+    VOID = "void", LSLType.VOID, "()"
+    INTEGER = "integer", LSLType.INTEGER, "number"
+    FLOAT = "float", LSLType.FLOAT, "number"
+    STRING = "string", LSLType.STRING, "string"
+    KEY = "key", LSLType.KEY, "uuid"
+    VECTOR = "vector", LSLType.VECTOR, "vector"
+    ROTATION = "rotation", LSLType.ROTATION, "quaternion"
+    LIST = "list", LSLType.LIST, "list"
+
+    INDEX = "index", LSLType.INTEGER, "number"
+    BOOLEAN = "boolean", LSLType.INTEGER, "boolean | number"
+    ASSET = "asset", LSLType.STRING, "string | uuid"
+    ENUM = "enum", LSLType.INTEGER, "number"
+    PARAM = "param", LSLType.LIST, "{number}"
+    PARAM_GET = "param-get", LSLType.LIST, "{number}"
+
+    def __new__(cls, name: str, lsl: LSLType, luau: str):
+        entry = str.__new__(cls, name)
+        entry._value_ = name
+        entry.lsl = lsl
+        entry.luau = luau
+        return entry
+
+
+class LSLTypeSemantics:
+    def __init__(
+        self,
+        lsl: LSLType | None = None,
+        luau: str | None = None,
+        # semantics
+        asset: bool = False,
+        boolean: bool = False,
+        index: bool = False,
+        enum: str | None = None,
+        param: str | None = None,
+        param_get: str | None = None,
+    ):
+        all_semantics = [bool(x) for x in [lsl, asset, boolean, index, enum, param, param_get]]
+        if sum(all_semantics) != 1:
+            raise ValueError("Must have exactly one semantic")
+        semantics_index = next(i for i, x in enumerate(all_semantics) if x)
+        self.type = (
+            LSLExtendedType.VOID,
+            LSLExtendedType.ASSET,
+            LSLExtendedType.BOOLEAN,
+            LSLExtendedType.INDEX,
+            LSLExtendedType.ENUM,
+            LSLExtendedType.PARAM,
+            LSLExtendedType.PARAM_GET,
+        )[semantics_index]
+        if type is LSLExtendedType.VOID:
+            self.lsl = lsl
+            self.type = LSLExtendedType(lsl)
+        else:
+            self.lsl = self.type.lsl
+        self.luau = luau or self.type.luau
+
+        self.asset = asset
+        self.boolean = boolean
+        self.index = index
+        self.enum = enum
+        self.param = param
+        self.param_get = param_get
+
+
+LSLTypeSemantics.PRESETS = {
+    "void": LSLTypeSemantics(lsl=LSLType.VOID),
+    "integer": LSLTypeSemantics(lsl=LSLType.INTEGER),
+    "float": LSLTypeSemantics(lsl=LSLType.FLOAT),
+    "string": LSLTypeSemantics(lsl=LSLType.STRING),
+    "key": LSLTypeSemantics(lsl=LSLType.KEY),
+    "vector": LSLTypeSemantics(lsl=LSLType.VECTOR),
+    "rotation": LSLTypeSemantics(lsl=LSLType.ROTATION),
+    "list": LSLTypeSemantics(lsl=LSLType.LIST),
+    "index": LSLTypeSemantics(index=True),
+    "boolean": LSLTypeSemantics(boolean=True),
+    "asset": LSLTypeSemantics(asset=True),
+}
+
+
 @dataclasses.dataclass
 class LSLArgument:
     name: str
@@ -712,6 +793,20 @@ class LSLDefinitionParser:
                 f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"
             )
         return arg
+
+    def _handle_type_semantics(self, type_data: str | dict) -> LSLTypeSemantics:
+        if isinstance(type_data, str):
+            try:
+                return LSLTypeSemantics.PRESETS[type_data]
+            except KeyError:
+                raise ValueError(f"Unknown type semantics {type_data!r}")
+        return LSLTypeSemantics(
+            lsl=LSLType(type_data.get("lsl")) if "lsl" in type_data else None,
+            luau=type_data.get("luau", None),
+            asset=bool(type_data.get("asset", False)),
+            boolean=bool(type_data.get("boolean", False)),
+            index=bool(type_data.get("index", False)),
+        )
 
     def _validate_args(self, obj: LSLEvent | LSLFunction) -> None:
         unique_arg_names = {a.name for a in obj.arguments}
