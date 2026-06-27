@@ -823,8 +823,8 @@ class LSLDefinitionParser:
                 value_type=const_data.get("value-type", None),
                 pretty_name=const_data.get("pretty-name", None),
             )
-            if const.type.lsl not in {"float", "integer", "string", "vector", "rotation"}:
-                raise ValueError(f"Invalid constant type {const.type}")
+            if const.type.name not in {"float", "integer", "string", "vector", "rotation"}:
+                raise ValueError(f"Invalid constant type {const.name}")
             if const.name in self._definitions.constants:
                 raise KeyError(f"{const.name} is already defined")
             self._definitions.constants[const.name] = const
