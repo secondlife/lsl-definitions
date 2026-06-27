@@ -139,8 +139,7 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
 @dataclasses.dataclass
 class LSLConstant:
     name: str
-    type: LSLType
-    slua_type: str | None
+    type: LSLTypeSemantics
     slua_removed: bool
     value: str
     """A LSL literal, except:
@@ -162,7 +161,7 @@ class LSLConstant:
         """A LSL literal, except strings are stripped of start/end quotes (")
         All string escape sequences have been decoded into plain unicode code points
         """
-        if self.type != LSLType.STRING:
+        if self.type.lsl != LSLType.STRING:
             return self.value
         # convert unicode escapes from Luau format to Python format
         python_literal = re.sub(r"\\u\{([a-fA-F0-9]+)\}", r"\\u\1", f'"{self.value}"')
@@ -172,7 +171,7 @@ class LSLConstant:
     @property
     def lsl_doc_literal(self) -> str:
         """A LSL literal, except strings might have luau escape sequences for readability"""
-        if self.type in {LSLType.STRING, LSLType.KEY}:
+        if self.type.lsl in {LSLType.STRING, LSLType.KEY}:
             return f'"{self.value}"'
         else:
             return self.value
@@ -180,11 +179,11 @@ class LSLConstant:
     @property
     def slua_literal(self) -> str:
         """A SLua literal or expression"""
-        if self.type == LSLType.KEY or self.slua_type == "uuid":
+        if self.type.lsl == LSLType.KEY or self.type.luau == "uuid":
             return f"uuid({self.lsl_doc_literal})"
-        elif self.type == LSLType.VECTOR:
+        elif self.type.lsl == LSLType.VECTOR:
             return f"vector({self.value[1:-1]})"
-        elif self.type == LSLType.ROTATION:
+        elif self.type.lsl == LSLType.ROTATION:
             return f"rotation({self.value[1:-1]})"
         else:
             return self.lsl_doc_literal
@@ -196,7 +195,7 @@ class LSLConstant:
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
-                "type": str(self.type),
+                "type": str(self.type.lsl),
                 # This format looks better in viewer tooltips
                 # "value": unescape_control_characters(self.lsl_doc_literal),
                 # But this format is backwards compatible with some other (mis?)uses of the file
@@ -288,7 +287,7 @@ class LSLTypeSemantics:
         param_get: str | None = None,
     ):
         all_semantics = [bool(x) for x in [lsl, asset, boolean, index, enum, param, param_get]]
-        if sum(all_semantics) != 1:
+        if not (sum(all_semantics) == 1 or (lsl is LSLType.LIST and sum(all_semantics) == 2)):
             raise ValueError("Must have exactly one semantic")
         semantics_index = next(i for i, x in enumerate(all_semantics) if x)
         self.type = (
@@ -300,7 +299,7 @@ class LSLTypeSemantics:
             LSLExtendedType.PARAM,
             LSLExtendedType.PARAM_GET,
         )[semantics_index]
-        if type is LSLExtendedType.VOID:
+        if self.type is LSLExtendedType.VOID:
             self.lsl = lsl
             self.type = LSLExtendedType(lsl)
         else:
@@ -334,13 +333,7 @@ LSLTypeSemantics.PRESETS = {
 class LSLArgument:
     name: str
     type: LSLType
-    slua_type: str | None
     tooltip: str
-    index_semantics: bool
-    asset_semantics: bool
-    """Represents an asset name or uuid"""
-    bool_semantics: bool
-    """Represents a boolean"""
 
     def compute_slua_type(self, event: bool = False) -> str:
         if self.slua_type is not None:
@@ -383,7 +376,7 @@ class LSLEvent(LSLFunctionBase):
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": str(a.type),
+                            "type": str(a.type.lsl),
                         }
                     }
                     for a in self.arguments
@@ -429,11 +422,7 @@ class LSLFunction(LSLFunctionBase):
     energy: float
     sleep: float
     ret_type: LSLType
-    slua_type: str | None
     god_mode: bool
-    index_semantics: bool
-    bool_semantics: bool
-    asset_semantics: bool
     detected_semantics: bool
     type_arguments: list[str]
     private: bool
@@ -492,7 +481,7 @@ class LSLFunction(LSLFunctionBase):
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": str(a.type),
+                            "type": str(a.type.lsl),
                         }
                     }
                     for a in self.arguments
@@ -500,10 +489,10 @@ class LSLFunction(LSLFunctionBase):
                 "deprecated": self.deprecated is not None,
                 "energy": self.energy,
                 "god-mode": self.god_mode,
-                "return": str(self.ret_type),
+                "return": str(self.ret_type.lsl),
                 "sleep": self.sleep,
                 "tooltip": self.tooltip,
-                "bool_semantics": self.bool_semantics,
+                "bool_semantics": self.ret_type.boolean,
                 **(
                     {}
                     if not include_internal
@@ -514,7 +503,7 @@ class LSLFunction(LSLFunctionBase):
                         "must-use": self.must_use,
                         "native": self.native,
                         "mono-sleep": self.mono_sleep,
-                        "index-semantics": self.index_semantics,
+                        "index-semantics": self.ret_type.index,
                     }
                 ),
             }
@@ -694,10 +683,7 @@ class LSLDefinitionParser:
                 name=event_name,
                 tooltip=event_data.get("tooltip", ""),
                 categories=event_data["categories"],
-                arguments=[
-                    self._handle_argument(event_name, arg)
-                    for arg in (event_data.get("arguments") or [])
-                ],
+                arguments=[self._handle_argument(arg) for arg in (event_data.get("arguments", []))],
                 private=event_data.get("private", False),
                 deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
                 slua_deprecated=Deprecated.from_definition(
@@ -728,13 +714,9 @@ class LSLDefinitionParser:
                 sleep=float(func_data["sleep"] or "0.0"),
                 # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
                 mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
-                ret_type=LSLType(func_data["return"]),
-                slua_type=func_data.get("slua-return", None),
+                ret_type=self._handle_type_semantics(func_data["return"]),
                 type_arguments=func_data.get("type-arguments", []),
-                arguments=[
-                    self._handle_argument(func_name, arg)
-                    for arg in (func_data.get("arguments") or [])
-                ],
+                arguments=[self._handle_argument(arg) for arg in (func_data.get("arguments", []))],
                 private=func_data.get("private", False),
                 god_mode=func_data.get("god-mode", False),
                 deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
@@ -744,33 +726,11 @@ class LSLDefinitionParser:
                 pure=func_data.get("pure", False),
                 must_use=func_data.get("must-use", False),
                 native=func_data.get("native", False),
-                index_semantics=bool(func_data.get("index-semantics", False)),
-                bool_semantics=bool(func_data.get("bool-semantics", False)),
-                asset_semantics=bool(func_data.get("asset-semantics", False)),
                 detected_semantics=bool(func_data.get("detected-semantics", False)),
             )
-
             if func.name in self._definitions.functions:
                 raise KeyError(f"{func.name} is already defined")
-
-            if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-                raise ValueError(
-                    f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
-                )
-            if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-                raise ValueError(
-                    f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
-                )
-            if func.asset_semantics and func.ret_type not in (LSLType.STRING, LSLType.LIST):
-                raise ValueError(
-                    f"{func.name} has ret with asset semantics, but ret type is {func.ret_type!r}"
-                )
-
-            if func.bool_semantics and func.index_semantics:
-                raise ValueError(f"Can't have both bool and index semantics for {func.name}")
-
             self._validate_args(func)
-
             self._definitions.functions[func.name] = func
             return func
         except Exception as e:
@@ -784,19 +744,9 @@ class LSLDefinitionParser:
         arg_name, arg_data = list(arg_dict.items())[0]
         arg = LSLArgument(
             name=arg_name,
-            type=LSLType(arg_data["type"]),
-            slua_type=arg_data.get("slua-type", None),
-            asset_semantics=bool(arg_data.get("asset-semantics", False)),
-            bool_semantics=bool(arg_data.get("bool-semantics", False)),
-            index_semantics=bool(arg_data.get("index-semantics", False)),
+            type=self._handle_type_semantics(arg_data["type"]),
             tooltip=arg_data.get("tooltip", ""),
         )
-        if arg.asset_semantics and arg.type != LSLType.STRING:
-            raise ValueError(f"{arg_name} has asset semantics, but type is {arg.type!r}")
-        if arg.bool_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(f"{arg_name} has bool semantics, but type is {arg.type!r}")
-        if arg.index_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(f"{arg_name} has index semantics, but type is {arg.type!r}")
         return arg
 
     def _handle_type_semantics(self, type_data: str | dict) -> LSLTypeSemantics:
@@ -820,7 +770,7 @@ class LSLDefinitionParser:
         for name in unique_arg_names:
             self._validate_identifier(name)
         if obj.name.startswith("llDetected"):
-            if not all(x.index_semantics for x in obj.arguments):
+            if not all(x.type.index for x in obj.arguments):
                 raise ValueError(f"{obj.name} had argument without index semantics")
 
     _IDENTIFIER_RE = re.compile(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z")
@@ -876,8 +826,7 @@ class LSLDefinitionParser:
         try:
             const = LSLConstant(
                 name=const_name,
-                type=LSLType(const_data["type"]),
-                slua_type=const_data.get("slua-type", None),
+                type=self._handle_type_semantics(const_data["type"]),
                 slua_removed=const_data.get("slua-removed", False),
                 value=str(const_data["value"]),
                 tooltip=const_data.get("tooltip", ""),
@@ -889,7 +838,7 @@ class LSLDefinitionParser:
                 value_type=const_data.get("value-type", None),
                 pretty_name=const_data.get("pretty-name", None),
             )
-            if const.type not in {"float", "integer", "string", "vector", "rotation"}:
+            if const.type.lsl not in {"float", "integer", "string", "vector", "rotation"}:
                 raise ValueError(f"Invalid constant type {const.type}")
             if const.name in self._definitions.constants:
                 raise KeyError(f"{const.name} is already defined")
@@ -901,7 +850,7 @@ class LSLDefinitionParser:
             raise ValueError(f"In constant {const_name!r}: {e}") from e
 
     def _add_enum_member(self, enum_name: str, const: LSLConstant) -> LSLEnumMember:
-        if const.type != LSLType.INTEGER:
+        if const.type.lsl != LSLType.INTEGER:
             raise ValueError("Only integer constants can be enum members")
         enum: LSLEnum = self._definitions.enums.get(enum_name, None)
         if enum is None:
