@@ -46,7 +46,6 @@ class LSLTypeMeta(NamedTuple):
     library_abbr: str
     cs_name: str
     mono_bind_name: str
-    slua_name: str
 
 
 _CS_TYPE_MODULE = "[ScriptTypes]LindenLab.SecondLife"
@@ -61,7 +60,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="",
         cs_name="void",
         mono_bind_name="void",
-        slua_name="()",
     ),
     LSLType.INTEGER: LSLTypeMeta(
         cil_name="int32",
@@ -71,7 +69,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="i",
         cs_name="int",
         mono_bind_name="S32",
-        slua_name="number",
     ),
     LSLType.FLOAT: LSLTypeMeta(
         cil_name="float",
@@ -81,7 +78,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="f",
         cs_name="float",
         mono_bind_name="F32",
-        slua_name="number",
     ),
     LSLType.STRING: LSLTypeMeta(
         cil_name="string",
@@ -91,7 +87,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="s",
         cs_name="string",
         mono_bind_name="MonoStringType",
-        slua_name="string",
     ),
     LSLType.KEY: LSLTypeMeta(
         cil_name=f"valuetype {_CS_TYPE_MODULE}.Key",
@@ -101,7 +96,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="k",
         cs_name="Key",
         mono_bind_name="MonoKeyType",
-        slua_name="uuid",
     ),
     LSLType.VECTOR: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Vector",
@@ -111,7 +105,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="v",
         cs_name="Vector",
         mono_bind_name="MonoVectorType",
-        slua_name="vector",
     ),
     LSLType.ROTATION: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Quaternion",
@@ -121,7 +114,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="q",
         cs_name="Quaternion",
         mono_bind_name="MonoQuaternionType",
-        slua_name="quaternion",
     ),
     LSLType.LIST: LSLTypeMeta(
         cil_name="class [mscorlib]System.Collections.ArrayList",
@@ -131,7 +123,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="l",
         cs_name="ArrayList",
         mono_bind_name="MonoListType",
-        slua_name="list",
     ),
 }
 
@@ -213,7 +204,7 @@ class LSLConstant:
                     # Will always use a <string> node, but that's fine for our purposes.
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
-                    "type": slua.validate_type(self.slua_type or self.type.meta.slua_name),
+                    "type": slua.validate_type(self.type.luau),
                     "value": unescape_control_characters(self.slua_literal),
                 }
             )
@@ -332,20 +323,14 @@ LSLTypeSemantics.PRESETS = {
 @dataclasses.dataclass
 class LSLArgument:
     name: str
-    type: LSLType
+    type: LSLTypeSemantics
     tooltip: str
 
     def compute_slua_type(self, event: bool = False) -> str:
-        if self.slua_type is not None:
-            return self.slua_type
-        if self.asset_semantics and self.type == LSLType.STRING:
-            return "string | uuid"
-        if self.bool_semantics and self.type == LSLType.INTEGER:
-            if event:
-                return "boolean"
-            else:
-                return "boolean | number"
-        return self.type.meta.slua_name
+        if self.type.boolean and event:
+            return "boolean"
+        else:
+            return self.type.luau
 
 
 @dataclasses.dataclass
@@ -518,17 +503,17 @@ class LSLFunction(LSLFunctionBase):
             return self.name[2:]
 
     def compute_slua_type(self, llcompat=False) -> str:
-        if self.slua_type is not None:
-            return self.slua_type
-        if not llcompat and self.index_semantics and self.ret_type == LSLType.INTEGER:
+        if not llcompat and self.ret_type.type == LSLExtendedType.INDEX:
             return "number?"
-        if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
+        if not llcompat and self.ret_type.type == LSLExtendedType.BOOLEAN:
             return "boolean"
-        return self.ret_type.meta.slua_name
+        if self.ret_type.type == LSLExtendedType.ASSET:
+            return "string"
+        return self.ret_type.luau
 
     def compute_slua_tooltip(self, llcompat=False) -> str:
         tooltip = self.tooltip
-        if self.index_semantics and not llcompat:
+        if self.ret_type.index and not llcompat:
             tooltip = tooltip.replace("-1", "nil")
         return tooltip
 
