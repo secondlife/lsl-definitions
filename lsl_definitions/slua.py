@@ -59,8 +59,9 @@ class SLuaProperty:
             **({"value": self.value} if self.value is not None else {}),
         }
 
-    def to_luau_def(self) -> str:
-        return f"{self.name}: {self.type}"
+    def to_luau_def(self, extern: bool = False) -> str:
+        modifiers = "read " if extern and self.modifiable == "read-only" else ""
+        return f"{modifiers}{self.name}: {self.type}"
 
 
 @dataclasses.dataclass
@@ -318,7 +319,7 @@ class SLuaClassDeclaration:
     def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
         for prop in self.properties.values():
-            f.write(f"  {prop.to_luau_def()}\n")
+            f.write(f"  {prop.to_luau_def(extern=True)}\n")
         for func in self.functions.values():
             func.write_luau_global_def(f, indent=1)
         for func in self.methods.values():
