@@ -7741,7 +7741,7 @@ functions:
       - data_conversion
   llCastRay:
     arguments:
-    - start:
+    - start_pos:
         tooltip: Starting location vector of the ray.
         type: vector
     - end_pos:
@@ -8135,7 +8135,7 @@ functions:
         tooltip: Source list to copy and modify.
         type: list
         slua-type: '{T}'
-    - start:
+    - start_index:
         tooltip: Starting index of the slice to remove (inclusive).
         type: integer
         index-semantics: true
@@ -8165,7 +8165,7 @@ functions:
     - src:
         tooltip: Source string to modify.
         type: string
-    - start:
+    - start_index:
         tooltip: Starting index of the substring to remove (inclusive).
         type: integer
         index-semantics: true
@@ -10616,7 +10616,7 @@ functions:
       - script
   llGetStaticPath:
     arguments:
-    - start:
+    - start_pos:
         tooltip: Starting position vector.
         type: vector
     - end_pos:
@@ -10661,7 +10661,7 @@ functions:
     - src:
         tooltip: Source string to slice.
         type: string
-    - start:
+    - start_index:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
@@ -11897,7 +11897,7 @@ functions:
         tooltip: Source list to slice.
         type: list
         slua-type: '{T}'
-    - start:
+    - start_index:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
@@ -11928,7 +11928,7 @@ functions:
         tooltip: Source strided list.
         type: list
         slua-type: '{T}'
-    - start:
+    - start_index:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
@@ -11964,7 +11964,7 @@ functions:
         tooltip: Source strided list.
         type: list
         slua-type: '{T}'
-    - start:
+    - start_index:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
@@ -12113,7 +12113,7 @@ functions:
     - test:
         tooltip: List elements to search for.
         type: list
-    - start:
+    - start_index:
         tooltip: Zero-based start index of the range to search.
         type: integer
         index-semantics: true
@@ -12201,7 +12201,7 @@ functions:
         tooltip: Source list to insert.
         type: list
         slua-type: '{T}'
-    - start:
+    - start_index:
         tooltip: Zero-based start index (inclusive) of the replaced range.
         type: integer
         index-semantics: true
@@ -14041,7 +14041,7 @@ functions:
       - vector
   llRotBetween:
     arguments:
-    - start:
+    - start_vec:
         tooltip: Starting vector.
         type: vector
     - end_vec:
