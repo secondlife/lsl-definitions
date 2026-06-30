@@ -1421,10 +1421,10 @@ linkset_data:
     pass: Passphrase used to protect or update the key.
     tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
 list:
-  llDeleteSubList( list src, integer start, integer end ) -> list:
+  llDeleteSubList( list src, integer start, integer end_index ) -> list:
     src: Source list to copy and modify.
     start: Starting index of the slice to remove (inclusive).
-    end: Ending index of the slice to remove (inclusive).
+    end_index: Ending index of the slice to remove (inclusive).
     tooltip: Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes
       the specified range.
   llGetListEntryType( list src, integer index ) -> integer:
@@ -1453,22 +1453,22 @@ list:
     src: Source list containing the element of interest.
     index: Zero-based index of the entry.
     tooltip: Returns the key (UUID) value at index in the list src. Returns a null string/key if the index is out of bounds or if the value cannot be type-cast.
-  llList2List( list src, integer start, integer end ) -> list:
+  llList2List( list src, integer start, integer end_index ) -> list:
     src: Source list to slice.
     start: Zero-based start index (inclusive).
-    end: Zero-based end index (inclusive).
+    end_index: Zero-based end index (inclusive).
     tooltip: Returns a new list containing the subset of entries from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end.
-  llList2ListSlice( list src, integer start, integer end, integer stride, integer slice_index ) -> list:
+  llList2ListSlice( list src, integer start, integer end_index, integer stride, integer slice_index ) -> list:
     src: Source strided list.
     start: Zero-based start index (inclusive).
-    end: Zero-based end index (inclusive).
+    end_index: Zero-based end index (inclusive).
     stride: Number of entries per stride (defaults to 1 if less than 1).
     slice_index: Zero-based element index within each stride to extract (negatives count backward from the end of the stride).
     tooltip: Returns a list containing the slice_index'th element of every stride within the inclusive range from start to end in the strided list src. Stride must be a positive integer.
-  llList2ListStrided( list src, integer start, integer end, integer stride ) -> list:
+  llList2ListStrided( list src, integer start, integer end_index, integer stride ) -> list:
     src: Source strided list.
     start: Zero-based start index (inclusive).
-    end: Zero-based end index (inclusive).
+    end_index: Zero-based end index (inclusive).
     stride: Number of entries per stride (defaults to 1 if less than 1).
     tooltip: Returns a new list containing the first element of every stride in the strided list src within the inclusive range from start to end.
   llList2Rot( list src, integer index ) -> rotation:
@@ -1492,11 +1492,11 @@ list:
     test: List elements to search for.
     instance: Zero-based occurrence index of the match to find.
     tooltip: Returns the integer index of the specified instance of list test within the list src (returns -1 if not found).
-  llListFindStrided( list src, list test, integer start, integer end, integer stride ) -> integer:
+  llListFindStrided( list src, list test, integer start, integer end_index, integer stride ) -> integer:
     src: List to search within.
     test: List elements to search for.
     start: Zero-based start index of the range to search.
-    end: Zero-based end index of the range to search.
+    end_index: Zero-based end index of the range to search.
     stride: Number of entries per stride in the list.
     tooltip: Returns the integer index of the first instance of list test in the strided list src within the range from start to end (stepping through by stride). Returns -1 if not found.
   llListInsertList( list dest, list src, integer start ) -> list:
@@ -1508,11 +1508,11 @@ list:
     src: Source list to randomize.
     stride: Size of each randomized block (defaults to 1 if less than 1).
     tooltip: Returns a randomized copy of the list src by blocks of size stride. If the list length is not perfectly divisible by stride, no randomization occurs.
-  llListReplaceList( list dest, list src, integer start, integer end ) -> list:
+  llListReplaceList( list dest, list src, integer start, integer end_index ) -> list:
     dest: Target destination list.
     src: Source list to insert.
     start: Zero-based start index (inclusive) of the replaced range.
-    end: Zero-based end index (inclusive) of the replaced range.
+    end_index: Zero-based end index (inclusive) of the replaced range.
     tooltip: Returns a copy of the list dest with the inclusive range from start to end removed, and the elements of src inserted in its place at start.
   llListSort( list src, integer stride, integer ascending ) -> list:
     src: List to be sorted.
@@ -1615,9 +1615,9 @@ math:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end ) -> rotation:
+  llRotBetween( vector start, vector end_vec ) -> rotation:
     start: Starting vector.
-    end: Target ending vector.
+    end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llRound( float val ) -> integer:
     val: Float value to round.
@@ -1679,9 +1679,9 @@ math_3d:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end ) -> rotation:
+  llRotBetween( vector start, vector end_vec ) -> rotation:
     start: Starting vector.
-    end: Target ending vector.
+    end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
@@ -1735,9 +1735,9 @@ math_trig:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end ) -> rotation:
+  llRotBetween( vector start, vector end_vec ) -> rotation:
     start: Starting vector.
-    end: Target ending vector.
+    end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llSin( float theta ) -> float:
     theta: Angle expressed in radians.
@@ -1850,13 +1850,13 @@ movement:
     tooltip: Triggered continuously while the object's rotation is outside the leeway angle of targets set via llRotTarget.
   not_at_target(  ):
     tooltip: Triggered continuously while the object's position has not yet reached the range of targets set via llTarget.
-  llApplyImpulse( vector momentum, integer local ) -> void:
+  llApplyImpulse( vector momentum, integer is_local ) -> void:
     momentum: Linear impulse vector to apply.
-    local: Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.
+    is_local: Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.
     tooltip: Applies a linear impulse (momentum) to a physical object. If local is TRUE, the impulse is applied in local coordinates; otherwise, it is applied in global region coordinates.
-  llApplyRotationalImpulse( vector force, integer local ) -> void:
+  llApplyRotationalImpulse( vector force, integer is_local ) -> void:
     force: Rotational impulse vector to apply.
-    local: Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.
+    is_local: Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.
     tooltip: Applies a rotational impulse (force) to a physical object. If local is TRUE, the rotational impulse is applied in local coordinates; otherwise, it is applied in global region coordinates.
   llGetOmega(  ) -> vector:
     tooltip: Returns a vector representing the physical rotation (angular velocity) of the object in radians per second.
@@ -1877,11 +1877,11 @@ movement:
   llPointAt( vector pos ) -> void // private // deprecated:
     pos: Position vector to point at.
     tooltip: Directs the avatar owning the object to point at the vector pos.
-  llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void:
+  llPushObject( key target, vector impulse, vector ang_impulse, integer is_local ) -> void:
     target: UUID of the target avatar or object in the same region.
     impulse: Linear impulse vector representing the direction and force of the push.
     ang_impulse: Angular impulse vector representing the rotational force.
-    local: Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.
+    is_local: Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.
     tooltip: Applies physical impulse (force) and ang_impulse (rotational force) to the specified target avatar or object.
   llRotLookAt( rotation target_direction, float strength, float damping ) -> void:
     target_direction: Target rotation to align the object with.
@@ -1901,19 +1901,19 @@ movement:
     rot: Target rotation to turn the avatar to face.
     flags: Flags to configure the rotation behavior.
     tooltip: Sets the rotation of the avatar to rot, controlled by flags.
-  llSetAngularVelocity( vector initial_omega, integer local ) -> void:
+  llSetAngularVelocity( vector initial_omega, integer is_local ) -> void:
     initial_omega: Angular velocity vector to apply (in radians per second).
-    local: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Sets the angular velocity of a physical object to initial_omega (mass-independent). If local is TRUE, applied in local coordinates; if FALSE, applied in global coordinates. Has no effect on
       non-physical objects.
-  llSetForce( vector force, integer local ) -> void:
+  llSetForce( vector force, integer is_local ) -> void:
     force: Directional force vector to apply.
-    local: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Applies a constant linear force to a physical object. If local is TRUE, force is applied relative to local coordinates; if FALSE, applied relative to region coordinates.
-  llSetForceAndTorque( vector force, vector torque, integer local ) -> void:
+  llSetForceAndTorque( vector force, vector torque, integer is_local ) -> void:
     force: Directional linear force vector.
     torque: Torque rotational force vector.
-    local: Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.
+    is_local: Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.
     tooltip: Sets both the constant linear force and constant torque acting on a physical object. If local is TRUE, forces are applied in local coordinates; if FALSE, in global coordinates.
   llSetHoverHeight( float height, integer water, float tau ) -> void:
     height: Distance to hover above the ground or water.
@@ -1937,13 +1937,13 @@ movement:
   llSetRot( rotation rot ) -> void:
     rot: Target rotation.
     tooltip: Sets the rotation of the prim to rot. If in a child prim, rot is treated as root-relative; if in the root prim of a non-physical object, rotates the entire object.
-  llSetTorque( vector torque, integer local ) -> void:
+  llSetTorque( vector torque, integer is_local ) -> void:
     torque: Torque rotational force vector.
-    local: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Applies a constant torque rotational force to a physical object. If local is TRUE, torque is applied in local coordinates; if FALSE, applied in global coordinates.
-  llSetVelocity( vector velocity, integer local ) -> void:
+  llSetVelocity( vector velocity, integer is_local ) -> void:
     velocity: Linear velocity vector to apply (in meters per second).
-    local: Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.
     tooltip: Sets the linear velocity of a physical object to velocity. If local is TRUE, velocity is treated as a local directional vector; if FALSE, as a global region directional vector. Has no effect
       on non-physical objects.
   llStopHover(  ) -> void:
@@ -2225,9 +2225,9 @@ pathfinding:
     options: A list of GCNP_* flags and parameters to configure the search limits.
     tooltip: Returns a list containing the closest vector position on the navigation mesh (navmesh) to the specified point (expressed in region-local space), or an empty list if none is found. Configured
       using options.
-  llGetStaticPath( vector start, vector end, float radius, list params ) -> list:
+  llGetStaticPath( vector start, vector end_pos, float radius, list params ) -> list:
     start: Starting position vector.
-    end: Target end position vector.
+    end_pos: Target end position vector.
     radius: Radius of the character path, between 0.125m and 5.0m.
     params: A list specifying the CHARACTER_TYPE parameter (defaults to CHARACTER_TYPE_NONE).
     tooltip: Returns a list of position vectors representing pathfinding waypoints between start and end on the static navmesh for a character of the specified radius. Ignores movable obstacles and can
@@ -2377,17 +2377,17 @@ physics:
   land_collision_start( vector pos ):
     pos: Vector position of collision with the ground.
     tooltip: Triggered in the root prim when a physical object or attached avatar first begins colliding with the ground at position pos.
-  llApplyImpulse( vector momentum, integer local ) -> void:
+  llApplyImpulse( vector momentum, integer is_local ) -> void:
     momentum: Linear impulse vector to apply.
-    local: Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.
+    is_local: Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.
     tooltip: Applies a linear impulse (momentum) to a physical object. If local is TRUE, the impulse is applied in local coordinates; otherwise, it is applied in global region coordinates.
-  llApplyRotationalImpulse( vector force, integer local ) -> void:
+  llApplyRotationalImpulse( vector force, integer is_local ) -> void:
     force: Rotational impulse vector to apply.
-    local: Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.
+    is_local: Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.
     tooltip: Applies a rotational impulse (force) to a physical object. If local is TRUE, the rotational impulse is applied in local coordinates; otherwise, it is applied in global region coordinates.
-  llCastRay( vector start, vector end, list options ) -> list:
+  llCastRay( vector start, vector end_pos, list options ) -> list:
     start: Starting location vector of the ray.
-    end: Ending location vector of the ray.
+    end_pos: Ending location vector of the ray.
     options: A list of option flags and their parameters to configure the raycast.
     tooltip: Casts a ray into the physics world from start to end and reports collision data for intersections with objects based on options. Returns a list of strided values [UUID_1, {link_number_1}, hit_position_1,
       {hit_normal_1}, ..., status_code]. A negative status_code indicates an error; otherwise, it represents the number of hits.
@@ -2445,11 +2445,11 @@ physics:
   llPointAt( vector pos ) -> void // private // deprecated:
     pos: Position vector to point at.
     tooltip: Directs the avatar owning the object to point at the vector pos.
-  llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void:
+  llPushObject( key target, vector impulse, vector ang_impulse, integer is_local ) -> void:
     target: UUID of the target avatar or object in the same region.
     impulse: Linear impulse vector representing the direction and force of the push.
     ang_impulse: Angular impulse vector representing the rotational force.
-    local: Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.
+    is_local: Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.
     tooltip: Applies physical impulse (force) and ang_impulse (rotational force) to the specified target avatar or object.
   llRemoveVehicleFlags( integer flags ) -> void:
     flags: A bitwise mask of VEHICLE_FLAG_* constants to disable.
@@ -2472,22 +2472,22 @@ physics:
     rot: Target rotation to turn the avatar to face.
     flags: Flags to configure the rotation behavior.
     tooltip: Sets the rotation of the avatar to rot, controlled by flags.
-  llSetAngularVelocity( vector initial_omega, integer local ) -> void:
+  llSetAngularVelocity( vector initial_omega, integer is_local ) -> void:
     initial_omega: Angular velocity vector to apply (in radians per second).
-    local: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Sets the angular velocity of a physical object to initial_omega (mass-independent). If local is TRUE, applied in local coordinates; if FALSE, applied in global coordinates. Has no effect on
       non-physical objects.
   llSetBuoyancy( float buoyancy ) -> void:
     buoyancy: Float buoyancy value to set.
     tooltip: Sets the buoyancy of a physical object (requires physics to be enabled). A value of 0.0 offers no buoyancy, < 1.0 sinks, 1.0 counteracts gravity, and > 1.0 rises.
-  llSetForce( vector force, integer local ) -> void:
+  llSetForce( vector force, integer is_local ) -> void:
     force: Directional force vector to apply.
-    local: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Applies a constant linear force to a physical object. If local is TRUE, force is applied relative to local coordinates; if FALSE, applied relative to region coordinates.
-  llSetForceAndTorque( vector force, vector torque, integer local ) -> void:
+  llSetForceAndTorque( vector force, vector torque, integer is_local ) -> void:
     force: Directional linear force vector.
     torque: Torque rotational force vector.
-    local: Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.
+    is_local: Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.
     tooltip: Sets both the constant linear force and constant torque acting on a physical object. If local is TRUE, forces are applied in local coordinates; if FALSE, in global coordinates.
   llSetHoverHeight( float height, integer water, float tau ) -> void:
     height: Distance to hover above the ground or water.
@@ -2511,13 +2511,13 @@ physics:
     status: Bitmask representing the STATUS_* flag(s) to change.
     value: Boolean. If TRUE, enables the status; if FALSE, disables it.
     tooltip: Sets the object status attributes specified by status to value.
-  llSetTorque( vector torque, integer local ) -> void:
+  llSetTorque( vector torque, integer is_local ) -> void:
     torque: Torque rotational force vector.
-    local: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.
     tooltip: Applies a constant torque rotational force to a physical object. If local is TRUE, torque is applied in local coordinates; if FALSE, applied in global coordinates.
-  llSetVelocity( vector velocity, integer local ) -> void:
+  llSetVelocity( vector velocity, integer is_local ) -> void:
     velocity: Linear velocity vector to apply (in meters per second).
-    local: Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.
+    is_local: Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.
     tooltip: Sets the linear velocity of a physical object to velocity. If local is TRUE, velocity is treated as a local directional vector; if FALSE, as a global region directional vector. Has no effect
       on non-physical objects.
   llStopHover(  ) -> void:
@@ -3085,9 +3085,9 @@ quaternion:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end ) -> rotation:
+  llRotBetween( vector start, vector end_vec ) -> rotation:
     start: Starting vector.
-    end: Target ending vector.
+    end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
 region:
   changed( integer change ):
@@ -3459,9 +3459,9 @@ sensor:
   sensor( integer num_detected ):
     num_detected: Total number of detected targets found (usable with llDetected* functions).
     tooltip: Triggered when objects matching constraints of llSensor or llSensorRepeat are successfully detected. Passes num_detected, representing the number of detected targets.
-  llCastRay( vector start, vector end, list options ) -> list:
+  llCastRay( vector start, vector end_pos, list options ) -> list:
     start: Starting location vector of the ray.
-    end: Ending location vector of the ray.
+    end_pos: Ending location vector of the ray.
     options: A list of option flags and their parameters to configure the raycast.
     tooltip: Casts a ray into the physics world from start to end and reports collision data for intersections with objects based on options. Returns a list of strided values [UUID_1, {link_number_1}, hit_position_1,
       {hit_normal_1}, ..., status_code]. A negative status_code indicates an error; otherwise, it represents the number of hits.
@@ -3627,16 +3627,16 @@ string:
   llChar( integer val ) -> string:
     val: Unicode value to convert into a character string.
     tooltip: Constructs and returns a single-character string representing the supplied Unicode value val.
-  llDeleteSubString( string src, integer start, integer end ) -> string:
+  llDeleteSubString( string src, integer start, integer end_index ) -> string:
     src: Source string to modify.
     start: Starting index of the substring to remove (inclusive).
-    end: Ending index of the substring to remove (inclusive).
+    end_index: Ending index of the substring to remove (inclusive).
     tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
       excludes the specified range.
-  llGetSubString( string src, integer start, integer end ) -> string:
+  llGetSubString( string src, integer start, integer end_index ) -> string:
     src: Source string to slice.
     start: Zero-based start index (inclusive).
-    end: Zero-based end index (inclusive).
+    end_index: Zero-based end index (inclusive).
     tooltip: Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring
       is the excluded range.
   llInsertString( string dst, integer pos, string src ) -> string:

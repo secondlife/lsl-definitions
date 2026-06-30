@@ -378,7 +378,7 @@ linkset_data:
 - llLinksetDataWrite( string name, string value ) -> integer
 - llLinksetDataWriteProtected( string name, string value, string pass ) -> integer
 list:
-- llDeleteSubList( list src, integer start, integer end ) -> list
+- llDeleteSubList( list src, integer start, integer end_index ) -> list
 - llGetListEntryType( list src, integer index ) -> integer
 - llGetListLength( list src ) -> integer
 - llList2CSV( list src ) -> string
@@ -386,18 +386,18 @@ list:
 - llList2Integer( list src, integer index ) -> integer
 - llList2Json( string type, list values ) -> string
 - llList2Key( list src, integer index ) -> key
-- llList2List( list src, integer start, integer end ) -> list
-- llList2ListSlice( list src, integer start, integer end, integer stride, integer slice_index ) -> list
-- llList2ListStrided( list src, integer start, integer end, integer stride ) -> list
+- llList2List( list src, integer start, integer end_index ) -> list
+- llList2ListSlice( list src, integer start, integer end_index, integer stride, integer slice_index ) -> list
+- llList2ListStrided( list src, integer start, integer end_index, integer stride ) -> list
 - llList2Rot( list src, integer index ) -> rotation
 - llList2String( list src, integer index ) -> string
 - llList2Vector( list src, integer index ) -> vector
 - llListFindList( list src, list test ) -> integer
 - llListFindListNext( list src, list test, integer instance ) -> integer
-- llListFindStrided( list src, list test, integer start, integer end, integer stride ) -> integer
+- llListFindStrided( list src, list test, integer start, integer end_index, integer stride ) -> integer
 - llListInsertList( list dest, list src, integer start ) -> list
 - llListRandomize( list src, integer stride ) -> list
-- llListReplaceList( list dest, list src, integer start, integer end ) -> list
+- llListReplaceList( list dest, list src, integer start, integer end_index ) -> list
 - llListSort( list src, integer stride, integer ascending ) -> list
 - llListSortStrided( list src, integer stride, integer stride_index, integer ascending ) -> list
 - llListStatistics( integer operation, list src ) -> float
@@ -427,7 +427,7 @@ math:
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
-- llRotBetween( vector start, vector end ) -> rotation
+- llRotBetween( vector start, vector end_vec ) -> rotation
 - llRound( float val ) -> integer
 - llSin( float theta ) -> float
 - llSqrt( float val ) -> float
@@ -447,7 +447,7 @@ math_3d:
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
-- llRotBetween( vector start, vector end ) -> rotation
+- llRotBetween( vector start, vector end_vec ) -> rotation
 - llVecDist( vector vec_a, vector vec_b ) -> float
 - llVecMag( vector vec ) -> float
 - llVecNorm( vector vec ) -> vector
@@ -464,7 +464,7 @@ math_trig:
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
-- llRotBetween( vector start, vector end ) -> rotation
+- llRotBetween( vector start, vector end_vec ) -> rotation
 - llSin( float theta ) -> float
 - llTan( float theta ) -> float
 media:
@@ -499,30 +499,30 @@ movement:
 - moving_start(  )
 - not_at_rot_target(  )
 - not_at_target(  )
-- llApplyImpulse( vector momentum, integer local ) -> void
-- llApplyRotationalImpulse( vector force, integer local ) -> void
+- llApplyImpulse( vector momentum, integer is_local ) -> void
+- llApplyRotationalImpulse( vector force, integer is_local ) -> void
 - llGetOmega(  ) -> vector
 - llGetTorque(  ) -> vector
 - llGetVel(  ) -> vector
 - llLookAt( vector target, float strength, float damping ) -> void
 - llMoveToTarget( vector target, float tau ) -> void
 - llPointAt( vector pos ) -> void // private // deprecated
-- llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void
+- llPushObject( key target, vector impulse, vector ang_impulse, integer is_local ) -> void
 - llRotLookAt( rotation target_direction, float strength, float damping ) -> void
 - llRotTarget( rotation rot, float error ) -> integer
 - llRotTargetRemove( integer handle ) -> void
 - llSetAgentRot( rotation rot, integer flags ) -> void
-- llSetAngularVelocity( vector initial_omega, integer local ) -> void
-- llSetForce( vector force, integer local ) -> void
-- llSetForceAndTorque( vector force, vector torque, integer local ) -> void
+- llSetAngularVelocity( vector initial_omega, integer is_local ) -> void
+- llSetForce( vector force, integer is_local ) -> void
+- llSetForceAndTorque( vector force, vector torque, integer is_local ) -> void
 - llSetHoverHeight( float height, integer water, float tau ) -> void
 - llSetKeyframedMotion( list keyframes, list options ) -> void
 - llSetLocalRot( rotation rot ) -> void
 - llSetPos( vector pos ) -> void
 - llSetRegionPos( vector position ) -> integer
 - llSetRot( rotation rot ) -> void
-- llSetTorque( vector torque, integer local ) -> void
-- llSetVelocity( vector velocity, integer local ) -> void
+- llSetTorque( vector torque, integer is_local ) -> void
+- llSetVelocity( vector velocity, integer is_local ) -> void
 - llStopHover(  ) -> void
 - llStopLookAt(  ) -> void
 - llStopMoveToTarget(  ) -> void
@@ -606,7 +606,7 @@ pathfinding:
 - llExecCharacterCmd( integer command, list options ) -> void
 - llFleeFrom( vector position, float distance, list options ) -> void
 - llGetClosestNavPoint( vector point, list options ) -> list
-- llGetStaticPath( vector start, vector end, float radius, list params ) -> list
+- llGetStaticPath( vector start, vector end_pos, float radius, list params ) -> list
 - llNavigateTo( vector pos, list options ) -> void
 - llPatrolPoints( list patrolPoints, list options ) -> void
 - llPursue( key target, list options ) -> void
@@ -650,9 +650,9 @@ physics:
 - land_collision( vector pos )
 - land_collision_end( vector pos )
 - land_collision_start( vector pos )
-- llApplyImpulse( vector momentum, integer local ) -> void
-- llApplyRotationalImpulse( vector force, integer local ) -> void
-- llCastRay( vector start, vector end, list options ) -> list
+- llApplyImpulse( vector momentum, integer is_local ) -> void
+- llApplyRotationalImpulse( vector force, integer is_local ) -> void
+- llCastRay( vector start, vector end_pos, list options ) -> list
 - llCollisionFilter( string name, key id, integer accept ) -> void
 - llCollisionSound( string impact_sound, float impact_volume ) -> void
 - llGetAccel(  ) -> vector
@@ -671,22 +671,22 @@ physics:
 - llMoveToTarget( vector target, float tau ) -> void
 - llPassCollisions( integer pass ) -> void
 - llPointAt( vector pos ) -> void // private // deprecated
-- llPushObject( key target, vector impulse, vector ang_impulse, integer local ) -> void
+- llPushObject( key target, vector impulse, vector ang_impulse, integer is_local ) -> void
 - llRemoveVehicleFlags( integer flags ) -> void
 - llRotLookAt( rotation target_direction, float strength, float damping ) -> void
 - llRotTarget( rotation rot, float error ) -> integer
 - llRotTargetRemove( integer handle ) -> void
 - llSetAgentRot( rotation rot, integer flags ) -> void
-- llSetAngularVelocity( vector initial_omega, integer local ) -> void
+- llSetAngularVelocity( vector initial_omega, integer is_local ) -> void
 - llSetBuoyancy( float buoyancy ) -> void
-- llSetForce( vector force, integer local ) -> void
-- llSetForceAndTorque( vector force, vector torque, integer local ) -> void
+- llSetForce( vector force, integer is_local ) -> void
+- llSetForceAndTorque( vector force, vector torque, integer is_local ) -> void
 - llSetHoverHeight( float height, integer water, float tau ) -> void
 - llSetKeyframedMotion( list keyframes, list options ) -> void
 - llSetPhysicsMaterial( integer mask, float gravity_multiplier, float restitution, float friction, float density ) -> void
 - llSetStatus( integer status, integer value ) -> void
-- llSetTorque( vector torque, integer local ) -> void
-- llSetVelocity( vector velocity, integer local ) -> void
+- llSetTorque( vector torque, integer is_local ) -> void
+- llSetVelocity( vector velocity, integer is_local ) -> void
 - llStopHover(  ) -> void
 - llStopLookAt(  ) -> void
 - llStopMoveToTarget(  ) -> void
@@ -844,7 +844,7 @@ quaternion:
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
-- llRotBetween( vector start, vector end ) -> rotation
+- llRotBetween( vector start, vector end_vec ) -> rotation
 region:
 - changed( integer change )
 - llCloud( vector offset ) -> float // deprecated
@@ -958,7 +958,7 @@ sensor:
 - collision_start( integer num_detected )
 - no_sensor(  )
 - sensor( integer num_detected )
-- llCastRay( vector start, vector end, list options ) -> list
+- llCastRay( vector start, vector end_pos, list options ) -> list
 - llCollisionFilter( string name, key id, integer accept ) -> void
 - llPassCollisions( integer pass ) -> void
 - llSensor( string name, key id, integer type, float radius, float arc ) -> void
@@ -1001,8 +1001,8 @@ sound:
 - llTriggerSoundLimited( string sound, float volume, vector top_north_east, vector bottom_south_west ) -> void
 string:
 - llChar( integer val ) -> string
-- llDeleteSubString( string src, integer start, integer end ) -> string
-- llGetSubString( string src, integer start, integer end ) -> string
+- llDeleteSubString( string src, integer start, integer end_index ) -> string
+- llGetSubString( string src, integer start, integer end_index ) -> string
 - llInsertString( string dst, integer pos, string src ) -> string
 - llOrd( string val, integer index ) -> integer
 - llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string

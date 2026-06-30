@@ -10537,7 +10537,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.</string>
@@ -10569,7 +10569,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.</string>
@@ -10918,7 +10918,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending location vector of the ray.</string>
@@ -11465,7 +11465,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending index of the slice to remove (inclusive).</string>
@@ -11506,7 +11506,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending index of the substring to remove (inclusive).</string>
@@ -14951,7 +14951,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Target end position vector.</string>
@@ -15035,7 +15035,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -16952,7 +16952,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -16993,7 +16993,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -17052,7 +17052,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -17280,7 +17280,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index of the range to search.</string>
@@ -17412,7 +17412,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive) of the replaced range.</string>
@@ -19189,7 +19189,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.</string>
@@ -20457,7 +20457,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Target ending vector.</string>
@@ -21155,7 +21155,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -21453,7 +21453,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -21494,7 +21494,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.</string>
@@ -22947,7 +22947,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -23144,7 +23144,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.</string>
