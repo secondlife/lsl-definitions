@@ -7,6 +7,8 @@ import sys
 import jsonschema
 import yaml
 
+from lsl_definitions.utils import LUAU_KEYWORDS
+
 
 def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
     with open(schema_filename, encoding="utf-8") as schema_file:
@@ -30,9 +32,6 @@ def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
     except Exception as e:
         print(f"\nOh no ...: {e} processing {yaml_filename}", file=sys.stderr)
         raise e
-
-
-from lsl_definitions.utils import LUAU_KEYWORDS
 
 
 def validate_no_keyword_params() -> None:
