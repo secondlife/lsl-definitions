@@ -114,6 +114,10 @@
                 "comment": {
                     "markdownDescription": "A brief description of this parameter.",
                     "type": "string"
+                },
+                "default-value": {
+                    "markdownDescription": "The default value of this parameter when omitted.",
+                    "type": ["string", "number", "boolean", "null"]
                 }
             },
             "required": ["name"],
@@ -264,6 +268,64 @@
             },
             "required": ["name", "comment"],
             "type": "object"
+        },
+        "metamethod-variant": {
+            "markdownDescription": "An alternative structure or shape for a metamethod.",
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "markdownDescription": "A brief description of this variant.",
+                    "type": "string"
+                },
+                "type": {
+                    "markdownDescription": "The type of this specific variant.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "return-type": { "$ref": "#/$defs/type" }
+            },
+            "required": ["type"],
+            "type": "object"
+        },
+        "metamethod-definition": {
+            "markdownDescription": "A metamethod signature and description.",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "markdownDescription": "The name of the metamethod.",
+                    "pattern": "^__[a-z]+$",
+                    "type": "string"
+                },
+                "comment": {
+                    "markdownDescription": "A brief description of this metamethod.",
+                    "type": "string"
+                },
+                "type-parameters": {
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                     },
+                    "type": "array"
+                },
+                "type": {
+                    "markdownDescription": "The combined or primary type of this metamethod.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "return-type": { "$ref": "#/$defs/type" },
+                "variants": {
+                    "items": { "$ref": "#/$defs/metamethod-variant" },
+                    "type": "array"
+                }
+            },
+            "required": ["name"],
+            "type": "object"
         }
     },
     "additionalProperties": false,
@@ -342,22 +404,8 @@
             "type": "object"
         },
         "metamethods": {
-            "additionalProperties": false,
-            "patternProperties": {
-                "^__[a-z]*": {
-                    "properties": {
-                        "tooltip": {
-                            "markdownDescription": "A brief description of this metamethod.",
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "tooltip"
-                    ],
-                    "type": "object"
-                }
-            },
-            "type": "object"
+            "items": { "$ref": "#/$defs/metamethod-definition" },
+            "type": "array"
         }
     },
     "required": [

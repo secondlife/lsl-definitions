@@ -352,11 +352,12 @@ functions:
   type-parameters: [T]
   parameters:
   - name: value
-    comment: The value to check for truthiness.
+    comment: Value to check for truthiness.
     type: T?
   - name: errorMessage
-    comment: Optional error message to display if the value is not truthy.
+    comment: Error message to display if the value is not truthy.
     type: string?
+    default-value: '"assertion failed!"'
   return-type: T
   fastcall: true
   typechecker: {magic: true}
@@ -385,11 +386,12 @@ functions:
   type-parameters: [T]
   parameters:
   - name: message
-    comment: The error message to raise.
+    comment: Error message to raise.
     type: T
   - name: level
-    comment: Optional level to attribute the error to in the call stack.
+    comment: Level to attribute the error to in the call stack.
     type: number?
+    default-value: 1
   return-type: never
 - name: gcinfo
   comment: Returns the total heap size in kilobytes.
@@ -407,7 +409,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the metatable for.
+    comment: Object to get the metatable for.
     type: T
     selene-type: table
   return-type: getmetatable<T>
@@ -432,7 +434,7 @@ functions:
   type-parameters: [V]
   parameters:
   - name: tab
-    comment: The table to iterate over.
+    comment: Table to iterate over.
     type: "{V}"
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
 - name: loadstring
@@ -449,19 +451,21 @@ functions:
   comment: Creates a new untyped userdata object with an optional metatable.
   parameters:
   - name: mt
-    comment: Optional boolean to create a modifiable metatable.
+    comment: Boolean to create a modifiable metatable.
     type: boolean?
+    default-value: false
   return-type: any
 - name: next
   comment: Returns the next key-value pair in the table traversal order.
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to traverse.
+    comment: Table to traverse.
     type: "{[K]: V}"
   - name: i
-    comment: Optional key to start traversal after.
+    comment: Key to start traversal after.
     type: K?
+    default-value: nil
   return-type: (K?, V)
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pairs
@@ -469,7 +473,7 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to iterate over.
+    comment: Table to iterate over.
     type: "{[K]: V}"
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
@@ -509,10 +513,10 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to perform the lookup on.
+    comment: Table to perform the lookup on.
     type: "{[K]: V}"
   - name: k
-    comment: The key to look up in the table.
+    comment: Key to look up in the table.
     type: K
   return-type: V?
   fastcall: true
@@ -521,7 +525,7 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table or string to compute the length of.
+    comment: Table or string to compute the length of.
     type: "{[K]: V} | string"
   return-type: number
   fastcall: true
@@ -530,13 +534,13 @@ functions:
   type-parameters: [K, V]
   parameters:
   - name: t
-    comment: The table to assign the value to.
+    comment: Table to assign the value to.
     type: "{[K]: V}"
   - name: k
-    comment: The key to assign the value to.
+    comment: Key to assign the value to.
     type: K
   - name: v
-    comment: The value to assign.
+    comment: Value to assign.
     type: V
   return-type: "{[K]: V}"
   fastcall: true
@@ -544,7 +548,7 @@ functions:
   comment: Execute the named external module.
   parameters:
   - name: target
-    comment: The name of the external module.
+    comment: Name of the external module.
     type: any
   return-type: any
   typechecker: {magic: true}
@@ -553,10 +557,10 @@ functions:
   type-parameters: [A...]
   parameters:
   - name: i
-    comment: The index or '#' to count arguments.
+    comment: Index or '#' to count arguments.
     type: string | number
   - name: ...
-    comment: The arguments to select from.
+    comment: Arguments to select from.
     type: A...
   return-type: ...any
   fastcall: true
@@ -577,11 +581,11 @@ functions:
   type-parameters: [T, MT]
   parameters:
   - name: t
-    comment: The table to set the metatable for.
+    comment: Table to set the metatable for.
     type: T
     selene-type: table
   - name: mt
-    comment: The metatable to set.
+    comment: Metatable to set.
     type: MT
     selene-type: table
   return-type: setmetatable<T, MT>
@@ -591,12 +595,13 @@ functions:
   comment: Converts the input string to a number in the specified base.
   parameters:
   - name: value
-    comment: The string to convert to a number.
+    comment: String to convert to a number.
     type: string? | number
     selene-type: string
   - name: base
-    comment: Optional base for the conversion.
+    comment: Base for the conversion.
     type: number?
+    default-value: 10
   return-type: number?
   fastcall: true
   must-use: true
@@ -621,7 +626,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: value
-    comment: The object to convert to a string.
+    comment: Object to convert to a string.
     type: T
   return-type: string
   fastcall: true
@@ -648,7 +653,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the type of.
+    comment: Object to get the type of.
     type: T
   return-type: string
   must-use: true
@@ -658,7 +663,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: obj
-    comment: The object to get the type of.
+    comment: Object to get the type of.
     type: T
   return-type: string
   must-use: true
@@ -671,11 +676,13 @@ functions:
     comment: Array from which to extract values.
     type: "{V}"
   - name: i
-    comment: Starting index (optional, defaults to 1).
+    comment: Starting index.
     type: number?
+    default-value: 1
   - name: j
-    comment: "Ending index (optional, defaults to #tab)."
+    comment: "Ending index."
     type: number?
+    default-value: '#tab'
   return-type: ...V
   fastcall: true
 - name: xpcall
@@ -766,6 +773,7 @@ modules:
       type: number
     - name: width
       type: number?
+      default-value: 1
     return-type: number
     must-use: true
     fastcall: true
@@ -804,6 +812,7 @@ modules:
       type: number
     - name: width
       type: number?
+      default-value: 1
     return-type: number
     must-use: true
     fastcall: true
@@ -1147,8 +1156,9 @@ modules:
       comment: String to write.
       type: string
     - name: count
-      comment: Number of bytes to write (optional).
+      comment: Number of bytes to write.
       type: number?
+      default-value: '#value'
     return-type: ()
   - name: len
     comment: Returns the size of the buffer in bytes.
@@ -1172,11 +1182,13 @@ modules:
       comment: Source buffer to copy from.
       type: buffer
     - name: sourceOffset
-      comment: Offset in source buffer (optional).
+      comment: Offset in source buffer.
       type: number?
+      default-value: 0
     - name: count
-      comment: Number of bytes to copy (optional).
+      comment: Number of bytes to copy.
       type: number?
+      default-value: 'buffer.len(b) - sourceOffset'
     return-type: ()
   - name: fill
     comment: Fills the buffer with the specified value starting at the given offset.
@@ -1192,8 +1204,9 @@ modules:
       comment: Value to fill with.
       type: number
     - name: count
-      comment: Number of bytes to fill (optional).
+      comment: Number of bytes to fill.
       type: number?
+      default-value: 'buffer.len(b) - offset'
     return-type: ()
   - name: readbits
     comment: Reads up to 32 bits from the buffer at the given offset.
@@ -1241,7 +1254,7 @@ modules:
     comment: Resumes a coroutine, returning true and results if successful, or false and an error.
     parameters:
     - name: co
-      comment: The coroutine to resume.
+      comment: Coroutine to resume.
       type: thread
     - name: ...
       comment: Arguments to pass to the coroutine.
@@ -1256,7 +1269,7 @@ modules:
     comment: 'Returns the status of the coroutine: "running", "suspended", "normal", or "dead".'
     parameters:
     - name: co
-      comment: The coroutine to check status of.
+      comment: Coroutine to check status of.
       type: thread
     return-type: '"running" | "suspended" | "normal" | "dead"'
     must-use: true
@@ -1284,7 +1297,7 @@ modules:
     comment: Closes a coroutine, returning true if successful or false and an error.
     parameters:
     - name: co
-      comment: The coroutine to close.
+      comment: Coroutine to close.
       type: thread
     return-type: (boolean, string?)
 - name: debug
@@ -1330,11 +1343,13 @@ modules:
     - comment: Returns a string with a traceback of the current call stack
       parameters:
       - name: message
-        comment: Optional message prepended to the traceback.
+        comment: Message prepended to the traceback.
         type: string?
+        default-value: nil
       - name: level
-        comment: Optional stack level to start traceback.
+        comment: Stack level to start traceback.
         type: number?
+        default-value: 1
       return-type: string
     parameters:
     - name: co
@@ -1342,11 +1357,13 @@ modules:
       type: thread
       optional: true
     - name: msg
-      comment: Optional message prepended to the traceback.
+      comment: Message prepended to the traceback.
       type: string?
+      default-value: nil
     - name: level
-      comment: Optional stack level to start traceback.
+      comment: Stack level to start traceback.
       type: number?
+      default-value: 1
     return-type: string
     must-use: true
 - name: llbase64
@@ -1377,6 +1394,7 @@ modules:
     - name: asBuffer
       type: false?
       selene-type: bool
+      default-value: false
     return-type: string
     must-use: true
 - name: lljson
@@ -1390,6 +1408,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
+      default-value: '{allow_sparse=false, skip_tojson=false, replacer=nil}'
     return-type: string
     must-use: true
   - name: decode
@@ -1400,6 +1419,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
+      default-value: '{track_path=false, reviver=nil}'
     return-type: any
     must-use: true
   - name: slencode
@@ -1410,6 +1430,7 @@ modules:
       type: any
     - name: options
       type: LLJsonEncodeOptions?
+      default-value: '{allow_sparse=false, skip_tojson=false, tight=false, replacer=nil}'
     return-type: string
     must-use: true
   - name: sldecode
@@ -1420,6 +1441,7 @@ modules:
       type: string
     - name: options
       type: LLJsonDecodeOptions?
+      default-value: '{track_path=false, reviver=nil}'
     return-type: any
     must-use: true
   constants:
@@ -1496,10 +1518,10 @@ modules:
       the quadrant.
     parameters:
     - name: "y"
-      comment: The y-coordinate.
+      comment: Y-coordinate.
       type: number
     - name: x
-      comment: The x-coordinate.
+      comment: X-coordinate.
       type: number
     return-type: number
     must-use: true
@@ -1517,7 +1539,7 @@ modules:
     comment: Returns n clamped between min and max.
     parameters:
     - name: "n"
-      comment: The value to be clamped.
+      comment: Value to be clamped.
       type: number
     - name: min
       comment: Minimum allowable value.
@@ -1577,10 +1599,10 @@ modules:
     comment: Returns the remainder of x modulo y, rounded towards zero.
     parameters:
     - name: x
-      comment: The dividend.
+      comment: Dividend.
       type: number
     - name: "y"
-      comment: The divisor.
+      comment: Divisor.
       type: number
     return-type: number
     must-use: true
@@ -1598,10 +1620,10 @@ modules:
     comment: Returns s * 2^e.
     parameters:
     - name: s
-      comment: The significand.
+      comment: Significand.
       type: number
     - name: e
-      comment: The exponent.
+      comment: Exponent.
       type: number
     return-type: number
     must-use: true
@@ -1628,8 +1650,9 @@ modules:
       comment: A number to compute logarithm.
       type: number
     - name: base
-      comment: Base of the logarithm (default is e).
+      comment: Base of the logarithm.
       type: number?
+      default-value: 'math.e'
     return-type: number
     must-use: true
     fastcall: true
@@ -1704,11 +1727,13 @@ modules:
       comment: X coordinate for the noise function.
       type: number
     - name: "y"
-      comment: Y coordinate for the noise function (default is 0).
+      comment: Y coordinate for the noise function.
       type: number?
+      default-value: 0
     - name: z
-      comment: Z coordinate for the noise function (default is 0).
+      comment: Z coordinate for the noise function.
       type: number?
+      default-value: 0
     return-type: number
     must-use: true
   - name: pow
@@ -1736,11 +1761,13 @@ modules:
     comment: Returns a random number within the given range.
     parameters:
     - name: min
-      comment: Minimum value of the range (optional).
+      comment: Minimum value of the range.
       type: number?
+      default-value: nil
     - name: max
-      comment: Maximum value of the range (optional).
+      comment: Maximum value of the range.
       type: number?
+      default-value: nil
     return-type: number
     must-use: true
   - name: randomseed
@@ -1844,7 +1871,7 @@ modules:
     fastcall: true
   constants:
   - name: pi
-    comment: The value of pi
+    comment: Value of pi
     type: number
     value: 3.141592653589793
   - name: huge
@@ -1865,11 +1892,13 @@ modules:
     comment: Returns a table or string representation of the time based on the provided format.
     parameters:
     - name: formatString
-      comment: Optional format string for the date representation.
+      comment: Format string for the date representation.
       type: string?
+      default-value: '"%c"'
     - name: t
-      comment: Optional timestamp to format; defaults to the current time.
+      comment: Timestamp to format; defaults to the current time.
       type: number?
+      default-value: 'os.time()'
     return-type: string
     overloads:
     - parameters:
@@ -1877,8 +1906,9 @@ modules:
         comment: Optional format string for the date representation.
         type: '"*t" | "!*t"'
       - name: t
-        comment: Optional timestamp to format; defaults to the current time.
+        comment: Timestamp to format; defaults to the current time.
         type: number?
+        default-value: 'os.time()'
       return-type: DateTypeResult
     must-use: true
   - name: difftime
@@ -2034,11 +2064,13 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: i
     return-type: '...number'
     must-use: true
     fastcall: true
@@ -2064,11 +2096,13 @@ modules:
       comment: Pattern to search for.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: plain
-      comment: Perform raw search (optional).
+      comment: Perform raw search.
       type: boolean?
+      default-value: false
     return-type: (number?, number?, ...string)
     must-use: true
     typechecker: {builtin: true, magic: true}
@@ -2110,8 +2144,9 @@ modules:
       comment: Replacement string, function, or table.
       type: 'string | { [string]: string } | (...string) -> string'
     - name: maxn
-      comment: Maximum replacements (optional).
+      comment: Maximum replacements.
       type: number?
+      default-value: nil
     return-type: (string, number)
     must-use: true
     typechecker: {builtin: true}
@@ -2144,8 +2179,9 @@ modules:
       comment: Pattern to match.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     return-type: '...string'
     must-use: true
     typechecker: {builtin: true, magic: true}
@@ -2198,8 +2234,9 @@ modules:
       comment: Input string.
       type: string
     - name: separator
-      comment: Separator to split on. Default is ","
+      comment: Separator to split on.
       type: string?
+      default-value: '","'
     return-type: '{string}'
     must-use: true
     typechecker: {builtin: true}
@@ -2213,8 +2250,9 @@ modules:
       comment: Starting index.
       type: number
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: '#s'
     return-type: string
     must-use: true
     fastcall: true
@@ -2229,8 +2267,9 @@ modules:
       comment: Encoded string.
       type: string
     - name: init
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     return-type: '...any'
     must-use: true
     typechecker: {builtin: true}
@@ -2253,14 +2292,17 @@ modules:
       comment: Array of strings.
       type: '{string | number}'
     - name: sep
-      comment: Separator string (optional).
+      comment: Separator string.
       type: string?
+      default-value: '""'
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: '#a'
     return-type: string
     must-use: true
   - name: foreach
@@ -2374,8 +2416,9 @@ modules:
       type: '{V}'
       observes: write
     - name: i
-      comment: "Index to remove (default: the last one)."
+      comment: "Index to remove."
       type: number?
+      default-value: '#a'
     return-type: V?
   - name: sort
     comment: Sorts an array in place.
@@ -2388,6 +2431,7 @@ modules:
     - name: f
       comment: Comparison function.
       type: '((a: V, b: V) -> boolean)?'
+      default-value: nil
     return-type: ()
   - name: pack
     comment: Packs multiple arguments into a new array with length field n.
@@ -2407,11 +2451,13 @@ modules:
       comment: Array to unpack.
       type: '{V}'
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: '#a'
     return-type: '...V'
     must-use: true
     fastcall: true
@@ -2432,8 +2478,9 @@ modules:
       comment: Destination index.
       type: number
     - name: dest
-      comment: Destination array (optional).
+      comment: Destination array.
       type: '{V}?'
+      default-value: src
       observes: write
     return-type: '{V}'
   - name: create
@@ -2444,8 +2491,9 @@ modules:
       comment: Number of elements to allocate.
       type: number
     - name: v
-      comment: Value to prefill elements with (optional).
+      comment: Value to prefill elements with.
       type: V?
+      default-value: nil
     return-type: '{V}'
     must-use: true
   - name: find
@@ -2459,8 +2507,9 @@ modules:
       comment: Value to search for.
       type: V
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     return-type: number?
     must-use: true
   - name: clear
@@ -2481,6 +2530,7 @@ modules:
     - name: shrink_sparse
       comment: Allow moving sparse array elements to hash table storage.
       type: boolean?
+      default-value: false
     return-type: '{V}'
   - name: freeze
     comment: Freezes a table, making it read-only.
@@ -2538,11 +2588,13 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: i
     return-type: '...number'
     must-use: true
   - name: len
@@ -2553,11 +2605,13 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 1
     - name: j
-      comment: Ending index (optional).
+      comment: Ending index.
       type: number?
+      default-value: '#s'
     return-type: (number?, number?)
     must-use: true
   - name: offset
@@ -2570,8 +2624,9 @@ modules:
       comment: Character position.
       type: number
     - name: i
-      comment: Starting index (optional).
+      comment: Starting index.
       type: number?
+      default-value: 'if n >= 0 then 1 else #s + 1'
     return-type: number?
     must-use: true
   constants:
@@ -2615,8 +2670,9 @@ modules:
       comment: Y component of the vector.
       type: number
     - name: z
-      comment: Z component of the vector (optional).
+      comment: Z component of the vector.
       type: number?
+      default-value: 0
     return-type: vector
     must-use: true
     fastcall: true
@@ -2631,8 +2687,9 @@ modules:
       comment: Y component of the vector.
       type: number
     - name: z
-      comment: Z component of the vector (optional).
+      comment: Z component of the vector.
       type: number?
+      default-value: 0
     return-type: vector
     must-use: true
     fastcall: true
@@ -2689,8 +2746,9 @@ modules:
       comment: Right input vector.
       type: vector
     - name: axis
-      comment: Axis to determine the sign of the angle (optional).
+      comment: Axis to determine the sign of the angle.
       type: vector?
+      default-value: nil
     return-type: number
     must-use: true
   - name: floor
@@ -2801,7 +2859,7 @@ modules:
 # auto-generated from lsl_definitions.yaml
 constants:
 - name: "_G"
-  comment: The table of Lua builtin globals.
+  comment: Table of Lua builtin globals.
   type: any
   value: '{}'
 - name: _VERSION
@@ -2881,47 +2939,245 @@ builtin-constants:
     type: boolean
     value: 'false'
 metamethods:
-  __add:
-    tooltip: "Overload method for + operator."
-  __call:
-    tooltip: "Method called when table is called as a function."
-  __concat:
-    tooltip: "Overload method for .. operator."
-  __div:
-    tooltip: "Overload method for / operator."
-  __eq:
-    tooltip: "Overload method for == operator."
-  __index:
-    tooltip: "Method or table called when table is indexed."
-  __le:
-    tooltip: "Overload method for <= operator."
-  __len:
-    tooltip: "Overload method for # operator."
-  __lt:
-    tooltip: "Overload method for < operator."
-  __metatable:
-    tooltip: "Override the table returned by getmetatable and cause setmetatable to raise an error."
-  __mod:
-    tooltip: "Overload method for % operator."
-  __mode:
-    tooltip: "Controls weak mapping of table. Valid returns are 'k' for keys and 'v' for values or 'kv' for both."
-  __mul:
-    tooltip: "Overload method for * operator."
-  __newindex:
-    tooltip: "Method or table called when table is indexed with an assignment."
-  __pow:
-    tooltip: "Overload method for ^ operator."
-  __sub:
-    tooltip: "Overload method for - operator."
-  __tostring:
-    tooltip: "Method called by tostring to convert the value to a string."
-  __unm:
-    tooltip: "Overload method for - as unary operator."
-  __iter:
-    tooltip: "Method called to iterate over the table."
-  __idiv:
-    tooltip: "Overload method for // operator."
-  __tojson:
-    tooltip: "Called by lljson encode and slencode to encode the value as JSON."
-  __jsonhint:
-    tooltip: 'String property used by lljson.encode. Must be one of "array" or "object".'
+  - name: __add
+    comment: "Defines behavior for the addition (+) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand of the addition."
+      - name: right
+        type: any
+        comment: "The right operand of the addition."
+    return-type: any
+  - name: __call
+    comment: "Called when the table or object is called as if it were a function."
+    type-parameters: [A..., R...]
+    type: "<A..., R...>(self: {}, A...) -> R..."
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The table being invoked."
+      - name: ...
+        type: "A..."
+        comment: "The arguments passed to the call."
+    return-type: "R..."
+  - name: __concat
+    comment: "Defines behavior for the concatenation (..) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand or object to concatenate."
+      - name: right
+        type: any
+        comment: "The right operand or object to concatenate."
+    return-type: any
+  - name: __div
+    comment: "Defines behavior for the division (/) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand of the division (dividend)."
+      - name: right
+        type: any
+        comment: "The right operand of the division (divisor)."
+    return-type: any
+  - name: __eq
+    comment: "Defines behavior for the equality (==) operator."
+    type: "(left: {}, right: {}) -> boolean"
+    parameters:
+      - name: left
+        type: '{}'
+        comment: "The first value to compare."
+      - name: right
+        type: '{}'
+        comment: "The second value to compare."
+    return-type: boolean
+  - name: __idiv
+    comment: "Defines behavior for the floor division (//) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand of the floor division."
+      - name: right
+        type: any
+        comment: "The right operand of the floor division."
+    return-type: any
+  - name: __index
+    comment: "Called when looking up a key that does not exist in the table."
+    type: "((self: {}, key: any) -> any) | { [any]: any }"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The table being accessed."
+      - name: key
+        type: any
+        comment: "The key that was not found in the table."
+    return-type: any
+    variants:
+      - comment: "Called as a function fallback when looking up a key that does not exist in the table."
+        type: "(self: {}, key: any) -> any"
+        parameters:
+          - name: self
+            type: '{}'
+            comment: "The table being accessed."
+          - name: key
+            type: any
+            comment: "The key that was not found in the table."
+        return-type: any
+      - comment: "A fallback dictionary/table used to search for missing keys."
+        type: "{ [any]: any }"
+        return-type: any
+  - name: __iter
+    comment: "Called before generalized iteration begins on a table or userdata. Returns an iterator generator function, a state object, and an initial control variable."
+    type-parameters: [S, K, V...]
+    type: "<S, K, V...>(self: {}) -> ((state: S, index: K) -> (K?, V...), S, K)"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The table or object being iterated."
+    return-type: "((state: S, index: K) -> (K?, V...), S, K)"
+  - name: __jsonhint
+    comment: "String property used by lljson.encode to enforce table formatting rules."
+    type: '"array" | "object"'
+  - name: __le
+    comment: "Defines behavior for the less-than-or-equal-to (<=) operator."
+    type: "(left: {}, right: {}) -> boolean"
+    parameters:
+      - name: left
+        type: '{}'
+        comment: "The left operand of the comparison."
+      - name: right
+        type: '{}'
+        comment: "The right operand of the comparison."
+    return-type: boolean
+  - name: __len
+    comment: "Defines behavior for the length (#) operator."
+    type: "(self: {}) -> number"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The object whose length is being measured."
+    return-type: number
+  - name: __lt
+    comment: "Defines behavior for the less-than (<) operator."
+    type: "(left: {}, right: {}) -> boolean"
+    parameters:
+      - name: left
+        type: '{}'
+        comment: "The left operand of the comparison."
+      - name: right
+        type: '{}'
+        comment: "The right operand of the comparison."
+    return-type: boolean
+  - name: __metatable
+    comment: "Protects the metatable. If present, getmetatable returns this value, and setmetatable will raise an error."
+    type: any
+  - name: __mod
+    comment: "Defines behavior for the modulo (%) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand (dividend)."
+      - name: right
+        type: any
+        comment: "The right operand (divisor)."
+    return-type: any
+  - name: __mode
+    comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
+    type: '"k" | "v" | "kv"'
+  - name: __mul
+    comment: "Defines behavior for the multiplication (*) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand of the multiplication."
+      - name: right
+        type: any
+        comment: "The right operand of the multiplication."
+    return-type: any
+  - name: __newindex
+    comment: "Called when assigning a value to a key that does not exist in the table."
+    type: "((self: {}, key: any, value: any) -> ()) | { [any]: any }"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The table being assigned."
+      - name: key
+        type: any
+        comment: "The key being created."
+      - name: value
+        type: any
+        comment: "The value being assigned to the key."
+    return-type: "()"
+    variants:
+      - comment: "Called as a function fallback when assigning a value to a key that does not exist in the table."
+        type: "(self: {}, key: any, value: any) -> ()"
+        parameters:
+          - name: self
+            type: '{}'
+            comment: "The table being assigned."
+          - name: key
+            type: any
+            comment: "The key being created."
+          - name: value
+            type: any
+            comment: "The value being assigned to the key."
+        return-type: "()"
+      - comment: "A fallback dictionary/table where new key-value assignments are forwarded."
+        type: "{ [any]: any }"
+        return-type: "()"
+  - name: __pow
+    comment: "Defines behavior for the exponentiation (^) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The base value."
+      - name: right
+        type: any
+        comment: "The exponent value."
+    return-type: any
+  - name: __sub
+    comment: "Defines behavior for the subtraction (-) operator."
+    type: "(left: any, right: any) -> any"
+    parameters:
+      - name: left
+        type: any
+        comment: "The left operand of the subtraction (minuend)."
+      - name: right
+        type: any
+        comment: "The right operand of the subtraction (subtrahend)."
+    return-type: any
+  - name: __tojson
+    comment: "Called during JSON serialization (with lljson.encode or lljson.slencode). Returns an alternative representation of the table to be serialized in its place."
+    type: '(self: {}, ctx: { mode: "json" | "sljson", tight: boolean }) -> any'
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The table being serialized."
+      - name: ctx
+        type: '{ mode: "json" | "sljson", tight: boolean }'
+        comment: "Context table containing metadata about the current serialization process, including 'mode' ('json' or 'sljson') and 'tight' (boolean)."
+    return-type: any
+  - name: __tostring
+    comment: "Called by tostring to convert the value to a string."
+    type: "(self: {}) -> string"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The object being converted to a string."
+    return-type: string
+  - name: __unm
+    comment: "Defines behavior for the unary negation (-) operator."
+    type: "(self: {}) -> any"
+    parameters:
+      - name: self
+        type: '{}'
+        comment: "The value being negated."
+    return-type: any

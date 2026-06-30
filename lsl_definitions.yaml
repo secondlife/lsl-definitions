@@ -1164,25 +1164,25 @@ constants:
         default: 1
   CHANGED_ALLOWED_DROP:
     member-of: [ChangeType]
-    tooltip: The object inventory changed because a user other than the owner (or
+    tooltip: Object inventory changed because a user other than the owner (or
       the owner if the object is no-mod) added an item. This is only possible if
       enabled via llAllowInventoryDrop.
     type: integer
     value: '0x40'
   CHANGED_COLOR:
     member-of: [ChangeType]
-    tooltip: The object's Blinn-Phong color or alpha parameters have changed.
+    tooltip: Object's Blinn-Phong color or alpha parameters have changed.
     type: integer
     value: '0x2'
   CHANGED_INVENTORY:
     member-of: [ChangeType]
-    tooltip: The prim inventory has changed by someone who has modification rights
+    tooltip: Prim inventory has changed by someone who has modification rights
       to it.
     type: integer
     value: '0x1'
   CHANGED_LINK:
     member-of: [ChangeType]
-    tooltip: The number of prims making up the object or avatars seated on it has
+    tooltip: Number of prims making up the object or avatars seated on it has
       changed. Also occurs when duplicating a linked object or when a prim
       changes type or shape. Does not trigger on attach/detach, sit/unsit in
       attachments, or single prim duplication.
@@ -1195,43 +1195,43 @@ constants:
     value: '0x800'
   CHANGED_OWNER:
     member-of: [ChangeType]
-    tooltip: The object has changed owners. Triggers in the original object when a
+    tooltip: Object has changed owners. Triggers in the original object when a
       user takes it, copies it, or deeds it to a group, and in the new object
       when it is first rezzed.
     type: integer
     value: '0x80'
   CHANGED_REGION:
     member-of: [ChangeType]
-    tooltip: The object has changed regions by crossing a boundary or teleporting
+    tooltip: Object has changed regions by crossing a boundary or teleporting
       (if attached). Triggers only in the root prim of a linkset.
     type: integer
     value: '0x100'
   CHANGED_REGION_START:
     member-of: [ChangeType]
-    tooltip: The region containing this object has just come online.
+    tooltip: Region containing this object has just come online.
     type: integer
     value: '0x400'
   CHANGED_RENDER_MATERIAL:
     member-of: [ChangeType]
-    tooltip: The render material (prim material ID or material overrides) has
+    tooltip: Render material (prim material ID or material overrides) has
       changed on one or more faces.
     type: integer
     value: '0x1000'
   CHANGED_SCALE:
     member-of: [ChangeType]
-    tooltip: The prim scale of at least one prim in the linked object has changed.
+    tooltip: Prim scale of at least one prim in the linked object has changed.
       Only the root prim receives this event.
     type: integer
     value: '0x8'
   CHANGED_SHAPE:
     member-of: [ChangeType]
-    tooltip: The prim base shape (PRIM_TYPE, such as box, prism, torus, taper,
+    tooltip: Prim base shape (PRIM_TYPE, such as box, prism, torus, taper,
       twist, or cut) has changed.
     type: integer
     value: '0x4'
   CHANGED_TELEPORT:
     member-of: [ChangeType]
-    tooltip: The avatar this object is attached to has teleported. Triggers only in
+    tooltip: Avatar this object is attached to has teleported. Triggers only in
       the root prim of an attachment. Does not occur for child prims or 'sit
       teleports'. If scripts are disabled at the destination, the event queues
       and triggers after moving to a script-enabled parcel.
@@ -1239,7 +1239,7 @@ constants:
     value: '0x200'
   CHANGED_TEXTURE:
     member-of: [ChangeType]
-    tooltip: The prim texture parameters (shine/bump settings, repeats, flip,
+    tooltip: Prim texture parameters (shine/bump settings, repeats, flip,
       rotation, offset, or texture) have changed.
     type: integer
     value: '0x10'
@@ -1478,7 +1478,7 @@ constants:
     type: integer
     value: 2147483646
   COMBAT_LOG_ID:
-    tooltip: The ID used by all combat log messages sent from the region to the
+    tooltip: ID used by all combat log messages sent from the region to the
       COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive
       only system-generated combat log messages.
     type: string
@@ -1742,7 +1742,7 @@ constants:
     type: integer
     value: 2147483647
   DEG_TO_RAD:
-    tooltip: The constant 0.017453293 (precise value is PI/180). Multiply a value in
+    tooltip: Constant 0.017453293 (precise value is PI/180). Multiply a value in
       degrees by this number to convert it to radians.
     type: float
     value: '0.017453293'
@@ -1808,35 +1808,34 @@ constants:
     value: -1
   ENV_NO_ENVIRONMENT:
     member-of: [EnvironmentError]
-    tooltip: The environmental settings inventory object could not be found, or
+    tooltip: Environmental settings inventory object could not be found, or
       there is no environment on this parcel to modify.
     type: integer
     value: -3
   ENV_NO_EXPERIENCE_LAND:
     member-of: [EnvironmentError]
-    tooltip: The experience has not been enabled or cannot run on the land.
+    tooltip: Experience has not been enabled or cannot run on the land.
     type: integer
     value: -7
   ENV_NO_EXPERIENCE_PERMISSION:
     member-of: [EnvironmentError]
-    tooltip: The agent has not granted permission to change environments.
+    tooltip: Agent has not granted permission to change environments.
     type: integer
     value: -2
   ENV_NO_PERMISSIONS:
     member-of: [EnvironmentError]
-    tooltip: The script lacks permissions to modify the environment at this
+    tooltip: Script lacks permissions to modify the environment at this
       location, or an attempt was made to remove altitude track 0 or 1.
     type: integer
     value: -9
   ENV_OK:
     member-of: [EnvironmentError]
-    tooltip: The agent, parcel, or region will attempt to change the applied
-      environment.
+    tooltip: Agent, parcel, or region will attempt to change the applied environment.
     type: integer
     value: 1
   ENV_THROTTLE:
     member-of: [EnvironmentError]
-    tooltip: The scripts have exceeded the throttle limit. Wait and retry the request.
+    tooltip: Scripts have exceeded the throttle limit. Wait and retry the request.
     type: integer
     value: -8
   ENV_VALIDATION_FAIL:
@@ -4020,7 +4019,7 @@ constants:
     type: integer
     value: '0x2000'
   PI:
-    tooltip: The mathematical constant Pi (3.14159265), representing the number of
+    tooltip: Mathematical constant Pi (3.14159265), representing the number of
       radians in a half circle (semi-circle). When used in sensor functions, it
       specifies a full sphere scan.
     type: float
@@ -4032,7 +4031,7 @@ constants:
     type: integer
     value: '0x8'
   PI_BY_TWO:
-    tooltip: The constant Pi/2 (1.57079633), representing the number of radians in a
+    tooltip: Constant Pi/2 (1.57079633), representing the number of radians in a
       quarter circle. When used in sensor functions, it specifies a hemisphere
       scan.
     type: float
@@ -5936,7 +5935,7 @@ constants:
     type: integer
     value: '0x00'
   RAD_TO_DEG:
-    tooltip: The constant 57.2957795 (precise value is 180/PI). Multiply a value in
+    tooltip: Constant 57.2957795 (precise value is 180/PI). Multiply a value in
       radians by this number to convert it to degrees.
     type: float
     value: '57.2957795'
@@ -6908,7 +6907,7 @@ constants:
     type: integer
     value: '0x02'
   SQRT2:
-    tooltip: The mathematical constant representing the square root of 2 (1.41421356).
+    tooltip: Mathematical constant representing the square root of 2 (1.41421356).
     type: float
     value: '1.41421356'
   STATUS_BLOCK_GRAB:
@@ -7243,7 +7242,7 @@ constants:
     value: 11
     value-type: vector
   TEXTURE_BLANK:
-    tooltip: The asset UUID representing the default 'Blank' texture.
+    tooltip: Asset UUID representing the default 'Blank' texture.
     type: string
     slua-type: uuid
     value: "5748decc-f629-461c-9a36-a35a221fe21f"
@@ -7253,17 +7252,17 @@ constants:
     slua-type: uuid
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_MEDIA:
-    tooltip: The asset UUID representing the default 'Default Media' texture.
+    tooltip: Asset UUID representing the default 'Default Media' texture.
     type: string
     slua-type: uuid
     value: "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"
   TEXTURE_PLYWOOD:
-    tooltip: The asset UUID representing the default 'Plywood' texture.
+    tooltip: Asset UUID representing the default 'Plywood' texture.
     type: string
     slua-type: uuid
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_TRANSPARENT:
-    tooltip: The asset UUID representing the '*Default Transparent Texture' in the
+    tooltip: Asset UUID representing the '*Default Transparent Texture' in the
       library (included with viewers).
     type: string
     slua-type: uuid
@@ -7411,7 +7410,7 @@ constants:
     slua-removed: true
     value: 1
   TWO_PI:
-    tooltip: The mathematical constant representing the number of radians in a full
+    tooltip: Mathematical constant representing the number of radians in a full
       circle (6.28318530, twice the value of PI).
     type: float
     value: '6.28318530'
@@ -7853,22 +7852,22 @@ constants:
         details: Small wave speed and direction.
   XP_ERROR_EXPERIENCES_DISABLED:
     member-of: [ExperienceError]
-    tooltip: The region currently has experiences disabled.
+    tooltip: Region currently has experiences disabled.
     type: integer
     value: 2
   XP_ERROR_EXPERIENCE_DISABLED:
     member-of: [ExperienceError]
-    tooltip: The experience owner has temporarily disabled the experience.
+    tooltip: Experience owner has temporarily disabled the experience.
     type: integer
     value: 8
   XP_ERROR_EXPERIENCE_SUSPENDED:
     member-of: [ExperienceError]
-    tooltip: The experience has been suspended by Linden Lab customer support.
+    tooltip: Experience has been suspended by Linden Lab customer support.
     type: integer
     value: 9
   XP_ERROR_INVALID_EXPERIENCE:
     member-of: [ExperienceError]
-    tooltip: The script is associated with an experience that no longer exists.
+    tooltip: Script is associated with an experience that no longer exists.
     type: integer
     value: 7
   XP_ERROR_INVALID_PARAMETERS:
@@ -7878,12 +7877,12 @@ constants:
     value: 3
   XP_ERROR_KEY_NOT_FOUND:
     member-of: [ExperienceError]
-    tooltip: The requested key does not exist.
+    tooltip: Requested key does not exist.
     type: integer
     value: 14
   XP_ERROR_MATURITY_EXCEEDED:
     member-of: [ExperienceError]
-    tooltip: The content rating of the experience exceeds that of the region.
+    tooltip: Content rating of the experience exceeds that of the region.
     type: integer
     value: 16
   XP_ERROR_NONE:
@@ -7893,7 +7892,7 @@ constants:
     value: 0
   XP_ERROR_NOT_FOUND:
     member-of: [ExperienceError]
-    tooltip: The sim was unable to verify the validity of the experience. Retrying
+    tooltip: Sim was unable to verify the validity of the experience. Retrying
       after a short wait is advised.
     type: integer
     value: 6
@@ -7905,7 +7904,7 @@ constants:
     value: 4
   XP_ERROR_NOT_PERMITTED_LAND:
     member-of: [ExperienceError]
-    tooltip: The experience is blocked or not enabled for this land, or is not
+    tooltip: Experience is blocked or not enabled for this land, or is not
       allowed to run in the current region.
     type: integer
     value: 17
@@ -7922,7 +7921,7 @@ constants:
     value: 11
   XP_ERROR_REQUEST_PERM_TIMEOUT:
     member-of: [ExperienceError]
-    tooltip: The request for experience permissions was ignored and the request
+    tooltip: Request for experience permissions was ignored and the request
       timed out without modification.
     type: integer
     value: 18
@@ -7939,12 +7938,12 @@ constants:
     value: 13
   XP_ERROR_STORE_DISABLED:
     member-of: [ExperienceError]
-    tooltip: The key-value store is currently disabled on this region.
+    tooltip: Key-value store is currently disabled on this region.
     type: integer
     value: 12
   XP_ERROR_THROTTLED:
     member-of: [ExperienceError]
-    tooltip: The call failed due to too many recent calls.
+    tooltip: Call failed due to too many recent calls.
     type: integer
     value: 1
   XP_ERROR_UNKNOWN_ERROR:
@@ -7967,13 +7966,13 @@ events:
   at_rot_target:
     arguments:
     - handle:
-        tooltip: The integer handle returned by the llRotTarget call.
+        tooltip: Integer handle returned by the llRotTarget call.
         type: integer
     - targetrot:
-        tooltip: The target rotation specified in the llRotTarget call.
+        tooltip: Target rotation specified in the llRotTarget call.
         type: rotation
     - ourrot:
-        tooltip: The current rotation of the object (similar to llGetRot).
+        tooltip: Current rotation of the object (similar to llGetRot).
         type: rotation
     tooltip: Triggered when the script's rotation (ourrot) comes within a defined
       angle (error) of the target rotation (targetrot) set by a call to
@@ -7983,13 +7982,13 @@ events:
   at_target:
     arguments:
     - tnum:
-        tooltip: The integer target handle returned by the llTarget call.
+        tooltip: Integer target handle returned by the llTarget call.
         type: integer
     - targetpos:
-        tooltip: The target position vector specified in the llTarget call.
+        tooltip: Target position vector specified in the llTarget call.
         type: vector
     - ourpos:
-        tooltip: The current position vector of the object (similar to llGetPos).
+        tooltip: Current position vector of the object (similar to llGetPos).
         type: vector
     tooltip: Triggered when the scripted object's position (ourpos) comes within the
       defined range of the target position (targetpos) set by llTarget (which
@@ -7999,7 +7998,7 @@ events:
   attach:
     arguments:
     - id:
-        tooltip: The UUID of the avatar the object is attached to, or NULL_KEY if
+        tooltip: UUID of the avatar the object is attached to, or NULL_KEY if
           detached.
         type: key
     tooltip: Triggered whenever the object is attached to or detached from an
@@ -8029,7 +8028,7 @@ events:
   collision:
     arguments:
     - num_detected:
-        tooltip: The total number of detected colliders (usable with llDetected*
+        tooltip: Total number of detected colliders (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8043,7 +8042,7 @@ events:
   collision_end:
     arguments:
     - num_detected:
-        tooltip: The total number of detected colliders (usable with llDetected*
+        tooltip: Total number of detected colliders (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8057,7 +8056,7 @@ events:
   collision_start:
     arguments:
     - num_detected:
-        tooltip: The total number of detected colliders (usable with llDetected*
+        tooltip: Total number of detected colliders (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8071,7 +8070,7 @@ events:
   control:
     arguments:
     - id:
-        tooltip: The UUID of the avatar whose inputs are captured.
+        tooltip: UUID of the avatar whose inputs are captured.
         type: key
     - level:
         tooltip: A bitfield of CONTROL_* constants representing currently held controls.
@@ -8091,11 +8090,11 @@ events:
   dataserver:
     arguments:
     - queryid:
-        tooltip: The key identifying the asynchronous request (matches the handle
+        tooltip: Key identifying the asynchronous request (matches the handle
           returned by the requesting function).
         type: key
     - data:
-        tooltip: The string containing the requested data.
+        tooltip: String containing the requested data.
         type: string
     tooltip: Triggered when requested data is returned to the script (e.g., from
       llRequestAgentData, llRequestInventoryData, or llGetNotecardLine).
@@ -8104,19 +8103,19 @@ events:
   email:
     arguments:
     - time:
-        tooltip: The timestamp of when the email was received.
+        tooltip: Timestamp of when the email was received.
         type: string
     - address:
-        tooltip: The email address of the sender.
+        tooltip: Email address of the sender.
         type: string
     - subject:
-        tooltip: The subject of the email.
+        tooltip: Subject of the email.
         type: string
     - message:
-        tooltip: The body text of the email.
+        tooltip: Body text of the email.
         type: string
     - num_left:
-        tooltip: The number of pending emails still waiting in the queue.
+        tooltip: Number of pending emails still waiting in the queue.
         type: integer
     tooltip: Triggered when an email sent to this script's address arrives. num_left
       indicates the number of pending emails remaining in the queue.
@@ -8125,7 +8124,7 @@ events:
   experience_permissions:
     arguments:
     - agent_id:
-        tooltip: The UUID of the avatar approving experience permissions.
+        tooltip: UUID of the avatar approving experience permissions.
         type: key
     tooltip: Triggered when the agent specified by agent_id approves an experience
       permissions request (interactively or automatically if previously
@@ -8137,11 +8136,11 @@ events:
   experience_permissions_denied:
     arguments:
     - agent_id:
-        tooltip: The UUID of the avatar who denied or was blocked from granting
+        tooltip: UUID of the avatar who denied or was blocked from granting
           permissions.
         type: key
     - reason:
-        tooltip: The XP_ERROR_* error constant describing why permissions were denied.
+        tooltip: XP_ERROR_* error constant describing why permissions were denied.
         type: integer
         enum-semantics: ExperienceError
     tooltip: Triggered when the agent specified by agent_id denies experience
@@ -8154,7 +8153,7 @@ events:
   final_damage:
     arguments:
     - num_detected:
-        tooltip: The number of damage events applied to the avatar or task.
+        tooltip: Number of damage events applied to the avatar or task.
         type: integer
     detected-semantics: true
     tooltip: Triggered after all on_damage events across all scripts have completed
@@ -8167,7 +8166,7 @@ events:
   game_control:
     arguments:
     - id:
-        tooltip: The UUID of the avatar supplying controller input.
+        tooltip: UUID of the avatar supplying controller input.
         type: key
     - button_levels:
         tooltip: A 32-bit mask representing the buttons currently held down on the
@@ -8188,15 +8187,15 @@ events:
   http_request:
     arguments:
     - request_id:
-        tooltip: The unique key identifying the incoming HTTP request (used with
+        tooltip: Unique key identifying the incoming HTTP request (used with
           llHTTPResponse).
         type: key
     - method:
-        tooltip: The HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request
+        tooltip: HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request
           status constants.
         type: string
     - body:
-        tooltip: The string payload of the incoming request body.
+        tooltip: String payload of the incoming request body.
         type: string
     tooltip: Triggered when the script's registered URL receives an incoming HTTP
       request identified by request_id.
@@ -8206,18 +8205,18 @@ events:
   http_response:
     arguments:
     - request_id:
-        tooltip: The key matching the handle returned by the initiating llHTTPRequest
+        tooltip: Key matching the handle returned by the initiating llHTTPRequest
           call.
         type: key
     - status:
-        tooltip: The integer HTTP status code returned (such as 200 or 404).
+        tooltip: Integer HTTP status code returned (such as 200 or 404).
         type: integer
     - metadata:
         tooltip: A list of HTTP_* constants and response headers metadata.
         type: list
         param-semantics: HTTPResponseError
     - body:
-        tooltip: The string payload of the received response body.
+        tooltip: String payload of the received response body.
         type: string
     tooltip: Triggered when an HTTP response body is received for a pending
       request_id, or if the request fails or times out.
@@ -8227,7 +8226,7 @@ events:
   land_collision:
     arguments:
     - pos:
-        tooltip: The vector position of collision with the ground.
+        tooltip: Vector position of collision with the ground.
         type: vector
     tooltip: Triggered in the root prim when a physical object or attached avatar is
       colliding with the ground at position pos.
@@ -8236,7 +8235,7 @@ events:
   land_collision_end:
     arguments:
     - pos:
-        tooltip: The vector position of the last ground collision.
+        tooltip: Vector position of the last ground collision.
         type: vector
     tooltip: Triggered in the root prim when a physical object or attached avatar
       stops colliding with the ground at position pos.
@@ -8245,7 +8244,7 @@ events:
   land_collision_start:
     arguments:
     - pos:
-        tooltip: The vector position of collision with the ground.
+        tooltip: Vector position of collision with the ground.
         type: vector
     tooltip: Triggered in the root prim when a physical object or attached avatar
       first begins colliding with the ground at position pos.
@@ -8254,7 +8253,7 @@ events:
   link_message:
     arguments:
     - sender_num:
-        tooltip: The link index of the prim containing the script that sent the message.
+        tooltip: Link index of the prim containing the script that sent the message.
         type: integer
     - num:
         tooltip: An integer value passed from the sending script.
@@ -8278,10 +8277,10 @@ events:
         type: integer
         enum-semantics: LinksetDataAction
     - name:
-        tooltip: The key name of the modified key-value pair.
+        tooltip: Key name of the modified key-value pair.
         type: string
     - value:
-        tooltip: The new string value of the pair (empty if the pair was deleted or is
+        tooltip: New string value of the pair (empty if the pair was deleted or is
           password-protected).
         type: string
     tooltip: Fires in all scripts in the linkset whenever the datastore has been
@@ -8294,16 +8293,16 @@ events:
   listen:
     arguments:
     - channel:
-        tooltip: The chat channel where the message appeared.
+        tooltip: Chat channel where the message appeared.
         type: integer
     - name:
-        tooltip: The name of the sending prim or the legacy name of the sending avatar.
+        tooltip: Name of the sending prim or the legacy name of the sending avatar.
         type: string
     - id:
-        tooltip: The UUID of the sending avatar or prim.
+        tooltip: UUID of the sending avatar or prim.
         type: key
     - message:
-        tooltip: The spoken text string.
+        tooltip: Spoken text string.
         type: string
     tooltip: Triggered when a chat message matching active llListen filters is
       received on channel. Passes the sender's name and UUID key id, along with
@@ -8315,10 +8314,10 @@ events:
   money:
     arguments:
     - id:
-        tooltip: The UUID of the paying resident.
+        tooltip: UUID of the paying resident.
         type: key
     - amount:
-        tooltip: The quantity of L$ paid to the prim.
+        tooltip: Quantity of L$ paid to the prim.
         type: integer
     tooltip: Triggered when a resident specified by id pays an amount of Linden
       dollars (L$) to the prim.
@@ -8360,7 +8359,7 @@ events:
   object_rez:
     arguments:
     - id:
-        tooltip: The UUID of the newly rezzed object.
+        tooltip: UUID of the newly rezzed object.
         type: key
     tooltip: Triggered when this object successfully rezzes another object from its
       inventory. Passes the key (UUID) id of the newly rezzed object.
@@ -8369,7 +8368,7 @@ events:
   on_damage:
     arguments:
     - num_detected:
-        tooltip: The number of pending damage events.
+        tooltip: Number of pending damage events.
         type: integer
     detected-semantics: true
     tooltip: Triggered when damage has been inflicted on an avatar or task, but
@@ -8388,7 +8387,7 @@ events:
   on_rez:
     arguments:
     - start_param:
-        tooltip: The integer start parameter passed from the rezzing call.
+        tooltip: Integer start parameter passed from the rezzing call.
         type: integer
     tooltip: Triggered when the object is rezzed into the world (by a script or
       user). Passes start_param from the rezzing call (or 0 if rezzed from
@@ -8400,7 +8399,7 @@ events:
   path_update:
     arguments:
     - type:
-        tooltip: The path update status or failure code constant (PU_* flag).
+        tooltip: Path update status or failure code constant (PU_* flag).
         type: integer
         enum-semantics: CharacterPathUpdateType
     - reserved:
@@ -8413,23 +8412,23 @@ events:
   remote_data:
     arguments:
     - event_type:
-        tooltip: The integer constant representing the type of XML-RPC event.
+        tooltip: Integer constant representing the type of XML-RPC event.
         type: integer
         enum-semantics: RemoteDataEventType
     - channel:
-        tooltip: The XML-RPC channel ID key.
+        tooltip: XML-RPC channel ID key.
         type: key
     - message_id:
-        tooltip: The XML-RPC message ID key.
+        tooltip: XML-RPC message ID key.
         type: key
     - sender:
-        tooltip: The XML-RPC sender string.
+        tooltip: XML-RPC sender string.
         type: string
     - idata:
-        tooltip: The payload integer data.
+        tooltip: Payload integer data.
         type: integer
     - sdata:
-        tooltip: The payload string data.
+        tooltip: Payload string data.
         type: string
     deprecated: true
     tooltip: Deprecated. Triggered by incoming XML-RPC calls, passing event_type,
@@ -8439,7 +8438,7 @@ events:
   run_time_permissions:
     arguments:
     - perm:
-        tooltip: The bitfield of currently granted permissions (PERMISSION_* flags).
+        tooltip: Bitfield of currently granted permissions (PERMISSION_* flags).
         type: integer
         enum-semantics: ScriptPermission
     tooltip: Triggered when an agent grants or denies runtime permissions requested
@@ -8450,7 +8449,7 @@ events:
   sensor:
     arguments:
     - num_detected:
-        tooltip: The total number of detected targets found (usable with llDetected*
+        tooltip: Total number of detected targets found (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8485,7 +8484,7 @@ events:
   touch:
     arguments:
     - num_detected:
-        tooltip: The total number of touching agents detected (usable with llDetected*
+        tooltip: Total number of touching agents detected (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8498,7 +8497,7 @@ events:
   touch_end:
     arguments:
     - num_detected:
-        tooltip: The total number of touching agents detected (usable with llDetected*
+        tooltip: Total number of touching agents detected (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8511,7 +8510,7 @@ events:
   touch_start:
     arguments:
     - num_detected:
-        tooltip: The total number of touching agents detected (usable with llDetected*
+        tooltip: Total number of touching agents detected (usable with llDetected*
           functions).
         type: integer
     detected-semantics: true
@@ -8524,7 +8523,7 @@ events:
   transaction_result:
     arguments:
     - id:
-        tooltip: The key matching the handle returned by the initiating llTransfer*
+        tooltip: Key matching the handle returned by the initiating llTransfer*
           function.
         type: key
     - success:
@@ -8607,10 +8606,10 @@ functions:
   llAddToLandBanList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar to add to the ban list.
+        tooltip: UUID of the avatar to add to the ban list.
         type: key
     - hours:
-        tooltip: The duration, in hours, to ban the avatar for (0 for indefinite).
+        tooltip: Duration, in hours, to ban the avatar for (0 for indefinite).
         type: float
     energy: 10.0
     func-id: 310
@@ -8626,10 +8625,10 @@ functions:
   llAddToLandPassList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar to add to the pass list.
+        tooltip: UUID of the avatar to add to the pass list.
         type: key
     - hours:
-        tooltip: The duration, in hours, to allow the avatar for (range [0.0, 144.0], 0
+        tooltip: Duration, in hours, to allow the avatar for (range [0.0, 144.0], 0
           for indefinite).
         type: float
     energy: 10.0
@@ -8644,11 +8643,11 @@ functions:
   llAdjustDamage:
     arguments:
     - number:
-        tooltip: The index of the damage event to modify.
+        tooltip: Index of the damage event to modify.
         type: integer
         index-semantics: true
     - new_damage:
-        tooltip: The new damage value to be applied or distributed after on_damage
+        tooltip: New damage value to be applied or distributed after on_damage
           processing.
         type: float
     energy: 10.0
@@ -8664,7 +8663,7 @@ functions:
   llAdjustSoundVolume:
     arguments:
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 207
@@ -8677,7 +8676,7 @@ functions:
   llAgentInExperience:
     arguments:
     - agent:
-        tooltip: The UUID of the avatar in the same region to query.
+        tooltip: UUID of the avatar in the same region to query.
         type: key
     energy: 10.0
     experience: true
@@ -8712,10 +8711,10 @@ functions:
   llAngleBetween:
     arguments:
     - a:
-        tooltip: The starting rotation.
+        tooltip: Starting rotation.
         type: rotation
     - b:
-        tooltip: The ending rotation.
+        tooltip: Ending rotation.
         type: rotation
     energy: 10.0
     func-id: 174
@@ -8732,7 +8731,7 @@ functions:
   llApplyImpulse:
     arguments:
     - momentum:
-        tooltip: The linear impulse vector to apply.
+        tooltip: Linear impulse vector to apply.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, momentum is treated as a local directional vector; if
@@ -8752,7 +8751,7 @@ functions:
   llApplyRotationalImpulse:
     arguments:
     - force:
-        tooltip: The rotational impulse vector to apply.
+        tooltip: Rotational impulse vector to apply.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, the force is treated as a local directional vector;
@@ -8813,7 +8812,7 @@ functions:
   llAttachToAvatar:
     arguments:
     - attach_point:
-        tooltip: The ATTACH_* constant or integer value representing the target
+        tooltip: ATTACH_* constant or integer value representing the target
           attachment point.
         type: integer
         enum-semantics: AttachPoint
@@ -8832,7 +8831,7 @@ functions:
   llAttachToAvatarTemp:
     arguments:
     - attach_point:
-        tooltip: The ATTACH_* constant or integer value representing the target
+        tooltip: ATTACH_* constant or integer value representing the target
           attachment point.
         type: integer
         enum-semantics: AttachPoint
@@ -8852,7 +8851,7 @@ functions:
   llAvatarOnLinkSitTarget:
     arguments:
     - link:
-        tooltip: The index of the prim in the linkset (1 for root, >1 for children), or
+        tooltip: Index of the prim in the linkset (1 for root, >1 for children), or
           a LINK_* flag.
         type: integer
         enum-semantics: Link
@@ -8884,13 +8883,13 @@ functions:
   llAxes2Rot:
     arguments:
     - fwd:
-        tooltip: The forward/back directional vector of the rotation.
+        tooltip: Forward/back directional vector of the rotation.
         type: vector
     - left:
-        tooltip: The left/right directional vector of the rotation.
+        tooltip: Left/right directional vector of the rotation.
         type: vector
     - up:
-        tooltip: The up/down directional vector of the rotation.
+        tooltip: Up/down directional vector of the rotation.
         type: vector
     energy: 10.0
     func-id: 17
@@ -8906,10 +8905,10 @@ functions:
   llAxisAngle2Rot:
     arguments:
     - axis:
-        tooltip: The axis vector around which the rotation is generated.
+        tooltip: Axis vector around which the rotation is generated.
         type: vector
     - angle:
-        tooltip: The angle of rotation, expressed in radians.
+        tooltip: Angle of rotation, expressed in radians.
         type: float
     energy: 10.0
     func-id: 169
@@ -8926,7 +8925,7 @@ functions:
   llBase64ToInteger:
     arguments:
     - str:
-        tooltip: The Base64-encoded string to decode.
+        tooltip: Base64-encoded string to decode.
         type: string
     slua-deprecated:
       reason: Use 'llbase64.decode' and 'string.unpack' or 'buffer.readi32' instead.
@@ -8944,7 +8943,7 @@ functions:
   llBase64ToString:
     arguments:
     - str:
-        tooltip: The Base64-encoded string to decode.
+        tooltip: Base64-encoded string to decode.
         type: string
     energy: 10.0
     func-id: 261
@@ -8991,7 +8990,7 @@ functions:
   llCSV2List:
     arguments:
     - src:
-        tooltip: The string of comma-separated values to parse.
+        tooltip: String of comma-separated values to parse.
         type: string
     energy: 10.0
     func-id: 196
@@ -9005,10 +9004,10 @@ functions:
   llCastRay:
     arguments:
     - start:
-        tooltip: The starting location vector of the ray.
+        tooltip: Starting location vector of the ray.
         type: vector
     - end:
-        tooltip: The ending location vector of the ray.
+        tooltip: Ending location vector of the ray.
         type: vector
     - options:
         tooltip: A list of option flags and their parameters to configure the raycast.
@@ -9030,7 +9029,7 @@ functions:
   llCeil:
     arguments:
     - val:
-        tooltip: The float value to round.
+        tooltip: Float value to round.
         type: float
     slua-deprecated:
       use: math.ceil
@@ -9049,7 +9048,7 @@ functions:
   llChar:
     arguments:
     - val:
-        tooltip: The Unicode value to convert into a character string.
+        tooltip: Unicode value to convert into a character string.
         type: integer
     energy: 10.0
     func-id: 526
@@ -9114,7 +9113,7 @@ functions:
         type: integer
         enum-semantics: Links
     - face:
-        tooltip: The face number to clear.
+        tooltip: Face number to clear.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -9132,7 +9131,7 @@ functions:
   llClearPrimMedia:
     arguments:
     - face:
-        tooltip: The face number (side) to clear.
+        tooltip: Face number (side) to clear.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -9150,7 +9149,7 @@ functions:
   llCloseRemoteDataChannel:
     arguments:
     - channel:
-        tooltip: The XML-RPC channel ID to close.
+        tooltip: XML-RPC channel ID to close.
         type: key
     deprecated: true
     energy: 10.0
@@ -9163,7 +9162,7 @@ functions:
   llCloud:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     deprecated: true
@@ -9179,10 +9178,10 @@ functions:
   llCollisionFilter:
     arguments:
     - name:
-        tooltip: The specific object name or avatar legacy name to filter for.
+        tooltip: Specific object name or avatar legacy name to filter for.
         type: string
     - id:
-        tooltip: The group, avatar, or object UUID to filter by.
+        tooltip: Group, avatar, or object UUID to filter by.
         type: key
     - accept:
         tooltip: Boolean. If TRUE, only collisions matching the name and id filters are
@@ -9203,12 +9202,12 @@ functions:
   llCollisionSound:
     arguments:
     - impact_sound:
-        tooltip: The UUID of a sound, the name of a sound in the prim's inventory, or an
+        tooltip: UUID of a sound, the name of a sound in the prim's inventory, or an
           empty string to suppress sounds.
         type: string
         asset-semantics: true
     - impact_volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 160
@@ -9223,7 +9222,7 @@ functions:
   llCollisionSprite:
     arguments:
     - impact_sprite:
-        tooltip: The UUID of a texture, the name of a texture in the prim's inventory,
+        tooltip: UUID of a texture, the name of a texture in the prim's inventory,
           or an empty string to suppress sprites.
         type: string
         asset-semantics: true
@@ -9241,10 +9240,10 @@ functions:
   llComputeHash:
     arguments:
     - message:
-        tooltip: The message string to be hashed.
+        tooltip: Message string to be hashed.
         type: string
     - algorithm:
-        tooltip: The cryptographic digest algorithm to use (e.g., md5, sha1, sha224,
+        tooltip: Cryptographic digest algorithm to use (e.g., md5, sha1, sha224,
           sha256, sha384, or sha512).
         type: string
     energy: 10.0
@@ -9259,7 +9258,7 @@ functions:
   llCos:
     arguments:
     - theta:
-        tooltip: The angle expressed in radians.
+        tooltip: Angle expressed in radians.
         type: float
     slua-deprecated:
       use: math.cos
@@ -9294,10 +9293,10 @@ functions:
   llCreateKeyValue:
     arguments:
     - k:
-        tooltip: The unique key name for the key-value pair.
+        tooltip: Unique key name for the key-value pair.
         type: string
     - v:
-        tooltip: The value for the key-value pair (maximum 2047 characters, or 4095
+        tooltip: Value for the key-value pair (maximum 2047 characters, or 4095
           characters if using Mono).
         type: string
     energy: 10.0
@@ -9317,7 +9316,7 @@ functions:
   llCreateLink:
     arguments:
     - target:
-        tooltip: The UUID of the target prim/object in the same region.
+        tooltip: UUID of the target prim/object in the same region.
         type: key
     - parent:
         tooltip: Boolean. If TRUE, the script's object becomes the root prim; if FALSE,
@@ -9337,14 +9336,14 @@ functions:
   llDamage:
     arguments:
     - target:
-        tooltip: The key of the target avatar or task to receive damage.
+        tooltip: Key of the target avatar or task to receive damage.
         type: key
     - damage:
-        tooltip: The amount of damage to inflict (can exceed 100, unlike collision-based
+        tooltip: Amount of damage to inflict (can exceed 100, unlike collision-based
           damage).
         type: float
     - damage_type:
-        tooltip: The type of damage to deliver to the target (can correspond to a
+        tooltip: Type of damage to deliver to the target (can correspond to a
           DAMAGE_TYPE_* constant).
         type: integer
         enum-semantics: DamageType
@@ -9384,7 +9383,7 @@ functions:
   llDeleteKeyValue:
     arguments:
     - k:
-        tooltip: The key of the key-value pair to delete.
+        tooltip: Key of the key-value pair to delete.
         type: string
     energy: 10.0
     experience: true
@@ -9403,15 +9402,15 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The source list to copy and modify.
+        tooltip: Source list to copy and modify.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The starting index of the slice to remove (inclusive).
+        tooltip: Starting index of the slice to remove (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The ending index of the slice to remove (inclusive).
+        tooltip: Ending index of the slice to remove (inclusive).
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -9434,14 +9433,14 @@ functions:
   llDeleteSubString:
     arguments:
     - src:
-        tooltip: The source string to modify.
+        tooltip: Source string to modify.
         type: string
     - start:
-        tooltip: The starting index of the substring to remove (inclusive).
+        tooltip: Starting index of the substring to remove (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The ending index of the substring to remove (inclusive).
+        tooltip: Ending index of the substring to remove (inclusive).
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9458,7 +9457,7 @@ functions:
   llDerezObject:
     arguments:
     - id:
-        tooltip: The UUID of the object in the region to derez.
+        tooltip: UUID of the object in the region to derez.
         type: key
     - flag:
         tooltip: Derez behavior flags matching DEREZ_* constants.
@@ -9493,7 +9492,7 @@ functions:
   llDetectedDamage:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9511,7 +9510,7 @@ functions:
   llDetectedGrab:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9529,7 +9528,7 @@ functions:
   llDetectedGroup:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9547,7 +9546,7 @@ functions:
   llDetectedKey:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9564,7 +9563,7 @@ functions:
   llDetectedLinkNumber:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9583,7 +9582,7 @@ functions:
   llDetectedName:
     arguments:
     - item:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9599,7 +9598,7 @@ functions:
   llDetectedOwner:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9616,7 +9615,7 @@ functions:
   llDetectedPos:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9633,7 +9632,7 @@ functions:
   llDetectedRezzer:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9649,7 +9648,7 @@ functions:
   llDetectedRot:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9665,7 +9664,7 @@ functions:
   llDetectedTouchBinormal:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9684,7 +9683,7 @@ functions:
   llDetectedTouchFace:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9702,7 +9701,7 @@ functions:
   llDetectedTouchNormal:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9720,7 +9719,7 @@ functions:
   llDetectedTouchPos:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9738,7 +9737,7 @@ functions:
   llDetectedTouchST:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9757,7 +9756,7 @@ functions:
   llDetectedTouchUV:
     arguments:
     - index:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9777,7 +9776,7 @@ functions:
   llDetectedType:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9795,7 +9794,7 @@ functions:
   llDetectedVel:
     arguments:
     - number:
-        tooltip: The index of the detection information.
+        tooltip: Index of the detection information.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -9811,17 +9810,17 @@ functions:
   llDialog:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     - message:
-        tooltip: The text message to display in the dialog box.
+        tooltip: Text message to display in the dialog box.
         type: string
     - buttons:
         tooltip: A list of up to 12 strings representing button labels.
         type: list
         slua-type: "{string}"
     - channel:
-        tooltip: The output chat channel (any integer value) where button clicks are
+        tooltip: Output chat channel (any integer value) where button clicks are
           chatted.
         type: integer
     energy: 10.0
@@ -9848,10 +9847,10 @@ functions:
   llDumpList2String:
     arguments:
     - src:
-        tooltip: The source list to convert.
+        tooltip: Source list to convert.
         type: list
     - separator:
-        tooltip: The separator string to place between list entries.
+        tooltip: Separator string to place between list entries.
         type: string
     energy: 10.0
     func-id: 245
@@ -9866,10 +9865,10 @@ functions:
   llEdgeOfWorld:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates.
+        tooltip: Position vector in region coordinates.
         type: vector
     - dir:
-        tooltip: The direction vector.
+        tooltip: Direction vector.
         type: vector
     energy: 10.0
     func-id: 205
@@ -9886,7 +9885,7 @@ functions:
   llEjectFromLand:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 213
@@ -9900,13 +9899,13 @@ functions:
   llEmail:
     arguments:
     - address:
-        tooltip: The destination email address.
+        tooltip: Destination email address.
         type: string
     - subject:
-        tooltip: The subject of the email.
+        tooltip: Subject of the email.
         type: string
     - message:
-        tooltip: The message body of the email.
+        tooltip: Message body of the email.
         type: string
     energy: 10.0
     func-id: 119
@@ -9918,7 +9917,7 @@ functions:
   llEscapeURL:
     arguments:
     - url:
-        tooltip: The unescaped URL string to escape.
+        tooltip: Unescaped URL string to escape.
         type: string
     energy: 10.0
     func-id: 307
@@ -9933,7 +9932,7 @@ functions:
   llEuler2Rot:
     arguments:
     - v:
-        tooltip: The vector of Euler angles to convert.
+        tooltip: Vector of Euler angles to convert.
         type: vector
     energy: 10.0
     func-id: 16
@@ -9948,7 +9947,7 @@ functions:
   llEvade:
     arguments:
     - target:
-        tooltip: The UUID of the group, avatar, or object to evade.
+        tooltip: UUID of the group, avatar, or object to evade.
         type: key
     - options:
         tooltip: No options currently available (should be empty list).
@@ -9967,7 +9966,7 @@ functions:
   llExecCharacterCmd:
     arguments:
     - command:
-        tooltip: The pathfinding command to execute.
+        tooltip: Pathfinding command to execute.
         type: integer
         enum-semantics: CharacterCommand
     - options:
@@ -9986,7 +9985,7 @@ functions:
   llFabs:
     arguments:
     - val:
-        tooltip: The float value to convert.
+        tooltip: Float value to convert.
         type: float
     slua-deprecated:
       use: math.abs
@@ -10004,11 +10003,11 @@ functions:
   llFindNotecardTextCount:
     arguments:
     - notecardname:
-        tooltip: The name of the target notecard.
+        tooltip: Name of the target notecard.
         type: string
         asset-semantics: true
     - pattern:
-        tooltip: The regular expression pattern to search for.
+        tooltip: Regular expression pattern to search for.
         type: string
     - options:
         tooltip: A list of options to control the search (currently unused, should be
@@ -10030,19 +10029,19 @@ functions:
   llFindNotecardTextSync:
     arguments:
     - name:
-        tooltip: The name of a notecard in the prim's inventory, or a UUID.
+        tooltip: Name of a notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - pattern:
-        tooltip: The regular expression pattern to search for.
+        tooltip: Regular expression pattern to search for.
         type: string
     - start:
-        tooltip: The number of match results to skip before returning (0 to start at the
+        tooltip: Number of match results to skip before returning (0 to start at the
           first match).
         type: integer
         index-semantics: true
     - count:
-        tooltip: The maximum number of matches to return (if 0, returns the first 64
+        tooltip: Maximum number of matches to return (if 0, returns the first 64
           matches).
         type: integer
     - options:
@@ -10066,10 +10065,10 @@ functions:
   llFleeFrom:
     arguments:
     - position:
-        tooltip: The position vector in region coordinates from which to flee.
+        tooltip: Position vector in region coordinates from which to flee.
         type: vector
     - distance:
-        tooltip: The distance in meters to keep from the position.
+        tooltip: Distance in meters to keep from the position.
         type: float
     - options:
         tooltip: No options currently available (should be empty list).
@@ -10086,7 +10085,7 @@ functions:
   llFloor:
     arguments:
     - val:
-        tooltip: The float value to round.
+        tooltip: Float value to round.
         type: float
     slua-deprecated:
       use: math.floor
@@ -10123,7 +10122,7 @@ functions:
   llFrand:
     arguments:
     - mag:
-        tooltip: The float magnitude of the random range.
+        tooltip: Float magnitude of the random range.
         type: float
     energy: 10.0
     func-id: 8
@@ -10162,7 +10161,7 @@ functions:
   llGetAgentInfo:
     arguments:
     - id:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 206
@@ -10178,7 +10177,7 @@ functions:
   llGetAgentLanguage:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 336
@@ -10192,7 +10191,7 @@ functions:
   llGetAgentList:
     arguments:
     - scope:
-        tooltip: The scope flag (AGENT_LIST_PARCEL, AGENT_LIST_PARCEL_OWNER, or
+        tooltip: Scope flag (AGENT_LIST_PARCEL, AGENT_LIST_PARCEL_OWNER, or
           AGENT_LIST_REGION) to filter the returned agents.
         type: integer
         enum-semantics: AgentListScope
@@ -10216,7 +10215,7 @@ functions:
   llGetAgentSize:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 218
@@ -10230,7 +10229,7 @@ functions:
   llGetAlpha:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -10257,7 +10256,7 @@ functions:
   llGetAnimation:
     arguments:
     - id:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 162
@@ -10273,7 +10272,7 @@ functions:
   llGetAnimationList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 266
@@ -10290,7 +10289,7 @@ functions:
   llGetAnimationOverride:
     arguments:
     - anim_state:
-        tooltip: The animation state string to query.
+        tooltip: Animation state string to query.
         type: string
     energy: 10.0
     func-id: 500
@@ -10323,7 +10322,7 @@ functions:
   llGetAttachedList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     energy: 10.0
     func-id: 523
@@ -10340,7 +10339,7 @@ functions:
   llGetAttachedListFiltered:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     - options:
         tooltip: A list of options to filter the returned attachments.
@@ -10361,7 +10360,7 @@ functions:
   llGetBoundingBox:
     arguments:
     - object:
-        tooltip: The UUID of the avatar or prim in the same region.
+        tooltip: UUID of the avatar or prim in the same region.
         type: key
     energy: 10.0
     func-id: 277
@@ -10454,7 +10453,7 @@ functions:
   llGetClosestNavPoint:
     arguments:
     - point:
-        tooltip: The position vector in region-local coordinates.
+        tooltip: Position vector in region-local coordinates.
         type: vector
     - options:
         tooltip: A list of GCNP_* flags and parameters to configure the search limits.
@@ -10474,7 +10473,7 @@ functions:
   llGetColor:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -10533,7 +10532,7 @@ functions:
   llGetDisplayName:
     arguments:
     - id:
-        tooltip: The UUID of the avatar in the same region or otherwise known to the
+        tooltip: UUID of the avatar in the same region or otherwise known to the
           region.
         type: key
     energy: 10.0
@@ -10560,7 +10559,7 @@ functions:
   llGetEnv:
     arguments:
     - name:
-        tooltip: The name of the regional data to request (unrecognized strings return
+        tooltip: Name of the regional data to request (unrecognized strings return
           an empty string).
         type: string
     energy: 10.0
@@ -10574,7 +10573,7 @@ functions:
   llGetEnvironment:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates (X/Y determine the parcel, or
+        tooltip: Position vector in region coordinates (X/Y determine the parcel, or
           region if X/Y are -1; Z determines the sky track altitude).
         type: vector
     - params:
@@ -10598,7 +10597,7 @@ functions:
   llGetExperienceDetails:
     arguments:
     - experience_id:
-        tooltip: The UUID of the experience to query (can be NULL_KEY to retrieve
+        tooltip: UUID of the experience to query (can be NULL_KEY to retrieve
           details for the script's own experience).
         type: key
     energy: 10.0
@@ -10615,7 +10614,7 @@ functions:
   llGetExperienceErrorMessage:
     arguments:
     - error:
-        tooltip: The XP_ERROR_* error code constant to translate.
+        tooltip: XP_ERROR_* error code constant to translate.
         type: integer
         enum-semantics: ExperienceError
     energy: 10.0
@@ -10704,10 +10703,10 @@ functions:
   llGetHTTPHeader:
     arguments:
     - request_id:
-        tooltip: The unique key of the HTTP request.
+        tooltip: Unique key of the HTTP request.
         type: key
     - header:
-        tooltip: The lowercase name of the HTTP header to retrieve.
+        tooltip: Lowercase name of the HTTP header to retrieve.
         type: string
     energy: 10.0
     func-id: 349
@@ -10721,7 +10720,7 @@ functions:
   llGetHealth:
     arguments:
     - id:
-        tooltip: The UUID of the agent or object to query.
+        tooltip: UUID of the agent or object to query.
         type: key
     energy: 10.0
     func-id: 552
@@ -10735,7 +10734,7 @@ functions:
   llGetInventoryAcquireTime:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 529
@@ -10749,7 +10748,7 @@ functions:
   llGetInventoryCreator:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 291
@@ -10762,7 +10761,7 @@ functions:
   llGetInventoryDesc:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 543
@@ -10776,7 +10775,7 @@ functions:
   llGetInventoryKey:
     arguments:
     - name:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 175
@@ -10789,11 +10788,11 @@ functions:
   llGetInventoryName:
     arguments:
     - type:
-        tooltip: The INVENTORY_* type constant of the item.
+        tooltip: INVENTORY_* type constant of the item.
         type: integer
         enum-semantics: InventoryType
     - number:
-        tooltip: The index number of the item of that type, starting from 0.
+        tooltip: Index number of the item of that type, starting from 0.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -10808,7 +10807,7 @@ functions:
   llGetInventoryNumber:
     arguments:
     - type:
-        tooltip: The INVENTORY_* type constant to count.
+        tooltip: INVENTORY_* type constant to count.
         type: integer
         enum-semantics: InventoryType
     energy: 10.0
@@ -10823,10 +10822,10 @@ functions:
   llGetInventoryPermMask:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     - category:
-        tooltip: The MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
           MASK_EVERYONE, or MASK_NEXT).
         type: integer
         enum-semantics: AssetPermissionCategory
@@ -10844,7 +10843,7 @@ functions:
   llGetInventoryType:
     arguments:
     - name:
-        tooltip: The name of the inventory item.
+        tooltip: Name of the inventory item.
         type: string
     energy: 10.0
     func-id: 301
@@ -10870,7 +10869,7 @@ functions:
   llGetLandOwnerAt:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates.
+        tooltip: Position vector in region coordinates.
         type: vector
     energy: 10.0
     func-id: 216
@@ -10884,7 +10883,7 @@ functions:
   llGetLinkKey:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     energy: 10.0
@@ -10899,11 +10898,11 @@ functions:
   llGetLinkMedia:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     - face:
-        tooltip: The face number (side) of the prim.
+        tooltip: Face number (side) of the prim.
         type: integer
         enum-semantics: Faces
     - params:
@@ -10928,7 +10927,7 @@ functions:
   llGetLinkName:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     energy: 10.0
@@ -10953,7 +10952,7 @@ functions:
   llGetLinkNumberOfSides:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     energy: 10.0
@@ -10969,7 +10968,7 @@ functions:
   llGetLinkPrimitiveParams:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag to
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag to
           retrieve parameters from.
         type: integer
         enum-semantics: Link
@@ -10994,7 +10993,7 @@ functions:
   llGetLinkSitFlags:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     energy: 10.0
@@ -11011,10 +11010,10 @@ functions:
   llGetListEntryType:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -11034,7 +11033,7 @@ functions:
   llGetListLength:
     arguments:
     - src:
-        tooltip: The list to measure.
+        tooltip: List to measure.
         type: list
     slua-deprecated:
       reason: "Use '#' or 'rawlen' instead. Metatable support."
@@ -11164,10 +11163,10 @@ functions:
   llGetNextEmail:
     arguments:
     - address:
-        tooltip: The sender email address filter.
+        tooltip: Sender email address filter.
         type: string
     - subject:
-        tooltip: The email subject filter.
+        tooltip: Email subject filter.
         type: string
     energy: 10.0
     func-id: 120
@@ -11180,11 +11179,11 @@ functions:
   llGetNotecardLine:
     arguments:
     - name:
-        tooltip: The name of the notecard in the prim's inventory, or a UUID.
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - line:
-        tooltip: The zero-based line number to request.
+        tooltip: Zero-based line number to request.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -11201,11 +11200,11 @@ functions:
   llGetNotecardLineSync:
     arguments:
     - name:
-        tooltip: The name of the notecard in the prim's inventory, or a UUID.
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - line:
-        tooltip: The zero-based line number to request.
+        tooltip: Zero-based line number to request.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -11222,7 +11221,7 @@ functions:
   llGetNumberOfNotecardLines:
     arguments:
     - name:
-        tooltip: The name of the notecard in the prim's inventory, or a UUID.
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     energy: 10.0
@@ -11286,7 +11285,7 @@ functions:
   llGetObjectDetails:
     arguments:
     - id:
-        tooltip: The UUID of the avatar or prim (in the same or adjacent regions) to
+        tooltip: UUID of the avatar or prim (in the same or adjacent regions) to
           query.
         type: key
     - params:
@@ -11310,10 +11309,10 @@ functions:
   llGetObjectLinkKey:
     arguments:
     - object_id:
-        tooltip: The UUID of the target prim or linkset.
+        tooltip: UUID of the target prim or linkset.
         type: key
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag of the
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag of the
           prim to retrieve.
         type: integer
         enum-semantics: Link
@@ -11330,7 +11329,7 @@ functions:
   llGetObjectMass:
     arguments:
     - id:
-        tooltip: The UUID of the avatar or object to query.
+        tooltip: UUID of the avatar or object to query.
         type: key
     energy: 10.0
     func-id: 295
@@ -11357,7 +11356,7 @@ functions:
   llGetObjectPermMask:
     arguments:
     - category:
-        tooltip: The MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
+        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
           MASK_EVERYONE, or MASK_NEXT).
         type: integer
         enum-semantics: Link
@@ -11375,7 +11374,7 @@ functions:
   llGetObjectPrimCount:
     arguments:
     - prim:
-        tooltip: The UUID of the prim in the same region.
+        tooltip: UUID of the prim in the same region.
         type: key
     energy: 10.0
     func-id: 323
@@ -11412,7 +11411,7 @@ functions:
   llGetOwnerKey:
     arguments:
     - id:
-        tooltip: The UUID of the prim in the same region.
+        tooltip: UUID of the prim in the same region.
         type: key
     energy: 10.0
     func-id: 182
@@ -11426,7 +11425,7 @@ functions:
   llGetParcelDetails:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates (only the X and Y components
+        tooltip: Position vector in region coordinates (only the X and Y components
           are used).
         type: vector
     - params:
@@ -11449,7 +11448,7 @@ functions:
   llGetParcelFlags:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates (the Z component is ignored).
+        tooltip: Position vector in region coordinates (the Z component is ignored).
         type: vector
     energy: 10.0
     func-id: 317
@@ -11464,7 +11463,7 @@ functions:
   llGetParcelMaxPrims:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates (the Z component is ignored).
+        tooltip: Position vector in region coordinates (the Z component is ignored).
         type: vector
     - sim_wide:
         tooltip: Boolean. If TRUE, returns the combined land impact limit for all
@@ -11497,10 +11496,10 @@ functions:
   llGetParcelPrimCount:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates (the Z component is ignored).
+        tooltip: Position vector in region coordinates (the Z component is ignored).
         type: vector
     - category:
-        tooltip: The PARCEL_COUNT_* category flag.
+        tooltip: PARCEL_COUNT_* category flag.
         type: integer
         enum-semantics: ParcelPrimCountCategory
     - sim_wide:
@@ -11523,7 +11522,7 @@ functions:
   llGetParcelPrimOwners:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates.
+        tooltip: Position vector in region coordinates.
         type: vector
     energy: 10.0
     func-id: 324
@@ -11589,7 +11588,7 @@ functions:
   llGetPrimMediaParams:
     arguments:
     - face:
-        tooltip: The face number (side) of the prim.
+        tooltip: Face number (side) of the prim.
         type: integer
         enum-semantics: Faces
     - params:
@@ -11789,7 +11788,7 @@ functions:
   llGetRenderMaterial:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -11874,7 +11873,7 @@ functions:
   llGetScriptState:
     arguments:
     - script:
-        tooltip: The name of the script in the prim's inventory.
+        tooltip: Name of the script in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 250
@@ -11891,7 +11890,7 @@ functions:
   llGetSimStats:
     arguments:
     - stat_type:
-        tooltip: The SIM_STAT_* flag of the statistic to retrieve.
+        tooltip: SIM_STAT_* flag of the statistic to retrieve.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -11942,13 +11941,13 @@ functions:
   llGetStaticPath:
     arguments:
     - start:
-        tooltip: The starting position vector.
+        tooltip: Starting position vector.
         type: vector
     - end:
-        tooltip: The target end position vector.
+        tooltip: Target end position vector.
         type: vector
     - radius:
-        tooltip: The radius of the character path, between 0.125m and 5.0m.
+        tooltip: Radius of the character path, between 0.125m and 5.0m.
         type: float
     - params:
         tooltip: A list specifying the CHARACTER_TYPE parameter (defaults to
@@ -11969,7 +11968,7 @@ functions:
   llGetStatus:
     arguments:
     - status:
-        tooltip: The single STATUS_* flag to check.
+        tooltip: Single STATUS_* flag to check.
         type: integer
         enum-semantics: ObjectStatusParam
     energy: 10.0
@@ -11986,14 +11985,14 @@ functions:
   llGetSubString:
     arguments:
     - src:
-        tooltip: The source string to slice.
+        tooltip: Source string to slice.
         type: string
     - start:
-        tooltip: The zero-based start index (inclusive).
+        tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index (inclusive).
+        tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
     energy: 10.0
@@ -12036,7 +12035,7 @@ functions:
   llGetTexture:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -12054,7 +12053,7 @@ functions:
   llGetTextureOffset:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -12070,7 +12069,7 @@ functions:
   llGetTextureRot:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -12086,7 +12085,7 @@ functions:
   llGetTextureScale:
     arguments:
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -12175,7 +12174,7 @@ functions:
   llGetUsername:
     arguments:
     - id:
-        tooltip: The UUID of the avatar in the same region or otherwise known to the
+        tooltip: UUID of the avatar in the same region or otherwise known to the
           region.
         type: key
     energy: 10.0
@@ -12204,7 +12203,7 @@ functions:
   llGetVisualParams:
     arguments:
     - agentid:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     - params:
         tooltip: A list of visual parameter IDs or names to retrieve values for.
@@ -12235,10 +12234,10 @@ functions:
   llGiveAgentInventory:
     arguments:
     - agent:
-        tooltip: The UUID of the receiving agent in the region.
+        tooltip: UUID of the receiving agent in the region.
         type: key
     - folder:
-        tooltip: The name of the destination folder to be created in the agent's
+        tooltip: Name of the destination folder to be created in the agent's
           inventory.
         type: string
     - inventory:
@@ -12262,10 +12261,10 @@ functions:
   llGiveInventory:
     arguments:
     - destination:
-        tooltip: The UUID of the destination avatar or prim.
+        tooltip: UUID of the destination avatar or prim.
         type: key
     - inventory:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 150
@@ -12280,10 +12279,10 @@ functions:
   llGiveInventoryList:
     arguments:
     - target:
-        tooltip: The UUID of the target avatar or prim in the same region.
+        tooltip: UUID of the target avatar or prim in the same region.
         type: key
     - folder:
-        tooltip: The name of the destination folder to be created (ignored if the target
+        tooltip: Name of the destination folder to be created (ignored if the target
           is an object).
         type: string
     - inventory:
@@ -12304,10 +12303,10 @@ functions:
   llGiveMoney:
     arguments:
     - destination:
-        tooltip: The UUID of the destination avatar.
+        tooltip: UUID of the destination avatar.
         type: key
     - amount:
-        tooltip: The number of L$ to transfer (must be greater than 0).
+        tooltip: Number of L$ to transfer (must be greater than 0).
         type: integer
     energy: 10.0
     func-id: 99
@@ -12326,10 +12325,10 @@ functions:
   llGodLikeRezObject:
     arguments:
     - inventory:
-        tooltip: The asset UUID of the object to rez.
+        tooltip: Asset UUID of the object to rez.
         type: key
     - pos:
-        tooltip: The position vector in region coordinates where the object will be
+        tooltip: Position vector in region coordinates where the object will be
           rezzed.
         type: vector
     energy: 10.0
@@ -12345,7 +12344,7 @@ functions:
   llGround:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -12360,7 +12359,7 @@ functions:
   llGroundContour:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -12376,7 +12375,7 @@ functions:
   llGroundNormal:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -12391,7 +12390,7 @@ functions:
   llGroundRepel:
     arguments:
     - height:
-        tooltip: The target distance in meters above the ground or water.
+        tooltip: Target distance in meters above the ground or water.
         type: float
     - water:
         tooltip: Boolean. If TRUE, damp relative to the higher of land and water; if
@@ -12399,7 +12398,7 @@ functions:
         type: integer
         bool-semantics: true
     - tau:
-        tooltip: The timescale in seconds to critically damp the movement.
+        tooltip: Timescale in seconds to critically damp the movement.
         type: float
     energy: 10.0
     func-id: 230
@@ -12414,7 +12413,7 @@ functions:
   llGroundSlope:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -12429,13 +12428,13 @@ functions:
   llHMAC:
     arguments:
     - private_key:
-        tooltip: The PEM-formatted secret key to use for the HMAC hash.
+        tooltip: PEM-formatted secret key to use for the HMAC hash.
         type: string
     - msg:
-        tooltip: The message string to be hashed.
+        tooltip: Message string to be hashed.
         type: string
     - algorithm:
-        tooltip: The cryptographic digest algorithm to use.
+        tooltip: Cryptographic digest algorithm to use.
         type: string
     energy: 10.0
     func-id: 538
@@ -12450,14 +12449,14 @@ functions:
   llHTTPRequest:
     arguments:
     - url:
-        tooltip: The destination HTTP or HTTPS URL.
+        tooltip: Destination HTTP or HTTPS URL.
         type: string
     - parameters:
         tooltip: A list of HTTP_* configuration flags and value pairs.
         type: list
         param-semantics: HTTPRequestParam
     - body:
-        tooltip: The string contents of the request body.
+        tooltip: String contents of the request body.
         type: string
     energy: 10.0
     func-id: 320
@@ -12472,14 +12471,14 @@ functions:
   llHTTPResponse:
     arguments:
     - request_id:
-        tooltip: The unique key identifying the incoming HTTP request.
+        tooltip: Unique key identifying the incoming HTTP request.
         type: key
     - status:
-        tooltip: The integer HTTP status code (such as 200, 400, or 404) to respond
+        tooltip: Integer HTTP status code (such as 200, 400, or 404) to respond
           with.
         type: integer
     - body:
-        tooltip: The string contents of the response body.
+        tooltip: String contents of the response body.
         type: string
     energy: 10.0
     func-id: 348
@@ -12495,7 +12494,7 @@ functions:
   llHash:
     arguments:
     - val:
-        tooltip: The string to hash.
+        tooltip: String to hash.
         type: string
     energy: 10.0
     func-id: 528
@@ -12509,14 +12508,14 @@ functions:
   llInsertString:
     arguments:
     - dst:
-        tooltip: The target destination string.
+        tooltip: Target destination string.
         type: string
     - pos:
-        tooltip: The zero-based position index where insertion starts.
+        tooltip: Zero-based position index where insertion starts.
         type: integer
         index-semantics: true
     - src:
-        tooltip: The source string to insert.
+        tooltip: Source string to insert.
         type: string
     energy: 10.0
     func-id: 96
@@ -12530,10 +12529,10 @@ functions:
   llInstantMessage:
     arguments:
     - user:
-        tooltip: The UUID of the destination user.
+        tooltip: UUID of the destination user.
         type: key
     - message:
-        tooltip: The text message string to send.
+        tooltip: Text message string to send.
         type: string
     energy: 10.0
     func-id: 118
@@ -12546,7 +12545,7 @@ functions:
   llIntegerToBase64:
     arguments:
     - number:
-        tooltip: The integer number to encode.
+        tooltip: Integer number to encode.
         type: integer
     energy: 10.0
     func-id: 280
@@ -12560,7 +12559,7 @@ functions:
   llIsFriend:
     arguments:
     - agent_id:
-        tooltip: The UUID of the agent to check.
+        tooltip: UUID of the agent to check.
         type: key
     energy: 10.0
     func-id: 542
@@ -12575,11 +12574,11 @@ functions:
   llIsLinkGLTFMaterial:
     arguments:
     - link:
-        tooltip: The link number (or LINK_* flag) of the prim to inspect.
+        tooltip: Link number (or LINK_* flag) of the prim to inspect.
         type: integer
         enum-semantics: Link
     - face:
-        tooltip: The face number (or ALL_SIDES) of the prim to inspect.
+        tooltip: Face number (or ALL_SIDES) of the prim to inspect.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -12597,7 +12596,7 @@ functions:
   llJson2List:
     arguments:
     - src:
-        tooltip: The JSON string to parse.
+        tooltip: JSON string to parse.
         type: string
     slua-deprecated:
       use: lljson.decode
@@ -12614,7 +12613,7 @@ functions:
   llJsonGetValue:
     arguments:
     - json:
-        tooltip: The JSON string to query.
+        tooltip: JSON string to query.
         type: string
     - specifiers:
         tooltip: A list of key names or array indices specifying the path to the desired
@@ -12639,7 +12638,7 @@ functions:
   llJsonSetValue:
     arguments:
     - json:
-        tooltip: The source JSON string to modify.
+        tooltip: Source JSON string to modify.
         type: string
     - specifiers:
         tooltip: A list of key names or array indices specifying the path to add,
@@ -12649,7 +12648,7 @@ functions:
           # But we don't support that in the bindgen yet.
           # index-semantics: true
     - value:
-        tooltip: The new value to set, or the JSON_DELETE constant to delete the
+        tooltip: New value to set, or the JSON_DELETE constant to delete the
           targeted element.
         type: string
     slua-deprecated:
@@ -12670,7 +12669,7 @@ functions:
   llJsonValueType:
     arguments:
     - json:
-        tooltip: The JSON string containing the value to query.
+        tooltip: JSON string containing the value to query.
         type: string
     - specifiers:
         tooltip: A list of key names or array indices specifying the path to the value.
@@ -12694,7 +12693,7 @@ functions:
   llKey2Name:
     arguments:
     - id:
-        tooltip: The UUID of the target avatar or prim in the same region.
+        tooltip: UUID of the target avatar or prim in the same region.
         type: key
     energy: 10.0
     func-id: 210
@@ -12724,11 +12723,11 @@ functions:
   llKeysKeyValue:
     arguments:
     - first:
-        tooltip: The zero-based start index of the keys to retrieve.
+        tooltip: Zero-based start index of the keys to retrieve.
         type: integer
         index-semantics: true
     - count:
-        tooltip: The number of keys to retrieve.
+        tooltip: Number of keys to retrieve.
         type: integer
     energy: 10.0
     experience: true
@@ -12747,7 +12746,7 @@ functions:
   llLinear2sRGB:
     arguments:
     - color:
-        tooltip: The RGB color vector in linear space to convert.
+        tooltip: RGB color vector in linear space to convert.
         type: vector
     energy: 10.0
     func-id: 715
@@ -12763,12 +12762,12 @@ functions:
   llLinkAdjustSoundVolume:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag of the
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag of the
           prim to adjust.
         type: integer
         enum-semantics: Links
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 535
@@ -12781,7 +12780,7 @@ functions:
   llLinkParticleSystem:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - rules:
@@ -12800,15 +12799,15 @@ functions:
   llLinkPlaySound:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     - flags:
         tooltip: Bitwise flags (combination of SOUND_*) controlling the sound playback.
@@ -12827,7 +12826,7 @@ functions:
   llLinkSetSoundQueueing:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - queue:
@@ -12845,11 +12844,11 @@ functions:
   llLinkSetSoundRadius:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - radius:
-        tooltip: The maximum distance in meters at which the sounds can be heard.
+        tooltip: Maximum distance in meters at which the sounds can be heard.
         type: float
     energy: 10.0
     func-id: 536
@@ -12862,14 +12861,14 @@ functions:
   llLinkSitTarget:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     - offset:
-        tooltip: The offset position vector in local prim coordinates.
+        tooltip: Offset position vector in local prim coordinates.
         type: vector
     - rot:
-        tooltip: The rotation relative to the prim's rotation.
+        tooltip: Rotation relative to the prim's rotation.
         type: rotation
     energy: 10.0
     func-id: 375
@@ -12884,7 +12883,7 @@ functions:
   llLinkStopSound:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     energy: 10.0
@@ -12940,7 +12939,7 @@ functions:
   llLinksetDataDelete:
     arguments:
     - name:
-        tooltip: The key name of the key-value pair to delete.
+        tooltip: Key name of the key-value pair to delete.
         type: string
     energy: 10.0
     func-id: 652
@@ -12959,7 +12958,7 @@ functions:
         tooltip: A regular expression (regex) specifying which keys to delete.
         type: string
     - pass:
-        tooltip: The optional passphrase required to delete matching protected keys.
+        tooltip: Optional passphrase required to delete matching protected keys.
         type: string
     energy: 10.0
     func-id: 662
@@ -12976,10 +12975,10 @@ functions:
   llLinksetDataDeleteProtected:
     arguments:
     - name:
-        tooltip: The key name of the protected key-value pair to delete.
+        tooltip: Key name of the protected key-value pair to delete.
         type: string
     - pass:
-        tooltip: The passphrase required to delete the protected key.
+        tooltip: Passphrase required to delete the protected key.
         type: string
     energy: 10.0
     func-id: 660
@@ -12999,11 +12998,11 @@ functions:
         tooltip: A regular expression (regex) describing which keys to search for.
         type: string
     - start:
-        tooltip: The zero-based start index of the matching keys to return.
+        tooltip: Zero-based start index of the matching keys to return.
         type: integer
         index-semantics: true
     - count:
-        tooltip: The maximum number of keys to return (or less than 1 to retrieve all
+        tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           matching keys).
         type: integer
     energy: 10.0
@@ -13022,11 +13021,11 @@ functions:
   llLinksetDataListKeys:
     arguments:
     - start:
-        tooltip: The zero-based start index of the keys to return.
+        tooltip: Zero-based start index of the keys to return.
         type: integer
         index-semantics: true
     - count:
-        tooltip: The maximum number of keys to return (or less than 1 to retrieve all
+        tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           keys).
         type: integer
     energy: 10.0
@@ -13044,7 +13043,7 @@ functions:
   llLinksetDataRead:
     arguments:
     - name:
-        tooltip: The key of the key-value pair to read.
+        tooltip: Key of the key-value pair to read.
         type: string
     energy: 10.0
     func-id: 651
@@ -13060,10 +13059,10 @@ functions:
   llLinksetDataReadProtected:
     arguments:
     - name:
-        tooltip: The key of the protected key-value pair to read.
+        tooltip: Key of the protected key-value pair to read.
         type: string
     - pass:
-        tooltip: The passphrase required to read the protected key.
+        tooltip: Passphrase required to read the protected key.
         type: string
     energy: 10.0
     func-id: 659
@@ -13092,10 +13091,10 @@ functions:
   llLinksetDataWrite:
     arguments:
     - name:
-        tooltip: The key name of the key-value pair.
+        tooltip: Key name of the key-value pair.
         type: string
     - value:
-        tooltip: The string value to write to the datastore.
+        tooltip: String value to write to the datastore.
         type: string
     energy: 10.0
     func-id: 650
@@ -13111,13 +13110,13 @@ functions:
   llLinksetDataWriteProtected:
     arguments:
     - name:
-        tooltip: The key name of the protected key-value pair.
+        tooltip: Key name of the protected key-value pair.
         type: string
     - value:
-        tooltip: The string value to write to the datastore.
+        tooltip: String value to write to the datastore.
         type: string
     - pass:
-        tooltip: The passphrase used to protect or update the key.
+        tooltip: Passphrase used to protect or update the key.
         type: string
     energy: 10.0
     func-id: 658
@@ -13134,7 +13133,7 @@ functions:
   llList2CSV:
     arguments:
     - src:
-        tooltip: The source list to convert.
+        tooltip: Source list to convert.
         type: list
     energy: 10.0
     func-id: 195
@@ -13149,10 +13148,10 @@ functions:
   llList2Float:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13172,10 +13171,10 @@ functions:
   llList2Integer:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13195,10 +13194,10 @@ functions:
   llList2Json:
     arguments:
     - type:
-        tooltip: The JSON target type (JSON_ARRAY or JSON_OBJECT).
+        tooltip: JSON target type (JSON_ARRAY or JSON_OBJECT).
         type: string
     - values:
-        tooltip: The list of values to serialize.
+        tooltip: List of values to serialize.
         type: list
     slua-deprecated:
       use: lljson.encode
@@ -13218,10 +13217,10 @@ functions:
   llList2Key:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13243,15 +13242,15 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The source list to slice.
+        tooltip: Source list to slice.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The zero-based start index (inclusive).
+        tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index (inclusive).
+        tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13274,22 +13273,22 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The source strided list.
+        tooltip: Source strided list.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The zero-based start index (inclusive).
+        tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index (inclusive).
+        tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
     - stride:
-        tooltip: The number of entries per stride (defaults to 1 if less than 1).
+        tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
     - slice_index:
-        tooltip: The zero-based element index within each stride to extract (negatives
+        tooltip: Zero-based element index within each stride to extract (negatives
           count backward from the end of the stride).
         type: integer
         index-semantics: true
@@ -13310,19 +13309,19 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The source strided list.
+        tooltip: Source strided list.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The zero-based start index (inclusive).
+        tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index (inclusive).
+        tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
     - stride:
-        tooltip: The number of entries per stride (defaults to 1 if less than 1).
+        tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
     slua-deprecated:
       reason: Prefer structured tables over strided lists.
@@ -13339,10 +13338,10 @@ functions:
   llList2Rot:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13363,10 +13362,10 @@ functions:
   llList2String:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13386,10 +13385,10 @@ functions:
   llList2Vector:
     arguments:
     - src:
-        tooltip: The source list containing the element of interest.
+        tooltip: Source list containing the element of interest.
         type: list
     - index:
-        tooltip: The zero-based index of the entry.
+        tooltip: Zero-based index of the entry.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13409,10 +13408,10 @@ functions:
   llListFindList:
     arguments:
     - src:
-        tooltip: The list to search within.
+        tooltip: List to search within.
         type: list
     - test:
-        tooltip: The list elements to search for.
+        tooltip: List elements to search for.
         type: list
     slua-deprecated:
       use: table.find
@@ -13431,13 +13430,13 @@ functions:
   llListFindListNext:
     arguments:
     - src:
-        tooltip: The list to search within.
+        tooltip: List to search within.
         type: list
     - test:
-        tooltip: The list elements to search for.
+        tooltip: List elements to search for.
         type: list
     - instance:
-        tooltip: The zero-based occurrence index of the match to find.
+        tooltip: Zero-based occurrence index of the match to find.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13457,21 +13456,21 @@ functions:
   llListFindStrided:
     arguments:
     - src:
-        tooltip: The list to search within.
+        tooltip: List to search within.
         type: list
     - test:
-        tooltip: The list elements to search for.
+        tooltip: List elements to search for.
         type: list
     - start:
-        tooltip: The zero-based start index of the range to search.
+        tooltip: Zero-based start index of the range to search.
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index of the range to search.
+        tooltip: Zero-based end index of the range to search.
         type: integer
         index-semantics: true
     - stride:
-        tooltip: The number of entries per stride in the list.
+        tooltip: Number of entries per stride in the list.
         type: integer
     slua-deprecated:
       reason: Prefer dictionary lookups over strided list searches.
@@ -13490,15 +13489,15 @@ functions:
     type-arguments: [T]
     arguments:
     - dest:
-        tooltip: The target destination list.
+        tooltip: Target destination list.
         type: list
         slua-type: '{T}'
     - src:
-        tooltip: The source list to insert.
+        tooltip: Source list to insert.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The zero-based index where insertion begins.
+        tooltip: Zero-based index where insertion begins.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13522,11 +13521,11 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The source list to randomize.
+        tooltip: Source list to randomize.
         type: list
         slua-type: '{T}'
     - stride:
-        tooltip: The size of each randomized block (defaults to 1 if less than 1).
+        tooltip: Size of each randomized block (defaults to 1 if less than 1).
         type: integer
     energy: 10.0
     func-id: 197
@@ -13543,19 +13542,19 @@ functions:
     type-arguments: [T]
     arguments:
     - dest:
-        tooltip: The target destination list.
+        tooltip: Target destination list.
         type: list
         slua-type: '{T}'
     - src:
-        tooltip: The source list to insert.
+        tooltip: Source list to insert.
         type: list
         slua-type: '{T}'
     - start:
-        tooltip: The zero-based start index (inclusive) of the replaced range.
+        tooltip: Zero-based start index (inclusive) of the replaced range.
         type: integer
         index-semantics: true
     - end:
-        tooltip: The zero-based end index (inclusive) of the replaced range.
+        tooltip: Zero-based end index (inclusive) of the replaced range.
         type: integer
         index-semantics: true
     slua-deprecated:
@@ -13577,11 +13576,11 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The list to be sorted.
+        tooltip: List to be sorted.
         type: list
         slua-type: '{T}'
     - stride:
-        tooltip: The number of entries per block/stride (defaults to 1 if less than 1).
+        tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
@@ -13603,14 +13602,14 @@ functions:
     type-arguments: [T]
     arguments:
     - src:
-        tooltip: The list to be sorted.
+        tooltip: List to be sorted.
         type: list
         slua-type: '{T}'
     - stride:
-        tooltip: The number of entries per block/stride (defaults to 1 if less than 1).
+        tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
     - stride_index:
-        tooltip: The zero-based index of the element within each stride to use as the
+        tooltip: Zero-based index of the element within each stride to use as the
           sort key (negatives count backward from the end of the stride).
         type: integer
         index-semantics: true
@@ -13636,11 +13635,11 @@ functions:
   llListStatistics:
     arguments:
     - operation:
-        tooltip: The LIST_STAT_* constant of the statistical operation to perform.
+        tooltip: LIST_STAT_* constant of the statistical operation to perform.
         type: integer
         enum-semantics: ListStatisticsOperation
     - src:
-        tooltip: The list of floats and integers to analyze.
+        tooltip: List of floats and integers to analyze.
         type: list
     energy: 10.0
     func-id: 315
@@ -13656,19 +13655,19 @@ functions:
   llListen:
     arguments:
     - channel:
-        tooltip: The input chat channel to listen on (any integer from -2147483648 to
+        tooltip: Input chat channel to listen on (any integer from -2147483648 to
           2147483647).
         type: integer
     - name:
-        tooltip: The specific prim name or avatar legacy name to filter by (or empty
+        tooltip: Specific prim name or avatar legacy name to filter by (or empty
           string for no filter).
         type: string
     - id:
-        tooltip: The specific avatar or prim UUID to filter by (or NULL_KEY for no
+        tooltip: Specific avatar or prim UUID to filter by (or NULL_KEY for no
           filter).
         type: key
     - msg:
-        tooltip: The specific chat message string to filter by (or empty string for no
+        tooltip: Specific chat message string to filter by (or empty string for no
           filter).
         type: string
     energy: 10.0
@@ -13685,7 +13684,7 @@ functions:
   llListenControl:
     arguments:
     - handle:
-        tooltip: The integer listener handle returned by llListen.
+        tooltip: Integer listener handle returned by llListen.
         type: integer
     - active:
         tooltip: Boolean. If TRUE, activates the listener; if FALSE, deactivates it.
@@ -13704,7 +13703,7 @@ functions:
   llListenRemove:
     arguments:
     - handle:
-        tooltip: The integer listener handle returned by llListen to remove.
+        tooltip: Integer listener handle returned by llListen to remove.
         type: integer
     energy: 10.0
     func-id: 27
@@ -13718,13 +13717,13 @@ functions:
   llLoadURL:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     - message:
-        tooltip: The text message to display in the dialog box.
+        tooltip: Text message to display in the dialog box.
         type: string
     - url:
-        tooltip: The web URL to open.
+        tooltip: Web URL to open.
         type: string
     energy: 10.0
     func-id: 297
@@ -13740,7 +13739,7 @@ functions:
   llLog:
     arguments:
     - val:
-        tooltip: The float value to evaluate.
+        tooltip: Float value to evaluate.
         type: float
     slua-deprecated:
       use: math.log
@@ -13759,7 +13758,7 @@ functions:
   llLog10:
     arguments:
     - val:
-        tooltip: The float value to evaluate.
+        tooltip: Float value to evaluate.
         type: float
     slua-deprecated:
       use: math.log10
@@ -13778,14 +13777,14 @@ functions:
   llLookAt:
     arguments:
     - target:
-        tooltip: The target position vector in region coordinates to look at.
+        tooltip: Target position vector in region coordinates to look at.
         type: vector
     - strength:
-        tooltip: The force of rotation (0.0 cancels the tracking; values around half the
+        tooltip: Force of rotation (0.0 cancels the tracking; values around half the
           object's mass are typical).
         type: float
     - damping:
-        tooltip: The timescale in seconds to critically damp the orientation.
+        tooltip: Timescale in seconds to critically damp the orientation.
         type: float
     energy: 10.0
     func-id: 105
@@ -13801,11 +13800,11 @@ functions:
   llLoopSound:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 87
@@ -13819,11 +13818,11 @@ functions:
   llLoopSoundMaster:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 88
@@ -13837,11 +13836,11 @@ functions:
   llLoopSoundSlave:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 89
@@ -13854,10 +13853,10 @@ functions:
   llMD5String:
     arguments:
     - src:
-        tooltip: The source string to hash.
+        tooltip: Source string to hash.
         type: string
     - nonce:
-        tooltip: The nonce string used as a salt.
+        tooltip: Nonce string used as a salt.
         type: integer
     energy: 10.0
     func-id: 258
@@ -13886,11 +13885,11 @@ functions:
         tooltip: ""
         type: float
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - offset:
-        tooltip: The offset relative to the prim's position (expressed in local
+        tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
         type: vector
     deprecated:
@@ -13921,11 +13920,11 @@ functions:
         tooltip: ""
         type: float
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - offset:
-        tooltip: The offset relative to the prim's position (expressed in local
+        tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
         type: vector
     deprecated:
@@ -13958,11 +13957,11 @@ functions:
         tooltip: ""
         type: integer
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - offset:
-        tooltip: The offset relative to the prim's position (expressed in local
+        tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
         type: vector
     - bounce_offset:
@@ -13996,11 +13995,11 @@ functions:
         tooltip: ""
         type: float
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - offset:
-        tooltip: The offset relative to the prim's position (expressed in local
+        tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
         type: vector
     deprecated:
@@ -14019,7 +14018,7 @@ functions:
         type: integer
         enum-semantics: EstateAccessParam
     - avatar:
-        tooltip: The UUID of the avatar or group to add or remove.
+        tooltip: UUID of the avatar or group to add or remove.
         type: key
     energy: 10.0
     func-id: 393
@@ -14035,10 +14034,10 @@ functions:
   llMapBeacon:
     arguments:
     - region_name:
-        tooltip: The name of the region where the beacon is displayed.
+        tooltip: Name of the region where the beacon is displayed.
         type: string
     - pos:
-        tooltip: The position vector in region coordinates to highlight.
+        tooltip: Position vector in region coordinates to highlight.
         type: vector
     - options:
         tooltip: A list of options to configure the map beacon.
@@ -14057,10 +14056,10 @@ functions:
   llMapDestination:
     arguments:
     - simname:
-        tooltip: The name of the target simulator region.
+        tooltip: Name of the target simulator region.
         type: string
     - pos:
-        tooltip: The position vector in region coordinates to highlight.
+        tooltip: Position vector in region coordinates to highlight.
         type: vector
     - look_at:
         tooltip: Position in local coordinates (currently unused/ignored).
@@ -14079,7 +14078,7 @@ functions:
   llMessageLinked:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag
           controlling which prim(s) receive the message.
         type: integer
         enum-semantics: Links
@@ -14107,7 +14106,7 @@ functions:
   llMinEventDelay:
     arguments:
     - delay:
-        tooltip: The minimum delay duration in seconds.
+        tooltip: Minimum delay duration in seconds.
         type: float
     energy: 10.0
     func-id: 125
@@ -14120,13 +14119,13 @@ functions:
   llModPow:
     arguments:
     - a:
-        tooltip: The base integer value.
+        tooltip: Base integer value.
         type: integer
     - b:
-        tooltip: The power exponent (capped at 0xFFFF / 16 bits).
+        tooltip: Power exponent (capped at 0xFFFF / 16 bits).
         type: integer
     - c:
-        tooltip: The modulus integer value.
+        tooltip: Modulus integer value.
         type: integer
     energy: 10.0
     func-id: 300
@@ -14140,12 +14139,12 @@ functions:
   llModifyLand:
     arguments:
     - action:
-        tooltip: The LAND_* action flag to perform (e.g., LAND_LEVEL, LAND_RAISE,
+        tooltip: LAND_* action flag to perform (e.g., LAND_LEVEL, LAND_RAISE,
           LAND_LOWER, LAND_SMOOTH, LAND_NOISE, or LAND_REVERT).
         type: integer
         enum-semantics: ModifyLandAction
     - brush:
-        tooltip: The brush size (0, 1, or 2, representing 2m x 2m, 4m x 4m, or 8m x 8m).
+        tooltip: Brush size (0, 1, or 2, representing 2m x 2m, 4m x 4m, or 8m x 8m).
         type: integer
         enum-semantics: ModifyLandBrush
     energy: 10.0
@@ -14159,10 +14158,10 @@ functions:
   llMoveToTarget:
     arguments:
     - target:
-        tooltip: The target position vector in region coordinates.
+        tooltip: Target position vector in region coordinates.
         type: vector
     - tau:
-        tooltip: The timescale in seconds to critically damp the movement.
+        tooltip: Timescale in seconds to critically damp the movement.
         type: float
     energy: 10.0
     func-id: 70
@@ -14177,7 +14176,7 @@ functions:
   llName2Key:
     arguments:
     - name:
-        tooltip: The name of the avatar (e.g., 'First Last' or 'first.last').
+        tooltip: Name of the avatar (e.g., 'First Last' or 'first.last').
         type: string
     energy: 10.0
     func-id: 524
@@ -14193,7 +14192,7 @@ functions:
   llNavigateTo:
     arguments:
     - pos:
-        tooltip: The destination position vector in region coordinates.
+        tooltip: Destination position vector in region coordinates.
         type: vector
     - options:
         tooltip: A list of parameters to configure pathfinding behavior (currently only
@@ -14212,13 +14211,13 @@ functions:
   llOffsetTexture:
     arguments:
     - u:
-        tooltip: The horizontal (U) offset, typically in the interval [-1.0, 1.0].
+        tooltip: Horizontal (U) offset, typically in the interval [-1.0, 1.0].
         type: float
     - v:
-        tooltip: The vertical (V) offset, typically in the interval [-1.0, 1.0].
+        tooltip: Vertical (V) offset, typically in the interval [-1.0, 1.0].
         type: float
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -14233,10 +14232,10 @@ functions:
   llOpenFloater:
     arguments:
     - floater_name:
-        tooltip: The identifier string of the viewer floater to open.
+        tooltip: Identifier string of the viewer floater to open.
         type: string
     - url:
-        tooltip: The URL to load within the opened floater.
+        tooltip: URL to load within the opened floater.
         type: string
     - params:
         tooltip: Options or parameters to apply to the opened floater.
@@ -14265,10 +14264,10 @@ functions:
   llOrd:
     arguments:
     - val:
-        tooltip: The source string containing the character.
+        tooltip: Source string containing the character.
         type: string
     - index:
-        tooltip: The zero-based index of the character to convert.
+        tooltip: Zero-based index of the character to convert.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -14283,7 +14282,7 @@ functions:
   llOverMyLand:
     arguments:
     - id:
-        tooltip: The UUID of the group, avatar, or object to check.
+        tooltip: UUID of the group, avatar, or object to check.
         type: key
     energy: 10.0
     func-id: 215
@@ -14298,7 +14297,7 @@ functions:
   llOwnerSay:
     arguments:
     - msg:
-        tooltip: The text message string to send.
+        tooltip: Text message string to send.
         type: string
     slua-deprecated:
       use: "print"
@@ -14354,7 +14353,7 @@ functions:
   llParseString2List:
     arguments:
     - src:
-        tooltip: The source string to parse.
+        tooltip: Source string to parse.
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
@@ -14379,7 +14378,7 @@ functions:
   llParseStringKeepNulls:
     arguments:
     - src:
-        tooltip: The source string to parse.
+        tooltip: Source string to parse.
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
@@ -14469,11 +14468,11 @@ functions:
   llPlaySound:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 86
@@ -14488,11 +14487,11 @@ functions:
   llPlaySoundSlave:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 90
@@ -14505,7 +14504,7 @@ functions:
   llPointAt:
     arguments:
     - pos:
-        tooltip: The position vector to point at.
+        tooltip: Position vector to point at.
         type: vector
     deprecated: true
     energy: 10.0
@@ -14520,10 +14519,10 @@ functions:
   llPow:
     arguments:
     - base:
-        tooltip: The base float value.
+        tooltip: Base float value.
         type: float
     - exponent:
-        tooltip: The exponent float value.
+        tooltip: Exponent float value.
         type: float
     slua-deprecated:
       use: "^"
@@ -14542,7 +14541,7 @@ functions:
   llPreloadSound:
     arguments:
     - sound:
-        tooltip: The name of the sound in the prim's inventory, or a UUID.
+        tooltip: Name of the sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     energy: 10.0
@@ -14556,7 +14555,7 @@ functions:
   llPursue:
     arguments:
     - target:
-        tooltip: The UUID of the group, avatar, or object to pursue.
+        tooltip: UUID of the group, avatar, or object to pursue.
         type: key
     - options:
         tooltip: A list of options to configure pursuit behavior.
@@ -14573,14 +14572,14 @@ functions:
   llPushObject:
     arguments:
     - target:
-        tooltip: The UUID of the target avatar or object in the same region.
+        tooltip: UUID of the target avatar or object in the same region.
         type: key
     - impulse:
-        tooltip: The linear impulse vector representing the direction and force of the
+        tooltip: Linear impulse vector representing the direction and force of the
           push.
         type: vector
     - ang_impulse:
-        tooltip: The angular impulse vector representing the rotational force.
+        tooltip: Angular impulse vector representing the rotational force.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, forces are applied relative to the target's local
@@ -14599,7 +14598,7 @@ functions:
   llReadKeyValue:
     arguments:
     - k:
-        tooltip: The key of the key-value pair to read.
+        tooltip: Key of the key-value pair to read.
         type: string
     energy: 10.0
     experience: true
@@ -14631,10 +14630,10 @@ functions:
   llRegionSay:
     arguments:
     - channel:
-        tooltip: The output chat channel to broadcast on (must be non-zero).
+        tooltip: Output chat channel to broadcast on (must be non-zero).
         type: integer
     - msg:
-        tooltip: The text message string to broadcast.
+        tooltip: Text message string to broadcast.
         type: string
     energy: 10.0
     func-id: 331
@@ -14648,13 +14647,13 @@ functions:
   llRegionSayTo:
     arguments:
     - target:
-        tooltip: The UUID of the destination avatar or prim in the same region.
+        tooltip: UUID of the destination avatar or prim in the same region.
         type: key
     - channel:
-        tooltip: The output chat channel (any integer value).
+        tooltip: Output chat channel (any integer value).
         type: integer
     - msg:
-        tooltip: The text message string to send.
+        tooltip: Text message string to send.
         type: string
     energy: 10.0
     func-id: 364
@@ -14671,7 +14670,7 @@ functions:
   llReleaseCamera:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     deprecated:
       use: ll.ClearCameraParams
@@ -14702,7 +14701,7 @@ functions:
   llReleaseURL:
     arguments:
     - url:
-        tooltip: The URL string to release.
+        tooltip: URL string to release.
         type: string
     energy: 10.0
     func-id: 347
@@ -14716,16 +14715,16 @@ functions:
   llRemoteDataReply:
     arguments:
     - channel:
-        tooltip: The XML-RPC channel ID.
+        tooltip: XML-RPC channel ID.
         type: key
     - message_id:
-        tooltip: The XML-RPC message ID.
+        tooltip: XML-RPC message ID.
         type: key
     - sdata:
-        tooltip: The string payload data to reply with.
+        tooltip: String payload data to reply with.
         type: string
     - idata:
-        tooltip: The integer payload data to reply with.
+        tooltip: Integer payload data to reply with.
         type: integer
     deprecated: true
     energy: 10.0
@@ -14750,16 +14749,16 @@ functions:
   llRemoteLoadScript:
     arguments:
     - target:
-        tooltip: The UUID of the target prim.
+        tooltip: UUID of the target prim.
         type: key
     - name:
-        tooltip: The name of the script in the prim's inventory.
+        tooltip: Name of the script in the prim's inventory.
         type: string
     - running:
         tooltip: Whether the script should start running.
         type: integer
     - start_param:
-        tooltip: The start parameter passed to the script.
+        tooltip: Start parameter passed to the script.
         type: integer
     deprecated: true
     energy: 10.0
@@ -14774,13 +14773,13 @@ functions:
   llRemoteLoadScriptPin:
     arguments:
     - target:
-        tooltip: The UUID of the target prim in the same region.
+        tooltip: UUID of the target prim in the same region.
         type: key
     - name:
-        tooltip: The name of the script in the prim's inventory.
+        tooltip: Name of the script in the prim's inventory.
         type: string
     - pin:
-        tooltip: The integer PIN code (must match the PIN set on the target via
+        tooltip: Integer PIN code (must match the PIN set on the target via
           llSetRemoteScriptAccessPin).
         type: integer
     - running:
@@ -14789,7 +14788,7 @@ functions:
         type: integer
         bool-semantics: true
     - start_param:
-        tooltip: The integer start parameter passed to the copied script (readable via
+        tooltip: Integer start parameter passed to the copied script (readable via
           llGetStartParameter).
         type: integer
     energy: 10.0
@@ -14807,7 +14806,7 @@ functions:
   llRemoveFromLandBanList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar to remove.
+        tooltip: UUID of the avatar to remove.
         type: key
     energy: 10.0
     func-id: 312
@@ -14820,7 +14819,7 @@ functions:
   llRemoveFromLandPassList:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar to remove.
+        tooltip: UUID of the avatar to remove.
         type: key
     energy: 10.0
     func-id: 311
@@ -14833,7 +14832,7 @@ functions:
   llRemoveInventory:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory to remove.
+        tooltip: Name of the item in the prim's inventory to remove.
         type: string
     energy: 10.0
     func-id: 151
@@ -14860,14 +14859,14 @@ functions:
   llReplaceAgentEnvironment:
     arguments:
     - agent_id:
-        tooltip: The UUID of an agent in the region participating in the experience.
+        tooltip: UUID of an agent in the region participating in the experience.
         type: key
     - transition:
-        tooltip: The duration in seconds over which to transition to the new
+        tooltip: Duration in seconds over which to transition to the new
           environment.
         type: float
     - environment:
-        tooltip: The name of an environmental setting in inventory, or its asset UUID
+        tooltip: Name of an environmental setting in inventory, or its asset UUID
           (or empty string/NULL_KEY to clear).
         type: string
         asset-semantics: true
@@ -14889,11 +14888,11 @@ functions:
   llReplaceEnvironment:
     arguments:
     - position:
-        tooltip: The position vector of the target parcel (the Z component is ignored;
+        tooltip: Position vector of the target parcel (the Z component is ignored;
           use <-1.0, -1.0, -1.0> for the entire region).
         type: vector
     - environment:
-        tooltip: The name of an environmental setting in inventory, or its asset UUID
+        tooltip: Name of an environmental setting in inventory, or its asset UUID
           (or empty string/NULL_KEY to clear).
         type: string
         asset-semantics: true
@@ -14902,10 +14901,10 @@ functions:
           2000m, 4: 3000m, -1: all tracks)."
         type: integer
     - day_length:
-        tooltip: The day cycle length in seconds (-1 to leave unchanged).
+        tooltip: Day cycle length in seconds (-1 to leave unchanged).
         type: integer
     - day_offset:
-        tooltip: The day cycle offset in seconds from UTC (-1 to leave unchanged).
+        tooltip: Day cycle offset in seconds from UTC (-1 to leave unchanged).
         type: integer
     energy: 10.0
     func-id: 718
@@ -14922,16 +14921,16 @@ functions:
   llReplaceSubString:
     arguments:
     - src:
-        tooltip: The original source string to search.
+        tooltip: Original source string to search.
         type: string
     - pattern:
-        tooltip: The substring pattern to find and replace.
+        tooltip: Substring pattern to find and replace.
         type: string
     - replacement_pattern:
-        tooltip: The new substring used to replace the pattern.
+        tooltip: New substring used to replace the pattern.
         type: string
     - count:
-        tooltip: The maximum number of replacements to make (0 for all, positive for
+        tooltip: Maximum number of replacements to make (0 for all, positive for
           left-to-right, negative for right-to-left).
         type: integer
     energy: 10.0
@@ -14948,10 +14947,10 @@ functions:
   llRequestAgentData:
     arguments:
     - id:
-        tooltip: The UUID of the agent.
+        tooltip: UUID of the agent.
         type: key
     - data:
-        tooltip: The DATA_* category flag of the requested information.
+        tooltip: DATA_* category flag of the requested information.
         type: integer
         enum-semantics: AgentData
     energy: 10.0
@@ -14967,7 +14966,7 @@ functions:
   llRequestDisplayName:
     arguments:
     - id:
-        tooltip: The UUID of the avatar to query.
+        tooltip: UUID of the avatar to query.
         type: key
     energy: 10.0
     func-id: 361
@@ -14982,7 +14981,7 @@ functions:
   llRequestExperiencePermissions:
     arguments:
     - agent:
-        tooltip: The UUID of the agent to request permissions from.
+        tooltip: UUID of the agent to request permissions from.
         type: key
     - name:
         tooltip: Deprecated parameter (no longer used).
@@ -15003,7 +15002,7 @@ functions:
   llRequestInventoryData:
     arguments:
     - name:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 156
@@ -15019,10 +15018,10 @@ functions:
   llRequestPermissions:
     arguments:
     - agent:
-        tooltip: The UUID of the agent in the same region.
+        tooltip: UUID of the agent in the same region.
         type: key
     - permissions:
-        tooltip: The bitfield containing the PERMISSION_* constants to request.
+        tooltip: Bitfield containing the PERMISSION_* constants to request.
         type: integer
         enum-semantics: ScriptPermission
     energy: 10.0
@@ -15050,10 +15049,10 @@ functions:
   llRequestSimulatorData:
     arguments:
     - region:
-        tooltip: The case-sensitive region name.
+        tooltip: Case-sensitive region name.
         type: string
     - data:
-        tooltip: The DATA_SIM_* flag of the requested simulator data.
+        tooltip: DATA_SIM_* flag of the requested simulator data.
         type: integer
         enum-semantics: SimulatorData
     energy: 10.0
@@ -15080,7 +15079,7 @@ functions:
   llRequestUserKey:
     arguments:
     - username:
-        tooltip: The current or historical username of the avatar to resolve.
+        tooltip: Current or historical username of the avatar to resolve.
         type: string
     energy: 10.0
     func-id: 525
@@ -15096,7 +15095,7 @@ functions:
   llRequestUsername:
     arguments:
     - id:
-        tooltip: The UUID of the avatar to query.
+        tooltip: UUID of the avatar to query.
         type: key
     energy: 10.0
     func-id: 359
@@ -15111,7 +15110,7 @@ functions:
   llResetAnimationOverride:
     arguments:
     - anim_state:
-        tooltip: The animation state string (or 'ALL') to reset.
+        tooltip: Animation state string (or 'ALL') to reset.
         type: string
     energy: 10.0
     func-id: 502
@@ -15148,7 +15147,7 @@ functions:
   llResetOtherScript:
     arguments:
     - name:
-        tooltip: The name of the target script in the prim's inventory.
+        tooltip: Name of the target script in the prim's inventory.
         type: string
     energy: 10.0
     func-id: 249
@@ -15199,10 +15198,10 @@ functions:
   llReturnObjectsByOwner:
     arguments:
     - owner:
-        tooltip: The UUID of the avatar or group whose objects will be returned.
+        tooltip: UUID of the avatar or group whose objects will be returned.
         type: key
     - scope:
-        tooltip: The OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL,
+        tooltip: OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL,
           OBJECT_RETURN_PARCEL_OWNER, or OBJECT_RETURN_REGION).
         type: integer
         enum-semantics: ReturnObjectsScope
@@ -15223,20 +15222,20 @@ functions:
   llRezAtRoot:
     arguments:
     - inventory:
-        tooltip: The name of the object in the prim's inventory.
+        tooltip: Name of the object in the prim's inventory.
         type: string
     - position:
-        tooltip: The position vector in region coordinates where the root of the object
+        tooltip: Position vector in region coordinates where the root of the object
           will be placed.
         type: vector
     - velocity:
-        tooltip: The initial velocity vector for the rezzed object.
+        tooltip: Initial velocity vector for the rezzed object.
         type: vector
     - rot:
-        tooltip: The initial rotation of the rezzed object.
+        tooltip: Initial rotation of the rezzed object.
         type: rotation
     - param:
-        tooltip: The start parameter passed to the rezzed object's on_rez event
+        tooltip: Start parameter passed to the rezzed object's on_rez event
           (accessible via llGetStartParameter).
         type: integer
     energy: 200.0
@@ -15252,20 +15251,20 @@ functions:
   llRezObject:
     arguments:
     - inventory:
-        tooltip: The name of the object in the prim's inventory.
+        tooltip: Name of the object in the prim's inventory.
         type: string
     - pos:
-        tooltip: The position vector in region coordinates where the center of the
+        tooltip: Position vector in region coordinates where the center of the
           object will be placed.
         type: vector
     - vel:
-        tooltip: The initial velocity vector (maximum magnitude ~200m/s).
+        tooltip: Initial velocity vector (maximum magnitude ~200m/s).
         type: vector
     - rot:
-        tooltip: The initial rotation of the rezzed object.
+        tooltip: Initial rotation of the rezzed object.
         type: rotation
     - param:
-        tooltip: The start parameter passed to the rezzed object's on_rez event
+        tooltip: Start parameter passed to the rezzed object's on_rez event
           (accessible via llGetStartParameter).
         type: integer
     energy: 200.0
@@ -15281,7 +15280,7 @@ functions:
   llRezObjectWithParams:
     arguments:
     - inventory:
-        tooltip: The name of the object in the prim's inventory.
+        tooltip: Name of the object in the prim's inventory.
         type: string
     - params:
         tooltip: A list of REZ_* parameters to configure the rezzed object's attributes.
@@ -15302,7 +15301,7 @@ functions:
   llRot2Angle:
     arguments:
     - rot:
-        tooltip: The rotation value.
+        tooltip: Rotation value.
         type: rotation
     energy: 10.0
     func-id: 171
@@ -15318,7 +15317,7 @@ functions:
   llRot2Axis:
     arguments:
     - rot:
-        tooltip: The rotation value.
+        tooltip: Rotation value.
         type: rotation
     energy: 10.0
     func-id: 170
@@ -15335,7 +15334,7 @@ functions:
   llRot2Euler:
     arguments:
     - quat:
-        tooltip: The rotation value to convert.
+        tooltip: Rotation value to convert.
         type: rotation
     energy: 10.0
     func-id: 15
@@ -15351,7 +15350,7 @@ functions:
   llRot2Fwd:
     arguments:
     - q:
-        tooltip: The rotation value.
+        tooltip: Rotation value.
         type: rotation
     slua-deprecated:
       use: quaternion.tofwd
@@ -15373,7 +15372,7 @@ functions:
   llRot2Left:
     arguments:
     - q:
-        tooltip: The rotation value.
+        tooltip: Rotation value.
         type: rotation
     slua-deprecated:
       use: quaternion.toleft
@@ -15394,7 +15393,7 @@ functions:
   llRot2Up:
     arguments:
     - q:
-        tooltip: The rotation value.
+        tooltip: Rotation value.
         type: rotation
     slua-deprecated:
       use: quaternion.toup
@@ -15415,10 +15414,10 @@ functions:
   llRotBetween:
     arguments:
     - start:
-        tooltip: The starting vector.
+        tooltip: Starting vector.
         type: vector
     - end:
-        tooltip: The target ending vector.
+        tooltip: Target ending vector.
         type: vector
     energy: 10.0
     func-id: 21
@@ -15435,14 +15434,14 @@ functions:
   llRotLookAt:
     arguments:
     - target_direction:
-        tooltip: The target rotation to align the object with.
+        tooltip: Target rotation to align the object with.
         type: rotation
     - strength:
-        tooltip: The force of rotation (0.0 cancels the tracking; values around half the
+        tooltip: Force of rotation (0.0 cancels the tracking; values around half the
           object's mass are typical).
         type: float
     - damping:
-        tooltip: The timescale in seconds to critically damp the rotation.
+        tooltip: Timescale in seconds to critically damp the rotation.
         type: float
     energy: 10.0
     func-id: 127
@@ -15457,10 +15456,10 @@ functions:
   llRotTarget:
     arguments:
     - rot:
-        tooltip: The target rotation to track.
+        tooltip: Target rotation to track.
         type: rotation
     - error:
-        tooltip: The tolerance angle in radians defining when the target rotation is
+        tooltip: Tolerance angle in radians defining when the target rotation is
           considered reached.
         type: float
     energy: 10.0
@@ -15476,7 +15475,7 @@ functions:
   llRotTargetRemove:
     arguments:
     - handle:
-        tooltip: The integer target handle returned by llRotTarget to remove.
+        tooltip: Integer target handle returned by llRotTarget to remove.
         type: integer
     energy: 10.0
     func-id: 69
@@ -15490,10 +15489,10 @@ functions:
   llRotateTexture:
     arguments:
     - angle:
-        tooltip: The rotation angle expressed in radians.
+        tooltip: Rotation angle expressed in radians.
         type: float
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -15508,7 +15507,7 @@ functions:
   llRound:
     arguments:
     - val:
-        tooltip: The float value to round.
+        tooltip: Float value to round.
         type: float
     slua-deprecated:
       use: math.round
@@ -15525,7 +15524,7 @@ functions:
   llSHA1String:
     arguments:
     - src:
-        tooltip: The source string to hash.
+        tooltip: Source string to hash.
         type: string
     energy: 10.0
     func-id: 343
@@ -15539,7 +15538,7 @@ functions:
   llSHA256String:
     arguments:
     - src:
-        tooltip: The source string to hash.
+        tooltip: Source string to hash.
         type: string
     energy: 10.0
     func-id: 531
@@ -15553,7 +15552,7 @@ functions:
   llSameGroup:
     arguments:
     - uuid:
-        tooltip: The UUID of the group, avatar, or prim to check.
+        tooltip: UUID of the group, avatar, or prim to check.
         type: key
     energy: 10.0
     func-id: 219
@@ -15569,10 +15568,10 @@ functions:
   llSay:
     arguments:
     - channel:
-        tooltip: The integer chat channel to transmit the message on.
+        tooltip: Integer chat channel to transmit the message on.
         type: integer
     - msg:
-        tooltip: The text message string to transmit.
+        tooltip: Text message string to transmit.
         type: string
     energy: 10.0
     func-id: 23
@@ -15589,7 +15588,7 @@ functions:
   llScaleByFactor:
     arguments:
     - scaling_factor:
-        tooltip: The multiplier scale factor to apply to the prim sizes and their local
+        tooltip: Multiplier scale factor to apply to the prim sizes and their local
           positions.
         type: float
     energy: 10.0
@@ -15607,15 +15606,15 @@ functions:
   llScaleTexture:
     arguments:
     - u:
-        tooltip: The horizontal (U) texture repeats scale value, in the interval
+        tooltip: Horizontal (U) texture repeats scale value, in the interval
           [-100.0, 100.0].
         type: float
     - v:
-        tooltip: The vertical (V) texture repeats scale value, in the interval [-100.0,
+        tooltip: Vertical (V) texture repeats scale value, in the interval [-100.0,
           100.0].
         type: float
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -15631,7 +15630,7 @@ functions:
   llScriptDanger:
     arguments:
     - pos:
-        tooltip: The position vector in region coordinates to check.
+        tooltip: Position vector in region coordinates to check.
         type: vector
     energy: 10.0
     func-id: 246
@@ -15648,7 +15647,7 @@ functions:
   llScriptProfiler:
     arguments:
     - flags:
-        tooltip: The PROFILE_* flag (such as PROFILE_NONE or PROFILE_SCRIPT_MEMORY) to
+        tooltip: PROFILE_* flag (such as PROFILE_NONE or PROFILE_SCRIPT_MEMORY) to
           set the profiling state.
         type: integer
         enum-semantics: ScriptProfileMode
@@ -15664,16 +15663,16 @@ functions:
   llSendRemoteData:
     arguments:
     - channel:
-        tooltip: The XML-RPC channel ID.
+        tooltip: XML-RPC channel ID.
         type: key
     - dest:
-        tooltip: The destination XML-RPC URL or server.
+        tooltip: Destination XML-RPC URL or server.
         type: string
     - idata:
-        tooltip: The integer payload data.
+        tooltip: Integer payload data.
         type: integer
     - sdata:
-        tooltip: The string payload data.
+        tooltip: String payload data.
         type: string
     deprecated: true
     energy: 10.0
@@ -15688,23 +15687,23 @@ functions:
   llSensor:
     arguments:
     - name:
-        tooltip: The specific object or avatar name to filter for (or empty string for
+        tooltip: Specific object or avatar name to filter for (or empty string for
           no filter).
         type: string
     - id:
-        tooltip: The UUID of the group, avatar, or object to filter by (or NULL_KEY for
+        tooltip: UUID of the group, avatar, or object to filter by (or NULL_KEY for
           no filter).
         type: key
     - type:
-        tooltip: The integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
+        tooltip: Integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
           AGENT_BY_USERNAME, ACTIVE, PASSIVE, or SCRIPTED (0 for no filter).
         type: integer
         enum-semantics: DetectType
     - radius:
-        tooltip: The maximum distance in meters to scan (range [0.0, 96.0]).
+        tooltip: Maximum distance in meters to scan (range [0.0, 96.0]).
         type: float
     - arc:
-        tooltip: The maximum angle in radians relative to the local X-axis to scan
+        tooltip: Maximum angle in radians relative to the local X-axis to scan
           (range [0.0, PI]).
         type: float
     energy: 10.0
@@ -15729,27 +15728,27 @@ functions:
   llSensorRepeat:
     arguments:
     - name:
-        tooltip: The specific object or avatar name to filter for (or empty string for
+        tooltip: Specific object or avatar name to filter for (or empty string for
           no filter).
         type: string
     - id:
-        tooltip: The UUID of the group, avatar, or object to filter by (or NULL_KEY for
+        tooltip: UUID of the group, avatar, or object to filter by (or NULL_KEY for
           no filter).
         type: key
     - type:
-        tooltip: The integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
+        tooltip: Integer bitfield type mask containing AGENT, AGENT_BY_LEGACY_NAME,
           AGENT_BY_USERNAME, ACTIVE, PASSIVE, or SCRIPTED (0 for no filter).
         type: integer
         enum-semantics: DetectType
     - radius:
-        tooltip: The maximum distance in meters to scan (range [0.0, 96.0]).
+        tooltip: Maximum distance in meters to scan (range [0.0, 96.0]).
         type: float
     - arc:
-        tooltip: The maximum angle in radians relative to the local X-axis to scan
+        tooltip: Maximum angle in radians relative to the local X-axis to scan
           (range [0.0, PI]).
         type: float
     - rate:
-        tooltip: The interval in seconds between repeated scans.
+        tooltip: Interval in seconds between repeated scans.
         type: float
     energy: 10.0
     func-id: 29
@@ -15763,10 +15762,10 @@ functions:
   llSetAgentEnvironment:
     arguments:
     - agent_id:
-        tooltip: The UUID of the agent participating in the experience.
+        tooltip: UUID of the agent participating in the experience.
         type: key
     - transition:
-        tooltip: The transition duration in seconds.
+        tooltip: Transition duration in seconds.
         type: float
     - params:
         tooltip: A list of environmental parameters to apply.
@@ -15789,7 +15788,7 @@ functions:
   llSetAgentRot:
     arguments:
     - rot:
-        tooltip: The target rotation to turn the avatar to face.
+        tooltip: Target rotation to turn the avatar to face.
         type: rotation
     - flags:
         tooltip: Flags to configure the rotation behavior.
@@ -15807,11 +15806,11 @@ functions:
   llSetAlpha:
     arguments:
     - alpha:
-        tooltip: The transparency value to set, from 0.0 (clear) to 1.0 (solid; clamped
+        tooltip: Transparency value to set, from 0.0 (clear) to 1.0 (solid; clamped
           to a minimum of 0.1).
         type: float
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -15827,7 +15826,7 @@ functions:
   llSetAngularVelocity:
     arguments:
     - initial_omega:
-        tooltip: The angular velocity vector to apply (in radians per second).
+        tooltip: Angular velocity vector to apply (in radians per second).
         type: vector
     - local:
         tooltip: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE,
@@ -15848,10 +15847,10 @@ functions:
   llSetAnimationOverride:
     arguments:
     - anim_state:
-        tooltip: The animation state to override.
+        tooltip: Animation state to override.
         type: string
     - anim:
-        tooltip: The name of an animation in the prim's inventory, or a built-in
+        tooltip: Name of an animation in the prim's inventory, or a built-in
           animation name.
         type: string
     energy: 10.0
@@ -15869,7 +15868,7 @@ functions:
   llSetBuoyancy:
     arguments:
     - buoyancy:
-        tooltip: The float buoyancy value to set.
+        tooltip: Float buoyancy value to set.
         type: float
     energy: 10.0
     func-id: 122
@@ -15883,7 +15882,7 @@ functions:
   llSetCameraAtOffset:
     arguments:
     - offset:
-        tooltip: The offset position vector in local coordinates relative to the prim.
+        tooltip: Offset position vector in local coordinates relative to the prim.
         type: vector
     energy: 10.0
     func-id: 244
@@ -15896,7 +15895,7 @@ functions:
   llSetCameraEyeOffset:
     arguments:
     - offset:
-        tooltip: The offset position vector in local coordinates relative to the prim.
+        tooltip: Offset position vector in local coordinates relative to the prim.
         type: vector
     energy: 10.0
     func-id: 243
@@ -15927,7 +15926,7 @@ functions:
   llSetClickAction:
     arguments:
     - action:
-        tooltip: The CLICK_ACTION_* flag representing the action to apply.
+        tooltip: CLICK_ACTION_* flag representing the action to apply.
         type: integer
         enum-semantics: ClickAction
     energy: 10.0
@@ -15945,10 +15944,10 @@ functions:
   llSetColor:
     arguments:
     - color:
-        tooltip: The color vector in RGB <R, G, B> (values from 0.0 to 1.0).
+        tooltip: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
         type: vector
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -15963,10 +15962,10 @@ functions:
   llSetContentType:
     arguments:
     - request_id:
-        tooltip: The unique key identifying the incoming HTTP request.
+        tooltip: Unique key identifying the incoming HTTP request.
         type: key
     - content_type:
-        tooltip: The CONTENT_TYPE_* constant representing the Internet media type to
+        tooltip: CONTENT_TYPE_* constant representing the Internet media type to
           use.
         type: integer
         enum-semantics: HTTPContentType
@@ -15984,7 +15983,7 @@ functions:
   llSetDamage:
     arguments:
     - damage:
-        tooltip: The float damage value to set (range -100.0 for full heal to 100.0 for
+        tooltip: Float damage value to set (range -100.0 for full heal to 100.0 for
           instant kill).
         type: float
     energy: 10.0
@@ -15999,7 +15998,7 @@ functions:
   llSetEnvironment:
     arguments:
     - position:
-        tooltip: The position vector in region coordinates to specify the target parcel,
+        tooltip: Position vector in region coordinates to specify the target parcel,
           or <-1.0, -1.0, z> for the entire region (where z specifies the sky
           track, or -1 for all tracks).
         type: vector
@@ -16036,7 +16035,7 @@ functions:
   llSetForce:
     arguments:
     - force:
-        tooltip: The directional force vector to apply.
+        tooltip: Directional force vector to apply.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a
@@ -16056,10 +16055,10 @@ functions:
   llSetForceAndTorque:
     arguments:
     - force:
-        tooltip: The directional linear force vector.
+        tooltip: Directional linear force vector.
         type: vector
     - torque:
-        tooltip: The torque rotational force vector.
+        tooltip: Torque rotational force vector.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, force and torque are treated as local vectors; if
@@ -16094,14 +16093,14 @@ functions:
   llSetHoverHeight:
     arguments:
     - height:
-        tooltip: The distance to hover above the ground or water.
+        tooltip: Distance to hover above the ground or water.
         type: float
     - water:
         tooltip: Boolean. If TRUE, hovers above water too; if FALSE, water is ignored.
         type: integer
         bool-semantics: true
     - tau:
-        tooltip: The timescale in seconds to critically damp the movement.
+        tooltip: Timescale in seconds to critically damp the movement.
         type: float
     energy: 10.0
     func-id: 123
@@ -16116,14 +16115,14 @@ functions:
   llSetInventoryPermMask:
     arguments:
     - item:
-        tooltip: The name of the item in the prim's inventory.
+        tooltip: Name of the item in the prim's inventory.
         type: string
     - category:
-        tooltip: The MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
+        tooltip: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
         type: integer
         enum-semantics: AssetPermissionCategory
     - value:
-        tooltip: The bitfield of permissions (PERM_* flags) to set.
+        tooltip: Bitfield of permissions (PERM_* flags) to set.
         type: integer
         enum-semantics: AssetPermission
     energy: 10.0
@@ -16161,14 +16160,14 @@ functions:
   llSetLinkAlpha:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - alpha:
-        tooltip: The transparency value to set, from 0.0 (clear) to 1.0 (solid).
+        tooltip: Transparency value to set, from 0.0 (clear) to 1.0 (solid).
         type: float
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16182,15 +16181,15 @@ functions:
   llSetLinkCamera:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     - eye:
-        tooltip: The eye offset position vector in local coordinates relative to the
+        tooltip: Eye offset position vector in local coordinates relative to the
           prim.
         type: vector
     - at:
-        tooltip: The look-at offset position vector in local coordinates relative to the
+        tooltip: Look-at offset position vector in local coordinates relative to the
           prim.
         type: vector
     energy: 10.0
@@ -16205,14 +16204,14 @@ functions:
   llSetLinkColor:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - color:
-        tooltip: The color vector in RGB <R, G, B> (values from 0.0 to 1.0).
+        tooltip: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
         type: vector
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16226,11 +16225,11 @@ functions:
   llSetLinkGLTFOverrides:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     - params:
@@ -16249,11 +16248,11 @@ functions:
   llSetLinkMedia:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Link
     - face:
-        tooltip: The face number (side) of the prim.
+        tooltip: Face number (side) of the prim.
         type: integer
         enum-semantics: Faces
     - params:
@@ -16277,7 +16276,7 @@ functions:
   llSetLinkPrimitiveParams:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - rules:
@@ -16300,7 +16299,7 @@ functions:
   llSetLinkPrimitiveParamsFast:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - rules:
@@ -16320,15 +16319,15 @@ functions:
   llSetLinkRenderMaterial:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - material:
-        tooltip: The name of a material in the prim's inventory, or a UUID.
+        tooltip: Name of a material in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16344,7 +16343,7 @@ functions:
   llSetLinkSitFlags:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - flags:
@@ -16362,15 +16361,15 @@ functions:
   llSetLinkTexture:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag.
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
         enum-semantics: Links
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16384,32 +16383,32 @@ functions:
   llSetLinkTextureAnim:
     arguments:
     - link:
-        tooltip: The link number (1 for root, >1 for children) or a LINK_* flag to
+        tooltip: Link number (1 for root, >1 for children) or a LINK_* flag to
           animate.
         type: integer
         enum-semantics: Links
     - mode:
-        tooltip: The bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
+        tooltip: Bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
         type: integer
         enum-semantics: TextureAnimMode
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     - sizex:
-        tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
+        tooltip: Number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
     - sizey:
-        tooltip: The number of vertical frames (ignored for ROTATE and SCALE).
+        tooltip: Number of vertical frames (ignored for ROTATE and SCALE).
         type: integer
     - start:
-        tooltip: The start frame number (or radians for ROTATE).
+        tooltip: Start frame number (or radians for ROTATE).
         type: float
     - length:
-        tooltip: The number of frames to display (or radians for ROTATE).
+        tooltip: Number of frames to display (or radians for ROTATE).
         type: float
     - rate:
-        tooltip: The playback rate in frames per second (or radians/sec for ROTATE, UV
+        tooltip: Playback rate in frames per second (or radians/sec for ROTATE, UV
           coords/sec for SMOOTH). Must not be zero.
         type: float
     energy: 10.0
@@ -16427,7 +16426,7 @@ functions:
   llSetLocalRot:
     arguments:
     - rot:
-        tooltip: The local rotation to set.
+        tooltip: Local rotation to set.
         type: rotation
     energy: 10.0
     func-id: 284
@@ -16440,7 +16439,7 @@ functions:
   llSetMemoryLimit:
     arguments:
     - limit:
-        tooltip: The integer memory limit in bytes to reserve (must be less than the
+        tooltip: Integer memory limit in bytes to reserve (must be less than the
           64KB maximum).
         type: integer
     energy: 10.0
@@ -16456,7 +16455,7 @@ functions:
   llSetObjectDesc:
     arguments:
     - description:
-        tooltip: The new description string (up to 127 characters).
+        tooltip: New description string (up to 127 characters).
         type: string
     energy: 10.0
     func-id: 271
@@ -16470,7 +16469,7 @@ functions:
   llSetObjectName:
     arguments:
     - name:
-        tooltip: The new name string.
+        tooltip: New name string.
         type: string
     energy: 10.0
     func-id: 203
@@ -16483,11 +16482,11 @@ functions:
   llSetObjectPermMask:
     arguments:
     - mask:
-        tooltip: The MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
+        tooltip: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
         type: integer
         enum-semantics: AssetPermissionCategory
     - value:
-        tooltip: The bitfield of permissions (PERM_* flags) to set.
+        tooltip: Bitfield of permissions (PERM_* flags) to set.
         type: integer
         enum-semantics: AssetPermission
     energy: 10.0
@@ -16529,7 +16528,7 @@ functions:
   llSetParcelMusicURL:
     arguments:
     - url:
-        tooltip: The streaming audio URL string.
+        tooltip: Streaming audio URL string.
         type: string
     energy: 10.0
     func-id: 267
@@ -16544,7 +16543,7 @@ functions:
   llSetPayPrice:
     arguments:
     - price:
-        tooltip: The default price integer shown in the text field (can accept PAY_*
+        tooltip: Default price integer shown in the text field (can accept PAY_*
           constants or positive values).
         type: integer
     - quick_pay_buttons:
@@ -16566,22 +16565,22 @@ functions:
   llSetPhysicsMaterial:
     arguments:
     - mask:
-        tooltip: The bitwise mask combination specifying which of the floats (DENSITY,
+        tooltip: Bitwise mask combination specifying which of the floats (DENSITY,
           FRICTION, RESTITUTION, or GRAVITY_MULTIPLIER) to apply.
         type: integer
         enum-semantics: PhysicsMaterialParam
     - gravity_multiplier:
-        tooltip: The gravity multiplier float value (range [-1.0, +28.0], default is
+        tooltip: Gravity multiplier float value (range [-1.0, +28.0], default is
           1.0).
         type: float
     - restitution:
-        tooltip: The elasticity restitution float value (range [0.0, 1.0]).
+        tooltip: Elasticity restitution float value (range [0.0, 1.0]).
         type: float
     - friction:
-        tooltip: The friction coefficient float value (range [0.0, 255.0]).
+        tooltip: Friction coefficient float value (range [0.0, 255.0]).
         type: float
     - density:
-        tooltip: The density float value in kg/m³ (range [1.0, 22587.0]).
+        tooltip: Density float value in kg/m³ (range [1.0, 22587.0]).
         type: float
     energy: 10.0
     func-id: 380
@@ -16597,7 +16596,7 @@ functions:
   llSetPos:
     arguments:
     - pos:
-        tooltip: The position vector to move to (in region coordinates, or local
+        tooltip: Position vector to move to (in region coordinates, or local
           coordinates if in a child prim).
         type: vector
     energy: 10.0
@@ -16613,7 +16612,7 @@ functions:
   llSetPrimMediaParams:
     arguments:
     - face:
-        tooltip: The face number (side) of the prim.
+        tooltip: Face number (side) of the prim.
         type: integer
         enum-semantics: Faces
     - params:
@@ -16636,7 +16635,7 @@ functions:
   llSetPrimURL:
     arguments:
     - url:
-        tooltip: The web URL to display.
+        tooltip: Web URL to display.
         type: string
     deprecated:
       use: ll.SetPrimMediaParams
@@ -16674,7 +16673,7 @@ functions:
   llSetRegionPos:
     arguments:
     - position:
-        tooltip: The target position vector in region coordinates (can cross up to 10m
+        tooltip: Target position vector in region coordinates (can cross up to 10m
           over a region border).
         type: vector
     energy: 10.0
@@ -16691,7 +16690,7 @@ functions:
   llSetRemoteScriptAccessPin:
     arguments:
     - pin:
-        tooltip: The integer PIN code (non-zero enables, zero disables).
+        tooltip: Integer PIN code (non-zero enables, zero disables).
         type: integer
     energy: 10.0
     func-id: 252
@@ -16705,11 +16704,11 @@ functions:
   llSetRenderMaterial:
     arguments:
     - material:
-        tooltip: The name of a material in the prim's inventory, or a UUID.
+        tooltip: Name of a material in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16725,7 +16724,7 @@ functions:
   llSetRot:
     arguments:
     - rot:
-        tooltip: The target rotation.
+        tooltip: Target rotation.
         type: rotation
     energy: 10.0
     func-id: 61
@@ -16740,7 +16739,7 @@ functions:
   llSetScale:
     arguments:
     - size:
-        tooltip: The target size vector.
+        tooltip: Target size vector.
         type: vector
     energy: 10.0
     func-id: 47
@@ -16754,7 +16753,7 @@ functions:
   llSetScriptState:
     arguments:
     - name:
-        tooltip: The name of the script in the prim's inventory.
+        tooltip: Name of the script in the prim's inventory.
         type: string
     - running:
         tooltip: Boolean. If TRUE, enables the script; if FALSE, disables it.
@@ -16772,7 +16771,7 @@ functions:
   llSetSitText:
     arguments:
     - text:
-        tooltip: The context menu text to display.
+        tooltip: Context menu text to display.
         type: string
     energy: 10.0
     func-id: 242
@@ -16802,7 +16801,7 @@ functions:
   llSetSoundRadius:
     arguments:
     - radius:
-        tooltip: The maximum distance in meters at which the sounds can be heard.
+        tooltip: Maximum distance in meters at which the sounds can be heard.
         type: float
     energy: 10.0
     func-id: 209
@@ -16815,7 +16814,7 @@ functions:
   llSetStatus:
     arguments:
     - status:
-        tooltip: The bitmask representing the STATUS_* flag(s) to change.
+        tooltip: Bitmask representing the STATUS_* flag(s) to change.
         type: integer
         enum-semantics: ObjectStatusParam
     - value:
@@ -16834,13 +16833,13 @@ functions:
   llSetText:
     arguments:
     - text:
-        tooltip: The floating text string to display.
+        tooltip: Floating text string to display.
         type: string
     - color:
-        tooltip: The color vector in RGB <R, G, B> (values from 0.0 to 1.0).
+        tooltip: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
         type: vector
     - alpha:
-        tooltip: The transparency value to set, from 0.0 (clear) to 1.0 (solid).
+        tooltip: Transparency value to set, from 0.0 (clear) to 1.0 (solid).
         type: float
     energy: 10.0
     func-id: 152
@@ -16856,11 +16855,11 @@ functions:
   llSetTexture:
     arguments:
     - texture:
-        tooltip: The name of a texture in the prim's inventory, or a UUID.
+        tooltip: Name of a texture in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     energy: 10.0
@@ -16874,27 +16873,27 @@ functions:
   llSetTextureAnim:
     arguments:
     - mode:
-        tooltip: The bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
+        tooltip: Bitfield of texture animation mode flags (ANIM_ON, LOOP, etc.).
         type: integer
         enum-semantics: TextureAnimMode
     - face:
-        tooltip: The face number or ALL_SIDES.
+        tooltip: Face number or ALL_SIDES.
         type: integer
         enum-semantics: Faces
     - sizex:
-        tooltip: The number of horizontal frames (ignored for ROTATE and SCALE).
+        tooltip: Number of horizontal frames (ignored for ROTATE and SCALE).
         type: integer
     - sizey:
-        tooltip: The number of vertical frames (ignored for ROTATE and SCALE).
+        tooltip: Number of vertical frames (ignored for ROTATE and SCALE).
         type: integer
     - start:
-        tooltip: The start frame number (or radians for ROTATE).
+        tooltip: Start frame number (or radians for ROTATE).
         type: float
     - length:
-        tooltip: The number of frames to display (or radians for ROTATE).
+        tooltip: Number of frames to display (or radians for ROTATE).
         type: float
     - rate:
-        tooltip: The playback rate in frames per second (or radians/sec for ROTATE, UV
+        tooltip: Playback rate in frames per second (or radians/sec for ROTATE, UV
           coords/sec for SMOOTH). Must not be zero.
         type: float
     energy: 10.0
@@ -16912,7 +16911,7 @@ functions:
   llSetTimerEvent:
     arguments:
     - sec:
-        tooltip: The interval in seconds between timer events (0.0 to disable).
+        tooltip: Interval in seconds between timer events (0.0 to disable).
         type: float
     energy: 10.0
     func-id: 107
@@ -16927,7 +16926,7 @@ functions:
   llSetTorque:
     arguments:
     - torque:
-        tooltip: The torque rotational force vector.
+        tooltip: Torque rotational force vector.
         type: vector
     - local:
         tooltip: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a
@@ -16947,7 +16946,7 @@ functions:
   llSetTouchText:
     arguments:
     - text:
-        tooltip: The context menu text to display.
+        tooltip: Context menu text to display.
         type: string
     energy: 10.0
     func-id: 241
@@ -16975,11 +16974,11 @@ functions:
   llSetVehicleFloatParam:
     arguments:
     - param:
-        tooltip: The VEHICLE_* float parameter constant to set.
+        tooltip: VEHICLE_* float parameter constant to set.
         type: integer
         enum-semantics: VehicleFloatParam
     - value:
-        tooltip: The float value to set.
+        tooltip: Float value to set.
         type: float
     energy: 10.0
     func-id: 233
@@ -16991,11 +16990,11 @@ functions:
   llSetVehicleRotationParam:
     arguments:
     - param:
-        tooltip: The VEHICLE_* rotation parameter constant to set.
+        tooltip: VEHICLE_* rotation parameter constant to set.
         type: integer
         enum-semantics: VehicleRotationParam
     - rot:
-        tooltip: The rotation value to set.
+        tooltip: Rotation value to set.
         type: rotation
     energy: 10.0
     func-id: 235
@@ -17007,7 +17006,7 @@ functions:
   llSetVehicleType:
     arguments:
     - type:
-        tooltip: The VEHICLE_TYPE_* constant to set.
+        tooltip: VEHICLE_TYPE_* constant to set.
         type: integer
         enum-semantics: VehicleType
     energy: 10.0
@@ -17020,11 +17019,11 @@ functions:
   llSetVehicleVectorParam:
     arguments:
     - param:
-        tooltip: The VEHICLE_* vector parameter constant to set.
+        tooltip: VEHICLE_* vector parameter constant to set.
         type: integer
         enum-semantics: VehicleVectorParam
     - vec:
-        tooltip: The vector value to set.
+        tooltip: Vector value to set.
         type: vector
     energy: 10.0
     func-id: 234
@@ -17036,7 +17035,7 @@ functions:
   llSetVelocity:
     arguments:
     - velocity:
-        tooltip: The linear velocity vector to apply (in meters per second).
+        tooltip: Linear velocity vector to apply (in meters per second).
         type: vector
     - local:
         tooltip: Boolean. If TRUE, velocity is treated as a local directional vector; if
@@ -17056,10 +17055,10 @@ functions:
   llShout:
     arguments:
     - channel:
-        tooltip: The integer chat channel to shout the message on.
+        tooltip: Integer chat channel to shout the message on.
         type: integer
     - msg:
-        tooltip: The text message string to transmit.
+        tooltip: Text message string to transmit.
         type: string
     energy: 10.0
     func-id: 24
@@ -17076,13 +17075,13 @@ functions:
   llSignRSA:
     arguments:
     - private_key:
-        tooltip: The PEM-formatted private key.
+        tooltip: PEM-formatted private key.
         type: string
     - msg:
-        tooltip: The message contents to sign.
+        tooltip: Message contents to sign.
         type: string
     - algorithm:
-        tooltip: The digest algorithm to use (sha1, sha224, sha256, sha384, or sha512).
+        tooltip: Digest algorithm to use (sha1, sha224, sha256, sha384, or sha512).
         type: string
     energy: 10.0
     func-id: 539
@@ -17098,7 +17097,7 @@ functions:
   llSin:
     arguments:
     - theta:
-        tooltip: The angle expressed in radians.
+        tooltip: Angle expressed in radians.
         type: float
     slua-deprecated:
       use: math.sin
@@ -17117,10 +17116,10 @@ functions:
   llSitOnLink:
     arguments:
     - agent_id:
-        tooltip: The UUID of the avatar being forced to sit.
+        tooltip: UUID of the avatar being forced to sit.
         type: key
     - link:
-        tooltip: The link number for the prim containing the desired sit target.
+        tooltip: Link number for the prim containing the desired sit target.
         type: integer
         enum-semantics: Link
     energy: 10.0
@@ -17139,10 +17138,10 @@ functions:
   llSitTarget:
     arguments:
     - offset:
-        tooltip: The target position vector in local prim coordinates.
+        tooltip: Target position vector in local prim coordinates.
         type: vector
     - rot:
-        tooltip: The target rotation relative to the prim's rotation.
+        tooltip: Target rotation relative to the prim's rotation.
         type: rotation
     energy: 10.0
     func-id: 238
@@ -17157,7 +17156,7 @@ functions:
   llSleep:
     arguments:
     - sec:
-        tooltip: The duration in seconds to put the script to sleep.
+        tooltip: Duration in seconds to put the script to sleep.
         type: float
     energy: 0.0
     func-id: 108
@@ -17172,11 +17171,11 @@ functions:
   llSound:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     - queue:
         tooltip: Boolean. If TRUE, queues the sound; if FALSE, interrupts the currently
@@ -17201,7 +17200,7 @@ functions:
   llSoundPreload:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     deprecated:
@@ -17218,7 +17217,7 @@ functions:
   llSqrt:
     arguments:
     - val:
-        tooltip: The positive float value (must be >= 0.0).
+        tooltip: Positive float value (must be >= 0.0).
         type: float
     slua-deprecated:
       use: math.sqrt
@@ -17237,7 +17236,7 @@ functions:
   llStartAnimation:
     arguments:
     - anim:
-        tooltip: The name of an animation in the prim's inventory, or a built-in
+        tooltip: Name of an animation in the prim's inventory, or a built-in
           animation.
         type: string
     energy: 10.0
@@ -17256,7 +17255,7 @@ functions:
   llStartObjectAnimation:
     arguments:
     - anim:
-        tooltip: The name of an animation in the current object's inventory.
+        tooltip: Name of an animation in the current object's inventory.
         type: string
     energy: 10.0
     func-id: 504
@@ -17269,7 +17268,7 @@ functions:
   llStopAnimation:
     arguments:
     - anim:
-        tooltip: The name of an animation in the prim's inventory, a UUID of an
+        tooltip: Name of an animation in the prim's inventory, a UUID of an
           animation, or a built-in animation name.
         type: string
         asset-semantics: true
@@ -17321,7 +17320,7 @@ functions:
   llStopObjectAnimation:
     arguments:
     - anim:
-        tooltip: The name of an animation in the current object's inventory, or an
+        tooltip: Name of an animation in the current object's inventory, or an
           animation UUID.
         type: string
         asset-semantics: true
@@ -17357,7 +17356,7 @@ functions:
   llStringLength:
     arguments:
     - str:
-        tooltip: The string to measure.
+        tooltip: String to measure.
         type: string
     slua-deprecated:
       reason: "Use 'utf8.len' or '#' or 'string.len' instead."
@@ -17374,7 +17373,7 @@ functions:
   llStringToBase64:
     arguments:
     - str:
-        tooltip: The source string to encode.
+        tooltip: Source string to encode.
         type: string
     energy: 10.0
     func-id: 260
@@ -17391,10 +17390,10 @@ functions:
   llStringTrim:
     arguments:
     - src:
-        tooltip: The string to trim.
+        tooltip: String to trim.
         type: string
     - type:
-        tooltip: The trim type flag (STRING_TRIM_HEAD, STRING_TRIM_TAIL, or
+        tooltip: Trim type flag (STRING_TRIM_HEAD, STRING_TRIM_TAIL, or
           STRING_TRIM).
         type: integer
         enum-semantics: StringTrimType
@@ -17411,10 +17410,10 @@ functions:
   llSubStringIndex:
     arguments:
     - source:
-        tooltip: The source string to search within.
+        tooltip: Source string to search within.
         type: string
     - pattern:
-        tooltip: The substring pattern to search for.
+        tooltip: Substring pattern to search for.
         type: string
     energy: 10.0
     func-id: 181
@@ -17429,7 +17428,7 @@ functions:
   llTakeCamera:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     deprecated:
       use: ll.SetCameraParams
@@ -17446,7 +17445,7 @@ functions:
   llTakeControls:
     arguments:
     - controls:
-        tooltip: The bitfield of CONTROL_* flags to intercept.
+        tooltip: Bitfield of CONTROL_* flags to intercept.
         type: integer
         enum-semantics: ControlButton
     - accept:
@@ -17476,7 +17475,7 @@ functions:
   llTan:
     arguments:
     - theta:
-        tooltip: The angle expressed in radians.
+        tooltip: Angle expressed in radians.
         type: float
     slua-deprecated:
       use: math.tan
@@ -17495,10 +17494,10 @@ functions:
   llTarget:
     arguments:
     - position:
-        tooltip: The target position vector in region coordinates.
+        tooltip: Target position vector in region coordinates.
         type: vector
     - range:
-        tooltip: The radius tolerance in meters surrounding the target position.
+        tooltip: Radius tolerance in meters surrounding the target position.
         type: float
     energy: 10.0
     func-id: 66
@@ -17512,10 +17511,10 @@ functions:
   llTargetOmega:
     arguments:
     - axis:
-        tooltip: The local axis vector around which the object rotates.
+        tooltip: Local axis vector around which the object rotates.
         type: vector
     - spinrate:
-        tooltip: The rotation rate multiplier in radians per second.
+        tooltip: Rotation rate multiplier in radians per second.
         type: float
     - gain:
         tooltip: A float modulating the rotational strength (disables the rotation if
@@ -17534,7 +17533,7 @@ functions:
   llTargetRemove:
     arguments:
     - handle:
-        tooltip: The integer target handle returned by llTarget to remove.
+        tooltip: Integer target handle returned by llTarget to remove.
         type: integer
     energy: 10.0
     func-id: 67
@@ -17547,15 +17546,15 @@ functions:
   llTargetedEmail:
     arguments:
     - target:
-        tooltip: The target constant (e.g., TARGETED_EMAIL_OBJECT_OWNER or
+        tooltip: Target constant (e.g., TARGETED_EMAIL_OBJECT_OWNER or
           TARGETED_EMAIL_ROOT_CREATOR).
         type: integer
         enum-semantics: EmailTarget
     - subject:
-        tooltip: The subject of the email.
+        tooltip: Subject of the email.
         type: string
     - message:
-        tooltip: The email message body.
+        tooltip: Email message body.
         type: string
     energy: 10.0
     func-id: 750
@@ -17568,18 +17567,18 @@ functions:
   llTeleportAgent:
     arguments:
     - agent:
-        tooltip: The UUID of the owning avatar to teleport.
+        tooltip: UUID of the owning avatar to teleport.
         type: key
     - landmark:
-        tooltip: The name of the landmark in the prim's inventory, or an empty string to
+        tooltip: Name of the landmark in the prim's inventory, or an empty string to
           teleport locally.
         type: string
     - position:
-        tooltip: The position vector in local region coordinates to teleport to if
+        tooltip: Position vector in local region coordinates to teleport to if
           landmark is empty.
         type: vector
     - look_at:
-        tooltip: The position vector (or direction unit vector if teleporting out of
+        tooltip: Position vector (or direction unit vector if teleporting out of
           region) the agent faces upon landing.
         type: vector
     energy: 10.0
@@ -17599,17 +17598,17 @@ functions:
   llTeleportAgentGlobalCoords:
     arguments:
     - agent:
-        tooltip: The UUID of the owning avatar to teleport.
+        tooltip: UUID of the owning avatar to teleport.
         type: key
     - global_coordinates:
-        tooltip: The global coordinates vector of the target region (obtained via
+        tooltip: Global coordinates vector of the target region (obtained via
           llRequestSimulatorData).
         type: vector
     - region_coordinates:
-        tooltip: The target coordinates vector within the destination region.
+        tooltip: Target coordinates vector within the destination region.
         type: vector
     - look_at:
-        tooltip: The position vector within the region (or unit direction vector if out
+        tooltip: Position vector within the region (or unit direction vector if out
           of region) that the agent faces upon landing.
         type: vector
     energy: 10.0
@@ -17629,7 +17628,7 @@ functions:
   llTeleportAgentHome:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar to teleport.
+        tooltip: UUID of the avatar to teleport.
         type: key
     energy: 100.0
     func-id: 158
@@ -17645,13 +17644,13 @@ functions:
   llTextBox:
     arguments:
     - avatar:
-        tooltip: The UUID of the avatar in the same region.
+        tooltip: UUID of the avatar in the same region.
         type: key
     - message:
-        tooltip: The text message to display in the text box.
+        tooltip: Text message to display in the text box.
         type: string
     - channel:
-        tooltip: The output chat channel (any integer value) where the input text is
+        tooltip: Output chat channel (any integer value) where the input text is
           chatted.
         type: integer
     energy: 10.0
@@ -17669,7 +17668,7 @@ functions:
   llToLower:
     arguments:
     - src:
-        tooltip: The source string to convert.
+        tooltip: Source string to convert.
         type: string
     energy: 10.0
     func-id: 98
@@ -17683,7 +17682,7 @@ functions:
   llToUpper:
     arguments:
     - src:
-        tooltip: The source string to convert.
+        tooltip: Source string to convert.
         type: string
     energy: 10.0
     func-id: 97
@@ -17697,10 +17696,10 @@ functions:
   llTransferLindenDollars:
     arguments:
     - destination:
-        tooltip: The UUID of the destination avatar.
+        tooltip: UUID of the destination avatar.
         type: key
     - amount:
-        tooltip: The quantity of L$ to transfer (must be greater than 0).
+        tooltip: Quantity of L$ to transfer (must be greater than 0).
         type: integer
     energy: 10.0
     func-id: 395
@@ -17717,7 +17716,7 @@ functions:
   llTransferOwnership:
     arguments:
     - agent_id:
-        tooltip: The UUID of the avatar to receive ownership of the object.
+        tooltip: UUID of the avatar to receive ownership of the object.
         type: key
     - flags:
         tooltip: Flags controlling the transfer type (such as TRANSFER_FLAG_COPY or
@@ -17741,11 +17740,11 @@ functions:
   llTriggerSound:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     energy: 10.0
     func-id: 91
@@ -17759,17 +17758,17 @@ functions:
   llTriggerSoundLimited:
     arguments:
     - sound:
-        tooltip: The name of a sound in the prim's inventory, or a UUID.
+        tooltip: Name of a sound in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - volume:
-        tooltip: The volume level to set, between 0.0 (silent) and 1.0 (loud).
+        tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     - top_north_east:
-        tooltip: The top-north-east boundary position vector in region coordinates.
+        tooltip: Top-north-east boundary position vector in region coordinates.
         type: vector
     - bottom_south_west:
-        tooltip: The bottom-south-west boundary position vector in region coordinates.
+        tooltip: Bottom-south-west boundary position vector in region coordinates.
         type: vector
     energy: 10.0
     func-id: 212
@@ -17783,7 +17782,7 @@ functions:
   llUnSit:
     arguments:
     - id:
-        tooltip: The UUID of the avatar to unsit.
+        tooltip: UUID of the avatar to unsit.
         type: key
     energy: 10.0
     func-id: 220
@@ -17798,7 +17797,7 @@ functions:
   llUnescapeURL:
     arguments:
     - url:
-        tooltip: The escaped URL string to decode.
+        tooltip: Escaped URL string to decode.
         type: string
     energy: 10.0
     func-id: 308
@@ -17827,10 +17826,10 @@ functions:
   llUpdateKeyValue:
     arguments:
     - k:
-        tooltip: The key of the key-value pair to update.
+        tooltip: Key of the key-value pair to update.
         type: string
     - v:
-        tooltip: The new value for the key-value pair.
+        tooltip: New value for the key-value pair.
         type: string
     - checked:
         tooltip: Boolean. If TRUE, requires the existing value to match original_value
@@ -17838,7 +17837,7 @@ functions:
         type: integer
         bool-semantics: true
     - original_value:
-        tooltip: The string value to compare against the existing value in the
+        tooltip: String value to compare against the existing value in the
           datastore.
         type: string
     energy: 10.0
@@ -17857,10 +17856,10 @@ functions:
   llVecDist:
     arguments:
     - vec_a:
-        tooltip: The first vector.
+        tooltip: First vector.
         type: vector
     - vec_b:
-        tooltip: The second vector.
+        tooltip: Second vector.
         type: vector
     slua-deprecated:
       use: vector.magnitude
@@ -17880,7 +17879,7 @@ functions:
   llVecMag:
     arguments:
     - vec:
-        tooltip: The vector to evaluate.
+        tooltip: Vector to evaluate.
         type: vector
     slua-deprecated:
       use: vector.magnitude
@@ -17900,7 +17899,7 @@ functions:
   llVecNorm:
     arguments:
     - vec:
-        tooltip: The vector to normalize.
+        tooltip: Vector to normalize.
         type: vector
     slua-deprecated:
       use: vector.normalize
@@ -17919,16 +17918,16 @@ functions:
   llVerifyRSA:
     arguments:
     - public_key:
-        tooltip: The PEM-formatted public key to use for signature verification.
+        tooltip: PEM-formatted public key to use for signature verification.
         type: string
     - msg:
-        tooltip: The message string that was signed.
+        tooltip: Message string that was signed.
         type: string
     - signature:
-        tooltip: The Base64-encoded signature to verify.
+        tooltip: Base64-encoded signature to verify.
         type: string
     - algorithm:
-        tooltip: The cryptographic digest algorithm to use.
+        tooltip: Cryptographic digest algorithm to use.
         type: string
     energy: 10.0
     func-id: 540
@@ -17962,7 +17961,7 @@ functions:
   llWanderWithin:
     arguments:
     - origin:
-        tooltip: The center coordinate position vector to wander about.
+        tooltip: Center coordinate position vector to wander about.
         type: vector
     - dist:
         tooltip: A vector specifying the maximum distance limits (half-extents) along
@@ -17985,7 +17984,7 @@ functions:
   llWater:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -18000,10 +17999,10 @@ functions:
   llWhisper:
     arguments:
     - channel:
-        tooltip: The integer chat channel to whisper the message on.
+        tooltip: Integer chat channel to whisper the message on.
         type: integer
     - msg:
-        tooltip: The text message string to transmit.
+        tooltip: Text message string to transmit.
         type: string
     energy: 10.0
     func-id: 22
@@ -18020,7 +18019,7 @@ functions:
   llWind:
     arguments:
     - offset:
-        tooltip: The offset relative to the prim's position, expressed in local
+        tooltip: Offset relative to the prim's position, expressed in local
           coordinates.
         type: vector
     energy: 10.0
@@ -18035,7 +18034,7 @@ functions:
   llWorldPosToHUD:
     arguments:
     - world_pos:
-        tooltip: The world-frame position vector to project into HUD space.
+        tooltip: World-frame position vector to project into HUD space.
         type: vector
     energy: 10.0
     func-id: 547
@@ -18055,10 +18054,10 @@ functions:
   llXorBase64:
     arguments:
     - str1:
-        tooltip: The first Base64 string.
+        tooltip: First Base64 string.
         type: string
     - str2:
-        tooltip: The second Base64 string (will repeat if shorter than str1).
+        tooltip: Second Base64 string (will repeat if shorter than str1).
         type: string
     energy: 10.0
     func-id: 522
@@ -18073,10 +18072,10 @@ functions:
   llXorBase64Strings:
     arguments:
     - str1:
-        tooltip: The first Base64 string.
+        tooltip: First Base64 string.
         type: string
     - str2:
-        tooltip: The second Base64 string (will repeat if shorter than str1).
+        tooltip: Second Base64 string (will repeat if shorter than str1).
         type: string
     deprecated:
       use: ll.XorBase64
@@ -18094,10 +18093,10 @@ functions:
   llXorBase64StringsCorrect:
     arguments:
     - str1:
-        tooltip: The first Base64 string.
+        tooltip: First Base64 string.
         type: string
     - str2:
-        tooltip: The second Base64 string (will repeat if shorter than str1).
+        tooltip: Second Base64 string (will repeat if shorter than str1).
         type: string
     deprecated:
       use: ll.XorBase64
@@ -18114,7 +18113,7 @@ functions:
   llsRGB2Linear:
     arguments:
     - srgb:
-        tooltip: The color vector in the sRGB colorspace to convert.
+        tooltip: Color vector in the sRGB colorspace to convert.
         type: vector
     energy: 10.0
     func-id: 716
@@ -18142,11 +18141,11 @@ types:
       [0, 1, 2, 3, 4] or ["Yes", "No", "Perhaps"].
   quaternion:
     private: true
-    tooltip: The quaternion type is a left over from way back when LSL was created.
+    tooltip: Quaternion type is a left over from way back when LSL was created.
       It was later renamed to <rotation> to make it more user friendly, but it appears
       someone forgot to remove it ;-)
   rotation:
-    tooltip: The rotation type is one of several ways to represent an orientation
+    tooltip: Rotation type is one of several ways to represent an orientation
       in 3D.\nIt is a mathematical object called a quaternion. You can think of a
       quaternion as four numbers (x, y, z, w), three of which represent the direction
       an object is facing and a fourth that represents the object's banking left or

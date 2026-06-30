@@ -375,7 +375,7 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>The value of pi",
+        "documentation": "Value: 3.141592653589793<br>Value of pi",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
@@ -5337,43 +5337,43 @@
         "documentation": "Value: 10<br>Sets the radius of a sphere around the camera's ideal position within which it is not affected by target motion."
     },
     "@sl-slua/global/CHANGED_ALLOWED_DROP": {
-        "documentation": "Value: 0x40<br>The object inventory changed because a user other than the owner (or the owner if the object is no-mod) added an item. This is only possible if enabled via llAllowInventoryDrop."
+        "documentation": "Value: 0x40<br>Object inventory changed because a user other than the owner (or the owner if the object is no-mod) added an item. This is only possible if enabled via llAllowInventoryDrop."
     },
     "@sl-slua/global/CHANGED_COLOR": {
-        "documentation": "Value: 0x2<br>The object's Blinn-Phong color or alpha parameters have changed."
+        "documentation": "Value: 0x2<br>Object's Blinn-Phong color or alpha parameters have changed."
     },
     "@sl-slua/global/CHANGED_INVENTORY": {
-        "documentation": "Value: 0x1<br>The prim inventory has changed by someone who has modification rights to it."
+        "documentation": "Value: 0x1<br>Prim inventory has changed by someone who has modification rights to it."
     },
     "@sl-slua/global/CHANGED_LINK": {
-        "documentation": "Value: 0x20<br>The number of prims making up the object or avatars seated on it has changed. Also occurs when duplicating a linked object or when a prim changes type or shape. Does not trigger on attach/detach, sit/unsit in attachments, or single prim duplication."
+        "documentation": "Value: 0x20<br>Number of prims making up the object or avatars seated on it has changed. Also occurs when duplicating a linked object or when a prim changes type or shape. Does not trigger on attach/detach, sit/unsit in attachments, or single prim duplication."
     },
     "@sl-slua/global/CHANGED_MEDIA": {
         "documentation": "Value: 0x800<br>Prim Media on the prim has changed."
     },
     "@sl-slua/global/CHANGED_OWNER": {
-        "documentation": "Value: 0x80<br>The object has changed owners. Triggers in the original object when a user takes it, copies it, or deeds it to a group, and in the new object when it is first rezzed."
+        "documentation": "Value: 0x80<br>Object has changed owners. Triggers in the original object when a user takes it, copies it, or deeds it to a group, and in the new object when it is first rezzed."
     },
     "@sl-slua/global/CHANGED_REGION": {
-        "documentation": "Value: 0x100<br>The object has changed regions by crossing a boundary or teleporting (if attached). Triggers only in the root prim of a linkset."
+        "documentation": "Value: 0x100<br>Object has changed regions by crossing a boundary or teleporting (if attached). Triggers only in the root prim of a linkset."
     },
     "@sl-slua/global/CHANGED_REGION_START": {
-        "documentation": "Value: 0x400<br>The region containing this object has just come online."
+        "documentation": "Value: 0x400<br>Region containing this object has just come online."
     },
     "@sl-slua/global/CHANGED_RENDER_MATERIAL": {
-        "documentation": "Value: 0x1000<br>The render material (prim material ID or material overrides) has changed on one or more faces."
+        "documentation": "Value: 0x1000<br>Render material (prim material ID or material overrides) has changed on one or more faces."
     },
     "@sl-slua/global/CHANGED_SCALE": {
-        "documentation": "Value: 0x8<br>The prim scale of at least one prim in the linked object has changed. Only the root prim receives this event."
+        "documentation": "Value: 0x8<br>Prim scale of at least one prim in the linked object has changed. Only the root prim receives this event."
     },
     "@sl-slua/global/CHANGED_SHAPE": {
-        "documentation": "Value: 0x4<br>The prim base shape (PRIM_TYPE, such as box, prism, torus, taper, twist, or cut) has changed."
+        "documentation": "Value: 0x4<br>Prim base shape (PRIM_TYPE, such as box, prism, torus, taper, twist, or cut) has changed."
     },
     "@sl-slua/global/CHANGED_TELEPORT": {
-        "documentation": "Value: 0x200<br>The avatar this object is attached to has teleported. Triggers only in the root prim of an attachment. Does not occur for child prims or 'sit teleports'. If scripts are disabled at the destination, the event queues and triggers after moving to a script-enabled parcel."
+        "documentation": "Value: 0x200<br>Avatar this object is attached to has teleported. Triggers only in the root prim of an attachment. Does not occur for child prims or 'sit teleports'. If scripts are disabled at the destination, the event queues and triggers after moving to a script-enabled parcel."
     },
     "@sl-slua/global/CHANGED_TEXTURE": {
-        "documentation": "Value: 0x10<br>The prim texture parameters (shine/bump settings, repeats, flip, rotation, offset, or texture) have changed."
+        "documentation": "Value: 0x10<br>Prim texture parameters (shine/bump settings, repeats, flip, rotation, offset, or texture) have changed."
     },
     "@sl-slua/global/CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES": {
         "documentation": "Value: 14<br>If set to FALSE, the pathfinding character will not attempt to catch up on lost time when performance is low, potentially providing more reliable (though potentially more stuttery) movement. Default is TRUE."
@@ -5475,7 +5475,7 @@
         "documentation": "Value: 2147483646<br>A region-wide channel reserved for combat-related log events. Passing this to llRegionSay adds the message to the combat log, and scripts listening on this channel can monitor the combat log."
     },
     "@sl-slua/global/COMBAT_LOG_ID": {
-        "documentation": "Value: uuid(\"45e0fcfa-2268-4490-a51c-3e51bdfe80d1\")<br>The ID used by all combat log messages sent from the region to the COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive only system-generated combat log messages."
+        "documentation": "Value: uuid(\"45e0fcfa-2268-4490-a51c-3e51bdfe80d1\")<br>ID used by all combat log messages sent from the region to the COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive only system-generated combat log messages."
     },
     "@sl-slua/global/CONTENT_TYPE_ATOM": {
         "documentation": "Value: 4<br>Sets the 'Content-Type' header of subsequent LSL HTTP server responses via llHTTPResponse to 'application/atom+xml'."
@@ -5616,7 +5616,7 @@
         "documentation": "Value: 2147483647<br>A chat channel reserved for script debugging and error messages. Passing this to llSay, llWhisper, or llShout prints text to the Script Warning/Error Window and broadcasts it to nearby avatars' script consoles."
     },
     "@sl-slua/global/DEG_TO_RAD": {
-        "documentation": "Value: 0.017453293<br>The constant 0.017453293 (precise value is PI/180). Multiply a value in degrees by this number to convert it to radians."
+        "documentation": "Value: 0.017453293<br>Constant 0.017453293 (precise value is PI/180). Multiply a value in degrees by this number to convert it to radians."
     },
     "@sl-slua/global/DENSITY": {
         "documentation": "Value: 1<br>Used with llSetPhysicsMaterial to indicate that the density parameter is enabled (which overrides the previous value). Must be between 1.0 and 22587.0 kg/m\u00b3."
@@ -5643,22 +5643,22 @@
         "documentation": "Value: -1<br>Attempted to change environments outside an experience, or the script is not running as part of an experience with a valid experience key."
     },
     "@sl-slua/global/ENV_NO_ENVIRONMENT": {
-        "documentation": "Value: -3<br>The environmental settings inventory object could not be found, or there is no environment on this parcel to modify."
+        "documentation": "Value: -3<br>Environmental settings inventory object could not be found, or there is no environment on this parcel to modify."
     },
     "@sl-slua/global/ENV_NO_EXPERIENCE_LAND": {
-        "documentation": "Value: -7<br>The experience has not been enabled or cannot run on the land."
+        "documentation": "Value: -7<br>Experience has not been enabled or cannot run on the land."
     },
     "@sl-slua/global/ENV_NO_EXPERIENCE_PERMISSION": {
-        "documentation": "Value: -2<br>The agent has not granted permission to change environments."
+        "documentation": "Value: -2<br>Agent has not granted permission to change environments."
     },
     "@sl-slua/global/ENV_NO_PERMISSIONS": {
-        "documentation": "Value: -9<br>The script lacks permissions to modify the environment at this location, or an attempt was made to remove altitude track 0 or 1."
+        "documentation": "Value: -9<br>Script lacks permissions to modify the environment at this location, or an attempt was made to remove altitude track 0 or 1."
     },
     "@sl-slua/global/ENV_OK": {
-        "documentation": "Value: 1<br>The agent, parcel, or region will attempt to change the applied environment."
+        "documentation": "Value: 1<br>Agent, parcel, or region will attempt to change the applied environment."
     },
     "@sl-slua/global/ENV_THROTTLE": {
-        "documentation": "Value: -8<br>The scripts have exceeded the throttle limit. Wait and retry the request."
+        "documentation": "Value: -8<br>Scripts have exceeded the throttle limit. Wait and retry the request."
     },
     "@sl-slua/global/ENV_VALIDATION_FAIL": {
         "documentation": "Value: -6<br>Could not validate the environmental settings or values passed."
@@ -6615,13 +6615,13 @@
         "documentation": "Value: 0x2000<br>Permissions mask representing transfer permission."
     },
     "@sl-slua/global/PI": {
-        "documentation": "Value: 3.14159265<br>The mathematical constant Pi (3.14159265), representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan."
+        "documentation": "Value: 3.14159265<br>Mathematical constant Pi (3.14159265), representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan."
     },
     "@sl-slua/global/PING_PONG": {
         "documentation": "Value: 0x8<br>Used with texture animation functions to cause the animation to play forward first, and then in reverse."
     },
     "@sl-slua/global/PI_BY_TWO": {
-        "documentation": "Value: 1.57079633<br>The constant Pi/2 (1.57079633), representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan."
+        "documentation": "Value: 1.57079633<br>Constant Pi/2 (1.57079633), representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan."
     },
     "@sl-slua/global/PRIM_ALLOW_UNSIT": {
         "documentation": "Value: 39<br>Prim parameter for allowing or restricting manual standing for avatars seated on this prim within a valid experience. Ignored if the avatar was not seated via llSitOnLink. When restriction is active, participating seated avatars cannot manually stand or select another prim to sit on."
@@ -7245,7 +7245,7 @@
         "documentation": "Value: 0x00<br>Path update status code triggered when the character enters the slowdown distance near its current goal."
     },
     "@sl-slua/global/RAD_TO_DEG": {
-        "documentation": "Value: 57.2957795<br>The constant 57.2957795 (precise value is 180/PI). Multiply a value in radians by this number to convert it to degrees."
+        "documentation": "Value: 57.2957795<br>Constant 57.2957795 (precise value is 180/PI). Multiply a value in radians by this number to convert it to degrees."
     },
     "@sl-slua/global/RCERR_CAST_TIME_EXCEEDED": {
         "documentation": "Value: -3<br>Raycast error indicating the parcel or agent exceeded the maximum allocated raycast time. Waiting a few frames and retrying will usually succeed as resources replenish."
@@ -7602,7 +7602,7 @@
         "documentation": "Value: 0x02<br>Sound playback option that triggers a non-attached sound once at the prim's current location (does not move with the prim). This flag overrides all other sound playback options."
     },
     "@sl-slua/global/SQRT2": {
-        "documentation": "Value: 1.41421356<br>The mathematical constant representing the square root of 2 (1.41421356)."
+        "documentation": "Value: 1.41421356<br>Mathematical constant representing the square root of 2 (1.41421356)."
     },
     "@sl-slua/global/STATUS_BLOCK_GRAB": {
         "documentation": "Value: 0x40<br>Status flag (default FALSE) that blocks click-and-drag grab movements on unlinked prims or the root prim of a linkset. Useful for preventing physical objects from being trivially disturbed."
@@ -7740,19 +7740,19 @@
         "documentation": "Value: 11<br>Terrain parameter used with llSetGroundTexture to set the UV scale vector (repeats per meter, ignoring the Z component) for terrain layer 4. Only works for PBR textures."
     },
     "@sl-slua/global/TEXTURE_BLANK": {
-        "documentation": "Value: uuid(\"5748decc-f629-461c-9a36-a35a221fe21f\")<br>The asset UUID representing the default 'Blank' texture."
+        "documentation": "Value: uuid(\"5748decc-f629-461c-9a36-a35a221fe21f\")<br>Asset UUID representing the default 'Blank' texture."
     },
     "@sl-slua/global/TEXTURE_DEFAULT": {
         "documentation": "Value: uuid(\"89556747-24cb-43ed-920b-47caed15465f\")"
     },
     "@sl-slua/global/TEXTURE_MEDIA": {
-        "documentation": "Value: uuid(\"8b5fec65-8d8d-9dc5-cda8-8fdf2716e361\")<br>The asset UUID representing the default 'Default Media' texture."
+        "documentation": "Value: uuid(\"8b5fec65-8d8d-9dc5-cda8-8fdf2716e361\")<br>Asset UUID representing the default 'Default Media' texture."
     },
     "@sl-slua/global/TEXTURE_PLYWOOD": {
-        "documentation": "Value: uuid(\"89556747-24cb-43ed-920b-47caed15465f\")<br>The asset UUID representing the default 'Plywood' texture."
+        "documentation": "Value: uuid(\"89556747-24cb-43ed-920b-47caed15465f\")<br>Asset UUID representing the default 'Plywood' texture."
     },
     "@sl-slua/global/TEXTURE_TRANSPARENT": {
-        "documentation": "Value: uuid(\"8dcd4a48-2d37-4909-9f78-f7a9eb4ef903\")<br>The asset UUID representing the '*Default Transparent Texture' in the library (included with viewers)."
+        "documentation": "Value: uuid(\"8dcd4a48-2d37-4909-9f78-f7a9eb4ef903\")<br>Asset UUID representing the '*Default Transparent Texture' in the library (included with viewers)."
     },
     "@sl-slua/global/TOUCH_INVALID_FACE": {
         "documentation": "Value: -1<br>Value returned by llDetectedTouchFace when the touch position is not valid."
@@ -7824,7 +7824,7 @@
         "documentation": "Value: 0"
     },
     "@sl-slua/global/TWO_PI": {
-        "documentation": "Value: 6.28318530<br>The mathematical constant representing the number of radians in a full circle (6.28318530, twice the value of PI)."
+        "documentation": "Value: 6.28318530<br>Mathematical constant representing the number of radians in a full circle (6.28318530, twice the value of PI)."
     },
     "@sl-slua/global/TYPE_FLOAT": {
         "documentation": "Value: 2<br>Variable type constant indicating the list entry or value is a float."
@@ -8007,37 +8007,37 @@
         "documentation": "Value: 106<br>Environmental wave direction vectors (X is east/west, Y is north/south) specifying speeds and directions for both large and small waves."
     },
     "@sl-slua/global/XP_ERROR_EXPERIENCES_DISABLED": {
-        "documentation": "Value: 2<br>The region currently has experiences disabled."
+        "documentation": "Value: 2<br>Region currently has experiences disabled."
     },
     "@sl-slua/global/XP_ERROR_EXPERIENCE_DISABLED": {
-        "documentation": "Value: 8<br>The experience owner has temporarily disabled the experience."
+        "documentation": "Value: 8<br>Experience owner has temporarily disabled the experience."
     },
     "@sl-slua/global/XP_ERROR_EXPERIENCE_SUSPENDED": {
-        "documentation": "Value: 9<br>The experience has been suspended by Linden Lab customer support."
+        "documentation": "Value: 9<br>Experience has been suspended by Linden Lab customer support."
     },
     "@sl-slua/global/XP_ERROR_INVALID_EXPERIENCE": {
-        "documentation": "Value: 7<br>The script is associated with an experience that no longer exists."
+        "documentation": "Value: 7<br>Script is associated with an experience that no longer exists."
     },
     "@sl-slua/global/XP_ERROR_INVALID_PARAMETERS": {
         "documentation": "Value: 3<br>One of the string arguments was too big to fit in the key-value store."
     },
     "@sl-slua/global/XP_ERROR_KEY_NOT_FOUND": {
-        "documentation": "Value: 14<br>The requested key does not exist."
+        "documentation": "Value: 14<br>Requested key does not exist."
     },
     "@sl-slua/global/XP_ERROR_MATURITY_EXCEEDED": {
-        "documentation": "Value: 16<br>The content rating of the experience exceeds that of the region."
+        "documentation": "Value: 16<br>Content rating of the experience exceeds that of the region."
     },
     "@sl-slua/global/XP_ERROR_NONE": {
         "documentation": "Value: 0<br>No error was detected."
     },
     "@sl-slua/global/XP_ERROR_NOT_FOUND": {
-        "documentation": "Value: 6<br>The sim was unable to verify the validity of the experience. Retrying after a short wait is advised."
+        "documentation": "Value: 6<br>Sim was unable to verify the validity of the experience. Retrying after a short wait is advised."
     },
     "@sl-slua/global/XP_ERROR_NOT_PERMITTED": {
         "documentation": "Value: 4<br>This experience is not allowed to run by the requested agent, or experience permissions were denied by the user."
     },
     "@sl-slua/global/XP_ERROR_NOT_PERMITTED_LAND": {
-        "documentation": "Value: 17<br>The experience is blocked or not enabled for this land, or is not allowed to run in the current region."
+        "documentation": "Value: 17<br>Experience is blocked or not enabled for this land, or is not allowed to run in the current region."
     },
     "@sl-slua/global/XP_ERROR_NO_EXPERIENCE": {
         "documentation": "Value: 5<br>This script is not associated with an experience."
@@ -8046,7 +8046,7 @@
         "documentation": "Value: 11<br>An attempt to write data to the key-value store failed due to the data quota being met."
     },
     "@sl-slua/global/XP_ERROR_REQUEST_PERM_TIMEOUT": {
-        "documentation": "Value: 18<br>The request for experience permissions was ignored and the request timed out without modification."
+        "documentation": "Value: 18<br>Request for experience permissions was ignored and the request timed out without modification."
     },
     "@sl-slua/global/XP_ERROR_RETRY_UPDATE": {
         "documentation": "Value: 15<br>A checked update failed due to an out of date request."
@@ -8055,10 +8055,10 @@
         "documentation": "Value: 13<br>Unable to communicate with the key-value store, or attempted to create a key that already exists."
     },
     "@sl-slua/global/XP_ERROR_STORE_DISABLED": {
-        "documentation": "Value: 12<br>The key-value store is currently disabled on this region."
+        "documentation": "Value: 12<br>Key-value store is currently disabled on this region."
     },
     "@sl-slua/global/XP_ERROR_THROTTLED": {
-        "documentation": "Value: 1<br>The call failed due to too many recent calls."
+        "documentation": "Value: 1<br>Call failed due to too many recent calls."
     },
     "@sl-slua/global/XP_ERROR_UNKNOWN_ERROR": {
         "documentation": "Value: 10<br>An unknown error occurred that is not covered by any of the other predetermined error states."
@@ -8070,7 +8070,7 @@
         "documentation": "Value: vector(0.0, 0.0, 0.0)<br>A vector constant representing <0.0, 0.0, 0.0>. This is the default value for vector variables."
     },
     "@sl-slua/global/_G": {
-        "documentation": "Value: {}<br>The table of Lua builtin globals."
+        "documentation": "Value: {}<br>Table of Lua builtin globals."
     },
     "@sl-slua/global/_VERSION": {
         "documentation": "Value: \"Luau\""

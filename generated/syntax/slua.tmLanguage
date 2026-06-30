@@ -239,7 +239,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>\b(__(?:add|call|concat|div|eq|index|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tostring|unm|iter|idiv|tojson|jsonhint))\b</string>
+            <string>\b(__(?:add|call|concat|div|eq|idiv|index|iter|jsonhint|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tojson|tostring|unm))\b</string>
             <key>name</key>
             <string>variable.language.metamethod.luau</string>
           </dict>
@@ -717,7 +717,7 @@
             <key>name</key>
             <string>variable.language.metamethod.luau</string>
             <key>match</key>
-            <string>(?&lt;=[^.]\.|:)\b(__(?:add|call|concat|div|eq|index|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tostring|unm|iter|idiv|tojson|jsonhint))\b</string>
+            <string>(?&lt;=[^.]\.|:)\b(__(?:add|call|concat|div|eq|idiv|index|iter|jsonhint|le|len|lt|metatable|mod|mode|mul|newindex|pow|sub|tojson|tostring|unm))\b</string>
           </dict>
           <dict>
             <key>name</key>
