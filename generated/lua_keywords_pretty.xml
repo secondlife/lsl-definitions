@@ -201,17 +201,17 @@ export type DateTypeResult = {
          <key>HttpRequestParams</key>
          <map>
             <key>tooltip</key>
-            <string>HTTP request parameter table. Pass to ll.httpRequest() to configure an HTTP request.</string>
+            <string>HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.</string>
          </map>
          <key>MediaParams</key>
          <map>
             <key>tooltip</key>
-            <string>Prim face media parameter table. Pass to llprim.SetMedia() to configure media on a face.</string>
+            <string>Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.</string>
          </map>
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>
-            <string>Particle system parameter table. Pass to llprim.ParticleSystem() to emit particles.</string>
+            <string>Particle system parameter table. Pass to llprim.particleSystem() to emit particles.</string>
          </map>
          <key>list</key>
          <map>
@@ -17195,7 +17195,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, momentum is treated as a local directional vector; if FALSE, it is treated as a global region vector.</string>
@@ -17227,7 +17227,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.</string>
@@ -17575,7 +17575,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting location vector of the ray.</string>
@@ -17584,7 +17584,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending location vector of the ray.</string>
@@ -18130,7 +18130,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting index of the slice to remove (inclusive).</string>
@@ -18139,7 +18139,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending index of the slice to remove (inclusive).</string>
@@ -18173,7 +18173,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting index of the substring to remove (inclusive).</string>
@@ -18182,7 +18182,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending index of the substring to remove (inclusive).</string>
@@ -21626,7 +21626,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting position vector.</string>
@@ -21635,7 +21635,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Target end position vector.</string>
@@ -21708,7 +21708,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -21717,7 +21717,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -23643,7 +23643,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -23652,7 +23652,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -23690,7 +23690,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -23699,7 +23699,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -23755,7 +23755,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -23764,7 +23764,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive).</string>
@@ -23995,7 +23995,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index of the range to search.</string>
@@ -24004,7 +24004,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index of the range to search.</string>
@@ -24143,7 +24143,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive) of the replaced range.</string>
@@ -24152,7 +24152,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based end index (inclusive) of the replaced range.</string>
@@ -25943,7 +25943,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, forces are applied relative to the target's local axes; if FALSE, relative to region axes.</string>
@@ -27194,7 +27194,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting vector.</string>
@@ -27203,7 +27203,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Target ending vector.</string>
@@ -27897,7 +27897,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -28195,7 +28195,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, force is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -28236,7 +28236,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, force and torque are treated as local vectors; if FALSE, as global region vectors.</string>
@@ -29639,7 +29639,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a global region vector.</string>
@@ -29836,7 +29836,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>local</key>
+                  <key>is_local</key>
                   <map>
                      <key>tooltip</key>
                      <string>Boolean. If TRUE, velocity is treated as a local directional vector; if FALSE, as a global region vector.</string>

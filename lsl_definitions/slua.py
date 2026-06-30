@@ -16,7 +16,7 @@ from lsl_definitions.rulesets import (
     expand_spp_builder,
     expand_table_ruleset,
 )
-from lsl_definitions.utils import Deprecated, remove_worthless
+from lsl_definitions.utils import Deprecated, remove_worthless, sanitize_luau_param_name
 
 _TABLE_RULESET_TYPE_MAP: dict[str, str] = {
     "float": "number",
@@ -93,7 +93,7 @@ class SLuaParameter:
             else:
                 return f"...: {self.type}"
         else:
-            return f"{self.name}: {self.type}"
+            return f"{sanitize_luau_param_name(self.name)}: {self.type}"
 
     @property
     def formatted_comment(self) -> str:

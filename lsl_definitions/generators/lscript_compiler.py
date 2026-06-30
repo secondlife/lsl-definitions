@@ -6,6 +6,112 @@ from lsl_definitions.generators.base import register
 from lsl_definitions.lsl import LSLArgument, LSLDefinitions, LSLEvent, LSLType
 from lsl_definitions.utils import splice_str, to_c_str
 
+# C++ reserved keywords that cannot be used as identifiers.
+_CPP_RESERVED_KEYWORDS = frozenset(
+    {
+        "alignas",
+        "alignof",
+        "and",
+        "and_eq",
+        "asm",
+        "auto",
+        "bitand",
+        "bitor",
+        "bool",
+        "break",
+        "case",
+        "catch",
+        "char",
+        "char8_t",
+        "char16_t",
+        "char32_t",
+        "class",
+        "compl",
+        "concept",
+        "const",
+        "consteval",
+        "constexpr",
+        "constinit",
+        "const_cast",
+        "continue",
+        "co_await",
+        "co_return",
+        "co_yield",
+        "decltype",
+        "default",
+        "delete",
+        "do",
+        "double",
+        "dynamic_cast",
+        "else",
+        "enum",
+        "explicit",
+        "export",
+        "extern",
+        "false",
+        "float",
+        "for",
+        "friend",
+        "goto",
+        "if",
+        "import",
+        "inline",
+        "int",
+        "long",
+        "module",
+        "mutable",
+        "namespace",
+        "new",
+        "noexcept",
+        "not",
+        "not_eq",
+        "nullptr",
+        "operator",
+        "or",
+        "or_eq",
+        "private",
+        "protected",
+        "public",
+        "register",
+        "reinterpret_cast",
+        "requires",
+        "return",
+        "short",
+        "signed",
+        "sizeof",
+        "static",
+        "static_assert",
+        "static_cast",
+        "struct",
+        "switch",
+        "template",
+        "this",
+        "thread_local",
+        "throw",
+        "true",
+        "try",
+        "typedef",
+        "typeid",
+        "typename",
+        "union",
+        "unsigned",
+        "using",
+        "virtual",
+        "void",
+        "volatile",
+        "wchar_t",
+        "while",
+        "xor",
+        "xor_eq",
+    }
+)
+
+
+def _cpp_ident(name: str) -> str:
+    """Append '_' to any identifier that is a C++ reserved keyword."""
+    return f"{name}_" if name in _CPP_RESERVED_KEYWORDS else name
+
+
 _LEXER_CONST_COMMENT = "/* GENERATED LEXER CONSTANTS */"
 _LEXER_EVENT_COMMENT = "/* GENERATED LEXER EVENTS */"
 _LEXER_COORD_TEMPLATE = '"%(name)s" { count(); return(%(name)s); }\n'
@@ -264,9 +370,11 @@ def gen_tree_header_file(definitions: LSLDefinitions) -> str:
     for event in definitions.events.values():
         if event.name in _TREE_BLACKLIST:
             continue
-        constructor_args = "".join(f", LLScriptIdentifier *{x.name}" for x in event.arguments)
+        constructor_args = "".join(
+            f", LLScriptIdentifier *{_cpp_ident(x.name)}" for x in event.arguments
+        )
         member_initializers = "\n".join(
-            f"        , {_arg_to_member_name(x)}({x.name})" for x in event.arguments
+            f"        , {_arg_to_member_name(x)}({_cpp_ident(x.name)})" for x in event.arguments
         )
         members = "\n".join(
             f"    LLScriptIdentifier *{_arg_to_member_name(x)};" for x in event.arguments
