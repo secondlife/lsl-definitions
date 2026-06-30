@@ -10909,7 +10909,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting location vector of the ray.</string>
@@ -11456,7 +11456,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting index of the slice to remove (inclusive).</string>
@@ -11497,7 +11497,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting index of the substring to remove (inclusive).</string>
@@ -14942,7 +14942,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting position vector.</string>
@@ -15026,7 +15026,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -16943,7 +16943,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -16984,7 +16984,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -17043,7 +17043,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive).</string>
@@ -17271,7 +17271,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index of the range to search.</string>
@@ -17403,7 +17403,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>start</key>
+                  <key>start_index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Zero-based start index (inclusive) of the replaced range.</string>
@@ -20448,7 +20448,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting vector.</string>

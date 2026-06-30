@@ -1421,9 +1421,9 @@ linkset_data:
     pass: Passphrase used to protect or update the key.
     tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
 list:
-  llDeleteSubList( list src, integer start, integer end_index ) -> list:
+  llDeleteSubList( list src, integer start_index, integer end_index ) -> list:
     src: Source list to copy and modify.
-    start: Starting index of the slice to remove (inclusive).
+    start_index: Starting index of the slice to remove (inclusive).
     end_index: Ending index of the slice to remove (inclusive).
     tooltip: Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes
       the specified range.
@@ -1453,21 +1453,21 @@ list:
     src: Source list containing the element of interest.
     index: Zero-based index of the entry.
     tooltip: Returns the key (UUID) value at index in the list src. Returns a null string/key if the index is out of bounds or if the value cannot be type-cast.
-  llList2List( list src, integer start, integer end_index ) -> list:
+  llList2List( list src, integer start_index, integer end_index ) -> list:
     src: Source list to slice.
-    start: Zero-based start index (inclusive).
+    start_index: Zero-based start index (inclusive).
     end_index: Zero-based end index (inclusive).
     tooltip: Returns a new list containing the subset of entries from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end.
-  llList2ListSlice( list src, integer start, integer end_index, integer stride, integer slice_index ) -> list:
+  llList2ListSlice( list src, integer start_index, integer end_index, integer stride, integer slice_index ) -> list:
     src: Source strided list.
-    start: Zero-based start index (inclusive).
+    start_index: Zero-based start index (inclusive).
     end_index: Zero-based end index (inclusive).
     stride: Number of entries per stride (defaults to 1 if less than 1).
     slice_index: Zero-based element index within each stride to extract (negatives count backward from the end of the stride).
     tooltip: Returns a list containing the slice_index'th element of every stride within the inclusive range from start to end in the strided list src. Stride must be a positive integer.
-  llList2ListStrided( list src, integer start, integer end_index, integer stride ) -> list:
+  llList2ListStrided( list src, integer start_index, integer end_index, integer stride ) -> list:
     src: Source strided list.
-    start: Zero-based start index (inclusive).
+    start_index: Zero-based start index (inclusive).
     end_index: Zero-based end index (inclusive).
     stride: Number of entries per stride (defaults to 1 if less than 1).
     tooltip: Returns a new list containing the first element of every stride in the strided list src within the inclusive range from start to end.
@@ -1492,10 +1492,10 @@ list:
     test: List elements to search for.
     instance: Zero-based occurrence index of the match to find.
     tooltip: Returns the integer index of the specified instance of list test within the list src (returns -1 if not found).
-  llListFindStrided( list src, list test, integer start, integer end_index, integer stride ) -> integer:
+  llListFindStrided( list src, list test, integer start_index, integer end_index, integer stride ) -> integer:
     src: List to search within.
     test: List elements to search for.
-    start: Zero-based start index of the range to search.
+    start_index: Zero-based start index of the range to search.
     end_index: Zero-based end index of the range to search.
     stride: Number of entries per stride in the list.
     tooltip: Returns the integer index of the first instance of list test in the strided list src within the range from start to end (stepping through by stride). Returns -1 if not found.
@@ -1508,10 +1508,10 @@ list:
     src: Source list to randomize.
     stride: Size of each randomized block (defaults to 1 if less than 1).
     tooltip: Returns a randomized copy of the list src by blocks of size stride. If the list length is not perfectly divisible by stride, no randomization occurs.
-  llListReplaceList( list dest, list src, integer start, integer end_index ) -> list:
+  llListReplaceList( list dest, list src, integer start_index, integer end_index ) -> list:
     dest: Target destination list.
     src: Source list to insert.
-    start: Zero-based start index (inclusive) of the replaced range.
+    start_index: Zero-based start index (inclusive) of the replaced range.
     end_index: Zero-based end index (inclusive) of the replaced range.
     tooltip: Returns a copy of the list dest with the inclusive range from start to end removed, and the elements of src inserted in its place at start.
   llListSort( list src, integer stride, integer ascending ) -> list:
@@ -1615,8 +1615,8 @@ math:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end_vec ) -> rotation:
-    start: Starting vector.
+  llRotBetween( vector start_vec, vector end_vec ) -> rotation:
+    start_vec: Starting vector.
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llRound( float val ) -> integer:
@@ -1679,8 +1679,8 @@ math_3d:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end_vec ) -> rotation:
-    start: Starting vector.
+  llRotBetween( vector start_vec, vector end_vec ) -> rotation:
+    start_vec: Starting vector.
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llVecDist( vector vec_a, vector vec_b ) -> float:
@@ -1735,8 +1735,8 @@ math_trig:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end_vec ) -> rotation:
-    start: Starting vector.
+  llRotBetween( vector start_vec, vector end_vec ) -> rotation:
+    start_vec: Starting vector.
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
   llSin( float theta ) -> float:
@@ -2225,8 +2225,8 @@ pathfinding:
     options: A list of GCNP_* flags and parameters to configure the search limits.
     tooltip: Returns a list containing the closest vector position on the navigation mesh (navmesh) to the specified point (expressed in region-local space), or an empty list if none is found. Configured
       using options.
-  llGetStaticPath( vector start, vector end_pos, float radius, list params ) -> list:
-    start: Starting position vector.
+  llGetStaticPath( vector start_pos, vector end_pos, float radius, list params ) -> list:
+    start_pos: Starting position vector.
     end_pos: Target end position vector.
     radius: Radius of the character path, between 0.125m and 5.0m.
     params: A list specifying the CHARACTER_TYPE parameter (defaults to CHARACTER_TYPE_NONE).
@@ -2385,8 +2385,8 @@ physics:
     force: Rotational impulse vector to apply.
     is_local: Boolean. If TRUE, the force is treated as a local directional vector; if FALSE, it is treated as a global region vector.
     tooltip: Applies a rotational impulse (force) to a physical object. If local is TRUE, the rotational impulse is applied in local coordinates; otherwise, it is applied in global region coordinates.
-  llCastRay( vector start, vector end_pos, list options ) -> list:
-    start: Starting location vector of the ray.
+  llCastRay( vector start_pos, vector end_pos, list options ) -> list:
+    start_pos: Starting location vector of the ray.
     end_pos: Ending location vector of the ray.
     options: A list of option flags and their parameters to configure the raycast.
     tooltip: Casts a ray into the physics world from start to end and reports collision data for intersections with objects based on options. Returns a list of strided values [UUID_1, {link_number_1}, hit_position_1,
@@ -3085,8 +3085,8 @@ quaternion:
   llRot2Up( rotation q ) -> vector:
     q: Rotation value.
     tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
-  llRotBetween( vector start, vector end_vec ) -> rotation:
-    start: Starting vector.
+  llRotBetween( vector start_vec, vector end_vec ) -> rotation:
+    start_vec: Starting vector.
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
 region:
@@ -3459,8 +3459,8 @@ sensor:
   sensor( integer num_detected ):
     num_detected: Total number of detected targets found (usable with llDetected* functions).
     tooltip: Triggered when objects matching constraints of llSensor or llSensorRepeat are successfully detected. Passes num_detected, representing the number of detected targets.
-  llCastRay( vector start, vector end_pos, list options ) -> list:
-    start: Starting location vector of the ray.
+  llCastRay( vector start_pos, vector end_pos, list options ) -> list:
+    start_pos: Starting location vector of the ray.
     end_pos: Ending location vector of the ray.
     options: A list of option flags and their parameters to configure the raycast.
     tooltip: Casts a ray into the physics world from start to end and reports collision data for intersections with objects based on options. Returns a list of strided values [UUID_1, {link_number_1}, hit_position_1,
@@ -3627,15 +3627,15 @@ string:
   llChar( integer val ) -> string:
     val: Unicode value to convert into a character string.
     tooltip: Constructs and returns a single-character string representing the supplied Unicode value val.
-  llDeleteSubString( string src, integer start, integer end_index ) -> string:
+  llDeleteSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to modify.
-    start: Starting index of the substring to remove (inclusive).
+    start_index: Starting index of the substring to remove (inclusive).
     end_index: Ending index of the substring to remove (inclusive).
     tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
       excludes the specified range.
-  llGetSubString( string src, integer start, integer end_index ) -> string:
+  llGetSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to slice.
-    start: Zero-based start index (inclusive).
+    start_index: Zero-based start index (inclusive).
     end_index: Zero-based end index (inclusive).
     tooltip: Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring
       is the excluded range.
