@@ -31,6 +31,38 @@ class Deprecated:
         )
 
 
+LUAU_KEYWORDS: frozenset[str] = frozenset(
+    {
+        "and",
+        "break",
+        "do",
+        "else",
+        "elseif",
+        "end",
+        "false",
+        "for",
+        "function",
+        "if",
+        "in",
+        "local",
+        "nil",
+        "not",
+        "or",
+        "repeat",
+        "return",
+        "then",
+        "true",
+        "until",
+        "while",
+    }
+)
+
+
+def sanitize_luau_param_name(name: str) -> str:
+    """Append '_' to any parameter name that is a Luau reserved word."""
+    return f"{name}_" if name in LUAU_KEYWORDS else name
+
+
 CONTROL_PICTURES = range(0x2400, 0x2420)
 """Pass this to str.translate to display EOF and NAK prettier"""
 

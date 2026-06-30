@@ -7475,7 +7475,7 @@ functions:
     - momentum:
         tooltip: Linear impulse vector to apply.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, momentum is treated as a local directional vector; if
           FALSE, it is treated as a global region vector.
         type: integer
@@ -7495,7 +7495,7 @@ functions:
     - force:
         tooltip: Rotational impulse vector to apply.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, the force is treated as a local directional vector;
           if FALSE, it is treated as a global region vector.
         type: integer
@@ -7744,7 +7744,7 @@ functions:
     - start:
         tooltip: Starting location vector of the ray.
         type: vector
-    - end:
+    - end_pos:
         tooltip: Ending location vector of the ray.
         type: vector
     - options:
@@ -8139,7 +8139,7 @@ functions:
         tooltip: Starting index of the slice to remove (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Ending index of the slice to remove (inclusive).
         type: integer
         index-semantics: true
@@ -8169,7 +8169,7 @@ functions:
         tooltip: Starting index of the substring to remove (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Ending index of the substring to remove (inclusive).
         type: integer
         index-semantics: true
@@ -10619,7 +10619,7 @@ functions:
     - start:
         tooltip: Starting position vector.
         type: vector
-    - end:
+    - end_pos:
         tooltip: Target end position vector.
         type: vector
     - radius:
@@ -10665,7 +10665,7 @@ functions:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
@@ -11901,7 +11901,7 @@ functions:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
@@ -11932,7 +11932,7 @@ functions:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
@@ -11968,7 +11968,7 @@ functions:
         tooltip: Zero-based start index (inclusive).
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index (inclusive).
         type: integer
         index-semantics: true
@@ -12117,7 +12117,7 @@ functions:
         tooltip: Zero-based start index of the range to search.
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index of the range to search.
         type: integer
         index-semantics: true
@@ -12205,7 +12205,7 @@ functions:
         tooltip: Zero-based start index (inclusive) of the replaced range.
         type: integer
         index-semantics: true
-    - end:
+    - end_index:
         tooltip: Zero-based end index (inclusive) of the replaced range.
         type: integer
         index-semantics: true
@@ -13219,7 +13219,7 @@ functions:
     - ang_impulse:
         tooltip: Angular impulse vector representing the rotational force.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, forces are applied relative to the target's local
           axes; if FALSE, relative to region axes.
         type: integer
@@ -14044,7 +14044,7 @@ functions:
     - start:
         tooltip: Starting vector.
         type: vector
-    - end:
+    - end_vec:
         tooltip: Target ending vector.
         type: vector
     energy: 10.0
@@ -14447,7 +14447,7 @@ functions:
     - initial_omega:
         tooltip: Angular velocity vector to apply (in radians per second).
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE,
           as a global region vector.
         type: integer
@@ -14650,7 +14650,7 @@ functions:
     - force:
         tooltip: Directional force vector to apply.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a
           global region vector.
         type: integer
@@ -14673,7 +14673,7 @@ functions:
     - torque:
         tooltip: Torque rotational force vector.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, force and torque are treated as local vectors; if
           FALSE, as global region vectors.
         type: integer
@@ -15497,7 +15497,7 @@ functions:
     - torque:
         tooltip: Torque rotational force vector.
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a
           global region vector.
         type: integer
@@ -15601,7 +15601,7 @@ functions:
     - velocity:
         tooltip: Linear velocity vector to apply (in meters per second).
         type: vector
-    - local:
+    - is_local:
         tooltip: Boolean. If TRUE, velocity is treated as a local directional vector; if
           FALSE, as a global region vector.
         type: integer
