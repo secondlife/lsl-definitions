@@ -32,31 +32,7 @@ def validate_definitions_via_jsonschema(schema_filename, yaml_filename) -> None:
         raise e
 
 
-LUAU_KEYWORDS = frozenset(
-    {
-        "and",
-        "break",
-        "do",
-        "else",
-        "elseif",
-        "end",
-        "false",
-        "for",
-        "function",
-        "if",
-        "in",
-        "local",
-        "nil",
-        "not",
-        "or",
-        "repeat",
-        "return",
-        "then",
-        "true",
-        "until",
-        "while",
-    }
-)
+from lsl_definitions.utils import LUAU_KEYWORDS
 
 
 def validate_no_keyword_params() -> None:
