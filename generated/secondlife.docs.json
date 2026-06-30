@@ -320,6 +320,12 @@
     "@sl-slua/global/llbase64.decode": {
         "documentation": "Decodes a base64 string to a string, or buffer if asBuffer is true. The output is truncated at the first decoding error."
     },
+    "@sl-slua/global/llhttp": {
+        "documentation": "Utilities for making HTTP requests."
+    },
+    "@sl-slua/global/llhttp.request": {
+        "documentation": "Send an HTTP request. Returns a key identifying the request, which is delivered via the http_response event. Omit body for requests that do not need a body (e.g. GET)."
+    },
     "@sl-slua/global/lljson": {
         "documentation": "JSON encoding/decoding library for Second Life.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
@@ -369,6 +375,12 @@
     },
     "@sl-slua/global/llprim.ParamsSetter": {
         "documentation": "Value: PrimParamsSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
+    },
+    "@sl-slua/global/llprim.particleSystem": {
+        "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
+    },
+    "@sl-slua/global/llprim.setMedia": {
+        "documentation": "Configure media on a specific face. Omit link to apply to the current prim."
     },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
@@ -5817,7 +5829,7 @@
         "documentation": "Value: 0<br>Indicates the response body truncation point in bytes."
     },
     "@sl-slua/global/HTTP_CUSTOM_HEADER": {
-        "documentation": "Value: 5<br>Adds a custom HTTP header (name and value pair) to the request. Up to 8 custom headers can be configured per request. Some default or sensitive headers are blocked for security reasons."
+        "documentation": "Value: 5<br>Adds custom HTTP headers to the request (up to 8 per request). At the SLua level, provide a string-keyed table mapping header names to values; the serializer emits one HTTP_CUSTOM_HEADER/key/value triple per entry. Some default or sensitive headers are blocked for security reasons."
     },
     "@sl-slua/global/HTTP_EXTENDED_ERROR": {
         "documentation": "Value: 9<br>If set to TRUE, llHTTPRequest always returns a key. If an error occurs during the request, detailed error information (delivered in an RFC 7807 JSON block) is reported through the http_response event using that key."
@@ -6864,7 +6876,7 @@
         "documentation": "Value: 1"
     },
     "@sl-slua/global/PRIM_MEDIA_WHITELIST": {
-        "documentation": "Value: 12<br>String. Gets or sets the whitelist as a string of escaped, comma-separated URLs (supports up to 64 URLs or 1024 characters, whichever comes first)."
+        "documentation": "Value: 12<br>Gets or sets the media whitelist as an array of URL strings (up to 64 URLs or 1024 characters, whichever comes first). At the SLua level, provide a {string} array; the serializer encodes it as an escaped, comma-separated string for the underlying LSL API."
     },
     "@sl-slua/global/PRIM_MEDIA_WHITELIST_ENABLE": {
         "documentation": "Value: 11<br>Boolean. Gets or sets whether media navigation is restricted to the URLs listed in PRIM_MEDIA_WHITELIST."

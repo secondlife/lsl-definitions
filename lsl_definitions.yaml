@@ -326,7 +326,7 @@ enums:
     prefix: PSYS_
     tooltip: ''
   ParticleSourcePattern:
-    type: flag
+    type: enum
     prefix: PSYS_SRC_PATTERN_
     tooltip: ''
   PassMode:
@@ -1964,6 +1964,7 @@ constants:
       with unlisted content types will return status 415.
     type: integer
     value: 8
+    value-type: string-multi
   HTTP_BODY_MAXLENGTH:
     member-of: [HTTPRequestParam]
     tooltip: "Sets the maximum (UTF-8 encoded) byte length of the HTTP response
@@ -1971,6 +1972,7 @@ constants:
       bytes, LSO Max: 4096 bytes)."
     type: integer
     value: 2
+    value-type: integer
   HTTP_BODY_TRUNCATED:
     member-of: [HTTPResponseError]
     tooltip: Indicates the response body truncation point in bytes.
@@ -1978,11 +1980,13 @@ constants:
     value: 0
   HTTP_CUSTOM_HEADER:
     member-of: [HTTPRequestParam]
-    tooltip: Adds a custom HTTP header (name and value pair) to the request. Up to 8
-      custom headers can be configured per request. Some default or sensitive
-      headers are blocked for security reasons.
+    tooltip: Adds custom HTTP headers to the request (up to 8 per request). At
+      the SLua level, provide a string-keyed table mapping header names to
+      values; the serializer emits one HTTP_CUSTOM_HEADER/key/value triple per
+      entry. Some default or sensitive headers are blocked for security reasons.
     type: integer
     value: 5
+    value-type: string-map
   HTTP_EXTENDED_ERROR:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, llHTTPRequest always returns a key. If an error occurs
@@ -1990,12 +1994,14 @@ constants:
       JSON block) is reported through the http_response event using that key.
     type: integer
     value: 9
+    value-type: boolean
   HTTP_METHOD:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the HTTP method ('GET', 'POST', 'PUT', or 'DELETE') for the
       request.
     type: integer
     value: 0
+    value-type: string
   HTTP_MIMETYPE:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the request Content-Type MIME type. Text types should define
@@ -2003,6 +2009,7 @@ constants:
       'application/x-www-form-urlencoded' to emulate HTML forms.
     type: integer
     value: 1
+    value-type: string
   HTTP_PRAGMA_NO_CACHE:
     member-of: [HTTPRequestParam]
     tooltip: "Controls whether the 'Pragma: no-cache' header is sent with the HTTP
@@ -2010,6 +2017,7 @@ constants:
       FALSE, it is omitted."
     type: integer
     value: 6
+    value-type: boolean
   HTTP_USER_AGENT:
     member-of: [HTTPRequestParam]
     tooltip: Appends a custom string to the default LSL User-Agent header value.
@@ -2017,6 +2025,7 @@ constants:
       not allowed and will cause a script error; use hyphens instead.
     type: integer
     value: 7
+    value-type: string
   HTTP_VERBOSE_THROTTLE:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, shouts error messages to DEBUG_CHANNEL if the outgoing
@@ -2024,6 +2033,7 @@ constants:
       suppressed.
     type: integer
     value: 4
+    value-type: boolean
   HTTP_VERIFY_CERT:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, the server's SSL certificate must be verifiable using a
@@ -2031,6 +2041,7 @@ constants:
       SSL certificate is accepted.
     type: integer
     value: 3
+    value-type: boolean
   IMG_USE_BAKED_AUX1:
     tooltip: ''
     type: string
@@ -4024,35 +4035,41 @@ constants:
       for that media type. Note: This flag is not currently implemented."
     type: integer
     value: 0
+    value-type: boolean
   PRIM_MEDIA_AUTO_LOOP:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-looping is enabled for the face media.
     type: integer
     value: 4
+    value-type: boolean
   PRIM_MEDIA_AUTO_PLAY:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media auto-plays when a resident is able
       to view it.
     type: integer
     value: 5
+    value-type: boolean
   PRIM_MEDIA_AUTO_SCALE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-scaling is enabled, which forces the
       media to fill the entire texture size.
     type: integer
     value: 6
+    value-type: boolean
   PRIM_MEDIA_AUTO_ZOOM:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether clicking the media triggers auto-zoom and
       auto-focus.
     type: integer
     value: 7
+    value-type: boolean
   PRIM_MEDIA_CONTROLS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the style of media controls (can be set to
       PRIM_MEDIA_CONTROLS_STANDARD or PRIM_MEDIA_CONTROLS_MINI).
     type: integer
     value: 1
+    value-type: integer
   PRIM_MEDIA_CONTROLS_MINI:
     member-of: [PrimMediaControl]
     tooltip: Mini web navigation controls constant; does not include an address bar.
@@ -4069,6 +4086,7 @@ constants:
       (maximum 1024 characters). Changing this URL triggers media navigation.
     type: integer
     value: 2
+    value-type: string
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: >-
@@ -4078,17 +4096,20 @@ constants:
       Note: Viewer settings affect this flag. It works by default on most prims.
     type: integer
     value: 8
+    value-type: boolean
   PRIM_MEDIA_HEIGHT_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the height of the media in pixels.
     type: integer
     value: 10
+    value-type: integer
   PRIM_MEDIA_HOME_URL:
     member-of: [PrimMediaParam]
     tooltip: String. Gets or sets the home URL for the chosen face (maximum 1024
       characters).
     type: integer
     value: 3
+    value-type: string
   PRIM_MEDIA_MAX_HEIGHT_PIXELS:
     tooltip: ''
     type: integer
@@ -4119,12 +4140,14 @@ constants:
       media control bar (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 14
+    value-type: integer
   PRIM_MEDIA_PERMS_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the permissions mask controlling who can interact
       with the media (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 13
+    value-type: integer
   PRIM_MEDIA_PERM_ANYONE:
     member-of: [PrimMediaPerm]
     tooltip: ''
@@ -4147,22 +4170,26 @@ constants:
     value: 1
   PRIM_MEDIA_WHITELIST:
     member-of: [PrimMediaParam]
-    tooltip: String. Gets or sets the whitelist as a string of escaped,
-      comma-separated URLs (supports up to 64 URLs or 1024 characters, whichever
-      comes first).
+    tooltip: Gets or sets the media whitelist as an array of URL strings (up to
+      64 URLs or 1024 characters, whichever comes first). At the SLua level,
+      provide a {string} array; the serializer encodes it as an escaped,
+      comma-separated string for the underlying LSL API.
     type: integer
     value: 12
+    value-type: string-csv
   PRIM_MEDIA_WHITELIST_ENABLE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media navigation is restricted to the
       URLs listed in PRIM_MEDIA_WHITELIST.
     type: integer
     value: 11
+    value-type: boolean
   PRIM_MEDIA_WIDTH_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the width of the media in pixels.
     type: integer
     value: 9
+    value-type: integer
   PRIM_NAME:
     member-of: [PrimParam]
     tooltip: Prim parameter [PRIM_NAME, string name] to get or set the prim's name
@@ -4576,11 +4603,13 @@ constants:
     tooltip: Integer parameter defining the destination blending function.
     type: integer
     value: 25
+    value-type: integer
   PSYS_PART_BLEND_FUNC_SOURCE:
     member-of: [ParticleParam]
     tooltip: Integer parameter defining the source blending function.
     type: integer
     value: 24
+    value-type: integer
   PSYS_PART_BOUNCE_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing particles to bounce off a plane at the emitter
@@ -4596,33 +4625,42 @@ constants:
     value: '0x100'
   PSYS_PART_END_ALPHA:
     member-of: [ParticleParam]
+    pretty-name: alpha_end
     tooltip: Float parameter that determines the ending alpha (transparency) of the
       particles.
     type: integer
     value: 4
+    value-type: float
   PSYS_PART_END_COLOR:
     member-of: [ParticleParam]
+    pretty-name: color_end
     tooltip: Vector parameter <r, g, b> that determines the ending color of the
       particles.
     type: integer
     value: 3
+    value-type: vector
   PSYS_PART_END_GLOW:
     member-of: [ParticleParam]
+    pretty-name: glow_end
     tooltip: Float parameter that determines the ending glow value of the particles.
     type: integer
     value: 27
+    value-type: float
   PSYS_PART_END_SCALE:
     member-of: [ParticleParam]
+    pretty-name: scale_end
     tooltip: Vector parameter <sx, sy, z> defining the ending size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
     value: 6
+    value-type: vector
   PSYS_PART_FLAGS:
     member-of: [ParticleParam]
     tooltip: Integer bitfield parameter specifying the simulation flags for emitted
       particles. Multiple flags can be combined using bitwise OR (|).
     type: integer
     value: 0
+    value-type: integer
   PSYS_PART_FOLLOW_SRC_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing particle positions to remain relative to the
@@ -4639,12 +4677,14 @@ constants:
     value: '0x20'
   PSYS_PART_INTERP_COLOR_MASK:
     member-of: [ParticleFlag]
+    pretty-name: color_interp
     tooltip: Particle flag causing the particle's color and alpha to smoothly
       interpolate from their START values to their END values over its lifetime.
     type: integer
     value: '0x1'
   PSYS_PART_INTERP_SCALE_MASK:
     member-of: [ParticleFlag]
+    pretty-name: scale_interp
     tooltip: Particle flag causing the particle's size/scale to transition from its
       START setting to its END setting over its lifetime.
     type: integer
@@ -4655,6 +4695,7 @@ constants:
       individual particle before it dies.
     type: integer
     value: 7
+    value-type: float
   PSYS_PART_RIBBON_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag that joins emitted particles into a continuous ribbon
@@ -4666,27 +4707,35 @@ constants:
     value: '0x400'
   PSYS_PART_START_ALPHA:
     member-of: [ParticleParam]
+    pretty-name: alpha_begin
     tooltip: Float parameter that determines the starting alpha (transparency) of
       the particles.
     type: integer
     value: 2
+    value-type: float
   PSYS_PART_START_COLOR:
     member-of: [ParticleParam]
+    pretty-name: color_begin
     tooltip: Vector parameter <r, g, b> that determines the starting color of the
       particles.
     type: integer
     value: 1
+    value-type: vector
   PSYS_PART_START_GLOW:
     member-of: [ParticleParam]
+    pretty-name: glow_begin
     tooltip: Float parameter that determines the starting glow value of the particles.
     type: integer
     value: 26
+    value-type: float
   PSYS_PART_START_SCALE:
     member-of: [ParticleParam]
+    pretty-name: scale_begin
     tooltip: Vector parameter <sx, sy, z> defining the starting size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
     value: 5
+    value-type: vector
   PSYS_PART_TARGET_LINEAR_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing emitted particles to move in a straight,
@@ -4716,12 +4765,14 @@ constants:
       apply to particles.
     type: integer
     value: 8
+    value-type: vector
   PSYS_SRC_ANGLE_BEGIN:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the angle in radians where particles will
       not be created (for ANGLE patterns).
     type: integer
     value: 22
+    value-type: float
   PSYS_SRC_ANGLE_END:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the ending angle in radians to be filled
@@ -4729,45 +4780,54 @@ constants:
       roles are swapped.
     type: integer
     value: 23
+    value-type: float
   PSYS_SRC_BURST_PART_COUNT:
     member-of: [ParticleParam]
     tooltip: Integer parameter specifying the number of particles to release in each
       burst.
     type: integer
     value: 15
+    value-type: integer
   PSYS_SRC_BURST_RADIUS:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the radial distance from the emitter's
       center at which particles are created.
     type: integer
     value: 16
+    value-type: float
   PSYS_SRC_BURST_RATE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the interval in seconds between particle bursts.
     type: integer
     value: 13
+    value-type: float
   PSYS_SRC_BURST_SPEED_MAX:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the maximum initial speed of emitted particles.
     type: integer
     value: 18
+    value-type: float
   PSYS_SRC_BURST_SPEED_MIN:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the minimum initial speed of emitted particles.
     type: integer
     value: 17
+    value-type: float
   PSYS_SRC_INNERANGLE:
     member-of: [ParticleParam]
+    pretty-name: angle_inner
     tooltip: Float parameter specifying the inner angle of the arc for ANGLE or
       ANGLE_CONE patterns. The specified inner area will not contain particles.
     type: integer
     value: 10
+    value-type: float
   PSYS_SRC_MAX_AGE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the active duration of the particle system
       in seconds (0.0 means forever).
     type: integer
     value: 19
+    value-type: float
   # These were present in the lexer, but not in the syntax file, they're marked private for consistency.
   # TODO: check if the private is actually warranted, it's likely not.
   PSYS_SRC_OBJ_REL_MASK:
@@ -4782,19 +4842,23 @@ constants:
       emission axis for ANGLE and ANGLE_CONE patterns.
     type: integer
     value: 21
+    value-type: vector
   PSYS_SRC_OUTERANGLE:
     member-of: [ParticleParam]
+    pretty-name: angle_outer
     tooltip: Float parameter specifying the outer angle of the arc for ANGLE or
       ANGLE_CONE patterns. The area between the outer and inner angles is filled
       with particles.
     type: integer
     value: 11
+    value-type: float
   PSYS_SRC_PATTERN:
     member-of: [ParticleParam]
     tooltip: Integer parameter specifying the generation pattern
       (PSYS_SRC_PATTERN_*) used to emit particles.
     type: integer
     value: 9
+    value-type: integer
   PSYS_SRC_PATTERN_ANGLE:
     member-of: [ParticleSourcePattern]
     tooltip: Emission pattern that sprays particles outward in a flat circular,
@@ -4836,12 +4900,14 @@ constants:
       PSYS_PART_TARGET_POS_MASK or PSYS_PART_TARGET_LINEAR_MASK is enabled.
     type: integer
     value: 20
+    value-type: key
   PSYS_SRC_TEXTURE:
     member-of: [ParticleParam]
     tooltip: String parameter specifying the inventory name or UUID asset key of the
       texture used for the particles.
     type: integer
     value: 12
+    value-type: asset
   PUBLIC_CHANNEL:
     tooltip: Integer constant representing the open local chat channel. Passing this
       to chat functions (llSay, llWhisper, llShout) prints text to the publicly
@@ -16678,6 +16744,7 @@ controls:
 # details, media, environment, KFM options, prim-param reads) aren't modeled yet.
 builder-rulesets:
   prim-params:
+    type: builder
     enum: PrimParam
     rules:
       # PRIM_TYPE_LEGACY intentionally omitted, it has very annoying semantics,
@@ -16943,3 +17010,32 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  http-params:
+    type: table
+    enum: HTTPRequestParam
+    filler-tokens: [http]
+    lua-type: HttpRequestParams
+    lua-module: llhttp
+    lua-fn: request
+    dispatch-fn: HTTPRequest
+
+  particle-params:
+    type: table
+    enum: ParticleParam
+    filler-tokens: [part, src]
+    flag-enum: ParticleFlag
+    flag-field: flags
+    flag-mask: _MASK
+    lua-module: llprim
+    lua-fn: particleSystem
+    lua-type: ParticleParams
+    dispatch-fn: LinkParticleSystem
+
+  prim-media-params:
+    type: table
+    enum: PrimMediaParam
+    lua-module: llprim
+    lua-fn: setMedia
+    lua-type: MediaParams
+    dispatch-fn: SetLinkMedia

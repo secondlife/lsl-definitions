@@ -149,6 +149,142 @@
             "markdownDescription": "An array of parameter type-name pairs.",
             "minItems": 1,
             "type": "array"
+        },
+        "builderRule": {
+            "additionalProperties": false,
+            "type": "object",
+            "required": ["params"],
+            "dependentRequired": {
+                "variants-on": ["variants", "variant-enum"],
+                "variants": ["variants-on", "variant-enum"],
+                "variant-enum": ["variants", "variants-on"]
+            },
+            "properties": {
+                "face-target": {
+                    "const": true,
+                    "markdownDescription": "This rule targets a specific face.",
+                    "type": "boolean"
+                },
+                "method-name": {
+                    "markdownDescription": "Override the derived SLua builder method name.",
+                    "pattern": "^[a-z][A-Za-z0-9]*$",
+                    "type": "string"
+                },
+                "nullable": {
+                    "const": true,
+                    "markdownDescription": "This rule's params may all be NULL.",
+                    "type": "boolean"
+                },
+                "params": { "$ref": "#/$defs/rulesetParamArray" },
+                "variants-on": {
+                    "markdownDescription": "Name of the discriminator parameter (must appear in `params`).",
+                    "pattern": "^[a-z_]+$",
+                    "type": "string"
+                },
+                "variant-enum": {
+                    "markdownDescription": "Name of the LSL enum whose members key into each variant's `applies-to`.",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$",
+                    "type": "string"
+                },
+                "variants": {
+                    "markdownDescription": "Variants whose additional params depend on the discriminator value.",
+                    "items": {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "required": ["applies-to", "params"],
+                        "properties": {
+                            "applies-to": {
+                                "markdownDescription": "Members of the rule's `variant-enum` for which this variant applies.",
+                                "items": {
+                                    "pattern": "^[A-Z][A-Z0-9_]*$",
+                                    "type": "string"
+                                },
+                                "minItems": 1,
+                                "type": "array",
+                                "uniqueItems": true
+                            },
+                            "params": { "$ref": "#/$defs/rulesetParamArray" }
+                        }
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                }
+            }
+        },
+        "builderRuleset": {
+            "additionalProperties": false,
+            "type": "object",
+            "required": ["type", "enum"],
+            "properties": {
+                "type": {
+                    "markdownDescription": "The kind of fluent interface this ruleset generates. `builder` produces setter methods (SPP-style); `table` produces property-assignment tables with an `apply()` dispatch.",
+                    "type": "string",
+                    "enum": ["builder", "table"]
+                },
+                "enum": {
+                    "markdownDescription": "Name of the LSL enum backing this ruleset. For `builder` rulesets, the enum's `prefix` is stripped from rule constant names to derive method names, and every key under `rules` must be a member of this enum. For `table` rulesets, members of this enum map directly to table properties.",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "rules": {
+                    "markdownDescription": "(`builder` only) Map of rule constant names to their rule definitions.",
+                    "additionalProperties": false,
+                    "type": "object",
+                    "patternProperties": {
+                        "^[A-Z][A-Z0-9_]*$": { "$ref": "#/$defs/builderRule" }
+                    }
+                },
+                "filler-tokens": {
+                    "markdownDescription": "(`table` optional) Tokens stripped from member names when generating pretty property aliases.",
+                    "type": "array",
+                    "items": { "type": "string", "pattern": "^[a-z]+$" }
+                },
+                "flag-enum": {
+                    "markdownDescription": "(`table` optional) Name of the LSL flag enum whose bits are exposed as boolean properties.",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "flag-field": {
+                    "markdownDescription": "(`table` optional) Name of the integer property that `flag-enum` bits are ORed into.",
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "flag-mask": {
+                    "markdownDescription": "(`table` optional) Suffix (e.g. `_MASK`) stripped from each flag constant name before tokenizing into a property name.",
+                    "type": "string",
+                    "pattern": "^_[A-Z]+$"
+                },
+                "lua-module": {
+                    "markdownDescription": "(`table` only) Lua global module name (e.g. `llparticle`).",
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "lua-type": {
+                    "markdownDescription": "(`table` only) Lua type name within the module (e.g. `ParticleParams`).",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                },
+                "lua-fn": {
+                    "markdownDescription": "(`table` only) Lua function name exposed in `lua-module` (e.g. `ParticleSystem`).",
+                    "type": "string",
+                    "pattern": "^[A-Za-z][a-zA-Z0-9]*$"
+                },
+                "dispatch-fn": {
+                    "markdownDescription": "(`table` only) `ll.*` function name whose signature drives code generation (e.g. `LinkParticleSystem`). Must take a list argument (not necessarily last).",
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]*$"
+                }
+            },
+            "if": {
+                "properties": { "type": { "const": "builder" } },
+                "required": ["type"]
+            },
+            "then": { "required": ["rules"] },
+            "else": {
+                "required": ["enum", "lua-type"],
+                "if": { "required": ["dispatch-fn"] },
+                "then": { "required": ["lua-module", "lua-fn"] }
+            }
         }
     },
     "additionalProperties": false,
@@ -221,6 +357,15 @@
                             "markdownDescription": "The name of the enum this constant is a member of, if any.",
                             "type": "array",
                             "items": { "type": "string", "pattern": "^[A-Z]+[A-Za-z_]*$" }
+                        },
+                        "value-type": {
+                            "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types. 'string-csv' accepts a {string} array and serializes it as an escaped comma-separated string. 'string-map' accepts a {[string]: string} table and emits one tag/key/value triple per entry.",
+                            "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map", "string-multi"]
+                        },
+                        "pretty-name": {
+                            "markdownDescription": "Override the auto-generated property alias for this constant when used as a table-ruleset key. Must be a valid Lua identifier (lowercase, underscores).",
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]*$"
                         }
                     },
                     "required": [
@@ -541,90 +686,12 @@
             "type": "object"
         },
         "builder-rulesets": {
-            "additionalProperties": false,
             "markdownDescription": "Rulesets that codegen into fluent-builder SLua classes (ordered rule+value setters, face-target, discriminator variants).",
             "type": "object",
-            "properties": {
-                "prim-params": {
-                    "additionalProperties": false,
-                    "type": "object",
-                    "required": ["rules"],
-                    "properties": {
-                        "enum": {
-                            "markdownDescription": "Name of the LSL enum whose members are the rule constants. The enum's `prefix` is stripped off each rule name to derive builder method names; every key under `rules` must be a member of this enum.",
-                            "pattern": "^[A-Z][A-Za-z0-9]*$",
-                            "type": "string"
-                        },
-                        "rules": {
-                            "additionalProperties": false,
-                            "type": "object",
-                            "patternProperties": {
-                                "^[A-Z][A-Z0-9_]*$": {
-                                    "additionalProperties": false,
-                                    "type": "object",
-                                    "required": ["params"],
-                                    "dependentRequired": {
-                                        "variants-on": ["variants", "variant-enum"],
-                                        "variants": ["variants-on", "variant-enum"],
-                                        "variant-enum": ["variants", "variants-on"]
-                                    },
-                                    "properties": {
-                                        "face-target": {
-                                            "const": true,
-                                            "markdownDescription": "This rule targets a specific face.",
-                                            "type": "boolean"
-                                        },
-                                        "method-name": {
-                                            "markdownDescription": "Override the derived SLua builder method name.",
-                                            "pattern": "^[a-z][A-Za-z0-9]*$",
-                                            "type": "string"
-                                        },
-                                        "nullable": {
-                                            "const": true,
-                                            "markdownDescription": "This rule's params may all be NULL.",
-                                            "type": "boolean"
-                                        },
-                                        "params": { "$ref": "#/$defs/rulesetParamArray" },
-                                        "variants-on": {
-                                            "markdownDescription": "Name of the discriminator parameter (must appear in `params`).",
-                                            "pattern": "^[a-z_]+$",
-                                            "type": "string"
-                                        },
-                                        "variant-enum": {
-                                            "markdownDescription": "Name of the LSL enum whose members key into each variant's `applies-to`.",
-                                            "pattern": "^[A-Z][A-Za-z0-9]*$",
-                                            "type": "string"
-                                        },
-                                        "variants": {
-                                            "markdownDescription": "Variants whose additional params depend on the discriminator value.",
-                                            "items": {
-                                                "additionalProperties": false,
-                                                "type": "object",
-                                                "required": ["applies-to", "params"],
-                                                "properties": {
-                                                    "applies-to": {
-                                                        "markdownDescription": "Members of the rule's `variant-enum` for which this variant applies.",
-                                                        "items": {
-                                                            "pattern": "^[A-Z][A-Z0-9_]*$",
-                                                            "type": "string"
-                                                        },
-                                                        "minItems": 1,
-                                                        "type": "array",
-                                                        "uniqueItems": true
-                                                    },
-                                                    "params": { "$ref": "#/$defs/rulesetParamArray" }
-                                                }
-                                            },
-                                            "minItems": 1,
-                                            "type": "array"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            "patternProperties": {
+                "^[a-z][a-z0-9-]*$": { "$ref": "#/$defs/builderRuleset" }
+            },
+            "additionalProperties": false
         }
     },
     "required": [
