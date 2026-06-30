@@ -10,8 +10,27 @@ from typing import TYPE_CHECKING, Any, TextIO
 import llsd
 import yaml
 
-from lsl_definitions.rulesets import BuilderMethod, BuilderSpec, expand_spp_builder
+from lsl_definitions.rulesets import (
+    BuilderMethod,
+    BuilderSpec,
+    expand_spp_builder,
+    expand_table_ruleset,
+)
 from lsl_definitions.utils import Deprecated, remove_worthless
+
+_TABLE_RULESET_TYPE_MAP: dict[str, str] = {
+    "float": "number",
+    "integer": "number",
+    "boolean": "boolean",
+    "vector": "vector",
+    "rotation": "rotation",
+    "string": "string",
+    "key": "(string | uuid)",
+    "asset": "(string | uuid)",
+    "string-csv": "{string}",
+    "string-map": "{[string]: string | number | boolean | vector | quaternion}",
+    "string-multi": "{string}",
+}
 
 if TYPE_CHECKING:
     from typing import Literal
@@ -433,6 +452,7 @@ class SLuaDefinitions:
         """
         self.generate_ll_modules(lsl)
         self._generate_spp_builder_class(lsl)
+        self._generate_fluent_builder_classes(lsl)
 
     def generate_ll_modules(self, lsl: LSLDefinitions, solverV2: bool = True) -> None:
         """
@@ -666,6 +686,78 @@ class SLuaDefinitions:
         # We assume that the class we place this in is pre-existing
         builder_class = [m for m in self.classes if m.name == spec.class_name][0]
         builder_class.methods.extend(methods)
+
+    def _generate_fluent_builder_classes(self, lsl: LSLDefinitions) -> None:
+        """Inject typed properties into fluent builder classes or type aliases.
+
+        For each table-type builder ruleset that names a lua-type, finds the matching
+        SLuaClassDeclaration in self.classes (and populates its properties list) OR a
+        SLuaTypeAlias in self.type_aliases (and rebuilds its definition string) from
+        expand_table_ruleset() plus any flag enum members.
+        """
+        for ruleset_name, ruleset_data in lsl.builder_rulesets.items():
+            if ruleset_data.get("type") != "table":
+                continue
+            lua_type = ruleset_data.get("lua-type")
+            if not lua_type:
+                continue
+
+            cls = next((c for c in self.classes if c.name == lua_type), None)
+            alias = next((a for a in self.type_aliases if a.name == lua_type), None)
+            if cls is None and alias is None:
+                continue
+
+            # Collect (prop_name, luau_type) pairs
+            props: list[tuple[str, str]] = []
+
+            # Regular properties from expand_table_ruleset
+            for desc in expand_table_ruleset(lsl, ruleset_name):
+                prop_name = desc.pretty_name if desc.pretty_name else desc.strict_name
+                luau_base = _TABLE_RULESET_TYPE_MAP.get(desc.value_type, "any")
+                props.append((prop_name, f"{luau_base}?"))
+
+            # Flag enum boolean properties
+            flag_enum_name = ruleset_data.get("flag-enum")
+            if flag_enum_name:
+                flag_enum = lsl.enums[flag_enum_name]
+                prefix = flag_enum.prefix
+                flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
+                filler_tokens = set(ruleset_data.get("filler-tokens", []))
+                flag_consts = sorted(
+                    (
+                        c
+                        for c in lsl.constants.values()
+                        if any(e.name == flag_enum_name for e in c.member_of) and not c.private
+                    ),
+                    key=lambda c: int(c.value, 0),
+                )
+                for const in flag_consts:
+                    if const.pretty_name:
+                        prop_name = const.pretty_name
+                    else:
+                        strict = (
+                            const.name[len(prefix) :]
+                            if const.name.startswith(prefix)
+                            else const.name
+                        ).lower()
+                        if flag_suffix and strict.endswith(flag_suffix):
+                            strict = strict[: -len(flag_suffix)]
+                        tokens = [t for t in strict.split("_") if t not in filler_tokens]
+                        prop_name = "_".join(tokens) if tokens else strict
+                    props.append((prop_name, "boolean?"))
+
+            if cls is not None:
+                for prop_name, prop_type in props:
+                    cls.properties.append(
+                        SLuaProperty(name=prop_name, type=prop_type, modifiable="full-write")
+                    )
+            else:
+                # Rebuild the type alias definition as a typed table literal.
+                lines = ["{"]
+                for prop_name, prop_type in props:
+                    lines.append(f"  {prop_name}: {prop_type},")
+                lines.append("}")
+                alias.definition = "\n".join(lines)
 
 
 class SLuaDefinitionParser:

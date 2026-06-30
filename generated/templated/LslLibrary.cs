@@ -84,10 +84,10 @@ namespace LindenLab.SecondLife
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static void llSetLinkGLTFOverridesInternal(int link, int face, object[] params, int params_len);
+        public extern static void llSetLinkGLTFOverridesInternal(int link, int face, object[] @params, int params_len);
 
-        public static void llSetLinkGLTFOverrides(int link, int face, ArrayList params) {
-            llSetLinkGLTFOverridesInternal(link, face, ToArrayNoCopy(params), params.Count);
+        public static void llSetLinkGLTFOverrides(int link, int face, ArrayList @params) {
+            llSetLinkGLTFOverridesInternal(link, face, ToArrayNoCopy(@params), @params.Count);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

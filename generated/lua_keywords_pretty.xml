@@ -198,6 +198,21 @@ export type DateTypeResult = {
   isdst: boolean?,
 }</string>
          </map>
+         <key>HttpRequestParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>HTTP request parameter table. Pass to ll.httpRequest() to configure an HTTP request.</string>
+         </map>
+         <key>MediaParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Prim face media parameter table. Pass to llprim.SetMedia() to configure media on a face.</string>
+         </map>
+         <key>ParticleParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Particle system parameter table. Pass to llprim.ParticleSystem() to emit particles.</string>
+         </map>
          <key>list</key>
          <map>
             <key>tooltip</key>
@@ -2723,7 +2738,7 @@ export type rotation = quaternion</string>
          <key>HTTP_CUSTOM_HEADER</key>
          <map>
             <key>tooltip</key>
-            <string>Adds a custom HTTP header (name and value pair) to the request. Up to 8 custom headers can be configured per request. Some default or sensitive headers are blocked for security reasons.</string>
+            <string>Adds custom HTTP headers to the request (up to 8 per request). At the SLua level, provide a string-keyed table mapping header names to values; the serializer emits one HTTP_CUSTOM_HEADER/key/value triple per entry. Some default or sensitive headers are blocked for security reasons.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -5916,7 +5931,7 @@ vector force
          <key>PRIM_MEDIA_WHITELIST</key>
          <map>
             <key>tooltip</key>
-            <string>String. Gets or sets the whitelist as a string of escaped, comma-separated URLs (supports up to 64 URLs or 1024 characters, whichever comes first).</string>
+            <string>Gets or sets the media whitelist as an array of URL strings (up to 64 URLs or 1024 characters, whichever comes first). At the SLua level, provide a {string} array; the serializer encodes it as an escaped, comma-separated string for the underlying LSL API.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -13217,6 +13232,54 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Encodes a string or buffer to base64</string>
          </map>
+         <key>llhttp</key>
+         <map>
+            <key>energy</key>
+            <real>-1.0</real>
+            <key>tooltip</key>
+            <string>Utilities for making HTTP requests.</string>
+         </map>
+         <key>llhttp.request</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>url</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>string</string>
+                  </map>
+               </map>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>HttpRequestParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>body</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>string?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>uuid</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Send an HTTP request. Returns a key identifying the request, which is delivered via the http_response event. Omit body for requests that do not need a body (e.g. GET).</string>
+         </map>
          <key>lljson</key>
          <map>
             <key>energy</key>
@@ -13358,6 +13421,79 @@ Returns true if result is non-zero.</string>
             <real>-1.0</real>
             <key>tooltip</key>
             <string>Utilities for working with prims / objects</string>
+         </map>
+         <key>llprim.particleSystem</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>ParticleParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>link</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>()</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
+         </map>
+         <key>llprim.setMedia</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>face</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number</string>
+                  </map>
+               </map>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>MediaParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>link</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>number</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Configure media on a specific face. Omit link to apply to the current prim.</string>
          </map>
          <key>math</key>
          <map>

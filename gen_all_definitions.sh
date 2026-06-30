@@ -7,7 +7,7 @@ mkdir -p "$outdir" "$outdir/cpp" "$outdir/templated" "$outdir/experimental" "$ou
 
 DEFS="./lsl_definitions.yaml"
 SLUA="./slua_definitions.yaml"
-CMD="python gen_definitions.py"
+CMD="$(command -v python3 || command -v python) gen_definitions.py"
 
 # Viewer outputs
 $CMD $DEFS syntax "$outdir/lsl_keywords.xml"
@@ -33,6 +33,7 @@ $CMD $DEFS gen_lscript_interface "$outdir/cpp/lscript_interface.cpp"
 $CMD $DEFS gen_mono_bind_interfaces "$outdir/cpp/mono_bind_interfaces.cpp"
 $CMD $DEFS gen_lua_registrations 1 "$outdir/cpp/lua_registrations.cpp"
 $CMD $DEFS gen_lua_constant_definitions "$outdir/cpp/lua_constant_definitions.cpp"
+$CMD $DEFS gen_fluent_builder_descriptors "$outdir/cpp/fluent_builder_descriptors.cpp"
 $CMD $DEFS gen_lscript_library_bind_pure "$outdir/cpp/lscript_library_bind_pure.cpp"
 $CMD $DEFS gen_tree_header_file "$outdir/cpp/lscript_tree.h"
 $CMD $DEFS gen_tree_source_file "$outdir/cpp/lscript_tree.cpp"

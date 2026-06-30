@@ -85,6 +85,74 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type ParticleParams = {
+  flags: number?,
+  color_begin: vector?,
+  alpha_begin: number?,
+  color_end: vector?,
+  alpha_end: number?,
+  scale_begin: vector?,
+  scale_end: vector?,
+  part_max_age: number?,
+  accel: vector?,
+  pattern: number?,
+  angle_inner: number?,
+  angle_outer: number?,
+  texture: (string | uuid)?,
+  burst_rate: number?,
+  burst_count: number?,
+  burst_radius: number?,
+  burst_speed_min: number?,
+  burst_speed_max: number?,
+  src_max_age: number?,
+  target_key: (string | uuid)?,
+  omega: vector?,
+  angle_begin: number?,
+  angle_end: number?,
+  blend_func_source: number?,
+  blend_func_dest: number?,
+  glow_begin: number?,
+  glow_end: number?,
+  color_interp: boolean?,
+  scale_interp: boolean?,
+  bounce: boolean?,
+  wind: boolean?,
+  follow: boolean?,
+  follow_velocity: boolean?,
+  target_pos: boolean?,
+  target_linear: boolean?,
+  emissive: boolean?,
+  ribbon: boolean?,
+}
+export type MediaParams = {
+  alt_image_enable: boolean?,
+  controls: number?,
+  current_url: string?,
+  home_url: string?,
+  auto_loop: boolean?,
+  auto_play: boolean?,
+  auto_scale: boolean?,
+  auto_zoom: boolean?,
+  first_click_interact: boolean?,
+  width_pixels: number?,
+  height_pixels: number?,
+  whitelist_enable: boolean?,
+  whitelist: {string}?,
+  perms_interact: number?,
+  perms_control: number?,
+}
+export type HttpRequestParams = {
+  method: string?,
+  mimetype: string?,
+  body_maxlength: number?,
+  verify_cert: boolean?,
+  verbose_throttle: boolean?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  accept: {string}?,
+  extended_error: boolean?,
+}
 
 declare extern type DetectedEvent with
   index: number
@@ -362,6 +430,15 @@ declare llbase64: {
 
 
 ---------------------------
+-- Global Table: llhttp
+---------------------------
+
+declare llhttp: {
+  request: (url: string, params: HttpRequestParams?, body: string?) -> uuid,
+}
+
+
+---------------------------
 -- Global Table: lljson
 ---------------------------
 
@@ -385,6 +462,8 @@ declare lljson: {
 
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
+  particleSystem: (params: ParticleParams?, link: number?) -> (),
+  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
 }
 
 

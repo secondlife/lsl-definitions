@@ -152,7 +152,10 @@ class LSLConstant:
     slua_deprecated: Deprecated | None
     private: bool
     """Whether this should this be included in the syntax file"""
+    pretty_name: str | None = None
+    """Optional override for the auto-generated property alias in table-ruleset APIs."""
     member_of: list[LSLEnum] = dataclasses.field(default_factory=list)
+    value_type: str | None = None
 
     @property
     def value_raw(self) -> str:
@@ -588,14 +591,15 @@ class LSLDefinitionParser:
             enum_name = ruleset_data["enum"]
             if enum_name not in self._definitions.enums:
                 raise ValueError(f"{ruleset_name} references unknown enum {enum_name!r}")
-            rule_enum = self._definitions.enums[enum_name]
-            for rule_name, rule_data in ruleset_data["rules"].items():
-                if rule_name not in rule_enum.by_name:
-                    raise ValueError(
-                        f"{ruleset_name} rule {rule_name!r} is not a member of "
-                        f"its ruleset's declared enum {enum_name!r}"
-                    )
-                self._validate_builder_rule_variants(ruleset_name, rule_name, rule_data)
+            if ruleset_data.get("type", "builder") == "builder":
+                rule_enum = self._definitions.enums[enum_name]
+                for rule_name, rule_data in ruleset_data["rules"].items():
+                    if rule_name not in rule_enum.by_name:
+                        raise ValueError(
+                            f"{ruleset_name} rule {rule_name!r} is not a member of "
+                            f"its ruleset's declared enum {enum_name!r}"
+                        )
+                    self._validate_builder_rule_variants(ruleset_name, rule_name, rule_data)
         self._definitions.builder_rulesets.update(builder_rulesets)
 
         return self._definitions
@@ -898,6 +902,8 @@ class LSLDefinitionParser:
                 slua_deprecated=Deprecated.from_definition(
                     const_data.get("slua-deprecated", False)
                 ),
+                value_type=const_data.get("value-type", None),
+                pretty_name=const_data.get("pretty-name", None),
             )
             if const.type not in {"float", "integer", "string", "vector", "rotation"}:
                 raise ValueError(f"Invalid constant type {const.type}")

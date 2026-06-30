@@ -237,6 +237,21 @@ type-aliases:
   comment: Configuration options for lljson decoding
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: ParticleParams
+  comment: Particle system parameter table. Pass to llprim.particleSystem() to emit particles.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
+- name: MediaParams
+  comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
+  selene-type: table
+- name: HttpRequestParams
+  comment: HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
+  selene-type: table
 classes:
 - name: LLEvents
   comment: Event registration and management class for Second Life events
@@ -1467,6 +1482,21 @@ modules:
     comment: A constant to pass for an empty object to json encode.
     type: '{}'
     value: 'setmetatable({}, lljson.object_mt)'
+- name: llhttp
+  comment: Utilities for making HTTP requests.
+  functions:
+  - name: request
+    comment: Send an HTTP request. Returns a key identifying the request, which is
+      delivered via the http_response event. Omit body for requests that do not
+      need a body (e.g. GET).
+    parameters:
+    - name: url
+      type: string
+    - name: params
+      type: HttpRequestParams?
+    - name: body
+      type: string?
+    return-type: uuid
 - name: llprim
   comment: Utilities for working with prims / objects
   constants:
@@ -1474,6 +1504,25 @@ modules:
     comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
+  functions:
+  - name: particleSystem
+    comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
+    parameters:
+    - name: params
+      type: ParticleParams?
+    - name: link
+      type: number?
+    return-type: '()'
+  - name: setMedia
+    comment: Configure media on a specific face. Omit link to apply to the current prim.
+    parameters:
+    - name: face
+      type: number
+    - name: params
+      type: MediaParams?
+    - name: link
+      type: number?
+    return-type: number
 - name: math
   comment: Mathematical functions library.
   functions:

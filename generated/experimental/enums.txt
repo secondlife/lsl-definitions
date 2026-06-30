@@ -825,11 +825,11 @@ enum ParticleParam {
   PART_END_GLOW = 27
 };
 enum ParticleSourcePattern {
-  DROP = 0x1
-  EXPLODE = 0x2
-  ANGLE = 0x4
-  ANGLE_CONE = 0x8
-  ANGLE_CONE_EMPTY = 0x10
+  DROP = 1
+  EXPLODE = 2
+  ANGLE = 4
+  ANGLE_CONE = 8
+  ANGLE_CONE_EMPTY = 16
 };
 enum PassMode {
   IF_NOT_HANDLED = 0
