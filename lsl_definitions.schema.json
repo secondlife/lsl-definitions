@@ -299,6 +299,82 @@
                             "markdownDescription": "The name of the enum this constant is a member of, if any.",
                             "type": "array",
                             "items": { "type": "string", "pattern": "^[A-Z]+[A-Za-z_]*$" }
+                        },
+                        "value-type": {
+                            "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types. 'string-csv' accepts a {string} array and serializes it as an escaped comma-separated string. 'string-map' accepts a {[string]: string} table and emits one tag/key/value triple per entry.",
+                            "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map", "string-multi"],
+                            "type": "string"
+                        },
+                        "range": {
+                            "markdownDescription": "An array with the start and end values.",
+                            "items": {
+                                "type": ["number", "string", "integer"]
+                            },
+                            "maxItems": 2,
+                            "minItems": 2,
+                            "type": "array"
+                        },
+                        "default": {
+                            "markdownDescription": "The default value.",
+                            "type": ["number", "string", "integer", "boolean"]
+                        },
+                        "enum": {
+                            "markdownDescription": "A category of constants valid for this value.",
+                            "type": "string"
+                        },
+                        "details": {
+                            "markdownDescription": "Additional information.",
+                            "type": "string"
+                        },
+                        "access": {
+                            "markdownDescription": "Access mode. 'arg' is always an argument. 'read' is used only when reading. 'write' is used only when writing.",
+                            "enum": ["arg", "read", "write", "read/write"],
+                            "type": "string"
+                        },
+                        "values": {
+                            "markdownDescription": "A list of values associated to the constant.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "name": {
+                                        "markdownDescription": "The name of this value.",
+                                        "type": "string"
+                                    },
+                                    "value-type": {
+                                        "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types. 'string-csv' accepts a {string} array and serializes it as an escaped comma-separated string. 'string-map' accepts a {[string]: string} table and emits one tag/key/value triple per entry.",
+                                        "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map", "string-multi"],
+                                        "type": "string"
+                                    },
+                                    "range": {
+                                        "markdownDescription": "An array with the start and end values.",
+                                        "items": {
+                                            "type": ["number", "string", "integer"]
+                                        },
+                                        "maxItems": 2,
+                                        "minItems": 2,
+                                        "type": "array"
+                                    },
+                                    "default": {
+                                        "markdownDescription": "The default value.",
+                                        "type": ["number", "string", "integer", "boolean"]
+                                    },
+                                    "enum": {
+                                        "markdownDescription": "A category of constants valid for this value.",
+                                        "type": "string"
+                                    },
+                                    "details": {
+                                        "markdownDescription": "Additional information.",
+                                        "type": "string"
+                                    },
+                                    "access": {
+                                        "markdownDescription": "Access mode. 'arg' is always an argument. 'read' is used only when reading. 'write' is used only when writing.",
+                                        "enum": ["arg", "read", "write", "read/write"],
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         }
                     },
                     "required": [

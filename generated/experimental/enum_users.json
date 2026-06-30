@@ -94,11 +94,12 @@
   ],
   "EnvironmentError": [],
   "EnvironmentParam": [
-    "llGetEnvironment",
     "llSetAgentEnvironment",
     "llSetEnvironment"
   ],
-  "EnvironmentParamReadOnly": [],
+  "EnvironmentParamReadOnly": [
+    "llGetEnvironment"
+  ],
   "EstateAccessParam": [
     "llManageEstateAccess"
   ],

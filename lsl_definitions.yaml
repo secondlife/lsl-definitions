@@ -867,7 +867,8 @@ constants:
     deprecated:
       use: ATTACH_RIGHT_PEC
     member-of: [AttachPoint]
-    tooltip: Attachment point for the avatar's right pectoral (deprecated, use ATTACH_RIGHT_PEC).
+    tooltip: Attachment point for the avatar's right pectoral (deprecated, use
+      ATTACH_RIGHT_PEC).
     type: integer
     value: 30
   ATTACH_LSHOULDER:
@@ -960,7 +961,8 @@ constants:
     deprecated:
       use: ATTACH_LEFT_PEC
     member-of: [AttachPoint]
-    tooltip: Attachment point for the avatar's left pectoral (deprecated, use ATTACH_LEFT_PEC).
+    tooltip: Attachment point for the avatar's left pectoral (deprecated, use
+      ATTACH_LEFT_PEC).
     type: integer
     value: 29
   ATTACH_RSHOULDER:
@@ -1014,84 +1016,152 @@ constants:
       avatar's viewer.
     type: integer
     value: 1
+    values:
+      - name: open_map
+        value-type: boolean
+      - name: focus_map
+        value-type: boolean
   CAMERA_ACTIVE:
     member-of: [CameraParam]
     tooltip: Option flag used with llSetCameraParams to turn scripted control of the
       camera on or off.
     type: integer
     value: 12
+    values:
+      - name: isActive
+        value-type: boolean
+        default: false
   CAMERA_BEHINDNESS_ANGLE:
     member-of: [CameraParam]
     tooltip: Sets the angle in degrees within which the camera is not constrained by
       changes in target rotation.
     type: integer
     value: 8
+    values:
+      - name: degrees
+        value-type: float
+        range: [0, 180]
+        default: 10
   CAMERA_BEHINDNESS_LAG:
     member-of: [CameraParam]
     tooltip: Sets how strongly the camera is forced to stay behind the target if
       outside of the behindness angle.
     type: integer
     value: 9
+    values:
+      - name: seconds
+        value-type: float
+        range: [0, 3]
+        default: 0
   CAMERA_DISTANCE:
     member-of: [CameraParam]
     tooltip: Sets how far away the camera wants to be from its target.
     type: integer
     value: 7
+    values:
+      - name: meters
+        value-type: float
+        range: [0.5, 50]
+        default: 3
   CAMERA_FOCUS:
     member-of: [CameraParam]
     tooltip: Sets camera focus (target position) in region coordinates.
     type: integer
     value: 17
+    values:
+      - name: position
+        value-type: vector
   CAMERA_FOCUS_LAG:
     member-of: [CameraParam]
     tooltip: Sets how much the camera lags as it aims toward the target.
     type: integer
     value: 6
+    values:
+      - name: seconds
+        value-type: float
+        range: [0, 3]
+        default: 0.1
   CAMERA_FOCUS_LOCKED:
     member-of: [CameraParam]
     tooltip: Option flag used with llSetCameraParams to lock the camera focus so it
       does not move.
     type: integer
     value: 22
+    values:
+      - name: isLocked
+        value-type: boolean
+        default: false
   CAMERA_FOCUS_OFFSET:
     member-of: [CameraParam]
     tooltip: Adjusts the camera focus position relative to the target.
     type: integer
     value: 1
+    values:
+      - name: meters
+        value-type: vector
+        range: ["<-10,-10,-10>", "<10,10,10>"]
+        default: <0,0,0>
   CAMERA_FOCUS_THRESHOLD:
     member-of: [CameraParam]
     tooltip: Sets the radius of a sphere around the camera's target position within
       which its focus is not affected by target motion.
     type: integer
     value: 11
+    values:
+      - name: meters
+        value-type: float
+        range: [0, 4]
+        default: 1
   CAMERA_PITCH:
     member-of: [CameraParam]
     tooltip: Adjusts the angular amount that the camera aims straight ahead versus
       straight down, maintaining the same distance (analogous to 'incidence').
     type: integer
     value: 0
+    values:
+      - name: degrees
+        value-type: float
+        range: [-45, 80]
+        default: 0
   CAMERA_POSITION:
     member-of: [CameraParam]
     tooltip: Sets camera position in region coordinates.
     type: integer
     value: 13
+    values:
+      - name: position
+        value-type: vector
   CAMERA_POSITION_LAG:
     member-of: [CameraParam]
     tooltip: Sets how much the camera lags as it moves toward its ideal position.
     type: integer
     value: 5
+    values:
+      - name: seconds
+        value-type: float
+        range: [0, 3]
+        default: 0.1
   CAMERA_POSITION_LOCKED:
     member-of: [CameraParam]
     tooltip: Option flag used with llSetCameraParams to lock the camera position so
       it does not move.
     type: integer
     value: 21
+    values:
+      - name: isLocked
+        value-type: boolean
+        default: false
   CAMERA_POSITION_THRESHOLD:
     member-of: [CameraParam]
     tooltip: Sets the radius of a sphere around the camera's ideal position within
       which it is not affected by target motion.
     type: integer
     value: 10
+    values:
+      - name: meters
+        value-type: float
+        range: [0, 3]
+        default: 1
   CHANGED_ALLOWED_DROP:
     member-of: [ChangeType]
     tooltip: The object inventory changed because a user other than the owner (or
@@ -1180,6 +1250,8 @@ constants:
       (though potentially more stuttery) movement. Default is TRUE.
     type: integer
     value: 14
+    value-type: boolean
+    default: true
   CHARACTER_AVOIDANCE_MODE:
     member-of: [CharacterParam]
     tooltip: Specifies which objects a pathfinding character avoids (other
@@ -1188,6 +1260,9 @@ constants:
       for both categories.
     type: integer
     value: 5
+    value-type: integer
+    enum: CharacterAvoidanceMode
+    default: AVOID_CHARACTERS | AVOID_DYNAMIC_OBSTACLES
   CHARACTER_CMD_JUMP:
     member-of: [CharacterCommand]
     tooltip: Makes the character jump. Requires a height parameter between 0.1m and
@@ -1211,6 +1286,9 @@ constants:
       character.
     type: integer
     value: 1
+    value-type: float
+    range: [0.2, 40]
+    default: 6
   CHARACTER_DESIRED_TURN_SPEED:
     member-of: [CharacterParam]
     tooltip: Specifies the character's maximum speed while turning about the Z-axis
@@ -1218,6 +1296,9 @@ constants:
       a character may turn at higher speeds under certain conditions.
     type: integer
     value: 12
+    value-type: float
+    range: [0.02, 40]
+    default: 6
   CHARACTER_LENGTH:
     member-of: [CharacterParam]
     tooltip: Sets the collision capsule length for a pathfinding character. If the
@@ -1225,16 +1306,24 @@ constants:
       twice the radius plus 0.1m.
     type: integer
     value: 3
+    value-type: float
+    range: [0, 10]
   CHARACTER_MAX_ACCEL:
     member-of: [CharacterParam]
     tooltip: Specifies the character's maximum acceleration rate (default is 20 m/s²).
     type: integer
     value: 8
+    value-type: float
+    range: [0.5, 40]
+    default: 20
   CHARACTER_MAX_DECEL:
     member-of: [CharacterParam]
     tooltip: Specifies the character's maximum deceleration rate (default is 30 m/s²).
     type: integer
     value: 9
+    value-type: float
+    range: [0.5, 60]
+    default: 30
   CHARACTER_MAX_SPEED:
     member-of: [CharacterParam]
     tooltip: Specifies the character's maximum speed (must be between 0.2 and 50
@@ -1243,12 +1332,18 @@ constants:
       TRAVERSAL_TYPE_FAST mode.
     type: integer
     value: 13
+    value-type: float
+    range: [1, 40]
+    default: 20
   CHARACTER_MAX_TURN_RADIUS:
     member-of: [CharacterParam]
     tooltip: Specifies the character's turn radius when traveling at
       CHARACTER_DESIRED_TURN_SPEED (default is 1.25 meters).
     type: integer
     value: 10
+    value-type: float
+    range: [0.1, 10]
+    default: 1.25
   CHARACTER_ORIENTATION:
     member-of: [CharacterParam]
     tooltip: Specifies the orientation of the collision capsule for a pathfinding
@@ -1256,12 +1351,17 @@ constants:
       and HORIZONTAL.
     type: integer
     value: 4
+    value-type: integer
+    enum: CharacterOrientation
+    default: VERTICAL
   CHARACTER_RADIUS:
     member-of: [CharacterParam]
     tooltip: Sets the collision capsule radius used to define the size of a
       pathfinding character.
     type: integer
     value: 2
+    value-type: float
+    range: [0.125, 5]
   CHARACTER_STAY_WITHIN_PARCEL:
     member-of: [CharacterParam]
     tooltip: Determines whether a character is restricted to its starting parcel
@@ -1271,6 +1371,7 @@ constants:
       pushed out, it can re-enter but cannot voluntarily leave again.
     type: integer
     value: 15
+    value-type: boolean
   CHARACTER_TYPE:
     member-of: [CharacterParam, GetClosestNavPointParam, GetStaticPathParam]
     tooltip: Specifies the preferred surface and terrain terrain-type for the
@@ -1279,6 +1380,9 @@ constants:
       along a road prefer type C).
     type: integer
     value: 6
+    value-type: integer
+    enum: CharacterType
+    default: CHARACTER_TYPE_NONE
   CHARACTER_TYPE_A:
     member-of: [CharacterType]
     tooltip: Used for pathfinding character types that prefer movement consistent
@@ -1673,6 +1777,17 @@ constants:
       secs_since_midnight (seconds elapsed since the last day cycle midnight)."
     type: integer
     value: 200
+    values:
+      - name: day_length
+        value-type: integer
+        details: Number of seconds in the environments day cycle.
+      - name: day_offset
+        value-type: integer
+        details: Number of seconds day cycle is offset from GMT.
+      - name: secs_since_midnight
+        value-type: float
+        details: Number of seconds elapsed since the last day cycle midnight.
+    access: read
   ENV_INVALID_AGENT:
     member-of: [EnvironmentError]
     tooltip: Unable to find the specified agent, or could not find an agent with the
@@ -1715,7 +1830,8 @@ constants:
     value: -9
   ENV_OK:
     member-of: [EnvironmentError]
-    tooltip: The agent, parcel, or region will attempt to change the applied environment.
+    tooltip: The agent, parcel, or region will attempt to change the applied
+      environment.
     type: integer
     value: 1
   ENV_THROTTLE:
@@ -1810,6 +1926,8 @@ constants:
     tooltip: Flags used to control which attachments are returned.
     type: integer
     value: 2
+    value-type: integer
+    enum: AttachedListFilterFlag
   FILTER_FLAG_HUDS:
     member-of: [AttachedListFilterFlag]
     tooltip: Filter flag used with llGetAttachedListFiltered to include HUDs with
@@ -1821,12 +1939,16 @@ constants:
     tooltip: Filter parameter used to include a specific attachment point.
     type: integer
     value: 1
+    value-type: integer
+    enum: AttachPoint
   FORCE_DIRECT_PATH:
     member-of: [CharacterNavigateParam]
     tooltip: Forces the pathfinding character to navigate in a straight line toward
       the specified position (can be set to TRUE or FALSE).
     type: integer
     value: 1
+    value-type: boolean
+    default: false
   FRICTION:
     member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the friction override. The
@@ -1974,18 +2096,23 @@ constants:
     tooltip: ''
     type: integer
     value: '2'
+    value-type: boolean
   GCNP_RADIUS:
     member-of: [GetClosestNavPointParam]
     tooltip: Used with llGetClosestNavPoint to limit how far out to search for a
       navigation point.
     type: integer
     value: 0
+    value-type: float
+    default: 20
   GCNP_STATIC:
     member-of: [GetClosestNavPointParam]
     tooltip: Used with llGetClosestNavPoint to specify that the test should use the
       static navmesh, ignoring all dynamic obstacles.
     type: integer
     value: 1
+    value-type: boolean
+    default: false
   GRAVITY_MULTIPLIER:
     member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the gravity multiplier
@@ -2005,6 +2132,8 @@ constants:
       with unlisted content types will return status 415.
     type: integer
     value: 8
+    value-type: string-multi
+    default: text/plain;charset=utf-8
   HTTP_BODY_MAXLENGTH:
     member-of: [HTTPRequestParam]
     tooltip: "Sets the maximum (UTF-8 encoded) byte length of the HTTP response
@@ -2012,6 +2141,8 @@ constants:
       bytes, LSO Max: 4096 bytes)."
     type: integer
     value: 2
+    value-type: integer
+    default: 2048
   HTTP_BODY_TRUNCATED:
     member-of: [HTTPResponseError]
     tooltip: Indicates the response body truncation point in bytes.
@@ -2024,6 +2155,7 @@ constants:
       headers are blocked for security reasons.
     type: integer
     value: 5
+    value-type: string-map
   HTTP_EXTENDED_ERROR:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, llHTTPRequest always returns a key. If an error occurs
@@ -2031,12 +2163,16 @@ constants:
       JSON block) is reported through the http_response event using that key.
     type: integer
     value: 9
+    value-type: boolean
+    default: false
   HTTP_METHOD:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the HTTP method ('GET', 'POST', 'PUT', or 'DELETE') for the
       request.
     type: integer
     value: 0
+    value-type: string
+    default: GET
   HTTP_MIMETYPE:
     member-of: [HTTPRequestParam]
     tooltip: Specifies the request Content-Type MIME type. Text types should define
@@ -2044,6 +2180,8 @@ constants:
       'application/x-www-form-urlencoded' to emulate HTML forms.
     type: integer
     value: 1
+    value-type: string
+    default: text/plain;charset=utf-8
   HTTP_PRAGMA_NO_CACHE:
     member-of: [HTTPRequestParam]
     tooltip: "Controls whether the 'Pragma: no-cache' header is sent with the HTTP
@@ -2051,6 +2189,8 @@ constants:
       FALSE, it is omitted."
     type: integer
     value: 6
+    value-type: boolean
+    default: true
   HTTP_USER_AGENT:
     member-of: [HTTPRequestParam]
     tooltip: Appends a custom string to the default LSL User-Agent header value.
@@ -2058,6 +2198,7 @@ constants:
       not allowed and will cause a script error; use hyphens instead.
     type: integer
     value: 7
+    value-type: string
   HTTP_VERBOSE_THROTTLE:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, shouts error messages to DEBUG_CHANNEL if the outgoing
@@ -2065,6 +2206,8 @@ constants:
       suppressed.
     type: integer
     value: 4
+    value-type: boolean
+    default: true
   HTTP_VERIFY_CERT:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, the server's SSL certificate must be verifiable using a
@@ -2072,6 +2215,8 @@ constants:
       SSL certificate is accepted.
     type: integer
     value: 3
+    value-type: boolean
+    default: true
   IMG_USE_BAKED_AUX1:
     tooltip: ''
     type: string
@@ -2307,6 +2452,8 @@ constants:
       KFM_CMD_PLAY, or KFM_CMD_PAUSE to play, stop, or pause the motion.
     type: integer
     value: 0
+    value-type: integer
+    enum: KeyframedMotionCommand
   KFM_DATA:
     member-of: [KeyframedMotionParam]
     tooltip: Option flag in llSetKeyframedMotion followed by a bitwise combination
@@ -2314,6 +2461,9 @@ constants:
       both rotation and translation data must be provided.
     type: integer
     value: 2
+    value-type: integer
+    enum: KeyframedMotionData
+    default: KFM_ROTATION | KFM_TRANSLATION
   KFM_FORWARD:
     member-of: [KeyframedMotionMode]
     tooltip: Playback mode used with KFM_MODE in llSetKeyframedMotion (default). It
@@ -2334,6 +2484,9 @@ constants:
       KFM_FORWARD). Must be specified when the keyframe list is provided.
     type: integer
     value: 1
+    value-type: integer
+    enum: KeyframedMotionMode
+    default: KFM_FORWARD
   KFM_PING_PONG:
     member-of: [KeyframedMotionMode]
     tooltip: Playback mode used with KFM_MODE in llSetKeyframedMotion.
@@ -2627,6 +2780,8 @@ constants:
     tooltip: ''
     type: integer
     value: 2
+    value-type: float
+    range: [0.1, 10]
   NULL_KEY:
     tooltip: A special string constant used as a null or empty key value.
     type: string
@@ -2639,6 +2794,8 @@ constants:
       Plus, or -1 if the target is not an avatar.
     type: integer
     value: 41
+    value-type: integer
+    details: "Max.length: 1"
   OBJECT_ANIMATED_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails. For an object, returns a boolean
@@ -2646,6 +2803,8 @@ constants:
       the total number of 'Animated Mesh' attachments worn.
     type: integer
     value: 39
+    value-type: integer
+    details: "Max.length: 1"
   OBJECT_ANIMATED_SLOTS_AVAILABLE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the avatar's available
@@ -2653,6 +2812,8 @@ constants:
       avatar).
     type: integer
     value: 40
+    value-type: integer
+    details: "Max.length: 2"
   OBJECT_ATTACHED_POINT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails. Returns the integer attachment point
@@ -2660,6 +2821,9 @@ constants:
       (e.g., an avatar or unattached object).
     type: integer
     value: 19
+    value-type: integer
+    enum: AttachPoint
+    details: "Local: llGetAttached   Max.length: 11"
   OBJECT_ATTACHED_SLOTS_AVAILABLE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get an avatar's available
@@ -2667,6 +2831,8 @@ constants:
       are available.
     type: integer
     value: 35
+    value-type: integer
+    details: "Max.length: 2"
   OBJECT_BODY_SHAPE_TYPE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve a float representing the
@@ -2675,6 +2841,9 @@ constants:
       male). Returns -1.0 if not an avatar or if no data is available.
     type: integer
     value: 26
+    value-type: float
+    range: [0, 1]
+    details: "Max.length: 9"
   OBJECT_CHARACTER_TIME:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the average CPU time (in
@@ -2682,6 +2851,8 @@ constants:
       Returns 0 for non-characters.
     type: integer
     value: 17
+    value-type: float
+    details: "Alternatives: Pathfinding characters   Max.length: 15"
   OBJECT_CLICK_ACTION:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the click action of a prim.
@@ -2689,6 +2860,9 @@ constants:
       0).
     type: integer
     value: 28
+    value-type: integer
+    enum: ClickAction
+    details: "Max.length: 3"
   OBJECT_CREATION_TIME:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the object's creation time
@@ -2697,18 +2871,24 @@ constants:
       for avatars.
     type: integer
     value: 36
+    value-type: string
+    details: "Max.length: 27"
   OBJECT_CREATOR:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the key of the prim's creator.
       Returns NULL_KEY if the ID is an avatar.
     type: integer
     value: 8
+    value-type: key
+    details: "Local: llGetCreator   Alternatives: Creator   Max.length: 36"
   OBJECT_DAMAGE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the amount of damage a
       prim inflicts upon collision.
     type: integer
     value: 51
+    value-type: float
+    details: "Local: llGetPrimitiveParams and PRIM_DAMAGE"
   OBJECT_DAMAGE_TYPE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the type of damage a prim
@@ -2716,12 +2896,17 @@ constants:
       constant, a custom type, or a value repurposed by a combat system.
     type: integer
     value: 52
+    value-type: integer
+    enum: DamageType
+    details: "Local: llGetPrimitiveParams and PRIM_DAMAGE"
   OBJECT_DESC:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the prim's description.
       Returns an empty string if the ID is an avatar.
     type: integer
     value: 2
+    value-type: string
+    details: "Local: llGetObjectDesc   Max.length: 127"
   OBJECT_GROUP:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim's group key. Returns
@@ -2729,18 +2914,24 @@ constants:
       to get an avatar's active group).
     type: integer
     value: 7
+    value-type: key
+    details: "Alternatives: Group   Max.length: 36"
   OBJECT_GROUP_TAG:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get an avatar's active group
       tag/title. Returns an empty string if the target is not an avatar.
     type: integer
     value: 33
+    value-type: string
+    details: "Max.length: 20"
   OBJECT_HEALTH:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the current health value
       of an avatar or prim.
     type: integer
     value: 50
+    value-type: float
+    details: "Local: llGetPrimitiveParams and PRIM_HEALTH / llGetHealth"
   OBJECT_HOVER_HEIGHT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the dynamic hover height of an
@@ -2748,6 +2939,9 @@ constants:
       available; does not reflect the shape's 'Hover' slider.
     type: integer
     value: 25
+    value-type: float
+    range: [-2, 2]
+    details: "Max.length: 9"
   OBJECT_LAST_OWNER_ID:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the key of the previous owner.
@@ -2756,41 +2950,57 @@ constants:
       and re-rezzed.
     type: integer
     value: 27
+    value-type: key
+    details: "Max.length: 36"
   OBJECT_LINK_NUMBER:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the index of the prim within
       its linkset, or 0 if unlinked.
     type: integer
     value: 46
+    value-type: integer
+    details: "Local: llGetLinkNumber"
   OBJECT_LOCKED:
     member-of: [ObjectDetailsParam]
-    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the object is locked.
+    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the
+      object is locked.
     type: integer
     value: 55
+    value-type: boolean
   OBJECT_MASS:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the total mass (in
       kilograms) of the object's linkset.
     type: integer
     value: 43
+    value-type: float
+    details: "Local: llGetMassMKS"
   OBJECT_MATERIAL:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the physics material of
       the object, returning an integer matching a PRIM_MATERIAL_* constant.
     type: integer
     value: 42
+    value-type: integer
+    enum: PhysicsMaterialPreset
+    details: "Local: llGetPrimitiveParams and PRIM_MATERIAL"
   OBJECT_NAME:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim's name, or the legacy
       name if the target is an avatar.
     type: integer
     value: 1
+    value-type: string
+    details: "Local: llGetObjectName   Alternatives: llKey2Name /
+      llDetectedName   Max.length: 63"
   OBJECT_OMEGA:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the rotational (angular)
       velocity of an object in radians per second.
     type: integer
     value: 29
+    value-type: vector
+    details: "Local: llGetOmega   Max.length: 36"
   OBJECT_OWNER:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the owner's key. If the target
@@ -2798,24 +3008,64 @@ constants:
       NULL_KEY.
     type: integer
     value: 6
+    value-type: key
+    details: "Local: llGetOwner   Alternatives: llDetectedOwner /
+      llGetOwnerKey   Max.length: 36"
   OBJECT_PATHFINDING_TYPE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the pathfinding setting of an
       object in the region, returning an integer matching an OPT_* constant.
     type: integer
     value: 20
+    value-type: integer
+    enum: ObjectPathfindingType
+    details: "Alternatives: Pathfinding types   Max.length: 11"
   OBJECT_PERMS:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the permissions of the
       object as five integers.
     type: integer
     value: 53
+    values:
+      - name: base
+        value-type: integer
+        enum: AssetPermission
+      - name: owner
+        value-type: integer
+        enum: AssetPermission
+      - name: group
+        value-type: integer
+        enum: AssetPermission
+      - name: everyone
+        value-type: integer
+        enum: AssetPermission
+      - name: next_owner
+        value-type: integer
+        enum: AssetPermission
+    details: "Local: llGetObjectPermMask"
   OBJECT_PERMS_COMBINED:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the permissions of the
       object combined with all of its inventory items as five integers.
     type: integer
     value: 54
+    values:
+      - name: base
+        value-type: integer
+        enum: AssetPermission
+      - name: owner
+        value-type: integer
+        enum: AssetPermission
+      - name: group
+        value-type: integer
+        enum: AssetPermission
+      - name: everyone
+        value-type: integer
+        enum: AssetPermission
+      - name: next_owner
+        value-type: integer
+        enum: AssetPermission
+    details: "Local: llGetObjectPermMask"
   OBJECT_PHANTOM:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get a boolean indicating if
@@ -2823,6 +3073,8 @@ constants:
       attachment.
     type: integer
     value: 22
+    value-type: boolean
+    details: "Local: llGetStatus PRIM_PHANTOM   Max.length: 1"
   OBJECT_PHYSICS:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get a boolean indicating if
@@ -2830,11 +3082,15 @@ constants:
       attachment.
     type: integer
     value: 21
+    value-type: boolean
+    details: "Local: llGetStatus PRIM_PHYSICS   Max.length: 1"
   OBJECT_PHYSICS_COST:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the physics cost of the object.
     type: integer
     value: 16
+    value-type: float
+    details: "Alternatives: Physics cost   Max.length: 15"
   OBJECT_POS:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim's position in region
@@ -2842,18 +3098,25 @@ constants:
       relative to the script's region.
     type: integer
     value: 3
+    value-type: vector
+    details: "Local: llGetPos   Alternatives: llDetectedPos   Max.length: 37"
   OBJECT_PRIM_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim count of the object.
       Note that the script and target object must be owned by the same owner.
     type: integer
     value: 30
+    value-type: integer
+    details: "Local: llGetNumberOfPrims   Alternatives:
+      llGetObjectPrimCount   Max.length: 3"
   OBJECT_PRIM_EQUIVALENCE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim equivalence of the
       object.
     type: integer
     value: 13
+    value-type: integer
+    details: "Alternatives: Calculating land impact   Max.length: 11"
   OBJECT_RENDER_WEIGHT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the render weight (Avatar
@@ -2861,6 +3124,9 @@ constants:
       objects, -1 if unknown, and is capped at 500,000.
     type: integer
     value: 24
+    value-type: integer
+    range: [0, 500000]
+    details: "Alternatives: Avatar_Rendering_Cost   Max.length: 6"
   OBJECT_RETURN_PARCEL:
     member-of: [ReturnObjectsScope]
     tooltip: Scope flag used with llReturnObjectsByOwner to return all objects on
@@ -2888,12 +3154,15 @@ constants:
       avatar that rezzed the target object.
     type: integer
     value: 32
+    value-type: key
+    details: "Max.length: 36"
   OBJECT_REZ_TIME:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to retrieve the timestamp of when the
       object was rezzed.
     type: integer
     value: 45
+    value-type: string
   OBJECT_ROOT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the ID of the root prim. For
@@ -2901,22 +3170,30 @@ constants:
       the avatar's own ID if not sitting).
     type: integer
     value: 18
+    value-type: key
+    details: "Local: llGetLinkKey   Max.length: 36"
   OBJECT_ROT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the prim's rotation.
     type: integer
     value: 4
+    value-type: rotation
+    details: "Local: llGetRot   Alternatives: llDetectedRot   Max.length: 48"
   OBJECT_RUNNING_SCRIPT_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the total number of running
       scripts attached to the target object or agent.
     type: integer
     value: 9
+    value-type: integer
+    details: "Local: llGetScriptState   Max.length: 11"
   OBJECT_SCALE:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the size (scale) of the object.
     type: integer
     value: 47
+    value-type: vector
+    details: "Local: llGetScale"
   OBJECT_SCRIPT_MEMORY:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the allocated script memory
@@ -2924,6 +3201,8 @@ constants:
       recomputed every 10-20 seconds.
     type: integer
     value: 11
+    value-type: integer
+    details: "Max.length: 11"
   OBJECT_SCRIPT_TIME:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the average script CPU time
@@ -2931,6 +3210,8 @@ constants:
       since entering the region if present for less than 30 minutes.
     type: integer
     value: 12
+    value-type: float
+    details: "Alternatives: Top Scripts   Max.length: 15"
   OBJECT_SELECT_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the total number of
@@ -2938,53 +3219,71 @@ constants:
       target is an avatar.
     type: integer
     value: 37
+    value-type: integer
+    details: "Max.length: 3"
   OBJECT_SERVER_COST:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the server cost of the object.
     type: integer
     value: 14
+    value-type: float
+    details: "Alternatives: Server cost   Max.length: 15"
   OBJECT_SIT_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the total number of agents
       sitting on any links in the object. Returns 0 if the target is an avatar.
     type: integer
     value: 38
+    value-type: integer
+    details: "Max.length: 3"
   OBJECT_STREAMING_COST:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the streaming (download) cost
       of the object.
     type: integer
     value: 15
+    value-type: float
+    details: "Alternatives: Streaming (download) cost   Max.length: 15"
   OBJECT_TEMP_ATTACHED:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get a boolean indicating whether
       the object is temporarily attached.
     type: integer
     value: 34
+    value-type: boolean
+    details: "Max.length: 1"
   OBJECT_TEMP_ON_REZ:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get a boolean indicating if
       temporary-on-rez is enabled for the object.
     type: integer
     value: 23
+    value-type: boolean
+    details: "Local: PRIM_TEMP_ON_REZ   Max.length: 1"
   OBJECT_TEXT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the floating (hover) text
       displayed above the object.
     type: integer
     value: 44
+    value-type: string
+    details: "Local: llGetPrimitiveParams and PRIM_TEXT"
   OBJECT_TEXT_ALPHA:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the alpha value of the
       floating (hover) text displayed above the object.
     type: integer
     value: 49
+    value-type: float
+    details: "Local: llGetPrimitiveParams and PRIM_TEXT"
   OBJECT_TEXT_COLOR:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the color vector of the
       floating (hover) text displayed above the object.
     type: integer
     value: 48
+    value-type: vector
+    details: "Local: llGetPrimitiveParams and PRIM_TEXT"
   OBJECT_TOTAL_INVENTORY_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the total number of inventory
@@ -2992,12 +3291,16 @@ constants:
       the same owner.
     type: integer
     value: 31
+    value-type: integer
+    details: "Local: llGetInventoryNumber(INVENTORY_ALL)   Max.length: 10"
   OBJECT_TOTAL_SCRIPT_COUNT:
     member-of: [ObjectDetailsParam]
     tooltip: Flag used with llGetObjectDetails to get the total number of scripts
       (both running and stopped) attached to the target object or agent.
     type: integer
     value: 10
+    value-type: integer
+    details: "Local: llGetInventoryNumber   Max.length: 11"
   OBJECT_UNKNOWN_DETAIL:
     tooltip: Flag returned by llGetObjectDetails when an invalid flag is requested.
     type: integer
@@ -3008,11 +3311,15 @@ constants:
       target object.
     type: integer
     value: 5
+    value-type: vector
+    details: "Local: llGetVel   Alternatives: llDetectedVel   Max.length: 36"
   OBJECT_VOLUME_DETECT:
     member-of: [ObjectDetailsParam]
-    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the object is VolumeDetect.
+    tooltip: Flag used with llGetObjectDetails to get a boolean, indicating if the
+      object is VolumeDetect.
     type: integer
     value: 56
+    value-type: boolean
   OPT_AVATAR:
     member-of: [ObjectPathfindingType]
     tooltip: Returned for avatars.
@@ -3030,8 +3337,8 @@ constants:
     value: 6
   OPT_LEGACY_LINKSET:
     member-of: [ObjectPathfindingType]
-    tooltip: Returned for movable obstacles, movable phantoms, physical, and volumedetect
-      objects.
+    tooltip: Returned for movable obstacles, movable phantoms, physical, and
+      volumedetect objects.
     type: integer
     value: 0
   OPT_MATERIAL_VOLUME:
@@ -3061,18 +3368,22 @@ constants:
       PRIM_GLTF_ALPHA_MODE_BLEND.
     type: integer
     value: 2
+    value-type: float
   OVERRIDE_GLTF_BASE_ALPHA_MASK:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the alpha
       cutoff level on the face(s) when the alpha mode is set to mask.
     type: integer
     value: 4
+    value-type: float
   OVERRIDE_GLTF_BASE_ALPHA_MODE:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the alpha
       mode on the face(s) to one of the valid blend modes.
     type: integer
     value: 3
+    value-type: integer
+    enum: GLTFAlphaMode
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the
@@ -3080,30 +3391,37 @@ constants:
       llsRGB2Linear to convert colors from Blinn-Phong to PBR.
     type: integer
     value: 1
+    value-type: vector
   OVERRIDE_GLTF_BASE_DOUBLE_SIDED:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides. If set to TRUE,
       the texture on the face(s) will be rendered as double-sided.
     type: integer
     value: 5
+    value-type: boolean
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the tint
       (specified in linear RGB) used for the emissive texture on the face(s).
     type: integer
     value: 8
+    value-type: vector
   OVERRIDE_GLTF_METALLIC_FACTOR:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       metallic factor on the specified face(s) to a value between 0 and 1.
     type: integer
     value: 6
+    value-type: float
+    range: [0, 1]
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
     member-of: [GLTFOverride]
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       roughness factor on the specified face(s) to a value between 0 and 1.
     type: integer
     value: 7
+    value-type: float
+    range: [0, 1]
   PARCEL_COUNT_GROUP:
     member-of: [ParcelPrimCountCategory]
     tooltip: Used with llGetParcelPrimCount to get the total land impact of objects
@@ -3147,54 +3465,64 @@ constants:
       square meters (sqm).
     type: integer
     value: 4
+    value-type: integer
   PARCEL_DETAILS_DESC:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the description of the
       parcel (up to 127 characters).
     type: integer
     value: 1
+    value-type: string
   PARCEL_DETAILS_FLAGS:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the parcel flags set on
       this parcel (see llGetParcelFlags for listings and meanings).
     type: integer
     value: 12
+    value-type: integer
+    enum: ParcelFlag
   PARCEL_DETAILS_GROUP:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the parcel group's
       36-character key.
     type: integer
     value: 3
+    value-type: key
   PARCEL_DETAILS_ID:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the parcel's 36-character
       UUID/key.
     type: integer
     value: 5
+    value-type: key
   PARCEL_DETAILS_LANDING_LOOKAT:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the lookat vector set for
       the landing point (teleport routing) on this parcel, if any.
     type: integer
     value: 10
+    value-type: vector
   PARCEL_DETAILS_LANDING_POINT:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the landing point vector
       set for this parcel, if any.
     type: integer
     value: 9
+    value-type: vector
   PARCEL_DETAILS_NAME:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the name of the parcel
       (up to 63 characters).
     type: integer
     value: 0
+    value-type: string
   PARCEL_DETAILS_OWNER:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the parcel owner's
       36-character key.
     type: integer
     value: 2
+    value-type: key
   PARCEL_DETAILS_PRIM_CAPACITY:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the total prim capacity
@@ -3202,6 +3530,7 @@ constants:
       same-parcel-only and/or sim-wide reporting).
     type: integer
     value: 7
+    value-type: integer
   PARCEL_DETAILS_PRIM_USED:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the total prim usage on
@@ -3209,6 +3538,7 @@ constants:
       prim counts by owner, group, or temporary status).
     type: integer
     value: 8
+    value-type: integer
   PARCEL_DETAILS_SCRIPT_DANGER:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to check if the script is in danger
@@ -3216,12 +3546,14 @@ constants:
       parcel; see llScriptDanger.
     type: integer
     value: 13
+    value-type: boolean
   PARCEL_DETAILS_SEE_AVATARS:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the 'See and chat with
       residents on this parcel' avatar visibility setting.
     type: integer
     value: 6
+    value-type: boolean
   PARCEL_DETAILS_TP_ROUTING:
     member-of: [ParcelDetailsParam]
     tooltip: Flag used with llGetParcelDetails to retrieve the teleport routing
@@ -3229,6 +3561,8 @@ constants:
       2 = TP_ROUTING_FREE; rules are only enforced if a landing point is set).
     type: integer
     value: 11
+    value-type: integer
+    enum: ParcelTeleportRouting
   PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY:
     member-of: [ParcelFlag]
     tooltip: Flag used with llGetParcelFlags to check if the parcel allows all
@@ -3338,18 +3672,23 @@ constants:
       command to the designated agent only.
     type: integer
     value: 7
+    value-type: key
+    access: write
   PARCEL_MEDIA_COMMAND_AUTO_ALIGN:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to toggle or set the parcel
       media option 'Auto scale content'.
     type: integer
     value: 9
+    value-type: boolean
+    access: write
   PARCEL_MEDIA_COMMAND_DESC:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
       or set the parcel media description.
     type: integer
     value: 12
+    value-type: string
   PARCEL_MEDIA_COMMAND_LOOP:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to start the media stream
@@ -3357,6 +3696,7 @@ constants:
       it reaches the end.
     type: integer
     value: 3
+    access: write
   PARCEL_MEDIA_COMMAND_LOOP_SET:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
@@ -3364,78 +3704,96 @@ constants:
       have functionality limitations; see VWR-19712).
     type: integer
     value: 13
+    value-type: float
   PARCEL_MEDIA_COMMAND_PAUSE:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to pause the media stream on
       the current frame.
     type: integer
     value: 1
+    access: write
   PARCEL_MEDIA_COMMAND_PLAY:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to play the media stream
       from its current frame, stopping when the end is reached.
     type: integer
     value: 2
+    access: write
   PARCEL_MEDIA_COMMAND_SIZE:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
       or set the parcel media pixel resolution.
     type: integer
     value: 11
+    values:
+      - name: x
+        value-type: integer
+      - name: y
+        value-type: integer
   PARCEL_MEDIA_COMMAND_STOP:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to stop the media stream and
       rewind it to the first frame.
     type: integer
     value: 0
+    access: write
   PARCEL_MEDIA_COMMAND_TEXTURE:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
       or set the parcel's media texture.
     type: integer
     value: 4
+    value-type: asset
   PARCEL_MEDIA_COMMAND_TIME:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to jump to a specific
       timestamp in the media stream, specified in floating-point seconds.
     type: integer
     value: 6
+    value-type: float
+    access: write
   PARCEL_MEDIA_COMMAND_TYPE:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
       or set the parcel media MIME type (e.g., 'text/html').
     type: integer
     value: 10
+    value-type: string
   PARCEL_MEDIA_COMMAND_UNLOAD:
     member-of: [ParcelMediaCommand]
     tooltip: Command used with llParcelMediaCommandList to completely unload the
       media and restore the face's original texture.
     type: integer
     value: 8
+    access: write
   PARCEL_MEDIA_COMMAND_URL:
     member-of: [ParcelMediaCommand, ParcelMediaQuery]
     tooltip: Command used with llParcelMediaCommandList or llParcelMediaQuery to get
       or set the parcel's media URL.
     type: integer
     value: 5
+    value-type: string
   PARCEL_SALE_AGENT:
     member-of: [ParcelSaleParam]
     tooltip: Option used with llSetParcelForSale to specify the agent ID authorized
       to buy the parcel. If none is set, any agent can purchase it.
     type: integer
     value: 2
+    value-type: key
   PARCEL_SALE_OBJECTS:
     member-of: [ParcelSaleParam]
     tooltip: Option used with llSetParcelForSale. If set to TRUE, objects on the
       parcel are included in the sale.
     type: integer
     value: 3
+    value-type: boolean
   PARCEL_SALE_PRICE:
     member-of: [ParcelSaleParam]
     tooltip: Option used with llSetParcelForSale to set the parcel price. If no
       authorized agent is set, the price must be greater than 0.
     type: integer
     value: 1
+    value-type: integer
   PARCEL_SALE_OK:
     member-of: [ParcelSaleError]
     tooltip: Status code indicating the parcel sale information was successfully set.
@@ -3507,6 +3865,8 @@ constants:
       the character moves to the next waypoint at full speed with no pause.
     type: integer
     value: 0
+    value-type: boolean
+    default: false
   PAYMENT_INFO_ON_FILE:
     member-of: [AgentDataPaymentInfo]
     tooltip: Agent data flag returned by llRequestAgentData indicating if the user
@@ -3685,6 +4045,7 @@ constants:
       seated avatars cannot manually stand or select another prim to sit on.
     type: integer
     value: 39
+    value-type: boolean
   PRIM_ALPHA_MODE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter used to set diffuse texture alpha rendering mode
@@ -3692,6 +4053,17 @@ constants:
       _MASK, or _EMISSIVE), and alpha_cutoff (used only for _MASK) parameters.
     type: integer
     value: 38
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: alpha_mode
+        value-type: integer
+        enum: AlphaMode
+      - name: mask_cutoff
+        value-type: integer
+        range: [0, 255]
   PRIM_ALPHA_MODE_BLEND:
     member-of: [AlphaMode]
     tooltip: Prim parameter setting for PRIM_ALPHA_MODE. Directs the face to use
@@ -3784,6 +4156,17 @@ constants:
       settings of a face.
     type: integer
     value: 19
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: shiny
+        value-type: integer
+        enum: PrimShiny
+      - name: bump
+        value-type: integer
+        enum: PrimBump
   PRIM_BUMP_SIDING:
     member-of: [PrimBump]
     tooltip: "Face bump mapping setting: siding."
@@ -3827,18 +4210,26 @@ constants:
       primitive.
     type: integer
     value: 24
+    value-type: boolean
   PRIM_CLICK_ACTION:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter followed by a CLICK_ACTION_* constant to specify the
       default action taken when a user clicks or touches the prim.
     type: integer
     value: 43
+    value-type: integer
+    enum: ClickAction
   PRIM_COLLISION_SOUND:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to set the collision sound UUID and volume level for the
       prim.
     type: integer
     value: 53
+    values:
+      - name: sound
+        value-type: asset
+      - name: volume
+        value-type: float
   PRIM_COLOR:
     member-of: [PrimParam, PrimParamGet]
     tooltip: |
@@ -3849,18 +4240,38 @@ constants:
       float alpha – from 0.0 (clear) to 1.0 (solid) (0.0 <= alpha <= 1.0)
     type: integer
     value: 18
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: color
+        value-type: vector
+        details: "Color: llGetColor."
+      - name: alpha
+        value-type: float
+        range: [0, 1]
+        details: "Alpha: llGetAlpha."
   PRIM_DAMAGE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter used to get or set the damage amount and damage type
       delivered by the prim on collision.
     type: integer
     value: 51
+    values:
+      - name: damage
+        value-type: float
+      - name: damage_type
+        value-type: integer
+        enum: DamageType
   PRIM_DESC:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_DESC, string description] to get or set the prim's
       description (equivalent to llGetObjectDesc/llSetObjectDesc).
     type: integer
     value: 28
+    value-type: string
+    details: "Description: llGetObjectDesc."
   PRIM_FLEXIBLE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: |
@@ -3875,12 +4286,39 @@ constants:
       vector force
     type: integer
     value: 21
+    values:
+      - name: enabled
+        value-type: boolean
+      - name: softness
+        value-type: integer
+        range: [0, 3]
+      - name: gravity
+        value-type: float
+        range: [-10, 10]
+      - name: friction
+        value-type: float
+        range: [0, 10]
+      - name: wind
+        value-type: float
+        range: [0, 10]
+      - name: tension
+        value-type: float
+        range: [0, 10]
+      - name: force
+        value-type: vector
   PRIM_FULLBRIGHT:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_FULLBRIGHT, integer face, integer boolean] to get
       or set whether full-bright rendering is enabled on the specified face.
     type: integer
     value: 20
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: enabled
+        value-type: boolean
   PRIM_GLOW:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_GLOW, integer face, float intensity] to get or set
@@ -3888,6 +4326,14 @@ constants:
       named constant is rejected).
     type: integer
     value: 25
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: intensity
+        value-type: float
+        range: [0, 1]
   PRIM_GLTF_ALPHA_MODE_BLEND:
     member-of: [GLTFAlphaMode]
     tooltip: "GLTF alpha mode setting for PRIM_GLTF_BASE_COLOR. Renders the material
@@ -3917,6 +4363,34 @@ constants:
       (PRIM_GLTF_ALPHA_MODE_*), alpha_cutoff, and double_sided arguments.
     type: integer
     value: 48
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-10000,-10000,0>", "<10000,10000,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
+      - name: color
+        value-type: vector
+      - name: alpha
+        value-type: float
+        range: [0, 1]
+      - name: gltf_alpha_mode
+        value-type: integer
+        enum: GLTFAlphaMode
+      - name: alpha_mask_cutoff
+        value-type: float
+        range: [0, 1]
+      - name: double_sided
+        value-type: boolean
   PRIM_GLTF_EMISSIVE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to get or set the GLTF emission override of a face.
@@ -3924,6 +4398,23 @@ constants:
       (specified in linear space; use llsRGB2Linear).
     type: integer
     value: 46
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-10000,-10000,0>", "<10000,10000,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
+      - name: emissive_tint
+        value-type: vector
   PRIM_GLTF_METALLIC_ROUGHNESS:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to get or set the GLTF occlusion/metallic/roughness
@@ -3931,18 +4422,55 @@ constants:
       metallic_factor, and roughness_factor arguments.
     type: integer
     value: 47
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-10000,-10000,0>", "<10000,10000,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
+      - name: metallic_factor
+        value-type: float
+        range: [0, 1]
+      - name: roughness_factor
+        value-type: float
+        range: [0, 1]
   PRIM_GLTF_NORMAL:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to get or set the GLTF normal map override of a face.
       Requires face, texture, repeats, offsets, and rotation arguments.
     type: integer
     value: 45
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-10000,-10000,0>", "<10000,10000,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
   PRIM_HEALTH:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter used to get or set the health of the prim. Objects
       default to 0 health.
     type: integer
     value: 52
+    value-type: float
   PRIM_HOLE_CIRCLE:
     member-of: [PrimTypeHole]
     tooltip: Parameter used with certain PRIM_TYPE_* flags to make a circular hole
@@ -3974,6 +4502,9 @@ constants:
       parameters call.
     type: integer
     value: 34
+    value-type: integer
+    enum: Links
+    access: arg
   PRIM_MATERIAL:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_MATERIAL, integer PRIM_MATERIAL_*] to get or set
@@ -3982,6 +4513,8 @@ constants:
       without affecting mass.
     type: integer
     value: 2
+    value-type: integer
+    enum: PhysicsMaterialPreset
   PRIM_MATERIAL_DENSITY:
     member-of: [PhysicsMaterialParam]
     private: true
@@ -4065,35 +4598,42 @@ constants:
       for that media type. Note: This flag is not currently implemented."
     type: integer
     value: 0
+    value-type: boolean
   PRIM_MEDIA_AUTO_LOOP:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-looping is enabled for the face media.
     type: integer
     value: 4
+    value-type: boolean
   PRIM_MEDIA_AUTO_PLAY:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media auto-plays when a resident is able
       to view it.
     type: integer
     value: 5
+    value-type: boolean
   PRIM_MEDIA_AUTO_SCALE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether auto-scaling is enabled, which forces the
       media to fill the entire texture size.
     type: integer
     value: 6
+    value-type: boolean
   PRIM_MEDIA_AUTO_ZOOM:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether clicking the media triggers auto-zoom and
       auto-focus.
     type: integer
     value: 7
+    value-type: boolean
   PRIM_MEDIA_CONTROLS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the style of media controls (can be set to
       PRIM_MEDIA_CONTROLS_STANDARD or PRIM_MEDIA_CONTROLS_MINI).
     type: integer
     value: 1
+    value-type: integer
+    enum: PrimMediaControl
   PRIM_MEDIA_CONTROLS_MINI:
     member-of: [PrimMediaControl]
     tooltip: Mini web navigation controls constant; does not include an address bar.
@@ -4110,26 +4650,31 @@ constants:
       (maximum 1024 characters). Changing this URL triggers media navigation.
     type: integer
     value: 2
+    value-type: string
   PRIM_MEDIA_FIRST_CLICK_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: >-
-      Boolean. Gets or sets what happens when someone click on a playing, but unfocused media face:
-      TRUE: Does the same thing a focused media face does, and forwards the click to the web browser.
-      FALSE: Focuses the media prim so that future clicks are forwarded to the web browser.
-      Note: Viewer settings affect this flag. It works by default on most prims.
+      Boolean. Gets or sets what happens when someone click on a playing, but
+      unfocused media face: TRUE: Does the same thing a focused media face does,
+      and forwards the click to the web browser. FALSE: Focuses the media prim
+      so that future clicks are forwarded to the web browser. Note: Viewer
+      settings affect this flag. It works by default on most prims.
     type: integer
     value: 8
+    value-type: boolean
   PRIM_MEDIA_HEIGHT_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the height of the media in pixels.
     type: integer
     value: 10
+    value-type: integer
   PRIM_MEDIA_HOME_URL:
     member-of: [PrimMediaParam]
     tooltip: String. Gets or sets the home URL for the chosen face (maximum 1024
       characters).
     type: integer
     value: 3
+    value-type: string
   PRIM_MEDIA_MAX_HEIGHT_PIXELS:
     tooltip: ''
     type: integer
@@ -4160,12 +4705,16 @@ constants:
       media control bar (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 14
+    value-type: integer
+    enum: PrimMediaPerm
   PRIM_MEDIA_PERMS_INTERACT:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the permissions mask controlling who can interact
       with the media (PRIM_MEDIA_PERM_ANYONE, _GROUP, _NONE, or _OWNER).
     type: integer
     value: 13
+    value-type: integer
+    enum: PrimMediaPerm
   PRIM_MEDIA_PERM_ANYONE:
     member-of: [PrimMediaPerm]
     tooltip: ''
@@ -4193,23 +4742,28 @@ constants:
       comes first).
     type: integer
     value: 12
+    value-type: string-csv
   PRIM_MEDIA_WHITELIST_ENABLE:
     member-of: [PrimMediaParam]
     tooltip: Boolean. Gets or sets whether media navigation is restricted to the
       URLs listed in PRIM_MEDIA_WHITELIST.
     type: integer
     value: 11
+    value-type: boolean
   PRIM_MEDIA_WIDTH_PIXELS:
     member-of: [PrimMediaParam]
     tooltip: Integer. Gets or sets the width of the media in pixels.
     type: integer
     value: 9
+    value-type: integer
   PRIM_NAME:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_NAME, string name] to get or set the prim's name
       (equivalent to llGetObjectName/llSetObjectName).
     type: integer
     value: 27
+    value-type: string
+    details: "Name: llGetObjectName."
   PRIM_NORMAL:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to get or set the Blinn-Phong normal map texture
@@ -4217,6 +4771,21 @@ constants:
       rotation_in_radians arguments.
     type: integer
     value: 37
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-100,-100,0>", "<100,100,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
   PRIM_OMEGA:
     member-of: [PrimParam, PrimParamGet]
     tooltip: |
@@ -4227,18 +4796,30 @@ constants:
       float gain – also modulates the final spinrate and disables the rotation behavior if zero
     type: integer
     value: 32
+    values:
+      - name: axis
+        value-type: vector
+        details: llTargetOmega
+      - name: spinrate
+        value-type: float
+      - name: gain
+        value-type: float
   PRIM_PHANTOM:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_PHANTOM, integer boolean] to get or set whether
       phantom status is enabled.
     type: integer
     value: 5
+    value-type: boolean
+    details: "Phantom status: llGetStatus."
   PRIM_PHYSICS:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_PHYSICS, integer boolean] to get or set whether
       the object responds to Second Life physics.
     type: integer
     value: 3
+    value-type: boolean
+    details: "Physics status: llGetStatus."
   PRIM_PHYSICS_SHAPE_CONVEX:
     member-of: [PhysicsShapeType]
     tooltip: Physics shape type setting. Uses the convex hull of the prim shape to
@@ -4266,6 +4847,8 @@ constants:
       used for physics optimization.
     type: integer
     value: 30
+    value-type: integer
+    enum: PhysicsShapeType
   PRIM_POINT_LIGHT:
     member-of: [PrimParam, PrimParamGet]
     tooltip: |
@@ -4279,6 +4862,20 @@ constants:
       float falloff – ranges from 0.01 to 2.0
     type: integer
     value: 23
+    values:
+      - name: enabled
+        value-type: boolean
+      - name: linear_color
+        value-type: vector
+      - name: intensity
+        value-type: float
+        range: [0, 1]
+      - name: radius
+        value-type: float
+        range: [0.1, 20]
+      - name: falloff
+        value-type: float
+        range: [0, 2]
   PRIM_POSITION:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_POSITION, vector position] to get or set the
@@ -4286,12 +4883,16 @@ constants:
       on the script context).
     type: integer
     value: 6
+    value-type: vector
+    details: "Global position: llGetPos."
   PRIM_POS_LOCAL:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_POS_LOCAL, vector position] to get or set the
       local position of a prim (equivalent to llGetLocalPos/llSetPos).
     type: integer
     value: 33
+    value-type: vector
+    details: "Local position: llGetLocalPos."
   PRIM_PROJECTOR:
     member-of: [PrimParam]
     # llGetPrimitiveParams cannot read PRIM_PROJECTOR:
@@ -4302,6 +4903,15 @@ constants:
       configured as a projector, the texture key will return NULL_KEY.
     type: integer
     value: 42
+    values:
+      - name: texture
+        value-type: string
+      - name: fov
+        value-type: float
+      - name: focus
+        value-type: float
+      - name: ambiance
+        value-type: float
   PRIM_REFLECTION_PROBE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to configure the object as a custom-placed reflection
@@ -4309,6 +4919,18 @@ constants:
       volume of influence.
     type: integer
     value: 44
+    values:
+      - name: enabled
+        value-type: boolean
+      - name: ambiance
+        value-type: float
+        range: [0, 100]
+      - name: clip_distance
+        value-type: float
+        range: [0, 1024]
+      - name: flags
+        value-type: integer
+        enum: ReflectionProbeType
   PRIM_REFLECTION_PROBE_BOX:
     member-of: [ReflectionProbeType]
     tooltip: Flag option used with PRIM_REFLECTION_PROBE. When set, the reflection
@@ -4338,6 +4960,14 @@ constants:
       rotation_in_radians."
     type: integer
     value: 49
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: render_material
+        value-type: asset
+        details: "Material: llGetRenderMaterial."
   PRIM_ROTATION:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_ROTATION, rotation global_rot] to get or set the
@@ -4345,12 +4975,16 @@ constants:
       setting this on child prims may be broken).
     type: integer
     value: 8
+    value-type: rotation
+    details: "Global rotation: llGetRot."
   PRIM_ROT_LOCAL:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_ROT_LOCAL, rotation local_rot] to get or set the
       local rotation of a prim (equivalent to llGetLocalRot/llSetLocalRot).
     type: integer
     value: 29
+    value-type: rotation
+    details: "Local rotation: llGetLocalRot."
   PRIM_SCRIPTED_SIT_ONLY:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter restricting manual sitting on this prim. When active,
@@ -4358,6 +4992,7 @@ constants:
       fail. This restriction applies even outside experience-enabled regions.
     type: integer
     value: 40
+    value-type: boolean
   PRIM_SCULPT_FLAG_ANIMESH:
     member-of: [PrimTypeSculptFlag]
     tooltip: Read-only flag for PRIM_TYPE_SCULPT to query whether the object is an
@@ -4440,6 +5075,8 @@ constants:
       the prim.
     type: integer
     value: 50
+    value-type: integer
+    enum: SitFlag
   PRIM_SIT_TARGET:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_SIT_TARGET, integer boolean, vector offset,
@@ -4448,18 +5085,31 @@ constants:
       0.0> can be explicitly set.
     type: integer
     value: 41
+    values:
+      - name: sit_target
+        value-type: boolean
+        details: "Sit target: llSitTarget."
+      - name: offset
+        value-type: vector
+      - name: rot
+        value-type: rotation
   PRIM_SIZE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_SIZE, vector size] to get or set the prim's
       physical dimensions (equivalent to llGetScale/llSetScale).
     type: integer
     value: 7
+    value-type: vector
+    details: "Size: llGetScale."
+    range: ["<0.01,0.01,0.01>", "<64,64,64>"]
   PRIM_SLICE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_SLICE, vector slice] to get or set the prim's
       slice values (a shape attribute equivalent to advanced cut).
     type: integer
     value: 35
+    value-type: vector
+    range: ["<0,0,0>", "<1,1,0>"]
   PRIM_SPECULAR:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter to get or set the Blinn-Phong specular map texture
@@ -4467,6 +5117,29 @@ constants:
       rotation_in_radians, color, glossy, and environment arguments.
     type: integer
     value: 36
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+      - name: repeats
+        value-type: vector
+        range: ["<-100,-100,0>", "<100,100,0>"]
+      - name: offsets
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: rotation_in_radians
+        value-type: float
+      - name: color
+        value-type: vector
+      - name: glossiness
+        value-type: integer
+        range: [0, 255]
+      - name: environment
+        value-type: integer
+        range: [0, 255]
   PRIM_TEMP_ON_REZ:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter used to get or set the object's temporary status.
@@ -4475,12 +5148,22 @@ constants:
       regional limits.
     type: integer
     value: 4
+    value-type: boolean
+    details: Temporary attribute.
   PRIM_TEXGEN:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_TEXGEN, integer face, integer mode] to get or set
       the texture mapping mode of the face.
     type: integer
     value: 22
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: mode
+        value-type: integer
+        enum: PrimTexgen
   PRIM_TEXGEN_DEFAULT:
     member-of: [PrimTexgen]
     tooltip: Texture mapping mode setting for PRIM_TEXGEN. Specifies that texture
@@ -4500,6 +5183,14 @@ constants:
       get or set the object's floating/hover text (equivalent to llSetText).
     type: integer
     value: 26
+    values:
+      - name: text
+        value-type: string
+      - name: color
+        value-type: vector
+      - name: alpha
+        value-type: float
+        range: [0, 1]
   PRIM_TEXTURE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter [PRIM_TEXTURE, integer face, string texture, vector
@@ -4507,60 +5198,259 @@ constants:
       Blinn-Phong diffuse texture settings of a face.
     type: integer
     value: 17
+    values:
+      - name: face
+        value-type: integer
+        enum: Faces
+        access: arg
+      - name: texture
+        value-type: asset
+        details: "Texture: llGetTexture."
+      - name: repeats
+        value-type: vector
+        range: ["<-100,-100,0>", "<100,100,0>"]
+        details: "Repeats: llGetTextureScale."
+      - name: offsets
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+        details: "Offset: llGetTextureOffset."
+      - name: rotation_in_radians
+        value-type: float
+        details: "Rotation: llGetTextureRot."
   PRIM_TYPE:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter used to get or set the geometric shape type
       (PRIM_TYPE_*) and its associated parameters.
     type: integer
     value: 9
+    value-type: integer
+    enum: PrimType
   PRIM_TYPE_BOX:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a box and
       configure its shape properties.
     type: integer
     value: 0
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: top_size
+        value-type: vector
+        range: ["<0,0,0>", "<2,2,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
   PRIM_TYPE_CYLINDER:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a cylinder and
       configure its shape properties.
     type: integer
     value: 1
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: top_size
+        value-type: vector
+        range: ["<0,0,0>", "<2,2,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
   PRIM_TYPE_PRISM:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a prism and
       configure its shape properties.
     type: integer
     value: 2
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: top_size
+        value-type: vector
+        range: ["<0,0,0>", "<2,2,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
   PRIM_TYPE_RING:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a ring and
       configure its shape properties.
     type: integer
     value: 6
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: hole_size
+        value-type: vector
+        range: ["<0.05,0.05,0>", "<1,0.5,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
+      - name: advanced_cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: taper
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: revolutions
+        value-type: float
+        range: [1, 4]
+      - name: radius_offset
+        value-type: float
+      - name: skew
+        value-type: float
+        range: [-1, 1]
   PRIM_TYPE_SCULPT:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a sculpted
       prim (sculpty) or mesh of a specific type.
     type: integer
     value: 7
+    values:
+      - name: map
+        value-type: asset
+      - name: type
+        value-type: integer
+        enum: PrimTypeSculpt
   PRIM_TYPE_SPHERE:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a sphere and
       configure its shape properties.
     type: integer
     value: 3
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: dimple
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
   PRIM_TYPE_TORUS:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a torus and
       configure its shape properties.
     type: integer
     value: 4
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: hole_size
+        value-type: vector
+        range: ["<0.05,0.05,0>", "<1,0.5,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
+      - name: advanced_cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: taper
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: revolutions
+        value-type: float
+        range: [1, 4]
+      - name: radius_offset
+        value-type: float
+      - name: skew
+        value-type: float
+        range: [-1, 1]
   PRIM_TYPE_TUBE:
     member-of: [PrimType]
     tooltip: Shape parameter for PRIM_TYPE used to define the prim as a tube and
       configure its shape properties.
     type: integer
     value: 5
+    values:
+      - name: hole_shape
+        value-type: integer
+        enum: PrimTypeHole
+      - name: cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: hollow
+        value-type: float
+        range: [0, 0.95]
+      - name: twist
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: hole_size
+        value-type: vector
+        range: ["<0.05,0.05,0>", "<1,0.5,0>"]
+      - name: top_shear
+        value-type: vector
+        range: ["<-0.5,-0.5,0>", "<0.5,0.5,0>"]
+      - name: advanced_cut
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,0>"]
+      - name: taper
+        value-type: vector
+        range: ["<-1,-1,0>", "<1,1,0>"]
+      - name: revolutions
+        value-type: float
+        range: [1, 4]
+      - name: radius_offset
+        value-type: float
+      - name: skew
+        value-type: float
+        range: [-1, 1]
   PROFILE_NONE:
     member-of: [ScriptProfileMode]
     tooltip: Disables script profiling.
@@ -4617,11 +5507,17 @@ constants:
     tooltip: Integer parameter defining the destination blending function.
     type: integer
     value: 25
+    value-type: integer
+    enum: ParticleBlendFunc
+    default: PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA
   PSYS_PART_BLEND_FUNC_SOURCE:
     member-of: [ParticleParam]
     tooltip: Integer parameter defining the source blending function.
     type: integer
     value: 24
+    value-type: integer
+    enum: ParticleBlendFunc
+    default: PSYS_PART_BF_SOURCE_ALPHA
   PSYS_PART_BOUNCE_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing particles to bounce off a plane at the emitter
@@ -4641,29 +5537,38 @@ constants:
       particles.
     type: integer
     value: 4
+    value-type: float
+    range: [0, 1]
   PSYS_PART_END_COLOR:
     member-of: [ParticleParam]
     tooltip: Vector parameter <r, g, b> that determines the ending color of the
       particles.
     type: integer
     value: 3
+    value-type: vector
   PSYS_PART_END_GLOW:
     member-of: [ParticleParam]
     tooltip: Float parameter that determines the ending glow value of the particles.
     type: integer
     value: 27
+    value-type: float
+    range: [0, 1]
   PSYS_PART_END_SCALE:
     member-of: [ParticleParam]
     tooltip: Vector parameter <sx, sy, z> defining the ending size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
     value: 6
+    value-type: vector
+    range: ["<0.03125,0.03125,0>", "<4,4,0>"]
   PSYS_PART_FLAGS:
     member-of: [ParticleParam]
     tooltip: Integer bitfield parameter specifying the simulation flags for emitted
       particles. Multiple flags can be combined using bitwise OR (|).
     type: integer
     value: 0
+    value-type: integer
+    enum: ParticleFlag
   PSYS_PART_FOLLOW_SRC_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing particle positions to remain relative to the
@@ -4696,6 +5601,8 @@ constants:
       individual particle before it dies.
     type: integer
     value: 7
+    value-type: float
+    range: [0, 30]
   PSYS_PART_RIBBON_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag that joins emitted particles into a continuous ribbon
@@ -4711,23 +5618,30 @@ constants:
       the particles.
     type: integer
     value: 2
+    value-type: float
+    range: [0, 1]
   PSYS_PART_START_COLOR:
     member-of: [ParticleParam]
     tooltip: Vector parameter <r, g, b> that determines the starting color of the
       particles.
     type: integer
     value: 1
+    value-type: vector
   PSYS_PART_START_GLOW:
     member-of: [ParticleParam]
     tooltip: Float parameter that determines the starting glow value of the particles.
     type: integer
     value: 26
+    value-type: float
+    range: [0, 1]
   PSYS_PART_START_SCALE:
     member-of: [ParticleParam]
     tooltip: Vector parameter <sx, sy, z> defining the starting size of the particle
       billboard in meters (z-axis value is ignored).
     type: integer
     value: 5
+    value-type: vector
+    range: ["<0.03125,0.03125,0>", "<4,4,0>"]
   PSYS_PART_TARGET_LINEAR_MASK:
     member-of: [ParticleFlag]
     tooltip: Particle flag causing emitted particles to move in a straight,
@@ -4757,12 +5671,15 @@ constants:
       apply to particles.
     type: integer
     value: 8
+    value-type: vector
+    range: ["<-100,-100,-100>", "<100,100,100>"]
   PSYS_SRC_ANGLE_BEGIN:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the angle in radians where particles will
       not be created (for ANGLE patterns).
     type: integer
     value: 22
+    value-type: float
   PSYS_SRC_ANGLE_END:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the ending angle in radians to be filled
@@ -4770,45 +5687,53 @@ constants:
       roles are swapped.
     type: integer
     value: 23
+    value-type: float
   PSYS_SRC_BURST_PART_COUNT:
     member-of: [ParticleParam]
     tooltip: Integer parameter specifying the number of particles to release in each
       burst.
     type: integer
     value: 15
+    value-type: integer
   PSYS_SRC_BURST_RADIUS:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the radial distance from the emitter's
       center at which particles are created.
     type: integer
     value: 16
+    value-type: float
   PSYS_SRC_BURST_RATE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the interval in seconds between particle bursts.
     type: integer
     value: 13
+    value-type: float
   PSYS_SRC_BURST_SPEED_MAX:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the maximum initial speed of emitted particles.
     type: integer
     value: 18
+    value-type: float
   PSYS_SRC_BURST_SPEED_MIN:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the minimum initial speed of emitted particles.
     type: integer
     value: 17
+    value-type: float
   PSYS_SRC_INNERANGLE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the inner angle of the arc for ANGLE or
       ANGLE_CONE patterns. The specified inner area will not contain particles.
     type: integer
     value: 10
+    value-type: float
   PSYS_SRC_MAX_AGE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the active duration of the particle system
       in seconds (0.0 means forever).
     type: integer
     value: 19
+    value-type: float
   # These were present in the lexer, but not in the syntax file, they're marked private for consistency.
   # TODO: check if the private is actually warranted, it's likely not.
   PSYS_SRC_OBJ_REL_MASK:
@@ -4817,12 +5742,14 @@ constants:
     tooltip: ''
     type: integer
     value: '0x1'
+    value-type: integer
   PSYS_SRC_OMEGA:
     member-of: [ParticleParam]
     tooltip: Vector parameter setting the angular velocity used to rotate the
       emission axis for ANGLE and ANGLE_CONE patterns.
     type: integer
     value: 21
+    value-type: vector
   PSYS_SRC_OUTERANGLE:
     member-of: [ParticleParam]
     tooltip: Float parameter specifying the outer angle of the arc for ANGLE or
@@ -4830,12 +5757,15 @@ constants:
       with particles.
     type: integer
     value: 11
+    value-type: float
   PSYS_SRC_PATTERN:
     member-of: [ParticleParam]
     tooltip: Integer parameter specifying the generation pattern
       (PSYS_SRC_PATTERN_*) used to emit particles.
     type: integer
     value: 9
+    value-type: integer
+    enum: ParticleSourcePattern
   PSYS_SRC_PATTERN_ANGLE:
     member-of: [ParticleSourcePattern]
     tooltip: Emission pattern that sprays particles outward in a flat circular,
@@ -4877,12 +5807,14 @@ constants:
       PSYS_PART_TARGET_POS_MASK or PSYS_PART_TARGET_LINEAR_MASK is enabled.
     type: integer
     value: 20
+    value-type: key
   PSYS_SRC_TEXTURE:
     member-of: [ParticleParam]
     tooltip: String parameter specifying the inventory name or UUID asset key of the
       texture used for the particles.
     type: integer
     value: 12
+    value-type: asset
   PUBLIC_CHANNEL:
     tooltip: Integer constant representing the open local chat channel. Passing this
       to chat functions (llSay, llWhisper, llShout) prints text to the publicly
@@ -4896,24 +5828,33 @@ constants:
       non-zero PURSUIT_OFFSET.
     type: integer
     value: 3
+    value-type: float
+    range: [0, 1]
+    default: 0
   PURSUIT_GOAL_TOLERANCE:
     member-of: [CharacterPursueParam]
     tooltip: Option for llPursue defining how close (between 0.25m and 10m) the
       character must be to consider the goal reached.
     type: integer
     value: 5
+    value-type: float
+    range: [0.25, 10]
   PURSUIT_INTERCEPT:
     member-of: [CharacterPursueParam]
     tooltip: Option for llPursue specifying whether the pathfinding character
       attempts to predict and intercept the target's future location.
     type: integer
     value: 4
+    value-type: boolean
+    default: false
   PURSUIT_OFFSET:
     member-of: [CharacterPursueParam]
     tooltip: Option for llPursue specifying a constant position offset relative to
       the target for the character to navigate toward.
     type: integer
     value: 1
+    value-type: vector
+    default: ZERO_VECTOR
   PU_EVADE_HIDDEN:
     member-of: [CharacterPathUpdateType]
     tooltip: Path update status code triggered when an llEvade character determines
@@ -5023,6 +5964,9 @@ constants:
     tooltip: Flag used with llCastRay to configure returned data.
     type: integer
     value: 2
+    value-type: integer
+    enum: RayCastData
+    default: 0
   RC_DETECT_PHANTOM:
     member-of: [RayCastParam]
     tooltip: Flag used with llCastRay. If set to TRUE (or non-zero), detects both
@@ -5031,6 +5975,8 @@ constants:
       in RC_REJECT_TYPES.
     type: integer
     value: 1
+    value-type: boolean
+    default: false
   RC_GET_LINK_NUM:
     member-of: [RayCastData]
     tooltip: Flag used with llCastRay causing the results stride to include the
@@ -5055,6 +6001,8 @@ constants:
       (up to 256). To avoid performance issues, keep this value small.
     type: integer
     value: 3
+    value-type: integer
+    default: 1
   RC_REJECT_AGENTS:
     member-of: [RayCastRejectType]
     tooltip: Flag used with llCastRay to prevent the detection of avatars.
@@ -5081,6 +6029,9 @@ constants:
       of objects and avatars.
     type: integer
     value: 0
+    value-type: integer
+    enum: RayCastRejectType
+    default: 0
   REGION_FLAG_ALLOW_DAMAGE:
     member-of: [RegionFlag]
     tooltip: Flag used with llGetRegionFlags to check if the region is entirely
@@ -5165,6 +6116,8 @@ constants:
       target positions blocked by solid obstacles.
     type: integer
     value: 2
+    value-type: boolean
+    default: false
   RESTITUTION:
     member-of: [PhysicsMaterialParam]
     tooltip: Used with llSetPhysicsMaterial to enable the restitution (bounciness)
@@ -5184,12 +6137,18 @@ constants:
       TRUE, the vector is in local coordinates.
     type: integer
     value: 5
+    values:
+      - name: force
+        value-type: vector
+      - name: local
+        value-type: boolean
   REZ_DAMAGE:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the float damage amount the rezzed object
       inflicts on an agent upon collision.
     type: integer
     value: 8
+    value-type: float
   REZ_DAMAGE_TYPE:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the integer damage type applied on collision
@@ -5197,12 +6156,16 @@ constants:
       field).
     type: integer
     value: 12
+    value-type: integer
+    enum: DamageType
   REZ_FLAGS:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the integer bitfield of flags to apply to the
       newly created object.
     type: integer
     value: 1
+    value-type: integer
+    enum: RezFlag
   REZ_FLAG_BLOCK_GRAB_OBJECT:
     member-of: [RezFlag]
     tooltip: Rez flag that disables grabbing on the newly rezzed object.
@@ -5253,6 +6216,7 @@ constants:
       non-zero value locks that axis.
     type: integer
     value: 11
+    value-type: vector
   REZ_OMEGA:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the initial angular velocity (omega) applied
@@ -5260,12 +6224,22 @@ constants:
       gain]. If relative is TRUE, the axis vector is in local coordinates.
     type: integer
     value: 7
+    values:
+      - name: axis
+        value-type: vector
+      - name: local
+        value-type: boolean
+      - name: spin
+        value-type: float
+      - name: gain
+        value-type: float
   REZ_PARAM:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the integer start parameter passed into the
       newly rezzed object's on_rez event.
     type: integer
     value: 0
+    value-type: integer
   REZ_PARAM_STRING:
     member-of: [RezParam]
     tooltip: Rez parameter specifying an initialization string (up to 1024 bytes)
@@ -5273,6 +6247,7 @@ constants:
       llGetStartString.
     type: integer
     value: 13
+    value-type: string
   REZ_POS:
     member-of: [RezParam]
     tooltip: Rez parameter [vector position, integer relative, integer at_root] to
@@ -5281,12 +6256,24 @@ constants:
       root prim.
     type: integer
     value: 2
+    values:
+      - name: pos
+        value-type: vector
+      - name: relative
+        value-type: boolean
+      - name: at_root
+        value-type: boolean
   REZ_ROT:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the initial rotation to apply to the newly
       rezzed object. Can be relative to the rezzing object or absolute.
     type: integer
     value: 3
+    values:
+      - name: rot
+        value-type: rotation
+      - name: relative
+        value-type: boolean
   REZ_SOUND:
     member-of: [RezParam]
     tooltip: Rez parameter [string name_or_uuid, float volume, integer loop] to
@@ -5294,6 +6281,13 @@ constants:
       TRUE, it loops continuously.
     type: integer
     value: 9
+    values:
+      - name: sound
+        value-type: asset
+      - name: volume
+        value-type: float
+      - name: loop
+        value-type: boolean
   REZ_SOUND_COLLIDE:
     member-of: [RezParam]
     tooltip: Rez parameter [string name_or_uuid, float volume] specifying a sound
@@ -5301,12 +6295,18 @@ constants:
       object, the ground, or an avatar.
     type: integer
     value: 10
+    values:
+      - name: sound
+        value-type: asset
+      - name: volume
+        value-type: float
   REZ_TORQUE:
     member-of: [RezParam]
     private: true
     tooltip: ''
     type: integer
     value: 6
+    value-type: vector
   REZ_VEL:
     member-of: [RezParam]
     tooltip: Rez parameter specifying the initial velocity to apply to the object.
@@ -5314,6 +6314,13 @@ constants:
       TRUE, it adds the rezzing object's velocity.
     type: integer
     value: 4
+    values:
+      - name: velocity
+        value-type: vector
+      - name: local
+        value-type: boolean
+      - name: inherit
+        value-type: boolean
   ROTATE:
     member-of: [TextureAnimMode]
     tooltip: Used with texture animation functions to animate the texture's
@@ -5563,12 +6570,18 @@ constants:
     tooltip: Environmental setting for the ambient color used in the scene.
     type: integer
     value: 0
+    value-type: vector
   SKY_BLUE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the colors used to calculate blue
       density and blue horizon in the sky.
     type: integer
     value: 22
+    values:
+      - name: blue_density
+        value-type: vector
+      - name: blue_horizon
+        value-type: vector
   SKY_CLOUDS:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental cloud parameters including color, coverage percentage,
@@ -5576,12 +6589,46 @@ constants:
       default texture status.
     type: integer
     value: 2
+    values:
+      - name: color
+        value-type: vector
+        details: The color used for the clouds.
+      - name: coverage
+        value-type: float
+        range: [0, 1]
+        details: The coverage percentage.
+      - name: scale
+        value-type: float
+        range: [0, 3]
+        details: The scaling applied to the cloud textures.
+      - name: variance
+        value-type: float
+        range: [0, 1]
+        details: A randomizing factor applied to the main cloud layer.
+      - name: scroll
+        value-type: vector
+        range: ["<-50,-50,0>", "<50,50,0>"]
+        details: The scroll speed of the clouds (X is east/west, Y is north/south, Z is
+          unused).
+      - name: density
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,3>"]
+        details: The X/Y and D parameter used to generate cloud density.
+      - name: detail
+        value-type: vector
+        range: ["<0,0,0>", "<1,1,1>"]
+        details: The X/Y and D parameter used to generate cloud details.
+      - name: is_default
+        value-type: boolean
+        access: read
   SKY_CLOUD_TEXTURE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the inventory name or UUID of the
       texture used for the clouds.
     type: integer
     value: 19
+    value-type: asset
+    access: write
   SKY_DENSITY_PROFILE_COUNTS:
     private: true
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
@@ -5594,23 +6641,51 @@ constants:
       and maximum altitude."
     type: integer
     value: 4
+    values:
+      - name: offset
+        value-type: float
+        range: [0, 1]
+      - name: radius
+        value-type: float
+        range: [1000, 2000]
+      - name: max_altitude
+        value-type: float
+        range: [0, 10000]
   SKY_GAMMA:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting for the gamma value applied to the scene
       (repurposed in viewer 7.0+ as the HDR Scale value in the EEP editor).
     type: integer
     value: 5
+    value-type: float
+    range: [0, 20]
   SKY_GLOW:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental setting for sun and moon glow parameters: size and focus."
     type: integer
     value: 6
+    values:
+      - name: glow_size
+        value-type: float
+        range: [0.2, 40]
+      - name: glow_focus
+        value-type: float
+        range: [-10, 10]
   SKY_HAZE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the values used to calculate the light
       scattering impact of blue density and blue horizon on the scene.
     type: integer
     value: 23
+    values:
+      - name: density
+        value-type: float
+      - name: horizon
+        value-type: float
+      - name: density_multiplier
+        value-type: float
+      - name: distance_multiplier
+        value-type: float
   SKY_LIGHT:
     member-of: [EnvironmentParamReadOnly]
     tooltip: "Environmental setting containing lighting parameters: dominant light
@@ -5618,6 +6693,20 @@ constants:
       total ambient color (sRGB)."
     type: integer
     value: 8
+    values:
+      - name: light_direction
+        value-type: vector
+        details: "light_direction: A unit vector indicating the direction of the
+          dominant light source."
+      - name: fade_color
+        value-type: vector
+        details: "fade_color: A color vector representing the current color of the light
+          emitted from the dominant light source (in sRGB space)."
+      - name: total_ambient
+        value-type: vector
+        details: "total_ambient: A color vector representing the current ambient color
+          in use in the scene (in sRGB space)."
+    access: read
   SKY_MIE_CONFIG:
     private: true
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
@@ -5630,18 +6719,57 @@ constants:
       is_default_texture, direction vector, ambient color, and diffuse color."
     type: integer
     value: 9
+    values:
+      - name: rot
+        value-type: rotation
+        details: The current rotation applied to the moon.
+      - name: scale
+        value-type: float
+        range: [0.25, 20]
+        details: The current scale applied to the moon's texture.
+      - name: brightness
+        value-type: float
+        range: [0, 1]
+        details: The moon's brightness.
+      - name: is_default_texture
+        value-type: boolean
+        access: read
+      - name: direction
+        value-type: vector
+        details: A unit vector pointing at the moon.
+        access: read
+      - name: ambient_color
+        value-type: vector
+        details: The ambient color of the moon.
+        access: read
+      - name: diffuse_color
+        value-type: vector
+        details: The diffuse color applied to the moon.
+        access: read
   SKY_MOON_TEXTURE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the inventory name or UUID of the
       texture used for the moon.
     type: integer
     value: 20
+    value-type: asset
+    access: write
   SKY_PLANET:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental planet rendering parameters: planet_radius,
       sky_bottom_radius, and sky_top_radius."
     type: integer
     value: 10
+    values:
+      - name: planet_radius
+        value-type: float
+        range: [1000, 32768]
+      - name: sky_bottom_radius
+        value-type: float
+        range: [1000, 32768]
+      - name: sky_top_radius
+        value-type: float
+        range: [1000, 32768]
   SKY_RAYLEIGH_CONFIG:
     private: true
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
@@ -5655,41 +6783,98 @@ constants:
       compatible viewers and testing areas."
     type: integer
     value: 24
+    value-type: float
+    range: [0, 10]
   SKY_REFRACTION:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental sky refraction parameters for rainbows and optical
       effects: moisture_level, droplet_radius, and ice_level."
     type: integer
     value: 11
+    values:
+      - name: moisture_level
+        value-type: float
+        range: [0, 1]
+      - name: droplet_radius
+        value-type: float
+        range: [5, 1000]
+      - name: ice_level
+        value-type: float
+        range: [0, 1]
   SKY_STAR_BRIGHTNESS:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting for the brightness value applied to stars.
     type: integer
     value: 13
+    value-type: float
+    range: [0, 500]
   SKY_SUN:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental sun parameters: rotation, scale, color,
       is_default_texture, direction vector, ambient color, and diffuse color."
     type: integer
     value: 14
+    values:
+      - name: rot
+        value-type: rotation
+        details: The current rotation applied to the sun.
+      - name: scale
+        value-type: float
+        range: [0.25, 20]
+        details: The current scale applied to the sun's texture.
+      - name: sun_color
+        value-type: vector
+      - name: is_default_texture
+        value-type: boolean
+        access: read
+      - name: direction
+        value-type: vector
+        details: A unit vector pointing at the sun.
+        access: read
+      - name: ambient_color
+        value-type: vector
+        details: The ambient color of the sun.
+        access: read
+      - name: diffuse_color
+        value-type: vector
+        details: The diffuse color applied to the sun.
+        access: read
   SKY_SUN_TEXTURE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the inventory name or UUID of the
       texture used for the sun.
     type: integer
     value: 21
+    value-type: asset
+    access: write
   SKY_TEXTURE_DEFAULTS:
     member-of: [EnvironmentParamReadOnly]
     tooltip: Environmental check returning 1 if the sky textures are set to their
       default values, or 0 if they use custom textures.
     type: integer
     value: 1
+    values:
+      - name: bloom_is_default
+        value-type: boolean
+      - name: halo_is_default
+        value-type: boolean
+      - name: rainbow_is_default
+        value-type: boolean
+    access: read
   SKY_TRACKS:
     member-of: [EnvironmentParamReadOnly]
     tooltip: Environmental setting containing the track altitudes used for sky
       transitions in the region.
     type: integer
     value: 15
+    values:
+      - name: sky2
+        value-type: float
+      - name: sky3
+        value-type: float
+      - name: sky4
+        value-type: float
+    access: read
   SMOOTH:
     member-of: [TextureAnimMode]
     tooltip: Used with texture animation functions to cause the animation to slide
@@ -5796,9 +6981,9 @@ constants:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default FALSE) that makes the entire object
       phantom/non-colliding when set to TRUE, allowing avatars and objects to
-      pass through it. It is a good idea to
-      use this for most objects that move or rotate, but are non-physical. It is also
-      useful for simulating volumetric lighting.
+      pass through it. It is a good idea to use this for most objects that move
+      or rotate, but are non-physical. It is also useful for simulating
+      volumetric lighting.
     type: integer
     value: '0x10'
   STATUS_PHYSICS:
@@ -5817,16 +7002,16 @@ constants:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default TRUE) that allows physical rotation on the
       object's local X-axis. Setting to FALSE prevents physical rotation around
-      the local X-axis. For example, a sit-and-spin
-      device spins around the Z axis (up) but not around the X or Y axes.
+      the local X-axis. For example, a sit-and-spin device spins around the Z
+      axis (up) but not around the X or Y axes.
     type: integer
     value: '0x2'
   STATUS_ROTATE_Y:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default TRUE) that allows physical rotation on the
       object's local Y-axis. Setting to FALSE prevents physical rotation around
-      the local Y-axis. For example, a sit-and-spin
-      device spins around the Z axis (up) but not around the X or Y axes.
+      the local Y-axis. For example, a sit-and-spin device spins around the Z
+      axis (up) but not around the X or Y axes.
     type: integer
     value: '0x4'
   STATUS_ROTATE_Z:
@@ -5888,6 +7073,7 @@ constants:
       terrain detail layer 1.
     type: integer
     value: 0
+    value-type: asset
   TERRAIN_DETAIL_2:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the texture or
@@ -5895,6 +7081,7 @@ constants:
       terrain detail layer 2.
     type: integer
     value: 1
+    value-type: asset
   TERRAIN_DETAIL_3:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the texture or
@@ -5902,6 +7089,7 @@ constants:
       terrain detail layer 3.
     type: integer
     value: 2
+    value-type: asset
   TERRAIN_DETAIL_4:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the texture or
@@ -5909,6 +7097,7 @@ constants:
       terrain detail layer 4.
     type: integer
     value: 3
+    value-type: asset
   TERRAIN_HEIGHT_RANGE_NE:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the north-east
@@ -5917,6 +7106,11 @@ constants:
       and 3 mix in between.
     type: integer
     value: 7
+    values:
+      - name: low
+        value-type: float
+      - name: high
+        value-type: float
   TERRAIN_HEIGHT_RANGE_NW:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the north-west
@@ -5925,6 +7119,11 @@ constants:
       and 3 mix in between.
     type: integer
     value: 6
+    values:
+      - name: low
+        value-type: float
+      - name: high
+        value-type: float
   TERRAIN_HEIGHT_RANGE_SE:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the south-east
@@ -5933,6 +7132,11 @@ constants:
       and 3 mix in between.
     type: integer
     value: 5
+    values:
+      - name: low
+        value-type: float
+      - name: high
+        value-type: float
   TERRAIN_HEIGHT_RANGE_SW:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the south-west
@@ -5941,6 +7145,11 @@ constants:
       and 3 mix in between.
     type: integer
     value: 4
+    values:
+      - name: low
+        value-type: float
+      - name: high
+        value-type: float
   TERRAIN_PBR_OFFSET_1:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV offset
@@ -5948,6 +7157,7 @@ constants:
       for PBR textures.
     type: integer
     value: 16
+    value-type: vector
   TERRAIN_PBR_OFFSET_2:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV offset
@@ -5955,6 +7165,7 @@ constants:
       for PBR textures.
     type: integer
     value: 17
+    value-type: vector
   TERRAIN_PBR_OFFSET_3:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV offset
@@ -5962,6 +7173,7 @@ constants:
       for PBR textures.
     type: integer
     value: 18
+    value-type: vector
   TERRAIN_PBR_OFFSET_4:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV offset
@@ -5969,30 +7181,35 @@ constants:
       for PBR textures.
     type: integer
     value: 19
+    value-type: vector
   TERRAIN_PBR_ROTATION_1:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the rotation of
       the PBR texture for layer 1, in radians. Only works for PBR textures.
     type: integer
     value: 12
+    value-type: float
   TERRAIN_PBR_ROTATION_2:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the rotation of
       the PBR texture for layer 2, in radians. Only works for PBR textures.
     type: integer
     value: 13
+    value-type: float
   TERRAIN_PBR_ROTATION_3:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the rotation of
       the PBR texture for layer 3, in radians. Only works for PBR textures.
     type: integer
     value: 14
+    value-type: float
   TERRAIN_PBR_ROTATION_4:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the rotation of
       the PBR texture for layer 4, in radians. Only works for PBR textures.
     type: integer
     value: 15
+    value-type: float
   TERRAIN_PBR_SCALE_1:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV scale
@@ -6000,6 +7217,7 @@ constants:
       Only works for PBR textures.
     type: integer
     value: 8
+    value-type: vector
   TERRAIN_PBR_SCALE_2:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV scale
@@ -6007,6 +7225,7 @@ constants:
       Only works for PBR textures.
     type: integer
     value: 9
+    value-type: vector
   TERRAIN_PBR_SCALE_3:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV scale
@@ -6014,6 +7233,7 @@ constants:
       Only works for PBR textures.
     type: integer
     value: 10
+    value-type: vector
   TERRAIN_PBR_SCALE_4:
     member-of: [GroundTextureParam]
     tooltip: Terrain parameter used with llSetGroundTexture to set the UV scale
@@ -6021,6 +7241,7 @@ constants:
       Only works for PBR textures.
     type: integer
     value: 11
+    value-type: vector
   TEXTURE_BLANK:
     tooltip: The asset UUID representing the default 'Blank' texture.
     type: string
@@ -6098,12 +7319,14 @@ constants:
       inventory into.
     type: integer
     value: 0
+    value-type: string
   TRANSFER_FLAGS:
     member-of: [GiveAgentInventoryParam]
     tooltip: Inventory parameter specifying flags to control the behavior of
       inventory transfers.
     type: integer
     value: 1
+    value-type: integer
   TRANSFER_FLAG_COPY:
     member-of: [TransferOwnershipFlag]
     tooltip: Inventory transfer flag that copies the transferred object and places
@@ -6163,6 +7386,9 @@ constants:
       type. Expects TRAVERSAL_TYPE_SLOW (default), _FAST, or _NONE.
     type: integer
     value: 7
+    value-type: integer
+    enum: CharacterTraversalType
+    default: TRAVERSAL_TYPE_SLOW
   TRAVERSAL_TYPE_FAST:
     member-of: [CharacterTraversalType]
     tooltip: ''
@@ -6297,18 +7523,18 @@ constants:
     value: 38
   VEHICLE_BANKING_MIX:
     member-of: [VehicleFloatParam]
-    tooltip: Vehicle float parameter (range 0.0 (static) to 1.0) (dynamic) controlling the mix between
-      static banking (scales only with roll angle) and dynamic banking
-      (additionally scales with linear speed).
+    tooltip: Vehicle float parameter (range 0.0 (static) to 1.0) (dynamic)
+      controlling the mix between static banking (scales only with roll angle)
+      and dynamic banking (additionally scales with linear speed).
     type: integer
     value: 39
   VEHICLE_BANKING_TIMESCALE:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter specifying the exponential timescale for the
-      banking behavior to take full effect.
-      This is another way to scale the strength of the banking effect, however it
-      affects the term that is proportional to the difference between what the banking
-      behavior is trying to do, and what the vehicle is actually doing.
+      banking behavior to take full effect. This is another way to scale the
+      strength of the banking effect, however it affects the term that is
+      proportional to the difference between what the banking behavior is trying
+      to do, and what the vehicle is actually doing.
     type: integer
     value: 40
   VEHICLE_BUOYANCY:
@@ -6415,15 +7641,15 @@ constants:
   VEHICLE_LINEAR_DEFLECTION_EFFICIENCY:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter (range 0.0 to 1.0) modulating the efficiency
-      and strength of linear deflection. That is, its a simple scalar for modulating
-      the strength of linear deflection.
+      and strength of linear deflection. That is, its a simple scalar for
+      modulating the strength of linear deflection.
     type: integer
     value: 28
   VEHICLE_LINEAR_DEFLECTION_TIMESCALE:
     member-of: [VehicleFloatParam]
     tooltip: Vehicle float parameter specifying the exponential timescale for the
-      vehicle to redirect its linear velocity along its preferred X-axis.
-      It is another way to specify how much time it takes for the vehicle's linear
+      vehicle to redirect its linear velocity along its preferred X-axis. It is
+      another way to specify how much time it takes for the vehicle's linear
       velocity to be redirected to its preferred axis of motion.
     type: integer
     value: 29
@@ -6529,54 +7755,102 @@ constants:
       should pause briefly after reaching each wander waypoint.
     type: integer
     value: 0
+    value-type: boolean
+    default: false
   WATER_BLUR_MULTIPLIER:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting specifying the multiplier applied to blur the
       scene when underwater.
     type: integer
     value: 100
+    value-type: float
+    range: [-0.5, 0.5]
   WATER_FOG:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental underwater fog parameters: color, density exponent, and
       modulation."
     type: integer
     value: 101
+    values:
+      - name: color
+        value-type: vector
+        details: The color of the underwater fog.
+      - name: density
+        value-type: float
+        range: [-10, 10]
+        details: Density exponent applied to the fog.
+      - name: modulation
+        value-type: float
+        range: [0, 20]
   WATER_FRESNEL:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental water surface Fresnel scattering parameters: offset and
       scale."
     type: integer
     value: 102
+    values:
+      - name: offset
+        value-type: float
+        range: [0, 1]
+      - name: scale
+        value-type: float
+        range: [0, 1]
   WATER_NORMAL_SCALE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting specifying the scaling vector applied to the
       water normal map.
     type: integer
     value: 104
+    value-type: vector
+    range: ["<0,0,0>", "<10,10,10>"]
   WATER_NORMAL_TEXTURE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the inventory name or UUID of the
       normal map texture used for water waves.
     type: integer
     value: 107
+    value-type: asset
+    access: write
   WATER_REFRACTION:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: "Environmental water surface refraction scale factors: scale_above and
       scale_below."
     type: integer
     value: 105
+    values:
+      - name: scale_above
+        value-type: float
+        range: [0, 3]
+      - name: scale_below
+        value-type: float
+        range: [0, 3]
   WATER_TEXTURE_DEFAULTS:
     member-of: [EnvironmentParamReadOnly]
     tooltip: Environmental check returning 1 if default water wave maps are used, or
       0 if a custom texture is set.
     type: integer
     value: 103
+    values:
+      - name: normal_is_default
+        value-type: boolean
+      - name: transparent_is_default
+        value-type: boolean
+    access: read
   WATER_WAVE_DIRECTION:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental wave direction vectors (X is east/west, Y is north/south)
       specifying speeds and directions for both large and small waves.
     type: integer
     value: 106
+    values:
+      - name: large_wave
+        value-type: vector
+        range: ["<-20,-20,0>", "<20,20,0>"]
+        details: Large wave speed and direction.
+      - name: small_wave
+        value-type: vector
+        range: ["<-20,-20,0>", "<20,20,0>"]
+        details: Small wave speed and direction.
   XP_ERROR_EXPERIENCES_DISABLED:
     member-of: [ExperienceError]
     tooltip: The region currently has experiences disabled.
@@ -9306,13 +10580,13 @@ functions:
     - params:
         tooltip: A list of environmental attributes to retrieve.
         type: list
-        param-get-semantics: EnvironmentParam
+        param-get-semantics: EnvironmentParamReadOnly
         slua-type: "{number}"
     energy: 10.0
     func-id: 711
     must-use: true
     return: list
-    param-get-semantics: EnvironmentParam
+    param-get-semantics: EnvironmentParamReadOnly
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
