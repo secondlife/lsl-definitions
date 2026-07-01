@@ -49,7 +49,7 @@
       <key>license_file</key>
       <string>LICENSES/lsl_definitions.txt</string>
       <key>copyright</key>
-      <string>Copyright (c) 2026, Linden Lab</string>
+      <string>Copyright (c) 2026, Linden Research, Inc.</string>
       <key>name</key>
       <string>lsl_definitions</string>
       <key>source_directory</key>
