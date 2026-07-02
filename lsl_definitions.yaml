@@ -1967,6 +1967,7 @@ constants:
     value-type: string-multi
   HTTP_BODY_MAXLENGTH:
     member-of: [HTTPRequestParam]
+    pretty-name: max_body_length
     tooltip: "Sets the maximum (UTF-8 encoded) byte length of the HTTP response
       body. The maximum limit depends on the VM being used (Mono Max: 16384
       bytes, LSO Max: 4096 bytes)."
@@ -4099,6 +4100,7 @@ constants:
     value-type: boolean
   PRIM_MEDIA_HEIGHT_PIXELS:
     member-of: [PrimMediaParam]
+    pretty-name: height
     tooltip: Integer. Gets or sets the height of the media in pixels.
     type: integer
     value: 10
@@ -4186,6 +4188,7 @@ constants:
     value-type: boolean
   PRIM_MEDIA_WIDTH_PIXELS:
     member-of: [PrimMediaParam]
+    pretty-name: width
     tooltip: Integer. Gets or sets the width of the media in pixels.
     type: integer
     value: 9
