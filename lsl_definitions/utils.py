@@ -50,12 +50,14 @@ LUAU_KEYWORDS: frozenset[str] = frozenset(
         "nil",
         "not",
         "or",
+        "read",
         "repeat",
         "return",
         "then",
         "true",
         "until",
         "while",
+        "write",
     }
 )
 
