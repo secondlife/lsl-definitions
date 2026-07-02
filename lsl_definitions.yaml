@@ -1376,6 +1376,7 @@ constants:
     type: integer
     value: 7
   COMBAT_CHANNEL:
+    member-of: [Channels, ChannelDebug]
     tooltip: A region-wide channel reserved for combat-related log events. Passing
       this to llRegionSay adds the message to the combat log, and scripts
       listening on this channel can monitor the combat log.
