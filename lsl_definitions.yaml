@@ -95,7 +95,7 @@ enums:
     type: enum
     other-values: true
     tooltip: ''
-  ChannelDebug:
+  ChannelNonPublic:
     type: enum
     other-values: true
     tooltip: ''
@@ -1376,7 +1376,7 @@ constants:
     type: integer
     value: 7
   COMBAT_CHANNEL:
-    member-of: [Channel, ChannelDebug]
+    member-of: [Channel, ChannelNonPublic]
     tooltip: A region-wide channel reserved for combat-related log events. Passing
       this to llRegionSay adds the message to the combat log, and scripts
       listening on this channel can monitor the combat log.
@@ -1641,7 +1641,7 @@ constants:
     type: integer
     value: 6
   DEBUG_CHANNEL:
-    member-of: [Channel, ChannelDebug]
+    member-of: [Channel, ChannelNonPublic]
     tooltip: A chat channel reserved for script debugging and error messages.
       Passing this to llSay, llWhisper, or llShout prints text to the Script
       Warning/Error Window and broadcasts it to nearby avatars' script consoles.
@@ -13372,7 +13372,7 @@ functions:
     - channel:
         tooltip: The output chat channel to broadcast on (must be non-zero).
         type: integer
-        enum-semantics: ChannelDebug
+        enum-semantics: ChannelNonPublic
     - msg:
         tooltip: The text message string to broadcast.
         type: string
