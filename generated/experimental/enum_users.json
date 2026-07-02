@@ -24,7 +24,9 @@
     "llSetObjectPermMask"
   ],
   "AssetPermissionCategoryFlag": [],
-  "AssetPermissionCategoryOrFlag": [],
+  "AssetPermissionCategoryOrFlag": [
+    "llGetObjectPermMask"
+  ],
   "AttachPoint": [
     "llAttachToAvatar",
     "llAttachToAvatarTemp"
@@ -38,6 +40,17 @@
   ],
   "ChangeType": [
     "changed"
+  ],
+  "Channel": [
+    "listen",
+    "llListen",
+    "llSay",
+    "llShout",
+    "llTextBox",
+    "llWhisper"
+  ],
+  "ChannelNonPublic": [
+    "llRegionSay"
   ],
   "CharacterAvoidanceMode": [],
   "CharacterCommand": [
@@ -94,11 +107,12 @@
   ],
   "EnvironmentError": [],
   "EnvironmentParam": [
-    "llGetEnvironment",
     "llSetAgentEnvironment",
     "llSetEnvironment"
   ],
-  "EnvironmentParamReadOnly": [],
+  "EnvironmentParamReadOnly": [
+    "llGetEnvironment"
+  ],
   "EstateAccessParam": [
     "llManageEstateAccess"
   ],
@@ -114,7 +128,6 @@
     "llGetLinkMedia",
     "llGetPrimMediaParams",
     "llGetRenderMaterial",
-    "llGetSimStats",
     "llGetTexture",
     "llGetTextureOffset",
     "llGetTextureRot",
@@ -189,7 +202,6 @@
     "llGetLinkPrimitiveParams",
     "llGetLinkSitFlags",
     "llGetObjectLinkKey",
-    "llGetObjectPermMask",
     "llIsLinkGLTFMaterial",
     "llLinkSitTarget",
     "llSetLinkCamera",
@@ -266,7 +278,10 @@
     "llParticleSystem"
   ],
   "ParticleSourcePattern": [],
-  "PassMode": [],
+  "PassMode": [
+    "llPassCollisions",
+    "llPassTouches"
+  ],
   "PayButton": [
     "llSetPayPrice"
   ],
@@ -333,7 +348,9 @@
   "SimulatorData": [
     "llRequestSimulatorData"
   ],
-  "SimulatorStat": [],
+  "SimulatorStat": [
+    "llGetSimStats"
+  ],
   "SitError": [],
   "SitFlag": [
     "llSetLinkSitFlags"

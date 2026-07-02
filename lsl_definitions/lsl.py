@@ -717,7 +717,7 @@ class LSLDefinitionParser:
                 )
             if func_data.get("enum-semantics"):
                 func.enum_semantics = self._resolve_enum(func_data["enum-semantics"])
-                if func.ret_type != LSLType.INTEGER:
+                if func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
                     raise ValueError(
                         f"{func.name} has enum semantics, but ret type is {func.ret_type!r}"
                     )

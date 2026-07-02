@@ -4894,6 +4894,7 @@ constants:
     type: integer
     value: 12
   PUBLIC_CHANNEL:
+    member-of: [Channel]
     tooltip: Integer constant representing the open local chat channel. Passing this
       to chat functions (llSay, llWhisper, llShout) prints text to the publicly
       heard chat seen by nearby users and objects.

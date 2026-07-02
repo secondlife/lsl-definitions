@@ -8729,13 +8729,13 @@ globals:
       based on rules. An empty list removes the particle system.
   ll.PassCollisions:
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-collisions attribute. If pass is TRUE, collision events
       are passed from child prims to the root; if FALSE (default), they only trigger
       events in the affected child prim.
   ll.PassTouches:
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-touches attribute. If pass is TRUE, touch events are
       passed from child prims to the root; if FALSE (default), they only trigger events
       in the affected child prim.
@@ -13457,7 +13457,7 @@ globals:
         are passed from child prims to the root; if FALSE (default), they only trigger
         events in the affected child prim.
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-collisions attribute. If pass is TRUE, collision events
       are passed from child prims to the root; if FALSE (default), they only trigger
       events in the affected child prim.
@@ -13467,7 +13467,7 @@ globals:
         passed from child prims to the root; if FALSE (default), they only trigger
         events in the affected child prim.
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-touches attribute. If pass is TRUE, touch events are
       passed from child prims to the root; if FALSE (default), they only trigger events
       in the affected child prim.

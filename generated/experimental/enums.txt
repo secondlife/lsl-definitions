@@ -161,6 +161,15 @@ enum ChangeType {
   MEDIA = 0x800
   RENDER_MATERIAL = 0x1000
 };
+enum Channel {
+  PUBLIC_CHANNEL = 0
+  COMBAT_CHANNEL = 2147483646
+  DEBUG_CHANNEL = 2147483647
+};
+enum ChannelNonPublic {
+  COMBAT_CHANNEL = 2147483646
+  DEBUG_CHANNEL = 2147483647
+};
 enum CharacterAvoidanceMode {
   NONE = 0
   CHARACTERS = 1
@@ -1291,9 +1300,7 @@ enum VehicleVectorParam {
   ANGULAR_MOTOR_DIRECTION = 19
   LINEAR_MOTOR_OFFSET = 20
 };
-const integer COMBAT_CHANNEL = 2147483646
 const string COMBAT_LOG_ID = "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
-const integer DEBUG_CHANNEL = 2147483647
 const float DEG_TO_RAD = 0.017453293
 const string EOF = "\n\n\n"
 const integer FALSE = 0
@@ -1330,7 +1337,6 @@ const integer PRIM_MEDIA_MAX_WHITELIST_COUNT = 64
 const integer PRIM_MEDIA_MAX_WHITELIST_SIZE = 1024
 const integer PRIM_MEDIA_MAX_WIDTH_PIXELS = 2048
 const integer PRIM_MEDIA_PARAM_MAX = 14
-const integer PUBLIC_CHANNEL = 0
 const float RAD_TO_DEG = 57.2957795
 const float SQRT2 = 1.41421356
 const string TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f"
