@@ -91,7 +91,7 @@ enums:
     type: flag
     prefix: CHANGED_
     tooltip: ''
-  Channels:
+  Channel:
     type: enum
     other-values: true
     tooltip: ''
@@ -1376,7 +1376,7 @@ constants:
     type: integer
     value: 7
   COMBAT_CHANNEL:
-    member-of: [Channels, ChannelDebug]
+    member-of: [Channel, ChannelDebug]
     tooltip: A region-wide channel reserved for combat-related log events. Passing
       this to llRegionSay adds the message to the combat log, and scripts
       listening on this channel can monitor the combat log.
@@ -1641,7 +1641,7 @@ constants:
     type: integer
     value: 6
   DEBUG_CHANNEL:
-    member-of: [Channels, ChannelDebug]
+    member-of: [Channel, ChannelDebug]
     tooltip: A chat channel reserved for script debugging and error messages.
       Passing this to llSay, llWhisper, or llShout prints text to the Script
       Warning/Error Window and broadcasts it to nearby avatars' script consoles.
@@ -7032,7 +7032,7 @@ events:
     - channel:
         tooltip: The chat channel where the message appeared.
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     - name:
         tooltip: The name of the sending prim or the legacy name of the sending avatar.
         type: string
@@ -12397,7 +12397,7 @@ functions:
         tooltip: The input chat channel to listen on (any integer from -2147483648 to
           2147483647).
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     - name:
         tooltip: The specific prim name or avatar legacy name to filter by (or empty
           string for no filter).
@@ -14311,7 +14311,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to transmit the message on.
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     - msg:
         tooltip: The text message string to transmit.
         type: string
@@ -15799,7 +15799,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to shout the message on.
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     - msg:
         tooltip: The text message string to transmit.
         type: string
@@ -16396,7 +16396,7 @@ functions:
         tooltip: The output chat channel (any integer value) where the input text is
           chatted.
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     energy: 10.0
     func-id: 335
     mono-sleep: 0.0
@@ -16745,7 +16745,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to whisper the message on.
         type: integer
-        enum-semantics: Channels
+        enum-semantics: Channel
     - msg:
         tooltip: The text message string to transmit.
         type: string
