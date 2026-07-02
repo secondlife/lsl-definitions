@@ -91,6 +91,14 @@ enums:
     type: flag
     prefix: CHANGED_
     tooltip: ''
+  Channels:
+    type: enum
+    other-values: true
+    tooltip: ''
+  ChannelDebug:
+    type: enum
+    other-values: true
+    tooltip: ''
   CharacterAvoidanceMode:
     type: enum
     prefix: AVOID_
@@ -1632,6 +1640,7 @@ constants:
     type: integer
     value: 6
   DEBUG_CHANNEL:
+    member-of: [Channels, ChannelDebug]
     tooltip: A chat channel reserved for script debugging and error messages.
       Passing this to llSay, llWhisper, or llShout prints text to the Script
       Warning/Error Window and broadcasts it to nearby avatars' script consoles.
@@ -7022,6 +7031,7 @@ events:
     - channel:
         tooltip: The chat channel where the message appeared.
         type: integer
+        enum-semantics: Channels
     - name:
         tooltip: The name of the sending prim or the legacy name of the sending avatar.
         type: string
@@ -8226,6 +8236,7 @@ functions:
     func-id: 554
     must-use: true
     return: list
+    enum-semantics: DamageType
     detected-semantics: true
     sleep: 0.0
     tooltip: Returns a list containing pending damage information for the event
@@ -9306,13 +9317,13 @@ functions:
     - params:
         tooltip: A list of environmental attributes to retrieve.
         type: list
-        param-get-semantics: EnvironmentParam
+        param-get-semantics: EnvironmentParamReadOnly
         slua-type: "{number}"
     energy: 10.0
     func-id: 711
     must-use: true
     return: list
-    param-get-semantics: EnvironmentParam
+    param-get-semantics: EnvironmentParamReadOnly
     # There may be some bool-like entries in the list we need to convert
     bool-semantics: true
     sleep: 0.0
@@ -10086,12 +10097,12 @@ functions:
         tooltip: The MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP,
           MASK_EVERYONE, or MASK_NEXT).
         type: integer
-        enum-semantics: Link
+        enum-semantics: AssetPermissionCategoryOrFlag
     energy: 10.0
     func-id: 287
     must-use: true
     return: integer
-    enum-semantics: AssetPermissionCategoryOrFlag
+    enum-semantics: AssetPermission
     sleep: 0.0
     tooltip: Returns an integer bitfield representing the permission mask of the
       specified category for the object containing the script.
@@ -10619,7 +10630,7 @@ functions:
     - stat_type:
         tooltip: The SIM_STAT_* flag of the statistic to retrieve.
         type: integer
-        enum-semantics: Faces
+        enum-semantics: SimulatorStat
     energy: 10.0
     func-id: 415
     must-use: true
@@ -12385,6 +12396,7 @@ functions:
         tooltip: The input chat channel to listen on (any integer from -2147483648 to
           2147483647).
         type: integer
+        enum-semantics: Channels
     - name:
         tooltip: The specific prim name or avatar legacy name to filter by (or empty
           string for no filter).
@@ -13147,7 +13159,7 @@ functions:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
         type: integer
-        bool-semantics: true
+        enum-semantics: PassMode
     energy: 10.0
     func-id: 166
     return: void
@@ -13163,7 +13175,7 @@ functions:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
         type: integer
-        bool-semantics: true
+        enum-semantics: PassMode
     energy: 10.0
     func-id: 154
     return: void
@@ -13359,6 +13371,7 @@ functions:
     - channel:
         tooltip: The output chat channel to broadcast on (must be non-zero).
         type: integer
+        enum-semantics: ChannelDebug
     - msg:
         tooltip: The text message string to broadcast.
         type: string
@@ -14297,6 +14310,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to transmit the message on.
         type: integer
+        enum-semantics: Channels
     - msg:
         tooltip: The text message string to transmit.
         type: string
@@ -15784,6 +15798,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to shout the message on.
         type: integer
+        enum-semantics: Channels
     - msg:
         tooltip: The text message string to transmit.
         type: string
@@ -16380,6 +16395,7 @@ functions:
         tooltip: The output chat channel (any integer value) where the input text is
           chatted.
         type: integer
+        enum-semantics: Channels
     energy: 10.0
     func-id: 335
     mono-sleep: 0.0
@@ -16728,6 +16744,7 @@ functions:
     - channel:
         tooltip: The integer chat channel to whisper the message on.
         type: integer
+        enum-semantics: Channels
     - msg:
         tooltip: The text message string to transmit.
         type: string
