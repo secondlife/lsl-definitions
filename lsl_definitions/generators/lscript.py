@@ -700,9 +700,7 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
             args_str = ", ".join(
                 f"{a.type.lsl.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
             )
-            new_defs += (
-                f"        public static {func.ret_type.lsl.meta.cs_name} {func.name}({args_str}) {{\n"
-            )
+            new_defs += f"        public static {func.ret_type.lsl.meta.cs_name} {func.name}({args_str}) {{\n"
 
             call_args = []
             for arg in func.arguments:
