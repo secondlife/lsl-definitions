@@ -722,8 +722,8 @@ class SLuaDefinitions:
             if not lua_type:
                 continue
 
-            cls = next((c for c in self.classes if c.name == lua_type), None)
-            alias = next((a for a in self.type_aliases if a.name == lua_type), None)
+            cls = self.classes.get(lua_type, None)
+            alias = self.type_aliases.get(lua_type, None)
             if cls is None and alias is None:
                 continue
 
