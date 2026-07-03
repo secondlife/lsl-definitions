@@ -4996,7 +4996,7 @@ globals:
     - type: any
     - type: '...'
     description: Returns a subset of arguments starting from the specified index.
-      Supports negative indexing. If index is '#' returns the number of arguments.
+      Supports negative indexing. If index is '#', returns the number of arguments.
   setfenv:
     removed: true
     description: setfenv is removed in SLua.
@@ -5478,16 +5478,16 @@ globals:
     description: A constant to pass for null to json encode.
   lljson.remove:
     property: read-only
-    description: A constant to return from a reviver/replacer replacer function to
-      omit this item.
+    description: A constant to return from a reviver/replacer function to omit this
+      item.
   lljson.array_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an array for json encode.
+    description: Metatable for declaring a table as an array for json encode.
   lljson.object_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an object for json encode.
+    description: Metatable for declaring a table as an object for json encode.
   lljson.empty_array:
     property: read-only
     type: table
@@ -5694,8 +5694,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns Perlin noise value for the point (x, y, z). The return value
-      is in the range [-1.0, 1.0].
+    description: Returns a Perlin noise value for the point (x, y, z). The return
+      value is in the range [-1.0, 1.0].
   math.pow:
     args:
     - type: number
@@ -6052,7 +6052,8 @@ globals:
       required: false
     must_use: true
     description: Splits a string by separator. Returns a list of substrings. If the
-      separator is empty, the string is split into individual one-byte substrings.
+      separator is nil, splits at commas (","). If the separator is empty, splits
+      into individual one-byte substrings.
   string.sub:
     args:
     - type: string

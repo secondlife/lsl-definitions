@@ -272,7 +272,7 @@ export type rotation = quaternion</string>
          <key>lljson.array_mt</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an array for json encode.</string>
+            <string>Metatable for declaring a table as an array for json encode.</string>
             <key>type</key>
             <string>{__jsonhint: string}</string>
             <key>value</key>
@@ -306,7 +306,7 @@ export type rotation = quaternion</string>
          <key>lljson.object_mt</key>
          <map>
             <key>tooltip</key>
-            <string>Metatable for declaring table as an object for json encode.</string>
+            <string>Metatable for declaring a table as an object for json encode.</string>
             <key>type</key>
             <string>{__jsonhint: string}</string>
             <key>value</key>
@@ -315,7 +315,7 @@ export type rotation = quaternion</string>
          <key>lljson.remove</key>
          <map>
             <key>tooltip</key>
-            <string>A constant to return from a reviver/replacer replacer function to omit this item.</string>
+            <string>A constant to return from a reviver/replacer function to omit this item.</string>
             <key>type</key>
             <string>any</string>
          </map>
@@ -10649,7 +10649,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>level</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller and so on (optional, defaults to 1).</string>
+                     <string>Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller, and so on (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11089,7 +11089,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#' returns the number of arguments.</string>
+            <string>Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#', returns the number of arguments.</string>
          </map>
          <key>setmetatable</key>
          <map>
@@ -11241,7 +11241,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>String to convert to an uuid.</string>
+                     <string>String to convert to a uuid.</string>
                      <key>type</key>
                      <string>string? | buffer | uuid</string>
                   </map>
@@ -11950,7 +11950,7 @@ Returns true if result is non-zero.</string>
                   <key>targetOffset</key>
                   <map>
                      <key>tooltip</key>
-                     <string>0-based offset in target buffer.</string>
+                     <string>0-based byte offset in target buffer.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11968,7 +11968,7 @@ Returns true if result is non-zero.</string>
                   <key>sourceOffset</key>
                   <map>
                      <key>tooltip</key>
-                     <string>0-based offset in source buffer (optional, defaults to 0).</string>
+                     <string>0-based byte offset in source buffer (optional, defaults to 0).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -13915,7 +13915,7 @@ Returns true if result is non-zero.</string>
                   <key>n</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to check as NAN.</string>
+                     <string>Number to check as NaN.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14243,7 +14243,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].</string>
+            <string>Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].</string>
          </map>
          <key>math.pow</key>
          <map>
@@ -15388,7 +15388,7 @@ Returns true if result is non-zero.</string>
                   <key>separator</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Separator to split on. If empty, the string is split into individual bytes (optional, defaults to ",").</string>
+                     <string>Separator to split on. If nil, splits at commas (","). If empty, splits into individual bytes (optional, defaults to ",").</string>
                      <key>type</key>
                      <string>string?</string>
                   </map>
@@ -15401,7 +15401,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Splits a string by separator. Returns a list of substrings. If the separator is empty, the string is split into individual one-byte substrings.</string>
+            <string>Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.</string>
          </map>
          <key>string.sub</key>
          <map>

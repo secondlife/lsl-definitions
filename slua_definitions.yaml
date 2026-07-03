@@ -425,7 +425,7 @@ functions:
     comment: Error message, or object, to raise. Does not have to be a string.
     type: T
   - name: level
-    comment: Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller and so on.
+    comment: Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller, and so on.
     type: number?
     default-value: 1
   return-type: never
@@ -589,7 +589,7 @@ functions:
   return-type: any
   typechecker: {magic: true}
 - name: select
-  comment: Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#' returns the number of arguments.
+  comment: Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#', returns the number of arguments.
   type-parameters: [A...]
   parameters:
   - name: i
@@ -674,7 +674,7 @@ functions:
     shorter than 16 bytes.
   parameters:
   - name: val
-    comment: String to convert to an uuid.
+    comment: String to convert to a uuid.
     type: string? | buffer | uuid
     selene-type: string
   return-type: uuid?
@@ -1227,13 +1227,13 @@ modules:
       type: buffer
       observes: write
     - name: targetOffset
-      comment: 0-based offset in target buffer.
+      comment: 0-based byte offset in target buffer.
       type: number
     - name: source
       comment: Source buffer to copy from.
       type: buffer
     - name: sourceOffset
-      comment: 0-based offset in source buffer.
+      comment: 0-based byte offset in source buffer.
       type: number?
       default-value: 0
     - name: count
@@ -1513,14 +1513,14 @@ modules:
     comment: A constant to pass for null to json encode.
     type: any
   - name: remove
-    comment: A constant to return from a reviver/replacer replacer function to omit this item.
+    comment: A constant to return from a reviver/replacer function to omit this item.
     type: any
   - name: array_mt
-    comment: Metatable for declaring table as an array for json encode.
+    comment: Metatable for declaring a table as an array for json encode.
     type: '{__jsonhint: string}'
     value: '{__jsonhint = "array"}'
   - name: object_mt
-    comment: Metatable for declaring table as an object for json encode.
+    comment: Metatable for declaring a table as an object for json encode.
     type: '{__jsonhint: string}'
     value: '{__jsonhint = "object"}'
   - name: empty_array
@@ -1818,7 +1818,7 @@ modules:
     must-use: true
     fastcall: true
   - name: noise
-    comment: Returns Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].
+    comment: Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].
     parameters:
     - name: x
       comment: X coordinate for the noise function.
@@ -1870,13 +1870,13 @@ modules:
     variants:
       - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
         return-type: number
-      - comment: "Returns a random integer number in [1, n] range. Input is truncated to integer."
+      - comment: "Returns a random integer number in the [1, n] range. Input is truncated to integer."
         parameters:
         - name: n
           comment: Maximum value of the range.
           type: number
         return-type: number
-      - comment: "Returns a random integer number in [min, max] range. Inputs are truncated to integers."
+      - comment: "Returns a random integer number in the [min, max] range. Inputs are truncated to integers."
         parameters:
         - name: min
           comment: Minimum value of the range.
@@ -1961,7 +1961,7 @@ modules:
     comment: Returns true if n is NaN.
     parameters:
     - name: "n"
-      comment: Number to check as NAN.
+      comment: Number to check as NaN.
       type: number
     return-type: boolean
     must-use: true
@@ -2344,13 +2344,13 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: split
-    comment: Splits a string by separator. Returns a list of substrings. If the separator is empty, the string is split into individual one-byte substrings.
+    comment: Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.
     parameters:
     - name: s
       comment: Input string.
       type: string
     - name: separator
-      comment: Separator to split on. If empty, the string is split into individual bytes.
+      comment: Separator to split on. If nil, splits at commas (","). If empty, splits into individual bytes.
       type: string?
       default-value: '","'
     return-type: '{string}'
