@@ -414,7 +414,7 @@ declare debug: {
     & ((level: number, s: string) -> ...any)
     & ((func: (...any) -> ...any, s: string) -> ...any),
   traceback: ((co: thread, msg: string?, level: number?) -> string)
-    & ((message: string?, level: number?) -> string),
+    & ((msg: string?, level: number?) -> string),
 }
 
 
