@@ -48,10 +48,10 @@
         "documentation": "Execute the named external module."
     },
     "@sl-slua/global/select": {
-        "documentation": "Returns a subset of arguments starting from the specified index (supports negative indexing). If index is '#' returns the number of arguments."
+        "documentation": "Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#' returns the number of arguments."
     },
     "@sl-slua/global/setmetatable": {
-        "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (with a '__metatable' field)."
+        "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
     },
     "@sl-slua/global/tonumber": {
         "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
@@ -423,7 +423,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#clamp"
     },
     "@sl-slua/global/math.cos": {
-        "documentation": "Returns the cosine of n (n is in radians).",
+        "documentation": "Returns the cosine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cos"
     },
     "@sl-slua/global/math.cosh": {
@@ -459,7 +459,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#lerp"
     },
     "@sl-slua/global/math.log": {
-        "documentation": "Returns the logarithm of n in the given base (default e).",
+        "documentation": "Returns the logarithm of n in the given base, defaults to e.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#log"
     },
     "@sl-slua/global/math.log10": {
@@ -511,7 +511,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sign"
     },
     "@sl-slua/global/math.sin": {
-        "documentation": "Returns the sine of n (n is in radians).",
+        "documentation": "Returns the sine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sin"
     },
     "@sl-slua/global/math.sinh": {
@@ -523,7 +523,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt"
     },
     "@sl-slua/global/math.tan": {
-        "documentation": "Returns the tangent of n (n is in radians).",
+        "documentation": "Returns the tangent of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tan"
     },
     "@sl-slua/global/math.tanh": {
@@ -754,7 +754,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#extend"
     },
     "@sl-slua/global/table.remove": {
-        "documentation": "Removes and returns the element at index i (defaulting to the end of the array), shifting subsequent elements down by 1. Returns nil if no element was removed.",
+        "documentation": "Removes and returns the element at index i, shifting subsequent elements down by 1. Defaults to the end of the array. Returns nil if no element was removed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#remove"
     },
     "@sl-slua/global/table.sort": {

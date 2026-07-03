@@ -4995,8 +4995,8 @@ globals:
     args:
     - type: any
     - type: '...'
-    description: Returns a subset of arguments starting from the specified index (supports
-      negative indexing). If index is '#' returns the number of arguments.
+    description: Returns a subset of arguments starting from the specified index.
+      Supports negative indexing. If index is '#' returns the number of arguments.
   setfenv:
     removed: true
     description: setfenv is removed in SLua.
@@ -5005,7 +5005,7 @@ globals:
     - type: table
     - type: table
     description: Changes the metatable for the given table. Raises an error if the
-      table already has a protected metatable (with a '__metatable' field).
+      table already has a protected metatable (it has a '__metatable' field).
   tonumber:
     args:
     - type: string
@@ -5601,7 +5601,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of n (n is in radians).
+    description: Returns the cosine of n. n is in radians.
   math.cosh:
     args:
     - type: number
@@ -5652,7 +5652,7 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the logarithm of n in the given base (default e).
+    description: Returns the logarithm of n in the given base, defaults to e.
   math.log10:
     args:
     - type: number
@@ -5735,7 +5735,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of n (n is in radians).
+    description: Returns the sine of n. n is in radians.
   math.sinh:
     args:
     - type: number
@@ -5750,7 +5750,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of n (n is in radians).
+    description: Returns the tangent of n. n is in radians.
   math.tanh:
     args:
     - type: number
@@ -6144,9 +6144,8 @@ globals:
       observes: write
     - type: number
       required: false
-    description: Removes and returns the element at index i (defaulting to the end
-      of the array), shifting subsequent elements down by 1. Returns nil if no element
-      was removed.
+    description: Removes and returns the element at index i, shifting subsequent elements
+      down by 1. Defaults to the end of the array. Returns nil if no element was removed.
   table.sort:
     args:
     - type: table
@@ -15534,8 +15533,8 @@ structs:
     s:
       property: read-only
       type: number
-      description: S component of the rotation/quaternion (equivalent to the W component
-        in other notations).
+      description: S component of the rotation/quaternion. Equivalent to the W component
+        in other notations.
   uuid:
     __tostring:
       method: true
@@ -15589,18 +15588,18 @@ structs:
     x:
       property: read-only
       type: number
-      description: X coordinate component of the vector (typically represents red
-        color, forward position, or pitch).
+      description: X coordinate component of the vector. Typically represents red
+        color, forward position, or pitch.
     y:
       property: read-only
       type: number
-      description: Y coordinate component of the vector (typically represents green
-        color, left/right position, or roll).
+      description: Y coordinate component of the vector. Typically represents green
+        color, left/right position, or roll.
     z:
       property: read-only
       type: number
-      description: Z coordinate component of the vector (typically represents blue
-        color, altitude/upward position, or yaw).
+      description: Z coordinate component of the vector. Typically represents blue
+        color, altitude/upward position, or yaw.
   DetectedEvent:
     adjustDamage:
       method: true

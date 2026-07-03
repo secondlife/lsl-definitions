@@ -59,7 +59,7 @@ base-classes:
     comment: Z component of the rotation/quaternion.
   - name: s
     type: number
-    comment: S component of the rotation/quaternion (equivalent to the W component in other notations).
+    comment: S component of the rotation/quaternion. Equivalent to the W component in other notations.
 - name: uuid
   comment: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
   methods:
@@ -126,13 +126,13 @@ base-classes:
   properties:
   - name: x
     type: number
-    comment: "X coordinate component of the vector (typically represents red color, forward position, or pitch)."
+    comment: "X coordinate component of the vector. Typically represents red color, forward position, or pitch."
   - name: "y"
     type: number
-    comment: "Y coordinate component of the vector (typically represents green color, left/right position, or roll)."
+    comment: "Y coordinate component of the vector. Typically represents green color, left/right position, or roll."
   - name: z
     type: number
-    comment: "Z coordinate component of the vector (typically represents blue color, altitude/upward position, or yaw)."
+    comment: "Z coordinate component of the vector. Typically represents blue color, altitude/upward position, or yaw."
 - name: DetectedEvent
   comment: Event detection class providing access to detected object/avatar information
   # auto-generated from lsl_definitions.yaml
@@ -422,7 +422,7 @@ functions:
   type-parameters: [T]
   parameters:
   - name: message
-    comment: Error message (or object) to raise. Does not have to be a string.
+    comment: Error message, or object, to raise. Does not have to be a string.
     type: T
   - name: level
     comment: Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller and so on.
@@ -589,11 +589,11 @@ functions:
   return-type: any
   typechecker: {magic: true}
 - name: select
-  comment: Returns a subset of arguments starting from the specified index (supports negative indexing). If index is '#' returns the number of arguments.
+  comment: Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#' returns the number of arguments.
   type-parameters: [A...]
   parameters:
   - name: i
-    comment: An index number starting from 1 (or negative starting from the end), or '#' to return the total arguments count
+    comment: Index integer, or '#' to return the total arguments count. Supports negative indexing.
     type: string | number
   - name: ...
     comment: Arguments to select from.
@@ -613,7 +613,7 @@ functions:
   return-type: ((T...) -> R...)?
   slua-removed: true
 - name: setmetatable
-  comment: Changes the metatable for the given table. Raises an error if the table already has a protected metatable (with a '__metatable' field).
+  comment: Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field).
   type-parameters: [T, MT]
   parameters:
   - name: t
@@ -635,7 +635,7 @@ functions:
     type: string? | number
     selene-type: string
   - name: base
-    comment: Base for the conversion, supporting values from 2 to 36.
+    comment: Base for the conversion. Valid range is [2, 36].
     type: number?
     default-value: 10
   return-type: number?
@@ -1648,7 +1648,7 @@ modules:
     must-use: true
     fastcall: true
   - name: cos
-    comment: Returns the cosine of n (n is in radians).
+    comment: Returns the cosine of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -1741,7 +1741,7 @@ modules:
     must-use: true
     fastcall: true
   - name: log
-    comment: Returns the logarithm of n in the given base (default e).
+    comment: Returns the logarithm of n in the given base, defaults to e.
     parameters:
     - name: "n"
       comment: A number to compute logarithm.
@@ -1868,7 +1868,7 @@ modules:
     return-type: number
     must-use: true
     variants:
-      - comment: "Returns a random float number in the [0, 1] range (exclusive of 1)."
+      - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
         return-type: number
       - comment: "Returns a random integer number in [1, n] range. Input is truncated to integer."
         parameters:
@@ -1913,7 +1913,7 @@ modules:
     must-use: true
     fastcall: true
   - name: sin
-    comment: Returns the sine of n (n is in radians).
+    comment: Returns the sine of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -1940,7 +1940,7 @@ modules:
     must-use: true
     fastcall: true
   - name: tan
-    comment: Returns the tangent of n (n is in radians).
+    comment: Returns the tangent of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -2212,7 +2212,7 @@ modules:
       comment: Pattern to search for.
       type: string
     - name: init
-      comment: Index to start the search from (supports negative indexing).
+      comment: Index to start the search from. Supports negative indexing.
       type: number?
       default-value: 1
     - name: plain
@@ -2363,10 +2363,10 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index (supports negative indexing).
+      comment: Starting index. Supports negative indexing.
       type: number
     - name: j
-      comment: Ending index (supports negative indexing).
+      comment: Ending index. Supports negative indexing.
       type: number?
       default-value: '#s'
     return-type: string
@@ -2470,7 +2470,7 @@ modules:
   - name: insert
     comment: Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a].
     overloads:
-    - comment: Appends an element to the end of the array (equivalent to a[#a+1] = value).
+    - comment: Appends an element to the end of the array. Equivalent to a[#a+1] = value.
       type-parameters: [V]
       parameters:
       - name: a
@@ -2522,7 +2522,7 @@ modules:
       type: '{V}'
     return-type: '{V}'
   - name: remove
-    comment: Removes and returns the element at index i (defaulting to the end of the array), shifting subsequent elements down by 1. Returns nil if no element was removed.
+    comment: Removes and returns the element at index i, shifting subsequent elements down by 1. Defaults to the end of the array. Returns nil if no element was removed.
     type-parameters: [V]
     parameters:
     - name: a
