@@ -3629,16 +3629,16 @@ string:
     tooltip: Constructs and returns a single-character string from the given Unicode codepoint ordinal.
   llDeleteSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to modify.
-    start_index: Starting codepoint index of the substring to remove (inclusive).
-    end_index: Ending codepoint index of the substring to remove (inclusive).
+    start_index: Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.
+    end_index: Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.
     tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
       excludes the specified range.
   llGetSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to slice.
-    start_index: Starting codepoint index (inclusive).
-    end_index: Ending codepoint index (inclusive).
-    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end. If start is greater than end, the substring is the excluded
-      range.
+    start_index: Starting codepoint index (inclusive). Supports negative indexing.
+    end_index: Ending codepoint index (inclusive). Supports negative indexing.
+    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring
+      is the excluded range.
   llInsertString( string dst, integer pos, string src ) -> string:
     dst: Target destination string.
     pos: Codepoint index where insertion starts.
@@ -3646,8 +3646,8 @@ string:
     tooltip: Returns a copy of dst with src inserted at codepoint index pos.
   llOrd( string val, integer index ) -> integer:
     val: Source string.
-    index: Codepoint index of the character to convert.
-    tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index in the string val.
+    index: Codepoint index of the character to convert. Supports negative indexing.
+    tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.
   llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string:
     src: Original source string to search.
     pattern: Substring pattern to find and replace.

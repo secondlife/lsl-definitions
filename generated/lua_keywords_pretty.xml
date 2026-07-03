@@ -14963,7 +14963,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14972,7 +14972,7 @@ Returns true if result is non-zero.</string>
                   <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending byte index (inclusive), or i if omitted (optional, defaults to i).</string>
+                     <string>Ending byte index (inclusive), or i if omitted. Supports negative indexing (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -14985,7 +14985,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the numeric code of every byte in the range start..end in the string src.</string>
+            <string>Returns the numeric code of every byte in the range start..end in the string src. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.char</key>
          <map>
@@ -15058,7 +15058,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Returns nil if not found.</string>
+            <string>Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Returns nil if not found. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.format</key>
          <map>
@@ -15243,10 +15243,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>init</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Byte index to start at, or 1 if omitted (optional, defaults to 1).</string>
+                     <string>Byte index to start at, or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15259,7 +15259,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.</string>
+            <string>Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.pack</key>
          <map>
@@ -15411,7 +15411,7 @@ Returns true if result is non-zero.</string>
                   <key>src</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Source string to slice.</string>
+                     <string>Source string to slice. Supports negative indexing.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15420,7 +15420,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting byte index (inclusive).</string>
+                     <string>Starting byte index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -15429,7 +15429,7 @@ Returns true if result is non-zero.</string>
                   <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #sub).</string>
+                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #src).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15442,7 +15442,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive byte range start..end. Negative indices count backward from the end.</string>
+            <string>Returns a copy of the substring from src within the inclusive byte range start..end. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.unpack</key>
          <map>
@@ -15467,10 +15467,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>init</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index, or 1 if omitted (optional, defaults to 1).</string>
+                     <string>Starting byte index, or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -15483,7 +15483,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Decodes a binary string using a pack format.</string>
+            <string>Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.upper</key>
          <map>
@@ -16280,7 +16280,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16289,7 +16289,7 @@ Returns true if result is non-zero.</string>
                   <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending byte index (inclusive), or i if omitted (optional, defaults to i).</string>
+                     <string>Ending byte index (inclusive), or i if omitted. Supports negative indexing (optional, defaults to i).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16302,7 +16302,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start..end in the string src.</string>
+            <string>Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start..end in the string src. Negative indices count backward from the end of the string.</string>
          </map>
          <key>utf8.codes</key>
          <map>
@@ -16344,7 +16344,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting byte index (inclusive), or 1 if omitted (optional, defaults to 1).</string>
+                     <string>Starting byte index (inclusive), or 1 if omitted. Supports negative indexing (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16353,7 +16353,7 @@ Returns true if result is non-zero.</string>
                   <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending byte index (inclusive), or the end of the string if omitted (optional, defaults to #s).</string>
+                     <string>Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing (optional, defaults to #str).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16366,7 +16366,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the number of Unicode codepoints in the inclusive byte range start..end of the string src. If the string is not utf8, returns (nil, error index) instead.</string>
+            <string>Returns the number of Unicode codepoints in the inclusive byte range start..end of the string src. If the string is not utf8, returns (nil, error index) instead. Negative indices count backward from the end of the string.</string>
          </map>
          <key>utf8.offset</key>
          <map>
@@ -16385,7 +16385,7 @@ Returns true if result is non-zero.</string>
                   <key>n</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Character index.</string>
+                     <string>Character index. Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -16394,7 +16394,7 @@ Returns true if result is non-zero.</string>
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting byte index, or 1 if omitted (optional, defaults to if n &gt;= 0 then 1 else #s + 1).</string>
+                     <string>Starting byte index, or 1 if omitted. Supports negative indexing (optional, defaults to if n &gt;= 0 then 1 else #str + 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -16407,7 +16407,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the byte offset of the nth Unicode codepoint in the string.</string>
+            <string>Returns the byte offset of the nth Unicode codepoint in the string. Negative indices count backward from the end of the string.</string>
          </map>
          <key>uuid</key>
          <map>
@@ -18177,7 +18177,7 @@ Returns true if result is non-zero.</string>
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting codepoint index of the substring to remove (inclusive).</string>
+                     <string>Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -18186,7 +18186,7 @@ Returns true if result is non-zero.</string>
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending codepoint index of the substring to remove (inclusive).</string>
+                     <string>Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21712,7 +21712,7 @@ Returns true if result is non-zero.</string>
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting codepoint index (inclusive).</string>
+                     <string>Starting codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21721,7 +21721,7 @@ Returns true if result is non-zero.</string>
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending codepoint index (inclusive).</string>
+                     <string>Ending codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -21734,7 +21734,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring is the excluded range.</string>
          </map>
          <key>ll.GetSunDirection</key>
          <map>
@@ -25467,7 +25467,7 @@ Returns true if result is non-zero.</string>
                   <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Codepoint index of the character to convert.</string>
+                     <string>Codepoint index of the character to convert. Supports negative indexing.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25480,7 +25480,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val.</string>
+            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.</string>
          </map>
          <key>ll.OverMyLand</key>
          <map>

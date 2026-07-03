@@ -8244,10 +8244,12 @@ functions:
         type: string
     - start_index:
         tooltip: Starting codepoint index of the substring to remove (inclusive).
+          Supports negative indexing.
         type: integer
         index-semantics: true
     - end_index:
         tooltip: Ending codepoint index of the substring to remove (inclusive).
+          Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -10796,11 +10798,11 @@ functions:
         tooltip: Source string to slice.
         type: string
     - start_index:
-        tooltip: Starting codepoint index (inclusive).
+        tooltip: Starting codepoint index (inclusive). Supports negative indexing.
         type: integer
         index-semantics: true
     - end_index:
-        tooltip: Ending codepoint index (inclusive).
+        tooltip: Ending codepoint index (inclusive). Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -10809,9 +10811,9 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a copy of the substring from src within the inclusive codepoint range
-      start..end. Negative indices count backward
-      from the end. If start is greater than end, the substring is the excluded
-      range.
+      start..end.
+      Negative indices count backward from the end of the string.
+      If start is greater than end, the substring is the excluded range.
     categories:
       - string
   llGetSunDirection:
@@ -13075,7 +13077,7 @@ functions:
         tooltip: Source string.
         type: string
     - index:
-        tooltip: Codepoint index of the character to convert.
+        tooltip: Codepoint index of the character to convert. Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -13085,6 +13087,7 @@ functions:
     sleep: 0.0
     tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index
       in the string val.
+      Negative indices count backward from the end of the string.
     categories:
       - string
   llOverMyLand:

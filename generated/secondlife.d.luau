@@ -560,14 +560,14 @@ declare string: {
   gsub: (src: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
   len: @checked (str: string) -> number, -- builtin
   lower: @checked (src: string) -> string, -- builtin
-  match: @checked (src: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
+  match: @checked (src: string, pattern: string, start: number?) -> ...string?, -- builtin, magic type
   pack: (format_string: string, ...any) -> string, -- builtin
   packsize: @checked (format_string: string) -> number, -- builtin
   rep: @checked (src: string, count: number) -> string, -- builtin
   reverse: @checked (src: string) -> string, -- builtin
   split: @checked (src: string, separator: string?) -> {string}, -- builtin
   sub: @checked (src: string, start: number, end_: number?) -> string, -- builtin
-  unpack: @checked (format_string: string, src: string, init: number?) -> ...any, -- builtin
+  unpack: @checked (format_string: string, src: string, start: number?) -> ...any, -- builtin
   upper: @checked (src: string) -> string, -- builtin
 }
 

@@ -2272,18 +2272,18 @@ modules:
   comment: String manipulation library.
   functions:
   - name: byte
-    comment: Returns the numeric code of every byte
-      in the range start..end in the string src.
+    comment: Returns the numeric code of every byte in the range start..end in the string src.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string.
       type: string
     - name: start
-      comment: Starting byte index (inclusive), or 1 if omitted.
+      comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     - name: end
-      comment: Ending byte index (inclusive), or i if omitted.
+      comment: Ending byte index (inclusive), or i if omitted. Supports negative indexing.
       type: number?
       default-value: i
     return-type: '...number'
@@ -2304,6 +2304,7 @@ modules:
   - name: find
     comment: Returns the start and end byte indices of the first occurrence of pattern
       inside the string src, followed by any regex-captured substrings. Returns nil if not found.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string to search within.
@@ -2389,6 +2390,7 @@ modules:
     typechecker: {builtin: true, checked: true}
   - name: match
     comment: Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string to search within.
@@ -2396,8 +2398,8 @@ modules:
     - name: pattern
       comment: Regex pattern to search for.
       type: string
-    - name: init
-      comment: Byte index to start at, or 1 if omitted.
+    - name: start
+      comment: Byte index to start at, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     return-type: '...string?'
@@ -2460,24 +2462,25 @@ modules:
     typechecker: {builtin: true, checked: true}
   - name: sub
     comment: Returns a copy of the substring from src within the inclusive byte range
-      start..end. Negative indices count backward from the end.
+      start..end. Negative indices count backward from the end of the string.
     parameters:
     - name: src
-      comment: Source string to slice.
+      comment: Source string to slice. Supports negative indexing.
       type: string
     - name: start
-      comment: Starting byte index (inclusive).
+      comment: Starting byte index (inclusive). Supports negative indexing.
       type: number
     - name: end
       comment: Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing.
       type: number?
-      default-value: '#sub'
+      default-value: '#src'
     return-type: string
     must-use: true
     fastcall: true
     typechecker: {builtin: true, checked: true}
   - name: unpack
-    comment: Decodes a binary string using a pack format.
+    comment: Decodes a binary string using a pack format, starting from index start.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: format_string
       comment: Pack format string.
@@ -2485,8 +2488,8 @@ modules:
     - name: src
       comment: Encoded string.
       type: string
-    - name: init
-      comment: Starting index, or 1 if omitted.
+    - name: start
+      comment: Starting byte index, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     return-type: '...any'
@@ -2804,16 +2807,17 @@ modules:
   - name: codepoint
     comment: Returns the ordinals (Unicode copepoint integers) of the characters
       in the inclusive byte range start..end in the string src.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string.
       type: string
     - name: start
-      comment: Starting byte index (inclusive), or 1 if omitted.
+      comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     - name: end
-      comment: Ending byte index (inclusive), or i if omitted.
+      comment: Ending byte index (inclusive), or i if omitted. Supports negative indexing.
       type: number?
       default-value: i
     return-type: '...number'
@@ -2822,34 +2826,36 @@ modules:
   - name: len
     comment: Returns the number of Unicode codepoints in the inclusive byte range start..end
       of the string src. If the string is not utf8, returns (nil, error index) instead.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: str
       comment: Source string to measure.
       type: string
     - name: start
-      comment: Starting byte index (inclusive), or 1 if omitted.
+      comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
     - name: end
-      comment: Ending byte index (inclusive), or the end of the string if omitted.
+      comment: Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing.
       type: number?
-      default-value: '#s'
+      default-value: '#str'
     return-type: (number?, number?)
     must-use: true
     typechecker: {checked: true}
   - name: offset
     comment: Returns the byte offset of the nth Unicode codepoint in the string.
+      Negative indices count backward from the end of the string.
     parameters:
     - name: str
       comment: String to index.
       type: string
     - name: n
-      comment: Character index.
+      comment: Character index. Supports negative indexing.
       type: number
     - name: start
-      comment: Starting byte index, or 1 if omitted.
+      comment: Starting byte index, or 1 if omitted. Supports negative indexing.
       type: number?
-      default-value: 'if n >= 0 then 1 else #s + 1'
+      default-value: 'if n >= 0 then 1 else #str + 1'
     return-type: number?
     must-use: true
     typechecker: {checked: true}

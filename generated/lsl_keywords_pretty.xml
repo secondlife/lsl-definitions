@@ -11500,7 +11500,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting codepoint index of the substring to remove (inclusive).</string>
+                     <string>Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -11509,7 +11509,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending codepoint index of the substring to remove (inclusive).</string>
+                     <string>Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15029,7 +15029,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting codepoint index (inclusive).</string>
+                     <string>Starting codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15038,7 +15038,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending codepoint index (inclusive).</string>
+                     <string>Ending codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15051,7 +15051,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring is the excluded range.</string>
          </map>
          <key>llGetSunDirection</key>
          <map>
@@ -18712,7 +18712,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Codepoint index of the character to convert.</string>
+                     <string>Codepoint index of the character to convert. Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -18725,7 +18725,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val.</string>
+            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.</string>
          </map>
          <key>llOverMyLand</key>
          <map>
