@@ -1425,8 +1425,8 @@ list:
     src: Source list to copy and modify.
     start_index: Starting index of the slice to remove (inclusive).
     end_index: Ending index of the slice to remove (inclusive).
-    tooltip: Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes
-      the specified range.
+    tooltip: Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index,
+      the deletion excludes the specified range.
   llGetListEntryType( list src, integer index ) -> integer:
     src: Source list containing the element of interest.
     index: Zero-based index of the entry.
@@ -3631,19 +3631,19 @@ string:
     src: Source string to modify.
     start_index: Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.
     end_index: Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.
-    tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
-      excludes the specified range.
+    tooltip: Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater
+      than end_index, the deletion excludes the specified range.
   llGetSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to slice.
     start_index: Starting codepoint index (inclusive). Supports negative indexing.
     end_index: Ending codepoint index (inclusive). Supports negative indexing.
-    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring
-      is the excluded range.
-  llInsertString( string dst, integer pos, string src ) -> string:
+    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than
+      end_index, the substring is the excluded range.
+  llInsertString( string dst, integer index, string src ) -> string:
     dst: Target destination string.
-    pos: Codepoint index where insertion starts.
+    index: Codepoint index where insertion starts.
     src: Source string to insert.
-    tooltip: Returns a copy of dst with src inserted at codepoint index pos.
+    tooltip: Returns a copy of dst with src inserted at the given codepoint index.
   llOrd( string val, integer index ) -> integer:
     val: Source string.
     index: Codepoint index of the character to convert. Supports negative indexing.

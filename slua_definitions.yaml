@@ -2272,17 +2272,17 @@ modules:
   comment: String manipulation library.
   functions:
   - name: byte
-    comment: Returns the numeric code of every byte in the range start..end in the string src.
+    comment: Returns the numeric code of every byte in the range start_index..end_index in the string src.
       Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string.
       type: string
-    - name: start
+    - name: start_index
       comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
-    - name: end
+    - name: end_index
       comment: Ending byte index (inclusive), or i if omitted. Supports negative indexing.
       type: number?
       default-value: i
@@ -2303,7 +2303,7 @@ modules:
     typechecker: {builtin: true, checked: true}
   - name: find
     comment: Returns the start and end byte indices of the first occurrence of pattern
-      inside the string src, followed by any regex-captured substrings. Returns nil if not found.
+      inside the string src, followed by any regex-captured substrings. Search starts from start_index. Returns nil if not found.
       Negative indices count backward from the end of the string.
     parameters:
     - name: src
@@ -2312,7 +2312,7 @@ modules:
     - name: pattern
       comment: Pattern to search for.
       type: string
-    - name: start
+    - name: start_index
       comment: Byte index to start the search from, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
@@ -2389,7 +2389,7 @@ modules:
     must-use: true
     typechecker: {builtin: true, checked: true}
   - name: match
-    comment: Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found.
+    comment: Returns all occurences of the regex pattern inside the string src, starting from start_index. Returns nil if no match is found.
       Negative indices count backward from the end of the string.
     parameters:
     - name: src
@@ -2398,7 +2398,7 @@ modules:
     - name: pattern
       comment: Regex pattern to search for.
       type: string
-    - name: start
+    - name: start_index
       comment: Byte index to start at, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
@@ -2462,15 +2462,15 @@ modules:
     typechecker: {builtin: true, checked: true}
   - name: sub
     comment: Returns a copy of the substring from src within the inclusive byte range
-      start..end. Negative indices count backward from the end of the string.
+      start_index..end_index. Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string to slice. Supports negative indexing.
       type: string
-    - name: start
+    - name: start_index
       comment: Starting byte index (inclusive). Supports negative indexing.
       type: number
-    - name: end
+    - name: end_index
       comment: Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing.
       type: number?
       default-value: '#src'
@@ -2806,17 +2806,17 @@ modules:
     typechecker: {checked: true}
   - name: codepoint
     comment: Returns the ordinals (Unicode copepoint integers) of the characters
-      in the inclusive byte range start..end in the string src.
+      in the inclusive byte range start_index..end_index in the string src.
       Negative indices count backward from the end of the string.
     parameters:
     - name: src
       comment: Source string.
       type: string
-    - name: start
+    - name: start_index
       comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
-    - name: end
+    - name: end_index
       comment: Ending byte index (inclusive), or i if omitted. Supports negative indexing.
       type: number?
       default-value: i
@@ -2824,18 +2824,18 @@ modules:
     must-use: true
     typechecker: {checked: true}
   - name: len
-    comment: Returns the number of Unicode codepoints in the inclusive byte range start..end
+    comment: Returns the number of Unicode codepoints in the inclusive byte range start_index..end_index
       of the string src. If the string is not utf8, returns (nil, error index) instead.
       Negative indices count backward from the end of the string.
     parameters:
     - name: str
       comment: Source string to measure.
       type: string
-    - name: start
+    - name: start_index
       comment: Starting byte index (inclusive), or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 1
-    - name: end
+    - name: end_index
       comment: Ending byte index (inclusive), or the end of the string if omitted. Supports negative indexing.
       type: number?
       default-value: '#str'
@@ -2852,7 +2852,7 @@ modules:
     - name: n
       comment: Character index. Supports negative indexing.
       type: number
-    - name: start
+    - name: start_index
       comment: Starting byte index, or 1 if omitted. Supports negative indexing.
       type: number?
       default-value: 'if n >= 0 then 1 else #str + 1'

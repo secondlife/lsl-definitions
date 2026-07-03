@@ -650,7 +650,7 @@
         "learn_more_link": "https://luau.org/library/#string-library"
     },
     "@sl-slua/global/string.byte": {
-        "documentation": "Returns the numeric code of every byte in the range start..end in the string src. Negative indices count backward from the end of the string.",
+        "documentation": "Returns the numeric code of every byte in the range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#byte"
     },
     "@sl-slua/global/string.char": {
@@ -658,7 +658,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#char"
     },
     "@sl-slua/global/string.find": {
-        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Returns nil if not found. Negative indices count backward from the end of the string.",
+        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Search starts from start_index. Returns nil if not found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#find"
     },
     "@sl-slua/global/string.format": {
@@ -682,7 +682,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Returns all occurences of the regex pattern inside the string src. Returns nil if no match is found. Negative indices count backward from the end of the string.",
+        "documentation": "Returns all occurences of the regex pattern inside the string src, starting from start_index. Returns nil if no match is found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -706,7 +706,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#split"
     },
     "@sl-slua/global/string.sub": {
-        "documentation": "Returns a copy of the substring from src within the inclusive byte range start..end. Negative indices count backward from the end of the string.",
+        "documentation": "Returns a copy of the substring from src within the inclusive byte range start_index..end_index. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
@@ -818,11 +818,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codes"
     },
     "@sl-slua/global/utf8.codepoint": {
-        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start..end in the string src. Negative indices count backward from the end of the string.",
+        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codepoint"
     },
     "@sl-slua/global/utf8.len": {
-        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range start..end of the string src. If the string is not utf8, returns (nil, error index) instead. Negative indices count backward from the end of the string.",
+        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range start_index..end_index of the string src. If the string is not utf8, returns (nil, error index) instead. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#len"
     },
     "@sl-slua/global/utf8.offset": {
@@ -1083,11 +1083,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/ll.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/ll.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/ll.DerezObject": {
@@ -1727,7 +1727,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/ll.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/ll.GetSunDirection": {
@@ -1851,7 +1851,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/ll.InsertString": {
-        "documentation": "Returns a copy of dst with src inserted at codepoint index pos.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/ll.InstantMessage": {
@@ -3146,11 +3146,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/llcompat.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/llcompat.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/llcompat.DerezObject": {
@@ -3794,7 +3794,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/llcompat.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/llcompat.GetSunDirection": {
@@ -3918,7 +3918,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/llcompat.InsertString": {
-        "documentation": "Returns a copy of dst with src inserted at codepoint index pos.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/llcompat.InstantMessage": {

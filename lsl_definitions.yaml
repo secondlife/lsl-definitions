@@ -8231,9 +8231,9 @@ functions:
     return: list
     slua-return: '{T}'
     sleep: 0.0
-    tooltip: Returns a copy of the list src with the slice from start to end
+    tooltip: Returns a copy of the list src with the slice from start_index to end_index
       (inclusive) removed. Negative indices count backward from the end of the
-      list. If start is greater than end, the deletion excludes the specified
+      list. If start_index is greater than end_index, the deletion excludes the specified
       range.
     categories:
       - list
@@ -8257,9 +8257,9 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of the string src with the characters from start to end
+    tooltip: Returns a copy of the string src with the characters from start_index to end_index
       (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified
+      string. If start_index is greater than end_index, the deletion excludes the specified
       range.
     categories:
       - string
@@ -10811,9 +10811,9 @@ functions:
     return: string
     sleep: 0.0
     tooltip: Returns a copy of the substring from src within the inclusive codepoint range
-      start..end.
+      start_index..end_index.
       Negative indices count backward from the end of the string.
-      If start is greater than end, the substring is the excluded range.
+      If start_index is greater than end_index, the substring is the excluded range.
     categories:
       - string
   llGetSunDirection:
@@ -11320,7 +11320,7 @@ functions:
     - dst:
         tooltip: Target destination string.
         type: string
-    - pos:
+    - index:
         tooltip: Codepoint index where insertion starts.
         type: integer
         index-semantics: true
@@ -11332,7 +11332,7 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of dst with src inserted at codepoint index pos.
+    tooltip: Returns a copy of dst with src inserted at the given codepoint index.
     categories:
       - string
   llInstantMessage:

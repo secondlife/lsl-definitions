@@ -552,21 +552,21 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 ---------------------------
 
 declare string: {
-  byte: @checked (src: string, start: number?, end_: number?) -> ...number, -- builtin
+  byte: @checked (src: string, start_index: number?, end_index: number?) -> ...number, -- builtin
   char: @checked (...number) -> string, -- builtin
-  find: @checked (src: string, pattern: string, start: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
+  find: @checked (src: string, pattern: string, start_index: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
   format: @checked (format_string: string, ...any) -> string, -- builtin, magic type
   gmatch: @checked (src: string, pattern: string) -> () -> ...string, -- builtin, magic type
   gsub: (src: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
   len: @checked (str: string) -> number, -- builtin
   lower: @checked (src: string) -> string, -- builtin
-  match: @checked (src: string, pattern: string, start: number?) -> ...string?, -- builtin, magic type
+  match: @checked (src: string, pattern: string, start_index: number?) -> ...string?, -- builtin, magic type
   pack: (format_string: string, ...any) -> string, -- builtin
   packsize: @checked (format_string: string) -> number, -- builtin
   rep: @checked (src: string, count: number) -> string, -- builtin
   reverse: @checked (src: string) -> string, -- builtin
   split: @checked (src: string, separator: string?) -> {string}, -- builtin
-  sub: @checked (src: string, start: number, end_: number?) -> string, -- builtin
+  sub: @checked (src: string, start_index: number, end_index: number?) -> string, -- builtin
   unpack: @checked (format_string: string, src: string, start: number?) -> ...any, -- builtin
   upper: @checked (src: string) -> string, -- builtin
 }
@@ -610,9 +610,9 @@ declare utf8: {
   charpattern: string,
   char: @checked (...number) -> string,
   codes: @checked (src: string) -> ((string, number) -> (number, number), string, number),
-  codepoint: @checked (src: string, start: number?, end_: number?) -> ...number,
-  len: @checked (str: string, start: number?, end_: number?) -> (number?, number?),
-  offset: @checked (str: string, n: number, start: number?) -> number?,
+  codepoint: @checked (src: string, start_index: number?, end_index: number?) -> ...number,
+  len: @checked (str: string, start_index: number?, end_index: number?) -> (number?, number?),
+  offset: @checked (str: string, n: number, start_index: number?) -> number?,
 }
 
 
@@ -893,7 +893,7 @@ declare ll: {
   HTTPRequest: (url: string, parameters: list, body: string) -> uuid,
   HTTPResponse: (request_id: uuid, status: number, body: string) -> (),
   Hash: (val: string) -> number,
-  InsertString: (dst: string, pos: number, src: string) -> string,
+  InsertString: (dst: string, index: number, src: string) -> string,
   InstantMessage: (user: uuid, message: string) -> (),
   IntegerToBase64: (number: number) -> string,
   IsFriend: (agent_id: uuid) -> boolean,
@@ -1417,7 +1417,7 @@ declare llcompat: {
   HTTPRequest: @deprecated (url: string, parameters: list, body: string) -> uuid,
   HTTPResponse: @deprecated (request_id: uuid, status: number, body: string) -> (),
   Hash: @deprecated (val: string) -> number,
-  InsertString: @deprecated (dst: string, pos: number, src: string) -> string,
+  InsertString: @deprecated (dst: string, index: number, src: string) -> string,
   InstantMessage: @deprecated (user: uuid, message: string) -> (),
   IntegerToBase64: @deprecated (number: number) -> string,
   IsFriend: @deprecated (agent_id: uuid) -> number,

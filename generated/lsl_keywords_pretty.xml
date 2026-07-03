@@ -11481,7 +11481,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDeleteSubString</key>
          <map>
@@ -11522,7 +11522,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDerezObject</key>
          <map>
@@ -15051,7 +15051,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive codepoint range start..end. Negative indices count backward from the end of the string. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.</string>
          </map>
          <key>llGetSunDirection</key>
          <map>
@@ -15822,7 +15822,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>pos</key>
+                  <key>index</key>
                   <map>
                      <key>tooltip</key>
                      <string>Codepoint index where insertion starts.</string>
@@ -15847,7 +15847,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of dst with src inserted at codepoint index pos.</string>
+            <string>Returns a copy of dst with src inserted at the given codepoint index.</string>
          </map>
          <key>llInstantMessage</key>
          <map>

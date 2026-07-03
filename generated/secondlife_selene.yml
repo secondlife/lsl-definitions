@@ -5960,8 +5960,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the numeric code of every byte in the range start..end in
-      the string src. Negative indices count backward from the end of the string.
+    description: Returns the numeric code of every byte in the range start_index..end_index
+      in the string src. Negative indices count backward from the end of the string.
   string.char:
     args:
     - type: '...'
@@ -5978,8 +5978,9 @@ globals:
       required: false
     must_use: true
     description: Returns the start and end byte indices of the first occurrence of
-      pattern inside the string src, followed by any regex-captured substrings. Returns
-      nil if not found. Negative indices count backward from the end of the string.
+      pattern inside the string src, followed by any regex-captured substrings. Search
+      starts from start_index. Returns nil if not found. Negative indices count backward
+      from the end of the string.
   string.format:
     args:
     - type: string
@@ -6023,9 +6024,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns all occurences of the regex pattern inside the string src.
-      Returns nil if no match is found. Negative indices count backward from the end
-      of the string.
+    description: Returns all occurences of the regex pattern inside the string src,
+      starting from start_index. Returns nil if no match is found. Negative indices
+      count backward from the end of the string.
   string.pack:
     args:
     - type: string
@@ -6066,7 +6067,8 @@ globals:
       required: false
     must_use: true
     description: Returns a copy of the substring from src within the inclusive byte
-      range start..end. Negative indices count backward from the end of the string.
+      range start_index..end_index. Negative indices count backward from the end of
+      the string.
   string.unpack:
     args:
     - type: string
@@ -6258,8 +6260,8 @@ globals:
       required: false
     must_use: true
     description: Returns the ordinals (Unicode copepoint integers) of the characters
-      in the inclusive byte range start..end in the string src. Negative indices count
-      backward from the end of the string.
+      in the inclusive byte range start_index..end_index in the string src. Negative
+      indices count backward from the end of the string.
   utf8.len:
     args:
     - type: string
@@ -6269,8 +6271,9 @@ globals:
       required: false
     must_use: true
     description: Returns the number of Unicode codepoints in the inclusive byte range
-      start..end of the string src. If the string is not utf8, returns (nil, error
-      index) instead. Negative indices count backward from the end of the string.
+      start_index..end_index of the string src. If the string is not utf8, returns
+      (nil, error index) instead. Negative indices count backward from the end of
+      the string.
   utf8.offset:
     args:
     - type: string
@@ -6756,18 +6759,20 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the list src with the slice from start to end (inclusive)
-      removed. Negative indices count backward from the end of the list. If start
-      is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the list src with the slice from start_index to
+      end_index (inclusive) removed. Negative indices count backward from the end
+      of the list. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   ll.DeleteSubString:
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the string src with the characters from start to
-      end (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the string src with the characters from start_index
+      to end_index (inclusive) removed. Negative indices count backward from the end
+      of the string. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   ll.DerezObject:
     args:
     - type:
@@ -7833,8 +7838,9 @@ globals:
     - type: number
     must_use: true
     description: Returns a copy of the substring from src within the inclusive codepoint
-      range start..end. Negative indices count backward from the end of the string.
-      If start is greater than end, the substring is the excluded range.
+      range start_index..end_index. Negative indices count backward from the end of
+      the string. If start_index is greater than end_index, the substring is the excluded
+      range.
   ll.GetSunDirection:
     args: []
     must_use: true
@@ -8053,7 +8059,7 @@ globals:
     - type: number
     - type: string
     must_use: true
-    description: Returns a copy of dst with src inserted at codepoint index pos.
+    description: Returns a copy of dst with src inserted at the given codepoint index.
   ll.InstantMessage:
     args:
     - type:
@@ -10656,31 +10662,34 @@ globals:
       event.
   llcompat.DeleteSubList:
     deprecated:
-      message: Returns a copy of the list src with the slice from start to end (inclusive)
-        removed. Negative indices count backward from the end of the list. If start
-        is greater than end, the deletion excludes the specified range.
+      message: Returns a copy of the list src with the slice from start_index to end_index
+        (inclusive) removed. Negative indices count backward from the end of the list.
+        If start_index is greater than end_index, the deletion excludes the specified
+        range.
     args:
     - type: table
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the list src with the slice from start to end (inclusive)
-      removed. Negative indices count backward from the end of the list. If start
-      is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the list src with the slice from start_index to
+      end_index (inclusive) removed. Negative indices count backward from the end
+      of the list. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   llcompat.DeleteSubString:
     deprecated:
-      message: Returns a copy of the string src with the characters from start to
-        end (inclusive) removed. Negative indices count backward from the end of the
-        string. If start is greater than end, the deletion excludes the specified
-        range.
+      message: Returns a copy of the string src with the characters from start_index
+        to end_index (inclusive) removed. Negative indices count backward from the
+        end of the string. If start_index is greater than end_index, the deletion
+        excludes the specified range.
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the string src with the characters from start to
-      end (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the string src with the characters from start_index
+      to end_index (inclusive) removed. Negative indices count backward from the end
+      of the string. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   llcompat.DerezObject:
     deprecated:
       message: Derezzes (deletes or returns) a targeted object in the region previously
@@ -12235,16 +12244,18 @@ globals:
   llcompat.GetSubString:
     deprecated:
       message: Returns a copy of the substring from src within the inclusive codepoint
-        range start..end. Negative indices count backward from the end of the string.
-        If start is greater than end, the substring is the excluded range.
+        range start_index..end_index. Negative indices count backward from the end
+        of the string. If start_index is greater than end_index, the substring is
+        the excluded range.
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
     description: Returns a copy of the substring from src within the inclusive codepoint
-      range start..end. Negative indices count backward from the end of the string.
-      If start is greater than end, the substring is the excluded range.
+      range start_index..end_index. Negative indices count backward from the end of
+      the string. If start_index is greater than end_index, the substring is the excluded
+      range.
   llcompat.GetSunDirection:
     deprecated:
       message: Returns a normalized vector representing the current direction of the
@@ -12566,13 +12577,13 @@ globals:
       val (returns 0 if the string is empty).
   llcompat.InsertString:
     deprecated:
-      message: Returns a copy of dst with src inserted at codepoint index pos.
+      message: Returns a copy of dst with src inserted at the given codepoint index.
     args:
     - type: string
     - type: number
     - type: string
     must_use: true
-    description: Returns a copy of dst with src inserted at codepoint index pos.
+    description: Returns a copy of dst with src inserted at the given codepoint index.
   llcompat.InstantMessage:
     deprecated:
       message: Sends an instant message containing message to the user identified
