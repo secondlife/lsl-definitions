@@ -4936,7 +4936,7 @@ globals:
     args:
     - type: table
     description: Returns an iterator for sequential integer key-value pairs in the
-      table. Iteration halts at the first nil value.
+      table. Iteration starts at 1 and halts at the first nil value.
   loadstring:
     removed: true
     description: loadstring is removed in SLua.

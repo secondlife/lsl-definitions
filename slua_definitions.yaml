@@ -466,7 +466,7 @@ functions:
     type: string
   local-only: true
 - name: ipairs
-  comment: Returns an iterator for sequential integer key-value pairs in the table. Iteration halts at the first nil value.
+  comment: Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value.
   type-parameters: [V]
   parameters:
   - name: tab

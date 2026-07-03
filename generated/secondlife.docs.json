@@ -15,7 +15,7 @@
         "documentation": "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
     },
     "@sl-slua/global/ipairs": {
-        "documentation": "Returns an iterator for sequential integer key-value pairs in the table. Iteration halts at the first nil value."
+        "documentation": "Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value."
     },
     "@sl-slua/global/newproxy": {
         "documentation": "Creates a new untyped userdata object with an optional metatable."

@@ -10730,7 +10730,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an iterator for sequential integer key-value pairs in the table. Iteration halts at the first nil value.</string>
+            <string>Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value.</string>
          </map>
          <key>newproxy</key>
          <map>
