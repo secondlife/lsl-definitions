@@ -275,10 +275,10 @@ classes:
     parameters:
     - name: self
     - name: event
-      comment: "The name of the event to handle."
+      comment: "Name of the event to handle."
       type: LLEventName
     - name: callback
-      comment: "The function to execute when the event happens."
+      comment: "Function to execute when the event happens."
       type: LLEventHandler
     return-type: LLEventHandler
   - name: 'off'
@@ -288,10 +288,10 @@ classes:
     parameters:
     - name: self
     - name: event
-      comment: "The name of the event to remove."
+      comment: "Name of the event to remove."
       type: LLEventName
     - name: callback
-      comment: "The function to remove. Note: To remove a handler added via LLEvents:once(), you must pass the specific wrapper function it returned."
+      comment: "Function to remove. Note: To remove a handler added via LLEvents:once(), you must pass the specific wrapper function it returned."
       type: LLEventHandler
     return-type: boolean
   - name: once
@@ -301,10 +301,10 @@ classes:
     parameters:
     - name: self
     - name: event
-      comment: "The name of the event to handle."
+      comment: "Name of the event to handle."
       type: LLEventName
     - name: callback
-      comment: "The function to execute once when the event happens."
+      comment: "Function to execute once when the event happens."
       type: LLEventHandler
     return-type: LLEventHandler
   - name: handlers
@@ -312,7 +312,7 @@ classes:
     parameters:
     - name: self
     - name: event
-      comment: "The name of the event to query."
+      comment: "Name of the event to query."
       type: LLEventName
     return-type: '{LLEventHandler}'
   - name: eventNames
@@ -328,10 +328,10 @@ classes:
     parameters:
     - name: self
     - name: seconds
-      comment: "The interval in seconds. Minimum practical interval is ~0.022s (one server frame). An interval of 0 schedules the timer for the next frame."
+      comment: "Interval in seconds. Minimum practical interval is ~0.022s (one server frame). An interval of 0 schedules the timer for the next frame."
       type: number
     - name: callback
-      comment: "The function to execute when the time arrives."
+      comment: "Function to execute when the time arrives."
       type: LLTimerEveryCallback
     return-type: LLTimerCallback
   - name: once
@@ -339,10 +339,10 @@ classes:
     parameters:
     - name: self
     - name: seconds
-      comment: "The time in seconds to wait before triggering. A value of 0 schedules it for the next frame."
+      comment: "Time in seconds to wait before triggering. A value of 0 schedules it for the next frame."
       type: number
     - name: callback
-      comment: "The function to execute once when the time arrives."
+      comment: "Function to execute once when the time arrives."
       type: LLTimerOnceCallback
     return-type: LLTimerCallback
   - name: 'off'
@@ -350,7 +350,7 @@ classes:
     parameters:
     - name: self
     - name: callback
-      comment: "The function reference to remove."
+      comment: "Function reference to remove."
       type: LLTimerCallback
     return-type: boolean
 - name: PrimParamsSetterType
