@@ -7395,7 +7395,7 @@ functions:
   llAcos:
     arguments:
     - val:
-        tooltip: A floating-point value falling in the range [-1.0, 1.0].
+        tooltip: A number in the range [-1.0, 1.0].
         type: float
     slua-deprecated:
       use: math.acos
@@ -7407,7 +7407,7 @@ functions:
     must-use: true # not pure because it might trigger a math error
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arc-cosine of val in radians.
+    tooltip: Returns the arccosine of val in radians.
     categories:
       - math
       - math_trig
@@ -7579,7 +7579,7 @@ functions:
   llAsin:
     arguments:
     - val:
-        tooltip: A floating-point value falling in the range [-1.0, 1.0].
+        tooltip: A number in the range [-1.0, 1.0].
         type: float
     slua-deprecated:
       use: math.asin
@@ -7591,17 +7591,17 @@ functions:
     must-use: true # not pure because it might trigger a math error
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arc-sine of val in radians.
+    tooltip: Returns the arcsine of val in radians.
     categories:
       - math
       - math_trig
   llAtan2:
     arguments:
     - y:
-        tooltip: A floating-point value representing the y coordinate.
+        tooltip: Y coordinate.
         type: float
     - x:
-        tooltip: A floating-point value representing the x coordinate.
+        tooltip: X coordinate.
         type: float
     slua-deprecated:
       use: math.atan2
@@ -7613,7 +7613,8 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arctangent2 of y and x.
+    tooltip: "Returns the arctangent of y/x in radians, using the signs to determine the quadrant.
+      Note the argument order: Y is the first parameter, X is the second parameter."
     categories:
       - math
       - math_trig
@@ -8065,7 +8066,7 @@ functions:
   llCos:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: An angle in radians.
         type: float
     slua-deprecated:
       use: math.cos
@@ -8077,7 +8078,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the cosine of theta.
+    tooltip: Returns the cosine of theta. theta is in radians.
     categories:
       - math
       - math_trig
@@ -15908,7 +15909,7 @@ functions:
   llSin:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: An angle in radians.
         type: float
     slua-deprecated:
       use: math.sin
@@ -15920,7 +15921,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the sine of theta.
+    tooltip: Returns the sine of theta. theta is in radians.
     categories:
       - math
       - math_trig
@@ -16286,7 +16287,7 @@ functions:
   llTan:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: An angle in radians.
         type: float
     slua-deprecated:
       use: math.tan
@@ -16298,7 +16299,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the tangent of theta.
+    tooltip: Returns the tangent of theta. theta is in radians.
     categories:
       - math
       - math_trig

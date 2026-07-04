@@ -1636,29 +1636,29 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: acos
-    comment: Returns the arc cosine of n in radians.
+    comment: Returns the arccosine of val in radians.
     parameters:
-    - name: "n"
-      comment: "A number in the range [-1, 1]."
+    - name: val
+      comment: A number in the range [-1.0, 1.0].
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: asin
-    comment: Returns the arc sine of n in radians.
+    comment: Returns the arcsine of n in radians.
     parameters:
-    - name: "n"
-      comment: "A number in the range [-1, 1]."
+    - name: val
+      comment: A number in the range [-1.0, 1.0].
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: atan
-    comment: Returns the arc tangent of n in radians.
+    comment: Returns the arctangent of val in radians.
     parameters:
-    - name: "n"
+    - name: val
       comment: A number.
       type: number
     return-type: number
@@ -1666,13 +1666,14 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: atan2
-    comment: "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter."
+    comment: "Returns the arctangent of y/x in radians, using the signs to determine the quadrant.
+      Note the argument order: Y is the first parameter, X is the second parameter."
     parameters:
     - name: "y"
-      comment: Y-coordinate.
+      comment: Y coordinate.
       type: number
     - name: x
-      comment: X-coordinate.
+      comment: X coordinate.
       type: number
     return-type: number
     must-use: true
@@ -1705,9 +1706,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: cos
-    comment: Returns the cosine of n. n is in radians.
+    comment: Returns the cosine of theta. theta is in radians.
     parameters:
-    - name: "n"
+    - name: theta
       comment: An angle in radians.
       type: number
     return-type: number
@@ -1993,9 +1994,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: sin
-    comment: Returns the sine of n. n is in radians.
+    comment: Returns the sine of theta. theta is in radians.
     parameters:
-    - name: "n"
+    - name: theta
       comment: An angle in radians.
       type: number
     return-type: number
@@ -2023,9 +2024,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: tan
-    comment: Returns the tangent of n. n is in radians.
+    comment: Returns the tangent of theta. theta is in radians.
     parameters:
-    - name: "n"
+    - name: theta
       comment: An angle in radians.
       type: number
     return-type: number
