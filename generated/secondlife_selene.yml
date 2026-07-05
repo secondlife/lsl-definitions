@@ -4960,9 +4960,9 @@ globals:
     args:
     - type: function
     - type: '...'
-    description: Executes a function in protected mode. Returns a boolean indicating
-      success. If true, it also returns the function's results. If false, it returns
-      the error message.
+    description: Executes function f in protected mode, calling it with the provided
+      arguments. Returns a boolean indicating success. If true, it also returns the
+      function's results. If false, it returns the error message.
   print:
     args:
     - type: '...'
@@ -4971,22 +4971,23 @@ globals:
     args:
     - type: any
     - type: any
-    description: Returns true if a and b have the same type and value.
+    description: Returns true if a and b have the same type and value or reference,
+      bypassing the __eq metamethod..
   rawget:
     args:
     - type: table
     - type: any
-    description: Performs a table lookup bypassing metatables.
+    description: Performs a table lookup, bypassing the __index metamethod..
   rawlen:
     args:
     - type: any
-    description: Returns the length of a table or string bypassing metatables.
+    description: Returns the length of a table or string, bypassing the __len metamethod..
   rawset:
     args:
     - type: table
     - type: any
     - type: any
-    description: Assigns a value to a table field bypassing metatables.
+    description: Assigns a value to a table field, bypassing the __newindex metamethod..
   require:
     args:
     - type: any
@@ -5018,12 +5019,12 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a quaternion, returns nil if invalid
+    description: Converts a string to a quaternion, returns nil if invalid.
   torotation:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a rotation (quaternion), returns nil if invalid
+    description: Converts a string to a rotation (quaternion), returns nil if invalid.
   tostring:
     args:
     - type: any
@@ -5039,7 +5040,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a vector, returns nil if invalid
+    description: Converts a string to a vector, returns nil if invalid.
   type:
     args:
     - type: any
@@ -5063,8 +5064,8 @@ globals:
     - type: function
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, handling errors with err if
-      they occur.
+    description: Calls function f with the provided arguments, handling errors with
+      err if they occur.
   bit32.arshift:
     args:
     - type: number
@@ -5454,7 +5455,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Encodes a string or buffer to base64
+    description: Encodes a string or buffer to base64.
   llbase64.decode:
     args:
     - type: string
@@ -5551,11 +5552,11 @@ globals:
   math.pi:
     property: read-only
     type: number
-    description: Value of pi
+    description: Value of pi.
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity)
+    description: A value larger than any other numeric value (infinity).
   math.abs:
     args:
     - type: number
@@ -6021,7 +6022,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Finds and returns matches for a pattern in the input string.
+    description: Finds and returns matches for a pattern in the input string. Returns
+      nil if no match is found.
   string.pack:
     args:
     - type: string
@@ -6124,8 +6126,8 @@ globals:
     - type: number
       required: false
     - type: any
-    description: Inserts an element at index i, shifting subsequent elements up by
-      1. The index must be within the range [1,
+    description: 'Inserts an element at index i, shifting subsequent elements up by
+      1. The index must be within the range [1, #a].'
   table.append:
     args:
     - type: table
@@ -6138,7 +6140,7 @@ globals:
       observes: write
     - type: table
     description: 'Appends all elements from one array to the end of another. Shorthand
-      for table.move(b, 1, #b, #a+1, a)'
+      for table.move(b, 1, #b, #a+1, a).'
   table.remove:
     args:
     - type: table
@@ -6178,7 +6180,8 @@ globals:
     - type: table
       required: false
       observes: write
-    description: Inserts elements [i..j] from src array into dest array at [d].
+    description: Copies elements [i..j] from src array into dest array starting at
+      [d], overwriting existing elements.
   table.create:
     args:
     - type: number
@@ -6229,7 +6232,7 @@ globals:
   utf8.charpattern:
     property: read-only
     type: string
-    description: Pattern that matches exactly one UTF-8 byte sequence
+    description: Pattern that matches exactly one UTF-8 byte sequence.
   utf8.char:
     args:
     - type: '...'
@@ -15543,11 +15546,11 @@ structs:
     istruthy:
       property: read-only
       type: bool
-      description: Returns true if the UUID is not the null UUID (all zeros)
+      description: Returns true if the UUID is not the null UUID (all zeros).
     bytes:
       property: read-only
       type: string
-      description: Returns the raw 16-byte binary string of the UUID
+      description: Returns the raw 16-byte binary string of the UUID.
   vector:
     __add:
       method: true

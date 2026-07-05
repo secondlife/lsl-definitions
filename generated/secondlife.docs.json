@@ -27,22 +27,22 @@
         "documentation": "Returns an iterator for all key-value pairs in the table."
     },
     "@sl-slua/global/pcall": {
-        "documentation": "Executes a function in protected mode. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message."
+        "documentation": "Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message."
     },
     "@sl-slua/global/print": {
         "documentation": "Prints all arguments to standard output using Tab as a separator."
     },
     "@sl-slua/global/rawequal": {
-        "documentation": "Returns true if a and b have the same type and value."
+        "documentation": "Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod.."
     },
     "@sl-slua/global/rawget": {
-        "documentation": "Performs a table lookup bypassing metatables."
+        "documentation": "Performs a table lookup, bypassing the __index metamethod.."
     },
     "@sl-slua/global/rawlen": {
-        "documentation": "Returns the length of a table or string bypassing metatables."
+        "documentation": "Returns the length of a table or string, bypassing the __len metamethod.."
     },
     "@sl-slua/global/rawset": {
-        "documentation": "Assigns a value to a table field bypassing metatables."
+        "documentation": "Assigns a value to a table field, bypassing the __newindex metamethod.."
     },
     "@sl-slua/global/require": {
         "documentation": "Execute the named external module."
@@ -57,10 +57,10 @@
         "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
     },
     "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+        "documentation": "Converts a string to a quaternion, returns nil if invalid."
     },
     "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid."
     },
     "@sl-slua/global/tostring": {
         "documentation": "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
@@ -69,7 +69,7 @@
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
-        "documentation": "Converts a string to a vector, returns nil if invalid"
+        "documentation": "Converts a string to a vector, returns nil if invalid."
     },
     "@sl-slua/global/type": {
         "documentation": "Returns the type of the object as a string."
@@ -81,7 +81,7 @@
         "documentation": "Returns values from an array in the specified index range."
     },
     "@sl-slua/global/xpcall": {
-        "documentation": "Calls function f with parameters args, handling errors with err if they occur."
+        "documentation": "Calls function f with the provided arguments, handling errors with err if they occur."
     },
     "@sl-slua/global/bit32": {
         "documentation": "Bitwise operations library.",
@@ -315,7 +315,7 @@
         "documentation": "Base64 encoding/decoding library."
     },
     "@sl-slua/global/llbase64.encode": {
-        "documentation": "Encodes a string or buffer to base64"
+        "documentation": "Encodes a string or buffer to base64."
     },
     "@sl-slua/global/llbase64.decode": {
         "documentation": "Decodes a base64 string to a string, or buffer if asBuffer is true. The output is truncated at the first decoding error."
@@ -387,11 +387,11 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>Value of pi",
+        "documentation": "Value: 3.141592653589793<br>Value of pi.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
-        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity)",
+        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#huge"
     },
     "@sl-slua/global/math.abs": {
@@ -682,7 +682,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Finds and returns matches for a pattern in the input string.",
+        "documentation": "Finds and returns matches for a pattern in the input string. Returns nil if no match is found.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -742,7 +742,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#maxn"
     },
     "@sl-slua/global/table.insert": {
-        "documentation": "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1,",
+        "documentation": "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#insert"
     },
     "@sl-slua/global/table.append": {
@@ -750,7 +750,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#append"
     },
     "@sl-slua/global/table.extend": {
-        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a)",
+        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#extend"
     },
     "@sl-slua/global/table.remove": {
@@ -770,7 +770,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#unpack"
     },
     "@sl-slua/global/table.move": {
-        "documentation": "Inserts elements [i..j] from src array into dest array at [d].",
+        "documentation": "Copies elements [i..j] from src array into dest array starting at [d], overwriting existing elements.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#move"
     },
     "@sl-slua/global/table.create": {
@@ -806,7 +806,7 @@
         "learn_more_link": "https://luau.org/library/#utf8-library"
     },
     "@sl-slua/global/utf8.charpattern": {
-        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence",
+        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#charpattern"
     },
     "@sl-slua/global/utf8.char": {

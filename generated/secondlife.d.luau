@@ -560,7 +560,7 @@ declare string: {
   gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
   len: (s: string) -> number, -- builtin
   lower: (s: string) -> string, -- builtin
-  match: (s: string, pattern: string, init: number?) -> ...string, -- builtin, magic type
+  match: (s: string, pattern: string, init: number?) -> ...string?, -- builtin, magic type
   pack: (fmt: string, ...any) -> string, -- builtin
   packsize: (fmt: string) -> number, -- builtin
   rep: (s: string, n: number) -> string, -- builtin
@@ -583,7 +583,7 @@ declare table: {
   foreachi: @[deprecated {reason='Use a for loop instead'}]<V, R>(a: {V}, f: (index: number, value: V) -> R?) -> R?,
   getn: @[deprecated {use='#'}](a: {any}) -> number,
   maxn: (t: {any}) -> number,
-  insert: (<V>(a: {V}, i: number, v: V) -> ())
+  insert: (<V>(a: {V}, i: number, value: V) -> ())
     & (<V>(a: {V}, value: V) -> ()),
   append: <V>(a: {V}, ...V) -> (),
   extend: <V>(a: {V}, b: {V}) -> {V},

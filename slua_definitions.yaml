@@ -61,7 +61,7 @@ base-classes:
     type: number
     comment: S component of the rotation/quaternion. Equivalent to the W component in other notations.
 - name: uuid
-  comment: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
+  comment: 'A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".'
   methods:
   - name: __tostring
     parameters:
@@ -69,10 +69,10 @@ base-classes:
     return-type: string
   properties:
   - name: istruthy
-    comment: Returns true if the UUID is not the null UUID (all zeros)
+    comment: Returns true if the UUID is not the null UUID (all zeros).
     type: boolean
   - name: bytes
-    comment: Returns the raw 16-byte binary string of the UUID
+    comment: Returns the raw 16-byte binary string of the UUID.
     type: string
 - name: vector
   comment: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
@@ -441,7 +441,7 @@ functions:
   return-type: '{[string]: any}'
   slua-removed: true
 - name: getmetatable
-  comment: Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead.
+  comment: "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
   type-parameters: [T]
   parameters:
   - name: obj
@@ -514,7 +514,7 @@ functions:
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pcall
-  comment: Executes a function in protected mode. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message.
+  comment: Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message.
   type-parameters: [A..., R...]
   parameters:
   - name: f
@@ -533,7 +533,7 @@ functions:
     type: T...
   return-type: ()
 - name: rawequal
-  comment: Returns true if a and b have the same type and value.
+  comment: Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod..
   type-parameters: [T1, T2]
   parameters:
   - name: a
@@ -545,7 +545,7 @@ functions:
   return-type: boolean
   fastcall: true
 - name: rawget
-  comment: Performs a table lookup bypassing metatables.
+  comment: Performs a table lookup, bypassing the __index metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -557,7 +557,7 @@ functions:
   return-type: V?
   fastcall: true
 - name: rawlen
-  comment: Returns the length of a table or string bypassing metatables.
+  comment: Returns the length of a table or string, bypassing the __len metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -566,7 +566,7 @@ functions:
   return-type: number
   fastcall: true
 - name: rawset
-  comment: Assigns a value to a table field bypassing metatables.
+  comment: Assigns a value to a table field, bypassing the __newindex metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -613,7 +613,7 @@ functions:
   return-type: ((T...) -> R...)?
   slua-removed: true
 - name: setmetatable
-  comment: Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field).
+  comment: "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
   type-parameters: [T, MT]
   parameters:
   - name: t
@@ -635,14 +635,14 @@ functions:
     type: string? | number
     selene-type: string
   - name: base
-    comment: Base for the conversion. Valid range is [2, 36].
+    comment: "Base for the conversion. Valid range is [2, 36]."
     type: number?
     default-value: 10
   return-type: number?
   fastcall: true
   must-use: true
 - name: toquaternion
-  comment: Converts a string to a quaternion, returns nil if invalid
+  comment: Converts a string to a quaternion, returns nil if invalid.
   parameters:
   - name: value
     comment: String to convert to a quaternion.
@@ -651,7 +651,7 @@ functions:
   return-type: quaternion?
   must-use: true
 - name: torotation
-  comment: Converts a string to a rotation (quaternion), returns nil if invalid
+  comment: Converts a string to a rotation (quaternion), returns nil if invalid.
   parameters:
   - name: value
     comment: String to convert to a rotation.
@@ -660,7 +660,7 @@ functions:
   return-type: quaternion?
   must-use: true
 - name: tostring
-  comment: Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present.
+  comment: "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
   type-parameters: [T]
   parameters:
   - name: value
@@ -680,7 +680,7 @@ functions:
   return-type: uuid?
   must-use: true
 - name: tovector
-  comment: Converts a string to a vector, returns nil if invalid
+  comment: Converts a string to a vector, returns nil if invalid.
   parameters:
   - name: val
     comment: String to convert to a vector.
@@ -726,7 +726,7 @@ functions:
   return-type: ...V
   fastcall: true
 - name: xpcall
-  comment: Calls function f with parameters args, handling errors with err if they occur.
+  comment: Calls function f with the provided arguments, handling errors with err if they occur.
   type-parameters: [E, A..., R1..., R2...]
   parameters:
   - name: f
@@ -806,7 +806,7 @@ modules:
     must-use: true
     fastcall: true
   - name: extract
-    comment: Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31].
+    comment: "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
     - name: "n"
       comment: Number to extract from.
@@ -834,7 +834,7 @@ modules:
     must-use: true
     fastcall: true
   - name: lshift
-    comment: Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.
+    comment: "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
     - name: "n"
       comment: Number to shift.
@@ -846,7 +846,7 @@ modules:
     must-use: true
     fastcall: true
   - name: replace
-    comment: Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31].
+    comment: "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
     - name: "n"
       comment: Number to replace in.
@@ -877,7 +877,7 @@ modules:
     must-use: true
     fastcall: true
   - name: rshift
-    comment: Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.
+    comment: "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
     - name: "n"
       comment: Number to shift.
@@ -1269,7 +1269,7 @@ modules:
       comment: Bit offset to read at.
       type: number
     - name: bitCount
-      comment: Number of bits to read. Must be in [0, 32] range.
+      comment: "Number of bits to read. Must be in [0, 32] range."
       type: number
     return-type: number
     must-use: true
@@ -1284,7 +1284,7 @@ modules:
       comment: Bit offset to write at.
       type: number
     - name: bitCount
-      comment: Number of bits to write. Must be in [0, 32] range.
+      comment: "Number of bits to write. Must be in [0, 32] range."
       type: number
     - name: value
       comment: Source of bits to write.
@@ -1357,7 +1357,7 @@ modules:
   - name: info
     comment: Returns information about a stack frame or function based on specified format.
     overloads:
-    - comment: Returns information about a stack level
+    - comment: Returns information about a stack level.
       parameters:
       - name: level
         comment: Stack level or function reference for inspection.
@@ -1366,7 +1366,7 @@ modules:
         comment: String specifying requested information.
         type: string
       return-type: '...any'
-    - comment: Returns information about a function
+    - comment: Returns information about a function.
       parameters:
       - name: func
         comment: Function reference.
@@ -1391,7 +1391,7 @@ modules:
   - name: traceback
     comment: Returns a human-readable call stack starting from the specified level.
     overloads:
-    - comment: Returns a string with a traceback of the current call stack
+    - comment: Returns a string with a traceback of the current call stack.
       parameters:
       - name: msg
         comment: Message prepended to the traceback.
@@ -1421,7 +1421,7 @@ modules:
   comment: Base64 encoding/decoding library.
   functions:
   - name: encode
-    comment: Encodes a string or buffer to base64
+    comment: Encodes a string or buffer to base64.
     parameters:
     - name: data
       comment: "String or buffer to encode to base64 format."
@@ -1433,7 +1433,7 @@ modules:
     comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
       The output is truncated at the first decoding error.
     overloads:
-    - comment: Decodes a base64 string to a buffer if asBuffer is true
+    - comment: Decodes a base64 string to a buffer if asBuffer is true.
       parameters:
       - name: data
         comment: "Base64 encoded string to decode."
@@ -1588,7 +1588,7 @@ modules:
     comment: Returns the arc cosine of n in radians.
     parameters:
     - name: "n"
-      comment: A number in the range [-1, 1].
+      comment: "A number in the range [-1, 1]."
       type: number
     return-type: number
     must-use: true
@@ -1597,7 +1597,7 @@ modules:
     comment: Returns the arc sine of n in radians.
     parameters:
     - name: "n"
-      comment: A number in the range [-1, 1].
+      comment: "A number in the range [-1, 1]."
       type: number
     return-type: number
     must-use: true
@@ -1818,7 +1818,7 @@ modules:
     must-use: true
     fastcall: true
   - name: noise
-    comment: Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].
+    comment: "Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0]."
     parameters:
     - name: x
       comment: X coordinate for the noise function.
@@ -1869,6 +1869,7 @@ modules:
     must-use: true
     variants:
       - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
+        parameters: []
         return-type: number
       - comment: "Returns a random integer number in the [1, n] range. Input is truncated to integer."
         parameters:
@@ -1986,11 +1987,11 @@ modules:
     fastcall: true
   constants:
   - name: pi
-    comment: Value of pi
+    comment: Value of pi.
     type: number
     value: 3.141592653589793
   - name: huge
-    comment: A value larger than any other numeric value (infinity)
+    comment: A value larger than any other numeric value (infinity).
     type: number
     value: inf
 - name: os
@@ -2286,7 +2287,7 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: match
-    comment: Finds and returns matches for a pattern in the input string.
+    comment: Finds and returns matches for a pattern in the input string. Returns nil if no match is found.
     parameters:
     - name: s
       comment: Input string.
@@ -2298,7 +2299,7 @@ modules:
       comment: Starting index.
       type: number?
       default-value: 1
-    return-type: '...string'
+    return-type: '...string?'
     must-use: true
     typechecker: {builtin: true, magic: true}
   - name: pack
@@ -2344,13 +2345,13 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: split
-    comment: Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.
+    comment: 'Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.'
     parameters:
     - name: s
       comment: Input string.
       type: string
     - name: separator
-      comment: Separator to split on. If nil, splits at commas (","). If empty, splits into individual bytes.
+      comment: 'Separator to split on. If nil, splits at commas (","). If empty, splits into individual bytes.'
       type: string?
       default-value: '","'
     return-type: '{string}'
@@ -2468,9 +2469,9 @@ modules:
     return-type: number
     must-use: true
   - name: insert
-    comment: Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a].
+    comment: "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a]."
     overloads:
-    - comment: Appends an element to the end of the array. Equivalent to a[#a+1] = value.
+    - comment: "Appends an element to the end of the array. Equivalent to a[#a+1] = value."
       type-parameters: [V]
       parameters:
       - name: a
@@ -2491,7 +2492,7 @@ modules:
       comment: "Index to insert at. Elements at or above this index will shift up by 1."
       type: number
       optional: true
-    - name: v
+    - name: value
       comment: Value to insert.
       type: V
     return-type: ()
@@ -2510,7 +2511,7 @@ modules:
     return-type: ()
   - name: extend
     comment: "Appends all elements from one array to the end of another.
-      Shorthand for table.move(b, 1, #b, #a+1, a)"
+      Shorthand for table.move(b, 1, #b, #a+1, a)."
     type-parameters: [V]
     parameters:
     - name: a
@@ -2576,7 +2577,7 @@ modules:
     must-use: true
     fastcall: true
   - name: move
-    comment: Inserts elements [i..j] from src array into dest array at [d].
+    comment: "Copies elements [i..j] from src array into dest array starting at [d], overwriting existing elements."
     type-parameters: [V]
     parameters:
     - name: src
@@ -2745,7 +2746,7 @@ modules:
     must-use: true
   constants:
   - name: charpattern
-    comment: Pattern that matches exactly one UTF-8 byte sequence
+    comment: Pattern that matches exactly one UTF-8 byte sequence.
     type: string
     value: '"[\x00-\x7F\xC2-\xF4][\x80-\xBF]*"'
 - name: uuid
