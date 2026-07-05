@@ -7377,7 +7377,7 @@ functions:
   llAbs:
     arguments:
     - val:
-        tooltip: Any integer value.
+        tooltip: Integer to convert.
         type: integer
     slua-deprecated:
       use: math.abs
@@ -7389,7 +7389,7 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the absolute (positive) value of val.
+    tooltip: Returns the absolute (positive) integer value of val.
     categories:
       - math
   llAcos:
@@ -7838,7 +7838,7 @@ functions:
   llCeil:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round up.
         type: float
     slua-deprecated:
       use: math.ceil
@@ -7850,8 +7850,8 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the smallest integer value greater than or equal to val
-      (rounded toward positive infinity).
+    tooltip: Returns val rounded toward positive infinity.
+      In other words, returns the smallest integer greater than or equal to val.
     categories:
       - math
   llChar:
@@ -8796,7 +8796,7 @@ functions:
   llFabs:
     arguments:
     - val:
-        tooltip: Float value to convert.
+        tooltip: Number to convert.
         type: float
     slua-deprecated:
       use: math.abs
@@ -8808,7 +8808,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the absolute (positive) value of val.
+    tooltip: Returns the absolute (positive) value of val.
     categories:
       - math
   llFindNotecardTextCount:
@@ -8896,7 +8896,7 @@ functions:
   llFloor:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round down.
         type: float
     slua-deprecated:
       use: math.floor
@@ -8908,8 +8908,8 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the largest integer value less than or equal to val (rounded
-      toward negative infinity).
+    tooltip: Returns val rounded toward negative infinity.
+      In other words, returns the largest integer less than or equal to val.
     categories:
       - math
   llForceMouselook:
@@ -11564,6 +11564,7 @@ functions:
       - data_conversion
       - math
       - prim_appearance
+      - vector
   llLinkAdjustSoundVolume:
     arguments:
     - link:
@@ -12545,7 +12546,7 @@ functions:
   llLog:
     arguments:
     - val:
-        tooltip: Float value to evaluate.
+        tooltip: Number to compute the logarithm of.
         type: float
     slua-deprecated:
       use: math.log
@@ -12557,14 +12558,13 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the natural (base e) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    tooltip: Returns natural (base e) logarithm of val. If negative, return 0.0.
     categories:
       - math
   llLog10:
     arguments:
     - val:
-        tooltip: Float value to evaluate.
+        tooltip: Number to compute the logarithm of.
         type: float
     slua-deprecated:
       use: math.log10
@@ -12576,8 +12576,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the base-10 (common) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    tooltip: Returns base-10 (common) logarithm of val. If negative, return 0.0.
     categories:
       - math
   llLookAt:
@@ -14317,7 +14316,7 @@ functions:
   llRound:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round.
         type: float
     slua-deprecated:
       use: math.round
@@ -16041,8 +16040,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the square root of the positive value val.
-      Triggers a math runtime error if val is less than 0.0 (imaginary results).
+    tooltip: Returns the square root of val. If negative, return Nan.
     categories:
       - math
   llStartAnimation:
@@ -16939,8 +16937,10 @@ functions:
     tooltip: Returns a vector representing the conversion of the color srgb from the
       sRGB colorspace into the linear RGB colorspace.
     categories:
+      - data_conversion
       - math
       - prim_appearance
+      - vector
 types:
   float:
     tooltip: 32 bit floating point value.\nThe range is 1.175494351E-38 to 3.402823466E+38.

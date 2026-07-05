@@ -1626,10 +1626,10 @@ modules:
   comment: Mathematical functions library.
   functions:
   - name: abs
-    comment: Returns the absolute value of n.
+    comment: Returns the absolute (positive) value of val.
     parameters:
-    - name: "n"
-      comment: A number.
+    - name: val
+      comment: Number to convert.
       type: number
     return-type: number
     must-use: true
@@ -1637,19 +1637,21 @@ modules:
     typechecker: {checked: true}
   - name: acos
     comment: Returns the arccosine of val in radians.
+      Returns NaN if val is not in range [-1.0, 1.0].
     parameters:
     - name: val
-      comment: A number in the range [-1.0, 1.0].
+      comment: Cosine value in the range [-1.0, 1.0] to invert.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: asin
-    comment: Returns the arcsine of n in radians.
+    comment: Returns the arcsine of val in radians.
+      Returns NaN if val is not in range [-1.0, 1.0].
     parameters:
     - name: val
-      comment: A number in the range [-1.0, 1.0].
+      comment: Sine value in the range [-1.0, 1.0] to invert.
       type: number
     return-type: number
     must-use: true
@@ -1659,7 +1661,7 @@ modules:
     comment: Returns the arctangent of val in radians.
     parameters:
     - name: val
-      comment: A number.
+      comment: Tangent value to invert.
       type: number
     return-type: number
     must-use: true
@@ -1680,20 +1682,21 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: ceil
-    comment: Returns the smallest integer larger than or equal to n.
+    comment: Returns val rounded toward positive infinity.
+      In other words, returns the smallest integer greater than or equal to val.
     parameters:
-    - name: "n"
-      comment: A number to round up.
+    - name: val
+      comment: Number to round up.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: clamp
-    comment: Returns n clamped between min and max. Raises an error if min is greater than max.
+    comment: Returns val clamped between min and max. Raises an error if min is greater than max.
     parameters:
-    - name: "n"
-      comment: Value to be clamped.
+    - name: val
+      comment: The value to clamp.
       type: number
     - name: min
       comment: Minimum allowable value.
@@ -1709,7 +1712,7 @@ modules:
     comment: Returns the cosine of theta. theta is in radians.
     parameters:
     - name: theta
-      comment: An angle in radians.
+      comment: Angle in radians.
       type: number
     return-type: number
     must-use: true
@@ -1718,38 +1721,39 @@ modules:
   - name: cosh
     comment: Returns the hyperbolic cosine of n.
     parameters:
-    - name: "n"
-      comment: A number to compute the hyperbolic cosine of.
+    - name: val
+      comment: Number to compute the hyperbolic cosine of.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: deg
-    comment: Converts n from radians to degrees.
+    comment: Converts val from radians to degrees.
     parameters:
-    - name: "n"
-      comment: A value in radians.
+    - name: val
+      comment: Number in radians.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: exp
-    comment: Returns the base-e exponent of n.
+    comment: Returns the e to the power of val.
     parameters:
-    - name: "n"
-      comment: A number to compute e^n.
+    - name: val
+      comment: Number to compute e^n.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: floor
-    comment: Returns the largest integer smaller than or equal to n.
+    comment: Returns val rounded toward negative infinity.
+      In other words, returns the largest integer less than or equal to val.
     parameters:
-    - name: "n"
-      comment: A number to round down.
+    - name: val
+      comment: Number to round down.
       type: number
     return-type: number
     must-use: true
@@ -1769,10 +1773,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: frexp
-    comment: Returns m and e such that n = m * 2^e.
+    comment: Returns significand s and integer exponent e such that val = s * 2^e.
     parameters:
-    - name: "n"
-      comment: A number to split into significand and exponent.
+    - name: val
+      comment: Number to split into significand and exponent.
       type: number
     return-type: (number, number)
     must-use: true
@@ -1808,10 +1812,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: log
-    comment: Returns the logarithm of n in the given base, defaults to e.
+    comment: Returns the logarithm of val in the given base. The default base is e.
     parameters:
-    - name: "n"
-      comment: A number to compute logarithm.
+    - name: val
+      comment: Number to compute the logarithm of.
       type: number
     - name: base
       comment: Base of the logarithm.
@@ -1822,19 +1826,19 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: log10
-    comment: Returns the base-10 logarithm of n.
+    comment: Returns the base-10 logarithm of val.
     parameters:
-    - name: "n"
-      comment: A number to compute base-10 logarithm.
+    - name: val
+      comment: Number to compute base-10 logarithm.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: map
-    comment: Maps n from input range to output range.
+    comment: Maps val from input range to output range.
     parameters:
-    - name: "n"
+    - name: val
       comment: Number to map.
       type: number
     - name: inMin
@@ -1855,8 +1859,8 @@ modules:
   - name: max
     comment: Returns the maximum value from the given numbers.
     parameters:
-    - name: "n"
-      comment: A number to find the maximum from.
+    - name: val
+      comment: Number to find the maximum from.
       type: number
     - name: ...
       comment: Numbers to find the maximum from.
@@ -1869,8 +1873,8 @@ modules:
   - name: min
     comment: Returns the minimum value from the given numbers.
     parameters:
-    - name: "n"
-      comment: A number to find the minimum from.
+    - name: val
+      comment: Number to find the minimum from.
       type: number
     - name: ...
       comment: Numbers to find the minimum from.
@@ -1881,10 +1885,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: modf
-    comment: Returns the integer and fractional parts of n.
+    comment: Returns the integer and fractional parts of val.
     parameters:
-    - name: "n"
-      comment: A number to split into integer and fractional parts.
+    - name: val
+      comment: Number to split into integer and fractional parts.
       type: number
     return-type: (number, number)
     must-use: true
@@ -1921,10 +1925,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: rad
-    comment: Converts n from degrees to radians.
+    comment: Converts val from degrees to radians.
     parameters:
     - name: "n"
-      comment: A value in degrees.
+      comment: Value in degrees.
       type: number
     return-type: number
     must-use: true
@@ -1974,20 +1978,20 @@ modules:
       reason: Disabled in SLua.
     typechecker: {checked: true}
   - name: round
-    comment: Rounds n to the nearest integer.
+    comment: Rounds val to the nearest integer. Halfway values are rounded away from zero.
     parameters:
-    - name: "n"
-      comment: A number to round to the nearest integer. Halfway values are rounded away from zero.
+    - name: val
+      comment: Number to round to the nearest integer. Halfway values are rounded away from zero.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: sign
-    comment: Returns -1 if n is negative, 1 if positive, and 0 if zero.
+    comment: Returns -1 if val is negative, 1 if positive, and 0 if zero.
     parameters:
-    - name: "n"
-      comment: A number to get the sign of.
+    - name: val
+      comment: Number to get the sign of.
       type: number
     return-type: number
     must-use: true
@@ -1997,27 +2001,27 @@ modules:
     comment: Returns the sine of theta. theta is in radians.
     parameters:
     - name: theta
-      comment: An angle in radians.
+      comment: Angle in radians.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: sinh
-    comment: Returns the hyperbolic sine of n.
+    comment: Returns the hyperbolic sine of val.
     parameters:
-    - name: "n"
-      comment: A number to compute the hyperbolic sine of.
+    - name: val
+      comment: Number to compute the hyperbolic sine of.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: sqrt
-    comment: Returns the square root of n.
+    comment: Returns the square root of val. If negative, return Nan.
     parameters:
-    - name: "n"
-      comment: A number to compute the square root of.
+    - name: val
+      comment: Number to compute the square root of.
       type: number
     return-type: number
     must-use: true
@@ -2027,17 +2031,17 @@ modules:
     comment: Returns the tangent of theta. theta is in radians.
     parameters:
     - name: theta
-      comment: An angle in radians.
+      comment: Angle in radians.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: tanh
-    comment: Returns the hyperbolic tangent of n.
+    comment: Returns the hyperbolic tangent of val.
     parameters:
-    - name: "n"
-      comment: A number to compute the hyperbolic tangent of.
+    - name: val
+      comment: Number to compute the hyperbolic tangent of.
       type: number
     return-type: number
     must-use: true
@@ -2079,7 +2083,7 @@ modules:
     type: number
     value: 3.141592653589793
   - name: huge
-    comment: A value larger than any other numeric value (infinity).
+    comment: Value larger than any other numeric value (infinity).
     type: number
     value: inf
 - name: os
