@@ -34,8 +34,14 @@ source_environment_tempfile="$stage/source_environment.sh"
 
 # Don't care about these, actually
 rm -rf "$stage/lsl_definitions/templated"
-rm -rf "$stage/lsl_definitions/cpp"
 rm -rf "$stage/lsl_definitions/experimental"
+# Remove cpp files not intended for distribution; keep lua_constant_definitions.cpp,
+# lua_registrations.cpp, and ruleset_builder_descriptors.cpp
+find "$stage/lsl_definitions/cpp" -type f \
+    ! -name 'lua_constant_definitions.cpp' \
+    ! -name 'lua_registrations.cpp' \
+    ! -name 'ruleset_builder_descriptors.cpp' \
+    -delete
 # These only exist to keep the `git diff` sane
 rm "$stage/lsl_definitions/lua_keywords_pretty.xml"
 rm "$stage/lsl_definitions/lsl_keywords_pretty.xml"
