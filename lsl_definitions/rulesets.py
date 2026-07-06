@@ -35,8 +35,8 @@ _RULESET_TYPES: dict[str, BuilderParamType] = {
     ]
 }
 
-# Maps value-type annotation string → FluentParamDescriptor semantic char.
-# Consumed by any code that builds a C array of FluentParamDescriptor from
+# Maps value-type annotation string -> RulesetParamDescriptor semantic char.
+# Consumed by any code that builds a C array of RulesetParamDescriptor from
 # a MemberDescriptor list.
 _VALUE_TYPE_TO_SEMANTIC: dict[str, str] = {
     "integer": "i",
@@ -216,7 +216,7 @@ def expand_member_params(
     pretties = [_pretty(strict, override) for strict, _, _, override in rows]
 
     # Hard-fail if any pretty name is duplicated and at least one side is an explicit
-    # override (author error — cannot silently revert an intentional name).
+    # override (author error -- cannot silently revert an intentional name).
     pretty_counts: dict[str, int] = {}
     for p in pretties:
         pretty_counts[p] = pretty_counts.get(p, 0) + 1

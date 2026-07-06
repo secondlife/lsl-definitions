@@ -975,18 +975,18 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
     return "\n".join(bindings)
 
 
-@register("gen_fluent_builder_descriptors")
-def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
-    """Generate FluentParamDescriptor arrays and dispatch wrappers for all type:table rulesets.
+@register("gen_ruleset_builder_descriptors")
+def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
+    """Generate RulesetParamDescriptor arrays and dispatch wrappers for all type:table rulesets.
 
     For each ruleset, inspects the signature of ll{dispatch-fn} to determine whether
     a link parameter is needed, then emits:
-      - FluentParamDescriptor array
-      - FluentFlagDescriptor array (if flag-enum present)
-      - fluent_builder_def_build / fluent_builder_def_add_flags calls (as a static initializer)
+      - RulesetParamDescriptor array
+      - RulesetFlagDescriptor array (if flag-enum present)
+      - ruleset_builder_def_build / ruleset_builder_def_add_flags calls (as a static initializer)
       - a lambda dispatch wrapper
-      - a slua_register_fluent_fn call
-    The resulting fragment is #include'd inside init_fluent_builders(lua_State* L).
+      - a slua_register_ruleset_fn call
+    The resulting fragment is #include'd inside init_ruleset_builders(lua_State* L).
     """
     _semantic_map = _VALUE_TYPE_TO_SEMANTIC
 
@@ -1005,7 +1005,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             raise ValueError(f"dispatch-fn '{full_name}' not found in definitions")
 
         args = func.arguments
-        # Find the list argument — it may appear anywhere in the signature.
+        # Find the list argument -- it may appear anywhere in the signature.
         list_idx = next((i for i, a in enumerate(args) if a.type == LSLType.LIST), None)
         if list_idx is None:
             raise ValueError(f"{full_name}: no list argument found in signature")
@@ -1081,7 +1081,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
             )
 
         # Serialize params table into a flat rules list.
-        lines.append(f"    slua_fluent_serialize(L, {params_lua_pos}, def);")
+        lines.append(f"    slua_ruleset_serialize(L, {params_lua_pos}, def);")
         lines.append("    int rules_idx = lua_gettop(L);")
 
         # Dispatch to ll.* in original LL order.
@@ -1131,7 +1131,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         body = "\n".join(lines)
         return (
             f"auto {cpp_name} = [](lua_State* L) -> int {{\n"
-            f"    const auto* def = (const FluentBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));\n"
+            f"    const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));\n"
             f"{body}\n"
             f"}};"
         )
@@ -1158,7 +1158,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
         param_body = "\n".join(desc_lines)
         section = (
             f"// {ruleset_name}\n"
-            f"static const FluentParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
+            f"static const RulesetParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
         )
 
         flag_enum_name = ruleset_data.get("flag-enum")
@@ -1208,22 +1208,22 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
 
             flag_body = "\n".join(flag_lines)
             section += (
-                f"static const FluentFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
+                f"static const RulesetFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
             )
 
             # Build def and add flags in a single static initializer so it is safe
-            # to call init_fluent_builders more than once.
+            # to call init_ruleset_builders more than once.
             section += (
-                f"static FluentBuilderDef* {def_name} = []() {{\n"
-                f"    auto* d = fluent_builder_def_build({array_name}, std::size({array_name}));\n"
-                f"    fluent_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
+                f"static RulesetBuilderDef* {def_name} = []() {{\n"
+                f"    auto* d = ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
+                f"    ruleset_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
                 f"    return d;\n"
                 f"}}();\n"
             )
         else:
             section += (
-                f"static FluentBuilderDef* {def_name} = "
-                f"fluent_builder_def_build({array_name}, std::size({array_name}));\n"
+                f"static RulesetBuilderDef* {def_name} = "
+                f"ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
             )
 
         if dispatch_fn is not None:
@@ -1236,7 +1236,7 @@ def gen_fluent_builder_descriptors(definitions: LSLDefinitions) -> str:
                 + "\n"
             )
             section += (
-                f'slua_register_fluent_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
+                f'slua_register_ruleset_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
             )
 
         sections.append(section)

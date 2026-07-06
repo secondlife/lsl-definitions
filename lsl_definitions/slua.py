@@ -452,7 +452,7 @@ class SLuaDefinitions:
         """
         self.generate_ll_modules(lsl)
         self._generate_spp_builder_class(lsl)
-        self._generate_fluent_builder_classes(lsl)
+        self._generate_ruleset_builder_classes(lsl)
 
     def generate_ll_modules(self, lsl: LSLDefinitions, solverV2: bool = True) -> None:
         """
@@ -687,7 +687,7 @@ class SLuaDefinitions:
         builder_class = [m for m in self.classes if m.name == spec.class_name][0]
         builder_class.methods.extend(methods)
 
-    def _generate_fluent_builder_classes(self, lsl: LSLDefinitions) -> None:
+    def _generate_ruleset_builder_classes(self, lsl: LSLDefinitions) -> None:
         """Inject typed properties into fluent builder classes or type aliases.
 
         For each table-type builder ruleset that names a lua-type, finds the matching
