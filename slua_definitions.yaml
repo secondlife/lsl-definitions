@@ -2936,32 +2936,32 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: magnitude
-    comment: Computes the magnitude of the vector.
+    comment: Returns the magnitude (geometric length) of vec.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to evaluate.
       type: vector
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: normalize
-    comment: Computes the normalized version (unit vector) of the vector.
+    comment: Returns the normalized unit vector pointing the same direction as vec.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to normalize.
       type: vector
     return-type: vector
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: cross
-    comment: Computes the cross product of two vectors.
+    comment: Returns the cross product of two vectors.
     parameters:
-    - name: a
+    - name: vec1
       comment: Left input vector.
       type: vector
-    - name: b
+    - name: vec2
       comment: Right input vector.
       type: vector
     return-type: vector
@@ -2969,12 +2969,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: dot
-    comment: Computes the dot product of two vectors.
+    comment: Returns the dot product of two vectors.
     parameters:
-    - name: a
+    - name: vec1
       comment: Left input vector.
       type: vector
-    - name: b
+    - name: vec2
       comment: Right input vector.
       type: vector
     return-type: number
@@ -2982,13 +2982,14 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: angle
-    comment: Computes the angle between two vectors in radians.
+    comment: Returns the angle between two vectors in radians.
       The axis, if specified, is used to determine the sign of the angle.
+      If no axis is specified, the angle is positive, as if axis was vector.cross(vec1, vec2).
     parameters:
-    - name: a
+    - name: vec1
       type: vector
       comment: Left input vector.
-    - name: b
+    - name: vec2
       comment: Right input vector.
       type: vector
     - name: axis
@@ -3001,8 +3002,8 @@ modules:
   - name: floor
     comment: Applies math.floor to each component of the vector.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to round down.
       type: vector
     return-type: vector
     must-use: true
@@ -3011,8 +3012,8 @@ modules:
   - name: ceil
     comment: Applies math.ceil to each component of the vector.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to round up.
       type: vector
     return-type: vector
     must-use: true
@@ -3021,8 +3022,8 @@ modules:
   - name: abs
     comment: Applies math.abs to each component of the vector.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to convert.
       type: vector
     return-type: vector
     must-use: true
@@ -3031,8 +3032,8 @@ modules:
   - name: sign
     comment: Applies math.sign to each component of the vector.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to get the sign of.
       type: vector
     return-type: vector
     must-use: true
@@ -3041,8 +3042,8 @@ modules:
   - name: clamp
     comment: Clamps each component of the vector between min and max values.
     parameters:
-    - name: v
-      comment: Input vector to be clamped.
+    - name: vec
+      comment: Vector to be clamped.
       type: vector
     - name: min
       comment: Minimum vector value.
@@ -3057,8 +3058,8 @@ modules:
   - name: max
     comment: Applies math.max to each component of the vectors.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to find the maximum from.
       type: vector
     - name: ...
       comment: Vectors to find the maximum from.
@@ -3070,8 +3071,8 @@ modules:
   - name: min
     comment: Applies math.min to each component of the vectors.
     parameters:
-    - name: v
-      comment: Input vector.
+    - name: vec
+      comment: Vector to find the minimum from.
       type: vector
     - name: ...
       comment: Vectors to find the minimum from.

@@ -11551,14 +11551,14 @@ functions:
   llLinear2sRGB:
     arguments:
     - color:
-        tooltip: RGB color vector in linear space to convert.
+        tooltip: Color vector in the linear RGB space to convert.
         type: vector
     energy: 10.0
     func-id: 715
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the conversion of color from the linear
+    tooltip: Returns the color vector converted from the linear
       RGB colorspace into the sRGB colorspace.
     categories:
       - data_conversion
@@ -16705,8 +16705,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the magnitude (geometric length) of the
-      vector vec.
+    tooltip: Returns the magnitude (geometric length) of vec.
     categories:
       - math
       - math_3d
@@ -16725,7 +16724,7 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a normalized unit vector sharing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec.
     categories:
       - math
       - math_3d
@@ -16928,7 +16927,7 @@ functions:
       - data_conversion
   llsRGB2Linear:
     arguments:
-    - srgb:
+    - color:
         tooltip: Color vector in the sRGB colorspace to convert.
         type: vector
     energy: 10.0
@@ -16936,7 +16935,7 @@ functions:
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the conversion of the color srgb from the
+    tooltip: Returns the color vector converted from the
       sRGB colorspace into the linear RGB colorspace.
     categories:
       - data_conversion
