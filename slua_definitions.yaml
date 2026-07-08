@@ -748,12 +748,12 @@ modules:
   functions:
   - name: arshift
     comment: |-
-      Shifts n by i bits to the right. If i is negative, a left shift is performed.
+      Returns val shifted by i bits to the right. If i is negative, a left shift is performed.
       Does an arithmetic shift: The most significant bit of n is propagated during the shift.
       Returns 0 if i < -31, or all sign bits if i > 31.
     parameters:
-    - name: "n"
-      comment: Number to shift.
+    - name: val
+      comment: Integer to shift.
       type: number
     - name: i
       comment: Number of bits to shift.
@@ -763,68 +763,67 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: band
-    comment: Performs a bitwise AND operation on input numbers.
+    comment: Returns the bitwise AND of the given numbers.
     parameters:
     - name: ...
-      comment: Numbers to perform bitwise AND on.
+      comment: Integers to perform bitwise AND on.
       type: ...number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: bnot
-    comment: Returns the bitwise negation of the input number.
+    comment: Returns the bitwise negation of val.
     parameters:
-    - name: "n"
-      comment: Number to negate.
+    - name: val
+      comment: Integer to negate.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: bor
-    comment: Performs a bitwise OR operation on input numbers.
+    comment: Returns the bitwise OR of the given numbers.
     parameters:
     - name: ...
-      comment: Numbers to perform bitwise OR on.
+      comment: Integers to perform bitwise OR on.
       type: ...number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: bxor
-    comment: Performs a bitwise XOR operation on input numbers.
+    comment: Returns the bitwise XOR of the given numbers.
     parameters:
     - name: ...
-      comment: Numbers to perform bitwise XOR on.
+      comment: Integers to perform bitwise XOR on.
       type: ...number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: btest
-    comment: |-
-      Performs a bitwise AND operation on input numbers.
-      Returns true if result is non-zero.
+    comment: Returns true if the bitwise AND of the given numbers is non-zero.
     parameters:
     - name: ...
-      comment: Numbers to perform bitwise AND on.
+      comment: Integers to perform bitwise AND on.
       type: ...number
     return-type: boolean
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: extract
-    comment: "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31]."
+    comment: Returns width bits from src, starting from bit index field.
+      Raises an error if the selected bit range is goes outside the range [0, 31].
     parameters:
-    - name: "n"
-      comment: Number to extract from.
+    - name: src
+      comment: Integer to extract from.
       type: number
     - name: field
       comment: Starting index.
       type: number
     - name: width
-      comment: Number of bits to extract.
+      comment: Number of bits to extract, or 1 if omitted.
       type: number?
       default-value: 1
     return-type: number
@@ -832,10 +831,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lrotate
-    comment: Rotates n by i bits to the left. If i is negative, a right rotate is performed.
+    comment: Returns val rotated by i bits to the left. If i is negative, a right rotate is performed.
     parameters:
-    - name: "n"
-      comment: Number to rotate.
+    - name: val
+      comment: Integer to rotate.
       type: number
     - name: i
       comment: Number of bits to rotate.
@@ -845,10 +844,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lshift
-    comment: "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range."
+    comment: Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.
     parameters:
-    - name: "n"
-      comment: Number to shift.
+    - name: val
+      comment: Integer to shift.
       type: number
     - name: i
       comment: Number of bits to shift.
@@ -858,19 +857,20 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: replace
-    comment: "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31]."
+    comment: Returns dst with width bits replaced from src, starting from bit index field.
+      Raises an error if the selected bit range goes outside the range [0, 31].
     parameters:
-    - name: "n"
-      comment: Number to replace in.
+    - name: dst
+      comment: Integer to replace bits in.
       type: number
-    - name: v
-      comment: Value containing the new bits to insert.
+    - name: src
+      comment: Integer containing the replacement bits.
       type: number
     - name: field
-      comment: Starting index.
+      comment: Starting bit index, zero-based
       type: number
     - name: width
-      comment: Number of bits to replace.
+      comment: Number of bits to replace, or 1 if omitted.
       type: number?
       default-value: 1
     return-type: number
@@ -878,10 +878,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: rrotate
-    comment: Rotates n by i bits to the right. If i is negative, a left rotate is performed.
+    comment: Returns val rotated by i bits to the right. If i is negative, a left rotate is performed.
     parameters:
-    - name: "n"
-      comment: Number to rotate.
+    - name: val
+      comment: Integer to rotate.
       type: number
     - name: i
       comment: Number of bits to rotate.
@@ -891,10 +891,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: rshift
-    comment: "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range."
+    comment: Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.
     parameters:
-    - name: "n"
-      comment: Number to shift.
+    - name: val
+      comment: Integer to shift.
       type: number
     - name: i
       comment: Number of bits to shift.
@@ -904,53 +904,53 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: s32
-    comment: Wrap this number from float64 range to signed int32 range and truncate to integer.
-      Makes integer arithmetic compatible with LSL.
+    comment: Returns val, wrapped from float64 range to signed int32 range and truncated to integer.
+      Makes integer arithmetic compatable with LSL.
     parameters:
-    - name: "n"
-      comment: Number to truncate.
+    - name: val
+      comment: Integer to truncate.
       type: number
     return-type: number
     must-use: true
     typechecker: {checked: true}
   - name: smul
-    comment: Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary.
+    comment: Returns the product of two signed 32-bit integers as a signed 32-bit integer, wrapping as necessary.
       Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.
     parameters:
-    - name: a
+    - name: val1
       comment: Left factor.
       type: number
-    - name: b
+    - name: val2
       comment: Right factor.
       type: number
     return-type: number
     must-use: true
     typechecker: {checked: true}
   - name: countlz
-    comment: Count leading zeros.
+    comment: Returns the count of val's leading zeros.
     parameters:
-    - name: "n"
-      comment: Number whose leading zeros will be counted.
+    - name: val
+      comment: Integer to count leading zeros in.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: countrz
-    comment: Count trailing zeros.
+    comment: Returns the count of val's troiling zeros.
     parameters:
-    - name: "n"
-      comment: Number whose trailing zeros will be counted.
+    - name: val
+      comment: Integer to count trailing zeros in.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: byteswap
-    comment: Swap byte order.
+    comment: Returns val with its bytes swapped to the reverse order.
     parameters:
-    - name: "n"
-      comment: Number whose byte order will be swapped.
+    - name: val
+      comment: Integer whose byte order will be swapped.
       type: number
     return-type: number
     must-use: true
