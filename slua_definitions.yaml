@@ -1802,10 +1802,10 @@ modules:
     comment: Linearly interpolates between start and end using factor t.
     parameters:
     - name: start
-      comment: Start value.
+      comment: Starting value.
       type: number
     - name: end
-      comment: End value.
+      comment: Ending value.
       type: number
     - name: t
       comment: Interpolation factor.
@@ -2191,30 +2191,30 @@ modules:
     must-use: true
     typechecker: {checked: true}
   - name: normalize
-    comment: Computes the normalized version (unit quaternion) of the quaternion.
+    comment: Returns the normalized unit quaternion pointing the same direction as q.
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to normalize.
       type: quaternion
     return-type: quaternion
     must-use: true
     typechecker: {checked: true}
   - name: magnitude
-    comment: Computes the magnitude of the quaternion.
+    comment: Returns the magnitude (geometric length) of the quaternion.
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to evaluate.
       type: quaternion
     return-type: number
     must-use: true
     typechecker: {checked: true}
   - name: dot
-    comment: Computes the dot product of two quaternions.
+    comment: Returns the dot product of two quaternions.
     parameters:
-    - name: a
+    - name: q1
       comment: Left input quaternion.
       type: quaternion
-    - name: b
+    - name: q2
       comment: Right input quaternion.
       type: quaternion
     return-type: number
@@ -2224,10 +2224,10 @@ modules:
     comment: Spherical linear interpolation from start to end using factor t.
     parameters:
     - name: start
-      comment: Start quaternion.
+      comment: Starting quaternion.
       type: quaternion
     - name: end
-      comment: End quaternion.
+      comment: Ending quaternion.
       type: quaternion
     - name: t
       comment: Interpolation factor.
@@ -2236,37 +2236,41 @@ modules:
     must-use: true
     typechecker: {checked: true}
   - name: conjugate
-    comment: Computes the conjugate of the quaternion.
+    comment: Returns the conjugate of the quaternion.
+      Equivilant to quaternion(-q.x, -q.y, -q.z, q.s))
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to conjugate.
       type: quaternion
     return-type: quaternion
     must-use: true
     typechecker: {checked: true}
   - name: tofwd
-    comment: Computes the forward vector from the quaternion.
+    comment: Returns the unit vector pointing toward positive X direction (forward)
+      in the coordinate space of rotation q. Equivilant to vector(1, 0, 0) * q.
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to convert.
       type: quaternion
     return-type: vector
     must-use: true
     typechecker: {checked: true}
   - name: toleft
-    comment: Computes the left vector from the quaternion.
+    comment: Returns the unit vector pointing toward positive Y direction (left)
+      in the coordinate space of rotation q. Equivilant to vector(0, 1, 0) * q.
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to convert.
       type: quaternion
     return-type: vector
     must-use: true
     typechecker: {checked: true}
   - name: toup
-    comment: Computes the up vector from the quaternion.
+    comment: Returns the unit vector pointing toward positive Z direction (up)
+      in the coordinate space of rotation q. Equivilant to vector(0, 0, 1) * q.
     parameters:
     - name: q
-      comment: Input quaternion.
+      comment: Quaternion to convert.
       type: quaternion
     return-type: vector
     must-use: true
@@ -2936,7 +2940,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: magnitude
-    comment: Returns the magnitude (geometric length) of vec.
+    comment: Returns the magnitude (geometric length) of the vector.
     parameters:
     - name: vec
       comment: Vector to evaluate.
@@ -2958,11 +2962,11 @@ modules:
   - name: cross
     comment: Returns the cross product of two vectors.
     parameters:
-    - name: vec1
-      comment: Left input vector.
+    - name: start_vec
+      comment: Starting vector.
       type: vector
-    - name: vec2
-      comment: Right input vector.
+    - name: end_vec
+      comment: Ending vector.
       type: vector
     return-type: vector
     must-use: true
@@ -2982,15 +2986,15 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: angle
-    comment: Returns the angle between two vectors in radians.
+    comment: Returns the angle from start_vec to end_vec in radians.
       The axis, if specified, is used to determine the sign of the angle.
-      If no axis is specified, the angle is positive, as if axis was vector.cross(vec1, vec2).
+      If no axis is specified, the angle is positive, as if axis was vector.cross(start_vec, end_vec).
     parameters:
-    - name: vec1
+    - name: start_vec
       type: vector
-      comment: Left input vector.
-    - name: vec2
-      comment: Right input vector.
+      comment: Starting vector.
+    - name: end_vec
+      comment: Ending vector.
       type: vector
     - name: axis
       comment: Axis to determine the sign of the angle.
@@ -3085,10 +3089,10 @@ modules:
     comment: Linearly interpolates between start and end using factor t.
     parameters:
     - name: start
-      comment: Start vector.
+      comment: Starting vector.
       type: vector
     - name: end
-      comment: End vector.
+      comment: Ending vector.
       type: vector
     - name: t
       comment: Interpolation factor.
