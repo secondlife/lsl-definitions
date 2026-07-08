@@ -331,7 +331,7 @@ export type rotation = quaternion</string>
          <key>math.huge</key>
          <map>
             <key>tooltip</key>
-            <string>A value larger than any other numeric value (infinity).</string>
+            <string>Value larger than any other numeric value (infinity).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -340,7 +340,7 @@ export type rotation = quaternion</string>
          <key>math.pi</key>
          <map>
             <key>tooltip</key>
-            <string>Value of pi.</string>
+            <string>The number of radians in a half circle (semi-circle).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -349,7 +349,7 @@ export type rotation = quaternion</string>
          <key>quaternion.identity</key>
          <map>
             <key>tooltip</key>
-            <string>Identity quaternion constant.</string>
+            <string>Identity quaternion constant. Causes no change when rotated.</string>
             <key>type</key>
             <string>quaternion</string>
             <key>value</key>
@@ -367,7 +367,7 @@ export type rotation = quaternion</string>
          <key>vector.one</key>
          <map>
             <key>tooltip</key>
-            <string>Constant vector with all components set to 1.</string>
+            <string>Vector constant with all components set to 1.</string>
             <key>type</key>
             <string>vector</string>
             <key>value</key>
@@ -376,7 +376,7 @@ export type rotation = quaternion</string>
          <key>vector.zero</key>
          <map>
             <key>tooltip</key>
-            <string>Constant vector with all components set to 0.</string>
+            <string>Vector constant with all components set to 0.</string>
             <key>type</key>
             <string>vector</string>
             <key>value</key>
@@ -5166,7 +5166,7 @@ export type rotation = quaternion</string>
          <key>PI</key>
          <map>
             <key>tooltip</key>
-            <string>Mathematical constant Pi (3.14159265), representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan.</string>
+            <string>Mathematical constant pi, representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -5184,7 +5184,7 @@ export type rotation = quaternion</string>
          <key>PI_BY_TWO</key>
          <map>
             <key>tooltip</key>
-            <string>Constant Pi/2 (1.57079633), representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan.</string>
+            <string>Mathematical constant pi/2, representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -7087,7 +7087,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>RAD_TO_DEG</key>
          <map>
             <key>tooltip</key>
-            <string>Constant 57.2957795 (precise value is 180/PI). Multiply a value in radians by this number to convert it to degrees.</string>
+            <string>180/PI. Multiply a value in radians by this number to convert it to degrees.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -8164,7 +8164,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SQRT2</key>
          <map>
             <key>tooltip</key>
-            <string>Mathematical constant representing the square root of 2 (1.41421356).</string>
+            <string>Mathematical constant representing the square root of 2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -8832,7 +8832,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>TWO_PI</key>
          <map>
             <key>tooltip</key>
-            <string>Mathematical constant representing the number of radians in a full circle (6.28318530, twice the value of PI).</string>
+            <string>Mathematical constant pi*2, representing the number of radians in a full circle.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -11438,10 +11438,10 @@ float falloff – ranges from 0.01 to 2.0
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to shift.</string>
+                     <string>Integer to shift.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11463,7 +11463,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Shifts n by i bits to the right. If i is negative, a left shift is performed.
+            <string>Returns val shifted by i bits to the right. If i is negative, a left shift is performed.
 Does an arithmetic shift: The most significant bit of n is propagated during the shift.
 Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
          </map>
@@ -11475,7 +11475,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Numbers to perform bitwise AND on.</string>
+                     <string>Integers to perform bitwise AND on.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -11488,17 +11488,17 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Performs a bitwise AND operation on input numbers.</string>
+            <string>Returns the bitwise AND of the given numbers.</string>
          </map>
          <key>bit32.bnot</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to negate.</string>
+                     <string>Integer to negate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11511,7 +11511,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the bitwise negation of the input number.</string>
+            <string>Returns the bitwise negation of val.</string>
          </map>
          <key>bit32.bor</key>
          <map>
@@ -11521,7 +11521,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Numbers to perform bitwise OR on.</string>
+                     <string>Integers to perform bitwise OR on.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -11534,7 +11534,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Performs a bitwise OR operation on input numbers.</string>
+            <string>Returns the bitwise OR of the given numbers.</string>
          </map>
          <key>bit32.btest</key>
          <map>
@@ -11544,7 +11544,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Numbers to perform bitwise AND on.</string>
+                     <string>Integers to perform bitwise AND on.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -11557,8 +11557,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Performs a bitwise AND operation on input numbers.
-Returns true if result is non-zero.</string>
+            <string>Returns true if the bitwise AND of the given numbers is non-zero.</string>
          </map>
          <key>bit32.bxor</key>
          <map>
@@ -11568,7 +11567,7 @@ Returns true if result is non-zero.</string>
                   <key>...</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Numbers to perform bitwise XOR on.</string>
+                     <string>Integers to perform bitwise XOR on.</string>
                      <key>type</key>
                      <string>...number</string>
                   </map>
@@ -11581,17 +11580,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Performs a bitwise XOR operation on input numbers.</string>
+            <string>Returns the bitwise XOR of the given numbers.</string>
          </map>
          <key>bit32.byteswap</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number whose byte order will be swapped.</string>
+                     <string>Integer whose byte order will be swapped.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11604,17 +11603,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Swap byte order.</string>
+            <string>Returns val with its bytes swapped to the reverse order.</string>
          </map>
          <key>bit32.countlz</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number whose leading zeros will be counted.</string>
+                     <string>Integer to count leading zeros in.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11627,17 +11626,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Count leading zeros.</string>
+            <string>Returns the count of val's leading zeros.</string>
          </map>
          <key>bit32.countrz</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number whose trailing zeros will be counted.</string>
+                     <string>Integer to count trailing zeros in.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11650,17 +11649,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Count trailing zeros.</string>
+            <string>Returns the count of val's troiling zeros.</string>
          </map>
          <key>bit32.extract</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to extract from.</string>
+                     <string>Integer to extract from.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11678,7 +11677,7 @@ Returns true if result is non-zero.</string>
                   <key>width</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of bits to extract (optional, defaults to 1).</string>
+                     <string>Number of bits to extract, or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11691,17 +11690,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31].</string>
+            <string>Returns width bits from src, starting from bit index field. Raises an error if the selected bit range is goes outside the range [0, 31].</string>
          </map>
          <key>bit32.lrotate</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to rotate.</string>
+                     <string>Integer to rotate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11723,17 +11722,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Rotates n by i bits to the left. If i is negative, a right rotate is performed.</string>
+            <string>Returns val rotated by i bits to the left. If i is negative, a right rotate is performed.</string>
          </map>
          <key>bit32.lshift</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to shift.</string>
+                     <string>Integer to shift.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11755,26 +11754,26 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.</string>
+            <string>Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.</string>
          </map>
          <key>bit32.replace</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>dst</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to replace in.</string>
+                     <string>Integer to replace bits in.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>v</key>
+                  <key>src</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Value containing the new bits to insert.</string>
+                     <string>Integer containing the replacement bits.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11783,7 +11782,7 @@ Returns true if result is non-zero.</string>
                   <key>field</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index.</string>
+                     <string>Starting bit index, zero-based</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11792,7 +11791,7 @@ Returns true if result is non-zero.</string>
                   <key>width</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of bits to replace (optional, defaults to 1).</string>
+                     <string>Number of bits to replace, or 1 if omitted (optional, defaults to 1).</string>
                      <key>type</key>
                      <string>number?</string>
                   </map>
@@ -11805,17 +11804,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31].</string>
+            <string>Returns dst with width bits replaced from src, starting from bit index field. Raises an error if the selected bit range goes outside the range [0, 31].</string>
          </map>
          <key>bit32.rrotate</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to rotate.</string>
+                     <string>Integer to rotate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11837,17 +11836,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Rotates n by i bits to the right. If i is negative, a left rotate is performed.</string>
+            <string>Returns val rotated by i bits to the right. If i is negative, a left rotate is performed.</string>
          </map>
          <key>bit32.rshift</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to shift.</string>
+                     <string>Integer to shift.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11869,17 +11868,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.</string>
+            <string>Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.</string>
          </map>
          <key>bit32.s32</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to truncate.</string>
+                     <string>Integer to truncate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -11892,14 +11891,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Wrap this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatible with LSL.</string>
+            <string>Returns val, wrapped from float64 range to signed int32 range and truncated to integer. Makes integer arithmetic compatable with LSL.</string>
          </map>
          <key>bit32.smul</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>val1</key>
                   <map>
                      <key>tooltip</key>
                      <string>Left factor.</string>
@@ -11908,7 +11907,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>val2</key>
                   <map>
                      <key>tooltip</key>
                      <string>Right factor.</string>
@@ -11924,7 +11923,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.</string>
+            <string>Returns the product of two signed 32-bit integers as a signed 32-bit integer, wrapping as necessary. Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.</string>
          </map>
          <key>buffer</key>
          <map>
@@ -13508,10 +13507,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number.</string>
+                     <string>Number to convert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13524,17 +13523,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the absolute value of n.</string>
+            <string>Returns the absolute (positive) value of val.</string>
          </map>
          <key>math.acos</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number in the range [-1, 1].</string>
+                     <string>Cosine value in the range [-1.0, 1.0] to invert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13547,17 +13546,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the arc cosine of n in radians.</string>
+            <string>Returns the arccosine of val in radians. Returns NaN if val is not in range [-1.0, 1.0].</string>
          </map>
          <key>math.asin</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number in the range [-1, 1].</string>
+                     <string>Sine value in the range [-1.0, 1.0] to invert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13570,17 +13569,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the arc sine of n in radians.</string>
+            <string>Returns the arcsine of val in radians. Returns NaN if val is not in range [-1.0, 1.0].</string>
          </map>
          <key>math.atan</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number.</string>
+                     <string>Tangent value to invert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13593,7 +13592,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the arc tangent of n in radians.</string>
+            <string>Returns the arctangent of val in radians.</string>
          </map>
          <key>math.atan2</key>
          <map>
@@ -13603,7 +13602,7 @@ Returns true if result is non-zero.</string>
                   <key>y</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Y-coordinate.</string>
+                     <string>Y coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13612,7 +13611,7 @@ Returns true if result is non-zero.</string>
                   <key>x</key>
                   <map>
                      <key>tooltip</key>
-                     <string>X-coordinate.</string>
+                     <string>X coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13625,17 +13624,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.</string>
+            <string>Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.</string>
          </map>
          <key>math.ceil</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to round up.</string>
+                     <string>Number to round up.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13648,17 +13647,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the smallest integer larger than or equal to n.</string>
+            <string>Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.</string>
          </map>
          <key>math.clamp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Value to be clamped.</string>
+                     <string>Number to clamp.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13689,17 +13688,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns n clamped between min and max. Raises an error if min is greater than max.</string>
+            <string>Returns val clamped between min and max. Raises an error if min is greater than max.</string>
          </map>
          <key>math.cos</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>An angle in radians.</string>
+                     <string>Angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13712,17 +13711,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the cosine of n. n is in radians.</string>
+            <string>Returns the cosine of theta. theta is in radians.</string>
          </map>
          <key>math.cosh</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute the hyperbolic cosine of.</string>
+                     <string>Number to compute the hyperbolic cosine of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13742,10 +13741,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A value in radians.</string>
+                     <string>Number in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13758,17 +13757,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts n from radians to degrees.</string>
+            <string>Returns theta converted from radians to degrees.</string>
          </map>
          <key>math.exp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute e^n.</string>
+                     <string>Number to compute e^n.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13781,17 +13780,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the base-e exponent of n.</string>
+            <string>Returns the e to the power of val.</string>
          </map>
          <key>math.floor</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to round down.</string>
+                     <string>Number to round down.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13804,14 +13803,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the largest integer smaller than or equal to n.</string>
+            <string>Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.</string>
          </map>
          <key>math.fmod</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>x</key>
+                  <key>dividend</key>
                   <map>
                      <key>tooltip</key>
                      <string>Dividend.</string>
@@ -13820,10 +13819,10 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>y</key>
+                  <key>modulus</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Divisor.</string>
+                     <string>Modulus.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13836,17 +13835,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the remainder of x modulo y, rounded towards zero.</string>
+            <string>Returns the remainder (modulo) of dividend/modulus, (i.e. d mod m), rounded towards zero. Returns NaN if modulus is 0. Identical to d % m if both arguments have the same sign.</string>
          </map>
          <key>math.frexp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to split into significand and exponent.</string>
+                     <string>Number to split into significand and exponent.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13859,14 +13858,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns m and e such that n = m * 2^e.</string>
+            <string>Breaks a floating-point number into it's component parts significand and exponent. In other words, Returns significand s and integer exponent e such that val = s * 2^e. Inverse of math.ldexp.</string>
          </map>
          <key>math.isfinite</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Number to check as finite.</string>
@@ -13882,14 +13881,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns true if n is finite.</string>
+            <string>Returns true if val is finite.</string>
          </map>
          <key>math.isinf</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Number to check as infinite.</string>
@@ -13905,14 +13904,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns true if n is infinite.</string>
+            <string>Returns true if val is infinite.</string>
          </map>
          <key>math.isnan</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Number to check as NaN.</string>
@@ -13928,14 +13927,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns true if n is NaN.</string>
+            <string>Returns true if val is NaN.</string>
          </map>
          <key>math.ldexp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>s</key>
+                  <key>significand</key>
                   <map>
                      <key>tooltip</key>
                      <string>Significand.</string>
@@ -13944,7 +13943,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>e</key>
+                  <key>exponent</key>
                   <map>
                      <key>tooltip</key>
                      <string>Exponent.</string>
@@ -13960,26 +13959,26 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns s * 2^e.</string>
+            <string>Returns s * 2^e. Inverse of math.frexp</string>
          </map>
          <key>math.lerp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Start value.</string>
+                     <string>Starting value.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>End value.</string>
+                     <string>Ending value.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14001,17 +14000,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Linearly interpolates between a and b using factor t.</string>
+            <string>Linearly interpolates between start and end using factor t.</string>
          </map>
          <key>math.log</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute logarithm.</string>
+                     <string>Number to compute the logarithm of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14033,17 +14032,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the logarithm of n in the given base, defaults to e.</string>
+            <string>Returns the logarithm of val in the given base. The default base is e.</string>
          </map>
          <key>math.log10</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute base-10 logarithm.</string>
+                     <string>Number to compute base-10 logarithm.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14056,14 +14055,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the base-10 logarithm of n.</string>
+            <string>Returns the base-10 logarithm of val.</string>
          </map>
          <key>math.map</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Number to map.</string>
@@ -14115,17 +14114,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Maps n from input range to output range.</string>
+            <string>Maps val from input range to output range.</string>
          </map>
          <key>math.max</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to find the maximum from.</string>
+                     <string>Number to find the maximum from.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14154,10 +14153,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to find the minimum from.</string>
+                     <string>Number to find the minimum from.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14186,10 +14185,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to split into integer and fractional parts.</string>
+                     <string>Number to split into integer and fractional parts.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14202,7 +14201,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the integer and fractional parts of n.</string>
+            <string>Returns the integer and fractional parts of val.</string>
          </map>
          <key>math.noise</key>
          <map>
@@ -14282,10 +14281,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A value in degrees.</string>
+                     <string>Angle in degrees.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14298,7 +14297,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts n from degrees to radians.</string>
+            <string>Returns theta converted from degrees to radians.</string>
          </map>
          <key>math.random</key>
          <map>
@@ -14362,10 +14361,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to round to the nearest integer. Halfway values are rounded away from zero.</string>
+                     <string>Number to round to the nearest integer. Halfway values are rounded away from zero.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14378,17 +14377,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Rounds n to the nearest integer.</string>
+            <string>Returns val rounded to the nearest integer. Halfway values are rounded away from zero.</string>
          </map>
          <key>math.sign</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to get the sign of.</string>
+                     <string>Number to get the sign of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14401,17 +14400,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns -1 if n is negative, 1 if positive, and 0 if zero.</string>
+            <string>Returns -1 if val is negative, 1 if positive, and 0 if zero.</string>
          </map>
          <key>math.sin</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>An angle in radians.</string>
+                     <string>Angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14424,17 +14423,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the sine of n. n is in radians.</string>
+            <string>Returns the sine of theta. theta is in radians.</string>
          </map>
          <key>math.sinh</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute the hyperbolic sine of.</string>
+                     <string>Number to compute the hyperbolic sine of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14447,17 +14446,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the hyperbolic sine of n.</string>
+            <string>Returns the hyperbolic sine of val.</string>
          </map>
          <key>math.sqrt</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute the square root of.</string>
+                     <string>Number to compute the square root of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14470,17 +14469,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the square root of n.</string>
+            <string>Returns the square root of val. If negative, return Nan.</string>
          </map>
          <key>math.tan</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>An angle in radians.</string>
+                     <string>Angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14493,17 +14492,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the tangent of n. n is in radians.</string>
+            <string>Returns the tangent of theta. theta is in radians.</string>
          </map>
          <key>math.tanh</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>n</key>
+                  <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A number to compute the hyperbolic tangent of.</string>
+                     <string>Number to compute the hyperbolic tangent of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -14516,7 +14515,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the hyperbolic tangent of n.</string>
+            <string>Returns the hyperbolic tangent of val.</string>
          </map>
          <key>os</key>
          <map>
@@ -14686,7 +14685,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to conjugate.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14699,7 +14698,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the conjugate of the quaternion.</string>
+            <string>Returns the conjugate of the quaternion. Equivilant to quaternion(-q.x, -q.y, -q.z, q.s))</string>
          </map>
          <key>quaternion.create</key>
          <map>
@@ -14756,7 +14755,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>q1</key>
                   <map>
                      <key>tooltip</key>
                      <string>Left input quaternion.</string>
@@ -14765,7 +14764,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>q2</key>
                   <map>
                      <key>tooltip</key>
                      <string>Right input quaternion.</string>
@@ -14781,7 +14780,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the dot product of two quaternions.</string>
+            <string>Returns the dot product of two quaternions.</string>
          </map>
          <key>quaternion.magnitude</key>
          <map>
@@ -14791,7 +14790,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to evaluate.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14804,7 +14803,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the magnitude of the quaternion.</string>
+            <string>Returns the magnitude (geometric length) of the quaternion.</string>
          </map>
          <key>quaternion.normalize</key>
          <map>
@@ -14814,7 +14813,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to normalize.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14827,26 +14826,26 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the normalized version (unit quaternion) of the quaternion.</string>
+            <string>Returns the normalized unit quaternion pointing the same direction as q.</string>
          </map>
          <key>quaternion.slerp</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start_q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Start quaternion.</string>
+                     <string>Starting quaternion.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end_q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>End quaternion.</string>
+                     <string>Ending quaternion.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14868,7 +14867,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Spherical linear interpolation from a to b using factor t.</string>
+            <string>Spherical linear interpolation from start to end using factor t.</string>
          </map>
          <key>quaternion.tofwd</key>
          <map>
@@ -14878,7 +14877,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14891,7 +14890,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the forward vector from the quaternion.</string>
+            <string>Returns the unit vector pointing toward positive X direction (forward) in the coordinate space of rotation q. Equivilant to vector(1, 0, 0) * q.</string>
          </map>
          <key>quaternion.toleft</key>
          <map>
@@ -14901,7 +14900,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14914,7 +14913,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the left vector from the quaternion.</string>
+            <string>Returns the unit vector pointing toward positive Y direction (left) in the coordinate space of rotation q. Equivilant to vector(0, 1, 0) * q.</string>
          </map>
          <key>quaternion.toup</key>
          <map>
@@ -14924,7 +14923,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input quaternion.</string>
+                     <string>Quaternion to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -14937,7 +14936,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the up vector from the quaternion.</string>
+            <string>Returns the unit vector pointing toward positive Z direction (up) in the coordinate space of rotation q. Equivilant to vector(0, 0, 1) * q.</string>
          </map>
          <key>string</key>
          <map>
@@ -16501,10 +16500,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to convert.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16524,19 +16523,19 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start_vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Left input vector.</string>
+                     <string>Starting vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Right input vector.</string>
+                     <string>Ending vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16558,17 +16557,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the angle between two vectors in radians. The axis, if specified, is used to determine the sign of the angle.</string>
+            <string>Returns the angle from start_vec to end_vec in radians. The axis, if specified, is used to determine the sign of the angle. If no axis is specified, the angle is positive, as if axis was vector.cross(start_vec, end_vec).</string>
          </map>
          <key>vector.ceil</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to round up.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16588,10 +16587,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector to be clamped.</string>
+                     <string>Vector to be clamped.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16670,19 +16669,19 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start_vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Left input vector.</string>
+                     <string>Starting vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Right input vector.</string>
+                     <string>Ending vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16695,14 +16694,14 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the cross product of two vectors.</string>
+            <string>Returns the cross product of two vectors.</string>
          </map>
          <key>vector.dot</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>vec1</key>
                   <map>
                      <key>tooltip</key>
                      <string>Left input vector.</string>
@@ -16711,7 +16710,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>vec2</key>
                   <map>
                      <key>tooltip</key>
                      <string>Right input vector.</string>
@@ -16727,17 +16726,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the dot product of two vectors.</string>
+            <string>Returns the dot product of two vectors.</string>
          </map>
          <key>vector.floor</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to round down.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16757,19 +16756,19 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Start vector.</string>
+                     <string>Starting vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end</key>
                   <map>
                      <key>tooltip</key>
-                     <string>End vector.</string>
+                     <string>Ending vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16791,17 +16790,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Linearly interpolates between a and b using factor t.</string>
+            <string>Linearly interpolates between start and end using factor t.</string>
          </map>
          <key>vector.magnitude</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to evaluate.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16814,17 +16813,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the magnitude of the vector.</string>
+            <string>Returns the magnitude (geometric length) of the vector.</string>
          </map>
          <key>vector.max</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to find the maximum from.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16853,10 +16852,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to find the minimum from.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16885,10 +16884,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to normalize.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16901,17 +16900,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Computes the normalized version (unit vector) of the vector.</string>
+            <string>Returns the normalized unit vector pointing the same direction as vec.</string>
          </map>
          <key>vector.sign</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input vector.</string>
+                     <string>Vector to get the sign of.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -16941,7 +16940,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Any integer value.</string>
+                     <string>Integer to convert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -16956,7 +16955,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the absolute (positive) value of val.</string>
+            <string>Returns the absolute (positive) integer value of val.</string>
          </map>
          <key>ll.Acos</key>
          <map>
@@ -16966,7 +16965,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A floating-point value falling in the range [-1.0, 1.0].</string>
+                     <string>A number in the range [-1.0, 1.0].</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -16981,7 +16980,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the arc-cosine of val in radians.</string>
+            <string>Returns the arccosine of val in radians.</string>
          </map>
          <key>ll.AddToLandBanList</key>
          <map>
@@ -17155,7 +17154,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>start_rot</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting rotation.</string>
@@ -17164,7 +17163,7 @@ Returns true if result is non-zero.</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>end_rot</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending rotation.</string>
@@ -17180,7 +17179,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the angle in radians between rotations a and b.</string>
+            <string>Returns the angle, in radians, between rotations start_rot and and end_rot.</string>
          </map>
          <key>ll.ApplyImpulse</key>
          <map>
@@ -17254,7 +17253,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A floating-point value falling in the range [-1.0, 1.0].</string>
+                     <string>A number in the range [-1.0, 1.0].</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17269,7 +17268,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the arc-sine of val in radians.</string>
+            <string>Returns the arcsine of val in radians.</string>
          </map>
          <key>ll.Atan2</key>
          <map>
@@ -17279,7 +17278,7 @@ Returns true if result is non-zero.</string>
                   <key>y</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A floating-point value representing the y coordinate.</string>
+                     <string>Y coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17288,7 +17287,7 @@ Returns true if result is non-zero.</string>
                   <key>x</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A floating-point value representing the x coordinate.</string>
+                     <string>X coordinate.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17303,7 +17302,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the arctangent2 of y and x.</string>
+            <string>Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.</string>
          </map>
          <key>ll.AttachToAvatar</key>
          <map>
@@ -17437,7 +17436,7 @@ Returns true if result is non-zero.</string>
                   <key>axis</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Axis vector around which the rotation is generated.</string>
+                     <string>Axis vector to rotate around.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -17446,7 +17445,7 @@ Returns true if result is non-zero.</string>
                   <key>angle</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Angle of rotation, expressed in radians.</string>
+                     <string>Angle to rotate, in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17459,7 +17458,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the rotation representing a generated angle (in radians) about the specified axis.</string>
+            <string>Returns the rotation that rotates angle radians around the axis vector.</string>
          </map>
          <key>ll.Base64ToInteger</key>
          <map>
@@ -17620,7 +17619,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to round.</string>
+                     <string>Number to round up.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17635,7 +17634,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the smallest integer value greater than or equal to val (rounded toward positive infinity).</string>
+            <string>Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.</string>
          </map>
          <key>ll.Char</key>
          <map>
@@ -17917,7 +17916,7 @@ Returns true if result is non-zero.</string>
                   <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Angle expressed in radians.</string>
+                     <string>An angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -17932,7 +17931,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the cosine of theta.</string>
+            <string>Returns the cosine of theta. theta is in radians.</string>
          </map>
          <key>ll.CreateCharacter</key>
          <map>
@@ -18917,10 +18916,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>v</key>
+                  <key>vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Vector of Euler angles to convert.</string>
+                     <string>Vector of Euler angles to convert, in radians.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -18933,7 +18932,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the rotation representation of the Euler angles vector v.</string>
+            <string>Returns the quaternion representation of the Euler angles (in radians) within vec.</string>
          </map>
          <key>ll.Evade</key>
          <map>
@@ -19007,7 +19006,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to convert.</string>
+                     <string>Number to convert.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -19022,7 +19021,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the absolute (positive) value of val.</string>
+            <string>Returns the absolute (positive) value of val.</string>
          </map>
          <key>ll.FindNotecardTextCount</key>
          <map>
@@ -19173,7 +19172,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to round.</string>
+                     <string>Number to round down.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -19188,7 +19187,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the largest integer value less than or equal to val (rounded toward negative infinity).</string>
+            <string>Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.</string>
          </map>
          <key>ll.ForceMouselook</key>
          <map>
@@ -22857,7 +22856,7 @@ Returns true if result is non-zero.</string>
                   <key>color</key>
                   <map>
                      <key>tooltip</key>
-                     <string>RGB color vector in linear space to convert.</string>
+                     <string>Color vector in the linear RGB space to convert.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -22870,7 +22869,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.</string>
+            <string>Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.</string>
          </map>
          <key>ll.LinkAdjustSoundVolume</key>
          <map>
@@ -24291,9 +24290,9 @@ Returns true if result is non-zero.</string>
                   <key>src</key>
                   <map>
                      <key>tooltip</key>
-                     <string>List of floats and integers to analyze.</string>
+                     <string>List of numbers to analyze.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{number}</string>
                   </map>
                </map>
             </array>
@@ -24304,7 +24303,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the result of performing the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.</string>
+            <string>Returns the numeric result of the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.</string>
          </map>
          <key>ll.Listen</key>
          <map>
@@ -24460,7 +24459,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to evaluate.</string>
+                     <string>Number to compute the logarithm of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -24475,7 +24474,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the natural (base e) logarithm of the positive value val (returns 0.0 if val &lt;= 0).</string>
+            <string>Returns natural (base e) logarithm of val. If negative, return 0.0.</string>
          </map>
          <key>ll.Log10</key>
          <map>
@@ -24485,7 +24484,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to evaluate.</string>
+                     <string>Number to compute the logarithm of.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -24500,7 +24499,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the base-10 (common) logarithm of the positive value val (returns 0.0 if val &lt;= 0).</string>
+            <string>Returns base-10 (common) logarithm of val. If negative, return 0.0.</string>
          </map>
          <key>ll.LookAt</key>
          <map>
@@ -25197,28 +25196,28 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>a</key>
+                  <key>base</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Base integer value.</string>
+                     <string>32-bit unsigned integer base.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>b</key>
+                  <key>exponent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Power exponent (capped at 0xFFFF / 16 bits).</string>
+                     <string>32-bit unsigned integer exponent.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
                </map>
                <map>
-                  <key>c</key>
+                  <key>modulus</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Modulus integer value.</string>
+                     <string>32-bit unsigned integer modulus.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25231,7 +25230,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing a raised to the power b, modulo c (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).</string>
+            <string>Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295]. Output is wrapped to signed 32-bit integer range [-2147483648..2147483647]. Will never overflow, unlike (b^e), which can overflow to inf.</string>
          </map>
          <key>ll.ModifyLand</key>
          <map>
@@ -25831,7 +25830,7 @@ Returns true if result is non-zero.</string>
                   <key>base</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Base float value.</string>
+                     <string>Base number.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25840,7 +25839,7 @@ Returns true if result is non-zero.</string>
                   <key>exponent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Exponent float value.</string>
+                     <string>Exponent number.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25855,7 +25854,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing base raised to the power exponent. Returns 0 and triggers a Math Error for imaginary results.</string>
+            <string>Returns base raised to the power exponent. If result is imaginary, returns NaN.</string>
          </map>
          <key>ll.PreloadSound</key>
          <map>
@@ -27051,10 +27050,10 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>rot</key>
+                  <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value.</string>
+                     <string>Rotation to evaluate.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27067,17 +27066,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the rotation angle of rot.</string>
+            <string>Returns the angle, in radians, that q rotates.</string>
          </map>
          <key>ll.Rot2Axis</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>rot</key>
+                  <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value.</string>
+                     <string>Rotation to evaluate.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27090,17 +27089,17 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a vector representing the rotation axis of rot.</string>
+            <string>Returns the  unit vector axis that q rotates around.</string>
          </map>
          <key>ll.Rot2Euler</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>quat</key>
+                  <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value to convert.</string>
+                     <string>Rotation to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27113,7 +27112,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.</string>
+            <string>Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.</string>
          </map>
          <key>ll.Rot2Fwd</key>
          <map>
@@ -27123,7 +27122,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value.</string>
+                     <string>Rotation to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27138,7 +27137,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.</string>
+            <string>Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to &lt;1, 0, 0&gt; * q.</string>
          </map>
          <key>ll.Rot2Left</key>
          <map>
@@ -27148,7 +27147,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value.</string>
+                     <string>Rotation to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27163,7 +27162,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.</string>
+            <string>Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to &lt;0, 1, 0&gt; * q.</string>
          </map>
          <key>ll.Rot2Up</key>
          <map>
@@ -27173,7 +27172,7 @@ Returns true if result is non-zero.</string>
                   <key>q</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Rotation value.</string>
+                     <string>Rotation to convert.</string>
                      <key>type</key>
                      <string>quaternion</string>
                   </map>
@@ -27188,7 +27187,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.</string>
+            <string>Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to &lt;0, 0, 1&gt; * q.</string>
          </map>
          <key>ll.RotBetween</key>
          <map>
@@ -27207,7 +27206,7 @@ Returns true if result is non-zero.</string>
                   <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Target ending vector.</string>
+                     <string>Ending vector.</string>
                      <key>type</key>
                      <string>vector</string>
                   </map>
@@ -27220,7 +27219,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a rotation representing the shortest path rotation from vector start to vector end.</string>
+            <string>Returns the shortest-path quaternion that rotates start_vec onto end_vec.</string>
          </map>
          <key>ll.RotLookAt</key>
          <map>
@@ -27358,7 +27357,7 @@ Returns true if result is non-zero.</string>
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Float value to round.</string>
+                     <string>Number to round.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -27373,7 +27372,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the integer that float val is closest to.</string>
+            <string>Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.</string>
          </map>
          <key>ll.SHA1String</key>
          <map>
@@ -29936,7 +29935,7 @@ Returns true if result is non-zero.</string>
                   <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Angle expressed in radians.</string>
+                     <string>An angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -29951,7 +29950,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the sine of theta.</string>
+            <string>Returns the sine of theta. theta is in radians.</string>
          </map>
          <key>ll.SitOnLink</key>
          <map>
@@ -30140,7 +30139,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the square root of the positive value val. Triggers a math runtime error if val is less than 0.0 (imaginary results).</string>
+            <string>Returns the square root of val. If negative, return Nan.</string>
          </map>
          <key>ll.StartAnimation</key>
          <map>
@@ -30478,7 +30477,7 @@ Returns true if result is non-zero.</string>
                   <key>theta</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Angle expressed in radians.</string>
+                     <string>An angle in radians.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -30493,7 +30492,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the tangent of theta.</string>
+            <string>Returns the tangent of theta. theta is in radians.</string>
          </map>
          <key>ll.Target</key>
          <map>
@@ -31173,7 +31172,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a float representing the magnitude (geometric length) of the vector vec.</string>
+            <string>Returns the magnitude (geometric length) of vec.</string>
          </map>
          <key>ll.VecNorm</key>
          <map>
@@ -31198,7 +31197,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a normalized unit vector sharing the same direction as vec.</string>
+            <string>Returns the normalized unit vector pointing the same direction as vec.</string>
          </map>
          <key>ll.VerifyRSA</key>
          <map>
@@ -31520,7 +31519,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>srgb</key>
+                  <key>color</key>
                   <map>
                      <key>tooltip</key>
                      <string>Color vector in the sRGB colorspace to convert.</string>
@@ -31536,7 +31535,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.</string>
+            <string>Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.</string>
          </map>
       </map>
       <key>llsd-lsl-syntax-version</key>

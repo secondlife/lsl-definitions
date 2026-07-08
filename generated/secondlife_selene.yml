@@ -2486,9 +2486,9 @@ globals:
   PI:
     property: read-only
     type: number
-    description: Mathematical constant Pi (3.14159265), representing the number of
-      radians in a half circle (semi-circle). When used in sensor functions, it specifies
-      a full sphere scan.
+    description: Mathematical constant pi, representing the number of radians in a
+      half circle (semi-circle). When used in sensor functions, it specifies a full
+      sphere scan.
   PING_PONG:
     property: read-only
     type: number
@@ -2497,7 +2497,7 @@ globals:
   PI_BY_TWO:
     property: read-only
     type: number
-    description: Constant Pi/2 (1.57079633), representing the number of radians in
+    description: Mathematical constant pi/2, representing the number of radians in
       a quarter circle. When used in sensor functions, it specifies a hemisphere scan.
   PRIM_ALLOW_UNSIT:
     property: read-only
@@ -3548,8 +3548,8 @@ globals:
   RAD_TO_DEG:
     property: read-only
     type: number
-    description: Constant 57.2957795 (precise value is 180/PI). Multiply a value in
-      radians by this number to convert it to degrees.
+    description: 180/PI. Multiply a value in radians by this number to convert it
+      to degrees.
   RCERR_CAST_TIME_EXCEEDED:
     property: read-only
     type: number
@@ -4120,7 +4120,7 @@ globals:
   SQRT2:
     property: read-only
     type: number
-    description: Mathematical constant representing the square root of 2 (1.41421356).
+    description: Mathematical constant representing the square root of 2.
   STATUS_BLOCK_GRAB:
     property: read-only
     type: number
@@ -4492,8 +4492,8 @@ globals:
   TWO_PI:
     property: read-only
     type: number
-    description: Mathematical constant representing the number of radians in a full
-      circle (6.28318530, twice the value of PI).
+    description: Mathematical constant pi*2, representing the number of radians in
+      a full circle.
   TYPE_FLOAT:
     property: read-only
     type: number
@@ -5071,8 +5071,8 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: 'Shifts n by i bits to the right. If i is negative, a left shift
-      is performed.
+    description: 'Returns val shifted by i bits to the right. If i is negative, a
+      left shift is performed.
 
       Does an arithmetic shift: The most significant bit of n is propagated during
       the shift.
@@ -5082,29 +5082,27 @@ globals:
     args:
     - type: '...'
     must_use: true
-    description: Performs a bitwise AND operation on input numbers.
+    description: Returns the bitwise AND of the given numbers.
   bit32.bnot:
     args:
     - type: number
     must_use: true
-    description: Returns the bitwise negation of the input number.
+    description: Returns the bitwise negation of val.
   bit32.bor:
     args:
     - type: '...'
     must_use: true
-    description: Performs a bitwise OR operation on input numbers.
+    description: Returns the bitwise OR of the given numbers.
   bit32.bxor:
     args:
     - type: '...'
     must_use: true
-    description: Performs a bitwise XOR operation on input numbers.
+    description: Returns the bitwise XOR of the given numbers.
   bit32.btest:
     args:
     - type: '...'
     must_use: true
-    description: 'Performs a bitwise AND operation on input numbers.
-
-      Returns true if result is non-zero.'
+    description: Returns true if the bitwise AND of the given numbers is non-zero.
   bit32.extract:
     args:
     - type: number
@@ -5112,22 +5110,22 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Extracts bits from n at position field with width. Raises an error
-      if the selected bit range goes outside [0, 31].
+    description: Returns width bits from src, starting from bit index field. Raises
+      an error if the selected bit range is goes outside the range [0, 31].
   bit32.lrotate:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Rotates n by i bits to the left. If i is negative, a right rotate
-      is performed.
+    description: Returns val rotated by i bits to the left. If i is negative, a right
+      rotate is performed.
   bit32.lshift:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Shifts n by i bits to the left. If i is negative, a right shift is
-      performed. Returns 0 if i is outside the [-31, 31] range.
+    description: Returns val shifted by i bits to the left. If i is negative, a right
+      shift is performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.replace:
     args:
     - type: number
@@ -5136,51 +5134,52 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Replaces bits in n at position field with width using value v. Raises
-      an error if the selected bit range goes outside [0, 31].
+    description: Returns dst with width bits replaced from src, starting from bit
+      index field. Raises an error if the selected bit range goes outside the range
+      [0, 31].
   bit32.rrotate:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Rotates n by i bits to the right. If i is negative, a left rotate
-      is performed.
+    description: Returns val rotated by i bits to the right. If i is negative, a left
+      rotate is performed.
   bit32.rshift:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Shifts n by i bits to the right. If i is negative, a left shift is
-      performed. Returns 0 if i is outside the [-31, 31] range.
+    description: Returns val shifted by i bits to the right. If i is negative, a left
+      shift is performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.s32:
     args:
     - type: number
     must_use: true
-    description: Wrap this number from float64 range to signed int32 range and truncate
-      to integer. Makes integer arithmetic compatible with LSL.
+    description: Returns val, wrapped from float64 range to signed int32 range and
+      truncated to integer. Makes integer arithmetic compatable with LSL.
   bit32.smul:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Multiplies two signed 32-bit integers. Returns the result as a signed
-      32-bit integer, wrapping as necessary. Avoids precision loss associated with
-      float64 multiplication. Compatible with LSL integer multiplication.
+    description: Returns the product of two signed 32-bit integers as a signed 32-bit
+      integer, wrapping as necessary. Avoids precision loss associated with float64
+      multiplication. Compatible with LSL integer multiplication.
   bit32.countlz:
     args:
     - type: number
     must_use: true
-    description: Count leading zeros.
+    description: Returns the count of val's leading zeros.
   bit32.countrz:
     args:
     - type: number
     must_use: true
-    description: Count trailing zeros.
+    description: Returns the count of val's troiling zeros.
   bit32.byteswap:
     args:
     - type: number
     must_use: true
-    description: Swap byte order.
+    description: Returns val with its bytes swapped to the reverse order.
   buffer.create:
     args:
     - type: number
@@ -5552,57 +5551,60 @@ globals:
   math.pi:
     property: read-only
     type: number
-    description: Value of pi.
+    description: The number of radians in a half circle (semi-circle).
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity).
+    description: Value larger than any other numeric value (infinity).
   math.abs:
     args:
     - type: number
     must_use: true
-    description: Returns the absolute value of n.
+    description: Returns the absolute (positive) value of val.
   math.acos:
     args:
     - type: number
     must_use: true
-    description: Returns the arc cosine of n in radians.
+    description: Returns the arccosine of val in radians. Returns NaN if val is not
+      in range [-1.0, 1.0].
   math.asin:
     args:
     - type: number
     must_use: true
-    description: Returns the arc sine of n in radians.
+    description: Returns the arcsine of val in radians. Returns NaN if val is not
+      in range [-1.0, 1.0].
   math.atan:
     args:
     - type: number
     must_use: true
-    description: Returns the arc tangent of n in radians.
+    description: Returns the arctangent of val in radians.
   math.atan2:
     args:
     - type: number
     - type: number
     must_use: true
-    description: 'Returns the arc tangent of y/x in radians, using the signs to determine
+    description: 'Returns the arctangent of y/x in radians, using the signs to determine
       the quadrant. Note the argument order: Y is the first parameter, X is the second
       parameter.'
   math.ceil:
     args:
     - type: number
     must_use: true
-    description: Returns the smallest integer larger than or equal to n.
+    description: Returns val rounded toward positive infinity. In other words, returns
+      the smallest integer greater than or equal to val.
   math.clamp:
     args:
     - type: number
     - type: number
     - type: number
     must_use: true
-    description: Returns n clamped between min and max. Raises an error if min is
+    description: Returns val clamped between min and max. Raises an error if min is
       greater than max.
   math.cos:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of n. n is in radians.
+    description: Returns the cosine of theta. theta is in radians.
   math.cosh:
     args:
     - type: number
@@ -5612,53 +5614,59 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Converts n from radians to degrees.
+    description: Returns theta converted from radians to degrees.
   math.exp:
     args:
     - type: number
     must_use: true
-    description: Returns the base-e exponent of n.
+    description: Returns the e to the power of val.
   math.floor:
     args:
     - type: number
     must_use: true
-    description: Returns the largest integer smaller than or equal to n.
+    description: Returns val rounded toward negative infinity. In other words, returns
+      the largest integer less than or equal to val.
   math.fmod:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Returns the remainder of x modulo y, rounded towards zero.
+    description: Returns the remainder (modulo) of dividend/modulus, (i.e. d mod m),
+      rounded towards zero. Returns NaN if modulus is 0. Identical to d % m if both
+      arguments have the same sign.
   math.frexp:
     args:
     - type: number
     must_use: true
-    description: Returns m and e such that n = m * 2^e.
+    description: Breaks a floating-point number into it's component parts significand
+      and exponent. In other words, Returns significand s and integer exponent e such
+      that val = s * 2^e. Inverse of math.ldexp.
   math.ldexp:
     args:
     - type: number
     - type: number
     must_use: true
-    description: Returns s * 2^e.
+    description: Returns s * 2^e. Inverse of math.frexp
   math.lerp:
     args:
     - type: number
     - type: number
     - type: number
     must_use: true
-    description: Linearly interpolates between a and b using factor t.
+    description: Linearly interpolates between start and end using factor t.
   math.log:
     args:
     - type: number
     - type: number
       required: false
     must_use: true
-    description: Returns the logarithm of n in the given base, defaults to e.
+    description: Returns the logarithm of val in the given base. The default base
+      is e.
   math.log10:
     args:
     - type: number
     must_use: true
-    description: Returns the base-10 logarithm of n.
+    description: Returns the base-10 logarithm of val.
   math.map:
     args:
     - type: number
@@ -5667,7 +5675,7 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Maps n from input range to output range.
+    description: Maps val from input range to output range.
   math.max:
     args:
     - type: number
@@ -5686,7 +5694,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the integer and fractional parts of n.
+    description: Returns the integer and fractional parts of val.
   math.noise:
     args:
     - type: number
@@ -5707,7 +5715,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Converts n from degrees to radians.
+    description: Returns theta converted from degrees to radians.
   math.random:
     args:
     - type: number
@@ -5726,52 +5734,53 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Rounds n to the nearest integer.
+    description: Returns val rounded to the nearest integer. Halfway values are rounded
+      away from zero.
   math.sign:
     args:
     - type: number
     must_use: true
-    description: Returns -1 if n is negative, 1 if positive, and 0 if zero.
+    description: Returns -1 if val is negative, 1 if positive, and 0 if zero.
   math.sin:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of n. n is in radians.
+    description: Returns the sine of theta. theta is in radians.
   math.sinh:
     args:
     - type: number
     must_use: true
-    description: Returns the hyperbolic sine of n.
+    description: Returns the hyperbolic sine of val.
   math.sqrt:
     args:
     - type: number
     must_use: true
-    description: Returns the square root of n.
+    description: Returns the square root of val. If negative, return Nan.
   math.tan:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of n. n is in radians.
+    description: Returns the tangent of theta. theta is in radians.
   math.tanh:
     args:
     - type: number
     must_use: true
-    description: Returns the hyperbolic tangent of n.
+    description: Returns the hyperbolic tangent of val.
   math.isnan:
     args:
     - type: number
     must_use: true
-    description: Returns true if n is NaN.
+    description: Returns true if val is NaN.
   math.isinf:
     args:
     - type: number
     must_use: true
-    description: Returns true if n is infinite.
+    description: Returns true if val is infinite.
   math.isfinite:
     args:
     - type: number
     must_use: true
-    description: Returns true if n is finite.
+    description: Returns true if val is finite.
   os.clock:
     args: []
     must_use: true
@@ -5817,7 +5826,7 @@ globals:
       quaternion.create.
   quaternion.identity:
     struct: quaternion
-    description: Identity quaternion constant.
+    description: Identity quaternion constant. Causes no change when rotated.
   quaternion.create:
     args:
     - type: number
@@ -5831,13 +5840,14 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the normalized version (unit quaternion) of the quaternion.
+    description: Returns the normalized unit quaternion pointing the same direction
+      as q.
   quaternion.magnitude:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the magnitude of the quaternion.
+    description: Returns the magnitude (geometric length) of the quaternion.
   quaternion.dot:
     args:
     - type:
@@ -5845,7 +5855,7 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the dot product of two quaternions.
+    description: Returns the dot product of two quaternions.
   quaternion.slerp:
     args:
     - type:
@@ -5854,31 +5864,35 @@ globals:
         display: quaternion
     - type: number
     must_use: true
-    description: Spherical linear interpolation from a to b using factor t.
+    description: Spherical linear interpolation from start to end using factor t.
   quaternion.conjugate:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the conjugate of the quaternion.
+    description: Returns the conjugate of the quaternion. Equivilant to quaternion(-q.x,
+      -q.y, -q.z, q.s))
   quaternion.tofwd:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the forward vector from the quaternion.
+    description: Returns the unit vector pointing toward positive X direction (forward)
+      in the coordinate space of rotation q. Equivilant to vector(1, 0, 0) * q.
   quaternion.toleft:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the left vector from the quaternion.
+    description: Returns the unit vector pointing toward positive Y direction (left)
+      in the coordinate space of rotation q. Equivilant to vector(0, 1, 0) * q.
   quaternion.toup:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the up vector from the quaternion.
+    description: Returns the unit vector pointing toward positive Z direction (up)
+      in the coordinate space of rotation q. Equivilant to vector(0, 0, 1) * q.
   rotation:
     args:
     - type: number
@@ -5890,7 +5904,7 @@ globals:
       quaternion.create.
   rotation.identity:
     struct: quaternion
-    description: Identity quaternion constant.
+    description: Identity quaternion constant. Causes no change when rotated.
   rotation.create:
     args:
     - type: number
@@ -5904,13 +5918,14 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the normalized version (unit quaternion) of the quaternion.
+    description: Returns the normalized unit quaternion pointing the same direction
+      as q.
   rotation.magnitude:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the magnitude of the quaternion.
+    description: Returns the magnitude (geometric length) of the quaternion.
   rotation.dot:
     args:
     - type:
@@ -5918,7 +5933,7 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the dot product of two quaternions.
+    description: Returns the dot product of two quaternions.
   rotation.slerp:
     args:
     - type:
@@ -5927,31 +5942,35 @@ globals:
         display: quaternion
     - type: number
     must_use: true
-    description: Spherical linear interpolation from a to b using factor t.
+    description: Spherical linear interpolation from start to end using factor t.
   rotation.conjugate:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the conjugate of the quaternion.
+    description: Returns the conjugate of the quaternion. Equivilant to quaternion(-q.x,
+      -q.y, -q.z, q.s))
   rotation.tofwd:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the forward vector from the quaternion.
+    description: Returns the unit vector pointing toward positive X direction (forward)
+      in the coordinate space of rotation q. Equivilant to vector(1, 0, 0) * q.
   rotation.toleft:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the left vector from the quaternion.
+    description: Returns the unit vector pointing toward positive Y direction (left)
+      in the coordinate space of rotation q. Equivilant to vector(0, 1, 0) * q.
   rotation.toup:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Computes the up vector from the quaternion.
+    description: Returns the unit vector pointing toward positive Z direction (up)
+      in the coordinate space of rotation q. Equivilant to vector(0, 0, 1) * q.
   string.byte:
     args:
     - type: string
@@ -6307,10 +6326,10 @@ globals:
     description: Creates a new vector with the given component values. Alias of vector.create.
   vector.zero:
     struct: vector
-    description: Constant vector with all components set to 0.
+    description: Vector constant with all components set to 0.
   vector.one:
     struct: vector
-    description: Constant vector with all components set to 1.
+    description: Vector constant with all components set to 1.
   vector.create:
     args:
     - type: number
@@ -6324,13 +6343,14 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Computes the magnitude of the vector.
+    description: Returns the magnitude (geometric length) of the vector.
   vector.normalize:
     args:
     - type:
         display: vector
     must_use: true
-    description: Computes the normalized version (unit vector) of the vector.
+    description: Returns the normalized unit vector pointing the same direction as
+      vec.
   vector.cross:
     args:
     - type:
@@ -6338,7 +6358,7 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Computes the cross product of two vectors.
+    description: Returns the cross product of two vectors.
   vector.dot:
     args:
     - type:
@@ -6346,7 +6366,7 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Computes the dot product of two vectors.
+    description: Returns the dot product of two vectors.
   vector.angle:
     args:
     - type:
@@ -6357,8 +6377,9 @@ globals:
         display: vector
       required: false
     must_use: true
-    description: Computes the angle between two vectors in radians. The axis, if specified,
-      is used to determine the sign of the angle.
+    description: Returns the angle from start_vec to end_vec in radians. The axis,
+      if specified, is used to determine the sign of the angle. If no axis is specified,
+      the angle is positive, as if axis was vector.cross(start_vec, end_vec).
   vector.floor:
     args:
     - type:
@@ -6415,7 +6436,7 @@ globals:
         display: vector
     - type: number
     must_use: true
-    description: Linearly interpolates between a and b using factor t.
+    description: Linearly interpolates between start and end using factor t.
   ll.Abs:
     deprecated:
       message: Use 'math.abs' instead. Double precision; fastcall.
@@ -6424,8 +6445,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the absolute (positive) value of
-      val.
+    description: Returns the absolute (positive) integer value of val.
   ll.Acos:
     deprecated:
       message: Use 'math.acos' instead. Double precision; fastcall.
@@ -6434,7 +6454,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the arc-cosine of val in radians.
+    description: Returns the arccosine of val in radians.
   ll.AddToLandBanList:
     args:
     - type:
@@ -6484,8 +6504,8 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a float representing the angle in radians between rotations
-      a and b.
+    description: Returns the angle, in radians, between rotations start_rot and and
+      end_rot.
   ll.ApplyImpulse:
     args:
     - type:
@@ -6510,7 +6530,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the arc-sine of val in radians.
+    description: Returns the arcsine of val in radians.
   ll.Atan2:
     deprecated:
       message: Use 'math.atan2' instead. Double precision; fastcall.
@@ -6520,7 +6540,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a float representing the arctangent2 of y and x.
+    description: 'Returns the arctangent of y/x in radians, using the signs to determine
+      the quadrant. Note the argument order: Y is the first parameter, X is the second
+      parameter.'
   ll.AttachToAvatar:
     args:
     - type: number
@@ -6562,8 +6584,7 @@ globals:
         display: vector
     - type: number
     must_use: true
-    description: Returns the rotation representing a generated angle (in radians)
-      about the specified axis.
+    description: Returns the rotation that rotates angle radians around the axis vector.
   ll.Base64ToInteger:
     deprecated:
       message: Use 'llbase64.decode' and 'string.unpack' or 'buffer.readi32' instead.
@@ -6621,8 +6642,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the smallest integer value greater than or equal to val (rounded
-      toward positive infinity).
+    description: Returns val rounded toward positive infinity. In other words, returns
+      the smallest integer greater than or equal to val.
   ll.Char:
     args:
     - type: number
@@ -6705,7 +6726,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the cosine of theta.
+    description: Returns the cosine of theta. theta is in radians.
   ll.CreateCharacter:
     args:
     - type: table
@@ -7000,7 +7021,8 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns the rotation representation of the Euler angles vector v.
+    description: Returns the quaternion representation of the Euler angles (in radians)
+      within vec.
   ll.Evade:
     args:
     - type:
@@ -7024,7 +7046,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the absolute (positive) value of val.
+    description: Returns the absolute (positive) value of val.
   ll.FindNotecardTextCount:
     args:
     - type: string
@@ -7060,8 +7082,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the largest integer value less than or equal to val (rounded
-      toward negative infinity).
+    description: Returns val rounded toward negative infinity. In other words, returns
+      the largest integer less than or equal to val.
   ll.ForceMouselook:
     args:
     - type: bool
@@ -8150,8 +8172,8 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns a vector representing the conversion of color from the linear
-      RGB colorspace into the sRGB colorspace.
+    description: Returns the color vector converted from the linear RGB colorspace
+      into the sRGB colorspace.
   ll.LinkAdjustSoundVolume:
     args:
     - type: number
@@ -8499,8 +8521,8 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: Returns a float representing the result of performing the statistical
-      aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
+    description: Returns the numeric result of the statistical aggregate function
+      operation (a LIST_STAT_* constant) on the numeric list src.
   ll.Listen:
     args:
     - type: number
@@ -8538,8 +8560,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the natural (base e) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    description: Returns natural (base e) logarithm of val. If negative, return 0.0.
   ll.Log10:
     deprecated:
       message: Use 'math.log10' instead. Double precision; fastcall.
@@ -8548,8 +8569,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the base-10 (common) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    description: Returns base-10 (common) logarithm of val. If negative, return 0.0.
   ll.LookAt:
     args:
     - type:
@@ -8690,8 +8710,10 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns an integer representing a raised to the power b, modulo c
-      (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+    description: Returns base raised to the power exponent, modulo modulus (i.e.,
+      (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295].
+      Output is wrapped to signed 32-bit integer range [-2147483648..2147483647].
+      Will never overflow, unlike (b^e), which can overflow to inf.
   ll.ModifyLand:
     args:
     - type: number
@@ -8844,8 +8866,8 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a float representing base raised to the power exponent. Returns
-      0 and triggers a Math Error for imaginary results.
+    description: Returns base raised to the power exponent. If result is imaginary,
+      returns NaN.
   ll.PreloadSound:
     args:
     - type: string
@@ -9134,20 +9156,20 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a float representing the rotation angle of rot.
+    description: Returns the angle, in radians, that q rotates.
   ll.Rot2Axis:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a vector representing the rotation axis of rot.
+    description: Returns the  unit vector axis that q rotates around.
   ll.Rot2Euler:
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a vector representing the Euler rotation (roll, pitch, yaw)
-      of quat, with each component expressed in radians.
+    description: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles
+      will be in radians.
   ll.Rot2Fwd:
     deprecated:
       message: Use 'quaternion.tofwd' instead.
@@ -9157,8 +9179,8 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive X direction
-      (forward) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive X (forward) in the
+      coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
   ll.Rot2Left:
     deprecated:
       message: Use 'quaternion.toleft' instead.
@@ -9168,8 +9190,8 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive Y direction
-      (left) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive Y (left) in the
+      coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
   ll.Rot2Up:
     deprecated:
       message: Use 'quaternion.toup' instead.
@@ -9179,8 +9201,8 @@ globals:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive Z direction
-      (up) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive Z (up) in the coordinate
+      space of rotation q. Equivilant to <0, 0, 1> * q.
   ll.RotBetween:
     args:
     - type:
@@ -9188,8 +9210,8 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns a rotation representing the shortest path rotation from vector
-      start to vector end.
+    description: Returns the shortest-path quaternion that rotates start_vec onto
+      end_vec.
   ll.RotLookAt:
     args:
     - type:
@@ -9226,7 +9248,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the integer that float val is closest to.
+    description: Returns val rounded to the nearest integer. Halfway values are rounded
+      toward infinity.
   ll.SHA1String:
     args:
     - type: string
@@ -9789,7 +9812,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the sine of theta.
+    description: Returns the sine of theta. theta is in radians.
   ll.SitOnLink:
     args:
     - type:
@@ -9843,8 +9866,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the square root of the positive value
-      val. Triggers a math runtime error if val is less than 0.0 (imaginary results).
+    description: Returns the square root of val. If negative, return Nan.
   ll.StartAnimation:
     args:
     - type: string
@@ -9942,7 +9964,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the tangent of theta.
+    description: Returns the tangent of theta. theta is in radians.
   ll.Target:
     args:
     - type:
@@ -10109,8 +10131,7 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns a float representing the magnitude (geometric length) of
-      the vector vec.
+    description: Returns the magnitude (geometric length) of vec.
   ll.VecNorm:
     deprecated:
       message: Use 'vector.normalize' instead. It's a fastcall.
@@ -10120,7 +10141,8 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns a normalized unit vector sharing the same direction as vec.
+    description: Returns the normalized unit vector pointing the same direction as
+      vec.
   ll.VerifyRSA:
     args:
     - type: string
@@ -10214,23 +10236,22 @@ globals:
     - type:
         display: vector
     must_use: true
-    description: Returns a vector representing the conversion of the color srgb from
-      the sRGB colorspace into the linear RGB colorspace.
+    description: Returns the color vector converted from the sRGB colorspace into
+      the linear RGB colorspace.
   llcompat.Abs:
     deprecated:
-      message: Returns an integer representing the absolute (positive) value of val.
+      message: Returns the absolute (positive) integer value of val.
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the absolute (positive) value of
-      val.
+    description: Returns the absolute (positive) integer value of val.
   llcompat.Acos:
     deprecated:
-      message: Returns a float representing the arc-cosine of val in radians.
+      message: Returns the arccosine of val in radians.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the arc-cosine of val in radians.
+    description: Returns the arccosine of val in radians.
   llcompat.AddToLandBanList:
     deprecated:
       message: Adds the avatar to the parcel ban list for the specified number of
@@ -10296,16 +10317,16 @@ globals:
       users with modify permissions.
   llcompat.AngleBetween:
     deprecated:
-      message: Returns a float representing the angle in radians between rotations
-        a and b.
+      message: Returns the angle, in radians, between rotations start_rot and and
+        end_rot.
     args:
     - type:
         display: quaternion
     - type:
         display: quaternion
     must_use: true
-    description: Returns a float representing the angle in radians between rotations
-      a and b.
+    description: Returns the angle, in radians, between rotations start_rot and and
+      end_rot.
   llcompat.ApplyImpulse:
     deprecated:
       message: Applies a linear impulse (momentum) to a physical object. If local
@@ -10332,19 +10353,23 @@ globals:
       it is applied in global region coordinates.
   llcompat.Asin:
     deprecated:
-      message: Returns a float representing the arc-sine of val in radians.
+      message: Returns the arcsine of val in radians.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the arc-sine of val in radians.
+    description: Returns the arcsine of val in radians.
   llcompat.Atan2:
     deprecated:
-      message: Returns a float representing the arctangent2 of y and x.
+      message: 'Returns the arctangent of y/x in radians, using the signs to determine
+        the quadrant. Note the argument order: Y is the first parameter, X is the
+        second parameter.'
     args:
     - type: number
     - type: number
     must_use: true
-    description: Returns a float representing the arctangent2 of y and x.
+    description: 'Returns the arctangent of y/x in radians, using the signs to determine
+      the quadrant. Note the argument order: Y is the first parameter, X is the second
+      parameter.'
   llcompat.AttachToAvatar:
     deprecated:
       message: Attaches the object to the avatar who has granted the PERMISSION_ATTACH
@@ -10401,15 +10426,13 @@ globals:
       up.
   llcompat.AxisAngle2Rot:
     deprecated:
-      message: Returns the rotation representing a generated angle (in radians) about
-        the specified axis.
+      message: Returns the rotation that rotates angle radians around the axis vector.
     args:
     - type:
         display: vector
     - type: number
     must_use: true
-    description: Returns the rotation representing a generated angle (in radians)
-      about the specified axis.
+    description: Returns the rotation that rotates angle radians around the axis vector.
   llcompat.Base64ToInteger:
     deprecated:
       message: Returns an integer representing the Base64-decoded big-endian value
@@ -10475,13 +10498,13 @@ globals:
       represents the number of hits.
   llcompat.Ceil:
     deprecated:
-      message: Returns the smallest integer value greater than or equal to val (rounded
-        toward positive infinity).
+      message: Returns val rounded toward positive infinity. In other words, returns
+        the smallest integer greater than or equal to val.
     args:
     - type: number
     must_use: true
-    description: Returns the smallest integer value greater than or equal to val (rounded
-      toward positive infinity).
+    description: Returns val rounded toward positive infinity. In other words, returns
+      the smallest integer greater than or equal to val.
   llcompat.Char:
     deprecated:
       message: Constructs and returns a single-character string from the given Unicode
@@ -10584,11 +10607,11 @@ globals:
       cryptographic algorithm.
   llcompat.Cos:
     deprecated:
-      message: Returns a float representing the cosine of theta.
+      message: Returns the cosine of theta. theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the cosine of theta.
+    description: Returns the cosine of theta. theta is in radians.
   llcompat.CreateCharacter:
     deprecated:
       message: Converts the linkset containing the script into a pathfinding character
@@ -10986,12 +11009,14 @@ globals:
       hexadecimal UTF-8 equivalent.
   llcompat.Euler2Rot:
     deprecated:
-      message: Returns the rotation representation of the Euler angles vector v.
+      message: Returns the quaternion representation of the Euler angles (in radians)
+        within vec.
     args:
     - type:
         display: vector
     must_use: true
-    description: Returns the rotation representation of the Euler angles vector v.
+    description: Returns the quaternion representation of the Euler angles (in radians)
+      within vec.
   llcompat.Evade:
     deprecated:
       message: Directs a pathfinding character to evade target, attempting to hide
@@ -11016,11 +11041,11 @@ globals:
       jump.
   llcompat.Fabs:
     deprecated:
-      message: Returns a float representing the absolute (positive) value of val.
+      message: Returns the absolute (positive) value of val.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the absolute (positive) value of val.
+    description: Returns the absolute (positive) value of val.
   llcompat.FindNotecardTextCount:
     deprecated:
       message: Searches the text of a cached notecard for lines containing the given
@@ -11062,13 +11087,13 @@ globals:
       the target position vector (within the region or adjacent regions).
   llcompat.Floor:
     deprecated:
-      message: Returns the largest integer value less than or equal to val (rounded
-        toward negative infinity).
+      message: Returns val rounded toward negative infinity. In other words, returns
+        the largest integer less than or equal to val.
     args:
     - type: number
     must_use: true
-    description: Returns the largest integer value less than or equal to val (rounded
-      toward negative infinity).
+    description: Returns val rounded toward negative infinity. In other words, returns
+      the largest integer less than or equal to val.
   llcompat.ForceMouselook:
     deprecated:
       message: Sets whether any avatar sitting on this prim is forced into mouselook
@@ -12697,14 +12722,14 @@ globals:
       out of bounds.
   llcompat.Linear2sRGB:
     deprecated:
-      message: Returns a vector representing the conversion of color from the linear
-        RGB colorspace into the sRGB colorspace.
+      message: Returns the color vector converted from the linear RGB colorspace into
+        the sRGB colorspace.
     args:
     - type:
         display: vector
     must_use: true
-    description: Returns a vector representing the conversion of color from the linear
-      RGB colorspace into the sRGB colorspace.
+    description: Returns the color vector converted from the linear RGB colorspace
+      into the sRGB colorspace.
   llcompat.LinkAdjustSoundVolume:
     deprecated:
       message: Adjusts the volume of the currently playing sound attached to the linked
@@ -13118,15 +13143,14 @@ globals:
       is TRUE) or descending order (if FALSE).
   llcompat.ListStatistics:
     deprecated:
-      message: Returns a float representing the result of performing the statistical
-        aggregate function operation (a LIST_STAT_* constant) on the numeric list
-        src.
+      message: Returns the numeric result of the statistical aggregate function operation
+        (a LIST_STAT_* constant) on the numeric list src.
     args:
     - type: number
     - type: table
     must_use: true
-    description: Returns a float representing the result of performing the statistical
-      aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
+    description: Returns the numeric result of the statistical aggregate function
+      operation (a LIST_STAT_* constant) on the numeric list src.
   llcompat.Listen:
     deprecated:
       message: Creates a listener on channel from name and id for msg. Returns an
@@ -13171,22 +13195,18 @@ globals:
       browser.
   llcompat.Log:
     deprecated:
-      message: Returns a float representing the natural (base e) logarithm of the
-        positive value val (returns 0.0 if val <= 0).
+      message: Returns natural (base e) logarithm of val. If negative, return 0.0.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the natural (base e) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    description: Returns natural (base e) logarithm of val. If negative, return 0.0.
   llcompat.Log10:
     deprecated:
-      message: Returns a float representing the base-10 (common) logarithm of the
-        positive value val (returns 0.0 if val <= 0).
+      message: Returns base-10 (common) logarithm of val. If negative, return 0.0.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the base-10 (common) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    description: Returns base-10 (common) logarithm of val. If negative, return 0.0.
   llcompat.LookAt:
     deprecated:
       message: Causes the object to orient its positive Z-axis (up axis) toward the
@@ -13362,15 +13382,19 @@ globals:
       and defaults vary by event type).
   llcompat.ModPow:
     deprecated:
-      message: Returns an integer representing a raised to the power b, modulo c (i.e.,
-        (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+      message: Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m).
+        All inputs are wrapped to unsigned 32-bit integer range [0..4294967295]. Output
+        is wrapped to signed 32-bit integer range [-2147483648..2147483647]. Will
+        never overflow, unlike (b^e), which can overflow to inf.
     args:
     - type: number
     - type: number
     - type: number
     must_use: true
-    description: Returns an integer representing a raised to the power b, modulo c
-      (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+    description: Returns base raised to the power exponent, modulo modulus (i.e.,
+      (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295].
+      Output is wrapped to signed 32-bit integer range [-2147483648..2147483647].
+      Will never overflow, unlike (b^e), which can overflow to inf.
   llcompat.ModifyLand:
     deprecated:
       message: Modifies the terrain using the specified land action and brush size
@@ -13578,14 +13602,14 @@ globals:
       loop point of the most audible active Sync Master.
   llcompat.Pow:
     deprecated:
-      message: Returns a float representing base raised to the power exponent. Returns
-        0 and triggers a Math Error for imaginary results.
+      message: Returns base raised to the power exponent. If result is imaginary,
+        returns NaN.
     args:
     - type: number
     - type: number
     must_use: true
-    description: Returns a float representing base raised to the power exponent. Returns
-      0 and triggers a Math Error for imaginary results.
+    description: Returns base raised to the power exponent. If result is imaginary,
+      returns NaN.
   llcompat.PreloadSound:
     deprecated:
       message: Causes nearby viewers in range to preload the specified sound from
@@ -14000,72 +14024,71 @@ globals:
       failure.
   llcompat.Rot2Angle:
     deprecated:
-      message: Returns a float representing the rotation angle of rot.
+      message: Returns the angle, in radians, that q rotates.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a float representing the rotation angle of rot.
+    description: Returns the angle, in radians, that q rotates.
   llcompat.Rot2Axis:
     deprecated:
-      message: Returns a vector representing the rotation axis of rot.
+      message: Returns the  unit vector axis that q rotates around.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a vector representing the rotation axis of rot.
+    description: Returns the  unit vector axis that q rotates around.
   llcompat.Rot2Euler:
     deprecated:
-      message: Returns a vector representing the Euler rotation (roll, pitch, yaw)
-        of quat, with each component expressed in radians.
+      message: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles
+        will be in radians.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a vector representing the Euler rotation (roll, pitch, yaw)
-      of quat, with each component expressed in radians.
+    description: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles
+      will be in radians.
   llcompat.Rot2Fwd:
     deprecated:
-      message: Returns a unit vector pointing in the local positive X direction (forward)
-        relative to the parent (root prim or region) defined by rotation q.
+      message: Returns the unit vector pointing toward positive X (forward) in the
+        coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive X direction
-      (forward) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive X (forward) in the
+      coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
   llcompat.Rot2Left:
     deprecated:
-      message: Returns a unit vector pointing in the local positive Y direction (left)
-        relative to the parent (root prim or region) defined by rotation q.
+      message: Returns the unit vector pointing toward positive Y (left) in the coordinate
+        space of rotation q. Equivilant to <0, 1, 0> * q.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive Y direction
-      (left) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive Y (left) in the
+      coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
   llcompat.Rot2Up:
     deprecated:
-      message: Returns a unit vector pointing in the local positive Z direction (up)
-        relative to the parent (root prim or region) defined by rotation q.
+      message: Returns the unit vector pointing toward positive Z (up) in the coordinate
+        space of rotation q. Equivilant to <0, 0, 1> * q.
     args:
     - type:
         display: quaternion
     must_use: true
-    description: Returns a unit vector pointing in the local positive Z direction
-      (up) relative to the parent (root prim or region) defined by rotation q.
+    description: Returns the unit vector pointing toward positive Z (up) in the coordinate
+      space of rotation q. Equivilant to <0, 0, 1> * q.
   llcompat.RotBetween:
     deprecated:
-      message: Returns a rotation representing the shortest path rotation from vector
-        start to vector end.
+      message: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
     args:
     - type:
         display: vector
     - type:
         display: vector
     must_use: true
-    description: Returns a rotation representing the shortest path rotation from vector
-      start to vector end.
+    description: Returns the shortest-path quaternion that rotates start_vec onto
+      end_vec.
   llcompat.RotLookAt:
     deprecated:
       message: Causes the object to smoothly rotate to target_direction with a force
@@ -14110,11 +14133,13 @@ globals:
       If face is ALL_SIDES, rotates the texture on all faces.
   llcompat.Round:
     deprecated:
-      message: Returns the integer that float val is closest to.
+      message: Returns val rounded to the nearest integer. Halfway values are rounded
+        toward infinity.
     args:
     - type: number
     must_use: true
-    description: Returns the integer that float val is closest to.
+    description: Returns val rounded to the nearest integer. Halfway values are rounded
+      toward infinity.
   llcompat.SHA1String:
     deprecated:
       message: Returns a string of 40 hex characters representing the SHA-1 security
@@ -14935,11 +14960,11 @@ globals:
       or sha512). Can be paired with llVerifyRSA to pass verifiable messages.
   llcompat.Sin:
     deprecated:
-      message: Returns a float representing the sine of theta.
+      message: Returns the sine of theta. theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the sine of theta.
+    description: Returns the sine of theta. theta is in radians.
   llcompat.SitOnLink:
     deprecated:
       message: Forces the avatar specified by agent_id (who must be participating
@@ -14996,13 +15021,11 @@ globals:
       on viewers within range.
   llcompat.Sqrt:
     deprecated:
-      message: Returns a float representing the square root of the positive value
-        val. Triggers a math runtime error if val is less than 0.0 (imaginary results).
+      message: Returns the square root of val. If negative, return Nan.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the square root of the positive value
-      val. Triggers a math runtime error if val is less than 0.0 (imaginary results).
+    description: Returns the square root of val. If negative, return Nan.
   llcompat.StartAnimation:
     deprecated:
       message: Starts the animation anim (inventory or built-in) on the avatar who
@@ -15126,11 +15149,11 @@ globals:
       the PERMISSION_TAKE_CONTROLS runtime permission.
   llcompat.Tan:
     deprecated:
-      message: Returns a float representing the tangent of theta.
+      message: Returns the tangent of theta. theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns a float representing the tangent of theta.
+    description: Returns the tangent of theta. theta is in radians.
   llcompat.Target:
     deprecated:
       message: Registers a positional target at position with a leeway radius range.
@@ -15356,22 +15379,21 @@ globals:
       between vectors vec_a and vec_b.
   llcompat.VecMag:
     deprecated:
-      message: Returns a float representing the magnitude (geometric length) of the
-        vector vec.
+      message: Returns the magnitude (geometric length) of vec.
     args:
     - type:
         display: vector
     must_use: true
-    description: Returns a float representing the magnitude (geometric length) of
-      the vector vec.
+    description: Returns the magnitude (geometric length) of vec.
   llcompat.VecNorm:
     deprecated:
-      message: Returns a normalized unit vector sharing the same direction as vec.
+      message: Returns the normalized unit vector pointing the same direction as vec.
     args:
     - type:
         display: vector
     must_use: true
-    description: Returns a normalized unit vector sharing the same direction as vec.
+    description: Returns the normalized unit vector pointing the same direction as
+      vec.
   llcompat.VerifyRSA:
     deprecated:
       message: Returns TRUE if the Base64-formatted signature is verified as valid
@@ -15493,14 +15515,14 @@ globals:
       nulls are present) a bitwise exclusive OR (XOR) on Base64 strings str1 and str2.
   llcompat.sRGB2Linear:
     deprecated:
-      message: Returns a vector representing the conversion of the color srgb from
-        the sRGB colorspace into the linear RGB colorspace.
+      message: Returns the color vector converted from the sRGB colorspace into the
+        linear RGB colorspace.
     args:
     - type:
         display: vector
     must_use: true
-    description: Returns a vector representing the conversion of the color srgb from
-      the sRGB colorspace into the linear RGB colorspace.
+    description: Returns the color vector converted from the sRGB colorspace into
+      the linear RGB colorspace.
 structs:
   quaternion:
     __add:

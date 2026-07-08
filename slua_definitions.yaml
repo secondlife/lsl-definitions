@@ -2223,10 +2223,10 @@ modules:
   - name: slerp
     comment: Spherical linear interpolation from start to end using factor t.
     parameters:
-    - name: start
+    - name: start_q
       comment: Starting quaternion.
       type: quaternion
-    - name: end
+    - name: end_q
       comment: Ending quaternion.
       type: quaternion
     - name: t
