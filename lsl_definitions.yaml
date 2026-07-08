@@ -3682,7 +3682,7 @@ constants:
     type: integer
     value: '0x2000'
   PI:
-    tooltip: Mathematical constant Pi (3.14159265), representing the number of
+    tooltip: Mathematical constant pi, representing the number of
       radians in a half circle (semi-circle). When used in sensor functions, it
       specifies a full sphere scan.
     type: float
@@ -3694,7 +3694,7 @@ constants:
     type: integer
     value: '0x8'
   PI_BY_TWO:
-    tooltip: Constant Pi/2 (1.57079633), representing the number of radians in a
+    tooltip: Mathematical constant pi/2, representing the number of radians in a
       quarter circle. When used in sensor functions, it specifies a hemisphere
       scan.
     type: float
@@ -5075,8 +5075,7 @@ constants:
     type: integer
     value: '0x00'
   RAD_TO_DEG:
-    tooltip: Constant 57.2957795 (precise value is 180/PI). Multiply a value in
-      radians by this number to convert it to degrees.
+    tooltip: 180/PI. Multiply a value in radians by this number to convert it to degrees.
     type: float
     value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
@@ -5803,7 +5802,7 @@ constants:
     type: integer
     value: '0x02'
   SQRT2:
-    tooltip: Mathematical constant representing the square root of 2 (1.41421356).
+    tooltip: Mathematical constant representing the square root of 2.
     type: float
     value: '1.41421356'
   STATUS_BLOCK_GRAB:
@@ -6265,8 +6264,7 @@ constants:
     slua-removed: true
     value: 1
   TWO_PI:
-    tooltip: Mathematical constant representing the number of radians in a full
-      circle (6.28318530, twice the value of PI).
+    tooltip: Mathematical constant pi*2, representing the number of radians in a full circle.
     type: float
     value: '6.28318530'
   TYPE_FLOAT:
@@ -14324,7 +14322,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Rounds val to the nearest integer. Halfway values are rounded toward infinity.
+    tooltip: Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.
     categories:
       - math
   llSHA1String:

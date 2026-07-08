@@ -1729,9 +1729,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: deg
-    comment: Converts val from radians to degrees.
+    comment: Returns theta converted from radians to degrees.
     parameters:
-    - name: val
+    - name: theta
       comment: Number in radians.
       type: number
     return-type: number
@@ -1928,10 +1928,10 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: rad
-    comment: Converts val from degrees to radians.
+    comment: Returns theta converted from degrees to radians.
     parameters:
-    - name: "n"
-      comment: Value in degrees.
+    - name: theta
+      comment: Angle in degrees.
       type: number
     return-type: number
     must-use: true
@@ -1981,7 +1981,7 @@ modules:
       reason: Disabled in SLua.
     typechecker: {checked: true}
   - name: round
-    comment: Rounds val to the nearest integer. Halfway values are rounded away from zero.
+    comment: Returns val rounded to the nearest integer. Halfway values are rounded away from zero.
     parameters:
     - name: val
       comment: Number to round to the nearest integer. Halfway values are rounded away from zero.
@@ -2082,7 +2082,7 @@ modules:
     typechecker: {checked: true}
   constants:
   - name: pi
-    comment: Value of pi.
+    comment: The number of radians in a half circle (semi-circle).
     type: number
     value: 3.141592653589793
   - name: huge
@@ -2277,7 +2277,7 @@ modules:
     typechecker: {checked: true}
   constants:
   - name: identity
-    comment: Identity quaternion constant.
+    comment: Identity quaternion constant. Causes no change when rotated.
     type: quaternion
     value: quaternion(0, 0, 0, 1)
 - name: string
@@ -3103,11 +3103,11 @@ modules:
     typechecker: {checked: true}
   constants:
   - name: zero
-    comment: Constant vector with all components set to 0.
+    comment: Vector constant with all components set to 0.
     type: vector
     value: vector(0, 0, 0)
   - name: one
-    comment: Constant vector with all components set to 1.
+    comment: Vector constant with all components set to 1.
     type: vector
     value: vector(1, 1, 1)
 - name: ll
