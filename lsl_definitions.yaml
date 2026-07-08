@@ -12445,14 +12445,15 @@ functions:
         type: integer
         enum-semantics: ListStatisticsOperation
     - src:
-        tooltip: List of floats and integers to analyze.
+        tooltip: List of numbers to analyze.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 315
     must-use: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the result of performing the statistical
+    tooltip: Returns the numeric result of the statistical
       aggregate function operation (a LIST_STAT_* constant) on the numeric list
       src.
     categories:
@@ -12923,22 +12924,24 @@ functions:
       - script
   llModPow:
     arguments:
-    - a:
-        tooltip: Base integer value.
+    - base:
+        tooltip: 32-bit unsigned integer base.
         type: integer
-    - b:
-        tooltip: Power exponent (capped at 0xFFFF / 16 bits).
+    - exponent:
+        tooltip: 32-bit unsigned integer exponent.
         type: integer
-    - c:
-        tooltip: Modulus integer value.
+    - modulus:
+        tooltip: 32-bit unsigned integer modulus.
         type: integer
     energy: 10.0
     func-id: 300
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing a raised to the power b, modulo c
-      (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+    tooltip: Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m).
+      All inputs are wrapped to unsigned 32-bit integer range [0..4294967295].
+      Output is wrapped to signed 32-bit integer range [-2147483648..2147483647].
+      Will never overflow, unlike (b^e), which can overflow to inf.
     categories:
       - math
   llModifyLand:
@@ -13325,10 +13328,10 @@ functions:
   llPow:
     arguments:
     - base:
-        tooltip: Base float value.
+        tooltip: Base number.
         type: float
     - exponent:
-        tooltip: Exponent float value.
+        tooltip: Exponent number.
         type: float
     slua-deprecated:
       use: "^"
@@ -13340,8 +13343,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing base raised to the power exponent. Returns
-      0 and triggers a Math Error for imaginary results.
+    tooltip: Returns base raised to the power exponent. If result is imaginary, returns NaN.
     categories:
       - math
   llPreloadSound:
@@ -14327,7 +14329,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the integer that float val is closest to.
+    tooltip: Rounds val to the nearest integer. Halfway values are rounded toward infinity.
     categories:
       - math
   llSHA1String:

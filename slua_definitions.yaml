@@ -1696,7 +1696,7 @@ modules:
     comment: Returns val clamped between min and max. Raises an error if min is greater than max.
     parameters:
     - name: val
-      comment: The value to clamp.
+      comment: Number to clamp.
       type: number
     - name: min
       comment: Minimum allowable value.
@@ -1760,20 +1760,23 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: fmod
-    comment: Returns the remainder of x modulo y, rounded towards zero.
+    comment: Returns the remainder (modulo) of dividend/modulus, (i.e. d mod m), rounded towards zero.
+      Returns NaN if modulus is 0. Identical to d % m if both arguments have the same sign.
     parameters:
-    - name: x
+    - name: dividend
       comment: Dividend.
       type: number
-    - name: "y"
-      comment: Divisor.
+    - name: modulus
+      comment: Modulus.
       type: number
     return-type: number
     must-use: true
     fastcall: true
     typechecker: {checked: true}
   - name: frexp
-    comment: Returns significand s and integer exponent e such that val = s * 2^e.
+    comment: Breaks a floating-point number into it's component parts significand and exponent.
+      In other words, Returns significand s and integer exponent e such that val = s * 2^e.
+      Inverse of math.ldexp.
     parameters:
     - name: val
       comment: Number to split into significand and exponent.
@@ -1783,12 +1786,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: ldexp
-    comment: Returns s * 2^e.
+    comment: Returns s * 2^e. Inverse of math.frexp
     parameters:
-    - name: s
+    - name: significand
       comment: Significand.
       type: number
-    - name: e
+    - name: exponent
       comment: Exponent.
       type: number
     return-type: number
@@ -1796,12 +1799,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lerp
-    comment: Linearly interpolates between a and b using factor t.
+    comment: Linearly interpolates between start and end using factor t.
     parameters:
-    - name: a
+    - name: start
       comment: Start value.
       type: number
-    - name: b
+    - name: end
       comment: End value.
       type: number
     - name: t
@@ -2048,9 +2051,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: isnan
-    comment: Returns true if n is NaN.
+    comment: Returns true if val is NaN.
     parameters:
-    - name: "n"
+    - name: val
       comment: Number to check as NaN.
       type: number
     return-type: boolean
@@ -2058,9 +2061,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: isinf
-    comment: Returns true if n is infinite.
+    comment: Returns true if val is infinite.
     parameters:
-    - name: "n"
+    - name: val
       comment: Number to check as infinite.
       type: number
     return-type: boolean
@@ -2068,9 +2071,9 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: isfinite
-    comment: Returns true if n is finite.
+    comment: Returns true if val is finite.
     parameters:
-    - name: "n"
+    - name: val
       comment: Number to check as finite.
       type: number
     return-type: boolean
@@ -2218,12 +2221,12 @@ modules:
     must-use: true
     typechecker: {checked: true}
   - name: slerp
-    comment: Spherical linear interpolation from a to b using factor t.
+    comment: Spherical linear interpolation from start to end using factor t.
     parameters:
-    - name: a
+    - name: start
       comment: Start quaternion.
       type: quaternion
-    - name: b
+    - name: end
       comment: End quaternion.
       type: quaternion
     - name: t
@@ -3078,12 +3081,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lerp
-    comment: Linearly interpolates between a and b using factor t.
+    comment: Linearly interpolates between start and end using factor t.
     parameters:
-    - name: a
+    - name: start
       comment: Start vector.
       type: vector
-    - name: b
+    - name: end
       comment: End vector.
       type: vector
     - name: t
