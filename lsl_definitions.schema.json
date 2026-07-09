@@ -513,6 +513,10 @@
                                             "slua-type": {
                                                 "markdownDescription": "A more specific argument type for slua type-checking.",
                                                 "type": "string"
+                                            },
+                                            "ruleset": {
+                                                "markdownDescription": "Name of a builder-ruleset for automatic dict-to-list coercion. When present, the base ll.* function will accept either a flat rules list or a dict matching the named ruleset.",
+                                                "type": "string"
                                             }
                                         },
                                         "required": [

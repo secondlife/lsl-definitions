@@ -11123,8 +11123,10 @@ functions:
         tooltip: Destination HTTP or HTTPS URL.
         type: string
     - parameters:
-        tooltip: A list of HTTP_* configuration flags and value pairs.
+        tooltip: A list of HTTP_* configuration flags and value pairs,
+          or an HTTPRequestParams dictionary.
         type: list
+        ruleset: http-params
     - body:
         tooltip: String contents of the request body.
         type: string
@@ -11450,8 +11452,10 @@ functions:
         tooltip: Link number (1 for root, >1 for children) or a LINK_* flag.
         type: integer
     - rules:
-        tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
+        tooltip: A list of particle system rules and data pairs [rule1, data1, ...],
+          or a ParticleParams dictionary.
         type: list
+        ruleset: particle-params
     energy: 10.0
     func-id: 355
     return: void
@@ -13049,6 +13053,7 @@ functions:
     - rules:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
+        ruleset: particle-params
     energy: 10.0
     func-id: 229
     return: void
@@ -14859,8 +14864,9 @@ functions:
         type: integer
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
-          parameters.
+          parameters, or a PrimMediaParams dictionary.
         type: list
+        ruleset: prim-media-params
     energy: 10.0
     func-id: 371
     return: integer

@@ -884,7 +884,12 @@ void task_lscript_init_generated()
 
 @register("gen_lua_registrations")
 def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) -> str:
-    """Generate lambdas to handle incoming Lua calls that wrap ll*() lscript functions"""
+    """Generate lambdas to handle incoming Lua calls that wrap ll*() lscript functions
+
+    Note: This file is included inside an array initializer, so it cannot have
+    file-scope declarations. The ruleset def pointers (kParticleParamsDef, etc.)
+    must be visible from ruleset_builder_descriptors being included earlier.
+    """
     bindings = []
     for func in definitions.functions.values():
         if compat_mode != func.need_compat:
@@ -894,6 +899,18 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
         assert func.name.startswith("ll")
         func_name = func.name[2:]
         prelude = ""
+
+        # Generate ruleset coercion calls for arguments with ruleset annotations.
+        # These must happen BEFORE extract_lua_args() since they modify the stack.
+        coercion_lines = []
+        for arg_idx, arg in enumerate(func.arguments):
+            if arg.ruleset:
+                ruleset_data = definitions.builder_rulesets[arg.ruleset]
+                enum_name = ruleset_data["enum"]
+                def_name = f"k{enum_name}sDef"
+                lua_pos = arg_idx + 1  # 1-based Lua stack position
+                coercion_lines.append(f"    slua_ruleset_coerce(L, {lua_pos}, {def_name});")
+        coercion_block = "\n".join(coercion_lines) + "\n" if coercion_lines else ""
 
         # If we're not a simple function we need to run an interrupt when the
         # function _ends_ too, so we don't run over our time budget. This is
@@ -920,7 +937,7 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
 
         binding = """
 {"%(func_name)s", [](lua_State *L) {
-    LLScriptLibData args[%(num_args)d];
+%(coercion_block)s    LLScriptLibData args[%(num_args)d];
     const LSCRIPTType types[] = {%(arg_types)s};
     // Convert the arguments to LLScriptLibData, throwing if not possible.
     extract_lua_args(L, %(num_args)d, types, args);
@@ -933,6 +950,7 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
             "arg_types": ", ".join(a.type.meta.lst_name for a in func.arguments),
             "func_id": func.func_id,
             "func_name": func_name,
+            "coercion_block": coercion_block,
             "prelude": prelude if prelude.strip() else "    // no prelude",
             "index_semantics": "false" if not func.index_semantics else "!compat_mode",
             "bool_semantics": "false" if not func.bool_semantics else "!compat_mode",
@@ -979,14 +997,14 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
 def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
     """Generate RulesetParamDescriptor arrays and dispatch wrappers for all type:table rulesets.
 
-    For each ruleset, inspects the signature of ll{dispatch-fn} to determine whether
-    a link parameter is needed, then emits:
-      - RulesetParamDescriptor array
-      - RulesetFlagDescriptor array (if flag-enum present)
-      - ruleset_builder_def_build / ruleset_builder_def_add_flags calls (as a static initializer)
-      - a lambda dispatch wrapper
-      - a slua_register_ruleset_fn call
-    The resulting fragment is #include'd inside init_ruleset_builders(lua_State* L).
+    For each ruleset, emits:
+      - RulesetParamDescriptor array (file scope)
+      - RulesetFlagDescriptor array if flag-enum present (file scope)
+      - RulesetBuilderDef* pointer (file scope, NOT static - accessible to lua_registrations.cpp)
+      - a lambda dispatch wrapper (inside init_ruleset_builders)
+      - a slua_register_ruleset_fn call (inside init_ruleset_builders)
+
+    The resulting fragment is #include'd at file scope. Call init_ruleset_builders(L) to register.
     """
     _semantic_map = _VALUE_TYPE_TO_SEMANTIC
 
@@ -1061,7 +1079,9 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
             if not is_link:
                 prefix_lua_positions[arg_name] = lua_pos
                 if arg_type == LSLType.INTEGER:
-                    lines.append(f"    int {arg_name.lower()} = luaL_checkinteger(L, {lua_pos});")
+                    lines.append(
+                        f"        int {arg_name.lower()} = luaL_checkinteger(L, {lua_pos});"
+                    )
                 lua_pos += 1
 
         # Similarly for suffix args (start after the params table slot).
@@ -1070,73 +1090,77 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
         for arg_name, arg_type in suffix_args:
             suffix_lua_positions[arg_name] = lua_pos
             if arg_type == LSLType.INTEGER:
-                lines.append(f"    int {arg_name.lower()}_s = luaL_optinteger(L, {lua_pos}, 0);")
+                lines.append(
+                    f"        int {arg_name.lower()}_s = luaL_optinteger(L, {lua_pos}, 0);"
+                )
             lua_pos += 1
 
         # Read optional link arg (comes after suffix args on the Lua stack).
         if has_link:
             lines.append(
-                f"    int link = lua_isnoneornil(L, {link_lua_pos}) "
+                f"        int link = lua_isnoneornil(L, {link_lua_pos}) "
                 f"? SLUA_LINK_THIS : luaL_checkinteger(L, {link_lua_pos});"
             )
 
         # Serialize params table into a flat rules list.
-        lines.append(f"    slua_ruleset_serialize(L, {params_lua_pos}, def);")
-        lines.append("    int rules_idx = lua_gettop(L);")
+        lines.append(f"        slua_ruleset_serialize(L, {params_lua_pos}, def);")
+        lines.append("        int rules_idx = lua_gettop(L);")
 
         # Dispatch to ll.* in original LL order.
-        lines.append('    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");')
-        lines.append(f'    lua_rawgetfield(L, -1, "{dispatch_fn}");')
+        lines.append('        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");')
+        lines.append(f'        lua_rawgetfield(L, -1, "{dispatch_fn}");')
 
         # Push prefix args in LL order.
         for arg_name, arg_type, is_link in prefix_args:
             if is_link:
-                lines.append("    lua_pushinteger(L, link);")
+                lines.append("        lua_pushinteger(L, link);")
             elif arg_type == LSLType.INTEGER:
-                lines.append(f"    lua_pushinteger(L, {arg_name.lower()});")
+                lines.append(f"        lua_pushinteger(L, {arg_name.lower()});")
             else:
-                lines.append(f"    lua_pushvalue(L, {prefix_lua_positions[arg_name]});")
+                lines.append(f"        lua_pushvalue(L, {prefix_lua_positions[arg_name]});")
 
         # Push the serialized rules list.
-        lines.append("    lua_pushvalue(L, rules_idx);")
+        lines.append("        lua_pushvalue(L, rules_idx);")
 
         # Push suffix args in LL order.
         for arg_name, arg_type in suffix_args:
             pos = suffix_lua_positions[arg_name]
             if arg_type == LSLType.INTEGER:
-                lines.append(f"    lua_pushinteger(L, {arg_name.lower()}_s);")
+                lines.append(f"        lua_pushinteger(L, {arg_name.lower()}_s);")
             elif arg_type == LSLType.FLOAT:
                 lines.append(
-                    f"    if (lua_isnoneornil(L, {pos})) lua_pushnumber(L, 0.0); else lua_pushvalue(L, {pos});"
+                    f"        if (lua_isnoneornil(L, {pos})) lua_pushnumber(L, 0.0); else lua_pushvalue(L, {pos});"
                 )
             elif arg_type in (LSLType.STRING, LSLType.KEY):
                 lines.append(
-                    f'    if (lua_isnoneornil(L, {pos})) lua_pushliteral(L, ""); else lua_pushvalue(L, {pos});'
+                    f'        if (lua_isnoneornil(L, {pos})) lua_pushliteral(L, ""); else lua_pushvalue(L, {pos});'
                 )
             elif arg_type == LSLType.VECTOR:
                 lines.append(
-                    f"    if (lua_isnoneornil(L, {pos})) lua_pushvector(L, 0.0f, 0.0f, 0.0f); else lua_pushvalue(L, {pos});"
+                    f"        if (lua_isnoneornil(L, {pos})) lua_pushvector(L, 0.0f, 0.0f, 0.0f); else lua_pushvalue(L, {pos});"
                 )
             elif arg_type == LSLType.ROTATION:
                 lines.append(
-                    f"    if (lua_isnoneornil(L, {pos})) luaSL_pushquaternion(L, 0.0f, 0.0f, 0.0f, 1.0f); else lua_pushvalue(L, {pos});"
+                    f"        if (lua_isnoneornil(L, {pos})) luaSL_pushquaternion(L, 0.0f, 0.0f, 0.0f, 1.0f); else lua_pushvalue(L, {pos});"
                 )
             else:
-                lines.append(f"    lua_pushvalue(L, {pos});")
+                lines.append(f"        lua_pushvalue(L, {pos});")
 
         nresults = 0 if ret_type == LSLType.VOID else 1
-        lines.append(f"    lua_call(L, {total_ll_args}, {nresults});")
-        lines.append(f"    return {nresults};")
+        lines.append(f"        lua_call(L, {total_ll_args}, {nresults});")
+        lines.append(f"        return {nresults};")
 
         body = "\n".join(lines)
         return (
             f"auto {cpp_name} = [](lua_State* L) -> int {{\n"
-            f"    const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));\n"
+            f"        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));\n"
             f"{body}\n"
-            f"}};"
+            f"    }};"
         )
 
-    sections = []
+    file_scope_sections = []
+    function_body_lines = []
+
     for ruleset_name, ruleset_data in definitions.builder_rulesets.items():
         if ruleset_data.get("type", "builder") != "table":
             continue
@@ -1156,7 +1180,7 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
             desc_lines.append(f"    {{\"{name}\", '{sem}', {desc.tag}}},")
 
         param_body = "\n".join(desc_lines)
-        section = (
+        file_scope = (
             f"// {ruleset_name}\n"
             f"static const RulesetParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
         )
@@ -1207,41 +1231,50 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
                 flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
 
             flag_body = "\n".join(flag_lines)
-            section += (
+            file_scope += (
                 f"static const RulesetFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
             )
 
-            # Build def and add flags in a single static initializer so it is safe
-            # to call init_ruleset_builders more than once.
-            section += (
-                f"static RulesetBuilderDef* {def_name} = []() {{\n"
+            # Build def with flags in a single static initializer (file scope, NOT static).
+            file_scope += (
+                f"RulesetBuilderDef* {def_name} = []() {{\n"
                 f"    auto* d = ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
                 f"    ruleset_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
                 f"    return d;\n"
                 f"}}();\n"
             )
         else:
-            section += (
-                f"static RulesetBuilderDef* {def_name} = "
+            # Simple def pointer (file scope, NOT static).
+            file_scope += (
+                f"RulesetBuilderDef* {def_name} = "
                 f"ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
             )
 
+        file_scope_sections.append(file_scope)
+
+        # Build lambda and registration (inside function body)
         if dispatch_fn is not None:
             lua_module = ruleset_data["lua-module"]
             lua_fn = ruleset_data["lua-fn"]
             prefix_args, suffix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
             cpp_name = _lua_fn_to_cpp_name(lua_fn)
-            section += (
-                _build_wrapper(cpp_name, dispatch_fn, prefix_args, suffix_args, has_link, ret_type)
-                + "\n"
-            )
-            section += (
-                f'slua_register_ruleset_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
-            )
 
-        sections.append(section)
+            wrapper = _build_wrapper(
+                cpp_name, dispatch_fn, prefix_args, suffix_args, has_link, ret_type
+            )
+            function_body_lines.append(f"    {wrapper}")
+            function_body_lines.append(
+                f'    slua_register_ruleset_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
+            )
+            function_body_lines.append("")
 
-    return "\n\n".join(sections)
+    # Combine: file scope declarations, then the function
+    result = "\n".join(file_scope_sections)
+    result += "\ninline void init_ruleset_builders(lua_State* L) {\n"
+    result += "\n".join(function_body_lines)
+    result += "}\n"
+
+    return result
 
 
 @register("gen_lscript_library_bind_pure")

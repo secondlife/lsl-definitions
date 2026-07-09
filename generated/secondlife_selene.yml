@@ -8752,7 +8752,7 @@ globals:
       and spacers accept up to 8 string entries each.
   ll.ParticleSystem:
     args:
-    - type: table
+    - type: any
     description: Creates or updates a particle system on the prim containing the script
       based on rules. An empty list removes the particle system.
   ll.PassCollisions:
@@ -13476,7 +13476,7 @@ globals:
       message: Creates or updates a particle system on the prim containing the script
         based on rules. An empty list removes the particle system.
     args:
-    - type: table
+    - type: any
     description: Creates or updates a particle system on the prim containing the script
       based on rules. An empty list removes the particle system.
   llcompat.PassCollisions:
