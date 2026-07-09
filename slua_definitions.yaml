@@ -3690,10 +3690,12 @@ builtin-types:
     tooltip: "Boolean: represents a true or false value."
   buffer:
     tooltip: Read-write binary data.
+  integer:
+    tooltip: 64-bit integer.
   never:
     tooltip: The empty type that contains no values.
   number:
-    tooltip: Double‑precision floating point number.
+    tooltip: Double‑precision (64-bit) floating point number.
   string:
     tooltip: Read-only binary data. Usually UTF-8-encoded text.
   thread:
