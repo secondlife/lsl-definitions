@@ -7986,7 +7986,7 @@ globals:
   ll.HTTPRequest:
     args:
     - type: string
-    - type: table
+    - type: any
     - type: string
     description: Sends an HTTP request to the specified url containing body and configured
       via parameters. Raises an http_response event and returns a key query handle
@@ -8116,7 +8116,7 @@ globals:
   ll.LinkParticleSystem:
     args:
     - type: number
-    - type: table
+    - type: any
     description: Creates or updates a particle system on the linked prim link based
       on the list of rules. An empty list removes the particle system.
   ll.LinkPlaySound:
@@ -9452,7 +9452,7 @@ globals:
     args:
     - type: number
     - type: number
-    - type: table
+    - type: any
     description: Sets the media parameters specified by params on face of the linked
       prim link without a script delay. Returns an integer STATUS_* flag detailing
       success or failure.
@@ -12496,7 +12496,7 @@ globals:
         identifying the request.
     args:
     - type: string
-    - type: table
+    - type: any
     - type: string
     description: Sends an HTTP request to the specified url containing body and configured
       via parameters. Raises an http_response event and returns a key query handle
@@ -12676,7 +12676,7 @@ globals:
         on the list of rules. An empty list removes the particle system.
     args:
     - type: number
-    - type: table
+    - type: any
     description: Creates or updates a particle system on the linked prim link based
       on the list of rules. An empty list removes the particle system.
   llcompat.LinkPlaySound:
@@ -14470,7 +14470,7 @@ globals:
     args:
     - type: number
     - type: number
-    - type: table
+    - type: any
     description: Sets the media parameters specified by params on face of the linked
       prim link without a script delay. Returns an integer STATUS_* flag detailing
       success or failure.

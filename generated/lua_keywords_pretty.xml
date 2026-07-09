@@ -22404,7 +22404,7 @@ Returns true if result is non-zero.</string>
                   <key>parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of HTTP_* configuration flags and value pairs.</string>
+                     <string>A list of HTTP_* configuration flags and value pairs, or an HTTPRequestParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -22920,7 +22920,7 @@ Returns true if result is non-zero.</string>
                   <key>rules</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of particle system rules and data pairs [rule1, data1, ...].</string>
+                     <string>A list of particle system rules and data pairs [rule1, data1, ...], or a ParticleParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -28583,7 +28583,7 @@ Returns true if result is non-zero.</string>
                   <key>params</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A set of property-value pairs (in no particular order) specifying media parameters.</string>
+                     <string>A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>

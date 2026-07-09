@@ -11,20 +11,7 @@ static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"accept", 'N', 8},
     {"extended_error", 'b', 9},
 };
-static RulesetBuilderDef* kHTTPRequestParamsDef = ruleset_builder_def_build(kHTTPRequestParamsDescs, std::size(kHTTPRequestParamsDescs));
-auto request = [](lua_State* L) -> int {
-    const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-    slua_ruleset_serialize(L, 2, def);
-    int rules_idx = lua_gettop(L);
-    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-    lua_rawgetfield(L, -1, "HTTPRequest");
-    lua_pushvalue(L, 1);
-    lua_pushvalue(L, rules_idx);
-    if (lua_isnoneornil(L, 3)) lua_pushliteral(L, ""); else lua_pushvalue(L, 3);
-    lua_call(L, 3, 1);
-    return 1;
-};
-slua_register_ruleset_fn(L, "llhttp", "request", request, kHTTPRequestParamsDef);
+RulesetBuilderDef* kHTTPRequestParamsDef = ruleset_builder_def_build(kHTTPRequestParamsDescs, std::size(kHTTPRequestParamsDescs));
 
 // particle-params
 static const RulesetParamDescriptor kParticleParamsDescs[] = {
@@ -68,24 +55,11 @@ static const RulesetFlagDescriptor kParticleParamFlagDescs[] = {
     {"emissive", 0x100, 0},
     {"ribbon", 0x400, 0},
 };
-static RulesetBuilderDef* kParticleParamsDef = []() {
+RulesetBuilderDef* kParticleParamsDef = []() {
     auto* d = ruleset_builder_def_build(kParticleParamsDescs, std::size(kParticleParamsDescs));
     ruleset_builder_def_add_flags(d, kParticleParamFlagDescs, std::size(kParticleParamFlagDescs));
     return d;
 }();
-auto particle_system = [](lua_State* L) -> int {
-    const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-    int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);
-    slua_ruleset_serialize(L, 1, def);
-    int rules_idx = lua_gettop(L);
-    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-    lua_rawgetfield(L, -1, "LinkParticleSystem");
-    lua_pushinteger(L, link);
-    lua_pushvalue(L, rules_idx);
-    lua_call(L, 2, 0);
-    return 0;
-};
-slua_register_ruleset_fn(L, "llprim", "particleSystem", particle_system, kParticleParamsDef);
 
 // prim-media-params
 static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
@@ -105,19 +79,50 @@ static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
     {"perms_interact", 'i', 13},
     {"perms_control", 'i', 14},
 };
-static RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
-auto set_media = [](lua_State* L) -> int {
-    const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-    int face = luaL_checkinteger(L, 1);
-    int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
-    slua_ruleset_serialize(L, 2, def);
-    int rules_idx = lua_gettop(L);
-    lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-    lua_rawgetfield(L, -1, "SetLinkMedia");
-    lua_pushinteger(L, link);
-    lua_pushinteger(L, face);
-    lua_pushvalue(L, rules_idx);
-    lua_call(L, 3, 1);
-    return 1;
-};
-slua_register_ruleset_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);
+RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
+
+inline void init_ruleset_builders(lua_State* L) {
+    auto request = [](lua_State* L) -> int {
+        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+        slua_ruleset_serialize(L, 2, def);
+        int rules_idx = lua_gettop(L);
+        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+        lua_rawgetfield(L, -1, "HTTPRequest");
+        lua_pushvalue(L, 1);
+        lua_pushvalue(L, rules_idx);
+        if (lua_isnoneornil(L, 3)) lua_pushliteral(L, ""); else lua_pushvalue(L, 3);
+        lua_call(L, 3, 1);
+        return 1;
+    };
+    slua_register_ruleset_fn(L, "llhttp", "request", request, kHTTPRequestParamsDef);
+
+    auto particle_system = [](lua_State* L) -> int {
+        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+        int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);
+        slua_ruleset_serialize(L, 1, def);
+        int rules_idx = lua_gettop(L);
+        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+        lua_rawgetfield(L, -1, "LinkParticleSystem");
+        lua_pushinteger(L, link);
+        lua_pushvalue(L, rules_idx);
+        lua_call(L, 2, 0);
+        return 0;
+    };
+    slua_register_ruleset_fn(L, "llprim", "particleSystem", particle_system, kParticleParamsDef);
+
+    auto set_media = [](lua_State* L) -> int {
+        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+        int face = luaL_checkinteger(L, 1);
+        int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
+        slua_ruleset_serialize(L, 2, def);
+        int rules_idx = lua_gettop(L);
+        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+        lua_rawgetfield(L, -1, "SetLinkMedia");
+        lua_pushinteger(L, link);
+        lua_pushinteger(L, face);
+        lua_pushvalue(L, rules_idx);
+        lua_call(L, 3, 1);
+        return 1;
+    };
+    slua_register_ruleset_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);
+}
