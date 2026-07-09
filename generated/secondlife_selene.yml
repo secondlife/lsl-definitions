@@ -5014,17 +5014,17 @@ globals:
       required: false
     must_use: true
     description: Converts the input string to a number in the specified base. Returns
-      nil if the conversion fails.
+      nil if invalid.
   toquaternion:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a quaternion, returns nil if invalid.
+    description: Converts a string to a quaternion. Returns nil if invalid.
   torotation:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a rotation (quaternion), returns nil if invalid.
+    description: Converts a string to a rotation (quaternion). Returns nil if invalid.
   tostring:
     args:
     - type: any
@@ -5040,7 +5040,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a vector, returns nil if invalid.
+    description: Converts a string to a vector. Returns nil if invalid.
   type:
     args:
     - type: any

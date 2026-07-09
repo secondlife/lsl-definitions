@@ -54,13 +54,13 @@
         "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
     },
     "@sl-slua/global/tonumber": {
-        "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
+        "documentation": "Converts the input string to a number in the specified base. Returns nil if invalid."
     },
     "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid."
+        "documentation": "Converts a string to a quaternion. Returns nil if invalid."
     },
     "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid."
+        "documentation": "Converts a string to a rotation (quaternion). Returns nil if invalid."
     },
     "@sl-slua/global/tostring": {
         "documentation": "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
@@ -69,7 +69,7 @@
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
-        "documentation": "Converts a string to a vector, returns nil if invalid."
+        "documentation": "Converts a string to a vector. Returns nil if invalid."
     },
     "@sl-slua/global/type": {
         "documentation": "Returns the type of the object as a string."

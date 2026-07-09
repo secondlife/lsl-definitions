@@ -11158,7 +11158,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts the input string to a number in the specified base. Returns nil if the conversion fails.</string>
+            <string>Converts the input string to a number in the specified base. Returns nil if invalid.</string>
          </map>
          <key>toquaternion</key>
          <map>
@@ -11181,7 +11181,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts a string to a quaternion, returns nil if invalid.</string>
+            <string>Converts a string to a quaternion. Returns nil if invalid.</string>
          </map>
          <key>torotation</key>
          <map>
@@ -11204,7 +11204,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts a string to a rotation (quaternion), returns nil if invalid.</string>
+            <string>Converts a string to a rotation (quaternion). Returns nil if invalid.</string>
          </map>
          <key>tostring</key>
          <map>
@@ -11241,7 +11241,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>String to convert to a uuid.</string>
+                     <string>String or buffer to convert to a uuid.</string>
                      <key>type</key>
                      <string>string? | buffer | uuid</string>
                   </map>
@@ -11277,7 +11277,7 @@ float falloff – ranges from 0.01 to 2.0
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts a string to a vector, returns nil if invalid.</string>
+            <string>Converts a string to a vector. Returns nil if invalid.</string>
          </map>
          <key>type</key>
          <map>
@@ -11668,7 +11668,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   <key>field</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index.</string>
+                     <string>Starting bit index, zero-based</string>
                      <key>type</key>
                      <string>number</string>
                   </map>

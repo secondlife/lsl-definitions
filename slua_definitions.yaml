@@ -631,7 +631,7 @@ functions:
   fastcall: true
   typechecker: {builtin: true, magic: true}  # builtin due to FFlag::LuauSolverV2
 - name: tonumber
-  comment: Converts the input string to a number in the specified base. Returns nil if the conversion fails.
+  comment: Converts the input string to a number in the specified base. Returns nil if invalid.
   parameters:
   - name: value
     comment: String to convert to a number.
@@ -645,7 +645,7 @@ functions:
   fastcall: true
   must-use: true
 - name: toquaternion
-  comment: Converts a string to a quaternion, returns nil if invalid.
+  comment: Converts a string to a quaternion. Returns nil if invalid.
   parameters:
   - name: value
     comment: String to convert to a quaternion.
@@ -654,7 +654,7 @@ functions:
   return-type: quaternion?
   must-use: true
 - name: torotation
-  comment: Converts a string to a rotation (quaternion), returns nil if invalid.
+  comment: Converts a string to a rotation (quaternion). Returns nil if invalid.
   parameters:
   - name: value
     comment: String to convert to a rotation.
@@ -677,13 +677,13 @@ functions:
     shorter than 16 bytes.
   parameters:
   - name: val
-    comment: String to convert to a uuid.
+    comment: String or buffer to convert to a uuid.
     type: string? | buffer | uuid
     selene-type: string
   return-type: uuid?
   must-use: true
 - name: tovector
-  comment: Converts a string to a vector, returns nil if invalid.
+  comment: Converts a string to a vector. Returns nil if invalid.
   parameters:
   - name: val
     comment: String to convert to a vector.
@@ -820,7 +820,7 @@ modules:
       comment: Integer to extract from.
       type: number
     - name: field
-      comment: Starting index.
+      comment: Starting bit index, zero-based
       type: number
     - name: width
       comment: Number of bits to extract, or 1 if omitted.
