@@ -1051,6 +1051,19 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  - name: readinteger
+    comment: Reads a signed or unsigned 64-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1167,6 +1180,22 @@ modules:
     - name: value
       comment: Value to write.
       type: number
+    return-type: ()
+    fastcall: true
+    typechecker: {checked: true}
+  - name: writeinteger
+    comment: Writes a signed or unsigned 64-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+      observes: write
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: integer
     return-type: ()
     fastcall: true
     typechecker: {checked: true}
@@ -1634,6 +1663,45 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  - name: fromstring
+    comment: Converts the input string to a number in the specified base. Returns nil if not an integer.
+    parameters:
+    - name: value
+      comment: String to convert to an integer.
+      type: string
+    - name: base
+      comment: Base for the conversion.
+      type: number?
+      default-value: 10
+    return-type: integer?
+    fastcall: true
+    must-use: true
+  - name: ge
+    comment: Returns true if int1 >= int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: gt
+    comment: Returns true if int1 > int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
   - name: idiv
     comment: Returns dividend / divisor (signed), rounding toward negative infinity. Raises an error if divisor is zero.
     parameters:
@@ -1644,6 +1712,32 @@ modules:
       comment: Integer divisor.
       type: integer
     return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: le
+    comment: Returns true if int1 <= int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: lt
+    comment: Returns true if int1 < int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
     must-use: true
     fastcall: true
     typechecker: {checked: true}
@@ -1673,6 +1767,34 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  - name: max
+    comment: Returns the maximum value from the given integers (signed).
+    parameters:
+    - name: val
+      comment: Integer to find the maximum from.
+      type: integer
+    - name: ...
+      comment: Integers to find the maximum from.
+      type: ...integer
+      optional: false
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: min
+    comment: Returns the minimum value from the given integers (signed).
+    parameters:
+    - name: val
+      comment: Integer to find the minimum from.
+      type: integer
+    - name: ...
+      comment: Integers to find the minimum from.
+      type: ...integer
+      optional: false
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
   - name: mod
     comment: Returns the remainder of dividend / divisor (signed).
       The result always has the same sign as the divisor.
@@ -1696,6 +1818,17 @@ modules:
       type: integer
     - name: int2
       comment: Right integer factor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: neg
+    comment: Returns the negation of val.
+      integer.neg(integer.minsigned) == integer.minsigned due to overflow.
+    parameters:
+    - name: val
+      comment: Integer to negate.
       type: integer
     return-type: integer
     must-use: true
@@ -1776,6 +1909,15 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  - name: tonumber
+    comment: Returns the nearest float64 to the given int64. Is inexact above 2^53.
+    parameters:
+    - name: val
+      comment: Integer to convert to a number.
+      type: integer
+    return-type: number
+    fastcall: true
+    must-use: true
   - name: udiv
     comment: Returns dividend / divisor (unsigned), rounding toward negative infinity. Raises an error if divisor is zero.
     parameters:
@@ -1786,6 +1928,58 @@ modules:
       comment: Integer divisor.
       type: integer
     return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: uge
+    comment: Returns true if int1 >= int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ugt
+    comment: Returns true if int1 > int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ule
+    comment: Returns true if int1 <= int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ult
+    comment: Returns true if int1 < int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
     must-use: true
     fastcall: true
     typechecker: {checked: true}
@@ -1803,6 +1997,15 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  constants:
+  - name: maxsigned
+    comment: The most positive signed int64 (2^63-1).
+    type: integer
+    value: 9_223_372_036_854_775_807i
+  - name: minsigned
+    comment: The most negative signed int64 (-2^63).
+    type: integer
+    value: -9_223_372_036_854_775_808i
 - name: llbase64
   comment: Base64 encoding/decoding library.
   functions:
