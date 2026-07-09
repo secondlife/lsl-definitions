@@ -1674,7 +1674,6 @@ modules:
       type: number?
       default-value: 10
     return-type: integer?
-    fastcall: true
     must-use: true
   - name: ge
     comment: Returns true if int1 >= int2 (signed).
