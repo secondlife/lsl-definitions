@@ -17025,9 +17025,6 @@ builder-rulesets:
     enum: HTTPRequestParam
     filler-tokens: [http]
     lua-type: HttpRequestParams
-    lua-module: llhttp
-    lua-fn: request
-    dispatch-fn: HTTPRequest
 
   particle-params:
     type: table

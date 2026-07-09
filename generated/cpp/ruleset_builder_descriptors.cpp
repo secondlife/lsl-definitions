@@ -82,20 +82,6 @@ static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
 RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
 
 inline void init_ruleset_builders(lua_State* L) {
-    auto request = [](lua_State* L) -> int {
-        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-        slua_ruleset_serialize(L, 2, def);
-        int rules_idx = lua_gettop(L);
-        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-        lua_rawgetfield(L, -1, "HTTPRequest");
-        lua_pushvalue(L, 1);
-        lua_pushvalue(L, rules_idx);
-        if (lua_isnoneornil(L, 3)) lua_pushliteral(L, ""); else lua_pushvalue(L, 3);
-        lua_call(L, 3, 1);
-        return 1;
-    };
-    slua_register_ruleset_fn(L, "llhttp", "request", request, kHTTPRequestParamsDef);
-
     auto particle_system = [](lua_State* L) -> int {
         const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
         int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);
