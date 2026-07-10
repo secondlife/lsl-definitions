@@ -117,15 +117,12 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
 
         type_map = {
             "boolean": "bool",
-            "boolean | number": "bool",
             "number": "number",
             "string": "string",
-            "string | uuid": "string",
             "buffer": {"display": "buffer"},
             "uuid": {"display": "uuid"},
             "vector": {"display": "vector"},
             "quaternion": {"display": "quaternion"},
-            "list": "table",
             "thread": {"display": "thread"},
         }
         if type_str in type_map:

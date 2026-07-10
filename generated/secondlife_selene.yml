@@ -8630,7 +8630,8 @@ globals:
     - type: number
     - type: number
     - type: string
-    - type: string
+    - type:
+        display: uuid
     description: Triggers a link_message event, sending num, str, and id to the scripts
       in the prim(s) specified by link to allow scripts within the same object to
       communicate.
@@ -13304,7 +13305,8 @@ globals:
     - type: number
     - type: number
     - type: string
-    - type: string
+    - type:
+        display: uuid
     description: Triggers a link_message event, sending num, str, and id to the scripts
       in the prim(s) specified by link to allow scripts within the same object to
       communicate.

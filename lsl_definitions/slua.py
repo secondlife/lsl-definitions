@@ -507,6 +507,7 @@ class SLuaDefinitions:
                         name=a.name,
                         comment=a.tooltip,
                         type=self.validate_type(replace_list(a.compute_slua_type(event=True))),
+                        selene_type=a.type.name.selene,
                     )
                     for a in event.arguments
                 ],
@@ -606,6 +607,7 @@ class SLuaDefinitions:
                         name=a.name,
                         comment=a.tooltip,
                         type=self.validate_type(a.compute_slua_type(), known_types),
+                        selene_type=a.type.name.selene,
                     )
                     for a in func.arguments
                 ],
@@ -672,7 +674,11 @@ class SLuaDefinitions:
                 if method.nullable:
                     # Nullable is represented through a blank string
                     slua_type = f'{slua_type} | ""'
-                parameters.append(SLuaParameter(name=param.name, type=slua_type))
+                parameters.append(
+                    SLuaParameter(
+                        name=param.name, type=slua_type, selene_type=param.type.name.selene
+                    )
+                )
             return SLuaFunction(
                 name=method.name,
                 type_parameters=["T"],
