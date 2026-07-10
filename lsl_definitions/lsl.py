@@ -240,28 +240,27 @@ class LSLEnum:
 
 
 class LSLExtendedType(StringEnum):
-    VOID = "void", LSLType.VOID, "()", ""
-    INTEGER = "integer", LSLType.INTEGER, "number", "number"
-    FLOAT = "float", LSLType.FLOAT, "number", "number"
-    STRING = "string", LSLType.STRING, "string", "string"
-    KEY = "key", LSLType.KEY, "uuid", {"display": "uuid"}
-    VECTOR = "vector", LSLType.VECTOR, "vector", {"display": "vector"}
-    ROTATION = "rotation", LSLType.ROTATION, "quaternion", {"display": "quaternion"}
-    LIST = "list", LSLType.LIST, "list", "table"
+    VOID = "void", LSLType.VOID, "()"
+    INTEGER = "integer", LSLType.INTEGER, "number"
+    FLOAT = "float", LSLType.FLOAT, "number"
+    STRING = "string", LSLType.STRING, "string"
+    KEY = "key", LSLType.KEY, "uuid"
+    VECTOR = "vector", LSLType.VECTOR, "vector"
+    ROTATION = "rotation", LSLType.ROTATION, "quaternion"
+    LIST = "list", LSLType.LIST, "list"
 
-    INDEX = "index", LSLType.INTEGER, "number", "number"
-    BOOLEAN = "boolean", LSLType.INTEGER, "boolean | number", "bool"
-    ASSET = "asset", LSLType.STRING, "string | uuid", "string"
-    ENUM = "enum", LSLType.INTEGER, "number", "number"
-    PARAM = "param", LSLType.LIST, "{number}", "table"
-    PARAM_GET = "param-get", LSLType.LIST, "{number}", "table"
+    INDEX = "index", LSLType.INTEGER, "number"
+    BOOLEAN = "boolean", LSLType.INTEGER, "boolean | number"
+    ASSET = "asset", LSLType.STRING, "string | uuid"
+    ENUM = "enum", LSLType.INTEGER, "number"
+    PARAM = "param", LSLType.LIST, "{number}"
+    PARAM_GET = "param-get", LSLType.LIST, "{number}"
 
-    def __new__(cls, name: str, lsl: LSLType, luau: str, selene: str | dict):
+    def __new__(cls, name: str, lsl: LSLType, luau: str):
         entry = str.__new__(cls, name)
         entry._value_ = name
         entry.lsl = lsl
         entry.luau = luau
-        entry.selene = selene
         return entry
 
 
