@@ -430,15 +430,6 @@ declare llbase64: {
 
 
 ---------------------------
--- Global Table: llhttp
----------------------------
-
-declare llhttp: {
-  request: (url: string, params: HttpRequestParams?, body: string?) -> uuid,
-}
-
-
----------------------------
 -- Global Table: lljson
 ---------------------------
 

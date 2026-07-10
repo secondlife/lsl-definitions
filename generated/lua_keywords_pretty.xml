@@ -201,7 +201,7 @@ export type DateTypeResult = {
          <key>HttpRequestParams</key>
          <map>
             <key>tooltip</key>
-            <string>HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.</string>
+            <string>HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.</string>
          </map>
          <key>MediaParams</key>
          <map>
@@ -13231,54 +13231,6 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Encodes a string or buffer to base64</string>
-         </map>
-         <key>llhttp</key>
-         <map>
-            <key>energy</key>
-            <real>-1.0</real>
-            <key>tooltip</key>
-            <string>Utilities for making HTTP requests.</string>
-         </map>
-         <key>llhttp.request</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>url</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>string</string>
-                  </map>
-               </map>
-               <map>
-                  <key>params</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>HttpRequestParams?</string>
-                  </map>
-               </map>
-               <map>
-                  <key>body</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>string?</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>uuid</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Send an HTTP request. Returns a key identifying the request, which is delivered via the http_response event. Omit body for requests that do not need a body (e.g. GET).</string>
          </map>
          <key>lljson</key>
          <map>

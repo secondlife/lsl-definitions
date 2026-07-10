@@ -320,12 +320,6 @@
     "@sl-slua/global/llbase64.decode": {
         "documentation": "Decodes a base64 string to a string, or buffer if asBuffer is true. The output is truncated at the first decoding error."
     },
-    "@sl-slua/global/llhttp": {
-        "documentation": "Utilities for making HTTP requests."
-    },
-    "@sl-slua/global/llhttp.request": {
-        "documentation": "Send an HTTP request. Returns a key identifying the request, which is delivered via the http_response event. Omit body for requests that do not need a body (e.g. GET)."
-    },
     "@sl-slua/global/lljson": {
         "documentation": "JSON encoding/decoding library for Second Life.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
