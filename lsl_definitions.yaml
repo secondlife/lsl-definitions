@@ -15205,6 +15205,7 @@ functions:
         tooltip: A set of property-value pairs (in no particular order) specifying media
           parameters.
         type: list
+        ruleset: prim-media-params
     energy: 10.0
     func-id: 350
     return: integer

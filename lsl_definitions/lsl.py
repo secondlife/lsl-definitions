@@ -275,14 +275,13 @@ class LSLArgument:
                 return "boolean | number"
         base_type = self.type.meta.slua_name
         # If this argument has a ruleset annotation and we have rulesets data,
-        # create a union type: {any} | RulesetType
+        # create a union type: <original type> | RulesetType
         if self.ruleset and builder_rulesets:
             ruleset_data = builder_rulesets.get(self.ruleset)
             if ruleset_data:
                 lua_type = ruleset_data.get("lua-type")
                 if lua_type:
-                    # Use {any} as the base list type to allow mixed elements
-                    return f"{{any}} | {lua_type}"
+                    return f"{base_type} | {lua_type}"
         return base_type
 
 

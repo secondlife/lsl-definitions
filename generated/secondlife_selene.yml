@@ -9567,7 +9567,7 @@ globals:
   ll.SetPrimMediaParams:
     args:
     - type: number
-    - type: table
+    - type: any
     description: Sets the media parameters specified by params on the designated face
       of the prim. Returns an integer STATUS_* flag detailing success or failure.
   ll.SetPrimURL:
@@ -14642,7 +14642,7 @@ globals:
         of the prim. Returns an integer STATUS_* flag detailing success or failure.
     args:
     - type: number
-    - type: table
+    - type: any
     description: Sets the media parameters specified by params on the designated face
       of the prim. Returns an integer STATUS_* flag detailing success or failure.
   llcompat.SetPrimURL:
