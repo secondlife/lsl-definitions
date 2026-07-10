@@ -1336,8 +1336,7 @@ constants:
     tooltip: ID used by all combat log messages sent from the region to the
       COMBAT_CHANNEL. Scripts can filter llListen calls with this ID to receive
       only system-generated combat log messages.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "45e0fcfa-2268-4490-a51c-3e51bdfe80d1"
   CONTENT_TYPE_ATOM:
     member-of: [HTTPContentType]
@@ -2045,58 +2044,47 @@ constants:
     value-type: boolean
   IMG_USE_BAKED_AUX1:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "9742065b-19b5-297c-858a-29711d539043"
   IMG_USE_BAKED_AUX2:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
   IMG_USE_BAKED_AUX3:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"
   IMG_USE_BAKED_EYES:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"
   IMG_USE_BAKED_HAIR:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"
   IMG_USE_BAKED_HEAD:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "5a9f4a74-30f2-821c-b88d-70499d3e7183"
   IMG_USE_BAKED_LEFTARM:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "ff62763f-d60a-9855-890b-0c96f8f8cd98"
   IMG_USE_BAKED_LEFTLEG:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8e915e25-31d1-cc95-ae08-d58a47488251"
   IMG_USE_BAKED_LOWER:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "24daea5f-0539-cfcf-047f-fbc40b2786ba"
   IMG_USE_BAKED_SKIRT:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "43529ce8-7faa-ad92-165a-bc4078371687"
   IMG_USE_BAKED_UPPER:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "ae2de45c-d252-50b8-5c6e-19f39ce79317"
   INVENTORY_ALL:
     member-of: [InventoryType]
@@ -2600,8 +2588,7 @@ constants:
     value: 2
   NULL_KEY:
     tooltip: A special string constant used as a null or empty key value.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "00000000-0000-0000-0000-000000000000"
   OBJECT_ACCOUNT_LEVEL:
     member-of: [ObjectDetailsParam]
@@ -6051,29 +6038,24 @@ constants:
     value: 11
   TEXTURE_BLANK:
     tooltip: Asset UUID representing the default 'Blank' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "5748decc-f629-461c-9a36-a35a221fe21f"
   TEXTURE_DEFAULT:
     tooltip: ''
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_MEDIA:
     tooltip: Asset UUID representing the default 'Default Media' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"
   TEXTURE_PLYWOOD:
     tooltip: Asset UUID representing the default 'Plywood' texture.
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "89556747-24cb-43ed-920b-47caed15465f"
   TEXTURE_TRANSPARENT:
     tooltip: Asset UUID representing the '*Default Transparent Texture' in the
       library (included with viewers).
-    type: string
-    slua-type: uuid
+    type: {lsl: string, luau: uuid}
     value: "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"
   TOUCH_INVALID_FACE:
     # not enum as it can return positive integers also
@@ -6926,8 +6908,7 @@ events:
     - axes:
         tooltip: A list of six float values in the range [-1.0, 1.0] representing
           controller axes.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     tooltip: Triggered when a compatible viewer sends game controller input changes
       for the avatar specified by id. Only triggers for scripts in attachments
       or seats.
@@ -7012,8 +6993,7 @@ events:
         type: string
     - id:
         tooltip: A key value passed from the sending script.
-        type: key
-        slua-type: string
+        type: {lsl: key, luau: string}
     tooltip: Triggered when the script receives a link message from sender_num,
       containing the parameters num, str, and id sent via llMessageLinked.
     categories:
@@ -7273,8 +7253,7 @@ events:
         type: key
     - success:
         tooltip: Boolean. TRUE if the L$ transfer succeeded, FALSE otherwise.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - data:
         tooltip: Contains a CSV string of transaction info on success, or an error
           string on failure.
@@ -7291,8 +7270,6 @@ functions:
 #    sleep: Additional sleep time imposed by the script after this function completes.
 #    mono-sleep: Sleep in the mono script runtime
 #    return: Return type of the function.
-#    slua-return: More specific return type for slua type-checking.
-#    slua-type: More specific argument type for slua type-checking.
 #    type-arguments: An array of strings naming the type variables used for generic type-checking this slua function.
 #    arguments: An array of maps of maps describing the parameters to this function.
 #    tooltip: A brief description of this function. Map of maps is used to retain ordering.
@@ -7307,9 +7284,6 @@ functions:
 #    god-mode: If true, this function can only be executed in god mode.
 #    experience: If true, this function requires an experience to be set for the script to compile.
 #    linden-experience: If true, this function requires a linden-owned experience.
-#    index-semantics: If true then the returned integer from this function represents 0 based index
-#    bool-semantics: If true then the returned integer represents a boolean 1 or 0
-#    asset-semantics: If true this argument represents an inventory item and can accept either name or uuid
 #    detected-semantics: If true, the event or function is involved in the DetectedEvent wrapper in SLua
   llAbs:
     arguments:
@@ -7389,8 +7363,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the damage event to modify.
-        type: integer
-        index-semantics: true
+        type: index
     - new_damage:
         tooltip: New damage value to be applied or distributed after on_damage
           processing.
@@ -7427,8 +7400,7 @@ functions:
     experience: true
     func-id: 392
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the specified agent is in the experience and the
       experience can run in the current region/location; returns FALSE
@@ -7442,8 +7414,7 @@ functions:
         tooltip: Boolean. If TRUE, allows anyone to drop inventory items into the prim
           (even without modify rights). If FALSE, restricts inventory dropping
           to those with modify permissions.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 176
     return: void
@@ -7481,8 +7452,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, momentum is treated as a local directional vector; if
           FALSE, it is treated as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 72
     return: void
@@ -7501,8 +7471,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, the force is treated as a local directional vector;
           if FALSE, it is treated as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 73
     return: void
@@ -7736,8 +7705,7 @@ functions:
     energy: 10.0
     func-id: 196
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Parses the comma-separated string src and returns it as a list.
     categories:
@@ -7921,8 +7889,7 @@ functions:
     - accept:
         tooltip: Boolean. If TRUE, only collisions matching the name and id filters are
           processed; if FALSE, matching collisions are excluded.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 110
     return: void
@@ -7939,8 +7906,7 @@ functions:
     - impact_sound:
         tooltip: UUID of a sound, the name of a sound in the prim's inventory, or an
           empty string to suppress sounds.
-        type: string
-        asset-semantics: true
+        type: asset
     - impact_volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -7959,8 +7925,7 @@ functions:
     - impact_sprite:
         tooltip: UUID of a texture, the name of a texture in the prim's inventory,
           or an empty string to suppress sprites.
-        type: string
-        asset-semantics: true
+        type: asset
     deprecated: true
     energy: 10.0
     func-id: 161
@@ -8055,8 +8020,7 @@ functions:
     - parent:
         tooltip: Boolean. If TRUE, the script's object becomes the root prim; if FALSE,
           target becomes the root.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 141
     return: void
@@ -8136,16 +8100,13 @@ functions:
     arguments:
     - src:
         tooltip: Source list to copy and modify.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Starting index of the slice to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Ending index of the slice to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.remove
       reason: Unnecessary table copying.
@@ -8154,8 +8115,7 @@ functions:
     func-id: 193
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src with the slice from start to end
       (inclusive) removed. Negative indices count backward from the end of the
@@ -8170,12 +8130,10 @@ functions:
         type: string
     - start_index:
         tooltip: Starting index of the substring to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Ending index of the substring to remove (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 95
     pure: true
@@ -8197,8 +8155,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 509
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Derezzes (deletes or returns) a targeted object in the region
       previously rezzed by a script in this linkset, returning TRUE on success
@@ -8225,8 +8182,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 554
     must-use: true
@@ -8243,8 +8199,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 37
     must-use: true
@@ -8261,13 +8216,11 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 39
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     detected-semantics: true
     sleep: 0.0
     tooltip: Returns TRUE if the detected object or avatar specified by number has
@@ -8279,8 +8232,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 32
     must-use: true
@@ -8296,8 +8248,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 40
     # Note that the return does NOT have index semantics, link numbers are already one-indexed (sort of)
@@ -8315,8 +8266,7 @@ functions:
     arguments:
     - item:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 31
     must-use: true
@@ -8331,8 +8281,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 33
     must-use: true
@@ -8348,8 +8297,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 35
     must-use: true
@@ -8365,8 +8313,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 553
     must-use: true
@@ -8381,8 +8328,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 38
     must-use: true
@@ -8397,8 +8343,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 341
     must-use: true
@@ -8416,8 +8361,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 338
     # NOTE: We can't change face number indexing easily because it's part of the viewer, so no index semantics for ret...
@@ -8434,8 +8378,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 340
     must-use: true
@@ -8452,8 +8395,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 339
     must-use: true
@@ -8470,8 +8412,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 342
     must-use: true
@@ -8489,8 +8430,7 @@ functions:
     arguments:
     - index:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 337
     must-use: true
@@ -8509,8 +8449,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 34
     must-use: true
@@ -8526,8 +8465,7 @@ functions:
     arguments:
     - number:
         tooltip: Index of the detection information.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 36
     must-use: true
@@ -8548,8 +8486,7 @@ functions:
         type: string
     - buttons:
         tooltip: A list of up to 12 strings representing button labels.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     - channel:
         tooltip: Output chat channel (any integer value) where button clicks are
           chatted.
@@ -8604,8 +8541,7 @@ functions:
     energy: 10.0
     func-id: 205
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Checks if the border reached along the vector dir from the vector pos
       is the edge of the world (i.e., has no neighboring simulator). Returns
@@ -8733,8 +8669,7 @@ functions:
     arguments:
     - notecardname:
         tooltip: Name of the target notecard.
-        type: string
-        asset-semantics: true
+        type: asset
     - pattern:
         tooltip: Regular expression pattern to search for.
         type: string
@@ -8758,16 +8693,14 @@ functions:
     arguments:
     - name:
         tooltip: Name of a notecard in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - pattern:
         tooltip: Regular expression pattern to search for.
         type: string
     - start:
         tooltip: Number of match results to skip before returning (0 to start at the
           first match).
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of matches to return (if 0, returns the first 64
           matches).
@@ -8778,9 +8711,8 @@ functions:
     energy: 10.0
     func-id: 508
     must-use: true
-    return: list
     # There are list indices in the return value!
-    index-semantics: true
+    return: {lsl: list, index: true}
     sleep: 0.0
     tooltip: Synchronously searches a cached notecard name for lines containing
       pattern, returning a list of line and column numbers. Returns a list
@@ -8832,8 +8764,7 @@ functions:
     - mouselook:
         tooltip: Boolean. If TRUE, forces a sitting avatar into mouselook; if FALSE,
           allows them to keep their current camera mode.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 294
     return: void
@@ -8925,8 +8856,7 @@ functions:
     energy: 10.0
     func-id: 412
     must-use: true
-    return: list
-    slua-return: "{uuid}"
+    return: {lsl: list, luau: "{uuid}"}
     sleep: 0.0
     tooltip: Requests a list of avatar UUID keys for agents currently in the region,
       limited by scope. Returns a list of keys or a list containing an error
@@ -8999,8 +8929,7 @@ functions:
     energy: 10.0
     func-id: 266
     must-use: true
-    return: list
-    slua-return: "{uuid}"
+    return: {lsl: list, luau: "{uuid}"}
     sleep: 0.0
     tooltip: Returns a list of keys (UUIDs) representing all active animations
       currently playing on the specified avatar.
@@ -9048,8 +8977,7 @@ functions:
     energy: 10.0
     func-id: 523
     must-use: true
-    return: list
-    slua-return: '{uuid} | {string}'
+    return: {lsl: list, luau: '{uuid} | {string}'}
     sleep: 0.0
     tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible
       (non-HUD) attachments worn by the specified avatar, in the order they were
@@ -9068,8 +8996,7 @@ functions:
     energy: 10.0
     func-id: 518
     must-use: true
-    return: list
-    slua-return: '{uuid} | {string}'
+    return: {lsl: list, luau: '{uuid} | {string}'}
     sleep: 0.0
     tooltip: Retrieves a list of attachment object keys worn by avatar in the order
       they were attached, filtered by options. Returns a list containing an
@@ -9085,8 +9012,7 @@ functions:
     energy: 10.0
     func-id: 277
     must-use: true
-    return: list
-    slua-return: '{vector}'
+    return: {lsl: list, luau: '{vector}'}
     sleep: 0.0
     tooltip: Returns the bounding box of object (including any linked prims)
       relative to its root prim in local coordinates, formatted as [ (vector)
@@ -9181,8 +9107,7 @@ functions:
     energy: 10.0
     func-id: 408
     must-use: true
-    return: list
-    slua-return: "{vector}"
+    return: {lsl: list, luau: "{vector}"}
     sleep: 0.0
     tooltip: Returns a list containing the closest vector position on the navigation
       mesh (navmesh) to the specified point (expressed in region-local space),
@@ -9296,14 +9221,12 @@ functions:
         type: vector
     - params:
         tooltip: A list of environmental attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 711
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the current environment parameters for the
       parcel or region at pos, retrieved in the order specified by params.
@@ -9352,8 +9275,7 @@ functions:
     func-id: 410
     private: true
     must-use: true
-    return: list
-    slua-return: '{uuid}'
+    return: {lsl: list, luau: '{uuid}'}
     sleep: 0.0
     tooltip: ""
     categories:
@@ -9507,8 +9429,7 @@ functions:
         type: integer
     - number:
         tooltip: Index number of the item of that type, starting from 0.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 147
     must-use: true
@@ -9614,14 +9535,12 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 372
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the media parameters of the specified face on
       the linked prim link, retrieved in the order requested by params.
@@ -9676,14 +9595,12 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 354
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list of primitive parameters requested in params for the
       linked prim specified by link (equivalent to llGetPrimitiveParams).
@@ -9712,8 +9629,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: typeof
       selene-replace: ["typeof(%1[%2])" ]
@@ -9877,12 +9793,10 @@ functions:
     arguments:
     - name:
         tooltip: Name of the notecard in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - line:
         tooltip: Zero-based line number to request.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 217
     return: key
@@ -9898,12 +9812,10 @@ functions:
     arguments:
     - name:
         tooltip: Name of the notecard in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - line:
         tooltip: Zero-based line number to request.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 549
     must-use: true
@@ -9919,8 +9831,7 @@ functions:
     arguments:
     - name:
         tooltip: Name of the notecard in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     energy: 10.0
     func-id: 276
     return: key
@@ -9959,9 +9870,7 @@ functions:
     energy: 10.0
     func-id: 506
     must-use: true
-    return: list
-    slua-return: "{string}"
-    asset-semantics: true
+    return: {lsl: list, asset: true, luau: "{string}"}
     sleep: 0.0
     tooltip: Returns a list of strings representing the names of all active
       animations currently playing on the object.
@@ -9987,15 +9896,13 @@ functions:
         type: key
     - params:
         tooltip: A list of OBJECT_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 332
     must-use: true
-    return: list
-    sleep: 0.0
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
+    sleep: 0.0
     tooltip: Returns a list containing the requested parameters of the specified
       avatar or object id, retrieved in the order requested by params.
     categories:
@@ -10122,14 +10029,12 @@ functions:
         type: vector
     - params:
         tooltip: A list of PARCEL_DETAILS_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 327
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.0
     tooltip: Returns a list containing the requested parcel details specified by
       params (retrieved in the same order) for the parcel at the vector pos.
@@ -10158,8 +10063,7 @@ functions:
         tooltip: Boolean. If TRUE, returns the combined land impact limit for all
           parcels owned by the parcel owner in the region; if FALSE, returns
           only the limit for the specified parcel.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 326
     must-use: true
@@ -10194,8 +10098,7 @@ functions:
         tooltip: Boolean. If TRUE, searches all parcels in the region owned by the
           targeted parcel's owner; if FALSE, searches only the specified
           parcel.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 325
     must-use: true
@@ -10252,8 +10155,7 @@ functions:
     energy: 10.0
     func-id: 381
     must-use: true
-    return: list
-    slua-return: "{number}"
+    return: {lsl: list, luau: "{number}"}
     sleep: 0.0
     tooltip: Returns a list of the format [float gravity_multiplier, float
       restitution, float friction, float density] detailing the physical
@@ -10279,14 +10181,12 @@ functions:
         type: integer
     - params:
         tooltip: A list of PRIM_MEDIA_* property constants to retrieve values for.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 351
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 1.0
     tooltip: Returns a list containing the media parameters of the specified face,
       retrieved in the order requested by params. Returns an empty list if no
@@ -10299,14 +10199,12 @@ functions:
     arguments:
     - params:
         tooltip: A list of PRIM_* flags specifying the attributes to retrieve.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 279
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 0.2
     tooltip: Returns a list of primitive attribute values matching the requested
       params list.
@@ -10474,8 +10372,7 @@ functions:
     energy: 10.0
     func-id: 760
     must-use: true
-    return: string
-    asset-semantics: true
+    return: asset
     sleep: 0.0
     tooltip: Returns a string representing the render material on face (returns the
       inventory name if it is in the prim's inventory, or its key UUID
@@ -10558,8 +10455,7 @@ functions:
     energy: 10.0
     func-id: 250
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns a boolean integer indicating whether the specified script in
       the prim's inventory is running (returns TRUE if running, FALSE
@@ -10651,8 +10547,7 @@ functions:
     energy: 10.0
     func-id: 46
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns a boolean integer indicating whether the specified status flag
       status is enabled for the object.
@@ -10666,12 +10561,10 @@ functions:
         type: string
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 94
     pure: true
@@ -10717,8 +10610,7 @@ functions:
     energy: 10.0
     func-id: 57
     must-use: true
-    return: string
-    asset-semantics: true
+    return: asset
     sleep: 0.0
     tooltip: Returns a string representing the Blinn-Phong diffuse texture on face
       (returns the inventory name if it is a texture in the prim's inventory, or
@@ -10880,13 +10772,11 @@ functions:
         type: key
     - params:
         tooltip: A list of visual parameter IDs or names to retrieve values for.
-        type: list
-        slua-type: "{number | string}"
+        type: {lsl: list, luau: "{number | string}"}
     energy: 10.0
     func-id: 530
     must-use: true
-    return: list
-    slua-return: '{number | ""}'
+    return: {lsl: list, luau: '{number | ""}'}
     sleep: 0.0
     tooltip: Returns a list containing the values of the visual parameters requested
       in params for the agent specified by agentid.
@@ -10915,8 +10805,7 @@ functions:
         type: string
     - inventory:
         tooltip: A list of inventory items to transfer.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     - options:
         tooltip: A list of options to configure the inventory transfer.
         type: list
@@ -10958,8 +10847,7 @@ functions:
         type: string
     - inventory:
         tooltip: A list of names representing items in the prim's inventory.
-        type: list
-        slua-type: "{string}"
+        type: {lsl: list, luau: "{string}"}
     energy: 10.0
     func-id: 231
     return: void
@@ -11066,8 +10954,7 @@ functions:
     - water:
         tooltip: Boolean. If TRUE, damp relative to the higher of land and water; if
           FALSE, damp relative to land only.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - tau:
         tooltip: Timescale in seconds to critically damp the movement.
         type: float
@@ -11182,8 +11069,7 @@ functions:
         type: string
     - pos:
         tooltip: Zero-based position index where insertion starts.
-        type: integer
-        index-semantics: true
+        type: index
     - src:
         tooltip: Source string to insert.
         type: string
@@ -11234,8 +11120,7 @@ functions:
     energy: 10.0
     func-id: 542
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if agent_id and the owner of the script are friends, and
       FALSE otherwise.
@@ -11252,8 +11137,7 @@ functions:
     energy: 10.0
     func-id: 559
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Checks the specified face on the linked prim link. Returns TRUE if the
       face material is a PBR render material, or FALSE if it uses Blinn-Phong
@@ -11288,7 +11172,7 @@ functions:
           value.
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
         type: list
     slua-deprecated:
       use: lljson.decode
@@ -11314,7 +11198,7 @@ functions:
         type: list
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
     - value:
         tooltip: New value to set, or the JSON_DELETE constant to delete the
           targeted element.
@@ -11343,7 +11227,7 @@ functions:
         tooltip: A list of key names or array indices specifying the path to the value.
           # TODO: The specifiers can contain integers, which should be array indices
           # But we don't support that in the bindgen yet.
-          # index-semantics: true
+          # type: {lsl: list, index: true}
         type: list
     slua-deprecated:
       reason: Use 'lljson.decode' and 'typeof' instead. Also, the indices are
@@ -11392,8 +11276,7 @@ functions:
     arguments:
     - first:
         tooltip: Zero-based start index of the keys to retrieve.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Number of keys to retrieve.
         type: integer
@@ -11468,8 +11351,7 @@ functions:
         type: integer
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -11493,8 +11375,7 @@ functions:
         type: integer
     - queue:
         tooltip: Boolean. If TRUE, sound queuing is enabled; if FALSE, it is disabled.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 537
     return: void
@@ -11620,8 +11501,7 @@ functions:
         type: string
     energy: 10.0
     func-id: 662
-    return: list
-    slua-return: "{number}"
+    return: {lsl: list, luau: "{number}"}
     sleep: 0.0
     tooltip: Deletes all keys in the datastore matching the regular expression
       pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and
@@ -11656,8 +11536,7 @@ functions:
         type: string
     - start:
         tooltip: Zero-based start index of the matching keys to return.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           matching keys).
@@ -11665,8 +11544,7 @@ functions:
     energy: 10.0
     func-id: 657
     must-use: true
-    return: list
-    slua-return: "{string}"
+    return: {lsl: list, luau: "{string}"}
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
       datastore that match the regular expression pattern, starting at index
@@ -11679,8 +11557,7 @@ functions:
     arguments:
     - start:
         tooltip: Zero-based start index of the keys to return.
-        type: integer
-        index-semantics: true
+        type: index
     - count:
         tooltip: Maximum number of keys to return (or less than 1 to retrieve all
           keys).
@@ -11688,8 +11565,7 @@ functions:
     energy: 10.0
     func-id: 656
     must-use: true
-    return: list
-    slua-return: "{string}"
+    return: {lsl: list, luau: "{string}"}
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
       datastore, starting at index start (returns all keys if count < 1).
@@ -11807,8 +11683,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'tonumber' instead.
       selene-replace: ["tonumber(%1[%2]) or 0" ]
@@ -11830,8 +11705,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]', 'tonumber', and 'math.modf' instead.
       selene-replace: ["math.modf(tonumber(%1[%2]) or 0)" ]
@@ -11876,8 +11750,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'touuid' instead.
       selene-replace: ["touuid(%1[%2]) or NULL_KEY" ]
@@ -11898,16 +11771,13 @@ functions:
     arguments:
     - src:
         tooltip: Source list to slice.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use 'unpack' (fastcall) or 'table.move' instead. Prefer structured
         tables over strided lists.
@@ -11916,8 +11786,7 @@ functions:
     func-id: 192
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing the subset of entries from src within the
       inclusive range specified by the start and end indices. Negative indices
@@ -11929,31 +11798,26 @@ functions:
     arguments:
     - src:
         tooltip: Source strided list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
     - slice_index:
         tooltip: Zero-based element index within each stride to extract (negatives
           count backward from the end of the stride).
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 801
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a list containing the slice_index'th element of every stride
       within the inclusive range from start to end in the strided list src.
@@ -11965,16 +11829,13 @@ functions:
     arguments:
     - src:
         tooltip: Source strided list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive).
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride (defaults to 1 if less than 1).
         type: integer
@@ -11983,8 +11844,7 @@ functions:
     energy: 10.0
     func-id: 198
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing the first element of every stride in the
       strided list src within the inclusive range from start to end.
@@ -11997,8 +11857,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: '[]'
       selene-replace: ["%1[%2]" ]
@@ -12021,8 +11880,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       reason: Use '[]' and 'tostring' instead.
       selene-replace: ["tostring(%1[%2])" ]
@@ -12044,8 +11902,7 @@ functions:
         type: list
     - index:
         tooltip: Zero-based index of the entry.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: '[]'
       selene-replace: ["%1[%2]" ]
@@ -12075,8 +11932,7 @@ functions:
     energy: 10.0
     func-id: 201
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the first instance of list test within the
       list src (returns -1 if not found).
@@ -12092,8 +11948,7 @@ functions:
         type: list
     - instance:
         tooltip: Zero-based occurrence index of the match to find.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.find
       reason: Prefer dictionaries or single-item searches.
@@ -12101,8 +11956,7 @@ functions:
     energy: 10.0
     func-id: 803
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the specified instance of list test within
       the list src (returns -1 if not found).
@@ -12118,12 +11972,10 @@ functions:
         type: list
     - start_index:
         tooltip: Zero-based start index of the range to search.
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index of the range to search.
-        type: integer
-        index-semantics: true
+        type: index
     - stride:
         tooltip: Number of entries per stride in the list.
         type: integer
@@ -12132,8 +11984,7 @@ functions:
     energy: 10.0
     func-id: 800
     must-use: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the integer index of the first instance of list test in the
       strided list src within the range from start to end (stepping through by
@@ -12145,16 +11996,13 @@ functions:
     arguments:
     - dest:
         tooltip: Target destination list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - src:
         tooltip: Source list to insert.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start:
         tooltip: Zero-based index where insertion begins.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: table.insert
       reason: Unnecessary table copying. Fastcall.
@@ -12165,8 +12013,7 @@ functions:
     func-id: 200
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a new list containing all elements of dest with the elements of
       src inserted starting at index start. Does not modify dest itself.
@@ -12177,16 +12024,14 @@ functions:
     arguments:
     - src:
         tooltip: Source list to randomize.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Size of each randomized block (defaults to 1 if less than 1).
         type: integer
     energy: 10.0
     func-id: 197
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a randomized copy of the list src by blocks of size stride. If
       the list length is not perfectly divisible by stride, no randomization
@@ -12198,20 +12043,16 @@ functions:
     arguments:
     - dest:
         tooltip: Target destination list.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - src:
         tooltip: Source list to insert.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - start_index:
         tooltip: Zero-based start index (inclusive) of the replaced range.
-        type: integer
-        index-semantics: true
+        type: index
     - end_index:
         tooltip: Zero-based end index (inclusive) of the replaced range.
-        type: integer
-        index-semantics: true
+        type: index
     slua-deprecated:
       use: 't[n] = x'
       reason: Unnecessary table copying.
@@ -12220,8 +12061,7 @@ functions:
     func-id: 296
     native: true
     pure: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list dest with the inclusive range from start to
       end removed, and the elements of src inserted in its place at start.
@@ -12232,21 +12072,18 @@ functions:
     arguments:
     - src:
         tooltip: List to be sorted.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
           descending order.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 184
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src, sorted into blocks of stride in
       ascending order (if ascending is TRUE) or descending order (if FALSE).
@@ -12258,29 +12095,25 @@ functions:
     arguments:
     - src:
         tooltip: List to be sorted.
-        type: list
-        slua-type: '{T}'
+        type: {lsl: list, luau: '{T}'}
     - stride:
         tooltip: Number of entries per block/stride (defaults to 1 if less than 1).
         type: integer
     - stride_index:
         tooltip: Zero-based index of the element within each stride to use as the
           sort key (negatives count backward from the end of the stride).
-        type: integer
-        index-semantics: true
+        type: index
     - ascending:
         tooltip: Boolean. If TRUE, sorts in ascending order; if FALSE, sorts in
           descending order.
-        type: integer
-        bool-semantics: true
+        type: boolean
     slua-deprecated:
       use: table.sort
       reason: Prefer structured tables over strided lists.
     energy: 10.0
     func-id: 802
     must-use: true
-    return: list
-    slua-return: '{T}'
+    return: {lsl: list, luau: '{T}'}
     sleep: 0.0
     tooltip: Returns a copy of the list src sorted into blocks of stride by the
       element at stride_index in each block. Sorted in ascending order (if
@@ -12342,8 +12175,7 @@ functions:
         type: integer
     - active:
         tooltip: Boolean. If TRUE, activates the listener; if FALSE, deactivates it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 26
     return: void
@@ -12455,8 +12287,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -12473,8 +12304,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -12491,8 +12321,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -12540,8 +12369,7 @@ functions:
         type: float
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - offset:
         tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
@@ -12575,8 +12403,7 @@ functions:
         type: float
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - offset:
         tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
@@ -12612,8 +12439,7 @@ functions:
         type: integer
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - offset:
         tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
@@ -12650,8 +12476,7 @@ functions:
         type: float
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - offset:
         tooltip: Offset relative to the prim's position (expressed in local
           coordinates; completely ignored by the system).
@@ -12675,8 +12500,7 @@ functions:
         type: key
     energy: 10.0
     func-id: 393
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Adds or removes agents from the estate's access or ban lists, or groups
       from the estate's group access list, specified by the action. Returns TRUE
@@ -12739,12 +12563,10 @@ functions:
         type: integer
     - str:
         tooltip: A string value passed as the third parameter of the link_message event.
-        type: string
-        slua-type: string | uuid
+        type: {lsl: string, luau: string | uuid}
     - id:
         tooltip: A key value passed as the fourth parameter of the link_message event.
-        type: key
-        slua-type: string | uuid
+        type: {lsl: key, luau: string | uuid}
     energy: 10.0
     func-id: 164
     return: void
@@ -12915,8 +12737,7 @@ functions:
         type: string
     - index:
         tooltip: Zero-based index of the character to convert.
-        type: integer
-        index-semantics: true
+        type: index
     energy: 10.0
     func-id: 527
     pure: true
@@ -12934,8 +12755,7 @@ functions:
     energy: 10.0
     func-id: 215
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the avatar or object specified by key id is over land
       owned by the script owner, or FALSE otherwise.
@@ -12978,14 +12798,12 @@ functions:
     arguments:
     - query:
         tooltip: A list of PARCEL_MEDIA_COMMAND_* attributes to query.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 299
     must-use: true
-    return: list
     # There may be some bool-like entries in the list we need to convert
-    bool-semantics: true
+    return: {lsl: list, boolean: true}
     sleep: 2.0
     tooltip: Queries the media properties of the parcel containing the script,
       returning a list of values in the order requested by query. Only works if
@@ -13001,18 +12819,15 @@ functions:
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     - spacers:
         tooltip: A list of up to 8 strings representing spacers to be preserved in the
           list.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     energy: 10.0
     func-id: 214
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Breaks the string src into a list of substrings, discarding any
       separators, keeping spacers, and omitting any empty null values.
@@ -13026,18 +12841,15 @@ functions:
         type: string
     - separators:
         tooltip: A list of up to 8 strings representing separators to be discarded.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     - spacers:
         tooltip: A list of up to 8 strings representing spacers to be preserved in the
           list.
-        type: list
-        slua-type: '{string}'
+        type: {lsl: list, luau: '{string}'}
     energy: 10.0
     func-id: 285
     pure: true
-    return: list
-    slua-return: '{string}'
+    return: {lsl: list, luau: '{string}'}
     sleep: 0.0
     tooltip: Breaks the string src into a list, discarding separators and keeping
       spacers, while preserving empty null values (unlike llParseString2List).
@@ -13062,8 +12874,7 @@ functions:
     arguments:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 166
     return: void
@@ -13078,8 +12889,7 @@ functions:
     arguments:
     - pass:
         tooltip: A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 154
     return: void
@@ -13093,8 +12903,7 @@ functions:
     arguments:
     - patrolPoints:
         tooltip: A list of at least two position vectors representing the patrol path.
-        type: list
-        slua-type: "{vector}"
+        type: {lsl: list, luau: "{vector}"}
     - options:
         tooltip: A list of PATROL_* flags and parameters to configure the patrol
           behavior.
@@ -13111,8 +12920,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -13130,8 +12938,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -13184,8 +12991,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of the sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     energy: 10.0
     func-id: 93
     return: void
@@ -13225,8 +13031,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, forces are applied relative to the target's local
           axes; if FALSE, relative to region axes.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 165
     return: void
@@ -13426,8 +13231,7 @@ functions:
     - running:
         tooltip: Boolean. If TRUE, sets the copied script to run immediately; if FALSE,
           leaves it stopped.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - start_param:
         tooltip: Integer start parameter passed to the copied script (readable via
           llGetStartParameter).
@@ -13508,8 +13312,7 @@ functions:
     - environment:
         tooltip: Name of an environmental setting in inventory, or its asset UUID
           (or empty string/NULL_KEY to clear).
-        type: string
-        asset-semantics: true
+        type: asset
     energy: 10.0
     experience: true
     func-id: 713
@@ -13533,8 +13336,7 @@ functions:
     - environment:
         tooltip: Name of an environmental setting in inventory, or its asset UUID
           (or empty string/NULL_KEY to clear).
-        type: string
-        asset-semantics: true
+        type: asset
     - track_no:
         tooltip: "The elevation track to change (0: water, 1: ground, 2: 1000m, 3:
           2000m, 4: 3000m, -1: all tracks)."
@@ -13815,8 +13617,7 @@ functions:
     arguments:
     - objects:
         tooltip: A list of object UUID keys to return.
-        type: list
-        slua-type: "{uuid}"
+        type: {lsl: list, luau: "{uuid}"}
     energy: 10.0
     func-id: 520
     return: integer
@@ -14187,8 +13988,7 @@ functions:
     energy: 10.0
     func-id: 219
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the agent or object specified by uuid is in the same
       region (simulator) and shares the same active group as the prim containing
@@ -14223,8 +14023,7 @@ functions:
         type: float
     energy: 10.0
     func-id: 592
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Attempts to uniformly resize the entire object by scaling_factor,
       maintaining size-position ratios of the prims. Fails if the linkset is
@@ -14264,8 +14063,7 @@ functions:
     energy: 10.0
     func-id: 246
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the vector position pos is over public land, sandbox
       land, land restricting edit/build permissions, or land that disables
@@ -14453,8 +14251,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, initial_omega is treated as a local vector; if FALSE,
           as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 379
     return: void
@@ -14656,8 +14453,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, force is treated as a local vector; if FALSE, as a
           global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 64
     return: void
@@ -14679,8 +14475,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, force and torque are treated as local vectors; if
           FALSE, as global region vectors.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 76
     return: void
@@ -14712,8 +14507,7 @@ functions:
         type: float
     - water:
         tooltip: Boolean. If TRUE, hovers above water too; if FALSE, water is ignored.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - tau:
         tooltip: Timescale in seconds to critically damp the movement.
         type: float
@@ -14919,8 +14713,7 @@ functions:
         type: integer
     - material:
         tooltip: Name of a material in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - face:
         tooltip: Face number or ALL_SIDES.
         type: integer
@@ -14957,8 +14750,7 @@ functions:
         type: integer
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - face:
         tooltip: Face number or ALL_SIDES.
         type: integer
@@ -15031,8 +14823,7 @@ functions:
         type: integer
     energy: 10.0
     func-id: 369
-    return: integer
-    bool-semantics: true
+    return: boolean
     slua-removed: true
     sleep: 0.0
     tooltip: Requests that limit bytes are reserved for the script. Returns TRUE on
@@ -15089,8 +14880,7 @@ functions:
     - ForSale:
         tooltip: Boolean. If TRUE, puts the parcel up for sale; if FALSE, removes it
           from sale.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - Options:
         tooltip: A list of options to configure the sale (e.g., price, authorized buyer,
           and object inclusion).
@@ -15132,8 +14922,7 @@ functions:
     - quick_pay_buttons:
         tooltip: A list of four integer values or PAY_* constants specifying the button
           payment choices.
-        type: list
-        slua-type: "{number}"
+        type: {lsl: list, luau: "{number}"}
     energy: 10.0
     func-id: 302
     return: void
@@ -15255,8 +15044,7 @@ functions:
         type: vector
     energy: 10.0
     func-id: 397
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Tries to move the entire object so that its root prim is within 0.1m of
       the vector position (underground positions are set to ground level).
@@ -15282,8 +15070,7 @@ functions:
     arguments:
     - material:
         tooltip: Name of a material in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - face:
         tooltip: Face number or ALL_SIDES.
         type: integer
@@ -15333,8 +15120,7 @@ functions:
         type: string
     - running:
         tooltip: Boolean. If TRUE, enables the script; if FALSE, disables it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 148
     return: void
@@ -15363,8 +15149,7 @@ functions:
     arguments:
     - queue:
         tooltip: Boolean. If TRUE, sound queuing is enabled; if FALSE, it is disabled.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 208
     return: void
@@ -15394,8 +15179,7 @@ functions:
         type: integer
     - value:
         tooltip: Boolean. If TRUE, enables the status; if FALSE, disables it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 45
     return: void
@@ -15431,8 +15215,7 @@ functions:
     arguments:
     - texture:
         tooltip: Name of a texture in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - face:
         tooltip: Face number or ALL_SIDES.
         type: integer
@@ -15503,8 +15286,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, torque is treated as a local vector; if FALSE, as a
           global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 74
     return: void
@@ -15607,8 +15389,7 @@ functions:
     - is_local:
         tooltip: Boolean. If TRUE, velocity is treated as a local directional vector; if
           FALSE, as a global region vector.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 378
     return: void
@@ -15737,20 +15518,17 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
     - queue:
         tooltip: Boolean. If TRUE, queues the sound; if FALSE, interrupts the currently
           playing sound.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - loop:
         tooltip: Boolean. If TRUE, loops the sound.
-        type: integer
-        bool-semantics: true
+        type: boolean
     deprecated:
       use: ll.PlaySound
       selene-replace: ["ll.PlaySound(%1, %2)", "ll.LoopSound(%1, %2)"]
@@ -15766,8 +15544,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     deprecated:
       use: ll.PreloadSound
       selene-replace: ["ll.PreloadSound(%1)"]
@@ -15835,8 +15612,7 @@ functions:
     - anim:
         tooltip: Name of an animation in the prim's inventory, a UUID of an
           animation, or a built-in animation name.
-        type: string
-        asset-semantics: true
+        type: asset
     energy: 10.0
     func-id: 130
     return: void
@@ -15887,8 +15663,7 @@ functions:
     - anim:
         tooltip: Name of an animation in the current object's inventory, or an
           animation UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     energy: 10.0
     func-id: 505
     return: void
@@ -15982,8 +15757,7 @@ functions:
     energy: 10.0
     func-id: 181
     pure: true
-    return: integer
-    index-semantics: true
+    return: index
     sleep: 0.0
     tooltip: Returns the zero-based index of the first instance of the pattern
       substring inside the string source. Returns -1 if not found.
@@ -16014,13 +15788,11 @@ functions:
     - accept:
         tooltip: Boolean. Determines whether control events are generated to trigger
           script handlers.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - pass_on:
         tooltip: Boolean. If TRUE, the keys also perform their default functions; if
           FALSE, default actions are suppressed.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 111
     return: void
@@ -16300,8 +16072,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -16318,8 +16089,7 @@ functions:
     arguments:
     - sound:
         tooltip: Name of a sound in the prim's inventory, or a UUID.
-        type: string
-        asset-semantics: true
+        type: asset
     - volume:
         tooltip: Volume level to set, between 0.0 (silent) and 1.0 (loud).
         type: float
@@ -16392,8 +16162,7 @@ functions:
     - checked:
         tooltip: Boolean. If TRUE, requires the existing value to match original_value
           to complete the update; if FALSE, creates the key if needed.
-        type: integer
-        bool-semantics: true
+        type: boolean
     - original_value:
         tooltip: String value to compare against the existing value in the
           datastore.
@@ -16490,8 +16259,7 @@ functions:
     energy: 10.0
     func-id: 540
     must-use: true
-    return: integer
-    bool-semantics: true
+    return: boolean
     sleep: 0.0
     tooltip: Returns TRUE if the Base64-formatted signature is verified as valid for
       the message msg when using the digest algorithm and public_key. Returns
@@ -16503,8 +16271,7 @@ functions:
     - detect:
         tooltip: Boolean. If TRUE, enables VolumeDetect; if FALSE (default), disables
           it.
-        type: integer
-        bool-semantics: true
+        type: boolean
     energy: 10.0
     func-id: 248
     return: void
@@ -16757,7 +16524,7 @@ builder-rulesets:
         # Make this more obviously verb-y since it's a meta-command
         method-name: "targetLink"
         params:
-          - [ link, link_target ]
+          - [ integer, link_target ]
       MATERIAL:
         # Otherwise this is _very_ easy to confuse with render materials
         method-name: 'physicsMaterial'
@@ -16766,8 +16533,6 @@ builder-rulesets:
       PHYSICS:
         method-name: 'physical'
         params:
-          # Note that we use "asset" and "boolean" types to denote places where
-          # 'asset-semantics' or 'bool-semantics' would apply.
           - [ boolean, enabled ]
       TEMP_ON_REZ:
         method-name: 'temporary'

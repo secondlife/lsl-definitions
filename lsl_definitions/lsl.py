@@ -46,7 +46,6 @@ class LSLTypeMeta(NamedTuple):
     library_abbr: str
     cs_name: str
     mono_bind_name: str
-    slua_name: str
 
 
 _CS_TYPE_MODULE = "[ScriptTypes]LindenLab.SecondLife"
@@ -61,7 +60,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="",
         cs_name="void",
         mono_bind_name="void",
-        slua_name="()",
     ),
     LSLType.INTEGER: LSLTypeMeta(
         cil_name="int32",
@@ -71,7 +69,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="i",
         cs_name="int",
         mono_bind_name="S32",
-        slua_name="number",
     ),
     LSLType.FLOAT: LSLTypeMeta(
         cil_name="float",
@@ -81,7 +78,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="f",
         cs_name="float",
         mono_bind_name="F32",
-        slua_name="number",
     ),
     LSLType.STRING: LSLTypeMeta(
         cil_name="string",
@@ -91,7 +87,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="s",
         cs_name="string",
         mono_bind_name="MonoStringType",
-        slua_name="string",
     ),
     LSLType.KEY: LSLTypeMeta(
         cil_name=f"valuetype {_CS_TYPE_MODULE}.Key",
@@ -101,7 +96,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="k",
         cs_name="Key",
         mono_bind_name="MonoKeyType",
-        slua_name="uuid",
     ),
     LSLType.VECTOR: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Vector",
@@ -111,7 +105,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="v",
         cs_name="Vector",
         mono_bind_name="MonoVectorType",
-        slua_name="vector",
     ),
     LSLType.ROTATION: LSLTypeMeta(
         cil_name=f"class {_CS_TYPE_MODULE}.Quaternion",
@@ -121,7 +114,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="q",
         cs_name="Quaternion",
         mono_bind_name="MonoQuaternionType",
-        slua_name="quaternion",
     ),
     LSLType.LIST: LSLTypeMeta(
         cil_name="class [mscorlib]System.Collections.ArrayList",
@@ -131,7 +123,6 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="l",
         cs_name="ArrayList",
         mono_bind_name="MonoListType",
-        slua_name="list",
     ),
 }
 
@@ -139,8 +130,7 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
 @dataclasses.dataclass
 class LSLConstant:
     name: str
-    type: LSLType
-    slua_type: str | None
+    type: LSLTypeSemantics
     slua_removed: bool
     value: str
     """A LSL literal, except:
@@ -162,7 +152,7 @@ class LSLConstant:
         """A LSL literal, except strings are stripped of start/end quotes (")
         All string escape sequences have been decoded into plain unicode code points
         """
-        if self.type != LSLType.STRING:
+        if self.type.lsl != LSLType.STRING:
             return self.value
         # convert unicode escapes from Luau format to Python format
         python_literal = re.sub(r"\\u\{([a-fA-F0-9]+)\}", r"\\u\1", f'"{self.value}"')
@@ -172,7 +162,7 @@ class LSLConstant:
     @property
     def lsl_doc_literal(self) -> str:
         """A LSL literal, except strings might have luau escape sequences for readability"""
-        if self.type in {LSLType.STRING, LSLType.KEY}:
+        if self.type.lsl in {LSLType.STRING, LSLType.KEY}:
             return f'"{self.value}"'
         else:
             return self.value
@@ -180,11 +170,11 @@ class LSLConstant:
     @property
     def slua_literal(self) -> str:
         """A SLua literal or expression"""
-        if self.type == LSLType.KEY or self.slua_type == "uuid":
+        if self.type.lsl == LSLType.KEY or self.type.luau == "uuid":
             return f"uuid({self.lsl_doc_literal})"
-        elif self.type == LSLType.VECTOR:
+        elif self.type.lsl == LSLType.VECTOR:
             return f"vector({self.value[1:-1]})"
-        elif self.type == LSLType.ROTATION:
+        elif self.type.lsl == LSLType.ROTATION:
             return f"rotation({self.value[1:-1]})"
         else:
             return self.lsl_doc_literal
@@ -196,7 +186,7 @@ class LSLConstant:
                 # Will always use a <string> node, but that's fine for our purposes.
                 # That's already the case for vector and hex int constants, anyway.
                 "tooltip": self.tooltip,
-                "type": str(self.type),
+                "type": str(self.type.lsl),
                 # This format looks better in viewer tooltips
                 # "value": unescape_control_characters(self.lsl_doc_literal),
                 # But this format is backwards compatible with some other (mis?)uses of the file
@@ -214,7 +204,7 @@ class LSLConstant:
                     # Will always use a <string> node, but that's fine for our purposes.
                     # That's already the case for vector and hex int constants, anyway.
                     "tooltip": self.tooltip,
-                    "type": slua.validate_type(self.slua_type or self.type.meta.slua_name),
+                    "type": slua.validate_type(self.type.luau),
                     "value": unescape_control_characters(self.slua_literal),
                 }
             )
@@ -249,29 +239,98 @@ class LSLEnum:
     by_value: dict[int, LSLEnumMember] = dataclasses.field(default_factory=dict)
 
 
+class LSLExtendedType(StringEnum):
+    VOID = "void", LSLType.VOID, "()"
+    INTEGER = "integer", LSLType.INTEGER, "number"
+    FLOAT = "float", LSLType.FLOAT, "number"
+    STRING = "string", LSLType.STRING, "string"
+    KEY = "key", LSLType.KEY, "uuid"
+    VECTOR = "vector", LSLType.VECTOR, "vector"
+    ROTATION = "rotation", LSLType.ROTATION, "quaternion"
+    LIST = "list", LSLType.LIST, "list"
+
+    INDEX = "index", LSLType.INTEGER, "number"
+    BOOLEAN = "boolean", LSLType.INTEGER, "boolean | number"
+    ASSET = "asset", LSLType.STRING, "string | uuid"
+    ENUM = "enum", LSLType.INTEGER, "number"
+    PARAM = "param", LSLType.LIST, "{number}"
+    PARAM_GET = "param-get", LSLType.LIST, "{number}"
+
+    def __new__(cls, name: str, lsl: LSLType, luau: str):
+        entry = str.__new__(cls, name)
+        entry._value_ = name
+        entry.lsl = lsl
+        entry.luau = luau
+        return entry
+
+
+class LSLTypeSemantics:
+    def __init__(
+        self,
+        lsl: LSLType | None = None,
+        luau: str | None = None,
+        # semantics
+        asset: bool = False,
+        boolean: bool = False,
+        index: bool = False,
+        enum: str | None = None,
+        param: str | None = None,
+        param_get: str | None = None,
+    ):
+        all_semantics = [bool(x) for x in [lsl, asset, boolean, index, enum, param, param_get]]
+        if not (sum(all_semantics) == 1 or (lsl is LSLType.LIST and sum(all_semantics) == 2)):
+            raise ValueError("Must have exactly one semantic")
+        semantics_index = next(i for i, x in enumerate(all_semantics) if x)
+        self.name = (
+            LSLExtendedType.VOID,
+            LSLExtendedType.ASSET,
+            LSLExtendedType.BOOLEAN,
+            LSLExtendedType.INDEX,
+            LSLExtendedType.ENUM,
+            LSLExtendedType.PARAM,
+            LSLExtendedType.PARAM_GET,
+        )[semantics_index]
+        if self.name is LSLExtendedType.VOID:
+            self.lsl = lsl
+            self.name = LSLExtendedType(lsl)
+        else:
+            self.lsl = self.name.lsl
+        self.luau = luau or self.name.luau
+
+        self.asset = asset
+        self.boolean = boolean
+        self.index = index
+        self.enum = enum
+        self.param = param
+        self.param_get = param_get
+
+
+LSLTypeSemantics.PRESETS = {
+    "void": LSLTypeSemantics(lsl=LSLType.VOID),
+    "integer": LSLTypeSemantics(lsl=LSLType.INTEGER),
+    "float": LSLTypeSemantics(lsl=LSLType.FLOAT),
+    "string": LSLTypeSemantics(lsl=LSLType.STRING),
+    "key": LSLTypeSemantics(lsl=LSLType.KEY),
+    "vector": LSLTypeSemantics(lsl=LSLType.VECTOR),
+    "rotation": LSLTypeSemantics(lsl=LSLType.ROTATION),
+    "list": LSLTypeSemantics(lsl=LSLType.LIST),
+    "index": LSLTypeSemantics(index=True),
+    "boolean": LSLTypeSemantics(boolean=True),
+    "asset": LSLTypeSemantics(asset=True),
+}
+
+
 @dataclasses.dataclass
 class LSLArgument:
     name: str
-    type: LSLType
-    slua_type: str | None
+    type: LSLTypeSemantics
     tooltip: str
-    index_semantics: bool
-    asset_semantics: bool
-    """Represents an asset name or uuid"""
-    bool_semantics: bool
-    """Represents a boolean"""
 
     def compute_slua_type(self, event: bool = False) -> str:
-        if self.slua_type is not None:
-            return self.slua_type
-        if self.asset_semantics and self.type == LSLType.STRING:
-            return "string | uuid"
-        if self.bool_semantics and self.type == LSLType.INTEGER:
-            if event:
-                return "boolean"
-            else:
-                return "boolean | number"
-        return self.type.meta.slua_name
+        if self.type.boolean and event:
+            return "boolean"
+        else:
+            return self.type.luau
 
 
 @dataclasses.dataclass
@@ -283,7 +342,7 @@ class LSLFunctionBase(abc.ABC):
 
     @property
     def args_str(self) -> str:
-        return "( " + ", ".join(f"{x.type!s} {x.name}" for x in self.arguments) + " )"
+        return "( " + ", ".join(f"{x.type.lsl!s} {x.name}" for x in self.arguments) + " )"
 
 
 @dataclasses.dataclass
@@ -302,7 +361,7 @@ class LSLEvent(LSLFunctionBase):
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": str(a.type),
+                            "type": str(a.type.lsl),
                         }
                     }
                     for a in self.arguments
@@ -348,11 +407,7 @@ class LSLFunction(LSLFunctionBase):
     energy: float
     sleep: float
     ret_type: LSLType
-    slua_type: str | None
     god_mode: bool
-    index_semantics: bool
-    bool_semantics: bool
-    asset_semantics: bool
     detected_semantics: bool
     type_arguments: list[str]
     private: bool
@@ -399,9 +454,9 @@ class LSLFunction(LSLFunctionBase):
     def need_compat(self) -> bool:
         """Whether this function needs a "compat" wrapper with an upvalue to handle SLua fixups"""
         return (
-            self.bool_semantics
-            or self.index_semantics
-            or any(a.index_semantics for a in self.arguments)
+            self.ret_type.boolean
+            or self.ret_type.index
+            or any(a.type.index for a in self.arguments)
         )
 
     def to_dict(self, include_internal: bool = False) -> dict:
@@ -411,7 +466,7 @@ class LSLFunction(LSLFunctionBase):
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": str(a.type),
+                            "type": str(a.type.lsl),
                         }
                     }
                     for a in self.arguments
@@ -419,10 +474,10 @@ class LSLFunction(LSLFunctionBase):
                 "deprecated": self.deprecated is not None,
                 "energy": self.energy,
                 "god-mode": self.god_mode,
-                "return": str(self.ret_type),
+                "return": str(self.ret_type.lsl),
                 "sleep": self.sleep,
                 "tooltip": self.tooltip,
-                "bool_semantics": self.bool_semantics,
+                "bool_semantics": self.ret_type.boolean,
                 **(
                     {}
                     if not include_internal
@@ -433,7 +488,7 @@ class LSLFunction(LSLFunctionBase):
                         "must-use": self.must_use,
                         "native": self.native,
                         "mono-sleep": self.mono_sleep,
-                        "index-semantics": self.index_semantics,
+                        "index-semantics": self.ret_type.index,
                     }
                 ),
             }
@@ -448,17 +503,17 @@ class LSLFunction(LSLFunctionBase):
             return self.name[2:]
 
     def compute_slua_type(self, llcompat=False) -> str:
-        if self.slua_type is not None:
-            return self.slua_type
-        if not llcompat and self.index_semantics and self.ret_type == LSLType.INTEGER:
-            return "number?"
-        if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
-            return "boolean"
-        return self.ret_type.meta.slua_name
+        if self.ret_type.name == LSLExtendedType.INDEX:
+            return "number" if llcompat else "number?"
+        if self.ret_type.name == LSLExtendedType.BOOLEAN:
+            return "number" if llcompat else "boolean"
+        if self.ret_type.name == LSLExtendedType.ASSET:
+            return "string"
+        return self.ret_type.luau
 
     def compute_slua_tooltip(self, llcompat=False) -> str:
         tooltip = self.tooltip
-        if self.index_semantics and not llcompat:
+        if self.ret_type.index and not llcompat:
             tooltip = tooltip.replace("-1", "nil")
         return tooltip
 
@@ -587,131 +642,111 @@ class LSLDefinitionParser:
         return self._definitions
 
     def _handle_enum(self, enum_name: str, enum_data: dict) -> LSLEnum:
-        self._validate_identifier(enum_name)
-        enum = LSLEnum(
-            name=enum_name,
-            type=LSLEnumType(enum_data["type"]),
-            prefix=enum_data.get("prefix", ""),
-            tooltip=enum_data.get("tooltip", ""),
-            deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
-            _special_members=set(enum_data.get("special-members", [])),
-        )
+        try:
+            self._validate_identifier(enum_name)
+            enum = LSLEnum(
+                name=enum_name,
+                type=LSLEnumType(enum_data["type"]),
+                prefix=enum_data.get("prefix", ""),
+                tooltip=enum_data.get("tooltip", ""),
+                deprecated=Deprecated.from_definition(enum_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(enum_data.get("slua-deprecated", False)),
+                _special_members=set(enum_data.get("special-members", [])),
+            )
 
-        if enum.name in self._definitions.enums:
-            raise KeyError(f"{enum.name} is already defined")
-        self._definitions.enums[enum.name] = enum
-        return enum
+            if enum.name in self._definitions.enums:
+                raise KeyError(f"{enum.name} is already defined")
+            self._definitions.enums[enum.name] = enum
+            return enum
+        except Exception as e:
+            raise ValueError(f"In enum {enum_name!r}: {e}") from e
 
     def _handle_event(self, event_name: str, event_data: dict) -> LSLEvent:
-        self._validate_identifier(event_name)
-        event = LSLEvent(
-            name=event_name,
-            tooltip=event_data.get("tooltip", ""),
-            categories=event_data["categories"],
-            arguments=[
-                self._handle_argument(event_name, arg)
-                for arg in (event_data.get("arguments") or [])
-            ],
-            private=event_data.get("private", False),
-            deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(event_data.get("slua-deprecated", False)),
-            slua_removed=event_data.get("slua-removed", False),
-            detected_semantics=event_data.get("detected-semantics", False),
-        )
+        try:
+            self._validate_identifier(event_name)
+            event = LSLEvent(
+                name=event_name,
+                tooltip=event_data.get("tooltip", ""),
+                categories=event_data["categories"],
+                arguments=[self._handle_argument(arg) for arg in (event_data.get("arguments", []))],
+                private=event_data.get("private", False),
+                deprecated=Deprecated.from_definition(event_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(
+                    event_data.get("slua-deprecated", False)
+                ),
+                slua_removed=event_data.get("slua-removed", False),
+                detected_semantics=event_data.get("detected-semantics", False),
+            )
 
-        if event.name in self._definitions.events:
-            raise KeyError(f"{event.name} is already defined")
-        self._validate_args(event)
+            if event.name in self._definitions.events:
+                raise KeyError(f"{event.name} is already defined")
+            self._validate_args(event)
 
-        self._definitions.events[event.name] = event
-        return event
+            self._definitions.events[event.name] = event
+            return event
+        except Exception as e:
+            raise ValueError(f"In event {event_name!r}: {e}") from e
 
     def _handle_function(self, func_name: str, func_data: dict) -> LSLFunction:
-        self._validate_identifier(func_name)
-        func = LSLFunction(
-            name=func_name,
-            tooltip=func_data["tooltip"],
-            categories=func_data["categories"],
-            # These do actually need to be floats.
-            energy=float(func_data["energy"] or "0.0"),
-            sleep=float(func_data["sleep"] or "0.0"),
-            # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
-            mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
-            ret_type=LSLType(func_data["return"]),
-            slua_type=func_data.get("slua-return", None),
-            type_arguments=func_data.get("type-arguments", []),
-            arguments=[
-                self._handle_argument(func_name, arg) for arg in (func_data.get("arguments") or [])
-            ],
-            private=func_data.get("private", False),
-            god_mode=func_data.get("god-mode", False),
-            deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
-            slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
-            slua_removed=func_data.get("slua-removed", False),
-            func_id=func_data["func-id"],
-            pure=func_data.get("pure", False),
-            must_use=func_data.get("must-use", False),
-            native=func_data.get("native", False),
-            index_semantics=bool(func_data.get("index-semantics", False)),
-            bool_semantics=bool(func_data.get("bool-semantics", False)),
-            asset_semantics=bool(func_data.get("asset-semantics", False)),
-            detected_semantics=bool(func_data.get("detected-semantics", False)),
-        )
-
-        if func.name in self._definitions.functions:
-            raise KeyError(f"{func.name} is already defined")
-
-        if func.index_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-            raise ValueError(
-                f"{func.name} has ret with index semantics, but ret type is {func.ret_type!r}"
+        try:
+            self._validate_identifier(func_name)
+            func = LSLFunction(
+                name=func_name,
+                tooltip=func_data["tooltip"],
+                categories=func_data["categories"],
+                # These do actually need to be floats.
+                energy=float(func_data["energy"] or "0.0"),
+                sleep=float(func_data["sleep"] or "0.0"),
+                # 99.9% of the time this won't be specified, if it isn't, just use `sleep`'s value.
+                mono_sleep=float(func_data.get("mono-sleep", func_data.get("sleep")) or "0.0"),
+                ret_type=self._handle_type_semantics(func_data["return"]),
+                type_arguments=func_data.get("type-arguments", []),
+                arguments=[self._handle_argument(arg) for arg in (func_data.get("arguments", []))],
+                private=func_data.get("private", False),
+                god_mode=func_data.get("god-mode", False),
+                deprecated=Deprecated.from_definition(func_data.get("deprecated", False)),
+                slua_deprecated=Deprecated.from_definition(func_data.get("slua-deprecated", False)),
+                slua_removed=func_data.get("slua-removed", False),
+                func_id=func_data["func-id"],
+                pure=func_data.get("pure", False),
+                must_use=func_data.get("must-use", False),
+                native=func_data.get("native", False),
+                detected_semantics=bool(func_data.get("detected-semantics", False)),
             )
-        if func.bool_semantics and func.ret_type not in (LSLType.INTEGER, LSLType.LIST):
-            raise ValueError(
-                f"{func.name} has ret with bool semantics, but ret type is {func.ret_type!r}"
-            )
-        if func.asset_semantics and func.ret_type not in (LSLType.STRING, LSLType.LIST):
-            raise ValueError(
-                f"{func.name} has ret with asset semantics, but ret type is {func.ret_type!r}"
-            )
+            if func.name in self._definitions.functions:
+                raise KeyError(f"{func.name} is already defined")
+            self._validate_args(func)
+            self._definitions.functions[func.name] = func
+            return func
+        except Exception as e:
+            raise ValueError(f"In function {func_name!r}: {e}") from e
 
-        if func.bool_semantics and func.index_semantics:
-            raise ValueError(f"Can't have both bool and index semantics for {func.name}")
-
-        self._validate_args(func)
-
-        self._definitions.functions[func.name] = func
-        return func
-
-    @staticmethod
-    def _handle_argument(func_name: str, arg_dict: dict) -> LSLArgument:
+    def _handle_argument(self, arg_dict: dict) -> LSLArgument:
         if len(arg_dict) != 1:
             # Arguments are meant to be an array of single-element dicts to keep order.
-            raise ValueError(f"Expected {func_name}'s {arg_dict!r} to only have one element")
+            raise ValueError(f"Expected {arg_dict!r} to only have one element")
 
         arg_name, arg_data = list(arg_dict.items())[0]
         arg = LSLArgument(
             name=arg_name,
-            type=LSLType(arg_data["type"]),
-            slua_type=arg_data.get("slua-type", None),
-            asset_semantics=bool(arg_data.get("asset-semantics", False)),
-            bool_semantics=bool(arg_data.get("bool-semantics", False)),
-            index_semantics=bool(arg_data.get("index-semantics", False)),
+            type=self._handle_type_semantics(arg_data["type"]),
             tooltip=arg_data.get("tooltip", ""),
         )
-        if arg.asset_semantics and arg.type != LSLType.STRING:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has asset semantics, but type is {arg.type!r}"
-            )
-        if arg.bool_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has bool semantics, but type is {arg.type!r}"
-            )
-        if arg.index_semantics and arg.type != LSLType.INTEGER:
-            raise ValueError(
-                f"{func_name}'s {arg_name} has index semantics, but type is {arg.type!r}"
-            )
         return arg
+
+    def _handle_type_semantics(self, type_data: str | dict) -> LSLTypeSemantics:
+        if isinstance(type_data, str):
+            try:
+                return LSLTypeSemantics.PRESETS[type_data]
+            except KeyError:
+                raise ValueError(f"Unknown type semantics {type_data!r}")
+        return LSLTypeSemantics(
+            lsl=LSLType(type_data.get("lsl")) if "lsl" in type_data else None,
+            luau=type_data.get("luau", None),
+            asset=bool(type_data.get("asset", False)),
+            boolean=bool(type_data.get("boolean", False)),
+            index=bool(type_data.get("index", False)),
+        )
 
     def _validate_args(self, obj: LSLEvent | LSLFunction) -> None:
         unique_arg_names = {a.name for a in obj.arguments}
@@ -720,7 +755,7 @@ class LSLDefinitionParser:
         for name in unique_arg_names:
             self._validate_identifier(name)
         if obj.name.startswith("llDetected"):
-            if not all(x.index_semantics for x in obj.arguments):
+            if not all(x.type.index for x in obj.arguments):
                 raise ValueError(f"{obj.name} had argument without index semantics")
 
     _IDENTIFIER_RE = re.compile(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z")
@@ -776,8 +811,7 @@ class LSLDefinitionParser:
         try:
             const = LSLConstant(
                 name=const_name,
-                type=LSLType(const_data["type"]),
-                slua_type=const_data.get("slua-type", None),
+                type=self._handle_type_semantics(const_data["type"]),
                 slua_removed=const_data.get("slua-removed", False),
                 value=str(const_data["value"]),
                 tooltip=const_data.get("tooltip", ""),
@@ -789,8 +823,8 @@ class LSLDefinitionParser:
                 value_type=const_data.get("value-type", None),
                 pretty_name=const_data.get("pretty-name", None),
             )
-            if const.type not in {"float", "integer", "string", "vector", "rotation"}:
-                raise ValueError(f"Invalid constant type {const.type}")
+            if const.type.name not in {"float", "integer", "string", "vector", "rotation"}:
+                raise ValueError(f"Invalid constant type {const.type.name}")
             if const.name in self._definitions.constants:
                 raise KeyError(f"{const.name} is already defined")
             self._definitions.constants[const.name] = const
@@ -801,7 +835,7 @@ class LSLDefinitionParser:
             raise ValueError(f"In constant {const_name!r}: {e}") from e
 
     def _add_enum_member(self, enum_name: str, const: LSLConstant) -> LSLEnumMember:
-        if const.type != LSLType.INTEGER:
+        if const.type.lsl != LSLType.INTEGER:
             raise ValueError("Only integer constants can be enum members")
         enum: LSLEnum = self._definitions.enums.get(enum_name, None)
         if enum is None:

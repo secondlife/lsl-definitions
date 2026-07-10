@@ -30,6 +30,47 @@
             "markdownDescription": "One of the valid types:\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector",
             "enum": ["float", "integer", "key", "list", "rotation", "string", "vector"]
         },
+        "typeSemantics": {
+            "oneOf": [
+                {
+                    "description": "A plain lsl type",
+                    "$ref": "#/$defs/lslType"
+                },
+                {
+                    "description": "A zero-argument semantic type",
+                    "enum": ["asset", "boolean", "index"]
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "lsl": {
+                            "description": "The native type in LSL.",
+                            "$ref": "#/$defs/lslType"
+                        },
+                        "luau": {
+                            "markdownDescription": "The typechecking type in SLua.",
+                            "type": "string"
+                        },
+                        "asset": {
+                            "const": true,
+                            "description": "This is a string value representing an asset name or uuid.",
+                            "type": "boolean"
+                        },
+                        "boolean": {
+                            "const": true,
+                            "description": "This is an integer value representing a boolean value.",
+                            "type": "boolean"
+                        },
+                        "index": {
+                            "const": true,
+                            "description": "This is an integer value representing a zero-based index.",
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ]
+        },
         "functionCategories": {
             "items": {
                 "additionalProperties": false,
@@ -135,8 +176,8 @@
                 "minItems": 2,
                 "prefixItems": [
                     {
-                        "enum": ["integer", "link", "boolean", "vector", "rotation", "float", "string", "asset"],
-                        "markdownDescription": "The parameter type."
+                        "markdownDescription": "The parameter type.",
+                        "$ref": "#/$defs/typeSemantics"
                     },
                     {
                         "markdownDescription": "The parameter name.",
@@ -315,10 +356,7 @@
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "type",
-                        "tooltip"
-                    ]
+                    "required": ["type", "tooltip"]
                 }
             }
         },
@@ -344,11 +382,7 @@
                             "markdownDescription": "A brief description of this constant.",
                             "type": "string"
                         },
-                        "type": { "$ref": "#/$defs/lslType" },
-                        "slua-type": {
-                            "markdownDescription": "A more specific constant type for slua type-checking.",
-                            "type": "string"
-                        },
+                        "type": { "$ref": "#/$defs/typeSemantics" },
                         "value": {
                             "markdownDescription": "The value of the constant.",
                             "type": [ "integer", "string" ]
@@ -395,9 +429,7 @@
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "tooltip"
-                    ],
+                    "required": ["tooltip"],
                     "type": "object"
                 }
             },
@@ -414,16 +446,15 @@
                                 "additionalProperties": false,
                                 "patternProperties": {
                                     "^(?:[A-Za-z]+(?:_[A-Za-z]+)*)$": {
+                                        "additionalProperties": false,
                                         "properties": {
                                             "tooltip": {
                                                 "markdownDescription": "A brief description of this event argument.",
                                                 "type": "string"
                                             },
-                                            "type": { "$ref": "#/$defs/lslType" }
+                                            "type": { "$ref": "#/$defs/typeSemantics" }
                                         },
-                                        "required": [
-                                            "type"
-                                        ],
+                                        "required": ["type", "tooltip"],
                                         "type": "object"
                                     }
                                 },
@@ -455,10 +486,7 @@
                         },
                         "categories": { "$ref": "#/$defs/functionCategories" }
                     },
-                    "required": [
-                        "tooltip",
-                        "categories"
-                    ]
+                    "required": ["tooltip", "categories"]
                 }
             },
             "type": "object"
@@ -490,34 +518,13 @@
                                     "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
                                         "additionalProperties": false,
                                         "properties": {
-                                            "asset-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
-                                                "type": "boolean"
-                                            },
-                                            "bool-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a boolean value.",
-                                                "type": "boolean"
-                                            },
-                                            "index-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
-                                                "type": "boolean"
-                                            },
                                             "tooltip": {
                                                 "markdownDescription": "A brief description of this function argument.",
                                                 "type": "string"
                                             },
-                                            "type": { "$ref": "#/$defs/lslType" },
-                                            "slua-type": {
-                                                "markdownDescription": "A more specific argument type for slua type-checking.",
-                                                "type": "string"
-                                            }
+                                            "type": { "$ref": "#/$defs/typeSemantics" }
                                         },
-                                        "required": [
-                                            "type"
-                                        ],
+                                        "required": ["type", "tooltip"],
                                         "type": "object"
                                     }
                                 },
@@ -526,16 +533,6 @@
                             "markdownDescription": "An array of function arguments.",
                             "type": "array",
                             "uniqueItems": true
-                        },
-                        "asset-semantics": {
-                            "const": true,
-                            "markdownDescription": "The returned string value represents an asset name or uuid.",
-                            "type": "boolean"
-                        },
-                        "bool-semantics": {
-                            "const": true,
-                            "markdownDescription": "The returned integer value represents a boolean value.",
-                            "type": "boolean"
                         },
                         "deprecated": { "$ref": "#/$defs/deprecated" },
                         "detected-semantics": {
@@ -560,11 +557,6 @@
                         "god-mode": {
                             "const": true,
                             "markdownDescription": "This function can only be executed in god mode.",
-                            "type": "boolean"
-                        },
-                        "index-semantics": {
-                            "const": true,
-                            "markdownDescription": "The returned integer value represents a zero-based index.",
                             "type": "boolean"
                         },
                         "linden-experience": {
@@ -600,7 +592,7 @@
                             "default": "void",
                             "markdownDescription": "One of the valid return types for functions:\n\n- float\n- integer\n- key\n- list\n- rotation\n- string\n- vector\n- void\n\nIf omitted, it is assumed to be void.",
                             "oneOf": [
-                                { "$ref": "#/$defs/lslType" },
+                                { "$ref": "#/$defs/typeSemantics" },
                                 { "const": "void" }
                             ]
                         },
@@ -612,10 +604,6 @@
                             "const": true,
                             "markdownDescription": "In SLua, this function has been removed from ll module and only exists in llcompat.",
                             "type": "boolean"
-                        },
-                        "slua-return": {
-                            "markdownDescription": "A more specific return type for slua type-checking.",
-                            "type": "string"
                         },
                         "requires-permission": {
                             "items": {
@@ -648,10 +636,7 @@
                         },
                         "categories": { "$ref": "#/$defs/functionCategories" }
                     },
-                    "required": [
-                        "tooltip",
-                        "categories"
-                    ]
+                    "required": ["tooltip", "categories"]
                 }
             },
             "type": "object"
@@ -677,9 +662,7 @@
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "tooltip"
-                    ],
+                    "required": ["tooltip"],
                     "type": "object"
                 }
             },

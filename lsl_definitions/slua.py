@@ -592,7 +592,7 @@ class SLuaDefinitions:
 
         for func in lsl.functions.values():
             semantic_prefix = (
-                "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
+                "(Index semantics) " if func.ret_type.index or func.detected_semantics else ""
             )
             known_types = self.validate_type_params(func.type_arguments)
             ll_func = SLuaFunction(
@@ -650,7 +650,7 @@ class SLuaDefinitions:
             prop = SLuaProperty(
                 name=const.name,
                 comment=const.tooltip,
-                type=self.validate_type(const.slua_type or const.type.meta.slua_name),
+                type=self.validate_type(const.type.luau),
                 value=const.slua_literal,
                 private=const.private,
             )
@@ -668,7 +668,7 @@ class SLuaDefinitions:
                 # Face is required even on nullable rules.
                 parameters.append(SLuaParameter(name="face", type="number"))
             for param in method.params:
-                slua_type = param.type.luau_type
+                slua_type = param.type.luau
                 if method.nullable:
                     # Nullable is represented through a blank string
                     slua_type = f'{slua_type} | ""'

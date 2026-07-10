@@ -23,16 +23,16 @@ def gen_lscript_library_defs(definitions: LSLDefinitions) -> str:
     func_defs = ""
     for func in definitions.functions.values():
         if func.arguments:
-            args_def = f'"{"".join(x.type.meta.library_abbr for x in func.arguments)}"'
+            args_def = f'"{"".join(x.type.lsl.meta.library_abbr for x in func.arguments)}"'
         else:
             # Using `nullptr` instead of `""` saves a worthless array alloc inside `runllib_common()`.
             args_def = "nullptr"
 
-        if func.ret_type == LSLType.VOID:
+        if func.ret_type.lsl == LSLType.VOID:
             # Using `nullptr` instead of `""` saves a worthless alloc inside `runllib_common()`.
             ret_def = "nullptr"
         else:
-            ret_def = f'"{func.ret_type.meta.library_abbr}"'
+            ret_def = f'"{func.ret_type.lsl.meta.library_abbr}"'
 
         func_defs += (
             f'dangerousAddFunction({func.func_id}, "{func.name}", {ret_def}, {args_def}, '
@@ -647,11 +647,11 @@ _OLD_FUNC_BLACKLIST = {
 
 
 def _any_arg_list(func: LSLFunction) -> bool:
-    return any(a.type == LSLType.LIST for a in func.arguments)
+    return any(a.type.lsl == LSLType.LIST for a in func.arguments)
 
 
 def _any_list(func: LSLFunction) -> bool:
-    return func.ret_type == LSLType.LIST or _any_arg_list(func)
+    return func.ret_type.lsl == LSLType.LIST or _any_arg_list(func)
 
 
 @register("gen_mono_library_defs")
@@ -679,15 +679,17 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
         if _any_list(func):
             # If the function does anything with lists we need special wrapper code
             # Write the internal implementation
-            ret_str = "object[]" if func.ret_type == LSLType.LIST else func.ret_type.meta.cs_name
+            ret_str = (
+                "object[]" if func.ret_type.lsl == LSLType.LIST else func.ret_type.lsl.meta.cs_name
+            )
 
             args_strs = []
             for arg in func.arguments:
-                if arg.type == LSLType.LIST:
+                if arg.type.lsl == LSLType.LIST:
                     args_strs.append(f"object[] {_cs_ident(arg.name)}")
                     args_strs.append(f"int {arg.name}_len")
                 else:
-                    args_strs.append(f"{arg.type.meta.cs_name} {_cs_ident(arg.name)}")
+                    args_strs.append(f"{arg.type.lsl.meta.cs_name} {_cs_ident(arg.name)}")
 
             args_str = ", ".join(args_strs)
             new_defs += (
@@ -696,26 +698,24 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
 
             # Now for the wrapper implementation
             args_str = ", ".join(
-                f"{a.type.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
+                f"{a.type.lsl.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
             )
-            new_defs += (
-                f"        public static {func.ret_type.meta.cs_name} {func.name}({args_str}) {{\n"
-            )
+            new_defs += f"        public static {func.ret_type.lsl.meta.cs_name} {func.name}({args_str}) {{\n"
 
             call_args = []
             for arg in func.arguments:
-                if arg.type == LSLType.LIST:
+                if arg.type.lsl == LSLType.LIST:
                     call_args.append(f"ToArrayNoCopy({_cs_ident(arg.name)})")
                     call_args.append(f"{_cs_ident(arg.name)}.Count")
                 else:
                     call_args.append(_cs_ident(arg.name))
 
             call_expr = f"{func.name}Internal({', '.join(call_args)})"
-            if func.ret_type == LSLType.LIST:
+            if func.ret_type.lsl == LSLType.LIST:
                 # List returns don't have a length component like list args, the embedding
                 # code must infer the length through Mono APIs.
                 call_expr = f"ToArrayListNoCopy({call_expr})"
-            if func.ret_type == LSLType.VOID:
+            if func.ret_type.lsl == LSLType.VOID:
                 # Mono very much dislikes using a return from an otherwise void function
                 new_defs += f"            {call_expr};\n"
             else:
@@ -723,9 +723,9 @@ def gen_mono_library_defs(definitions: LSLDefinitions, template_path: str) -> st
             new_defs += "        }\n\n"
         else:
             args_str = ", ".join(
-                f"{a.type.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
+                f"{a.type.lsl.meta.cs_name} {_cs_ident(a.name)}" for a in func.arguments
             )
-            new_defs += f"        public extern static {func.ret_type.meta.cs_name} {func.name}({args_str});\n"
+            new_defs += f"        public extern static {func.ret_type.lsl.meta.cs_name} {func.name}({args_str});\n"
 
     return splice_str(template, _MONO_CS_LIBRARY_DEFS_COMMENT, new_defs)
 
@@ -796,9 +796,9 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions) -> str:
             f"LLScriptLibData args[{len(func.arguments)}];",
         ]
         for i, arg in enumerate(func.arguments):
-            arg_bind_name = arg.type.meta.mono_bind_name
+            arg_bind_name = arg.type.lsl.meta.mono_bind_name
             arg_spec.append(f"{arg_bind_name} p{i}")
-            if arg.type == LSLType.LIST:
+            if arg.type.lsl == LSLType.LIST:
                 # Lists have both the array _and a length_ when passed as args
                 arg_spec.append(f"S32 p{i}_length")
                 function_stmts.append(
@@ -809,11 +809,11 @@ def gen_mono_bind_interfaces(definitions: LSLDefinitions) -> str:
                     f"LLScriptLibDataHelper<{arg_bind_name}>::set(args[{i}], p{i});"
                 )
 
-        ret_bind_name = func.ret_type.meta.mono_bind_name
+        ret_bind_name = func.ret_type.lsl.meta.mono_bind_name
         function_stmts.extend(
             [
                 "LLScriptLibData retval;",
-                f"retval.mType = {func.ret_type.meta.lst_name};",
+                f"retval.mType = {func.ret_type.lsl.meta.lst_name};",
                 f"call_lib_func({func.func_id}, retval, {len(func.arguments)}, args, {func.energy}, {func.mono_sleep});",
                 f"return LLScriptLibDataHelper<{ret_bind_name}>::get(retval);",
             ]
@@ -908,12 +908,12 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
         if func.need_compat:
             prelude += "    const bool compat_mode = lua_toboolean(L, lua_upvalueindex(1));\n"
 
-        if any(a.index_semantics for a in func.arguments):
+        if any(a.type.index for a in func.arguments):
             # If we're not in compat mode
             prelude += "    if (!compat_mode)\n    {\n"
             for arg_idx, arg in enumerate(func.arguments):
-                if arg.index_semantics:
-                    assert arg.type == LSLType.INTEGER
+                if arg.type.index:
+                    assert arg.type.lsl == LSLType.INTEGER
                     # This function will fix up the index to be 0-based or throw an error if 0 was passed.
                     prelude += f"        args[{arg_idx}].mInteger = luaSL_checkindexlike(L, {arg_idx + 1});\n"
             prelude += "    }\n"
@@ -929,13 +929,13 @@ def gen_lua_registrations(definitions: LSLDefinitions, *, compat_mode: int = 0) 
 }}
         """ % {
             "num_args": len(func.arguments),
-            "ret_type": func.ret_type.meta.lst_name,
-            "arg_types": ", ".join(a.type.meta.lst_name for a in func.arguments),
+            "ret_type": func.ret_type.lsl.meta.lst_name,
+            "arg_types": ", ".join(a.type.lsl.meta.lst_name for a in func.arguments),
             "func_id": func.func_id,
             "func_name": func_name,
             "prelude": prelude if prelude.strip() else "    // no prelude",
-            "index_semantics": "false" if not func.index_semantics else "!compat_mode",
-            "bool_semantics": "false" if not func.bool_semantics else "!compat_mode",
+            "index_semantics": "false" if not func.ret_type.index else "!compat_mode",
+            "bool_semantics": "false" if not func.ret_type.boolean else "!compat_mode",
         }
         bindings.append(binding)
 
@@ -953,22 +953,24 @@ def gen_lua_constant_definitions(definitions: LSLDefinitions) -> str:
         if const.slua_removed:
             continue
         binding = "    "
-        if const.type == LSLType.KEY or is_uuid(const.value):
+        if const.type.lsl == LSLType.KEY or is_uuid(const.value):
             # This is a bit weird. UUID constants don't exist in LSL, but they do in Lua.
             # Make these an actual UUID if we can to make comparison easier.
             binding += f'luaSL_pushuuidstring(L, "{to_c_str(const.value)}");'
-        elif const.type == LSLType.STRING:
+        elif const.type.lsl == LSLType.STRING:
             binding += f'lua_pushstring(L, "{to_c_str(const.value_raw)}");'
-        elif const.type == LSLType.INTEGER:
+        elif const.type.lsl == LSLType.INTEGER:
             binding += f"luaSL_pushnativeinteger(L, {const.value});"
-        elif const.type == LSLType.FLOAT:
+        elif const.type.lsl == LSLType.FLOAT:
             binding += f"lua_pushnumber(L, {const.value});"
-        elif const.type == LSLType.VECTOR:
+        elif const.type.lsl == LSLType.VECTOR:
             binding += f"lua_pushvector(L, {const.value[1:-1]});"
-        elif const.type == LSLType.ROTATION:
+        elif const.type.lsl == LSLType.ROTATION:
             binding += f"luaSL_pushquaternion(L, {const.value[1:-1]});"
         else:
-            raise ValueError(f"Can't generate Lua constant for {const.name} of type {const.type}")
+            raise ValueError(
+                f"Can't generate Lua constant for {const.name} of type {const.type.lsl}"
+            )
 
         binding += f'\n    lua_setglobal(L, "{to_c_str(const.name)}");\n'
         bindings.append(binding)
@@ -1006,21 +1008,21 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
 
         args = func.arguments
         # Find the list argument -- it may appear anywhere in the signature.
-        list_idx = next((i for i, a in enumerate(args) if a.type == LSLType.LIST), None)
+        list_idx = next((i for i, a in enumerate(args) if a.type.lsl == LSLType.LIST), None)
         if list_idx is None:
             raise ValueError(f"{full_name}: no list argument found in signature")
 
         prefix_result = []
         has_link = False
         for arg in args[:list_idx]:
-            is_link = arg.type == LSLType.INTEGER and "link" in arg.name.lower()
+            is_link = arg.type.lsl == LSLType.INTEGER and "link" in arg.name.lower()
             if is_link:
                 has_link = True
-            prefix_result.append((arg.name, arg.type, is_link))
+            prefix_result.append((arg.name, arg.type.lsl, is_link))
 
-        suffix_result = [(arg.name, arg.type) for arg in args[list_idx + 1 :]]
+        suffix_result = [(arg.name, arg.type.lsl) for arg in args[list_idx + 1 :]]
 
-        return prefix_result, suffix_result, has_link, func.ret_type
+        return prefix_result, suffix_result, has_link, func.ret_type.lsl
 
     def _lua_fn_to_cpp_name(lua_fn: str) -> str:
         """Convert camelCase Lua function name to snake_case C++ variable name.
