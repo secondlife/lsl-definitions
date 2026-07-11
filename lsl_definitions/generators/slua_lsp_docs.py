@@ -82,6 +82,8 @@ class DocBuilder:
         self.docs[f"{GLOBALS_PREFIX}{module_prefix}{const.name}"] = entry
 
     def add_module(self, module: SLuaModule) -> None:
+        if module.typechecker_flags.fflag_disabled:
+            return
         if module.callable:
             self.add_function(module.callable)
         else:
@@ -95,7 +97,7 @@ class DocBuilder:
                 self.add_constant(const, module=module.name)
         # for func in sorted(self.functions, key=lambda x: x.name)
         for func in module.functions:
-            if not func.private and not func.local_only:
+            if func.show_in_syntax_files:
                 self.add_function(func, module=module.name)
 
 
@@ -120,7 +122,7 @@ def gen_slua_lsp_docs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     #         if not const.private and const.name != "rotation":
     #             selene["globals"][const.name] = selene_property(const)
     for func in slua_definitions.functions:
-        if not func.private and not func.local_only and not func.slua_removed:
+        if func.show_in_syntax_files and not func.slua_removed:
             builder.add_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:
