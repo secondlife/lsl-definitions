@@ -52,13 +52,13 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         class_.write_luau_def(defs)
     defs.write("\n")
     for func in slua_definitions.functions:
-        if func.private or func.local_only:
+        if not func.show_in_syntax_files:
             continue
         if not func.typechecker_flags.fully_defined:
             defs.write("-- ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-        if module.name in {"ll", "llcompat"}:
+        if module.name in {"ll", "llcompat"} or module.typechecker_flags.fflag_disabled:
             continue
         if module.name == "string":
             defs.write(

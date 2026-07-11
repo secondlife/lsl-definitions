@@ -428,7 +428,7 @@ declare {self.name}: """)
         for prop in self.constants:
             f.write(f"  {prop.to_luau_def()},\n")
         for func in self.functions:
-            if func.private or func.local_only:
+            if not func.show_in_syntax_files:
                 continue
             func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")

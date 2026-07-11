@@ -368,7 +368,6 @@ declare buffer: {
   readi16: @checked (b: buffer, offset: number) -> number,
   readu16: @checked (b: buffer, offset: number) -> number,
   readi32: @checked (b: buffer, offset: number) -> number,
-  readinteger: @checked (b: buffer, offset: number) -> integer,
   readu32: @checked (b: buffer, offset: number) -> number,
   readf32: @checked (b: buffer, offset: number) -> number,
   readf64: @checked (b: buffer, offset: number) -> number,
@@ -377,7 +376,6 @@ declare buffer: {
   writei16: @checked (b: buffer, offset: number, value: number) -> (),
   writeu16: @checked (b: buffer, offset: number, value: number) -> (),
   writei32: @checked (b: buffer, offset: number, value: number) -> (),
-  writeinteger: @checked (b: buffer, offset: number, value: integer) -> (),
   writeu32: @checked (b: buffer, offset: number, value: number) -> (),
   writef32: @checked (b: buffer, offset: number, value: number) -> (),
   writef64: @checked (b: buffer, offset: number, value: number) -> (),
@@ -388,16 +386,6 @@ declare buffer: {
   fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
   readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
   writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
-}
-
-
----------------------------
--- Global Table: class
----------------------------
-
-declare class: {
-  classof: @checked (obj: unknown) -> class?,
-  instanceof: @checked (obj: unknown, cls: class) -> boolean,
 }
 
 
@@ -427,55 +415,6 @@ declare debug: {
     & ((func: (...any) -> ...any, s: string) -> ...any),
   traceback: ((co: thread, msg: string?, level: number?) -> string)
     & ((msg: string?, level: number?) -> string),
-}
-
-
----------------------------
--- Global Table: integer
----------------------------
-
-declare integer: {
-  maxsigned: integer,
-  minsigned: integer,
-  add: @checked (int1: integer, int2: integer) -> integer,
-  arshift: @checked (val: integer, i: integer) -> integer,
-  band: @checked (...integer) -> integer,
-  bnot: @checked (val: integer) -> integer,
-  bor: @checked (...integer) -> integer,
-  bxor: @checked (...integer) -> integer,
-  bswap: @checked (val: integer) -> integer,
-  btest: @checked (...integer) -> boolean,
-  clamp: @checked (val: integer, min: integer, max: integer) -> integer,
-  countlz: @checked (val: integer) -> integer,
-  countrz: @checked (val: integer) -> integer,
-  create: @checked (val: number) -> integer?,
-  div: @checked (dividend: integer, divisor: integer) -> integer,
-  extract: @checked (src: integer, field: integer, width: integer?) -> integer,
-  fromstring: (value: string, base: number?) -> integer?,
-  ge: @checked (int1: integer, int2: integer) -> boolean,
-  gt: @checked (int1: integer, int2: integer) -> boolean,
-  idiv: @checked (dividend: integer, divisor: integer) -> integer,
-  le: @checked (int1: integer, int2: integer) -> boolean,
-  lt: @checked (int1: integer, int2: integer) -> boolean,
-  lrotate: @checked (val: integer, i: integer) -> integer,
-  lshift: @checked (val: integer, i: integer) -> integer,
-  max: @checked (val: integer, ...integer) -> integer,
-  min: @checked (val: integer, ...integer) -> integer,
-  mod: @checked (dividend: integer, divisor: integer) -> integer,
-  mul: @checked (int1: integer, int2: integer) -> integer,
-  neg: @checked (val: integer) -> integer,
-  rem: @checked (dividend: integer, divisor: integer) -> integer,
-  replace: @checked (dst: integer, src: integer, field: integer, width: integer?) -> integer,
-  rrotate: @checked (val: integer, i: integer) -> integer,
-  rshift: @checked (val: integer, i: integer) -> integer,
-  sub: @checked (int1: integer, int2: integer) -> integer,
-  tonumber: (val: integer) -> number,
-  udiv: @checked (dividend: integer, divisor: integer) -> integer,
-  uge: @checked (int1: integer, int2: integer) -> boolean,
-  ugt: @checked (int1: integer, int2: integer) -> boolean,
-  ule: @checked (int1: integer, int2: integer) -> boolean,
-  ult: @checked (int1: integer, int2: integer) -> boolean,
-  urem: @checked (dividend: integer, divisor: integer) -> integer,
 }
 
 
