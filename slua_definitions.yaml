@@ -1367,6 +1367,7 @@ modules:
     typechecker: {checked: true}
 - name: class
   comment: Class/object manipulation library.
+  typechecker: {fflag-disabled: true}
   functions:
   - name: classof
     comment: Returns the class of the given object, or nil if not a class.
@@ -3701,6 +3702,7 @@ controls:
     tooltip: "Luau export keyword: declares a type that can be used outside this module."
   public:
     tooltip: "Luau public keyword: declares a class attribute."
+    typechecker: {fflag-disabled: true}
   in:
     tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
   not:
@@ -3718,6 +3720,7 @@ builtin-types:
     tooltip: Read-write binary data.
   class:
     tooltip: Shared methods and attributes available to object instances.
+    typechecker: {fflag-disabled: true}
   integer:
     tooltip: 64-bit integer.
     typechecker: {fflag-disabled: true}
@@ -3727,6 +3730,7 @@ builtin-types:
     tooltip: Double‑precision (64-bit) floating point number.
   object:
     tooltip: Instance of a class.
+    typechecker: {fflag-disabled: true}
   string:
     tooltip: Read-only binary data. Usually UTF-8-encoded text.
   thread:
