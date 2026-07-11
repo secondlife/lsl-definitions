@@ -1336,6 +1336,30 @@ modules:
       type: number
     return-type: ()
     typechecker: {checked: true}
+- name: class
+  comment: Class/object manipulation library.
+  functions:
+  - name: classof
+    comment: Returns the class of the given object, or nil if not a class.
+    parameters:
+    - name: obj
+      comment: Object to get the class of.
+      type: unknown
+    return-type: class?
+    must-use: true
+    typechecker: {checked: true}
+  - name: instanceof
+    comment: Returns true if obj is an instance of the given class.
+    parameters:
+    - name: obj
+      comment: Object to check the class of.
+      type: unknown
+    - name: cls
+      comment: Class to check against.
+      type: class
+    return-type: boolean
+    must-use: true
+    typechecker: {checked: true}
 - name: coroutine
   comment: Coroutine manipulation library.
   functions:
@@ -3134,6 +3158,8 @@ controls:
     tooltip: "Lua local keyword: declares a local variable or function."
   export:
     tooltip: "Luau export keyword: declares a type that can be used outside this module."
+  public:
+    tooltip: "Luau public keyword: declares a class attribute."
   in:
     tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
   not:
@@ -3149,10 +3175,14 @@ builtin-types:
     tooltip: "Boolean: represents a true or false value."
   buffer:
     tooltip: Read-write binary data.
+  class:
+    tooltip: Shared methods and attributes available to object instances.
   never:
     tooltip: The empty type that contains no values.
   number:
     tooltip: Double‑precision floating point number.
+  object:
+    tooltip: Instance of a class.
   string:
     tooltip: Read-only binary data. Usually UTF-8-encoded text.
   thread:
