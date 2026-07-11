@@ -481,6 +481,16 @@ declare buffer: {
 
 
 ---------------------------
+-- Global Table: class
+---------------------------
+
+declare class: {
+  classof: @checked (obj: unknown) -> class?,
+  instanceof: @checked (obj: unknown, cls: class) -> boolean,
+}
+
+
+---------------------------
 -- Global Table: coroutine
 ---------------------------
 
