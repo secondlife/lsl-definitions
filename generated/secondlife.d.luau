@@ -309,7 +309,7 @@ declare loadstring: nil
 declare function newproxy(mt: boolean?): any
 -- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
 -- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
-declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...)
+-- declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...) -- magic type
 declare function print<T...>(...: T...): ()
 declare function rawequal<T1, T2>(a: T1, b: T2): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?

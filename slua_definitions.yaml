@@ -503,6 +503,7 @@ functions:
     comment: Arguments to pass to the function.
     type: A...
   return-type: (boolean, R...)
+  typechecker: {magic: true}
 - name: print
   comment: Prints all arguments to standard output using Tab as a separator.
   type-parameters: [T...]
