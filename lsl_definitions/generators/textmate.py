@@ -103,14 +103,18 @@ def gen_textmate_slua(
         return f"{module.name}{constants}"
 
     def get_slua_global_constants(definitions: SLuaDefinitions) -> str:
-        constants = [get_slua_global_constants_for_module(m) for m in definitions.modules]
+        constants = [
+            get_slua_global_constants_for_module(m)
+            for m in definitions.modules
+            if not m.typechecker_flags.fflag_disabled
+        ]
         constants.sort()
         return "|".join(constants)
 
     def get_slua_module_regex(module: SLuaModule) -> str:
         if module.name in {"ll", "llcompat"}:
             return None
-        functions = [f.name for f in module.functions if not f.private and not f.local_only]
+        functions = [f.name for f in module.functions if f.show_in_syntax_files]
         functions.sort()
         functions = "|".join(functions)
         if len(functions) < 1:
@@ -122,7 +126,11 @@ def gen_textmate_slua(
         return crunch_regex_strings(constants)
 
     def get_slua_modules(definitions: SLuaDefinitions) -> str:
-        modules = [get_slua_module_regex(m) for m in definitions.modules]
+        modules = [
+            get_slua_module_regex(m)
+            for m in definitions.modules
+            if not m.typechecker_flags.fflag_disabled
+        ]
         modules = [m for m in modules if m is not None]
         modules.sort()
         return "|".join(modules)
@@ -131,7 +139,7 @@ def gen_textmate_slua(
         functions = [
             f.name
             for f in definitions.get_module("ll").functions
-            if not f.private and not f.local_only and not f.slua_removed and f.deprecated is None
+            if f.show_in_syntax_files and not f.slua_removed and f.deprecated is None
         ]
         return crunch_regex_strings(functions)
 
@@ -139,17 +147,18 @@ def gen_textmate_slua(
         functions = [
             f.name
             for f in definitions.get_module("ll").functions
-            if not f.private
-            and not f.local_only
-            and not f.slua_removed
-            and f.deprecated is not None
+            if f.show_in_syntax_files and not f.slua_removed and f.deprecated is not None
         ]
         return crunch_regex_strings(functions)
 
     def get_slua_global_types(definitions: SLuaDefinitions) -> str:
         # Missing types that are not documented in builtins, classes or aliases
         missing_types = ["nil"]
-        builtin_types = [t for t in definitions.builtin_types.keys()]
+        builtin_types = [
+            t
+            for t in definitions.builtin_types.keys()
+            if not definitions.builtin_types[t].get("typechecker", {}).get("fflag-disabled", False)
+        ]
         base_classes = [b.name for b in definitions.base_classes]
         type_aliases = [t.name for t in definitions.type_aliases if t.export]
         return "|".join(missing_types + builtin_types + base_classes + type_aliases)
