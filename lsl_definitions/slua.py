@@ -124,6 +124,8 @@ class SLuaTypecheckerFlags:
     """
     checked: bool = False
     """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
+    fflag_disabled: bool = False
+    """This function is present in Luau, but is temporarily disabled by a feature flag in SLua. Exclude it from syntax files."""
 
     @property
     def fully_defined(self) -> bool:
@@ -138,6 +140,15 @@ class SLuaTypecheckerFlags:
         if self.magic:
             comments.append("magic type")
         return " -- " + ", ".join(comments) if comments else ""
+
+    @classmethod
+    def from_dict(cls, d: dict) -> SLuaTypecheckerFlags:
+        return cls(
+            builtin=d.get("builtin", False),
+            magic=d.get("magic", False),
+            checked=d.get("checked", False),
+            fflag_disabled=d.get("fflag-disabled", False),
+        )
 
 
 @dataclasses.dataclass
@@ -184,6 +195,12 @@ class SLuaFunction(SLuaFunctionBase):
     )
     """Flags specific to the internals of luau-analyze and luau-lsp."""
     overloads: list[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
+
+    @property
+    def show_in_syntax_files(self) -> bool:
+        return (
+            not self.private and not self.local_only and not self.typechecker_flags.fflag_disabled
+        )
 
     @property
     def annotation_string(self) -> str:
@@ -353,9 +370,15 @@ class SLuaModule:
     constants: list[SLuaProperty]
     functions: list[SLuaFunction]
     comment: str = ""
+    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
+        default_factory=SLuaTypecheckerFlags
+    )
+    """Flags specific to the internals of luau-analyze and luau-lsp."""
 
     def to_keywords_functions_dict(self) -> dict:
         functions = {}
+        if self.typechecker_flags.fflag_disabled:
+            return functions
         if self.callable:
             functions[self.name] = self.callable.to_keywords_dict()
         else:
@@ -364,12 +387,14 @@ class SLuaModule:
             {
                 f"{self.name}.{func.name}": func.to_keywords_dict()
                 for func in sorted(self.functions, key=lambda x: x.name)
-                if not func.private and not func.local_only
+                if func.show_in_syntax_files
             }
         )
         return functions
 
     def to_keywords_constants_dict(self) -> dict:
+        if self.typechecker_flags.fflag_disabled:
+            return {}
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
             for prop in sorted(self.constants, key=lambda x: x.name)
@@ -872,6 +897,7 @@ class SLuaDefinitionParser:
             callable=None,
             constants=[],
             functions=[],
+            typechecker_flags=SLuaTypecheckerFlags.from_dict(data.get("typechecker", {})),
         )
         try:
             self._validate_identifier(module.name)
@@ -947,7 +973,7 @@ class SLuaDefinitionParser:
                 local_only=data.get("local-only", False),
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
-                typechecker_flags=SLuaTypecheckerFlags(**data.get("typechecker", {})),
+                typechecker_flags=SLuaTypecheckerFlags.from_dict(data.get("typechecker", {})),
             )
             self._validate_identifier(func.name)
             self._validate_scope(func.name, scope)
