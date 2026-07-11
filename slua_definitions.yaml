@@ -1063,7 +1063,7 @@ modules:
     return-type: integer
     must-use: true
     fastcall: true
-    typechecker: {checked: true}
+    typechecker: {checked: true, fflag-disabled: true}
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1198,7 +1198,7 @@ modules:
       type: integer
     return-type: ()
     fastcall: true
-    typechecker: {checked: true}
+    typechecker: {checked: true, fflag-disabled: true}
   - name: writeu32
     comment: Writes an unsigned 32-bit integer to the buffer at the given offset.
     parameters:
@@ -1520,6 +1520,7 @@ modules:
     must-use: true
 - name: integer
   comment: 64-bit integer operations library.
+  typechecker: {fflag-disabled: true}
   functions:
   - name: add
     comment: Returns the sum of two 64-bit integers (signed or unsigned), wrapping on overflow.
@@ -3719,6 +3720,7 @@ builtin-types:
     tooltip: Shared methods and attributes available to object instances.
   integer:
     tooltip: 64-bit integer.
+    typechecker: {fflag-disabled: true}
   never:
     tooltip: The empty type that contains no values.
   number:
