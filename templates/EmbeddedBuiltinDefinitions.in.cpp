@@ -12,29 +12,12 @@ namespace Luau
 
 static constexpr const char* kBuiltinDefinitionBaseSrc = R"BUILTIN_SRC(
 
-$SLUA_GLOBAL_FUNCTIONS
+$GLOBAL_FUNCTIONS
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionBit32Src = R"BUILTIN_SRC(
 
-declare bit32: {
-    band: @checked (...number) -> number,
-    bor: @checked (...number) -> number,
-    bxor: @checked (...number) -> number,
-    btest: @checked (number, ...number) -> boolean,
-    rrotate: @checked (x: number, disp: number) -> number,
-    lrotate: @checked (x: number, disp: number) -> number,
-    lshift: @checked (x: number, disp: number) -> number,
-    arshift: @checked (x: number, disp: number) -> number,
-    rshift: @checked (x: number, disp: number) -> number,
-    bnot: @checked (x: number) -> number,
-    extract: @checked (n: number, field: number, width: number?) -> number,
-    replace: @checked (n: number, v: number, field: number, width: number?) -> number,
-    countlz: @checked (n: number) -> number,
-    countrz: @checked (n: number) -> number,
-    byteswap: @checked (n: number) -> number,
-}
-
+$BIT32_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionMathSrc = R"BUILTIN_SRC(

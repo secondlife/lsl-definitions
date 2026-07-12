@@ -536,12 +536,12 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
   toup: (q: quaternion) -> vector,
 }
 
---[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match
 
 ---------------------------
 -- Global Table: string
 ---------------------------
 
+--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match
 declare string: {
   byte: @checked (src: string, start_index: number?, end_index: number?) -> ...number, -- builtin
   char: @checked (...number) -> string, -- builtin
@@ -561,8 +561,8 @@ declare string: {
   unpack: @checked (format_string: string, src: string, start: number?) -> ...any, -- builtin
   upper: @checked (src: string) -> string, -- builtin
 }
-
 --]]
+
 
 ---------------------------
 -- Global Table: table

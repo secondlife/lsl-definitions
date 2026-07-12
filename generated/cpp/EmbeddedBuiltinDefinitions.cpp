@@ -48,21 +48,23 @@ declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., err: (E) -> R
 static constexpr const char* kBuiltinDefinitionBit32Src = R"BUILTIN_SRC(
 
 declare bit32: {
-    band: @checked (...number) -> number,
-    bor: @checked (...number) -> number,
-    bxor: @checked (...number) -> number,
-    btest: @checked (number, ...number) -> boolean,
-    rrotate: @checked (x: number, disp: number) -> number,
-    lrotate: @checked (x: number, disp: number) -> number,
-    lshift: @checked (x: number, disp: number) -> number,
-    arshift: @checked (x: number, disp: number) -> number,
-    rshift: @checked (x: number, disp: number) -> number,
-    bnot: @checked (x: number) -> number,
-    extract: @checked (n: number, field: number, width: number?) -> number,
-    replace: @checked (n: number, v: number, field: number, width: number?) -> number,
-    countlz: @checked (n: number) -> number,
-    countrz: @checked (n: number) -> number,
-    byteswap: @checked (n: number) -> number,
+  arshift: @checked (n: number, i: number) -> number,
+  band: @checked (...number) -> number,
+  bnot: @checked (n: number) -> number,
+  bor: @checked (...number) -> number,
+  bxor: @checked (...number) -> number,
+  btest: @checked (...number) -> boolean,
+  extract: @checked (n: number, field: number, width: number?) -> number,
+  lrotate: @checked (n: number, i: number) -> number,
+  lshift: @checked (n: number, i: number) -> number,
+  replace: @checked (n: number, v: number, field: number, width: number?) -> number,
+  rrotate: @checked (n: number, i: number) -> number,
+  rshift: @checked (n: number, i: number) -> number,
+  s32: @checked (n: number) -> number,
+  smul: @checked (a: number, b: number) -> number,
+  countlz: @checked (n: number) -> number,
+  countrz: @checked (n: number) -> number,
+  byteswap: @checked (n: number) -> number,
 }
 
 )BUILTIN_SRC";
