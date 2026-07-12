@@ -33,6 +33,9 @@ def gen_slua_embedded_defs(
     with io.StringIO() as defs:
         slua_definitions.modules.pop("bit32").write_luau_def(defs)
         inserts["BIT32_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("math").write_luau_def(defs)
+        inserts["MATH_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())
