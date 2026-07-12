@@ -25690,7 +25690,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).</string>
                      <key>type</key>
-                     <string>boolean | number</string>
+                     <string>number</string>
                   </map>
                </map>
             </array>
@@ -25713,7 +25713,7 @@ Returns true if result is non-zero.</string>
                      <key>tooltip</key>
                      <string>A PASS_* flag (e.g., PASS_ALWAYS, PASS_IF_NOT_HANDLED, or PASS_NEVER).</string>
                      <key>type</key>
-                     <string>boolean | number</string>
+                     <string>number</string>
                   </map>
                </map>
             </array>
