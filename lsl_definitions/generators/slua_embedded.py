@@ -36,6 +36,17 @@ def gen_slua_embedded_defs(
     with io.StringIO() as defs:
         slua_definitions.modules.pop("math").write_luau_def(defs)
         inserts["MATH_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        alias = slua_definitions.type_aliases.pop("DateTypeArg")
+        alias.export = False
+        defs.write(alias.to_luau_def())
+        defs.write("\n")
+        alias = slua_definitions.type_aliases.pop("DateTypeResult")
+        alias.export = False
+        defs.write(alias.to_luau_def())
+        defs.write("\n")
+        slua_definitions.modules.pop("os").write_luau_def(defs)
+        inserts["OS_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())

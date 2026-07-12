@@ -61,13 +61,13 @@ export type DateTypeArg = {
 export type DateTypeResult = {
   year: number,
   month: number,
+  wday: number,
+  yday: number,
   day: number,
-  hour: number?,
-  min: number?,
-  sec: number?,
-  wday: number?,
-  yday: number?,
-  isdst: boolean?,
+  hour: number,
+  min: number,
+  sec: number,
+  isdst: boolean,
 }
 type LLJsonEncodeOptions = {
   tight: boolean?,

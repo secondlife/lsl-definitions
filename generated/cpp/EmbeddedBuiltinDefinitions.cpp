@@ -118,32 +118,32 @@ declare math: {
 static constexpr const char* kBuiltinDefinitionOsSrc = R"BUILTIN_SRC(
 
 type DateTypeArg = {
-    year: number,
-    month: number,
-    day: number,
-    hour: number?,
-    min: number?,
-    sec: number?,
-    isdst: boolean?,
+  year: number,
+  month: number,
+  day: number,
+  hour: number?,
+  min: number?,
+  sec: number?,
+  isdst: boolean?,
 }
-
 type DateTypeResult = {
-    year: number,
-    month: number,
-    wday: number,
-    yday: number,
-    day: number,
-    hour: number,
-    min: number,
-    sec: number,
-    isdst: boolean,
+  year: number,
+  month: number,
+  wday: number,
+  yday: number,
+  day: number,
+  hour: number,
+  min: number,
+  sec: number,
+  isdst: boolean,
 }
-
 declare os: {
-    time: (time: DateTypeArg?) -> number,
-    date: ((formatString: "*t" | "!*t", time: number?) -> DateTypeResult) & ((formatString: string?, time: number?) -> string),
-    difftime: (t2: DateTypeResult | number, t1: DateTypeResult | number) -> number,
-    clock: () -> number,
+  clock: () -> number,
+  date: ((formatString: string?, t: number?) -> string)
+    & ((formatString: "*t" | "!*t", t: number?) -> DateTypeResult),
+  difftime: @[deprecated {reason='Same as a - b'}](a: number, b: number) -> number,
+  time: ((time: DateTypeArg) -> number?)
+    & (() -> number),
 }
 
 )BUILTIN_SRC";
