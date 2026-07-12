@@ -32,65 +32,22 @@ $OS_TABLE
 
 static constexpr const char* kBuiltinDefinitionCoroutineSrc = R"BUILTIN_SRC(
 
-declare coroutine: {
-    create: <A..., R...>(f: (A...) -> R...) -> thread,
-    resume: <A..., R...>(co: thread, A...) -> (boolean, R...),
-    running: () -> thread,
-    status: @checked (co: thread) -> "dead" | "running" | "normal" | "suspended",
-    wrap: <A..., R...>(f: (A...) -> R...) -> ((A...) -> R...),
-    yield: <A..., R...>(A...) -> R...,
-    isyieldable: () -> boolean,
-    close: @checked (co: thread) -> (boolean, any)
-}
-
+$COROUTINE_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionTableSrc = R"BUILTIN_SRC(
 
-declare table: {
-    concat: <V>(t: {V}, sep: string?, i: number?, j: number?) -> string,
-    insert: (<V>(t: {V}, value: V) -> ()) & (<V>(t: {V}, pos: number, value: V) -> ()),
-    maxn: <V>(t: {V}) -> number,
-    remove: <V>(t: {V}, number?) -> V?,
-    sort: <V>(t: {V}, comp: ((V, V) -> boolean)?) -> (),
-    create: <V>(count: number, value: V?) -> {V},
-    find: <V>(haystack: {V}, needle: V, init: number?) -> number?,
-
-    unpack: <V>(list: {V}, i: number?, j: number?) -> ...V,
-    pack: <V>(...V) -> { n: number, [number]: V },
-
-    getn: <V>(t: {V}) -> number,
-    foreach: <K, V>(t: {[K]: V}, f: (K, V) -> ()) -> (),
-    foreachi: <V>({V}, (number, V) -> ()) -> (),
-
-    move: <V>(src: {V}, a: number, b: number, t: number, dst: {V}?) -> {V},
-
-    clear: (table: {}) -> (),
-    isfrozen: (t: {}) -> boolean,
-}
-
+$TABLE_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionDebugSrc = R"BUILTIN_SRC(
 
-declare debug: {
-    info: ((thread: thread, level: number, options: string) -> ...any) & ((level: number, options: string) -> ...any) & (<A..., R1...>(func: (A...) -> R1..., options: string) -> ...any),
-    traceback: ((message: string?, level: number?) -> string) & ((thread: thread, message: string?, level: number?) -> string),
-}
-
+$DEBUG_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionUtf8Src = R"BUILTIN_SRC(
 
-declare utf8: {
-    char: @checked (...number) -> string,
-    charpattern: string,
-    codes: @checked (str: string) -> ((string, number) -> (number, number), string, number),
-    codepoint: @checked (str: string, i: number?, j: number?) -> ...number,
-    len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
-    offset: @checked (s: string, n: number?, i: number?) -> number,
-}
-
+$UTF8_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionBufferSrc = R"BUILTIN_SRC(

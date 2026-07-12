@@ -47,6 +47,18 @@ def gen_slua_embedded_defs(
         defs.write("\n")
         slua_definitions.modules.pop("os").write_luau_def(defs)
         inserts["OS_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("coroutine").write_luau_def(defs)
+        inserts["COROUTINE_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("table").write_luau_def(defs)
+        inserts["TABLE_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("debug").write_luau_def(defs)
+        inserts["DEBUG_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("utf8").write_luau_def(defs)
+        inserts["UTF8_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())

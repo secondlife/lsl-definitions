@@ -151,14 +151,14 @@ declare os: {
 static constexpr const char* kBuiltinDefinitionCoroutineSrc = R"BUILTIN_SRC(
 
 declare coroutine: {
-    create: <A..., R...>(f: (A...) -> R...) -> thread,
-    resume: <A..., R...>(co: thread, A...) -> (boolean, R...),
-    running: () -> thread,
-    status: @checked (co: thread) -> "dead" | "running" | "normal" | "suspended",
-    wrap: <A..., R...>(f: (A...) -> R...) -> ((A...) -> R...),
-    yield: <A..., R...>(A...) -> R...,
-    isyieldable: () -> boolean,
-    close: @checked (co: thread) -> (boolean, any)
+  create: <A..., R...>(f: (A...) -> R...) -> thread,
+  resume: <A..., R...>(co: thread, A...) -> (boolean, R...),
+  running: () -> thread?,
+  status: @checked (co: thread) -> "running" | "suspended" | "normal" | "dead",
+  wrap: <A..., R...>(f: (A...) -> R...) -> (A...) -> R...,
+  yield: <A..., R...>(A...) -> R...,
+  isyieldable: () -> boolean,
+  close: @checked (co: thread) -> (boolean, string?),
 }
 
 )BUILTIN_SRC";
@@ -166,25 +166,27 @@ declare coroutine: {
 static constexpr const char* kBuiltinDefinitionTableSrc = R"BUILTIN_SRC(
 
 declare table: {
-    concat: <V>(t: {V}, sep: string?, i: number?, j: number?) -> string,
-    insert: (<V>(t: {V}, value: V) -> ()) & (<V>(t: {V}, pos: number, value: V) -> ()),
-    maxn: <V>(t: {V}) -> number,
-    remove: <V>(t: {V}, number?) -> V?,
-    sort: <V>(t: {V}, comp: ((V, V) -> boolean)?) -> (),
-    create: <V>(count: number, value: V?) -> {V},
-    find: <V>(haystack: {V}, needle: V, init: number?) -> number?,
-
-    unpack: <V>(list: {V}, i: number?, j: number?) -> ...V,
-    pack: <V>(...V) -> { n: number, [number]: V },
-
-    getn: <V>(t: {V}) -> number,
-    foreach: <K, V>(t: {[K]: V}, f: (K, V) -> ()) -> (),
-    foreachi: <V>({V}, (number, V) -> ()) -> (),
-
-    move: <V>(src: {V}, a: number, b: number, t: number, dst: {V}?) -> {V},
-
-    clear: (table: {}) -> (),
-    isfrozen: (t: {}) -> boolean,
+  concat: (a: {string | number}, sep: string?, i: number?, j: number?) -> string,
+  foreach: @[deprecated {reason='Use a for loop instead'}]<K, V, R>(t: {[K]: V}, f: (key: K, value: V) -> R?) -> R?,
+  foreachi: @[deprecated {reason='Use a for loop instead'}]<V, R>(a: {V}, f: (index: number, value: V) -> R?) -> R?,
+  getn: @[deprecated {use='#'}](a: {any}) -> number,
+  maxn: (t: {any}) -> number,
+  insert: (<V>(a: {V}, i: number, value: V) -> ())
+    & (<V>(a: {V}, value: V) -> ()),
+  append: <V>(a: {V}, ...V) -> (),
+  extend: <V>(a: {V}, b: {V}) -> {V},
+  remove: <V>(a: {V}, i: number?) -> V?,
+  sort: <V>(a: {V}, f: ((a: V, b: V) -> boolean)?) -> (),
+  pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
+  unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
+  move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
+  create: <V>(n: number, v: V?) -> {V},
+  find: <V>(t: {V}, v: V, i: number?) -> number?,
+  clear: (t: {}) -> (),
+  shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
+  freeze: <table>(t: table) -> table, -- magic type
+  isfrozen: (t: {}) -> boolean,
+  clone: <table>(t: table) -> table, -- magic type
 }
 
 )BUILTIN_SRC";
@@ -192,8 +194,11 @@ declare table: {
 static constexpr const char* kBuiltinDefinitionDebugSrc = R"BUILTIN_SRC(
 
 declare debug: {
-    info: ((thread: thread, level: number, options: string) -> ...any) & ((level: number, options: string) -> ...any) & (<A..., R1...>(func: (A...) -> R1..., options: string) -> ...any),
-    traceback: ((message: string?, level: number?) -> string) & ((thread: thread, message: string?, level: number?) -> string),
+  info: ((co: thread | ((...any) -> ...any) | number, level: number, s: string) -> ...any)
+    & ((level: number, s: string) -> ...any)
+    & ((func: (...any) -> ...any, s: string) -> ...any),
+  traceback: ((co: thread, msg: string?, level: number?) -> string)
+    & ((msg: string?, level: number?) -> string),
 }
 
 )BUILTIN_SRC";
@@ -201,12 +206,12 @@ declare debug: {
 static constexpr const char* kBuiltinDefinitionUtf8Src = R"BUILTIN_SRC(
 
 declare utf8: {
-    char: @checked (...number) -> string,
-    charpattern: string,
-    codes: @checked (str: string) -> ((string, number) -> (number, number), string, number),
-    codepoint: @checked (str: string, i: number?, j: number?) -> ...number,
-    len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
-    offset: @checked (s: string, n: number?, i: number?) -> number,
+  charpattern: string,
+  char: @checked (...number) -> string,
+  codes: @checked (s: string) -> ((string, number) -> (number, number), string, number),
+  codepoint: @checked (s: string, i: number?, j: number?) -> ...number,
+  len: @checked (s: string, i: number?, j: number?) -> (number?, number?),
+  offset: @checked (s: string, n: number, i: number?) -> number?,
 }
 
 )BUILTIN_SRC";
