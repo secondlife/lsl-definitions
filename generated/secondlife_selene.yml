@@ -7322,8 +7322,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-      representing when the inventory item was placed inside the prim.
+    description: Returns the time when the item was placed in the prim's inventory,
+      as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   ll.GetInventoryCreator:
     args:
     - type: string
@@ -7334,33 +7334,31 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the description of the specified inventory
-      item.
+    description: Returns the description string of the specified inventory item.
   ll.GetInventoryKey:
     args:
     - type: string
     must_use: true
-    description: Returns the key (UUID) of the specified inventory name.
+    description: Returns the key (UUID) of the specified inventory item.
   ll.GetInventoryName:
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns the name of the inventory item of the specified type (INVENTORY_*)
-      at the index number.
+      at the specified inventory index.
   ll.GetInventoryNumber:
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the quantity of items of the specified
-      type (INVENTORY_*) in the prim's inventory.
+    description: Returns the count of items of the specified type (INVENTORY_*) in
+      the prim's inventory.
   ll.GetInventoryPermMask:
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission category
-      mask of the specified inventory item.
+    description: Returns the specified item's permission flags for the specified group.
   ll.GetInventoryType:
     args:
     - type: string
@@ -7573,8 +7571,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission mask of the
-      specified category for the object containing the script.
+    description: Returns the script's object's permission flags for the specified
+      group.
   ll.GetObjectPrimCount:
     args:
     - type:
@@ -7955,9 +7953,9 @@ globals:
     - type:
         display: uuid
     - type: string
-    description: Gives the specified inventory item to the destination, as permitted
-      by the permissions system. The destination can be any agent, or an object located
-      in the same region.
+    description: Gives the specified inventory item to the target, as permitted by
+      the permissions system. The target can be any agent or an object located in
+      the same region.
   ll.GiveInventoryList:
     args:
     - type:
@@ -7983,8 +7981,8 @@ globals:
         display: uuid
     - type:
         display: vector
-    description: Rezzes an object directly from a UUID specified by inventory at the
-      position pos, provided the owner has the god-bit set.
+    description: Rezzes an object directly from a UUID specified by id at the position
+      pos, provided the owner has the god-bit set.
   ll.Ground:
     args:
     - type:
@@ -8946,8 +8944,8 @@ globals:
     - type: number
     - type: bool
     - type: number
-    description: Copies the script name into target, setting it running (if running
-      is TRUE) with the start_param, provided the script owner has modify permissions
+    description: Copies the script into target, setting it running (if running is
+      TRUE) with the start_param, provided the script owner has modify permissions
       on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
   ll.RemoveFromLandBanList:
     args:
@@ -9026,9 +9024,9 @@ globals:
   ll.RequestInventoryData:
     args:
     - type: string
-    description: Asynchronously requests data for the inventory item specified by
-      name, triggering a dataserver event. Currently, only landmark items are supported
-      (which return local region coordinates). Returns a key query handle.
+    description: Asynchronously requests data for the named inventory item, triggering
+      a dataserver event. Currently, only landmark items are supported (which return
+      local region coordinates). Returns a key query handle.
   ll.RequestPermissions:
     args:
     - type:
@@ -9079,7 +9077,7 @@ globals:
   ll.ResetOtherScript:
     args:
     - type: string
-    description: Resets the script name located in the prim's inventory.
+    description: Resets the named script name in the prim's inventory.
   ll.ResetScript:
     args: []
     description: Resets the current script.
@@ -9107,9 +9105,9 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at position moving at velocity,
-      rotated to rot with its root prim centered exactly on position, passing param
-      as the on_rez start parameter.
+    description: Instantiates the named inventory object with the root prim at pos
+      with velocity vel and rotation rot, passing start_param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   ll.RezObject:
     args:
     - type: string
@@ -9120,16 +9118,17 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at pos with velocity vel and rotation
-      rot, passing param as the on_rez start parameter. The vel parameter is ignored
-      if the rezzed object is non-physical.
+    description: Instantiates the named inventory object with the bounding box centered
+      at pos with velocity vel and rotation rot, passing param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   ll.RezObjectWithParams:
     args:
     - type: string
     - type: table
-    description: Instantiates the inventory object (defaulting to the rezzing prim's
-      position unless REZ_POS is specified) using the initial set of parameters specified
-      in params. Returns the key of the rezzed object, or a blank key on failure.
+    description: Instantiates the named inventory object (defaulting to the rezzing
+      prim's position unless REZ_POS is specified) using the initial set of parameters
+      specified in options. Returns the key of the rezzed object, or a blank key on
+      failure.
   ll.Rot2Angle:
     args:
     - type:
@@ -9456,8 +9455,7 @@ globals:
     - type: string
     - type: number
     - type: number
-    description: Sets the specified permission category of the inventory item to the
-      value permissions mask.
+    description: Sets the specified item's permission flags for the specified group.
   ll.SetKeyframedMotion:
     args:
     - type: table
@@ -9573,8 +9571,7 @@ globals:
     args:
     - type: number
     - type: number
-    description: Sets the specified permission mask category to value on the root
-      object containing the script.
+    description: Sets the scripts's object's permission flags for the specified group.
   ll.SetParcelForSale:
     args:
     - type: bool
@@ -9672,7 +9669,7 @@ globals:
     args:
     - type: string
     - type: bool
-    description: Sets the running state of the script name in the prim's inventory.
+    description: Sets the running state of the named script in the prim's inventory.
       If running is TRUE, the script is enabled; if FALSE, it is disabled.
   ll.SetSitText:
     args:
@@ -10043,7 +10040,7 @@ globals:
     - type: number
     - type: table
     description: Transfers ownership of the object (or a copy of it, depending on
-      flags) to the avatar agent_id. Returns an integer indicating the success or
+      Flags) to the specified agent. Returns an integer indicating the success or
       failure of the transfer.
   ll.TriggerSound:
     args:
@@ -11473,13 +11470,13 @@ globals:
       object specified by id.
   llcompat.GetInventoryAcquireTime:
     deprecated:
-      message: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-        representing when the inventory item was placed inside the prim.
+      message: Returns the time when the item was placed in the prim's inventory,
+        as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-      representing when the inventory item was placed inside the prim.
+    description: Returns the time when the item was placed in the prim's inventory,
+      as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   llcompat.GetInventoryCreator:
     deprecated:
       message: Returns the key (UUID) of the creator of the specified inventory item.
@@ -11490,49 +11487,45 @@ globals:
       item.
   llcompat.GetInventoryDesc:
     deprecated:
-      message: Returns a string containing the description of the specified inventory
-        item.
+      message: Returns the description string of the specified inventory item.
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the description of the specified inventory
-      item.
+    description: Returns the description string of the specified inventory item.
   llcompat.GetInventoryKey:
     deprecated:
-      message: Returns the key (UUID) of the specified inventory name.
+      message: Returns the key (UUID) of the specified inventory item.
     args:
     - type: string
     must_use: true
-    description: Returns the key (UUID) of the specified inventory name.
+    description: Returns the key (UUID) of the specified inventory item.
   llcompat.GetInventoryName:
     deprecated:
       message: Returns the name of the inventory item of the specified type (INVENTORY_*)
-        at the index number.
+        at the specified inventory index.
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns the name of the inventory item of the specified type (INVENTORY_*)
-      at the index number.
+      at the specified inventory index.
   llcompat.GetInventoryNumber:
     deprecated:
-      message: Returns an integer representing the quantity of items of the specified
-        type (INVENTORY_*) in the prim's inventory.
+      message: Returns the count of items of the specified type (INVENTORY_*) in the
+        prim's inventory.
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the quantity of items of the specified
-      type (INVENTORY_*) in the prim's inventory.
+    description: Returns the count of items of the specified type (INVENTORY_*) in
+      the prim's inventory.
   llcompat.GetInventoryPermMask:
     deprecated:
-      message: Returns an integer bitfield representing the permission category mask
-        of the specified inventory item.
+      message: Returns the specified item's permission flags for the specified group.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission category
-      mask of the specified inventory item.
+    description: Returns the specified item's permission flags for the specified group.
   llcompat.GetInventoryType:
     deprecated:
       message: Returns an integer representing the INVENTORY_* type of the named inventory
@@ -11839,13 +11832,12 @@ globals:
       the script.
   llcompat.GetObjectPermMask:
     deprecated:
-      message: Returns an integer bitfield representing the permission mask of the
-        specified category for the object containing the script.
+      message: Returns the script's object's permission flags for the specified group.
     args:
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission mask of the
-      specified category for the object containing the script.
+    description: Returns the script's object's permission flags for the specified
+      group.
   llcompat.GetObjectPrimCount:
     deprecated:
       message: Returns an integer representing the total number of prims in the object
@@ -12425,16 +12417,16 @@ globals:
       using options.
   llcompat.GiveInventory:
     deprecated:
-      message: Gives the specified inventory item to the destination, as permitted
-        by the permissions system. The destination can be any agent, or an object
-        located in the same region.
+      message: Gives the specified inventory item to the target, as permitted by the
+        permissions system. The target can be any agent or an object located in the
+        same region.
     args:
     - type:
         display: uuid
     - type: string
-    description: Gives the specified inventory item to the destination, as permitted
-      by the permissions system. The destination can be any agent, or an object located
-      in the same region.
+    description: Gives the specified inventory item to the target, as permitted by
+      the permissions system. The target can be any agent or an object located in
+      the same region.
   llcompat.GiveInventoryList:
     deprecated:
       message: Gives the list of inventory items to target as a new folder named folder.
@@ -12466,15 +12458,15 @@ globals:
       transaction_result events).
   llcompat.GodLikeRezObject:
     deprecated:
-      message: Rezzes an object directly from a UUID specified by inventory at the
-        position pos, provided the owner has the god-bit set.
+      message: Rezzes an object directly from a UUID specified by id at the position
+        pos, provided the owner has the god-bit set.
     args:
     - type:
         display: uuid
     - type:
         display: vector
-    description: Rezzes an object directly from a UUID specified by inventory at the
-      position pos, provided the owner has the god-bit set.
+    description: Rezzes an object directly from a UUID specified by id at the position
+      pos, provided the owner has the god-bit set.
   llcompat.Ground:
     deprecated:
       message: Returns a float representing the ground height directly below the prim's
@@ -13713,9 +13705,9 @@ globals:
       if the object moves to another region.
   llcompat.RemoteLoadScriptPin:
     deprecated:
-      message: Copies the script name into target, setting it running (if running
-        is TRUE) with the start_param, provided the script owner has modify permissions
-        on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
+      message: Copies the script into target, setting it running (if running is TRUE)
+        with the start_param, provided the script owner has modify permissions on
+        target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
     args:
     - type:
         display: uuid
@@ -13723,8 +13715,8 @@ globals:
     - type: number
     - type: bool
     - type: number
-    description: Copies the script name into target, setting it running (if running
-      is TRUE) with the start_param, provided the script owner has modify permissions
+    description: Copies the script into target, setting it running (if running is
+      TRUE) with the start_param, provided the script owner has modify permissions
       on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
   llcompat.RemoveFromLandBanList:
     deprecated:
@@ -13837,14 +13829,14 @@ globals:
       experience_permissions_denied.
   llcompat.RequestInventoryData:
     deprecated:
-      message: Asynchronously requests data for the inventory item specified by name,
-        triggering a dataserver event. Currently, only landmark items are supported
-        (which return local region coordinates). Returns a key query handle.
+      message: Asynchronously requests data for the named inventory item, triggering
+        a dataserver event. Currently, only landmark items are supported (which return
+        local region coordinates). Returns a key query handle.
     args:
     - type: string
-    description: Asynchronously requests data for the inventory item specified by
-      name, triggering a dataserver event. Currently, only landmark items are supported
-      (which return local region coordinates). Returns a key query handle.
+    description: Asynchronously requests data for the named inventory item, triggering
+      a dataserver event. Currently, only landmark items are supported (which return
+      local region coordinates). Returns a key query handle.
   llcompat.RequestPermissions:
     deprecated:
       message: Requests permissions (a bitfield specified by permissions) from the
@@ -13923,10 +13915,10 @@ globals:
     description: Removes all residents from the land parcel's access/pass list.
   llcompat.ResetOtherScript:
     deprecated:
-      message: Resets the script name located in the prim's inventory.
+      message: Resets the named script name in the prim's inventory.
     args:
     - type: string
-    description: Resets the script name located in the prim's inventory.
+    description: Resets the named script name in the prim's inventory.
   llcompat.ResetScript:
     deprecated:
       message: Resets the current script.
@@ -13961,9 +13953,9 @@ globals:
       and the script owner must own the parcel or be an estate manager/region owner.
   llcompat.RezAtRoot:
     deprecated:
-      message: Instantiates the inventory object at position moving at velocity, rotated
-        to rot with its root prim centered exactly on position, passing param as the
-        on_rez start parameter.
+      message: Instantiates the named inventory object with the root prim at pos with
+        velocity vel and rotation rot, passing start_param as the on_rez start parameter.
+        The vel parameter is ignored if the rezzed object is non-physical.
     args:
     - type: string
     - type:
@@ -13973,14 +13965,14 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at position moving at velocity,
-      rotated to rot with its root prim centered exactly on position, passing param
-      as the on_rez start parameter.
+    description: Instantiates the named inventory object with the root prim at pos
+      with velocity vel and rotation rot, passing start_param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   llcompat.RezObject:
     deprecated:
-      message: Instantiates the inventory object at pos with velocity vel and rotation
-        rot, passing param as the on_rez start parameter. The vel parameter is ignored
-        if the rezzed object is non-physical.
+      message: Instantiates the named inventory object with the bounding box centered
+        at pos with velocity vel and rotation rot, passing param as the on_rez start
+        parameter. The vel parameter is ignored if the rezzed object is non-physical.
     args:
     - type: string
     - type:
@@ -13990,21 +13982,22 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at pos with velocity vel and rotation
-      rot, passing param as the on_rez start parameter. The vel parameter is ignored
-      if the rezzed object is non-physical.
+    description: Instantiates the named inventory object with the bounding box centered
+      at pos with velocity vel and rotation rot, passing param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   llcompat.RezObjectWithParams:
     deprecated:
-      message: Instantiates the inventory object (defaulting to the rezzing prim's
-        position unless REZ_POS is specified) using the initial set of parameters
-        specified in params. Returns the key of the rezzed object, or a blank key
+      message: Instantiates the named inventory object (defaulting to the rezzing
+        prim's position unless REZ_POS is specified) using the initial set of parameters
+        specified in options. Returns the key of the rezzed object, or a blank key
         on failure.
     args:
     - type: string
     - type: table
-    description: Instantiates the inventory object (defaulting to the rezzing prim's
-      position unless REZ_POS is specified) using the initial set of parameters specified
-      in params. Returns the key of the rezzed object, or a blank key on failure.
+    description: Instantiates the named inventory object (defaulting to the rezzing
+      prim's position unless REZ_POS is specified) using the initial set of parameters
+      specified in options. Returns the key of the rezzed object, or a blank key on
+      failure.
   llcompat.Rot2Angle:
     deprecated:
       message: Returns a float representing the rotation angle of rot.
@@ -14454,14 +14447,12 @@ globals:
       not use with vehicles; call llStopHover to cancel.
   llcompat.SetInventoryPermMask:
     deprecated:
-      message: Sets the specified permission category of the inventory item to the
-        value permissions mask.
+      message: Sets the specified item's permission flags for the specified group.
     args:
     - type: string
     - type: number
     - type: number
-    description: Sets the specified permission category of the inventory item to the
-      value permissions mask.
+    description: Sets the specified item's permission flags for the specified group.
   llcompat.SetKeyframedMotion:
     deprecated:
       message: Smoothly moves a non-physical object between the positions, orientations,
@@ -14626,13 +14617,11 @@ globals:
     description: Sets the name of the prim containing the script to name.
   llcompat.SetObjectPermMask:
     deprecated:
-      message: Sets the specified permission mask category to value on the root object
-        containing the script.
+      message: Sets the scripts's object's permission flags for the specified group.
     args:
     - type: number
     - type: number
-    description: Sets the specified permission mask category to value on the root
-      object containing the script.
+    description: Sets the scripts's object's permission flags for the specified group.
   llcompat.SetParcelForSale:
     deprecated:
       message: Sets the parcel the object is on for sale. If ForSale is TRUE, puts
@@ -14767,12 +14756,12 @@ globals:
       to size.
   llcompat.SetScriptState:
     deprecated:
-      message: Sets the running state of the script name in the prim's inventory.
+      message: Sets the running state of the named script in the prim's inventory.
         If running is TRUE, the script is enabled; if FALSE, it is disabled.
     args:
     - type: string
     - type: bool
-    description: Sets the running state of the script name in the prim's inventory.
+    description: Sets the running state of the named script in the prim's inventory.
       If running is TRUE, the script is enabled; if FALSE, it is disabled.
   llcompat.SetSitText:
     deprecated:
@@ -15275,8 +15264,8 @@ globals:
       the resulting transaction_result event.
   llcompat.TransferOwnership:
     deprecated:
-      message: Transfers ownership of the object (or a copy of it, depending on flags)
-        to the avatar agent_id. Returns an integer indicating the success or failure
+      message: Transfers ownership of the object (or a copy of it, depending on Flags)
+        to the specified agent. Returns an integer indicating the success or failure
         of the transfer.
     args:
     - type:
@@ -15284,7 +15273,7 @@ globals:
     - type: number
     - type: table
     description: Transfers ownership of the object (or a copy of it, depending on
-      flags) to the avatar agent_id. Returns an integer indicating the success or
+      Flags) to the specified agent. Returns an integer indicating the success or
       failure of the transfer.
   llcompat.TriggerSound:
     deprecated:
@@ -15997,7 +15986,7 @@ structs:
       property: override-fields
       type: function
       description: Triggered when various properties of the object change. The parameter
-        change is a bitfield of CHANGED_* constants.
+        changes is a bitfield of CHANGED_* flags.
     collision:
       property: override-fields
       type: function

@@ -1,29 +1,29 @@
 # Functions by category
 asset_permissions:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
-  llGetInventoryPermMask( string item, integer category ) -> integer:
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
+  llGetInventoryPermMask( string item, integer group ) -> integer:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission category mask of the specified inventory item.
-  llGetObjectPermMask( integer category ) -> integer:
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.
-  llSetInventoryPermMask( string item, integer category, integer value ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the specified item's permission flags for the specified group.
+  llGetObjectPermMask( integer group ) -> integer:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the script's object's permission flags for the specified group.
+  llSetInventoryPermMask( string item, integer group, integer flags ) -> void:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission category of the inventory item to the value permissions mask.
-  llSetObjectPermMask( integer mask, integer value ) -> void:
-    mask: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission mask category to value on the root object containing the script.
-  llTransferOwnership( key agent_id, integer flags, list options ) -> integer:
-    agent_id: UUID of the avatar to receive ownership of the object.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the specified item's permission flags for the specified group.
+  llSetObjectPermMask( integer group, integer flags ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the scripts's object's permission flags for the specified group.
+  llTransferOwnership( key agent, integer flags, list options ) -> integer:
+    agent: UUID of the agent to receive ownership of the object.
     flags: Flags controlling the transfer type (such as TRANSFER_FLAG_COPY or TRANSFER_FLAG_TAKE).
     options: Extra options applied to the transfer (currently unused).
-    tooltip: Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.
+    tooltip: Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.
 attachments:
   attach( key id ):
     id: UUID of the avatar the object is attached to, or NULL_KEY if detached.
@@ -369,20 +369,20 @@ avatar_communication:
     tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
       avatars and are used to communicate with scripts.
 avatar_inventory:
-  llGiveAgentInventory( key agent, string folder, list inventory, list options ) -> integer:
-    agent: UUID of the receiving agent in the region.
-    folder: Name of the destination folder to be created in the agent's inventory.
-    inventory: A list of inventory items to transfer.
+  llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer:
+    agent: UUID of the target agent in the same region.
+    folder: Name of the destination folder to be created
+    items: The names of the items in the prim's inventory to transfer.
     options: A list of options to configure the inventory transfer.
     tooltip: Gives the specified inventory items to the agent as a new folder named folder, as permitted by the permissions system. Customizes the transfer using options.
-  llGiveInventory( key destination, string inventory ) -> void:
-    destination: UUID of the destination avatar or prim.
-    inventory: Name of the item in the prim's inventory.
-    tooltip: Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.
-  llGiveInventoryList( key target, string folder, list inventory ) -> void:
-    target: UUID of the target avatar or prim in the same region.
+  llGiveInventory( key target, string item ) -> void:
+    target: UUID of the target agent or prim.
+    item: Name of the item in the prim's inventory to transfer.
+    tooltip: Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.
+  llGiveInventoryList( key target, string folder, list items ) -> void:
+    target: UUID of the target agent or prim in the same region.
     folder: Name of the destination folder to be created (ignored if the target is an object).
-    inventory: A list of names representing items in the prim's inventory.
+    items: The names of the items in the prim's inventory to transfer.
     tooltip: Gives the list of inventory items to target as a new folder named folder. If target is an object, the items are passed directly into its inventory and no folder is created. The target must
       be an agent or an object in the same region.
 camera:
@@ -506,11 +506,11 @@ combat:
   llGetHealth( key id ) -> float:
     id: UUID of the agent or object to query.
     tooltip: Returns a float representing the current health of the avatar or object specified by id.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
   llSetDamage( float damage ) -> void:
     damage: Float damage value to set (range -100.0 for full heal to 100.0 for instant kill).
     tooltip: Sets the amount of damage delivered when this object hits an avatar. The object is immediately destroyed upon inflicting damage, and no collision event is triggered.
@@ -795,10 +795,10 @@ dataserver:
     id: UUID of the avatar to query.
     tooltip: Asynchronously requests the display name of the agent specified by id, triggering a dataserver event with the results. The agent does not need to be online or in the region. Returns a key query
       handle.
-  llRequestInventoryData( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns
-      a key query handle.
+  llRequestInventoryData( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key
+      query handle.
   llRequestSimulatorData( string region, integer data ) -> key:
     region: Case-sensitive region name.
     data: DATA_SIM_* flag of the requested simulator data.
@@ -1182,9 +1182,9 @@ land_moderation:
     avatar: UUID of the avatar to teleport.
     tooltip: Teleports the avatar (who must be standing on land owned by the script owner) directly to their designated home location without warning (similar to a God Summons).
 linkset:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   linkset_data( integer action, string name, string value ):
     action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
     name: Key name of the modified key-value pair.
@@ -1238,9 +1238,9 @@ linkset:
     tooltip: Returns a float representing the minimum scale factor that can be applied to the object via llScaleByFactor without violating size limits.
   llGetNumberOfPrims(  ) -> integer:
     tooltip: Returns an integer representing the total number of prims and seated avatars in the linkset containing the script.
-  llGetObjectPermMask( integer category ) -> integer:
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.
+  llGetObjectPermMask( integer group ) -> integer:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the script's object's permission flags for the specified group.
   llGetOwner(  ) -> key:
     tooltip: Returns the key (UUID) of the object's current owner.
   llGetRootPosition(  ) -> vector:
@@ -1361,10 +1361,10 @@ linkset:
     rate: Playback rate in frames per second (or radians/sec for ROTATE, UV coords/sec for SMOOTH). Must not be zero.
     tooltip: Animates the texture on face of the linked prim link by setting the scale and offset according to mode. Parameters sizex/sizey define frames, start defines the start frame/angle, length defines
       duration, and rate defines playback speed.
-  llSetObjectPermMask( integer mask, integer value ) -> void:
-    mask: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission mask category to value on the root object containing the script.
+  llSetObjectPermMask( integer group, integer flags ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the scripts's object's permission flags for the specified group.
   llSetStatus( integer status, integer value ) -> void:
     status: Bitmask representing the STATUS_* flag(s) to change.
     value: Boolean. If TRUE, enables the status; if FALSE, disables it.
@@ -1746,9 +1746,9 @@ math_trig:
     theta: Angle expressed in radians.
     tooltip: Returns a float representing the tangent of theta.
 media:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llClearLinkMedia( integer link, integer face ) -> integer:
     link: 'The link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag representing the target prim.'
     face: Face number to clear.
@@ -2601,14 +2601,14 @@ prim:
     v: Vertical (V) offset, typically in the interval [-1.0, 1.0].
     face: Face number or ALL_SIDES.
     tooltip: Sets the texture horizontal (u) and vertical (v) offsets for the chosen face. If face is ALL_SIDES, offsets all faces.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
     target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
   llRotateTexture( float angle, integer face ) -> void:
     angle: Rotation angle expressed in radians.
     face: Face number or ALL_SIDES.
@@ -2691,9 +2691,9 @@ prim:
     rot: Target rotation relative to the prim's rotation.
     tooltip: Sets the sit target position (offset) and rotation (rot) relative to the prim's position and orientation. Clears the sit target if offset is ZERO_VECTOR.
 prim_appearance:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llGetAlpha( integer face ) -> float:
     face: Face number or ALL_SIDES.
     tooltip: Returns a float representing the Blinn-Phong alpha (transparency) of face. If face is ALL_SIDES, returns the mean average of all faces.
@@ -2841,120 +2841,128 @@ prim_appearance:
     srgb: Color vector in the sRGB colorspace to convert.
     tooltip: Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.
 prim_inventory:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llAllowInventoryDrop( integer add ) -> void:
     add: Boolean. If TRUE, allows anyone to drop inventory items into the prim (even without modify rights). If FALSE, restricts inventory dropping to those with modify permissions.
     tooltip: If add is TRUE, allows users without object modify permissions to drop inventory items into the prim. If FALSE, restricts inventory dropping to users with modify permissions.
-  llDerezObject( key id, integer flag ) -> integer:
+  llDerezObject( key id, integer flags ) -> integer:
     id: UUID of the object in the region to derez.
-    flag: Derez behavior flags matching DEREZ_* constants.
+    flags: Derez behavior flags matching DEREZ_* constants.
     tooltip: Derezzes (deletes or returns) a targeted object in the region previously rezzed by a script in this linkset, returning TRUE on success or FALSE on failure.
   llGetInventoryAcquireTime( string item ) -> string:
     item: Name of the item in the prim's inventory.
-    tooltip: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.
+    tooltip: Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   llGetInventoryCreator( string item ) -> key:
     item: Name of the item in the prim's inventory.
     tooltip: Returns the key (UUID) of the creator of the specified inventory item.
   llGetInventoryDesc( string item ) -> string:
     item: Name of the item in the prim's inventory.
-    tooltip: Returns a string containing the description of the specified inventory item.
-  llGetInventoryKey( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Returns the key (UUID) of the specified inventory name.
-  llGetInventoryName( integer type, integer number ) -> string:
+    tooltip: Returns the description string of the specified inventory item.
+  llGetInventoryKey( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Returns the key (UUID) of the specified inventory item.
+  llGetInventoryName( integer type, integer index ) -> string:
     type: INVENTORY_* type constant of the item.
-    number: Index number of the item of that type, starting from 0.
-    tooltip: Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.
+    index: Index of the item of that type.
+    tooltip: Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.
   llGetInventoryNumber( integer type ) -> integer:
     type: INVENTORY_* type constant to count.
-    tooltip: Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.
-  llGetInventoryPermMask( string item, integer category ) -> integer:
+    tooltip: Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.
+  llGetInventoryPermMask( string item, integer group ) -> integer:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission category mask of the specified inventory item.
-  llGetInventoryType( string name ) -> integer:
-    name: Name of the inventory item.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the specified item's permission flags for the specified group.
+  llGetInventoryType( string item ) -> integer:
+    item: Name of the item in the prim's inventory.
     tooltip: Returns an integer representing the INVENTORY_* type of the named inventory item.
   llGetScriptName(  ) -> string:
     tooltip: Returns a string containing the name of the script calling this function.
   llGetScriptState( string script ) -> integer:
     script: Name of the script in the prim's inventory.
     tooltip: Returns a boolean integer indicating whether the specified script in the prim's inventory is running (returns TRUE if running, FALSE otherwise).
-  llGiveInventory( key destination, string inventory ) -> void:
-    destination: UUID of the destination avatar or prim.
-    inventory: Name of the item in the prim's inventory.
-    tooltip: Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.
-  llGiveInventoryList( key target, string folder, list inventory ) -> void:
-    target: UUID of the target avatar or prim in the same region.
+  llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer:
+    agent: UUID of the target agent in the same region.
+    folder: Name of the destination folder to be created
+    items: The names of the items in the prim's inventory to transfer.
+    options: A list of options to configure the inventory transfer.
+    tooltip: Gives the specified inventory items to the agent as a new folder named folder, as permitted by the permissions system. Customizes the transfer using options.
+  llGiveInventory( key target, string item ) -> void:
+    target: UUID of the target agent or prim.
+    item: Name of the item in the prim's inventory to transfer.
+    tooltip: Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.
+  llGiveInventoryList( key target, string folder, list items ) -> void:
+    target: UUID of the target agent or prim in the same region.
     folder: Name of the destination folder to be created (ignored if the target is an object).
-    inventory: A list of names representing items in the prim's inventory.
+    items: The names of the items in the prim's inventory to transfer.
     tooltip: Gives the list of inventory items to target as a new folder named folder. If target is an object, the items are passed directly into its inventory and no folder is created. The target must
       be an agent or an object in the same region.
-  llGodLikeRezObject( key inventory, vector pos ) -> void:
-    inventory: Asset UUID of the object to rez.
+  llGodLikeRezObject( key id, vector pos ) -> void:
+    id: Asset UUID of the object to rez.
     pos: Position vector in region coordinates where the object will be rezzed.
-    tooltip: Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.
-  llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated:
+    tooltip: Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.
+  llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated:
     target: UUID of the target prim.
-    name: Name of the script in the prim's inventory.
-    running: Whether the script should start running.
-    start_param: Start parameter passed to the script.
-    tooltip: Deprecated.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
-    target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
+    tooltip: Deprecated.
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
+    target: UUID of the target prim in the same region.
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
+    running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
+    start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
   llRemoveInventory( string item ) -> void:
     item: Name of the item in the prim's inventory to remove.
     tooltip: Permanently deletes the named inventory item from the prim's inventory.
-  llRequestInventoryData( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns
-      a key query handle.
-  llResetOtherScript( string name ) -> void:
-    name: Name of the target script in the prim's inventory.
-    tooltip: Resets the script name located in the prim's inventory.
-  llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
-    position: Position vector in region coordinates where the root of the object will be placed.
-    velocity: Initial velocity vector for the rezzed object.
+  llRequestInventoryData( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key
+      query handle.
+  llResetOtherScript( string script ) -> void:
+    script: Name of the target script in the prim's inventory.
+    tooltip: Resets the named script name in the prim's inventory.
+  llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
+    pos: Position vector in region coordinates where the root of the object will be placed.
+    vel: Initial velocity vector for the rezzed object.
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.
-  llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the
+      rezzed object is non-physical.
+  llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
     pos: Position vector in region coordinates where the center of the object will be placed.
     vel: Initial velocity vector (maximum magnitude ~200m/s).
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
-  llSetInventoryPermMask( string item, integer category, integer value ) -> void:
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if
+      the rezzed object is non-physical.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
+  llSetInventoryPermMask( string item, integer group, integer flags ) -> void:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission category of the inventory item to the value permissions mask.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the specified item's permission flags for the specified group.
   llSetRemoteScriptAccessPin( integer pin ) -> void:
     pin: Integer PIN code (non-zero enables, zero disables).
     tooltip: Sets the prim's remote script access PIN to pin (a non-zero value enables loading via llRemoteLoadScriptPin, while zero disables it).
-  llSetScriptState( string name, integer running ) -> void:
-    name: Name of the script in the prim's inventory.
+  llSetScriptState( string script, integer running ) -> void:
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, enables the script; if FALSE, disables it.
-    tooltip: Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
+    tooltip: Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
 prim_media:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llClearLinkMedia( integer link, integer face ) -> integer:
     link: 'The link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag representing the target prim.'
     face: Face number to clear.
@@ -3090,9 +3098,9 @@ quaternion:
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
 region:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llCloud( vector offset ) -> float // deprecated:
     offset: Offset relative to the prim's position, expressed in local coordinates.
     tooltip: Returns a float representing the cloud density at the prim's position offset by the vector offset.
@@ -3204,9 +3212,9 @@ rez:
     start_param: Integer start parameter passed from the rezzing call.
     tooltip: Triggered when the object is rezzed into the world (by a script or user). Passes start_param from the rezzing call (or 0 if rezzed from inventory). Also triggers on attachments during login
       or when attached from inventory.
-  llDerezObject( key id, integer flag ) -> integer:
+  llDerezObject( key id, integer flags ) -> integer:
     id: UUID of the object in the region to derez.
-    flag: Derez behavior flags matching DEREZ_* constants.
+    flags: Derez behavior flags matching DEREZ_* constants.
     tooltip: Derezzes (deletes or returns) a targeted object in the region previously rezzed by a script in this linkset, returning TRUE on success or FALSE on failure.
   llDie(  ) -> void:
     tooltip: Deletes the entire object containing the script (the object does not go to inventory). Use llBreakLink first to delete only a single prim.
@@ -3214,10 +3222,10 @@ rez:
     tooltip: Returns an integer representing the start/rez parameter passed to the object on creation (returns 0 if rezzed by an agent).
   llGetStartString(  ) -> string:
     tooltip: Returns the initialization string passed to the object's root prim on rez with llRezObjectWithParams (via REZ_PARAM_STRING; returns an empty string if rezzed by an agent).
-  llGodLikeRezObject( key inventory, vector pos ) -> void:
-    inventory: Asset UUID of the object to rez.
+  llGodLikeRezObject( key id, vector pos ) -> void:
+    id: Asset UUID of the object to rez.
     pos: Position vector in region coordinates where the object will be rezzed.
-    tooltip: Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.
+    tooltip: Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.
   llReturnObjectsByID( list objects ) -> integer:
     objects: A list of object UUID keys to return.
     tooltip: Returns objects specified by the list of UUIDs objects to their owners. Requires the PERMISSION_RETURN_OBJECTS permission, and the script owner must own the parcel or be an estate manager/region
@@ -3227,29 +3235,31 @@ rez:
     scope: OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL, OBJECT_RETURN_PARCEL_OWNER, or OBJECT_RETURN_REGION).
     tooltip: Returns objects owned by owner within the specified scope (parcel, parcel owner, or region). Requires the PERMISSION_RETURN_OBJECTS permission, and the script owner must own the parcel or be
       an estate manager/region owner.
-  llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
-    position: Position vector in region coordinates where the root of the object will be placed.
-    velocity: Initial velocity vector for the rezzed object.
+  llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
+    pos: Position vector in region coordinates where the root of the object will be placed.
+    vel: Initial velocity vector for the rezzed object.
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.
-  llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the
+      rezzed object is non-physical.
+  llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
     pos: Position vector in region coordinates where the center of the object will be placed.
     vel: Initial velocity vector (maximum magnitude ~200m/s).
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if
+      the rezzed object is non-physical.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
 script:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   on_rez( integer start_param ):
     start_param: Integer start parameter passed from the rezzing call.
     tooltip: Triggered when the object is rezzed into the world (by a script or user). Passes start_param from the rezzing call (or 0 if rezzed from inventory). Also triggers on attachments during login
@@ -3288,23 +3298,23 @@ script:
   llMinEventDelay( float delay ) -> void:
     delay: Minimum delay duration in seconds.
     tooltip: Sets the minimum delay time between events being handled (minimums and defaults vary by event type).
-  llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated:
+  llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated:
     target: UUID of the target prim.
-    name: Name of the script in the prim's inventory.
-    running: Whether the script should start running.
-    start_param: Start parameter passed to the script.
-    tooltip: Deprecated.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
-    target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
-  llResetOtherScript( string name ) -> void:
-    name: Name of the target script in the prim's inventory.
-    tooltip: Resets the script name located in the prim's inventory.
+    tooltip: Deprecated.
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
+    target: UUID of the target prim in the same region.
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
+    running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
+    start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
+  llResetOtherScript( string script ) -> void:
+    script: Name of the target script in the prim's inventory.
+    tooltip: Resets the named script name in the prim's inventory.
   llResetScript(  ) -> void:
     tooltip: Resets the current script.
   llResetTime(  ) -> void:
@@ -3321,10 +3331,10 @@ script:
   llSetRemoteScriptAccessPin( integer pin ) -> void:
     pin: Integer PIN code (non-zero enables, zero disables).
     tooltip: Sets the prim's remote script access PIN to pin (a non-zero value enables loading via llRemoteLoadScriptPin, while zero disables it).
-  llSetScriptState( string name, integer running ) -> void:
-    name: Name of the script in the prim's inventory.
+  llSetScriptState( string script, integer running ) -> void:
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, enables the script; if FALSE, disables it.
-    tooltip: Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
+    tooltip: Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
   llSetTimerEvent( float sec ) -> void:
     sec: Interval in seconds between timer events (0.0 to disable).
     tooltip: Sets a timer to trigger a timer event periodically every sec seconds. Passing 0.0 stops further timer events.
@@ -3497,9 +3507,9 @@ sensor:
     tooltip: If detect is TRUE, enables VolumeDetect (object becomes phantom and physical objects/avatars can pass through it). Triggers collision_start on initial intersection and collision_end when intersection
       stops (standard collision events are suppressed while intersecting).
 sit:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llAvatarOnLinkSitTarget( integer link ) -> key:
     link: Index of the prim in the linkset (1 for root, >1 for children), or a LINK_* flag.
     tooltip: Returns the UUID of the avatar seated on the specified link's sit target, or NULL_KEY if no avatar is sitting there.
@@ -3673,9 +3683,9 @@ string:
     src: Source string to convert.
     tooltip: Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.
 teleport:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llMapDestination( string simname, vector pos, vector look_at ) -> void:
     simname: Name of the target simulator region.
     pos: Position vector in region coordinates to highlight.
