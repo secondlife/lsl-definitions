@@ -147,6 +147,22 @@
             "required": [],
             "type": "object"
         },
+        "function-variant": {
+            "markdownDescription": "An alternative structure or shape for a function.",
+            "additionalProperties": false,
+            "properties": {
+                "comment": {
+                    "markdownDescription": "A brief description of this variant.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "items": { "$ref": "#/$defs/function-parameter" },
+                    "type": "array"
+                },
+                "return-type": { "$ref": "#/$defs/type" }
+            },
+            "type": "object"
+        },
         "function": {
             "markdownDescription": "A full function signature.",
             "additionalProperties": false,
@@ -166,6 +182,10 @@
                 "return-type": { "$ref": "#/$defs/type" },
                 "overloads": {
                     "items": { "$ref": "#/$defs/function-anon" },
+                    "type": "array"
+                },
+                "variants": {
+                    "items": { "$ref": "#/$defs/function-variant" },
                     "type": "array"
                 },
                 "deprecated": { "$ref": "#/$defs/deprecated" },
@@ -208,6 +228,11 @@
                         "magic": {
                             "const": true,
                             "description": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
+                            "type": "boolean"
+                        },
+                        "checked": {
+                            "const": true,
+                            "markdownDescription": "This function's run-time type checks match the typechecker. Functions with checked types report the same errors in --!strict and --!nonstrict modes.",
                             "type": "boolean"
                         }
                     }

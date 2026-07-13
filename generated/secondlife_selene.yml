@@ -4909,7 +4909,7 @@ globals:
     - type: string
       required: false
     description: Checks if the value is truthy; if not, raises an error with the optional
-      message.
+      message. Returns the value upon success.
   dangerouslyexecuterequiredmodule:
     args:
     - type: function
@@ -4919,8 +4919,8 @@ globals:
     - type: any
     - type: number
       required: false
-    description: Raises an error with the specified object and optional call stack
-      level.
+    description: Raises an error with the specified object. The optional level determines
+      which call stack level is blamed for the error.
   gcinfo:
     args: []
     description: Returns the total heap size in kilobytes.
@@ -4930,11 +4930,13 @@ globals:
   getmetatable:
     args:
     - type: table
-    description: Returns the metatable for the specified object.
+    description: Returns the metatable for the specified object. If the metatable
+      has a '__metatable' field, returns its value instead.
   ipairs:
     args:
     - type: table
-    description: Returns an iterator for numeric key-value pairs in the table.
+    description: Returns an iterator for sequential integer key-value pairs in the
+      table. Iteration starts at 1 and halts at the first nil value.
   loadstring:
     removed: true
     description: loadstring is removed in SLua.
@@ -4948,7 +4950,8 @@ globals:
     - type: table
     - type: any
       required: false
-    description: Returns the next key-value pair in the table traversal order.
+    description: Returns the next key-value pair in the table traversal order. If
+      the index is nil or omitted, returns the first pair.
   pairs:
     args:
     - type: table
@@ -4957,32 +4960,36 @@ globals:
     args:
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, returning success and function
-      results or an error.
+    description: Executes function f in protected mode, calling it with the provided
+      arguments. Returns a boolean indicating success. If true, it also returns the
+      function's results. If false, it returns the error message.
   print:
     args:
     - type: '...'
-    description: Prints all arguments to standard output using Tab as a separator.
+    description: Sends all arguments as text privately to the object owner, separated
+      by 4 spaces. The owner must be currently in the same region for the message
+      to be received.
   rawequal:
     args:
     - type: any
     - type: any
-    description: Returns true if a and b have the same type and value.
+    description: Returns true if a and b have the same type and value or reference,
+      bypassing the __eq metamethod..
   rawget:
     args:
     - type: table
     - type: any
-    description: Performs a table lookup bypassing metatables.
+    description: Performs a table lookup, bypassing the __index metamethod..
   rawlen:
     args:
     - type: any
-    description: Returns the length of a table or string bypassing metatables.
+    description: Returns the length of a table or string, bypassing the __len metamethod..
   rawset:
     args:
     - type: table
     - type: any
     - type: any
-    description: Assigns a value to a table field bypassing metatables.
+    description: Assigns a value to a table field, bypassing the __newindex metamethod..
   require:
     args:
     - type: any
@@ -4991,7 +4998,8 @@ globals:
     args:
     - type: any
     - type: '...'
-    description: Returns a subset of arguments or the number of arguments.
+    description: Returns a subset of arguments starting from the specified index.
+      Supports negative indexing. If index is '#', returns the number of arguments.
   setfenv:
     removed: true
     description: setfenv is removed in SLua.
@@ -4999,28 +5007,31 @@ globals:
     args:
     - type: table
     - type: table
-    description: Changes the metatable for the given table.
+    description: Changes the metatable for the given table. Raises an error if the
+      table already has a protected metatable (it has a '__metatable' field).
   tonumber:
     args:
     - type: string
     - type: number
       required: false
     must_use: true
-    description: Converts the input string to a number in the specified base.
+    description: Converts the input string to a number in the specified base. Returns
+      nil if the conversion fails.
   toquaternion:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a quaternion, returns nil if invalid
+    description: Converts a string to a quaternion, returns nil if invalid.
   torotation:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a rotation (quaternion), returns nil if invalid
+    description: Converts a string to a rotation (quaternion), returns nil if invalid.
   tostring:
     args:
     - type: any
-    description: Converts the input object to a string.
+    description: Converts the input object to a string. Calls the metatable's '__tostring'
+      metamethod if present.
   touuid:
     args:
     - type: string
@@ -5031,7 +5042,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a vector, returns nil if invalid
+    description: Converts a string to a vector, returns nil if invalid.
   type:
     args:
     - type: any
@@ -5055,8 +5066,8 @@ globals:
     - type: function
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, handling errors with err if
-      they occur.
+    description: Calls function f with the provided arguments, handling errors with
+      err if they occur.
   bit32.arshift:
     args:
     - type: number
@@ -5066,7 +5077,9 @@ globals:
       is performed.
 
       Does an arithmetic shift: The most significant bit of n is propagated during
-      the shift.'
+      the shift.
+
+      Returns 0 if i < -31, or all sign bits if i > 31.'
   bit32.band:
     args:
     - type: '...'
@@ -5101,7 +5114,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Extracts bits from n at position field with width
+    description: Extracts bits from n at position field with width. Raises an error
+      if the selected bit range goes outside [0, 31].
   bit32.lrotate:
     args:
     - type: number
@@ -5115,7 +5129,7 @@ globals:
     - type: number
     must_use: true
     description: Shifts n by i bits to the left. If i is negative, a right shift is
-      performed.
+      performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.replace:
     args:
     - type: number
@@ -5124,7 +5138,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Replaces bits in n at position field with width using value v
+    description: Replaces bits in n at position field with width using value v. Raises
+      an error if the selected bit range goes outside [0, 31].
   bit32.rrotate:
     args:
     - type: number
@@ -5138,7 +5153,7 @@ globals:
     - type: number
     must_use: true
     description: Shifts n by i bits to the right. If i is negative, a left shift is
-      performed.
+      performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.s32:
     args:
     - type: number
@@ -5157,17 +5172,17 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Count leading zeros
+    description: Count leading zeros.
   bit32.countrz:
     args:
     - type: number
     must_use: true
-    description: Count trailing zeros
+    description: Count trailing zeros.
   bit32.byteswap:
     args:
     - type: number
     must_use: true
-    description: Swap byte order
+    description: Swap byte order.
   buffer.create:
     args:
     - type: number
@@ -5384,8 +5399,9 @@ globals:
     - type:
         display: thread
     - type: '...'
-    description: Resumes a coroutine, returning true and results if successful, or
-      false and an error.
+    description: Resumes a coroutine. Returns true followed by any values passed to
+      coroutine.yield() or returned by the function. If an error occurs, returns false
+      and the error message.
   coroutine.running:
     args: []
     must_use: true
@@ -5441,7 +5457,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Encodes a string or buffer to base64
+    description: Encodes a string or buffer to base64.
   llbase64.decode:
     args:
     - type: string
@@ -5455,16 +5471,16 @@ globals:
     description: A constant to pass for null to json encode.
   lljson.remove:
     property: read-only
-    description: A constant to return from a reviver/replacer replacer function to
-      omit this item.
+    description: A constant to return from a reviver/replacer function to omit this
+      item.
   lljson.array_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an array for json encode.
+    description: Metatable for declaring a table as an array for json encode.
   lljson.object_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an object for json encode.
+    description: Metatable for declaring a table as an object for json encode.
   lljson.empty_array:
     property: read-only
     type: table
@@ -5528,11 +5544,11 @@ globals:
   math.pi:
     property: read-only
     type: number
-    description: Value of pi
+    description: Value of pi.
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity)
+    description: A value larger than any other numeric value (infinity).
   math.abs:
     args:
     - type: number
@@ -5558,8 +5574,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns the arc tangent of y/x in radians, using the signs to determine
-      the quadrant.
+    description: 'Returns the arc tangent of y/x in radians, using the signs to determine
+      the quadrant. Note the argument order: Y is the first parameter, X is the second
+      parameter.'
   math.ceil:
     args:
     - type: number
@@ -5571,12 +5588,13 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns n clamped between min and max.
+    description: Returns n clamped between min and max. Raises an error if min is
+      greater than max.
   math.cos:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of n (n is in radians).
+    description: Returns the cosine of n. n is in radians.
   math.cosh:
     args:
     - type: number
@@ -5627,7 +5645,7 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the logarithm of n in the given base (default e).
+    description: Returns the logarithm of n in the given base, defaults to e.
   math.log10:
     args:
     - type: number
@@ -5669,7 +5687,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns Perlin noise value for the point (x, y, z).
+    description: Returns a Perlin noise value for the point (x, y, z). The return
+      value is in the range [-1.0, 1.0].
   math.pow:
     args:
     - type: number
@@ -5709,7 +5728,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of n (n is in radians).
+    description: Returns the sine of n. n is in radians.
   math.sinh:
     args:
     - type: number
@@ -5724,7 +5743,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of n (n is in radians).
+    description: Returns the tangent of n. n is in radians.
   math.tanh:
     args:
     - type: number
@@ -5933,14 +5952,14 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the numeric code of every byte in the input string within
-      the given range.
+    description: Returns the numeric code of every byte in the range start_index..end_index
+      in the string src. Negative indices count backward from the end of the string.
   string.char:
     args:
     - type: '...'
       required: true
     must_use: true
-    description: Returns a string containing characters for the given byte values.
+    description: Constructs and returns a string from the given byte integers.
   string.find:
     args:
     - type: string
@@ -5950,7 +5969,10 @@ globals:
     - type: bool
       required: false
     must_use: true
-    description: Finds the first instance of the pattern in the string.
+    description: Returns the start and end byte indices of the first occurrence of
+      pattern inside the string src, followed by any regex-captured substrings. Search
+      starts from start_index. Returns nil if not found. Negative indices count backward
+      from the end of the string.
   string.format:
     args:
     - type: string
@@ -5963,7 +5985,8 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns an iterator function for pattern matches
+    description: Returns an iterator function of all occurences of the regex pattern
+      inside the string src.
   string.gsub:
     args:
     - type: string
@@ -5972,18 +5995,20 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Performs pattern-based substitution in a string.
+    description: Returns a copy of src with maxn occurrences of the regex pattern
+      replaced by repl, followed by the total number of substitutions that occurred.
+      repl can be a string, function, or table.
   string.len:
     args:
     - type: string
     must_use: true
-    description: 'Returns the number of bytes in the string. Identical to #s'
+    description: 'Returns the number of bytes in the string. Identical to #str.'
   string.lower:
     args:
     - type: string
     must_use: true
-    description: Returns a lowercase version of the input string. Only works with
-      ASCII. Use ll.ToLower for strings that may contain Unicode.
+    description: Returns a lowercase copy of the string src. Only converts ASCII characters.
+      Use ll.ToLower for strings that may contain Unicode.
   string.match:
     args:
     - type: string
@@ -5991,7 +6016,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Finds and returns matches for a pattern in the input string.
+    description: Returns all occurences of the regex pattern inside the string src,
+      starting from start_index. Returns nil if no match is found. Negative indices
+      count backward from the end of the string.
   string.pack:
     args:
     - type: string
@@ -6008,19 +6035,22 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the input string repeated a given number of times.
+    description: Returns the string src repeated n times. Returns an empty string
+      if n is zero or negative.
   string.reverse:
     args:
     - type: string
     must_use: true
-    description: Returns the input string with bytes in reverse order.
+    description: Returns a copy of the string src with bytes in reverse order.
   string.split:
     args:
     - type: string
     - type: string
       required: false
     must_use: true
-    description: Splits a string by separator. Returns a list of substrings.
+    description: Splits a string by separator. Returns a list of substrings. If the
+      separator is nil, splits at commas (","). If the separator is empty, splits
+      into individual one-byte substrings.
   string.sub:
     args:
     - type: string
@@ -6028,7 +6058,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns a substring from the given range.
+    description: Returns a copy of the substring from src within the inclusive byte
+      range start_index..end_index. Negative indices count backward from the end of
+      the string.
   string.unpack:
     args:
     - type: string
@@ -6036,13 +6068,14 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Decodes a binary string using a pack format.
+    description: Decodes a binary string using a pack format, starting from index
+      start. Negative indices count backward from the end of the string.
   string.upper:
     args:
     - type: string
     must_use: true
-    description: Returns an uppercase version of the input string. Only works with
-      ASCII. Use ll.ToUpper for strings that may contain Unicode.
+    description: Returns an uppercase copy of the string src. Only converts ASCII
+      characters. Use ll.ToUpper for strings that may contain Unicode.
   table.concat:
     args:
     - type: table
@@ -6091,28 +6124,29 @@ globals:
     - type: number
       required: false
     - type: any
-    description: Inserts an element at the specified index, or at the end of the array.
+    description: 'Inserts an element at index i, shifting subsequent elements up by
+      1. The index must be within the range [1, #a].'
   table.append:
     args:
     - type: table
       observes: write
     - type: '...'
-    description: Appends one or more an elements to end of the array.
+    description: Appends one or more elements to the end of the array.
   table.extend:
     args:
     - type: table
       observes: write
     - type: table
     description: 'Appends all elements from one array to the end of another. Shorthand
-      for table.move(b, 1, #b, #a+1, a)'
+      for table.move(b, 1, #b, #a+1, a).'
   table.remove:
     args:
     - type: table
       observes: write
     - type: number
       required: false
-    description: Removes and returns the element at the specified index from the array,
-      or from the end of the array.
+    description: Removes and returns the element at index i, shifting subsequent elements
+      down by 1. Defaults to the end of the array. Returns nil if no element was removed.
   table.sort:
     args:
     - type: table
@@ -6124,7 +6158,8 @@ globals:
     args:
     - type: '...'
     must_use: true
-    description: Packs multiple arguments into a new array with length field n.
+    description: Packs arguments into a table and sets an 'n' field with the total
+      count. This is the safest way to pack varargs (...) that might contain nil values.
   table.unpack:
     args:
     - type: table
@@ -6143,7 +6178,8 @@ globals:
     - type: table
       required: false
       observes: write
-    description: Inserts elements [i..j] from src array into dest array at [d].
+    description: Copies elements [i..j] from src array into dest array starting at
+      [d], overwriting existing elements.
   table.create:
     args:
     - type: number
@@ -6151,7 +6187,8 @@ globals:
       required: false
     must_use: true
     description: Creates a new table with pre-allocated array capacity, optionally
-      filled.
+      filled. Preallocation only benefits array portions and is counter-productive
+      for dictionaries.
   table.find:
     args:
     - type: table
@@ -6160,12 +6197,13 @@ globals:
       required: false
     must_use: true
     description: Finds the first occurrence of a value in the array and returns its
-      index.
+      index. Traversal stops at the first nil.
   table.clear:
     args:
     - type: table
       observes: write
-    description: Clears all elements from a table while keeping its capacity.
+    description: Clears all elements from a table while keeping its capacity to avoid
+      memory reallocations during future assignments.
   table.shrink:
     args:
     - type: table
@@ -6175,7 +6213,9 @@ globals:
   table.freeze:
     args:
     - type: table
-    description: Freezes a table, making it read-only.
+    description: Freezes a table, making it read-only. The freeze is shallow and does
+      not affect nested tables. Raises an error if the table is already frozen or
+      has a protected metatable.
   table.isfrozen:
     args:
     - type: table
@@ -6185,22 +6225,24 @@ globals:
     args:
     - type: table
     must_use: true
-    description: Creates a shallow copy of the table.
+    description: Creates a shallow copy of the table, copying its keys, values, and
+      metatable. The clone is always unfrozen even if the source was frozen.
   utf8.charpattern:
     property: read-only
     type: string
-    description: Pattern that matches exactly one UTF-8 byte sequence
+    description: Pattern that matches exactly one UTF-8 byte sequence.
   utf8.char:
     args:
     - type: '...'
       required: true
-    description: Creates a string from Unicode codepoints.
+    description: Constructs and returns a string from the given Unicode codepoint
+      ordinals.
   utf8.codes:
     args:
     - type: string
     must_use: true
     description: Returns an iterator that produces the byte offset and Unicode codepoint
-      for each character in the string.
+      for each character in the string src.
   utf8.codepoint:
     args:
     - type: string
@@ -6209,7 +6251,9 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the Unicode codepoints in the specified range of the string.
+    description: Returns the ordinals (Unicode copepoint integers) of the characters
+      in the inclusive byte range start_index..end_index in the string src. Negative
+      indices count backward from the end of the string.
   utf8.len:
     args:
     - type: string
@@ -6218,8 +6262,10 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the number of Unicode codepoints in the specified range of
-      the string, or nil and error index.
+    description: Returns the number of Unicode codepoints in the inclusive byte range
+      start_index..end_index of the string src. If the string is not utf8, returns
+      (nil, error index) instead. Negative indices count backward from the end of
+      the string.
   utf8.offset:
     args:
     - type: string
@@ -6228,6 +6274,7 @@ globals:
       required: false
     must_use: true
     description: Returns the byte offset of the nth Unicode codepoint in the string.
+      Negative indices count backward from the end of the string.
   uuid:
     args:
     - type: any
@@ -6572,8 +6619,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Constructs and returns a single-character string representing the
-      supplied Unicode value val.
+    description: Constructs and returns a single-character string from the given Unicode
+      codepoint ordinal.
   ll.ClearCameraParams:
     args: []
     description: Resets all camera parameters to default values and turns off scripted
@@ -6704,18 +6751,20 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the list src with the slice from start to end (inclusive)
-      removed. Negative indices count backward from the end of the list. If start
-      is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the list src with the slice from start_index to
+      end_index (inclusive) removed. Negative indices count backward from the end
+      of the list. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   ll.DeleteSubString:
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the string src with the characters from start to
-      end (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the string src with the characters from start_index
+      to end_index (inclusive) removed. Negative indices count backward from the end
+      of the string. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   ll.DerezObject:
     args:
     - type:
@@ -6895,9 +6944,10 @@ globals:
     - type: string
     - type: table
     - type: number
-    description: Shows a dialog box on the screen of the avatar specified by avatar,
-      displaying message along with up to 12 choice buttons. Clicking a button chats
-      its label on channel.
+    description: Shows a dialog box on the screen of the specified agent, displaying
+      msg along with up to 12 choice buttons. Clicking a button chats its label on
+      channel. The chat originates at the object's position, but uses the agent's
+      name and UUID, so it can be heard as long as the agent is still in the region.
   ll.Die:
     args: []
     description: Deletes the entire object containing the script (the object does
@@ -6930,7 +6980,9 @@ globals:
     - type: string
     - type: string
     - type: string
-    description: Sends an email to address with subject and message.
+    description: Sends an email with the given destination address, subject, and body
+      msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can
+      be used for script communication; see llGetNextEmail()
   ll.EscapeURL:
     args:
     - type: string
@@ -7071,7 +7123,7 @@ globals:
         display: uuid
     must_use: true
     description: Returns a string representing the name of the currently playing locomotion
-      animation for the avatar specified by id.
+      animation for the specified avatar.
   ll.GetAnimationList:
     args:
     - type:
@@ -7096,18 +7148,18 @@ globals:
     - type:
         display: uuid
     must_use: true
-    description: Returns a list of object keys (UUIDs) corresponding to public, visible
-      (non-HUD) attachments worn by the specified avatar, in the order they were attached.
-      Returns a list with an error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached. HUDs are not included because they are neither
+      public nor visible. Returns a list containing an error message string on failure.
   ll.GetAttachedListFiltered:
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachment object keys worn by avatar in the
-      order they were attached, filtered by options. Returns a list containing an
-      error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached, filtered by options. Returns a list containing
+      an error message string on failure.
   ll.GetBoundingBox:
     args:
     - type:
@@ -7265,8 +7317,8 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-      representing when the inventory item was placed inside the prim.
+    description: Returns the time when the item was placed in the prim's inventory,
+      as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   ll.GetInventoryCreator:
     args:
     - type: string
@@ -7277,33 +7329,31 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the description of the specified inventory
-      item.
+    description: Returns the description string of the specified inventory item.
   ll.GetInventoryKey:
     args:
     - type: string
     must_use: true
-    description: Returns the key (UUID) of the specified inventory name.
+    description: Returns the key (UUID) of the specified inventory item.
   ll.GetInventoryName:
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns the name of the inventory item of the specified type (INVENTORY_*)
-      at the index number.
+      at the specified inventory index.
   ll.GetInventoryNumber:
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the quantity of items of the specified
-      type (INVENTORY_*) in the prim's inventory.
+    description: Returns the count of items of the specified type (INVENTORY_*) in
+      the prim's inventory.
   ll.GetInventoryPermMask:
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission category
-      mask of the specified inventory item.
+    description: Returns the specified item's permission flags for the specified group.
   ll.GetInventoryType:
     args:
     - type: string
@@ -7442,8 +7492,13 @@ globals:
     args:
     - type: string
     - type: string
-    description: Requests the next queued email matching the specified sender address
-      and subject filters via the email event.
+    description: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   ll.GetNotecardLine:
     args:
     - type: string
@@ -7477,8 +7532,8 @@ globals:
   ll.GetObjectAnimationNames:
     args: []
     must_use: true
-    description: Returns a list of strings representing the names of all active animations
-      currently playing on the object.
+    description: Returns a list of strings representing the names or UUIDs of all
+      active animations currently playing on the object.
   ll.GetObjectDesc:
     args: []
     must_use: true
@@ -7516,8 +7571,8 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission mask of the
-      specified category for the object containing the script.
+    description: Returns the script's object's permission flags for the specified
+      group.
   ll.GetObjectPrimCount:
     args:
     - type:
@@ -7780,9 +7835,10 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the substring from src within the inclusive range
-      specified by the start and end indices. Negative indices count backward from
-      the end. If start is greater than end, the substring is the excluded range.
+    description: Returns a copy of the substring from src within the inclusive codepoint
+      range start_index..end_index. Negative indices count backward from the end of
+      the string. If start_index is greater than end_index, the substring is the excluded
+      range.
   ll.GetSunDirection:
     args: []
     must_use: true
@@ -7897,9 +7953,9 @@ globals:
     - type:
         display: uuid
     - type: string
-    description: Gives the specified inventory item to the destination, as permitted
-      by the permissions system. The destination can be any agent, or an object located
-      in the same region.
+    description: Gives the specified inventory item to the target, as permitted by
+      the permissions system. The target can be any agent or an object located in
+      the same region.
   ll.GiveInventoryList:
     args:
     - type:
@@ -7925,8 +7981,8 @@ globals:
         display: uuid
     - type:
         display: vector
-    description: Rezzes an object directly from a UUID specified by inventory at the
-      position pos, provided the owner has the god-bit set.
+    description: Rezzes an object directly from a UUID specified by id at the position
+      pos, provided the owner has the god-bit set.
   ll.Ground:
     args:
     - type:
@@ -8001,15 +8057,14 @@ globals:
     - type: number
     - type: string
     must_use: true
-    description: Returns a new string representing dst with src inserted starting
-      at the zero-based index pos. Note that this operation does not modify dst itself.
+    description: Returns a copy of dst with src inserted at the given codepoint index.
   ll.InstantMessage:
     args:
     - type:
         display: uuid
     - type: string
-    description: Sends an instant message containing message to the user identified
-      by their key.
+    description: Sends an instant message containing msg to the agent identified by
+      their key.
   ll.IntegerToBase64:
     args:
     - type: number
@@ -8691,8 +8746,9 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the integer Unicode (ordinal) value of the character at index
-      in the string val.
+    description: Returns the ordinal (Unicode copepoint integer) of the character
+      at index in the string val. Negative indices count backward from the end of
+      the string.
   ll.OverMyLand:
     args:
     - type:
@@ -8737,9 +8793,9 @@ globals:
     - type: table
     - type: table
     must_use: true
-    description: Breaks the string src into a list, discarding separators and keeping
-      spacers, while preserving empty null values (unlike llParseString2List). separators
-      and spacers accept up to 8 string entries each.
+    description: Breaks the string src into a list of substrings, discarding separators
+      and keeping spacers, while preserving empty null values (unlike llParseString2List).
+      separators and spacers accept up to 8 string entries each.
   ll.ParticleSystem:
     args:
     - type: table
@@ -8747,13 +8803,13 @@ globals:
       based on rules. An empty list removes the particle system.
   ll.PassCollisions:
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-collisions attribute. If pass is TRUE, collision events
       are passed from child prims to the root; if FALSE (default), they only trigger
       events in the affected child prim.
   ll.PassTouches:
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-touches attribute. If pass is TRUE, touch events are
       passed from child prims to the root; if FALSE (default), they only trigger events
       in the affected child prim.
@@ -8829,16 +8885,17 @@ globals:
     args:
     - type: number
     - type: string
-    description: Broadcasts the message msg on channel to the entire region (heard
-      by any script listening on that channel; channel 0 is not permitted).
+    description: Broadcasts the message msg to all scripts listening on channel Channel
+      within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive
+      the message.
   ll.RegionSayTo:
     args:
     - type:
         display: uuid
     - type: number
     - type: string
-    description: Sends the message msg on channel privately to the targeted avatar
-      or object (if within the region). If target is an avatar and channel is non-zero,
+    description: Sends the message msg on Channel privately to the targeted agent
+      or object (if within the region). If target is an agent and channel is non-zero,
       the message can also be heard by any attachments worn by the avatar.
   ll.ReleaseCamera:
     deprecated:
@@ -8888,8 +8945,8 @@ globals:
     - type: number
     - type: bool
     - type: number
-    description: Copies the script name into target, setting it running (if running
-      is TRUE) with the start_param, provided the script owner has modify permissions
+    description: Copies the script into target, setting it running (if running is
+      TRUE) with the start_param, provided the script owner has modify permissions
       on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
   ll.RemoveFromLandBanList:
     args:
@@ -8938,9 +8995,9 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns a new string representing src with count occurrences of pattern
-      replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-      positive counts process left-to-right, while negative counts process right-to-left.
+    description: Returns a copy of src with count occurrences of pattern replaced
+      by replacement_pattern. Setting count to 0 replaces all occurrences; positive
+      counts process left-to-right, while negative counts process right-to-left.
   ll.RequestAgentData:
     args:
     - type:
@@ -8968,9 +9025,9 @@ globals:
   ll.RequestInventoryData:
     args:
     - type: string
-    description: Asynchronously requests data for the inventory item specified by
-      name, triggering a dataserver event. Currently, only landmark items are supported
-      (which return local region coordinates). Returns a key query handle.
+    description: Asynchronously requests data for the named inventory item, triggering
+      a dataserver event. Currently, only landmark items are supported (which return
+      local region coordinates). Returns a key query handle.
   ll.RequestPermissions:
     args:
     - type:
@@ -9021,7 +9078,7 @@ globals:
   ll.ResetOtherScript:
     args:
     - type: string
-    description: Resets the script name located in the prim's inventory.
+    description: Resets the named script name in the prim's inventory.
   ll.ResetScript:
     args: []
     description: Resets the current script.
@@ -9049,9 +9106,9 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at position moving at velocity,
-      rotated to rot with its root prim centered exactly on position, passing param
-      as the on_rez start parameter.
+    description: Instantiates the named inventory object with the root prim at pos
+      with velocity vel and rotation rot, passing start_param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   ll.RezObject:
     args:
     - type: string
@@ -9062,16 +9119,17 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at pos with velocity vel and rotation
-      rot, passing param as the on_rez start parameter. The vel parameter is ignored
-      if the rezzed object is non-physical.
+    description: Instantiates the named inventory object with the bounding box centered
+      at pos with velocity vel and rotation rot, passing param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   ll.RezObjectWithParams:
     args:
     - type: string
     - type: table
-    description: Instantiates the inventory object (defaulting to the rezzing prim's
-      position unless REZ_POS is specified) using the initial set of parameters specified
-      in params. Returns the key of the rezzed object, or a blank key on failure.
+    description: Instantiates the named inventory object (defaulting to the rezzing
+      prim's position unless REZ_POS is specified) using the initial set of parameters
+      specified in options. Returns the key of the rezzed object, or a blank key on
+      failure.
   ll.Rot2Angle:
     args:
     - type:
@@ -9194,10 +9252,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Says the text message msg on the specified channel. The message can
-      be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-      (2147483647) are not visible to avatars and can be used for script-to-script
-      communication.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("chat_range"), which is 20m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.ScaleByFactor:
     args:
     - type: number
@@ -9398,8 +9456,7 @@ globals:
     - type: string
     - type: number
     - type: number
-    description: Sets the specified permission category of the inventory item to the
-      value permissions mask.
+    description: Sets the specified item's permission flags for the specified group.
   ll.SetKeyframedMotion:
     args:
     - type: table
@@ -9515,8 +9572,7 @@ globals:
     args:
     - type: number
     - type: number
-    description: Sets the specified permission mask category to value on the root
-      object containing the script.
+    description: Sets the scripts's object's permission flags for the specified group.
   ll.SetParcelForSale:
     args:
     - type: bool
@@ -9614,7 +9670,7 @@ globals:
     args:
     - type: string
     - type: bool
-    description: Sets the running state of the script name in the prim's inventory.
+    description: Sets the running state of the named script in the prim's inventory.
       If running is TRUE, the script is enabled; if FALSE, it is disabled.
   ll.SetSitText:
     args:
@@ -9713,10 +9769,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Shouts the text message msg on the specified channel. The message
-      can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("shout_range"), which is 100m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.SignRSA:
     args:
     - type: string
@@ -9836,8 +9892,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Returns an integer representing the number of characters in the string
-      str (excluding the null terminator).
+    description: Returns the number of unicode codepoints in the string.
   ll.StringToBase64:
     deprecated:
       message: Use 'llbase64.encode' instead.
@@ -9861,8 +9916,8 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns the zero-based index of the first instance of the pattern
-      substring inside the string source. Returns nil if not found.
+    description: Returns the codepoint index of the first occurrence of pattern inside
+      the string source. Returns nil if not found. No regex.
   ll.TakeCamera:
     deprecated:
       message: Use 'll.SetCameraParams' instead.
@@ -9916,8 +9971,9 @@ globals:
     - type: number
     - type: string
     - type: string
-    description: Sends an email containing subject and message to the target (which
-      can designate the owner or creator of the object).
+    description: Sends an email to with the given subject subject and body msg to
+      the target (which can designate the owner or creator of the object). The email
+      will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
   ll.TeleportAgent:
     args:
     - type:
@@ -9957,18 +10013,22 @@ globals:
         display: uuid
     - type: string
     - type: number
-    description: Opens an input text box dialog displaying message to the avatar.
-      Submitting text chats the input string on channel as if said by the avatar.
+    description: Opens an input text box dialog displaying msg to the agent. Submitting
+      text chats the input string on channel as if said by the agent. The chat originates
+      at the object's position, but uses the agent's name and UUID, so it can be heard
+      as long as the agent is still in the region.
   ll.ToLower:
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to lowercase.
+    description: Returns a lowercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   ll.ToUpper:
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to uppercase.
+    description: Returns an uppercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   ll.TransferLindenDollars:
     args:
     - type:
@@ -9984,7 +10044,7 @@ globals:
     - type: number
     - type: table
     description: Transfers ownership of the object (or a copy of it, depending on
-      flags) to the avatar agent_id. Returns an integer indicating the success or
+      Flags) to the specified agent. Returns an integer indicating the success or
       failure of the transfer.
   ll.TriggerSound:
     args:
@@ -10103,10 +10163,10 @@ globals:
     args:
     - type: number
     - type: string
-    description: Whispers the text message msg on the specified channel. The message
-      can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   ll.Wind:
     args:
     - type:
@@ -10428,13 +10488,13 @@ globals:
       toward positive infinity).
   llcompat.Char:
     deprecated:
-      message: Constructs and returns a single-character string representing the supplied
-        Unicode value val.
+      message: Constructs and returns a single-character string from the given Unicode
+        codepoint ordinal.
     args:
     - type: number
     must_use: true
-    description: Constructs and returns a single-character string representing the
-      supplied Unicode value val.
+    description: Constructs and returns a single-character string from the given Unicode
+      codepoint ordinal.
   llcompat.ClearCameraParams:
     deprecated:
       message: Resets all camera parameters to default values and turns off scripted
@@ -10603,31 +10663,34 @@ globals:
       event.
   llcompat.DeleteSubList:
     deprecated:
-      message: Returns a copy of the list src with the slice from start to end (inclusive)
-        removed. Negative indices count backward from the end of the list. If start
-        is greater than end, the deletion excludes the specified range.
+      message: Returns a copy of the list src with the slice from start_index to end_index
+        (inclusive) removed. Negative indices count backward from the end of the list.
+        If start_index is greater than end_index, the deletion excludes the specified
+        range.
     args:
     - type: table
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the list src with the slice from start to end (inclusive)
-      removed. Negative indices count backward from the end of the list. If start
-      is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the list src with the slice from start_index to
+      end_index (inclusive) removed. Negative indices count backward from the end
+      of the list. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   llcompat.DeleteSubString:
     deprecated:
-      message: Returns a copy of the string src with the characters from start to
-        end (inclusive) removed. Negative indices count backward from the end of the
-        string. If start is greater than end, the deletion excludes the specified
-        range.
+      message: Returns a copy of the string src with the characters from start_index
+        to end_index (inclusive) removed. Negative indices count backward from the
+        end of the string. If start_index is greater than end_index, the deletion
+        excludes the specified range.
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the string src with the characters from start to
-      end (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified range.
+    description: Returns a copy of the string src with the characters from start_index
+      to end_index (inclusive) removed. Negative indices count backward from the end
+      of the string. If start_index is greater than end_index, the deletion excludes
+      the specified range.
   llcompat.DerezObject:
     deprecated:
       message: Derezzes (deletes or returns) a targeted object in the region previously
@@ -10854,18 +10917,20 @@ globals:
       index.
   llcompat.Dialog:
     deprecated:
-      message: Shows a dialog box on the screen of the avatar specified by avatar,
-        displaying message along with up to 12 choice buttons. Clicking a button chats
-        its label on channel.
+      message: Shows a dialog box on the screen of the specified agent, displaying
+        msg along with up to 12 choice buttons. Clicking a button chats its label
+        on channel. The chat originates at the object's position, but uses the agent's
+        name and UUID, so it can be heard as long as the agent is still in the region.
     args:
     - type:
         display: uuid
     - type: string
     - type: table
     - type: number
-    description: Shows a dialog box on the screen of the avatar specified by avatar,
-      displaying message along with up to 12 choice buttons. Clicking a button chats
-      its label on channel.
+    description: Shows a dialog box on the screen of the specified agent, displaying
+      msg along with up to 12 choice buttons. Clicking a button chats its label on
+      channel. The chat originates at the object's position, but uses the agent's
+      name and UUID, so it can be heard as long as the agent is still in the region.
   llcompat.Die:
     deprecated:
       message: Deletes the entire object containing the script (the object does not
@@ -10908,12 +10973,16 @@ globals:
       owner (group or resident).
   llcompat.Email:
     deprecated:
-      message: Sends an email to address with subject and message.
+      message: Sends an email with the given destination address, subject, and body
+        msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This
+        can be used for script communication; see llGetNextEmail()
     args:
     - type: string
     - type: string
     - type: string
-    description: Sends an email to address with subject and message.
+    description: Sends an email with the given destination address, subject, and body
+      msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can
+      be used for script communication; see llGetNextEmail()
   llcompat.EscapeURL:
     deprecated:
       message: Returns a string representing the escaped/encoded version of url, replacing
@@ -11112,13 +11181,13 @@ globals:
   llcompat.GetAnimation:
     deprecated:
       message: Returns a string representing the name of the currently playing locomotion
-        animation for the avatar specified by id.
+        animation for the specified avatar.
     args:
     - type:
         display: uuid
     must_use: true
     description: Returns a string representing the name of the currently playing locomotion
-      animation for the avatar specified by id.
+      animation for the specified avatar.
   llcompat.GetAnimationList:
     deprecated:
       message: Returns a list of keys (UUIDs) representing all active animations currently
@@ -11150,29 +11219,29 @@ globals:
       the object is attached to, or 0 if it is unattached or pending detachment.
   llcompat.GetAttachedList:
     deprecated:
-      message: Returns a list of object keys (UUIDs) corresponding to public, visible
-        (non-HUD) attachments worn by the specified avatar, in the order they were
-        attached. Returns a list with an error message string on failure.
+      message: Returns a list of object keys (UUIDs) worn by the specified avatar,
+        in the order they were attached. HUDs are not included because they are neither
+        public nor visible. Returns a list containing an error message string on failure.
     args:
     - type:
         display: uuid
     must_use: true
-    description: Returns a list of object keys (UUIDs) corresponding to public, visible
-      (non-HUD) attachments worn by the specified avatar, in the order they were attached.
-      Returns a list with an error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached. HUDs are not included because they are neither
+      public nor visible. Returns a list containing an error message string on failure.
   llcompat.GetAttachedListFiltered:
     deprecated:
-      message: Retrieves a list of attachment object keys worn by avatar in the order
-        they were attached, filtered by options. Returns a list containing an error
-        message string on failure.
+      message: Returns a list of object keys (UUIDs) worn by the specified avatar,
+        in the order they were attached, filtered by options. Returns a list containing
+        an error message string on failure.
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachment object keys worn by avatar in the
-      order they were attached, filtered by options. Returns a list containing an
-      error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached, filtered by options. Returns a list containing
+      an error message string on failure.
   llcompat.GetBoundingBox:
     deprecated:
       message: Returns the bounding box of object (including any linked prims) relative
@@ -11411,13 +11480,13 @@ globals:
       object specified by id.
   llcompat.GetInventoryAcquireTime:
     deprecated:
-      message: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-        representing when the inventory item was placed inside the prim.
+      message: Returns the time when the item was placed in the prim's inventory,
+        as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ)
-      representing when the inventory item was placed inside the prim.
+    description: Returns the time when the item was placed in the prim's inventory,
+      as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   llcompat.GetInventoryCreator:
     deprecated:
       message: Returns the key (UUID) of the creator of the specified inventory item.
@@ -11428,49 +11497,45 @@ globals:
       item.
   llcompat.GetInventoryDesc:
     deprecated:
-      message: Returns a string containing the description of the specified inventory
-        item.
+      message: Returns the description string of the specified inventory item.
     args:
     - type: string
     must_use: true
-    description: Returns a string containing the description of the specified inventory
-      item.
+    description: Returns the description string of the specified inventory item.
   llcompat.GetInventoryKey:
     deprecated:
-      message: Returns the key (UUID) of the specified inventory name.
+      message: Returns the key (UUID) of the specified inventory item.
     args:
     - type: string
     must_use: true
-    description: Returns the key (UUID) of the specified inventory name.
+    description: Returns the key (UUID) of the specified inventory item.
   llcompat.GetInventoryName:
     deprecated:
       message: Returns the name of the inventory item of the specified type (INVENTORY_*)
-        at the index number.
+        at the specified inventory index.
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns the name of the inventory item of the specified type (INVENTORY_*)
-      at the index number.
+      at the specified inventory index.
   llcompat.GetInventoryNumber:
     deprecated:
-      message: Returns an integer representing the quantity of items of the specified
-        type (INVENTORY_*) in the prim's inventory.
+      message: Returns the count of items of the specified type (INVENTORY_*) in the
+        prim's inventory.
     args:
     - type: number
     must_use: true
-    description: Returns an integer representing the quantity of items of the specified
-      type (INVENTORY_*) in the prim's inventory.
+    description: Returns the count of items of the specified type (INVENTORY_*) in
+      the prim's inventory.
   llcompat.GetInventoryPermMask:
     deprecated:
-      message: Returns an integer bitfield representing the permission category mask
-        of the specified inventory item.
+      message: Returns the specified item's permission flags for the specified group.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission category
-      mask of the specified inventory item.
+    description: Returns the specified item's permission flags for the specified group.
   llcompat.GetInventoryType:
     deprecated:
       message: Returns an integer representing the INVENTORY_* type of the named inventory
@@ -11665,13 +11730,23 @@ globals:
       if no custom parcel environment is set.
   llcompat.GetNextEmail:
     deprecated:
-      message: Requests the next queued email matching the specified sender address
-        and subject filters via the email event.
+      message: 'Requests the next queued email via the email event. Emails must
+
+        1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+        2. Be sent from the specified sender Address (or any address if blank)
+
+        3. Have the specified subject Subject (or any subject if blank)'
     args:
     - type: string
     - type: string
-    description: Requests the next queued email matching the specified sender address
-      and subject filters via the email event.
+    description: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   llcompat.GetNotecardLine:
     deprecated:
       message: Asynchronously requests the line index line of the notecard name from
@@ -11721,12 +11796,12 @@ globals:
       of the prim containing the script.
   llcompat.GetObjectAnimationNames:
     deprecated:
-      message: Returns a list of strings representing the names of all active animations
-        currently playing on the object.
+      message: Returns a list of strings representing the names or UUIDs of all active
+        animations currently playing on the object.
     args: []
     must_use: true
-    description: Returns a list of strings representing the names of all active animations
-      currently playing on the object.
+    description: Returns a list of strings representing the names or UUIDs of all
+      active animations currently playing on the object.
   llcompat.GetObjectDesc:
     deprecated:
       message: Returns a string containing the description of the specific prim containing
@@ -11777,13 +11852,12 @@ globals:
       the script.
   llcompat.GetObjectPermMask:
     deprecated:
-      message: Returns an integer bitfield representing the permission mask of the
-        specified category for the object containing the script.
+      message: Returns the script's object's permission flags for the specified group.
     args:
     - type: number
     must_use: true
-    description: Returns an integer bitfield representing the permission mask of the
-      specified category for the object containing the script.
+    description: Returns the script's object's permission flags for the specified
+      group.
   llcompat.GetObjectPrimCount:
     deprecated:
       message: Returns an integer representing the total number of prims in the object
@@ -12181,17 +12255,19 @@ globals:
       flag status is enabled for the object.
   llcompat.GetSubString:
     deprecated:
-      message: Returns a copy of the substring from src within the inclusive range
-        specified by the start and end indices. Negative indices count backward from
-        the end. If start is greater than end, the substring is the excluded range.
+      message: Returns a copy of the substring from src within the inclusive codepoint
+        range start_index..end_index. Negative indices count backward from the end
+        of the string. If start_index is greater than end_index, the substring is
+        the excluded range.
     args:
     - type: string
     - type: number
     - type: number
     must_use: true
-    description: Returns a copy of the substring from src within the inclusive range
-      specified by the start and end indices. Negative indices count backward from
-      the end. If start is greater than end, the substring is the excluded range.
+    description: Returns a copy of the substring from src within the inclusive codepoint
+      range start_index..end_index. Negative indices count backward from the end of
+      the string. If start_index is greater than end_index, the substring is the excluded
+      range.
   llcompat.GetSunDirection:
     deprecated:
       message: Returns a normalized vector representing the current direction of the
@@ -12361,16 +12437,16 @@ globals:
       using options.
   llcompat.GiveInventory:
     deprecated:
-      message: Gives the specified inventory item to the destination, as permitted
-        by the permissions system. The destination can be any agent, or an object
-        located in the same region.
+      message: Gives the specified inventory item to the target, as permitted by the
+        permissions system. The target can be any agent or an object located in the
+        same region.
     args:
     - type:
         display: uuid
     - type: string
-    description: Gives the specified inventory item to the destination, as permitted
-      by the permissions system. The destination can be any agent, or an object located
-      in the same region.
+    description: Gives the specified inventory item to the target, as permitted by
+      the permissions system. The target can be any agent or an object located in
+      the same region.
   llcompat.GiveInventoryList:
     deprecated:
       message: Gives the list of inventory items to target as a new folder named folder.
@@ -12402,15 +12478,15 @@ globals:
       transaction_result events).
   llcompat.GodLikeRezObject:
     deprecated:
-      message: Rezzes an object directly from a UUID specified by inventory at the
-        position pos, provided the owner has the god-bit set.
+      message: Rezzes an object directly from a UUID specified by id at the position
+        pos, provided the owner has the god-bit set.
     args:
     - type:
         display: uuid
     - type:
         display: vector
-    description: Rezzes an object directly from a UUID specified by inventory at the
-      position pos, provided the owner has the god-bit set.
+    description: Rezzes an object directly from a UUID specified by id at the position
+      pos, provided the owner has the god-bit set.
   llcompat.Ground:
     deprecated:
       message: Returns a float representing the ground height directly below the prim's
@@ -12513,25 +12589,23 @@ globals:
       val (returns 0 if the string is empty).
   llcompat.InsertString:
     deprecated:
-      message: Returns a new string representing dst with src inserted starting at
-        the zero-based index pos. Note that this operation does not modify dst itself.
+      message: Returns a copy of dst with src inserted at the given codepoint index.
     args:
     - type: string
     - type: number
     - type: string
     must_use: true
-    description: Returns a new string representing dst with src inserted starting
-      at the zero-based index pos. Note that this operation does not modify dst itself.
+    description: Returns a copy of dst with src inserted at the given codepoint index.
   llcompat.InstantMessage:
     deprecated:
-      message: Sends an instant message containing message to the user identified
-        by their key.
+      message: Sends an instant message containing msg to the agent identified by
+        their key.
     args:
     - type:
         display: uuid
     - type: string
-    description: Sends an instant message containing message to the user identified
-      by their key.
+    description: Sends an instant message containing msg to the agent identified by
+      their key.
   llcompat.IntegerToBase64:
     deprecated:
       message: Returns an 8-character Base64 string representing the big-endian encoded
@@ -13388,14 +13462,16 @@ globals:
       triggering a remote_data event with the channel ID once available.
   llcompat.Ord:
     deprecated:
-      message: Returns the integer Unicode (ordinal) value of the character at index
-        in the string val.
+      message: Returns the ordinal (Unicode copepoint integer) of the character at
+        index in the string val. Negative indices count backward from the end of the
+        string.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Returns the integer Unicode (ordinal) value of the character at index
-      in the string val.
+    description: Returns the ordinal (Unicode copepoint integer) of the character
+      at index in the string val. Negative indices count backward from the end of
+      the string.
   llcompat.OverMyLand:
     deprecated:
       message: Returns TRUE if the avatar or object specified by key id is over land
@@ -13450,17 +13526,17 @@ globals:
       accept up to 8 string entries each.
   llcompat.ParseStringKeepNulls:
     deprecated:
-      message: Breaks the string src into a list, discarding separators and keeping
-        spacers, while preserving empty null values (unlike llParseString2List). separators
-        and spacers accept up to 8 string entries each.
+      message: Breaks the string src into a list of substrings, discarding separators
+        and keeping spacers, while preserving empty null values (unlike llParseString2List).
+        separators and spacers accept up to 8 string entries each.
     args:
     - type: string
     - type: table
     - type: table
     must_use: true
-    description: Breaks the string src into a list, discarding separators and keeping
-      spacers, while preserving empty null values (unlike llParseString2List). separators
-      and spacers accept up to 8 string entries each.
+    description: Breaks the string src into a list of substrings, discarding separators
+      and keeping spacers, while preserving empty null values (unlike llParseString2List).
+      separators and spacers accept up to 8 string entries each.
   llcompat.ParticleSystem:
     deprecated:
       message: Creates or updates a particle system on the prim containing the script
@@ -13475,7 +13551,7 @@ globals:
         are passed from child prims to the root; if FALSE (default), they only trigger
         events in the affected child prim.
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-collisions attribute. If pass is TRUE, collision events
       are passed from child prims to the root; if FALSE (default), they only trigger
       events in the affected child prim.
@@ -13485,7 +13561,7 @@ globals:
         passed from child prims to the root; if FALSE (default), they only trigger
         events in the affected child prim.
     args:
-    - type: bool
+    - type: number
     description: Sets the pass-touches attribute. If pass is TRUE, touch events are
       passed from child prims to the root; if FALSE (default), they only trigger events
       in the affected child prim.
@@ -13581,25 +13657,27 @@ globals:
       prim's faces (currently non-functional).
   llcompat.RegionSay:
     deprecated:
-      message: Broadcasts the message msg on channel to the entire region (heard by
-        any script listening on that channel; channel 0 is not permitted).
+      message: Broadcasts the message msg to all scripts listening on channel Channel
+        within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can
+        receive the message.
     args:
     - type: number
     - type: string
-    description: Broadcasts the message msg on channel to the entire region (heard
-      by any script listening on that channel; channel 0 is not permitted).
+    description: Broadcasts the message msg to all scripts listening on channel Channel
+      within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive
+      the message.
   llcompat.RegionSayTo:
     deprecated:
-      message: Sends the message msg on channel privately to the targeted avatar or
-        object (if within the region). If target is an avatar and channel is non-zero,
+      message: Sends the message msg on Channel privately to the targeted agent or
+        object (if within the region). If target is an agent and channel is non-zero,
         the message can also be heard by any attachments worn by the avatar.
     args:
     - type:
         display: uuid
     - type: number
     - type: string
-    description: Sends the message msg on channel privately to the targeted avatar
-      or object (if within the region). If target is an avatar and channel is non-zero,
+    description: Sends the message msg on Channel privately to the targeted agent
+      or object (if within the region). If target is an agent and channel is non-zero,
       the message can also be heard by any attachments worn by the avatar.
   llcompat.ReleaseCamera:
     deprecated:
@@ -13649,9 +13727,9 @@ globals:
       if the object moves to another region.
   llcompat.RemoteLoadScriptPin:
     deprecated:
-      message: Copies the script name into target, setting it running (if running
-        is TRUE) with the start_param, provided the script owner has modify permissions
-        on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
+      message: Copies the script into target, setting it running (if running is TRUE)
+        with the start_param, provided the script owner has modify permissions on
+        target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
     args:
     - type:
         display: uuid
@@ -13659,8 +13737,8 @@ globals:
     - type: number
     - type: bool
     - type: number
-    description: Copies the script name into target, setting it running (if running
-      is TRUE) with the start_param, provided the script owner has modify permissions
+    description: Copies the script into target, setting it running (if running is
+      TRUE) with the start_param, provided the script owner has modify permissions
       on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).
   llcompat.RemoveFromLandBanList:
     deprecated:
@@ -13722,18 +13800,18 @@ globals:
       the parcel or estate management rights.
   llcompat.ReplaceSubString:
     deprecated:
-      message: Returns a new string representing src with count occurrences of pattern
-        replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-        positive counts process left-to-right, while negative counts process right-to-left.
+      message: Returns a copy of src with count occurrences of pattern replaced by
+        replacement_pattern. Setting count to 0 replaces all occurrences; positive
+        counts process left-to-right, while negative counts process right-to-left.
     args:
     - type: string
     - type: string
     - type: string
     - type: number
     must_use: true
-    description: Returns a new string representing src with count occurrences of pattern
-      replaced by replacement_pattern. Setting count to 0 replaces all occurrences;
-      positive counts process left-to-right, while negative counts process right-to-left.
+    description: Returns a copy of src with count occurrences of pattern replaced
+      by replacement_pattern. Setting count to 0 replaces all occurrences; positive
+      counts process left-to-right, while negative counts process right-to-left.
   llcompat.RequestAgentData:
     deprecated:
       message: Asynchronously requests the specified data category (DATA_*) about
@@ -13773,14 +13851,14 @@ globals:
       experience_permissions_denied.
   llcompat.RequestInventoryData:
     deprecated:
-      message: Asynchronously requests data for the inventory item specified by name,
-        triggering a dataserver event. Currently, only landmark items are supported
-        (which return local region coordinates). Returns a key query handle.
+      message: Asynchronously requests data for the named inventory item, triggering
+        a dataserver event. Currently, only landmark items are supported (which return
+        local region coordinates). Returns a key query handle.
     args:
     - type: string
-    description: Asynchronously requests data for the inventory item specified by
-      name, triggering a dataserver event. Currently, only landmark items are supported
-      (which return local region coordinates). Returns a key query handle.
+    description: Asynchronously requests data for the named inventory item, triggering
+      a dataserver event. Currently, only landmark items are supported (which return
+      local region coordinates). Returns a key query handle.
   llcompat.RequestPermissions:
     deprecated:
       message: Requests permissions (a bitfield specified by permissions) from the
@@ -13859,10 +13937,10 @@ globals:
     description: Removes all residents from the land parcel's access/pass list.
   llcompat.ResetOtherScript:
     deprecated:
-      message: Resets the script name located in the prim's inventory.
+      message: Resets the named script name in the prim's inventory.
     args:
     - type: string
-    description: Resets the script name located in the prim's inventory.
+    description: Resets the named script name in the prim's inventory.
   llcompat.ResetScript:
     deprecated:
       message: Resets the current script.
@@ -13897,9 +13975,9 @@ globals:
       and the script owner must own the parcel or be an estate manager/region owner.
   llcompat.RezAtRoot:
     deprecated:
-      message: Instantiates the inventory object at position moving at velocity, rotated
-        to rot with its root prim centered exactly on position, passing param as the
-        on_rez start parameter.
+      message: Instantiates the named inventory object with the root prim at pos with
+        velocity vel and rotation rot, passing start_param as the on_rez start parameter.
+        The vel parameter is ignored if the rezzed object is non-physical.
     args:
     - type: string
     - type:
@@ -13909,14 +13987,14 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at position moving at velocity,
-      rotated to rot with its root prim centered exactly on position, passing param
-      as the on_rez start parameter.
+    description: Instantiates the named inventory object with the root prim at pos
+      with velocity vel and rotation rot, passing start_param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   llcompat.RezObject:
     deprecated:
-      message: Instantiates the inventory object at pos with velocity vel and rotation
-        rot, passing param as the on_rez start parameter. The vel parameter is ignored
-        if the rezzed object is non-physical.
+      message: Instantiates the named inventory object with the bounding box centered
+        at pos with velocity vel and rotation rot, passing param as the on_rez start
+        parameter. The vel parameter is ignored if the rezzed object is non-physical.
     args:
     - type: string
     - type:
@@ -13926,21 +14004,22 @@ globals:
     - type:
         display: quaternion
     - type: number
-    description: Instantiates the inventory object at pos with velocity vel and rotation
-      rot, passing param as the on_rez start parameter. The vel parameter is ignored
-      if the rezzed object is non-physical.
+    description: Instantiates the named inventory object with the bounding box centered
+      at pos with velocity vel and rotation rot, passing param as the on_rez start
+      parameter. The vel parameter is ignored if the rezzed object is non-physical.
   llcompat.RezObjectWithParams:
     deprecated:
-      message: Instantiates the inventory object (defaulting to the rezzing prim's
-        position unless REZ_POS is specified) using the initial set of parameters
-        specified in params. Returns the key of the rezzed object, or a blank key
+      message: Instantiates the named inventory object (defaulting to the rezzing
+        prim's position unless REZ_POS is specified) using the initial set of parameters
+        specified in options. Returns the key of the rezzed object, or a blank key
         on failure.
     args:
     - type: string
     - type: table
-    description: Instantiates the inventory object (defaulting to the rezzing prim's
-      position unless REZ_POS is specified) using the initial set of parameters specified
-      in params. Returns the key of the rezzed object, or a blank key on failure.
+    description: Instantiates the named inventory object (defaulting to the rezzing
+      prim's position unless REZ_POS is specified) using the initial set of parameters
+      specified in options. Returns the key of the rezzed object, or a blank key on
+      failure.
   llcompat.Rot2Angle:
     deprecated:
       message: Returns a float representing the rotation angle of rot.
@@ -14090,17 +14169,17 @@ globals:
       script; returns FALSE otherwise.
   llcompat.Say:
     deprecated:
-      message: Says the text message msg on the specified channel. The message can
-        be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-        (2147483647) are not visible to avatars and can be used for script-to-script
-        communication.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("chat_range"), which is 20m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Says the text message msg on the specified channel. The message can
-      be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
-      (2147483647) are not visible to avatars and can be used for script-to-script
-      communication.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("chat_range"), which is 20m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.ScaleByFactor:
     deprecated:
       message: Attempts to uniformly resize the entire object by scaling_factor, maintaining
@@ -14390,14 +14469,12 @@ globals:
       not use with vehicles; call llStopHover to cancel.
   llcompat.SetInventoryPermMask:
     deprecated:
-      message: Sets the specified permission category of the inventory item to the
-        value permissions mask.
+      message: Sets the specified item's permission flags for the specified group.
     args:
     - type: string
     - type: number
     - type: number
-    description: Sets the specified permission category of the inventory item to the
-      value permissions mask.
+    description: Sets the specified item's permission flags for the specified group.
   llcompat.SetKeyframedMotion:
     deprecated:
       message: Smoothly moves a non-physical object between the positions, orientations,
@@ -14562,13 +14639,11 @@ globals:
     description: Sets the name of the prim containing the script to name.
   llcompat.SetObjectPermMask:
     deprecated:
-      message: Sets the specified permission mask category to value on the root object
-        containing the script.
+      message: Sets the scripts's object's permission flags for the specified group.
     args:
     - type: number
     - type: number
-    description: Sets the specified permission mask category to value on the root
-      object containing the script.
+    description: Sets the scripts's object's permission flags for the specified group.
   llcompat.SetParcelForSale:
     deprecated:
       message: Sets the parcel the object is on for sale. If ForSale is TRUE, puts
@@ -14703,12 +14778,12 @@ globals:
       to size.
   llcompat.SetScriptState:
     deprecated:
-      message: Sets the running state of the script name in the prim's inventory.
+      message: Sets the running state of the named script in the prim's inventory.
         If running is TRUE, the script is enabled; if FALSE, it is disabled.
     args:
     - type: string
     - type: bool
-    description: Sets the running state of the script name in the prim's inventory.
+    description: Sets the running state of the named script in the prim's inventory.
       If running is TRUE, the script is enabled; if FALSE, it is disabled.
   llcompat.SetSitText:
     deprecated:
@@ -14856,17 +14931,17 @@ globals:
       region directional vector. Has no effect on non-physical objects.
   llcompat.Shout:
     deprecated:
-      message: Shouts the text message msg on the specified channel. The message can
-        be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and
-        DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-        with scripts.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("shout_range"), which is 100m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Shouts the text message msg on the specified channel. The message
-      can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("shout_range"), which is 100m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.SignRSA:
     deprecated:
       message: Returns the Base64-encoded RSA signature of msg using the PEM-formatted
@@ -15012,13 +15087,11 @@ globals:
     description: Stops playback of the currently playing attached sound.
   llcompat.StringLength:
     deprecated:
-      message: Returns an integer representing the number of characters in the string
-        str (excluding the null terminator).
+      message: Returns the number of unicode codepoints in the string.
     args:
     - type: string
     must_use: true
-    description: Returns an integer representing the number of characters in the string
-      str (excluding the null terminator).
+    description: Returns the number of unicode codepoints in the string.
   llcompat.StringToBase64:
     deprecated:
       message: Returns the Base64 representation string of str, interpreting it as
@@ -15042,14 +15115,14 @@ globals:
       to the specified trim type.
   llcompat.SubStringIndex:
     deprecated:
-      message: (Index semantics) Returns the zero-based index of the first instance
-        of the pattern substring inside the string source. Returns -1 if not found.
+      message: (Index semantics) Returns the codepoint index of the first occurrence
+        of pattern inside the string source. Returns -1 if not found. No regex.
     args:
     - type: string
     - type: string
     must_use: true
-    description: (Index semantics) Returns the zero-based index of the first instance
-      of the pattern substring inside the string source. Returns -1 if not found.
+    description: (Index semantics) Returns the codepoint index of the first occurrence
+      of pattern inside the string source. Returns -1 if not found. No regex.
   llcompat.TakeCamera:
     deprecated:
       message: Deprecated (use llSetCameraParams instead). Formerly used to take control
@@ -15115,14 +15188,16 @@ globals:
       with llTarget.
   llcompat.TargetedEmail:
     deprecated:
-      message: Sends an email containing subject and message to the target (which
-        can designate the owner or creator of the object).
+      message: Sends an email to with the given subject subject and body msg to the
+        target (which can designate the owner or creator of the object). The email
+        will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
     args:
     - type: number
     - type: string
     - type: string
-    description: Sends an email containing subject and message to the target (which
-      can designate the owner or creator of the object).
+    description: Sends an email to with the given subject subject and body msg to
+      the target (which can designate the owner or creator of the object). The email
+      will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
   llcompat.TeleportAgent:
     deprecated:
       message: Teleports the owning agent (who must grant PERMISSION_TELEPORT) to
@@ -15172,29 +15247,37 @@ globals:
       a God Summons).
   llcompat.TextBox:
     deprecated:
-      message: Opens an input text box dialog displaying message to the avatar. Submitting
-        text chats the input string on channel as if said by the avatar.
+      message: Opens an input text box dialog displaying msg to the agent. Submitting
+        text chats the input string on channel as if said by the agent. The chat originates
+        at the object's position, but uses the agent's name and UUID, so it can be
+        heard as long as the agent is still in the region.
     args:
     - type:
         display: uuid
     - type: string
     - type: number
-    description: Opens an input text box dialog displaying message to the avatar.
-      Submitting text chats the input string on channel as if said by the avatar.
+    description: Opens an input text box dialog displaying msg to the agent. Submitting
+      text chats the input string on channel as if said by the agent. The chat originates
+      at the object's position, but uses the agent's name and UUID, so it can be heard
+      as long as the agent is still in the region.
   llcompat.ToLower:
     deprecated:
-      message: Returns a copy of the string src converted entirely to lowercase.
+      message: Returns a lowercase copy of the string src. Converts all unicode characters,
+        not just ASCII.
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to lowercase.
+    description: Returns a lowercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   llcompat.ToUpper:
     deprecated:
-      message: Returns a copy of the string src converted entirely to uppercase.
+      message: Returns an uppercase copy of the string src. Converts all unicode characters,
+        not just ASCII.
     args:
     - type: string
     must_use: true
-    description: Returns a copy of the string src converted entirely to uppercase.
+    description: Returns an uppercase copy of the string src. Converts all unicode
+      characters, not just ASCII.
   llcompat.TransferLindenDollars:
     deprecated:
       message: Transfers amount of L$ from the script owner to the destination avatar,
@@ -15209,8 +15292,8 @@ globals:
       the resulting transaction_result event.
   llcompat.TransferOwnership:
     deprecated:
-      message: Transfers ownership of the object (or a copy of it, depending on flags)
-        to the avatar agent_id. Returns an integer indicating the success or failure
+      message: Transfers ownership of the object (or a copy of it, depending on Flags)
+        to the specified agent. Returns an integer indicating the success or failure
         of the transfer.
     args:
     - type:
@@ -15218,7 +15301,7 @@ globals:
     - type: number
     - type: table
     description: Transfers ownership of the object (or a copy of it, depending on
-      flags) to the avatar agent_id. Returns an integer indicating the success or
+      Flags) to the specified agent. Returns an integer indicating the success or
       failure of the transfer.
   llcompat.TriggerSound:
     deprecated:
@@ -15369,17 +15452,17 @@ globals:
       prim's position offset by the vector offset.
   llcompat.Whisper:
     deprecated:
-      message: Whispers the text message msg on the specified channel. The message
-        can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-        and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-        with scripts.
+      message: Broadcasts the message msg to all scripts or agents listening on channel
+        within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen
+        on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are
+        for script-to-script communication.
     args:
     - type: number
     - type: string
-    description: Whispers the text message msg on the specified channel. The message
-      can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0)
-      and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate
-      with scripts.
+    description: Broadcasts the message msg to all scripts or agents listening on
+      channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents
+      listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels
+      are for script-to-script communication.
   llcompat.Wind:
     deprecated:
       message: Returns a vector representing the wind velocity at the prim's position
@@ -15482,15 +15565,20 @@ structs:
     x:
       property: read-only
       type: number
+      description: X component of the rotation/quaternion.
     y:
       property: read-only
       type: number
+      description: Y component of the rotation/quaternion.
     z:
       property: read-only
       type: number
+      description: Z component of the rotation/quaternion.
     s:
       property: read-only
       type: number
+      description: S component of the rotation/quaternion. Equivalent to the W component
+        in other notations.
   uuid:
     __tostring:
       method: true
@@ -15498,11 +15586,11 @@ structs:
     istruthy:
       property: read-only
       type: bool
-      description: Returns true if the UUID is not the null UUID (all zeros)
+      description: Returns true if the UUID is not the null UUID (all zeros).
     bytes:
       property: read-only
       type: string
-      description: Returns the raw 16-byte binary string of the UUID
+      description: Returns the raw 16-byte binary string of the UUID.
   vector:
     __add:
       method: true
@@ -15544,12 +15632,18 @@ structs:
     x:
       property: read-only
       type: number
+      description: X coordinate component of the vector. Typically represents red
+        color, forward position, or pitch.
     y:
       property: read-only
       type: number
+      description: Y coordinate component of the vector. Typically represents green
+        color, left/right position, or roll.
     z:
       property: read-only
       type: number
+      description: Z coordinate component of the vector. Typically represents blue
+        color, altitude/upward position, or yaw.
   DetectedEvent:
     adjustDamage:
       method: true
@@ -15684,12 +15778,17 @@ structs:
     index:
       property: read-only
       type: number
+      description: Index of the detected entity.
     valid:
       property: read-only
       type: bool
+      description: Returns true if the detected index is valid and contains active
+        data.
     canAdjustDamage:
       property: read-only
       type: bool
+      description: Returns true if the detected object or avatar can have its damage
+        adjusted.
   LLEvents:
     'on':
       method: true
@@ -15737,7 +15836,10 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Registers a callback for an event. Returns the callback.
+      description: Registers a handler function to run whenever the specified event
+        occurs. Multiple handlers can be attached to the same event and will run in
+        the order they were added. Returns the same function passed in so it can be
+        used later with LLEvents:off().
     'off':
       method: true
       args:
@@ -15784,7 +15886,9 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Unregisters a callback. Returns true if found and removed.
+      description: Removes an event handler. If the function was added multiple times
+        via LLEvents:on(), only the last one added is removed. Returns true if the
+        function was found and removed, false otherwise.
     once:
       method: true
       args:
@@ -15831,7 +15935,10 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Registers a one-time callback. Returns the wrapper function.
+      description: Registers a one-time event handler. The function runs only once
+        and is automatically removed afterward. Returns a newly generated wrapper
+        function, which MUST be used if you want to manually remove the handler early
+        using LLEvents:off().
     handlers:
       method: true
       args:
@@ -15877,11 +15984,14 @@ structs:
         - run_time_permissions
         - timer
         - transaction_result
-      description: Returns a list of all handlers for a specific event.
+      description: Returns an array table containing all the functions currently handling
+        the specified event. Useful for debugging or for iterating to remove all functions
+        handling an event.
     eventNames:
       method: true
       args: []
-      description: Returns a list of all event names that have handlers.
+      description: Returns an array table of all event names that currently have active
+        handler functions attached.
     at_rot_target:
       property: override-fields
       type: function
@@ -15898,13 +16008,12 @@ structs:
       property: override-fields
       type: function
       description: Triggered whenever the object is attached to or detached from an
-        avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if
-        detached.
+        avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.
     changed:
       property: override-fields
       type: function
       description: Triggered when various properties of the object change. The parameter
-        change is a bitfield of CHANGED_* constants.
+        changes is a bitfield of CHANGED_* flags.
     collision:
       property: override-fields
       type: function
@@ -15937,8 +16046,9 @@ structs:
     email:
       property: override-fields
       type: function
-      description: Triggered when an email sent to this script's address arrives.
-        num_left indicates the number of pending emails remaining in the queue.
+      description: Receive an email requested by llGetNextEmail(). NumberRemaining
+        indicates the number of emails remaining in the queue for llGetNextEmail()
+        to retrieve.
     experience_permissions:
       property: override-fields
       type: function
@@ -16003,7 +16113,7 @@ structs:
       type: function
       description: Triggered when a chat message matching active llListen filters
         is received on channel. Passes the sender's name and UUID key id, along with
-        the spoken message string.
+        the spoken string msg.
     money:
       property: override-fields
       type: function
@@ -16110,20 +16220,23 @@ structs:
       args:
       - type: number
       - type: function
-      description: Registers a callback to be called every N seconds. Returns the
-        callback.
+      description: Registers a repeating timer. The callback receives (expected_time,
+        interval). Returns the same function passed in so it can be removed later.
     once:
       method: true
       args:
       - type: number
       - type: function
-      description: Registers a callback to be called once after N seconds. Returns
-        the callback.
+      description: Registers a one-time timer. The timer runs only once and is automatically
+        removed afterward. The callback receives (expected_time, nil). Returns the
+        same function passed in, which can be used to cancel it early via LLTimers:off().
     'off':
       method: true
       args:
       - type: function
-      description: Unregisters a timer callback. Returns true if found and removed.
+      description: Stops and removes a timer. If the same function was added multiple
+        times, only the last one added is removed, regardless of its interval. Returns
+        true if the timer was found and removed, false otherwise.
   PrimParamsSetterType:
     apply:
       method: true

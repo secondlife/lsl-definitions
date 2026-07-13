@@ -9374,7 +9374,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>id</key>
+                  <key>avatar</key>
                   <map>
                      <key>tooltip</key>
                      <string>UUID of the avatar the object is attached to, or NULL_KEY if detached.</string>
@@ -9384,24 +9384,24 @@ If another state is defined before the default state, the compiler will report a
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if detached.</string>
+            <string>Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.</string>
          </map>
          <key>changed</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>change</key>
+                  <key>changes</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A bitfield of CHANGED_* constants representing what changed.</string>
+                     <string>A bitfield of CHANGED_* flags representing what changed.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.</string>
+            <string>Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.</string>
          </map>
          <key>collision</key>
          <map>
@@ -9523,7 +9523,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>time</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Timestamp of when the email was received.</string>
+                     <string>Timestamp of when the email was received, in (string)llGetUnixTime() format.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -9547,7 +9547,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Body text of the email.</string>
@@ -9559,14 +9559,14 @@ If another state is defined before the default state, the compiler will report a
                   <key>num_left</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of pending emails still waiting in the queue.</string>
+                     <string>Number of emails still waiting in the queue.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when an email sent to this script's address arrives. num_left indicates the number of pending emails remaining in the queue.</string>
+            <string>Receive an email requested by llGetNextEmail(). NumberRemaining indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.</string>
          </map>
          <key>experience_permissions</key>
          <map>
@@ -9889,7 +9889,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the sending prim or the legacy name of the sending avatar.</string>
+                     <string>Name of the sending prim or the legacy name of the sending agent.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -9898,13 +9898,13 @@ If another state is defined before the default state, the compiler will report a
                   <key>id</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the sending avatar or prim.</string>
+                     <string>UUID of the sending agent or prim.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Spoken text string.</string>
@@ -9914,7 +9914,7 @@ If another state is defined before the default state, the compiler will report a
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.</string>
+            <string>Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.</string>
          </map>
          <key>money</key>
          <map>
@@ -10976,7 +10976,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Unicode value to convert into a character string.</string>
+                     <string>Unicode codepoint integer (ordinal) to convert.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -10989,7 +10989,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Constructs and returns a single-character string representing the supplied Unicode value val.</string>
+            <string>Constructs and returns a single-character string from the given Unicode codepoint ordinal.</string>
          </map>
          <key>llClearCameraParams</key>
          <map>
@@ -11481,7 +11481,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDeleteSubString</key>
          <map>
@@ -11500,7 +11500,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index of the substring to remove (inclusive).</string>
+                     <string>Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -11509,7 +11509,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index of the substring to remove (inclusive).</string>
+                     <string>Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -11522,7 +11522,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDerezObject</key>
          <map>
@@ -11538,7 +11538,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>flag</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Derez behavior flags matching DEREZ_* constants.</string>
@@ -11993,16 +11993,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>avatar</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar in the same region.</string>
+                     <string>UUID of the agent in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message to display in the dialog box.</string>
@@ -12023,7 +12023,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value) where button clicks are chatted.</string>
+                     <string>Output chat channel (any 32-bit signed integer value) where button clicks are chatted.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -12036,7 +12036,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.</string>
+            <string>Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.</string>
          </map>
          <key>llDie</key>
          <map>
@@ -12164,7 +12164,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Message body of the email.</string>
@@ -12180,7 +12180,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>20.0</real>
             <key>tooltip</key>
-            <string>Sends an email to address with subject and message.</string>
+            <string>Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()</string>
          </map>
          <key>llEscapeURL</key>
          <map>
@@ -12696,7 +12696,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>id</key>
+                  <key>avatar</key>
                   <map>
                      <key>tooltip</key>
                      <string>UUID of the avatar in the same region.</string>
@@ -12712,7 +12712,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.</string>
+            <string>Returns a string representing the name of the currently playing locomotion animation for the specified avatar.</string>
          </map>
          <key>llGetAnimationList</key>
          <map>
@@ -12795,7 +12795,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.</string>
+            <string>Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.</string>
          </map>
          <key>llGetAttachedListFiltered</key>
          <map>
@@ -12827,7 +12827,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.</string>
+            <string>Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.</string>
          </map>
          <key>llGetBoundingBox</key>
          <map>
@@ -13319,7 +13319,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.</string>
+            <string>Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"</string>
          </map>
          <key>llGetInventoryCreator</key>
          <map>
@@ -13365,14 +13365,14 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string containing the description of the specified inventory item.</string>
+            <string>Returns the description string of the specified inventory item.</string>
          </map>
          <key>llGetInventoryKey</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the item in the prim's inventory.</string>
@@ -13388,7 +13388,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the key (UUID) of the specified inventory name.</string>
+            <string>Returns the key (UUID) of the specified inventory item.</string>
          </map>
          <key>llGetInventoryName</key>
          <map>
@@ -13404,10 +13404,10 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>number</key>
+                  <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Index number of the item of that type, starting from 0.</string>
+                     <string>Index of the item of that type.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -13420,7 +13420,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.</string>
+            <string>Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.</string>
          </map>
          <key>llGetInventoryNumber</key>
          <map>
@@ -13443,7 +13443,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.</string>
+            <string>Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.</string>
          </map>
          <key>llGetInventoryPermMask</key>
          <map>
@@ -13459,10 +13459,10 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -13475,17 +13475,17 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer bitfield representing the permission category mask of the specified inventory item.</string>
+            <string>Returns the specified item's permission flags for the specified group.</string>
          </map>
          <key>llGetInventoryType</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the inventory item.</string>
+                     <string>Name of the item in the prim's inventory.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -13909,7 +13909,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>address</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Sender email address filter.</string>
+                     <string>Sender email address filter, or "" for any address.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -13918,7 +13918,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>subject</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Email subject filter.</string>
+                     <string>Email subject filter, or "" for any subject.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -13931,7 +13931,10 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Requests the next queued email matching the specified sender address and subject filters via the email event.</string>
+            <string>Requests the next queued email via the email event. Emails must
+1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+2. Be sent from the specified sender Address (or any address if blank)
+3. Have the specified subject Subject (or any subject if blank)</string>
          </map>
          <key>llGetNotecardLine</key>
          <map>
@@ -14060,7 +14063,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of strings representing the names of all active animations currently playing on the object.</string>
+            <string>Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.</string>
          </map>
          <key>llGetObjectDesc</key>
          <map>
@@ -14184,10 +14187,10 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -14200,7 +14203,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.</string>
+            <string>Returns the script's object's permission flags for the specified group.</string>
          </map>
          <key>llGetObjectPrimCount</key>
          <map>
@@ -15029,7 +15032,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based start index (inclusive).</string>
+                     <string>Starting codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15038,7 +15041,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based end index (inclusive).</string>
+                     <string>Ending codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15051,7 +15054,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.</string>
          </map>
          <key>llGetSunDirection</key>
          <map>
@@ -15348,7 +15351,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the receiving agent in the region.</string>
+                     <string>UUID of the target agent in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -15357,16 +15360,16 @@ If another state is defined before the default state, the compiler will report a
                   <key>folder</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the destination folder to be created in the agent's inventory.</string>
+                     <string>Name of the destination folder to be created</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>items</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of inventory items to transfer.</string>
+                     <string>The names of the items in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -15395,19 +15398,19 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>destination</key>
+                  <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination avatar or prim.</string>
+                     <string>UUID of the target agent or prim.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the item in the prim's inventory.</string>
+                     <string>Name of the item in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -15420,7 +15423,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.</string>
+            <string>Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.</string>
          </map>
          <key>llGiveInventoryList</key>
          <map>
@@ -15430,7 +15433,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the target avatar or prim in the same region.</string>
+                     <string>UUID of the target agent or prim in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -15445,10 +15448,10 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>inventory</key>
+                  <key>items</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of names representing items in the prim's inventory.</string>
+                     <string>The names of the items in the prim's inventory to transfer.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -15500,7 +15503,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>id</key>
                   <map>
                      <key>tooltip</key>
                      <string>Asset UUID of the object to rez.</string>
@@ -15527,7 +15530,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.</string>
+            <string>Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.</string>
          </map>
          <key>llGround</key>
          <map>
@@ -15822,10 +15825,10 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>pos</key>
+                  <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based position index where insertion starts.</string>
+                     <string>Codepoint index where insertion starts.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15847,23 +15850,23 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.</string>
+            <string>Returns a copy of dst with src inserted at the given codepoint index.</string>
          </map>
          <key>llInstantMessage</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>user</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination user.</string>
+                     <string>UUID of the destination agent.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message string to send.</string>
@@ -15879,7 +15882,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>2.0</real>
             <key>tooltip</key>
-            <string>Sends an instant message containing message to the user identified by their key.</string>
+            <string>Sends an instant message containing msg to the agent identified by their key.</string>
          </map>
          <key>llIntegerToBase64</key>
          <map>
@@ -17561,7 +17564,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input chat channel to listen on (any integer from -2147483648 to 2147483647).</string>
+                     <string>Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -17570,7 +17573,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Specific prim name or avatar legacy name to filter by (or empty string for no filter).</string>
+                     <string>Specific prim name or agent legacy name to filter by (or empty string for no filter).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -17579,7 +17582,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>id</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).</string>
+                     <string>Specific agent or prim UUID to filter by (or NULL_KEY for no filter).</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -18703,7 +18706,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Source string containing the character.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -18712,7 +18715,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based index of the character to convert.</string>
+                     <string>Codepoint index of the character to convert. Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -18725,7 +18728,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the integer Unicode (ordinal) value of the character at index in the string val.</string>
+            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.</string>
          </map>
          <key>llOverMyLand</key>
          <map>
@@ -18760,7 +18763,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to send.</string>
+                     <string>Text message string to send to the object owner.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -18903,7 +18906,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
+            <string>Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
          </map>
          <key>llParticleSystem</key>
          <map>
@@ -19254,7 +19257,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel to broadcast on (must be non-zero).</string>
+                     <string>Chat channel (any 32-bit signed integer value except zero) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -19276,7 +19279,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).</string>
+            <string>Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.</string>
          </map>
          <key>llRegionSayTo</key>
          <map>
@@ -19286,7 +19289,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination avatar or prim in the same region.</string>
+                     <string>UUID of the target agent or prim in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -19295,7 +19298,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value).</string>
+                     <string>Chat channel (any 32-bit signed integer value) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -19317,7 +19320,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.</string>
+            <string>Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.</string>
          </map>
          <key>llReleaseCamera</key>
          <map>
@@ -19463,7 +19466,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the script in the prim's inventory.</string>
@@ -19475,7 +19478,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>pin</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).</string>
+                     <string>Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -19506,7 +19509,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>3.0</real>
             <key>tooltip</key>
-            <string>Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).</string>
+            <string>Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).</string>
          </map>
          <key>llRemoveFromLandBanList</key>
          <map>
@@ -19726,7 +19729,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>replacement_pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>New substring used to replace the pattern.</string>
+                     <string>New substring that replaces the pattern.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -19748,7 +19751,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
+            <string>Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
          </map>
          <key>llRequestAgentData</key>
          <map>
@@ -19842,7 +19845,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the item in the prim's inventory.</string>
@@ -19858,7 +19861,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.</string>
+            <string>Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.</string>
          </map>
          <key>llRequestPermissions</key>
          <map>
@@ -20054,7 +20057,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the target script in the prim's inventory.</string>
@@ -20070,7 +20073,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Resets the script name located in the prim's inventory.</string>
+            <string>Resets the named script name in the prim's inventory.</string>
          </map>
          <key>llResetScript</key>
          <map>
@@ -20160,16 +20163,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>position</key>
+                  <key>pos</key>
                   <map>
                      <key>tooltip</key>
                      <string>Position vector in region coordinates where the root of the object will be placed.</string>
@@ -20178,7 +20181,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>velocity</key>
+                  <key>vel</key>
                   <map>
                      <key>tooltip</key>
                      <string>Initial velocity vector for the rezzed object.</string>
@@ -20196,7 +20199,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>param</key>
+                  <key>start_param</key>
                   <map>
                      <key>tooltip</key>
                      <string>Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).</string>
@@ -20212,17 +20215,17 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.</string>
+            <string>Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
          </map>
          <key>llRezObject</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -20255,7 +20258,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>param</key>
+                  <key>start_param</key>
                   <map>
                      <key>tooltip</key>
                      <string>Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).</string>
@@ -20271,26 +20274,26 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
+            <string>Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.</string>
          </map>
          <key>llRezObjectWithParams</key>
          <map>
             <key>arguments</key>
             <array>
                <map>
-                  <key>inventory</key>
+                  <key>item</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the object in the prim's inventory.</string>
+                     <string>Name of the object in the prim's inventory to rez.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
                <map>
-                  <key>params</key>
+                  <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of REZ_* parameters to configure the rezzed object's attributes.</string>
+                     <string>A list of REZ_* options to configure the rezzed object's attributes.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -20303,7 +20306,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.</string>
+            <string>Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.</string>
          </map>
          <key>llRot2Angle</key>
          <map>
@@ -20705,7 +20708,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to transmit the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -20714,7 +20717,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -20727,7 +20730,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llScaleByFactor</key>
          <map>
@@ -21590,16 +21593,16 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>category</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
                </map>
                <map>
-                  <key>value</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Bitfield of permissions (PERM_* flags) to set.</string>
@@ -21617,7 +21620,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the specified permission category of the inventory item to the value permissions mask.</string>
+            <string>Sets the specified item's permission flags for the specified group.</string>
          </map>
          <key>llSetKeyframedMotion</key>
          <map>
@@ -22221,16 +22224,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>mask</key>
+                  <key>group</key>
                   <map>
                      <key>tooltip</key>
-                     <string>MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).</string>
+                     <string>MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
                </map>
                <map>
-                  <key>value</key>
+                  <key>flags</key>
                   <map>
                      <key>tooltip</key>
                      <string>Bitfield of permissions (PERM_* flags) to set.</string>
@@ -22248,7 +22251,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the specified permission mask category to value on the root object containing the script.</string>
+            <string>Sets the scripts's object's permission flags for the specified group.</string>
          </map>
          <key>llSetParcelForSale</key>
          <map>
@@ -22632,7 +22635,7 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>name</key>
+                  <key>script</key>
                   <map>
                      <key>tooltip</key>
                      <string>Name of the script in the prim's inventory.</string>
@@ -22657,7 +22660,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.</string>
+            <string>Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.</string>
          </map>
          <key>llSetSitText</key>
          <map>
@@ -23170,7 +23173,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to shout the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to shout the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -23179,7 +23182,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23192,7 +23195,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llSignRSA</key>
          <map>
@@ -23453,7 +23456,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the prim's inventory, or a built-in animation.</string>
+                     <string>Name of the animation in the prim's inventory, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23476,7 +23479,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the current object's inventory.</string>
+                     <string>Name of the animation in the prim's inventory, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23499,7 +23502,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.</string>
+                     <string>Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23564,7 +23567,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the current object's inventory, or an animation UUID.</string>
+                     <string>Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23614,7 +23617,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the number of characters in the string str (excluding the null terminator).</string>
+            <string>Returns the number of unicode codepoints in the string.</string>
          </map>
          <key>llStringToBase64</key>
          <map>
@@ -23701,7 +23704,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.</string>
+            <string>Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.</string>
          </map>
          <key>llTakeCamera</key>
          <map>
@@ -23911,7 +23914,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Email message body.</string>
@@ -23927,7 +23930,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>20.0</real>
             <key>tooltip</key>
-            <string>Sends an email containing subject and message to the target (which can designate the owner or creator of the object).</string>
+            <string>Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.</string>
          </map>
          <key>llTeleportAgent</key>
          <map>
@@ -24057,16 +24060,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>avatar</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar in the same region.</string>
+                     <string>UUID of the agent in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message to display in the text box.</string>
@@ -24078,7 +24081,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value) where the input text is chatted.</string>
+                     <string>Output chat channel (any 32-bit signed integer value) where the input text is chatted.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -24091,7 +24094,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.</string>
+            <string>Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.</string>
          </map>
          <key>llToLower</key>
          <map>
@@ -24114,7 +24117,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to lowercase.</string>
+            <string>Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>llToUpper</key>
          <map>
@@ -24137,7 +24140,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to uppercase.</string>
+            <string>Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>llTransferLindenDollars</key>
          <map>
@@ -24176,10 +24179,10 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>agent_id</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar to receive ownership of the object.</string>
+                     <string>UUID of the agent to receive ownership of the object.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -24210,7 +24213,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.</string>
+            <string>Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.</string>
          </map>
          <key>llTriggerSound</key>
          <map>
@@ -24638,7 +24641,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to whisper the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to whisper the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -24647,7 +24650,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -24660,7 +24663,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llWind</key>
          <map>

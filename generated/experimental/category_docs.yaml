@@ -1,33 +1,33 @@
 # Functions by category
 asset_permissions:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
-  llGetInventoryPermMask( string item, integer category ) -> integer:
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
+  llGetInventoryPermMask( string item, integer group ) -> integer:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission category mask of the specified inventory item.
-  llGetObjectPermMask( integer category ) -> integer:
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.
-  llSetInventoryPermMask( string item, integer category, integer value ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the specified item's permission flags for the specified group.
+  llGetObjectPermMask( integer group ) -> integer:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the script's object's permission flags for the specified group.
+  llSetInventoryPermMask( string item, integer group, integer flags ) -> void:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission category of the inventory item to the value permissions mask.
-  llSetObjectPermMask( integer mask, integer value ) -> void:
-    mask: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission mask category to value on the root object containing the script.
-  llTransferOwnership( key agent_id, integer flags, list options ) -> integer:
-    agent_id: UUID of the avatar to receive ownership of the object.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the specified item's permission flags for the specified group.
+  llSetObjectPermMask( integer group, integer flags ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the scripts's object's permission flags for the specified group.
+  llTransferOwnership( key agent, integer flags, list options ) -> integer:
+    agent: UUID of the agent to receive ownership of the object.
     flags: Flags controlling the transfer type (such as TRANSFER_FLAG_COPY or TRANSFER_FLAG_TAKE).
     options: Extra options applied to the transfer (currently unused).
-    tooltip: Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.
+    tooltip: Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.
 attachments:
-  attach( key id ):
-    id: UUID of the avatar the object is attached to, or NULL_KEY if detached.
-    tooltip: Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if detached.
+  attach( key avatar ):
+    avatar: UUID of the avatar the object is attached to, or NULL_KEY if detached.
+    tooltip: Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.
   llAttachToAvatar( integer attach_point ) -> void:
     attach_point: ATTACH_* constant or integer value representing the target attachment point.
     tooltip: Attaches the object to the avatar who has granted the PERMISSION_ATTACH permission. Takes the object into the user's inventory and attaches it at attach_point.
@@ -42,12 +42,12 @@ attachments:
     tooltip: Returns the integer attachment point (an ATTACH_* constant) that the object is attached to, or 0 if it is unattached or pending detachment.
   llGetAttachedList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
-    tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message
-      string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing
+      an error message string on failure.
   llGetAttachedListFiltered( key avatar, list options ) -> list:
     avatar: UUID of the avatar in the same region.
     options: A list of options to filter the returned attachments.
-    tooltip: Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
 avatar:
   control( key id, integer level, integer edge ):
     id: UUID of the avatar whose inputs are captured.
@@ -106,9 +106,9 @@ avatar:
   llGetAgentSize( key avatar ) -> vector:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a vector representing the estimated bounding box size of the specified avatar, or ZERO_VECTOR if they are not in the same region.
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -117,12 +117,12 @@ avatar:
     tooltip: Returns a string representing the name of the animation currently overriding the specified anim_state. Requires the PERMISSION_OVERRIDE_ANIMATIONS or PERMISSION_TRIGGER_ANIMATION runtime permission.
   llGetAttachedList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
-    tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message
-      string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing
+      an error message string on failure.
   llGetAttachedListFiltered( key avatar, list options ) -> list:
     avatar: UUID of the avatar in the same region.
     options: A list of options to filter the returned attachments.
-    tooltip: Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
   llGetCameraAspect(  ) -> float:
     tooltip: Returns a float representing the camera's current aspect ratio (width/height) of the agent who granted PERMISSION_TRACK_CAMERA. Returns 0.0 if permissions are not granted.
   llGetCameraFOV(  ) -> float:
@@ -202,10 +202,10 @@ avatar:
     rules: A strided list of rules and data pairs configuring the camera.
     tooltip: Sets multiple camera parameters simultaneously using the list of rules. Requires the PERMISSION_CONTROL_CAMERA runtime permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
   llTakeCamera( key avatar ) -> void // deprecated:
@@ -242,9 +242,9 @@ avatar:
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
       runtime permission.
 avatar_animation:
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -259,45 +259,39 @@ avatar_animation:
     anim: Name of an animation in the prim's inventory, or a built-in animation name.
     tooltip: Overrides the default animation for anim_state with anim (which must be in the object's inventory or a built-in animation). Requires the PERMISSION_OVERRIDE_ANIMATIONS permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
 avatar_communication:
-  email( string time, string address, string subject, string message, integer num_left ):
-    time: Timestamp of when the email was received.
-    address: Email address of the sender.
-    subject: Subject of the email.
-    message: Body text of the email.
-    num_left: Number of pending emails still waiting in the queue.
-    tooltip: Triggered when an email sent to this script's address arrives. num_left indicates the number of pending emails remaining in the queue.
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
-  llEmail( string address, string subject, string message ) -> void:
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
+  llEmail( string address, string subject, string msg ) -> void:
     address: Destination email address.
     subject: Subject of the email.
-    message: Message body of the email.
-    tooltip: Sends an email to address with subject and message.
-  llInstantMessage( key user, string message ) -> void:
-    user: UUID of the destination user.
-    message: Text message string to send.
-    tooltip: Sends an instant message containing message to the user identified by their key.
+    msg: Message body of the email.
+    tooltip: Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()
+  llInstantMessage( key agent, string msg ) -> void:
+    agent: UUID of the destination agent.
+    msg: Text message string to send.
+    tooltip: Sends an instant message containing msg to the agent identified by their key.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -330,59 +324,60 @@ avatar_communication:
     params: Options or parameters to apply to the opened floater.
     tooltip: Opens the specified viewer floater_name loaded with url and configured via params. Returns an integer error code, or 0 if successful.
   llOwnerSay( string msg ) -> void:
-    msg: Text message string to send.
+    msg: Text message string to send to the object owner.
     tooltip: Sends the chat message msg privately to the object owner (the owner must be currently in the same region for the message to be received).
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llSetText( string text, vector color, float alpha ) -> void:
     text: Floating text string to display.
     color: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
     alpha: Transparency value to set, from 0.0 (clear) to 1.0 (solid).
     tooltip: Displays floating text above the prim with the specified color vector and transparency alpha.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
-  llTargetedEmail( integer target, string subject, string message ) -> void:
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
+  llTargetedEmail( integer target, string subject, string msg ) -> void:
     target: Target constant (e.g., TARGETED_EMAIL_OBJECT_OWNER or TARGETED_EMAIL_ROOT_CREATOR).
     subject: Subject of the email.
-    message: Email message body.
-    tooltip: Sends an email containing subject and message to the target (which can designate the owner or creator of the object).
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+    msg: Email message body.
+    tooltip: Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 avatar_inventory:
-  llGiveAgentInventory( key agent, string folder, list inventory, list options ) -> integer:
-    agent: UUID of the receiving agent in the region.
-    folder: Name of the destination folder to be created in the agent's inventory.
-    inventory: A list of inventory items to transfer.
+  llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer:
+    agent: UUID of the target agent in the same region.
+    folder: Name of the destination folder to be created
+    items: The names of the items in the prim's inventory to transfer.
     options: A list of options to configure the inventory transfer.
     tooltip: Gives the specified inventory items to the agent as a new folder named folder, as permitted by the permissions system. Customizes the transfer using options.
-  llGiveInventory( key destination, string inventory ) -> void:
-    destination: UUID of the destination avatar or prim.
-    inventory: Name of the item in the prim's inventory.
-    tooltip: Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.
-  llGiveInventoryList( key target, string folder, list inventory ) -> void:
-    target: UUID of the target avatar or prim in the same region.
+  llGiveInventory( key target, string item ) -> void:
+    target: UUID of the target agent or prim.
+    item: Name of the item in the prim's inventory to transfer.
+    tooltip: Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.
+  llGiveInventoryList( key target, string folder, list items ) -> void:
+    target: UUID of the target agent or prim in the same region.
     folder: Name of the destination folder to be created (ignored if the target is an object).
-    inventory: A list of names representing items in the prim's inventory.
+    items: The names of the items in the prim's inventory to transfer.
     tooltip: Gives the list of inventory items to target as a new folder named folder. If target is an object, the items are passed directly into its inventory and no folder is created. The target must
       be an agent or an object in the same region.
 camera:
@@ -425,22 +420,23 @@ camera:
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
       runtime permission.
 chat:
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -451,35 +447,36 @@ chat:
     handle: Integer listener handle returned by llListen to remove.
     tooltip: Completely removes the listener specified by the integer handle.
   llRegionSay( integer channel, string msg ) -> void:
-    channel: Output chat channel to broadcast on (must be non-zero).
+    channel: Chat channel (any 32-bit signed integer value except zero) to chat the message on.
     msg: Text message string to broadcast.
-    tooltip: Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).
+    tooltip: Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 combat:
   final_damage( integer num_detected ):
     num_detected: Number of damage events applied to the avatar or task.
@@ -506,11 +503,11 @@ combat:
   llGetHealth( key id ) -> float:
     id: UUID of the agent or object to query.
     tooltip: Returns a float representing the current health of the avatar or object specified by id.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
   llSetDamage( float damage ) -> void:
     damage: Float damage value to set (range -100.0 for full heal to 100.0 for instant kill).
     tooltip: Sets the amount of damage delivered when this object hits an avatar. The object is immediately destroyed upon inflicting damage, and no collision event is triggered.
@@ -626,8 +623,8 @@ data_conversion:
     src: Source string to parse.
     separators: A list of up to 8 strings representing separators to be discarded.
     spacers: A list of up to 8 strings representing spacers to be preserved in the list.
-    tooltip: Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries
-      each.
+    tooltip: Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up
+      to 8 string entries each.
   llStringToBase64( string str ) -> string:
     str: Source string to encode.
     tooltip: Returns the Base64 representation string of str, interpreting it as a UTF-8 byte sequence.
@@ -795,10 +792,10 @@ dataserver:
     id: UUID of the avatar to query.
     tooltip: Asynchronously requests the display name of the agent specified by id, triggering a dataserver event with the results. The agent does not need to be online or in the region. Returns a key query
       handle.
-  llRequestInventoryData( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns
-      a key query handle.
+  llRequestInventoryData( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key
+      query handle.
   llRequestSimulatorData( string region, integer data ) -> key:
     region: Case-sensitive region name.
     data: DATA_SIM_* flag of the requested simulator data.
@@ -1182,9 +1179,9 @@ land_moderation:
     avatar: UUID of the avatar to teleport.
     tooltip: Teleports the avatar (who must be standing on land owned by the script owner) directly to their designated home location without warning (similar to a God Summons).
 linkset:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   linkset_data( integer action, string name, string value ):
     action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
     name: Key name of the modified key-value pair.
@@ -1238,9 +1235,9 @@ linkset:
     tooltip: Returns a float representing the minimum scale factor that can be applied to the object via llScaleByFactor without violating size limits.
   llGetNumberOfPrims(  ) -> integer:
     tooltip: Returns an integer representing the total number of prims and seated avatars in the linkset containing the script.
-  llGetObjectPermMask( integer category ) -> integer:
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.
+  llGetObjectPermMask( integer group ) -> integer:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the script's object's permission flags for the specified group.
   llGetOwner(  ) -> key:
     tooltip: Returns the key (UUID) of the object's current owner.
   llGetRootPosition(  ) -> vector:
@@ -1361,10 +1358,10 @@ linkset:
     rate: Playback rate in frames per second (or radians/sec for ROTATE, UV coords/sec for SMOOTH). Must not be zero.
     tooltip: Animates the texture on face of the linked prim link by setting the scale and offset according to mode. Parameters sizex/sizey define frames, start defines the start frame/angle, length defines
       duration, and rate defines playback speed.
-  llSetObjectPermMask( integer mask, integer value ) -> void:
-    mask: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission mask category to value on the root object containing the script.
+  llSetObjectPermMask( integer group, integer flags ) -> void:
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the scripts's object's permission flags for the specified group.
   llSetStatus( integer status, integer value ) -> void:
     status: Bitmask representing the STATUS_* flag(s) to change.
     value: Boolean. If TRUE, enables the status; if FALSE, disables it.
@@ -1425,8 +1422,8 @@ list:
     src: Source list to copy and modify.
     start_index: Starting index of the slice to remove (inclusive).
     end_index: Ending index of the slice to remove (inclusive).
-    tooltip: Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes
-      the specified range.
+    tooltip: Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index,
+      the deletion excludes the specified range.
   llGetListEntryType( list src, integer index ) -> integer:
     src: Source list containing the element of interest.
     index: Zero-based index of the entry.
@@ -1746,9 +1743,9 @@ math_trig:
     theta: Angle expressed in radians.
     tooltip: Returns a float representing the tangent of theta.
 media:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llClearLinkMedia( integer link, integer face ) -> integer:
     link: 'The link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag representing the target prim.'
     face: Face number to clear.
@@ -2027,12 +2024,12 @@ object:
     tooltip: Returns TRUE if the agent or object specified by uuid is in the same region (simulator) and shares the same active group as the prim containing the script; returns FALSE otherwise.
 object_animation:
   llGetObjectAnimationNames(  ) -> list:
-    tooltip: Returns a list of strings representing the names of all active animations currently playing on the object.
+    tooltip: Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.
   llStartObjectAnimation( string anim ) -> void:
-    anim: Name of an animation in the current object's inventory.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the specified animation anim (inventory or built-in) on the rigged mesh object associated with the current script.
   llStopObjectAnimation( string anim ) -> void:
-    anim: Name of an animation in the current object's inventory, or an animation UUID.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the rigged mesh object associated with the current script.
 parcel:
   llAddToLandBanList( key avatar, float hours ) -> void:
@@ -2270,9 +2267,9 @@ permissions:
   llForceMouselook( integer mouselook ) -> void:
     mouselook: Boolean. If TRUE, forces a sitting avatar into mouselook; if FALSE, allows them to keep their current camera mode.
     tooltip: Sets whether any avatar sitting on this prim is forced into mouselook mode. Setting mouselook to TRUE forces the mode; FALSE (default) allows the avatar to keep their current camera mode.
-  llGetAnimation( key id ) -> string:
-    id: UUID of the avatar in the same region.
-    tooltip: Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.
+  llGetAnimation( key avatar ) -> string:
+    avatar: UUID of the avatar in the same region.
+    tooltip: Returns a string representing the name of the currently playing locomotion animation for the specified avatar.
   llGetAnimationList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
     tooltip: Returns a list of keys (UUIDs) representing all active animations currently playing on the specified avatar.
@@ -2321,10 +2318,10 @@ permissions:
     rules: A strided list of rules and data pairs configuring the camera.
     tooltip: Sets multiple camera parameters simultaneously using the list of rules. Requires the PERMISSION_CONTROL_CAMERA runtime permission.
   llStartAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, or a built-in animation.
+    anim: Name of the animation in the prim's inventory, or the built-in animation name.
     tooltip: Starts the animation anim (inventory or built-in) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on objects).
   llStopAnimation( string anim ) -> void:
-    anim: Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.
+    anim: Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
   llTakeCamera( key avatar ) -> void // deprecated:
@@ -2601,14 +2598,14 @@ prim:
     v: Vertical (V) offset, typically in the interval [-1.0, 1.0].
     face: Face number or ALL_SIDES.
     tooltip: Sets the texture horizontal (u) and vertical (v) offsets for the chosen face. If face is ALL_SIDES, offsets all faces.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
     target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
   llRotateTexture( float angle, integer face ) -> void:
     angle: Rotation angle expressed in radians.
     face: Face number or ALL_SIDES.
@@ -2691,9 +2688,9 @@ prim:
     rot: Target rotation relative to the prim's rotation.
     tooltip: Sets the sit target position (offset) and rotation (rot) relative to the prim's position and orientation. Clears the sit target if offset is ZERO_VECTOR.
 prim_appearance:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llGetAlpha( integer face ) -> float:
     face: Face number or ALL_SIDES.
     tooltip: Returns a float representing the Blinn-Phong alpha (transparency) of face. If face is ALL_SIDES, returns the mean average of all faces.
@@ -2841,120 +2838,128 @@ prim_appearance:
     srgb: Color vector in the sRGB colorspace to convert.
     tooltip: Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.
 prim_inventory:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llAllowInventoryDrop( integer add ) -> void:
     add: Boolean. If TRUE, allows anyone to drop inventory items into the prim (even without modify rights). If FALSE, restricts inventory dropping to those with modify permissions.
     tooltip: If add is TRUE, allows users without object modify permissions to drop inventory items into the prim. If FALSE, restricts inventory dropping to users with modify permissions.
-  llDerezObject( key id, integer flag ) -> integer:
+  llDerezObject( key id, integer flags ) -> integer:
     id: UUID of the object in the region to derez.
-    flag: Derez behavior flags matching DEREZ_* constants.
+    flags: Derez behavior flags matching DEREZ_* constants.
     tooltip: Derezzes (deletes or returns) a targeted object in the region previously rezzed by a script in this linkset, returning TRUE on success or FALSE on failure.
   llGetInventoryAcquireTime( string item ) -> string:
     item: Name of the item in the prim's inventory.
-    tooltip: Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.
+    tooltip: Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form "YYYY-MM-DDThh:mm:ssZ"
   llGetInventoryCreator( string item ) -> key:
     item: Name of the item in the prim's inventory.
     tooltip: Returns the key (UUID) of the creator of the specified inventory item.
   llGetInventoryDesc( string item ) -> string:
     item: Name of the item in the prim's inventory.
-    tooltip: Returns a string containing the description of the specified inventory item.
-  llGetInventoryKey( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Returns the key (UUID) of the specified inventory name.
-  llGetInventoryName( integer type, integer number ) -> string:
+    tooltip: Returns the description string of the specified inventory item.
+  llGetInventoryKey( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Returns the key (UUID) of the specified inventory item.
+  llGetInventoryName( integer type, integer index ) -> string:
     type: INVENTORY_* type constant of the item.
-    number: Index number of the item of that type, starting from 0.
-    tooltip: Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.
+    index: Index of the item of that type.
+    tooltip: Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.
   llGetInventoryNumber( integer type ) -> integer:
     type: INVENTORY_* type constant to count.
-    tooltip: Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.
-  llGetInventoryPermMask( string item, integer category ) -> integer:
+    tooltip: Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.
+  llGetInventoryPermMask( string item, integer group ) -> integer:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT).
-    tooltip: Returns an integer bitfield representing the permission category mask of the specified inventory item.
-  llGetInventoryType( string name ) -> integer:
-    name: Name of the inventory item.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to get.
+    tooltip: Returns the specified item's permission flags for the specified group.
+  llGetInventoryType( string item ) -> integer:
+    item: Name of the item in the prim's inventory.
     tooltip: Returns an integer representing the INVENTORY_* type of the named inventory item.
   llGetScriptName(  ) -> string:
     tooltip: Returns a string containing the name of the script calling this function.
   llGetScriptState( string script ) -> integer:
     script: Name of the script in the prim's inventory.
     tooltip: Returns a boolean integer indicating whether the specified script in the prim's inventory is running (returns TRUE if running, FALSE otherwise).
-  llGiveInventory( key destination, string inventory ) -> void:
-    destination: UUID of the destination avatar or prim.
-    inventory: Name of the item in the prim's inventory.
-    tooltip: Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.
-  llGiveInventoryList( key target, string folder, list inventory ) -> void:
-    target: UUID of the target avatar or prim in the same region.
+  llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer:
+    agent: UUID of the target agent in the same region.
+    folder: Name of the destination folder to be created
+    items: The names of the items in the prim's inventory to transfer.
+    options: A list of options to configure the inventory transfer.
+    tooltip: Gives the specified inventory items to the agent as a new folder named folder, as permitted by the permissions system. Customizes the transfer using options.
+  llGiveInventory( key target, string item ) -> void:
+    target: UUID of the target agent or prim.
+    item: Name of the item in the prim's inventory to transfer.
+    tooltip: Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.
+  llGiveInventoryList( key target, string folder, list items ) -> void:
+    target: UUID of the target agent or prim in the same region.
     folder: Name of the destination folder to be created (ignored if the target is an object).
-    inventory: A list of names representing items in the prim's inventory.
+    items: The names of the items in the prim's inventory to transfer.
     tooltip: Gives the list of inventory items to target as a new folder named folder. If target is an object, the items are passed directly into its inventory and no folder is created. The target must
       be an agent or an object in the same region.
-  llGodLikeRezObject( key inventory, vector pos ) -> void:
-    inventory: Asset UUID of the object to rez.
+  llGodLikeRezObject( key id, vector pos ) -> void:
+    id: Asset UUID of the object to rez.
     pos: Position vector in region coordinates where the object will be rezzed.
-    tooltip: Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.
-  llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated:
+    tooltip: Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.
+  llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated:
     target: UUID of the target prim.
-    name: Name of the script in the prim's inventory.
-    running: Whether the script should start running.
-    start_param: Start parameter passed to the script.
-    tooltip: Deprecated.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
-    target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
+    tooltip: Deprecated.
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
+    target: UUID of the target prim in the same region.
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
+    running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
+    start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
   llRemoveInventory( string item ) -> void:
     item: Name of the item in the prim's inventory to remove.
     tooltip: Permanently deletes the named inventory item from the prim's inventory.
-  llRequestInventoryData( string name ) -> key:
-    name: Name of the item in the prim's inventory.
-    tooltip: Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns
-      a key query handle.
-  llResetOtherScript( string name ) -> void:
-    name: Name of the target script in the prim's inventory.
-    tooltip: Resets the script name located in the prim's inventory.
-  llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
-    position: Position vector in region coordinates where the root of the object will be placed.
-    velocity: Initial velocity vector for the rezzed object.
+  llRequestInventoryData( string item ) -> key:
+    item: Name of the item in the prim's inventory.
+    tooltip: Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key
+      query handle.
+  llResetOtherScript( string script ) -> void:
+    script: Name of the target script in the prim's inventory.
+    tooltip: Resets the named script name in the prim's inventory.
+  llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
+    pos: Position vector in region coordinates where the root of the object will be placed.
+    vel: Initial velocity vector for the rezzed object.
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.
-  llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the
+      rezzed object is non-physical.
+  llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
     pos: Position vector in region coordinates where the center of the object will be placed.
     vel: Initial velocity vector (maximum magnitude ~200m/s).
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
-  llSetInventoryPermMask( string item, integer category, integer value ) -> void:
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if
+      the rezzed object is non-physical.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
+  llSetInventoryPermMask( string item, integer group, integer flags ) -> void:
     item: Name of the item in the prim's inventory.
-    category: MASK_* category flag (such as MASK_NEXT, MASK_OWNER, etc.).
-    value: Bitfield of permissions (PERM_* flags) to set.
-    tooltip: Sets the specified permission category of the inventory item to the value permissions mask.
+    group: MASK_* group (e.g., MASK_BASE, MASK_OWNER, MASK_GROUP, MASK_EVERYONE, or MASK_NEXT) to set.
+    flags: Bitfield of permissions (PERM_* flags) to set.
+    tooltip: Sets the specified item's permission flags for the specified group.
   llSetRemoteScriptAccessPin( integer pin ) -> void:
     pin: Integer PIN code (non-zero enables, zero disables).
     tooltip: Sets the prim's remote script access PIN to pin (a non-zero value enables loading via llRemoteLoadScriptPin, while zero disables it).
-  llSetScriptState( string name, integer running ) -> void:
-    name: Name of the script in the prim's inventory.
+  llSetScriptState( string script, integer running ) -> void:
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, enables the script; if FALSE, disables it.
-    tooltip: Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
+    tooltip: Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
 prim_media:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llClearLinkMedia( integer link, integer face ) -> integer:
     link: 'The link number (0: unlinked, 1: root prim, >1: child prims) or a LINK_* flag representing the target prim.'
     face: Face number to clear.
@@ -3090,9 +3095,9 @@ quaternion:
     end_vec: Target ending vector.
     tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
 region:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llCloud( vector offset ) -> float // deprecated:
     offset: Offset relative to the prim's position, expressed in local coordinates.
     tooltip: Returns a float representing the cloud density at the prim's position offset by the vector offset.
@@ -3204,9 +3209,9 @@ rez:
     start_param: Integer start parameter passed from the rezzing call.
     tooltip: Triggered when the object is rezzed into the world (by a script or user). Passes start_param from the rezzing call (or 0 if rezzed from inventory). Also triggers on attachments during login
       or when attached from inventory.
-  llDerezObject( key id, integer flag ) -> integer:
+  llDerezObject( key id, integer flags ) -> integer:
     id: UUID of the object in the region to derez.
-    flag: Derez behavior flags matching DEREZ_* constants.
+    flags: Derez behavior flags matching DEREZ_* constants.
     tooltip: Derezzes (deletes or returns) a targeted object in the region previously rezzed by a script in this linkset, returning TRUE on success or FALSE on failure.
   llDie(  ) -> void:
     tooltip: Deletes the entire object containing the script (the object does not go to inventory). Use llBreakLink first to delete only a single prim.
@@ -3214,10 +3219,10 @@ rez:
     tooltip: Returns an integer representing the start/rez parameter passed to the object on creation (returns 0 if rezzed by an agent).
   llGetStartString(  ) -> string:
     tooltip: Returns the initialization string passed to the object's root prim on rez with llRezObjectWithParams (via REZ_PARAM_STRING; returns an empty string if rezzed by an agent).
-  llGodLikeRezObject( key inventory, vector pos ) -> void:
-    inventory: Asset UUID of the object to rez.
+  llGodLikeRezObject( key id, vector pos ) -> void:
+    id: Asset UUID of the object to rez.
     pos: Position vector in region coordinates where the object will be rezzed.
-    tooltip: Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.
+    tooltip: Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.
   llReturnObjectsByID( list objects ) -> integer:
     objects: A list of object UUID keys to return.
     tooltip: Returns objects specified by the list of UUIDs objects to their owners. Requires the PERMISSION_RETURN_OBJECTS permission, and the script owner must own the parcel or be an estate manager/region
@@ -3227,29 +3232,31 @@ rez:
     scope: OBJECT_RETURN_* scope flag (such as OBJECT_RETURN_PARCEL, OBJECT_RETURN_PARCEL_OWNER, or OBJECT_RETURN_REGION).
     tooltip: Returns objects owned by owner within the specified scope (parcel, parcel owner, or region). Requires the PERMISSION_RETURN_OBJECTS permission, and the script owner must own the parcel or be
       an estate manager/region owner.
-  llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
-    position: Position vector in region coordinates where the root of the object will be placed.
-    velocity: Initial velocity vector for the rezzed object.
+  llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
+    pos: Position vector in region coordinates where the root of the object will be placed.
+    vel: Initial velocity vector for the rezzed object.
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.
-  llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void:
-    inventory: Name of the object in the prim's inventory.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the
+      rezzed object is non-physical.
+  llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void:
+    item: Name of the object in the prim's inventory to rez.
     pos: Position vector in region coordinates where the center of the object will be placed.
     vel: Initial velocity vector (maximum magnitude ~200m/s).
     rot: Initial rotation of the rezzed object.
-    param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
-    tooltip: Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.
-  llRezObjectWithParams( string inventory, list params ) -> key:
-    inventory: Name of the object in the prim's inventory.
-    params: A list of REZ_* parameters to configure the rezzed object's attributes.
-    tooltip: Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed
-      object, or a blank key on failure.
+    start_param: Start parameter passed to the rezzed object's on_rez event (accessible via llGetStartParameter).
+    tooltip: Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if
+      the rezzed object is non-physical.
+  llRezObjectWithParams( string item, list options ) -> key:
+    item: Name of the object in the prim's inventory to rez.
+    options: A list of REZ_* options to configure the rezzed object's attributes.
+    tooltip: Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of
+      the rezzed object, or a blank key on failure.
 script:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   on_rez( integer start_param ):
     start_param: Integer start parameter passed from the rezzing call.
     tooltip: Triggered when the object is rezzed into the world (by a script or user). Passes start_param from the rezzing call (or 0 if rezzed from inventory). Also triggers on attachments during login
@@ -3288,23 +3295,23 @@ script:
   llMinEventDelay( float delay ) -> void:
     delay: Minimum delay duration in seconds.
     tooltip: Sets the minimum delay time between events being handled (minimums and defaults vary by event type).
-  llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated:
+  llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated:
     target: UUID of the target prim.
-    name: Name of the script in the prim's inventory.
-    running: Whether the script should start running.
-    start_param: Start parameter passed to the script.
-    tooltip: Deprecated.
-  llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void:
-    target: UUID of the target prim in the same region.
-    name: Name of the script in the prim's inventory.
-    pin: Integer PIN code (must match the PIN set on the target via llSetRemoteScriptAccessPin).
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
     start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
-    tooltip: Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set
-      via llSetRemoteScriptAccessPin).
-  llResetOtherScript( string name ) -> void:
-    name: Name of the target script in the prim's inventory.
-    tooltip: Resets the script name located in the prim's inventory.
+    tooltip: Deprecated.
+  llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void:
+    target: UUID of the target prim in the same region.
+    script: Name of the script in the prim's inventory.
+    pin: Integer PIN code (must match the PIN set on the ObjectID via llSetRemoteScriptAccessPin).
+    running: Boolean. If TRUE, sets the copied script to run immediately; if FALSE, leaves it stopped.
+    start_param: Integer start parameter passed to the copied script (readable via llGetStartParameter).
+    tooltip: Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via
+      llSetRemoteScriptAccessPin).
+  llResetOtherScript( string script ) -> void:
+    script: Name of the target script in the prim's inventory.
+    tooltip: Resets the named script name in the prim's inventory.
   llResetScript(  ) -> void:
     tooltip: Resets the current script.
   llResetTime(  ) -> void:
@@ -3321,10 +3328,10 @@ script:
   llSetRemoteScriptAccessPin( integer pin ) -> void:
     pin: Integer PIN code (non-zero enables, zero disables).
     tooltip: Sets the prim's remote script access PIN to pin (a non-zero value enables loading via llRemoteLoadScriptPin, while zero disables it).
-  llSetScriptState( string name, integer running ) -> void:
-    name: Name of the script in the prim's inventory.
+  llSetScriptState( string script, integer running ) -> void:
+    script: Name of the script in the prim's inventory.
     running: Boolean. If TRUE, enables the script; if FALSE, disables it.
-    tooltip: Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
+    tooltip: Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.
   llSetTimerEvent( float sec ) -> void:
     sec: Interval in seconds between timer events (0.0 to disable).
     tooltip: Sets a timer to trigger a timer event periodically every sec seconds. Passing 0.0 stops further timer events.
@@ -3332,6 +3339,13 @@ script:
     sec: Duration in seconds to put the script to sleep.
     tooltip: Puts the script to sleep for sec seconds (at least until the next server-frame, ~0.02222 seconds). The script is inactive during this time. If sec is 0.0 or less, the script does not sleep.
 script_communication:
+  email( string time, string address, string subject, string msg, integer num_left ):
+    time: Timestamp of when the email was received, in (string)llGetUnixTime() format.
+    address: Email address of the sender.
+    subject: Subject of the email.
+    msg: Body text of the email.
+    num_left: Number of emails still waiting in the queue.
+    tooltip: Receive an email requested by llGetNextEmail(). NumberRemaining indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.
   http_request( key request_id, string method, string body ):
     request_id: Unique key identifying the incoming HTTP request (used with llHTTPResponse).
     method: HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request status constants.
@@ -3349,12 +3363,12 @@ script_communication:
     str: A text string value passed from the sending script.
     id: A key value passed from the sending script.
     tooltip: Triggered when the script receives a link message from sender_num, containing the parameters num, str, and id sent via llMessageLinked.
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
   remote_data( integer event_type, key channel, key message_id, string sender, integer idata, string sdata ) // deprecated:
     event_type: Integer constant representing the type of XML-RPC event.
     channel: XML-RPC channel ID key.
@@ -3366,10 +3380,21 @@ script_communication:
   llCloseRemoteDataChannel( key channel ) -> void // deprecated:
     channel: XML-RPC channel ID to close.
     tooltip: Deprecated. Closes the specified XML-RPC channel.
+  llEmail( string address, string subject, string msg ) -> void:
+    address: Destination email address.
+    subject: Subject of the email.
+    msg: Message body of the email.
+    tooltip: Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()
   llGetNextEmail( string address, string subject ) -> void:
-    address: Sender email address filter.
-    subject: Email subject filter.
-    tooltip: Requests the next queued email matching the specified sender address and subject filters via the email event.
+    address: Sender email address filter, or "" for any address.
+    subject: Email subject filter, or "" for any subject.
+    tooltip: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   llHTTPRequest( string url, list parameters, string body ) -> key:
     url: Destination HTTP or HTTPS URL.
     parameters: A list of HTTP_* configuration flags and value pairs, or an HTTPRequestParams dictionary.
@@ -3381,9 +3406,9 @@ script_communication:
     body: String contents of the response body.
     tooltip: Responds to the incoming HTTP request identified by request_id with the HTTP status code status and the payload body.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -3402,14 +3427,14 @@ script_communication:
   llOpenRemoteDataChannel(  ) -> void // deprecated:
     tooltip: Deprecated. Creates a channel to listen for incoming XML-RPC calls, triggering a remote_data event with the channel ID once available.
   llRegionSay( integer channel, string msg ) -> void:
-    channel: Output chat channel to broadcast on (must be non-zero).
+    channel: Chat channel (any 32-bit signed integer value except zero) to chat the message on.
     msg: Text message string to broadcast.
-    tooltip: Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).
+    tooltip: Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llRemoteDataReply( key channel, key message_id, string sdata, integer idata ) -> void // deprecated:
     channel: XML-RPC channel ID.
@@ -3424,10 +3449,10 @@ script_communication:
   llRequestURL(  ) -> key:
     tooltip: Asynchronously requests one HTTP URL for use by this script, triggering an http_request event. Returns a key query handle.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llSendRemoteData( key channel, string dest, integer idata, string sdata ) -> key // deprecated:
     channel: XML-RPC channel ID.
     dest: Destination XML-RPC URL or server.
@@ -3435,15 +3460,15 @@ script_communication:
     sdata: String payload data.
     tooltip: Deprecated. Sends an XML-RPC request to dest on channel, containing the channel ID as a string, integer idata, and string sdata. Returns a key representing the message_id.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 sensor:
   collision( integer num_detected ):
     num_detected: Total number of detected colliders (usable with llDetected* functions).
@@ -3497,9 +3522,9 @@ sensor:
     tooltip: If detect is TRUE, enables VolumeDetect (object becomes phantom and physical objects/avatars can pass through it). Triggers collision_start on initial intersection and collision_end when intersection
       stops (standard collision events are suppressed while intersecting).
 sit:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llAvatarOnLinkSitTarget( integer link ) -> key:
     link: Index of the prim in the linkset (1 for root, >1 for children), or a LINK_* flag.
     tooltip: Returns the UUID of the avatar seated on the specified link's sit target, or NULL_KEY if no avatar is sitting there.
@@ -3625,39 +3650,39 @@ sound:
     tooltip: Plays the specified sound once at volume, centered at the object but not attached, restricted to the axis-aligned bounding box defined by the coordinates top_north_east and bottom_south_west.
 string:
   llChar( integer val ) -> string:
-    val: Unicode value to convert into a character string.
-    tooltip: Constructs and returns a single-character string representing the supplied Unicode value val.
+    val: Unicode codepoint integer (ordinal) to convert.
+    tooltip: Constructs and returns a single-character string from the given Unicode codepoint ordinal.
   llDeleteSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to modify.
-    start_index: Starting index of the substring to remove (inclusive).
-    end_index: Ending index of the substring to remove (inclusive).
-    tooltip: Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion
-      excludes the specified range.
+    start_index: Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.
+    end_index: Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.
+    tooltip: Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater
+      than end_index, the deletion excludes the specified range.
   llGetSubString( string src, integer start_index, integer end_index ) -> string:
     src: Source string to slice.
-    start_index: Zero-based start index (inclusive).
-    end_index: Zero-based end index (inclusive).
-    tooltip: Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring
-      is the excluded range.
-  llInsertString( string dst, integer pos, string src ) -> string:
+    start_index: Starting codepoint index (inclusive). Supports negative indexing.
+    end_index: Ending codepoint index (inclusive). Supports negative indexing.
+    tooltip: Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than
+      end_index, the substring is the excluded range.
+  llInsertString( string dst, integer index, string src ) -> string:
     dst: Target destination string.
-    pos: Zero-based position index where insertion starts.
+    index: Codepoint index where insertion starts.
     src: Source string to insert.
-    tooltip: Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.
+    tooltip: Returns a copy of dst with src inserted at the given codepoint index.
   llOrd( string val, integer index ) -> integer:
-    val: Source string containing the character.
-    index: Zero-based index of the character to convert.
-    tooltip: Returns the integer Unicode (ordinal) value of the character at index in the string val.
+    val: Source string.
+    index: Codepoint index of the character to convert. Supports negative indexing.
+    tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.
   llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string:
     src: Original source string to search.
     pattern: Substring pattern to find and replace.
-    replacement_pattern: New substring used to replace the pattern.
+    replacement_pattern: New substring that replaces the pattern.
     count: Maximum number of replacements to make (0 for all, positive for left-to-right, negative for right-to-left).
-    tooltip: Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right,
-      while negative counts process right-to-left.
+    tooltip: Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts
+      process right-to-left.
   llStringLength( string str ) -> integer:
     str: String to measure.
-    tooltip: Returns an integer representing the number of characters in the string str (excluding the null terminator).
+    tooltip: Returns the number of unicode codepoints in the string.
   llStringTrim( string src, integer type ) -> string:
     src: String to trim.
     type: Trim type flag (STRING_TRIM_HEAD, STRING_TRIM_TAIL, or STRING_TRIM).
@@ -3665,17 +3690,17 @@ string:
   llSubStringIndex( string source, string pattern ) -> integer:
     source: Source string to search within.
     pattern: Substring pattern to search for.
-    tooltip: Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.
+    tooltip: Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.
   llToLower( string src ) -> string:
     src: Source string to convert.
-    tooltip: Returns a copy of the string src converted entirely to lowercase.
+    tooltip: Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.
   llToUpper( string src ) -> string:
     src: Source string to convert.
-    tooltip: Returns a copy of the string src converted entirely to uppercase.
+    tooltip: Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.
 teleport:
-  changed( integer change ):
-    change: A bitfield of CHANGED_* constants representing what changed.
-    tooltip: Triggered when various properties of the object change. The parameter change is a bitfield of CHANGED_* constants.
+  changed( integer changes ):
+    changes: A bitfield of CHANGED_* flags representing what changed.
+    tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   llMapDestination( string simname, vector pos, vector look_at ) -> void:
     simname: Name of the target simulator region.
     pos: Position vector in region coordinates to highlight.
@@ -3785,12 +3810,13 @@ user_interface:
   touch_start( integer num_detected ):
     num_detected: Total number of touching agents detected (usable with llDetected* functions).
     tooltip: Triggered when an avatar first touches the object. Passes num_detected, representing the number of touching agents.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llLoadURL( key avatar, string message, string url ) -> void:
     avatar: UUID of the avatar in the same region.
     message: Text message to display in the dialog box.
@@ -3821,11 +3847,12 @@ user_interface:
   llSetTouchText( string text ) -> void:
     text: Context menu text to display.
     tooltip: Displays the string text instead of 'Touch' in the right-click context menu.
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWorldPosToHUD( vector world_pos ) -> vector:
     world_pos: World-frame position vector to project into HUD space.
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA

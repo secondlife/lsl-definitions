@@ -128,6 +128,81 @@
                 }
             ]
         },
+        "arguments": {
+            "items": {
+                "additionalProperties": false,
+                "patternProperties": {
+                    "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "asset-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
+                                "type": "boolean"
+                            },
+                            "bool-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's integer value represents a boolean value.",
+                                "type": "boolean"
+                            },
+                            "index-semantics": {
+                                "const": true,
+                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
+                                "type": "boolean"
+                            },
+                            "enum-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's integer value represents an enum value.",
+                                "type": "string"
+                            },
+                            "param-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's list value represents a parameter list to set.",
+                                "type": "string"
+                            },
+                            "param-get-semantics": {
+                                "pattern": "^[A-Z][A-Za-z]+$",
+                                "markdownDescription": "This function argument's list value represents a parameter list to get.",
+                                "type": "string"
+                            },
+                            "tooltip": {
+                                "markdownDescription": "A brief description of this function argument.",
+                                "type": "string"
+                            },
+                            "type": { "$ref": "#/$defs/lslType" },
+                            "slua-type": {
+                                "markdownDescription": "A more specific argument type for slua type-checking.",
+                                "type": "string"
+                            },
+                            "ruleset": {
+                                "markdownDescription": "Name of a builder-ruleset for automatic dict-to-list coercion. When present, the base ll.* function will accept either a flat rules list or a dict matching the named ruleset.",
+                                "type": "string"
+                            },
+                            "range": {
+                                "markdownDescription": "The minimum and maximum valid values for the argument as [min, max].",
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "items": {
+                                    "anyOf": [
+                                        { "type": "number" },
+                                        { "type": "string" }
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "type"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "markdownDescription": "An array of function arguments.",
+            "type": "array",
+            "uniqueItems": true
+        },
         "rulesetParamArray": {
             "items": {
                 "items": false,
@@ -285,6 +360,23 @@
                 "if": { "required": ["dispatch-fn"] },
                 "then": { "required": ["lua-module", "lua-fn"] }
             }
+        },
+        "usesEnum": {
+            "markdownDescription": "The name of the category of constants or the list of constants used by the event or function.",
+            "oneOf": [
+                {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]+$"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Z][A-Z0-9_]*$"
+                    },
+                    "uniqueItems": true
+                }
+            ]
         }
     },
     "additionalProperties": false,
@@ -297,7 +389,12 @@
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
-                        "type": { "enum": ["enum", "flag"] },
+                        "type": { "enum": ["enum", "flag", "enum+flag", "param-dict", "param-list"] },
+                        "other-values": {
+                            "const": true,
+                            "markdownDescription": "This parameter accepts values outside the defined enum.",
+                            "type": "boolean"
+                        },
                         "prefix": {
                             "type": "string",
                             "pattern": "^[A-Z]+[A-Z_]*$",
@@ -305,6 +402,20 @@
                         },
                         "deprecated": { "$ref": "#/$defs/deprecated" },
                         "slua-deprecated": { "$ref": "#/$defs/deprecated" },
+                        "enum": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "The flag portion of this enum+flag."
+                        },
+                        "flag": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "The flag portion of this enum+flag."
+                        },
+                        "mask": {
+                            "type": "string",
+                            "markdownDescription": "The mask to extract the enum portion of this enum+flag."
+                        },
                         "special-members": {
                             "markdownDescription": "Valid member names whose value violates the validation rules",
                             "type": "array",
@@ -366,6 +477,76 @@
                             "markdownDescription": "Override the auto-generated property alias for this constant when used as a table-ruleset key. Must be a valid Lua identifier (lowercase, underscores).",
                             "type": "string",
                             "pattern": "^[a-z][a-z0-9_]*$"
+                        },
+                        "range": {
+                            "markdownDescription": "An array with the start and end values.",
+                            "items": {
+                                "type": ["number", "string", "integer"]
+                            },
+                            "maxItems": 2,
+                            "minItems": 2,
+                            "type": "array"
+                        },
+                        "default": {
+                            "markdownDescription": "The default value.",
+                            "type": ["number", "string", "integer", "boolean"]
+                        },
+                        "enum": {
+                            "markdownDescription": "A category of constants valid for this value.",
+                            "type": "string"
+                        },
+                        "details": {
+                            "markdownDescription": "Additional information.",
+                            "type": "string"
+                        },
+                        "access": {
+                            "markdownDescription": "Access mode. 'arg' is always an argument. 'read' is used only when reading. 'write' is used only when writing.",
+                            "enum": ["arg", "read", "write", "read/write"],
+                            "type": "string"
+                        },
+                        "values": {
+                            "markdownDescription": "A list of values associated to the constant.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "name": {
+                                        "markdownDescription": "The name of this value.",
+                                        "type": "string"
+                                    },
+                                    "value-type": {
+                                        "markdownDescription": "For constants used as rule tags in list-based APIs: the type of the value that follows this constant in the list. Uses the same vocabulary as ruleset param types. 'string-csv' accepts a {string} array and serializes it as an escaped comma-separated string. 'string-map' accepts a {[string]: string} table and emits one tag/key/value triple per entry.",
+                                        "enum": ["integer", "float", "string", "vector", "rotation", "boolean", "asset", "key", "string-csv", "string-map", "string-multi"]
+                                    },
+                                    "range": {
+                                        "markdownDescription": "An array with the start and end values.",
+                                        "items": {
+                                            "type": ["number", "string", "integer"]
+                                        },
+                                        "maxItems": 2,
+                                        "minItems": 2,
+                                        "type": "array"
+                                    },
+                                    "default": {
+                                        "markdownDescription": "The default value.",
+                                        "type": ["number", "string", "integer", "boolean"]
+                                    },
+                                    "enum": {
+                                        "markdownDescription": "A category of constants valid for this value.",
+                                        "type": "string"
+                                    },
+                                    "details": {
+                                        "markdownDescription": "Additional information.",
+                                        "type": "string"
+                                    },
+                                    "access": {
+                                        "markdownDescription": "Access mode. 'arg' is always an argument. 'read' is used only when reading. 'write' is used only when writing.",
+                                        "enum": ["arg", "read", "write", "read/write"],
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         }
                     },
                     "required": [
@@ -409,31 +590,7 @@
                 "^[a-z_]+$": {
                     "additionalProperties": false,
                     "properties": {
-                        "arguments": {
-                            "items": {
-                                "additionalProperties": false,
-                                "patternProperties": {
-                                    "^(?:[A-Za-z]+(?:_[A-Za-z]+)*)$": {
-                                        "properties": {
-                                            "tooltip": {
-                                                "markdownDescription": "A brief description of this event argument.",
-                                                "type": "string"
-                                            },
-                                            "type": { "$ref": "#/$defs/lslType" }
-                                        },
-                                        "required": [
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "markdownDescription": "An array of event arguments.",
-                            "minItems": 0,
-                            "type": "array",
-                            "uniqueItems": true
-                        },
+                        "arguments": { "$ref": "#/$defs/arguments" },
                         "detected-semantics": {
                             "const": true,
                             "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
@@ -453,7 +610,8 @@
                             "markdownDescription": "A brief description of this event.",
                             "type": "string"
                         },
-                        "categories": { "$ref": "#/$defs/functionCategories" }
+                        "categories": { "$ref": "#/$defs/functionCategories" },
+                        "uses-enum": { "$ref": "#/$defs/usesEnum" }
                     },
                     "required": [
                         "tooltip",
@@ -483,54 +641,7 @@
                             "type": "array",
                             "uniqueItems": true
                         },
-                        "arguments": {
-                            "items": {
-                                "additionalProperties": false,
-                                "patternProperties": {
-                                    "^(?:[A-Za-z]+(?:[A-z0-9-_]+)*)$": {
-                                        "additionalProperties": false,
-                                        "properties": {
-                                            "asset-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's string value represents an asset name or uuid.",
-                                                "type": "boolean"
-                                            },
-                                            "bool-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a boolean value.",
-                                                "type": "boolean"
-                                            },
-                                            "index-semantics": {
-                                                "const": true,
-                                                "markdownDescription": "This function argument's integer value represents a zero-based index.",
-                                                "type": "boolean"
-                                            },
-                                            "tooltip": {
-                                                "markdownDescription": "A brief description of this function argument.",
-                                                "type": "string"
-                                            },
-                                            "type": { "$ref": "#/$defs/lslType" },
-                                            "slua-type": {
-                                                "markdownDescription": "A more specific argument type for slua type-checking.",
-                                                "type": "string"
-                                            },
-                                            "ruleset": {
-                                                "markdownDescription": "Name of a builder-ruleset for automatic dict-to-list coercion. When present, the base ll.* function will accept either a flat rules list or a dict matching the named ruleset.",
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "markdownDescription": "An array of function arguments.",
-                            "type": "array",
-                            "uniqueItems": true
-                        },
+                        "arguments": { "$ref": "#/$defs/arguments" },
                         "asset-semantics": {
                             "const": true,
                             "markdownDescription": "The returned string value represents an asset name or uuid.",
@@ -550,6 +661,11 @@
                         "energy": {
                             "$ref": "#/$defs/nonNegativeNumber",
                             "markdownDescription": "The script energy consumed by this function."
+                        },
+                        "enum-semantics": {
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "This function's integer return value represents an enum value.",
+                            "type": "string"
                         },
                         "experience": {
                             "const": true,
@@ -589,6 +705,11 @@
                             "const": true,
                             "markdownDescription": "This function must use a native implementation for non-LSO VMs.",
                             "type": "boolean"
+                        },
+                        "param-get-semantics": {
+                            "pattern": "^[A-Z][A-Za-z]+$",
+                            "markdownDescription": "This function's list return value represents a list of the requested parameter values.",
+                            "type": "string"
                         },
                         "private": {
                             "const": true,
@@ -650,7 +771,12 @@
                             "markdownDescription": "A brief description of this function.",
                             "type": "string"
                         },
-                        "categories": { "$ref": "#/$defs/functionCategories" }
+                        "categories": { "$ref": "#/$defs/functionCategories" },
+                        "uses-enum": { "$ref": "#/$defs/usesEnum" },
+                        "other-values": {
+                            "markdownDescription": "Overwrites the other-values field in the category of constants.",
+                            "type": "boolean"
+                        }
                     },
                     "required": [
                         "tooltip",

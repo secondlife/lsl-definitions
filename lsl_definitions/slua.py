@@ -122,6 +122,8 @@ class SLuaTypecheckerFlags:
     For examples of each magic type function, see the comments of
     https://github.com/secondlife/lsl-definitions/pull/130
     """
+    checked: bool = False
+    """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
 
     @property
     def fully_defined(self) -> bool:
@@ -184,17 +186,21 @@ class SLuaFunction(SLuaFunctionBase):
     overloads: list[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
-    def deprecated_string(self) -> str:
-        if self.deprecated is None:
-            return ""
-        params: list[str] = []
-        if self.deprecated.use:
-            params.append(f"use={self.deprecated.use!r}")
-        if self.deprecated.reason:
-            params.append(f"reason={self.deprecated.reason!r}")
-        if params:
-            return f"@[deprecated {{{', '.join(params)}}}]"
-        return "@deprecated "
+    def annotation_string(self) -> str:
+        annotation = ""
+        if self.typechecker_flags.checked:
+            annotation += "@checked "
+        if self.deprecated is not None:
+            params: list[str] = []
+            if self.deprecated.use:
+                params.append(f"use={self.deprecated.use!r}")
+            if self.deprecated.reason:
+                params.append(f"reason={self.deprecated.reason!r}")
+            if params:
+                annotation += f"@[deprecated {{{', '.join(params)}}}]"
+            else:
+                annotation += "@deprecated "
+        return annotation
 
     def to_keywords_dict(self) -> dict:
         return remove_worthless(
@@ -220,13 +226,15 @@ class SLuaFunction(SLuaFunctionBase):
     def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
         """For declaring global functions and class/extern type methods"""
         if self.slua_removed:
-            f.write(f"{self.name}: nil\n")
+            f.write(f"declare {self.name}: nil\n")
         elif self.overloads:
             # the function format can't handle overloads
             self.write_luau_table_def(f, indent, suffix="")
         else:
             f.write(f"{'  ' * indent}")
-            f.write(self.deprecated_string)
+            f.write(self.annotation_string)
+            if indent == 0:
+                f.write("declare ")
             f.write(f"function {self.name}")
             f.write(self.type_parameters_string)
             f.write(self.parameters_string(declaration=True))
@@ -237,7 +245,7 @@ class SLuaFunction(SLuaFunctionBase):
     def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
         """For declaring functions within a table/module"""
         f.write(f"{'  ' * indent}{self.name}: ")
-        f.write(self.deprecated_string)
+        f.write(self.annotation_string)
         if not self.overloads:
             f.write(self.type_def_string)
         else:
@@ -293,10 +301,19 @@ class SLuaClassDeclaration:
         return {"tooltip": self.comment}
 
     def write_luau_def(self, f: TextIO) -> None:
+        self._workaround_annotated_callable_bug()
         if self.instance_type is None:
             self._write_extern_type_def(f)
         else:
             self._write_metatable_def(f)
+
+    def _workaround_annotated_callable_bug(self) -> None:
+        """
+        Workaround this bug by removing all checked annotations
+        https://github.com/luau-lang/luau/issues/2384
+        """
+        for func in self.methods:
+            func.typechecker_flags.checked = False
 
     def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
@@ -358,7 +375,19 @@ class SLuaModule:
             for prop in sorted(self.constants, key=lambda x: x.name)
         }
 
+    def _workaround_annotated_callable_bug(self) -> None:
+        """
+        Workaround this bug by removing all checked annotations
+        https://github.com/luau-lang/luau/issues/2384
+        """
+        if self.callable is None:
+            return  # no issue
+        self.callable.typechecker_flags.checked = False
+        for func in self.functions:
+            func.typechecker_flags.checked = False
+
     def write_luau_def(self, f: TextIO) -> None:
+        self._workaround_annotated_callable_bug()
         f.write(f"""
 ---------------------------
 -- Global Table: {self.name}
@@ -367,6 +396,7 @@ class SLuaModule:
 declare {self.name}: """)
         if self.callable:
             f.write("(")
+            f.write(self.callable.annotation_string)
             f.write(self.callable.type_def_string)
             f.write(") & ")
         f.write("{\n")
@@ -681,6 +711,7 @@ class SLuaDefinitions:
                 type_parameters=["T"],
                 parameters=parameters,
                 return_type="T",
+                typechecker_flags=SLuaTypecheckerFlags(checked=True),
             )
 
         spec = expand_spp_builder(lsl)

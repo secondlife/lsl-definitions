@@ -182,14 +182,14 @@ end
 declare extern type LLEvents with
   at_rot_target: ((handle: number, targetrot: quaternion, ourrot: quaternion) -> ())?
   at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
-  attach: ((id: uuid) -> ())?
-  changed: ((change: number) -> ())?
+  attach: ((avatar: uuid) -> ())?
+  changed: ((changes: number) -> ())?
   collision: LLDetectedEventHandler?
   collision_end: LLDetectedEventHandler?
   collision_start: LLDetectedEventHandler?
   control: ((id: uuid, level: number, edge: number) -> ())?
   dataserver: ((queryid: uuid, data: string) -> ())?
-  email: ((time: string, address: string, subject: string, message: string, num_left: number) -> ())?
+  email: ((time: string, address: string, subject: string, msg: string, num_left: number) -> ())?
   experience_permissions: ((agent_id: uuid) -> ())?
   experience_permissions_denied: ((agent_id: uuid, reason: number) -> ())?
   final_damage: LLDetectedEventHandler?
@@ -201,7 +201,7 @@ declare extern type LLEvents with
   land_collision_start: ((pos: vector) -> ())?
   link_message: ((sender_num: number, num: number, str: string, id: string) -> ())?
   linkset_data: ((action: number, name: string, value: string) -> ())?
-  listen: ((channel: number, name: string, id: uuid, message: string) -> ())?
+  listen: ((channel: number, name: string, id: uuid, msg: string) -> ())?
   money: ((id: uuid, amount: number) -> ())?
   moving_end: (() -> ())?
   moving_start: (() -> ())?
@@ -306,7 +306,7 @@ declare getfenv: nil
 -- declare function getmetatable<T>(obj: T): getmetatable<T> -- builtin
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
-declare function newproxy(mt: boolean?): any
+@checked declare function newproxy(mt: boolean?): any
 -- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
 -- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
 declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...)
@@ -315,7 +315,7 @@ declare function rawequal<T1, T2>(a: T1, b: T2): boolean
 declare function rawget<K, V>(t: {[K]: V}, k: K): V?
 declare function rawlen<K, V>(t: {[K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
--- declare function require(target: any): any -- magic type
+-- @checked declare function require(target: any): any -- magic type
 -- declare function select<A...>(i: string | number, ...: A...): ...any -- magic type
 declare setfenv: nil
 -- declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT> -- builtin, magic type
@@ -335,23 +335,23 @@ declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., err: (E) -> R
 ---------------------------
 
 declare bit32: {
-  arshift: (n: number, i: number) -> number,
-  band: (...number) -> number,
-  bnot: (n: number) -> number,
-  bor: (...number) -> number,
-  bxor: (...number) -> number,
-  btest: (...number) -> boolean,
-  extract: (n: number, field: number, width: number?) -> number,
-  lrotate: (n: number, i: number) -> number,
-  lshift: (n: number, i: number) -> number,
-  replace: (n: number, v: number, field: number, width: number?) -> number,
-  rrotate: (n: number, i: number) -> number,
-  rshift: (n: number, i: number) -> number,
-  s32: (n: number) -> number,
-  smul: (a: number, b: number) -> number,
-  countlz: (n: number) -> number,
-  countrz: (n: number) -> number,
-  byteswap: (n: number) -> number,
+  arshift: @checked (n: number, i: number) -> number,
+  band: @checked (...number) -> number,
+  bnot: @checked (n: number) -> number,
+  bor: @checked (...number) -> number,
+  bxor: @checked (...number) -> number,
+  btest: @checked (...number) -> boolean,
+  extract: @checked (n: number, field: number, width: number?) -> number,
+  lrotate: @checked (n: number, i: number) -> number,
+  lshift: @checked (n: number, i: number) -> number,
+  replace: @checked (n: number, v: number, field: number, width: number?) -> number,
+  rrotate: @checked (n: number, i: number) -> number,
+  rshift: @checked (n: number, i: number) -> number,
+  s32: @checked (n: number) -> number,
+  smul: @checked (a: number, b: number) -> number,
+  countlz: @checked (n: number) -> number,
+  countrz: @checked (n: number) -> number,
+  byteswap: @checked (n: number) -> number,
 }
 
 
@@ -360,32 +360,32 @@ declare bit32: {
 ---------------------------
 
 declare buffer: {
-  create: (size: number) -> buffer,
-  fromstring: (str: string) -> buffer,
-  tostring: (b: buffer) -> string,
-  readi8: (b: buffer, offset: number) -> number,
-  readu8: (b: buffer, offset: number) -> number,
-  readi16: (b: buffer, offset: number) -> number,
-  readu16: (b: buffer, offset: number) -> number,
-  readi32: (b: buffer, offset: number) -> number,
-  readu32: (b: buffer, offset: number) -> number,
-  readf32: (b: buffer, offset: number) -> number,
-  readf64: (b: buffer, offset: number) -> number,
-  writei8: (b: buffer, offset: number, value: number) -> (),
-  writeu8: (b: buffer, offset: number, value: number) -> (),
-  writei16: (b: buffer, offset: number, value: number) -> (),
-  writeu16: (b: buffer, offset: number, value: number) -> (),
-  writei32: (b: buffer, offset: number, value: number) -> (),
-  writeu32: (b: buffer, offset: number, value: number) -> (),
-  writef32: (b: buffer, offset: number, value: number) -> (),
-  writef64: (b: buffer, offset: number, value: number) -> (),
-  readstring: (b: buffer, offset: number, count: number) -> string,
-  writestring: (b: buffer, offset: number, value: string, count: number?) -> (),
-  len: (b: buffer) -> number,
-  copy: (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
-  fill: (b: buffer, offset: number, value: number, count: number?) -> (),
-  readbits: (b: buffer, bitOffset: number, bitCount: number) -> number,
-  writebits: (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
+  create: @checked (size: number) -> buffer,
+  fromstring: @checked (str: string) -> buffer,
+  tostring: @checked (b: buffer) -> string,
+  readi8: @checked (b: buffer, offset: number) -> number,
+  readu8: @checked (b: buffer, offset: number) -> number,
+  readi16: @checked (b: buffer, offset: number) -> number,
+  readu16: @checked (b: buffer, offset: number) -> number,
+  readi32: @checked (b: buffer, offset: number) -> number,
+  readu32: @checked (b: buffer, offset: number) -> number,
+  readf32: @checked (b: buffer, offset: number) -> number,
+  readf64: @checked (b: buffer, offset: number) -> number,
+  writei8: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu8: @checked (b: buffer, offset: number, value: number) -> (),
+  writei16: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu16: @checked (b: buffer, offset: number, value: number) -> (),
+  writei32: @checked (b: buffer, offset: number, value: number) -> (),
+  writeu32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef32: @checked (b: buffer, offset: number, value: number) -> (),
+  writef64: @checked (b: buffer, offset: number, value: number) -> (),
+  readstring: @checked (b: buffer, offset: number, count: number) -> string,
+  writestring: @checked (b: buffer, offset: number, value: string, count: number?) -> (),
+  len: @checked (b: buffer) -> number,
+  copy: @checked (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
+  fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
+  readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
+  writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
 }
 
 
@@ -397,11 +397,11 @@ declare coroutine: {
   create: (f: (...any) -> ...any) -> thread,
   resume: (co: thread, ...any) -> (boolean, ...any),
   running: () -> thread?,
-  status: (co: thread) -> "running" | "suspended" | "normal" | "dead",
+  status: @checked (co: thread) -> "running" | "suspended" | "normal" | "dead",
   wrap: (f: (...any) -> ...any) -> (...any) -> ...any,
   yield: (...any) -> ...any,
   isyieldable: () -> boolean,
-  close: (co: thread) -> (boolean, string?),
+  close: @checked (co: thread) -> (boolean, string?),
 }
 
 
@@ -414,7 +414,7 @@ declare debug: {
     & ((level: number, s: string) -> ...any)
     & ((func: (...any) -> ...any, s: string) -> ...any),
   traceback: ((co: thread, msg: string?, level: number?) -> string)
-    & ((message: string?, level: number?) -> string),
+    & ((msg: string?, level: number?) -> string),
 }
 
 
@@ -423,9 +423,18 @@ declare debug: {
 ---------------------------
 
 declare llbase64: {
-  encode: (data: string | buffer) -> string,
-  decode: ((data: string, asBuffer: false?) -> string)
+  encode: @checked (data: string | buffer) -> string,
+  decode: @checked ((data: string, asBuffer: false?) -> string)
     & ((data: string, asBuffer: true) -> buffer),
+}
+
+
+---------------------------
+-- Global Table: llhttp
+---------------------------
+
+declare llhttp: {
+  request: (url: string, params: HttpRequestParams?, body: string?) -> uuid,
 }
 
 
@@ -465,43 +474,43 @@ declare llprim: {
 declare math: {
   pi: number,
   huge: number,
-  abs: (n: number) -> number,
-  acos: (n: number) -> number,
-  asin: (n: number) -> number,
-  atan: (n: number) -> number,
-  atan2: (y: number, x: number) -> number,
-  ceil: (n: number) -> number,
-  clamp: (n: number, min: number, max: number) -> number,
-  cos: (n: number) -> number,
-  cosh: (n: number) -> number,
-  deg: (n: number) -> number,
-  exp: (n: number) -> number,
-  floor: (n: number) -> number,
-  fmod: (x: number, y: number) -> number,
-  frexp: (n: number) -> (number, number),
-  ldexp: (s: number, e: number) -> number,
-  lerp: (a: number, b: number, t: number) -> number,
-  log: (n: number, base: number?) -> number,
-  log10: (n: number) -> number,
-  map: (n: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
-  max: (n: number, ...number) -> number,
-  min: (n: number, ...number) -> number,
-  modf: (n: number) -> (number, number),
-  noise: (x: number, y: number?, z: number?) -> number,
-  pow: (base: number, exponent: number) -> number,
-  rad: (n: number) -> number,
-  random: (min: number?, max: number?) -> number,
-  randomseed: @[deprecated {reason='Disabled in SLua.'}](seed: number) -> (),
-  round: (n: number) -> number,
-  sign: (n: number) -> number,
-  sin: (n: number) -> number,
-  sinh: (n: number) -> number,
-  sqrt: (n: number) -> number,
-  tan: (n: number) -> number,
-  tanh: (n: number) -> number,
-  isnan: (n: number) -> boolean,
-  isinf: (n: number) -> boolean,
-  isfinite: (n: number) -> boolean,
+  abs: @checked (n: number) -> number,
+  acos: @checked (n: number) -> number,
+  asin: @checked (n: number) -> number,
+  atan: @checked (n: number) -> number,
+  atan2: @checked (y: number, x: number) -> number,
+  ceil: @checked (n: number) -> number,
+  clamp: @checked (n: number, min: number, max: number) -> number,
+  cos: @checked (n: number) -> number,
+  cosh: @checked (n: number) -> number,
+  deg: @checked (n: number) -> number,
+  exp: @checked (n: number) -> number,
+  floor: @checked (n: number) -> number,
+  fmod: @checked (x: number, y: number) -> number,
+  frexp: @checked (n: number) -> (number, number),
+  ldexp: @checked (s: number, e: number) -> number,
+  lerp: @checked (a: number, b: number, t: number) -> number,
+  log: @checked (n: number, base: number?) -> number,
+  log10: @checked (n: number) -> number,
+  map: @checked (n: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
+  max: @checked (n: number, ...number) -> number,
+  min: @checked (n: number, ...number) -> number,
+  modf: @checked (n: number) -> (number, number),
+  noise: @checked (x: number, y: number?, z: number?) -> number,
+  pow: @checked (base: number, exponent: number) -> number,
+  rad: @checked (n: number) -> number,
+  random: @checked (min: number?, max: number?) -> number,
+  randomseed: @checked @[deprecated {reason='Disabled in SLua.'}](seed: number) -> (),
+  round: @checked (n: number) -> number,
+  sign: @checked (n: number) -> number,
+  sin: @checked (n: number) -> number,
+  sinh: @checked (n: number) -> number,
+  sqrt: @checked (n: number) -> number,
+  tan: @checked (n: number) -> number,
+  tanh: @checked (n: number) -> number,
+  isnan: @checked (n: number) -> boolean,
+  isinf: @checked (n: number) -> boolean,
+  isfinite: @checked (n: number) -> boolean,
 }
 
 
@@ -543,23 +552,23 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
 ---------------------------
 
 declare string: {
-  byte: (s: string, i: number?, j: number?) -> ...number, -- builtin
-  char: (...number) -> string, -- builtin
-  find: (s: string, pattern: string, init: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
-  format: (formatstring: string, ...any) -> string, -- builtin, magic type
-  gmatch: (s: string, pattern: string) -> () -> ...string, -- builtin, magic type
-  gsub: (s: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
-  len: (s: string) -> number, -- builtin
-  lower: (s: string) -> string, -- builtin
-  match: (s: string, pattern: string, init: number?) -> ...string, -- builtin, magic type
-  pack: (fmt: string, ...any) -> string, -- builtin
-  packsize: (fmt: string) -> number, -- builtin
-  rep: (s: string, n: number) -> string, -- builtin
-  reverse: (s: string) -> string, -- builtin
-  split: (s: string, separator: string?) -> {string}, -- builtin
-  sub: (s: string, i: number, j: number?) -> string, -- builtin
-  unpack: (fmt: string, s: string, init: number?) -> ...any, -- builtin
-  upper: (s: string) -> string, -- builtin
+  byte: @checked (src: string, start_index: number?, end_index: number?) -> ...number, -- builtin
+  char: @checked (...number) -> string, -- builtin
+  find: @checked (src: string, pattern: string, start_index: number?, plain: boolean?) -> (number?, number?, ...string), -- builtin, magic type
+  format: @checked (format_string: string, ...any) -> string, -- builtin, magic type
+  gmatch: @checked (src: string, pattern: string) -> () -> ...string, -- builtin, magic type
+  gsub: (src: string, pattern: string, repl: string | { [string]: string } | (...string) -> string, maxn: number?) -> (string, number), -- builtin
+  len: @checked (str: string) -> number, -- builtin
+  lower: @checked (src: string) -> string, -- builtin
+  match: @checked (src: string, pattern: string, start_index: number?) -> ...string?, -- builtin, magic type
+  pack: (format_string: string, ...any) -> string, -- builtin
+  packsize: @checked (format_string: string) -> number, -- builtin
+  rep: @checked (src: string, count: number) -> string, -- builtin
+  reverse: @checked (src: string) -> string, -- builtin
+  split: @checked (src: string, separator: string?) -> {string}, -- builtin
+  sub: @checked (src: string, start_index: number, end_index: number?) -> string, -- builtin
+  unpack: @checked (format_string: string, src: string, start: number?) -> ...any, -- builtin
+  upper: @checked (src: string) -> string, -- builtin
 }
 
 --]]
@@ -574,7 +583,7 @@ declare table: {
   foreachi: @[deprecated {reason='Use a for loop instead'}]<V, R>(a: {V}, f: (index: number, value: V) -> R?) -> R?,
   getn: @[deprecated {use='#'}](a: {any}) -> number,
   maxn: (t: {any}) -> number,
-  insert: (<V>(a: {V}, i: number, v: V) -> ())
+  insert: (<V>(a: {V}, i: number, value: V) -> ())
     & (<V>(a: {V}, value: V) -> ()),
   append: <V>(a: {V}, ...V) -> (),
   extend: <V>(a: {V}, b: {V}) -> {V},
@@ -599,11 +608,11 @@ declare table: {
 
 declare utf8: {
   charpattern: string,
-  char: (...number) -> string,
-  codes: (s: string) -> ((string, number) -> (number, number), string, number),
-  codepoint: (s: string, i: number?, j: number?) -> ...number,
-  len: (s: string, i: number?, j: number?) -> (number?, number?),
-  offset: (s: string, n: number, i: number?) -> number?,
+  char: @checked (...number) -> string,
+  codes: @checked (src: string) -> ((string, number) -> (number, number), string, number),
+  codepoint: @checked (src: string, start_index: number?, end_index: number?) -> ...number,
+  len: @checked (str: string, start_index: number?, end_index: number?) -> (number?, number?),
+  offset: @checked (str: string, n: number, start_index: number?) -> number?,
 }
 
 
@@ -694,7 +703,7 @@ declare ll: {
   DeleteKeyValue: (k: string) -> uuid,
   DeleteSubList: @[deprecated {use='table.remove', reason='Unnecessary table copying.'}]<T>(src: {T}, start_index: number, end_index: number) -> {T},
   DeleteSubString: (src: string, start_index: number, end_index: number) -> string,
-  DerezObject: (id: uuid, flag: number) -> boolean,
+  DerezObject: (id: uuid, flags: number) -> boolean,
   DetachFromAvatar: () -> (),
   DetectedDamage: @[deprecated {use='getDamage'}](number: number) -> {any},
   DetectedGrab: @[deprecated {use='getGrab'}](number: number) -> vector,
@@ -714,12 +723,12 @@ declare ll: {
   DetectedTouchUV: @[deprecated {use='getTouchUV'}](index: number) -> vector,
   DetectedType: @[deprecated {use='getType'}](number: number) -> number,
   DetectedVel: @[deprecated {use='getVel'}](number: number) -> vector,
-  Dialog: (avatar: uuid, message: string, buttons: {string}, channel: number) -> (),
+  Dialog: (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
   Die: () -> (),
   DumpList2String: (src: list, separator: string) -> string,
   EdgeOfWorld: (pos: vector, dir: vector) -> boolean,
   EjectFromLand: (avatar: uuid) -> (),
-  Email: (address: string, subject: string, message: string) -> (),
+  Email: (address: string, subject: string, msg: string) -> (),
   EscapeURL: (url: string) -> string,
   Euler2Rot: (v: vector) -> quaternion,
   Evade: (target: uuid, options: list) -> (),
@@ -738,7 +747,7 @@ declare ll: {
   GetAgentList: (scope: number, options: list) -> {uuid},
   GetAgentSize: (avatar: uuid) -> vector,
   GetAlpha: (face: number) -> number,
-  GetAnimation: (id: uuid) -> string,
+  GetAnimation: (avatar: uuid) -> string,
   GetAnimationList: (avatar: uuid) -> {uuid},
   GetAnimationOverride: (anim_state: string) -> string,
   GetAttached: () -> number,
@@ -772,11 +781,11 @@ declare ll: {
   GetInventoryAcquireTime: (item: string) -> string,
   GetInventoryCreator: (item: string) -> uuid,
   GetInventoryDesc: (item: string) -> string,
-  GetInventoryKey: (name: string) -> uuid,
-  GetInventoryName: (type: number, number: number) -> string,
+  GetInventoryKey: (item: string) -> uuid,
+  GetInventoryName: (type: number, index: number) -> string,
   GetInventoryNumber: (type: number) -> number,
-  GetInventoryPermMask: (item: string, category: number) -> number,
-  GetInventoryType: (name: string) -> number,
+  GetInventoryPermMask: (item: string, group: number) -> number,
+  GetInventoryType: (item: string) -> number,
   GetKey: () -> uuid,
   GetLandOwnerAt: (pos: vector) -> uuid,
   GetLinkKey: (link: number) -> uuid,
@@ -809,7 +818,7 @@ declare ll: {
   GetObjectLinkKey: (object_id: uuid, link: number) -> uuid,
   GetObjectMass: (id: uuid) -> number,
   GetObjectName: () -> string,
-  GetObjectPermMask: (category: number) -> number,
+  GetObjectPermMask: (group: number) -> number,
   GetObjectPrimCount: (prim: uuid) -> number,
   GetOmega: () -> vector,
   GetOwner: () -> uuid,
@@ -870,22 +879,22 @@ declare ll: {
   GetVel: () -> vector,
   GetVisualParams: (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: () -> number,
-  GiveAgentInventory: (agent: uuid, folder: string, inventory: {string}, options: list) -> number,
-  GiveInventory: (destination: uuid, inventory: string) -> (),
-  GiveInventoryList: (target: uuid, folder: string, inventory: {string}) -> (),
+  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveInventory: (target: uuid, item: string) -> (),
+  GiveInventoryList: (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: (destination: uuid, amount: number) -> number,
-  GodLikeRezObject: (inventory: uuid, pos: vector) -> (),
+  GodLikeRezObject: (id: uuid, pos: vector) -> (),
   Ground: (offset: vector) -> number,
   GroundContour: (offset: vector) -> vector,
   GroundNormal: (offset: vector) -> vector,
   GroundRepel: (height: number, water: boolean | number, tau: number) -> (),
   GroundSlope: (offset: vector) -> vector,
   HMAC: (private_key: string, msg: string, algorithm: string) -> string,
-  HTTPRequest: (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
+  HTTPRequest: (url: string, parameters: list, body: string) -> uuid,
   HTTPResponse: (request_id: uuid, status: number, body: string) -> (),
   Hash: (val: string) -> number,
-  InsertString: (dst: string, pos: number, src: string) -> string,
-  InstantMessage: (user: uuid, message: string) -> (),
+  InsertString: (dst: string, index: number, src: string) -> string,
+  InstantMessage: (agent: uuid, msg: string) -> (),
   IntegerToBase64: (number: number) -> string,
   IsFriend: (agent_id: uuid) -> boolean,
   IsLinkGLTFMaterial: (link: number, face: number) -> boolean,
@@ -898,7 +907,7 @@ declare ll: {
   KeysKeyValue: (first: number, count: number) -> uuid,
   Linear2sRGB: (color: vector) -> vector,
   LinkAdjustSoundVolume: (link: number, volume: number) -> (),
-  LinkParticleSystem: (link: number, rules: list | ParticleParams) -> (),
+  LinkParticleSystem: (link: number, rules: list) -> (),
   LinkPlaySound: (link: number, sound: string | uuid, volume: number, flags: number) -> (),
   LinkSetSoundQueueing: (link: number, queue: boolean | number) -> (),
   LinkSetSoundRadius: (link: number, radius: number) -> (),
@@ -972,9 +981,9 @@ declare ll: {
   ParcelMediaQuery: (query: {number}) -> {any},
   ParseString2List: (src: string, separators: {string}, spacers: {string}) -> {string},
   ParseStringKeepNulls: (src: string, separators: {string}, spacers: {string}) -> {string},
-  ParticleSystem: (rules: list | ParticleParams) -> (),
-  PassCollisions: (pass: boolean | number) -> (),
-  PassTouches: (pass: boolean | number) -> (),
+  ParticleSystem: (rules: list) -> (),
+  PassCollisions: (pass: number) -> (),
+  PassTouches: (pass: number) -> (),
   PatrolPoints: (patrolPoints: {vector}, options: list) -> (),
   PlaySound: (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: (sound: string | uuid, volume: number) -> (),
@@ -991,7 +1000,7 @@ declare ll: {
   ReleaseURL: (url: string) -> (),
   RemoteDataReply: @deprecated (channel: uuid, message_id: uuid, sdata: string, idata: number) -> (),
   RemoteDataSetRegion: @deprecated () -> (),
-  RemoteLoadScriptPin: (target: uuid, name: string, pin: number, running: boolean | number, start_param: number) -> (),
+  RemoteLoadScriptPin: (target: uuid, script: string, pin: number, running: boolean | number, start_param: number) -> (),
   RemoveFromLandBanList: (avatar: uuid) -> (),
   RemoveFromLandPassList: (avatar: uuid) -> (),
   RemoveInventory: (item: string) -> (),
@@ -1002,7 +1011,7 @@ declare ll: {
   RequestAgentData: (id: uuid, data: number) -> uuid,
   RequestDisplayName: (id: uuid) -> uuid,
   RequestExperiencePermissions: (agent: uuid, name: string) -> (),
-  RequestInventoryData: (name: string) -> uuid,
+  RequestInventoryData: (item: string) -> uuid,
   RequestPermissions: (agent: uuid, permissions: number) -> (),
   RequestSecureURL: () -> uuid,
   RequestSimulatorData: (region: string, data: number) -> uuid,
@@ -1012,13 +1021,13 @@ declare ll: {
   ResetAnimationOverride: (anim_state: string) -> (),
   ResetLandBanList: () -> (),
   ResetLandPassList: () -> (),
-  ResetOtherScript: (name: string) -> (),
+  ResetOtherScript: (script: string) -> (),
   ResetScript: () -> (),
   ReturnObjectsByID: (objects: {uuid}) -> number,
   ReturnObjectsByOwner: (owner: uuid, scope: number) -> number,
-  RezAtRoot: (inventory: string, position: vector, velocity: vector, rot: quaternion, param: number) -> (),
-  RezObject: (inventory: string, pos: vector, vel: vector, rot: quaternion, param: number) -> (),
-  RezObjectWithParams: (inventory: string, params: list) -> uuid,
+  RezAtRoot: (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObject: (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObjectWithParams: (item: string, options: list) -> uuid,
   Rot2Angle: (rot: quaternion) -> number,
   Rot2Axis: (rot: quaternion) -> vector,
   Rot2Euler: (quat: quaternion) -> vector,
@@ -1061,13 +1070,13 @@ declare ll: {
   SetForceAndTorque: (force: vector, torque: vector, is_local: boolean | number) -> (),
   SetGroundTexture: (changes: list) -> number,
   SetHoverHeight: (height: number, water: boolean | number, tau: number) -> (),
-  SetInventoryPermMask: (item: string, category: number, value: number) -> (),
+  SetInventoryPermMask: (item: string, group: number, flags: number) -> (),
   SetKeyframedMotion: (keyframes: list, options: list) -> (),
   SetLinkAlpha: (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
-  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: (link: number, face: number, params: list) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
   SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
@@ -1077,13 +1086,13 @@ declare ll: {
   SetLocalRot: (rot: quaternion) -> (),
   SetObjectDesc: (description: string) -> (),
   SetObjectName: (name: string) -> (),
-  SetObjectPermMask: (mask: number, value: number) -> (),
+  SetObjectPermMask: (group: number, flags: number) -> (),
   SetParcelForSale: (ForSale: boolean | number, Options: list) -> number,
   SetParcelMusicURL: (url: string) -> (),
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: (pos: vector) -> (),
-  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: (face: number, params: list) -> number,
   SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
   SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
   SetRegionPos: (position: vector) -> boolean,
@@ -1091,7 +1100,7 @@ declare ll: {
   SetRenderMaterial: (material: string | uuid, face: number) -> (),
   SetRot: (rot: quaternion) -> (),
   SetScale: (size: vector) -> (),
-  SetScriptState: (name: string, running: boolean | number) -> (),
+  SetScriptState: (script: string, running: boolean | number) -> (),
   SetSitText: (text: string) -> (),
   SetSoundQueueing: (queue: boolean | number) -> (),
   SetSoundRadius: (radius: number) -> (),
@@ -1134,15 +1143,15 @@ declare ll: {
   Target: (position: vector, range: number) -> number,
   TargetOmega: (axis: vector, spinrate: number, gain: number) -> (),
   TargetRemove: (handle: number) -> (),
-  TargetedEmail: (target: number, subject: string, message: string) -> (),
+  TargetedEmail: (target: number, subject: string, msg: string) -> (),
   TeleportAgent: (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
   TeleportAgentGlobalCoords: (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
   TeleportAgentHome: (avatar: uuid) -> (),
-  TextBox: (avatar: uuid, message: string, channel: number) -> (),
+  TextBox: (agent: uuid, msg: string, channel: number) -> (),
   ToLower: (src: string) -> string,
   ToUpper: (src: string) -> string,
   TransferLindenDollars: (destination: uuid, amount: number) -> uuid,
-  TransferOwnership: (agent_id: uuid, flags: number, options: list) -> number,
+  TransferOwnership: (agent: uuid, flags: number, options: list) -> number,
   TriggerSound: (sound: string | uuid, volume: number) -> (),
   TriggerSoundLimited: (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
   UnSit: (id: uuid) -> (),
@@ -1217,7 +1226,7 @@ declare llcompat: {
   DeleteKeyValue: @deprecated (k: string) -> uuid,
   DeleteSubList: @deprecated <T>(src: {T}, start_index: number, end_index: number) -> {T},
   DeleteSubString: @deprecated (src: string, start_index: number, end_index: number) -> string,
-  DerezObject: @deprecated (id: uuid, flag: number) -> number,
+  DerezObject: @deprecated (id: uuid, flags: number) -> number,
   DetachFromAvatar: @deprecated () -> (),
   DetectedDamage: @deprecated (number: number) -> {any},
   DetectedGrab: @deprecated (number: number) -> vector,
@@ -1237,12 +1246,12 @@ declare llcompat: {
   DetectedTouchUV: @deprecated (index: number) -> vector,
   DetectedType: @deprecated (number: number) -> number,
   DetectedVel: @deprecated (number: number) -> vector,
-  Dialog: @deprecated (avatar: uuid, message: string, buttons: {string}, channel: number) -> (),
+  Dialog: @deprecated (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
   Die: @deprecated () -> (),
   DumpList2String: @deprecated (src: list, separator: string) -> string,
   EdgeOfWorld: @deprecated (pos: vector, dir: vector) -> number,
   EjectFromLand: @deprecated (avatar: uuid) -> (),
-  Email: @deprecated (address: string, subject: string, message: string) -> (),
+  Email: @deprecated (address: string, subject: string, msg: string) -> (),
   EscapeURL: @deprecated (url: string) -> string,
   Euler2Rot: @deprecated (v: vector) -> quaternion,
   Evade: @deprecated (target: uuid, options: list) -> (),
@@ -1262,7 +1271,7 @@ declare llcompat: {
   GetAgentSize: @deprecated (avatar: uuid) -> vector,
   GetAlpha: @deprecated (face: number) -> number,
   GetAndResetTime: @deprecated () -> number,
-  GetAnimation: @deprecated (id: uuid) -> string,
+  GetAnimation: @deprecated (avatar: uuid) -> string,
   GetAnimationList: @deprecated (avatar: uuid) -> {uuid},
   GetAnimationOverride: @deprecated (anim_state: string) -> string,
   GetAttached: @deprecated () -> number,
@@ -1296,11 +1305,11 @@ declare llcompat: {
   GetInventoryAcquireTime: @deprecated (item: string) -> string,
   GetInventoryCreator: @deprecated (item: string) -> uuid,
   GetInventoryDesc: @deprecated (item: string) -> string,
-  GetInventoryKey: @deprecated (name: string) -> uuid,
-  GetInventoryName: @deprecated (type: number, number: number) -> string,
+  GetInventoryKey: @deprecated (item: string) -> uuid,
+  GetInventoryName: @deprecated (type: number, index: number) -> string,
   GetInventoryNumber: @deprecated (type: number) -> number,
-  GetInventoryPermMask: @deprecated (item: string, category: number) -> number,
-  GetInventoryType: @deprecated (name: string) -> number,
+  GetInventoryPermMask: @deprecated (item: string, group: number) -> number,
+  GetInventoryType: @deprecated (item: string) -> number,
   GetKey: @deprecated () -> uuid,
   GetLandOwnerAt: @deprecated (pos: vector) -> uuid,
   GetLinkKey: @deprecated (link: number) -> uuid,
@@ -1333,7 +1342,7 @@ declare llcompat: {
   GetObjectLinkKey: @deprecated (object_id: uuid, link: number) -> uuid,
   GetObjectMass: @deprecated (id: uuid) -> number,
   GetObjectName: @deprecated () -> string,
-  GetObjectPermMask: @deprecated (category: number) -> number,
+  GetObjectPermMask: @deprecated (group: number) -> number,
   GetObjectPrimCount: @deprecated (prim: uuid) -> number,
   GetOmega: @deprecated () -> vector,
   GetOwner: @deprecated () -> uuid,
@@ -1394,22 +1403,22 @@ declare llcompat: {
   GetVel: @deprecated () -> vector,
   GetVisualParams: @deprecated (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: @deprecated () -> number,
-  GiveAgentInventory: @deprecated (agent: uuid, folder: string, inventory: {string}, options: list) -> number,
-  GiveInventory: @deprecated (destination: uuid, inventory: string) -> (),
-  GiveInventoryList: @deprecated (target: uuid, folder: string, inventory: {string}) -> (),
+  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveInventory: @deprecated (target: uuid, item: string) -> (),
+  GiveInventoryList: @deprecated (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: @deprecated (destination: uuid, amount: number) -> number,
-  GodLikeRezObject: @deprecated (inventory: uuid, pos: vector) -> (),
+  GodLikeRezObject: @deprecated (id: uuid, pos: vector) -> (),
   Ground: @deprecated (offset: vector) -> number,
   GroundContour: @deprecated (offset: vector) -> vector,
   GroundNormal: @deprecated (offset: vector) -> vector,
   GroundRepel: @deprecated (height: number, water: boolean | number, tau: number) -> (),
   GroundSlope: @deprecated (offset: vector) -> vector,
   HMAC: @deprecated (private_key: string, msg: string, algorithm: string) -> string,
-  HTTPRequest: @deprecated (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
+  HTTPRequest: @deprecated (url: string, parameters: list, body: string) -> uuid,
   HTTPResponse: @deprecated (request_id: uuid, status: number, body: string) -> (),
   Hash: @deprecated (val: string) -> number,
-  InsertString: @deprecated (dst: string, pos: number, src: string) -> string,
-  InstantMessage: @deprecated (user: uuid, message: string) -> (),
+  InsertString: @deprecated (dst: string, index: number, src: string) -> string,
+  InstantMessage: @deprecated (agent: uuid, msg: string) -> (),
   IntegerToBase64: @deprecated (number: number) -> string,
   IsFriend: @deprecated (agent_id: uuid) -> number,
   IsLinkGLTFMaterial: @deprecated (link: number, face: number) -> number,
@@ -1422,7 +1431,7 @@ declare llcompat: {
   KeysKeyValue: @deprecated (first: number, count: number) -> uuid,
   Linear2sRGB: @deprecated (color: vector) -> vector,
   LinkAdjustSoundVolume: @deprecated (link: number, volume: number) -> (),
-  LinkParticleSystem: @deprecated (link: number, rules: list | ParticleParams) -> (),
+  LinkParticleSystem: @deprecated (link: number, rules: list) -> (),
   LinkPlaySound: @deprecated (link: number, sound: string | uuid, volume: number, flags: number) -> (),
   LinkSetSoundQueueing: @deprecated (link: number, queue: boolean | number) -> (),
   LinkSetSoundRadius: @deprecated (link: number, radius: number) -> (),
@@ -1496,9 +1505,9 @@ declare llcompat: {
   ParcelMediaQuery: @deprecated (query: {number}) -> {any},
   ParseString2List: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
   ParseStringKeepNulls: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
-  ParticleSystem: @deprecated (rules: list | ParticleParams) -> (),
-  PassCollisions: @deprecated (pass: boolean | number) -> (),
-  PassTouches: @deprecated (pass: boolean | number) -> (),
+  ParticleSystem: @deprecated (rules: list) -> (),
+  PassCollisions: @deprecated (pass: number) -> (),
+  PassTouches: @deprecated (pass: number) -> (),
   PatrolPoints: @deprecated (patrolPoints: {vector}, options: list) -> (),
   PlaySound: @deprecated (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
@@ -1515,7 +1524,7 @@ declare llcompat: {
   ReleaseURL: @deprecated (url: string) -> (),
   RemoteDataReply: @deprecated (channel: uuid, message_id: uuid, sdata: string, idata: number) -> (),
   RemoteDataSetRegion: @deprecated () -> (),
-  RemoteLoadScriptPin: @deprecated (target: uuid, name: string, pin: number, running: boolean | number, start_param: number) -> (),
+  RemoteLoadScriptPin: @deprecated (target: uuid, script: string, pin: number, running: boolean | number, start_param: number) -> (),
   RemoveFromLandBanList: @deprecated (avatar: uuid) -> (),
   RemoveFromLandPassList: @deprecated (avatar: uuid) -> (),
   RemoveInventory: @deprecated (item: string) -> (),
@@ -1526,7 +1535,7 @@ declare llcompat: {
   RequestAgentData: @deprecated (id: uuid, data: number) -> uuid,
   RequestDisplayName: @deprecated (id: uuid) -> uuid,
   RequestExperiencePermissions: @deprecated (agent: uuid, name: string) -> (),
-  RequestInventoryData: @deprecated (name: string) -> uuid,
+  RequestInventoryData: @deprecated (item: string) -> uuid,
   RequestPermissions: @deprecated (agent: uuid, permissions: number) -> (),
   RequestSecureURL: @deprecated () -> uuid,
   RequestSimulatorData: @deprecated (region: string, data: number) -> uuid,
@@ -1536,14 +1545,14 @@ declare llcompat: {
   ResetAnimationOverride: @deprecated (anim_state: string) -> (),
   ResetLandBanList: @deprecated () -> (),
   ResetLandPassList: @deprecated () -> (),
-  ResetOtherScript: @deprecated (name: string) -> (),
+  ResetOtherScript: @deprecated (script: string) -> (),
   ResetScript: @deprecated () -> (),
   ResetTime: @deprecated () -> (),
   ReturnObjectsByID: @deprecated (objects: {uuid}) -> number,
   ReturnObjectsByOwner: @deprecated (owner: uuid, scope: number) -> number,
-  RezAtRoot: @deprecated (inventory: string, position: vector, velocity: vector, rot: quaternion, param: number) -> (),
-  RezObject: @deprecated (inventory: string, pos: vector, vel: vector, rot: quaternion, param: number) -> (),
-  RezObjectWithParams: @deprecated (inventory: string, params: list) -> uuid,
+  RezAtRoot: @deprecated (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObject: @deprecated (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObjectWithParams: @deprecated (item: string, options: list) -> uuid,
   Rot2Angle: @deprecated (rot: quaternion) -> number,
   Rot2Axis: @deprecated (rot: quaternion) -> vector,
   Rot2Euler: @deprecated (quat: quaternion) -> vector,
@@ -1586,13 +1595,13 @@ declare llcompat: {
   SetForceAndTorque: @deprecated (force: vector, torque: vector, is_local: boolean | number) -> (),
   SetGroundTexture: @deprecated (changes: list) -> number,
   SetHoverHeight: @deprecated (height: number, water: boolean | number, tau: number) -> (),
-  SetInventoryPermMask: @deprecated (item: string, category: number, value: number) -> (),
+  SetInventoryPermMask: @deprecated (item: string, group: number, flags: number) -> (),
   SetKeyframedMotion: @deprecated (keyframes: list, options: list) -> (),
   SetLinkAlpha: @deprecated (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
-  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: @deprecated (link: number, face: number, params: list) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
   SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
@@ -1603,13 +1612,13 @@ declare llcompat: {
   SetMemoryLimit: @deprecated (limit: number) -> number,
   SetObjectDesc: @deprecated (description: string) -> (),
   SetObjectName: @deprecated (name: string) -> (),
-  SetObjectPermMask: @deprecated (mask: number, value: number) -> (),
+  SetObjectPermMask: @deprecated (group: number, flags: number) -> (),
   SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list) -> number,
   SetParcelMusicURL: @deprecated (url: string) -> (),
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: @deprecated (pos: vector) -> (),
-  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: @deprecated (face: number, params: list) -> number,
   SetPrimURL: @deprecated (url: string) -> (),
   SetPrimitiveParams: @deprecated (rules: list) -> (),
   SetRegionPos: @deprecated (position: vector) -> number,
@@ -1617,7 +1626,7 @@ declare llcompat: {
   SetRenderMaterial: @deprecated (material: string | uuid, face: number) -> (),
   SetRot: @deprecated (rot: quaternion) -> (),
   SetScale: @deprecated (size: vector) -> (),
-  SetScriptState: @deprecated (name: string, running: boolean | number) -> (),
+  SetScriptState: @deprecated (script: string, running: boolean | number) -> (),
   SetSitText: @deprecated (text: string) -> (),
   SetSoundQueueing: @deprecated (queue: boolean | number) -> (),
   SetSoundRadius: @deprecated (radius: number) -> (),
@@ -1661,15 +1670,15 @@ declare llcompat: {
   Target: @deprecated (position: vector, range: number) -> number,
   TargetOmega: @deprecated (axis: vector, spinrate: number, gain: number) -> (),
   TargetRemove: @deprecated (handle: number) -> (),
-  TargetedEmail: @deprecated (target: number, subject: string, message: string) -> (),
+  TargetedEmail: @deprecated (target: number, subject: string, msg: string) -> (),
   TeleportAgent: @deprecated (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
   TeleportAgentGlobalCoords: @deprecated (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
   TeleportAgentHome: @deprecated (avatar: uuid) -> (),
-  TextBox: @deprecated (avatar: uuid, message: string, channel: number) -> (),
+  TextBox: @deprecated (agent: uuid, msg: string, channel: number) -> (),
   ToLower: @deprecated (src: string) -> string,
   ToUpper: @deprecated (src: string) -> string,
   TransferLindenDollars: @deprecated (destination: uuid, amount: number) -> uuid,
-  TransferOwnership: @deprecated (agent_id: uuid, flags: number, options: list) -> number,
+  TransferOwnership: @deprecated (agent: uuid, flags: number, options: list) -> number,
   TriggerSound: @deprecated (sound: string | uuid, volume: number) -> (),
   TriggerSoundLimited: @deprecated (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
   UnSit: @deprecated (id: uuid) -> (),

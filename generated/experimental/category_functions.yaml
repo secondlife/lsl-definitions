@@ -1,13 +1,13 @@
 # Functions by category
 asset_permissions:
-- changed( integer change )
-- llGetInventoryPermMask( string item, integer category ) -> integer
-- llGetObjectPermMask( integer category ) -> integer
-- llSetInventoryPermMask( string item, integer category, integer value ) -> void
-- llSetObjectPermMask( integer mask, integer value ) -> void
-- llTransferOwnership( key agent_id, integer flags, list options ) -> integer
+- changed( integer changes )
+- llGetInventoryPermMask( string item, integer group ) -> integer
+- llGetObjectPermMask( integer group ) -> integer
+- llSetInventoryPermMask( string item, integer group, integer flags ) -> void
+- llSetObjectPermMask( integer group, integer flags ) -> void
+- llTransferOwnership( key agent, integer flags, list options ) -> integer
 attachments:
-- attach( key id )
+- attach( key avatar )
 - llAttachToAvatar( integer attach_point ) -> void
 - llAttachToAvatarTemp( integer attach_point ) -> void
 - llDetachFromAvatar(  ) -> void
@@ -32,7 +32,7 @@ avatar:
 - llGetAgentLanguage( key avatar ) -> string
 - llGetAgentList( integer scope, list options ) -> list
 - llGetAgentSize( key avatar ) -> vector
-- llGetAnimation( key id ) -> string
+- llGetAnimation( key avatar ) -> string
 - llGetAnimationList( key avatar ) -> list
 - llGetAnimationOverride( string anim_state ) -> string
 - llGetAttachedList( key avatar ) -> list
@@ -69,7 +69,7 @@ avatar:
 - llUnSit( key id ) -> void
 - llWorldPosToHUD( vector world_pos ) -> vector
 avatar_animation:
-- llGetAnimation( key id ) -> string
+- llGetAnimation( key avatar ) -> string
 - llGetAnimationList( key avatar ) -> list
 - llGetAnimationOverride( string anim_state ) -> string
 - llResetAnimationOverride( string anim_state ) -> void
@@ -77,11 +77,10 @@ avatar_animation:
 - llStartAnimation( string anim ) -> void
 - llStopAnimation( string anim ) -> void
 avatar_communication:
-- email( string time, string address, string subject, string message, integer num_left )
-- listen( integer channel, string name, key id, string message )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
-- llEmail( string address, string subject, string message ) -> void
-- llInstantMessage( key user, string message ) -> void
+- listen( integer channel, string name, key id, string msg )
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
+- llEmail( string address, string subject, string msg ) -> void
+- llInstantMessage( key agent, string msg ) -> void
 - llListen( integer channel, string name, key id, string msg ) -> integer
 - llListenControl( integer handle, integer active ) -> void
 - llListenRemove( integer handle ) -> void
@@ -94,13 +93,13 @@ avatar_communication:
 - llSay( integer channel, string msg ) -> void
 - llSetText( string text, vector color, float alpha ) -> void
 - llShout( integer channel, string msg ) -> void
-- llTargetedEmail( integer target, string subject, string message ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTargetedEmail( integer target, string subject, string msg ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWhisper( integer channel, string msg ) -> void
 avatar_inventory:
-- llGiveAgentInventory( key agent, string folder, list inventory, list options ) -> integer
-- llGiveInventory( key destination, string inventory ) -> void
-- llGiveInventoryList( key target, string folder, list inventory ) -> void
+- llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer
+- llGiveInventory( key target, string item ) -> void
+- llGiveInventoryList( key target, string folder, list items ) -> void
 camera:
 - llClearCameraParams(  ) -> void
 - llForceMouselook( integer mouselook ) -> void
@@ -116,8 +115,8 @@ camera:
 - llTakeCamera( key avatar ) -> void // deprecated
 - llWorldPosToHUD( vector world_pos ) -> vector
 chat:
-- listen( integer channel, string name, key id, string message )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- listen( integer channel, string name, key id, string msg )
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
 - llListen( integer channel, string name, key id, string msg ) -> integer
 - llListenControl( integer handle, integer active ) -> void
 - llListenRemove( integer handle ) -> void
@@ -125,7 +124,7 @@ chat:
 - llRegionSayTo( key target, integer channel, string msg ) -> void
 - llSay( integer channel, string msg ) -> void
 - llShout( integer channel, string msg ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWhisper( integer channel, string msg ) -> void
 combat:
 - final_damage( integer num_detected )
@@ -135,7 +134,7 @@ combat:
 - llDamage( key target, float damage, integer damage_type ) -> void
 - llDetectedDamage( integer number ) -> list
 - llGetHealth( key id ) -> float
-- llRezObjectWithParams( string inventory, list params ) -> key
+- llRezObjectWithParams( string item, list options ) -> key
 - llSetDamage( float damage ) -> void
 cryptography:
 - llComputeHash( string message, string algorithm ) -> string
@@ -211,7 +210,7 @@ dataserver:
 - llReadKeyValue( string k ) -> key
 - llRequestAgentData( key id, integer data ) -> key
 - llRequestDisplayName( key id ) -> key
-- llRequestInventoryData( string name ) -> key
+- llRequestInventoryData( string item ) -> key
 - llRequestSimulatorData( string region, integer data ) -> key
 - llRequestUserKey( string username ) -> key
 - llRequestUsername( key id ) -> key
@@ -311,7 +310,7 @@ land_moderation:
 - llReturnObjectsByOwner( key owner, integer scope ) -> integer
 - llTeleportAgentHome( key avatar ) -> void
 linkset:
-- changed( integer change )
+- changed( integer changes )
 - linkset_data( integer action, string name, string value )
 - llAvatarOnLinkSitTarget( integer link ) -> key
 - llBreakAllLinks(  ) -> void
@@ -329,7 +328,7 @@ linkset:
 - llGetMaxScaleFactor(  ) -> float
 - llGetMinScaleFactor(  ) -> float
 - llGetNumberOfPrims(  ) -> integer
-- llGetObjectPermMask( integer category ) -> integer
+- llGetObjectPermMask( integer group ) -> integer
 - llGetOwner(  ) -> key
 - llGetRootPosition(  ) -> vector
 - llGetRootRotation(  ) -> rotation
@@ -360,7 +359,7 @@ linkset:
 - llSetLinkSitFlags( integer link, integer flags ) -> void
 - llSetLinkTexture( integer link, string texture, integer face ) -> void
 - llSetLinkTextureAnim( integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
-- llSetObjectPermMask( integer mask, integer value ) -> void
+- llSetObjectPermMask( integer group, integer flags ) -> void
 - llSetStatus( integer status, integer value ) -> void
 linkset_data:
 - linkset_data( integer action, string name, string value )
@@ -468,7 +467,7 @@ math_trig:
 - llSin( float theta ) -> float
 - llTan( float theta ) -> float
 media:
-- changed( integer change )
+- changed( integer changes )
 - llClearLinkMedia( integer link, integer face ) -> integer
 - llClearPrimMedia( integer face ) -> integer
 - llGetLinkMedia( integer link, integer face, list params ) -> list
@@ -618,7 +617,7 @@ permissions:
 - run_time_permissions( integer perm )
 - llClearCameraParams(  ) -> void
 - llForceMouselook( integer mouselook ) -> void
-- llGetAnimation( key id ) -> string
+- llGetAnimation( key avatar ) -> string
 - llGetAnimationList( key avatar ) -> list
 - llGetAnimationOverride( string anim_state ) -> string
 - llGetCameraAspect(  ) -> float
@@ -718,7 +717,7 @@ prim:
 - llGetTextureRot( integer face ) -> float
 - llGetTextureScale( integer face ) -> vector
 - llOffsetTexture( float u, float v, integer face ) -> void
-- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
+- llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void
 - llRotateTexture( float angle, integer face ) -> void
 - llScaleTexture( float u, float v, integer face ) -> void
 - llSetAlpha( float alpha, integer face ) -> void
@@ -740,7 +739,7 @@ prim:
 - llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
 - llSitTarget( vector offset, rotation rot ) -> void
 prim_appearance:
-- changed( integer change )
+- changed( integer changes )
 - llGetAlpha( integer face ) -> float
 - llGetColor( integer face ) -> vector
 - llGetLinkNumberOfSides( integer link ) -> integer
@@ -778,35 +777,36 @@ prim_appearance:
 - llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
 - llsRGB2Linear( vector srgb ) -> vector
 prim_inventory:
-- changed( integer change )
+- changed( integer changes )
 - llAllowInventoryDrop( integer add ) -> void
-- llDerezObject( key id, integer flag ) -> integer
+- llDerezObject( key id, integer flags ) -> integer
 - llGetInventoryAcquireTime( string item ) -> string
 - llGetInventoryCreator( string item ) -> key
 - llGetInventoryDesc( string item ) -> string
-- llGetInventoryKey( string name ) -> key
-- llGetInventoryName( integer type, integer number ) -> string
+- llGetInventoryKey( string item ) -> key
+- llGetInventoryName( integer type, integer index ) -> string
 - llGetInventoryNumber( integer type ) -> integer
-- llGetInventoryPermMask( string item, integer category ) -> integer
-- llGetInventoryType( string name ) -> integer
+- llGetInventoryPermMask( string item, integer group ) -> integer
+- llGetInventoryType( string item ) -> integer
 - llGetScriptName(  ) -> string
 - llGetScriptState( string script ) -> integer
-- llGiveInventory( key destination, string inventory ) -> void
-- llGiveInventoryList( key target, string folder, list inventory ) -> void
-- llGodLikeRezObject( key inventory, vector pos ) -> void
-- llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated
-- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
+- llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer
+- llGiveInventory( key target, string item ) -> void
+- llGiveInventoryList( key target, string folder, list items ) -> void
+- llGodLikeRezObject( key id, vector pos ) -> void
+- llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated
+- llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void
 - llRemoveInventory( string item ) -> void
-- llRequestInventoryData( string name ) -> key
-- llResetOtherScript( string name ) -> void
-- llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void
-- llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void
-- llRezObjectWithParams( string inventory, list params ) -> key
-- llSetInventoryPermMask( string item, integer category, integer value ) -> void
+- llRequestInventoryData( string item ) -> key
+- llResetOtherScript( string script ) -> void
+- llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void
+- llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void
+- llRezObjectWithParams( string item, list options ) -> key
+- llSetInventoryPermMask( string item, integer group, integer flags ) -> void
 - llSetRemoteScriptAccessPin( integer pin ) -> void
-- llSetScriptState( string name, integer running ) -> void
+- llSetScriptState( string script, integer running ) -> void
 prim_media:
-- changed( integer change )
+- changed( integer changes )
 - llClearLinkMedia( integer link, integer face ) -> integer
 - llClearPrimMedia( integer face ) -> integer
 - llGetLinkMedia( integer link, integer face, list params ) -> list
@@ -846,7 +846,7 @@ quaternion:
 - llRot2Up( rotation q ) -> vector
 - llRotBetween( vector start_vec, vector end_vec ) -> rotation
 region:
-- changed( integer change )
+- changed( integer changes )
 - llCloud( vector offset ) -> float // deprecated
 - llEdgeOfWorld( vector pos, vector dir ) -> integer
 - llGetAgentList( integer scope, list options ) -> list
@@ -886,18 +886,18 @@ region_appearance:
 rez:
 - object_rez( key id )
 - on_rez( integer start_param )
-- llDerezObject( key id, integer flag ) -> integer
+- llDerezObject( key id, integer flags ) -> integer
 - llDie(  ) -> void
 - llGetStartParameter(  ) -> integer
 - llGetStartString(  ) -> string
-- llGodLikeRezObject( key inventory, vector pos ) -> void
+- llGodLikeRezObject( key id, vector pos ) -> void
 - llReturnObjectsByID( list objects ) -> integer
 - llReturnObjectsByOwner( key owner, integer scope ) -> integer
-- llRezAtRoot( string inventory, vector position, vector velocity, rotation rot, integer param ) -> void
-- llRezObject( string inventory, vector pos, vector vel, rotation rot, integer param ) -> void
-- llRezObjectWithParams( string inventory, list params ) -> key
+- llRezAtRoot( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void
+- llRezObject( string item, vector pos, vector vel, rotation rot, integer start_param ) -> void
+- llRezObjectWithParams( string item, list options ) -> key
 script:
-- changed( integer change )
+- changed( integer changes )
 - on_rez( integer start_param )
 - state_entry(  )
 - state_exit(  )
@@ -915,25 +915,27 @@ script:
 - llGetTime(  ) -> float
 - llGetUsedMemory(  ) -> integer
 - llMinEventDelay( float delay ) -> void
-- llRemoteLoadScript( key target, string name, integer running, integer start_param ) -> void // private // deprecated
-- llRemoteLoadScriptPin( key target, string name, integer pin, integer running, integer start_param ) -> void
-- llResetOtherScript( string name ) -> void
+- llRemoteLoadScript( key target, string script, integer running, integer start_param ) -> void // private // deprecated
+- llRemoteLoadScriptPin( key target, string script, integer pin, integer running, integer start_param ) -> void
+- llResetOtherScript( string script ) -> void
 - llResetScript(  ) -> void
 - llResetTime(  ) -> void
 - llScriptDanger( vector pos ) -> integer
 - llScriptProfiler( integer flags ) -> void
 - llSetMemoryLimit( integer limit ) -> integer
 - llSetRemoteScriptAccessPin( integer pin ) -> void
-- llSetScriptState( string name, integer running ) -> void
+- llSetScriptState( string script, integer running ) -> void
 - llSetTimerEvent( float sec ) -> void
 - llSleep( float sec ) -> void
 script_communication:
+- email( string time, string address, string subject, string msg, integer num_left )
 - http_request( key request_id, string method, string body )
 - http_response( key request_id, integer status, list metadata, string body )
 - link_message( integer sender_num, integer num, string str, key id )
-- listen( integer channel, string name, key id, string message )
+- listen( integer channel, string name, key id, string msg )
 - remote_data( integer event_type, key channel, key message_id, string sender, integer idata, string sdata ) // deprecated
 - llCloseRemoteDataChannel( key channel ) -> void // deprecated
+- llEmail( string address, string subject, string msg ) -> void
 - llGetNextEmail( string address, string subject ) -> void
 - llHTTPRequest( string url, list parameters, string body ) -> key
 - llHTTPResponse( key request_id, integer status, string body ) -> void
@@ -966,7 +968,7 @@ sensor:
 - llSensorRepeat( string name, key id, integer type, float radius, float arc, float rate ) -> void
 - llVolumeDetect( integer detect ) -> void
 sit:
-- changed( integer change )
+- changed( integer changes )
 - llAvatarOnLinkSitTarget( integer link ) -> key
 - llAvatarOnSitTarget(  ) -> key
 - llGetLinkSitFlags( integer link ) -> integer
@@ -1003,7 +1005,7 @@ string:
 - llChar( integer val ) -> string
 - llDeleteSubString( string src, integer start_index, integer end_index ) -> string
 - llGetSubString( string src, integer start_index, integer end_index ) -> string
-- llInsertString( string dst, integer pos, string src ) -> string
+- llInsertString( string dst, integer index, string src ) -> string
 - llOrd( string val, integer index ) -> integer
 - llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string
 - llStringLength( string str ) -> integer
@@ -1012,7 +1014,7 @@ string:
 - llToLower( string src ) -> string
 - llToUpper( string src ) -> string
 teleport:
-- changed( integer change )
+- changed( integer changes )
 - llMapDestination( string simname, vector pos, vector look_at ) -> void
 - llTeleportAgent( key agent, string landmark, vector position, vector look_at ) -> void
 - llTeleportAgentGlobalCoords( key agent, vector global_coordinates, vector region_coordinates, vector look_at ) -> void
@@ -1050,7 +1052,7 @@ user_interface:
 - touch( integer num_detected )
 - touch_end( integer num_detected )
 - touch_start( integer num_detected )
-- llDialog( key avatar, string message, list buttons, integer channel ) -> void
+- llDialog( key agent, string msg, list buttons, integer channel ) -> void
 - llLoadURL( key avatar, string message, string url ) -> void
 - llMapBeacon( string region_name, vector pos, list options ) -> void
 - llMapDestination( string simname, vector pos, vector look_at ) -> void
@@ -1058,7 +1060,7 @@ user_interface:
 - llSetPayPrice( integer price, list quick_pay_buttons ) -> void
 - llSetSitText( string text ) -> void
 - llSetTouchText( string text ) -> void
-- llTextBox( key avatar, string message, integer channel ) -> void
+- llTextBox( key agent, string msg, integer channel ) -> void
 - llWorldPosToHUD( vector world_pos ) -> vector
 uuid:
 - llDetectedKey( integer number ) -> key

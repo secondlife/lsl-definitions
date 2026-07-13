@@ -1,75 +1,75 @@
 {
     "@sl-slua/global/assert": {
-        "documentation": "Checks if the value is truthy; if not, raises an error with the optional message."
+        "documentation": "Checks if the value is truthy; if not, raises an error with the optional message. Returns the value upon success."
     },
     "@sl-slua/global/dangerouslyexecuterequiredmodule": {
         "documentation": "Dangerously executes a required module function"
     },
     "@sl-slua/global/error": {
-        "documentation": "Raises an error with the specified object and optional call stack level."
+        "documentation": "Raises an error with the specified object. The optional level determines which call stack level is blamed for the error."
     },
     "@sl-slua/global/gcinfo": {
         "documentation": "Returns the total heap size in kilobytes."
     },
     "@sl-slua/global/getmetatable": {
-        "documentation": "Returns the metatable for the specified object."
+        "documentation": "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
     },
     "@sl-slua/global/ipairs": {
-        "documentation": "Returns an iterator for numeric key-value pairs in the table."
+        "documentation": "Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value."
     },
     "@sl-slua/global/newproxy": {
         "documentation": "Creates a new untyped userdata object with an optional metatable."
     },
     "@sl-slua/global/next": {
-        "documentation": "Returns the next key-value pair in the table traversal order."
+        "documentation": "Returns the next key-value pair in the table traversal order. If the index is nil or omitted, returns the first pair."
     },
     "@sl-slua/global/pairs": {
         "documentation": "Returns an iterator for all key-value pairs in the table."
     },
     "@sl-slua/global/pcall": {
-        "documentation": "Calls function f with parameters args, returning success and function results or an error."
+        "documentation": "Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message."
     },
     "@sl-slua/global/print": {
-        "documentation": "Prints all arguments to standard output using Tab as a separator."
+        "documentation": "Sends all arguments as text privately to the object owner, separated by 4 spaces. The owner must be currently in the same region for the message to be received."
     },
     "@sl-slua/global/rawequal": {
-        "documentation": "Returns true if a and b have the same type and value."
+        "documentation": "Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod.."
     },
     "@sl-slua/global/rawget": {
-        "documentation": "Performs a table lookup bypassing metatables."
+        "documentation": "Performs a table lookup, bypassing the __index metamethod.."
     },
     "@sl-slua/global/rawlen": {
-        "documentation": "Returns the length of a table or string bypassing metatables."
+        "documentation": "Returns the length of a table or string, bypassing the __len metamethod.."
     },
     "@sl-slua/global/rawset": {
-        "documentation": "Assigns a value to a table field bypassing metatables."
+        "documentation": "Assigns a value to a table field, bypassing the __newindex metamethod.."
     },
     "@sl-slua/global/require": {
         "documentation": "Execute the named external module."
     },
     "@sl-slua/global/select": {
-        "documentation": "Returns a subset of arguments or the number of arguments."
+        "documentation": "Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#', returns the number of arguments."
     },
     "@sl-slua/global/setmetatable": {
-        "documentation": "Changes the metatable for the given table."
+        "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
     },
     "@sl-slua/global/tonumber": {
-        "documentation": "Converts the input string to a number in the specified base."
+        "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
     },
     "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+        "documentation": "Converts a string to a quaternion, returns nil if invalid."
     },
     "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid."
     },
     "@sl-slua/global/tostring": {
-        "documentation": "Converts the input object to a string."
+        "documentation": "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
     },
     "@sl-slua/global/touuid": {
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
-        "documentation": "Converts a string to a vector, returns nil if invalid"
+        "documentation": "Converts a string to a vector, returns nil if invalid."
     },
     "@sl-slua/global/type": {
         "documentation": "Returns the type of the object as a string."
@@ -81,14 +81,14 @@
         "documentation": "Returns values from an array in the specified index range."
     },
     "@sl-slua/global/xpcall": {
-        "documentation": "Calls function f with parameters args, handling errors with err if they occur."
+        "documentation": "Calls function f with the provided arguments, handling errors with err if they occur."
     },
     "@sl-slua/global/bit32": {
         "documentation": "Bitwise operations library.",
         "learn_more_link": "https://luau.org/library/#bit32-library"
     },
     "@sl-slua/global/bit32.arshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.",
+        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.<br>Returns 0 if i < -31, or all sign bits if i > 31.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#arshift"
     },
     "@sl-slua/global/bit32.band": {
@@ -112,7 +112,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#btest"
     },
     "@sl-slua/global/bit32.extract": {
-        "documentation": "Extracts bits from n at position field with width",
+        "documentation": "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#extract"
     },
     "@sl-slua/global/bit32.lrotate": {
@@ -120,11 +120,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lrotate"
     },
     "@sl-slua/global/bit32.lshift": {
-        "documentation": "Shifts n by i bits to the left. If i is negative, a right shift is performed.",
+        "documentation": "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lshift"
     },
     "@sl-slua/global/bit32.replace": {
-        "documentation": "Replaces bits in n at position field with width using value v",
+        "documentation": "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#replace"
     },
     "@sl-slua/global/bit32.rrotate": {
@@ -132,7 +132,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rrotate"
     },
     "@sl-slua/global/bit32.rshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.",
+        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rshift"
     },
     "@sl-slua/global/bit32.s32": {
@@ -144,15 +144,15 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#smul"
     },
     "@sl-slua/global/bit32.countlz": {
-        "documentation": "Count leading zeros",
+        "documentation": "Count leading zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countlz"
     },
     "@sl-slua/global/bit32.countrz": {
-        "documentation": "Count trailing zeros",
+        "documentation": "Count trailing zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countrz"
     },
     "@sl-slua/global/bit32.byteswap": {
-        "documentation": "Swap byte order",
+        "documentation": "Swap byte order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#byteswap"
     },
     "@sl-slua/global/buffer": {
@@ -272,7 +272,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#create"
     },
     "@sl-slua/global/coroutine.resume": {
-        "documentation": "Resumes a coroutine, returning true and results if successful, or false and an error.",
+        "documentation": "Resumes a coroutine. Returns true followed by any values passed to coroutine.yield() or returned by the function. If an error occurs, returns false and the error message.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#resume"
     },
     "@sl-slua/global/coroutine.running": {
@@ -315,7 +315,7 @@
         "documentation": "Base64 encoding/decoding library."
     },
     "@sl-slua/global/llbase64.encode": {
-        "documentation": "Encodes a string or buffer to base64"
+        "documentation": "Encodes a string or buffer to base64."
     },
     "@sl-slua/global/llbase64.decode": {
         "documentation": "Decodes a base64 string to a string, or buffer if asBuffer is true. The output is truncated at the first decoding error."
@@ -329,15 +329,15 @@
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.remove": {
-        "documentation": "A constant to return from a reviver/replacer replacer function to omit this item.",
+        "documentation": "A constant to return from a reviver/replacer function to omit this item.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.array_mt": {
-        "documentation": "Value: {__jsonhint = \"array\"}<br>Metatable for declaring table as an array for json encode.",
+        "documentation": "Value: {__jsonhint = \"array\"}<br>Metatable for declaring a table as an array for json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.object_mt": {
-        "documentation": "Value: {__jsonhint = \"object\"}<br>Metatable for declaring table as an object for json encode.",
+        "documentation": "Value: {__jsonhint = \"object\"}<br>Metatable for declaring a table as an object for json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.empty_array": {
@@ -381,11 +381,11 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>Value of pi",
+        "documentation": "Value: 3.141592653589793<br>Value of pi.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
-        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity)",
+        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#huge"
     },
     "@sl-slua/global/math.abs": {
@@ -405,7 +405,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan"
     },
     "@sl-slua/global/math.atan2": {
-        "documentation": "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant.",
+        "documentation": "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan2"
     },
     "@sl-slua/global/math.ceil": {
@@ -413,11 +413,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#ceil"
     },
     "@sl-slua/global/math.clamp": {
-        "documentation": "Returns n clamped between min and max.",
+        "documentation": "Returns n clamped between min and max. Raises an error if min is greater than max.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#clamp"
     },
     "@sl-slua/global/math.cos": {
-        "documentation": "Returns the cosine of n (n is in radians).",
+        "documentation": "Returns the cosine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cos"
     },
     "@sl-slua/global/math.cosh": {
@@ -453,7 +453,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#lerp"
     },
     "@sl-slua/global/math.log": {
-        "documentation": "Returns the logarithm of n in the given base (default e).",
+        "documentation": "Returns the logarithm of n in the given base, defaults to e.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#log"
     },
     "@sl-slua/global/math.log10": {
@@ -477,7 +477,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#modf"
     },
     "@sl-slua/global/math.noise": {
-        "documentation": "Returns Perlin noise value for the point (x, y, z).",
+        "documentation": "Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#noise"
     },
     "@sl-slua/global/math.pow": {
@@ -505,7 +505,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sign"
     },
     "@sl-slua/global/math.sin": {
-        "documentation": "Returns the sine of n (n is in radians).",
+        "documentation": "Returns the sine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sin"
     },
     "@sl-slua/global/math.sinh": {
@@ -517,7 +517,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt"
     },
     "@sl-slua/global/math.tan": {
-        "documentation": "Returns the tangent of n (n is in radians).",
+        "documentation": "Returns the tangent of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tan"
     },
     "@sl-slua/global/math.tanh": {
@@ -644,15 +644,15 @@
         "learn_more_link": "https://luau.org/library/#string-library"
     },
     "@sl-slua/global/string.byte": {
-        "documentation": "Returns the numeric code of every byte in the input string within the given range.",
+        "documentation": "Returns the numeric code of every byte in the range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#byte"
     },
     "@sl-slua/global/string.char": {
-        "documentation": "Returns a string containing characters for the given byte values.",
+        "documentation": "Constructs and returns a string from the given byte integers.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#char"
     },
     "@sl-slua/global/string.find": {
-        "documentation": "Finds the first instance of the pattern in the string.",
+        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Search starts from start_index. Returns nil if not found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#find"
     },
     "@sl-slua/global/string.format": {
@@ -660,23 +660,23 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#format"
     },
     "@sl-slua/global/string.gmatch": {
-        "documentation": "Returns an iterator function for pattern matches",
+        "documentation": "Returns an iterator function of all occurences of the regex pattern inside the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gmatch"
     },
     "@sl-slua/global/string.gsub": {
-        "documentation": "Performs pattern-based substitution in a string.",
+        "documentation": "Returns a copy of src with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gsub"
     },
     "@sl-slua/global/string.len": {
-        "documentation": "Returns the number of bytes in the string. Identical to #s",
+        "documentation": "Returns the number of bytes in the string. Identical to #str.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#len"
     },
     "@sl-slua/global/string.lower": {
-        "documentation": "Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.",
+        "documentation": "Returns a lowercase copy of the string src. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Finds and returns matches for a pattern in the input string.",
+        "documentation": "Returns all occurences of the regex pattern inside the string src, starting from start_index. Returns nil if no match is found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -688,27 +688,27 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#packsize"
     },
     "@sl-slua/global/string.rep": {
-        "documentation": "Returns the input string repeated a given number of times.",
+        "documentation": "Returns the string src repeated n times. Returns an empty string if n is zero or negative.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#rep"
     },
     "@sl-slua/global/string.reverse": {
-        "documentation": "Returns the input string with bytes in reverse order.",
+        "documentation": "Returns a copy of the string src with bytes in reverse order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#reverse"
     },
     "@sl-slua/global/string.split": {
-        "documentation": "Splits a string by separator. Returns a list of substrings.",
+        "documentation": "Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (\",\"). If the separator is empty, splits into individual one-byte substrings.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#split"
     },
     "@sl-slua/global/string.sub": {
-        "documentation": "Returns a substring from the given range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive byte range start_index..end_index. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
-        "documentation": "Decodes a binary string using a pack format.",
+        "documentation": "Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
-        "documentation": "Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.",
+        "documentation": "Returns an uppercase copy of the string src. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#upper"
     },
     "@sl-slua/global/table": {
@@ -736,19 +736,19 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#maxn"
     },
     "@sl-slua/global/table.insert": {
-        "documentation": "Inserts an element at the specified index, or at the end of the array.",
+        "documentation": "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#insert"
     },
     "@sl-slua/global/table.append": {
-        "documentation": "Appends one or more an elements to end of the array.",
+        "documentation": "Appends one or more elements to the end of the array.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#append"
     },
     "@sl-slua/global/table.extend": {
-        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a)",
+        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#extend"
     },
     "@sl-slua/global/table.remove": {
-        "documentation": "Removes and returns the element at the specified index from the array, or from the end of the array.",
+        "documentation": "Removes and returns the element at index i, shifting subsequent elements down by 1. Defaults to the end of the array. Returns nil if no element was removed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#remove"
     },
     "@sl-slua/global/table.sort": {
@@ -756,7 +756,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#sort"
     },
     "@sl-slua/global/table.pack": {
-        "documentation": "Packs multiple arguments into a new array with length field n.",
+        "documentation": "Packs arguments into a table and sets an 'n' field with the total count. This is the safest way to pack varargs (...) that might contain nil values.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#pack"
     },
     "@sl-slua/global/table.unpack": {
@@ -764,19 +764,19 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#unpack"
     },
     "@sl-slua/global/table.move": {
-        "documentation": "Inserts elements [i..j] from src array into dest array at [d].",
+        "documentation": "Copies elements [i..j] from src array into dest array starting at [d], overwriting existing elements.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#move"
     },
     "@sl-slua/global/table.create": {
-        "documentation": "Creates a new table with pre-allocated array capacity, optionally filled.",
+        "documentation": "Creates a new table with pre-allocated array capacity, optionally filled. Preallocation only benefits array portions and is counter-productive for dictionaries.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#create"
     },
     "@sl-slua/global/table.find": {
-        "documentation": "Finds the first occurrence of a value in the array and returns its index.",
+        "documentation": "Finds the first occurrence of a value in the array and returns its index. Traversal stops at the first nil.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#find"
     },
     "@sl-slua/global/table.clear": {
-        "documentation": "Clears all elements from a table while keeping its capacity.",
+        "documentation": "Clears all elements from a table while keeping its capacity to avoid memory reallocations during future assignments.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#clear"
     },
     "@sl-slua/global/table.shrink": {
@@ -784,7 +784,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#shrink"
     },
     "@sl-slua/global/table.freeze": {
-        "documentation": "Freezes a table, making it read-only.",
+        "documentation": "Freezes a table, making it read-only. The freeze is shallow and does not affect nested tables. Raises an error if the table is already frozen or has a protected metatable.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#freeze"
     },
     "@sl-slua/global/table.isfrozen": {
@@ -792,7 +792,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#isfrozen"
     },
     "@sl-slua/global/table.clone": {
-        "documentation": "Creates a shallow copy of the table.",
+        "documentation": "Creates a shallow copy of the table, copying its keys, values, and metatable. The clone is always unfrozen even if the source was frozen.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#clone"
     },
     "@sl-slua/global/utf8": {
@@ -800,27 +800,27 @@
         "learn_more_link": "https://luau.org/library/#utf8-library"
     },
     "@sl-slua/global/utf8.charpattern": {
-        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence",
+        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#charpattern"
     },
     "@sl-slua/global/utf8.char": {
-        "documentation": "Creates a string from Unicode codepoints.",
+        "documentation": "Constructs and returns a string from the given Unicode codepoint ordinals.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#char"
     },
     "@sl-slua/global/utf8.codes": {
-        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string.",
+        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codes"
     },
     "@sl-slua/global/utf8.codepoint": {
-        "documentation": "Returns the Unicode codepoints in the specified range of the string.",
+        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codepoint"
     },
     "@sl-slua/global/utf8.len": {
-        "documentation": "Returns the number of Unicode codepoints in the specified range of the string, or nil and error index.",
+        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range start_index..end_index of the string src. If the string is not utf8, returns (nil, error index) instead. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#len"
     },
     "@sl-slua/global/utf8.offset": {
-        "documentation": "Returns the byte offset of the nth Unicode codepoint in the string.",
+        "documentation": "Returns the byte offset of the nth Unicode codepoint in the string. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#offset"
     },
     "@sl-slua/global/uuid": {
@@ -1005,7 +1005,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/ll.Char": {
-        "documentation": "Constructs and returns a single-character string representing the supplied Unicode value val.",
+        "documentation": "Constructs and returns a single-character string from the given Unicode codepoint ordinal.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlChar"
     },
     "@sl-slua/global/ll.ClearCameraParams": {
@@ -1077,11 +1077,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/ll.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/ll.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/ll.DerezObject": {
@@ -1165,7 +1165,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDetectedVel"
     },
     "@sl-slua/global/ll.Dialog": {
-        "documentation": "Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.",
+        "documentation": "Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDialog"
     },
     "@sl-slua/global/ll.Die": {
@@ -1185,7 +1185,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEjectFromLand"
     },
     "@sl-slua/global/ll.Email": {
-        "documentation": "Sends an email to address with subject and message.",
+        "documentation": "Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEmail"
     },
     "@sl-slua/global/ll.EscapeURL": {
@@ -1261,7 +1261,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAlpha"
     },
     "@sl-slua/global/ll.GetAnimation": {
-        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.",
+        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the specified avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAnimation"
     },
     "@sl-slua/global/ll.GetAnimationList": {
@@ -1277,11 +1277,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/ll.GetAttachedList": {
-        "documentation": "Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/ll.GetAttachedListFiltered": {
-        "documentation": "Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedListFiltered"
     },
     "@sl-slua/global/ll.GetBoundingBox": {
@@ -1385,7 +1385,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetHealth"
     },
     "@sl-slua/global/ll.GetInventoryAcquireTime": {
-        "documentation": "Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.",
+        "documentation": "Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form \"YYYY-MM-DDThh:mm:ssZ\"",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryAcquireTime"
     },
     "@sl-slua/global/ll.GetInventoryCreator": {
@@ -1393,23 +1393,23 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryCreator"
     },
     "@sl-slua/global/ll.GetInventoryDesc": {
-        "documentation": "Returns a string containing the description of the specified inventory item.",
+        "documentation": "Returns the description string of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryDesc"
     },
     "@sl-slua/global/ll.GetInventoryKey": {
-        "documentation": "Returns the key (UUID) of the specified inventory name.",
+        "documentation": "Returns the key (UUID) of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryKey"
     },
     "@sl-slua/global/ll.GetInventoryName": {
-        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.",
+        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryName"
     },
     "@sl-slua/global/ll.GetInventoryNumber": {
-        "documentation": "Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.",
+        "documentation": "Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryNumber"
     },
     "@sl-slua/global/ll.GetInventoryPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission category mask of the specified inventory item.",
+        "documentation": "Returns the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryPermMask"
     },
     "@sl-slua/global/ll.GetInventoryType": {
@@ -1497,7 +1497,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetMoonRotation"
     },
     "@sl-slua/global/ll.GetNextEmail": {
-        "documentation": "Requests the next queued email matching the specified sender address and subject filters via the email event.",
+        "documentation": "Requests the next queued email via the email event. Emails must<br>1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`<br>2. Be sent from the specified sender Address (or any address if blank)<br>3. Have the specified subject Subject (or any subject if blank)",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/ll.GetNotecardLine": {
@@ -1521,7 +1521,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfSides"
     },
     "@sl-slua/global/ll.GetObjectAnimationNames": {
-        "documentation": "Returns a list of strings representing the names of all active animations currently playing on the object.",
+        "documentation": "Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectAnimationNames"
     },
     "@sl-slua/global/ll.GetObjectDesc": {
@@ -1545,7 +1545,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectName"
     },
     "@sl-slua/global/ll.GetObjectPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.",
+        "documentation": "Returns the script's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectPermMask"
     },
     "@sl-slua/global/ll.GetObjectPrimCount": {
@@ -1721,7 +1721,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/ll.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/ll.GetSunDirection": {
@@ -1793,7 +1793,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveAgentInventory"
     },
     "@sl-slua/global/ll.GiveInventory": {
-        "documentation": "Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.",
+        "documentation": "Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveInventory"
     },
     "@sl-slua/global/ll.GiveInventoryList": {
@@ -1805,7 +1805,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveMoney"
     },
     "@sl-slua/global/ll.GodLikeRezObject": {
-        "documentation": "Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.",
+        "documentation": "Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGodLikeRezObject"
     },
     "@sl-slua/global/ll.Ground": {
@@ -1845,11 +1845,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/ll.InsertString": {
-        "documentation": "Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/ll.InstantMessage": {
-        "documentation": "Sends an instant message containing message to the user identified by their key.",
+        "documentation": "Sends an instant message containing msg to the agent identified by their key.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInstantMessage"
     },
     "@sl-slua/global/ll.IntegerToBase64": {
@@ -2169,7 +2169,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOpenRemoteDataChannel"
     },
     "@sl-slua/global/ll.Ord": {
-        "documentation": "Returns the integer Unicode (ordinal) value of the character at index in the string val.",
+        "documentation": "Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOrd"
     },
     "@sl-slua/global/ll.OverMyLand": {
@@ -2193,7 +2193,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseString2List"
     },
     "@sl-slua/global/ll.ParseStringKeepNulls": {
-        "documentation": "Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
+        "documentation": "Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseStringKeepNulls"
     },
     "@sl-slua/global/ll.ParticleSystem": {
@@ -2245,11 +2245,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRefreshPrimURL"
     },
     "@sl-slua/global/ll.RegionSay": {
-        "documentation": "Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).",
+        "documentation": "Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSay"
     },
     "@sl-slua/global/ll.RegionSayTo": {
-        "documentation": "Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
+        "documentation": "Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSayTo"
     },
     "@sl-slua/global/ll.ReleaseCamera": {
@@ -2273,7 +2273,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteDataSetRegion"
     },
     "@sl-slua/global/ll.RemoteLoadScriptPin": {
-        "documentation": "Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
+        "documentation": "Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteLoadScriptPin"
     },
     "@sl-slua/global/ll.RemoveFromLandBanList": {
@@ -2301,7 +2301,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceEnvironment"
     },
     "@sl-slua/global/ll.ReplaceSubString": {
-        "documentation": "Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
+        "documentation": "Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceSubString"
     },
     "@sl-slua/global/ll.RequestAgentData": {
@@ -2317,7 +2317,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestExperiencePermissions"
     },
     "@sl-slua/global/ll.RequestInventoryData": {
-        "documentation": "Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
+        "documentation": "Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestInventoryData"
     },
     "@sl-slua/global/ll.RequestPermissions": {
@@ -2357,7 +2357,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetLandPassList"
     },
     "@sl-slua/global/ll.ResetOtherScript": {
-        "documentation": "Resets the script name located in the prim's inventory.",
+        "documentation": "Resets the named script name in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetOtherScript"
     },
     "@sl-slua/global/ll.ResetScript": {
@@ -2373,15 +2373,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReturnObjectsByOwner"
     },
     "@sl-slua/global/ll.RezAtRoot": {
-        "documentation": "Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.",
+        "documentation": "Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezAtRoot"
     },
     "@sl-slua/global/ll.RezObject": {
-        "documentation": "Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
+        "documentation": "Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObject"
     },
     "@sl-slua/global/ll.RezObjectWithParams": {
-        "documentation": "Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.",
+        "documentation": "Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/ll.Rot2Angle": {
@@ -2445,7 +2445,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSameGroup"
     },
     "@sl-slua/global/ll.Say": {
-        "documentation": "Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"chat_range\"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSay"
     },
     "@sl-slua/global/ll.ScaleByFactor": {
@@ -2553,7 +2553,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetHoverHeight"
     },
     "@sl-slua/global/ll.SetInventoryPermMask": {
-        "documentation": "Sets the specified permission category of the inventory item to the value permissions mask.",
+        "documentation": "Sets the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetInventoryPermMask"
     },
     "@sl-slua/global/ll.SetKeyframedMotion": {
@@ -2617,7 +2617,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectName"
     },
     "@sl-slua/global/ll.SetObjectPermMask": {
-        "documentation": "Sets the specified permission mask category to value on the root object containing the script.",
+        "documentation": "Sets the scripts's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectPermMask"
     },
     "@sl-slua/global/ll.SetParcelForSale": {
@@ -2673,7 +2673,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScale"
     },
     "@sl-slua/global/ll.SetScriptState": {
-        "documentation": "Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
+        "documentation": "Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScriptState"
     },
     "@sl-slua/global/ll.SetSitText": {
@@ -2737,7 +2737,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetVelocity"
     },
     "@sl-slua/global/ll.Shout": {
-        "documentation": "Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"shout_range\"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlShout"
     },
     "@sl-slua/global/ll.SignRSA": {
@@ -2805,7 +2805,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStopSound"
     },
     "@sl-slua/global/ll.StringLength": {
-        "documentation": "Returns an integer representing the number of characters in the string str (excluding the null terminator).",
+        "documentation": "Returns the number of unicode codepoints in the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringLength"
     },
     "@sl-slua/global/ll.StringToBase64": {
@@ -2817,7 +2817,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/ll.SubStringIndex": {
-        "documentation": "Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns nil if not found.",
+        "documentation": "Returns the codepoint index of the first occurrence of pattern inside the string source. Returns nil if not found. No regex.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/ll.TakeCamera": {
@@ -2845,7 +2845,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetRemove"
     },
     "@sl-slua/global/ll.TargetedEmail": {
-        "documentation": "Sends an email containing subject and message to the target (which can designate the owner or creator of the object).",
+        "documentation": "Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetedEmail"
     },
     "@sl-slua/global/ll.TeleportAgent": {
@@ -2861,15 +2861,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTeleportAgentHome"
     },
     "@sl-slua/global/ll.TextBox": {
-        "documentation": "Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.",
+        "documentation": "Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/ll.ToLower": {
-        "documentation": "Returns a copy of the string src converted entirely to lowercase.",
+        "documentation": "Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToLower"
     },
     "@sl-slua/global/ll.ToUpper": {
-        "documentation": "Returns a copy of the string src converted entirely to uppercase.",
+        "documentation": "Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToUpper"
     },
     "@sl-slua/global/ll.TransferLindenDollars": {
@@ -2877,7 +2877,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferLindenDollars"
     },
     "@sl-slua/global/ll.TransferOwnership": {
-        "documentation": "Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.",
+        "documentation": "Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferOwnership"
     },
     "@sl-slua/global/ll.TriggerSound": {
@@ -2933,7 +2933,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWater"
     },
     "@sl-slua/global/ll.Whisper": {
-        "documentation": "Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"whisper_range\"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWhisper"
     },
     "@sl-slua/global/ll.Wind": {
@@ -3068,7 +3068,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/llcompat.Char": {
-        "documentation": "Constructs and returns a single-character string representing the supplied Unicode value val.",
+        "documentation": "Constructs and returns a single-character string from the given Unicode codepoint ordinal.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlChar"
     },
     "@sl-slua/global/llcompat.ClearCameraParams": {
@@ -3140,11 +3140,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/llcompat.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/llcompat.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/llcompat.DerezObject": {
@@ -3228,7 +3228,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDetectedVel"
     },
     "@sl-slua/global/llcompat.Dialog": {
-        "documentation": "Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.",
+        "documentation": "Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDialog"
     },
     "@sl-slua/global/llcompat.Die": {
@@ -3248,7 +3248,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEjectFromLand"
     },
     "@sl-slua/global/llcompat.Email": {
-        "documentation": "Sends an email to address with subject and message.",
+        "documentation": "Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEmail"
     },
     "@sl-slua/global/llcompat.EscapeURL": {
@@ -3328,7 +3328,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAndResetTime"
     },
     "@sl-slua/global/llcompat.GetAnimation": {
-        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.",
+        "documentation": "Returns a string representing the name of the currently playing locomotion animation for the specified avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAnimation"
     },
     "@sl-slua/global/llcompat.GetAnimationList": {
@@ -3344,11 +3344,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttached"
     },
     "@sl-slua/global/llcompat.GetAttachedList": {
-        "documentation": "Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedList"
     },
     "@sl-slua/global/llcompat.GetAttachedListFiltered": {
-        "documentation": "Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
+        "documentation": "Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetAttachedListFiltered"
     },
     "@sl-slua/global/llcompat.GetBoundingBox": {
@@ -3452,7 +3452,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetHealth"
     },
     "@sl-slua/global/llcompat.GetInventoryAcquireTime": {
-        "documentation": "Returns a string containing the UTC timestamp (YYYY-MM-DDThh:mm:ssZ) representing when the inventory item was placed inside the prim.",
+        "documentation": "Returns the time when the item was placed in the prim's inventory, as a UTC timestamp string of the form \"YYYY-MM-DDThh:mm:ssZ\"",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryAcquireTime"
     },
     "@sl-slua/global/llcompat.GetInventoryCreator": {
@@ -3460,23 +3460,23 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryCreator"
     },
     "@sl-slua/global/llcompat.GetInventoryDesc": {
-        "documentation": "Returns a string containing the description of the specified inventory item.",
+        "documentation": "Returns the description string of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryDesc"
     },
     "@sl-slua/global/llcompat.GetInventoryKey": {
-        "documentation": "Returns the key (UUID) of the specified inventory name.",
+        "documentation": "Returns the key (UUID) of the specified inventory item.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryKey"
     },
     "@sl-slua/global/llcompat.GetInventoryName": {
-        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the index number.",
+        "documentation": "Returns the name of the inventory item of the specified type (INVENTORY_*) at the specified inventory index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryName"
     },
     "@sl-slua/global/llcompat.GetInventoryNumber": {
-        "documentation": "Returns an integer representing the quantity of items of the specified type (INVENTORY_*) in the prim's inventory.",
+        "documentation": "Returns the count of items of the specified type (INVENTORY_*) in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryNumber"
     },
     "@sl-slua/global/llcompat.GetInventoryPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission category mask of the specified inventory item.",
+        "documentation": "Returns the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetInventoryPermMask"
     },
     "@sl-slua/global/llcompat.GetInventoryType": {
@@ -3564,7 +3564,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetMoonRotation"
     },
     "@sl-slua/global/llcompat.GetNextEmail": {
-        "documentation": "Requests the next queued email matching the specified sender address and subject filters via the email event.",
+        "documentation": "Requests the next queued email via the email event. Emails must<br>1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`<br>2. Be sent from the specified sender Address (or any address if blank)<br>3. Have the specified subject Subject (or any subject if blank)",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/llcompat.GetNotecardLine": {
@@ -3588,7 +3588,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfSides"
     },
     "@sl-slua/global/llcompat.GetObjectAnimationNames": {
-        "documentation": "Returns a list of strings representing the names of all active animations currently playing on the object.",
+        "documentation": "Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectAnimationNames"
     },
     "@sl-slua/global/llcompat.GetObjectDesc": {
@@ -3612,7 +3612,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectName"
     },
     "@sl-slua/global/llcompat.GetObjectPermMask": {
-        "documentation": "Returns an integer bitfield representing the permission mask of the specified category for the object containing the script.",
+        "documentation": "Returns the script's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetObjectPermMask"
     },
     "@sl-slua/global/llcompat.GetObjectPrimCount": {
@@ -3788,7 +3788,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/llcompat.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/llcompat.GetSunDirection": {
@@ -3860,7 +3860,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveAgentInventory"
     },
     "@sl-slua/global/llcompat.GiveInventory": {
-        "documentation": "Gives the specified inventory item to the destination, as permitted by the permissions system. The destination can be any agent, or an object located in the same region.",
+        "documentation": "Gives the specified inventory item to the target, as permitted by the permissions system. The target can be any agent or an object located in the same region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveInventory"
     },
     "@sl-slua/global/llcompat.GiveInventoryList": {
@@ -3872,7 +3872,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGiveMoney"
     },
     "@sl-slua/global/llcompat.GodLikeRezObject": {
-        "documentation": "Rezzes an object directly from a UUID specified by inventory at the position pos, provided the owner has the god-bit set.",
+        "documentation": "Rezzes an object directly from a UUID specified by id at the position pos, provided the owner has the god-bit set.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGodLikeRezObject"
     },
     "@sl-slua/global/llcompat.Ground": {
@@ -3912,11 +3912,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/llcompat.InsertString": {
-        "documentation": "Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/llcompat.InstantMessage": {
-        "documentation": "Sends an instant message containing message to the user identified by their key.",
+        "documentation": "Sends an instant message containing msg to the agent identified by their key.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInstantMessage"
     },
     "@sl-slua/global/llcompat.IntegerToBase64": {
@@ -4236,7 +4236,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOpenRemoteDataChannel"
     },
     "@sl-slua/global/llcompat.Ord": {
-        "documentation": "Returns the integer Unicode (ordinal) value of the character at index in the string val.",
+        "documentation": "Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOrd"
     },
     "@sl-slua/global/llcompat.OverMyLand": {
@@ -4260,7 +4260,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseString2List"
     },
     "@sl-slua/global/llcompat.ParseStringKeepNulls": {
-        "documentation": "Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
+        "documentation": "Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseStringKeepNulls"
     },
     "@sl-slua/global/llcompat.ParticleSystem": {
@@ -4312,11 +4312,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRefreshPrimURL"
     },
     "@sl-slua/global/llcompat.RegionSay": {
-        "documentation": "Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).",
+        "documentation": "Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSay"
     },
     "@sl-slua/global/llcompat.RegionSayTo": {
-        "documentation": "Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
+        "documentation": "Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSayTo"
     },
     "@sl-slua/global/llcompat.ReleaseCamera": {
@@ -4340,7 +4340,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteDataSetRegion"
     },
     "@sl-slua/global/llcompat.RemoteLoadScriptPin": {
-        "documentation": "Copies the script name into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
+        "documentation": "Copies the script into target, setting it running (if running is TRUE) with the start_param, provided the script owner has modify permissions on target and target's PIN matches pin (set via llSetRemoteScriptAccessPin).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRemoteLoadScriptPin"
     },
     "@sl-slua/global/llcompat.RemoveFromLandBanList": {
@@ -4368,7 +4368,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceEnvironment"
     },
     "@sl-slua/global/llcompat.ReplaceSubString": {
-        "documentation": "Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
+        "documentation": "Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceSubString"
     },
     "@sl-slua/global/llcompat.RequestAgentData": {
@@ -4384,7 +4384,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestExperiencePermissions"
     },
     "@sl-slua/global/llcompat.RequestInventoryData": {
-        "documentation": "Asynchronously requests data for the inventory item specified by name, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
+        "documentation": "Asynchronously requests data for the named inventory item, triggering a dataserver event. Currently, only landmark items are supported (which return local region coordinates). Returns a key query handle.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRequestInventoryData"
     },
     "@sl-slua/global/llcompat.RequestPermissions": {
@@ -4424,7 +4424,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetLandPassList"
     },
     "@sl-slua/global/llcompat.ResetOtherScript": {
-        "documentation": "Resets the script name located in the prim's inventory.",
+        "documentation": "Resets the named script name in the prim's inventory.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlResetOtherScript"
     },
     "@sl-slua/global/llcompat.ResetScript": {
@@ -4444,15 +4444,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReturnObjectsByOwner"
     },
     "@sl-slua/global/llcompat.RezAtRoot": {
-        "documentation": "Instantiates the inventory object at position moving at velocity, rotated to rot with its root prim centered exactly on position, passing param as the on_rez start parameter.",
+        "documentation": "Instantiates the named inventory object with the root prim at pos with velocity vel and rotation rot, passing start_param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezAtRoot"
     },
     "@sl-slua/global/llcompat.RezObject": {
-        "documentation": "Instantiates the inventory object at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
+        "documentation": "Instantiates the named inventory object with the bounding box centered at pos with velocity vel and rotation rot, passing param as the on_rez start parameter. The vel parameter is ignored if the rezzed object is non-physical.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObject"
     },
     "@sl-slua/global/llcompat.RezObjectWithParams": {
-        "documentation": "Instantiates the inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in params. Returns the key of the rezzed object, or a blank key on failure.",
+        "documentation": "Instantiates the named inventory object (defaulting to the rezzing prim's position unless REZ_POS is specified) using the initial set of parameters specified in options. Returns the key of the rezzed object, or a blank key on failure.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/llcompat.Rot2Angle": {
@@ -4516,7 +4516,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSameGroup"
     },
     "@sl-slua/global/llcompat.Say": {
-        "documentation": "Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"chat_range\"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSay"
     },
     "@sl-slua/global/llcompat.ScaleByFactor": {
@@ -4624,7 +4624,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetHoverHeight"
     },
     "@sl-slua/global/llcompat.SetInventoryPermMask": {
-        "documentation": "Sets the specified permission category of the inventory item to the value permissions mask.",
+        "documentation": "Sets the specified item's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetInventoryPermMask"
     },
     "@sl-slua/global/llcompat.SetKeyframedMotion": {
@@ -4692,7 +4692,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectName"
     },
     "@sl-slua/global/llcompat.SetObjectPermMask": {
-        "documentation": "Sets the specified permission mask category to value on the root object containing the script.",
+        "documentation": "Sets the scripts's object's permission flags for the specified group.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetObjectPermMask"
     },
     "@sl-slua/global/llcompat.SetParcelForSale": {
@@ -4748,7 +4748,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScale"
     },
     "@sl-slua/global/llcompat.SetScriptState": {
-        "documentation": "Sets the running state of the script name in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
+        "documentation": "Sets the running state of the named script in the prim's inventory. If running is TRUE, the script is enabled; if FALSE, it is disabled.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetScriptState"
     },
     "@sl-slua/global/llcompat.SetSitText": {
@@ -4816,7 +4816,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetVelocity"
     },
     "@sl-slua/global/llcompat.Shout": {
-        "documentation": "Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"shout_range\"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlShout"
     },
     "@sl-slua/global/llcompat.SignRSA": {
@@ -4884,7 +4884,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStopSound"
     },
     "@sl-slua/global/llcompat.StringLength": {
-        "documentation": "Returns an integer representing the number of characters in the string str (excluding the null terminator).",
+        "documentation": "Returns the number of unicode codepoints in the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringLength"
     },
     "@sl-slua/global/llcompat.StringToBase64": {
@@ -4896,7 +4896,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/llcompat.SubStringIndex": {
-        "documentation": "(Index semantics) Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/llcompat.TakeCamera": {
@@ -4924,7 +4924,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetRemove"
     },
     "@sl-slua/global/llcompat.TargetedEmail": {
-        "documentation": "Sends an email containing subject and message to the target (which can designate the owner or creator of the object).",
+        "documentation": "Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetedEmail"
     },
     "@sl-slua/global/llcompat.TeleportAgent": {
@@ -4940,15 +4940,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTeleportAgentHome"
     },
     "@sl-slua/global/llcompat.TextBox": {
-        "documentation": "Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.",
+        "documentation": "Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/llcompat.ToLower": {
-        "documentation": "Returns a copy of the string src converted entirely to lowercase.",
+        "documentation": "Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToLower"
     },
     "@sl-slua/global/llcompat.ToUpper": {
-        "documentation": "Returns a copy of the string src converted entirely to uppercase.",
+        "documentation": "Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToUpper"
     },
     "@sl-slua/global/llcompat.TransferLindenDollars": {
@@ -4956,7 +4956,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferLindenDollars"
     },
     "@sl-slua/global/llcompat.TransferOwnership": {
-        "documentation": "Transfers ownership of the object (or a copy of it, depending on flags) to the avatar agent_id. Returns an integer indicating the success or failure of the transfer.",
+        "documentation": "Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTransferOwnership"
     },
     "@sl-slua/global/llcompat.TriggerSound": {
@@ -5012,7 +5012,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWater"
     },
     "@sl-slua/global/llcompat.Whisper": {
-        "documentation": "Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"whisper_range\"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWhisper"
     },
     "@sl-slua/global/llcompat.Wind": {
