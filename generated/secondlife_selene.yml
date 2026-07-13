@@ -5567,7 +5567,7 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Converts the input string to a number in the specified base. Returns
+    description: Converts the input string to an integer in the specified base. Returns
       nil if not an integer.
   integer.ge:
     args:

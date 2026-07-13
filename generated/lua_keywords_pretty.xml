@@ -13572,7 +13572,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number to convert.</string>
+                     <string>Number to convert to an integer.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -13690,7 +13690,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Converts the input string to a number in the specified base. Returns nil if not an integer.</string>
+            <string>Converts the input string to an integer in the specified base. Returns nil if not an integer.</string>
          </map>
          <key>integer.ge</key>
          <map>

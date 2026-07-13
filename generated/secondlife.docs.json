@@ -371,7 +371,7 @@
         "documentation": "Returns width bits from src, starting from bit index field. Raises an error if the selected bit range is goes outside the range [0, 63]."
     },
     "@sl-slua/global/integer.fromstring": {
-        "documentation": "Converts the input string to a number in the specified base. Returns nil if not an integer."
+        "documentation": "Converts the input string to an integer in the specified base. Returns nil if not an integer."
     },
     "@sl-slua/global/integer.ge": {
         "documentation": "Returns true if int1 >= int2 (signed)."
