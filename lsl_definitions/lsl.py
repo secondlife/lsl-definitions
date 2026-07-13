@@ -276,8 +276,10 @@ class LSLArgument:
     """Represents a parameter list to set"""
     param_get_semantics: LSLEnum | None
     """Represents a parameter list to retrieve"""
+    ruleset: str | None
+    """Name of a builder-ruleset for dict-to-list coercion"""
 
-    def compute_slua_type(self, event: bool = False) -> str:
+    def compute_slua_type(self, event: bool = False, builder_rulesets: dict | None = None) -> str:
         if self.slua_type is not None:
             return self.slua_type
         if self.asset_semantics and self.type == LSLType.STRING:
@@ -287,7 +289,16 @@ class LSLArgument:
                 return "boolean"
             else:
                 return "boolean | number"
-        return self.type.meta.slua_name
+        base_type = self.type.meta.slua_name
+        # If this argument has a ruleset annotation and we have rulesets data,
+        # create a union type: <original type> | RulesetType
+        if self.ruleset and builder_rulesets:
+            ruleset_data = builder_rulesets.get(self.ruleset)
+            if ruleset_data:
+                lua_type = ruleset_data.get("lua-type")
+                if lua_type:
+                    return f"{base_type} | {lua_type}"
+        return base_type
 
 
 @dataclasses.dataclass
@@ -782,6 +793,7 @@ class LSLDefinitionParser:
             param_semantics=None,
             param_get_semantics=None,
             tooltip=arg_data.get("tooltip", ""),
+            ruleset=arg_data.get("ruleset", None),
         )
         if arg.asset_semantics and arg.type != LSLType.STRING:
             raise ValueError(f"{arg_name} has asset semantics, but type is {arg.type!r}")
@@ -789,6 +801,10 @@ class LSLDefinitionParser:
             raise ValueError(f"{arg_name} has bool semantics, but type is {arg.type!r}")
         if arg.index_semantics and arg.type != LSLType.INTEGER:
             raise ValueError(f"{arg_name} has index semantics, but type is {arg.type!r}")
+        if arg.ruleset and arg.type != LSLType.LIST:
+            raise ValueError(
+                f"{arg_name} has ruleset annotation, but type is {arg.type!r} (must be list)"
+            )
         if arg_data.get("enum-semantics"):
             arg.enum_semantics = self._resolve_enum(arg_data["enum-semantics"])
             if arg.type != LSLType.INTEGER:

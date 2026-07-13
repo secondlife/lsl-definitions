@@ -248,7 +248,7 @@ type-aliases:
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
 - name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.particleSystem() to emit particles.
+  comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
@@ -258,7 +258,7 @@ type-aliases:
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
   selene-type: table
 - name: HttpRequestParams
-  comment: HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.
+  comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
   selene-type: table
@@ -1583,21 +1583,6 @@ modules:
     comment: A constant to pass for an empty object to json encode.
     type: '{}'
     value: 'setmetatable({}, lljson.object_mt)'
-- name: llhttp
-  comment: Utilities for making HTTP requests.
-  functions:
-  - name: request
-    comment: Send an HTTP request. Returns a key identifying the request, which is
-      delivered via the http_response event. Omit body for requests that do not
-      need a body (e.g. GET).
-    parameters:
-    - name: url
-      type: string
-    - name: params
-      type: HttpRequestParams?
-    - name: body
-      type: string?
-    return-type: uuid
 - name: llprim
   comment: Utilities for working with prims / objects
   constants:
@@ -1606,7 +1591,7 @@ modules:
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
   functions:
-  - name: particleSystem
+  - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
     - name: params

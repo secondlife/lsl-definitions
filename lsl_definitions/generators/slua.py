@@ -132,7 +132,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             return type_map[type_str]
         if type_str in type_aliases:
             return type_aliases[type_str].selene_type
-        if type_str.startswith("{") and type_str.endswith("}"):
+        if (type_str.startswith("{") and type_str.endswith("}")) or type_str.startswith("list |"):
             return "table"
         if "|" in type_str:
             return default

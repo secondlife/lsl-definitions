@@ -916,7 +916,7 @@ effects:
     tooltip: Suppresses default collision sprites and replaces them with impact_sprite (which must be in the prim's inventory). Supply an empty string to only suppress collision sprites.
   llLinkParticleSystem( integer link, list rules ) -> void:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
-    rules: A list of particle system rules and data pairs [rule1, data1, ...].
+    rules: A list of particle system rules and data pairs [rule1, data1, ...], or a ParticleParams dictionary.
     tooltip: Creates or updates a particle system on the linked prim link based on the list of rules. An empty list removes the particle system.
   ? llMakeExplosion( integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset ) -> void // deprecated
   : particles: ''
@@ -1323,7 +1323,7 @@ linkset:
   llSetLinkMedia( integer link, integer face, list params ) -> integer:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
     face: Face number (side) of the prim.
-    params: A set of property-value pairs (in no particular order) specifying media parameters.
+    params: A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.
     tooltip: Sets the media parameters specified by params on face of the linked prim link without a script delay. Returns an integer STATUS_* flag detailing success or failure.
   llSetLinkPrimitiveParams( integer link, list rules ) -> void // deprecated:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
@@ -1790,7 +1790,7 @@ media:
   llSetLinkMedia( integer link, integer face, list params ) -> integer:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
     face: Face number (side) of the prim.
-    params: A set of property-value pairs (in no particular order) specifying media parameters.
+    params: A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.
     tooltip: Sets the media parameters specified by params on face of the linked prim link without a script delay. Returns an integer STATUS_* flag detailing success or failure.
   llSetParcelMusicURL( string url ) -> void:
     url: Streaming audio URL string.
@@ -2184,7 +2184,7 @@ parcel_media:
 particles:
   llLinkParticleSystem( integer link, list rules ) -> void:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
-    rules: A list of particle system rules and data pairs [rule1, data1, ...].
+    rules: A list of particle system rules and data pairs [rule1, data1, ...], or a ParticleParams dictionary.
     tooltip: Creates or updates a particle system on the linked prim link based on the list of rules. An empty list removes the particle system.
   llParticleSystem( list rules ) -> void:
     rules: A list of particle system rules and data pairs [rule1, data1, ...].
@@ -2990,7 +2990,7 @@ prim_media:
   llSetLinkMedia( integer link, integer face, list params ) -> integer:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
     face: Face number (side) of the prim.
-    params: A set of property-value pairs (in no particular order) specifying media parameters.
+    params: A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.
     tooltip: Sets the media parameters specified by params on face of the linked prim link without a script delay. Returns an integer STATUS_* flag detailing success or failure.
   llSetPrimMediaParams( integer face, list params ) -> integer:
     face: Face number (side) of the prim.
@@ -3397,7 +3397,7 @@ script_communication:
       3. Have the specified subject Subject (or any subject if blank)'
   llHTTPRequest( string url, list parameters, string body ) -> key:
     url: Destination HTTP or HTTPS URL.
-    parameters: A list of HTTP_* configuration flags and value pairs.
+    parameters: A list of HTTP_* configuration flags and value pairs, or an HTTPRequestParams dictionary.
     body: String contents of the request body.
     tooltip: Sends an HTTP request to the specified url containing body and configured via parameters. Raises an http_response event and returns a key query handle identifying the request.
   llHTTPResponse( key request_id, integer status, string body ) -> void:
@@ -3950,7 +3950,7 @@ web:
     tooltip: Returns a string representing the value of the specified header associated with the HTTP request_id.
   llHTTPRequest( string url, list parameters, string body ) -> key:
     url: Destination HTTP or HTTPS URL.
-    parameters: A list of HTTP_* configuration flags and value pairs.
+    parameters: A list of HTTP_* configuration flags and value pairs, or an HTTPRequestParams dictionary.
     body: String contents of the request body.
     tooltip: Sends an HTTP request to the specified url containing body and configured via parameters. Raises an http_response event and returns a key query handle identifying the request.
   llHTTPResponse( key request_id, integer status, string body ) -> void:
@@ -3979,7 +3979,7 @@ web:
   llSetLinkMedia( integer link, integer face, list params ) -> integer:
     link: Link number (1 for root, >1 for children) or a LINK_* flag.
     face: Face number (side) of the prim.
-    params: A set of property-value pairs (in no particular order) specifying media parameters.
+    params: A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.
     tooltip: Sets the media parameters specified by params on face of the linked prim link without a script delay. Returns an integer STATUS_* flag detailing success or failure.
   llSetPrimMediaParams( integer face, list params ) -> integer:
     face: Face number (side) of the prim.

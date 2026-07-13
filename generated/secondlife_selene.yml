@@ -5466,16 +5466,6 @@ globals:
     must_use: true
     description: Decodes a base64 string to a string, or buffer if asBuffer is true.
       The output is truncated at the first decoding error.
-  llhttp.request:
-    args:
-    - type: string
-    - type: table
-      required: false
-    - type: string
-      required: false
-    description: Send an HTTP request. Returns a key identifying the request, which
-      is delivered via the http_response event. Omit body for requests that do not
-      need a body (e.g. GET).
   lljson.null:
     property: read-only
     description: A constant to pass for null to json encode.
@@ -5534,7 +5524,7 @@ globals:
   llprim.ParamsSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.particleSystem:
+  llprim.setParticleSystem:
     args:
     - type: table
       required: false

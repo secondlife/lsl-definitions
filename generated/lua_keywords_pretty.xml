@@ -201,7 +201,7 @@ export type DateTypeResult = {
          <key>HttpRequestParams</key>
          <map>
             <key>tooltip</key>
-            <string>HTTP request parameter table. Pass to llhttp.request() to configure an HTTP request.</string>
+            <string>HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.</string>
          </map>
          <key>MediaParams</key>
          <map>
@@ -211,7 +211,7 @@ export type DateTypeResult = {
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>
-            <string>Particle system parameter table. Pass to llprim.particleSystem() to emit particles.</string>
+            <string>Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.</string>
          </map>
          <key>list</key>
          <map>
@@ -13233,54 +13233,6 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Encodes a string or buffer to base64.</string>
          </map>
-         <key>llhttp</key>
-         <map>
-            <key>energy</key>
-            <real>-1.0</real>
-            <key>tooltip</key>
-            <string>Utilities for making HTTP requests.</string>
-         </map>
-         <key>llhttp.request</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>url</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>string</string>
-                  </map>
-               </map>
-               <map>
-                  <key>params</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>HttpRequestParams?</string>
-                  </map>
-               </map>
-               <map>
-                  <key>body</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>string?</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>uuid</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Send an HTTP request. Returns a key identifying the request, which is delivered via the http_response event. Omit body for requests that do not need a body (e.g. GET).</string>
-         </map>
          <key>lljson</key>
          <map>
             <key>energy</key>
@@ -13423,38 +13375,6 @@ Returns true if result is non-zero.</string>
             <key>tooltip</key>
             <string>Utilities for working with prims / objects</string>
          </map>
-         <key>llprim.particleSystem</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>params</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>ParticleParams?</string>
-                  </map>
-               </map>
-               <map>
-                  <key>link</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>number?</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>()</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
-         </map>
          <key>llprim.setMedia</key>
          <map>
             <key>arguments</key>
@@ -13495,6 +13415,38 @@ Returns true if result is non-zero.</string>
             <real>0.0</real>
             <key>tooltip</key>
             <string>Configure media on a specific face. Omit link to apply to the current prim.</string>
+         </map>
+         <key>llprim.setParticleSystem</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>params</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>ParticleParams?</string>
+                  </map>
+               </map>
+               <map>
+                  <key>link</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string></string>
+                     <key>type</key>
+                     <string>number?</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>()</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
          </map>
          <key>math</key>
          <map>
@@ -22408,7 +22360,7 @@ Returns true if result is non-zero.</string>
                   <key>parameters</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of HTTP_* configuration flags and value pairs.</string>
+                     <string>A list of HTTP_* configuration flags and value pairs, or an HTTPRequestParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -22924,7 +22876,7 @@ Returns true if result is non-zero.</string>
                   <key>rules</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of particle system rules and data pairs [rule1, data1, ...].</string>
+                     <string>A list of particle system rules and data pairs [rule1, data1, ...], or a ParticleParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -28587,7 +28539,7 @@ Returns true if result is non-zero.</string>
                   <key>params</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A set of property-value pairs (in no particular order) specifying media parameters.</string>
+                     <string>A set of property-value pairs (in no particular order) specifying media parameters, or a PrimMediaParams dictionary.</string>
                      <key>type</key>
                      <string>list</string>
                   </map>

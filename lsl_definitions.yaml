@@ -12527,9 +12527,11 @@ functions:
         tooltip: Destination HTTP or HTTPS URL.
         type: string
     - parameters:
-        tooltip: A list of HTTP_* configuration flags and value pairs.
+        tooltip: A list of HTTP_* configuration flags and value pairs,
+          or an HTTPRequestParams dictionary.
         type: list
         param-semantics: HTTPRequestParam
+        ruleset: http-params
     - body:
         tooltip: String contents of the request body.
         type: string
@@ -12870,9 +12872,11 @@ functions:
         type: integer
         enum-semantics: Links
     - rules:
-        tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
+        tooltip: A list of particle system rules and data pairs [rule1, data1, ...],
+          or a ParticleParams dictionary.
         type: list
         param-semantics: ParticleParam
+        ruleset: particle-params
     energy: 10.0
     func-id: 355
     return: void
@@ -14499,6 +14503,7 @@ functions:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
         param-semantics: ParticleParam
+        ruleset: particle-params
     energy: 10.0
     func-id: 229
     return: void
@@ -16364,9 +16369,10 @@ functions:
         enum-semantics: Faces
     - params:
         tooltip: A set of property-value pairs (in no particular order) specifying media
-          parameters.
+          parameters, or a PrimMediaParams dictionary.
         type: list
         param-semantics: PrimMediaParam
+        ruleset: prim-media-params
     energy: 10.0
     func-id: 371
     return: integer
@@ -16734,6 +16740,7 @@ functions:
           parameters.
         type: list
         param-semantics: PrimMediaParam
+        ruleset: prim-media-params
     energy: 10.0
     func-id: 350
     return: integer
@@ -18588,9 +18595,6 @@ builder-rulesets:
     enum: HTTPRequestParam
     filler-tokens: [http]
     lua-type: HttpRequestParams
-    lua-module: llhttp
-    lua-fn: request
-    dispatch-fn: HTTPRequest
 
   particle-params:
     type: table
@@ -18600,7 +18604,7 @@ builder-rulesets:
     flag-field: flags
     flag-mask: _MASK
     lua-module: llprim
-    lua-fn: particleSystem
+    lua-fn: setParticleSystem
     lua-type: ParticleParams
     dispatch-fn: LinkParticleSystem
 

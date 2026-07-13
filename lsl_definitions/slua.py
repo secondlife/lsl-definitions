@@ -635,7 +635,10 @@ class SLuaDefinitions:
                     SLuaParameter(
                         name=a.name,
                         comment=a.tooltip,
-                        type=self.validate_type(a.compute_slua_type(), known_types),
+                        type=self.validate_type(
+                            a.compute_slua_type(builder_rulesets=lsl.builder_rulesets),
+                            known_types,
+                        ),
                     )
                     for a in func.arguments
                 ],
