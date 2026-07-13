@@ -1,75 +1,75 @@
 {
     "@sl-slua/global/assert": {
-        "documentation": "Checks if the value is truthy; if not, raises an error with the optional message."
+        "documentation": "Checks if the value is truthy; if not, raises an error with the optional message. Returns the value upon success."
     },
     "@sl-slua/global/dangerouslyexecuterequiredmodule": {
         "documentation": "Dangerously executes a required module function"
     },
     "@sl-slua/global/error": {
-        "documentation": "Raises an error with the specified object and optional call stack level."
+        "documentation": "Raises an error with the specified object. The optional level determines which call stack level is blamed for the error."
     },
     "@sl-slua/global/gcinfo": {
         "documentation": "Returns the total heap size in kilobytes."
     },
     "@sl-slua/global/getmetatable": {
-        "documentation": "Returns the metatable for the specified object."
+        "documentation": "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
     },
     "@sl-slua/global/ipairs": {
-        "documentation": "Returns an iterator for numeric key-value pairs in the table."
+        "documentation": "Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value."
     },
     "@sl-slua/global/newproxy": {
         "documentation": "Creates a new untyped userdata object with an optional metatable."
     },
     "@sl-slua/global/next": {
-        "documentation": "Returns the next key-value pair in the table traversal order."
+        "documentation": "Returns the next key-value pair in the table traversal order. If the index is nil or omitted, returns the first pair."
     },
     "@sl-slua/global/pairs": {
         "documentation": "Returns an iterator for all key-value pairs in the table."
     },
     "@sl-slua/global/pcall": {
-        "documentation": "Calls function f with parameters args, returning success and function results or an error."
+        "documentation": "Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message."
     },
     "@sl-slua/global/print": {
         "documentation": "Prints all arguments to standard output using Tab as a separator."
     },
     "@sl-slua/global/rawequal": {
-        "documentation": "Returns true if a and b have the same type and value."
+        "documentation": "Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod.."
     },
     "@sl-slua/global/rawget": {
-        "documentation": "Performs a table lookup bypassing metatables."
+        "documentation": "Performs a table lookup, bypassing the __index metamethod.."
     },
     "@sl-slua/global/rawlen": {
-        "documentation": "Returns the length of a table or string bypassing metatables."
+        "documentation": "Returns the length of a table or string, bypassing the __len metamethod.."
     },
     "@sl-slua/global/rawset": {
-        "documentation": "Assigns a value to a table field bypassing metatables."
+        "documentation": "Assigns a value to a table field, bypassing the __newindex metamethod.."
     },
     "@sl-slua/global/require": {
         "documentation": "Execute the named external module."
     },
     "@sl-slua/global/select": {
-        "documentation": "Returns a subset of arguments or the number of arguments."
+        "documentation": "Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#', returns the number of arguments."
     },
     "@sl-slua/global/setmetatable": {
-        "documentation": "Changes the metatable for the given table."
+        "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
     },
     "@sl-slua/global/tonumber": {
-        "documentation": "Converts the input string to a number in the specified base."
+        "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
     },
     "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid"
+        "documentation": "Converts a string to a quaternion, returns nil if invalid."
     },
     "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid"
+        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid."
     },
     "@sl-slua/global/tostring": {
-        "documentation": "Converts the input object to a string."
+        "documentation": "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
     },
     "@sl-slua/global/touuid": {
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
-        "documentation": "Converts a string to a vector, returns nil if invalid"
+        "documentation": "Converts a string to a vector, returns nil if invalid."
     },
     "@sl-slua/global/type": {
         "documentation": "Returns the type of the object as a string."
@@ -81,14 +81,14 @@
         "documentation": "Returns values from an array in the specified index range."
     },
     "@sl-slua/global/xpcall": {
-        "documentation": "Calls function f with parameters args, handling errors with err if they occur."
+        "documentation": "Calls function f with the provided arguments, handling errors with err if they occur."
     },
     "@sl-slua/global/bit32": {
         "documentation": "Bitwise operations library.",
         "learn_more_link": "https://luau.org/library/#bit32-library"
     },
     "@sl-slua/global/bit32.arshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.",
+        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.<br>Returns 0 if i < -31, or all sign bits if i > 31.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#arshift"
     },
     "@sl-slua/global/bit32.band": {
@@ -112,7 +112,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#btest"
     },
     "@sl-slua/global/bit32.extract": {
-        "documentation": "Extracts bits from n at position field with width",
+        "documentation": "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#extract"
     },
     "@sl-slua/global/bit32.lrotate": {
@@ -120,11 +120,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lrotate"
     },
     "@sl-slua/global/bit32.lshift": {
-        "documentation": "Shifts n by i bits to the left. If i is negative, a right shift is performed.",
+        "documentation": "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lshift"
     },
     "@sl-slua/global/bit32.replace": {
-        "documentation": "Replaces bits in n at position field with width using value v",
+        "documentation": "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#replace"
     },
     "@sl-slua/global/bit32.rrotate": {
@@ -132,7 +132,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rrotate"
     },
     "@sl-slua/global/bit32.rshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.",
+        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rshift"
     },
     "@sl-slua/global/bit32.s32": {
@@ -144,15 +144,15 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#smul"
     },
     "@sl-slua/global/bit32.countlz": {
-        "documentation": "Count leading zeros",
+        "documentation": "Count leading zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countlz"
     },
     "@sl-slua/global/bit32.countrz": {
-        "documentation": "Count trailing zeros",
+        "documentation": "Count trailing zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countrz"
     },
     "@sl-slua/global/bit32.byteswap": {
-        "documentation": "Swap byte order",
+        "documentation": "Swap byte order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#byteswap"
     },
     "@sl-slua/global/buffer": {
@@ -272,7 +272,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#create"
     },
     "@sl-slua/global/coroutine.resume": {
-        "documentation": "Resumes a coroutine, returning true and results if successful, or false and an error.",
+        "documentation": "Resumes a coroutine. Returns true followed by any values passed to coroutine.yield() or returned by the function. If an error occurs, returns false and the error message.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#resume"
     },
     "@sl-slua/global/coroutine.running": {
@@ -315,7 +315,7 @@
         "documentation": "Base64 encoding/decoding library."
     },
     "@sl-slua/global/llbase64.encode": {
-        "documentation": "Encodes a string or buffer to base64"
+        "documentation": "Encodes a string or buffer to base64."
     },
     "@sl-slua/global/llbase64.decode": {
         "documentation": "Decodes a base64 string to a string, or buffer if asBuffer is true. The output is truncated at the first decoding error."
@@ -335,15 +335,15 @@
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.remove": {
-        "documentation": "A constant to return from a reviver/replacer replacer function to omit this item.",
+        "documentation": "A constant to return from a reviver/replacer function to omit this item.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.array_mt": {
-        "documentation": "Value: {__jsonhint = \"array\"}<br>Metatable for declaring table as an array for json encode.",
+        "documentation": "Value: {__jsonhint = \"array\"}<br>Metatable for declaring a table as an array for json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.object_mt": {
-        "documentation": "Value: {__jsonhint = \"object\"}<br>Metatable for declaring table as an object for json encode.",
+        "documentation": "Value: {__jsonhint = \"object\"}<br>Metatable for declaring a table as an object for json encode.",
         "learn_more_link": "https://create.secondlife.com/script/learn-slua/json/"
     },
     "@sl-slua/global/lljson.empty_array": {
@@ -387,11 +387,11 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>Value of pi",
+        "documentation": "Value: 3.141592653589793<br>Value of pi.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
-        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity)",
+        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#huge"
     },
     "@sl-slua/global/math.abs": {
@@ -411,7 +411,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan"
     },
     "@sl-slua/global/math.atan2": {
-        "documentation": "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant.",
+        "documentation": "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan2"
     },
     "@sl-slua/global/math.ceil": {
@@ -419,11 +419,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#ceil"
     },
     "@sl-slua/global/math.clamp": {
-        "documentation": "Returns n clamped between min and max.",
+        "documentation": "Returns n clamped between min and max. Raises an error if min is greater than max.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#clamp"
     },
     "@sl-slua/global/math.cos": {
-        "documentation": "Returns the cosine of n (n is in radians).",
+        "documentation": "Returns the cosine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cos"
     },
     "@sl-slua/global/math.cosh": {
@@ -459,7 +459,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#lerp"
     },
     "@sl-slua/global/math.log": {
-        "documentation": "Returns the logarithm of n in the given base (default e).",
+        "documentation": "Returns the logarithm of n in the given base, defaults to e.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#log"
     },
     "@sl-slua/global/math.log10": {
@@ -483,7 +483,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#modf"
     },
     "@sl-slua/global/math.noise": {
-        "documentation": "Returns Perlin noise value for the point (x, y, z).",
+        "documentation": "Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#noise"
     },
     "@sl-slua/global/math.pow": {
@@ -511,7 +511,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sign"
     },
     "@sl-slua/global/math.sin": {
-        "documentation": "Returns the sine of n (n is in radians).",
+        "documentation": "Returns the sine of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sin"
     },
     "@sl-slua/global/math.sinh": {
@@ -523,7 +523,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt"
     },
     "@sl-slua/global/math.tan": {
-        "documentation": "Returns the tangent of n (n is in radians).",
+        "documentation": "Returns the tangent of n. n is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tan"
     },
     "@sl-slua/global/math.tanh": {
@@ -658,7 +658,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#char"
     },
     "@sl-slua/global/string.find": {
-        "documentation": "Finds the first instance of the pattern in the string.",
+        "documentation": "Finds the first instance of the pattern in the string. Returns the start and end indices of the first match, followed by any captured substrings. Returns nil if no match is found.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#find"
     },
     "@sl-slua/global/string.format": {
@@ -666,15 +666,15 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#format"
     },
     "@sl-slua/global/string.gmatch": {
-        "documentation": "Returns an iterator function for pattern matches",
+        "documentation": "Returns an iterator function for pattern matches.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gmatch"
     },
     "@sl-slua/global/string.gsub": {
-        "documentation": "Performs pattern-based substitution in a string.",
+        "documentation": "Performs pattern-based substitution in a string. Returns a copy of the string with substitutions made, followed by the total number of substitutions that occurred.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gsub"
     },
     "@sl-slua/global/string.len": {
-        "documentation": "Returns the number of bytes in the string. Identical to #s",
+        "documentation": "Returns the number of bytes in the string. Identical to #s.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#len"
     },
     "@sl-slua/global/string.lower": {
@@ -682,7 +682,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Finds and returns matches for a pattern in the input string.",
+        "documentation": "Finds and returns matches for a pattern in the input string. Returns nil if no match is found.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -694,7 +694,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#packsize"
     },
     "@sl-slua/global/string.rep": {
-        "documentation": "Returns the input string repeated a given number of times.",
+        "documentation": "Returns the input string repeated n times. Returns an empty string if n is zero or negative.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#rep"
     },
     "@sl-slua/global/string.reverse": {
@@ -702,7 +702,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#reverse"
     },
     "@sl-slua/global/string.split": {
-        "documentation": "Splits a string by separator. Returns a list of substrings.",
+        "documentation": "Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (\",\"). If the separator is empty, splits into individual one-byte substrings.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#split"
     },
     "@sl-slua/global/string.sub": {
@@ -742,19 +742,19 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#maxn"
     },
     "@sl-slua/global/table.insert": {
-        "documentation": "Inserts an element at the specified index, or at the end of the array.",
+        "documentation": "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#insert"
     },
     "@sl-slua/global/table.append": {
-        "documentation": "Appends one or more an elements to end of the array.",
+        "documentation": "Appends one or more elements to the end of the array.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#append"
     },
     "@sl-slua/global/table.extend": {
-        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a)",
+        "documentation": "Appends all elements from one array to the end of another. Shorthand for table.move(b, 1, #b, #a+1, a).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#extend"
     },
     "@sl-slua/global/table.remove": {
-        "documentation": "Removes and returns the element at the specified index from the array, or from the end of the array.",
+        "documentation": "Removes and returns the element at index i, shifting subsequent elements down by 1. Defaults to the end of the array. Returns nil if no element was removed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#remove"
     },
     "@sl-slua/global/table.sort": {
@@ -762,7 +762,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#sort"
     },
     "@sl-slua/global/table.pack": {
-        "documentation": "Packs multiple arguments into a new array with length field n.",
+        "documentation": "Packs arguments into a table and sets an 'n' field with the total count. This is the safest way to pack varargs (...) that might contain nil values.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#pack"
     },
     "@sl-slua/global/table.unpack": {
@@ -770,19 +770,19 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#unpack"
     },
     "@sl-slua/global/table.move": {
-        "documentation": "Inserts elements [i..j] from src array into dest array at [d].",
+        "documentation": "Copies elements [i..j] from src array into dest array starting at [d], overwriting existing elements.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#move"
     },
     "@sl-slua/global/table.create": {
-        "documentation": "Creates a new table with pre-allocated array capacity, optionally filled.",
+        "documentation": "Creates a new table with pre-allocated array capacity, optionally filled. Preallocation only benefits array portions and is counter-productive for dictionaries.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#create"
     },
     "@sl-slua/global/table.find": {
-        "documentation": "Finds the first occurrence of a value in the array and returns its index.",
+        "documentation": "Finds the first occurrence of a value in the array and returns its index. Traversal stops at the first nil.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#find"
     },
     "@sl-slua/global/table.clear": {
-        "documentation": "Clears all elements from a table while keeping its capacity.",
+        "documentation": "Clears all elements from a table while keeping its capacity to avoid memory reallocations during future assignments.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#clear"
     },
     "@sl-slua/global/table.shrink": {
@@ -790,7 +790,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#shrink"
     },
     "@sl-slua/global/table.freeze": {
-        "documentation": "Freezes a table, making it read-only.",
+        "documentation": "Freezes a table, making it read-only. The freeze is shallow and does not affect nested tables. Raises an error if the table is already frozen or has a protected metatable.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#freeze"
     },
     "@sl-slua/global/table.isfrozen": {
@@ -798,7 +798,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#isfrozen"
     },
     "@sl-slua/global/table.clone": {
-        "documentation": "Creates a shallow copy of the table.",
+        "documentation": "Creates a shallow copy of the table, copying its keys, values, and metatable. The clone is always unfrozen even if the source was frozen.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/table#clone"
     },
     "@sl-slua/global/utf8": {
@@ -806,7 +806,7 @@
         "learn_more_link": "https://luau.org/library/#utf8-library"
     },
     "@sl-slua/global/utf8.charpattern": {
-        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence",
+        "documentation": "Value: \"[\\x00-\\x7F\\xC2-\\xF4][\\x80-\\xBF]*\"<br>Pattern that matches exactly one UTF-8 byte sequence.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#charpattern"
     },
     "@sl-slua/global/utf8.char": {

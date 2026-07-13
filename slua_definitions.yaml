@@ -50,14 +50,18 @@ base-classes:
   properties:
   - name: x
     type: number
+    comment: X component of the rotation/quaternion.
   - name: "y"
     type: number
+    comment: Y component of the rotation/quaternion.
   - name: z
     type: number
+    comment: Z component of the rotation/quaternion.
   - name: s
     type: number
+    comment: S component of the rotation/quaternion. Equivalent to the W component in other notations.
 - name: uuid
-  comment: A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".
+  comment: 'A 128‑bit unique identifier formatted as 36 hexadecimal characters (8‑4‑4‑4‑12), e.g. "A822FF2B-FF02-461D-B45D-DCD10A2DE0C2".'
   methods:
   - name: __tostring
     parameters:
@@ -65,10 +69,10 @@ base-classes:
     return-type: string
   properties:
   - name: istruthy
-    comment: Returns true if the UUID is not the null UUID (all zeros)
+    comment: Returns true if the UUID is not the null UUID (all zeros).
     type: boolean
   - name: bytes
-    comment: Returns the raw 16-byte binary string of the UUID
+    comment: Returns the raw 16-byte binary string of the UUID.
     type: string
 - name: vector
   comment: A set of three float values. Used to represent colors (RGB), positions, directions, and velocities.
@@ -122,10 +126,13 @@ base-classes:
   properties:
   - name: x
     type: number
+    comment: "X coordinate component of the vector. Typically represents red color, forward position, or pitch."
   - name: "y"
     type: number
+    comment: "Y coordinate component of the vector. Typically represents green color, left/right position, or roll."
   - name: z
     type: number
+    comment: "Z coordinate component of the vector. Typically represents blue color, altitude/upward position, or yaw."
 - name: DetectedEvent
   comment: Event detection class providing access to detected object/avatar information
   # auto-generated from lsl_definitions.yaml
@@ -133,10 +140,13 @@ base-classes:
   properties:
   - name: index
     type: number
+    comment: "Index of the detected entity."
   - name: valid
     type: boolean
+    comment: "Returns true if the detected index is valid and contains active data."
   - name: canAdjustDamage
     type: boolean
+    comment: "Returns true if the detected object or avatar can have its damage adjusted."
 type-aliases:
 - name: rotation
   comment: '''rotation'' is an alias for ''quaternion'''
@@ -254,82 +264,93 @@ type-aliases:
   selene-type: table
 classes:
 - name: LLEvents
-  comment: Event registration and management class for Second Life events
+  comment: Event registration and management class for Second Life events. Supports adding multiple handlers per event and dynamic registration.
   # auto-generated from lsl_definitions.yaml
   properties: []
   methods:
   - name: 'on'
-    comment: Registers a callback for an event. Returns the callback.
+    comment: "Registers a handler function to run whenever the specified event occurs. Multiple handlers can be attached to the same event and will run in the order they were added. Returns the same function passed in so it can be used later with LLEvents:off()."
     # auto-generated from lsl_definitions.yaml
     overloads: []
     parameters:
     - name: self
     - name: event
+      comment: "Name of the event to handle."
       type: LLEventName
     - name: callback
+      comment: "Function to execute when the event happens."
       type: LLEventHandler
     return-type: LLEventHandler
   - name: 'off'
-    comment: Unregisters a callback. Returns true if found and removed.
+    comment: "Removes an event handler. If the function was added multiple times via LLEvents:on(), only the last one added is removed. Returns true if the function was found and removed, false otherwise."
     # auto-generated from lsl_definitions.yaml
     overloads: []
     parameters:
     - name: self
     - name: event
+      comment: "Name of the event to remove."
       type: LLEventName
     - name: callback
+      comment: "Function to remove. Note: To remove a handler added via LLEvents:once(), you must pass the specific wrapper function it returned."
       type: LLEventHandler
     return-type: boolean
   - name: once
-    comment: Registers a one-time callback. Returns the wrapper function.
+    comment: "Registers a one-time event handler. The function runs only once and is automatically removed afterward. Returns a newly generated wrapper function, which MUST be used if you want to manually remove the handler early using LLEvents:off()."
     # auto-generated from lsl_definitions.yaml
     overloads: []
     parameters:
     - name: self
     - name: event
+      comment: "Name of the event to handle."
       type: LLEventName
     - name: callback
+      comment: "Function to execute once when the event happens."
       type: LLEventHandler
     return-type: LLEventHandler
   - name: handlers
-    comment: Returns a list of all handlers for a specific event.
+    comment: "Returns an array table containing all the functions currently handling the specified event. Useful for debugging or for iterating to remove all functions handling an event."
     parameters:
     - name: self
     - name: event
+      comment: "Name of the event to query."
       type: LLEventName
     return-type: '{LLEventHandler}'
   - name: eventNames
-    comment: Returns a list of all event names that have handlers.
+    comment: "Returns an array table of all event names that currently have active handler functions attached."
     parameters:
     - name: self
     return-type: '{string}'
 - name: LLTimers
-  comment: Timer management class for scheduling periodic and one-time callbacks
+  comment: "Timer management class for scheduling periodic and one-time callbacks. Note: Do not mix LLTimers with old LSL timer functions (e.g., llcompat.SetTimerEvent), as they share the same underlying event and will interfere with each other."
   methods:
   - name: every
-    comment: Registers a callback to be called every N seconds. Returns the callback.
+    comment: "Registers a repeating timer. The callback receives (expected_time, interval). Returns the same function passed in so it can be removed later."
     parameters:
     - name: self
     - name: seconds
+      comment: "Interval in seconds. Minimum practical interval is ~0.022s (one server frame). An interval of 0 schedules the timer for the next frame."
       type: number
     - name: callback
+      comment: "Function to execute when the time arrives."
       type: LLTimerEveryCallback
     return-type: LLTimerCallback
   - name: once
-    comment: Registers a callback to be called once after N seconds. Returns the
-      callback.
+    comment: "Registers a one-time timer. The timer runs only once and is automatically removed afterward. The callback receives (expected_time, nil). Returns the same function passed in, which can be used to cancel it early via LLTimers:off()."
     parameters:
     - name: self
     - name: seconds
+      comment: "Time in seconds to wait before triggering. A value of 0 schedules it for the next frame."
       type: number
     - name: callback
+      comment: "Function to execute once when the time arrives."
       type: LLTimerOnceCallback
     return-type: LLTimerCallback
   - name: 'off'
-    comment: Unregisters a timer callback. Returns true if found and removed.
+    comment: "Stops and removes a timer. If the same function was added multiple times, only the last one added is removed, regardless of its interval. Returns true if the timer was found and removed, false otherwise."
     parameters:
     - name: self
     - name: callback
+      comment: "Function reference to remove."
       type: LLTimerCallback
     return-type: boolean
 - name: PrimParamsSetterType
@@ -363,7 +384,7 @@ global-variables:
   type: LLTimers
 functions:
 - name: assert
-  comment: Checks if the value is truthy; if not, raises an error with the optional message.
+  comment: Checks if the value is truthy; if not, raises an error with the optional message. Returns the value upon success.
   type-parameters: [T]
   parameters:
   - name: value
@@ -397,14 +418,14 @@ functions:
     type: (...any) -> ...any
   return-type: '...any'
 - name: error
-  comment: Raises an error with the specified object and optional call stack level.
+  comment: Raises an error with the specified object. The optional level determines which call stack level is blamed for the error.
   type-parameters: [T]
   parameters:
   - name: message
-    comment: Error message to raise.
+    comment: Error message, or object, to raise. Does not have to be a string.
     type: T
   - name: level
-    comment: Level to attribute the error to in the call stack.
+    comment: Level to attribute the error to in the call stack. Level 1 is the current function, level 2 is its caller, and so on.
     type: number?
     default-value: 1
   return-type: never
@@ -420,7 +441,7 @@ functions:
   return-type: '{[string]: any}'
   slua-removed: true
 - name: getmetatable
-  comment: Returns the metatable for the specified object.
+  comment: "Returns the metatable for the specified object. If the metatable has a '__metatable' field, returns its value instead."
   type-parameters: [T]
   parameters:
   - name: obj
@@ -445,7 +466,7 @@ functions:
     type: string
   local-only: true
 - name: ipairs
-  comment: Returns an iterator for numeric key-value pairs in the table.
+  comment: Returns an iterator for sequential integer key-value pairs in the table. Iteration starts at 1 and halts at the first nil value.
   type-parameters: [V]
   parameters:
   - name: tab
@@ -471,14 +492,14 @@ functions:
     default-value: false
   return-type: any
 - name: next
-  comment: Returns the next key-value pair in the table traversal order.
+  comment: Returns the next key-value pair in the table traversal order. If the index is nil or omitted, returns the first pair.
   type-parameters: [K, V]
   parameters:
   - name: t
     comment: Table to traverse.
     type: "{[K]: V}"
   - name: i
-    comment: Key to start traversal after.
+    comment: Key to start traversal after. Omit or pass nil to fetch the first key-value pair.
     type: K?
     default-value: nil
   return-type: (K?, V)
@@ -493,7 +514,7 @@ functions:
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
   typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pcall
-  comment: Calls function f with parameters args, returning success and function results or an error.
+  comment: Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message.
   type-parameters: [A..., R...]
   parameters:
   - name: f
@@ -512,7 +533,7 @@ functions:
     type: T...
   return-type: ()
 - name: rawequal
-  comment: Returns true if a and b have the same type and value.
+  comment: Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod..
   type-parameters: [T1, T2]
   parameters:
   - name: a
@@ -524,7 +545,7 @@ functions:
   return-type: boolean
   fastcall: true
 - name: rawget
-  comment: Performs a table lookup bypassing metatables.
+  comment: Performs a table lookup, bypassing the __index metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -536,7 +557,7 @@ functions:
   return-type: V?
   fastcall: true
 - name: rawlen
-  comment: Returns the length of a table or string bypassing metatables.
+  comment: Returns the length of a table or string, bypassing the __len metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -545,7 +566,7 @@ functions:
   return-type: number
   fastcall: true
 - name: rawset
-  comment: Assigns a value to a table field bypassing metatables.
+  comment: Assigns a value to a table field, bypassing the __newindex metamethod..
   type-parameters: [K, V]
   parameters:
   - name: t
@@ -568,11 +589,11 @@ functions:
   return-type: any
   typechecker: {magic: true}
 - name: select
-  comment: Returns a subset of arguments or the number of arguments.
+  comment: Returns a subset of arguments starting from the specified index. Supports negative indexing. If index is '#', returns the number of arguments.
   type-parameters: [A...]
   parameters:
   - name: i
-    comment: Index or '#' to count arguments.
+    comment: Index integer, or '#' to return the total arguments count. Supports negative indexing.
     type: string | number
   - name: ...
     comment: Arguments to select from.
@@ -592,7 +613,7 @@ functions:
   return-type: ((T...) -> R...)?
   slua-removed: true
 - name: setmetatable
-  comment: Changes the metatable for the given table.
+  comment: "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
   type-parameters: [T, MT]
   parameters:
   - name: t
@@ -607,37 +628,39 @@ functions:
   fastcall: true
   typechecker: {builtin: true, magic: true}  # builtin due to FFlag::LuauSolverV2
 - name: tonumber
-  comment: Converts the input string to a number in the specified base.
+  comment: Converts the input string to a number in the specified base. Returns nil if the conversion fails.
   parameters:
   - name: value
     comment: String to convert to a number.
     type: string? | number
     selene-type: string
   - name: base
-    comment: Base for the conversion.
+    comment: "Base for the conversion. Valid range is [2, 36]."
     type: number?
     default-value: 10
   return-type: number?
   fastcall: true
   must-use: true
 - name: toquaternion
-  comment: Converts a string to a quaternion, returns nil if invalid
+  comment: Converts a string to a quaternion, returns nil if invalid.
   parameters:
   - name: value
+    comment: String to convert to a quaternion.
     type: string? | quaternion
     selene-type: string
   return-type: quaternion?
   must-use: true
 - name: torotation
-  comment: Converts a string to a rotation (quaternion), returns nil if invalid
+  comment: Converts a string to a rotation (quaternion), returns nil if invalid.
   parameters:
   - name: value
+    comment: String to convert to a rotation.
     type: string? | quaternion
     selene-type: string
   return-type: quaternion?
   must-use: true
 - name: tostring
-  comment: Converts the input object to a string.
+  comment: "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
   type-parameters: [T]
   parameters:
   - name: value
@@ -651,14 +674,16 @@ functions:
     shorter than 16 bytes.
   parameters:
   - name: val
+    comment: String to convert to a uuid.
     type: string? | buffer | uuid
     selene-type: string
   return-type: uuid?
   must-use: true
 - name: tovector
-  comment: Converts a string to a vector, returns nil if invalid
+  comment: Converts a string to a vector, returns nil if invalid.
   parameters:
   - name: val
+    comment: String to convert to a vector.
     type: string? | vector
     selene-type: string
   return-type: vector?
@@ -701,7 +726,7 @@ functions:
   return-type: ...V
   fastcall: true
 - name: xpcall
-  comment: Calls function f with parameters args, handling errors with err if they occur.
+  comment: Calls function f with the provided arguments, handling errors with err if they occur.
   type-parameters: [E, A..., R1..., R2...]
   parameters:
   - name: f
@@ -722,6 +747,7 @@ modules:
     comment: |-
       Shifts n by i bits to the right. If i is negative, a left shift is performed.
       Does an arithmetic shift: The most significant bit of n is propagated during the shift.
+      Returns 0 if i < -31, or all sign bits if i > 31.
     parameters:
     - name: "n"
       comment: Number to shift.
@@ -780,13 +806,16 @@ modules:
     must-use: true
     fastcall: true
   - name: extract
-    comment: Extracts bits from n at position field with width
+    comment: "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
     - name: "n"
+      comment: Number to extract from.
       type: number
     - name: field
+      comment: Starting index.
       type: number
     - name: width
+      comment: Number of bits to extract.
       type: number?
       default-value: 1
     return-type: number
@@ -805,7 +834,7 @@ modules:
     must-use: true
     fastcall: true
   - name: lshift
-    comment: Shifts n by i bits to the left. If i is negative, a right shift is performed.
+    comment: "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
     - name: "n"
       comment: Number to shift.
@@ -817,15 +846,19 @@ modules:
     must-use: true
     fastcall: true
   - name: replace
-    comment: Replaces bits in n at position field with width using value v
+    comment: "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31]."
     parameters:
     - name: "n"
+      comment: Number to replace in.
       type: number
     - name: v
+      comment: Value containing the new bits to insert.
       type: number
     - name: field
+      comment: Starting index.
       type: number
     - name: width
+      comment: Number of bits to replace.
       type: number?
       default-value: 1
     return-type: number
@@ -844,7 +877,7 @@ modules:
     must-use: true
     fastcall: true
   - name: rshift
-    comment: Shifts n by i bits to the right. If i is negative, a left shift is performed.
+    comment: "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range."
     parameters:
     - name: "n"
       comment: Number to shift.
@@ -877,25 +910,28 @@ modules:
     return-type: number
     must-use: true
   - name: countlz
-    comment: Count leading zeros
+    comment: Count leading zeros.
     parameters:
     - name: "n"
+      comment: Number whose leading zeros will be counted.
       type: number
     return-type: number
     must-use: true
     fastcall: true
   - name: countrz
-    comment: Count trailing zeros
+    comment: Count trailing zeros.
     parameters:
     - name: "n"
+      comment: Number whose trailing zeros will be counted.
       type: number
     return-type: number
     must-use: true
     fastcall: true
   - name: byteswap
-    comment: Swap byte order
+    comment: Swap byte order.
     parameters:
     - name: "n"
+      comment: Number whose byte order will be swapped.
       type: number
     return-type: number
     must-use: true
@@ -934,7 +970,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -946,7 +982,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -958,7 +994,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -970,7 +1006,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -982,7 +1018,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -994,7 +1030,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -1006,7 +1042,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -1018,7 +1054,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to read from.
+      comment: 0-based byte offset to read from.
       type: number
     return-type: number
     must-use: true
@@ -1031,7 +1067,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1046,7 +1082,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1061,7 +1097,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1076,7 +1112,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1091,7 +1127,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1106,7 +1142,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1121,7 +1157,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1136,7 +1172,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: Value to write.
@@ -1150,7 +1186,7 @@ modules:
       comment: Buffer to read from.
       type: buffer
     - name: offset
-      comment: Byte offset to start reading.
+      comment: 0-based byte offset to start reading.
       type: number
     - name: count
       comment: Number of bytes to read.
@@ -1165,7 +1201,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to write at.
+      comment: 0-based byte offset to write at.
       type: number
     - name: value
       comment: String to write.
@@ -1191,19 +1227,19 @@ modules:
       type: buffer
       observes: write
     - name: targetOffset
-      comment: Offset in target buffer.
+      comment: 0-based byte offset in target buffer.
       type: number
     - name: source
       comment: Source buffer to copy from.
       type: buffer
     - name: sourceOffset
-      comment: Offset in source buffer.
+      comment: 0-based byte offset in source buffer.
       type: number?
       default-value: 0
     - name: count
       comment: Number of bytes to copy.
       type: number?
-      default-value: 'buffer.len(b) - sourceOffset'
+      default-value: 'buffer.len(source) - sourceOffset'
     return-type: ()
   - name: fill
     comment: Fills the buffer with the specified value starting at the given offset.
@@ -1213,7 +1249,7 @@ modules:
       type: buffer
       observes: write
     - name: offset
-      comment: Byte offset to start filling.
+      comment: 0-based byte offset to start filling.
       type: number
     - name: value
       comment: Value to fill with.
@@ -1233,7 +1269,7 @@ modules:
       comment: Bit offset to read at.
       type: number
     - name: bitCount
-      comment: Number of bits to read. Must be in [0, 32] range.
+      comment: "Number of bits to read. Must be in [0, 32] range."
       type: number
     return-type: number
     must-use: true
@@ -1248,7 +1284,7 @@ modules:
       comment: Bit offset to write at.
       type: number
     - name: bitCount
-      comment: Number of bits to write. Must be in [0, 32] range.
+      comment: "Number of bits to write. Must be in [0, 32] range."
       type: number
     - name: value
       comment: Source of bits to write.
@@ -1266,7 +1302,7 @@ modules:
     return-type: thread
     must-use: true
   - name: resume
-    comment: Resumes a coroutine, returning true and results if successful, or false and an error.
+    comment: Resumes a coroutine. Returns true followed by any values passed to coroutine.yield() or returned by the function. If an error occurs, returns false and the error message.
     parameters:
     - name: co
       comment: Coroutine to resume.
@@ -1321,7 +1357,7 @@ modules:
   - name: info
     comment: Returns information about a stack frame or function based on specified format.
     overloads:
-    - comment: Returns information about a stack level
+    - comment: Returns information about a stack level.
       parameters:
       - name: level
         comment: Stack level or function reference for inspection.
@@ -1330,7 +1366,7 @@ modules:
         comment: String specifying requested information.
         type: string
       return-type: '...any'
-    - comment: Returns information about a function
+    - comment: Returns information about a function.
       parameters:
       - name: func
         comment: Function reference.
@@ -1355,9 +1391,9 @@ modules:
   - name: traceback
     comment: Returns a human-readable call stack starting from the specified level.
     overloads:
-    - comment: Returns a string with a traceback of the current call stack
+    - comment: Returns a string with a traceback of the current call stack.
       parameters:
-      - name: message
+      - name: msg
         comment: Message prepended to the traceback.
         type: string?
         default-value: nil
@@ -1385,9 +1421,10 @@ modules:
   comment: Base64 encoding/decoding library.
   functions:
   - name: encode
-    comment: Encodes a string or buffer to base64
+    comment: Encodes a string or buffer to base64.
     parameters:
     - name: data
+      comment: "String or buffer to encode to base64 format."
       type: string | buffer
       selene-type: string
     return-type: string
@@ -1396,17 +1433,21 @@ modules:
     comment: Decodes a base64 string to a string, or buffer if asBuffer is true.
       The output is truncated at the first decoding error.
     overloads:
-    - comment: Decodes a base64 string to a buffer if asBuffer is true
+    - comment: Decodes a base64 string to a buffer if asBuffer is true.
       parameters:
       - name: data
+        comment: "Base64 encoded string to decode."
         type: string
       - name: asBuffer
+        comment: "If true, decodes the payload into a buffer instead of a string."
         type: "true"
       return-type: buffer
     parameters:
     - name: data
+      comment: "Base64 encoded string to decode."
       type: string
     - name: asBuffer
+      comment: "Decodes the payload as a string."
       type: false?
       selene-type: bool
       default-value: false
@@ -1420,8 +1461,10 @@ modules:
       Raises an error if value contains unsupported types.
     parameters:
     - name: value
+      comment: "Value (table, string, number, etc.) to serialize into JSON."
       type: any
     - name: options
+      comment: "Optional configuration settings and replacer function to customize serialization formatting."
       type: LLJsonEncodeOptions?
       default-value: '{allow_sparse=false, skip_tojson=false, replacer=nil}'
     return-type: string
@@ -1431,8 +1474,10 @@ modules:
       Raises an error if JSON is invalid.
     parameters:
     - name: json
+      comment: "JSON string to deserialize into a table or value."
       type: string
     - name: options
+      comment: "Optional configuration settings and reviver function to apply during parsing."
       type: LLJsonDecodeOptions?
       default-value: '{track_path=false, reviver=nil}'
     return-type: any
@@ -1442,8 +1487,10 @@ modules:
       more compactly. Raises an error if value contains unsupported types.
     parameters:
     - name: value
+      comment: "Value to serialize into SL-typed JSON."
       type: any
     - name: options
+      comment: "Optional configuration settings to customize serialization formatting."
       type: LLJsonEncodeOptions?
       default-value: '{allow_sparse=false, skip_tojson=false, tight=false, replacer=nil}'
     return-type: string
@@ -1453,8 +1500,10 @@ modules:
       Raises an error if JSON is invalid.
     parameters:
     - name: json
+      comment: "SL-typed JSON string to deserialize."
       type: string
     - name: options
+      comment: "Optional configuration settings to apply during parsing."
       type: LLJsonDecodeOptions?
       default-value: '{track_path=false, reviver=nil}'
     return-type: any
@@ -1464,14 +1513,14 @@ modules:
     comment: A constant to pass for null to json encode.
     type: any
   - name: remove
-    comment: A constant to return from a reviver/replacer replacer function to omit this item.
+    comment: A constant to return from a reviver/replacer function to omit this item.
     type: any
   - name: array_mt
-    comment: Metatable for declaring table as an array for json encode.
+    comment: Metatable for declaring a table as an array for json encode.
     type: '{__jsonhint: string}'
     value: '{__jsonhint = "array"}'
   - name: object_mt
-    comment: Metatable for declaring table as an object for json encode.
+    comment: Metatable for declaring a table as an object for json encode.
     type: '{__jsonhint: string}'
     value: '{__jsonhint = "object"}'
   - name: empty_array
@@ -1539,7 +1588,7 @@ modules:
     comment: Returns the arc cosine of n in radians.
     parameters:
     - name: "n"
-      comment: A number in the range [-1, 1].
+      comment: "A number in the range [-1, 1]."
       type: number
     return-type: number
     must-use: true
@@ -1548,7 +1597,7 @@ modules:
     comment: Returns the arc sine of n in radians.
     parameters:
     - name: "n"
-      comment: A number in the range [-1, 1].
+      comment: "A number in the range [-1, 1]."
       type: number
     return-type: number
     must-use: true
@@ -1563,8 +1612,7 @@ modules:
     must-use: true
     fastcall: true
   - name: atan2
-    comment: Returns the arc tangent of y/x in radians, using the signs to determine
-      the quadrant.
+    comment: "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter."
     parameters:
     - name: "y"
       comment: Y-coordinate.
@@ -1585,7 +1633,7 @@ modules:
     must-use: true
     fastcall: true
   - name: clamp
-    comment: Returns n clamped between min and max.
+    comment: Returns n clamped between min and max. Raises an error if min is greater than max.
     parameters:
     - name: "n"
       comment: Value to be clamped.
@@ -1600,7 +1648,7 @@ modules:
     must-use: true
     fastcall: true
   - name: cos
-    comment: Returns the cosine of n (n is in radians).
+    comment: Returns the cosine of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -1693,7 +1741,7 @@ modules:
     must-use: true
     fastcall: true
   - name: log
-    comment: Returns the logarithm of n in the given base (default e).
+    comment: Returns the logarithm of n in the given base, defaults to e.
     parameters:
     - name: "n"
       comment: A number to compute logarithm.
@@ -1718,19 +1766,19 @@ modules:
     comment: Maps n from input range to output range.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: Number to map.
       type: number
     - name: inMin
-      comment: A number.
+      comment: Lower bound of the input range.
       type: number
     - name: inMax
-      comment: A number.
+      comment: Upper bound of the input range.
       type: number
     - name: outMin
-      comment: A number.
+      comment: Lower bound of the output range.
       type: number
     - name: outMax
-      comment: A number.
+      comment: Upper bound of the output range.
       type: number
     return-type: number
     must-use: true
@@ -1738,7 +1786,7 @@ modules:
     comment: Returns the maximum value from the given numbers.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: A number to find the maximum from.
       type: number
     - name: ...
       comment: Numbers to find the maximum from.
@@ -1751,7 +1799,7 @@ modules:
     comment: Returns the minimum value from the given numbers.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: A number to find the minimum from.
       type: number
     - name: ...
       comment: Numbers to find the minimum from.
@@ -1770,7 +1818,7 @@ modules:
     must-use: true
     fastcall: true
   - name: noise
-    comment: Returns Perlin noise value for the point (x, y, z).
+    comment: "Returns a Perlin noise value for the point (x, y, z). The return value is in the range [-1.0, 1.0]."
     parameters:
     - name: x
       comment: X coordinate for the noise function.
@@ -1819,6 +1867,25 @@ modules:
       default-value: nil
     return-type: number
     must-use: true
+    variants:
+      - comment: "Returns a random float number in the [0, 1) range (exclusive of 1)."
+        parameters: []
+        return-type: number
+      - comment: "Returns a random integer number in the [1, n] range. Input is truncated to integer."
+        parameters:
+        - name: n
+          comment: Maximum value of the range.
+          type: number
+        return-type: number
+      - comment: "Returns a random integer number in the [min, max] range. Inputs are truncated to integers."
+        parameters:
+        - name: min
+          comment: Minimum value of the range.
+          type: number
+        - name: max
+          comment: Maximum value of the range.
+          type: number
+        return-type: number
   - name: randomseed
     comment: Sets the seed for the random number generator.
     parameters:
@@ -1832,7 +1899,7 @@ modules:
     comment: Rounds n to the nearest integer.
     parameters:
     - name: "n"
-      comment: A number to round to the nearest integer.
+      comment: A number to round to the nearest integer. Halfway values are rounded away from zero.
       type: number
     return-type: number
     must-use: true
@@ -1847,7 +1914,7 @@ modules:
     must-use: true
     fastcall: true
   - name: sin
-    comment: Returns the sine of n (n is in radians).
+    comment: Returns the sine of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -1874,7 +1941,7 @@ modules:
     must-use: true
     fastcall: true
   - name: tan
-    comment: Returns the tangent of n (n is in radians).
+    comment: Returns the tangent of n. n is in radians.
     parameters:
     - name: "n"
       comment: An angle in radians.
@@ -1895,7 +1962,7 @@ modules:
     comment: Returns true if n is NaN.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: Number to check as NaN.
       type: number
     return-type: boolean
     must-use: true
@@ -1904,7 +1971,7 @@ modules:
     comment: Returns true if n is infinite.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: Number to check as infinite.
       type: number
     return-type: boolean
     must-use: true
@@ -1913,18 +1980,18 @@ modules:
     comment: Returns true if n is finite.
     parameters:
     - name: "n"
-      comment: A number.
+      comment: Number to check as finite.
       type: number
     return-type: boolean
     must-use: true
     fastcall: true
   constants:
   - name: pi
-    comment: Value of pi
+    comment: Value of pi.
     type: number
     value: 3.141592653589793
   - name: huge
-    comment: A value larger than any other numeric value (infinity)
+    comment: A value larger than any other numeric value (infinity).
     type: number
     value: inf
 - name: os
@@ -1983,7 +2050,8 @@ modules:
       optional: true
     return-type: number?
     overloads:
-    - parameters: []
+    - comment: Returns the current Unix timestamp.
+      parameters: []
       return-type: number
     must-use: true
 - name: quaternion
@@ -2136,7 +2204,7 @@ modules:
     fastcall: true
     typechecker: {builtin: true}
   - name: find
-    comment: Finds the first instance of the pattern in the string.
+    comment: Finds the first instance of the pattern in the string. Returns the start and end indices of the first match, followed by any captured substrings. Returns nil if no match is found.
     parameters:
     - name: s
       comment: Input string.
@@ -2145,11 +2213,11 @@ modules:
       comment: Pattern to search for.
       type: string
     - name: init
-      comment: Starting index.
+      comment: Index to start the search from. Supports negative indexing.
       type: number?
       default-value: 1
     - name: plain
-      comment: Perform raw search.
+      comment: Perform raw search. If true, turns off pattern matching and performs a raw, case-sensitive substring match.
       type: boolean?
       default-value: false
     return-type: (number?, number?, ...string)
@@ -2169,7 +2237,7 @@ modules:
     must-use: true
     typechecker: {builtin: true, magic: true}
   - name: gmatch
-    comment: Returns an iterator function for pattern matches
+    comment: Returns an iterator function for pattern matches.
     parameters:
     - name: s
       comment: Input string.
@@ -2181,7 +2249,7 @@ modules:
     must-use: true
     typechecker: {builtin: true, magic: true}
   - name: gsub
-    comment: Performs pattern-based substitution in a string.
+    comment: Performs pattern-based substitution in a string. Returns a copy of the string with substitutions made, followed by the total number of substitutions that occurred.
     parameters:
     - name: s
       comment: Input string.
@@ -2200,7 +2268,7 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: len
-    comment: "Returns the number of bytes in the string. Identical to #s"
+    comment: "Returns the number of bytes in the string. Identical to #s."
     parameters:
     - name: s
       comment: Input string.
@@ -2219,7 +2287,7 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: match
-    comment: Finds and returns matches for a pattern in the input string.
+    comment: Finds and returns matches for a pattern in the input string. Returns nil if no match is found.
     parameters:
     - name: s
       comment: Input string.
@@ -2231,7 +2299,7 @@ modules:
       comment: Starting index.
       type: number?
       default-value: 1
-    return-type: '...string'
+    return-type: '...string?'
     must-use: true
     typechecker: {builtin: true, magic: true}
   - name: pack
@@ -2256,7 +2324,7 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: rep
-    comment: Returns the input string repeated a given number of times.
+    comment: Returns the input string repeated n times. Returns an empty string if n is zero or negative.
     parameters:
     - name: s
       comment: Input string.
@@ -2277,13 +2345,13 @@ modules:
     must-use: true
     typechecker: {builtin: true}
   - name: split
-    comment: Splits a string by separator. Returns a list of substrings.
+    comment: 'Splits a string by separator. Returns a list of substrings. If the separator is nil, splits at commas (","). If the separator is empty, splits into individual one-byte substrings.'
     parameters:
     - name: s
       comment: Input string.
       type: string
     - name: separator
-      comment: Separator to split on.
+      comment: 'Separator to split on. If nil, splits at commas (","). If empty, splits into individual bytes.'
       type: string?
       default-value: '","'
     return-type: '{string}'
@@ -2296,10 +2364,10 @@ modules:
       comment: Input string.
       type: string
     - name: i
-      comment: Starting index.
+      comment: Starting index. Supports negative indexing.
       type: number
     - name: j
-      comment: Ending index.
+      comment: Ending index. Supports negative indexing.
       type: number?
       default-value: '#s'
     return-type: string
@@ -2401,10 +2469,9 @@ modules:
     return-type: number
     must-use: true
   - name: insert
-    comment: Inserts an element at the specified index,
-      or at the end of the array.
+    comment: "Inserts an element at index i, shifting subsequent elements up by 1. The index must be within the range [1, #a]."
     overloads:
-    - comment: Inserts an element at the end of a list
+    - comment: "Appends an element to the end of the array. Equivalent to a[#a+1] = value."
       type-parameters: [V]
       parameters:
       - name: a
@@ -2422,16 +2489,16 @@ modules:
       type: '{V}'
       observes: write
     - name: i
-      comment: "Index to insert at (default: at the end)."
+      comment: "Index to insert at. Elements at or above this index will shift up by 1."
       type: number
       optional: true
-    - name: v
+    - name: value
       comment: Value to insert.
       type: V
     return-type: ()
     fastcall: true
   - name: append
-    comment: Appends one or more an elements to end of the array.
+    comment: Appends one or more elements to the end of the array.
     type-parameters: [V]
     parameters:
     - name: a
@@ -2444,7 +2511,7 @@ modules:
     return-type: ()
   - name: extend
     comment: "Appends all elements from one array to the end of another.
-      Shorthand for table.move(b, 1, #b, #a+1, a)"
+      Shorthand for table.move(b, 1, #b, #a+1, a)."
     type-parameters: [V]
     parameters:
     - name: a
@@ -2456,8 +2523,7 @@ modules:
       type: '{V}'
     return-type: '{V}'
   - name: remove
-    comment: Removes and returns the element at the specified index from the array,
-      or from the end of the array.
+    comment: Removes and returns the element at index i, shifting subsequent elements down by 1. Defaults to the end of the array. Returns nil if no element was removed.
     type-parameters: [V]
     parameters:
     - name: a
@@ -2465,7 +2531,7 @@ modules:
       type: '{V}'
       observes: write
     - name: i
-      comment: "Index to remove."
+      comment: "Index of the element to remove. Subsequent elements will shift down by 1."
       type: number?
       default-value: '#a'
     return-type: V?
@@ -2483,7 +2549,7 @@ modules:
       default-value: nil
     return-type: ()
   - name: pack
-    comment: Packs multiple arguments into a new array with length field n.
+    comment: Packs arguments into a table and sets an 'n' field with the total count. This is the safest way to pack varargs (...) that might contain nil values.
     type-parameters: [V]
     parameters:
     - name: ...
@@ -2511,7 +2577,7 @@ modules:
     must-use: true
     fastcall: true
   - name: move
-    comment: Inserts elements [i..j] from src array into dest array at [d].
+    comment: "Copies elements [i..j] from src array into dest array starting at [d], overwriting existing elements."
     type-parameters: [V]
     parameters:
     - name: src
@@ -2533,7 +2599,7 @@ modules:
       observes: write
     return-type: '{V}'
   - name: create
-    comment: Creates a new table with pre-allocated array capacity, optionally filled.
+    comment: Creates a new table with pre-allocated array capacity, optionally filled. Preallocation only benefits array portions and is counter-productive for dictionaries.
     type-parameters: [V]
     parameters:
     - name: "n"
@@ -2546,7 +2612,7 @@ modules:
     return-type: '{V}'
     must-use: true
   - name: find
-    comment: Finds the first occurrence of a value in the array and returns its index.
+    comment: Finds the first occurrence of a value in the array and returns its index. Traversal stops at the first nil.
     type-parameters: [V]
     parameters:
     - name: t
@@ -2562,7 +2628,7 @@ modules:
     return-type: number?
     must-use: true
   - name: clear
-    comment: Clears all elements from a table while keeping its capacity.
+    comment: Clears all elements from a table while keeping its capacity to avoid memory reallocations during future assignments.
     parameters:
     - name: t
       comment: Table to clear.
@@ -2582,7 +2648,7 @@ modules:
       default-value: false
     return-type: '{V}'
   - name: freeze
-    comment: Freezes a table, making it read-only.
+    comment: Freezes a table, making it read-only. The freeze is shallow and does not affect nested tables. Raises an error if the table is already frozen or has a protected metatable.
     type-parameters: [table]
     parameters:
     - name: t
@@ -2600,7 +2666,7 @@ modules:
     return-type: boolean
     must-use: true
   - name: clone
-    comment: Creates a shallow copy of the table.
+    comment: Creates a shallow copy of the table, copying its keys, values, and metatable. The clone is always unfrozen even if the source was frozen.
     type-parameters: [table]
     parameters:
     - name: t
@@ -2680,7 +2746,7 @@ modules:
     must-use: true
   constants:
   - name: charpattern
-    comment: Pattern that matches exactly one UTF-8 byte sequence
+    comment: Pattern that matches exactly one UTF-8 byte sequence.
     type: string
     value: '"[\x00-\x7F\xC2-\xF4][\x80-\xBF]*"'
 - name: uuid
@@ -2706,7 +2772,7 @@ modules:
     return-type: uuid
     must-use: true
 - name: vector
-  comment: Vector manipuluation library.
+  comment: Vector manipulation library.
   callable:
     name: vector
     comment: Creates a new vector with the given component values.
@@ -2930,7 +2996,7 @@ controls:
   end:
     tooltip: "Lua end keyword: closes control structures like if, do, while, for, and function."
   for:
-    tooltip: "Lua for loop: for var = start, end, step do ... end"
+    tooltip: "Lua for loop (numeric, generic or generalized): for var = start, end, step do ... end OR for key, val in iterator do ... end OR for key, val in tab do ... end"
   return:
     tooltip: "Lua return statement: returns a value from a function."
   while:
@@ -2944,11 +3010,11 @@ controls:
   break:
     tooltip: "Lua break statement: exits the nearest loop."
   continue:
-    tooltip: "Luau continue statement: skip to the next loop iteration."
+    tooltip: "Luau continue statement: skips to the next loop iteration."
   local:
     tooltip: "Lua local keyword: declares a local variable or function."
   export:
-    tooltip: "Luau export keyword: declares a type that can be used in outside this module."
+    tooltip: "Luau export keyword: declares a type that can be used outside this module."
   in:
     tooltip: "Lua in keyword: used in generic for loops to iterate over elements."
   not:
@@ -2994,10 +3060,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand of the addition."
+        comment: "Left operand of the addition."
       - name: right
         type: any
-        comment: "The right operand of the addition."
+        comment: "Right operand of the addition."
     return-type: any
   - name: __call
     comment: "Called when the table or object is called as if it were a function."
@@ -3006,10 +3072,10 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The table being invoked."
+        comment: "Table being invoked."
       - name: ...
         type: "A..."
-        comment: "The arguments passed to the call."
+        comment: "Arguments passed to the call."
     return-type: "R..."
   - name: __concat
     comment: "Defines behavior for the concatenation (..) operator."
@@ -3017,10 +3083,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand or object to concatenate."
+        comment: "Left operand or object to concatenate."
       - name: right
         type: any
-        comment: "The right operand or object to concatenate."
+        comment: "Right operand or object to concatenate."
     return-type: any
   - name: __div
     comment: "Defines behavior for the division (/) operator."
@@ -3028,10 +3094,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand of the division (dividend)."
+        comment: "Left operand of the division (dividend)."
       - name: right
         type: any
-        comment: "The right operand of the division (divisor)."
+        comment: "Right operand of the division (divisor)."
     return-type: any
   - name: __eq
     comment: "Defines behavior for the equality (==) operator."
@@ -3039,10 +3105,10 @@ metamethods:
     parameters:
       - name: left
         type: '{}'
-        comment: "The first value to compare."
+        comment: "First value to compare."
       - name: right
         type: '{}'
-        comment: "The second value to compare."
+        comment: "Second value to compare."
     return-type: boolean
   - name: __idiv
     comment: "Defines behavior for the floor division (//) operator."
@@ -3050,10 +3116,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand of the floor division."
+        comment: "Left operand of the floor division."
       - name: right
         type: any
-        comment: "The right operand of the floor division."
+        comment: "Right operand of the floor division."
     return-type: any
   - name: __index
     comment: "Called when looking up a key that does not exist in the table."
@@ -3061,10 +3127,10 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The table being accessed."
+        comment: "Table being accessed."
       - name: key
         type: any
-        comment: "The key that was not found in the table."
+        comment: "Key that was not found in the table."
     return-type: any
     variants:
       - comment: "Called as a function fallback when looking up a key that does not exist in the table."
@@ -3072,10 +3138,10 @@ metamethods:
         parameters:
           - name: self
             type: '{}'
-            comment: "The table being accessed."
+            comment: "Table being accessed."
           - name: key
             type: any
-            comment: "The key that was not found in the table."
+            comment: "Key that was not found in the table."
         return-type: any
       - comment: "A fallback dictionary/table used to search for missing keys."
         type: "{ [any]: any }"
@@ -3087,7 +3153,7 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The table or object being iterated."
+        comment: "Table or object being iterated."
     return-type: "((state: S, index: K) -> (K?, V...), S, K)"
   - name: __jsonhint
     comment: "String property used by lljson.encode to enforce table formatting rules."
@@ -3098,10 +3164,10 @@ metamethods:
     parameters:
       - name: left
         type: '{}'
-        comment: "The left operand of the comparison."
+        comment: "Left operand of the comparison."
       - name: right
         type: '{}'
-        comment: "The right operand of the comparison."
+        comment: "Right operand of the comparison."
     return-type: boolean
   - name: __len
     comment: "Defines behavior for the length (#) operator."
@@ -3109,7 +3175,7 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The object whose length is being measured."
+        comment: "Object whose length is being measured."
     return-type: number
   - name: __lt
     comment: "Defines behavior for the less-than (<) operator."
@@ -3117,10 +3183,10 @@ metamethods:
     parameters:
       - name: left
         type: '{}'
-        comment: "The left operand of the comparison."
+        comment: "Left operand of the comparison."
       - name: right
         type: '{}'
-        comment: "The right operand of the comparison."
+        comment: "Right operand of the comparison."
     return-type: boolean
   - name: __metatable
     comment: "Protects the metatable. If present, getmetatable returns this value, and setmetatable will raise an error."
@@ -3131,10 +3197,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand (dividend)."
+        comment: "Left operand (dividend)."
       - name: right
         type: any
-        comment: "The right operand (divisor)."
+        comment: "Right operand (divisor)."
     return-type: any
   - name: __mode
     comment: "Controls weak mapping of table elements. Valid values are 'k' (weak keys), 'v' (weak values), or 'kv' (both)."
@@ -3145,10 +3211,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand of the multiplication."
+        comment: "Left operand of the multiplication."
       - name: right
         type: any
-        comment: "The right operand of the multiplication."
+        comment: "Right operand of the multiplication."
     return-type: any
   - name: __newindex
     comment: "Called when assigning a value to a key that does not exist in the table."
@@ -3156,13 +3222,13 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The table being assigned."
+        comment: "Table being assigned."
       - name: key
         type: any
-        comment: "The key being created."
+        comment: "Key being assigned."
       - name: value
         type: any
-        comment: "The value being assigned to the key."
+        comment: "Value being assigned to the key."
     return-type: "()"
     variants:
       - comment: "Called as a function fallback when assigning a value to a key that does not exist in the table."
@@ -3170,13 +3236,13 @@ metamethods:
         parameters:
           - name: self
             type: '{}'
-            comment: "The table being assigned."
+            comment: "Table being assigned."
           - name: key
             type: any
-            comment: "The key being created."
+            comment: "Key being created."
           - name: value
             type: any
-            comment: "The value being assigned to the key."
+            comment: "Value being assigned to the key."
         return-type: "()"
       - comment: "A fallback dictionary/table where new key-value assignments are forwarded."
         type: "{ [any]: any }"
@@ -3187,10 +3253,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The base value."
+        comment: "Base value."
       - name: right
         type: any
-        comment: "The exponent value."
+        comment: "Exponent value."
     return-type: any
   - name: __sub
     comment: "Defines behavior for the subtraction (-) operator."
@@ -3198,10 +3264,10 @@ metamethods:
     parameters:
       - name: left
         type: any
-        comment: "The left operand of the subtraction (minuend)."
+        comment: "Left operand of the subtraction (minuend)."
       - name: right
         type: any
-        comment: "The right operand of the subtraction (subtrahend)."
+        comment: "Right operand of the subtraction (subtrahend)."
     return-type: any
   - name: __tojson
     comment: "Called during JSON serialization (with lljson.encode or lljson.slencode). Returns an alternative representation of the table to be serialized in its place."
@@ -3209,7 +3275,7 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The table being serialized."
+        comment: "Table being serialized."
       - name: ctx
         type: '{ mode: "json" | "sljson", tight: boolean }'
         comment: "Context table containing metadata about the current serialization process, including 'mode' ('json' or 'sljson') and 'tight' (boolean)."
@@ -3220,7 +3286,7 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The object being converted to a string."
+        comment: "Object being converted to a string."
     return-type: string
   - name: __unm
     comment: "Defines behavior for the unary negation (-) operator."
@@ -3228,5 +3294,5 @@ metamethods:
     parameters:
       - name: self
         type: '{}'
-        comment: "The value being negated."
+        comment: "Value being negated."
     return-type: any

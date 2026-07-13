@@ -4909,7 +4909,7 @@ globals:
     - type: string
       required: false
     description: Checks if the value is truthy; if not, raises an error with the optional
-      message.
+      message. Returns the value upon success.
   dangerouslyexecuterequiredmodule:
     args:
     - type: function
@@ -4919,8 +4919,8 @@ globals:
     - type: any
     - type: number
       required: false
-    description: Raises an error with the specified object and optional call stack
-      level.
+    description: Raises an error with the specified object. The optional level determines
+      which call stack level is blamed for the error.
   gcinfo:
     args: []
     description: Returns the total heap size in kilobytes.
@@ -4930,11 +4930,13 @@ globals:
   getmetatable:
     args:
     - type: table
-    description: Returns the metatable for the specified object.
+    description: Returns the metatable for the specified object. If the metatable
+      has a '__metatable' field, returns its value instead.
   ipairs:
     args:
     - type: table
-    description: Returns an iterator for numeric key-value pairs in the table.
+    description: Returns an iterator for sequential integer key-value pairs in the
+      table. Iteration starts at 1 and halts at the first nil value.
   loadstring:
     removed: true
     description: loadstring is removed in SLua.
@@ -4948,7 +4950,8 @@ globals:
     - type: table
     - type: any
       required: false
-    description: Returns the next key-value pair in the table traversal order.
+    description: Returns the next key-value pair in the table traversal order. If
+      the index is nil or omitted, returns the first pair.
   pairs:
     args:
     - type: table
@@ -4957,8 +4960,9 @@ globals:
     args:
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, returning success and function
-      results or an error.
+    description: Executes function f in protected mode, calling it with the provided
+      arguments. Returns a boolean indicating success. If true, it also returns the
+      function's results. If false, it returns the error message.
   print:
     args:
     - type: '...'
@@ -4967,22 +4971,23 @@ globals:
     args:
     - type: any
     - type: any
-    description: Returns true if a and b have the same type and value.
+    description: Returns true if a and b have the same type and value or reference,
+      bypassing the __eq metamethod..
   rawget:
     args:
     - type: table
     - type: any
-    description: Performs a table lookup bypassing metatables.
+    description: Performs a table lookup, bypassing the __index metamethod..
   rawlen:
     args:
     - type: any
-    description: Returns the length of a table or string bypassing metatables.
+    description: Returns the length of a table or string, bypassing the __len metamethod..
   rawset:
     args:
     - type: table
     - type: any
     - type: any
-    description: Assigns a value to a table field bypassing metatables.
+    description: Assigns a value to a table field, bypassing the __newindex metamethod..
   require:
     args:
     - type: any
@@ -4991,7 +4996,8 @@ globals:
     args:
     - type: any
     - type: '...'
-    description: Returns a subset of arguments or the number of arguments.
+    description: Returns a subset of arguments starting from the specified index.
+      Supports negative indexing. If index is '#', returns the number of arguments.
   setfenv:
     removed: true
     description: setfenv is removed in SLua.
@@ -4999,28 +5005,31 @@ globals:
     args:
     - type: table
     - type: table
-    description: Changes the metatable for the given table.
+    description: Changes the metatable for the given table. Raises an error if the
+      table already has a protected metatable (it has a '__metatable' field).
   tonumber:
     args:
     - type: string
     - type: number
       required: false
     must_use: true
-    description: Converts the input string to a number in the specified base.
+    description: Converts the input string to a number in the specified base. Returns
+      nil if the conversion fails.
   toquaternion:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a quaternion, returns nil if invalid
+    description: Converts a string to a quaternion, returns nil if invalid.
   torotation:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a rotation (quaternion), returns nil if invalid
+    description: Converts a string to a rotation (quaternion), returns nil if invalid.
   tostring:
     args:
     - type: any
-    description: Converts the input object to a string.
+    description: Converts the input object to a string. Calls the metatable's '__tostring'
+      metamethod if present.
   touuid:
     args:
     - type: string
@@ -5031,7 +5040,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Converts a string to a vector, returns nil if invalid
+    description: Converts a string to a vector, returns nil if invalid.
   type:
     args:
     - type: any
@@ -5055,8 +5064,8 @@ globals:
     - type: function
     - type: function
     - type: '...'
-    description: Calls function f with parameters args, handling errors with err if
-      they occur.
+    description: Calls function f with the provided arguments, handling errors with
+      err if they occur.
   bit32.arshift:
     args:
     - type: number
@@ -5066,7 +5075,9 @@ globals:
       is performed.
 
       Does an arithmetic shift: The most significant bit of n is propagated during
-      the shift.'
+      the shift.
+
+      Returns 0 if i < -31, or all sign bits if i > 31.'
   bit32.band:
     args:
     - type: '...'
@@ -5101,7 +5112,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Extracts bits from n at position field with width
+    description: Extracts bits from n at position field with width. Raises an error
+      if the selected bit range goes outside [0, 31].
   bit32.lrotate:
     args:
     - type: number
@@ -5115,7 +5127,7 @@ globals:
     - type: number
     must_use: true
     description: Shifts n by i bits to the left. If i is negative, a right shift is
-      performed.
+      performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.replace:
     args:
     - type: number
@@ -5124,7 +5136,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Replaces bits in n at position field with width using value v
+    description: Replaces bits in n at position field with width using value v. Raises
+      an error if the selected bit range goes outside [0, 31].
   bit32.rrotate:
     args:
     - type: number
@@ -5138,7 +5151,7 @@ globals:
     - type: number
     must_use: true
     description: Shifts n by i bits to the right. If i is negative, a left shift is
-      performed.
+      performed. Returns 0 if i is outside the [-31, 31] range.
   bit32.s32:
     args:
     - type: number
@@ -5157,17 +5170,17 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Count leading zeros
+    description: Count leading zeros.
   bit32.countrz:
     args:
     - type: number
     must_use: true
-    description: Count trailing zeros
+    description: Count trailing zeros.
   bit32.byteswap:
     args:
     - type: number
     must_use: true
-    description: Swap byte order
+    description: Swap byte order.
   buffer.create:
     args:
     - type: number
@@ -5384,8 +5397,9 @@ globals:
     - type:
         display: thread
     - type: '...'
-    description: Resumes a coroutine, returning true and results if successful, or
-      false and an error.
+    description: Resumes a coroutine. Returns true followed by any values passed to
+      coroutine.yield() or returned by the function. If an error occurs, returns false
+      and the error message.
   coroutine.running:
     args: []
     must_use: true
@@ -5441,7 +5455,7 @@ globals:
     args:
     - type: string
     must_use: true
-    description: Encodes a string or buffer to base64
+    description: Encodes a string or buffer to base64.
   llbase64.decode:
     args:
     - type: string
@@ -5465,16 +5479,16 @@ globals:
     description: A constant to pass for null to json encode.
   lljson.remove:
     property: read-only
-    description: A constant to return from a reviver/replacer replacer function to
-      omit this item.
+    description: A constant to return from a reviver/replacer function to omit this
+      item.
   lljson.array_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an array for json encode.
+    description: Metatable for declaring a table as an array for json encode.
   lljson.object_mt:
     property: read-only
     type: table
-    description: Metatable for declaring table as an object for json encode.
+    description: Metatable for declaring a table as an object for json encode.
   lljson.empty_array:
     property: read-only
     type: table
@@ -5538,11 +5552,11 @@ globals:
   math.pi:
     property: read-only
     type: number
-    description: Value of pi
+    description: Value of pi.
   math.huge:
     property: read-only
     type: number
-    description: A value larger than any other numeric value (infinity)
+    description: A value larger than any other numeric value (infinity).
   math.abs:
     args:
     - type: number
@@ -5568,8 +5582,9 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns the arc tangent of y/x in radians, using the signs to determine
-      the quadrant.
+    description: 'Returns the arc tangent of y/x in radians, using the signs to determine
+      the quadrant. Note the argument order: Y is the first parameter, X is the second
+      parameter.'
   math.ceil:
     args:
     - type: number
@@ -5581,12 +5596,13 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Returns n clamped between min and max.
+    description: Returns n clamped between min and max. Raises an error if min is
+      greater than max.
   math.cos:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of n (n is in radians).
+    description: Returns the cosine of n. n is in radians.
   math.cosh:
     args:
     - type: number
@@ -5637,7 +5653,7 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns the logarithm of n in the given base (default e).
+    description: Returns the logarithm of n in the given base, defaults to e.
   math.log10:
     args:
     - type: number
@@ -5679,7 +5695,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Returns Perlin noise value for the point (x, y, z).
+    description: Returns a Perlin noise value for the point (x, y, z). The return
+      value is in the range [-1.0, 1.0].
   math.pow:
     args:
     - type: number
@@ -5719,7 +5736,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of n (n is in radians).
+    description: Returns the sine of n. n is in radians.
   math.sinh:
     args:
     - type: number
@@ -5734,7 +5751,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of n (n is in radians).
+    description: Returns the tangent of n. n is in radians.
   math.tanh:
     args:
     - type: number
@@ -5960,7 +5977,9 @@ globals:
     - type: bool
       required: false
     must_use: true
-    description: Finds the first instance of the pattern in the string.
+    description: Finds the first instance of the pattern in the string. Returns the
+      start and end indices of the first match, followed by any captured substrings.
+      Returns nil if no match is found.
   string.format:
     args:
     - type: string
@@ -5973,7 +5992,7 @@ globals:
     - type: string
     - type: string
     must_use: true
-    description: Returns an iterator function for pattern matches
+    description: Returns an iterator function for pattern matches.
   string.gsub:
     args:
     - type: string
@@ -5982,12 +6001,14 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Performs pattern-based substitution in a string.
+    description: Performs pattern-based substitution in a string. Returns a copy of
+      the string with substitutions made, followed by the total number of substitutions
+      that occurred.
   string.len:
     args:
     - type: string
     must_use: true
-    description: 'Returns the number of bytes in the string. Identical to #s'
+    description: 'Returns the number of bytes in the string. Identical to #s.'
   string.lower:
     args:
     - type: string
@@ -6001,7 +6022,8 @@ globals:
     - type: number
       required: false
     must_use: true
-    description: Finds and returns matches for a pattern in the input string.
+    description: Finds and returns matches for a pattern in the input string. Returns
+      nil if no match is found.
   string.pack:
     args:
     - type: string
@@ -6018,7 +6040,8 @@ globals:
     - type: string
     - type: number
     must_use: true
-    description: Returns the input string repeated a given number of times.
+    description: Returns the input string repeated n times. Returns an empty string
+      if n is zero or negative.
   string.reverse:
     args:
     - type: string
@@ -6030,7 +6053,9 @@ globals:
     - type: string
       required: false
     must_use: true
-    description: Splits a string by separator. Returns a list of substrings.
+    description: Splits a string by separator. Returns a list of substrings. If the
+      separator is nil, splits at commas (","). If the separator is empty, splits
+      into individual one-byte substrings.
   string.sub:
     args:
     - type: string
@@ -6101,28 +6126,29 @@ globals:
     - type: number
       required: false
     - type: any
-    description: Inserts an element at the specified index, or at the end of the array.
+    description: 'Inserts an element at index i, shifting subsequent elements up by
+      1. The index must be within the range [1, #a].'
   table.append:
     args:
     - type: table
       observes: write
     - type: '...'
-    description: Appends one or more an elements to end of the array.
+    description: Appends one or more elements to the end of the array.
   table.extend:
     args:
     - type: table
       observes: write
     - type: table
     description: 'Appends all elements from one array to the end of another. Shorthand
-      for table.move(b, 1, #b, #a+1, a)'
+      for table.move(b, 1, #b, #a+1, a).'
   table.remove:
     args:
     - type: table
       observes: write
     - type: number
       required: false
-    description: Removes and returns the element at the specified index from the array,
-      or from the end of the array.
+    description: Removes and returns the element at index i, shifting subsequent elements
+      down by 1. Defaults to the end of the array. Returns nil if no element was removed.
   table.sort:
     args:
     - type: table
@@ -6134,7 +6160,8 @@ globals:
     args:
     - type: '...'
     must_use: true
-    description: Packs multiple arguments into a new array with length field n.
+    description: Packs arguments into a table and sets an 'n' field with the total
+      count. This is the safest way to pack varargs (...) that might contain nil values.
   table.unpack:
     args:
     - type: table
@@ -6153,7 +6180,8 @@ globals:
     - type: table
       required: false
       observes: write
-    description: Inserts elements [i..j] from src array into dest array at [d].
+    description: Copies elements [i..j] from src array into dest array starting at
+      [d], overwriting existing elements.
   table.create:
     args:
     - type: number
@@ -6161,7 +6189,8 @@ globals:
       required: false
     must_use: true
     description: Creates a new table with pre-allocated array capacity, optionally
-      filled.
+      filled. Preallocation only benefits array portions and is counter-productive
+      for dictionaries.
   table.find:
     args:
     - type: table
@@ -6170,12 +6199,13 @@ globals:
       required: false
     must_use: true
     description: Finds the first occurrence of a value in the array and returns its
-      index.
+      index. Traversal stops at the first nil.
   table.clear:
     args:
     - type: table
       observes: write
-    description: Clears all elements from a table while keeping its capacity.
+    description: Clears all elements from a table while keeping its capacity to avoid
+      memory reallocations during future assignments.
   table.shrink:
     args:
     - type: table
@@ -6185,7 +6215,9 @@ globals:
   table.freeze:
     args:
     - type: table
-    description: Freezes a table, making it read-only.
+    description: Freezes a table, making it read-only. The freeze is shallow and does
+      not affect nested tables. Raises an error if the table is already frozen or
+      has a protected metatable.
   table.isfrozen:
     args:
     - type: table
@@ -6195,11 +6227,12 @@ globals:
     args:
     - type: table
     must_use: true
-    description: Creates a shallow copy of the table.
+    description: Creates a shallow copy of the table, copying its keys, values, and
+      metatable. The clone is always unfrozen even if the source was frozen.
   utf8.charpattern:
     property: read-only
     type: string
-    description: Pattern that matches exactly one UTF-8 byte sequence
+    description: Pattern that matches exactly one UTF-8 byte sequence.
   utf8.char:
     args:
     - type: '...'
@@ -15492,15 +15525,20 @@ structs:
     x:
       property: read-only
       type: number
+      description: X component of the rotation/quaternion.
     y:
       property: read-only
       type: number
+      description: Y component of the rotation/quaternion.
     z:
       property: read-only
       type: number
+      description: Z component of the rotation/quaternion.
     s:
       property: read-only
       type: number
+      description: S component of the rotation/quaternion. Equivalent to the W component
+        in other notations.
   uuid:
     __tostring:
       method: true
@@ -15508,11 +15546,11 @@ structs:
     istruthy:
       property: read-only
       type: bool
-      description: Returns true if the UUID is not the null UUID (all zeros)
+      description: Returns true if the UUID is not the null UUID (all zeros).
     bytes:
       property: read-only
       type: string
-      description: Returns the raw 16-byte binary string of the UUID
+      description: Returns the raw 16-byte binary string of the UUID.
   vector:
     __add:
       method: true
@@ -15554,12 +15592,18 @@ structs:
     x:
       property: read-only
       type: number
+      description: X coordinate component of the vector. Typically represents red
+        color, forward position, or pitch.
     y:
       property: read-only
       type: number
+      description: Y coordinate component of the vector. Typically represents green
+        color, left/right position, or roll.
     z:
       property: read-only
       type: number
+      description: Z coordinate component of the vector. Typically represents blue
+        color, altitude/upward position, or yaw.
   DetectedEvent:
     adjustDamage:
       method: true
@@ -15694,12 +15738,17 @@ structs:
     index:
       property: read-only
       type: number
+      description: Index of the detected entity.
     valid:
       property: read-only
       type: bool
+      description: Returns true if the detected index is valid and contains active
+        data.
     canAdjustDamage:
       property: read-only
       type: bool
+      description: Returns true if the detected object or avatar can have its damage
+        adjusted.
   LLEvents:
     'on':
       method: true
@@ -15747,7 +15796,10 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Registers a callback for an event. Returns the callback.
+      description: Registers a handler function to run whenever the specified event
+        occurs. Multiple handlers can be attached to the same event and will run in
+        the order they were added. Returns the same function passed in so it can be
+        used later with LLEvents:off().
     'off':
       method: true
       args:
@@ -15794,7 +15846,9 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Unregisters a callback. Returns true if found and removed.
+      description: Removes an event handler. If the function was added multiple times
+        via LLEvents:on(), only the last one added is removed. Returns true if the
+        function was found and removed, false otherwise.
     once:
       method: true
       args:
@@ -15841,7 +15895,10 @@ structs:
         - timer
         - transaction_result
       - type: function
-      description: Registers a one-time callback. Returns the wrapper function.
+      description: Registers a one-time event handler. The function runs only once
+        and is automatically removed afterward. Returns a newly generated wrapper
+        function, which MUST be used if you want to manually remove the handler early
+        using LLEvents:off().
     handlers:
       method: true
       args:
@@ -15887,11 +15944,14 @@ structs:
         - run_time_permissions
         - timer
         - transaction_result
-      description: Returns a list of all handlers for a specific event.
+      description: Returns an array table containing all the functions currently handling
+        the specified event. Useful for debugging or for iterating to remove all functions
+        handling an event.
     eventNames:
       method: true
       args: []
-      description: Returns a list of all event names that have handlers.
+      description: Returns an array table of all event names that currently have active
+        handler functions attached.
     at_rot_target:
       property: override-fields
       type: function
@@ -16120,20 +16180,23 @@ structs:
       args:
       - type: number
       - type: function
-      description: Registers a callback to be called every N seconds. Returns the
-        callback.
+      description: Registers a repeating timer. The callback receives (expected_time,
+        interval). Returns the same function passed in so it can be removed later.
     once:
       method: true
       args:
       - type: number
       - type: function
-      description: Registers a callback to be called once after N seconds. Returns
-        the callback.
+      description: Registers a one-time timer. The timer runs only once and is automatically
+        removed afterward. The callback receives (expected_time, nil). Returns the
+        same function passed in, which can be used to cancel it early via LLTimers:off().
     'off':
       method: true
       args:
       - type: function
-      description: Unregisters a timer callback. Returns true if found and removed.
+      description: Stops and removes a timer. If the same function was added multiple
+        times, only the last one added is removed, regardless of its interval. Returns
+        true if the timer was found and removed, false otherwise.
   PrimParamsSetterType:
     apply:
       method: true
