@@ -19393,7 +19393,7 @@ Returns true if result is non-zero.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>id</key>
+                  <key>avatar</key>
                   <map>
                      <key>tooltip</key>
                      <string>UUID of the avatar in the same region.</string>
@@ -19409,7 +19409,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a string representing the name of the currently playing locomotion animation for the avatar specified by id.</string>
+            <string>Returns a string representing the name of the currently playing locomotion animation for the specified avatar.</string>
          </map>
          <key>ll.GetAnimationList</key>
          <map>
@@ -20755,7 +20755,7 @@ Returns true if result is non-zero.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a list of strings representing the names of all active animations currently playing on the object.</string>
+            <string>Returns a list of strings representing the names or UUIDs of all active animations currently playing on the object.</string>
          </map>
          <key>ll.GetObjectDesc</key>
          <map>
@@ -30150,7 +30150,7 @@ Returns true if result is non-zero.</string>
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the prim's inventory, or a built-in animation.</string>
+                     <string>Name of the animation in the prim's inventory, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -30173,7 +30173,7 @@ Returns true if result is non-zero.</string>
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the current object's inventory.</string>
+                     <string>Name of the animation in the prim's inventory, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -30196,7 +30196,7 @@ Returns true if result is non-zero.</string>
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the prim's inventory, a UUID of an animation, or a built-in animation name.</string>
+                     <string>Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string | uuid</string>
                   </map>
@@ -30261,7 +30261,7 @@ Returns true if result is non-zero.</string>
                   <key>anim</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of an animation in the current object's inventory, or an animation UUID.</string>
+                     <string>Name of the animation in the prim's inventory, the UUID of the animation, or the built-in animation name.</string>
                      <key>type</key>
                      <string>string | uuid</string>
                   </map>
