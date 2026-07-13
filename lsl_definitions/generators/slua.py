@@ -52,13 +52,13 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         class_.write_luau_def(defs)
     defs.write("\n")
     for func in slua_definitions.functions:
-        if func.private or func.local_only:
+        if not func.show_in_syntax_files:
             continue
         if not func.typechecker_flags.fully_defined:
             defs.write("-- ")
         func.write_luau_global_def(defs)
     for module in sorted(slua_definitions.modules, key=lambda x: x.name):
-        if module.name in {"ll", "llcompat"}:
+        if module.name in {"ll", "llcompat"} or module.typechecker_flags.fflag_disabled:
             continue
         if module.name == "string":
             defs.write(
@@ -196,6 +196,8 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
 
     def selene_module(module: SLuaModule) -> dict:
         globals = {}
+        if module.typechecker_flags.fflag_disabled:
+            return globals
         if module.callable:
             globals[module.name] = selene_function(module.callable)
         globals.update(
@@ -211,7 +213,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
                 f"{module.name}.{func.name}": selene_function(func)
                 # for func in sorted(self.functions, key=lambda x: x.name)
                 for func in module.functions
-                if not func.private and not func.local_only
+                if func.show_in_syntax_files
             }
         )
         return globals
@@ -234,7 +236,7 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
         if not const.private:
             selene["globals"][const.name] = selene_property(const)
     for func in sorted(slua_definitions.functions, key=lambda x: x.name):
-        if not func.private and not func.local_only:
+        if func.show_in_syntax_files:
             selene["globals"][func.name] = selene_function(func)
     for module in sorted(modules.values(), key=lambda x: x.name):
         if module.name not in {"ll", "llcompat"}:

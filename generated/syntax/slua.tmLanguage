@@ -488,19 +488,19 @@
             <key>name</key>
             <string>constant.numeric.hex.luau</string>
             <key>match</key>
-            <string>\b0_*[xX]_*[\da-fA-F_]*(?:[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
+            <string>\b0_*[xX]_*[\da-fA-F_]*(?:i|[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.binary.luau</string>
             <key>match</key>
-            <string>\b0_*[bB][01_]+(?:[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
+            <string>\b0_*[bB][01_]+(?:i|[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.decimal.luau</string>
             <key>match</key>
-            <string>(?:\d[\d_]*(?:\.[\d_]*)?|\.\d[\d_]*)(?:[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
+            <string>(?:\d[\d_]*(?:\.[\d_]*)?|\.\d[\d_]*)(?:i|[eE][\+\-]?_*\d[\d_]*(?:\.[\d_]*)?)?</string>
           </dict>
         </array>
       </dict>
