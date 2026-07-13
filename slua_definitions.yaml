@@ -248,7 +248,7 @@ type-aliases:
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
 - name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.particleSystem() to emit particles.
+  comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
@@ -1591,7 +1591,7 @@ modules:
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
   functions:
-  - name: particleSystem
+  - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
     - name: params

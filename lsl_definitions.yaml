@@ -18604,7 +18604,7 @@ builder-rulesets:
     flag-field: flags
     flag-mask: _MASK
     lua-module: llprim
-    lua-fn: particleSystem
+    lua-fn: setParticleSystem
     lua-type: ParticleParams
     dispatch-fn: LinkParticleSystem
 

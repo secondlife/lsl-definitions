@@ -5524,7 +5524,7 @@ globals:
   llprim.ParamsSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.particleSystem:
+  llprim.setParticleSystem:
     args:
     - type: table
       required: false

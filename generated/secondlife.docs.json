@@ -370,7 +370,7 @@
     "@sl-slua/global/llprim.ParamsSetter": {
         "documentation": "Value: PrimParamsSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
     },
-    "@sl-slua/global/llprim.particleSystem": {
+    "@sl-slua/global/llprim.setParticleSystem": {
         "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
     },
     "@sl-slua/global/llprim.setMedia": {
