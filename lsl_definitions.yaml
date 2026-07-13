@@ -6991,6 +6991,7 @@ events:
     categories:
       - avatar
       - input
+    uses-enum: GameControlAxis
   http_request:
     arguments:
     - request_id:
