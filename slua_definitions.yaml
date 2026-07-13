@@ -1628,7 +1628,7 @@ modules:
       it has a fractional part, is out of range, or is NaN.
     parameters:
     - name: val
-      comment: Number to convert.
+      comment: Number to convert to an integer.
       type: number
     return-type: integer?
     must-use: true
@@ -1666,7 +1666,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: fromstring
-    comment: Converts the input string to a number in the specified base. Returns nil if not an integer.
+    comment: Converts the input string to an integer in the specified base. Returns nil if not an integer.
     parameters:
     - name: value
       comment: String to convert to an integer.
