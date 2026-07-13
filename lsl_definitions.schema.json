@@ -173,6 +173,18 @@
                             "slua-type": {
                                 "markdownDescription": "A more specific argument type for slua type-checking.",
                                 "type": "string"
+                            },
+                            "range": {
+                                "markdownDescription": "The minimum and maximum valid values for the argument as [min, max].",
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "items": {
+                                    "anyOf": [
+                                        { "type": "number" },
+                                        { "type": "string" }
+                                    ]
+                                }
                             }
                         },
                         "required": [
@@ -344,6 +356,23 @@
                 "if": { "required": ["dispatch-fn"] },
                 "then": { "required": ["lua-module", "lua-fn"] }
             }
+        },
+        "usesEnum": {
+            "markdownDescription": "The name of the category of constants or the list of constants used by the event or function.",
+            "oneOf": [
+                {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Za-z0-9]+$"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Z][A-Z0-9_]*$"
+                    },
+                    "uniqueItems": true
+                }
+            ]
         }
     },
     "additionalProperties": false,
@@ -577,7 +606,8 @@
                             "markdownDescription": "A brief description of this event.",
                             "type": "string"
                         },
-                        "categories": { "$ref": "#/$defs/functionCategories" }
+                        "categories": { "$ref": "#/$defs/functionCategories" },
+                        "uses-enum": { "$ref": "#/$defs/usesEnum" }
                     },
                     "required": [
                         "tooltip",
@@ -737,7 +767,12 @@
                             "markdownDescription": "A brief description of this function.",
                             "type": "string"
                         },
-                        "categories": { "$ref": "#/$defs/functionCategories" }
+                        "categories": { "$ref": "#/$defs/functionCategories" },
+                        "uses-enum": { "$ref": "#/$defs/usesEnum" },
+                        "other-values": {
+                            "markdownDescription": "Overwrites the other-values field in the category of constants.",
+                            "type": "boolean"
+                        }
                     },
                     "required": [
                         "tooltip",
