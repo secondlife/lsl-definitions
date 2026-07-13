@@ -430,15 +430,6 @@ declare llbase64: {
 
 
 ---------------------------
--- Global Table: llhttp
----------------------------
-
-declare llhttp: {
-  request: (url: string, params: HttpRequestParams?, body: string?) -> uuid,
-}
-
-
----------------------------
 -- Global Table: lljson
 ---------------------------
 
@@ -890,7 +881,7 @@ declare ll: {
   GroundRepel: (height: number, water: boolean | number, tau: number) -> (),
   GroundSlope: (offset: vector) -> vector,
   HMAC: (private_key: string, msg: string, algorithm: string) -> string,
-  HTTPRequest: (url: string, parameters: list, body: string) -> uuid,
+  HTTPRequest: (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
   HTTPResponse: (request_id: uuid, status: number, body: string) -> (),
   Hash: (val: string) -> number,
   InsertString: (dst: string, index: number, src: string) -> string,
@@ -907,7 +898,7 @@ declare ll: {
   KeysKeyValue: (first: number, count: number) -> uuid,
   Linear2sRGB: (color: vector) -> vector,
   LinkAdjustSoundVolume: (link: number, volume: number) -> (),
-  LinkParticleSystem: (link: number, rules: list) -> (),
+  LinkParticleSystem: (link: number, rules: list | ParticleParams) -> (),
   LinkPlaySound: (link: number, sound: string | uuid, volume: number, flags: number) -> (),
   LinkSetSoundQueueing: (link: number, queue: boolean | number) -> (),
   LinkSetSoundRadius: (link: number, radius: number) -> (),
@@ -981,7 +972,7 @@ declare ll: {
   ParcelMediaQuery: (query: {number}) -> {any},
   ParseString2List: (src: string, separators: {string}, spacers: {string}) -> {string},
   ParseStringKeepNulls: (src: string, separators: {string}, spacers: {string}) -> {string},
-  ParticleSystem: (rules: list) -> (),
+  ParticleSystem: (rules: list | ParticleParams) -> (),
   PassCollisions: (pass: number) -> (),
   PassTouches: (pass: number) -> (),
   PatrolPoints: (patrolPoints: {vector}, options: list) -> (),
@@ -1076,7 +1067,7 @@ declare ll: {
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
-  SetLinkMedia: (link: number, face: number, params: list) -> number,
+  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
   SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
@@ -1092,7 +1083,7 @@ declare ll: {
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: (pos: vector) -> (),
-  SetPrimMediaParams: (face: number, params: list) -> number,
+  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
   SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
   SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
   SetRegionPos: (position: vector) -> boolean,
@@ -1414,7 +1405,7 @@ declare llcompat: {
   GroundRepel: @deprecated (height: number, water: boolean | number, tau: number) -> (),
   GroundSlope: @deprecated (offset: vector) -> vector,
   HMAC: @deprecated (private_key: string, msg: string, algorithm: string) -> string,
-  HTTPRequest: @deprecated (url: string, parameters: list, body: string) -> uuid,
+  HTTPRequest: @deprecated (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
   HTTPResponse: @deprecated (request_id: uuid, status: number, body: string) -> (),
   Hash: @deprecated (val: string) -> number,
   InsertString: @deprecated (dst: string, index: number, src: string) -> string,
@@ -1431,7 +1422,7 @@ declare llcompat: {
   KeysKeyValue: @deprecated (first: number, count: number) -> uuid,
   Linear2sRGB: @deprecated (color: vector) -> vector,
   LinkAdjustSoundVolume: @deprecated (link: number, volume: number) -> (),
-  LinkParticleSystem: @deprecated (link: number, rules: list) -> (),
+  LinkParticleSystem: @deprecated (link: number, rules: list | ParticleParams) -> (),
   LinkPlaySound: @deprecated (link: number, sound: string | uuid, volume: number, flags: number) -> (),
   LinkSetSoundQueueing: @deprecated (link: number, queue: boolean | number) -> (),
   LinkSetSoundRadius: @deprecated (link: number, radius: number) -> (),
@@ -1505,7 +1496,7 @@ declare llcompat: {
   ParcelMediaQuery: @deprecated (query: {number}) -> {any},
   ParseString2List: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
   ParseStringKeepNulls: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
-  ParticleSystem: @deprecated (rules: list) -> (),
+  ParticleSystem: @deprecated (rules: list | ParticleParams) -> (),
   PassCollisions: @deprecated (pass: number) -> (),
   PassTouches: @deprecated (pass: number) -> (),
   PatrolPoints: @deprecated (patrolPoints: {vector}, options: list) -> (),
@@ -1601,7 +1592,7 @@ declare llcompat: {
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
-  SetLinkMedia: @deprecated (link: number, face: number, params: list) -> number,
+  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
   SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
@@ -1618,7 +1609,7 @@ declare llcompat: {
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: @deprecated (pos: vector) -> (),
-  SetPrimMediaParams: @deprecated (face: number, params: list) -> number,
+  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
   SetPrimURL: @deprecated (url: string) -> (),
   SetPrimitiveParams: @deprecated (rules: list) -> (),
   SetRegionPos: @deprecated (position: vector) -> number,

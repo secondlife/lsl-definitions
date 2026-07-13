@@ -14503,7 +14503,7 @@ functions:
         tooltip: A list of particle system rules and data pairs [rule1, data1, ...].
         type: list
         param-semantics: ParticleParam
-      ruleset: particle-params
+        ruleset: particle-params
     energy: 10.0
     func-id: 229
     return: void
