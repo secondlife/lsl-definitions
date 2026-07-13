@@ -51,71 +51,13 @@ $UTF8_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionBufferSrc = R"BUILTIN_SRC(
---- Buffer API
-declare buffer: {
-    create: @checked (size: number) -> buffer,
-    fromstring: @checked (str: string) -> buffer,
-    tostring: @checked (b: buffer) -> string,
-    len: @checked (b: buffer) -> number,
-    copy: @checked (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
-    fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
-    readi8: @checked (b: buffer, offset: number) -> number,
-    readu8: @checked (b: buffer, offset: number) -> number,
-    readi16: @checked (b: buffer, offset: number) -> number,
-    readu16: @checked (b: buffer, offset: number) -> number,
-    readi32: @checked (b: buffer, offset: number) -> number,
-    readu32: @checked (b: buffer, offset: number) -> number,
-    readf32: @checked (b: buffer, offset: number) -> number,
-    readf64: @checked (b: buffer, offset: number) -> number,
-    writei8: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu8: @checked (b: buffer, offset: number, value: number) -> (),
-    writei16: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu16: @checked (b: buffer, offset: number, value: number) -> (),
-    writei32: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu32: @checked (b: buffer, offset: number, value: number) -> (),
-    writef32: @checked (b: buffer, offset: number, value: number) -> (),
-    writef64: @checked (b: buffer, offset: number, value: number) -> (),
-    readstring: @checked (b: buffer, offset: number, count: number) -> string,
-    writestring: @checked (b: buffer, offset: number, value: string, count: number?) -> (),
-    readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
-    writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> (),
-    readinteger: @checked (b: buffer, offset: number) -> integer,
-    writeinteger: @checked (b: buffer, offset: number, value: integer) -> (),
-}
 
+$BUFFER_TABLE
 )BUILTIN_SRC";
 
 static constexpr const char* kBuiltinDefinitionBufferSrc_NOINTEGER = R"BUILTIN_SRC(
---- Buffer API
-declare buffer: {
-    create: @checked (size: number) -> buffer,
-    fromstring: @checked (str: string) -> buffer,
-    tostring: @checked (b: buffer) -> string,
-    len: @checked (b: buffer) -> number,
-    copy: @checked (target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?) -> (),
-    fill: @checked (b: buffer, offset: number, value: number, count: number?) -> (),
-    readi8: @checked (b: buffer, offset: number) -> number,
-    readu8: @checked (b: buffer, offset: number) -> number,
-    readi16: @checked (b: buffer, offset: number) -> number,
-    readu16: @checked (b: buffer, offset: number) -> number,
-    readi32: @checked (b: buffer, offset: number) -> number,
-    readu32: @checked (b: buffer, offset: number) -> number,
-    readf32: @checked (b: buffer, offset: number) -> number,
-    readf64: @checked (b: buffer, offset: number) -> number,
-    writei8: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu8: @checked (b: buffer, offset: number, value: number) -> (),
-    writei16: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu16: @checked (b: buffer, offset: number, value: number) -> (),
-    writei32: @checked (b: buffer, offset: number, value: number) -> (),
-    writeu32: @checked (b: buffer, offset: number, value: number) -> (),
-    writef32: @checked (b: buffer, offset: number, value: number) -> (),
-    writef64: @checked (b: buffer, offset: number, value: number) -> (),
-    readstring: @checked (b: buffer, offset: number, count: number) -> string,
-    writestring: @checked (b: buffer, offset: number, value: string, count: number?) -> (),
-    readbits: @checked (b: buffer, bitOffset: number, bitCount: number) -> number,
-    writebits: @checked (b: buffer, bitOffset: number, bitCount: number, value: number) -> ()
-}
 
+$BUFFER_TABLE_NOINTEGER
 )BUILTIN_SRC";
 
 static const char* const kBuiltinDefinitionVectorSrc = R"BUILTIN_SRC(

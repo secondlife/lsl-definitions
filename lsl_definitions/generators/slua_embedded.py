@@ -59,6 +59,12 @@ def gen_slua_embedded_defs(
     with io.StringIO() as defs:
         slua_definitions.modules.pop("utf8").write_luau_def(defs)
         inserts["UTF8_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules["buffer"].write_luau_def(defs)
+        inserts["BUFFER_TABLE_NOINTEGER"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.modules.pop("buffer").write_luau_def(defs, enable_fflags=True)
+        inserts["BUFFER_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())
