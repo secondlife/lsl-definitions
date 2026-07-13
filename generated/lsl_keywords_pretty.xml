@@ -9523,7 +9523,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>time</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Timestamp of when the email was received.</string>
+                     <string>Timestamp of when the email was received, in (string)llGetUnixTime() format.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -9547,7 +9547,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Body text of the email.</string>
@@ -9559,14 +9559,14 @@ If another state is defined before the default state, the compiler will report a
                   <key>num_left</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of pending emails still waiting in the queue.</string>
+                     <string>Number of emails still waiting in the queue.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when an email sent to this script's address arrives. num_left indicates the number of pending emails remaining in the queue.</string>
+            <string>Receive an email requested by llGetNextEmail(). NumberRemaining indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.</string>
          </map>
          <key>experience_permissions</key>
          <map>
@@ -9889,7 +9889,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the sending prim or the legacy name of the sending avatar.</string>
+                     <string>Name of the sending prim or the legacy name of the sending agent.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -9898,13 +9898,13 @@ If another state is defined before the default state, the compiler will report a
                   <key>id</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the sending avatar or prim.</string>
+                     <string>UUID of the sending agent or prim.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Spoken text string.</string>
@@ -9914,7 +9914,7 @@ If another state is defined before the default state, the compiler will report a
                </map>
             </array>
             <key>tooltip</key>
-            <string>Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.</string>
+            <string>Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.</string>
          </map>
          <key>money</key>
          <map>
@@ -11993,16 +11993,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>avatar</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar in the same region.</string>
+                     <string>UUID of the agent in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message to display in the dialog box.</string>
@@ -12023,7 +12023,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value) where button clicks are chatted.</string>
+                     <string>Output chat channel (any 32-bit signed integer value) where button clicks are chatted.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -12036,7 +12036,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.</string>
+            <string>Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.</string>
          </map>
          <key>llDie</key>
          <map>
@@ -12164,7 +12164,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Message body of the email.</string>
@@ -12180,7 +12180,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>20.0</real>
             <key>tooltip</key>
-            <string>Sends an email to address with subject and message.</string>
+            <string>Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()</string>
          </map>
          <key>llEscapeURL</key>
          <map>
@@ -13909,7 +13909,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>address</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Sender email address filter.</string>
+                     <string>Sender email address filter, or "" for any address.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -13918,7 +13918,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>subject</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Email subject filter.</string>
+                     <string>Email subject filter, or "" for any subject.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -13931,7 +13931,10 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Requests the next queued email matching the specified sender address and subject filters via the email event.</string>
+            <string>Requests the next queued email via the email event. Emails must
+1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+2. Be sent from the specified sender Address (or any address if blank)
+3. Have the specified subject Subject (or any subject if blank)</string>
          </map>
          <key>llGetNotecardLine</key>
          <map>
@@ -15854,16 +15857,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>user</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination user.</string>
+                     <string>UUID of the destination agent.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message string to send.</string>
@@ -15879,7 +15882,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>2.0</real>
             <key>tooltip</key>
-            <string>Sends an instant message containing message to the user identified by their key.</string>
+            <string>Sends an instant message containing msg to the agent identified by their key.</string>
          </map>
          <key>llIntegerToBase64</key>
          <map>
@@ -17561,7 +17564,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Input chat channel to listen on (any integer from -2147483648 to 2147483647).</string>
+                     <string>Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -17570,7 +17573,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Specific prim name or avatar legacy name to filter by (or empty string for no filter).</string>
+                     <string>Specific prim name or agent legacy name to filter by (or empty string for no filter).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -17579,7 +17582,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>id</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).</string>
+                     <string>Specific agent or prim UUID to filter by (or NULL_KEY for no filter).</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -18760,7 +18763,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to send.</string>
+                     <string>Text message string to send to the object owner.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -19254,7 +19257,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel to broadcast on (must be non-zero).</string>
+                     <string>Chat channel (any 32-bit signed integer value except zero) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -19276,7 +19279,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).</string>
+            <string>Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.</string>
          </map>
          <key>llRegionSayTo</key>
          <map>
@@ -19286,7 +19289,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>target</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the destination avatar or prim in the same region.</string>
+                     <string>UUID of the target agent or prim in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
@@ -19295,7 +19298,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value).</string>
+                     <string>Chat channel (any 32-bit signed integer value) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -19317,7 +19320,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.</string>
+            <string>Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.</string>
          </map>
          <key>llReleaseCamera</key>
          <map>
@@ -20705,7 +20708,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to transmit the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to chat the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -20714,7 +20717,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -20727,7 +20730,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llScaleByFactor</key>
          <map>
@@ -23170,7 +23173,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to shout the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to shout the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -23179,7 +23182,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -23192,7 +23195,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llSignRSA</key>
          <map>
@@ -23911,7 +23914,7 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Email message body.</string>
@@ -23927,7 +23930,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>20.0</real>
             <key>tooltip</key>
-            <string>Sends an email containing subject and message to the target (which can designate the owner or creator of the object).</string>
+            <string>Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.</string>
          </map>
          <key>llTeleportAgent</key>
          <map>
@@ -24057,16 +24060,16 @@ If another state is defined before the default state, the compiler will report a
             <key>arguments</key>
             <array>
                <map>
-                  <key>avatar</key>
+                  <key>agent</key>
                   <map>
                      <key>tooltip</key>
-                     <string>UUID of the avatar in the same region.</string>
+                     <string>UUID of the agent in the same region.</string>
                      <key>type</key>
                      <string>key</string>
                   </map>
                </map>
                <map>
-                  <key>message</key>
+                  <key>msg</key>
                   <map>
                      <key>tooltip</key>
                      <string>Text message to display in the text box.</string>
@@ -24078,7 +24081,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Output chat channel (any integer value) where the input text is chatted.</string>
+                     <string>Output chat channel (any 32-bit signed integer value) where the input text is chatted.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -24091,7 +24094,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>1.0</real>
             <key>tooltip</key>
-            <string>Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.</string>
+            <string>Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.</string>
          </map>
          <key>llToLower</key>
          <map>
@@ -24638,7 +24641,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>channel</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Integer chat channel to whisper the message on.</string>
+                     <string>Chat channel (any 32-bit signed integer value) to whisper the message on.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -24647,7 +24650,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>msg</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Text message string to transmit.</string>
+                     <string>Text message string to broadcast.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -24660,7 +24663,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.</string>
+            <string>Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.</string>
          </map>
          <key>llWind</key>
          <map>

@@ -30,7 +30,7 @@
         "documentation": "Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message."
     },
     "@sl-slua/global/print": {
-        "documentation": "Prints all arguments to standard output using Tab as a separator."
+        "documentation": "Sends all arguments as text privately to the object owner, separated by 4 spaces. The owner must be currently in the same region for the message to be received."
     },
     "@sl-slua/global/rawequal": {
         "documentation": "Returns true if a and b have the same type and value or reference, bypassing the __eq metamethod.."
@@ -1171,7 +1171,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDetectedVel"
     },
     "@sl-slua/global/ll.Dialog": {
-        "documentation": "Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.",
+        "documentation": "Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDialog"
     },
     "@sl-slua/global/ll.Die": {
@@ -1191,7 +1191,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEjectFromLand"
     },
     "@sl-slua/global/ll.Email": {
-        "documentation": "Sends an email to address with subject and message.",
+        "documentation": "Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEmail"
     },
     "@sl-slua/global/ll.EscapeURL": {
@@ -1503,7 +1503,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetMoonRotation"
     },
     "@sl-slua/global/ll.GetNextEmail": {
-        "documentation": "Requests the next queued email matching the specified sender address and subject filters via the email event.",
+        "documentation": "Requests the next queued email via the email event. Emails must<br>1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`<br>2. Be sent from the specified sender Address (or any address if blank)<br>3. Have the specified subject Subject (or any subject if blank)",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/ll.GetNotecardLine": {
@@ -1855,7 +1855,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/ll.InstantMessage": {
-        "documentation": "Sends an instant message containing message to the user identified by their key.",
+        "documentation": "Sends an instant message containing msg to the agent identified by their key.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInstantMessage"
     },
     "@sl-slua/global/ll.IntegerToBase64": {
@@ -2251,11 +2251,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRefreshPrimURL"
     },
     "@sl-slua/global/ll.RegionSay": {
-        "documentation": "Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).",
+        "documentation": "Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSay"
     },
     "@sl-slua/global/ll.RegionSayTo": {
-        "documentation": "Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
+        "documentation": "Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSayTo"
     },
     "@sl-slua/global/ll.ReleaseCamera": {
@@ -2451,7 +2451,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSameGroup"
     },
     "@sl-slua/global/ll.Say": {
-        "documentation": "Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"chat_range\"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSay"
     },
     "@sl-slua/global/ll.ScaleByFactor": {
@@ -2743,7 +2743,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetVelocity"
     },
     "@sl-slua/global/ll.Shout": {
-        "documentation": "Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"shout_range\"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlShout"
     },
     "@sl-slua/global/ll.SignRSA": {
@@ -2851,7 +2851,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetRemove"
     },
     "@sl-slua/global/ll.TargetedEmail": {
-        "documentation": "Sends an email containing subject and message to the target (which can designate the owner or creator of the object).",
+        "documentation": "Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetedEmail"
     },
     "@sl-slua/global/ll.TeleportAgent": {
@@ -2867,7 +2867,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTeleportAgentHome"
     },
     "@sl-slua/global/ll.TextBox": {
-        "documentation": "Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.",
+        "documentation": "Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/ll.ToLower": {
@@ -2939,7 +2939,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWater"
     },
     "@sl-slua/global/ll.Whisper": {
-        "documentation": "Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"whisper_range\"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWhisper"
     },
     "@sl-slua/global/ll.Wind": {
@@ -3234,7 +3234,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDetectedVel"
     },
     "@sl-slua/global/llcompat.Dialog": {
-        "documentation": "Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.",
+        "documentation": "Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDialog"
     },
     "@sl-slua/global/llcompat.Die": {
@@ -3254,7 +3254,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEjectFromLand"
     },
     "@sl-slua/global/llcompat.Email": {
-        "documentation": "Sends an email to address with subject and message.",
+        "documentation": "Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEmail"
     },
     "@sl-slua/global/llcompat.EscapeURL": {
@@ -3570,7 +3570,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetMoonRotation"
     },
     "@sl-slua/global/llcompat.GetNextEmail": {
-        "documentation": "Requests the next queued email matching the specified sender address and subject filters via the email event.",
+        "documentation": "Requests the next queued email via the email event. Emails must<br>1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`<br>2. Be sent from the specified sender Address (or any address if blank)<br>3. Have the specified subject Subject (or any subject if blank)",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/llcompat.GetNotecardLine": {
@@ -3922,7 +3922,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/llcompat.InstantMessage": {
-        "documentation": "Sends an instant message containing message to the user identified by their key.",
+        "documentation": "Sends an instant message containing msg to the agent identified by their key.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInstantMessage"
     },
     "@sl-slua/global/llcompat.IntegerToBase64": {
@@ -4318,11 +4318,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRefreshPrimURL"
     },
     "@sl-slua/global/llcompat.RegionSay": {
-        "documentation": "Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).",
+        "documentation": "Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSay"
     },
     "@sl-slua/global/llcompat.RegionSayTo": {
-        "documentation": "Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
+        "documentation": "Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments worn by the avatar.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRegionSayTo"
     },
     "@sl-slua/global/llcompat.ReleaseCamera": {
@@ -4522,7 +4522,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSameGroup"
     },
     "@sl-slua/global/llcompat.Say": {
-        "documentation": "Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars and can be used for script-to-script communication.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"chat_range\"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSay"
     },
     "@sl-slua/global/llcompat.ScaleByFactor": {
@@ -4822,7 +4822,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSetVelocity"
     },
     "@sl-slua/global/llcompat.Shout": {
-        "documentation": "Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"shout_range\"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlShout"
     },
     "@sl-slua/global/llcompat.SignRSA": {
@@ -4930,7 +4930,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetRemove"
     },
     "@sl-slua/global/llcompat.TargetedEmail": {
-        "documentation": "Sends an email containing subject and message to the target (which can designate the owner or creator of the object).",
+        "documentation": "Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTargetedEmail"
     },
     "@sl-slua/global/llcompat.TeleportAgent": {
@@ -4946,7 +4946,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTeleportAgentHome"
     },
     "@sl-slua/global/llcompat.TextBox": {
-        "documentation": "Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.",
+        "documentation": "Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/llcompat.ToLower": {
@@ -5018,7 +5018,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWater"
     },
     "@sl-slua/global/llcompat.Whisper": {
-        "documentation": "Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to avatars and are used to communicate with scripts.",
+        "documentation": "Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv(\"whisper_range\"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647). All other channels are for script-to-script communication.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlWhisper"
     },
     "@sl-slua/global/llcompat.Wind": {

@@ -528,11 +528,13 @@ functions:
     type: A...
   return-type: (boolean, R...)
 - name: print
-  comment: Prints all arguments to standard output using Tab as a separator.
+  comment: Sends all arguments as text privately to the object owner,
+    separated by 4 spaces. The owner
+    must be currently in the same region for the message to be received.
   type-parameters: [T...]
   parameters:
   - name: ...
-    comment: Arguments to print to standard output.
+    comment: Arguments to send as text to the object owner.
     type: T...
   return-type: ()
 - name: rawequal

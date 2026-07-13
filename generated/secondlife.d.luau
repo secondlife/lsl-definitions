@@ -189,7 +189,7 @@ declare extern type LLEvents with
   collision_start: LLDetectedEventHandler?
   control: ((id: uuid, level: number, edge: number) -> ())?
   dataserver: ((queryid: uuid, data: string) -> ())?
-  email: ((time: string, address: string, subject: string, message: string, num_left: number) -> ())?
+  email: ((time: string, address: string, subject: string, msg: string, num_left: number) -> ())?
   experience_permissions: ((agent_id: uuid) -> ())?
   experience_permissions_denied: ((agent_id: uuid, reason: number) -> ())?
   final_damage: LLDetectedEventHandler?
@@ -201,7 +201,7 @@ declare extern type LLEvents with
   land_collision_start: ((pos: vector) -> ())?
   link_message: ((sender_num: number, num: number, str: string, id: string) -> ())?
   linkset_data: ((action: number, name: string, value: string) -> ())?
-  listen: ((channel: number, name: string, id: uuid, message: string) -> ())?
+  listen: ((channel: number, name: string, id: uuid, msg: string) -> ())?
   money: ((id: uuid, amount: number) -> ())?
   moving_end: (() -> ())?
   moving_start: (() -> ())?
@@ -723,12 +723,12 @@ declare ll: {
   DetectedTouchUV: @[deprecated {use='getTouchUV'}](index: number) -> vector,
   DetectedType: @[deprecated {use='getType'}](number: number) -> number,
   DetectedVel: @[deprecated {use='getVel'}](number: number) -> vector,
-  Dialog: (avatar: uuid, message: string, buttons: {string}, channel: number) -> (),
+  Dialog: (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
   Die: () -> (),
   DumpList2String: (src: list, separator: string) -> string,
   EdgeOfWorld: (pos: vector, dir: vector) -> boolean,
   EjectFromLand: (avatar: uuid) -> (),
-  Email: (address: string, subject: string, message: string) -> (),
+  Email: (address: string, subject: string, msg: string) -> (),
   EscapeURL: (url: string) -> string,
   Euler2Rot: (v: vector) -> quaternion,
   Evade: (target: uuid, options: list) -> (),
@@ -894,7 +894,7 @@ declare ll: {
   HTTPResponse: (request_id: uuid, status: number, body: string) -> (),
   Hash: (val: string) -> number,
   InsertString: (dst: string, index: number, src: string) -> string,
-  InstantMessage: (user: uuid, message: string) -> (),
+  InstantMessage: (agent: uuid, msg: string) -> (),
   IntegerToBase64: (number: number) -> string,
   IsFriend: (agent_id: uuid) -> boolean,
   IsLinkGLTFMaterial: (link: number, face: number) -> boolean,
@@ -1143,11 +1143,11 @@ declare ll: {
   Target: (position: vector, range: number) -> number,
   TargetOmega: (axis: vector, spinrate: number, gain: number) -> (),
   TargetRemove: (handle: number) -> (),
-  TargetedEmail: (target: number, subject: string, message: string) -> (),
+  TargetedEmail: (target: number, subject: string, msg: string) -> (),
   TeleportAgent: (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
   TeleportAgentGlobalCoords: (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
   TeleportAgentHome: (avatar: uuid) -> (),
-  TextBox: (avatar: uuid, message: string, channel: number) -> (),
+  TextBox: (agent: uuid, msg: string, channel: number) -> (),
   ToLower: (src: string) -> string,
   ToUpper: (src: string) -> string,
   TransferLindenDollars: (destination: uuid, amount: number) -> uuid,
@@ -1246,12 +1246,12 @@ declare llcompat: {
   DetectedTouchUV: @deprecated (index: number) -> vector,
   DetectedType: @deprecated (number: number) -> number,
   DetectedVel: @deprecated (number: number) -> vector,
-  Dialog: @deprecated (avatar: uuid, message: string, buttons: {string}, channel: number) -> (),
+  Dialog: @deprecated (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
   Die: @deprecated () -> (),
   DumpList2String: @deprecated (src: list, separator: string) -> string,
   EdgeOfWorld: @deprecated (pos: vector, dir: vector) -> number,
   EjectFromLand: @deprecated (avatar: uuid) -> (),
-  Email: @deprecated (address: string, subject: string, message: string) -> (),
+  Email: @deprecated (address: string, subject: string, msg: string) -> (),
   EscapeURL: @deprecated (url: string) -> string,
   Euler2Rot: @deprecated (v: vector) -> quaternion,
   Evade: @deprecated (target: uuid, options: list) -> (),
@@ -1418,7 +1418,7 @@ declare llcompat: {
   HTTPResponse: @deprecated (request_id: uuid, status: number, body: string) -> (),
   Hash: @deprecated (val: string) -> number,
   InsertString: @deprecated (dst: string, index: number, src: string) -> string,
-  InstantMessage: @deprecated (user: uuid, message: string) -> (),
+  InstantMessage: @deprecated (agent: uuid, msg: string) -> (),
   IntegerToBase64: @deprecated (number: number) -> string,
   IsFriend: @deprecated (agent_id: uuid) -> number,
   IsLinkGLTFMaterial: @deprecated (link: number, face: number) -> number,
@@ -1670,11 +1670,11 @@ declare llcompat: {
   Target: @deprecated (position: vector, range: number) -> number,
   TargetOmega: @deprecated (axis: vector, spinrate: number, gain: number) -> (),
   TargetRemove: @deprecated (handle: number) -> (),
-  TargetedEmail: @deprecated (target: number, subject: string, message: string) -> (),
+  TargetedEmail: @deprecated (target: number, subject: string, msg: string) -> (),
   TeleportAgent: @deprecated (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
   TeleportAgentGlobalCoords: @deprecated (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
   TeleportAgentHome: @deprecated (avatar: uuid) -> (),
-  TextBox: @deprecated (avatar: uuid, message: string, channel: number) -> (),
+  TextBox: @deprecated (agent: uuid, msg: string, channel: number) -> (),
   ToLower: @deprecated (src: string) -> string,
   ToUpper: @deprecated (src: string) -> string,
   TransferLindenDollars: @deprecated (destination: uuid, amount: number) -> uuid,

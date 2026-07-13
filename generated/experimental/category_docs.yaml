@@ -266,38 +266,32 @@ avatar_animation:
     tooltip: Stops the specified animation anim (inventory, built-in, or UUID) on the avatar who granted the script the PERMISSION_TRIGGER_ANIMATION permission (automatically granted for attached or sat-on
       objects).
 avatar_communication:
-  email( string time, string address, string subject, string message, integer num_left ):
-    time: Timestamp of when the email was received.
-    address: Email address of the sender.
-    subject: Subject of the email.
-    message: Body text of the email.
-    num_left: Number of pending emails still waiting in the queue.
-    tooltip: Triggered when an email sent to this script's address arrives. num_left indicates the number of pending emails remaining in the queue.
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
-  llEmail( string address, string subject, string message ) -> void:
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
+  llEmail( string address, string subject, string msg ) -> void:
     address: Destination email address.
     subject: Subject of the email.
-    message: Message body of the email.
-    tooltip: Sends an email to address with subject and message.
-  llInstantMessage( key user, string message ) -> void:
-    user: UUID of the destination user.
-    message: Text message string to send.
-    tooltip: Sends an instant message containing message to the user identified by their key.
+    msg: Message body of the email.
+    tooltip: Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()
+  llInstantMessage( key agent, string msg ) -> void:
+    agent: UUID of the destination agent.
+    msg: Text message string to send.
+    tooltip: Sends an instant message containing msg to the agent identified by their key.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -330,44 +324,45 @@ avatar_communication:
     params: Options or parameters to apply to the opened floater.
     tooltip: Opens the specified viewer floater_name loaded with url and configured via params. Returns an integer error code, or 0 if successful.
   llOwnerSay( string msg ) -> void:
-    msg: Text message string to send.
+    msg: Text message string to send to the object owner.
     tooltip: Sends the chat message msg privately to the object owner (the owner must be currently in the same region for the message to be received).
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llSetText( string text, vector color, float alpha ) -> void:
     text: Floating text string to display.
     color: Color vector in RGB <R, G, B> (values from 0.0 to 1.0).
     alpha: Transparency value to set, from 0.0 (clear) to 1.0 (solid).
     tooltip: Displays floating text above the prim with the specified color vector and transparency alpha.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
-  llTargetedEmail( integer target, string subject, string message ) -> void:
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
+  llTargetedEmail( integer target, string subject, string msg ) -> void:
     target: Target constant (e.g., TARGETED_EMAIL_OBJECT_OWNER or TARGETED_EMAIL_ROOT_CREATOR).
     subject: Subject of the email.
-    message: Email message body.
-    tooltip: Sends an email containing subject and message to the target (which can designate the owner or creator of the object).
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+    msg: Email message body.
+    tooltip: Sends an email to with the given subject subject and body msg to the target (which can designate the owner or creator of the object). The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 avatar_inventory:
   llGiveAgentInventory( key agent, string folder, list items, list options ) -> integer:
     agent: UUID of the target agent in the same region.
@@ -425,22 +420,23 @@ camera:
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
       runtime permission.
 chat:
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -451,35 +447,36 @@ chat:
     handle: Integer listener handle returned by llListen to remove.
     tooltip: Completely removes the listener specified by the integer handle.
   llRegionSay( integer channel, string msg ) -> void:
-    channel: Output chat channel to broadcast on (must be non-zero).
+    channel: Chat channel (any 32-bit signed integer value except zero) to chat the message on.
     msg: Text message string to broadcast.
-    tooltip: Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).
+    tooltip: Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 combat:
   final_damage( integer num_detected ):
     num_detected: Number of damage events applied to the avatar or task.
@@ -3342,6 +3339,13 @@ script:
     sec: Duration in seconds to put the script to sleep.
     tooltip: Puts the script to sleep for sec seconds (at least until the next server-frame, ~0.02222 seconds). The script is inactive during this time. If sec is 0.0 or less, the script does not sleep.
 script_communication:
+  email( string time, string address, string subject, string msg, integer num_left ):
+    time: Timestamp of when the email was received, in (string)llGetUnixTime() format.
+    address: Email address of the sender.
+    subject: Subject of the email.
+    msg: Body text of the email.
+    num_left: Number of emails still waiting in the queue.
+    tooltip: Receive an email requested by llGetNextEmail(). NumberRemaining indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.
   http_request( key request_id, string method, string body ):
     request_id: Unique key identifying the incoming HTTP request (used with llHTTPResponse).
     method: HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request status constants.
@@ -3359,12 +3363,12 @@ script_communication:
     str: A text string value passed from the sending script.
     id: A key value passed from the sending script.
     tooltip: Triggered when the script receives a link message from sender_num, containing the parameters num, str, and id sent via llMessageLinked.
-  listen( integer channel, string name, key id, string message ):
+  listen( integer channel, string name, key id, string msg ):
     channel: Chat channel where the message appeared.
-    name: Name of the sending prim or the legacy name of the sending avatar.
-    id: UUID of the sending avatar or prim.
-    message: Spoken text string.
-    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken message string.
+    name: Name of the sending prim or the legacy name of the sending agent.
+    id: UUID of the sending agent or prim.
+    msg: Spoken text string.
+    tooltip: Triggered when a chat message matching active llListen filters is received on channel. Passes the sender's name and UUID key id, along with the spoken string msg.
   remote_data( integer event_type, key channel, key message_id, string sender, integer idata, string sdata ) // deprecated:
     event_type: Integer constant representing the type of XML-RPC event.
     channel: XML-RPC channel ID key.
@@ -3376,10 +3380,21 @@ script_communication:
   llCloseRemoteDataChannel( key channel ) -> void // deprecated:
     channel: XML-RPC channel ID to close.
     tooltip: Deprecated. Closes the specified XML-RPC channel.
+  llEmail( string address, string subject, string msg ) -> void:
+    address: Destination email address.
+    subject: Subject of the email.
+    msg: Message body of the email.
+    tooltip: Sends an email with the given destination address, subject, and body msg. The email will be sent from `{ll.GetKey()}@lsl.secondlife.com`. This can be used for script communication; see llGetNextEmail()
   llGetNextEmail( string address, string subject ) -> void:
-    address: Sender email address filter.
-    subject: Email subject filter.
-    tooltip: Requests the next queued email matching the specified sender address and subject filters via the email event.
+    address: Sender email address filter, or "" for any address.
+    subject: Email subject filter, or "" for any subject.
+    tooltip: 'Requests the next queued email via the email event. Emails must
+
+      1. Be sent to `{ll.GetKey()}@lsl.secondlife.com`
+
+      2. Be sent from the specified sender Address (or any address if blank)
+
+      3. Have the specified subject Subject (or any subject if blank)'
   llHTTPRequest( string url, list parameters, string body ) -> key:
     url: Destination HTTP or HTTPS URL.
     parameters: A list of HTTP_* configuration flags and value pairs.
@@ -3391,9 +3406,9 @@ script_communication:
     body: String contents of the response body.
     tooltip: Responds to the incoming HTTP request identified by request_id with the HTTP status code status and the payload body.
   llListen( integer channel, string name, key id, string msg ) -> integer:
-    channel: Input chat channel to listen on (any integer from -2147483648 to 2147483647).
-    name: Specific prim name or avatar legacy name to filter by (or empty string for no filter).
-    id: Specific avatar or prim UUID to filter by (or NULL_KEY for no filter).
+    channel: Chat channel (any 32-bit signed integer value) to listen on. Exact range is -2147483648 to 2147483647.
+    name: Specific prim name or agent legacy name to filter by (or empty string for no filter).
+    id: Specific agent or prim UUID to filter by (or NULL_KEY for no filter).
     msg: Specific chat message string to filter by (or empty string for no filter).
     tooltip: Creates a listener on channel from name and id for msg. Returns an integer listener handle used to control or remove the listener. Empty strings or NULL_KEY filters do not filter on those parameters.
   llListenControl( integer handle, integer active ) -> void:
@@ -3412,14 +3427,14 @@ script_communication:
   llOpenRemoteDataChannel(  ) -> void // deprecated:
     tooltip: Deprecated. Creates a channel to listen for incoming XML-RPC calls, triggering a remote_data event with the channel ID once available.
   llRegionSay( integer channel, string msg ) -> void:
-    channel: Output chat channel to broadcast on (must be non-zero).
+    channel: Chat channel (any 32-bit signed integer value except zero) to chat the message on.
     msg: Text message string to broadcast.
-    tooltip: Broadcasts the message msg on channel to the entire region (heard by any script listening on that channel; channel 0 is not permitted).
+    tooltip: Broadcasts the message msg to all scripts listening on channel Channel within the region. PUBLIC_CHANNEL (0) cannot be used, so, only scripts can receive the message.
   llRegionSayTo( key target, integer channel, string msg ) -> void:
-    target: UUID of the destination avatar or prim in the same region.
-    channel: Output chat channel (any integer value).
+    target: UUID of the target agent or prim in the same region.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
     msg: Text message string to send.
-    tooltip: Sends the message msg on channel privately to the targeted avatar or object (if within the region). If target is an avatar and channel is non-zero, the message can also be heard by any attachments
+    tooltip: Sends the message msg on Channel privately to the targeted agent or object (if within the region). If target is an agent and channel is non-zero, the message can also be heard by any attachments
       worn by the avatar.
   llRemoteDataReply( key channel, key message_id, string sdata, integer idata ) -> void // deprecated:
     channel: XML-RPC channel ID.
@@ -3434,10 +3449,10 @@ script_communication:
   llRequestURL(  ) -> key:
     tooltip: Asynchronously requests one HTTP URL for use by this script, triggering an http_request event. Returns a key query handle.
   llSay( integer channel, string msg ) -> void:
-    channel: Integer chat channel to transmit the message on.
-    msg: Text message string to transmit.
-    tooltip: Says the text message msg on the specified channel. The message can be heard up to a 20m radius. Channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not visible to avatars
-      and can be used for script-to-script communication.
+    channel: Chat channel (any 32-bit signed integer value) to chat the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("chat_range"), which is 20m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647).
+      All other channels are for script-to-script communication.
   llSendRemoteData( key channel, string dest, integer idata, string sdata ) -> key // deprecated:
     channel: XML-RPC channel ID.
     dest: Destination XML-RPC URL or server.
@@ -3445,15 +3460,15 @@ script_communication:
     sdata: String payload data.
     tooltip: Deprecated. Sends an XML-RPC request to dest on channel, containing the channel ID as a string, integer idata, and string sdata. Returns a key representing the message_id.
   llShout( integer channel, string msg ) -> void:
-    channel: Integer chat channel to shout the message on.
-    msg: Text message string to transmit.
-    tooltip: Shouts the text message msg on the specified channel. The message can be heard up to a 100m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to shout the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("shout_range"), which is 100m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
   llWhisper( integer channel, string msg ) -> void:
-    channel: Integer chat channel to whisper the message on.
-    msg: Text message string to transmit.
-    tooltip: Whispers the text message msg on the specified channel. The message can be heard up to a 10m radius. All channels other than PUBLIC_CHANNEL (0) and DEBUG_CHANNEL (2147483647) are not sent to
-      avatars and are used to communicate with scripts.
+    channel: Chat channel (any 32-bit signed integer value) to whisper the message on.
+    msg: Text message string to broadcast.
+    tooltip: Broadcasts the message msg to all scripts or agents listening on channel within llGetEnv("whisper_range"), which is 10m on most regions. Agents listen on PUBLIC_CHANNEL (0) and DEBUG_CHANNEL
+      (2147483647). All other channels are for script-to-script communication.
 sensor:
   collision( integer num_detected ):
     num_detected: Total number of detected colliders (usable with llDetected* functions).
@@ -3795,12 +3810,13 @@ user_interface:
   touch_start( integer num_detected ):
     num_detected: Total number of touching agents detected (usable with llDetected* functions).
     tooltip: Triggered when an avatar first touches the object. Passes num_detected, representing the number of touching agents.
-  llDialog( key avatar, string message, list buttons, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the dialog box.
+  llDialog( key agent, string msg, list buttons, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the dialog box.
     buttons: A list of up to 12 strings representing button labels.
-    channel: Output chat channel (any integer value) where button clicks are chatted.
-    tooltip: Shows a dialog box on the screen of the avatar specified by avatar, displaying message along with up to 12 choice buttons. Clicking a button chats its label on channel.
+    channel: Output chat channel (any 32-bit signed integer value) where button clicks are chatted.
+    tooltip: Shows a dialog box on the screen of the specified agent, displaying msg along with up to 12 choice buttons. Clicking a button chats its label on channel. The chat originates at the object's
+      position, but uses the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llLoadURL( key avatar, string message, string url ) -> void:
     avatar: UUID of the avatar in the same region.
     message: Text message to display in the dialog box.
@@ -3831,11 +3847,12 @@ user_interface:
   llSetTouchText( string text ) -> void:
     text: Context menu text to display.
     tooltip: Displays the string text instead of 'Touch' in the right-click context menu.
-  llTextBox( key avatar, string message, integer channel ) -> void:
-    avatar: UUID of the avatar in the same region.
-    message: Text message to display in the text box.
-    channel: Output chat channel (any integer value) where the input text is chatted.
-    tooltip: Opens an input text box dialog displaying message to the avatar. Submitting text chats the input string on channel as if said by the avatar.
+  llTextBox( key agent, string msg, integer channel ) -> void:
+    agent: UUID of the agent in the same region.
+    msg: Text message to display in the text box.
+    channel: Output chat channel (any 32-bit signed integer value) where the input text is chatted.
+    tooltip: Opens an input text box dialog displaying msg to the agent. Submitting text chats the input string on channel as if said by the agent. The chat originates at the object's position, but uses
+      the agent's name and UUID, so it can be heard as long as the agent is still in the region.
   llWorldPosToHUD( vector world_pos ) -> vector:
     world_pos: World-frame position vector to project into HUD space.
     tooltip: Returns the local position vector that places the center of the HUD object directly over the world coordinate world_pos as viewed by the current camera. Requires the PERMISSION_TRACK_CAMERA
