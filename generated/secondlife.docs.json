@@ -271,6 +271,15 @@
         "documentation": "Writes up to 32 bits to the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#writebits"
     },
+    "@sl-slua/global/class": {
+        "documentation": "Class/object manipulation library."
+    },
+    "@sl-slua/global/class.classof": {
+        "documentation": "Returns the class of the given object, or nil if not a class."
+    },
+    "@sl-slua/global/class.instanceof": {
+        "documentation": "Returns true if obj is an instance of the given class."
+    },
     "@sl-slua/global/coroutine": {
         "documentation": "Coroutine manipulation library.",
         "learn_more_link": "https://luau.org/library/#coroutine-library"

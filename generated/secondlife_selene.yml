@@ -5404,6 +5404,17 @@ globals:
     - type: number
     - type: number
     description: Writes up to 32 bits to the buffer at the given offset.
+  class.classof:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the class of the given object, or nil if not a class.
+  class.instanceof:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if obj is an instance of the given class.
   coroutine.create:
     args:
     - type: function
