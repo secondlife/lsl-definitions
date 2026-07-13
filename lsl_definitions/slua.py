@@ -312,7 +312,7 @@ class SLuaClassDeclaration:
         Workaround this bug by removing all checked annotations
         https://github.com/luau-lang/luau/issues/2384
         """
-        for func in self.methods:
+        for func in self.methods.values():
             func.typechecker_flags.checked = False
 
     def _write_extern_type_def(self, f: TextIO) -> None:
@@ -383,7 +383,7 @@ class SLuaModule:
         if self.callable is None:
             return  # no issue
         self.callable.typechecker_flags.checked = False
-        for func in self.functions:
+        for func in self.functions.values():
             func.typechecker_flags.checked = False
 
     def write_luau_def(self, f: TextIO) -> None:
