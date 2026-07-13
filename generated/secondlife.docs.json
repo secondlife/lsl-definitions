@@ -650,15 +650,15 @@
         "learn_more_link": "https://luau.org/library/#string-library"
     },
     "@sl-slua/global/string.byte": {
-        "documentation": "Returns the numeric code of every byte in the input string within the given range.",
+        "documentation": "Returns the numeric code of every byte in the range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#byte"
     },
     "@sl-slua/global/string.char": {
-        "documentation": "Returns a string containing characters for the given byte values.",
+        "documentation": "Constructs and returns a string from the given byte integers.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#char"
     },
     "@sl-slua/global/string.find": {
-        "documentation": "Finds the first instance of the pattern in the string. Returns the start and end indices of the first match, followed by any captured substrings. Returns nil if no match is found.",
+        "documentation": "Returns the start and end byte indices of the first occurrence of pattern inside the string src, followed by any regex-captured substrings. Search starts from start_index. Returns nil if not found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#find"
     },
     "@sl-slua/global/string.format": {
@@ -666,23 +666,23 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#format"
     },
     "@sl-slua/global/string.gmatch": {
-        "documentation": "Returns an iterator function for pattern matches.",
+        "documentation": "Returns an iterator function of all occurences of the regex pattern inside the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gmatch"
     },
     "@sl-slua/global/string.gsub": {
-        "documentation": "Performs pattern-based substitution in a string. Returns a copy of the string with substitutions made, followed by the total number of substitutions that occurred.",
+        "documentation": "Returns a copy of src with maxn occurrences of the regex pattern replaced by repl, followed by the total number of substitutions that occurred. repl can be a string, function, or table.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#gsub"
     },
     "@sl-slua/global/string.len": {
-        "documentation": "Returns the number of bytes in the string. Identical to #s.",
+        "documentation": "Returns the number of bytes in the string. Identical to #str.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#len"
     },
     "@sl-slua/global/string.lower": {
-        "documentation": "Returns a lowercase version of the input string. Only works with ASCII. Use ll.ToLower for strings that may contain Unicode.",
+        "documentation": "Returns a lowercase copy of the string src. Only converts ASCII characters. Use ll.ToLower for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#lower"
     },
     "@sl-slua/global/string.match": {
-        "documentation": "Finds and returns matches for a pattern in the input string. Returns nil if no match is found.",
+        "documentation": "Returns all occurences of the regex pattern inside the string src, starting from start_index. Returns nil if no match is found. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#match"
     },
     "@sl-slua/global/string.pack": {
@@ -694,11 +694,11 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#packsize"
     },
     "@sl-slua/global/string.rep": {
-        "documentation": "Returns the input string repeated n times. Returns an empty string if n is zero or negative.",
+        "documentation": "Returns the string src repeated n times. Returns an empty string if n is zero or negative.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#rep"
     },
     "@sl-slua/global/string.reverse": {
-        "documentation": "Returns the input string with bytes in reverse order.",
+        "documentation": "Returns a copy of the string src with bytes in reverse order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#reverse"
     },
     "@sl-slua/global/string.split": {
@@ -706,15 +706,15 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#split"
     },
     "@sl-slua/global/string.sub": {
-        "documentation": "Returns a substring from the given range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive byte range start_index..end_index. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
-        "documentation": "Decodes a binary string using a pack format.",
+        "documentation": "Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
-        "documentation": "Returns an uppercase version of the input string. Only works with ASCII. Use ll.ToUpper for strings that may contain Unicode.",
+        "documentation": "Returns an uppercase copy of the string src. Only converts ASCII characters. Use ll.ToUpper for strings that may contain Unicode.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#upper"
     },
     "@sl-slua/global/table": {
@@ -810,23 +810,23 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#charpattern"
     },
     "@sl-slua/global/utf8.char": {
-        "documentation": "Creates a string from Unicode codepoints.",
+        "documentation": "Constructs and returns a string from the given Unicode codepoint ordinals.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#char"
     },
     "@sl-slua/global/utf8.codes": {
-        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string.",
+        "documentation": "Returns an iterator that produces the byte offset and Unicode codepoint for each character in the string src.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codes"
     },
     "@sl-slua/global/utf8.codepoint": {
-        "documentation": "Returns the Unicode codepoints in the specified range of the string.",
+        "documentation": "Returns the ordinals (Unicode copepoint integers) of the characters in the inclusive byte range start_index..end_index in the string src. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#codepoint"
     },
     "@sl-slua/global/utf8.len": {
-        "documentation": "Returns the number of Unicode codepoints in the specified range of the string, or nil and error index.",
+        "documentation": "Returns the number of Unicode codepoints in the inclusive byte range start_index..end_index of the string src. If the string is not utf8, returns (nil, error index) instead. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#len"
     },
     "@sl-slua/global/utf8.offset": {
-        "documentation": "Returns the byte offset of the nth Unicode codepoint in the string.",
+        "documentation": "Returns the byte offset of the nth Unicode codepoint in the string. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/utf8#offset"
     },
     "@sl-slua/global/uuid": {
@@ -1011,7 +1011,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/ll.Char": {
-        "documentation": "Constructs and returns a single-character string representing the supplied Unicode value val.",
+        "documentation": "Constructs and returns a single-character string from the given Unicode codepoint ordinal.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlChar"
     },
     "@sl-slua/global/ll.ClearCameraParams": {
@@ -1083,11 +1083,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/ll.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/ll.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/ll.DerezObject": {
@@ -1727,7 +1727,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/ll.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/ll.GetSunDirection": {
@@ -1851,7 +1851,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/ll.InsertString": {
-        "documentation": "Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/ll.InstantMessage": {
@@ -2175,7 +2175,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOpenRemoteDataChannel"
     },
     "@sl-slua/global/ll.Ord": {
-        "documentation": "Returns the integer Unicode (ordinal) value of the character at index in the string val.",
+        "documentation": "Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOrd"
     },
     "@sl-slua/global/ll.OverMyLand": {
@@ -2199,7 +2199,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseString2List"
     },
     "@sl-slua/global/ll.ParseStringKeepNulls": {
-        "documentation": "Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
+        "documentation": "Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseStringKeepNulls"
     },
     "@sl-slua/global/ll.ParticleSystem": {
@@ -2307,7 +2307,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceEnvironment"
     },
     "@sl-slua/global/ll.ReplaceSubString": {
-        "documentation": "Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
+        "documentation": "Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceSubString"
     },
     "@sl-slua/global/ll.RequestAgentData": {
@@ -2811,7 +2811,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStopSound"
     },
     "@sl-slua/global/ll.StringLength": {
-        "documentation": "Returns an integer representing the number of characters in the string str (excluding the null terminator).",
+        "documentation": "Returns the number of unicode codepoints in the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringLength"
     },
     "@sl-slua/global/ll.StringToBase64": {
@@ -2823,7 +2823,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/ll.SubStringIndex": {
-        "documentation": "Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns nil if not found.",
+        "documentation": "Returns the codepoint index of the first occurrence of pattern inside the string source. Returns nil if not found. No regex.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/ll.TakeCamera": {
@@ -2871,11 +2871,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/ll.ToLower": {
-        "documentation": "Returns a copy of the string src converted entirely to lowercase.",
+        "documentation": "Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToLower"
     },
     "@sl-slua/global/ll.ToUpper": {
-        "documentation": "Returns a copy of the string src converted entirely to uppercase.",
+        "documentation": "Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToUpper"
     },
     "@sl-slua/global/ll.TransferLindenDollars": {
@@ -3074,7 +3074,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/llcompat.Char": {
-        "documentation": "Constructs and returns a single-character string representing the supplied Unicode value val.",
+        "documentation": "Constructs and returns a single-character string from the given Unicode codepoint ordinal.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlChar"
     },
     "@sl-slua/global/llcompat.ClearCameraParams": {
@@ -3146,11 +3146,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteKeyValue"
     },
     "@sl-slua/global/llcompat.DeleteSubList": {
-        "documentation": "Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubList"
     },
     "@sl-slua/global/llcompat.DeleteSubString": {
-        "documentation": "Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.",
+        "documentation": "Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlDeleteSubString"
     },
     "@sl-slua/global/llcompat.DerezObject": {
@@ -3794,7 +3794,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetStatus"
     },
     "@sl-slua/global/llcompat.GetSubString": {
-        "documentation": "Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.",
+        "documentation": "Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetSubString"
     },
     "@sl-slua/global/llcompat.GetSunDirection": {
@@ -3918,7 +3918,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlHash"
     },
     "@sl-slua/global/llcompat.InsertString": {
-        "documentation": "Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.",
+        "documentation": "Returns a copy of dst with src inserted at the given codepoint index.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlInsertString"
     },
     "@sl-slua/global/llcompat.InstantMessage": {
@@ -4242,7 +4242,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOpenRemoteDataChannel"
     },
     "@sl-slua/global/llcompat.Ord": {
-        "documentation": "Returns the integer Unicode (ordinal) value of the character at index in the string val.",
+        "documentation": "Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlOrd"
     },
     "@sl-slua/global/llcompat.OverMyLand": {
@@ -4266,7 +4266,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseString2List"
     },
     "@sl-slua/global/llcompat.ParseStringKeepNulls": {
-        "documentation": "Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
+        "documentation": "Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlParseStringKeepNulls"
     },
     "@sl-slua/global/llcompat.ParticleSystem": {
@@ -4374,7 +4374,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceEnvironment"
     },
     "@sl-slua/global/llcompat.ReplaceSubString": {
-        "documentation": "Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
+        "documentation": "Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlReplaceSubString"
     },
     "@sl-slua/global/llcompat.RequestAgentData": {
@@ -4890,7 +4890,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStopSound"
     },
     "@sl-slua/global/llcompat.StringLength": {
-        "documentation": "Returns an integer representing the number of characters in the string str (excluding the null terminator).",
+        "documentation": "Returns the number of unicode codepoints in the string.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringLength"
     },
     "@sl-slua/global/llcompat.StringToBase64": {
@@ -4902,7 +4902,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlStringTrim"
     },
     "@sl-slua/global/llcompat.SubStringIndex": {
-        "documentation": "(Index semantics) Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.",
+        "documentation": "(Index semantics) Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSubStringIndex"
     },
     "@sl-slua/global/llcompat.TakeCamera": {
@@ -4950,11 +4950,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTextBox"
     },
     "@sl-slua/global/llcompat.ToLower": {
-        "documentation": "Returns a copy of the string src converted entirely to lowercase.",
+        "documentation": "Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToLower"
     },
     "@sl-slua/global/llcompat.ToUpper": {
-        "documentation": "Returns a copy of the string src converted entirely to uppercase.",
+        "documentation": "Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlToUpper"
     },
     "@sl-slua/global/llcompat.TransferLindenDollars": {

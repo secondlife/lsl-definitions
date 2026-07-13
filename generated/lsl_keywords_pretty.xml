@@ -10976,7 +10976,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Unicode value to convert into a character string.</string>
+                     <string>Unicode codepoint integer (ordinal) to convert.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -10989,7 +10989,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Constructs and returns a single-character string representing the supplied Unicode value val.</string>
+            <string>Constructs and returns a single-character string from the given Unicode codepoint ordinal.</string>
          </map>
          <key>llClearCameraParams</key>
          <map>
@@ -11481,7 +11481,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the list src with the slice from start to end (inclusive) removed. Negative indices count backward from the end of the list. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the list src with the slice from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the list. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDeleteSubString</key>
          <map>
@@ -11500,7 +11500,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Starting index of the substring to remove (inclusive).</string>
+                     <string>Starting codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -11509,7 +11509,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Ending index of the substring to remove (inclusive).</string>
+                     <string>Ending codepoint index of the substring to remove (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -11522,7 +11522,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src with the characters from start to end (inclusive) removed. Negative indices count backward from the end of the string. If start is greater than end, the deletion excludes the specified range.</string>
+            <string>Returns a copy of the string src with the characters from start_index to end_index (inclusive) removed. Negative indices count backward from the end of the string. If start_index is greater than end_index, the deletion excludes the specified range.</string>
          </map>
          <key>llDerezObject</key>
          <map>
@@ -15029,7 +15029,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>start_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based start index (inclusive).</string>
+                     <string>Starting codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15038,7 +15038,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>end_index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based end index (inclusive).</string>
+                     <string>Ending codepoint index (inclusive). Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15051,7 +15051,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the substring from src within the inclusive range specified by the start and end indices. Negative indices count backward from the end. If start is greater than end, the substring is the excluded range.</string>
+            <string>Returns a copy of the substring from src within the inclusive codepoint range start_index..end_index. Negative indices count backward from the end of the string. If start_index is greater than end_index, the substring is the excluded range.</string>
          </map>
          <key>llGetSunDirection</key>
          <map>
@@ -15822,10 +15822,10 @@ If another state is defined before the default state, the compiler will report a
                   </map>
                </map>
                <map>
-                  <key>pos</key>
+                  <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based position index where insertion starts.</string>
+                     <string>Codepoint index where insertion starts.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -15847,7 +15847,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing dst with src inserted starting at the zero-based index pos. Note that this operation does not modify dst itself.</string>
+            <string>Returns a copy of dst with src inserted at the given codepoint index.</string>
          </map>
          <key>llInstantMessage</key>
          <map>
@@ -18703,7 +18703,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>val</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Source string containing the character.</string>
+                     <string>Source string.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -18712,7 +18712,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>index</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based index of the character to convert.</string>
+                     <string>Codepoint index of the character to convert. Supports negative indexing.</string>
                      <key>type</key>
                      <string>integer</string>
                   </map>
@@ -18725,7 +18725,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the integer Unicode (ordinal) value of the character at index in the string val.</string>
+            <string>Returns the ordinal (Unicode copepoint integer) of the character at index in the string val. Negative indices count backward from the end of the string.</string>
          </map>
          <key>llOverMyLand</key>
          <map>
@@ -18903,7 +18903,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Breaks the string src into a list, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
+            <string>Breaks the string src into a list of substrings, discarding separators and keeping spacers, while preserving empty null values (unlike llParseString2List). separators and spacers accept up to 8 string entries each.</string>
          </map>
          <key>llParticleSystem</key>
          <map>
@@ -19726,7 +19726,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>replacement_pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>New substring used to replace the pattern.</string>
+                     <string>New substring that replaces the pattern.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -19748,7 +19748,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a new string representing src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
+            <string>Returns a copy of src with count occurrences of pattern replaced by replacement_pattern. Setting count to 0 replaces all occurrences; positive counts process left-to-right, while negative counts process right-to-left.</string>
          </map>
          <key>llRequestAgentData</key>
          <map>
@@ -23614,7 +23614,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the number of characters in the string str (excluding the null terminator).</string>
+            <string>Returns the number of unicode codepoints in the string.</string>
          </map>
          <key>llStringToBase64</key>
          <map>
@@ -23701,7 +23701,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the zero-based index of the first instance of the pattern substring inside the string source. Returns -1 if not found.</string>
+            <string>Returns the codepoint index of the first occurrence of pattern inside the string source. Returns -1 if not found. No regex.</string>
          </map>
          <key>llTakeCamera</key>
          <map>
@@ -24114,7 +24114,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to lowercase.</string>
+            <string>Returns a lowercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>llToUpper</key>
          <map>
@@ -24137,7 +24137,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns a copy of the string src converted entirely to uppercase.</string>
+            <string>Returns an uppercase copy of the string src. Converts all unicode characters, not just ASCII.</string>
          </map>
          <key>llTransferLindenDollars</key>
          <map>

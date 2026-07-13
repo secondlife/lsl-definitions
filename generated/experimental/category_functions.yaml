@@ -1003,7 +1003,7 @@ string:
 - llChar( integer val ) -> string
 - llDeleteSubString( string src, integer start_index, integer end_index ) -> string
 - llGetSubString( string src, integer start_index, integer end_index ) -> string
-- llInsertString( string dst, integer pos, string src ) -> string
+- llInsertString( string dst, integer index, string src ) -> string
 - llOrd( string val, integer index ) -> integer
 - llReplaceSubString( string src, string pattern, string replacement_pattern, integer count ) -> string
 - llStringLength( string str ) -> integer

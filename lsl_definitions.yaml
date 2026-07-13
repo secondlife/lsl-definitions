@@ -7856,15 +7856,14 @@ functions:
   llChar:
     arguments:
     - val:
-        tooltip: Unicode value to convert into a character string.
+        tooltip: Unicode codepoint integer (ordinal) to convert.
         type: integer
     energy: 10.0
     func-id: 526
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Constructs and returns a single-character string representing the
-      supplied Unicode value val.
+    tooltip: Constructs and returns a single-character string from the given Unicode codepoint ordinal.
     categories:
       - string
   llClearCameraParams:
@@ -8232,9 +8231,9 @@ functions:
     return: list
     slua-return: '{T}'
     sleep: 0.0
-    tooltip: Returns a copy of the list src with the slice from start to end
+    tooltip: Returns a copy of the list src with the slice from start_index to end_index
       (inclusive) removed. Negative indices count backward from the end of the
-      list. If start is greater than end, the deletion excludes the specified
+      list. If start_index is greater than end_index, the deletion excludes the specified
       range.
     categories:
       - list
@@ -8244,11 +8243,13 @@ functions:
         tooltip: Source string to modify.
         type: string
     - start_index:
-        tooltip: Starting index of the substring to remove (inclusive).
+        tooltip: Starting codepoint index of the substring to remove (inclusive).
+          Supports negative indexing.
         type: integer
         index-semantics: true
     - end_index:
-        tooltip: Ending index of the substring to remove (inclusive).
+        tooltip: Ending codepoint index of the substring to remove (inclusive).
+          Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -8256,9 +8257,9 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of the string src with the characters from start to end
+    tooltip: Returns a copy of the string src with the characters from start_index to end_index
       (inclusive) removed. Negative indices count backward from the end of the
-      string. If start is greater than end, the deletion excludes the specified
+      string. If start_index is greater than end_index, the deletion excludes the specified
       range.
     categories:
       - string
@@ -10797,11 +10798,11 @@ functions:
         tooltip: Source string to slice.
         type: string
     - start_index:
-        tooltip: Zero-based start index (inclusive).
+        tooltip: Starting codepoint index (inclusive). Supports negative indexing.
         type: integer
         index-semantics: true
     - end_index:
-        tooltip: Zero-based end index (inclusive).
+        tooltip: Ending codepoint index (inclusive). Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -10809,10 +10810,10 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of the substring from src within the inclusive range
-      specified by the start and end indices. Negative indices count backward
-      from the end. If start is greater than end, the substring is the excluded
-      range.
+    tooltip: Returns a copy of the substring from src within the inclusive codepoint range
+      start_index..end_index.
+      Negative indices count backward from the end of the string.
+      If start_index is greater than end_index, the substring is the excluded range.
     categories:
       - string
   llGetSunDirection:
@@ -11319,8 +11320,8 @@ functions:
     - dst:
         tooltip: Target destination string.
         type: string
-    - pos:
-        tooltip: Zero-based position index where insertion starts.
+    - index:
+        tooltip: Codepoint index where insertion starts.
         type: integer
         index-semantics: true
     - src:
@@ -11331,8 +11332,7 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a new string representing dst with src inserted starting at the
-      zero-based index pos. Note that this operation does not modify dst itself.
+    tooltip: Returns a copy of dst with src inserted at the given codepoint index.
     categories:
       - string
   llInstantMessage:
@@ -13074,10 +13074,10 @@ functions:
   llOrd:
     arguments:
     - val:
-        tooltip: Source string containing the character.
+        tooltip: Source string.
         type: string
     - index:
-        tooltip: Zero-based index of the character to convert.
+        tooltip: Codepoint index of the character to convert. Supports negative indexing.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -13085,8 +13085,9 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the integer Unicode (ordinal) value of the character at index
+    tooltip: Returns the ordinal (Unicode copepoint integer) of the character at index
       in the string val.
+      Negative indices count backward from the end of the string.
     categories:
       - string
   llOverMyLand:
@@ -13205,7 +13206,7 @@ functions:
     return: list
     slua-return: '{string}'
     sleep: 0.0
-    tooltip: Breaks the string src into a list, discarding separators and keeping
+    tooltip: Breaks the string src into a list of substrings, discarding separators and keeping
       spacers, while preserving empty null values (unlike llParseString2List).
       separators and spacers accept up to 8 string entries each.
     categories:
@@ -13738,7 +13739,7 @@ functions:
         tooltip: Substring pattern to find and replace.
         type: string
     - replacement_pattern:
-        tooltip: New substring used to replace the pattern.
+        tooltip: New substring that replaces the pattern.
         type: string
     - count:
         tooltip: Maximum number of replacements to make (0 for all, positive for
@@ -13749,7 +13750,7 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a new string representing src with count occurrences of pattern
+    tooltip: Returns a copy of src with count occurrences of pattern
       replaced by replacement_pattern. Setting count to 0 replaces all
       occurrences; positive counts process left-to-right, while negative counts
       process right-to-left.
@@ -16179,8 +16180,7 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the number of characters in the string
-      str (excluding the null terminator).
+    tooltip: Returns the number of unicode codepoints in the string.
     categories:
       - string
   llStringToBase64:
@@ -16234,8 +16234,8 @@ functions:
     return: integer
     index-semantics: true
     sleep: 0.0
-    tooltip: Returns the zero-based index of the first instance of the pattern
-      substring inside the string source. Returns -1 if not found.
+    tooltip: Returns the codepoint index of the first occurrence of pattern
+      inside the string source. Returns -1 if not found. No regex.
     categories:
       - string
   llTakeCamera:
@@ -16490,7 +16490,8 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of the string src converted entirely to lowercase.
+    tooltip: Returns a lowercase copy of the string src.
+      Converts all unicode characters, not just ASCII.
     categories:
       - string
   llToUpper:
@@ -16504,7 +16505,8 @@ functions:
     pure: true
     return: string
     sleep: 0.0
-    tooltip: Returns a copy of the string src converted entirely to uppercase.
+    tooltip: Returns an uppercase copy of the string src.
+      Converts all unicode characters, not just ASCII.
     categories:
       - string
   llTransferLindenDollars:
