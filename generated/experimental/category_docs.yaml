@@ -25,9 +25,9 @@ asset_permissions:
     options: Extra options applied to the transfer (currently unused).
     tooltip: Transfers ownership of the object (or a copy of it, depending on Flags) to the specified agent. Returns an integer indicating the success or failure of the transfer.
 attachments:
-  attach( key id ):
-    id: UUID of the avatar the object is attached to, or NULL_KEY if detached.
-    tooltip: Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if detached.
+  attach( key avatar ):
+    avatar: UUID of the avatar the object is attached to, or NULL_KEY if detached.
+    tooltip: Triggered whenever the object is attached to or detached from an avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.
   llAttachToAvatar( integer attach_point ) -> void:
     attach_point: ATTACH_* constant or integer value representing the target attachment point.
     tooltip: Attaches the object to the avatar who has granted the PERMISSION_ATTACH permission. Takes the object into the user's inventory and attaches it at attach_point.
@@ -42,12 +42,12 @@ attachments:
     tooltip: Returns the integer attachment point (an ATTACH_* constant) that the object is attached to, or 0 if it is unattached or pending detachment.
   llGetAttachedList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
-    tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message
-      string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing
+      an error message string on failure.
   llGetAttachedListFiltered( key avatar, list options ) -> list:
     avatar: UUID of the avatar in the same region.
     options: A list of options to filter the returned attachments.
-    tooltip: Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
 avatar:
   control( key id, integer level, integer edge ):
     id: UUID of the avatar whose inputs are captured.
@@ -117,12 +117,12 @@ avatar:
     tooltip: Returns a string representing the name of the animation currently overriding the specified anim_state. Requires the PERMISSION_OVERRIDE_ANIMATIONS or PERMISSION_TRIGGER_ANIMATION runtime permission.
   llGetAttachedList( key avatar ) -> list:
     avatar: UUID of the avatar in the same region.
-    tooltip: Returns a list of object keys (UUIDs) corresponding to public, visible (non-HUD) attachments worn by the specified avatar, in the order they were attached. Returns a list with an error message
-      string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached. HUDs are not included because they are neither public nor visible. Returns a list containing
+      an error message string on failure.
   llGetAttachedListFiltered( key avatar, list options ) -> list:
     avatar: UUID of the avatar in the same region.
     options: A list of options to filter the returned attachments.
-    tooltip: Retrieves a list of attachment object keys worn by avatar in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
+    tooltip: Returns a list of object keys (UUIDs) worn by the specified avatar, in the order they were attached, filtered by options. Returns a list containing an error message string on failure.
   llGetCameraAspect(  ) -> float:
     tooltip: Returns a float representing the camera's current aspect ratio (width/height) of the agent who granted PERMISSION_TRACK_CAMERA. Returns 0.0 if permissions are not granted.
   llGetCameraFOV(  ) -> float:

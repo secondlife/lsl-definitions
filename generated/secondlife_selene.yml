@@ -7153,18 +7153,18 @@ globals:
     - type:
         display: uuid
     must_use: true
-    description: Returns a list of object keys (UUIDs) corresponding to public, visible
-      (non-HUD) attachments worn by the specified avatar, in the order they were attached.
-      Returns a list with an error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached. HUDs are not included because they are neither
+      public nor visible. Returns a list containing an error message string on failure.
   ll.GetAttachedListFiltered:
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachment object keys worn by avatar in the
-      order they were attached, filtered by options. Returns a list containing an
-      error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached, filtered by options. Returns a list containing
+      an error message string on failure.
   ll.GetBoundingBox:
     args:
     - type:
@@ -11209,29 +11209,29 @@ globals:
       the object is attached to, or 0 if it is unattached or pending detachment.
   llcompat.GetAttachedList:
     deprecated:
-      message: Returns a list of object keys (UUIDs) corresponding to public, visible
-        (non-HUD) attachments worn by the specified avatar, in the order they were
-        attached. Returns a list with an error message string on failure.
+      message: Returns a list of object keys (UUIDs) worn by the specified avatar,
+        in the order they were attached. HUDs are not included because they are neither
+        public nor visible. Returns a list containing an error message string on failure.
     args:
     - type:
         display: uuid
     must_use: true
-    description: Returns a list of object keys (UUIDs) corresponding to public, visible
-      (non-HUD) attachments worn by the specified avatar, in the order they were attached.
-      Returns a list with an error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached. HUDs are not included because they are neither
+      public nor visible. Returns a list containing an error message string on failure.
   llcompat.GetAttachedListFiltered:
     deprecated:
-      message: Retrieves a list of attachment object keys worn by avatar in the order
-        they were attached, filtered by options. Returns a list containing an error
-        message string on failure.
+      message: Returns a list of object keys (UUIDs) worn by the specified avatar,
+        in the order they were attached, filtered by options. Returns a list containing
+        an error message string on failure.
     args:
     - type:
         display: uuid
     - type: table
     must_use: true
-    description: Retrieves a list of attachment object keys worn by avatar in the
-      order they were attached, filtered by options. Returns a list containing an
-      error message string on failure.
+    description: Returns a list of object keys (UUIDs) worn by the specified avatar,
+      in the order they were attached, filtered by options. Returns a list containing
+      an error message string on failure.
   llcompat.GetBoundingBox:
     deprecated:
       message: Returns the bounding box of object (including any linked prims) relative
@@ -15980,8 +15980,7 @@ structs:
       property: override-fields
       type: function
       description: Triggered whenever the object is attached to or detached from an
-        avatar. Passes the UUID key of the avatar (id) if attached, or NULL_KEY if
-        detached.
+        avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if detached.
     changed:
       property: override-fields
       type: function
