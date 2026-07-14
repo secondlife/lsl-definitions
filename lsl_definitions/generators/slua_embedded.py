@@ -62,6 +62,10 @@ def gen_slua_embedded_defs(
     with io.StringIO() as defs:
         slua_definitions.modules.pop("buffer").write_luau_def(defs)
         inserts["BUFFER_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.base_classes.pop("vector").write_luau_def(defs)
+        slua_definitions.modules.pop("vector").write_luau_def(defs)
+        inserts["VECTOR_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())

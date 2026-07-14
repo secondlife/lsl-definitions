@@ -286,31 +286,38 @@ declare buffer: {
 
 static const char* const kBuiltinDefinitionVectorSrc = R"BUILTIN_SRC(
 
--- While vector would have been better represented as a built-in primitive type, type solver extern type handling covers most of the properties
 declare extern type vector with
-    read x: number
-    read y: number
-    read z: number
+  x: number
+  y: number
+  z: number
+  function __add(self, other: vector): vector
+  function __sub(self, other: vector): vector
+  function __unm(self): vector
+  function __mul(self, other: number | vector | quaternion): vector
+  function __div(self, other: number | vector | quaternion): vector
+  function __mod(self, other: vector): vector
+  function __tostring(self): string
 end
 
-declare vector: {
-    create: @checked (x: number, y: number, z: number?) -> vector,
-    magnitude: @checked (vec: vector) -> number,
-    normalize: @checked (vec: vector) -> vector,
-    cross: @checked (vec1: vector, vec2: vector) -> vector,
-    dot: @checked (vec1: vector, vec2: vector) -> number,
-    angle: @checked (vec1: vector, vec2: vector, axis: vector?) -> number,
-    floor: @checked (vec: vector) -> vector,
-    ceil: @checked (vec: vector) -> vector,
-    abs: @checked (vec: vector) -> vector,
-    sign: @checked (vec: vector) -> vector,
-    clamp: @checked (vec: vector, min: vector, max: vector) -> vector,
-    max: @checked (vector, ...vector) -> vector,
-    min: @checked (vector, ...vector) -> vector,
-    lerp: @checked (vec1: vector, vec2: vector, t: number) -> vector,
 
-    zero: vector,
-    one: vector,
+
+declare vector: ((x: number, y: number, z: number?) -> vector) & {
+  zero: vector,
+  one: vector,
+  create: (x: number, y: number, z: number?) -> vector,
+  magnitude: (v: vector) -> number,
+  normalize: (v: vector) -> vector,
+  cross: (a: vector, b: vector) -> vector,
+  dot: (a: vector, b: vector) -> number,
+  angle: (a: vector, b: vector, axis: vector?) -> number,
+  floor: (v: vector) -> vector,
+  ceil: (v: vector) -> vector,
+  abs: (v: vector) -> vector,
+  sign: (v: vector) -> vector,
+  clamp: (v: vector, min: vector, max: vector) -> vector,
+  max: (v: vector, ...vector) -> vector,
+  min: (v: vector, ...vector) -> vector,
+  lerp: (a: vector, b: vector, t: number) -> vector,
 }
 
 )BUILTIN_SRC";
