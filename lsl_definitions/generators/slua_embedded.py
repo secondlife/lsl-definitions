@@ -15,6 +15,7 @@ def gen_slua_embedded_defs(
     """Generate SLua Embedded Definitions File."""
 
     inserts = {}
+    # Global functions
     with io.StringIO() as defs:
         defs.write("declare ")
         defs.write(slua_definitions.global_constants.pop("_G").to_luau_def())
@@ -30,6 +31,8 @@ def gen_slua_embedded_defs(
                 defs.write("-- ")
             func.write_luau_global_def(defs)
         inserts["GLOBAL_FUNCTIONS"] = defs.getvalue()
+
+    # Luau standard library modules
     with io.StringIO() as defs:
         slua_definitions.modules.pop("bit32").write_luau_def(defs)
         inserts["BIT32_TABLE"] = defs.getvalue()
@@ -62,6 +65,10 @@ def gen_slua_embedded_defs(
     with io.StringIO() as defs:
         slua_definitions.modules.pop("buffer").write_luau_def(defs)
         inserts["BUFFER_TABLE"] = defs.getvalue()
+    # string is not in the EmbeddedBuiltinDefinitions, only the BuiltinDefinitions
+    slua_definitions.modules.pop("string")
+
+    # base classes
     with io.StringIO() as defs:
         slua_definitions.base_classes.pop("vector").write_luau_def(defs)
         slua_definitions.modules.pop("vector").write_luau_def(defs)
@@ -78,6 +85,33 @@ def gen_slua_embedded_defs(
         slua_definitions.base_classes.pop("uuid").write_luau_def(defs)
         slua_definitions.modules.pop("uuid").write_luau_def(defs)
         inserts["UUID_TABLE"] = defs.getvalue()
+
+    # LL libraries
+    with io.StringIO() as defs:
+        for class_ in slua_definitions.base_classes.values():
+            class_.write_luau_def(defs)
+        defs.write("\n")
+        for alias in slua_definitions.type_aliases.values():
+            defs.write(alias.to_luau_def())
+            defs.write("\n")
+        defs.write("\n")
+        for class_ in slua_definitions.classes.values():
+            class_.write_luau_def(defs)
+        for var in slua_definitions.global_variables.values():
+            defs.write("declare ")
+            defs.write(var.to_luau_def())
+            defs.write("\n")
+        defs.write("\n")
+        for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
+            module.write_luau_def(defs)
+            defs.write("\n")
+        for const in sorted(slua_definitions.global_constants.values(), key=lambda x: x.name):
+            if const.private:
+                continue
+            defs.write("declare ")
+            defs.write(const.to_luau_def())
+            defs.write("\n")
+        inserts["LL_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())

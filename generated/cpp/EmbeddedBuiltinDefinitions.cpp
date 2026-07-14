@@ -421,6 +421,2330 @@ declare class: {
 }
 )CLASS_SRC";
 
+static constexpr const char* kBuiltinDefinitionLLSrc = R"BUILTIN_SRC(
+
+declare extern type DetectedEvent with
+  index: number
+  valid: boolean
+  canAdjustDamage: boolean
+  function adjustDamage(self, new_damage: number): ()
+  function getDamage(self): {any}
+  function getGrab(self): vector
+  function getGroup(self): boolean
+  function getKey(self): uuid
+  function getLinkNumber(self): number
+  function getName(self): string
+  function getOwner(self): uuid
+  function getPos(self): vector
+  function getRezzer(self): uuid
+  function getRot(self): quaternion
+  function getTouchBinormal(self): vector
+  function getTouchFace(self): number
+  function getTouchNormal(self): vector
+  function getTouchPos(self): vector
+  function getTouchST(self): vector
+  function getTouchUV(self): vector
+  function getType(self): number
+  function getVel(self): vector
+end
+
+
+export type rotation = quaternion
+export type list = {string | number | vector | uuid | quaternion | boolean}
+type LLDetectedEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
+type LLNonDetectedEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
+type LLEventName = LLDetectedEventName | LLNonDetectedEventName
+type LLEventHandler = (...any) -> ()
+type LLDetectedEventHandler = (detected: {DetectedEvent}) -> ()
+type LLTimerEveryCallback = (scheduled: number, interval: number) -> ()
+type LLTimerOnceCallback = (scheduled: number) -> ()
+type LLTimerCallback = LLTimerEveryCallback | LLTimerOnceCallback
+type LLJsonEncodeOptions = {
+  tight: boolean?,
+  skip_tojson: boolean?,
+  allow_sparse: boolean?,
+  replacer: ((key: any, value: any, parent: {}?) -> any)?,
+}
+type LLJsonDecodeReviverWithoutPath = (key: string | number, value: any, parent: {}?, ctx: {}) -> any
+type LLJsonDecodeOptionsWithoutPath = {
+  track_path: false?,
+  reviver: LLJsonDecodeReviverWithoutPath?,
+} | LLJsonDecodeReviverWithoutPath
+type LLJsonDecodeOptionsWithPath = {
+  track_path: true,
+  reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
+}
+type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type ParticleParams = {
+  flags: number?,
+  color_begin: vector?,
+  alpha_begin: number?,
+  color_end: vector?,
+  alpha_end: number?,
+  scale_begin: vector?,
+  scale_end: vector?,
+  part_max_age: number?,
+  accel: vector?,
+  pattern: number?,
+  angle_inner: number?,
+  angle_outer: number?,
+  texture: (string | uuid)?,
+  burst_rate: number?,
+  burst_count: number?,
+  burst_radius: number?,
+  burst_speed_min: number?,
+  burst_speed_max: number?,
+  src_max_age: number?,
+  target_key: (string | uuid)?,
+  omega: vector?,
+  angle_begin: number?,
+  angle_end: number?,
+  blend_func_source: number?,
+  blend_func_dest: number?,
+  glow_begin: number?,
+  glow_end: number?,
+  color_interp: boolean?,
+  scale_interp: boolean?,
+  bounce: boolean?,
+  wind: boolean?,
+  follow: boolean?,
+  follow_velocity: boolean?,
+  target_pos: boolean?,
+  target_linear: boolean?,
+  emissive: boolean?,
+  ribbon: boolean?,
+}
+export type MediaParams = {
+  alt_image_enable: boolean?,
+  controls: number?,
+  current_url: string?,
+  home_url: string?,
+  auto_loop: boolean?,
+  auto_play: boolean?,
+  auto_scale: boolean?,
+  auto_zoom: boolean?,
+  first_click_interact: boolean?,
+  width: number?,
+  height: number?,
+  whitelist_enable: boolean?,
+  whitelist: {string}?,
+  perms_interact: number?,
+  perms_control: number?,
+}
+export type HttpRequestParams = {
+  method: string?,
+  mimetype: string?,
+  max_body_length: number?,
+  verify_cert: boolean?,
+  verbose_throttle: boolean?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  accept: {string}?,
+  extended_error: boolean?,
+}
+
+declare extern type LLEvents with
+  at_rot_target: ((handle: number, targetrot: quaternion, ourrot: quaternion) -> ())?
+  at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
+  attach: ((avatar: uuid) -> ())?
+  changed: ((changes: number) -> ())?
+  collision: LLDetectedEventHandler?
+  collision_end: LLDetectedEventHandler?
+  collision_start: LLDetectedEventHandler?
+  control: ((id: uuid, level: number, edge: number) -> ())?
+  dataserver: ((queryid: uuid, data: string) -> ())?
+  email: ((time: string, address: string, subject: string, msg: string, num_left: number) -> ())?
+  experience_permissions: ((agent_id: uuid) -> ())?
+  experience_permissions_denied: ((agent_id: uuid, reason: number) -> ())?
+  final_damage: LLDetectedEventHandler?
+  game_control: ((id: uuid, button_levels: number, axes: {number}) -> ())?
+  http_request: ((request_id: uuid, method: string, body: string) -> ())?
+  http_response: ((request_id: uuid, status: number, metadata: {any}, body: string) -> ())?
+  land_collision: ((pos: vector) -> ())?
+  land_collision_end: ((pos: vector) -> ())?
+  land_collision_start: ((pos: vector) -> ())?
+  link_message: ((sender_num: number, num: number, str: string, id: string) -> ())?
+  linkset_data: ((action: number, name: string, value: string) -> ())?
+  listen: ((channel: number, name: string, id: uuid, msg: string) -> ())?
+  money: ((id: uuid, amount: number) -> ())?
+  moving_end: (() -> ())?
+  moving_start: (() -> ())?
+  no_sensor: (() -> ())?
+  not_at_rot_target: (() -> ())?
+  not_at_target: (() -> ())?
+  object_rez: ((id: uuid) -> ())?
+  on_damage: LLDetectedEventHandler?
+  on_death: (() -> ())?
+  on_rez: ((start_param: number) -> ())?
+  path_update: ((type: number, reserved: {any}) -> ())?
+  remote_data: ((event_type: number, channel: uuid, message_id: uuid, sender: string, idata: number, sdata: string) -> ())?
+  run_time_permissions: ((perm: number) -> ())?
+  sensor: LLDetectedEventHandler?
+  timer: (() -> ())?
+  touch: LLDetectedEventHandler?
+  touch_end: LLDetectedEventHandler?
+  touch_start: LLDetectedEventHandler?
+  transaction_result: ((id: uuid, success: boolean, data: string) -> ())?
+  on: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
+  off: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> boolean)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> boolean)
+  once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
+    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
+  function handlers(self, event: LLEventName): {LLEventHandler}
+  function eventNames(self): {string}
+end
+
+declare extern type LLTimers with
+  function every(self, seconds: number, callback: LLTimerEveryCallback): LLTimerCallback
+  function once(self, seconds: number, callback: LLTimerOnceCallback): LLTimerCallback
+  function off(self, callback: LLTimerCallback): boolean
+end
+
+export type PrimParamsSetterTypeMeta = {
+  __index: PrimParamsSetterTypeMeta,
+  new: () -> PrimParamsSetterType,
+  apply: (self: PrimParamsSetterType, link: number?) -> (),
+  targetLink: <T>(self: T & PrimParamsSetterType, link_target: number) -> T,
+  physicsMaterial: <T>(self: T & PrimParamsSetterType, flag: number) -> T,
+  physical: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  temporary: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  phantom: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  pos: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
+  size: <T>(self: T & PrimParamsSetterType, size: vector) -> T,
+  rot: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
+  primTypeBox: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeCylinder: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypePrism: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeSphere: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, dimple: vector) -> T,
+  primTypeTorus: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeTube: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeRing: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeSculpt: <T>(self: T & PrimParamsSetterType, texture: (string | uuid), sculpt_type: number) -> T,
+  texture: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  color: <T>(self: T & PrimParamsSetterType, face: number, color: vector, alpha: number) -> T,
+  shinyBump: <T>(self: T & PrimParamsSetterType, face: number, shiny: number, bump: number) -> T,
+  fullbright: <T>(self: T & PrimParamsSetterType, face: number, enabled: boolean) -> T,
+  flexible: <T>(self: T & PrimParamsSetterType, enabled: boolean, softness: number, gravity: number, friction: number, wind: number, tension: number, force: vector) -> T,
+  texgen: <T>(self: T & PrimParamsSetterType, face: number, mode: number) -> T,
+  pointLight: <T>(self: T & PrimParamsSetterType, enabled: boolean, linear_color: vector, intensity: number, radius: number, falloff: number) -> T,
+  glow: <T>(self: T & PrimParamsSetterType, face: number, intensity: number) -> T,
+  text: <T>(self: T & PrimParamsSetterType, text: string, color: vector, alpha: number) -> T,
+  name: <T>(self: T & PrimParamsSetterType, name: string) -> T,
+  description: <T>(self: T & PrimParamsSetterType, description: string) -> T,
+  rotLocal: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
+  physicsShapeType: <T>(self: T & PrimParamsSetterType, shape_type: number) -> T,
+  omega: <T>(self: T & PrimParamsSetterType, axis: vector, spinrate: number, gain: number) -> T,
+  posLocal: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
+  slice: <T>(self: T & PrimParamsSetterType, slice: vector) -> T,
+  specular: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number, color: vector, glossiness: number, environment: number) -> T,
+  normal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  alphaMode: <T>(self: T & PrimParamsSetterType, face: number, alpha_mode: number, mask_cutoff: number) -> T,
+  allowUnsit: <T>(self: T & PrimParamsSetterType, allowed: boolean) -> T,
+  scriptedSitOnly: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
+  sitTarget: <T>(self: T & PrimParamsSetterType, active: boolean, offset: vector, rot: quaternion) -> T,
+  projector: <T>(self: T & PrimParamsSetterType, texture: string, fov: number, focus: number, ambiance: number) -> T,
+  clickAction: <T>(self: T & PrimParamsSetterType, action: number) -> T,
+  reflectionProbe: <T>(self: T & PrimParamsSetterType, enabled: boolean, ambiance: number, clip_distance: number, flags: number) -> T,
+  gltfNormal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "") -> T,
+  gltfEmissive: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_emissive_tint: vector | "") -> T,
+  gltfMetallicRoughness: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", metallic_factor: number | "", roughness_factor: number | "") -> T,
+  gltfBaseColor: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_color: vector | "", alpha: number | "", gltf_alpha_mode: number | "", alpha_mask_cutoff: number | "", double_sided: boolean | "") -> T,
+  renderMaterial: <T>(self: T & PrimParamsSetterType, face: number, render_material: (string | uuid)) -> T,
+  sitFlags: <T>(self: T & PrimParamsSetterType, flags: number) -> T,
+  damage: <T>(self: T & PrimParamsSetterType, damage: number, damage_type: number) -> T,
+  health: <T>(self: T & PrimParamsSetterType, health: number) -> T,
+  collisionSound: <T>(self: T & PrimParamsSetterType, sound: (string | uuid), volume: number) -> T,
+}
+
+export type PrimParamsSetterType = typeof(
+  setmetatable((nil :: any) :: {any}, (nil :: any) :: PrimParamsSetterTypeMeta)
+)
+
+declare LLEvents: LLEvents
+declare LLTimers: LLTimers
+
+declare ll: {
+  Abs: @[deprecated {use='math.abs', reason='Double precision; fastcall.'}](val: number) -> number,
+  Acos: @[deprecated {use='math.acos', reason='Double precision; fastcall.'}](val: number) -> number,
+  AddToLandBanList: (avatar: uuid, hours: number) -> (),
+  AddToLandPassList: (avatar: uuid, hours: number) -> (),
+  AdjustDamage: @[deprecated {use='adjustDamage'}](number: number, new_damage: number) -> (),
+  AdjustSoundVolume: (volume: number) -> (),
+  AgentInExperience: (agent: uuid) -> boolean,
+  AllowInventoryDrop: (add: boolean | number) -> (),
+  AngleBetween: (a: quaternion, b: quaternion) -> number,
+  ApplyImpulse: (momentum: vector, is_local: boolean | number) -> (),
+  ApplyRotationalImpulse: (force: vector, is_local: boolean | number) -> (),
+  Asin: @[deprecated {use='math.asin', reason='Double precision; fastcall.'}](val: number) -> number,
+  Atan2: @[deprecated {use='math.atan2', reason='Double precision; fastcall.'}](y: number, x: number) -> number,
+  AttachToAvatar: (attach_point: number) -> (),
+  AttachToAvatarTemp: (attach_point: number) -> (),
+  AvatarOnLinkSitTarget: (link: number) -> uuid,
+  AvatarOnSitTarget: () -> uuid,
+  Axes2Rot: (fwd: vector, left: vector, up: vector) -> quaternion,
+  AxisAngle2Rot: (axis: vector, angle: number) -> quaternion,
+  Base64ToInteger: @[deprecated {reason="Use 'llbase64.decode' and 'string.unpack' or 'buffer.readi32' instead."}](str: string) -> number,
+  Base64ToString: @[deprecated {use='llbase64.decode'}](str: string) -> string,
+  BreakAllLinks: () -> (),
+  BreakLink: (link: number) -> (),
+  CSV2List: (src: string) -> {string},
+  CastRay: (start_pos: vector, end_pos: vector, options: list) -> {any},
+  Ceil: @[deprecated {use='math.ceil', reason='Fastcall.'}](val: number) -> number,
+  Char: (val: number) -> string,
+  ClearCameraParams: () -> (),
+  ClearLinkMedia: (link: number, face: number) -> number,
+  ClearPrimMedia: (face: number) -> number,
+  CloseRemoteDataChannel: @deprecated (channel: uuid) -> (),
+  Cloud: @deprecated (offset: vector) -> number,
+  CollisionFilter: (name: string, id: uuid, accept: boolean | number) -> (),
+  CollisionSound: (impact_sound: string | uuid, impact_volume: number) -> (),
+  CollisionSprite: @deprecated (impact_sprite: string | uuid) -> (),
+  ComputeHash: (message: string, algorithm: string) -> string,
+  Cos: @[deprecated {use='math.cos', reason='Double precision; fastcall.'}](theta: number) -> number,
+  CreateCharacter: (options: list) -> (),
+  CreateKeyValue: (k: string, v: string) -> uuid,
+  CreateLink: (target: uuid, parent: boolean | number) -> (),
+  Damage: (target: uuid, damage: number, damage_type: number) -> (),
+  DataSizeKeyValue: () -> uuid,
+  DeleteCharacter: () -> (),
+  DeleteKeyValue: (k: string) -> uuid,
+  DeleteSubList: @[deprecated {use='table.remove', reason='Unnecessary table copying.'}]<T>(src: {T}, start_index: number, end_index: number) -> {T},
+  DeleteSubString: (src: string, start_index: number, end_index: number) -> string,
+  DerezObject: (id: uuid, flags: number) -> boolean,
+  DetachFromAvatar: () -> (),
+  DetectedDamage: @[deprecated {use='getDamage'}](number: number) -> {any},
+  DetectedGrab: @[deprecated {use='getGrab'}](number: number) -> vector,
+  DetectedGroup: @[deprecated {use='getGroup'}](number: number) -> boolean,
+  DetectedKey: @[deprecated {use='getKey'}](number: number) -> uuid,
+  DetectedLinkNumber: @[deprecated {use='getLinkNumber'}](number: number) -> number,
+  DetectedName: @[deprecated {use='getName'}](item: number) -> string,
+  DetectedOwner: @[deprecated {use='getOwner'}](number: number) -> uuid,
+  DetectedPos: @[deprecated {use='getPos'}](number: number) -> vector,
+  DetectedRezzer: @[deprecated {use='getRezzer'}](number: number) -> uuid,
+  DetectedRot: @[deprecated {use='getRot'}](number: number) -> quaternion,
+  DetectedTouchBinormal: @[deprecated {use='getTouchBinormal'}](index: number) -> vector,
+  DetectedTouchFace: @[deprecated {use='getTouchFace'}](index: number) -> number,
+  DetectedTouchNormal: @[deprecated {use='getTouchNormal'}](index: number) -> vector,
+  DetectedTouchPos: @[deprecated {use='getTouchPos'}](index: number) -> vector,
+  DetectedTouchST: @[deprecated {use='getTouchST'}](index: number) -> vector,
+  DetectedTouchUV: @[deprecated {use='getTouchUV'}](index: number) -> vector,
+  DetectedType: @[deprecated {use='getType'}](number: number) -> number,
+  DetectedVel: @[deprecated {use='getVel'}](number: number) -> vector,
+  Dialog: (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
+  Die: () -> (),
+  DumpList2String: (src: list, separator: string) -> string,
+  EdgeOfWorld: (pos: vector, dir: vector) -> boolean,
+  EjectFromLand: (avatar: uuid) -> (),
+  Email: (address: string, subject: string, msg: string) -> (),
+  EscapeURL: (url: string) -> string,
+  Euler2Rot: (v: vector) -> quaternion,
+  Evade: (target: uuid, options: list) -> (),
+  ExecCharacterCmd: (command: number, options: list) -> (),
+  Fabs: @[deprecated {use='math.abs', reason='Double precision; fastcall.'}](val: number) -> number,
+  FindNotecardTextCount: (notecardname: string | uuid, pattern: string, options: list) -> uuid,
+  FindNotecardTextSync: (name: string | uuid, pattern: string, start: number, count: number, options: list) -> {any},
+  FleeFrom: (position: vector, distance: number, options: list) -> (),
+  Floor: @[deprecated {use='math.floor', reason='Fastcall.'}](val: number) -> number,
+  ForceMouselook: (mouselook: boolean | number) -> (),
+  Frand: (mag: number) -> number,
+  GenerateKey: () -> uuid,
+  GetAccel: () -> vector,
+  GetAgentInfo: (id: uuid) -> number,
+  GetAgentLanguage: (avatar: uuid) -> string,
+  GetAgentList: (scope: number, options: list) -> {uuid},
+  GetAgentSize: (avatar: uuid) -> vector,
+  GetAlpha: (face: number) -> number,
+  GetAnimation: (avatar: uuid) -> string,
+  GetAnimationList: (avatar: uuid) -> {uuid},
+  GetAnimationOverride: (anim_state: string) -> string,
+  GetAttached: () -> number,
+  GetAttachedList: (avatar: uuid) -> {uuid} | {string},
+  GetAttachedListFiltered: (avatar: uuid, options: list) -> {uuid} | {string},
+  GetBoundingBox: (object: uuid) -> {vector},
+  GetCameraAspect: () -> number,
+  GetCameraFOV: () -> number,
+  GetCameraPos: () -> vector,
+  GetCameraRot: () -> quaternion,
+  GetCenterOfMass: () -> vector,
+  GetClosestNavPoint: (point: vector, options: list) -> {vector},
+  GetColor: (face: number) -> vector,
+  GetCreator: () -> uuid,
+  GetDate: () -> string,
+  GetDayLength: () -> number,
+  GetDayOffset: () -> number,
+  GetDisplayName: (id: uuid) -> string,
+  GetEnergy: () -> number,
+  GetEnv: (name: string) -> string,
+  GetEnvironment: (pos: vector, params: {number}) -> {any},
+  GetExperienceDetails: (experience_id: uuid) -> {any},
+  GetExperienceErrorMessage: (error: number) -> string,
+  GetForce: () -> vector,
+  GetFreeMemory: () -> number,
+  GetFreeURLs: () -> number,
+  GetGMTclock: () -> number,
+  GetGeometricCenter: () -> vector,
+  GetHTTPHeader: (request_id: uuid, header: string) -> string,
+  GetHealth: (id: uuid) -> number,
+  GetInventoryAcquireTime: (item: string) -> string,
+  GetInventoryCreator: (item: string) -> uuid,
+  GetInventoryDesc: (item: string) -> string,
+  GetInventoryKey: (item: string) -> uuid,
+  GetInventoryName: (type: number, index: number) -> string,
+  GetInventoryNumber: (type: number) -> number,
+  GetInventoryPermMask: (item: string, group: number) -> number,
+  GetInventoryType: (item: string) -> number,
+  GetKey: () -> uuid,
+  GetLandOwnerAt: (pos: vector) -> uuid,
+  GetLinkKey: (link: number) -> uuid,
+  GetLinkMedia: (link: number, face: number, params: {number}) -> {any},
+  GetLinkName: (link: number) -> string,
+  GetLinkNumber: () -> number,
+  GetLinkNumberOfSides: (link: number) -> number,
+  GetLinkPrimitiveParams: (link: number, params: {number}) -> {any},
+  GetLinkSitFlags: (link: number) -> number,
+  GetListEntryType: @[deprecated {use='typeof'}](src: list, index: number) -> number,
+  GetListLength: @[deprecated {reason="Use '#' or 'rawlen' instead. Metatable support."}](src: list) -> number,
+  GetLocalPos: () -> vector,
+  GetLocalRot: () -> quaternion,
+  GetMass: () -> number,
+  GetMassMKS: () -> number,
+  GetMaxScaleFactor: () -> number,
+  GetMemoryLimit: () -> number,
+  GetMinScaleFactor: () -> number,
+  GetMoonDirection: () -> vector,
+  GetMoonRotation: () -> quaternion,
+  GetNextEmail: (address: string, subject: string) -> (),
+  GetNotecardLine: (name: string | uuid, line: number) -> uuid,
+  GetNotecardLineSync: (name: string | uuid, line: number) -> string,
+  GetNumberOfNotecardLines: (name: string | uuid) -> uuid,
+  GetNumberOfPrims: () -> number,
+  GetNumberOfSides: () -> number,
+  GetObjectAnimationNames: () -> {string},
+  GetObjectDesc: () -> string,
+  GetObjectDetails: (id: uuid, params: {number}) -> {any},
+  GetObjectLinkKey: (object_id: uuid, link: number) -> uuid,
+  GetObjectMass: (id: uuid) -> number,
+  GetObjectName: () -> string,
+  GetObjectPermMask: (group: number) -> number,
+  GetObjectPrimCount: (prim: uuid) -> number,
+  GetOmega: () -> vector,
+  GetOwner: () -> uuid,
+  GetOwnerKey: (id: uuid) -> uuid,
+  GetParcelDetails: (pos: vector, params: {number}) -> {any},
+  GetParcelFlags: (pos: vector) -> number,
+  GetParcelMaxPrims: (pos: vector, sim_wide: boolean | number) -> number,
+  GetParcelMusicURL: () -> string,
+  GetParcelPrimCount: (pos: vector, category: number, sim_wide: boolean | number) -> number,
+  GetParcelPrimOwners: (pos: vector) -> {any},
+  GetPermissions: () -> number,
+  GetPermissionsKey: () -> uuid,
+  GetPhysicsMaterial: () -> {number},
+  GetPos: () -> vector,
+  GetPrimMediaParams: (face: number, params: {number}) -> {any},
+  GetPrimitiveParams: (params: {number}) -> {any},
+  GetRegionAgentCount: () -> number,
+  GetRegionCorner: () -> vector,
+  GetRegionDayLength: () -> number,
+  GetRegionDayOffset: () -> number,
+  GetRegionFPS: () -> number,
+  GetRegionFlags: () -> number,
+  GetRegionMoonDirection: () -> vector,
+  GetRegionMoonRotation: () -> quaternion,
+  GetRegionName: () -> string,
+  GetRegionSunDirection: () -> vector,
+  GetRegionSunRotation: () -> quaternion,
+  GetRegionTimeDilation: () -> number,
+  GetRegionTimeOfDay: () -> number,
+  GetRenderMaterial: (face: number) -> string,
+  GetRootPosition: () -> vector,
+  GetRootRotation: () -> quaternion,
+  GetRot: () -> quaternion,
+  GetSPMaxMemory: () -> number,
+  GetScale: () -> vector,
+  GetScriptName: () -> string,
+  GetScriptState: (script: string) -> boolean,
+  GetSimStats: (stat_type: number) -> number,
+  GetSimulatorHostname: () -> string,
+  GetStartParameter: () -> number,
+  GetStartString: () -> string,
+  GetStaticPath: (start_pos: vector, end_pos: vector, radius: number, params: list) -> {any},
+  GetStatus: (status: number) -> boolean,
+  GetSubString: (src: string, start_index: number, end_index: number) -> string,
+  GetSunDirection: () -> vector,
+  GetSunRotation: () -> quaternion,
+  GetTexture: (face: number) -> string,
+  GetTextureOffset: (face: number) -> vector,
+  GetTextureRot: (face: number) -> number,
+  GetTextureScale: (face: number) -> vector,
+  GetTime: () -> number,
+  GetTimeOfDay: () -> number,
+  GetTimestamp: () -> string,
+  GetTorque: () -> vector,
+  GetUnixTime: @[deprecated {use='os.time', reason='Int32 will wrap on 2038-01-19'}]() -> number,
+  GetUsedMemory: () -> number,
+  GetUsername: (id: uuid) -> string,
+  GetVel: () -> vector,
+  GetVisualParams: (agentid: uuid, params: {number | string}) -> {number | ""},
+  GetWallclock: () -> number,
+  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveInventory: (target: uuid, item: string) -> (),
+  GiveInventoryList: (target: uuid, folder: string, items: {string}) -> (),
+  GiveMoney: (destination: uuid, amount: number) -> number,
+  GodLikeRezObject: (id: uuid, pos: vector) -> (),
+  Ground: (offset: vector) -> number,
+  GroundContour: (offset: vector) -> vector,
+  GroundNormal: (offset: vector) -> vector,
+  GroundRepel: (height: number, water: boolean | number, tau: number) -> (),
+  GroundSlope: (offset: vector) -> vector,
+  HMAC: (private_key: string, msg: string, algorithm: string) -> string,
+  HTTPRequest: (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
+  HTTPResponse: (request_id: uuid, status: number, body: string) -> (),
+  Hash: (val: string) -> number,
+  InsertString: (dst: string, index: number, src: string) -> string,
+  InstantMessage: (agent: uuid, msg: string) -> (),
+  IntegerToBase64: (number: number) -> string,
+  IsFriend: (agent_id: uuid) -> boolean,
+  IsLinkGLTFMaterial: (link: number, face: number) -> boolean,
+  Json2List: @[deprecated {use='lljson.decode'}](src: string) -> {any},
+  JsonGetValue: @[deprecated {use='lljson.decode', reason='Also, the indices are zero-based.'}](json: string, specifiers: list) -> string,
+  JsonSetValue: @[deprecated {use='lljson.encode', reason='Also, the indices are zero-based.'}](json: string, specifiers: list, value: string) -> string,
+  JsonValueType: @[deprecated {reason="Use 'lljson.decode' and 'typeof' instead. Also, the indices are zero-based."}](json: string, specifiers: list) -> string,
+  Key2Name: (id: uuid) -> string,
+  KeyCountKeyValue: () -> uuid,
+  KeysKeyValue: (first: number, count: number) -> uuid,
+  Linear2sRGB: (color: vector) -> vector,
+  LinkAdjustSoundVolume: (link: number, volume: number) -> (),
+  LinkParticleSystem: (link: number, rules: list | ParticleParams) -> (),
+  LinkPlaySound: (link: number, sound: string | uuid, volume: number, flags: number) -> (),
+  LinkSetSoundQueueing: (link: number, queue: boolean | number) -> (),
+  LinkSetSoundRadius: (link: number, radius: number) -> (),
+  LinkSitTarget: (link: number, offset: vector, rot: quaternion) -> (),
+  LinkStopSound: (link: number) -> (),
+  LinksetDataAvailable: () -> number,
+  LinksetDataCountFound: (pattern: string) -> number,
+  LinksetDataCountKeys: () -> number,
+  LinksetDataDelete: (name: string) -> number,
+  LinksetDataDeleteFound: (pattern: string, pass: string) -> {number},
+  LinksetDataDeleteProtected: (name: string, pass: string) -> number,
+  LinksetDataFindKeys: (pattern: string, start: number, count: number) -> {string},
+  LinksetDataListKeys: (start: number, count: number) -> {string},
+  LinksetDataRead: (name: string) -> string,
+  LinksetDataReadProtected: (name: string, pass: string) -> string,
+  LinksetDataReset: () -> (),
+  LinksetDataWrite: (name: string, value: string) -> number,
+  LinksetDataWriteProtected: (name: string, value: string, pass: string) -> number,
+  List2CSV: (src: list) -> string,
+  List2Float: @[deprecated {reason="Use '[]' and 'tonumber' instead."}](src: list, index: number) -> number,
+  List2Integer: @[deprecated {reason="Use '[]', 'tonumber', and 'math.modf' instead."}](src: list, index: number) -> number,
+  List2Json: @[deprecated {use='lljson.encode'}](type: string, values: list) -> string,
+  List2Key: @[deprecated {reason="Use '[]' and 'touuid' instead."}](src: list, index: number) -> uuid,
+  List2List: @[deprecated {reason="Use 'unpack' (fastcall) or 'table.move' instead. Prefer structured tables over strided lists."}]<T>(src: {T}, start_index: number, end_index: number) -> {T},
+  List2ListSlice: @[deprecated {reason='Prefer structured tables over strided lists.'}]<T>(src: {T}, start_index: number, end_index: number, stride: number, slice_index: number) -> {T},
+  List2ListStrided: @[deprecated {reason='Prefer structured tables over strided lists.'}]<T>(src: {T}, start_index: number, end_index: number, stride: number) -> {T},
+  List2Rot: @[deprecated {use='[]'}](src: list, index: number) -> quaternion,
+  List2String: @[deprecated {reason="Use '[]' and 'tostring' instead."}](src: list, index: number) -> string,
+  List2Vector: @[deprecated {use='[]'}](src: list, index: number) -> vector,
+  ListFindList: @[deprecated {use='table.find', reason='Prefer dictionaries or single-item searches.'}](src: list, test: list) -> number?,
+  ListFindListNext: @[deprecated {use='table.find', reason='Prefer dictionaries or single-item searches.'}](src: list, test: list, instance: number) -> number?,
+  ListFindStrided: @[deprecated {reason='Prefer dictionary lookups over strided list searches.'}](src: list, test: list, start_index: number, end_index: number, stride: number) -> number?,
+  ListInsertList: @[deprecated {use='table.insert', reason='Unnecessary table copying. Fastcall.'}]<T>(dest: {T}, src: {T}, start: number) -> {T},
+  ListRandomize: <T>(src: {T}, stride: number) -> {T},
+  ListReplaceList: @[deprecated {use='t[n] = x', reason='Unnecessary table copying.'}]<T>(dest: {T}, src: {T}, start_index: number, end_index: number) -> {T},
+  ListSort: <T>(src: {T}, stride: number, ascending: boolean | number) -> {T},
+  ListSortStrided: @[deprecated {use='table.sort', reason='Prefer structured tables over strided lists.'}]<T>(src: {T}, stride: number, stride_index: number, ascending: boolean | number) -> {T},
+  ListStatistics: (operation: number, src: list) -> number,
+  Listen: (channel: number, name: string, id: uuid, msg: string) -> number,
+  ListenControl: (handle: number, active: boolean | number) -> (),
+  ListenRemove: (handle: number) -> (),
+  LoadURL: (avatar: uuid, message: string, url: string) -> (),
+  Log: @[deprecated {use='math.log', reason='Double precision; fastcall.'}](val: number) -> number,
+  Log10: @[deprecated {use='math.log10', reason='Double precision; fastcall.'}](val: number) -> number,
+  LookAt: (target: vector, strength: number, damping: number) -> (),
+  LoopSound: (sound: string | uuid, volume: number) -> (),
+  LoopSoundMaster: (sound: string | uuid, volume: number) -> (),
+  LoopSoundSlave: (sound: string | uuid, volume: number) -> (),
+  MD5String: (src: string, nonce: number) -> string,
+  MakeExplosion: @[deprecated {use='ll.ParticleSystem'}](particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  MakeFire: @[deprecated {use='ll.ParticleSystem'}](particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  MakeFountain: @[deprecated {use='ll.ParticleSystem'}](particles: number, scale: number, vel: number, lifetime: number, arc: number, bounce: number, texture: string | uuid, offset: vector, bounce_offset: number) -> (),
+  MakeSmoke: @[deprecated {use='ll.ParticleSystem'}](particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  ManageEstateAccess: (action: number, avatar: uuid) -> boolean,
+  MapBeacon: (region_name: string, pos: vector, options: list) -> (),
+  MapDestination: (simname: string, pos: vector, look_at: vector) -> (),
+  MessageLinked: (link: number, num: number, str: string | uuid, id: string | uuid) -> (),
+  MinEventDelay: (delay: number) -> (),
+  ModPow: (a: number, b: number, c: number) -> number,
+  ModifyLand: (action: number, brush: number) -> (),
+  MoveToTarget: (target: vector, tau: number) -> (),
+  Name2Key: (name: string) -> uuid,
+  NavigateTo: (pos: vector, options: list) -> (),
+  OffsetTexture: (u: number, v: number, face: number) -> (),
+  OpenFloater: (floater_name: string, url: string, params: list) -> number,
+  OpenRemoteDataChannel: @deprecated () -> (),
+  Ord: (val: string, index: number) -> number,
+  OverMyLand: (id: uuid) -> boolean,
+  OwnerSay: @[deprecated {use='print'}](msg: string) -> (),
+  ParcelMediaCommandList: (commandList: list) -> (),
+  ParcelMediaQuery: (query: {number}) -> {any},
+  ParseString2List: (src: string, separators: {string}, spacers: {string}) -> {string},
+  ParseStringKeepNulls: (src: string, separators: {string}, spacers: {string}) -> {string},
+  ParticleSystem: (rules: list | ParticleParams) -> (),
+  PassCollisions: (pass: number) -> (),
+  PassTouches: (pass: number) -> (),
+  PatrolPoints: (patrolPoints: {vector}, options: list) -> (),
+  PlaySound: (sound: string | uuid, volume: number) -> (),
+  PlaySoundSlave: (sound: string | uuid, volume: number) -> (),
+  Pow: @[deprecated {use='^', reason='Double precision; operator.'}](base: number, exponent: number) -> number,
+  PreloadSound: (sound: string | uuid) -> (),
+  Pursue: (target: uuid, options: list) -> (),
+  PushObject: (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
+  ReadKeyValue: (k: string) -> uuid,
+  RefreshPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}]() -> (),
+  RegionSay: (channel: number, msg: string) -> (),
+  RegionSayTo: (target: uuid, channel: number, msg: string) -> (),
+  ReleaseCamera: @[deprecated {use='ll.ClearCameraParams'}](avatar: uuid) -> (),
+  ReleaseControls: () -> (),
+  ReleaseURL: (url: string) -> (),
+  RemoteDataReply: @deprecated (channel: uuid, message_id: uuid, sdata: string, idata: number) -> (),
+  RemoteDataSetRegion: @deprecated () -> (),
+  RemoteLoadScriptPin: (target: uuid, script: string, pin: number, running: boolean | number, start_param: number) -> (),
+  RemoveFromLandBanList: (avatar: uuid) -> (),
+  RemoveFromLandPassList: (avatar: uuid) -> (),
+  RemoveInventory: (item: string) -> (),
+  RemoveVehicleFlags: (flags: number) -> (),
+  ReplaceAgentEnvironment: (agent_id: uuid, transition: number, environment: string | uuid) -> number,
+  ReplaceEnvironment: (position: vector, environment: string | uuid, track_no: number, day_length: number, day_offset: number) -> number,
+  ReplaceSubString: (src: string, pattern: string, replacement_pattern: string, count: number) -> string,
+  RequestAgentData: (id: uuid, data: number) -> uuid,
+  RequestDisplayName: (id: uuid) -> uuid,
+  RequestExperiencePermissions: (agent: uuid, name: string) -> (),
+  RequestInventoryData: (item: string) -> uuid,
+  RequestPermissions: (agent: uuid, permissions: number) -> (),
+  RequestSecureURL: () -> uuid,
+  RequestSimulatorData: (region: string, data: number) -> uuid,
+  RequestURL: () -> uuid,
+  RequestUserKey: (username: string) -> uuid,
+  RequestUsername: (id: uuid) -> uuid,
+  ResetAnimationOverride: (anim_state: string) -> (),
+  ResetLandBanList: () -> (),
+  ResetLandPassList: () -> (),
+  ResetOtherScript: (script: string) -> (),
+  ResetScript: () -> (),
+  ReturnObjectsByID: (objects: {uuid}) -> number,
+  ReturnObjectsByOwner: (owner: uuid, scope: number) -> number,
+  RezAtRoot: (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObject: (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObjectWithParams: (item: string, options: list) -> uuid,
+  Rot2Angle: (rot: quaternion) -> number,
+  Rot2Axis: (rot: quaternion) -> vector,
+  Rot2Euler: (quat: quaternion) -> vector,
+  Rot2Fwd: @[deprecated {use='quaternion.tofwd'}](q: quaternion) -> vector,
+  Rot2Left: @[deprecated {use='quaternion.toleft'}](q: quaternion) -> vector,
+  Rot2Up: @[deprecated {use='quaternion.toup'}](q: quaternion) -> vector,
+  RotBetween: (start_vec: vector, end_vec: vector) -> quaternion,
+  RotLookAt: (target_direction: quaternion, strength: number, damping: number) -> (),
+  RotTarget: (rot: quaternion, error: number) -> number,
+  RotTargetRemove: (handle: number) -> (),
+  RotateTexture: (angle: number, face: number) -> (),
+  Round: @[deprecated {use='math.round', reason='Fastcall.'}](val: number) -> number,
+  SHA1String: (src: string) -> string,
+  SHA256String: (src: string) -> string,
+  SameGroup: (uuid: uuid) -> boolean,
+  Say: (channel: number, msg: string) -> (),
+  ScaleByFactor: (scaling_factor: number) -> boolean,
+  ScaleTexture: (u: number, v: number, face: number) -> (),
+  ScriptDanger: (pos: vector) -> boolean,
+  ScriptProfiler: (flags: number) -> (),
+  SendRemoteData: @deprecated (channel: uuid, dest: string, idata: number, sdata: string) -> uuid,
+  Sensor: (name: string, id: uuid, type: number, radius: number, arc: number) -> (),
+  SensorRemove: () -> (),
+  SensorRepeat: (name: string, id: uuid, type: number, radius: number, arc: number, rate: number) -> (),
+  SetAgentEnvironment: (agent_id: uuid, transition: number, params: list) -> number,
+  SetAgentRot: (rot: quaternion, flags: number) -> (),
+  SetAlpha: (alpha: number, face: number) -> (),
+  SetAngularVelocity: (initial_omega: vector, is_local: boolean | number) -> (),
+  SetAnimationOverride: (anim_state: string, anim: string) -> (),
+  SetBuoyancy: (buoyancy: number) -> (),
+  SetCameraAtOffset: (offset: vector) -> (),
+  SetCameraEyeOffset: (offset: vector) -> (),
+  SetCameraParams: (rules: list) -> (),
+  SetClickAction: (action: number) -> (),
+  SetColor: (color: vector, face: number) -> (),
+  SetContentType: (request_id: uuid, content_type: number) -> (),
+  SetDamage: (damage: number) -> (),
+  SetEnvironment: (position: vector, params: list) -> number,
+  SetForce: (force: vector, is_local: boolean | number) -> (),
+  SetForceAndTorque: (force: vector, torque: vector, is_local: boolean | number) -> (),
+  SetGroundTexture: (changes: list) -> number,
+  SetHoverHeight: (height: number, water: boolean | number, tau: number) -> (),
+  SetInventoryPermMask: (item: string, group: number, flags: number) -> (),
+  SetKeyframedMotion: (keyframes: list, options: list) -> (),
+  SetLinkAlpha: (link: number, alpha: number, face: number) -> (),
+  SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
+  SetLinkColor: (link: number, color: vector, face: number) -> (),
+  SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
+  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
+  SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
+  SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
+  SetLinkSitFlags: (link: number, flags: number) -> (),
+  SetLinkTexture: (link: number, texture: string | uuid, face: number) -> (),
+  SetLinkTextureAnim: (link: number, mode: number, face: number, sizex: number, sizey: number, start: number, length: number, rate: number) -> (),
+  SetLocalRot: (rot: quaternion) -> (),
+  SetObjectDesc: (description: string) -> (),
+  SetObjectName: (name: string) -> (),
+  SetObjectPermMask: (group: number, flags: number) -> (),
+  SetParcelForSale: (ForSale: boolean | number, Options: list) -> number,
+  SetParcelMusicURL: (url: string) -> (),
+  SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
+  SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
+  SetPos: (pos: vector) -> (),
+  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
+  SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
+  SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
+  SetRegionPos: (position: vector) -> boolean,
+  SetRemoteScriptAccessPin: (pin: number) -> (),
+  SetRenderMaterial: (material: string | uuid, face: number) -> (),
+  SetRot: (rot: quaternion) -> (),
+  SetScale: (size: vector) -> (),
+  SetScriptState: (script: string, running: boolean | number) -> (),
+  SetSitText: (text: string) -> (),
+  SetSoundQueueing: (queue: boolean | number) -> (),
+  SetSoundRadius: (radius: number) -> (),
+  SetStatus: (status: number, value: boolean | number) -> (),
+  SetText: (text: string, color: vector, alpha: number) -> (),
+  SetTexture: (texture: string | uuid, face: number) -> (),
+  SetTextureAnim: (mode: number, face: number, sizex: number, sizey: number, start: number, length: number, rate: number) -> (),
+  SetTorque: (torque: vector, is_local: boolean | number) -> (),
+  SetTouchText: (text: string) -> (),
+  SetVehicleFlags: (flags: number) -> (),
+  SetVehicleFloatParam: (param: number, value: number) -> (),
+  SetVehicleRotationParam: (param: number, rot: quaternion) -> (),
+  SetVehicleType: (type: number) -> (),
+  SetVehicleVectorParam: (param: number, vec: vector) -> (),
+  SetVelocity: (velocity: vector, is_local: boolean | number) -> (),
+  Shout: (channel: number, msg: string) -> (),
+  SignRSA: (private_key: string, msg: string, algorithm: string) -> string,
+  Sin: @[deprecated {use='math.sin', reason='Double precision; fastcall.'}](theta: number) -> number,
+  SitOnLink: (agent_id: uuid, link: number) -> number,
+  SitTarget: (offset: vector, rot: quaternion) -> (),
+  Sleep: (sec: number) -> (),
+  Sound: @[deprecated {use='ll.PlaySound'}](sound: string | uuid, volume: number, queue: boolean | number, loop: boolean | number) -> (),
+  SoundPreload: @[deprecated {use='ll.PreloadSound'}](sound: string | uuid) -> (),
+  Sqrt: @[deprecated {use='math.sqrt', reason='Double precision; fastcall.'}](val: number) -> number,
+  StartAnimation: (anim: string) -> (),
+  StartObjectAnimation: (anim: string) -> (),
+  StopAnimation: (anim: string | uuid) -> (),
+  StopHover: () -> (),
+  StopLookAt: () -> (),
+  StopMoveToTarget: () -> (),
+  StopObjectAnimation: (anim: string | uuid) -> (),
+  StopSound: () -> (),
+  StringLength: @[deprecated {reason="Use 'utf8.len' or '#' or 'string.len' instead."}](str: string) -> number,
+  StringToBase64: @[deprecated {use='llbase64.encode'}](str: string) -> string,
+  StringTrim: (src: string, type: number) -> string,
+  SubStringIndex: (source: string, pattern: string) -> number?,
+  TakeCamera: @[deprecated {use='ll.SetCameraParams'}](avatar: uuid) -> (),
+  TakeControls: (controls: number, accept: boolean | number, pass_on: boolean | number) -> (),
+  Tan: @[deprecated {use='math.tan', reason='Double precision; fastcall.'}](theta: number) -> number,
+  Target: (position: vector, range: number) -> number,
+  TargetOmega: (axis: vector, spinrate: number, gain: number) -> (),
+  TargetRemove: (handle: number) -> (),
+  TargetedEmail: (target: number, subject: string, msg: string) -> (),
+  TeleportAgent: (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
+  TeleportAgentGlobalCoords: (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
+  TeleportAgentHome: (avatar: uuid) -> (),
+  TextBox: (agent: uuid, msg: string, channel: number) -> (),
+  ToLower: (src: string) -> string,
+  ToUpper: (src: string) -> string,
+  TransferLindenDollars: (destination: uuid, amount: number) -> uuid,
+  TransferOwnership: (agent: uuid, flags: number, options: list) -> number,
+  TriggerSound: (sound: string | uuid, volume: number) -> (),
+  TriggerSoundLimited: (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
+  UnSit: (id: uuid) -> (),
+  UnescapeURL: (url: string) -> string,
+  UpdateCharacter: (options: list) -> (),
+  UpdateKeyValue: (k: string, v: string, checked: boolean | number, original_value: string) -> uuid,
+  VecDist: @[deprecated {use='vector.magnitude', reason="It's a fastcall."}](vec_a: vector, vec_b: vector) -> number,
+  VecMag: @[deprecated {use='vector.magnitude', reason="It's a fastcall."}](vec: vector) -> number,
+  VecNorm: @[deprecated {use='vector.normalize', reason="It's a fastcall."}](vec: vector) -> vector,
+  VerifyRSA: (public_key: string, msg: string, signature: string, algorithm: string) -> boolean,
+  VolumeDetect: (detect: boolean | number) -> (),
+  WanderWithin: (origin: vector, dist: vector, options: list) -> (),
+  Water: (offset: vector) -> number,
+  Whisper: (channel: number, msg: string) -> (),
+  Wind: (offset: vector) -> vector,
+  WorldPosToHUD: (world_pos: vector) -> vector,
+  XorBase64: (str1: string, str2: string) -> string,
+  XorBase64Strings: @[deprecated {use='ll.XorBase64'}](str1: string, str2: string) -> string,
+  XorBase64StringsCorrect: @[deprecated {use='ll.XorBase64'}](str1: string, str2: string) -> string,
+  sRGB2Linear: (srgb: vector) -> vector,
+}
+
+declare llbase64: {
+  encode: @checked (data: string | buffer) -> string,
+  decode: @checked ((data: string, asBuffer: false?) -> string)
+    & ((data: string, asBuffer: true) -> buffer),
+}
+
+declare llcompat: {
+  Abs: @deprecated (val: number) -> number,
+  Acos: @deprecated (val: number) -> number,
+  AddToLandBanList: @deprecated (avatar: uuid, hours: number) -> (),
+  AddToLandPassList: @deprecated (avatar: uuid, hours: number) -> (),
+  AdjustDamage: @deprecated (number: number, new_damage: number) -> (),
+  AdjustSoundVolume: @deprecated (volume: number) -> (),
+  AgentInExperience: @deprecated (agent: uuid) -> number,
+  AllowInventoryDrop: @deprecated (add: boolean | number) -> (),
+  AngleBetween: @deprecated (a: quaternion, b: quaternion) -> number,
+  ApplyImpulse: @deprecated (momentum: vector, is_local: boolean | number) -> (),
+  ApplyRotationalImpulse: @deprecated (force: vector, is_local: boolean | number) -> (),
+  Asin: @deprecated (val: number) -> number,
+  Atan2: @deprecated (y: number, x: number) -> number,
+  AttachToAvatar: @deprecated (attach_point: number) -> (),
+  AttachToAvatarTemp: @deprecated (attach_point: number) -> (),
+  AvatarOnLinkSitTarget: @deprecated (link: number) -> uuid,
+  AvatarOnSitTarget: @deprecated () -> uuid,
+  Axes2Rot: @deprecated (fwd: vector, left: vector, up: vector) -> quaternion,
+  AxisAngle2Rot: @deprecated (axis: vector, angle: number) -> quaternion,
+  Base64ToInteger: @deprecated (str: string) -> number,
+  Base64ToString: @deprecated (str: string) -> string,
+  BreakAllLinks: @deprecated () -> (),
+  BreakLink: @deprecated (link: number) -> (),
+  CSV2List: @deprecated (src: string) -> {string},
+  CastRay: @deprecated (start_pos: vector, end_pos: vector, options: list) -> {any},
+  Ceil: @deprecated (val: number) -> number,
+  Char: @deprecated (val: number) -> string,
+  ClearCameraParams: @deprecated () -> (),
+  ClearLinkMedia: @deprecated (link: number, face: number) -> number,
+  ClearPrimMedia: @deprecated (face: number) -> number,
+  CloseRemoteDataChannel: @deprecated (channel: uuid) -> (),
+  Cloud: @deprecated (offset: vector) -> number,
+  CollisionFilter: @deprecated (name: string, id: uuid, accept: boolean | number) -> (),
+  CollisionSound: @deprecated (impact_sound: string | uuid, impact_volume: number) -> (),
+  CollisionSprite: @deprecated (impact_sprite: string | uuid) -> (),
+  ComputeHash: @deprecated (message: string, algorithm: string) -> string,
+  Cos: @deprecated (theta: number) -> number,
+  CreateCharacter: @deprecated (options: list) -> (),
+  CreateKeyValue: @deprecated (k: string, v: string) -> uuid,
+  CreateLink: @deprecated (target: uuid, parent: boolean | number) -> (),
+  Damage: @deprecated (target: uuid, damage: number, damage_type: number) -> (),
+  DataSizeKeyValue: @deprecated () -> uuid,
+  DeleteCharacter: @deprecated () -> (),
+  DeleteKeyValue: @deprecated (k: string) -> uuid,
+  DeleteSubList: @deprecated <T>(src: {T}, start_index: number, end_index: number) -> {T},
+  DeleteSubString: @deprecated (src: string, start_index: number, end_index: number) -> string,
+  DerezObject: @deprecated (id: uuid, flags: number) -> number,
+  DetachFromAvatar: @deprecated () -> (),
+  DetectedDamage: @deprecated (number: number) -> {any},
+  DetectedGrab: @deprecated (number: number) -> vector,
+  DetectedGroup: @deprecated (number: number) -> number,
+  DetectedKey: @deprecated (number: number) -> uuid,
+  DetectedLinkNumber: @deprecated (number: number) -> number,
+  DetectedName: @deprecated (item: number) -> string,
+  DetectedOwner: @deprecated (number: number) -> uuid,
+  DetectedPos: @deprecated (number: number) -> vector,
+  DetectedRezzer: @deprecated (number: number) -> uuid,
+  DetectedRot: @deprecated (number: number) -> quaternion,
+  DetectedTouchBinormal: @deprecated (index: number) -> vector,
+  DetectedTouchFace: @deprecated (index: number) -> number,
+  DetectedTouchNormal: @deprecated (index: number) -> vector,
+  DetectedTouchPos: @deprecated (index: number) -> vector,
+  DetectedTouchST: @deprecated (index: number) -> vector,
+  DetectedTouchUV: @deprecated (index: number) -> vector,
+  DetectedType: @deprecated (number: number) -> number,
+  DetectedVel: @deprecated (number: number) -> vector,
+  Dialog: @deprecated (agent: uuid, msg: string, buttons: {string}, channel: number) -> (),
+  Die: @deprecated () -> (),
+  DumpList2String: @deprecated (src: list, separator: string) -> string,
+  EdgeOfWorld: @deprecated (pos: vector, dir: vector) -> number,
+  EjectFromLand: @deprecated (avatar: uuid) -> (),
+  Email: @deprecated (address: string, subject: string, msg: string) -> (),
+  EscapeURL: @deprecated (url: string) -> string,
+  Euler2Rot: @deprecated (v: vector) -> quaternion,
+  Evade: @deprecated (target: uuid, options: list) -> (),
+  ExecCharacterCmd: @deprecated (command: number, options: list) -> (),
+  Fabs: @deprecated (val: number) -> number,
+  FindNotecardTextCount: @deprecated (notecardname: string | uuid, pattern: string, options: list) -> uuid,
+  FindNotecardTextSync: @deprecated (name: string | uuid, pattern: string, start: number, count: number, options: list) -> {any},
+  FleeFrom: @deprecated (position: vector, distance: number, options: list) -> (),
+  Floor: @deprecated (val: number) -> number,
+  ForceMouselook: @deprecated (mouselook: boolean | number) -> (),
+  Frand: @deprecated (mag: number) -> number,
+  GenerateKey: @deprecated () -> uuid,
+  GetAccel: @deprecated () -> vector,
+  GetAgentInfo: @deprecated (id: uuid) -> number,
+  GetAgentLanguage: @deprecated (avatar: uuid) -> string,
+  GetAgentList: @deprecated (scope: number, options: list) -> {uuid},
+  GetAgentSize: @deprecated (avatar: uuid) -> vector,
+  GetAlpha: @deprecated (face: number) -> number,
+  GetAndResetTime: @deprecated () -> number,
+  GetAnimation: @deprecated (avatar: uuid) -> string,
+  GetAnimationList: @deprecated (avatar: uuid) -> {uuid},
+  GetAnimationOverride: @deprecated (anim_state: string) -> string,
+  GetAttached: @deprecated () -> number,
+  GetAttachedList: @deprecated (avatar: uuid) -> {uuid} | {string},
+  GetAttachedListFiltered: @deprecated (avatar: uuid, options: list) -> {uuid} | {string},
+  GetBoundingBox: @deprecated (object: uuid) -> {vector},
+  GetCameraAspect: @deprecated () -> number,
+  GetCameraFOV: @deprecated () -> number,
+  GetCameraPos: @deprecated () -> vector,
+  GetCameraRot: @deprecated () -> quaternion,
+  GetCenterOfMass: @deprecated () -> vector,
+  GetClosestNavPoint: @deprecated (point: vector, options: list) -> {vector},
+  GetColor: @deprecated (face: number) -> vector,
+  GetCreator: @deprecated () -> uuid,
+  GetDate: @deprecated () -> string,
+  GetDayLength: @deprecated () -> number,
+  GetDayOffset: @deprecated () -> number,
+  GetDisplayName: @deprecated (id: uuid) -> string,
+  GetEnergy: @deprecated () -> number,
+  GetEnv: @deprecated (name: string) -> string,
+  GetEnvironment: @deprecated (pos: vector, params: {number}) -> {any},
+  GetExperienceDetails: @deprecated (experience_id: uuid) -> {any},
+  GetExperienceErrorMessage: @deprecated (error: number) -> string,
+  GetForce: @deprecated () -> vector,
+  GetFreeMemory: @deprecated () -> number,
+  GetFreeURLs: @deprecated () -> number,
+  GetGMTclock: @deprecated () -> number,
+  GetGeometricCenter: @deprecated () -> vector,
+  GetHTTPHeader: @deprecated (request_id: uuid, header: string) -> string,
+  GetHealth: @deprecated (id: uuid) -> number,
+  GetInventoryAcquireTime: @deprecated (item: string) -> string,
+  GetInventoryCreator: @deprecated (item: string) -> uuid,
+  GetInventoryDesc: @deprecated (item: string) -> string,
+  GetInventoryKey: @deprecated (item: string) -> uuid,
+  GetInventoryName: @deprecated (type: number, index: number) -> string,
+  GetInventoryNumber: @deprecated (type: number) -> number,
+  GetInventoryPermMask: @deprecated (item: string, group: number) -> number,
+  GetInventoryType: @deprecated (item: string) -> number,
+  GetKey: @deprecated () -> uuid,
+  GetLandOwnerAt: @deprecated (pos: vector) -> uuid,
+  GetLinkKey: @deprecated (link: number) -> uuid,
+  GetLinkMedia: @deprecated (link: number, face: number, params: {number}) -> {any},
+  GetLinkName: @deprecated (link: number) -> string,
+  GetLinkNumber: @deprecated () -> number,
+  GetLinkNumberOfSides: @deprecated (link: number) -> number,
+  GetLinkPrimitiveParams: @deprecated (link: number, params: {number}) -> {any},
+  GetLinkSitFlags: @deprecated (link: number) -> number,
+  GetListEntryType: @deprecated (src: list, index: number) -> number,
+  GetListLength: @deprecated (src: list) -> number,
+  GetLocalPos: @deprecated () -> vector,
+  GetLocalRot: @deprecated () -> quaternion,
+  GetMass: @deprecated () -> number,
+  GetMassMKS: @deprecated () -> number,
+  GetMaxScaleFactor: @deprecated () -> number,
+  GetMemoryLimit: @deprecated () -> number,
+  GetMinScaleFactor: @deprecated () -> number,
+  GetMoonDirection: @deprecated () -> vector,
+  GetMoonRotation: @deprecated () -> quaternion,
+  GetNextEmail: @deprecated (address: string, subject: string) -> (),
+  GetNotecardLine: @deprecated (name: string | uuid, line: number) -> uuid,
+  GetNotecardLineSync: @deprecated (name: string | uuid, line: number) -> string,
+  GetNumberOfNotecardLines: @deprecated (name: string | uuid) -> uuid,
+  GetNumberOfPrims: @deprecated () -> number,
+  GetNumberOfSides: @deprecated () -> number,
+  GetObjectAnimationNames: @deprecated () -> {string},
+  GetObjectDesc: @deprecated () -> string,
+  GetObjectDetails: @deprecated (id: uuid, params: {number}) -> {any},
+  GetObjectLinkKey: @deprecated (object_id: uuid, link: number) -> uuid,
+  GetObjectMass: @deprecated (id: uuid) -> number,
+  GetObjectName: @deprecated () -> string,
+  GetObjectPermMask: @deprecated (group: number) -> number,
+  GetObjectPrimCount: @deprecated (prim: uuid) -> number,
+  GetOmega: @deprecated () -> vector,
+  GetOwner: @deprecated () -> uuid,
+  GetOwnerKey: @deprecated (id: uuid) -> uuid,
+  GetParcelDetails: @deprecated (pos: vector, params: {number}) -> {any},
+  GetParcelFlags: @deprecated (pos: vector) -> number,
+  GetParcelMaxPrims: @deprecated (pos: vector, sim_wide: boolean | number) -> number,
+  GetParcelMusicURL: @deprecated () -> string,
+  GetParcelPrimCount: @deprecated (pos: vector, category: number, sim_wide: boolean | number) -> number,
+  GetParcelPrimOwners: @deprecated (pos: vector) -> {any},
+  GetPermissions: @deprecated () -> number,
+  GetPermissionsKey: @deprecated () -> uuid,
+  GetPhysicsMaterial: @deprecated () -> {number},
+  GetPos: @deprecated () -> vector,
+  GetPrimMediaParams: @deprecated (face: number, params: {number}) -> {any},
+  GetPrimitiveParams: @deprecated (params: {number}) -> {any},
+  GetRegionAgentCount: @deprecated () -> number,
+  GetRegionCorner: @deprecated () -> vector,
+  GetRegionDayLength: @deprecated () -> number,
+  GetRegionDayOffset: @deprecated () -> number,
+  GetRegionFPS: @deprecated () -> number,
+  GetRegionFlags: @deprecated () -> number,
+  GetRegionMoonDirection: @deprecated () -> vector,
+  GetRegionMoonRotation: @deprecated () -> quaternion,
+  GetRegionName: @deprecated () -> string,
+  GetRegionSunDirection: @deprecated () -> vector,
+  GetRegionSunRotation: @deprecated () -> quaternion,
+  GetRegionTimeDilation: @deprecated () -> number,
+  GetRegionTimeOfDay: @deprecated () -> number,
+  GetRenderMaterial: @deprecated (face: number) -> string,
+  GetRootPosition: @deprecated () -> vector,
+  GetRootRotation: @deprecated () -> quaternion,
+  GetRot: @deprecated () -> quaternion,
+  GetSPMaxMemory: @deprecated () -> number,
+  GetScale: @deprecated () -> vector,
+  GetScriptName: @deprecated () -> string,
+  GetScriptState: @deprecated (script: string) -> number,
+  GetSimStats: @deprecated (stat_type: number) -> number,
+  GetSimulatorHostname: @deprecated () -> string,
+  GetStartParameter: @deprecated () -> number,
+  GetStartString: @deprecated () -> string,
+  GetStaticPath: @deprecated (start_pos: vector, end_pos: vector, radius: number, params: list) -> {any},
+  GetStatus: @deprecated (status: number) -> number,
+  GetSubString: @deprecated (src: string, start_index: number, end_index: number) -> string,
+  GetSunDirection: @deprecated () -> vector,
+  GetSunRotation: @deprecated () -> quaternion,
+  GetTexture: @deprecated (face: number) -> string,
+  GetTextureOffset: @deprecated (face: number) -> vector,
+  GetTextureRot: @deprecated (face: number) -> number,
+  GetTextureScale: @deprecated (face: number) -> vector,
+  GetTime: @deprecated () -> number,
+  GetTimeOfDay: @deprecated () -> number,
+  GetTimestamp: @deprecated () -> string,
+  GetTorque: @deprecated () -> vector,
+  GetUnixTime: @deprecated () -> number,
+  GetUsedMemory: @deprecated () -> number,
+  GetUsername: @deprecated (id: uuid) -> string,
+  GetVel: @deprecated () -> vector,
+  GetVisualParams: @deprecated (agentid: uuid, params: {number | string}) -> {number | ""},
+  GetWallclock: @deprecated () -> number,
+  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveInventory: @deprecated (target: uuid, item: string) -> (),
+  GiveInventoryList: @deprecated (target: uuid, folder: string, items: {string}) -> (),
+  GiveMoney: @deprecated (destination: uuid, amount: number) -> number,
+  GodLikeRezObject: @deprecated (id: uuid, pos: vector) -> (),
+  Ground: @deprecated (offset: vector) -> number,
+  GroundContour: @deprecated (offset: vector) -> vector,
+  GroundNormal: @deprecated (offset: vector) -> vector,
+  GroundRepel: @deprecated (height: number, water: boolean | number, tau: number) -> (),
+  GroundSlope: @deprecated (offset: vector) -> vector,
+  HMAC: @deprecated (private_key: string, msg: string, algorithm: string) -> string,
+  HTTPRequest: @deprecated (url: string, parameters: list | HttpRequestParams, body: string) -> uuid,
+  HTTPResponse: @deprecated (request_id: uuid, status: number, body: string) -> (),
+  Hash: @deprecated (val: string) -> number,
+  InsertString: @deprecated (dst: string, index: number, src: string) -> string,
+  InstantMessage: @deprecated (agent: uuid, msg: string) -> (),
+  IntegerToBase64: @deprecated (number: number) -> string,
+  IsFriend: @deprecated (agent_id: uuid) -> number,
+  IsLinkGLTFMaterial: @deprecated (link: number, face: number) -> number,
+  Json2List: @deprecated (src: string) -> {any},
+  JsonGetValue: @deprecated (json: string, specifiers: list) -> string,
+  JsonSetValue: @deprecated (json: string, specifiers: list, value: string) -> string,
+  JsonValueType: @deprecated (json: string, specifiers: list) -> string,
+  Key2Name: @deprecated (id: uuid) -> string,
+  KeyCountKeyValue: @deprecated () -> uuid,
+  KeysKeyValue: @deprecated (first: number, count: number) -> uuid,
+  Linear2sRGB: @deprecated (color: vector) -> vector,
+  LinkAdjustSoundVolume: @deprecated (link: number, volume: number) -> (),
+  LinkParticleSystem: @deprecated (link: number, rules: list | ParticleParams) -> (),
+  LinkPlaySound: @deprecated (link: number, sound: string | uuid, volume: number, flags: number) -> (),
+  LinkSetSoundQueueing: @deprecated (link: number, queue: boolean | number) -> (),
+  LinkSetSoundRadius: @deprecated (link: number, radius: number) -> (),
+  LinkSitTarget: @deprecated (link: number, offset: vector, rot: quaternion) -> (),
+  LinkStopSound: @deprecated (link: number) -> (),
+  LinksetDataAvailable: @deprecated () -> number,
+  LinksetDataCountFound: @deprecated (pattern: string) -> number,
+  LinksetDataCountKeys: @deprecated () -> number,
+  LinksetDataDelete: @deprecated (name: string) -> number,
+  LinksetDataDeleteFound: @deprecated (pattern: string, pass: string) -> {number},
+  LinksetDataDeleteProtected: @deprecated (name: string, pass: string) -> number,
+  LinksetDataFindKeys: @deprecated (pattern: string, start: number, count: number) -> {string},
+  LinksetDataListKeys: @deprecated (start: number, count: number) -> {string},
+  LinksetDataRead: @deprecated (name: string) -> string,
+  LinksetDataReadProtected: @deprecated (name: string, pass: string) -> string,
+  LinksetDataReset: @deprecated () -> (),
+  LinksetDataWrite: @deprecated (name: string, value: string) -> number,
+  LinksetDataWriteProtected: @deprecated (name: string, value: string, pass: string) -> number,
+  List2CSV: @deprecated (src: list) -> string,
+  List2Float: @deprecated (src: list, index: number) -> number,
+  List2Integer: @deprecated (src: list, index: number) -> number,
+  List2Json: @deprecated (type: string, values: list) -> string,
+  List2Key: @deprecated (src: list, index: number) -> uuid,
+  List2List: @deprecated <T>(src: {T}, start_index: number, end_index: number) -> {T},
+  List2ListSlice: @deprecated <T>(src: {T}, start_index: number, end_index: number, stride: number, slice_index: number) -> {T},
+  List2ListStrided: @deprecated <T>(src: {T}, start_index: number, end_index: number, stride: number) -> {T},
+  List2Rot: @deprecated (src: list, index: number) -> quaternion,
+  List2String: @deprecated (src: list, index: number) -> string,
+  List2Vector: @deprecated (src: list, index: number) -> vector,
+  ListFindList: @deprecated (src: list, test: list) -> number,
+  ListFindListNext: @deprecated (src: list, test: list, instance: number) -> number,
+  ListFindStrided: @deprecated (src: list, test: list, start_index: number, end_index: number, stride: number) -> number,
+  ListInsertList: @deprecated <T>(dest: {T}, src: {T}, start: number) -> {T},
+  ListRandomize: @deprecated <T>(src: {T}, stride: number) -> {T},
+  ListReplaceList: @deprecated <T>(dest: {T}, src: {T}, start_index: number, end_index: number) -> {T},
+  ListSort: @deprecated <T>(src: {T}, stride: number, ascending: boolean | number) -> {T},
+  ListSortStrided: @deprecated <T>(src: {T}, stride: number, stride_index: number, ascending: boolean | number) -> {T},
+  ListStatistics: @deprecated (operation: number, src: list) -> number,
+  Listen: @deprecated (channel: number, name: string, id: uuid, msg: string) -> number,
+  ListenControl: @deprecated (handle: number, active: boolean | number) -> (),
+  ListenRemove: @deprecated (handle: number) -> (),
+  LoadURL: @deprecated (avatar: uuid, message: string, url: string) -> (),
+  Log: @deprecated (val: number) -> number,
+  Log10: @deprecated (val: number) -> number,
+  LookAt: @deprecated (target: vector, strength: number, damping: number) -> (),
+  LoopSound: @deprecated (sound: string | uuid, volume: number) -> (),
+  LoopSoundMaster: @deprecated (sound: string | uuid, volume: number) -> (),
+  LoopSoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
+  MD5String: @deprecated (src: string, nonce: number) -> string,
+  MakeExplosion: @deprecated (particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  MakeFire: @deprecated (particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  MakeFountain: @deprecated (particles: number, scale: number, vel: number, lifetime: number, arc: number, bounce: number, texture: string | uuid, offset: vector, bounce_offset: number) -> (),
+  MakeSmoke: @deprecated (particles: number, scale: number, vel: number, lifetime: number, arc: number, texture: string | uuid, offset: vector) -> (),
+  ManageEstateAccess: @deprecated (action: number, avatar: uuid) -> number,
+  MapBeacon: @deprecated (region_name: string, pos: vector, options: list) -> (),
+  MapDestination: @deprecated (simname: string, pos: vector, look_at: vector) -> (),
+  MessageLinked: @deprecated (link: number, num: number, str: string | uuid, id: string | uuid) -> (),
+  MinEventDelay: @deprecated (delay: number) -> (),
+  ModPow: @deprecated (a: number, b: number, c: number) -> number,
+  ModifyLand: @deprecated (action: number, brush: number) -> (),
+  MoveToTarget: @deprecated (target: vector, tau: number) -> (),
+  Name2Key: @deprecated (name: string) -> uuid,
+  NavigateTo: @deprecated (pos: vector, options: list) -> (),
+  OffsetTexture: @deprecated (u: number, v: number, face: number) -> (),
+  OpenFloater: @deprecated (floater_name: string, url: string, params: list) -> number,
+  OpenRemoteDataChannel: @deprecated () -> (),
+  Ord: @deprecated (val: string, index: number) -> number,
+  OverMyLand: @deprecated (id: uuid) -> number,
+  OwnerSay: @deprecated (msg: string) -> (),
+  ParcelMediaCommandList: @deprecated (commandList: list) -> (),
+  ParcelMediaQuery: @deprecated (query: {number}) -> {any},
+  ParseString2List: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
+  ParseStringKeepNulls: @deprecated (src: string, separators: {string}, spacers: {string}) -> {string},
+  ParticleSystem: @deprecated (rules: list | ParticleParams) -> (),
+  PassCollisions: @deprecated (pass: number) -> (),
+  PassTouches: @deprecated (pass: number) -> (),
+  PatrolPoints: @deprecated (patrolPoints: {vector}, options: list) -> (),
+  PlaySound: @deprecated (sound: string | uuid, volume: number) -> (),
+  PlaySoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
+  Pow: @deprecated (base: number, exponent: number) -> number,
+  PreloadSound: @deprecated (sound: string | uuid) -> (),
+  Pursue: @deprecated (target: uuid, options: list) -> (),
+  PushObject: @deprecated (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
+  ReadKeyValue: @deprecated (k: string) -> uuid,
+  RefreshPrimURL: @deprecated () -> (),
+  RegionSay: @deprecated (channel: number, msg: string) -> (),
+  RegionSayTo: @deprecated (target: uuid, channel: number, msg: string) -> (),
+  ReleaseCamera: @deprecated (avatar: uuid) -> (),
+  ReleaseControls: @deprecated () -> (),
+  ReleaseURL: @deprecated (url: string) -> (),
+  RemoteDataReply: @deprecated (channel: uuid, message_id: uuid, sdata: string, idata: number) -> (),
+  RemoteDataSetRegion: @deprecated () -> (),
+  RemoteLoadScriptPin: @deprecated (target: uuid, script: string, pin: number, running: boolean | number, start_param: number) -> (),
+  RemoveFromLandBanList: @deprecated (avatar: uuid) -> (),
+  RemoveFromLandPassList: @deprecated (avatar: uuid) -> (),
+  RemoveInventory: @deprecated (item: string) -> (),
+  RemoveVehicleFlags: @deprecated (flags: number) -> (),
+  ReplaceAgentEnvironment: @deprecated (agent_id: uuid, transition: number, environment: string | uuid) -> number,
+  ReplaceEnvironment: @deprecated (position: vector, environment: string | uuid, track_no: number, day_length: number, day_offset: number) -> number,
+  ReplaceSubString: @deprecated (src: string, pattern: string, replacement_pattern: string, count: number) -> string,
+  RequestAgentData: @deprecated (id: uuid, data: number) -> uuid,
+  RequestDisplayName: @deprecated (id: uuid) -> uuid,
+  RequestExperiencePermissions: @deprecated (agent: uuid, name: string) -> (),
+  RequestInventoryData: @deprecated (item: string) -> uuid,
+  RequestPermissions: @deprecated (agent: uuid, permissions: number) -> (),
+  RequestSecureURL: @deprecated () -> uuid,
+  RequestSimulatorData: @deprecated (region: string, data: number) -> uuid,
+  RequestURL: @deprecated () -> uuid,
+  RequestUserKey: @deprecated (username: string) -> uuid,
+  RequestUsername: @deprecated (id: uuid) -> uuid,
+  ResetAnimationOverride: @deprecated (anim_state: string) -> (),
+  ResetLandBanList: @deprecated () -> (),
+  ResetLandPassList: @deprecated () -> (),
+  ResetOtherScript: @deprecated (script: string) -> (),
+  ResetScript: @deprecated () -> (),
+  ResetTime: @deprecated () -> (),
+  ReturnObjectsByID: @deprecated (objects: {uuid}) -> number,
+  ReturnObjectsByOwner: @deprecated (owner: uuid, scope: number) -> number,
+  RezAtRoot: @deprecated (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObject: @deprecated (item: string, pos: vector, vel: vector, rot: quaternion, start_param: number) -> (),
+  RezObjectWithParams: @deprecated (item: string, options: list) -> uuid,
+  Rot2Angle: @deprecated (rot: quaternion) -> number,
+  Rot2Axis: @deprecated (rot: quaternion) -> vector,
+  Rot2Euler: @deprecated (quat: quaternion) -> vector,
+  Rot2Fwd: @deprecated (q: quaternion) -> vector,
+  Rot2Left: @deprecated (q: quaternion) -> vector,
+  Rot2Up: @deprecated (q: quaternion) -> vector,
+  RotBetween: @deprecated (start_vec: vector, end_vec: vector) -> quaternion,
+  RotLookAt: @deprecated (target_direction: quaternion, strength: number, damping: number) -> (),
+  RotTarget: @deprecated (rot: quaternion, error: number) -> number,
+  RotTargetRemove: @deprecated (handle: number) -> (),
+  RotateTexture: @deprecated (angle: number, face: number) -> (),
+  Round: @deprecated (val: number) -> number,
+  SHA1String: @deprecated (src: string) -> string,
+  SHA256String: @deprecated (src: string) -> string,
+  SameGroup: @deprecated (uuid: uuid) -> number,
+  Say: @deprecated (channel: number, msg: string) -> (),
+  ScaleByFactor: @deprecated (scaling_factor: number) -> number,
+  ScaleTexture: @deprecated (u: number, v: number, face: number) -> (),
+  ScriptDanger: @deprecated (pos: vector) -> number,
+  ScriptProfiler: @deprecated (flags: number) -> (),
+  SendRemoteData: @deprecated (channel: uuid, dest: string, idata: number, sdata: string) -> uuid,
+  Sensor: @deprecated (name: string, id: uuid, type: number, radius: number, arc: number) -> (),
+  SensorRemove: @deprecated () -> (),
+  SensorRepeat: @deprecated (name: string, id: uuid, type: number, radius: number, arc: number, rate: number) -> (),
+  SetAgentEnvironment: @deprecated (agent_id: uuid, transition: number, params: list) -> number,
+  SetAgentRot: @deprecated (rot: quaternion, flags: number) -> (),
+  SetAlpha: @deprecated (alpha: number, face: number) -> (),
+  SetAngularVelocity: @deprecated (initial_omega: vector, is_local: boolean | number) -> (),
+  SetAnimationOverride: @deprecated (anim_state: string, anim: string) -> (),
+  SetBuoyancy: @deprecated (buoyancy: number) -> (),
+  SetCameraAtOffset: @deprecated (offset: vector) -> (),
+  SetCameraEyeOffset: @deprecated (offset: vector) -> (),
+  SetCameraParams: @deprecated (rules: list) -> (),
+  SetClickAction: @deprecated (action: number) -> (),
+  SetColor: @deprecated (color: vector, face: number) -> (),
+  SetContentType: @deprecated (request_id: uuid, content_type: number) -> (),
+  SetDamage: @deprecated (damage: number) -> (),
+  SetEnvironment: @deprecated (position: vector, params: list) -> number,
+  SetForce: @deprecated (force: vector, is_local: boolean | number) -> (),
+  SetForceAndTorque: @deprecated (force: vector, torque: vector, is_local: boolean | number) -> (),
+  SetGroundTexture: @deprecated (changes: list) -> number,
+  SetHoverHeight: @deprecated (height: number, water: boolean | number, tau: number) -> (),
+  SetInventoryPermMask: @deprecated (item: string, group: number, flags: number) -> (),
+  SetKeyframedMotion: @deprecated (keyframes: list, options: list) -> (),
+  SetLinkAlpha: @deprecated (link: number, alpha: number, face: number) -> (),
+  SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
+  SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
+  SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
+  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
+  SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
+  SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
+  SetLinkSitFlags: @deprecated (link: number, flags: number) -> (),
+  SetLinkTexture: @deprecated (link: number, texture: string | uuid, face: number) -> (),
+  SetLinkTextureAnim: @deprecated (link: number, mode: number, face: number, sizex: number, sizey: number, start: number, length: number, rate: number) -> (),
+  SetLocalRot: @deprecated (rot: quaternion) -> (),
+  SetMemoryLimit: @deprecated (limit: number) -> number,
+  SetObjectDesc: @deprecated (description: string) -> (),
+  SetObjectName: @deprecated (name: string) -> (),
+  SetObjectPermMask: @deprecated (group: number, flags: number) -> (),
+  SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list) -> number,
+  SetParcelMusicURL: @deprecated (url: string) -> (),
+  SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
+  SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
+  SetPos: @deprecated (pos: vector) -> (),
+  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
+  SetPrimURL: @deprecated (url: string) -> (),
+  SetPrimitiveParams: @deprecated (rules: list) -> (),
+  SetRegionPos: @deprecated (position: vector) -> number,
+  SetRemoteScriptAccessPin: @deprecated (pin: number) -> (),
+  SetRenderMaterial: @deprecated (material: string | uuid, face: number) -> (),
+  SetRot: @deprecated (rot: quaternion) -> (),
+  SetScale: @deprecated (size: vector) -> (),
+  SetScriptState: @deprecated (script: string, running: boolean | number) -> (),
+  SetSitText: @deprecated (text: string) -> (),
+  SetSoundQueueing: @deprecated (queue: boolean | number) -> (),
+  SetSoundRadius: @deprecated (radius: number) -> (),
+  SetStatus: @deprecated (status: number, value: boolean | number) -> (),
+  SetText: @deprecated (text: string, color: vector, alpha: number) -> (),
+  SetTexture: @deprecated (texture: string | uuid, face: number) -> (),
+  SetTextureAnim: @deprecated (mode: number, face: number, sizex: number, sizey: number, start: number, length: number, rate: number) -> (),
+  SetTimerEvent: @deprecated (sec: number) -> (),
+  SetTorque: @deprecated (torque: vector, is_local: boolean | number) -> (),
+  SetTouchText: @deprecated (text: string) -> (),
+  SetVehicleFlags: @deprecated (flags: number) -> (),
+  SetVehicleFloatParam: @deprecated (param: number, value: number) -> (),
+  SetVehicleRotationParam: @deprecated (param: number, rot: quaternion) -> (),
+  SetVehicleType: @deprecated (type: number) -> (),
+  SetVehicleVectorParam: @deprecated (param: number, vec: vector) -> (),
+  SetVelocity: @deprecated (velocity: vector, is_local: boolean | number) -> (),
+  Shout: @deprecated (channel: number, msg: string) -> (),
+  SignRSA: @deprecated (private_key: string, msg: string, algorithm: string) -> string,
+  Sin: @deprecated (theta: number) -> number,
+  SitOnLink: @deprecated (agent_id: uuid, link: number) -> number,
+  SitTarget: @deprecated (offset: vector, rot: quaternion) -> (),
+  Sleep: @deprecated (sec: number) -> (),
+  Sound: @deprecated (sound: string | uuid, volume: number, queue: boolean | number, loop: boolean | number) -> (),
+  SoundPreload: @deprecated (sound: string | uuid) -> (),
+  Sqrt: @deprecated (val: number) -> number,
+  StartAnimation: @deprecated (anim: string) -> (),
+  StartObjectAnimation: @deprecated (anim: string) -> (),
+  StopAnimation: @deprecated (anim: string | uuid) -> (),
+  StopHover: @deprecated () -> (),
+  StopLookAt: @deprecated () -> (),
+  StopMoveToTarget: @deprecated () -> (),
+  StopObjectAnimation: @deprecated (anim: string | uuid) -> (),
+  StopSound: @deprecated () -> (),
+  StringLength: @deprecated (str: string) -> number,
+  StringToBase64: @deprecated (str: string) -> string,
+  StringTrim: @deprecated (src: string, type: number) -> string,
+  SubStringIndex: @deprecated (source: string, pattern: string) -> number,
+  TakeCamera: @deprecated (avatar: uuid) -> (),
+  TakeControls: @deprecated (controls: number, accept: boolean | number, pass_on: boolean | number) -> (),
+  Tan: @deprecated (theta: number) -> number,
+  Target: @deprecated (position: vector, range: number) -> number,
+  TargetOmega: @deprecated (axis: vector, spinrate: number, gain: number) -> (),
+  TargetRemove: @deprecated (handle: number) -> (),
+  TargetedEmail: @deprecated (target: number, subject: string, msg: string) -> (),
+  TeleportAgent: @deprecated (agent: uuid, landmark: string, position: vector, look_at: vector) -> (),
+  TeleportAgentGlobalCoords: @deprecated (agent: uuid, global_coordinates: vector, region_coordinates: vector, look_at: vector) -> (),
+  TeleportAgentHome: @deprecated (avatar: uuid) -> (),
+  TextBox: @deprecated (agent: uuid, msg: string, channel: number) -> (),
+  ToLower: @deprecated (src: string) -> string,
+  ToUpper: @deprecated (src: string) -> string,
+  TransferLindenDollars: @deprecated (destination: uuid, amount: number) -> uuid,
+  TransferOwnership: @deprecated (agent: uuid, flags: number, options: list) -> number,
+  TriggerSound: @deprecated (sound: string | uuid, volume: number) -> (),
+  TriggerSoundLimited: @deprecated (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
+  UnSit: @deprecated (id: uuid) -> (),
+  UnescapeURL: @deprecated (url: string) -> string,
+  UpdateCharacter: @deprecated (options: list) -> (),
+  UpdateKeyValue: @deprecated (k: string, v: string, checked: boolean | number, original_value: string) -> uuid,
+  VecDist: @deprecated (vec_a: vector, vec_b: vector) -> number,
+  VecMag: @deprecated (vec: vector) -> number,
+  VecNorm: @deprecated (vec: vector) -> vector,
+  VerifyRSA: @deprecated (public_key: string, msg: string, signature: string, algorithm: string) -> number,
+  VolumeDetect: @deprecated (detect: boolean | number) -> (),
+  WanderWithin: @deprecated (origin: vector, dist: vector, options: list) -> (),
+  Water: @deprecated (offset: vector) -> number,
+  Whisper: @deprecated (channel: number, msg: string) -> (),
+  Wind: @deprecated (offset: vector) -> vector,
+  WorldPosToHUD: @deprecated (world_pos: vector) -> vector,
+  XorBase64: @deprecated (str1: string, str2: string) -> string,
+  XorBase64Strings: @deprecated (str1: string, str2: string) -> string,
+  XorBase64StringsCorrect: @deprecated (str1: string, str2: string) -> string,
+  sRGB2Linear: @deprecated (srgb: vector) -> vector,
+}
+
+declare lljson: {
+  null: any,
+  remove: any,
+  array_mt: {__jsonhint: string},
+  object_mt: {__jsonhint: string},
+  empty_array: {},
+  empty_object: {},
+  encode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  decode: (json: string, options: LLJsonDecodeOptions?) -> any,
+  slencode: (value: any, options: LLJsonEncodeOptions?) -> string,
+  sldecode: (json: string, options: LLJsonDecodeOptions?) -> any,
+}
+
+declare llprim: {
+  ParamsSetter: PrimParamsSetterTypeMeta,
+  setParticleSystem: (params: ParticleParams?, link: number?) -> (),
+  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
+}
+
+declare ACTIVE: number
+declare AGENT: number
+declare AGENT_ALWAYS_RUN: number
+declare AGENT_ATTACHMENTS: number
+declare AGENT_AUTOMATED: number
+declare AGENT_AUTOPILOT: number
+declare AGENT_AWAY: number
+declare AGENT_BUSY: number
+declare AGENT_BY_LEGACY_NAME: number
+declare AGENT_BY_USERNAME: number
+declare AGENT_CROUCHING: number
+declare AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT: number
+declare AGENT_FLYING: number
+declare AGENT_IN_AIR: number
+declare AGENT_LIST_PARCEL: number
+declare AGENT_LIST_PARCEL_OWNER: number
+declare AGENT_LIST_REGION: number
+declare AGENT_MOUSELOOK: number
+declare AGENT_ON_OBJECT: number
+declare AGENT_SCRIPTED: number
+declare AGENT_SITTING: number
+declare AGENT_TYPING: number
+declare AGENT_WALKING: number
+declare ALL_SIDES: number
+declare ANIM_ON: number
+declare ATTACH_ANY_HUD: number
+declare ATTACH_AVATAR_CENTER: number
+declare ATTACH_BACK: number
+declare ATTACH_BELLY: number
+declare ATTACH_CHEST: number
+declare ATTACH_CHIN: number
+declare ATTACH_FACE_JAW: number
+declare ATTACH_FACE_LEAR: number
+declare ATTACH_FACE_LEYE: number
+declare ATTACH_FACE_REAR: number
+declare ATTACH_FACE_REYE: number
+declare ATTACH_FACE_TONGUE: number
+declare ATTACH_GROIN: number
+declare ATTACH_HEAD: number
+declare ATTACH_HIND_LFOOT: number
+declare ATTACH_HIND_RFOOT: number
+declare ATTACH_HUD_BOTTOM: number
+declare ATTACH_HUD_BOTTOM_LEFT: number
+declare ATTACH_HUD_BOTTOM_RIGHT: number
+declare ATTACH_HUD_CENTER_1: number
+declare ATTACH_HUD_CENTER_2: number
+declare ATTACH_HUD_TOP_CENTER: number
+declare ATTACH_HUD_TOP_LEFT: number
+declare ATTACH_HUD_TOP_RIGHT: number
+declare ATTACH_LEAR: number
+declare ATTACH_LEFT_PEC: number
+declare ATTACH_LEYE: number
+declare ATTACH_LFOOT: number
+declare ATTACH_LHAND: number
+declare ATTACH_LHAND_RING1: number
+declare ATTACH_LHIP: number
+declare ATTACH_LLARM: number
+declare ATTACH_LLLEG: number
+declare ATTACH_LPEC: number
+declare ATTACH_LSHOULDER: number
+declare ATTACH_LUARM: number
+declare ATTACH_LULEG: number
+declare ATTACH_LWING: number
+declare ATTACH_MOUTH: number
+declare ATTACH_NECK: number
+declare ATTACH_NOSE: number
+declare ATTACH_PELVIS: number
+declare ATTACH_REAR: number
+declare ATTACH_REYE: number
+declare ATTACH_RFOOT: number
+declare ATTACH_RHAND: number
+declare ATTACH_RHAND_RING1: number
+declare ATTACH_RHIP: number
+declare ATTACH_RIGHT_PEC: number
+declare ATTACH_RLARM: number
+declare ATTACH_RLLEG: number
+declare ATTACH_RPEC: number
+declare ATTACH_RSHOULDER: number
+declare ATTACH_RUARM: number
+declare ATTACH_RULEG: number
+declare ATTACH_RWING: number
+declare ATTACH_TAIL_BASE: number
+declare ATTACH_TAIL_TIP: number
+declare AVOID_CHARACTERS: number
+declare AVOID_DYNAMIC_OBSTACLES: number
+declare AVOID_NONE: number
+declare BEACON_MAP: number
+declare CAMERA_ACTIVE: number
+declare CAMERA_BEHINDNESS_ANGLE: number
+declare CAMERA_BEHINDNESS_LAG: number
+declare CAMERA_DISTANCE: number
+declare CAMERA_FOCUS: number
+declare CAMERA_FOCUS_LAG: number
+declare CAMERA_FOCUS_LOCKED: number
+declare CAMERA_FOCUS_OFFSET: number
+declare CAMERA_FOCUS_THRESHOLD: number
+declare CAMERA_PITCH: number
+declare CAMERA_POSITION: number
+declare CAMERA_POSITION_LAG: number
+declare CAMERA_POSITION_LOCKED: number
+declare CAMERA_POSITION_THRESHOLD: number
+declare CHANGED_ALLOWED_DROP: number
+declare CHANGED_COLOR: number
+declare CHANGED_INVENTORY: number
+declare CHANGED_LINK: number
+declare CHANGED_MEDIA: number
+declare CHANGED_OWNER: number
+declare CHANGED_REGION: number
+declare CHANGED_REGION_START: number
+declare CHANGED_RENDER_MATERIAL: number
+declare CHANGED_SCALE: number
+declare CHANGED_SHAPE: number
+declare CHANGED_TELEPORT: number
+declare CHANGED_TEXTURE: number
+declare CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES: number
+declare CHARACTER_AVOIDANCE_MODE: number
+declare CHARACTER_CMD_JUMP: number
+declare CHARACTER_CMD_SMOOTH_STOP: number
+declare CHARACTER_CMD_STOP: number
+declare CHARACTER_DESIRED_SPEED: number
+declare CHARACTER_DESIRED_TURN_SPEED: number
+declare CHARACTER_LENGTH: number
+declare CHARACTER_MAX_ACCEL: number
+declare CHARACTER_MAX_DECEL: number
+declare CHARACTER_MAX_SPEED: number
+declare CHARACTER_MAX_TURN_RADIUS: number
+declare CHARACTER_ORIENTATION: number
+declare CHARACTER_RADIUS: number
+declare CHARACTER_STAY_WITHIN_PARCEL: number
+declare CHARACTER_TYPE: number
+declare CHARACTER_TYPE_A: number
+declare CHARACTER_TYPE_B: number
+declare CHARACTER_TYPE_C: number
+declare CHARACTER_TYPE_D: number
+declare CHARACTER_TYPE_NONE: number
+declare CLICK_ACTION_BUY: number
+declare CLICK_ACTION_DISABLED: number
+declare CLICK_ACTION_IGNORE: number
+declare CLICK_ACTION_NONE: number
+declare CLICK_ACTION_OPEN: number
+declare CLICK_ACTION_OPEN_MEDIA: number
+declare CLICK_ACTION_PAY: number
+declare CLICK_ACTION_PLAY: number
+declare CLICK_ACTION_SIT: number
+declare CLICK_ACTION_TOUCH: number
+declare CLICK_ACTION_ZOOM: number
+declare COMBAT_CHANNEL: number
+declare COMBAT_LOG_ID: uuid
+declare CONTENT_TYPE_ATOM: number
+declare CONTENT_TYPE_FORM: number
+declare CONTENT_TYPE_HTML: number
+declare CONTENT_TYPE_JSON: number
+declare CONTENT_TYPE_LLSD: number
+declare CONTENT_TYPE_RSS: number
+declare CONTENT_TYPE_TEXT: number
+declare CONTENT_TYPE_XHTML: number
+declare CONTENT_TYPE_XML: number
+declare CONTROL_BACK: number
+declare CONTROL_DOWN: number
+declare CONTROL_FWD: number
+declare CONTROL_LBUTTON: number
+declare CONTROL_LEFT: number
+declare CONTROL_ML_LBUTTON: number
+declare CONTROL_RIGHT: number
+declare CONTROL_ROT_LEFT: number
+declare CONTROL_ROT_RIGHT: number
+declare CONTROL_UP: number
+declare DAMAGEABLE: number
+declare DAMAGE_TYPE_ACID: number
+declare DAMAGE_TYPE_BLUDGEONING: number
+declare DAMAGE_TYPE_COLD: number
+declare DAMAGE_TYPE_ELECTRIC: number
+declare DAMAGE_TYPE_EMOTIONAL: number
+declare DAMAGE_TYPE_FIRE: number
+declare DAMAGE_TYPE_FORCE: number
+declare DAMAGE_TYPE_GENERIC: number
+declare DAMAGE_TYPE_IMPACT: number
+declare DAMAGE_TYPE_NECROTIC: number
+declare DAMAGE_TYPE_PIERCING: number
+declare DAMAGE_TYPE_POISON: number
+declare DAMAGE_TYPE_PSYCHIC: number
+declare DAMAGE_TYPE_RADIANT: number
+declare DAMAGE_TYPE_SLASHING: number
+declare DAMAGE_TYPE_SONIC: number
+declare DATA_BORN: number
+declare DATA_NAME: number
+declare DATA_ONLINE: number
+declare DATA_PAYINFO: number
+declare DATA_RATING: number
+declare DATA_RESERVED_0: number
+declare DATA_SIM_POS: number
+declare DATA_SIM_RATING: number
+declare DATA_SIM_STATUS: number
+declare DEBUG_CHANNEL: number
+declare DEG_TO_RAD: number
+declare DENSITY: number
+declare DEREZ_DIE: number
+declare DEREZ_MAKE_TEMP: number
+declare DEREZ_TO_INVENTORY: number
+declare ENVIRONMENT_DAYINFO: number
+declare ENV_INVALID_AGENT: number
+declare ENV_INVALID_RULE: number
+declare ENV_NOT_EXPERIENCE: number
+declare ENV_NO_ENVIRONMENT: number
+declare ENV_NO_EXPERIENCE_LAND: number
+declare ENV_NO_EXPERIENCE_PERMISSION: number
+declare ENV_NO_PERMISSIONS: number
+declare ENV_OK: number
+declare ENV_THROTTLE: number
+declare ENV_VALIDATION_FAIL: number
+declare EOF: string
+declare ERR_GENERIC: number
+declare ERR_MALFORMED_PARAMS: number
+declare ERR_PARCEL_PERMISSIONS: number
+declare ERR_RUNTIME_PERMISSIONS: number
+declare ERR_THROTTLED: number
+declare ESTATE_ACCESS_ALLOWED_AGENT_ADD: number
+declare ESTATE_ACCESS_ALLOWED_AGENT_REMOVE: number
+declare ESTATE_ACCESS_ALLOWED_GROUP_ADD: number
+declare ESTATE_ACCESS_ALLOWED_GROUP_REMOVE: number
+declare ESTATE_ACCESS_BANNED_AGENT_ADD: number
+declare ESTATE_ACCESS_BANNED_AGENT_REMOVE: number
+declare FILTER_FLAGS: number
+declare FILTER_FLAG_HUDS: number
+declare FILTER_INCLUDE: number
+declare FORCE_DIRECT_PATH: number
+declare FRICTION: number
+declare GAME_CONTROL_AXIS_LEFTX: number
+declare GAME_CONTROL_AXIS_LEFTY: number
+declare GAME_CONTROL_AXIS_RIGHTX: number
+declare GAME_CONTROL_AXIS_RIGHTY: number
+declare GAME_CONTROL_AXIS_TRIGGERLEFT: number
+declare GAME_CONTROL_AXIS_TRIGGERRIGHT: number
+declare GAME_CONTROL_BUTTON_A: number
+declare GAME_CONTROL_BUTTON_B: number
+declare GAME_CONTROL_BUTTON_BACK: number
+declare GAME_CONTROL_BUTTON_DPAD_DOWN: number
+declare GAME_CONTROL_BUTTON_DPAD_LEFT: number
+declare GAME_CONTROL_BUTTON_DPAD_RIGHT: number
+declare GAME_CONTROL_BUTTON_DPAD_UP: number
+declare GAME_CONTROL_BUTTON_GUIDE: number
+declare GAME_CONTROL_BUTTON_LEFTSHOULDER: number
+declare GAME_CONTROL_BUTTON_LEFTSTICK: number
+declare GAME_CONTROL_BUTTON_MISC1: number
+declare GAME_CONTROL_BUTTON_PADDLE1: number
+declare GAME_CONTROL_BUTTON_PADDLE2: number
+declare GAME_CONTROL_BUTTON_PADDLE3: number
+declare GAME_CONTROL_BUTTON_PADDLE4: number
+declare GAME_CONTROL_BUTTON_RIGHTSHOULDER: number
+declare GAME_CONTROL_BUTTON_RIGHTSTICK: number
+declare GAME_CONTROL_BUTTON_START: number
+declare GAME_CONTROL_BUTTON_TOUCHPAD: number
+declare GAME_CONTROL_BUTTON_X: number
+declare GAME_CONTROL_BUTTON_Y: number
+declare GCNP_RADIUS: number
+declare GCNP_STATIC: number
+declare GRAVITY_MULTIPLIER: number
+declare HORIZONTAL: number
+declare HTTP_ACCEPT: number
+declare HTTP_BODY_MAXLENGTH: number
+declare HTTP_BODY_TRUNCATED: number
+declare HTTP_CUSTOM_HEADER: number
+declare HTTP_EXTENDED_ERROR: number
+declare HTTP_METHOD: number
+declare HTTP_MIMETYPE: number
+declare HTTP_PRAGMA_NO_CACHE: number
+declare HTTP_USER_AGENT: number
+declare HTTP_VERBOSE_THROTTLE: number
+declare HTTP_VERIFY_CERT: number
+declare IMG_USE_BAKED_AUX1: uuid
+declare IMG_USE_BAKED_AUX2: uuid
+declare IMG_USE_BAKED_AUX3: uuid
+declare IMG_USE_BAKED_EYES: uuid
+declare IMG_USE_BAKED_HAIR: uuid
+declare IMG_USE_BAKED_HEAD: uuid
+declare IMG_USE_BAKED_LEFTARM: uuid
+declare IMG_USE_BAKED_LEFTLEG: uuid
+declare IMG_USE_BAKED_LOWER: uuid
+declare IMG_USE_BAKED_SKIRT: uuid
+declare IMG_USE_BAKED_UPPER: uuid
+declare INVENTORY_ALL: number
+declare INVENTORY_ANIMATION: number
+declare INVENTORY_BODYPART: number
+declare INVENTORY_CLOTHING: number
+declare INVENTORY_GESTURE: number
+declare INVENTORY_LANDMARK: number
+declare INVENTORY_MATERIAL: number
+declare INVENTORY_NONE: number
+declare INVENTORY_NOTECARD: number
+declare INVENTORY_OBJECT: number
+declare INVENTORY_SCRIPT: number
+declare INVENTORY_SETTING: number
+declare INVENTORY_SOUND: number
+declare INVENTORY_TEXTURE: number
+declare JSON_APPEND: number
+declare JSON_ARRAY: string
+declare JSON_DELETE: string
+declare JSON_FALSE: string
+declare JSON_INVALID: string
+declare JSON_NULL: string
+declare JSON_NUMBER: string
+declare JSON_OBJECT: string
+declare JSON_STRING: string
+declare JSON_TRUE: string
+declare KFM_CMD_PAUSE: number
+declare KFM_CMD_PLAY: number
+declare KFM_CMD_STOP: number
+declare KFM_COMMAND: number
+declare KFM_DATA: number
+declare KFM_FORWARD: number
+declare KFM_LOOP: number
+declare KFM_MODE: number
+declare KFM_PING_PONG: number
+declare KFM_REVERSE: number
+declare KFM_ROTATION: number
+declare KFM_TRANSLATION: number
+declare LAND_BRUSH_LARGE: number
+declare LAND_BRUSH_MEDIUM: number
+declare LAND_BRUSH_SMALL: number
+declare LAND_LARGE_BRUSH: number
+declare LAND_LEVEL: number
+declare LAND_LOWER: number
+declare LAND_MEDIUM_BRUSH: number
+declare LAND_NOISE: number
+declare LAND_RAISE: number
+declare LAND_REVERT: number
+declare LAND_SMALL_BRUSH: number
+declare LAND_SMOOTH: number
+declare LINKSETDATA_DELETE: number
+declare LINKSETDATA_EMEMORY: number
+declare LINKSETDATA_ENOKEY: number
+declare LINKSETDATA_EPROTECTED: number
+declare LINKSETDATA_MULTIDELETE: number
+declare LINKSETDATA_NOTFOUND: number
+declare LINKSETDATA_NOUPDATE: number
+declare LINKSETDATA_OK: number
+declare LINKSETDATA_RESET: number
+declare LINKSETDATA_UPDATE: number
+declare LINK_ALL_CHILDREN: number
+declare LINK_ALL_OTHERS: number
+declare LINK_ROOT: number
+declare LINK_SET: number
+declare LINK_THIS: number
+declare LIST_STAT_GEOMETRIC_MEAN: number
+declare LIST_STAT_MAX: number
+declare LIST_STAT_MEAN: number
+declare LIST_STAT_MEDIAN: number
+declare LIST_STAT_MIN: number
+declare LIST_STAT_NUM_COUNT: number
+declare LIST_STAT_RANGE: number
+declare LIST_STAT_STD_DEV: number
+declare LIST_STAT_SUM: number
+declare LIST_STAT_SUM_SQUARES: number
+declare LOOP: number
+declare MASK_BASE: number
+declare MASK_COMBINED: number
+declare MASK_EVERYONE: number
+declare MASK_GROUP: number
+declare MASK_NEXT: number
+declare MASK_OWNER: number
+declare NAK: string
+declare NULL_KEY: uuid
+declare OBJECT_ACCOUNT_LEVEL: number
+declare OBJECT_ANIMATED_COUNT: number
+declare OBJECT_ANIMATED_SLOTS_AVAILABLE: number
+declare OBJECT_ATTACHED_POINT: number
+declare OBJECT_ATTACHED_SLOTS_AVAILABLE: number
+declare OBJECT_BODY_SHAPE_TYPE: number
+declare OBJECT_CHARACTER_TIME: number
+declare OBJECT_CLICK_ACTION: number
+declare OBJECT_CREATION_TIME: number
+declare OBJECT_CREATOR: number
+declare OBJECT_DAMAGE: number
+declare OBJECT_DAMAGE_TYPE: number
+declare OBJECT_DESC: number
+declare OBJECT_GROUP: number
+declare OBJECT_GROUP_TAG: number
+declare OBJECT_HEALTH: number
+declare OBJECT_HOVER_HEIGHT: number
+declare OBJECT_LAST_OWNER_ID: number
+declare OBJECT_LINK_NUMBER: number
+declare OBJECT_LOCKED: number
+declare OBJECT_MASS: number
+declare OBJECT_MATERIAL: number
+declare OBJECT_NAME: number
+declare OBJECT_OMEGA: number
+declare OBJECT_OWNER: number
+declare OBJECT_PATHFINDING_TYPE: number
+declare OBJECT_PERMS: number
+declare OBJECT_PERMS_COMBINED: number
+declare OBJECT_PHANTOM: number
+declare OBJECT_PHYSICS: number
+declare OBJECT_PHYSICS_COST: number
+declare OBJECT_POS: number
+declare OBJECT_PRIM_COUNT: number
+declare OBJECT_PRIM_EQUIVALENCE: number
+declare OBJECT_RENDER_WEIGHT: number
+declare OBJECT_RETURN_PARCEL: number
+declare OBJECT_RETURN_PARCEL_OWNER: number
+declare OBJECT_RETURN_REGION: number
+declare OBJECT_REZZER_KEY: number
+declare OBJECT_REZ_TIME: number
+declare OBJECT_ROOT: number
+declare OBJECT_ROT: number
+declare OBJECT_RUNNING_SCRIPT_COUNT: number
+declare OBJECT_SCALE: number
+declare OBJECT_SCRIPT_MEMORY: number
+declare OBJECT_SCRIPT_TIME: number
+declare OBJECT_SELECT_COUNT: number
+declare OBJECT_SERVER_COST: number
+declare OBJECT_SIT_COUNT: number
+declare OBJECT_STREAMING_COST: number
+declare OBJECT_TEMP_ATTACHED: number
+declare OBJECT_TEMP_ON_REZ: number
+declare OBJECT_TEXT: number
+declare OBJECT_TEXT_ALPHA: number
+declare OBJECT_TEXT_COLOR: number
+declare OBJECT_TOTAL_INVENTORY_COUNT: number
+declare OBJECT_TOTAL_SCRIPT_COUNT: number
+declare OBJECT_UNKNOWN_DETAIL: number
+declare OBJECT_VELOCITY: number
+declare OBJECT_VOLUME_DETECT: number
+declare OPT_AVATAR: number
+declare OPT_CHARACTER: number
+declare OPT_EXCLUSION_VOLUME: number
+declare OPT_LEGACY_LINKSET: number
+declare OPT_MATERIAL_VOLUME: number
+declare OPT_OTHER: number
+declare OPT_STATIC_OBSTACLE: number
+declare OPT_WALKABLE: number
+declare OVERRIDE_GLTF_BASE_ALPHA: number
+declare OVERRIDE_GLTF_BASE_ALPHA_MASK: number
+declare OVERRIDE_GLTF_BASE_ALPHA_MODE: number
+declare OVERRIDE_GLTF_BASE_COLOR_FACTOR: number
+declare OVERRIDE_GLTF_BASE_DOUBLE_SIDED: number
+declare OVERRIDE_GLTF_EMISSIVE_FACTOR: number
+declare OVERRIDE_GLTF_METALLIC_FACTOR: number
+declare OVERRIDE_GLTF_ROUGHNESS_FACTOR: number
+declare PARCEL_COUNT_GROUP: number
+declare PARCEL_COUNT_OTHER: number
+declare PARCEL_COUNT_OWNER: number
+declare PARCEL_COUNT_SELECTED: number
+declare PARCEL_COUNT_TEMP: number
+declare PARCEL_COUNT_TOTAL: number
+declare PARCEL_DETAILS_AREA: number
+declare PARCEL_DETAILS_DESC: number
+declare PARCEL_DETAILS_FLAGS: number
+declare PARCEL_DETAILS_GROUP: number
+declare PARCEL_DETAILS_ID: number
+declare PARCEL_DETAILS_LANDING_LOOKAT: number
+declare PARCEL_DETAILS_LANDING_POINT: number
+declare PARCEL_DETAILS_NAME: number
+declare PARCEL_DETAILS_OWNER: number
+declare PARCEL_DETAILS_PRIM_CAPACITY: number
+declare PARCEL_DETAILS_PRIM_USED: number
+declare PARCEL_DETAILS_SCRIPT_DANGER: number
+declare PARCEL_DETAILS_SEE_AVATARS: number
+declare PARCEL_DETAILS_TP_ROUTING: number
+declare PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY: number
+declare PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS: number
+declare PARCEL_FLAG_ALLOW_CREATE_OBJECTS: number
+declare PARCEL_FLAG_ALLOW_DAMAGE: number
+declare PARCEL_FLAG_ALLOW_FLY: number
+declare PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY: number
+declare PARCEL_FLAG_ALLOW_GROUP_SCRIPTS: number
+declare PARCEL_FLAG_ALLOW_LANDMARK: number
+declare PARCEL_FLAG_ALLOW_SCRIPTS: number
+declare PARCEL_FLAG_ALLOW_TERRAFORM: number
+declare PARCEL_FLAG_LOCAL_SOUND_ONLY: number
+declare PARCEL_FLAG_RESTRICT_PUSHOBJECT: number
+declare PARCEL_FLAG_USE_ACCESS_GROUP: number
+declare PARCEL_FLAG_USE_ACCESS_LIST: number
+declare PARCEL_FLAG_USE_BAN_LIST: number
+declare PARCEL_FLAG_USE_LAND_PASS_LIST: number
+declare PARCEL_MEDIA_COMMAND_AGENT: number
+declare PARCEL_MEDIA_COMMAND_AUTO_ALIGN: number
+declare PARCEL_MEDIA_COMMAND_DESC: number
+declare PARCEL_MEDIA_COMMAND_LOOP: number
+declare PARCEL_MEDIA_COMMAND_LOOP_SET: number
+declare PARCEL_MEDIA_COMMAND_PAUSE: number
+declare PARCEL_MEDIA_COMMAND_PLAY: number
+declare PARCEL_MEDIA_COMMAND_SIZE: number
+declare PARCEL_MEDIA_COMMAND_STOP: number
+declare PARCEL_MEDIA_COMMAND_TEXTURE: number
+declare PARCEL_MEDIA_COMMAND_TIME: number
+declare PARCEL_MEDIA_COMMAND_TYPE: number
+declare PARCEL_MEDIA_COMMAND_UNLOAD: number
+declare PARCEL_MEDIA_COMMAND_URL: number
+declare PARCEL_SALE_AGENT: number
+declare PARCEL_SALE_ERROR_BAD_PARAMS: number
+declare PARCEL_SALE_ERROR_INVALID_PRICE: number
+declare PARCEL_SALE_ERROR_IN_ESCROW: number
+declare PARCEL_SALE_ERROR_NO_PARCEL: number
+declare PARCEL_SALE_ERROR_NO_PERMISSIONS: number
+declare PARCEL_SALE_OBJECTS: number
+declare PARCEL_SALE_OK: number
+declare PARCEL_SALE_PRICE: number
+declare PASSIVE: number
+declare PASS_ALWAYS: number
+declare PASS_IF_NOT_HANDLED: number
+declare PASS_NEVER: number
+declare PATROL_PAUSE_AT_WAYPOINTS: number
+declare PAYMENT_INFO_ON_FILE: number
+declare PAYMENT_INFO_USED: number
+declare PAY_DEFAULT: number
+declare PAY_HIDE: number
+declare PERMISSION_ATTACH: number
+declare PERMISSION_CHANGE_JOINTS: number
+declare PERMISSION_CHANGE_LINKS: number
+declare PERMISSION_CHANGE_PERMISSIONS: number
+declare PERMISSION_CONTROL_CAMERA: number
+declare PERMISSION_DEBIT: number
+declare PERMISSION_OVERRIDE_ANIMATIONS: number
+declare PERMISSION_PRIVILEGED_LAND_ACCESS: number
+declare PERMISSION_RELEASE_OWNERSHIP: number
+declare PERMISSION_REMAP_CONTROLS: number
+declare PERMISSION_RETURN_OBJECTS: number
+declare PERMISSION_SILENT_ESTATE_MANAGEMENT: number
+declare PERMISSION_TAKE_CONTROLS: number
+declare PERMISSION_TELEPORT: number
+declare PERMISSION_TRACK_CAMERA: number
+declare PERMISSION_TRIGGER_ANIMATION: number
+declare PERM_ALL: number
+declare PERM_COPY: number
+declare PERM_MODIFY: number
+declare PERM_MOVE: number
+declare PERM_TRANSFER: number
+declare PI: number
+declare PING_PONG: number
+declare PI_BY_TWO: number
+declare PRIM_ALLOW_UNSIT: number
+declare PRIM_ALPHA_MODE: number
+declare PRIM_ALPHA_MODE_BLEND: number
+declare PRIM_ALPHA_MODE_EMISSIVE: number
+declare PRIM_ALPHA_MODE_MASK: number
+declare PRIM_ALPHA_MODE_NONE: number
+declare PRIM_BUMP_BARK: number
+declare PRIM_BUMP_BLOBS: number
+declare PRIM_BUMP_BRICKS: number
+declare PRIM_BUMP_BRIGHT: number
+declare PRIM_BUMP_CHECKER: number
+declare PRIM_BUMP_CONCRETE: number
+declare PRIM_BUMP_DARK: number
+declare PRIM_BUMP_DISKS: number
+declare PRIM_BUMP_GRAVEL: number
+declare PRIM_BUMP_LARGETILE: number
+declare PRIM_BUMP_NONE: number
+declare PRIM_BUMP_SHINY: number
+declare PRIM_BUMP_SIDING: number
+declare PRIM_BUMP_STONE: number
+declare PRIM_BUMP_STUCCO: number
+declare PRIM_BUMP_SUCTION: number
+declare PRIM_BUMP_TILE: number
+declare PRIM_BUMP_WEAVE: number
+declare PRIM_BUMP_WOOD: number
+declare PRIM_CAST_SHADOWS: number
+declare PRIM_CLICK_ACTION: number
+declare PRIM_COLLISION_SOUND: number
+declare PRIM_COLOR: number
+declare PRIM_DAMAGE: number
+declare PRIM_DESC: number
+declare PRIM_FLEXIBLE: number
+declare PRIM_FULLBRIGHT: number
+declare PRIM_GLOW: number
+declare PRIM_GLTF_ALPHA_MODE_BLEND: number
+declare PRIM_GLTF_ALPHA_MODE_MASK: number
+declare PRIM_GLTF_ALPHA_MODE_OPAQUE: number
+declare PRIM_GLTF_BASE_COLOR: number
+declare PRIM_GLTF_EMISSIVE: number
+declare PRIM_GLTF_METALLIC_ROUGHNESS: number
+declare PRIM_GLTF_NORMAL: number
+declare PRIM_HEALTH: number
+declare PRIM_HOLE_CIRCLE: number
+declare PRIM_HOLE_DEFAULT: number
+declare PRIM_HOLE_SQUARE: number
+declare PRIM_HOLE_TRIANGLE: number
+declare PRIM_LINK_TARGET: number
+declare PRIM_MATERIAL: number
+declare PRIM_MATERIAL_FLESH: number
+declare PRIM_MATERIAL_GLASS: number
+declare PRIM_MATERIAL_LIGHT: number
+declare PRIM_MATERIAL_METAL: number
+declare PRIM_MATERIAL_PLASTIC: number
+declare PRIM_MATERIAL_RUBBER: number
+declare PRIM_MATERIAL_STONE: number
+declare PRIM_MATERIAL_WOOD: number
+declare PRIM_MEDIA_ALT_IMAGE_ENABLE: number
+declare PRIM_MEDIA_AUTO_LOOP: number
+declare PRIM_MEDIA_AUTO_PLAY: number
+declare PRIM_MEDIA_AUTO_SCALE: number
+declare PRIM_MEDIA_AUTO_ZOOM: number
+declare PRIM_MEDIA_CONTROLS: number
+declare PRIM_MEDIA_CONTROLS_MINI: number
+declare PRIM_MEDIA_CONTROLS_STANDARD: number
+declare PRIM_MEDIA_CURRENT_URL: number
+declare PRIM_MEDIA_FIRST_CLICK_INTERACT: number
+declare PRIM_MEDIA_HEIGHT_PIXELS: number
+declare PRIM_MEDIA_HOME_URL: number
+declare PRIM_MEDIA_MAX_HEIGHT_PIXELS: number
+declare PRIM_MEDIA_MAX_URL_LENGTH: number
+declare PRIM_MEDIA_MAX_WHITELIST_COUNT: number
+declare PRIM_MEDIA_MAX_WHITELIST_SIZE: number
+declare PRIM_MEDIA_MAX_WIDTH_PIXELS: number
+declare PRIM_MEDIA_PARAM_MAX: number
+declare PRIM_MEDIA_PERMS_CONTROL: number
+declare PRIM_MEDIA_PERMS_INTERACT: number
+declare PRIM_MEDIA_PERM_ANYONE: number
+declare PRIM_MEDIA_PERM_GROUP: number
+declare PRIM_MEDIA_PERM_NONE: number
+declare PRIM_MEDIA_PERM_OWNER: number
+declare PRIM_MEDIA_WHITELIST: number
+declare PRIM_MEDIA_WHITELIST_ENABLE: number
+declare PRIM_MEDIA_WIDTH_PIXELS: number
+declare PRIM_NAME: number
+declare PRIM_NORMAL: number
+declare PRIM_OMEGA: number
+declare PRIM_PHANTOM: number
+declare PRIM_PHYSICS: number
+declare PRIM_PHYSICS_SHAPE_CONVEX: number
+declare PRIM_PHYSICS_SHAPE_NONE: number
+declare PRIM_PHYSICS_SHAPE_PRIM: number
+declare PRIM_PHYSICS_SHAPE_TYPE: number
+declare PRIM_POINT_LIGHT: number
+declare PRIM_POSITION: number
+declare PRIM_POS_LOCAL: number
+declare PRIM_PROJECTOR: number
+declare PRIM_REFLECTION_PROBE: number
+declare PRIM_REFLECTION_PROBE_BOX: number
+declare PRIM_REFLECTION_PROBE_DYNAMIC: number
+declare PRIM_REFLECTION_PROBE_MIRROR: number
+declare PRIM_RENDER_MATERIAL: number
+declare PRIM_ROTATION: number
+declare PRIM_ROT_LOCAL: number
+declare PRIM_SCRIPTED_SIT_ONLY: number
+declare PRIM_SCULPT_FLAG_ANIMESH: number
+declare PRIM_SCULPT_FLAG_INVERT: number
+declare PRIM_SCULPT_FLAG_MIRROR: number
+declare PRIM_SCULPT_TYPE_CYLINDER: number
+declare PRIM_SCULPT_TYPE_MASK: number
+declare PRIM_SCULPT_TYPE_MESH: number
+declare PRIM_SCULPT_TYPE_PLANE: number
+declare PRIM_SCULPT_TYPE_SPHERE: number
+declare PRIM_SCULPT_TYPE_TORUS: number
+declare PRIM_SHINY_HIGH: number
+declare PRIM_SHINY_LOW: number
+declare PRIM_SHINY_MEDIUM: number
+declare PRIM_SHINY_NONE: number
+declare PRIM_SIT_FLAGS: number
+declare PRIM_SIT_TARGET: number
+declare PRIM_SIZE: number
+declare PRIM_SLICE: number
+declare PRIM_SPECULAR: number
+declare PRIM_TEMP_ON_REZ: number
+declare PRIM_TEXGEN: number
+declare PRIM_TEXGEN_DEFAULT: number
+declare PRIM_TEXGEN_PLANAR: number
+declare PRIM_TEXT: number
+declare PRIM_TEXTURE: number
+declare PRIM_TYPE: number
+declare PRIM_TYPE_BOX: number
+declare PRIM_TYPE_CYLINDER: number
+declare PRIM_TYPE_PRISM: number
+declare PRIM_TYPE_RING: number
+declare PRIM_TYPE_SCULPT: number
+declare PRIM_TYPE_SPHERE: number
+declare PRIM_TYPE_TORUS: number
+declare PRIM_TYPE_TUBE: number
+declare PROFILE_NONE: number
+declare PROFILE_SCRIPT_MEMORY: number
+declare PSYS_PART_BF_DEST_COLOR: number
+declare PSYS_PART_BF_ONE: number
+declare PSYS_PART_BF_ONE_MINUS_DEST_COLOR: number
+declare PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA: number
+declare PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR: number
+declare PSYS_PART_BF_SOURCE_ALPHA: number
+declare PSYS_PART_BF_SOURCE_COLOR: number
+declare PSYS_PART_BF_ZERO: number
+declare PSYS_PART_BLEND_FUNC_DEST: number
+declare PSYS_PART_BLEND_FUNC_SOURCE: number
+declare PSYS_PART_BOUNCE_MASK: number
+declare PSYS_PART_EMISSIVE_MASK: number
+declare PSYS_PART_END_ALPHA: number
+declare PSYS_PART_END_COLOR: number
+declare PSYS_PART_END_GLOW: number
+declare PSYS_PART_END_SCALE: number
+declare PSYS_PART_FLAGS: number
+declare PSYS_PART_FOLLOW_SRC_MASK: number
+declare PSYS_PART_FOLLOW_VELOCITY_MASK: number
+declare PSYS_PART_INTERP_COLOR_MASK: number
+declare PSYS_PART_INTERP_SCALE_MASK: number
+declare PSYS_PART_MAX_AGE: number
+declare PSYS_PART_RIBBON_MASK: number
+declare PSYS_PART_START_ALPHA: number
+declare PSYS_PART_START_COLOR: number
+declare PSYS_PART_START_GLOW: number
+declare PSYS_PART_START_SCALE: number
+declare PSYS_PART_TARGET_LINEAR_MASK: number
+declare PSYS_PART_TARGET_POS_MASK: number
+declare PSYS_PART_WIND_MASK: number
+declare PSYS_SRC_ACCEL: number
+declare PSYS_SRC_ANGLE_BEGIN: number
+declare PSYS_SRC_ANGLE_END: number
+declare PSYS_SRC_BURST_PART_COUNT: number
+declare PSYS_SRC_BURST_RADIUS: number
+declare PSYS_SRC_BURST_RATE: number
+declare PSYS_SRC_BURST_SPEED_MAX: number
+declare PSYS_SRC_BURST_SPEED_MIN: number
+declare PSYS_SRC_INNERANGLE: number
+declare PSYS_SRC_MAX_AGE: number
+declare PSYS_SRC_OMEGA: number
+declare PSYS_SRC_OUTERANGLE: number
+declare PSYS_SRC_PATTERN: number
+declare PSYS_SRC_PATTERN_ANGLE: number
+declare PSYS_SRC_PATTERN_ANGLE_CONE: number
+declare PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY: number
+declare PSYS_SRC_PATTERN_DROP: number
+declare PSYS_SRC_PATTERN_EXPLODE: number
+declare PSYS_SRC_TARGET_KEY: number
+declare PSYS_SRC_TEXTURE: number
+declare PUBLIC_CHANNEL: number
+declare PURSUIT_FUZZ_FACTOR: number
+declare PURSUIT_GOAL_TOLERANCE: number
+declare PURSUIT_INTERCEPT: number
+declare PURSUIT_OFFSET: number
+declare PU_EVADE_HIDDEN: number
+declare PU_EVADE_SPOTTED: number
+declare PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED: number
+declare PU_FAILURE_INVALID_GOAL: number
+declare PU_FAILURE_INVALID_START: number
+declare PU_FAILURE_NO_NAVMESH: number
+declare PU_FAILURE_NO_VALID_DESTINATION: number
+declare PU_FAILURE_OTHER: number
+declare PU_FAILURE_PARCEL_UNREACHABLE: number
+declare PU_FAILURE_TARGET_GONE: number
+declare PU_FAILURE_UNREACHABLE: number
+declare PU_GOAL_REACHED: number
+declare PU_SLOWDOWN_DISTANCE_REACHED: number
+declare RAD_TO_DEG: number
+declare RCERR_CAST_TIME_EXCEEDED: number
+declare RCERR_SIM_PERF_LOW: number
+declare RCERR_UNKNOWN: number
+declare RC_DATA_FLAGS: number
+declare RC_DETECT_PHANTOM: number
+declare RC_GET_LINK_NUM: number
+declare RC_GET_NORMAL: number
+declare RC_GET_ROOT_KEY: number
+declare RC_MAX_HITS: number
+declare RC_REJECT_AGENTS: number
+declare RC_REJECT_LAND: number
+declare RC_REJECT_NONPHYSICAL: number
+declare RC_REJECT_PHYSICAL: number
+declare RC_REJECT_TYPES: number
+declare REGION_FLAG_ALLOW_DAMAGE: number
+declare REGION_FLAG_ALLOW_DIRECT_TELEPORT: number
+declare REGION_FLAG_BLOCK_FLY: number
+declare REGION_FLAG_BLOCK_FLYOVER: number
+declare REGION_FLAG_BLOCK_TERRAFORM: number
+declare REGION_FLAG_DISABLE_COLLISIONS: number
+declare REGION_FLAG_DISABLE_PHYSICS: number
+declare REGION_FLAG_FIXED_SUN: number
+declare REGION_FLAG_RESTRICT_PUSHOBJECT: number
+declare REGION_FLAG_SANDBOX: number
+declare REMOTE_DATA_CHANNEL: number
+declare REMOTE_DATA_REPLY: number
+declare REMOTE_DATA_REQUEST: number
+declare REQUIRE_LINE_OF_SIGHT: number
+declare RESTITUTION: number
+declare REVERSE: number
+declare REZ_ACCEL: number
+declare REZ_DAMAGE: number
+declare REZ_DAMAGE_TYPE: number
+declare REZ_FLAGS: number
+declare REZ_FLAG_BLOCK_GRAB_OBJECT: number
+declare REZ_FLAG_DIE_ON_COLLIDE: number
+declare REZ_FLAG_DIE_ON_NOENTRY: number
+declare REZ_FLAG_NO_COLLIDE_FAMILY: number
+declare REZ_FLAG_NO_COLLIDE_OWNER: number
+declare REZ_FLAG_PHANTOM: number
+declare REZ_FLAG_PHYSICAL: number
+declare REZ_FLAG_TEMP: number
+declare REZ_LOCK_AXES: number
+declare REZ_OMEGA: number
+declare REZ_PARAM: number
+declare REZ_PARAM_STRING: number
+declare REZ_POS: number
+declare REZ_ROT: number
+declare REZ_SOUND: number
+declare REZ_SOUND_COLLIDE: number
+declare REZ_VEL: number
+declare ROTATE: number
+declare SCALE: number
+declare SCRIPTED: number
+declare SIM_STAT_ACTIVE_SCRIPT_COUNT: number
+declare SIM_STAT_AGENT_COUNT: number
+declare SIM_STAT_AGENT_MS: number
+declare SIM_STAT_AGENT_UPDATES: number
+declare SIM_STAT_AI_MS: number
+declare SIM_STAT_ASSET_DOWNLOADS: number
+declare SIM_STAT_ASSET_UPLOADS: number
+declare SIM_STAT_CHILD_AGENT_COUNT: number
+declare SIM_STAT_FRAME_MS: number
+declare SIM_STAT_IMAGE_MS: number
+declare SIM_STAT_IO_PUMP_MS: number
+declare SIM_STAT_NET_MS: number
+declare SIM_STAT_OTHER_MS: number
+declare SIM_STAT_PACKETS_IN: number
+declare SIM_STAT_PACKETS_OUT: number
+declare SIM_STAT_PCT_CHARS_STEPPED: number
+declare SIM_STAT_PHYSICS_FPS: number
+declare SIM_STAT_PHYSICS_MS: number
+declare SIM_STAT_PHYSICS_OTHER_MS: number
+declare SIM_STAT_PHYSICS_SHAPE_MS: number
+declare SIM_STAT_PHYSICS_STEP_MS: number
+declare SIM_STAT_SCRIPT_EPS: number
+declare SIM_STAT_SCRIPT_MS: number
+declare SIM_STAT_SCRIPT_RUN_PCT: number
+declare SIM_STAT_SLEEP_MS: number
+declare SIM_STAT_SPARE_MS: number
+declare SIM_STAT_UNACKED_BYTES: number
+declare SIT_FLAG_ALLOW_UNSIT: number
+declare SIT_FLAG_NO_COLLIDE: number
+declare SIT_FLAG_NO_DAMAGE: number
+declare SIT_FLAG_SCRIPTED_ONLY: number
+declare SIT_FLAG_SIT_TARGET: number
+declare SIT_INVALID_AGENT: number
+declare SIT_INVALID_LINK: number
+declare SIT_INVALID_OBJECT: number
+declare SIT_NOT_EXPERIENCE: number
+declare SIT_NO_ACCESS: number
+declare SIT_NO_EXPERIENCE_PERMISSION: number
+declare SIT_NO_SIT_TARGET: number
+declare SIT_OK: number
+declare SKY_AMBIENT: number
+declare SKY_BLUE: number
+declare SKY_CLOUDS: number
+declare SKY_CLOUD_TEXTURE: number
+declare SKY_DOME: number
+declare SKY_GAMMA: number
+declare SKY_GLOW: number
+declare SKY_HAZE: number
+declare SKY_LIGHT: number
+declare SKY_MOON: number
+declare SKY_MOON_TEXTURE: number
+declare SKY_PLANET: number
+declare SKY_REFLECTION_PROBE_AMBIANCE: number
+declare SKY_REFRACTION: number
+declare SKY_STAR_BRIGHTNESS: number
+declare SKY_SUN: number
+declare SKY_SUN_TEXTURE: number
+declare SKY_TEXTURE_DEFAULTS: number
+declare SKY_TRACKS: number
+declare SMOOTH: number
+declare SOUND_LOOP: number
+declare SOUND_PLAY: number
+declare SOUND_SYNC: number
+declare SOUND_TRIGGER: number
+declare SQRT2: number
+declare STATUS_BLOCK_GRAB: number
+declare STATUS_BLOCK_GRAB_OBJECT: number
+declare STATUS_BOUNDS_ERROR: number
+declare STATUS_CAST_SHADOWS: number
+declare STATUS_DIE_AT_EDGE: number
+declare STATUS_DIE_AT_NO_ENTRY: number
+declare STATUS_INTERNAL_ERROR: number
+declare STATUS_MALFORMED_PARAMS: number
+declare STATUS_NOT_FOUND: number
+declare STATUS_NOT_SUPPORTED: number
+declare STATUS_OK: number
+declare STATUS_PHANTOM: number
+declare STATUS_PHYSICS: number
+declare STATUS_RETURN_AT_EDGE: number
+declare STATUS_ROTATE_X: number
+declare STATUS_ROTATE_Y: number
+declare STATUS_ROTATE_Z: number
+declare STATUS_SANDBOX: number
+declare STATUS_TYPE_MISMATCH: number
+declare STATUS_WHITELIST_FAILED: number
+declare STRING_TRIM: number
+declare STRING_TRIM_HEAD: number
+declare STRING_TRIM_TAIL: number
+declare TARGETED_EMAIL_OBJECT_OWNER: number
+declare TARGETED_EMAIL_ROOT_CREATOR: number
+declare TERRAIN_DETAIL_1: number
+declare TERRAIN_DETAIL_2: number
+declare TERRAIN_DETAIL_3: number
+declare TERRAIN_DETAIL_4: number
+declare TERRAIN_HEIGHT_RANGE_NE: number
+declare TERRAIN_HEIGHT_RANGE_NW: number
+declare TERRAIN_HEIGHT_RANGE_SE: number
+declare TERRAIN_HEIGHT_RANGE_SW: number
+declare TERRAIN_PBR_OFFSET_1: number
+declare TERRAIN_PBR_OFFSET_2: number
+declare TERRAIN_PBR_OFFSET_3: number
+declare TERRAIN_PBR_OFFSET_4: number
+declare TERRAIN_PBR_ROTATION_1: number
+declare TERRAIN_PBR_ROTATION_2: number
+declare TERRAIN_PBR_ROTATION_3: number
+declare TERRAIN_PBR_ROTATION_4: number
+declare TERRAIN_PBR_SCALE_1: number
+declare TERRAIN_PBR_SCALE_2: number
+declare TERRAIN_PBR_SCALE_3: number
+declare TERRAIN_PBR_SCALE_4: number
+declare TEXTURE_BLANK: uuid
+declare TEXTURE_DEFAULT: uuid
+declare TEXTURE_MEDIA: uuid
+declare TEXTURE_PLYWOOD: uuid
+declare TEXTURE_TRANSPARENT: uuid
+declare TOUCH_INVALID_FACE: number
+declare TOUCH_INVALID_TEXCOORD: vector
+declare TOUCH_INVALID_VECTOR: vector
+declare TP_ROUTING_BLOCKED: number
+declare TP_ROUTING_FREE: number
+declare TP_ROUTING_LANDINGP: number
+declare TRANSFER_BAD_OPTS: number
+declare TRANSFER_BAD_ROOT: number
+declare TRANSFER_DEST: number
+declare TRANSFER_FLAGS: number
+declare TRANSFER_FLAG_COPY: number
+declare TRANSFER_FLAG_RESERVED: number
+declare TRANSFER_FLAG_TAKE: number
+declare TRANSFER_NO_ATTACHMENT: number
+declare TRANSFER_NO_ITEMS: number
+declare TRANSFER_NO_PERMS: number
+declare TRANSFER_NO_TARGET: number
+declare TRANSFER_OK: number
+declare TRANSFER_THROTTLE: number
+declare TRAVERSAL_TYPE: number
+declare TRAVERSAL_TYPE_FAST: number
+declare TRAVERSAL_TYPE_NONE: number
+declare TRAVERSAL_TYPE_SLOW: number
+declare TWO_PI: number
+declare TYPE_FLOAT: number
+declare TYPE_INTEGER: number
+declare TYPE_INVALID: number
+declare TYPE_KEY: number
+declare TYPE_ROTATION: number
+declare TYPE_STRING: number
+declare TYPE_VECTOR: number
+declare URL_REQUEST_DENIED: string
+declare URL_REQUEST_GRANTED: string
+declare VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY: number
+declare VEHICLE_ANGULAR_DEFLECTION_TIMESCALE: number
+declare VEHICLE_ANGULAR_FRICTION_TIMESCALE: number
+declare VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE: number
+declare VEHICLE_ANGULAR_MOTOR_DIRECTION: number
+declare VEHICLE_ANGULAR_MOTOR_TIMESCALE: number
+declare VEHICLE_BANKING_EFFICIENCY: number
+declare VEHICLE_BANKING_MIX: number
+declare VEHICLE_BANKING_TIMESCALE: number
+declare VEHICLE_BUOYANCY: number
+declare VEHICLE_FLAG_BLOCK_INTERFERENCE: number
+declare VEHICLE_FLAG_CAMERA_DECOUPLED: number
+declare VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT: number
+declare VEHICLE_FLAG_HOVER_TERRAIN_ONLY: number
+declare VEHICLE_FLAG_HOVER_UP_ONLY: number
+declare VEHICLE_FLAG_HOVER_WATER_ONLY: number
+declare VEHICLE_FLAG_LIMIT_MOTOR_UP: number
+declare VEHICLE_FLAG_LIMIT_ROLL_ONLY: number
+declare VEHICLE_FLAG_MOUSELOOK_BANK: number
+declare VEHICLE_FLAG_MOUSELOOK_STEER: number
+declare VEHICLE_FLAG_NO_DEFLECTION_UP: number
+declare VEHICLE_FLAG_NO_FLY_UP: number
+declare VEHICLE_HOVER_EFFICIENCY: number
+declare VEHICLE_HOVER_HEIGHT: number
+declare VEHICLE_HOVER_TIMESCALE: number
+declare VEHICLE_LINEAR_DEFLECTION_EFFICIENCY: number
+declare VEHICLE_LINEAR_DEFLECTION_TIMESCALE: number
+declare VEHICLE_LINEAR_FRICTION_TIMESCALE: number
+declare VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE: number
+declare VEHICLE_LINEAR_MOTOR_DIRECTION: number
+declare VEHICLE_LINEAR_MOTOR_OFFSET: number
+declare VEHICLE_LINEAR_MOTOR_TIMESCALE: number
+declare VEHICLE_REFERENCE_FRAME: number
+declare VEHICLE_TYPE_AIRPLANE: number
+declare VEHICLE_TYPE_BALLOON: number
+declare VEHICLE_TYPE_BOAT: number
+declare VEHICLE_TYPE_CAR: number
+declare VEHICLE_TYPE_NONE: number
+declare VEHICLE_TYPE_SLED: number
+declare VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY: number
+declare VEHICLE_VERTICAL_ATTRACTION_TIMESCALE: number
+declare VERTICAL: number
+declare WANDER_PAUSE_AT_WAYPOINTS: number
+declare WATER_BLUR_MULTIPLIER: number
+declare WATER_FOG: number
+declare WATER_FRESNEL: number
+declare WATER_NORMAL_SCALE: number
+declare WATER_NORMAL_TEXTURE: number
+declare WATER_REFRACTION: number
+declare WATER_TEXTURE_DEFAULTS: number
+declare WATER_WAVE_DIRECTION: number
+declare XP_ERROR_EXPERIENCES_DISABLED: number
+declare XP_ERROR_EXPERIENCE_DISABLED: number
+declare XP_ERROR_EXPERIENCE_SUSPENDED: number
+declare XP_ERROR_INVALID_EXPERIENCE: number
+declare XP_ERROR_INVALID_PARAMETERS: number
+declare XP_ERROR_KEY_NOT_FOUND: number
+declare XP_ERROR_MATURITY_EXCEEDED: number
+declare XP_ERROR_NONE: number
+declare XP_ERROR_NOT_FOUND: number
+declare XP_ERROR_NOT_PERMITTED: number
+declare XP_ERROR_NOT_PERMITTED_LAND: number
+declare XP_ERROR_NO_EXPERIENCE: number
+declare XP_ERROR_QUOTA_EXCEEDED: number
+declare XP_ERROR_REQUEST_PERM_TIMEOUT: number
+declare XP_ERROR_RETRY_UPDATE: number
+declare XP_ERROR_STORAGE_EXCEPTION: number
+declare XP_ERROR_STORE_DISABLED: number
+declare XP_ERROR_THROTTLED: number
+declare XP_ERROR_UNKNOWN_ERROR: number
+declare ZERO_ROTATION: quaternion
+declare ZERO_VECTOR: vector
+
+)BUILTIN_SRC";
+
 std::string getBuiltinDefinitionSource()
 {
     std::string result = kBuiltinDefinitionBaseSrc;
@@ -450,6 +2774,8 @@ std::string getBuiltinDefinitionSource()
     {
         result += kBuiltinDefinitionClassSrc;
     }
+
+    result += kBuiltinDefinitionLLSrc;
 
     return result;
 }

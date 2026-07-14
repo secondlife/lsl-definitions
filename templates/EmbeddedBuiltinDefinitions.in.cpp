@@ -160,6 +160,11 @@ declare class: {
 }
 )CLASS_SRC";
 
+static constexpr const char* kBuiltinDefinitionLLSrc = R"BUILTIN_SRC(
+
+$LL_TABLE
+)BUILTIN_SRC";
+
 std::string getBuiltinDefinitionSource()
 {
     std::string result = kBuiltinDefinitionBaseSrc;
@@ -189,6 +194,8 @@ std::string getBuiltinDefinitionSource()
     {
         result += kBuiltinDefinitionClassSrc;
     }
+
+    result += kBuiltinDefinitionLLSrc;
 
     return result;
 }
