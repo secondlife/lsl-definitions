@@ -22,7 +22,7 @@ def gen_slua_embedded_defs(
         defs.write(slua_definitions.global_constants.pop("_VERSION").to_luau_def())
         defs.write("\n")
         for func in slua_definitions.functions.values():
-            if not func.show_in_syntax_files:
+            if func.private or func.local_only:
                 continue
             if func.slua_removed:
                 continue
@@ -60,10 +60,7 @@ def gen_slua_embedded_defs(
         slua_definitions.modules.pop("utf8").write_luau_def(defs)
         inserts["UTF8_TABLE"] = defs.getvalue()
     with io.StringIO() as defs:
-        slua_definitions.modules["buffer"].write_luau_def(defs)
-        inserts["BUFFER_TABLE_NOINTEGER"] = defs.getvalue()
-    with io.StringIO() as defs:
-        slua_definitions.modules.pop("buffer").write_luau_def(defs, enable_fflags=True)
+        slua_definitions.modules.pop("buffer").write_luau_def(defs)
         inserts["BUFFER_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
