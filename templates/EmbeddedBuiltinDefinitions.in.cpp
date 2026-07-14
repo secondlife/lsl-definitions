@@ -90,9 +90,19 @@ static constexpr const char* kBuiltinDefinitionBufferSrc_NOINTEGER = R"BUILTIN_S
 $BUFFER_TABLE
 )BUILTIN_SRC";
 
+static const char* const kBuiltinDefinitionQuaternionSrc = R"BUILTIN_SRC(
+
+$QUATERNION_TABLE
+)BUILTIN_SRC";
+
 static const char* const kBuiltinDefinitionVectorSrc = R"BUILTIN_SRC(
 
 $VECTOR_TABLE
+)BUILTIN_SRC";
+
+static const char* const kBuiltinDefinitionUuidSrc = R"BUILTIN_SRC(
+
+$UUID_TABLE
 )BUILTIN_SRC";
 
 static const char* const kBuiltinDefinitionIntegerSrc = R"BUILTIN_SRC(
@@ -167,6 +177,8 @@ std::string getBuiltinDefinitionSource()
         result += kBuiltinDefinitionBufferSrc_NOINTEGER;
 
     result += kBuiltinDefinitionVectorSrc;
+    result += kBuiltinDefinitionQuaternionSrc;
+    result += kBuiltinDefinitionUuidSrc;
 
     if (FFlag::LuauIntegerType2 && FFlag::LuauIntegerLibrary)
     {

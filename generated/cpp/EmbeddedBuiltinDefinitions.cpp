@@ -284,6 +284,38 @@ declare buffer: {
 
 )BUILTIN_SRC";
 
+static const char* const kBuiltinDefinitionQuaternionSrc = R"BUILTIN_SRC(
+
+declare extern type quaternion with
+  x: number
+  y: number
+  z: number
+  s: number
+  function __add(self, other: quaternion): quaternion
+  function __sub(self, other: quaternion): quaternion
+  function __mul(self, other: quaternion): quaternion
+  function __div(self, other: quaternion): quaternion
+  function __unm(self): quaternion
+  function __eq(self, other: quaternion): boolean
+  function __tostring(self): string
+end
+
+declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion) & {
+  identity: quaternion,
+  create: (x: number, y: number, z: number, s: number) -> quaternion,
+  normalize: (q: quaternion) -> quaternion,
+  magnitude: (q: quaternion) -> number,
+  dot: (a: quaternion, b: quaternion) -> number,
+  slerp: (a: quaternion, b: quaternion, t: number) -> quaternion,
+  conjugate: (q: quaternion) -> quaternion,
+  tofwd: (q: quaternion) -> vector,
+  toleft: (q: quaternion) -> vector,
+  toup: (q: quaternion) -> vector,
+}
+declare rotation: typeof(quaternion)
+
+)BUILTIN_SRC";
+
 static const char* const kBuiltinDefinitionVectorSrc = R"BUILTIN_SRC(
 
 declare extern type vector with
@@ -298,8 +330,6 @@ declare extern type vector with
   function __mod(self, other: vector): vector
   function __tostring(self): string
 end
-
-
 
 declare vector: ((x: number, y: number, z: number?) -> vector) & {
   zero: vector,
@@ -318,6 +348,20 @@ declare vector: ((x: number, y: number, z: number?) -> vector) & {
   max: (v: vector, ...vector) -> vector,
   min: (v: vector, ...vector) -> vector,
   lerp: (a: vector, b: vector, t: number) -> vector,
+}
+
+)BUILTIN_SRC";
+
+static const char* const kBuiltinDefinitionUuidSrc = R"BUILTIN_SRC(
+
+declare extern type uuid with
+  istruthy: boolean
+  bytes: string
+  function __tostring(self): string
+end
+
+declare uuid: ((value: string? | buffer | uuid) -> uuid) & {
+  create: (value: string? | buffer | uuid) -> uuid,
 }
 
 )BUILTIN_SRC";
@@ -394,6 +438,8 @@ std::string getBuiltinDefinitionSource()
         result += kBuiltinDefinitionBufferSrc_NOINTEGER;
 
     result += kBuiltinDefinitionVectorSrc;
+    result += kBuiltinDefinitionQuaternionSrc;
+    result += kBuiltinDefinitionUuidSrc;
 
     if (FFlag::LuauIntegerType2 && FFlag::LuauIntegerLibrary)
     {

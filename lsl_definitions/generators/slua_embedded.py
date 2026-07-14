@@ -66,6 +66,18 @@ def gen_slua_embedded_defs(
         slua_definitions.base_classes.pop("vector").write_luau_def(defs)
         slua_definitions.modules.pop("vector").write_luau_def(defs)
         inserts["VECTOR_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.base_classes.pop("quaternion").write_luau_def(defs)
+        slua_definitions.modules.pop("quaternion").write_luau_def(defs)
+        var = slua_definitions.global_variables.pop("rotation")
+        defs.write("declare ")
+        defs.write(var.to_luau_def())
+        defs.write("\n")
+        inserts["QUATERNION_TABLE"] = defs.getvalue()
+    with io.StringIO() as defs:
+        slua_definitions.base_classes.pop("uuid").write_luau_def(defs)
+        slua_definitions.modules.pop("uuid").write_luau_def(defs)
+        inserts["UUID_TABLE"] = defs.getvalue()
 
     with open(template_path) as f:
         template = Template(f.read())
