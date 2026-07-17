@@ -359,7 +359,7 @@
         "documentation": "Returns the count of val's leading zeros."
     },
     "@sl-slua/global/integer.countrz": {
-        "documentation": "Returns the count of val's troiling zeros."
+        "documentation": "Returns the count of val's trailing zeros."
     },
     "@sl-slua/global/integer.create": {
         "documentation": "Returns number val converted to an integer. Returns nil if it has a fractional part, is out of range, or is NaN."

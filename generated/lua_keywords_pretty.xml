@@ -13562,7 +13562,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the count of val's troiling zeros.</string>
+            <string>Returns the count of val's trailing zeros.</string>
          </map>
          <key>integer.create</key>
          <map>

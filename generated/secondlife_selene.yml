@@ -5540,7 +5540,7 @@ globals:
     args:
     - type: any
     must_use: true
-    description: Returns the count of val's troiling zeros.
+    description: Returns the count of val's trailing zeros.
   integer.create:
     args:
     - type: number
