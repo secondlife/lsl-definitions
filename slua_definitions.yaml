@@ -1709,7 +1709,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: cos
-    comment: Returns the cosine of theta. theta is in radians.
+    comment: Returns the cosine of theta. Theta is in radians.
     parameters:
     - name: theta
       comment: Angle in radians.
@@ -2001,7 +2001,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: sin
-    comment: Returns the sine of theta. theta is in radians.
+    comment: Returns the sine of theta. Theta is in radians.
     parameters:
     - name: theta
       comment: Angle in radians.
@@ -2031,7 +2031,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: tan
-    comment: Returns the tangent of theta. theta is in radians.
+    comment: Returns the tangent of theta. Theta is in radians.
     parameters:
     - name: theta
       comment: Angle in radians.

@@ -13711,7 +13711,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the cosine of theta. theta is in radians.</string>
+            <string>Returns the cosine of theta. Theta is in radians.</string>
          </map>
          <key>math.cosh</key>
          <map>
@@ -14423,7 +14423,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the sine of theta. theta is in radians.</string>
+            <string>Returns the sine of theta. Theta is in radians.</string>
          </map>
          <key>math.sinh</key>
          <map>
@@ -14492,7 +14492,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the tangent of theta. theta is in radians.</string>
+            <string>Returns the tangent of theta. Theta is in radians.</string>
          </map>
          <key>math.tanh</key>
          <map>
@@ -17931,7 +17931,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the cosine of theta. theta is in radians.</string>
+            <string>Returns the cosine of theta. Theta is in radians.</string>
          </map>
          <key>ll.CreateCharacter</key>
          <map>
@@ -29950,7 +29950,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the sine of theta. theta is in radians.</string>
+            <string>Returns the sine of theta. Theta is in radians.</string>
          </map>
          <key>ll.SitOnLink</key>
          <map>
@@ -30492,7 +30492,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the tangent of theta. theta is in radians.</string>
+            <string>Returns the tangent of theta. Theta is in radians.</string>
          </map>
          <key>ll.Target</key>
          <map>

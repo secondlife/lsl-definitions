@@ -423,7 +423,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#clamp"
     },
     "@sl-slua/global/math.cos": {
-        "documentation": "Returns the cosine of theta. theta is in radians.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cos"
     },
     "@sl-slua/global/math.cosh": {
@@ -511,7 +511,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sign"
     },
     "@sl-slua/global/math.sin": {
-        "documentation": "Returns the sine of theta. theta is in radians.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sin"
     },
     "@sl-slua/global/math.sinh": {
@@ -523,7 +523,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt"
     },
     "@sl-slua/global/math.tan": {
-        "documentation": "Returns the tangent of theta. theta is in radians.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tan"
     },
     "@sl-slua/global/math.tanh": {
@@ -1051,7 +1051,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlComputeHash"
     },
     "@sl-slua/global/ll.Cos": {
-        "documentation": "Returns the cosine of theta. theta is in radians.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCos"
     },
     "@sl-slua/global/ll.CreateCharacter": {
@@ -2751,7 +2751,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSignRSA"
     },
     "@sl-slua/global/ll.Sin": {
-        "documentation": "Returns the sine of theta. theta is in radians.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSin"
     },
     "@sl-slua/global/ll.SitOnLink": {
@@ -2835,7 +2835,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTakeControls"
     },
     "@sl-slua/global/ll.Tan": {
-        "documentation": "Returns the tangent of theta. theta is in radians.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTan"
     },
     "@sl-slua/global/ll.Target": {
@@ -3114,7 +3114,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlComputeHash"
     },
     "@sl-slua/global/llcompat.Cos": {
-        "documentation": "Returns the cosine of theta. theta is in radians.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCos"
     },
     "@sl-slua/global/llcompat.CreateCharacter": {
@@ -4830,7 +4830,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSignRSA"
     },
     "@sl-slua/global/llcompat.Sin": {
-        "documentation": "Returns the sine of theta. theta is in radians.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSin"
     },
     "@sl-slua/global/llcompat.SitOnLink": {
@@ -4914,7 +4914,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTakeControls"
     },
     "@sl-slua/global/llcompat.Tan": {
-        "documentation": "Returns the tangent of theta. theta is in radians.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTan"
     },
     "@sl-slua/global/llcompat.Target": {

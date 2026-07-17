@@ -11261,7 +11261,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the cosine of theta. theta is in radians.</string>
+            <string>Returns the cosine of theta. Theta is in radians.</string>
          </map>
          <key>llCreateCharacter</key>
          <map>
@@ -23256,7 +23256,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the sine of theta. theta is in radians.</string>
+            <string>Returns the sine of theta. Theta is in radians.</string>
          </map>
          <key>llSitOnLink</key>
          <map>
@@ -23790,7 +23790,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the tangent of theta. theta is in radians.</string>
+            <string>Returns the tangent of theta. Theta is in radians.</string>
          </map>
          <key>llTarget</key>
          <map>

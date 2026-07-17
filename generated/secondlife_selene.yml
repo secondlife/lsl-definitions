@@ -5604,7 +5604,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of theta. theta is in radians.
+    description: Returns the cosine of theta. Theta is in radians.
   math.cosh:
     args:
     - type: number
@@ -5745,7 +5745,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of theta. theta is in radians.
+    description: Returns the sine of theta. Theta is in radians.
   math.sinh:
     args:
     - type: number
@@ -5760,7 +5760,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of theta. theta is in radians.
+    description: Returns the tangent of theta. Theta is in radians.
   math.tanh:
     args:
     - type: number
@@ -6726,7 +6726,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of theta. theta is in radians.
+    description: Returns the cosine of theta. Theta is in radians.
   ll.CreateCharacter:
     args:
     - type: table
@@ -9812,7 +9812,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the sine of theta. theta is in radians.
+    description: Returns the sine of theta. Theta is in radians.
   ll.SitOnLink:
     args:
     - type:
@@ -9964,7 +9964,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of theta. theta is in radians.
+    description: Returns the tangent of theta. Theta is in radians.
   ll.Target:
     args:
     - type:
@@ -10607,11 +10607,11 @@ globals:
       cryptographic algorithm.
   llcompat.Cos:
     deprecated:
-      message: Returns the cosine of theta. theta is in radians.
+      message: Returns the cosine of theta. Theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns the cosine of theta. theta is in radians.
+    description: Returns the cosine of theta. Theta is in radians.
   llcompat.CreateCharacter:
     deprecated:
       message: Converts the linkset containing the script into a pathfinding character
@@ -14960,11 +14960,11 @@ globals:
       or sha512). Can be paired with llVerifyRSA to pass verifiable messages.
   llcompat.Sin:
     deprecated:
-      message: Returns the sine of theta. theta is in radians.
+      message: Returns the sine of theta. Theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns the sine of theta. theta is in radians.
+    description: Returns the sine of theta. Theta is in radians.
   llcompat.SitOnLink:
     deprecated:
       message: Forces the avatar specified by agent_id (who must be participating
@@ -15149,11 +15149,11 @@ globals:
       the PERMISSION_TAKE_CONTROLS runtime permission.
   llcompat.Tan:
     deprecated:
-      message: Returns the tangent of theta. theta is in radians.
+      message: Returns the tangent of theta. Theta is in radians.
     args:
     - type: number
     must_use: true
-    description: Returns the tangent of theta. theta is in radians.
+    description: Returns the tangent of theta. Theta is in radians.
   llcompat.Target:
     deprecated:
       message: Registers a positional target at position with a leeway radius range.

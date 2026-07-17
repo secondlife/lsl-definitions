@@ -1565,7 +1565,7 @@ math:
     tooltip: Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.
   llCos( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the cosine of theta. theta is in radians.
+    tooltip: Returns the cosine of theta. Theta is in radians.
   llEuler2Rot( vector vec ) -> rotation:
     vec: Vector of Euler angles to convert, in radians.
     tooltip: Returns the quaternion representation of the Euler angles (in radians) within vec.
@@ -1628,13 +1628,13 @@ math:
     tooltip: Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.
   llSin( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the sine of theta. theta is in radians.
+    tooltip: Returns the sine of theta. Theta is in radians.
   llSqrt( float val ) -> float:
     val: Positive float value (must be >= 0.0).
     tooltip: Returns the square root of val. If negative, return NaN.
   llTan( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the tangent of theta. theta is in radians.
+    tooltip: Returns the tangent of theta. Theta is in radians.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
     vec_b: Second vector.
@@ -1723,7 +1723,7 @@ math_trig:
     tooltip: Returns the rotation that rotates angle radians around the axis vector.
   llCos( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the cosine of theta. theta is in radians.
+    tooltip: Returns the cosine of theta. Theta is in radians.
   llRot2Angle( rotation q ) -> float:
     q: Rotation to evaluate.
     tooltip: Returns the angle, in radians, that q rotates.
@@ -1745,10 +1745,10 @@ math_trig:
     tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
   llSin( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the sine of theta. theta is in radians.
+    tooltip: Returns the sine of theta. Theta is in radians.
   llTan( float theta ) -> float:
     theta: Angle in radians.
-    tooltip: Returns the tangent of theta. theta is in radians.
+    tooltip: Returns the tangent of theta. Theta is in radians.
 media:
   changed( integer changes ):
     changes: A bitfield of CHANGED_* flags representing what changed.

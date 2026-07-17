@@ -8074,7 +8074,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns the cosine of theta. theta is in radians.
+    tooltip: Returns the cosine of theta. Theta is in radians.
     categories:
       - math
       - math_trig
@@ -15915,7 +15915,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns the sine of theta. theta is in radians.
+    tooltip: Returns the sine of theta. Theta is in radians.
     categories:
       - math
       - math_trig
@@ -16292,7 +16292,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns the tangent of theta. theta is in radians.
+    tooltip: Returns the tangent of theta. Theta is in radians.
     categories:
       - math
       - math_trig
