@@ -2237,7 +2237,7 @@ modules:
     typechecker: {checked: true}
   - name: conjugate
     comment: Returns the conjugate of the quaternion.
-      Equivilant to quaternion(-q.x, -q.y, -q.z, q.s))
+      Equivalent to quaternion(-q.x, -q.y, -q.z, q.s))
     parameters:
     - name: q
       comment: Quaternion to conjugate.
@@ -2247,7 +2247,7 @@ modules:
     typechecker: {checked: true}
   - name: tofwd
     comment: Returns the unit vector pointing toward positive X direction (forward)
-      in the coordinate space of rotation q. Equivilant to vector(1, 0, 0) * q.
+      in the coordinate space of rotation q. Equivalent to vector(1, 0, 0) * q.
     parameters:
     - name: q
       comment: Quaternion to convert.
@@ -2257,7 +2257,7 @@ modules:
     typechecker: {checked: true}
   - name: toleft
     comment: Returns the unit vector pointing toward positive Y direction (left)
-      in the coordinate space of rotation q. Equivilant to vector(0, 1, 0) * q.
+      in the coordinate space of rotation q. Equivalent to vector(0, 1, 0) * q.
     parameters:
     - name: q
       comment: Quaternion to convert.
@@ -2267,7 +2267,7 @@ modules:
     typechecker: {checked: true}
   - name: toup
     comment: Returns the unit vector pointing toward positive Z direction (up)
-      in the coordinate space of rotation q. Equivilant to vector(0, 0, 1) * q.
+      in the coordinate space of rotation q. Equivalent to vector(0, 0, 1) * q.
     parameters:
     - name: q
       comment: Quaternion to convert.

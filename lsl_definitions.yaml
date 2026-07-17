@@ -8062,7 +8062,7 @@ functions:
   llCos:
     arguments:
     - theta:
-        tooltip: An angle in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.cos
@@ -14131,7 +14131,7 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
     categories:
       - math
       - math_3d
@@ -14167,7 +14167,7 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the unit vector pointing toward positive X (forward)
-      in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+      in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
     categories:
       - math
       - math_3d
@@ -14188,7 +14188,7 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the unit vector pointing toward positive Y (left)
-      in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+      in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
     categories:
       - math
       - math_3d
@@ -14209,7 +14209,7 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the unit vector pointing toward positive Z (up)
-      in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+      in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
     categories:
       - math
       - math_3d
@@ -15903,7 +15903,7 @@ functions:
   llSin:
     arguments:
     - theta:
-        tooltip: An angle in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.sin
@@ -16035,7 +16035,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns the square root of val. If negative, return Nan.
+    tooltip: Returns the square root of val. If negative, return NaN.
     categories:
       - math
   llStartAnimation:
@@ -16280,7 +16280,7 @@ functions:
   llTan:
     arguments:
     - theta:
-        tooltip: An angle in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.tan

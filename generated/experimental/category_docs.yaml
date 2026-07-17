@@ -1564,7 +1564,7 @@ math:
     val: Number to round up.
     tooltip: Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.
   llCos( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the cosine of theta. theta is in radians.
   llEuler2Rot( vector vec ) -> rotation:
     vec: Vector of Euler angles to convert, in radians.
@@ -1606,19 +1606,19 @@ math:
     tooltip: Returns the angle, in radians, that q rotates.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Euler( rotation q ) -> vector:
     q: Rotation to convert.
     tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
     end_vec: Ending vector.
@@ -1627,13 +1627,13 @@ math:
     val: Number to round.
     tooltip: Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.
   llSin( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the sine of theta. theta is in radians.
   llSqrt( float val ) -> float:
     val: Positive float value (must be >= 0.0).
-    tooltip: Returns the square root of val. If negative, return Nan.
+    tooltip: Returns the square root of val. If negative, return NaN.
   llTan( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the tangent of theta. theta is in radians.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
@@ -1670,19 +1670,19 @@ math_3d:
     tooltip: Returns the angle, in radians, that q rotates.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Euler( rotation q ) -> vector:
     q: Rotation to convert.
     tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
     end_vec: Ending vector.
@@ -1722,32 +1722,32 @@ math_trig:
     angle: Angle to rotate, in radians.
     tooltip: Returns the rotation that rotates angle radians around the axis vector.
   llCos( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the cosine of theta. theta is in radians.
   llRot2Angle( rotation q ) -> float:
     q: Rotation to evaluate.
     tooltip: Returns the angle, in radians, that q rotates.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Fwd( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
     end_vec: Ending vector.
     tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
   llSin( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the sine of theta. theta is in radians.
   llTan( float theta ) -> float:
-    theta: An angle in radians.
+    theta: Angle in radians.
     tooltip: Returns the tangent of theta. theta is in radians.
 media:
   changed( integer changes ):
@@ -3084,19 +3084,19 @@ quaternion:
     tooltip: Returns the angle, in radians, that q rotates.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Euler( rotation q ) -> vector:
     q: Rotation to convert.
     tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
     end_vec: Ending vector.
@@ -3875,16 +3875,16 @@ vector:
     tooltip: Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
-    tooltip: Returns the  unit vector axis that q rotates around.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Fwd( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivilant to <1, 0, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivilant to <0, 1, 0> * q.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
     q: Rotation to convert.
-    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivilant to <0, 0, 1> * q.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
     vec_b: Second vector.
