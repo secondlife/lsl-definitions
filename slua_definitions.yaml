@@ -937,7 +937,7 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: countrz
-    comment: Returns the count of val's troiling zeros.
+    comment: Returns the count of val's trailing zeros.
     parameters:
     - name: val
       comment: Integer to count trailing zeros in.

@@ -5174,7 +5174,7 @@ globals:
     args:
     - type: number
     must_use: true
-    description: Returns the count of val's troiling zeros.
+    description: Returns the count of val's trailing zeros.
   bit32.byteswap:
     args:
     - type: number

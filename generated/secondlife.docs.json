@@ -148,7 +148,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countlz"
     },
     "@sl-slua/global/bit32.countrz": {
-        "documentation": "Returns the count of val's troiling zeros.",
+        "documentation": "Returns the count of val's trailing zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countrz"
     },
     "@sl-slua/global/bit32.byteswap": {

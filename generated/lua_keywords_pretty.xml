@@ -11649,7 +11649,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the count of val's troiling zeros.</string>
+            <string>Returns the count of val's trailing zeros.</string>
          </map>
          <key>bit32.extract</key>
          <map>
