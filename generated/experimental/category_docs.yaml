@@ -585,7 +585,7 @@ data_conversion:
     tooltip: Parses the JSON string json and returns the JSON type constant (JSON_*) representing the value found at specifiers.
   llLinear2sRGB( vector color ) -> vector:
     color: Color vector in the linear RGB space to convert.
-    tooltip: Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llList2CSV( list src ) -> string:
     src: Source list to convert.
     tooltip: Returns a string of comma-separated values taken in order from the list src.
@@ -645,7 +645,7 @@ data_conversion:
     tooltip: Deprecated (use llXorBase64 instead). Correctly performs (unless nulls are present) a bitwise exclusive OR (XOR) on Base64 strings str1 and str2.
   llsRGB2Linear( vector color ) -> vector:
     color: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 data_storage:
   linkset_data( integer action, string name, string value ):
     action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
@@ -1580,7 +1580,7 @@ math:
     tooltip: Returns a pseudo-random float in the range [0.0, mag) or (mag, 0.0] depending on the sign of mag. The value is inclusive of 0.0 but exclusive of mag.
   llLinear2sRGB( vector color ) -> vector:
     color: Color vector in the linear RGB space to convert.
-    tooltip: Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llListStatistics( integer operation, list src ) -> float:
     operation: LIST_STAT_* constant of the statistical operation to perform.
     src: List of numbers to analyze.
@@ -1644,10 +1644,10 @@ math:
     tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns the normalized unit vector pointing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
   llsRGB2Linear( vector color ) -> vector:
     color: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 math_3d:
   llAngleBetween( rotation start_rot, rotation end_rot ) -> float:
     start_rot: Starting rotation.
@@ -1696,7 +1696,7 @@ math_3d:
     tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns the normalized unit vector pointing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
 math_trig:
   llAcos( float val ) -> float:
     val: A number in the range [-1.0, 1.0].
@@ -2741,7 +2741,7 @@ prim_appearance:
     tooltip: Checks the specified face on the linked prim link. Returns TRUE if the face material is a PBR render material, or FALSE if it uses Blinn-Phong diffuse textures.
   llLinear2sRGB( vector color ) -> vector:
     color: Color vector in the linear RGB space to convert.
-    tooltip: Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llOffsetTexture( float u, float v, integer face ) -> void:
     u: Horizontal (U) offset, typically in the interval [-1.0, 1.0].
     v: Vertical (V) offset, typically in the interval [-1.0, 1.0].
@@ -2843,7 +2843,7 @@ prim_appearance:
       rate defines playback speed.
   llsRGB2Linear( vector color ) -> vector:
     color: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 prim_inventory:
   changed( integer changes ):
     changes: A bitfield of CHANGED_* flags representing what changed.
@@ -3872,7 +3872,7 @@ uuid:
 vector:
   llLinear2sRGB( vector color ) -> vector:
     color: Color vector in the linear RGB space to convert.
-    tooltip: Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llRot2Axis( rotation q ) -> vector:
     q: Rotation to evaluate.
     tooltip: Returns the unit vector axis that q rotates around.
@@ -3894,10 +3894,10 @@ vector:
     tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns the normalized unit vector pointing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
   llsRGB2Linear( vector color ) -> vector:
     color: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 vehicles:
   llRemoveVehicleFlags( integer flags ) -> void:
     flags: A bitwise mask of VEHICLE_FLAG_* constants to disable.

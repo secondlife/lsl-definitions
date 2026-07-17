@@ -16181,7 +16181,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the color vector converted from the linear RGB colorspace into the sRGB colorspace.</string>
+            <string>Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.</string>
          </map>
          <key>llLinkAdjustSoundVolume</key>
          <map>
@@ -24489,7 +24489,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the normalized unit vector pointing the same direction as vec.</string>
+            <string>Returns the normalized unit vector pointing the same direction as vec. If &lt;0, 0, 0&gt;, return &lt;0, 0, 0&gt;.</string>
          </map>
          <key>llVerifyRSA</key>
          <map>
@@ -24829,7 +24829,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the color vector converted from the sRGB colorspace into the linear RGB colorspace.</string>
+            <string>Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.</string>
          </map>
       </map>
       <key>llsd-lsl-syntax-version</key>

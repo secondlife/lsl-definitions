@@ -11554,8 +11554,8 @@ functions:
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns the color vector converted from the linear
-      RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted
+      from the linear RGB colorspace argument.
     categories:
       - data_conversion
       - math
@@ -16718,6 +16718,7 @@ functions:
     return: vector
     sleep: 0.0
     tooltip: Returns the normalized unit vector pointing the same direction as vec.
+      If <0, 0, 0>, return <0, 0, 0>.
     categories:
       - math
       - math_3d
@@ -16928,8 +16929,8 @@ functions:
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns the color vector converted from the
-      sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted
+      from the sRGB colorspace argument.
     categories:
       - data_conversion
       - math

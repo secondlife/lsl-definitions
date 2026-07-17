@@ -2192,6 +2192,7 @@ modules:
     typechecker: {checked: true}
   - name: normalize
     comment: Returns the normalized unit quaternion pointing the same direction as q.
+      If <0, 0, 0, 0>, return quaternion.identity = <0, 0, 0, 1>.
     parameters:
     - name: q
       comment: Quaternion to normalize.
@@ -2951,6 +2952,7 @@ modules:
     typechecker: {checked: true}
   - name: normalize
     comment: Returns the normalized unit vector pointing the same direction as vec.
+      If <0, 0, 0>, return <NaN, NaN, NaN>.
     parameters:
     - name: vec
       comment: Vector to normalize.
