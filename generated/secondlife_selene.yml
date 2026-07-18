@@ -5653,7 +5653,8 @@ globals:
     - type: number
     - type: number
     must_use: true
-    description: Linearly interpolates between start and end using factor t.
+    description: Linearly interpolates between start_val and end_val using factor
+      t.
   math.log:
     args:
     - type: number
@@ -5864,7 +5865,8 @@ globals:
         display: quaternion
     - type: number
     must_use: true
-    description: Spherical linear interpolation from start to end using factor t.
+    description: Spherical linear interpolation from start_q to end_q using factor
+      t.
   quaternion.conjugate:
     args:
     - type:
@@ -5942,7 +5944,8 @@ globals:
         display: quaternion
     - type: number
     must_use: true
-    description: Spherical linear interpolation from start to end using factor t.
+    description: Spherical linear interpolation from start_q to end_q using factor
+      t.
   rotation.conjugate:
     args:
     - type:
@@ -6436,7 +6439,8 @@ globals:
         display: vector
     - type: number
     must_use: true
-    description: Linearly interpolates between start and end using factor t.
+    description: Linearly interpolates between start_vec and end_vec using factor
+      t.
   ll.Abs:
     deprecated:
       message: Use 'math.abs' instead. Double precision; fastcall.

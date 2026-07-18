@@ -455,7 +455,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#ldexp"
     },
     "@sl-slua/global/math.lerp": {
-        "documentation": "Linearly interpolates between start and end using factor t.",
+        "documentation": "Linearly interpolates between start_val and end_val using factor t.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#lerp"
     },
     "@sl-slua/global/math.log": {
@@ -586,7 +586,7 @@
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.slerp": {
-        "documentation": "Spherical linear interpolation from start to end using factor t.",
+        "documentation": "Spherical linear interpolation from start_q to end_q using factor t.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.conjugate": {
@@ -626,7 +626,7 @@
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.slerp": {
-        "documentation": "Spherical linear interpolation from start to end using factor t.",
+        "documentation": "Spherical linear interpolation from start_q to end_q using factor t.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.conjugate": {
@@ -900,7 +900,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#min"
     },
     "@sl-slua/global/vector.lerp": {
-        "documentation": "Linearly interpolates between start and end using factor t.",
+        "documentation": "Linearly interpolates between start_vec and end_vec using factor t.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#lerp"
     },
     "@sl-slua/global/ll": {

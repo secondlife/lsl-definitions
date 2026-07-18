@@ -1799,12 +1799,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lerp
-    comment: Linearly interpolates between start and end using factor t.
+    comment: Linearly interpolates between start_val and end_val using factor t.
     parameters:
-    - name: start
+    - name: start_val
       comment: Starting value.
       type: number
-    - name: end
+    - name: end_val
       comment: Ending value.
       type: number
     - name: t
@@ -2222,7 +2222,7 @@ modules:
     must-use: true
     typechecker: {checked: true}
   - name: slerp
-    comment: Spherical linear interpolation from start to end using factor t.
+    comment: Spherical linear interpolation from start_q to end_q using factor t.
     parameters:
     - name: start_q
       comment: Starting quaternion.
@@ -3088,12 +3088,12 @@ modules:
     fastcall: true
     typechecker: {checked: true}
   - name: lerp
-    comment: Linearly interpolates between start and end using factor t.
+    comment: Linearly interpolates between start_vec and end_vec using factor t.
     parameters:
-    - name: start
+    - name: start_vec
       comment: Starting vector.
       type: vector
-    - name: end
+    - name: end_vec
       comment: Ending vector.
       type: vector
     - name: t

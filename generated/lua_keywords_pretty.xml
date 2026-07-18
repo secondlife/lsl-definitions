@@ -13966,7 +13966,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting value.</string>
@@ -13975,7 +13975,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_val</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending value.</string>
@@ -14000,7 +14000,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Linearly interpolates between start and end using factor t.</string>
+            <string>Linearly interpolates between start_val and end_val using factor t.</string>
          </map>
          <key>math.log</key>
          <map>
@@ -14867,7 +14867,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Spherical linear interpolation from start to end using factor t.</string>
+            <string>Spherical linear interpolation from start_q to end_q using factor t.</string>
          </map>
          <key>quaternion.tofwd</key>
          <map>
@@ -16756,7 +16756,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>arguments</key>
             <array>
                <map>
-                  <key>start</key>
+                  <key>start_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Starting vector.</string>
@@ -16765,7 +16765,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                   </map>
                </map>
                <map>
-                  <key>end</key>
+                  <key>end_vec</key>
                   <map>
                      <key>tooltip</key>
                      <string>Ending vector.</string>
@@ -16790,7 +16790,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Linearly interpolates between start and end using factor t.</string>
+            <string>Linearly interpolates between start_vec and end_vec using factor t.</string>
          </map>
          <key>vector.magnitude</key>
          <map>

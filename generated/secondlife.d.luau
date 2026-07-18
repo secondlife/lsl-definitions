@@ -489,7 +489,7 @@ declare math: {
   fmod: @checked (dividend: number, modulus: number) -> number,
   frexp: @checked (val: number) -> (number, number),
   ldexp: @checked (significand: number, exponent: number) -> number,
-  lerp: @checked (start: number, end_: number, t: number) -> number,
+  lerp: @checked (start_val: number, end_val: number, t: number) -> number,
   log: @checked (val: number, base: number?) -> number,
   log10: @checked (val: number) -> number,
   map: @checked (val: number, inMin: number, inMax: number, outMin: number, outMax: number) -> number,
@@ -645,7 +645,7 @@ declare vector: ((x: number, y: number, z: number?) -> vector) & {
   clamp: (vec: vector, min: vector, max: vector) -> vector,
   max: (vec: vector, ...vector) -> vector,
   min: (vec: vector, ...vector) -> vector,
-  lerp: (start: vector, end_: vector, t: number) -> vector,
+  lerp: (start_vec: vector, end_vec: vector, t: number) -> vector,
 }
 
 declare rotation: typeof(quaternion)
