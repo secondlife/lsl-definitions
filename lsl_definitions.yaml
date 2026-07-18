@@ -4027,7 +4027,7 @@ constants:
     type: integer
     value: '0x2000'
   PI:
-    tooltip: Mathematical constant Pi (3.14159265), representing the number of
+    tooltip: Mathematical constant pi, representing the number of
       radians in a half circle (semi-circle). When used in sensor functions, it
       specifies a full sphere scan.
     type: float
@@ -4039,7 +4039,7 @@ constants:
     type: integer
     value: '0x8'
   PI_BY_TWO:
-    tooltip: Constant Pi/2 (1.57079633), representing the number of radians in a
+    tooltip: Mathematical constant pi/2, representing the number of radians in a
       quarter circle. When used in sensor functions, it specifies a hemisphere
       scan.
     type: float
@@ -5958,8 +5958,7 @@ constants:
     type: integer
     value: '0x00'
   RAD_TO_DEG:
-    tooltip: Constant 57.2957795 (precise value is 180/PI). Multiply a value in
-      radians by this number to convert it to degrees.
+    tooltip: 180/PI. Multiply a value in radians by this number to convert it to degrees.
     type: float
     value: '57.2957795'
   RCERR_CAST_TIME_EXCEEDED:
@@ -6930,7 +6929,7 @@ constants:
     type: integer
     value: '0x02'
   SQRT2:
-    tooltip: Mathematical constant representing the square root of 2 (1.41421356).
+    tooltip: Mathematical constant representing the square root of 2.
     type: float
     value: '1.41421356'
   STATUS_BLOCK_GRAB:
@@ -7433,8 +7432,7 @@ constants:
     slua-removed: true
     value: 1
   TWO_PI:
-    tooltip: Mathematical constant representing the number of radians in a full
-      circle (6.28318530, twice the value of PI).
+    tooltip: Mathematical constant pi*2, representing the number of radians in a full circle.
     type: float
     value: '6.28318530'
   TYPE_FLOAT:
@@ -8630,7 +8628,7 @@ functions:
   llAbs:
     arguments:
     - val:
-        tooltip: Any integer value.
+        tooltip: Integer to convert.
         type: integer
     slua-deprecated:
       use: math.abs
@@ -8642,13 +8640,13 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the absolute (positive) value of val.
+    tooltip: Returns the absolute (positive) integer value of val.
     categories:
       - math
   llAcos:
     arguments:
     - val:
-        tooltip: A floating-point value falling in the range [-1.0, 1.0].
+        tooltip: A number in the range [-1.0, 1.0].
         type: float
         range: [-1, 1]
     slua-deprecated:
@@ -8661,7 +8659,7 @@ functions:
     must-use: true # not pure because it might trigger a math error
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arc-cosine of val in radians.
+    tooltip: Returns the arccosine of val in radians.
     categories:
       - math
       - math_trig
@@ -8773,10 +8771,10 @@ functions:
       - prim_inventory
   llAngleBetween:
     arguments:
-    - a:
+    - start_rot:
         tooltip: Starting rotation.
         type: rotation
-    - b:
+    - end_rot:
         tooltip: Ending rotation.
         type: rotation
     energy: 10.0
@@ -8784,8 +8782,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the angle in radians between rotations a
-      and b.
+    tooltip: Returns the angle, in radians, between rotations start_rot and and end_rot.
     categories:
       - math
       - math_3d
@@ -8834,7 +8831,7 @@ functions:
   llAsin:
     arguments:
     - val:
-        tooltip: A floating-point value falling in the range [-1.0, 1.0].
+        tooltip: A number in the range [-1.0, 1.0].
         type: float
         range: [-1, 1]
     slua-deprecated:
@@ -8847,17 +8844,17 @@ functions:
     must-use: true # not pure because it might trigger a math error
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arc-sine of val in radians.
+    tooltip: Returns the arcsine of val in radians.
     categories:
       - math
       - math_trig
   llAtan2:
     arguments:
     - y:
-        tooltip: A floating-point value representing the y coordinate.
+        tooltip: Y coordinate.
         type: float
     - x:
-        tooltip: A floating-point value representing the x coordinate.
+        tooltip: X coordinate.
         type: float
     slua-deprecated:
       use: math.atan2
@@ -8869,7 +8866,8 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the arctangent2 of y and x.
+    tooltip: "Returns the arctangent of y/x in radians, using the signs to determine the quadrant.
+      Note the argument order: Y is the first parameter, X is the second parameter."
     categories:
       - math
       - math_trig
@@ -8969,18 +8967,17 @@ functions:
   llAxisAngle2Rot:
     arguments:
     - axis:
-        tooltip: Axis vector around which the rotation is generated.
+        tooltip: Axis vector to rotate around.
         type: vector
     - angle:
-        tooltip: Angle of rotation, expressed in radians.
+        tooltip: Angle to rotate, in radians.
         type: float
     energy: 10.0
     func-id: 169
     pure: true
     return: rotation
     sleep: 0.0
-    tooltip: Returns the rotation representing a generated angle (in radians) about
-      the specified axis.
+    tooltip: Returns the rotation that rotates angle radians around the axis vector.
     categories:
       - math
       - math_3d
@@ -9094,7 +9091,7 @@ functions:
   llCeil:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round up.
         type: float
     slua-deprecated:
       use: math.ceil
@@ -9106,8 +9103,8 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the smallest integer value greater than or equal to val
-      (rounded toward positive infinity).
+    tooltip: Returns val rounded toward positive infinity.
+      In other words, returns the smallest integer greater than or equal to val.
     categories:
       - math
   llChar:
@@ -9322,7 +9319,7 @@ functions:
   llCos:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.cos
@@ -9334,7 +9331,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the cosine of theta.
+    tooltip: Returns the cosine of theta. Theta is in radians.
     categories:
       - math
       - math_trig
@@ -10005,15 +10002,15 @@ functions:
       - web
   llEuler2Rot:
     arguments:
-    - v:
-        tooltip: Vector of Euler angles to convert.
+    - vec:
+        tooltip: Vector of Euler angles to convert, in radians.
         type: vector
     energy: 10.0
     func-id: 16
     pure: true
     return: rotation
     sleep: 0.0
-    tooltip: Returns the rotation representation of the Euler angles vector v.
+    tooltip: Returns the quaternion representation of the Euler angles (in radians) within vec.
     categories:
       - math
       - math_3d
@@ -10059,7 +10056,7 @@ functions:
   llFabs:
     arguments:
     - val:
-        tooltip: Float value to convert.
+        tooltip: Number to convert.
         type: float
     slua-deprecated:
       use: math.abs
@@ -10071,7 +10068,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the absolute (positive) value of val.
+    tooltip: Returns the absolute (positive) value of val.
     categories:
       - math
   llFindNotecardTextCount:
@@ -10159,7 +10156,7 @@ functions:
   llFloor:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round down.
         type: float
     slua-deprecated:
       use: math.floor
@@ -10171,8 +10168,8 @@ functions:
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the largest integer value less than or equal to val (rounded
-      toward negative infinity).
+    tooltip: Returns val rounded toward negative infinity.
+      In other words, returns the largest integer less than or equal to val.
     categories:
       - math
   llForceMouselook:
@@ -12834,19 +12831,20 @@ functions:
   llLinear2sRGB:
     arguments:
     - color:
-        tooltip: RGB color vector in linear space to convert.
+        tooltip: Color vector in the linear RGB space to convert.
         type: vector
     energy: 10.0
     func-id: 715
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the conversion of color from the linear
-      RGB colorspace into the sRGB colorspace.
+    tooltip: Returns a sRGB colorspace vector converted
+      from the linear RGB colorspace argument.
     categories:
       - data_conversion
       - math
       - prim_appearance
+      - vector
   llLinkAdjustSoundVolume:
     arguments:
     - link:
@@ -13732,14 +13730,15 @@ functions:
         type: integer
         enum-semantics: ListStatisticsOperation
     - src:
-        tooltip: List of floats and integers to analyze.
+        tooltip: List of numbers to analyze.
         type: list
+        slua-type: "{number}"
     energy: 10.0
     func-id: 315
     must-use: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the result of performing the statistical
+    tooltip: Returns the numeric result of the statistical
       aggregate function operation (a LIST_STAT_* constant) on the numeric list
       src.
     categories:
@@ -13833,7 +13832,7 @@ functions:
   llLog:
     arguments:
     - val:
-        tooltip: Float value to evaluate.
+        tooltip: Number to compute the logarithm of.
         type: float
     slua-deprecated:
       use: math.log
@@ -13845,14 +13844,13 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the natural (base e) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    tooltip: Returns natural (base e) logarithm of val. If negative, return 0.0.
     categories:
       - math
   llLog10:
     arguments:
     - val:
-        tooltip: Float value to evaluate.
+        tooltip: Number to compute the logarithm of.
         type: float
     slua-deprecated:
       use: math.log10
@@ -13864,8 +13862,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the base-10 (common) logarithm of the
-      positive value val (returns 0.0 if val <= 0).
+    tooltip: Returns base-10 (common) logarithm of val. If negative, return 0.0.
     categories:
       - math
   llLookAt:
@@ -14212,22 +14209,24 @@ functions:
       - script
   llModPow:
     arguments:
-    - a:
-        tooltip: Base integer value.
+    - base:
+        tooltip: 32-bit unsigned integer base.
         type: integer
-    - b:
-        tooltip: Power exponent (capped at 0xFFFF / 16 bits).
+    - exponent:
+        tooltip: 32-bit unsigned integer exponent.
         type: integer
-    - c:
-        tooltip: Modulus integer value.
+    - modulus:
+        tooltip: 32-bit unsigned integer modulus.
         type: integer
     energy: 10.0
     func-id: 300
     pure: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing a raised to the power b, modulo c
-      (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+    tooltip: Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m).
+      All inputs are wrapped to unsigned 32-bit integer range [0..4294967295].
+      Output is wrapped to signed 32-bit integer range [-2147483648..2147483647].
+      Will never overflow, unlike (b^e), which can overflow to inf.
     categories:
       - math
   llModifyLand:
@@ -14618,10 +14617,10 @@ functions:
   llPow:
     arguments:
     - base:
-        tooltip: Base float value.
+        tooltip: Base number.
         type: float
     - exponent:
-        tooltip: Exponent float value.
+        tooltip: Exponent number.
         type: float
     slua-deprecated:
       use: "^"
@@ -14633,8 +14632,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing base raised to the power exponent. Returns
-      0 and triggers a Math Error for imaginary results.
+    tooltip: Returns base raised to the power exponent. If result is imaginary, returns NaN.
     categories:
       - math
   llPreloadSound:
@@ -15402,15 +15400,15 @@ functions:
       - rez
   llRot2Angle:
     arguments:
-    - rot:
-        tooltip: Rotation value.
+    - q:
+        tooltip: Rotation to evaluate.
         type: rotation
     energy: 10.0
     func-id: 171
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the rotation angle of rot.
+    tooltip: Returns the angle, in radians, that q rotates.
     categories:
       - math
       - math_3d
@@ -15418,15 +15416,15 @@ functions:
       - quaternion
   llRot2Axis:
     arguments:
-    - rot:
-        tooltip: Rotation value.
+    - q:
+        tooltip: Rotation to evaluate.
         type: rotation
     energy: 10.0
     func-id: 170
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the rotation axis of rot.
+    tooltip: Returns the unit vector axis that q rotates around.
     categories:
       - math
       - math_3d
@@ -15435,16 +15433,15 @@ functions:
       - vector
   llRot2Euler:
     arguments:
-    - quat:
-        tooltip: Rotation value to convert.
+    - q:
+        tooltip: Rotation to convert.
         type: rotation
     energy: 10.0
     func-id: 15
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the Euler rotation (roll, pitch, yaw) of
-      quat, with each component expressed in radians.
+    tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
     categories:
       - math
       - math_3d
@@ -15452,7 +15449,7 @@ functions:
   llRot2Fwd:
     arguments:
     - q:
-        tooltip: Rotation value.
+        tooltip: Rotation to convert.
         type: rotation
     slua-deprecated:
       use: quaternion.tofwd
@@ -15462,9 +15459,8 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a unit vector pointing in the local positive X direction
-      (forward) relative to the parent (root prim or region) defined by rotation
-      q.
+    tooltip: Returns the unit vector pointing toward positive X (forward)
+      in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
     categories:
       - math
       - math_3d
@@ -15474,7 +15470,7 @@ functions:
   llRot2Left:
     arguments:
     - q:
-        tooltip: Rotation value.
+        tooltip: Rotation to convert.
         type: rotation
     slua-deprecated:
       use: quaternion.toleft
@@ -15484,8 +15480,8 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left)
-      relative to the parent (root prim or region) defined by rotation q.
+    tooltip: Returns the unit vector pointing toward positive Y (left)
+      in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
     categories:
       - math
       - math_3d
@@ -15495,7 +15491,7 @@ functions:
   llRot2Up:
     arguments:
     - q:
-        tooltip: Rotation value.
+        tooltip: Rotation to convert.
         type: rotation
     slua-deprecated:
       use: quaternion.toup
@@ -15505,8 +15501,8 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up)
-      relative to the parent (root prim or region) defined by rotation q.
+    tooltip: Returns the unit vector pointing toward positive Z (up)
+      in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
     categories:
       - math
       - math_3d
@@ -15519,15 +15515,14 @@ functions:
         tooltip: Starting vector.
         type: vector
     - end_vec:
-        tooltip: Target ending vector.
+        tooltip: Ending vector.
         type: vector
     energy: 10.0
     func-id: 21
     pure: true
     return: rotation
     sleep: 0.0
-    tooltip: Returns a rotation representing the shortest path rotation from vector
-      start to vector end.
+    tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
     categories:
       - math
       - math_3d
@@ -15609,7 +15604,7 @@ functions:
   llRound:
     arguments:
     - val:
-        tooltip: Float value to round.
+        tooltip: Number to round.
         type: float
     slua-deprecated:
       use: math.round
@@ -15620,7 +15615,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the integer that float val is closest to.
+    tooltip: Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.
     categories:
       - math
   llSHA1String:
@@ -17223,7 +17218,7 @@ functions:
   llSin:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.sin
@@ -17235,7 +17230,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the sine of theta.
+    tooltip: Returns the sine of theta. Theta is in radians.
     categories:
       - math
       - math_trig
@@ -17356,8 +17351,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the square root of the positive value val.
-      Triggers a math runtime error if val is less than 0.0 (imaginary results).
+    tooltip: Returns the square root of val. If negative, return NaN.
     categories:
       - math
   llStartAnimation:
@@ -17602,7 +17596,7 @@ functions:
   llTan:
     arguments:
     - theta:
-        tooltip: Angle expressed in radians.
+        tooltip: Angle in radians.
         type: float
     slua-deprecated:
       use: math.tan
@@ -17614,7 +17608,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the tangent of theta.
+    tooltip: Returns the tangent of theta. Theta is in radians.
     categories:
       - math
       - math_trig
@@ -18022,8 +18016,7 @@ functions:
     pure: true
     return: float
     sleep: 0.0
-    tooltip: Returns a float representing the magnitude (geometric length) of the
-      vector vec.
+    tooltip: Returns the magnitude (geometric length) of vec.
     categories:
       - math
       - math_3d
@@ -18042,7 +18035,8 @@ functions:
     pure: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a normalized unit vector sharing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec.
+      If <0, 0, 0>, return <0, 0, 0>.
     categories:
       - math
       - math_3d
@@ -18245,7 +18239,7 @@ functions:
       - data_conversion
   llsRGB2Linear:
     arguments:
-    - srgb:
+    - color:
         tooltip: Color vector in the sRGB colorspace to convert.
         type: vector
     energy: 10.0
@@ -18253,11 +18247,13 @@ functions:
     must-use: true
     return: vector
     sleep: 0.0
-    tooltip: Returns a vector representing the conversion of the color srgb from the
-      sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns a linear RGB colorspace vector converted
+      from the sRGB colorspace argument.
     categories:
+      - data_conversion
       - math
       - prim_appearance
+      - vector
 types:
   float:
     tooltip: 32 bit floating point value.\nThe range is 1.175494351E-38 to 3.402823466E+38.

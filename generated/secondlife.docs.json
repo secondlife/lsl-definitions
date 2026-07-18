@@ -54,13 +54,13 @@
         "documentation": "Changes the metatable for the given table. Raises an error if the table already has a protected metatable (it has a '__metatable' field)."
     },
     "@sl-slua/global/tonumber": {
-        "documentation": "Converts the input string to a number in the specified base. Returns nil if the conversion fails."
+        "documentation": "Converts the input string to a number in the specified base. Returns nil if invalid."
     },
     "@sl-slua/global/toquaternion": {
-        "documentation": "Converts a string to a quaternion, returns nil if invalid."
+        "documentation": "Converts a string to a quaternion. Returns nil if invalid."
     },
     "@sl-slua/global/torotation": {
-        "documentation": "Converts a string to a rotation (quaternion), returns nil if invalid."
+        "documentation": "Converts a string to a rotation (quaternion). Returns nil if invalid."
     },
     "@sl-slua/global/tostring": {
         "documentation": "Converts the input object to a string. Calls the metatable's '__tostring' metamethod if present."
@@ -69,7 +69,7 @@
         "documentation": "Creates a new uuid from a string, buffer, or existing uuid. Returns nil if the string is not a valid UUID, or the buffer is shorter than 16 bytes."
     },
     "@sl-slua/global/tovector": {
-        "documentation": "Converts a string to a vector, returns nil if invalid."
+        "documentation": "Converts a string to a vector. Returns nil if invalid."
     },
     "@sl-slua/global/type": {
         "documentation": "Returns the type of the object as a string."
@@ -88,71 +88,71 @@
         "learn_more_link": "https://luau.org/library/#bit32-library"
     },
     "@sl-slua/global/bit32.arshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.<br>Returns 0 if i < -31, or all sign bits if i > 31.",
+        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift.<br>Returns 0 if i < -31, or all sign bits if i > 31.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#arshift"
     },
     "@sl-slua/global/bit32.band": {
-        "documentation": "Performs a bitwise AND operation on input numbers.",
+        "documentation": "Returns the bitwise AND of the given numbers.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#band"
     },
     "@sl-slua/global/bit32.bnot": {
-        "documentation": "Returns the bitwise negation of the input number.",
+        "documentation": "Returns the bitwise negation of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#bnot"
     },
     "@sl-slua/global/bit32.bor": {
-        "documentation": "Performs a bitwise OR operation on input numbers.",
+        "documentation": "Returns the bitwise OR of the given numbers.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#bor"
     },
     "@sl-slua/global/bit32.bxor": {
-        "documentation": "Performs a bitwise XOR operation on input numbers.",
+        "documentation": "Returns the bitwise XOR of the given numbers.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#bxor"
     },
     "@sl-slua/global/bit32.btest": {
-        "documentation": "Performs a bitwise AND operation on input numbers.<br>Returns true if result is non-zero.",
+        "documentation": "Returns true if the bitwise AND of the given numbers is non-zero.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#btest"
     },
     "@sl-slua/global/bit32.extract": {
-        "documentation": "Extracts bits from n at position field with width. Raises an error if the selected bit range goes outside [0, 31].",
+        "documentation": "Returns width bits from src, starting from bit index field. Raises an error if the selected bit range is goes outside the range [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#extract"
     },
     "@sl-slua/global/bit32.lrotate": {
-        "documentation": "Rotates n by i bits to the left. If i is negative, a right rotate is performed.",
+        "documentation": "Returns val rotated by i bits to the left. If i is negative, a right rotate is performed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lrotate"
     },
     "@sl-slua/global/bit32.lshift": {
-        "documentation": "Shifts n by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.",
+        "documentation": "Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#lshift"
     },
     "@sl-slua/global/bit32.replace": {
-        "documentation": "Replaces bits in n at position field with width using value v. Raises an error if the selected bit range goes outside [0, 31].",
+        "documentation": "Returns dst with width bits replaced from src, starting from bit index field. Raises an error if the selected bit range goes outside the range [0, 31].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#replace"
     },
     "@sl-slua/global/bit32.rrotate": {
-        "documentation": "Rotates n by i bits to the right. If i is negative, a left rotate is performed.",
+        "documentation": "Returns val rotated by i bits to the right. If i is negative, a left rotate is performed.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rrotate"
     },
     "@sl-slua/global/bit32.rshift": {
-        "documentation": "Shifts n by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.",
+        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-31, 31] range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#rshift"
     },
     "@sl-slua/global/bit32.s32": {
-        "documentation": "Wrap this number from float64 range to signed int32 range and truncate to integer. Makes integer arithmetic compatible with LSL.",
+        "documentation": "Returns val, wrapped from float64 range to signed int32 range and truncated to integer. Makes integer arithmetic compatable with LSL.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#s32"
     },
     "@sl-slua/global/bit32.smul": {
-        "documentation": "Multiplies two signed 32-bit integers. Returns the result as a signed 32-bit integer, wrapping as necessary. Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.",
+        "documentation": "Returns the product of two signed 32-bit integers as a signed 32-bit integer, wrapping as necessary. Avoids precision loss associated with float64 multiplication. Compatible with LSL integer multiplication.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#smul"
     },
     "@sl-slua/global/bit32.countlz": {
-        "documentation": "Count leading zeros.",
+        "documentation": "Returns the count of val's leading zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countlz"
     },
     "@sl-slua/global/bit32.countrz": {
-        "documentation": "Count trailing zeros.",
+        "documentation": "Returns the count of val's trailing zeros.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#countrz"
     },
     "@sl-slua/global/bit32.byteswap": {
-        "documentation": "Swap byte order.",
+        "documentation": "Returns val with its bytes swapped to the reverse order.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/bit32#byteswap"
     },
     "@sl-slua/global/buffer": {
@@ -381,43 +381,43 @@
         "learn_more_link": "https://luau.org/library/#math-library"
     },
     "@sl-slua/global/math.pi": {
-        "documentation": "Value: 3.141592653589793<br>Value of pi.",
+        "documentation": "Value: 3.141592653589793<br>The number of radians in a half circle (semi-circle).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pi"
     },
     "@sl-slua/global/math.huge": {
-        "documentation": "Value: inf<br>A value larger than any other numeric value (infinity).",
+        "documentation": "Value: inf<br>Value larger than any other numeric value (infinity).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#huge"
     },
     "@sl-slua/global/math.abs": {
-        "documentation": "Returns the absolute value of n.",
+        "documentation": "Returns the absolute (positive) value of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#abs"
     },
     "@sl-slua/global/math.acos": {
-        "documentation": "Returns the arc cosine of n in radians.",
+        "documentation": "Returns the arccosine of val in radians. Returns NaN if val is not in range [-1.0, 1.0].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#acos"
     },
     "@sl-slua/global/math.asin": {
-        "documentation": "Returns the arc sine of n in radians.",
+        "documentation": "Returns the arcsine of val in radians. Returns NaN if val is not in range [-1.0, 1.0].",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#asin"
     },
     "@sl-slua/global/math.atan": {
-        "documentation": "Returns the arc tangent of n in radians.",
+        "documentation": "Returns the arctangent of val in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan"
     },
     "@sl-slua/global/math.atan2": {
-        "documentation": "Returns the arc tangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
+        "documentation": "Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#atan2"
     },
     "@sl-slua/global/math.ceil": {
-        "documentation": "Returns the smallest integer larger than or equal to n.",
+        "documentation": "Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#ceil"
     },
     "@sl-slua/global/math.clamp": {
-        "documentation": "Returns n clamped between min and max. Raises an error if min is greater than max.",
+        "documentation": "Returns val clamped between min and max. Raises an error if min is greater than max.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#clamp"
     },
     "@sl-slua/global/math.cos": {
-        "documentation": "Returns the cosine of n. n is in radians.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cos"
     },
     "@sl-slua/global/math.cosh": {
@@ -425,43 +425,43 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#cosh"
     },
     "@sl-slua/global/math.deg": {
-        "documentation": "Converts n from radians to degrees.",
+        "documentation": "Returns theta converted from radians to degrees.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#deg"
     },
     "@sl-slua/global/math.exp": {
-        "documentation": "Returns the base-e exponent of n.",
+        "documentation": "Returns the e to the power of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#exp"
     },
     "@sl-slua/global/math.floor": {
-        "documentation": "Returns the largest integer smaller than or equal to n.",
+        "documentation": "Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#floor"
     },
     "@sl-slua/global/math.fmod": {
-        "documentation": "Returns the remainder of x modulo y, rounded towards zero.",
+        "documentation": "Returns the remainder (modulo) of dividend/modulus, (i.e. d mod m), rounded towards zero. Returns NaN if modulus is 0. Identical to d % m if both arguments have the same sign.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#fmod"
     },
     "@sl-slua/global/math.frexp": {
-        "documentation": "Returns m and e such that n = m * 2^e.",
+        "documentation": "Breaks a floating-point number into it's component parts significand and exponent. In other words, Returns significand s and integer exponent e such that val = s * 2^e. Inverse of math.ldexp.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#frexp"
     },
     "@sl-slua/global/math.ldexp": {
-        "documentation": "Returns s * 2^e.",
+        "documentation": "Returns s * 2^e. Inverse of math.frexp",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#ldexp"
     },
     "@sl-slua/global/math.lerp": {
-        "documentation": "Linearly interpolates between a and b using factor t.",
+        "documentation": "Linearly interpolates between start_val and end_val using factor t.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#lerp"
     },
     "@sl-slua/global/math.log": {
-        "documentation": "Returns the logarithm of n in the given base, defaults to e.",
+        "documentation": "Returns the logarithm of val in the given base. The default base is e.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#log"
     },
     "@sl-slua/global/math.log10": {
-        "documentation": "Returns the base-10 logarithm of n.",
+        "documentation": "Returns the base-10 logarithm of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#log10"
     },
     "@sl-slua/global/math.map": {
-        "documentation": "Maps n from input range to output range.",
+        "documentation": "Maps val from input range to output range.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#map"
     },
     "@sl-slua/global/math.max": {
@@ -473,7 +473,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#min"
     },
     "@sl-slua/global/math.modf": {
-        "documentation": "Returns the integer and fractional parts of n.",
+        "documentation": "Returns the integer and fractional parts of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#modf"
     },
     "@sl-slua/global/math.noise": {
@@ -485,7 +485,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#pow"
     },
     "@sl-slua/global/math.rad": {
-        "documentation": "Converts n from degrees to radians.",
+        "documentation": "Returns theta converted from degrees to radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#rad"
     },
     "@sl-slua/global/math.random": {
@@ -497,43 +497,43 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#randomseed"
     },
     "@sl-slua/global/math.round": {
-        "documentation": "Rounds n to the nearest integer.",
+        "documentation": "Returns val rounded to the nearest integer. Halfway values are rounded away from zero.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#round"
     },
     "@sl-slua/global/math.sign": {
-        "documentation": "Returns -1 if n is negative, 1 if positive, and 0 if zero.",
+        "documentation": "Returns -1 if val is negative, 1 if positive, and 0 if zero.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sign"
     },
     "@sl-slua/global/math.sin": {
-        "documentation": "Returns the sine of n. n is in radians.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sin"
     },
     "@sl-slua/global/math.sinh": {
-        "documentation": "Returns the hyperbolic sine of n.",
+        "documentation": "Returns the hyperbolic sine of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sinh"
     },
     "@sl-slua/global/math.sqrt": {
-        "documentation": "Returns the square root of n.",
+        "documentation": "Returns the square root of val. If negative, return Nan.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#sqrt"
     },
     "@sl-slua/global/math.tan": {
-        "documentation": "Returns the tangent of n. n is in radians.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tan"
     },
     "@sl-slua/global/math.tanh": {
-        "documentation": "Returns the hyperbolic tangent of n.",
+        "documentation": "Returns the hyperbolic tangent of val.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#tanh"
     },
     "@sl-slua/global/math.isnan": {
-        "documentation": "Returns true if n is NaN.",
+        "documentation": "Returns true if val is NaN.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#isnan"
     },
     "@sl-slua/global/math.isinf": {
-        "documentation": "Returns true if n is infinite.",
+        "documentation": "Returns true if val is infinite.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#isinf"
     },
     "@sl-slua/global/math.isfinite": {
-        "documentation": "Returns true if n is finite.",
+        "documentation": "Returns true if val is finite.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/math#isfinite"
     },
     "@sl-slua/global/os": {
@@ -560,7 +560,7 @@
         "documentation": "Creates a new quaternion with the given component values. Alias of quaternion.create."
     },
     "@sl-slua/global/quaternion.identity": {
-        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant.",
+        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant. Causes no change when rotated.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.create": {
@@ -568,39 +568,39 @@
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.normalize": {
-        "documentation": "Computes the normalized version (unit quaternion) of the quaternion.",
+        "documentation": "Returns the normalized unit quaternion pointing the same direction as q. If <0, 0, 0, 0>, return quaternion.identity = <0, 0, 0, 1>.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.magnitude": {
-        "documentation": "Computes the magnitude of the quaternion.",
+        "documentation": "Returns the magnitude (geometric length) of the quaternion.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.dot": {
-        "documentation": "Computes the dot product of two quaternions.",
+        "documentation": "Returns the dot product of two quaternions.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.slerp": {
-        "documentation": "Spherical linear interpolation from a to b using factor t.",
+        "documentation": "Spherical linear interpolation from start_q to end_q using factor t.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.conjugate": {
-        "documentation": "Computes the conjugate of the quaternion.",
+        "documentation": "Returns the conjugate of the quaternion. Equivalent to quaternion(-q.x, -q.y, -q.z, q.s))",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.tofwd": {
-        "documentation": "Computes the forward vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive X direction (forward) in the coordinate space of rotation q. Equivalent to vector(1, 0, 0) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.toleft": {
-        "documentation": "Computes the left vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive Y direction (left) in the coordinate space of rotation q. Equivalent to vector(0, 1, 0) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/quaternion.toup": {
-        "documentation": "Computes the up vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive Z direction (up) in the coordinate space of rotation q. Equivalent to vector(0, 0, 1) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.identity": {
-        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant.",
+        "documentation": "Value: quaternion(0, 0, 0, 1)<br>Identity quaternion constant. Causes no change when rotated.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.create": {
@@ -608,35 +608,35 @@
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.normalize": {
-        "documentation": "Computes the normalized version (unit quaternion) of the quaternion.",
+        "documentation": "Returns the normalized unit quaternion pointing the same direction as q. If <0, 0, 0, 0>, return quaternion.identity = <0, 0, 0, 1>.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.magnitude": {
-        "documentation": "Computes the magnitude of the quaternion.",
+        "documentation": "Returns the magnitude (geometric length) of the quaternion.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.dot": {
-        "documentation": "Computes the dot product of two quaternions.",
+        "documentation": "Returns the dot product of two quaternions.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.slerp": {
-        "documentation": "Spherical linear interpolation from a to b using factor t.",
+        "documentation": "Spherical linear interpolation from start_q to end_q using factor t.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.conjugate": {
-        "documentation": "Computes the conjugate of the quaternion.",
+        "documentation": "Returns the conjugate of the quaternion. Equivalent to quaternion(-q.x, -q.y, -q.z, q.s))",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.tofwd": {
-        "documentation": "Computes the forward vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive X direction (forward) in the coordinate space of rotation q. Equivalent to vector(1, 0, 0) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.toleft": {
-        "documentation": "Computes the left vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive Y direction (left) in the coordinate space of rotation q. Equivalent to vector(0, 1, 0) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/rotation.toup": {
-        "documentation": "Computes the up vector from the quaternion.",
+        "documentation": "Returns the unit vector pointing toward positive Z direction (up) in the coordinate space of rotation q. Equivalent to vector(0, 0, 1) * q.",
         "learn_more_link": "https://suzanna-linn.github.io/slua/moving-rotations"
     },
     "@sl-slua/global/string": {
@@ -834,11 +834,11 @@
         "learn_more_link": "https://luau.org/library/#vector-library"
     },
     "@sl-slua/global/vector.zero": {
-        "documentation": "Value: vector(0, 0, 0)<br>Constant vector with all components set to 0.",
+        "documentation": "Value: vector(0, 0, 0)<br>Vector constant with all components set to 0.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#zero"
     },
     "@sl-slua/global/vector.one": {
-        "documentation": "Value: vector(1, 1, 1)<br>Constant vector with all components set to 1.",
+        "documentation": "Value: vector(1, 1, 1)<br>Vector constant with all components set to 1.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#one"
     },
     "@sl-slua/global/vector.create": {
@@ -846,23 +846,23 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#create"
     },
     "@sl-slua/global/vector.magnitude": {
-        "documentation": "Computes the magnitude of the vector.",
+        "documentation": "Returns the magnitude (geometric length) of the vector.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#magnitude"
     },
     "@sl-slua/global/vector.normalize": {
-        "documentation": "Computes the normalized version (unit vector) of the vector.",
+        "documentation": "Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <NaN, NaN, NaN>.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#normalize"
     },
     "@sl-slua/global/vector.cross": {
-        "documentation": "Computes the cross product of two vectors.",
+        "documentation": "Returns the cross product of two vectors.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#cross"
     },
     "@sl-slua/global/vector.dot": {
-        "documentation": "Computes the dot product of two vectors.",
+        "documentation": "Returns the dot product of two vectors.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#dot"
     },
     "@sl-slua/global/vector.angle": {
-        "documentation": "Computes the angle between two vectors in radians. The axis, if specified, is used to determine the sign of the angle.",
+        "documentation": "Returns the angle from start_vec to end_vec in radians. The axis, if specified, is used to determine the sign of the angle. If no axis is specified, the angle is positive, as if axis was vector.cross(start_vec, end_vec).",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#angle"
     },
     "@sl-slua/global/vector.floor": {
@@ -894,18 +894,18 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#min"
     },
     "@sl-slua/global/vector.lerp": {
-        "documentation": "Linearly interpolates between a and b using factor t.",
+        "documentation": "Linearly interpolates between start_vec and end_vec using factor t.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/vector#lerp"
     },
     "@sl-slua/global/ll": {
         "documentation": "Library for functions shared between LSL and SLua."
     },
     "@sl-slua/global/ll.Abs": {
-        "documentation": "Returns an integer representing the absolute (positive) value of val.",
+        "documentation": "Returns the absolute (positive) integer value of val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAbs"
     },
     "@sl-slua/global/ll.Acos": {
-        "documentation": "Returns a float representing the arc-cosine of val in radians.",
+        "documentation": "Returns the arccosine of val in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAcos"
     },
     "@sl-slua/global/ll.AddToLandBanList": {
@@ -933,7 +933,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAllowInventoryDrop"
     },
     "@sl-slua/global/ll.AngleBetween": {
-        "documentation": "Returns a float representing the angle in radians between rotations a and b.",
+        "documentation": "Returns the angle, in radians, between rotations start_rot and and end_rot.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAngleBetween"
     },
     "@sl-slua/global/ll.ApplyImpulse": {
@@ -945,11 +945,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlApplyRotationalImpulse"
     },
     "@sl-slua/global/ll.Asin": {
-        "documentation": "Returns a float representing the arc-sine of val in radians.",
+        "documentation": "Returns the arcsine of val in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAsin"
     },
     "@sl-slua/global/ll.Atan2": {
-        "documentation": "Returns a float representing the arctangent2 of y and x.",
+        "documentation": "Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAtan2"
     },
     "@sl-slua/global/ll.AttachToAvatar": {
@@ -973,7 +973,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAxes2Rot"
     },
     "@sl-slua/global/ll.AxisAngle2Rot": {
-        "documentation": "Returns the rotation representing a generated angle (in radians) about the specified axis.",
+        "documentation": "Returns the rotation that rotates angle radians around the axis vector.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAxisAngle2Rot"
     },
     "@sl-slua/global/ll.Base64ToInteger": {
@@ -1001,7 +1001,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCastRay"
     },
     "@sl-slua/global/ll.Ceil": {
-        "documentation": "Returns the smallest integer value greater than or equal to val (rounded toward positive infinity).",
+        "documentation": "Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/ll.Char": {
@@ -1045,7 +1045,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlComputeHash"
     },
     "@sl-slua/global/ll.Cos": {
-        "documentation": "Returns a float representing the cosine of theta.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCos"
     },
     "@sl-slua/global/ll.CreateCharacter": {
@@ -1193,7 +1193,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEscapeURL"
     },
     "@sl-slua/global/ll.Euler2Rot": {
-        "documentation": "Returns the rotation representation of the Euler angles vector v.",
+        "documentation": "Returns the quaternion representation of the Euler angles (in radians) within vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEuler2Rot"
     },
     "@sl-slua/global/ll.Evade": {
@@ -1205,7 +1205,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlExecCharacterCmd"
     },
     "@sl-slua/global/ll.Fabs": {
-        "documentation": "Returns a float representing the absolute (positive) value of val.",
+        "documentation": "Returns the absolute (positive) value of val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/ll.FindNotecardTextCount": {
@@ -1221,7 +1221,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFleeFrom"
     },
     "@sl-slua/global/ll.Floor": {
-        "documentation": "Returns the largest integer value less than or equal to val (rounded toward negative infinity).",
+        "documentation": "Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFloor"
     },
     "@sl-slua/global/ll.ForceMouselook": {
@@ -1893,7 +1893,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlKeysKeyValue"
     },
     "@sl-slua/global/ll.Linear2sRGB": {
-        "documentation": "Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.",
+        "documentation": "Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinear2sRGB"
     },
     "@sl-slua/global/ll.LinkAdjustSoundVolume": {
@@ -2053,7 +2053,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListSortStrided"
     },
     "@sl-slua/global/ll.ListStatistics": {
-        "documentation": "Returns a float representing the result of performing the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.",
+        "documentation": "Returns the numeric result of the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListStatistics"
     },
     "@sl-slua/global/ll.Listen": {
@@ -2073,11 +2073,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLoadURL"
     },
     "@sl-slua/global/ll.Log": {
-        "documentation": "Returns a float representing the natural (base e) logarithm of the positive value val (returns 0.0 if val <= 0).",
+        "documentation": "Returns natural (base e) logarithm of val. If negative, return 0.0.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLog"
     },
     "@sl-slua/global/ll.Log10": {
-        "documentation": "Returns a float representing the base-10 (common) logarithm of the positive value val (returns 0.0 if val <= 0).",
+        "documentation": "Returns base-10 (common) logarithm of val. If negative, return 0.0.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLog10"
     },
     "@sl-slua/global/ll.LookAt": {
@@ -2137,7 +2137,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlMinEventDelay"
     },
     "@sl-slua/global/ll.ModPow": {
-        "documentation": "Returns an integer representing a raised to the power b, modulo c (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).",
+        "documentation": "Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295]. Output is wrapped to signed 32-bit integer range [-2147483648..2147483647]. Will never overflow, unlike (b^e), which can overflow to inf.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlModPow"
     },
     "@sl-slua/global/ll.ModifyLand": {
@@ -2221,7 +2221,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlPlaySoundSlave"
     },
     "@sl-slua/global/ll.Pow": {
-        "documentation": "Returns a float representing base raised to the power exponent. Returns 0 and triggers a Math Error for imaginary results.",
+        "documentation": "Returns base raised to the power exponent. If result is imaginary, returns NaN.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlPow"
     },
     "@sl-slua/global/ll.PreloadSound": {
@@ -2385,31 +2385,31 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/ll.Rot2Angle": {
-        "documentation": "Returns a float representing the rotation angle of rot.",
+        "documentation": "Returns the angle, in radians, that q rotates.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Angle"
     },
     "@sl-slua/global/ll.Rot2Axis": {
-        "documentation": "Returns a vector representing the rotation axis of rot.",
+        "documentation": "Returns the unit vector axis that q rotates around.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Axis"
     },
     "@sl-slua/global/ll.Rot2Euler": {
-        "documentation": "Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.",
+        "documentation": "Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Euler"
     },
     "@sl-slua/global/ll.Rot2Fwd": {
-        "documentation": "Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Fwd"
     },
     "@sl-slua/global/ll.Rot2Left": {
-        "documentation": "Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Left"
     },
     "@sl-slua/global/ll.Rot2Up": {
-        "documentation": "Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Up"
     },
     "@sl-slua/global/ll.RotBetween": {
-        "documentation": "Returns a rotation representing the shortest path rotation from vector start to vector end.",
+        "documentation": "Returns the shortest-path quaternion that rotates start_vec onto end_vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRotBetween"
     },
     "@sl-slua/global/ll.RotLookAt": {
@@ -2429,7 +2429,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRotateTexture"
     },
     "@sl-slua/global/ll.Round": {
-        "documentation": "Returns the integer that float val is closest to.",
+        "documentation": "Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRound"
     },
     "@sl-slua/global/ll.SHA1String": {
@@ -2745,7 +2745,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSignRSA"
     },
     "@sl-slua/global/ll.Sin": {
-        "documentation": "Returns a float representing the sine of theta.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSin"
     },
     "@sl-slua/global/ll.SitOnLink": {
@@ -2769,7 +2769,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSoundPreload"
     },
     "@sl-slua/global/ll.Sqrt": {
-        "documentation": "Returns a float representing the square root of the positive value val. Triggers a math runtime error if val is less than 0.0 (imaginary results).",
+        "documentation": "Returns the square root of val. If negative, return NaN.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSqrt"
     },
     "@sl-slua/global/ll.StartAnimation": {
@@ -2829,7 +2829,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTakeControls"
     },
     "@sl-slua/global/ll.Tan": {
-        "documentation": "Returns a float representing the tangent of theta.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTan"
     },
     "@sl-slua/global/ll.Target": {
@@ -2909,11 +2909,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecDist"
     },
     "@sl-slua/global/ll.VecMag": {
-        "documentation": "Returns a float representing the magnitude (geometric length) of the vector vec.",
+        "documentation": "Returns the magnitude (geometric length) of vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecMag"
     },
     "@sl-slua/global/ll.VecNorm": {
-        "documentation": "Returns a normalized unit vector sharing the same direction as vec.",
+        "documentation": "Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecNorm"
     },
     "@sl-slua/global/ll.VerifyRSA": {
@@ -2957,18 +2957,18 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlXorBase64StringsCorrect"
     },
     "@sl-slua/global/ll.sRGB2Linear": {
-        "documentation": "Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.",
+        "documentation": "Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlsRGB2Linear"
     },
     "@sl-slua/global/llcompat": {
         "documentation": "Like ll, but exactly matches LSL semantics."
     },
     "@sl-slua/global/llcompat.Abs": {
-        "documentation": "Returns an integer representing the absolute (positive) value of val.",
+        "documentation": "Returns the absolute (positive) integer value of val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAbs"
     },
     "@sl-slua/global/llcompat.Acos": {
-        "documentation": "Returns a float representing the arc-cosine of val in radians.",
+        "documentation": "Returns the arccosine of val in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAcos"
     },
     "@sl-slua/global/llcompat.AddToLandBanList": {
@@ -2996,7 +2996,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAllowInventoryDrop"
     },
     "@sl-slua/global/llcompat.AngleBetween": {
-        "documentation": "Returns a float representing the angle in radians between rotations a and b.",
+        "documentation": "Returns the angle, in radians, between rotations start_rot and and end_rot.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAngleBetween"
     },
     "@sl-slua/global/llcompat.ApplyImpulse": {
@@ -3008,11 +3008,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlApplyRotationalImpulse"
     },
     "@sl-slua/global/llcompat.Asin": {
-        "documentation": "Returns a float representing the arc-sine of val in radians.",
+        "documentation": "Returns the arcsine of val in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAsin"
     },
     "@sl-slua/global/llcompat.Atan2": {
-        "documentation": "Returns a float representing the arctangent2 of y and x.",
+        "documentation": "Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAtan2"
     },
     "@sl-slua/global/llcompat.AttachToAvatar": {
@@ -3036,7 +3036,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAxes2Rot"
     },
     "@sl-slua/global/llcompat.AxisAngle2Rot": {
-        "documentation": "Returns the rotation representing a generated angle (in radians) about the specified axis.",
+        "documentation": "Returns the rotation that rotates angle radians around the axis vector.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlAxisAngle2Rot"
     },
     "@sl-slua/global/llcompat.Base64ToInteger": {
@@ -3064,7 +3064,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCastRay"
     },
     "@sl-slua/global/llcompat.Ceil": {
-        "documentation": "Returns the smallest integer value greater than or equal to val (rounded toward positive infinity).",
+        "documentation": "Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCeil"
     },
     "@sl-slua/global/llcompat.Char": {
@@ -3108,7 +3108,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlComputeHash"
     },
     "@sl-slua/global/llcompat.Cos": {
-        "documentation": "Returns a float representing the cosine of theta.",
+        "documentation": "Returns the cosine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlCos"
     },
     "@sl-slua/global/llcompat.CreateCharacter": {
@@ -3256,7 +3256,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEscapeURL"
     },
     "@sl-slua/global/llcompat.Euler2Rot": {
-        "documentation": "Returns the rotation representation of the Euler angles vector v.",
+        "documentation": "Returns the quaternion representation of the Euler angles (in radians) within vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlEuler2Rot"
     },
     "@sl-slua/global/llcompat.Evade": {
@@ -3268,7 +3268,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlExecCharacterCmd"
     },
     "@sl-slua/global/llcompat.Fabs": {
-        "documentation": "Returns a float representing the absolute (positive) value of val.",
+        "documentation": "Returns the absolute (positive) value of val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/llcompat.FindNotecardTextCount": {
@@ -3284,7 +3284,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFleeFrom"
     },
     "@sl-slua/global/llcompat.Floor": {
-        "documentation": "Returns the largest integer value less than or equal to val (rounded toward negative infinity).",
+        "documentation": "Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFloor"
     },
     "@sl-slua/global/llcompat.ForceMouselook": {
@@ -3960,7 +3960,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlKeysKeyValue"
     },
     "@sl-slua/global/llcompat.Linear2sRGB": {
-        "documentation": "Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.",
+        "documentation": "Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinear2sRGB"
     },
     "@sl-slua/global/llcompat.LinkAdjustSoundVolume": {
@@ -4120,7 +4120,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListSortStrided"
     },
     "@sl-slua/global/llcompat.ListStatistics": {
-        "documentation": "Returns a float representing the result of performing the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.",
+        "documentation": "Returns the numeric result of the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlListStatistics"
     },
     "@sl-slua/global/llcompat.Listen": {
@@ -4140,11 +4140,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLoadURL"
     },
     "@sl-slua/global/llcompat.Log": {
-        "documentation": "Returns a float representing the natural (base e) logarithm of the positive value val (returns 0.0 if val <= 0).",
+        "documentation": "Returns natural (base e) logarithm of val. If negative, return 0.0.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLog"
     },
     "@sl-slua/global/llcompat.Log10": {
-        "documentation": "Returns a float representing the base-10 (common) logarithm of the positive value val (returns 0.0 if val <= 0).",
+        "documentation": "Returns base-10 (common) logarithm of val. If negative, return 0.0.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLog10"
     },
     "@sl-slua/global/llcompat.LookAt": {
@@ -4204,7 +4204,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlMinEventDelay"
     },
     "@sl-slua/global/llcompat.ModPow": {
-        "documentation": "Returns an integer representing a raised to the power b, modulo c (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).",
+        "documentation": "Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295]. Output is wrapped to signed 32-bit integer range [-2147483648..2147483647]. Will never overflow, unlike (b^e), which can overflow to inf.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlModPow"
     },
     "@sl-slua/global/llcompat.ModifyLand": {
@@ -4288,7 +4288,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlPlaySoundSlave"
     },
     "@sl-slua/global/llcompat.Pow": {
-        "documentation": "Returns a float representing base raised to the power exponent. Returns 0 and triggers a Math Error for imaginary results.",
+        "documentation": "Returns base raised to the power exponent. If result is imaginary, returns NaN.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlPow"
     },
     "@sl-slua/global/llcompat.PreloadSound": {
@@ -4456,31 +4456,31 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRezObjectWithParams"
     },
     "@sl-slua/global/llcompat.Rot2Angle": {
-        "documentation": "Returns a float representing the rotation angle of rot.",
+        "documentation": "Returns the angle, in radians, that q rotates.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Angle"
     },
     "@sl-slua/global/llcompat.Rot2Axis": {
-        "documentation": "Returns a vector representing the rotation axis of rot.",
+        "documentation": "Returns the unit vector axis that q rotates around.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Axis"
     },
     "@sl-slua/global/llcompat.Rot2Euler": {
-        "documentation": "Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.",
+        "documentation": "Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Euler"
     },
     "@sl-slua/global/llcompat.Rot2Fwd": {
-        "documentation": "Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Fwd"
     },
     "@sl-slua/global/llcompat.Rot2Left": {
-        "documentation": "Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Left"
     },
     "@sl-slua/global/llcompat.Rot2Up": {
-        "documentation": "Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.",
+        "documentation": "Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRot2Up"
     },
     "@sl-slua/global/llcompat.RotBetween": {
-        "documentation": "Returns a rotation representing the shortest path rotation from vector start to vector end.",
+        "documentation": "Returns the shortest-path quaternion that rotates start_vec onto end_vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRotBetween"
     },
     "@sl-slua/global/llcompat.RotLookAt": {
@@ -4500,7 +4500,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRotateTexture"
     },
     "@sl-slua/global/llcompat.Round": {
-        "documentation": "Returns the integer that float val is closest to.",
+        "documentation": "Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlRound"
     },
     "@sl-slua/global/llcompat.SHA1String": {
@@ -4824,7 +4824,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSignRSA"
     },
     "@sl-slua/global/llcompat.Sin": {
-        "documentation": "Returns a float representing the sine of theta.",
+        "documentation": "Returns the sine of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSin"
     },
     "@sl-slua/global/llcompat.SitOnLink": {
@@ -4848,7 +4848,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSoundPreload"
     },
     "@sl-slua/global/llcompat.Sqrt": {
-        "documentation": "Returns a float representing the square root of the positive value val. Triggers a math runtime error if val is less than 0.0 (imaginary results).",
+        "documentation": "Returns the square root of val. If negative, return NaN.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlSqrt"
     },
     "@sl-slua/global/llcompat.StartAnimation": {
@@ -4908,7 +4908,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTakeControls"
     },
     "@sl-slua/global/llcompat.Tan": {
-        "documentation": "Returns a float representing the tangent of theta.",
+        "documentation": "Returns the tangent of theta. Theta is in radians.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlTan"
     },
     "@sl-slua/global/llcompat.Target": {
@@ -4988,11 +4988,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecDist"
     },
     "@sl-slua/global/llcompat.VecMag": {
-        "documentation": "Returns a float representing the magnitude (geometric length) of the vector vec.",
+        "documentation": "Returns the magnitude (geometric length) of vec.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecMag"
     },
     "@sl-slua/global/llcompat.VecNorm": {
-        "documentation": "Returns a normalized unit vector sharing the same direction as vec.",
+        "documentation": "Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlVecNorm"
     },
     "@sl-slua/global/llcompat.VerifyRSA": {
@@ -5036,7 +5036,7 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlXorBase64StringsCorrect"
     },
     "@sl-slua/global/llcompat.sRGB2Linear": {
-        "documentation": "Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.",
+        "documentation": "Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlsRGB2Linear"
     },
     "@sl-slua/global/ACTIVE": {
@@ -6621,13 +6621,13 @@
         "documentation": "Value: 0x2000<br>Permissions mask representing transfer permission."
     },
     "@sl-slua/global/PI": {
-        "documentation": "Value: 3.14159265<br>Mathematical constant Pi (3.14159265), representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan."
+        "documentation": "Value: 3.14159265<br>Mathematical constant pi, representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan."
     },
     "@sl-slua/global/PING_PONG": {
         "documentation": "Value: 0x8<br>Used with texture animation functions to cause the animation to play forward first, and then in reverse."
     },
     "@sl-slua/global/PI_BY_TWO": {
-        "documentation": "Value: 1.57079633<br>Constant Pi/2 (1.57079633), representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan."
+        "documentation": "Value: 1.57079633<br>Mathematical constant pi/2, representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan."
     },
     "@sl-slua/global/PRIM_ALLOW_UNSIT": {
         "documentation": "Value: 39<br>Prim parameter for allowing or restricting manual standing for avatars seated on this prim within a valid experience. Ignored if the avatar was not seated via llSitOnLink. When restriction is active, participating seated avatars cannot manually stand or select another prim to sit on."
@@ -7251,7 +7251,7 @@
         "documentation": "Value: 0x00<br>Path update status code triggered when the character enters the slowdown distance near its current goal."
     },
     "@sl-slua/global/RAD_TO_DEG": {
-        "documentation": "Value: 57.2957795<br>Constant 57.2957795 (precise value is 180/PI). Multiply a value in radians by this number to convert it to degrees."
+        "documentation": "Value: 57.2957795<br>180/PI. Multiply a value in radians by this number to convert it to degrees."
     },
     "@sl-slua/global/RCERR_CAST_TIME_EXCEEDED": {
         "documentation": "Value: -3<br>Raycast error indicating the parcel or agent exceeded the maximum allocated raycast time. Waiting a few frames and retrying will usually succeed as resources replenish."
@@ -7608,7 +7608,7 @@
         "documentation": "Value: 0x02<br>Sound playback option that triggers a non-attached sound once at the prim's current location (does not move with the prim). This flag overrides all other sound playback options."
     },
     "@sl-slua/global/SQRT2": {
-        "documentation": "Value: 1.41421356<br>Mathematical constant representing the square root of 2 (1.41421356)."
+        "documentation": "Value: 1.41421356<br>Mathematical constant representing the square root of 2."
     },
     "@sl-slua/global/STATUS_BLOCK_GRAB": {
         "documentation": "Value: 0x40<br>Status flag (default FALSE) that blocks click-and-drag grab movements on unlinked prims or the root prim of a linkset. Useful for preventing physical objects from being trivially disturbed."
@@ -7830,7 +7830,7 @@
         "documentation": "Value: 0"
     },
     "@sl-slua/global/TWO_PI": {
-        "documentation": "Value: 6.28318530<br>Mathematical constant representing the number of radians in a full circle (6.28318530, twice the value of PI)."
+        "documentation": "Value: 6.28318530<br>Mathematical constant pi*2, representing the number of radians in a full circle."
     },
     "@sl-slua/global/TYPE_FLOAT": {
         "documentation": "Value: 2<br>Variable type constant indicating the list entry or value is a float."

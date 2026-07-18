@@ -170,6 +170,7 @@ data_conversion:
 - llXorBase64( string str1, string str2 ) -> string
 - llXorBase64Strings( string str1, string str2 ) -> string // deprecated
 - llXorBase64StringsCorrect( string str1, string str2 ) -> string // deprecated
+- llsRGB2Linear( vector color ) -> vector
 data_storage:
 - linkset_data( integer action, string name, string value )
 - llCreateKeyValue( string k, string v ) -> key
@@ -403,14 +404,14 @@ list:
 math:
 - llAbs( integer val ) -> integer
 - llAcos( float val ) -> float
-- llAngleBetween( rotation a, rotation b ) -> float
+- llAngleBetween( rotation start_rot, rotation end_rot ) -> float
 - llAsin( float val ) -> float
 - llAtan2( float y, float x ) -> float
 - llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
 - llAxisAngle2Rot( vector axis, float angle ) -> rotation
 - llCeil( float val ) -> integer
 - llCos( float theta ) -> float
-- llEuler2Rot( vector v ) -> rotation
+- llEuler2Rot( vector vec ) -> rotation
 - llFabs( float val ) -> float
 - llFloor( float val ) -> integer
 - llFrand( float mag ) -> float
@@ -418,11 +419,11 @@ math:
 - llListStatistics( integer operation, list src ) -> float
 - llLog( float val ) -> float
 - llLog10( float val ) -> float
-- llModPow( integer a, integer b, integer c ) -> integer
+- llModPow( integer base, integer exponent, integer modulus ) -> integer
 - llPow( float base, float exponent ) -> float
-- llRot2Angle( rotation rot ) -> float
-- llRot2Axis( rotation rot ) -> vector
-- llRot2Euler( rotation quat ) -> vector
+- llRot2Angle( rotation q ) -> float
+- llRot2Axis( rotation q ) -> vector
+- llRot2Euler( rotation q ) -> vector
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
@@ -434,15 +435,15 @@ math:
 - llVecDist( vector vec_a, vector vec_b ) -> float
 - llVecMag( vector vec ) -> float
 - llVecNorm( vector vec ) -> vector
-- llsRGB2Linear( vector srgb ) -> vector
+- llsRGB2Linear( vector color ) -> vector
 math_3d:
-- llAngleBetween( rotation a, rotation b ) -> float
+- llAngleBetween( rotation start_rot, rotation end_rot ) -> float
 - llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
 - llAxisAngle2Rot( vector axis, float angle ) -> rotation
-- llEuler2Rot( vector v ) -> rotation
-- llRot2Angle( rotation rot ) -> float
-- llRot2Axis( rotation rot ) -> vector
-- llRot2Euler( rotation quat ) -> vector
+- llEuler2Rot( vector vec ) -> rotation
+- llRot2Angle( rotation q ) -> float
+- llRot2Axis( rotation q ) -> vector
+- llRot2Euler( rotation q ) -> vector
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
@@ -452,14 +453,14 @@ math_3d:
 - llVecNorm( vector vec ) -> vector
 math_trig:
 - llAcos( float val ) -> float
-- llAngleBetween( rotation a, rotation b ) -> float
+- llAngleBetween( rotation start_rot, rotation end_rot ) -> float
 - llAsin( float val ) -> float
 - llAtan2( float y, float x ) -> float
 - llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
 - llAxisAngle2Rot( vector axis, float angle ) -> rotation
 - llCos( float theta ) -> float
-- llRot2Angle( rotation rot ) -> float
-- llRot2Axis( rotation rot ) -> vector
+- llRot2Angle( rotation q ) -> float
+- llRot2Axis( rotation q ) -> vector
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
@@ -775,7 +776,7 @@ prim_appearance:
 - llSetText( string text, vector color, float alpha ) -> void
 - llSetTexture( string texture, integer face ) -> void
 - llSetTextureAnim( integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate ) -> void
-- llsRGB2Linear( vector srgb ) -> vector
+- llsRGB2Linear( vector color ) -> vector
 prim_inventory:
 - changed( integer changes )
 - llAllowInventoryDrop( integer add ) -> void
@@ -834,13 +835,13 @@ prim_properties:
 - llSetText( string text, vector color, float alpha ) -> void
 - llSetTouchText( string text ) -> void
 quaternion:
-- llAngleBetween( rotation a, rotation b ) -> float
+- llAngleBetween( rotation start_rot, rotation end_rot ) -> float
 - llAxes2Rot( vector fwd, vector left, vector up ) -> rotation
 - llAxisAngle2Rot( vector axis, float angle ) -> rotation
-- llEuler2Rot( vector v ) -> rotation
-- llRot2Angle( rotation rot ) -> float
-- llRot2Axis( rotation rot ) -> vector
-- llRot2Euler( rotation quat ) -> vector
+- llEuler2Rot( vector vec ) -> rotation
+- llRot2Angle( rotation q ) -> float
+- llRot2Axis( rotation q ) -> vector
+- llRot2Euler( rotation q ) -> vector
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
@@ -1072,13 +1073,15 @@ uuid:
 - llGetOwnerKey( key id ) -> key
 - llRequestUserKey( string username ) -> key
 vector:
-- llRot2Axis( rotation rot ) -> vector
+- llLinear2sRGB( vector color ) -> vector
+- llRot2Axis( rotation q ) -> vector
 - llRot2Fwd( rotation q ) -> vector
 - llRot2Left( rotation q ) -> vector
 - llRot2Up( rotation q ) -> vector
 - llVecDist( vector vec_a, vector vec_b ) -> float
 - llVecMag( vector vec ) -> float
 - llVecNorm( vector vec ) -> vector
+- llsRGB2Linear( vector color ) -> vector
 vehicles:
 - llRemoveVehicleFlags( integer flags ) -> void
 - llSetVehicleFlags( integer flags ) -> void

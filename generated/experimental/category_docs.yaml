@@ -581,8 +581,8 @@ data_conversion:
     specifiers: A list of key names or array indices specifying the path to the value.
     tooltip: Parses the JSON string json and returns the JSON type constant (JSON_*) representing the value found at specifiers.
   llLinear2sRGB( vector color ) -> vector:
-    color: RGB color vector in linear space to convert.
-    tooltip: Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.
+    color: Color vector in the linear RGB space to convert.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llList2CSV( list src ) -> string:
     src: Source list to convert.
     tooltip: Returns a string of comma-separated values taken in order from the list src.
@@ -640,6 +640,9 @@ data_conversion:
     str1: First Base64 string.
     str2: Second Base64 string (will repeat if shorter than str1).
     tooltip: Deprecated (use llXorBase64 instead). Correctly performs (unless nulls are present) a bitwise exclusive OR (XOR) on Base64 strings str1 and str2.
+  llsRGB2Linear( vector color ) -> vector:
+    color: Color vector in the sRGB colorspace to convert.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 data_storage:
   linkset_data( integer action, string name, string value ):
     action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
@@ -1525,223 +1528,224 @@ list:
     tooltip: Returns a copy of the list src sorted into blocks of stride by the element at stride_index in each block. Sorted in ascending order (if ascending is TRUE) or descending order (if FALSE).
   llListStatistics( integer operation, list src ) -> float:
     operation: LIST_STAT_* constant of the statistical operation to perform.
-    src: List of floats and integers to analyze.
-    tooltip: Returns a float representing the result of performing the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
+    src: List of numbers to analyze.
+    tooltip: Returns the numeric result of the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
 math:
   llAbs( integer val ) -> integer:
-    val: Any integer value.
-    tooltip: Returns an integer representing the absolute (positive) value of val.
+    val: Integer to convert.
+    tooltip: Returns the absolute (positive) integer value of val.
   llAcos( float val ) -> float:
-    val: A floating-point value falling in the range [-1.0, 1.0].
-    tooltip: Returns a float representing the arc-cosine of val in radians.
-  llAngleBetween( rotation a, rotation b ) -> float:
-    a: Starting rotation.
-    b: Ending rotation.
-    tooltip: Returns a float representing the angle in radians between rotations a and b.
+    val: A number in the range [-1.0, 1.0].
+    tooltip: Returns the arccosine of val in radians.
+  llAngleBetween( rotation start_rot, rotation end_rot ) -> float:
+    start_rot: Starting rotation.
+    end_rot: Ending rotation.
+    tooltip: Returns the angle, in radians, between rotations start_rot and and end_rot.
   llAsin( float val ) -> float:
-    val: A floating-point value falling in the range [-1.0, 1.0].
-    tooltip: Returns a float representing the arc-sine of val in radians.
+    val: A number in the range [-1.0, 1.0].
+    tooltip: Returns the arcsine of val in radians.
   llAtan2( float y, float x ) -> float:
-    y: A floating-point value representing the y coordinate.
-    x: A floating-point value representing the x coordinate.
-    tooltip: Returns a float representing the arctangent2 of y and x.
+    y: Y coordinate.
+    x: X coordinate.
+    tooltip: 'Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.'
   llAxes2Rot( vector fwd, vector left, vector up ) -> rotation:
     fwd: Forward/back directional vector of the rotation.
     left: Left/right directional vector of the rotation.
     up: Up/down directional vector of the rotation.
     tooltip: Returns the rotation defined by the coordinate axes fwd, left, and up.
   llAxisAngle2Rot( vector axis, float angle ) -> rotation:
-    axis: Axis vector around which the rotation is generated.
-    angle: Angle of rotation, expressed in radians.
-    tooltip: Returns the rotation representing a generated angle (in radians) about the specified axis.
+    axis: Axis vector to rotate around.
+    angle: Angle to rotate, in radians.
+    tooltip: Returns the rotation that rotates angle radians around the axis vector.
   llCeil( float val ) -> integer:
-    val: Float value to round.
-    tooltip: Returns the smallest integer value greater than or equal to val (rounded toward positive infinity).
+    val: Number to round up.
+    tooltip: Returns val rounded toward positive infinity. In other words, returns the smallest integer greater than or equal to val.
   llCos( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the cosine of theta.
-  llEuler2Rot( vector v ) -> rotation:
-    v: Vector of Euler angles to convert.
-    tooltip: Returns the rotation representation of the Euler angles vector v.
+    theta: Angle in radians.
+    tooltip: Returns the cosine of theta. Theta is in radians.
+  llEuler2Rot( vector vec ) -> rotation:
+    vec: Vector of Euler angles to convert, in radians.
+    tooltip: Returns the quaternion representation of the Euler angles (in radians) within vec.
   llFabs( float val ) -> float:
-    val: Float value to convert.
-    tooltip: Returns a float representing the absolute (positive) value of val.
+    val: Number to convert.
+    tooltip: Returns the absolute (positive) value of val.
   llFloor( float val ) -> integer:
-    val: Float value to round.
-    tooltip: Returns the largest integer value less than or equal to val (rounded toward negative infinity).
+    val: Number to round down.
+    tooltip: Returns val rounded toward negative infinity. In other words, returns the largest integer less than or equal to val.
   llFrand( float mag ) -> float:
     mag: Float magnitude of the random range.
     tooltip: Returns a pseudo-random float in the range [0.0, mag) or (mag, 0.0] depending on the sign of mag. The value is inclusive of 0.0 but exclusive of mag.
   llLinear2sRGB( vector color ) -> vector:
-    color: RGB color vector in linear space to convert.
-    tooltip: Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.
+    color: Color vector in the linear RGB space to convert.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llListStatistics( integer operation, list src ) -> float:
     operation: LIST_STAT_* constant of the statistical operation to perform.
-    src: List of floats and integers to analyze.
-    tooltip: Returns a float representing the result of performing the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
+    src: List of numbers to analyze.
+    tooltip: Returns the numeric result of the statistical aggregate function operation (a LIST_STAT_* constant) on the numeric list src.
   llLog( float val ) -> float:
-    val: Float value to evaluate.
-    tooltip: Returns a float representing the natural (base e) logarithm of the positive value val (returns 0.0 if val <= 0).
+    val: Number to compute the logarithm of.
+    tooltip: Returns natural (base e) logarithm of val. If negative, return 0.0.
   llLog10( float val ) -> float:
-    val: Float value to evaluate.
-    tooltip: Returns a float representing the base-10 (common) logarithm of the positive value val (returns 0.0 if val <= 0).
-  llModPow( integer a, integer b, integer c ) -> integer:
-    a: Base integer value.
-    b: Power exponent (capped at 0xFFFF / 16 bits).
-    c: Modulus integer value.
-    tooltip: Returns an integer representing a raised to the power b, modulo c (i.e., (a**b)%c). The b value is capped at 0xFFFF (16 bits).
+    val: Number to compute the logarithm of.
+    tooltip: Returns base-10 (common) logarithm of val. If negative, return 0.0.
+  llModPow( integer base, integer exponent, integer modulus ) -> integer:
+    base: 32-bit unsigned integer base.
+    exponent: 32-bit unsigned integer exponent.
+    modulus: 32-bit unsigned integer modulus.
+    tooltip: Returns base raised to the power exponent, modulo modulus (i.e., (b^e)%m). All inputs are wrapped to unsigned 32-bit integer range [0..4294967295]. Output is wrapped to signed 32-bit integer
+      range [-2147483648..2147483647]. Will never overflow, unlike (b^e), which can overflow to inf.
   llPow( float base, float exponent ) -> float:
-    base: Base float value.
-    exponent: Exponent float value.
-    tooltip: Returns a float representing base raised to the power exponent. Returns 0 and triggers a Math Error for imaginary results.
-  llRot2Angle( rotation rot ) -> float:
-    rot: Rotation value.
-    tooltip: Returns a float representing the rotation angle of rot.
-  llRot2Axis( rotation rot ) -> vector:
-    rot: Rotation value.
-    tooltip: Returns a vector representing the rotation axis of rot.
-  llRot2Euler( rotation quat ) -> vector:
-    quat: Rotation value to convert.
-    tooltip: Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.
+    base: Base number.
+    exponent: Exponent number.
+    tooltip: Returns base raised to the power exponent. If result is imaginary, returns NaN.
+  llRot2Angle( rotation q ) -> float:
+    q: Rotation to evaluate.
+    tooltip: Returns the angle, in radians, that q rotates.
+  llRot2Axis( rotation q ) -> vector:
+    q: Rotation to evaluate.
+    tooltip: Returns the unit vector axis that q rotates around.
+  llRot2Euler( rotation q ) -> vector:
+    q: Rotation to convert.
+    tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
-    end_vec: Target ending vector.
-    tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
+    end_vec: Ending vector.
+    tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
   llRound( float val ) -> integer:
-    val: Float value to round.
-    tooltip: Returns the integer that float val is closest to.
+    val: Number to round.
+    tooltip: Returns val rounded to the nearest integer. Halfway values are rounded toward infinity.
   llSin( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the sine of theta.
+    theta: Angle in radians.
+    tooltip: Returns the sine of theta. Theta is in radians.
   llSqrt( float val ) -> float:
     val: Positive float value (must be >= 0.0).
-    tooltip: Returns a float representing the square root of the positive value val. Triggers a math runtime error if val is less than 0.0 (imaginary results).
+    tooltip: Returns the square root of val. If negative, return NaN.
   llTan( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the tangent of theta.
+    theta: Angle in radians.
+    tooltip: Returns the tangent of theta. Theta is in radians.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
     vec_b: Second vector.
     tooltip: Returns a float representing the undirected, non-negative distance between vectors vec_a and vec_b.
   llVecMag( vector vec ) -> float:
     vec: Vector to evaluate.
-    tooltip: Returns a float representing the magnitude (geometric length) of the vector vec.
+    tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns a normalized unit vector sharing the same direction as vec.
-  llsRGB2Linear( vector srgb ) -> vector:
-    srgb: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
+  llsRGB2Linear( vector color ) -> vector:
+    color: Color vector in the sRGB colorspace to convert.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 math_3d:
-  llAngleBetween( rotation a, rotation b ) -> float:
-    a: Starting rotation.
-    b: Ending rotation.
-    tooltip: Returns a float representing the angle in radians between rotations a and b.
+  llAngleBetween( rotation start_rot, rotation end_rot ) -> float:
+    start_rot: Starting rotation.
+    end_rot: Ending rotation.
+    tooltip: Returns the angle, in radians, between rotations start_rot and and end_rot.
   llAxes2Rot( vector fwd, vector left, vector up ) -> rotation:
     fwd: Forward/back directional vector of the rotation.
     left: Left/right directional vector of the rotation.
     up: Up/down directional vector of the rotation.
     tooltip: Returns the rotation defined by the coordinate axes fwd, left, and up.
   llAxisAngle2Rot( vector axis, float angle ) -> rotation:
-    axis: Axis vector around which the rotation is generated.
-    angle: Angle of rotation, expressed in radians.
-    tooltip: Returns the rotation representing a generated angle (in radians) about the specified axis.
-  llEuler2Rot( vector v ) -> rotation:
-    v: Vector of Euler angles to convert.
-    tooltip: Returns the rotation representation of the Euler angles vector v.
-  llRot2Angle( rotation rot ) -> float:
-    rot: Rotation value.
-    tooltip: Returns a float representing the rotation angle of rot.
-  llRot2Axis( rotation rot ) -> vector:
-    rot: Rotation value.
-    tooltip: Returns a vector representing the rotation axis of rot.
-  llRot2Euler( rotation quat ) -> vector:
-    quat: Rotation value to convert.
-    tooltip: Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.
+    axis: Axis vector to rotate around.
+    angle: Angle to rotate, in radians.
+    tooltip: Returns the rotation that rotates angle radians around the axis vector.
+  llEuler2Rot( vector vec ) -> rotation:
+    vec: Vector of Euler angles to convert, in radians.
+    tooltip: Returns the quaternion representation of the Euler angles (in radians) within vec.
+  llRot2Angle( rotation q ) -> float:
+    q: Rotation to evaluate.
+    tooltip: Returns the angle, in radians, that q rotates.
+  llRot2Axis( rotation q ) -> vector:
+    q: Rotation to evaluate.
+    tooltip: Returns the unit vector axis that q rotates around.
+  llRot2Euler( rotation q ) -> vector:
+    q: Rotation to convert.
+    tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
-    end_vec: Target ending vector.
-    tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
+    end_vec: Ending vector.
+    tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
     vec_b: Second vector.
     tooltip: Returns a float representing the undirected, non-negative distance between vectors vec_a and vec_b.
   llVecMag( vector vec ) -> float:
     vec: Vector to evaluate.
-    tooltip: Returns a float representing the magnitude (geometric length) of the vector vec.
+    tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns a normalized unit vector sharing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
 math_trig:
   llAcos( float val ) -> float:
-    val: A floating-point value falling in the range [-1.0, 1.0].
-    tooltip: Returns a float representing the arc-cosine of val in radians.
-  llAngleBetween( rotation a, rotation b ) -> float:
-    a: Starting rotation.
-    b: Ending rotation.
-    tooltip: Returns a float representing the angle in radians between rotations a and b.
+    val: A number in the range [-1.0, 1.0].
+    tooltip: Returns the arccosine of val in radians.
+  llAngleBetween( rotation start_rot, rotation end_rot ) -> float:
+    start_rot: Starting rotation.
+    end_rot: Ending rotation.
+    tooltip: Returns the angle, in radians, between rotations start_rot and and end_rot.
   llAsin( float val ) -> float:
-    val: A floating-point value falling in the range [-1.0, 1.0].
-    tooltip: Returns a float representing the arc-sine of val in radians.
+    val: A number in the range [-1.0, 1.0].
+    tooltip: Returns the arcsine of val in radians.
   llAtan2( float y, float x ) -> float:
-    y: A floating-point value representing the y coordinate.
-    x: A floating-point value representing the x coordinate.
-    tooltip: Returns a float representing the arctangent2 of y and x.
+    y: Y coordinate.
+    x: X coordinate.
+    tooltip: 'Returns the arctangent of y/x in radians, using the signs to determine the quadrant. Note the argument order: Y is the first parameter, X is the second parameter.'
   llAxes2Rot( vector fwd, vector left, vector up ) -> rotation:
     fwd: Forward/back directional vector of the rotation.
     left: Left/right directional vector of the rotation.
     up: Up/down directional vector of the rotation.
     tooltip: Returns the rotation defined by the coordinate axes fwd, left, and up.
   llAxisAngle2Rot( vector axis, float angle ) -> rotation:
-    axis: Axis vector around which the rotation is generated.
-    angle: Angle of rotation, expressed in radians.
-    tooltip: Returns the rotation representing a generated angle (in radians) about the specified axis.
+    axis: Axis vector to rotate around.
+    angle: Angle to rotate, in radians.
+    tooltip: Returns the rotation that rotates angle radians around the axis vector.
   llCos( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the cosine of theta.
-  llRot2Angle( rotation rot ) -> float:
-    rot: Rotation value.
-    tooltip: Returns a float representing the rotation angle of rot.
-  llRot2Axis( rotation rot ) -> vector:
-    rot: Rotation value.
-    tooltip: Returns a vector representing the rotation axis of rot.
+    theta: Angle in radians.
+    tooltip: Returns the cosine of theta. Theta is in radians.
+  llRot2Angle( rotation q ) -> float:
+    q: Rotation to evaluate.
+    tooltip: Returns the angle, in radians, that q rotates.
+  llRot2Axis( rotation q ) -> vector:
+    q: Rotation to evaluate.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Fwd( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
-    end_vec: Target ending vector.
-    tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
+    end_vec: Ending vector.
+    tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
   llSin( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the sine of theta.
+    theta: Angle in radians.
+    tooltip: Returns the sine of theta. Theta is in radians.
   llTan( float theta ) -> float:
-    theta: Angle expressed in radians.
-    tooltip: Returns a float representing the tangent of theta.
+    theta: Angle in radians.
+    tooltip: Returns the tangent of theta. Theta is in radians.
 media:
   changed( integer changes ):
     changes: A bitfield of CHANGED_* flags representing what changed.
@@ -2733,8 +2737,8 @@ prim_appearance:
     face: Face number (or ALL_SIDES) of the prim to inspect.
     tooltip: Checks the specified face on the linked prim link. Returns TRUE if the face material is a PBR render material, or FALSE if it uses Blinn-Phong diffuse textures.
   llLinear2sRGB( vector color ) -> vector:
-    color: RGB color vector in linear space to convert.
-    tooltip: Returns a vector representing the conversion of color from the linear RGB colorspace into the sRGB colorspace.
+    color: Color vector in the linear RGB space to convert.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
   llOffsetTexture( float u, float v, integer face ) -> void:
     u: Horizontal (U) offset, typically in the interval [-1.0, 1.0].
     v: Vertical (V) offset, typically in the interval [-1.0, 1.0].
@@ -2834,9 +2838,9 @@ prim_appearance:
     rate: Playback rate in frames per second (or radians/sec for ROTATE, UV coords/sec for SMOOTH). Must not be zero.
     tooltip: Animates the texture on face of the prim by setting its scale and offset. mode defines options, sizex/sizey define frames, start defines the start frame/angle, length defines duration, and
       rate defines playback speed.
-  llsRGB2Linear( vector srgb ) -> vector:
-    srgb: Color vector in the sRGB colorspace to convert.
-    tooltip: Returns a vector representing the conversion of the color srgb from the sRGB colorspace into the linear RGB colorspace.
+  llsRGB2Linear( vector color ) -> vector:
+    color: Color vector in the sRGB colorspace to convert.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 prim_inventory:
   changed( integer changes ):
     changes: A bitfield of CHANGED_* flags representing what changed.
@@ -3056,44 +3060,44 @@ prim_properties:
     text: Context menu text to display.
     tooltip: Displays the string text instead of 'Touch' in the right-click context menu.
 quaternion:
-  llAngleBetween( rotation a, rotation b ) -> float:
-    a: Starting rotation.
-    b: Ending rotation.
-    tooltip: Returns a float representing the angle in radians between rotations a and b.
+  llAngleBetween( rotation start_rot, rotation end_rot ) -> float:
+    start_rot: Starting rotation.
+    end_rot: Ending rotation.
+    tooltip: Returns the angle, in radians, between rotations start_rot and and end_rot.
   llAxes2Rot( vector fwd, vector left, vector up ) -> rotation:
     fwd: Forward/back directional vector of the rotation.
     left: Left/right directional vector of the rotation.
     up: Up/down directional vector of the rotation.
     tooltip: Returns the rotation defined by the coordinate axes fwd, left, and up.
   llAxisAngle2Rot( vector axis, float angle ) -> rotation:
-    axis: Axis vector around which the rotation is generated.
-    angle: Angle of rotation, expressed in radians.
-    tooltip: Returns the rotation representing a generated angle (in radians) about the specified axis.
-  llEuler2Rot( vector v ) -> rotation:
-    v: Vector of Euler angles to convert.
-    tooltip: Returns the rotation representation of the Euler angles vector v.
-  llRot2Angle( rotation rot ) -> float:
-    rot: Rotation value.
-    tooltip: Returns a float representing the rotation angle of rot.
-  llRot2Axis( rotation rot ) -> vector:
-    rot: Rotation value.
-    tooltip: Returns a vector representing the rotation axis of rot.
-  llRot2Euler( rotation quat ) -> vector:
-    quat: Rotation value to convert.
-    tooltip: Returns a vector representing the Euler rotation (roll, pitch, yaw) of quat, with each component expressed in radians.
+    axis: Axis vector to rotate around.
+    angle: Angle to rotate, in radians.
+    tooltip: Returns the rotation that rotates angle radians around the axis vector.
+  llEuler2Rot( vector vec ) -> rotation:
+    vec: Vector of Euler angles to convert, in radians.
+    tooltip: Returns the quaternion representation of the Euler angles (in radians) within vec.
+  llRot2Angle( rotation q ) -> float:
+    q: Rotation to evaluate.
+    tooltip: Returns the angle, in radians, that q rotates.
+  llRot2Axis( rotation q ) -> vector:
+    q: Rotation to evaluate.
+    tooltip: Returns the unit vector axis that q rotates around.
+  llRot2Euler( rotation q ) -> vector:
+    q: Rotation to convert.
+    tooltip: Returns a vector of Euler angles (roll, pitch, yaw) of q. The angles will be in radians.
   llRot2Fwd( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llRotBetween( vector start_vec, vector end_vec ) -> rotation:
     start_vec: Starting vector.
-    end_vec: Target ending vector.
-    tooltip: Returns a rotation representing the shortest path rotation from vector start to vector end.
+    end_vec: Ending vector.
+    tooltip: Returns the shortest-path quaternion that rotates start_vec onto end_vec.
 region:
   changed( integer changes ):
     changes: A bitfield of CHANGED_* flags representing what changed.
@@ -3883,28 +3887,34 @@ uuid:
     tooltip: Asynchronously requests the Agent ID key (UUID) for the agent specified by their current or historical username, returning NULL_KEY if not found. Returns a key query handle for the dataserver
       event.
 vector:
-  llRot2Axis( rotation rot ) -> vector:
-    rot: Rotation value.
-    tooltip: Returns a vector representing the rotation axis of rot.
+  llLinear2sRGB( vector color ) -> vector:
+    color: Color vector in the linear RGB space to convert.
+    tooltip: Returns a sRGB colorspace vector converted from the linear RGB colorspace argument.
+  llRot2Axis( rotation q ) -> vector:
+    q: Rotation to evaluate.
+    tooltip: Returns the unit vector axis that q rotates around.
   llRot2Fwd( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive X direction (forward) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive X (forward) in the coordinate space of rotation q. Equivalent to <1, 0, 0> * q.
   llRot2Left( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Y direction (left) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Y (left) in the coordinate space of rotation q. Equivalent to <0, 1, 0> * q.
   llRot2Up( rotation q ) -> vector:
-    q: Rotation value.
-    tooltip: Returns a unit vector pointing in the local positive Z direction (up) relative to the parent (root prim or region) defined by rotation q.
+    q: Rotation to convert.
+    tooltip: Returns the unit vector pointing toward positive Z (up) in the coordinate space of rotation q. Equivalent to <0, 0, 1> * q.
   llVecDist( vector vec_a, vector vec_b ) -> float:
     vec_a: First vector.
     vec_b: Second vector.
     tooltip: Returns a float representing the undirected, non-negative distance between vectors vec_a and vec_b.
   llVecMag( vector vec ) -> float:
     vec: Vector to evaluate.
-    tooltip: Returns a float representing the magnitude (geometric length) of the vector vec.
+    tooltip: Returns the magnitude (geometric length) of vec.
   llVecNorm( vector vec ) -> vector:
     vec: Vector to normalize.
-    tooltip: Returns a normalized unit vector sharing the same direction as vec.
+    tooltip: Returns the normalized unit vector pointing the same direction as vec. If <0, 0, 0>, return <0, 0, 0>.
+  llsRGB2Linear( vector color ) -> vector:
+    color: Color vector in the sRGB colorspace to convert.
+    tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 vehicles:
   llRemoveVehicleFlags( integer flags ) -> void:
     flags: A bitwise mask of VEHICLE_FLAG_* constants to disable.
