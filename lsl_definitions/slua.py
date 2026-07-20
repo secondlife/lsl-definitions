@@ -388,12 +388,7 @@ class SLuaModule:
 
     def write_luau_def(self, f: TextIO) -> None:
         self._workaround_annotated_callable_bug()
-        f.write(f"""
----------------------------
--- Global Table: {self.name}
----------------------------
-
-declare {self.name}: """)
+        f.write(f"declare {self.name}: ")
         if self.callable:
             f.write("(")
             f.write(self.callable.annotation_string)
@@ -406,7 +401,7 @@ declare {self.name}: """)
             if func.private or func.local_only:
                 continue
             func.write_luau_table_def(f, indent=1)
-        f.write("}\n\n")
+        f.write("}\n")
 
 
 @dataclasses.dataclass
