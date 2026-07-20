@@ -50,6 +50,9 @@
       "include": "#local-declaration"
     },
     {
+      "include": "#const-declaration"
+    },
+    {
       "include": "#for-loop"
     },
     {
@@ -194,6 +197,45 @@
             }
           },
           "end": "(?=\\s*do\\b|\\s*[=;,]|\\s*$)",
+          "patterns": [
+            {
+              "include": "#type_literal"
+            }
+          ]
+        },
+        {
+          "name": "variable.other.constant.luau",
+          "match": "\\b([A-Z_][A-Z0-9_]*)\\b"
+        },
+        {
+          "name": "variable.other.readwrite.luau",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+        }
+      ]
+    },
+    "const-declaration": {
+      "begin": "\\b(const)\\b",
+      "end": "(?=\\s*[=;]|\\s*$)",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.const.luau"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#attribute"
+        },
+        {
+          "begin": "(:)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.type.luau"
+            }
+          },
+          "end": "(?=\\s*[=;,]|\\s*$)",
           "patterns": [
             {
               "include": "#type_literal"
