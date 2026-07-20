@@ -4032,6 +4032,9 @@ constants:
       specifies a full sphere scan.
     type: float
     value: '3.14159265'
+    slua-deprecated:
+      use: math.pi
+      reason: Double precision.
   PING_PONG:
     member-of: [TextureAnimMode]
     tooltip: Used with texture animation functions to cause the animation to play
@@ -4044,6 +4047,9 @@ constants:
       scan.
     type: float
     value: '1.57079633'
+    slua-deprecated:
+      use: math.pi/2
+      reason: Double precision.
   PRIM_ALLOW_UNSIT:
     member-of: [PrimParam, PrimParamGet]
     tooltip: Prim parameter for allowing or restricting manual standing for avatars
@@ -6932,6 +6938,9 @@ constants:
     tooltip: Mathematical constant representing the square root of 2.
     type: float
     value: '1.41421356'
+    slua-deprecated:
+      use: math.sqrt2
+      reason: Double precision.
   STATUS_BLOCK_GRAB:
     member-of: [ObjectStatusParam]
     tooltip: Status flag (default FALSE) that blocks click-and-drag grab movements
@@ -7435,6 +7444,9 @@ constants:
     tooltip: Mathematical constant pi*2, representing the number of radians in a full circle.
     type: float
     value: '6.28318530'
+    slua-deprecated:
+      use: math.tau
+      reason: Double precision.
   TYPE_FLOAT:
     member-of: [ListEntryType]
     slua-deprecated:
