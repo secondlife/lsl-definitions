@@ -289,9 +289,9 @@ class SLuaClassDeclaration:
     """Class declaration with properties and methods"""
 
     name: str
-    properties: list[SLuaProperty]
-    functions: list[SLuaFunction]
-    methods: list[SLuaFunction]
+    properties: dict[str, SLuaProperty]
+    functions: dict[str, SLuaFunction]
+    methods: dict[str, SLuaFunction]
     comment: str = ""
     instance_type: str | None = None
     export: bool = False
@@ -312,16 +312,16 @@ class SLuaClassDeclaration:
         Workaround this bug by removing all checked annotations
         https://github.com/luau-lang/luau/issues/2384
         """
-        for func in self.methods:
+        for func in self.methods.values():
             func.typechecker_flags.checked = False
 
     def _write_extern_type_def(self, f: TextIO) -> None:
         f.write(f"declare extern type {self.name} with\n")
-        for prop in self.properties:
+        for prop in self.properties.values():
             f.write(f"  {prop.to_luau_def()}\n")
-        for func in self.functions:
+        for func in self.functions.values():
             func.write_luau_global_def(f, indent=1)
-        for func in self.methods:
+        for func in self.methods.values():
             func.write_luau_global_def(f, indent=1)
         f.write("end\n\n")
 
@@ -330,11 +330,11 @@ class SLuaClassDeclaration:
         mt_name = f"{self.name}Meta"
         f.write(f"{export_str}type {mt_name} = {{\n")
         f.write(f"  __index: {mt_name},\n")
-        for prop in self.properties:
+        for prop in self.properties.values():
             f.write(f"  {prop.to_luau_def()},\n")
-        for func in self.functions:
+        for func in self.functions.values():
             func.write_luau_table_def(f, indent=1)
-        for func in self.methods:
+        for func in self.methods.values():
             func.write_luau_table_def(f, indent=1)
         f.write("}\n\n")
         f.write(f"{export_str}type {self.name} = typeof(\n")
@@ -350,8 +350,8 @@ class SLuaModule:
 
     name: str
     callable: SLuaFunction | None
-    constants: list[SLuaProperty]
-    functions: list[SLuaFunction]
+    constants: dict[str, SLuaProperty]
+    functions: dict[str, SLuaFunction]
     comment: str = ""
 
     def to_keywords_functions_dict(self) -> dict:
@@ -363,7 +363,7 @@ class SLuaModule:
         functions.update(
             {
                 f"{self.name}.{func.name}": func.to_keywords_dict()
-                for func in sorted(self.functions, key=lambda x: x.name)
+                for func in sorted(self.functions.values(), key=lambda x: x.name)
                 if not func.private and not func.local_only
             }
         )
@@ -372,7 +372,7 @@ class SLuaModule:
     def to_keywords_constants_dict(self) -> dict:
         return {
             f"{self.name}.{prop.name}": prop.to_keywords_dict()
-            for prop in sorted(self.constants, key=lambda x: x.name)
+            for prop in sorted(self.constants.values(), key=lambda x: x.name)
         }
 
     def _workaround_annotated_callable_bug(self) -> None:
@@ -383,7 +383,7 @@ class SLuaModule:
         if self.callable is None:
             return  # no issue
         self.callable.typechecker_flags.checked = False
-        for func in self.functions:
+        for func in self.functions.values():
             func.typechecker_flags.checked = False
 
     def write_luau_def(self, f: TextIO) -> None:
@@ -400,9 +400,9 @@ declare {self.name}: """)
             f.write(self.callable.type_def_string)
             f.write(") & ")
         f.write("{\n")
-        for prop in self.constants:
+        for prop in self.constants.values():
             f.write(f"  {prop.to_luau_def()},\n")
-        for func in self.functions:
+        for func in self.functions.values():
             if func.private or func.local_only:
                 continue
             func.write_luau_table_def(f, indent=1)
@@ -417,18 +417,18 @@ class SLuaDefinitions:
     controls: dict  # same structure as LSLDefinitions.controls
     builtin_types: dict  # same structure as LSLDefinitions.types
     metamethods: dict[str, str]
-    builtin_constants: list[SLuaProperty]
+    builtin_constants: dict[str, SLuaProperty]
 
     # 2. SLua base classes. These only depend on Luau builtins
-    base_classes: list[SLuaClassDeclaration]
-    type_aliases: list[SLuaTypeAlias]
+    base_classes: dict[str, SLuaClassDeclaration]
+    type_aliases: dict[str, SLuaTypeAlias]
 
     # 3. SLua standard library. Depends on base classes
-    classes: list[SLuaClassDeclaration]
-    functions: list[SLuaFunction]
-    modules: list[SLuaModule]
-    global_variables: list[SLuaProperty]
-    global_constants: list[SLuaProperty]
+    classes: dict[str, SLuaClassDeclaration]
+    functions: dict[str, SLuaFunction]
+    modules: dict[str, SLuaModule]
+    global_variables: dict[str, SLuaProperty]
+    global_constants: dict[str, SLuaProperty]
 
     # All known type names, populated by parser
     type_names: set[str] = dataclasses.field(default_factory=set)
@@ -436,18 +436,6 @@ class SLuaDefinitions:
     _TYPE_SEPERATORS_RE = re.compile(
         r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
     )
-
-    def get_module(self, name: str) -> SLuaModule:
-        for m in self.modules:
-            if m.name == name:
-                return m
-        return None
-
-    def get_class(self, name: str) -> SLuaClassDeclaration | None:
-        for c in self.classes:
-            if c.name == name:
-                return c
-        return None
 
     def validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
         """Validate that a type string only references known types."""
@@ -494,14 +482,10 @@ class SLuaDefinitions:
 
         If solverV2 is False, generate an overload for each event. (more correct)
         """
-        LLDetectedEventName_alias = next(
-            m for m in self.type_aliases if m.name == "LLDetectedEventName"
-        )
-        LLNonDetectedEventName_alias = next(
-            m for m in self.type_aliases if m.name == "LLNonDetectedEventName"
-        )
-        LLEventName_alias = next(m for m in self.type_aliases if m.name == "LLEventName")
-        LLEvents_class = next(m for m in self.classes if m.name == "LLEvents")
+        LLDetectedEventName_alias = self.type_aliases["LLDetectedEventName"]
+        LLNonDetectedEventName_alias = self.type_aliases["LLNonDetectedEventName"]
+        LLEventName_alias = self.type_aliases["LLEventName"]
+        LLEvents_class = self.classes["LLEvents"]
 
         def replace_list(type: str) -> str:
             """
@@ -580,7 +564,7 @@ class SLuaDefinitions:
                 modifiable="override-fields",
                 private=event.private,
             )
-            LLEvents_class.properties.append(event_prop)
+            LLEvents_class.properties[event_prop.name] = event_prop
 
         LLDetectedEventName_alias.definition = " | ".join(
             f'"{name}"' for name in LLDetectedEventName_alias.selene_type
@@ -591,7 +575,7 @@ class SLuaDefinitions:
         LLEventName_alias.selene_type = (
             LLDetectedEventName_alias.selene_type + LLNonDetectedEventName_alias.selene_type
         )
-        for register_func in LLEvents_class.methods:
+        for register_func in LLEvents_class.methods.values():
             if register_func.name in {"off", "on", "once"}:
                 register_func.parameters = [
                     SLuaParameter("self", type="LLEvents"),
@@ -616,9 +600,9 @@ class SLuaDefinitions:
                 if solverV2:
                     register_func.overloads[0].return_type = "LLEventHandler"
 
-        ll_module = next(m for m in self.modules if m.name == "ll")
-        llcompat_module = next(m for m in self.modules if m.name == "llcompat")
-        DetectedEvent_class = next(m for m in self.base_classes if m.name == "DetectedEvent")
+        ll_module = self.modules["ll"]
+        llcompat_module = self.modules["llcompat"]
+        DetectedEvent_class = self.base_classes["DetectedEvent"]
 
         for func in lsl.functions.values():
             semantic_prefix = (
@@ -658,8 +642,8 @@ class SLuaDefinitions:
                 must_use=ll_func.must_use,
             )
             if not func.slua_removed:
-                ll_module.functions.append(ll_func)
-            llcompat_module.functions.append(llcompat_func)
+                ll_module.functions[ll_func.name] = ll_func
+            llcompat_module.functions[llcompat_func.name] = llcompat_func
             if func.detected_semantics:
                 name = ll_func.name.replace("Detected", "Get")
                 name = name[0].lower() + name[1:]
@@ -675,7 +659,7 @@ class SLuaDefinitions:
                     must_use=ll_func.must_use,
                 )
                 detected_func.parameters[0] = SLuaParameter(name="self")
-                DetectedEvent_class.methods.append(detected_func)
+                DetectedEvent_class.methods[detected_func.name] = detected_func
 
         for const in lsl.constants.values():
             if const.slua_removed:
@@ -687,7 +671,7 @@ class SLuaDefinitions:
                 value=const.slua_literal,
                 private=const.private,
             )
-            self.global_constants.append(prop)
+            self.global_constants[prop.name] = prop
 
     def _generate_spp_builder_class(self, lsl: LSLDefinitions) -> None:
         """Expand the `prim-params` ruleset into the fluent SPP builder class and attach it to self."""
@@ -715,11 +699,13 @@ class SLuaDefinitions:
             )
 
         spec = expand_spp_builder(lsl)
-        methods: list[SLuaFunction] = [make_fluent_method(spec, m) for m in spec.methods]
+        methods: dict[str, SLuaFunction] = {
+            m.name: make_fluent_method(spec, m) for m in spec.methods
+        }
 
         # We assume that the class we place this in is pre-existing
-        builder_class = [m for m in self.classes if m.name == spec.class_name][0]
-        builder_class.methods.extend(methods)
+        builder_class = self.classes[spec.class_name]
+        builder_class.methods.update(methods)
 
     def _generate_ruleset_builder_classes(self, lsl: LSLDefinitions) -> None:
         """Inject typed properties into fluent builder classes or type aliases.
@@ -736,8 +722,8 @@ class SLuaDefinitions:
             if not lua_type:
                 continue
 
-            cls = next((c for c in self.classes if c.name == lua_type), None)
-            alias = next((a for a in self.type_aliases if a.name == lua_type), None)
+            cls = self.classes.get(lua_type, None)
+            alias = self.type_aliases.get(lua_type, None)
             if cls is None and alias is None:
                 continue
 
@@ -829,29 +815,34 @@ class SLuaDefinitionParser:
 
         # nil, true, false are also valid type literals
         self._type_names.update(const["name"] for const in def_dict["builtin-constants"])
-        builtin_constants = [
-            self._validate_property(const, self._global_scope, const=True)
+        builtin_constants = {
+            const["name"]: self._validate_property(const, self._global_scope, const=True)
             for const in def_dict["builtin-constants"]
-        ]
+        }
 
         # 2. SLua base classes
-        base_classes = [self._validate_class(class_) for class_ in def_dict["base-classes"]]
-        type_aliases = [self._validate_type_alias(alias) for alias in def_dict["type-aliases"]]
+        base_classes = {
+            class_["name"]: self._validate_class(class_) for class_ in def_dict["base-classes"]
+        }
+        type_aliases = {
+            alias["name"]: self._validate_type_alias(alias) for alias in def_dict["type-aliases"]
+        }
 
         # 3. SLua standard library
-        global_constants = [
-            self._validate_property(const, self._global_scope, const=True)
+        global_constants = {
+            const["name"]: self._validate_property(const, self._global_scope, const=True)
             for const in def_dict["constants"]
-        ]
-        classes = [self._validate_class(class_) for class_ in def_dict["classes"]]
-        functions = [
-            self._validate_function(func, self._global_scope) for func in def_dict["functions"]
-        ]
-        modules = [self._validate_module(module) for module in def_dict["modules"]]
-        global_variables = [
-            self._validate_property(const, self._global_scope)
+        }
+        classes = {class_["name"]: self._validate_class(class_) for class_ in def_dict["classes"]}
+        functions = {
+            func["name"]: self._validate_function(func, self._global_scope)
+            for func in def_dict["functions"]
+        }
+        modules = {module["name"]: self._validate_module(module) for module in def_dict["modules"]}
+        global_variables = {
+            const["name"]: self._validate_property(const, self._global_scope)
             for const in def_dict["global-variables"]
-        ]
+        }
 
         return SLuaDefinitions(
             controls=controls,
@@ -873,8 +864,8 @@ class SLuaDefinitionParser:
             name=data["name"],
             comment=data.get("comment", ""),
             callable=None,
-            constants=[],
-            functions=[],
+            constants={},
+            functions={},
         )
         try:
             self._validate_identifier(module.name)
@@ -886,14 +877,14 @@ class SLuaDefinitionParser:
                 if module.callable.name != module.name:
                     raise ValueError("module.callable.name must match module.name")
                 module_scope.clear()
-            module.constants = [
-                self._validate_property(prop, module_scope, const=True)
+            module.constants = {
+                prop["name"]: self._validate_property(prop, module_scope, const=True)
                 for prop in data.get("constants", [])
-            ]
-            module.functions = [
-                self._validate_function(function, module_scope)
+            }
+            module.functions = {
+                function["name"]: self._validate_function(function, module_scope)
                 for function in data.get("functions", [])
-            ]
+            }
         except Exception as e:
             raise ValueError(f"In module {module.name}: {e}") from e
         return module
@@ -904,9 +895,9 @@ class SLuaDefinitionParser:
             instance_type=data.get("instance-type", None),
             export=data.get("export", False),
             comment=data.get("comment", ""),
-            properties=[],
-            functions=[],
-            methods=[],
+            properties={},
+            functions={},
+            methods={},
         )
         try:
             self._validate_identifier(class_.name)
@@ -915,16 +906,18 @@ class SLuaDefinitionParser:
                 self._validate_scope(f"{class_.name}Meta", self._type_names)
                 self._validate_type(class_.instance_type)
             class_scope: set[str] = set()
-            class_.properties = [
-                self._validate_property(prop, class_scope) for prop in data.get("properties", [])
-            ]
-            class_.functions = [
-                self._validate_function(method, class_scope) for method in data.get("functions", [])
-            ]
-            class_.methods = [
-                self._validate_function(method, class_scope, class_name=class_.name)
+            class_.properties = {
+                prop["name"]: self._validate_property(prop, class_scope)
+                for prop in data.get("properties", [])
+            }
+            class_.functions = {
+                method["name"]: self._validate_function(method, class_scope)
+                for method in data.get("functions", [])
+            }
+            class_.methods = {
+                method["name"]: self._validate_function(method, class_scope, class_name=class_.name)
                 for method in data.get("methods", [])
-            ]
+            }
         except Exception as e:
             raise ValueError(f"In class {class_.name}: {e}") from e
         return class_
