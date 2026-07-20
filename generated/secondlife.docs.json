@@ -191,6 +191,10 @@
         "documentation": "Reads a signed 32-bit integer from the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readi32"
     },
+    "@sl-slua/global/buffer.readinteger": {
+        "documentation": "Reads a signed or unsigned 64-bit integer from the buffer at the given offset.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readinteger"
+    },
     "@sl-slua/global/buffer.readu32": {
         "documentation": "Reads an unsigned 32-bit integer from the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readu32"
@@ -222,6 +226,10 @@
     "@sl-slua/global/buffer.writei32": {
         "documentation": "Writes a signed 32-bit integer to the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#writei32"
+    },
+    "@sl-slua/global/buffer.writeinteger": {
+        "documentation": "Writes a signed or unsigned 64-bit integer to the buffer at the given offset.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#writeinteger"
     },
     "@sl-slua/global/buffer.writeu32": {
         "documentation": "Writes an unsigned 32-bit integer to the buffer at the given offset.",
@@ -310,6 +318,132 @@
     "@sl-slua/global/debug.traceback": {
         "documentation": "Returns a human-readable call stack starting from the specified level.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/debug#traceback"
+    },
+    "@sl-slua/global/integer": {
+        "documentation": "64-bit integer operations library."
+    },
+    "@sl-slua/global/integer.maxsigned": {
+        "documentation": "Value: 9_223_372_036_854_775_807i<br>The most positive signed int64 (2^63-1)."
+    },
+    "@sl-slua/global/integer.minsigned": {
+        "documentation": "Value: -9_223_372_036_854_775_808i<br>The most negative signed int64 (-2^63)."
+    },
+    "@sl-slua/global/integer.add": {
+        "documentation": "Returns the sum of two 64-bit integers (signed or unsigned), wrapping on overflow."
+    },
+    "@sl-slua/global/integer.arshift": {
+        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift."
+    },
+    "@sl-slua/global/integer.band": {
+        "documentation": "Returns the bitwise AND of the given integers."
+    },
+    "@sl-slua/global/integer.bnot": {
+        "documentation": "Returns the bitwise negation of val."
+    },
+    "@sl-slua/global/integer.bor": {
+        "documentation": "Returns the bitwise OR of the given integers."
+    },
+    "@sl-slua/global/integer.bxor": {
+        "documentation": "Returns the bitwise XOR of the given integers."
+    },
+    "@sl-slua/global/integer.bswap": {
+        "documentation": "Returns val with its bytes swapped to the reverse order."
+    },
+    "@sl-slua/global/integer.btest": {
+        "documentation": "Returns true if the bitwise AND of the given integers is non-zero."
+    },
+    "@sl-slua/global/integer.clamp": {
+        "documentation": "Returns val clamped between min and max. Raises an error if min is greater than max."
+    },
+    "@sl-slua/global/integer.countlz": {
+        "documentation": "Returns the count of val's leading zeros."
+    },
+    "@sl-slua/global/integer.countrz": {
+        "documentation": "Returns the count of val's trailing zeros."
+    },
+    "@sl-slua/global/integer.create": {
+        "documentation": "Returns number val converted to an integer. Returns nil if it has a fractional part, is out of range, or is NaN."
+    },
+    "@sl-slua/global/integer.div": {
+        "documentation": "Returns dividend / divisor (signed), rounding toward zero. Raises an error if divisor is zero."
+    },
+    "@sl-slua/global/integer.extract": {
+        "documentation": "Returns width bits from src, starting from bit index field. Raises an error if the selected bit range is goes outside the range [0, 63]."
+    },
+    "@sl-slua/global/integer.fromstring": {
+        "documentation": "Converts the input string to an integer in the specified base. Returns nil if not an integer."
+    },
+    "@sl-slua/global/integer.ge": {
+        "documentation": "Returns true if int1 >= int2 (signed)."
+    },
+    "@sl-slua/global/integer.gt": {
+        "documentation": "Returns true if int1 > int2 (signed)."
+    },
+    "@sl-slua/global/integer.idiv": {
+        "documentation": "Returns dividend / divisor (signed), rounding toward negative infinity. Raises an error if divisor is zero."
+    },
+    "@sl-slua/global/integer.le": {
+        "documentation": "Returns true if int1 <= int2 (signed)."
+    },
+    "@sl-slua/global/integer.lt": {
+        "documentation": "Returns true if int1 < int2 (signed)."
+    },
+    "@sl-slua/global/integer.lrotate": {
+        "documentation": "Returns val rotated by i bits to the left. If i is negative, a right rotate is performed."
+    },
+    "@sl-slua/global/integer.lshift": {
+        "documentation": "Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-63, 63] range."
+    },
+    "@sl-slua/global/integer.max": {
+        "documentation": "Returns the maximum value from the given integers (signed)."
+    },
+    "@sl-slua/global/integer.min": {
+        "documentation": "Returns the minimum value from the given integers (signed)."
+    },
+    "@sl-slua/global/integer.mod": {
+        "documentation": "Returns the remainder of dividend / divisor (signed). The result always has the same sign as the divisor. Raises an error if divisor is zero."
+    },
+    "@sl-slua/global/integer.mul": {
+        "documentation": "Returns the product of two 64-bit integers (signed or unsigned), wrapping on overflow."
+    },
+    "@sl-slua/global/integer.neg": {
+        "documentation": "Returns the negation of val. integer.neg(integer.minsigned) == integer.minsigned due to overflow."
+    },
+    "@sl-slua/global/integer.rem": {
+        "documentation": "Returns the remainder of dividend / divisor (signed). The result always has the same sign as the dividend. Raises an error if divisor is zero."
+    },
+    "@sl-slua/global/integer.replace": {
+        "documentation": "Returns dst with width bits replaced from src, starting from bit index field. Raises an error if the selected bit range goes outside the range [0, 63]."
+    },
+    "@sl-slua/global/integer.rrotate": {
+        "documentation": "Returns val rotated by i bits to the right. If i is negative, a left rotate is performed."
+    },
+    "@sl-slua/global/integer.rshift": {
+        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-63, 63] range."
+    },
+    "@sl-slua/global/integer.sub": {
+        "documentation": "Returns the difference between two 64-bit integers (signed or unsigned), wrapping on overflow."
+    },
+    "@sl-slua/global/integer.tonumber": {
+        "documentation": "Returns the nearest float64 to the given int64. Is inexact above 2^53."
+    },
+    "@sl-slua/global/integer.udiv": {
+        "documentation": "Returns dividend / divisor (unsigned), rounding toward negative infinity. Raises an error if divisor is zero."
+    },
+    "@sl-slua/global/integer.uge": {
+        "documentation": "Returns true if int1 >= int2 (unsigned)."
+    },
+    "@sl-slua/global/integer.ugt": {
+        "documentation": "Returns true if int1 > int2 (unsigned)."
+    },
+    "@sl-slua/global/integer.ule": {
+        "documentation": "Returns true if int1 <= int2 (unsigned)."
+    },
+    "@sl-slua/global/integer.ult": {
+        "documentation": "Returns true if int1 < int2 (unsigned)."
+    },
+    "@sl-slua/global/integer.urem": {
+        "documentation": "Returns the remainder of dividend / divisor (unsigned). Raises an error if divisor is zero."
     },
     "@sl-slua/global/llbase64": {
         "documentation": "Base64 encoding/decoding library."

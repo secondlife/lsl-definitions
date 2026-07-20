@@ -5234,6 +5234,14 @@ globals:
     - type: number
     must_use: true
     description: Reads a signed 32-bit integer from the buffer at the given offset.
+  buffer.readinteger:
+    args:
+    - type:
+        display: buffer
+    - type: number
+    must_use: true
+    description: Reads a signed or unsigned 64-bit integer from the buffer at the
+      given offset.
   buffer.readu32:
     args:
     - type:
@@ -5297,6 +5305,15 @@ globals:
     - type: number
     - type: number
     description: Writes a signed 32-bit integer to the buffer at the given offset.
+  buffer.writeinteger:
+    args:
+    - type:
+        display: buffer
+      observes: write
+    - type: number
+    - type: any
+    description: Writes a signed or unsigned 64-bit integer to the buffer at the given
+      offset.
   buffer.writeu32:
     args:
     - type:
@@ -5452,6 +5469,269 @@ globals:
       required: false
     must_use: true
     description: Returns a human-readable call stack starting from the specified level.
+  integer.maxsigned:
+    property: read-only
+    description: The most positive signed int64 (2^63-1).
+  integer.minsigned:
+    property: read-only
+    description: The most negative signed int64 (-2^63).
+  integer.add:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the sum of two 64-bit integers (signed or unsigned), wrapping
+      on overflow.
+  integer.arshift:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: 'Returns val shifted by i bits to the right. If i is negative, a
+      left shift is performed.
+
+      Does an arithmetic shift: The most significant bit of n is propagated during
+      the shift.'
+  integer.band:
+    args:
+    - type: '...'
+    must_use: true
+    description: Returns the bitwise AND of the given integers.
+  integer.bnot:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the bitwise negation of val.
+  integer.bor:
+    args:
+    - type: '...'
+    must_use: true
+    description: Returns the bitwise OR of the given integers.
+  integer.bxor:
+    args:
+    - type: '...'
+    must_use: true
+    description: Returns the bitwise XOR of the given integers.
+  integer.bswap:
+    args:
+    - type: any
+    must_use: true
+    description: Returns val with its bytes swapped to the reverse order.
+  integer.btest:
+    args:
+    - type: '...'
+    must_use: true
+    description: Returns true if the bitwise AND of the given integers is non-zero.
+  integer.clamp:
+    args:
+    - type: any
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns val clamped between min and max. Raises an error if min is
+      greater than max.
+  integer.countlz:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the count of val's leading zeros.
+  integer.countrz:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the count of val's trailing zeros.
+  integer.create:
+    args:
+    - type: number
+    must_use: true
+    description: Returns number val converted to an integer. Returns nil if it has
+      a fractional part, is out of range, or is NaN.
+  integer.div:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns dividend / divisor (signed), rounding toward zero. Raises
+      an error if divisor is zero.
+  integer.extract:
+    args:
+    - type: any
+    - type: any
+    - type: any
+      required: false
+    must_use: true
+    description: Returns width bits from src, starting from bit index field. Raises
+      an error if the selected bit range is goes outside the range [0, 63].
+  integer.fromstring:
+    args:
+    - type: string
+    - type: number
+      required: false
+    must_use: true
+    description: Converts the input string to an integer in the specified base. Returns
+      nil if not an integer.
+  integer.ge:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 >= int2 (signed).
+  integer.gt:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 > int2 (signed).
+  integer.idiv:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns dividend / divisor (signed), rounding toward negative infinity.
+      Raises an error if divisor is zero.
+  integer.le:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 <= int2 (signed).
+  integer.lt:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 < int2 (signed).
+  integer.lrotate:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns val rotated by i bits to the left. If i is negative, a right
+      rotate is performed.
+  integer.lshift:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns val shifted by i bits to the left. If i is negative, a right
+      shift is performed. Returns 0 if i is outside the [-63, 63] range.
+  integer.max:
+    args:
+    - type: any
+    - type: '...'
+      required: true
+    must_use: true
+    description: Returns the maximum value from the given integers (signed).
+  integer.min:
+    args:
+    - type: any
+    - type: '...'
+      required: true
+    must_use: true
+    description: Returns the minimum value from the given integers (signed).
+  integer.mod:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the remainder of dividend / divisor (signed). The result
+      always has the same sign as the divisor. Raises an error if divisor is zero.
+  integer.mul:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the product of two 64-bit integers (signed or unsigned),
+      wrapping on overflow.
+  integer.neg:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the negation of val. integer.neg(integer.minsigned) == integer.minsigned
+      due to overflow.
+  integer.rem:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the remainder of dividend / divisor (signed). The result
+      always has the same sign as the dividend. Raises an error if divisor is zero.
+  integer.replace:
+    args:
+    - type: any
+    - type: any
+    - type: any
+    - type: any
+      required: false
+    must_use: true
+    description: Returns dst with width bits replaced from src, starting from bit
+      index field. Raises an error if the selected bit range goes outside the range
+      [0, 63].
+  integer.rrotate:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns val rotated by i bits to the right. If i is negative, a left
+      rotate is performed.
+  integer.rshift:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns val shifted by i bits to the right. If i is negative, a left
+      shift is performed. Returns 0 if i is outside the [-63, 63] range.
+  integer.sub:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the difference between two 64-bit integers (signed or unsigned),
+      wrapping on overflow.
+  integer.tonumber:
+    args:
+    - type: any
+    must_use: true
+    description: Returns the nearest float64 to the given int64. Is inexact above
+      2^53.
+  integer.udiv:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns dividend / divisor (unsigned), rounding toward negative infinity.
+      Raises an error if divisor is zero.
+  integer.uge:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 >= int2 (unsigned).
+  integer.ugt:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 > int2 (unsigned).
+  integer.ule:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 <= int2 (unsigned).
+  integer.ult:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns true if int1 < int2 (unsigned).
+  integer.urem:
+    args:
+    - type: any
+    - type: any
+    must_use: true
+    description: Returns the remainder of dividend / divisor (unsigned). Raises an
+      error if divisor is zero.
   llbase64.encode:
     args:
     - type: string

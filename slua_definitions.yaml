@@ -1054,6 +1054,19 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
+  - name: readinteger
+    comment: Reads a signed or unsigned 64-bit integer from the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to read from.
+      type: buffer
+    - name: offset
+      comment: Byte offset to read from.
+      type: number
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1170,6 +1183,22 @@ modules:
     - name: value
       comment: Value to write.
       type: number
+    return-type: ()
+    fastcall: true
+    typechecker: {checked: true}
+  - name: writeinteger
+    comment: Writes a signed or unsigned 64-bit integer to the buffer at the given offset.
+    parameters:
+    - name: b
+      comment: Buffer to write to.
+      type: buffer
+      observes: write
+    - name: offset
+      comment: Byte offset to write at.
+      type: number
+    - name: value
+      comment: Value to write.
+      type: integer
     return-type: ()
     fastcall: true
     typechecker: {checked: true}
@@ -1468,6 +1497,517 @@ modules:
       default-value: 1
     return-type: string
     must-use: true
+- name: integer
+  comment: 64-bit integer operations library.
+  functions:
+  - name: add
+    comment: Returns the sum of two 64-bit integers (signed or unsigned), wrapping on overflow.
+    parameters:
+    - name: int1
+      comment: Left integer addend.
+      type: integer
+    - name: int2
+      comment: Right integer addend.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: arshift
+    comment: |-
+      Returns val shifted by i bits to the right. If i is negative, a left shift is performed.
+      Does an arithmetic shift: The most significant bit of n is propagated during the shift.
+    parameters:
+    - name: val
+      comment: Integer to shift.
+      type: integer
+    - name: i
+      comment: Number of bits to shift.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: band
+    comment: Returns the bitwise AND of the given integers.
+    parameters:
+    - name: ...
+      comment: Integers to perform bitwise AND on.
+      type: ...integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: bnot
+    comment: Returns the bitwise negation of val.
+    parameters:
+    - name: val
+      comment: Integer to negate.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: bor
+    comment: Returns the bitwise OR of the given integers.
+    parameters:
+    - name: ...
+      comment: Integers to perform bitwise OR on.
+      type: ...integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: bxor
+    comment: Returns the bitwise XOR of the given integers.
+    parameters:
+    - name: ...
+      comment: Integers to perform bitwise XOR on.
+      type: ...integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: bswap
+    comment: Returns val with its bytes swapped to the reverse order.
+    parameters:
+    - name: val
+      comment: Integer whose byte order will be swapped.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: btest
+    comment: Returns true if the bitwise AND of the given integers is non-zero.
+    parameters:
+    - name: ...
+      comment: Integers to perform bitwise AND on.
+      type: ...integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: clamp
+    comment: Returns val clamped between min and max. Raises an error if min is greater than max.
+    parameters:
+    - name: val
+      comment: Integer to clamp.
+      type: integer
+    - name: min
+      comment: Minimum allowable integer.
+      type: integer
+    - name: max
+      comment: Maximum allowable integer.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: countlz
+    comment: Returns the count of val's leading zeros.
+    parameters:
+    - name: val
+      comment: Integer to count leading zeros in.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: countrz
+    comment: Returns the count of val's trailing zeros.
+    parameters:
+    - name: val
+      comment: Integer to count trailing zeros in.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: create
+    comment: Returns number val converted to an integer. Returns nil if
+      it has a fractional part, is out of range, or is NaN.
+    parameters:
+    - name: val
+      comment: Number to convert to an integer.
+      type: number
+    return-type: integer?
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: div
+    comment: Returns dividend / divisor (signed), rounding toward zero. Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: extract
+    comment: Returns width bits from src, starting from bit index field.
+      Raises an error if the selected bit range is goes outside the range [0, 63].
+    parameters:
+    - name: src
+      comment: Integer to extract from.
+      type: integer
+    - name: field
+      comment: Starting bit index, zero-based
+      type: integer
+    - name: width
+      comment: Number of bits to extract, or 1 if omitted.
+      type: integer?
+      default-value: 1
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: fromstring
+    comment: Converts the input string to an integer in the specified base. Returns nil if not an integer.
+    parameters:
+    - name: value
+      comment: String to convert to an integer.
+      type: string
+    - name: base
+      comment: Base for the conversion.
+      type: number?
+      default-value: 10
+    return-type: integer?
+    must-use: true
+  - name: ge
+    comment: Returns true if int1 >= int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: gt
+    comment: Returns true if int1 > int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: idiv
+    comment: Returns dividend / divisor (signed), rounding toward negative infinity. Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: le
+    comment: Returns true if int1 <= int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: lt
+    comment: Returns true if int1 < int2 (signed).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: lrotate
+    comment: Returns val rotated by i bits to the left. If i is negative, a right rotate is performed.
+    parameters:
+    - name: val
+      comment: Integer to rotate.
+      type: integer
+    - name: i
+      comment: Number of bits to rotate.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: lshift
+    comment: Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-63, 63] range.
+    parameters:
+    - name: val
+      comment: Integer to shift.
+      type: integer
+    - name: i
+      comment: Number of bits to shift.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: max
+    comment: Returns the maximum value from the given integers (signed).
+    parameters:
+    - name: val
+      comment: Integer to find the maximum from.
+      type: integer
+    - name: ...
+      comment: Integers to find the maximum from.
+      type: ...integer
+      optional: false
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: min
+    comment: Returns the minimum value from the given integers (signed).
+    parameters:
+    - name: val
+      comment: Integer to find the minimum from.
+      type: integer
+    - name: ...
+      comment: Integers to find the minimum from.
+      type: ...integer
+      optional: false
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: mod
+    comment: Returns the remainder of dividend / divisor (signed).
+      The result always has the same sign as the divisor.
+      Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: mul
+    comment: Returns the product of two 64-bit integers (signed or unsigned), wrapping on overflow.
+    parameters:
+    - name: int1
+      comment: Left integer factor.
+      type: integer
+    - name: int2
+      comment: Right integer factor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: neg
+    comment: Returns the negation of val.
+      integer.neg(integer.minsigned) == integer.minsigned due to overflow.
+    parameters:
+    - name: val
+      comment: Integer to negate.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: rem
+    comment: Returns the remainder of dividend / divisor (signed).
+      The result always has the same sign as the dividend.
+      Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: replace
+    comment: Returns dst with width bits replaced from src, starting from bit index field.
+      Raises an error if the selected bit range goes outside the range [0, 63].
+    parameters:
+    - name: dst
+      comment: Integer to replace bits in.
+      type: integer
+    - name: src
+      comment: Integer containing the replacement bits.
+      type: integer
+    - name: field
+      comment: Starting bit index, zero-based
+      type: integer
+    - name: width
+      comment: Number of bits to replace, or 1 if omitted.
+      type: integer?
+      default-value: 1
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: rrotate
+    comment: Returns val rotated by i bits to the right. If i is negative, a left rotate is performed.
+    parameters:
+    - name: val
+      comment: Integer to rotate.
+      type: integer
+    - name: i
+      comment: Number of bits to rotate.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: rshift
+    comment: Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-63, 63] range.
+    parameters:
+    - name: val
+      comment: Integer to shift.
+      type: integer
+    - name: i
+      comment: Number of bits to shift.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: sub
+    comment: Returns the difference between two 64-bit integers (signed or unsigned), wrapping on overflow.
+    parameters:
+    - name: int1
+      comment: Integer to subtract from.
+      type: integer
+    - name: int2
+      comment: Integer to subtract.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: tonumber
+    comment: Returns the nearest float64 to the given int64. Is inexact above 2^53.
+    parameters:
+    - name: val
+      comment: Integer to convert to a number.
+      type: integer
+    return-type: number
+    fastcall: true
+    must-use: true
+  - name: udiv
+    comment: Returns dividend / divisor (unsigned), rounding toward negative infinity. Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: uge
+    comment: Returns true if int1 >= int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ugt
+    comment: Returns true if int1 > int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ule
+    comment: Returns true if int1 <= int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: ult
+    comment: Returns true if int1 < int2 (unsigned).
+    parameters:
+    - name: int1
+      comment: Left integer to compare.
+      type: integer
+    - name: int2
+      comment: Right integer to compare.
+      type: integer
+    return-type: boolean
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  - name: urem
+    comment: Returns the remainder of dividend / divisor (unsigned).
+      Raises an error if divisor is zero.
+    parameters:
+    - name: dividend
+      comment: Integer dividend.
+      type: integer
+    - name: divisor
+      comment: Integer divisor.
+      type: integer
+    return-type: integer
+    must-use: true
+    fastcall: true
+    typechecker: {checked: true}
+  constants:
+  - name: maxsigned
+    comment: The most positive signed int64 (2^63-1).
+    type: integer
+    value: 9_223_372_036_854_775_807i
+  - name: minsigned
+    comment: The most negative signed int64 (-2^63).
+    type: integer
+    value: -9_223_372_036_854_775_808i
 - name: llbase64
   comment: Base64 encoding/decoding library.
   functions:
@@ -3169,10 +3709,12 @@ builtin-types:
     tooltip: "Boolean: represents a true or false value."
   buffer:
     tooltip: Read-write binary data.
+  integer:
+    tooltip: 64-bit integer.
   never:
     tooltip: The empty type that contains no values.
   number:
-    tooltip: Double‑precision floating point number.
+    tooltip: Double‑precision (64-bit) floating point number.
   string:
     tooltip: Read-only binary data. Usually UTF-8-encoded text.
   thread:
