@@ -527,6 +527,7 @@ functions:
     comment: Arguments to pass to the function.
     type: A...
   return-type: (boolean, R...)
+  typechecker: {magic: true}
 - name: print
   comment: Sends all arguments as text privately to the object owner,
     separated by 4 spaces. The owner
