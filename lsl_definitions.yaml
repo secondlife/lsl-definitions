@@ -555,6 +555,416 @@ enums:
     type: enum
     prefix: VEHICLE_
     tooltip: ''
+  AnimationStates:
+    type: enum
+    tooltip: Names of the animation states
+    value-type: string
+    other-values: true
+    members:
+      - Crouching:
+          tooltip: ""
+          details: "Type: State, Default: crouch"
+      - CrouchWalking:
+          tooltip: ""
+          details: "Type: State, Default: crouchwalk"
+      - Falling Down:
+          tooltip: ""
+          details: "Type: State, Default: falldown"
+      - Flying:
+          tooltip: ""
+          details: "Type: State, Default: fly"
+      - FlyingSlow:
+          tooltip: Transition between hovering and forward flight.
+          details: "Type: State, Default: flyslow"
+      - Hovering:
+          tooltip: ""
+          details: "Type: State, Default: hover"
+      - Hovering Down:
+          tooltip: ""
+          details: "Type: State, Default: hover_down"
+      - Hovering Up:
+          tooltip: ""
+          details: "Type: State, Default: hover_up"
+      - Jumping:
+          tooltip: While still in the air during a jump.
+          details: "Type: State, Default: jump"
+      - Landing:
+          tooltip: When landing from a jump.
+          details: "Type: Transition, Default: land"
+      - PreJumping:
+          tooltip: At the beginning of a jump.
+          details: "Type: Transition, Default: prejump"
+      - Running:
+          tooltip: ""
+          details: "Type: State, Default: run"
+      - Sitting:
+          tooltip: Sitting on an object (and linked to it).
+          details: "Type: State, Default: sit"
+      - Sitting on Ground:
+          tooltip: Sitting, but not linked to an object.[2]
+          details: "Type: State, Default: sit_ground_constrained"
+      - Standing:
+          tooltip: ""
+          details: "Type: State, Default: stand"
+      - Standing Up:
+          tooltip: After falling a great distance. Sometimes referred to as Hard Landing.
+          details: "Type: Transition, Default: standup"
+      - Striding:
+          tooltip: When the avatar is stuck on the edge of an object or on top of another
+            avatar.
+          details: "Type: State, Default: stride"
+      - Soft Landing:
+          tooltip: After falling a small distance.
+          details: "Type: Transition, Default: soft_land"
+      - Taking Off:
+          tooltip: ""
+          details: "Type: State, Default: hover_up"
+      - Turning Left:
+          tooltip: ""
+          details: "Type: State, Default: turnleft"
+      - Turning Right:
+          tooltip: ""
+          details: "Type: State, Default: turnright"
+      - Walking:
+          tooltip: ""
+          details: "Type: State, Default: walk"
+  EnvironmentNames:
+    type: enum
+    tooltip: Names of the environment data
+    value-type: string
+    members:
+      - agent_limit:
+          tooltip: Get the maximum number of avatars normally allowed on this region
+            (teleport home, and login to last location, are allowed to exceed
+            this).
+          details: "Typecast to: integer"
+      - agent_limit_max:
+          tooltip: Get the maximum configurable setting for number of agents in the
+            region.
+          details: "Typecast to: integer"
+      - agent_reserved:
+          tooltip: Get the number of agent slots reserved for premium members in the
+            region.
+          details: "Typecast to: integer"
+      - agent_unreserved:
+          tooltip: Get the number of unreserved (non-premium) agent slots configured for
+            the region.
+          details: "Typecast to: integer"
+      - dynamic_pathfinding:
+          tooltip: Get the region's effective dynamic_pathfinding status, "enabled" or
+            "disabled". This option is configured in the Region Debug Console
+      - estate_id:
+          tooltip: Numerical index identifying which estate a region belongs to. Main grid
+            mainland is "1"
+          details: "Typecast to: integer"
+      - estate_name:
+          tooltip: '"mainland", "Linden Homes", "My Happy Estate", etc.'
+      - frame_number:
+          tooltip: Get the frame number of the simulator, for example "42042".
+          details: "Typecast to: integer"
+      - region_cpu_ratio:
+          tooltip: Get number of regions per CPU for this region type. Returns "1" or "4".
+          details: "Typecast to: integer"
+      - region_idle:
+          tooltip: Get the region's idle status, "1" or "0".
+          details: "Typecast to: integer boolean"
+      - region_product_name:
+          tooltip: 'Get the type of region this is: "Estate / Full Region", "Mainland /
+            Homestead", "Estate / Openspace", "Estate / Full Region - Skill
+            Gaming" etc.'
+      - region_product_sku:
+          tooltip: Get the region's product number (as string).
+      - region_start_time:
+          tooltip: Get the time the region was last (re)started, in llGetUnixTime format
+          details: "Typecast to: integer"
+      - sim_channel:
+          tooltip: Get the region's channel string, for example "Second Life Server".
+      - sim_version:
+          tooltip: Get the region's version number string, for example "10.11.30.215699".
+      - simulator_hostname:
+          tooltip: Get the simhost running this region. Same as llGetSimulatorHostname but
+            without the script delay.
+      - region_max_prims:
+          tooltip: Get the maximum number of prims allowed on this region.
+          details: "Typecast to: integer"
+      - region_object_bonus:
+          tooltip: Get the region's object bonus factor.
+          details: "Typecast to: float"
+      - whisper_range:
+          tooltip: Get the range for whispered chat in the region.
+          details: "Typecast to: float"
+      - chat_range:
+          tooltip: Get the range for spoken chat in the region.
+          details: "Typecast to: float"
+      - shout_range:
+          tooltip: Get the range for shouted chat in the region.
+          details: "Typecast to: float"
+      - region_rating:
+          tooltip: Get the maturity rating of the region. Same as DATA_SIM_RATING from
+            llRequestSimulatorData.
+      - grid:
+          tooltip: Get the grid the region is running on.
+      - allow_damage_adjust:
+          tooltip: Are scripts allowed to adjust damage. Allowed by default.
+          details: "Typecast to: integer boolean"
+      - restrict_combat_log:
+          tooltip: Whether scripts are restricted from writing into the combat log.
+            Allowed by default.
+          details: "Typecast to: integer boolean"
+      - restore_health:
+          tooltip: Is health reset to 100% on death. On by default.
+          details: "Typecast to: integer boolean"
+      - invulnerability_time:
+          tooltip: invulnerability time applied after avatar death. 0.0 by default.
+          details: "Typecast to: float"
+      - damage_throttle:
+          tooltip: The maximum number of points of damage a single source may inflict on a
+            target per second. 0.0s by default.
+          details: "Typecast to: float"
+      - health_regen_rate:
+          tooltip: The speed of health regeneration in hitpoints per second. 1/6s by
+            default.
+          details: "Typecast to: float"
+      - death_action:
+          tooltip: Set the action to take when an avatar dies in the region. Teleport home
+            by default. 0 = Teleport home. 1 = Teleport to parcel landing point.
+            2 = Teleport to region telehub. 3 = No action.
+          details: "Typecast to: integer"
+      - damage_limit:
+          tooltip: The maximum number of points of damage that may be delivered by a
+            single bullet or a single call to llDamage. If 0, there is no limit.
+          details: "Typecast to: float"
+  HTTPHeadersGet:
+    type: enum
+    tooltip: Headers in HTTP get
+    value-type: string
+    other-values: true
+    members:
+      - x-script-url:
+          tooltip: The base url, as originally received from
+            llRequestURL/llRequestSecureURL.
+          details: 'Example:
+            "https://sim3015.aditi.lindenlab.com:12043/cap/a7717681-2c04-e4ac-35e3-1f01c9861322"'
+      - x-path-info:
+          tooltip: Any trailing path information from the requested url.
+          details: "Example: /foo/bar"
+      - x-query-string:
+          tooltip: Any query arguments, the text past the first "?" in the url.
+          details: "Example: arg=gra"
+      - x-remote-ip:
+          tooltip: IP address of the host that made the request.
+    other-members: HTTPHeadersRequest
+  HTTPHeadersRequest:
+    type: param-list
+    tooltip: Headers in HTTP request
+    value-type: string
+    other-values: true
+    members:
+      - Connection:
+          tooltip: Connection options
+          details: "Example: close"
+      - Cache-Control:
+          tooltip: Maximum response age accepted.
+          details: "Example: max-age=259200"
+      - X-Forwarded-For:
+          tooltip: Used to show the IP address connected to through proxies.
+          details: "Example: 127.0.0.1"
+      - Via:
+          tooltip: Shows the recipients and protocols used between the User Agent and the
+            server.
+          details: "Example: 1.1 sim10115.agni.lindenlab.com:3128 (squid/2.7.STABLE9)"
+      - Content-Length:
+          tooltip: The size of the entity-body, in decimal number of octets.
+          details: "Example: 17"
+      - Pragma:
+          tooltip: The message should be forwarded to the server, even if it has a cached
+            version of the data.
+          details: "Example: no-cache"
+      - X-SecondLife-Shard:
+          tooltip: The environment the object is in. "Production" is the main grid and
+            "Testing" is the preview grid
+          details: "Example: Production"
+      - X-SecondLife-Region:
+          tooltip: The name of the region the object is in, along with the global
+            coordinates of the region's south-west corner
+          details: "Example: Jin Ho (264448, 233984)"
+      - X-SecondLife-Owner-Name:
+          tooltip: Legacy name of the owner of the object
+          details: "Example: Zeb Wyler"
+      - X-SecondLife-Owner-Key:
+          tooltip: UUID of the owner of the object
+          details: "Example: 01234567-89ab-cdef-0123-456789abcdef"
+      - X-SecondLife-Object-Name:
+          tooltip: The name of the object containing the script
+          details: "Example: Object"
+      - X-SecondLife-Object-Key:
+          tooltip: The key of the object containing the script
+          details: "Example: 01234567-89ab-cdef-0123-456789abcdef"
+      - X-SecondLife-Local-Velocity:
+          tooltip: The velocity of the object
+          details: "Example: 0.000000, 0.000000, 0.000000"
+      - X-SecondLife-Local-Rotation:
+          tooltip: The rotation of the object containing the script
+          details: "Example: 0.000000, 0.000000, 0.000000, 1.000000"
+      - X-SecondLife-Local-Position:
+          tooltip: The position of the object within the region
+          details: "Example: (173.009827, 75.551231, 60.950001)"
+      - User-Agent:
+          tooltip: The user-agent header sent by LSL Scripts. Contains Server version.
+          details: "Example: Second Life LSL/16.05.24.315768 (http://secondlife.com)"
+      - Content-Type:
+          tooltip: The media type of the entity body.
+          details: "Example: text/plain; charset=utf-8"
+      - Accept-Charset:
+          tooltip: Acceptable character sets from the server. Q being the quality expected
+            when sending the different character sets.
+          details: "Example: utf-8;q=1.0, *;q=0.5"
+      - Accept:
+          tooltip: Media types the server will accept.
+          details: "Example: text/*, application/xhtml+xml, application/atom+xml,
+            application/json, application/xml, application/llsd+xml,
+            application/x-javascript, application/javascript,
+            application/x-www-form-urlencoded, application/rss+xml"
+      - Accept-Encoding:
+          tooltip: Acceptable content encodings for the server.
+          details: "Example: deflate, gzip"
+      - Host:
+          tooltip: The internet host being requested.
+          details: "Example: secondlife.com"
+  Languages:
+    type: enum
+    tooltip: Language codes
+    value-type: string
+    other-values: true
+    members:
+      - en:
+          tooltip: English
+      - az:
+          tooltip: Azerbaycanca (Azerbaijani)
+      - da:
+          tooltip: Dansk (Danish)
+      - de:
+          tooltip: Deutsch (German)
+      - es:
+          tooltip: Español (Spanish)
+      - fr:
+          tooltip: Français (French)
+      - it:
+          tooltip: Italiano (Italian)
+      - hu:
+          tooltip: Magyar (Hungarian)
+      - nl:
+          tooltip: Nederlands (Dutch)
+      - pl:
+          tooltip: Polski (Polish)
+      - pt:
+          tooltip: Portugués (Portuguese)
+      - ru:
+          tooltip: Русский (Russian)
+      - tr:
+          tooltip: Türkçe (Turkish)
+      - uk:
+          tooltip: Українська (Ukrainian)
+      - zh:
+          tooltip: 中文 (简体) (Chinese)
+      - ja:
+          tooltip: 日本語 (Japanese)
+      - ko:
+          tooltip: 한국어 (Korean)
+  SimulatorDataRating:
+    type: enum
+    tooltip: Statuses returned when requesting simulator data
+    value-type: string
+    members:
+      - PG:
+          tooltip: General
+      - MATURE:
+          tooltip: Moderate
+      - ADULT:
+          tooltip: Adult
+      - UNKNOWN:
+          tooltip: rating or region unknown
+  SimulatorDataStatus:
+    type: enum
+    tooltip: Ratings returned when requesting simulator data
+    value-type: string
+    members:
+      - up:
+          tooltip: region currently up and running
+      - down:
+          tooltip: region currently down
+      - starting:
+          tooltip: region currently starting
+      - stopping:
+          tooltip: region currently stopping
+      - crashed:
+          tooltip: region has crashed
+      - unknown:
+          tooltip: region status unknown or unknown region
+  TransactionErrors:
+    type: enum
+    tooltip: Error tags returned on failed transactions
+    value-type: string
+    other-values: true
+    members:
+      - LINDENDOLLAR_INSUFFICIENTFUNDS:
+          tooltip: The source agent does not have enough L$ for the transfer
+      - LINDENDOLLAR_ENTITYDOESNOTEXIST:
+          tooltip: The destination UUID is not a valid agent.
+      - LINDENDOLLAR_BADCLOCKSKEW:
+          tooltip: There is bad clock skew between the sim host and the L$ service
+      - INVALID_DESTINATION:
+          tooltip: Destination agent is not a valid UUID
+      - INVALID_AMOUNT:
+          tooltip: Amount is <= 0
+      - THROTTLED:
+          tooltip: The scripted L$ throttle was hit for this object owner.
+      - MISSING_PERMISSION_DEBIT:
+          tooltip: The script does not have debit permission
+      - GROUP_OWNED:
+          tooltip: The object is group owned and thus can't give money
+      - TRANSFERS_DISABLED:
+          tooltip: L$ transfers are disabled in the region
+      - EXPIRED:
+          tooltip: The simulator timed out waiting for a response from the back-end
+            service.
+      - SERVICE_ERROR:
+          tooltip: There was an error connecting to the back-end service
+      - LINDENDOLLAR_TRANSACTIONTIMEOUT:
+          tooltip: The transaction timed out.
+  VisualParams:
+    type: param-dict
+    tooltip: Names of the visual parameters
+    value-type: string
+    members:
+      - height:
+          value: 33
+      - torso_length:
+          value: 38
+      - male:
+          value: 80
+      - heel_height:
+          value: 198
+      - platform_height:
+          value: 503
+      - shoe_height:
+          value: 616
+      - hand_size:
+          value: 675
+      - head_size:
+          value: 682
+      - leg_length:
+          value: 692
+      - arm_length:
+          value: 693
+      - neck_length:
+          value: 756
+      - waist_height:
+          value: 814
+      - hip_length:
+          value: 842
+      - hover:
+          value: 11001
 
 constants:
   ACTIVE:
@@ -2165,6 +2575,7 @@ constants:
     type: integer
     value: 5
     value-type: string-map
+    enum: HTTPHeadersRequest
   HTTP_EXTENDED_ERROR:
     member-of: [HTTPRequestParam]
     tooltip: If set to TRUE, llHTTPRequest always returns a key. If an error occurs
@@ -8281,6 +8692,7 @@ events:
     categories:
       - script_communication
       - web
+    uses-enum: HTTPHeadersRequest
   land_collision:
     arguments:
     - pos:
@@ -8593,6 +9005,7 @@ events:
         tooltip: Contains a CSV string of transaction info on success, or an error
           string on failure.
         type: string
+        enum-semantics: TransactionErrors
     tooltip: Triggered when an asynchronous L$ transfer (such as
       llTransferLindenDollars) is completed. Passes transaction info id, success
       status, and CSV or error data.
@@ -10259,6 +10672,7 @@ functions:
       interface language set by the avatar.
     categories:
       - avatar
+    enum-semantics: Languages
   llGetAgentList:
     arguments:
     - scope:
@@ -10340,6 +10754,7 @@ functions:
       - avatar
       - avatar_animation
       - permissions
+    enum-semantics: AnimationStates
   llGetAnimationList:
     arguments:
     - avatar:
@@ -10362,6 +10777,7 @@ functions:
     - anim_state:
         tooltip: Animation state string to query.
         type: string
+        enum-semantics: AnimationStates
     energy: 10.0
     func-id: 500
     must-use: true
@@ -10633,6 +11049,7 @@ functions:
         tooltip: Name of the regional data to request (unrecognized strings return
           an empty string).
         type: string
+        enum-semantics: EnvironmentNames
     energy: 10.0
     func-id: 362
     must-use: true
@@ -10779,6 +11196,7 @@ functions:
     - header:
         tooltip: Lowercase name of the HTTP header to retrieve.
         type: string
+        enum-semantics: HTTPHeadersGet
     energy: 10.0
     func-id: 349
     must-use: true
@@ -12281,6 +12699,7 @@ functions:
         tooltip: A list of visual parameter IDs or names to retrieve values for.
         type: list
         slua-type: "{number | string}"
+        param-get-semantics: VisualParams
     energy: 10.0
     func-id: 530
     must-use: true
@@ -12291,6 +12710,7 @@ functions:
       in params for the agent specified by agentid.
     categories:
       - avatar
+    param-get-semantics: VisualParams
   llGetWallclock:
     arguments: []
     energy: 10.0
@@ -15212,6 +15632,7 @@ functions:
     - anim_state:
         tooltip: Animation state string (or 'ALL') to reset.
         type: string
+        enum-semantics: AnimationStates
     energy: 10.0
     func-id: 502
     return: void
@@ -15955,6 +16376,7 @@ functions:
     - anim_state:
         tooltip: Animation state to override.
         type: string
+        enum-semantics: AnimationStates
     - anim:
         tooltip: Name of an animation in the prim's inventory, or a built-in
           animation name.
