@@ -1692,11 +1692,18 @@ constants:
       Pacific Time (not UTC).
     type: integer
     value: 3
+    dataserver-semantics:
+      value-type: string
+      tooltip: Account creation/"born on" date as a string in an ISO 8601 format of
+        YYYY-MM-DD.
   DATA_NAME:
     member-of: [AgentData]
     tooltip: Used with llRequestAgentData to return the requested agent's legacy name.
     type: integer
     value: 2
+    dataserver-semantics:
+      value-type: string
+      tooltip: Requested agent's legacy name.
   DATA_ONLINE:
     member-of: [AgentData]
     tooltip: "Used with llRequestAgentData to return whether the requested agent is
@@ -1704,6 +1711,9 @@ constants:
       offline)."
     type: integer
     value: 1
+    dataserver-semantics:
+      value-type: boolean
+      tooltip: If the requested agent is online.
   DATA_PAYINFO:
     member-of: [AgentData]
     tooltip: Used with llRequestAgentData to return a string containing the integer
@@ -1711,6 +1721,10 @@ constants:
       PAYMENT_INFO_USED, or both).
     type: integer
     value: 8
+    dataserver-semantics:
+      value-type: integer
+      enum: AgentDataPaymentInfo
+      tooltip: Mask flag for payment status.
   DATA_RATING:
     member-of: [AgentData]
     tooltip: Deprecated. Used with llRequestAgentData to return the string '0, 0, 0,
@@ -1719,6 +1733,13 @@ constants:
       removed from SL.
     type: integer
     value: 4
+    deprecated:
+      reason: Ratings were removed from SL.
+    dataserver-semantics:
+      value-type: string-csv
+      tooltip: "Returns [0, 0, 0, 0, 0, 0]. Used to return: [pos_behavior,
+        neg_behavior, pos_appearance, neg_appearance, pos_building,
+        neg_building]."
   DATA_RESERVED_0:
     member-of: [AgentData]
     tooltip: Reserved for Linden use.
@@ -1730,18 +1751,29 @@ constants:
       as a vector.
     type: integer
     value: 5
+    dataserver-semantics:
+      value-type: vector
+      tooltip: Region's global position.
   DATA_SIM_RATING:
     member-of: [SimulatorData]
     tooltip: Used with llRequestSimulatorData to return the simulator rating string
       ('PG', 'MATURE', 'ADULT', or 'UNKNOWN').
     type: integer
     value: 7
+    dataserver-semantics:
+      value-type: string
+      enum: SimulatorDataRating
+      tooltip: Simulator rating.
   DATA_SIM_STATUS:
     member-of: [SimulatorData]
     tooltip: Used with llRequestSimulatorData to return the simulator status as a
       string.
     type: integer
     value: 6
+    dataserver-semantics:
+      value-type: string
+      enum: SimulatorDataStatus
+      tooltip: Simulator status.
   DEBUG_CHANNEL:
     member-of: [Channel, ChannelNonPublic]
     tooltip: A chat channel reserved for script debugging and error messages.
@@ -9374,6 +9406,20 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llCreateLink:
     arguments:
     - target:
@@ -9431,6 +9477,22 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: used
+          value-type: integer
+          tooltip: Number of bytes used.
+        - name: quota
+          value-type: integer
+          tooltip: Number of bytes the key-store can utilize.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llDeleteCharacter:
     arguments: []
     energy: 10.0
@@ -9459,6 +9521,20 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llDeleteSubList:
     type-arguments: [T]
     arguments:
@@ -10097,6 +10173,9 @@ functions:
       - data_storage
       - dataserver
       - notecard
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of matches found for the given pattern.
   llFindNotecardTextSync:
     arguments:
     - name:
@@ -11267,6 +11346,10 @@ functions:
       - data_storage
       - dataserver
       - notecard
+    dataserver-semantics:
+      value-type: string
+      tooltip: Line in the requested notecard, limited to 255 bytes. If EOF the line
+        requested is past the end of the notecard.
   llGetNotecardLineSync:
     arguments:
     - name:
@@ -11304,6 +11387,9 @@ functions:
       - data_storage
       - dataserver
       - notecard
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of lines in the notecard requested.
   llGetNumberOfPrims:
     arguments: []
     energy: 10.0
@@ -12805,6 +12891,19 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: pairs
+          value-type: integer
+          tooltip: Number of keys-value pairs in the key-value store.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llKeysKeyValue:
     arguments:
     - first:
@@ -12828,6 +12927,19 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: keys
+          value-type: string-csv
+          tooltip: A list of keys (strings) used in the key-value store.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llLinear2sRGB:
     arguments:
     - color:
@@ -14710,6 +14822,20 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llRefreshPrimURL:
     arguments: []
     deprecated:
@@ -15063,6 +15189,8 @@ functions:
     categories:
       - avatar
       - dataserver
+    dataserver-semantics:
+      value-type: AgentData
   llRequestDisplayName:
     arguments:
     - id:
@@ -15078,6 +15206,9 @@ functions:
     categories:
       - avatar
       - dataserver
+    dataserver-semantics:
+      value-type: string
+      tooltip: Agent's display name.
   llRequestExperiencePermissions:
     arguments:
     - agent:
@@ -15115,6 +15246,11 @@ functions:
     categories:
       - dataserver
       - prim_inventory
+    dataserver-semantics:
+      value-type: vector
+      tooltip: A global position as an offset from the current region's origin
+        (<0,0,0>). To obtain the absolute global position of a landmark, add
+        llGetRegionCorner() to the vector.
   llRequestPermissions:
     arguments:
     - agent:
@@ -15164,6 +15300,8 @@ functions:
     categories:
       - dataserver
       - region
+    dataserver-semantics:
+      value-type: SimulatorData
   llRequestURL:
     arguments: []
     energy: 10.0
@@ -15192,6 +15330,9 @@ functions:
       - avatar
       - dataserver
       - uuid
+    dataserver-semantics:
+      value-type: key
+      tooltip: Agent's unique ID.
   llRequestUsername:
     arguments:
     - id:
@@ -15207,6 +15348,9 @@ functions:
     categories:
       - avatar
       - dataserver
+    dataserver-semantics:
+      value-type: string
+      tooltip: "Agent's username (legacy format: \"first.last\")."
   llResetAnimationOverride:
     arguments:
     - anim_state:
@@ -17979,6 +18123,20 @@ functions:
       - dataserver
       - experience
       - experience_data
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
   llVecDist:
     arguments:
     - vec_a:
