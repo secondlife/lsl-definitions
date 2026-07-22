@@ -1692,11 +1692,18 @@ constants:
       Pacific Time (not UTC).
     type: integer
     value: 3
+    dataserver-semantics:
+      value-type: string
+      tooltip: Account creation/"born on" date as a string in an ISO 8601 format of
+        YYYY-MM-DD.
   DATA_NAME:
     member-of: [AgentData]
     tooltip: Used with llRequestAgentData to return the requested agent's legacy name.
     type: integer
     value: 2
+    dataserver-semantics:
+      value-type: string
+      tooltip: Requested agent's legacy name.
   DATA_ONLINE:
     member-of: [AgentData]
     tooltip: "Used with llRequestAgentData to return whether the requested agent is
@@ -1704,6 +1711,9 @@ constants:
       offline)."
     type: integer
     value: 1
+    dataserver-semantics:
+      value-type: boolean
+      tooltip: If the requested agent is online.
   DATA_PAYINFO:
     member-of: [AgentData]
     tooltip: Used with llRequestAgentData to return a string containing the integer
@@ -1711,6 +1721,10 @@ constants:
       PAYMENT_INFO_USED, or both).
     type: integer
     value: 8
+    dataserver-semantics:
+      value-type: integer
+      enum: AgentDataPaymentInfo
+      tooltip: Mask flag for payment status.
   DATA_RATING:
     member-of: [AgentData]
     tooltip: Deprecated. Used with llRequestAgentData to return the string '0, 0, 0,
@@ -1719,6 +1733,13 @@ constants:
       removed from SL.
     type: integer
     value: 4
+    deprecated:
+      reason: Ratings were removed from SL.
+    dataserver-semantics:
+      value-type: string-csv
+      tooltip: "Returns [0, 0, 0, 0, 0, 0]. Used to return: [pos_behavior,
+        neg_behavior, pos_appearance, neg_appearance, pos_building,
+        neg_building]."
   DATA_RESERVED_0:
     member-of: [AgentData]
     tooltip: Reserved for Linden use.
@@ -1730,18 +1751,29 @@ constants:
       as a vector.
     type: integer
     value: 5
+    dataserver-semantics:
+      value-type: vector
+      tooltip: Region's global position.
   DATA_SIM_RATING:
     member-of: [SimulatorData]
     tooltip: Used with llRequestSimulatorData to return the simulator rating string
       ('PG', 'MATURE', 'ADULT', or 'UNKNOWN').
     type: integer
     value: 7
+    dataserver-semantics:
+      value-type: string
+      enum: SimulatorDataRating
+      tooltip: Simulator rating.
   DATA_SIM_STATUS:
     member-of: [SimulatorData]
     tooltip: Used with llRequestSimulatorData to return the simulator status as a
       string.
     type: integer
     value: 6
+    dataserver-semantics:
+      value-type: string
+      enum: SimulatorDataStatus
+      tooltip: Simulator status.
   DEBUG_CHANNEL:
     member-of: [Channel, ChannelNonPublic]
     tooltip: A chat channel reserved for script debugging and error messages.
@@ -9364,6 +9396,20 @@ functions:
     experience: true
     func-id: 387
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to create a key-value pair (k and v)
       associated with the script's experience. Returns a key query handle for
@@ -9422,6 +9468,22 @@ functions:
     experience: true
     func-id: 600
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: used
+          value-type: integer
+          tooltip: Number of bytes used.
+        - name: quota
+          value-type: integer
+          tooltip: Number of bytes the key-store can utilize.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to request the used and total data
       storage allocated for the experience. Returns a key query handle for the
@@ -9450,6 +9512,20 @@ functions:
     experience: true
     func-id: 390
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to delete the key-value pair
       associated with key k in the experience. Returns a key query handle for
@@ -10089,6 +10165,9 @@ functions:
     func-id: 507
     must-use: true
     return: key
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of matches found for the given pattern.
     sleep: 0.0
     tooltip: Searches the text of a cached notecard for lines containing the given
       pattern and returns the number of matches found through a dataserver
@@ -11259,6 +11338,10 @@ functions:
     energy: 10.0
     func-id: 217
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: Line in the requested notecard, limited to 255 bytes. If EOF the line
+        requested is past the end of the notecard.
     sleep: 0.1
     tooltip: Asynchronously requests the line index line of the notecard name from
       the dataserver. Returns a key query handle for the dataserver event, which
@@ -11297,6 +11380,9 @@ functions:
     energy: 10.0
     func-id: 276
     return: key
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of lines in the notecard requested.
     sleep: 0.1
     tooltip: Asynchronously requests the total line count of the notecard name.
       Returns a key query handle for the dataserver event.
@@ -12796,6 +12882,19 @@ functions:
     experience: true
     func-id: 601
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: pairs
+          value-type: integer
+          tooltip: Number of keys-value pairs in the key-value store.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction requesting the total count of keys
       in the experience data store. Returns a key query handle for the
@@ -12818,6 +12917,19 @@ functions:
     experience: true
     func-id: 602
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: keys
+          value-type: string-csv
+          tooltip: A list of keys (strings) used in the key-value store.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to retrieve count keys from the
       experience data store starting at the zero-based index first. Returns a
@@ -14701,6 +14813,20 @@ functions:
     experience: true
     func-id: 388
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to read the value associated with
       key k in the experience. Returns a key query handle for the dataserver
@@ -15056,6 +15182,8 @@ functions:
     energy: 10.0
     func-id: 155
     return: key
+    dataserver-semantics:
+      value-type: AgentData
     sleep: 0.1
     tooltip: Asynchronously requests the specified data category (DATA_*) about the
       agent id. Triggers a dataserver event with the results and returns a key
@@ -15071,6 +15199,9 @@ functions:
     energy: 10.0
     func-id: 361
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: Agent's display name.
     sleep: 0.0
     tooltip: Asynchronously requests the display name of the agent specified by id,
       triggering a dataserver event with the results. The agent does not need to
@@ -15107,6 +15238,11 @@ functions:
     energy: 10.0
     func-id: 156
     return: key
+    dataserver-semantics:
+      value-type: vector
+      tooltip: A global position as an offset from the current region's origin
+        (<0,0,0>). To obtain the absolute global position of a landmark, add
+        llGetRegionCorner() to the vector.
     sleep: 1.0
     tooltip: Asynchronously requests data for the named inventory item,
       triggering a dataserver event. Currently, only landmark items are
@@ -15158,6 +15294,8 @@ functions:
     energy: 10.0
     func-id: 293
     return: key
+    dataserver-semantics:
+      value-type: SimulatorData
     sleep: 1.0
     tooltip: Asynchronously requests data (using a DATA_SIM_* constant) about the
       region. Triggers a dataserver event and returns a key query handle.
@@ -15184,6 +15322,9 @@ functions:
     energy: 10.0
     func-id: 525
     return: key
+    dataserver-semantics:
+      value-type: key
+      tooltip: Agent's unique ID.
     sleep: 0.0
     tooltip: Asynchronously requests the Agent ID key (UUID) for the agent specified
       by their current or historical username, returning NULL_KEY if not found.
@@ -15200,6 +15341,9 @@ functions:
     energy: 10.0
     func-id: 359
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: "Agent's username (legacy format: \"first.last\")."
     sleep: 0.0
     tooltip: Asynchronously requests the unique single-word username of the agent
       identified by id, triggering a dataserver event. The agent does not need
@@ -17970,6 +18114,20 @@ functions:
     experience: true
     func-id: 389
     return: key
+    dataserver-semantics:
+      value-type: string-csv
+      error-semantics: true
+      values:
+        - name: success
+          value-type: boolean
+          tooltip: A boolean specifying if the transaction succeeded or not.
+        - name: value
+          value-type: string
+          tooltip: Value for the key-value pair. Maximum 4095 characters, or 2047 if using
+            LSO2. Note! This value may contain commas.
+        - name: error
+          value-type: ExperienceError
+          tooltip: An XP_ERROR_* flag that describes why the operation failed.
     sleep: 0.0
     tooltip: Starts an asynchronous transaction to update the key k to value v
       inside the experience datastore. If checked is TRUE, the update fails with
