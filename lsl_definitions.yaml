@@ -9396,16 +9396,6 @@ functions:
     experience: true
     func-id: 387
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to create a key-value pair (k and v)
-      associated with the script's experience. Returns a key query handle for
-      the dataserver event. Fails with XP_ERROR_STORAGE_EXCEPTION if the key
-      already exists.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -9420,6 +9410,16 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to create a key-value pair (k and v)
+      associated with the script's experience. Returns a key query handle for
+      the dataserver event. Fails with XP_ERROR_STORAGE_EXCEPTION if the key
+      already exists.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llCreateLink:
     arguments:
     - target:
@@ -9468,15 +9468,6 @@ functions:
     experience: true
     func-id: 600
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to request the used and total data
-      storage allocated for the experience. Returns a key query handle for the
-      dataserver event.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -9493,6 +9484,15 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to request the used and total data
+      storage allocated for the experience. Returns a key query handle for the
+      dataserver event.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llDeleteCharacter:
     arguments: []
     energy: 10.0
@@ -9512,15 +9512,6 @@ functions:
     experience: true
     func-id: 390
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to delete the key-value pair
-      associated with key k in the experience. Returns a key query handle for
-      the dataserver event.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -9535,6 +9526,15 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to delete the key-value pair
+      associated with key k in the experience. Returns a key query handle for
+      the dataserver event.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llDeleteSubList:
     type-arguments: [T]
     arguments:
@@ -10165,6 +10165,9 @@ functions:
     func-id: 507
     must-use: true
     return: key
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of matches found for the given pattern.
     sleep: 0.0
     tooltip: Searches the text of a cached notecard for lines containing the given
       pattern and returns the number of matches found through a dataserver
@@ -10173,9 +10176,6 @@ functions:
       - data_storage
       - dataserver
       - notecard
-    dataserver-semantics:
-      value-type: integer
-      tooltip: Number of matches found for the given pattern.
   llFindNotecardTextSync:
     arguments:
     - name:
@@ -11338,6 +11338,10 @@ functions:
     energy: 10.0
     func-id: 217
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: Line in the requested notecard, limited to 255 bytes. If EOF the line
+        requested is past the end of the notecard.
     sleep: 0.1
     tooltip: Asynchronously requests the line index line of the notecard name from
       the dataserver. Returns a key query handle for the dataserver event, which
@@ -11346,10 +11350,6 @@ functions:
       - data_storage
       - dataserver
       - notecard
-    dataserver-semantics:
-      value-type: string
-      tooltip: Line in the requested notecard, limited to 255 bytes. If EOF the line
-        requested is past the end of the notecard.
   llGetNotecardLineSync:
     arguments:
     - name:
@@ -11380,6 +11380,9 @@ functions:
     energy: 10.0
     func-id: 276
     return: key
+    dataserver-semantics:
+      value-type: integer
+      tooltip: Number of lines in the notecard requested.
     sleep: 0.1
     tooltip: Asynchronously requests the total line count of the notecard name.
       Returns a key query handle for the dataserver event.
@@ -11387,9 +11390,6 @@ functions:
       - data_storage
       - dataserver
       - notecard
-    dataserver-semantics:
-      value-type: integer
-      tooltip: Number of lines in the notecard requested.
   llGetNumberOfPrims:
     arguments: []
     energy: 10.0
@@ -12882,15 +12882,6 @@ functions:
     experience: true
     func-id: 601
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction requesting the total count of keys
-      in the experience data store. Returns a key query handle for the
-      dataserver event.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -12904,6 +12895,15 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction requesting the total count of keys
+      in the experience data store. Returns a key query handle for the
+      dataserver event.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llKeysKeyValue:
     arguments:
     - first:
@@ -12917,16 +12917,6 @@ functions:
     experience: true
     func-id: 602
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to retrieve count keys from the
-      experience data store starting at the zero-based index first. Returns a
-      key query handle for the dataserver event. Fails with
-      XP_ERROR_KEY_NOT_FOUND if out of bounds.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -12940,6 +12930,16 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to retrieve count keys from the
+      experience data store starting at the zero-based index first. Returns a
+      key query handle for the dataserver event. Fails with
+      XP_ERROR_KEY_NOT_FOUND if out of bounds.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llLinear2sRGB:
     arguments:
     - color:
@@ -14813,15 +14813,6 @@ functions:
     experience: true
     func-id: 388
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to read the value associated with
-      key k in the experience. Returns a key query handle for the dataserver
-      event. Fails with XP_ERROR_KEY_NOT_FOUND if the key does not exist.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -14836,6 +14827,15 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to read the value associated with
+      key k in the experience. Returns a key query handle for the dataserver
+      event. Fails with XP_ERROR_KEY_NOT_FOUND if the key does not exist.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llRefreshPrimURL:
     arguments: []
     deprecated:
@@ -15182,6 +15182,8 @@ functions:
     energy: 10.0
     func-id: 155
     return: key
+    dataserver-semantics:
+      value-type: AgentData
     sleep: 0.1
     tooltip: Asynchronously requests the specified data category (DATA_*) about the
       agent id. Triggers a dataserver event with the results and returns a key
@@ -15189,8 +15191,6 @@ functions:
     categories:
       - avatar
       - dataserver
-    dataserver-semantics:
-      value-type: AgentData
   llRequestDisplayName:
     arguments:
     - id:
@@ -15199,6 +15199,9 @@ functions:
     energy: 10.0
     func-id: 361
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: Agent's display name.
     sleep: 0.0
     tooltip: Asynchronously requests the display name of the agent specified by id,
       triggering a dataserver event with the results. The agent does not need to
@@ -15206,9 +15209,6 @@ functions:
     categories:
       - avatar
       - dataserver
-    dataserver-semantics:
-      value-type: string
-      tooltip: Agent's display name.
   llRequestExperiencePermissions:
     arguments:
     - agent:
@@ -15238,6 +15238,11 @@ functions:
     energy: 10.0
     func-id: 156
     return: key
+    dataserver-semantics:
+      value-type: vector
+      tooltip: A global position as an offset from the current region's origin
+        (<0,0,0>). To obtain the absolute global position of a landmark, add
+        llGetRegionCorner() to the vector.
     sleep: 1.0
     tooltip: Asynchronously requests data for the named inventory item,
       triggering a dataserver event. Currently, only landmark items are
@@ -15246,11 +15251,6 @@ functions:
     categories:
       - dataserver
       - prim_inventory
-    dataserver-semantics:
-      value-type: vector
-      tooltip: A global position as an offset from the current region's origin
-        (<0,0,0>). To obtain the absolute global position of a landmark, add
-        llGetRegionCorner() to the vector.
   llRequestPermissions:
     arguments:
     - agent:
@@ -15294,14 +15294,14 @@ functions:
     energy: 10.0
     func-id: 293
     return: key
+    dataserver-semantics:
+      value-type: SimulatorData
     sleep: 1.0
     tooltip: Asynchronously requests data (using a DATA_SIM_* constant) about the
       region. Triggers a dataserver event and returns a key query handle.
     categories:
       - dataserver
       - region
-    dataserver-semantics:
-      value-type: SimulatorData
   llRequestURL:
     arguments: []
     energy: 10.0
@@ -15322,6 +15322,9 @@ functions:
     energy: 10.0
     func-id: 525
     return: key
+    dataserver-semantics:
+      value-type: key
+      tooltip: Agent's unique ID.
     sleep: 0.0
     tooltip: Asynchronously requests the Agent ID key (UUID) for the agent specified
       by their current or historical username, returning NULL_KEY if not found.
@@ -15330,9 +15333,6 @@ functions:
       - avatar
       - dataserver
       - uuid
-    dataserver-semantics:
-      value-type: key
-      tooltip: Agent's unique ID.
   llRequestUsername:
     arguments:
     - id:
@@ -15341,6 +15341,9 @@ functions:
     energy: 10.0
     func-id: 359
     return: key
+    dataserver-semantics:
+      value-type: string
+      tooltip: "Agent's username (legacy format: \"first.last\")."
     sleep: 0.0
     tooltip: Asynchronously requests the unique single-word username of the agent
       identified by id, triggering a dataserver event. The agent does not need
@@ -15348,9 +15351,6 @@ functions:
     categories:
       - avatar
       - dataserver
-    dataserver-semantics:
-      value-type: string
-      tooltip: "Agent's username (legacy format: \"first.last\")."
   llResetAnimationOverride:
     arguments:
     - anim_state:
@@ -18114,15 +18114,6 @@ functions:
     experience: true
     func-id: 389
     return: key
-    sleep: 0.0
-    tooltip: Starts an asynchronous transaction to update the key k to value v
-      inside the experience datastore. If checked is TRUE, the update fails with
-      XP_ERROR_RETRY_UPDATE unless the existing value matches original_value.
-    categories:
-      - data_storage
-      - dataserver
-      - experience
-      - experience_data
     dataserver-semantics:
       value-type: string-csv
       error-semantics: true
@@ -18137,6 +18128,15 @@ functions:
         - name: error
           value-type: ExperienceError
           tooltip: An XP_ERROR_* flag that describes why the operation failed.
+    sleep: 0.0
+    tooltip: Starts an asynchronous transaction to update the key k to value v
+      inside the experience datastore. If checked is TRUE, the update fails with
+      XP_ERROR_RETRY_UPDATE unless the existing value matches original_value.
+    categories:
+      - data_storage
+      - dataserver
+      - experience
+      - experience_data
   llVecDist:
     arguments:
     - vec_a:
