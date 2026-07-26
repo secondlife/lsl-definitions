@@ -131,7 +131,7 @@ _TYPE_META_MAP: dict[LSLType, LSLTypeMeta] = {
         library_abbr="l",
         cs_name="ArrayList",
         mono_bind_name="MonoListType",
-        slua_name="list",
+        slua_name="ROList",
     ),
 }
 
@@ -354,7 +354,9 @@ class LSLEvent(LSLFunctionBase):
                     {
                         a.name: {
                             "tooltip": a.tooltip,
-                            "type": slua.validate_type(a.compute_slua_type(event=True)),
+                            "type": slua.validate_type(a.compute_slua_type(event=True)).replace(
+                                "ROList", "list"
+                            ),
                         }
                     }
                     for a in self.arguments
@@ -483,6 +485,7 @@ class LSLFunction(LSLFunctionBase):
             return "number?"
         if not llcompat and self.bool_semantics and self.ret_type == LSLType.INTEGER:
             return "boolean"
+
         return self.ret_type.meta.slua_name
 
     def compute_slua_tooltip(self, llcompat=False) -> str:
@@ -501,7 +504,9 @@ class LSLFunction(LSLFunctionBase):
                         {
                             a.name: {
                                 "tooltip": a.tooltip,
-                                "type": slua.validate_type(a.compute_slua_type(), known_types),
+                                "type": slua.validate_type(
+                                    a.compute_slua_type(), known_types
+                                ).replace("ROList", "list"),
                             }
                         }
                         for a in self.arguments
@@ -512,7 +517,9 @@ class LSLFunction(LSLFunctionBase):
                     or self.detected_semantics,
                     "energy": self.energy,
                     "god-mode": self.god_mode,
-                    "return": slua.validate_type(self.compute_slua_type(), known_types),
+                    "return": slua.validate_type(self.compute_slua_type(), known_types).replace(
+                        "ROList", "list"
+                    ),
                     "sleep": self.sleep,
                     "tooltip": self.compute_slua_tooltip(),
                 }

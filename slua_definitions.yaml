@@ -157,6 +157,9 @@ type-aliases:
   export: true
   definition: "{string | number | vector | uuid | quaternion | boolean}"
   selene-type: "table"
+- name: ROList
+  definition: "{read string | number | vector | uuid | quaternion | boolean}"
+  selene-type: "table"
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
