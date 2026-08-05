@@ -2086,7 +2086,7 @@ modules:
     type: number
     value: 1.618033988749895
   - name: pi
-    comment: Ratio of a circle's circumference to its diameter. 
+    comment: Ratio of a circle's circumference to its diameter.
       The number of radians in a half circle (semi-circle). math.tau/2.
     type: number
     value: 3.141592653589793
