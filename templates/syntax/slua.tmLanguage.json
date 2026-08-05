@@ -317,15 +317,19 @@
       "patterns": [
         {
           "name": "constant.numeric.hex.luau",
-          "match": "\\b0_*[xX]_*[\\da-fA-F_]*(?:i|[eE][\\+\\-]?_*\\d[\\d_]*(?:\\.[\\d_]*)?)?"
+          "match": "\\b0_*[xX]_*[\\da-fA-F][\\da-fA-F_]*i?"
         },
         {
           "name": "constant.numeric.binary.luau",
-          "match": "\\b0_*[bB][01_]+(?:i|[eE][\\+\\-]?_*\\d[\\d_]*(?:\\.[\\d_]*)?)?"
+          "match": "\\b0_*[bB]_*[01][01_]*i?"
         },
         {
           "name": "constant.numeric.decimal.luau",
-          "match": "(?:\\d[\\d_]*(?:\\.[\\d_]*)?|\\.\\d[\\d_]*)(?:i|[eE][\\+\\-]?_*\\d[\\d_]*(?:\\.[\\d_]*)?)?"
+          "match": "\\d[\\d_]*i"
+        },
+        {
+          "name": "constant.numeric.decimal.luau",
+          "match": "(?:\\d[\\d_]*(?:\\.[\\d_]*)?|\\.\\d[\\d_]*)(?:[eE][\\+\\-]?_*\\d[\\d_]*)?"
         }
       ]
     },
@@ -396,7 +400,7 @@
       "patterns": [
         {
           "name": "support.function.luau",
-          "match": "(?<![^.]\\.|:)\\b($SLUA_GLOBAL_FUNCTIONS_REGEX)\\b"
+          "match": "(?<![^.]\\.|:)\\b(assert|collectgarbage|error|gcinfo|getfenv|getmetatable|ipairs|loadstring|newproxy|next|pairs|pcall|print|rawequal|rawset|require|select|setfenv|setmetatable|tonumber|tostring|type|typeof|unpack|xpcall)\\b"
         },
         {
           "name": "constant.language.luau",
