@@ -463,8 +463,13 @@ declare llprim: {
 ---------------------------
 
 declare math: {
-  pi: number,
+  e: number,
   huge: number,
+  nan: number,
+  phi: number,
+  pi: number,
+  sqrt2: number,
+  tau: number,
   abs: @checked (val: number) -> number,
   acos: @checked (val: number) -> number,
   asin: @checked (val: number) -> number,

@@ -5540,14 +5540,36 @@ globals:
       required: false
     description: Configure media on a specific face. Omit link to apply to the current
       prim.
-  math.pi:
+  math.e:
     property: read-only
     type: number
-    description: The number of radians in a half circle (semi-circle).
+    description: Base of the natural logarithm.
   math.huge:
     property: read-only
     type: number
-    description: Value larger than any other numeric value (infinity).
+    description: Value larger than any other numeric value (infinity). 1/0.
+  math.nan:
+    property: read-only
+    type: number
+    description: Value representing an error (not a number). 0/0.
+  math.phi:
+    property: read-only
+    type: number
+    description: Golden ratio. (1 + math.sqrt(5))/2.
+  math.pi:
+    property: read-only
+    type: number
+    description: Ratio of a circle's circumference to its diameter. The number of
+      radians in a half circle (semi-circle). math.tau/2.
+  math.sqrt2:
+    property: read-only
+    type: number
+    description: Square root of 2. math.sqrt(2).
+  math.tau:
+    property: read-only
+    type: number
+    description: Ratio of a circle's circumference to its radius. The number of radians
+      in a full circle. math.pi*2.
   math.abs:
     args:
     - type: number
