@@ -6,10 +6,10 @@
 ----------------------------------
 
 declare extern type quaternion with
-  x: number
-  y: number
-  z: number
-  s: number
+  read x: number
+  read y: number
+  read z: number
+  read s: number
   function __add(self, other: quaternion): quaternion
   function __sub(self, other: quaternion): quaternion
   function __mul(self, other: quaternion): quaternion
@@ -20,15 +20,15 @@ declare extern type quaternion with
 end
 
 declare extern type uuid with
-  istruthy: boolean
-  bytes: string
+  read istruthy: boolean
+  read bytes: string
   function __tostring(self): string
 end
 
 declare extern type vector with
-  x: number
-  y: number
-  z: number
+  read x: number
+  read y: number
+  read z: number
   function __add(self, other: vector): vector
   function __sub(self, other: vector): vector
   function __unm(self): vector
@@ -155,9 +155,9 @@ export type HttpRequestParams = {
 }
 
 declare extern type DetectedEvent with
-  index: number
-  valid: boolean
-  canAdjustDamage: boolean
+  read index: number
+  read valid: boolean
+  read canAdjustDamage: boolean
   function adjustDamage(self, new_damage: number): ()
   function getDamage(self): {any}
   function getGrab(self): vector
