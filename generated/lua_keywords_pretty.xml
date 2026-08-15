@@ -5220,6 +5220,8 @@ export type rotation = quaternion</string>
          </map>
          <key>PI</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>Mathematical constant pi, representing the number of radians in a half circle (semi-circle). When used in sensor functions, it specifies a full sphere scan.</string>
             <key>type</key>
@@ -5238,6 +5240,8 @@ export type rotation = quaternion</string>
          </map>
          <key>PI_BY_TWO</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>Mathematical constant pi/2, representing the number of radians in a quarter circle. When used in sensor functions, it specifies a hemisphere scan.</string>
             <key>type</key>
@@ -8218,6 +8222,8 @@ float falloff – ranges from 0.01 to 2.0
          </map>
          <key>SQRT2</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>Mathematical constant representing the square root of 2.</string>
             <key>type</key>
@@ -8886,6 +8892,8 @@ float falloff – ranges from 0.01 to 2.0
          </map>
          <key>TWO_PI</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
             <string>Mathematical constant pi*2, representing the number of radians in a full circle.</string>
             <key>type</key>
