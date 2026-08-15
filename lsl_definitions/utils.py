@@ -35,6 +35,7 @@ LUAU_KEYWORDS: frozenset[str] = frozenset(
     {
         "and",
         "break",
+        "const",
         "continue",
         "do",
         "else",

@@ -67,11 +67,10 @@
         <key>include</key>
         <string>#local-declaration</string>
       </dict>
-      <!-- const declarations are not supported in SLua yet -->
-      <!--dict>
+      <dict>
         <key>include</key>
         <string>#const-declaration</string>
-      </dict-->
+      </dict>
       <dict>
         <key>include</key>
         <string>#for-loop</string>
@@ -310,8 +309,7 @@
           </dict>
         </array>
       </dict>
-      <!-- const declarations are not supported in SLua yet -->
-      <!--key>const-declaration</key>
+      <key>const-declaration</key>
       <dict>
         <key>begin</key>
         <string>\b(const)\b</string>
@@ -369,7 +367,7 @@
             <string>\b([a-zA-Z_][a-zA-Z0-9_]*)\b</string>
           </dict>
         </array>
-      </dict-->
+      </dict>
       <key>for-loop</key>
       <dict>
         <key>begin</key>
