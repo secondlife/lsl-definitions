@@ -9,6 +9,7 @@ from lsl_definitions.generators import (
     lscript_compiler,
     lsl,
     slua,
+    slua_embedded,
     slua_lsp_docs,
     textmate,
 )
@@ -24,6 +25,7 @@ __all__ = [
     "lscript_compiler",
     "lsl",
     "slua",
+    "slua_embedded",
     "slua_lsp_docs",
     "textmate",
 ]

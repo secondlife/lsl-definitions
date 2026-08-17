@@ -209,13 +209,13 @@ export type DateTypeArg = {
 export type DateTypeResult = {
   year: number,
   month: number,
+  wday: number,
+  yday: number,
   day: number,
-  hour: number?,
-  min: number?,
-  sec: number?,
-  wday: number?,
-  yday: number?,
-  isdst: boolean?,
+  hour: number,
+  min: number,
+  sec: number,
+  isdst: boolean,
 }</string>
          </map>
          <key>HttpRequestParams</key>
@@ -13095,6 +13095,11 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
          </map>
          <key>coroutine.create</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>A...</string>
+               <string>R...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -13103,7 +13108,7 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                      <key>tooltip</key>
                      <string>A function to be executed by the new coroutine.</string>
                      <key>type</key>
-                     <string>(...any) -&gt; ...any</string>
+                     <string>(A...) -&gt; R...</string>
                   </map>
                </map>
             </array>
@@ -13132,6 +13137,11 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
          </map>
          <key>coroutine.resume</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>A...</string>
+               <string>R...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -13149,14 +13159,14 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                      <key>tooltip</key>
                      <string>Arguments to pass to the coroutine.</string>
                      <key>type</key>
-                     <string>...any</string>
+                     <string>A...</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>(boolean, ...any)</string>
+            <string>(boolean, R...)</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -13201,6 +13211,11 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
          </map>
          <key>coroutine.wrap</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>A...</string>
+               <string>R...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -13209,14 +13224,14 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                      <key>tooltip</key>
                      <string>A function to execute in a coroutine.</string>
                      <key>type</key>
-                     <string>(...any) -&gt; ...any</string>
+                     <string>(A...) -&gt; R...</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>(...any) -&gt; ...any</string>
+            <string>(A...) -&gt; R...</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
@@ -13224,6 +13239,11 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
          </map>
          <key>coroutine.yield</key>
          <map>
+            <key>type-arguments</key>
+            <array>
+               <string>A...</string>
+               <string>R...</string>
+            </array>
             <key>arguments</key>
             <array>
                <map>
@@ -13232,14 +13252,14 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
                      <key>tooltip</key>
                      <string>Values to pass to the resuming code.</string>
                      <key>type</key>
-                     <string>...any</string>
+                     <string>A...</string>
                   </map>
                </map>
             </array>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
-            <string>...any</string>
+            <string>R...</string>
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
