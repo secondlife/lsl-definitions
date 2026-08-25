@@ -6379,7 +6379,6 @@ events:
         tooltip: A 32-bit mask representing the canonical buttons currently held down
           on the controller.
         type: integer
-        enum-semantics: GameControlButton
     - axes:
         tooltip: A list of six float values in the range [-1.0, 1.0] representing
           canonical controller axes.
@@ -6388,9 +6387,6 @@ events:
     tooltip: Triggered when a compatible viewer sends game controller input changes
       for the avatar specified by id. Only triggers for scripts in attachments
       or seats.
-    categories:
-      - avatar
-      - input
   http_request:
     arguments:
     - HTTPRequestID:
@@ -8768,11 +8764,13 @@ functions:
     - id:
         tooltip: UUID of the avatar whose game-controller state to query.
         type: key
+    categories:
+    - avatar
+    - input
     energy: 10.0
     func-id: 804
     must-use: true
     return: integer
-    enum-semantics: GameControlMode
     sleep: 0.0
     tooltip: Returns an integer identifying the current game-control mode for the
       avatar specified by id. The value is one of the GAME_CONTROL_MODE_* constants
@@ -8780,19 +8778,19 @@ functions:
       GAME_CONTROL_MODE_FLYCAM (2), GAME_CONTROL_MODE_CAPTIVE (3), or
       GAME_CONTROL_MODE_CURSOR (4)). Only valid for avatars in attachments or seats
       that are sending game controller input.
-    categories:
-      - avatar
-      - input
   llGetGameControlModeAxes:
     arguments:
     - id:
         tooltip: UUID of the avatar whose game-controller state to query.
         type: key
+    categories:
+    - avatar
+    - input
     energy: 10.0
     func-id: 806
     must-use: true
     return: list
-    slua-type: "{number}"
+    slua-return: "{number}"
     sleep: 0.0
     tooltip: Returns a list of floats in [-1.0, 1.0] representing the modal axes for
       the current game-control mode of the avatar specified by id. The element count
@@ -8806,19 +8804,18 @@ functions:
       GAME_CONTROL_AXIS_BOOM (4), GAME_CONTROL_AXIS_ROLL (5), and
       GAME_CONTROL_AXIS_ZOOM (6). For CURSOR mode 6 values are returned (cursor DX,
       DY, pixel X, pixel Y, normalized X, normalized Y).
-    categories:
-      - avatar
-      - input
   llGetGameControlModeButtons:
     arguments:
     - id:
         tooltip: UUID of the avatar whose game-controller state to query.
         type: key
+    categories:
+    - avatar
+    - input
     energy: 10.0
     func-id: 805
     must-use: true
     return: integer
-    enum-semantics: GameControlButton
     sleep: 0.0
     tooltip: Returns a 32-bit integer bitmask of the modal buttons currently active
       for the current game-control mode of the avatar specified by id. Bit positions
@@ -8834,9 +8831,6 @@ functions:
       is Pan left, bit 3 is Zoom in, bit 4 is Toggle AltZoom, bit 6 is Toggle
       follow, bit 7 is Reset, bits 9-10 are Roll CCW/CW, and bits 11-14 are Dolly
       and Truck directions.
-    categories:
-      - avatar
-      - input
   llGetGMTclock:
     arguments: []
     energy: 10.0
