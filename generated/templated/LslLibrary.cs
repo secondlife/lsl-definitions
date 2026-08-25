@@ -48,6 +48,17 @@ namespace LindenLab.SecondLife
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static int llGetGameControlMode(Key id);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static object[] llGetGameControlModeAxesInternal(Key id);
+
+        public static ArrayList llGetGameControlModeAxes(Key id) {
+            return ToArrayListNoCopy(llGetGameControlModeAxesInternal(id));
+        }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static int llGetGameControlModeButtons(Key id);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static float llGetHealth(Key ID);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static string llGetStartString();

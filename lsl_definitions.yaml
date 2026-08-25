@@ -179,6 +179,10 @@ enums:
     type: flag
     prefix: GAME_CONTROL_BUTTON_
     tooltip: ''
+  GameControlMode:
+    type: enum
+    prefix: GAME_CONTROL_MODE_
+    tooltip: ''
   GetClosestNavPointParam:
     type: enum
     prefix: GCNP_
@@ -1676,141 +1680,401 @@ constants:
       between 0.0 and 255.0
     type: integer
     value: 2
+  GAME_CONTROL_AXIS_ADVANCE:
+
+    tooltip: Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK,
+      and CAPTIVE modes.
+    type: integer
+    value: 1
+  GAME_CONTROL_AXIS_BOOM:
+
+    tooltip: Camera up/down movement. Modal axis index 4 for FLYCAM mode.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_DOLLY:
+
+    tooltip: Camera forward/backward movement. Modal axis index 1 for FLYCAM mode.
+    type: integer
+    value: 1
   GAME_CONTROL_AXIS_LEFTX:
-    member-of: [GameControlAxis]
-    tooltip: ''
+
+    tooltip: Left stick X axis. Canonical axis index 0.
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
-    member-of: [GameControlAxis]
-    tooltip: ''
+
+    tooltip: Left stick Y axis. Canonical axis index 1.
     type: integer
     value: 1
+  GAME_CONTROL_AXIS_LEFT_TRIGGER:
+
+    tooltip: Left trigger. Canonical axis index 4.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_LOOK:
+
+    tooltip: Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: 3
+  GAME_CONTROL_AXIS_PAN:
+
+    tooltip: Camera pan left/right. Modal axis index 2 for FLYCAM mode.
+    type: integer
+    value: 2
   GAME_CONTROL_AXIS_RIGHTX:
-    member-of: [GameControlAxis]
-    tooltip: ''
+
+    tooltip: Right stick X axis. Canonical axis index 2.
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
-    member-of: [GameControlAxis]
-    tooltip: ''
+
+    tooltip: Right stick Y axis. Canonical axis index 3.
+    type: integer
+    value: 3
+  GAME_CONTROL_AXIS_RIGHT_TRIGGER:
+
+    tooltip: Right trigger. Canonical axis index 5.
+    type: integer
+    value: 5
+  GAME_CONTROL_AXIS_RISE:
+
+    tooltip: Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE
+      modes.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_ROLL:
+
+    tooltip: Camera roll. Modal axis index 5 for FLYCAM mode.
+    type: integer
+    value: 5
+  GAME_CONTROL_AXIS_STRAFE:
+
+    tooltip: Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and
+      CAPTIVE modes.
+    type: integer
+    value: 0
+  GAME_CONTROL_AXIS_TILT:
+
+    tooltip: Camera tilt up/down. Modal axis index 3 for FLYCAM mode.
     type: integer
     value: 3
   GAME_CONTROL_AXIS_TRIGGERLEFT:
-    member-of: [GameControlAxis]
-    tooltip: ''
+    deprecated:
+      use: GAME_CONTROL_AXIS_LEFT_TRIGGER
+
+    tooltip: Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
-    member-of: [GameControlAxis]
-    tooltip: ''
+    deprecated:
+      use: GAME_CONTROL_AXIS_RIGHT_TRIGGER
+
+    tooltip: Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).
     type: integer
     value: 5
+  GAME_CONTROL_AXIS_TRUCK:
+
+    tooltip: Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM
+      mode.
+    type: integer
+    value: 0
+  GAME_CONTROL_AXIS_TURN:
+
+    tooltip: Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: 2
+  GAME_CONTROL_AXIS_ZOOM:
+
+    tooltip: Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE,
+      and FLYCAM modes.
+    type: integer
+    value: 6
   GAME_CONTROL_BUTTON_A:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_SOUTH
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH).
     type: integer
     value: '0x1'
+  GAME_CONTROL_BUTTON_ADVANCE_BACK:
+    tooltip: Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x1000'
+  GAME_CONTROL_BUTTON_ADVANCE_FORWARD:
+    tooltip: Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x800'
   GAME_CONTROL_BUTTON_B:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_EAST
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST).
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_SELECT
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT).
     type: integer
     value: '0x10'
+  GAME_CONTROL_BUTTON_CROUCH:
+    tooltip: Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_DOLLY_BACK:
+    tooltip: Camera dolly backward. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x1000'
+  GAME_CONTROL_BUTTON_DOLLY_FORWARD:
+    tooltip: Camera dolly forward. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x800'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad down.
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad left.
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad right.
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad up.
     type: integer
     value: '0x800'
-  GAME_CONTROL_BUTTON_GUIDE:
+  GAME_CONTROL_BUTTON_EAST:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right face button.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_GUIDE:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_HOME
+    member-of: [GameControlButton]
+    tooltip: Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME).
     type: integer
     value: '0x20'
+  GAME_CONTROL_BUTTON_HOME:
+    member-of: [GameControlButton]
+    tooltip: Home/guide button.
+    type: integer
+    value: '0x20'
+  GAME_CONTROL_BUTTON_JUMP:
+    tooltip: Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+    type: integer
+    value: '0x1'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left shoulder/bumper button.
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left analog stick click.
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Miscellaneous button 1.
     type: integer
     value: '0x8000'
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT:
+    tooltip: Left mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+    type: integer
+    value: '0x200'
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT:
+    tooltip: Right mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+    type: integer
+    value: '0x400'
+  GAME_CONTROL_BUTTON_NORTH:
+    member-of: [GameControlButton]
+    tooltip: Top face button.
+    type: integer
+    value: '0x8'
   GAME_CONTROL_BUTTON_PADDLE1:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 1.
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 2.
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 3.
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 4.
     type: integer
     value: '0x80000'
+  GAME_CONTROL_BUTTON_PAN_LEFT:
+    tooltip: Camera pan left. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_PAN_RIGHT:
+    tooltip: Camera pan right. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_RESET:
+    tooltip: Reset camera to default view. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x80'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right shoulder/bumper button.
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right analog stick click.
     type: integer
     value: '0x100'
+  GAME_CONTROL_BUTTON_ROLL_CCW:
+    tooltip: Roll camera counter-clockwise. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x200'
+  GAME_CONTROL_BUTTON_ROLL_CW:
+    tooltip: Roll camera clockwise. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x400'
+  GAME_CONTROL_BUTTON_SELECT:
+    member-of: [GameControlButton]
+    tooltip: Select/back button.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_SIT:
+    tooltip: Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_SOUTH:
+    member-of: [GameControlButton]
+    tooltip: Bottom face button.
+    type: integer
+    value: '0x1'
   GAME_CONTROL_BUTTON_START:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Start/menu button.
     type: integer
     value: '0x40'
+  GAME_CONTROL_BUTTON_STRAFE_LEFT:
+    tooltip: Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x2000'
+  GAME_CONTROL_BUTTON_STRAFE_RIGHT:
+    tooltip: Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x4000'
+  GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM:
+    tooltip: Toggle alt-zoom. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_TOGGLE_CURSOR:
+    tooltip: Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_TOGGLE_FLYCAM:
+    tooltip: Toggle flycam mode. Modal button for all modes.
+    type: integer
+    value: '0x100'
+  GAME_CONTROL_BUTTON_TOGGLE_FOLLOW:
+    tooltip: Toggle camera follow mode. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x40'
+  GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK:
+    tooltip: Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: '0x40'
+  GAME_CONTROL_BUTTON_TOGGLE_SPEAK:
+    tooltip: Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and
+      CURSOR modes.
+    type: integer
+    value: '0x20'
   GAME_CONTROL_BUTTON_TOUCHPAD:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Touchpad click.
     type: integer
     value: '0x100000'
-  GAME_CONTROL_BUTTON_X:
+  GAME_CONTROL_BUTTON_TRUCK_LEFT:
+    tooltip: Camera truck left. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x2000'
+  GAME_CONTROL_BUTTON_TRUCK_RIGHT:
+    tooltip: Camera truck right. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x4000'
+  GAME_CONTROL_BUTTON_WEST:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left face button.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_X:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_WEST
+    member-of: [GameControlButton]
+    tooltip: Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST).
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_NORTH
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH).
     type: integer
     value: '0x8'
+  GAME_CONTROL_BUTTON_ZOOM_IN:
+    tooltip: Zoom camera in. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x8'
+  GAME_CONTROL_BUTTON_ZOOM_OUT:
+    tooltip: Zoom camera out. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x1'
+  GAME_CONTROL_MODE_AVATAR:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 0
+  GAME_CONTROL_MODE_CAPTIVE:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 3
+  GAME_CONTROL_MODE_FLYCAM:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 2
+  GAME_CONTROL_MODE_CURSOR:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 4
+  GAME_CONTROL_MODE_MOUSELOOK:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 1
   GCNP_GET_WALKABILITY:
     member-of: [GetClosestNavPointParam]
     private: true
@@ -3246,6 +3510,11 @@ constants:
     tooltip: Grants the script privileged access to land parcel functions, such as parcel sale.
     type: integer
     value: '0x80000'
+  PERMISSION_GAME_CONTROL:
+    member-of: [ScriptPermission]
+    tooltip: ''
+    type: integer
+    value: '0x100000'
   PERM_ALL:
     member-of: [AssetPermission]
     tooltip: ''
@@ -6104,16 +6373,24 @@ events:
   game_control:
     arguments:
     - id:
-        tooltip: UUID of avatar supplying input
+        tooltip: UUID of the avatar supplying controller input.
         type: key
-    - buttons:
-        tooltip: 32-bit mask of buttons pressed
+    - button_levels:
+        tooltip: A 32-bit mask representing the canonical buttons currently held down
+          on the controller.
         type: integer
+        enum-semantics: GameControlButton
     - axes:
-        tooltip: Six float values in range [-1, 1]
+        tooltip: A list of six float values in the range [-1.0, 1.0] representing
+          canonical controller axes.
         type: list
         slua-type: "{number}"
-    tooltip: This event is raised when game controller input changes.
+    tooltip: Triggered when a compatible viewer sends game controller input changes
+      for the avatar specified by id. Only triggers for scripts in attachments
+      or seats.
+    categories:
+      - avatar
+      - input
   http_request:
     arguments:
     - HTTPRequestID:
@@ -8486,6 +8763,80 @@ functions:
     categories:
       - script
       - web
+  llGetGameControlMode:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    energy: 10.0
+    func-id: 804
+    must-use: true
+    return: integer
+    enum-semantics: GameControlMode
+    sleep: 0.0
+    tooltip: Returns an integer identifying the current game-control mode for the
+      avatar specified by id. The value is one of the GAME_CONTROL_MODE_* constants
+      (GAME_CONTROL_MODE_AVATAR (0), GAME_CONTROL_MODE_MOUSELOOK (1),
+      GAME_CONTROL_MODE_FLYCAM (2), GAME_CONTROL_MODE_CAPTIVE (3), or
+      GAME_CONTROL_MODE_CURSOR (4)). Only valid for avatars in attachments or seats
+      that are sending game controller input.
+    categories:
+      - avatar
+      - input
+  llGetGameControlModeAxes:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    energy: 10.0
+    func-id: 806
+    must-use: true
+    return: list
+    slua-type: "{number}"
+    sleep: 0.0
+    tooltip: Returns a list of floats in [-1.0, 1.0] representing the modal axes for
+      the current game-control mode of the avatar specified by id. The element count
+      and index meanings depend on the mode returned by llGetGameControlMode. For
+      AVATAR, MOUSELOOK, and CAPTIVE modes 5 values are returned indexed by
+      GAME_CONTROL_AXIS_STRAFE (0), GAME_CONTROL_AXIS_ADVANCE (1),
+      GAME_CONTROL_AXIS_TURN (2), GAME_CONTROL_AXIS_LOOK (3), and
+      GAME_CONTROL_AXIS_RISE (4). For FLYCAM mode 7 values are returned indexed by
+      GAME_CONTROL_AXIS_TRUCK (0), GAME_CONTROL_AXIS_DOLLY (1),
+      GAME_CONTROL_AXIS_PAN (2), GAME_CONTROL_AXIS_TILT (3),
+      GAME_CONTROL_AXIS_BOOM (4), GAME_CONTROL_AXIS_ROLL (5), and
+      GAME_CONTROL_AXIS_ZOOM (6). For CURSOR mode 6 values are returned (cursor DX,
+      DY, pixel X, pixel Y, normalized X, normalized Y).
+    categories:
+      - avatar
+      - input
+  llGetGameControlModeButtons:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    energy: 10.0
+    func-id: 805
+    must-use: true
+    return: integer
+    enum-semantics: GameControlButton
+    sleep: 0.0
+    tooltip: Returns a 32-bit integer bitmask of the modal buttons currently active
+      for the current game-control mode of the avatar specified by id. Bit positions
+      match the canonical GAME_CONTROL_BUTTON_* indices but their semantic meanings
+      vary by mode. For AVATAR, CAPTIVE, and CURSOR modes bit 0 (GAME_CONTROL_BUTTON_SOUTH)
+      is Jump, bit 1 (GAME_CONTROL_BUTTON_EAST) is Crouch, bit 2
+      (GAME_CONTROL_BUTTON_WEST) is Toggle sit, bit 4 (GAME_CONTROL_BUTTON_SELECT)
+      is Toggle cursor, bit 5 (GAME_CONTROL_BUTTON_HOME) is Toggle speak, bit 6
+      (GAME_CONTROL_BUTTON_START) is Toggle mouselook, bit 8
+      (GAME_CONTROL_BUTTON_RIGHTSTICK) is Toggle flycam, and bits 11-14 are the
+      D-pad directions. For MOUSELOOK mode bits 9-10 additionally map to mouse click
+      left and right. For FLYCAM mode bit 0 is Zoom out, bit 1 is Pan right, bit 2
+      is Pan left, bit 3 is Zoom in, bit 4 is Toggle AltZoom, bit 6 is Toggle
+      follow, bit 7 is Reset, bits 9-10 are Roll CCW/CW, and bits 11-14 are Dolly
+      and Truck directions.
+    categories:
+      - avatar
+      - input
   llGetGMTclock:
     arguments: []
     energy: 10.0

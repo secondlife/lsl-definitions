@@ -23,10 +23,10 @@ public:
 class LLScriptGameControlEvent : public LLScriptEvent
 {
 public:
-    LLScriptGameControlEvent(S32 line, S32 col, LLScriptIdentifier *id, LLScriptIdentifier *buttons, LLScriptIdentifier *axes)
+    LLScriptGameControlEvent(S32 line, S32 col, LLScriptIdentifier *id, LLScriptIdentifier *button_levels, LLScriptIdentifier *axes)
         : LLScriptEvent(line, col, LSTT_GAME_CONTROL)
         , mId(id)
-        , mButtons(buttons)
+        , mButtonLevels(button_levels)
         , mAxes(axes)
     {
     }
@@ -42,7 +42,7 @@ public:
     S32 getSize();
 
     LLScriptIdentifier *mId;
-    LLScriptIdentifier *mButtons;
+    LLScriptIdentifier *mButtonLevels;
     LLScriptIdentifier *mAxes;
 };
 

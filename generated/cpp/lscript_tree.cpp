@@ -93,7 +93,7 @@ void LLScriptGameControlEvent::recurse(
         fprintf(fp, "key ");
         mId->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
         fprintf(fp, ", integer ");
-        mButtons->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
+        mButtonLevels->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
         fprintf(fp, ", list ");
         mAxes->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
 
@@ -111,13 +111,13 @@ void LLScriptGameControlEvent::recurse(
             mId->mScopeEntry = scope->addEntry(mId->mName, LIT_VARIABLE, LST_KEY);
         }
 
-        if (scope->checkEntry(mButtons->mName))
+        if (scope->checkEntry(mButtonLevels->mName))
         {
             gErrorToText.writeError(fp, this, LSERROR_DUPLICATE_NAME);
         }
         else
         {
-            mButtons->mScopeEntry = scope->addEntry(mButtons->mName, LIT_VARIABLE, LST_INTEGER);
+            mButtonLevels->mScopeEntry = scope->addEntry(mButtonLevels->mName, LIT_VARIABLE, LST_INTEGER);
         }
 
         if (scope->checkEntry(mAxes->mName))
@@ -138,9 +138,9 @@ void LLScriptGameControlEvent::recurse(
                 mId->mScopeEntry->mOffset = (S32)count;
                 mId->mScopeEntry->mSize = 4;
                 count += mId->mScopeEntry->mSize;
-                mButtons->mScopeEntry->mOffset = (S32)count;
-                mButtons->mScopeEntry->mSize = 4;
-                count += mButtons->mScopeEntry->mSize;
+                mButtonLevels->mScopeEntry->mOffset = (S32)count;
+                mButtonLevels->mScopeEntry->mSize = 4;
+                count += mButtonLevels->mScopeEntry->mSize;
                 mAxes->mScopeEntry->mOffset = (S32)count;
                 mAxes->mScopeEntry->mSize = 4;
                 count += mAxes->mScopeEntry->mSize;
@@ -154,7 +154,7 @@ void LLScriptGameControlEvent::recurse(
             char name[] = "game_control";
             chunk->addBytes(name, strlen(name) + 1);
             chunk->addBytes(mId->mName, strlen(mId->mName) + 1);
-            chunk->addBytes(mButtons->mName, strlen(mButtons->mName) + 1);
+            chunk->addBytes(mButtonLevels->mName, strlen(mButtonLevels->mName) + 1);
             chunk->addBytes(mAxes->mName, strlen(mAxes->mName) + 1);
 
 #endif
@@ -167,7 +167,7 @@ void LLScriptGameControlEvent::recurse(
         fprintf(fp, "valuetype [ScriptTypes]LindenLab.SecondLife.Key ");
         mId->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
         fprintf(fp, ", int32 ");
-        mButtons->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
+        mButtonLevels->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
         fprintf(fp, ", class [mscorlib]System.Collections.ArrayList ");
         mAxes->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);
         fprintf(fp, " ");
@@ -176,7 +176,7 @@ void LLScriptGameControlEvent::recurse(
         break;
     default:
         mId->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);;
-        mButtons->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);;
+        mButtonLevels->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);;
         mAxes->recurse(fp, tabs, tabsize, pass, ptype, prunearg, scope, type, basetype, count, chunk, heap, stacksize, entry, entrycount, NULL);;
         break;
     }

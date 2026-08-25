@@ -1141,6 +1141,36 @@ static S32 _mono_binding_get_free_ur_ls_func()
     return LLScriptLibDataHelper<S32>::get(retval);
 }
 
+static S32 _mono_binding_get_game_control_mode_func(MonoKeyType p0)
+{
+    LLScriptLibData args[1];
+    LLScriptLibDataHelper<MonoKeyType>::set(args[0], p0);
+    LLScriptLibData retval;
+    retval.mType = LST_INTEGER;
+    call_lib_func(804, retval, 1, args, 10.0, 0.0);
+    return LLScriptLibDataHelper<S32>::get(retval);
+}
+
+static MonoListType _mono_binding_get_game_control_mode_axes_func(MonoKeyType p0)
+{
+    LLScriptLibData args[1];
+    LLScriptLibDataHelper<MonoKeyType>::set(args[0], p0);
+    LLScriptLibData retval;
+    retval.mType = LST_LIST;
+    call_lib_func(806, retval, 1, args, 10.0, 0.0);
+    return LLScriptLibDataHelper<MonoListType>::get(retval);
+}
+
+static S32 _mono_binding_get_game_control_mode_buttons_func(MonoKeyType p0)
+{
+    LLScriptLibData args[1];
+    LLScriptLibDataHelper<MonoKeyType>::set(args[0], p0);
+    LLScriptLibData retval;
+    retval.mType = LST_INTEGER;
+    call_lib_func(805, retval, 1, args, 10.0, 0.0);
+    return LLScriptLibDataHelper<S32>::get(retval);
+}
+
 static F32 _mono_binding_get_gm_tclock_func()
 {
     LLScriptLibData args[0];
@@ -5360,6 +5390,9 @@ void mono_internal_call_init_generated()
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetForce", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_force_func)));
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetFreeMemory", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_free_memory_func)));
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetFreeURLs", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_free_ur_ls_func)));
+    mono_add_internal_call("LindenLab.SecondLife.Library::llGetGameControlMode", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_game_control_mode_func)));
+    mono_add_internal_call("LindenLab.SecondLife.Library::llGetGameControlModeAxesInternal", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_game_control_mode_axes_func)));
+    mono_add_internal_call("LindenLab.SecondLife.Library::llGetGameControlModeButtons", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_game_control_mode_buttons_func)));
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetGMTclock", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_gm_tclock_func)));
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetGeometricCenter", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_geometric_center_func)));
     mono_add_internal_call("LindenLab.SecondLife.Library::llGetHTTPHeader", fnPtrToObjPtr(reinterpret_cast<PtrType>(_mono_binding_get_http_header_func)));

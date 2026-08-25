@@ -125,7 +125,7 @@ declare extern type LLEvents with
   experience_permissions: ((agent_id: uuid) -> ())?
   experience_permissions_denied: ((agent_id: uuid, Reason: number) -> ())?
   final_damage: LLDetectedEventHandler?
-  game_control: ((id: uuid, buttons: number, axes: {number}) -> ())?
+  game_control: ((id: uuid, button_levels: number, axes: {number}) -> ())?
   http_request: ((HTTPRequestID: uuid, HTTPMethod: string, Body: string) -> ())?
   http_response: ((HTTPRequestID: uuid, Status: number, Metadata: {any}, Body: string) -> ())?
   land_collision: ((Position: vector) -> ())?
@@ -695,6 +695,9 @@ declare ll: {
   GetForce: () -> vector,
   GetFreeMemory: () -> number,
   GetFreeURLs: () -> number,
+  GetGameControlMode: (id: uuid) -> number,
+  GetGameControlModeAxes: (id: uuid) -> {any},
+  GetGameControlModeButtons: (id: uuid) -> number,
   GetGMTclock: () -> number,
   GetGeometricCenter: () -> vector,
   GetHTTPHeader: (HTTPRequestID: uuid, Header: string) -> string,
@@ -1219,6 +1222,9 @@ declare llcompat: {
   GetForce: @deprecated () -> vector,
   GetFreeMemory: @deprecated () -> number,
   GetFreeURLs: @deprecated () -> number,
+  GetGameControlMode: @deprecated (id: uuid) -> number,
+  GetGameControlModeAxes: @deprecated (id: uuid) -> {any},
+  GetGameControlModeButtons: @deprecated (id: uuid) -> number,
   GetGMTclock: @deprecated () -> number,
   GetGeometricCenter: @deprecated () -> vector,
   GetHTTPHeader: @deprecated (HTTPRequestID: uuid, Header: string) -> string,
@@ -1849,33 +1855,84 @@ declare FILTER_FLAG_HUDS: number
 declare FILTER_INCLUDE: number
 declare FORCE_DIRECT_PATH: number
 declare FRICTION: number
+declare GAME_CONTROL_AXIS_ADVANCE: number
+declare GAME_CONTROL_AXIS_BOOM: number
+declare GAME_CONTROL_AXIS_DOLLY: number
 declare GAME_CONTROL_AXIS_LEFTX: number
 declare GAME_CONTROL_AXIS_LEFTY: number
+declare GAME_CONTROL_AXIS_LEFT_TRIGGER: number
+declare GAME_CONTROL_AXIS_LOOK: number
+declare GAME_CONTROL_AXIS_PAN: number
 declare GAME_CONTROL_AXIS_RIGHTX: number
 declare GAME_CONTROL_AXIS_RIGHTY: number
+declare GAME_CONTROL_AXIS_RIGHT_TRIGGER: number
+declare GAME_CONTROL_AXIS_RISE: number
+declare GAME_CONTROL_AXIS_ROLL: number
+declare GAME_CONTROL_AXIS_STRAFE: number
+declare GAME_CONTROL_AXIS_TILT: number
 declare GAME_CONTROL_AXIS_TRIGGERLEFT: number
 declare GAME_CONTROL_AXIS_TRIGGERRIGHT: number
+declare GAME_CONTROL_AXIS_TRUCK: number
+declare GAME_CONTROL_AXIS_TURN: number
+declare GAME_CONTROL_AXIS_ZOOM: number
 declare GAME_CONTROL_BUTTON_A: number
+declare GAME_CONTROL_BUTTON_ADVANCE_BACK: number
+declare GAME_CONTROL_BUTTON_ADVANCE_FORWARD: number
 declare GAME_CONTROL_BUTTON_B: number
 declare GAME_CONTROL_BUTTON_BACK: number
+declare GAME_CONTROL_BUTTON_CROUCH: number
+declare GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT: number
+declare GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT: number
+declare GAME_CONTROL_BUTTON_DOLLY_BACK: number
+declare GAME_CONTROL_BUTTON_DOLLY_FORWARD: number
 declare GAME_CONTROL_BUTTON_DPAD_DOWN: number
 declare GAME_CONTROL_BUTTON_DPAD_LEFT: number
 declare GAME_CONTROL_BUTTON_DPAD_RIGHT: number
 declare GAME_CONTROL_BUTTON_DPAD_UP: number
+declare GAME_CONTROL_BUTTON_EAST: number
 declare GAME_CONTROL_BUTTON_GUIDE: number
+declare GAME_CONTROL_BUTTON_HOME: number
+declare GAME_CONTROL_BUTTON_JUMP: number
 declare GAME_CONTROL_BUTTON_LEFTSHOULDER: number
 declare GAME_CONTROL_BUTTON_LEFTSTICK: number
 declare GAME_CONTROL_BUTTON_MISC1: number
+declare GAME_CONTROL_BUTTON_NORTH: number
 declare GAME_CONTROL_BUTTON_PADDLE1: number
 declare GAME_CONTROL_BUTTON_PADDLE2: number
 declare GAME_CONTROL_BUTTON_PADDLE3: number
 declare GAME_CONTROL_BUTTON_PADDLE4: number
+declare GAME_CONTROL_BUTTON_PAN_LEFT: number
+declare GAME_CONTROL_BUTTON_PAN_RIGHT: number
+declare GAME_CONTROL_BUTTON_RESET: number
 declare GAME_CONTROL_BUTTON_RIGHTSHOULDER: number
 declare GAME_CONTROL_BUTTON_RIGHTSTICK: number
+declare GAME_CONTROL_BUTTON_ROLL_CCW: number
+declare GAME_CONTROL_BUTTON_ROLL_CW: number
+declare GAME_CONTROL_BUTTON_SELECT: number
+declare GAME_CONTROL_BUTTON_SIT: number
+declare GAME_CONTROL_BUTTON_SOUTH: number
 declare GAME_CONTROL_BUTTON_START: number
+declare GAME_CONTROL_BUTTON_STRAFE_LEFT: number
+declare GAME_CONTROL_BUTTON_STRAFE_RIGHT: number
+declare GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM: number
+declare GAME_CONTROL_BUTTON_TOGGLE_CURSOR: number
+declare GAME_CONTROL_BUTTON_TOGGLE_FLYCAM: number
+declare GAME_CONTROL_BUTTON_TOGGLE_FOLLOW: number
+declare GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK: number
+declare GAME_CONTROL_BUTTON_TOGGLE_SPEAK: number
 declare GAME_CONTROL_BUTTON_TOUCHPAD: number
+declare GAME_CONTROL_BUTTON_TRUCK_LEFT: number
+declare GAME_CONTROL_BUTTON_TRUCK_RIGHT: number
+declare GAME_CONTROL_BUTTON_WEST: number
 declare GAME_CONTROL_BUTTON_X: number
 declare GAME_CONTROL_BUTTON_Y: number
+declare GAME_CONTROL_BUTTON_ZOOM_IN: number
+declare GAME_CONTROL_BUTTON_ZOOM_OUT: number
+declare GAME_CONTROL_MODE_AVATAR: number
+declare GAME_CONTROL_MODE_CAPTIVE: number
+declare GAME_CONTROL_MODE_CURSOR: number
+declare GAME_CONTROL_MODE_FLYCAM: number
+declare GAME_CONTROL_MODE_MOUSELOOK: number
 declare GCNP_RADIUS: number
 declare GCNP_STATIC: number
 declare GRAVITY_MULTIPLIER: number
@@ -2134,6 +2191,7 @@ declare PERMISSION_CHANGE_LINKS: number
 declare PERMISSION_CHANGE_PERMISSIONS: number
 declare PERMISSION_CONTROL_CAMERA: number
 declare PERMISSION_DEBIT: number
+declare PERMISSION_GAME_CONTROL: number
 declare PERMISSION_OVERRIDE_ANIMATIONS: number
 declare PERMISSION_PRIVILEGED_LAND_ACCESS: number
 declare PERMISSION_RELEASE_OWNERSHIP: number

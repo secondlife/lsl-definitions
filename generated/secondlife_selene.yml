@@ -896,85 +896,326 @@ globals:
     type: number
     description: Used with llSetPhysicsMaterial to enable the friction value. Must
       be between 0.0 and 255.0
+  GAME_CONTROL_AXIS_ADVANCE:
+    property: read-only
+    type: number
+    description: Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK,
+      and CAPTIVE modes.
+  GAME_CONTROL_AXIS_BOOM:
+    property: read-only
+    type: number
+    description: Camera up/down movement. Modal axis index 4 for FLYCAM mode.
+  GAME_CONTROL_AXIS_DOLLY:
+    property: read-only
+    type: number
+    description: Camera forward/backward movement. Modal axis index 1 for FLYCAM mode.
   GAME_CONTROL_AXIS_LEFTX:
     property: read-only
     type: number
+    description: Left stick X axis. Canonical axis index 0.
   GAME_CONTROL_AXIS_LEFTY:
     property: read-only
     type: number
+    description: Left stick Y axis. Canonical axis index 1.
+  GAME_CONTROL_AXIS_LEFT_TRIGGER:
+    property: read-only
+    type: number
+    description: Left trigger. Canonical axis index 4.
+  GAME_CONTROL_AXIS_LOOK:
+    property: read-only
+    type: number
+    description: Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_AXIS_PAN:
+    property: read-only
+    type: number
+    description: Camera pan left/right. Modal axis index 2 for FLYCAM mode.
   GAME_CONTROL_AXIS_RIGHTX:
     property: read-only
     type: number
+    description: Right stick X axis. Canonical axis index 2.
   GAME_CONTROL_AXIS_RIGHTY:
     property: read-only
     type: number
+    description: Right stick Y axis. Canonical axis index 3.
+  GAME_CONTROL_AXIS_RIGHT_TRIGGER:
+    property: read-only
+    type: number
+    description: Right trigger. Canonical axis index 5.
+  GAME_CONTROL_AXIS_RISE:
+    property: read-only
+    type: number
+    description: Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE
+      modes.
+  GAME_CONTROL_AXIS_ROLL:
+    property: read-only
+    type: number
+    description: Camera roll. Modal axis index 5 for FLYCAM mode.
+  GAME_CONTROL_AXIS_STRAFE:
+    property: read-only
+    type: number
+    description: Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and
+      CAPTIVE modes.
+  GAME_CONTROL_AXIS_TILT:
+    property: read-only
+    type: number
+    description: Camera tilt up/down. Modal axis index 3 for FLYCAM mode.
   GAME_CONTROL_AXIS_TRIGGERLEFT:
     property: read-only
     type: number
+    description: Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
     property: read-only
     type: number
+    description: Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).
+  GAME_CONTROL_AXIS_TRUCK:
+    property: read-only
+    type: number
+    description: Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM
+      mode.
+  GAME_CONTROL_AXIS_TURN:
+    property: read-only
+    type: number
+    description: Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_AXIS_ZOOM:
+    property: read-only
+    type: number
+    description: Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE,
+      and FLYCAM modes.
   GAME_CONTROL_BUTTON_A:
     property: read-only
     type: number
+    description: Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH).
+  GAME_CONTROL_BUTTON_ADVANCE_BACK:
+    property: read-only
+    type: number
+    description: Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_ADVANCE_FORWARD:
+    property: read-only
+    type: number
+    description: Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
   GAME_CONTROL_BUTTON_B:
     property: read-only
     type: number
+    description: Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST).
   GAME_CONTROL_BUTTON_BACK:
     property: read-only
     type: number
+    description: Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT).
+  GAME_CONTROL_BUTTON_CROUCH:
+    property: read-only
+    type: number
+    description: Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT:
+    property: read-only
+    type: number
+    description: Left mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT:
+    property: read-only
+    type: number
+    description: Right mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+  GAME_CONTROL_BUTTON_DOLLY_BACK:
+    property: read-only
+    type: number
+    description: Camera dolly backward. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_DOLLY_FORWARD:
+    property: read-only
+    type: number
+    description: Camera dolly forward. Modal button for FLYCAM mode.
   GAME_CONTROL_BUTTON_DPAD_DOWN:
     property: read-only
     type: number
+    description: D-pad down.
   GAME_CONTROL_BUTTON_DPAD_LEFT:
     property: read-only
     type: number
+    description: D-pad left.
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
     property: read-only
     type: number
+    description: D-pad right.
   GAME_CONTROL_BUTTON_DPAD_UP:
     property: read-only
     type: number
+    description: D-pad up.
+  GAME_CONTROL_BUTTON_EAST:
+    property: read-only
+    type: number
+    description: Right face button.
   GAME_CONTROL_BUTTON_GUIDE:
     property: read-only
     type: number
+    description: Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME).
+  GAME_CONTROL_BUTTON_HOME:
+    property: read-only
+    type: number
+    description: Home/guide button.
+  GAME_CONTROL_BUTTON_JUMP:
+    property: read-only
+    type: number
+    description: Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
     property: read-only
     type: number
+    description: Left shoulder/bumper button.
   GAME_CONTROL_BUTTON_LEFTSTICK:
     property: read-only
     type: number
+    description: Left analog stick click.
   GAME_CONTROL_BUTTON_MISC1:
     property: read-only
     type: number
+    description: Miscellaneous button 1.
+  GAME_CONTROL_BUTTON_NORTH:
+    property: read-only
+    type: number
+    description: Top face button.
   GAME_CONTROL_BUTTON_PADDLE1:
     property: read-only
     type: number
+    description: Paddle button 1.
   GAME_CONTROL_BUTTON_PADDLE2:
     property: read-only
     type: number
+    description: Paddle button 2.
   GAME_CONTROL_BUTTON_PADDLE3:
     property: read-only
     type: number
+    description: Paddle button 3.
   GAME_CONTROL_BUTTON_PADDLE4:
     property: read-only
     type: number
+    description: Paddle button 4.
+  GAME_CONTROL_BUTTON_PAN_LEFT:
+    property: read-only
+    type: number
+    description: Camera pan left. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_PAN_RIGHT:
+    property: read-only
+    type: number
+    description: Camera pan right. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_RESET:
+    property: read-only
+    type: number
+    description: Reset camera to default view. Modal button for FLYCAM mode.
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
     property: read-only
     type: number
+    description: Right shoulder/bumper button.
   GAME_CONTROL_BUTTON_RIGHTSTICK:
     property: read-only
     type: number
+    description: Right analog stick click.
+  GAME_CONTROL_BUTTON_ROLL_CCW:
+    property: read-only
+    type: number
+    description: Roll camera counter-clockwise. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_ROLL_CW:
+    property: read-only
+    type: number
+    description: Roll camera clockwise. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_SELECT:
+    property: read-only
+    type: number
+    description: Select/back button.
+  GAME_CONTROL_BUTTON_SIT:
+    property: read-only
+    type: number
+    description: Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and
+      CURSOR modes.
+  GAME_CONTROL_BUTTON_SOUTH:
+    property: read-only
+    type: number
+    description: Bottom face button.
   GAME_CONTROL_BUTTON_START:
     property: read-only
     type: number
+    description: Start/menu button.
+  GAME_CONTROL_BUTTON_STRAFE_LEFT:
+    property: read-only
+    type: number
+    description: Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_STRAFE_RIGHT:
+    property: read-only
+    type: number
+    description: Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM:
+    property: read-only
+    type: number
+    description: Toggle alt-zoom. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TOGGLE_CURSOR:
+    property: read-only
+    type: number
+    description: Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_BUTTON_TOGGLE_FLYCAM:
+    property: read-only
+    type: number
+    description: Toggle flycam mode. Modal button for all modes.
+  GAME_CONTROL_BUTTON_TOGGLE_FOLLOW:
+    property: read-only
+    type: number
+    description: Toggle camera follow mode. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK:
+    property: read-only
+    type: number
+    description: Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_BUTTON_TOGGLE_SPEAK:
+    property: read-only
+    type: number
+    description: Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
   GAME_CONTROL_BUTTON_TOUCHPAD:
     property: read-only
     type: number
+    description: Touchpad click.
+  GAME_CONTROL_BUTTON_TRUCK_LEFT:
+    property: read-only
+    type: number
+    description: Camera truck left. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TRUCK_RIGHT:
+    property: read-only
+    type: number
+    description: Camera truck right. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_WEST:
+    property: read-only
+    type: number
+    description: Left face button.
   GAME_CONTROL_BUTTON_X:
     property: read-only
     type: number
+    description: Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST).
   GAME_CONTROL_BUTTON_Y:
+    property: read-only
+    type: number
+    description: Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH).
+  GAME_CONTROL_BUTTON_ZOOM_IN:
+    property: read-only
+    type: number
+    description: Zoom camera in. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_ZOOM_OUT:
+    property: read-only
+    type: number
+    description: Zoom camera out. Modal button for FLYCAM mode.
+  GAME_CONTROL_MODE_AVATAR:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_CAPTIVE:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_CURSOR:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_FLYCAM:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_MOUSELOOK:
     property: read-only
     type: number
   GCNP_RADIUS:
@@ -1925,6 +2166,9 @@ globals:
     type: number
     description: If this permission is enabled, the object can successfully call llGiveMoney
       or llTransferLindenDollars to debit the owners account.
+  PERMISSION_GAME_CONTROL:
+    property: read-only
+    type: number
   PERMISSION_OVERRIDE_ANIMATIONS:
     property: read-only
     type: number
@@ -6295,6 +6539,49 @@ globals:
     must_use: true
     description: Returns the number of available URLs for the current script.\nReturns
       an integer that is the number of available URLs.
+  ll.GetGameControlMode:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns an integer identifying the current game-control mode for
+      the avatar specified by id. The value is one of the GAME_CONTROL_MODE_* constants
+      (GAME_CONTROL_MODE_AVATAR (0), GAME_CONTROL_MODE_MOUSELOOK (1), GAME_CONTROL_MODE_FLYCAM
+      (2), GAME_CONTROL_MODE_CAPTIVE (3), or GAME_CONTROL_MODE_CURSOR (4)). Only valid
+      for avatars in attachments or seats that are sending game controller input.
+  ll.GetGameControlModeAxes:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a list of floats in [-1.0, 1.0] representing the modal axes
+      for the current game-control mode of the avatar specified by id. The element
+      count and index meanings depend on the mode returned by llGetGameControlMode.
+      For AVATAR, MOUSELOOK, and CAPTIVE modes 5 values are returned indexed by GAME_CONTROL_AXIS_STRAFE
+      (0), GAME_CONTROL_AXIS_ADVANCE (1), GAME_CONTROL_AXIS_TURN (2), GAME_CONTROL_AXIS_LOOK
+      (3), and GAME_CONTROL_AXIS_RISE (4). For FLYCAM mode 7 values are returned indexed
+      by GAME_CONTROL_AXIS_TRUCK (0), GAME_CONTROL_AXIS_DOLLY (1), GAME_CONTROL_AXIS_PAN
+      (2), GAME_CONTROL_AXIS_TILT (3), GAME_CONTROL_AXIS_BOOM (4), GAME_CONTROL_AXIS_ROLL
+      (5), and GAME_CONTROL_AXIS_ZOOM (6). For CURSOR mode 6 values are returned (cursor
+      DX, DY, pixel X, pixel Y, normalized X, normalized Y).
+  ll.GetGameControlModeButtons:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a 32-bit integer bitmask of the modal buttons currently active
+      for the current game-control mode of the avatar specified by id. Bit positions
+      match the canonical GAME_CONTROL_BUTTON_* indices but their semantic meanings
+      vary by mode. For AVATAR, CAPTIVE, and CURSOR modes bit 0 (GAME_CONTROL_BUTTON_SOUTH)
+      is Jump, bit 1 (GAME_CONTROL_BUTTON_EAST) is Crouch, bit 2 (GAME_CONTROL_BUTTON_WEST)
+      is Toggle sit, bit 4 (GAME_CONTROL_BUTTON_SELECT) is Toggle cursor, bit 5 (GAME_CONTROL_BUTTON_HOME)
+      is Toggle speak, bit 6 (GAME_CONTROL_BUTTON_START) is Toggle mouselook, bit
+      8 (GAME_CONTROL_BUTTON_RIGHTSTICK) is Toggle flycam, and bits 11-14 are the
+      D-pad directions. For MOUSELOOK mode bits 9-10 additionally map to mouse click
+      left and right. For FLYCAM mode bit 0 is Zoom out, bit 1 is Pan right, bit 2
+      is Pan left, bit 3 is Zoom in, bit 4 is Toggle AltZoom, bit 6 is Toggle follow,
+      bit 7 is Reset, bits 9-10 are Roll CCW/CW, and bits 11-14 are Dolly and Truck
+      directions.
   ll.GetGMTclock:
     args: []
     must_use: true
@@ -10649,6 +10936,82 @@ globals:
     must_use: true
     description: Returns the number of available URLs for the current script.\nReturns
       an integer that is the number of available URLs.
+  llcompat.GetGameControlMode:
+    deprecated:
+      message: Returns an integer identifying the current game-control mode for the
+        avatar specified by id. The value is one of the GAME_CONTROL_MODE_* constants
+        (GAME_CONTROL_MODE_AVATAR (0), GAME_CONTROL_MODE_MOUSELOOK (1), GAME_CONTROL_MODE_FLYCAM
+        (2), GAME_CONTROL_MODE_CAPTIVE (3), or GAME_CONTROL_MODE_CURSOR (4)). Only
+        valid for avatars in attachments or seats that are sending game controller
+        input.
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns an integer identifying the current game-control mode for
+      the avatar specified by id. The value is one of the GAME_CONTROL_MODE_* constants
+      (GAME_CONTROL_MODE_AVATAR (0), GAME_CONTROL_MODE_MOUSELOOK (1), GAME_CONTROL_MODE_FLYCAM
+      (2), GAME_CONTROL_MODE_CAPTIVE (3), or GAME_CONTROL_MODE_CURSOR (4)). Only valid
+      for avatars in attachments or seats that are sending game controller input.
+  llcompat.GetGameControlModeAxes:
+    deprecated:
+      message: Returns a list of floats in [-1.0, 1.0] representing the modal axes
+        for the current game-control mode of the avatar specified by id. The element
+        count and index meanings depend on the mode returned by llGetGameControlMode.
+        For AVATAR, MOUSELOOK, and CAPTIVE modes 5 values are returned indexed by
+        GAME_CONTROL_AXIS_STRAFE (0), GAME_CONTROL_AXIS_ADVANCE (1), GAME_CONTROL_AXIS_TURN
+        (2), GAME_CONTROL_AXIS_LOOK (3), and GAME_CONTROL_AXIS_RISE (4). For FLYCAM
+        mode 7 values are returned indexed by GAME_CONTROL_AXIS_TRUCK (0), GAME_CONTROL_AXIS_DOLLY
+        (1), GAME_CONTROL_AXIS_PAN (2), GAME_CONTROL_AXIS_TILT (3), GAME_CONTROL_AXIS_BOOM
+        (4), GAME_CONTROL_AXIS_ROLL (5), and GAME_CONTROL_AXIS_ZOOM (6). For CURSOR
+        mode 6 values are returned (cursor DX, DY, pixel X, pixel Y, normalized X,
+        normalized Y).
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a list of floats in [-1.0, 1.0] representing the modal axes
+      for the current game-control mode of the avatar specified by id. The element
+      count and index meanings depend on the mode returned by llGetGameControlMode.
+      For AVATAR, MOUSELOOK, and CAPTIVE modes 5 values are returned indexed by GAME_CONTROL_AXIS_STRAFE
+      (0), GAME_CONTROL_AXIS_ADVANCE (1), GAME_CONTROL_AXIS_TURN (2), GAME_CONTROL_AXIS_LOOK
+      (3), and GAME_CONTROL_AXIS_RISE (4). For FLYCAM mode 7 values are returned indexed
+      by GAME_CONTROL_AXIS_TRUCK (0), GAME_CONTROL_AXIS_DOLLY (1), GAME_CONTROL_AXIS_PAN
+      (2), GAME_CONTROL_AXIS_TILT (3), GAME_CONTROL_AXIS_BOOM (4), GAME_CONTROL_AXIS_ROLL
+      (5), and GAME_CONTROL_AXIS_ZOOM (6). For CURSOR mode 6 values are returned (cursor
+      DX, DY, pixel X, pixel Y, normalized X, normalized Y).
+  llcompat.GetGameControlModeButtons:
+    deprecated:
+      message: Returns a 32-bit integer bitmask of the modal buttons currently active
+        for the current game-control mode of the avatar specified by id. Bit positions
+        match the canonical GAME_CONTROL_BUTTON_* indices but their semantic meanings
+        vary by mode. For AVATAR, CAPTIVE, and CURSOR modes bit 0 (GAME_CONTROL_BUTTON_SOUTH)
+        is Jump, bit 1 (GAME_CONTROL_BUTTON_EAST) is Crouch, bit 2 (GAME_CONTROL_BUTTON_WEST)
+        is Toggle sit, bit 4 (GAME_CONTROL_BUTTON_SELECT) is Toggle cursor, bit 5
+        (GAME_CONTROL_BUTTON_HOME) is Toggle speak, bit 6 (GAME_CONTROL_BUTTON_START)
+        is Toggle mouselook, bit 8 (GAME_CONTROL_BUTTON_RIGHTSTICK) is Toggle flycam,
+        and bits 11-14 are the D-pad directions. For MOUSELOOK mode bits 9-10 additionally
+        map to mouse click left and right. For FLYCAM mode bit 0 is Zoom out, bit
+        1 is Pan right, bit 2 is Pan left, bit 3 is Zoom in, bit 4 is Toggle AltZoom,
+        bit 6 is Toggle follow, bit 7 is Reset, bits 9-10 are Roll CCW/CW, and bits
+        11-14 are Dolly and Truck directions.
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a 32-bit integer bitmask of the modal buttons currently active
+      for the current game-control mode of the avatar specified by id. Bit positions
+      match the canonical GAME_CONTROL_BUTTON_* indices but their semantic meanings
+      vary by mode. For AVATAR, CAPTIVE, and CURSOR modes bit 0 (GAME_CONTROL_BUTTON_SOUTH)
+      is Jump, bit 1 (GAME_CONTROL_BUTTON_EAST) is Crouch, bit 2 (GAME_CONTROL_BUTTON_WEST)
+      is Toggle sit, bit 4 (GAME_CONTROL_BUTTON_SELECT) is Toggle cursor, bit 5 (GAME_CONTROL_BUTTON_HOME)
+      is Toggle speak, bit 6 (GAME_CONTROL_BUTTON_START) is Toggle mouselook, bit
+      8 (GAME_CONTROL_BUTTON_RIGHTSTICK) is Toggle flycam, and bits 11-14 are the
+      D-pad directions. For MOUSELOOK mode bits 9-10 additionally map to mouse click
+      left and right. For FLYCAM mode bit 0 is Zoom out, bit 1 is Pan right, bit 2
+      is Pan left, bit 3 is Zoom in, bit 4 is Toggle AltZoom, bit 6 is Toggle follow,
+      bit 7 is Reset, bits 9-10 are Roll CCW/CW, and bits 11-14 are Dolly and Truck
+      directions.
   llcompat.GetGMTclock:
     deprecated:
       message: Returns the time in seconds since midnight GMT.\nGets the time in seconds
@@ -15535,7 +15898,9 @@ structs:
     game_control:
       property: override-fields
       type: function
-      description: This event is raised when game controller input changes.
+      description: Triggered when a compatible viewer sends game controller input
+        changes for the avatar specified by id. Only triggers for scripts in attachments
+        or seats.
     http_request:
       property: override-fields
       type: function

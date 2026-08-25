@@ -679,11 +679,29 @@
     luaSL_pushnativeinteger(L, 2);
     lua_setglobal(L, "FRICTION");
 
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_ADVANCE");
+
+    luaSL_pushnativeinteger(L, 4);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_BOOM");
+
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_DOLLY");
+
     luaSL_pushnativeinteger(L, 0);
     lua_setglobal(L, "GAME_CONTROL_AXIS_LEFTX");
 
     luaSL_pushnativeinteger(L, 1);
     lua_setglobal(L, "GAME_CONTROL_AXIS_LEFTY");
+
+    luaSL_pushnativeinteger(L, 4);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_LEFT_TRIGGER");
+
+    luaSL_pushnativeinteger(L, 3);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_LOOK");
+
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_PAN");
 
     luaSL_pushnativeinteger(L, 2);
     lua_setglobal(L, "GAME_CONTROL_AXIS_RIGHTX");
@@ -691,20 +709,59 @@
     luaSL_pushnativeinteger(L, 3);
     lua_setglobal(L, "GAME_CONTROL_AXIS_RIGHTY");
 
+    luaSL_pushnativeinteger(L, 5);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_RIGHT_TRIGGER");
+
+    luaSL_pushnativeinteger(L, 4);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_RISE");
+
+    luaSL_pushnativeinteger(L, 5);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_ROLL");
+
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_STRAFE");
+
+    luaSL_pushnativeinteger(L, 3);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_TILT");
+
     luaSL_pushnativeinteger(L, 4);
     lua_setglobal(L, "GAME_CONTROL_AXIS_TRIGGERLEFT");
 
     luaSL_pushnativeinteger(L, 5);
     lua_setglobal(L, "GAME_CONTROL_AXIS_TRIGGERRIGHT");
 
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_TRUCK");
+
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_TURN");
+
+    luaSL_pushnativeinteger(L, 6);
+    lua_setglobal(L, "GAME_CONTROL_AXIS_ZOOM");
+
     luaSL_pushnativeinteger(L, 0x1);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_A");
+
+    luaSL_pushnativeinteger(L, 0x1000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ADVANCE_BACK");
+
+    luaSL_pushnativeinteger(L, 0x800);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ADVANCE_FORWARD");
 
     luaSL_pushnativeinteger(L, 0x2);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_B");
 
     luaSL_pushnativeinteger(L, 0x10);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_BACK");
+
+    luaSL_pushnativeinteger(L, 0x2);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_CROUCH");
+
+    luaSL_pushnativeinteger(L, 0x1000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_DOLLY_BACK");
+
+    luaSL_pushnativeinteger(L, 0x800);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_DOLLY_FORWARD");
 
     luaSL_pushnativeinteger(L, 0x1000);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_DPAD_DOWN");
@@ -718,8 +775,17 @@
     luaSL_pushnativeinteger(L, 0x800);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_DPAD_UP");
 
+    luaSL_pushnativeinteger(L, 0x2);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_EAST");
+
     luaSL_pushnativeinteger(L, 0x20);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_GUIDE");
+
+    luaSL_pushnativeinteger(L, 0x20);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_HOME");
+
+    luaSL_pushnativeinteger(L, 0x1);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_JUMP");
 
     luaSL_pushnativeinteger(L, 0x200);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_LEFTSHOULDER");
@@ -729,6 +795,15 @@
 
     luaSL_pushnativeinteger(L, 0x8000);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_MISC1");
+
+    luaSL_pushnativeinteger(L, 0x200);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT");
+
+    luaSL_pushnativeinteger(L, 0x400);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT");
+
+    luaSL_pushnativeinteger(L, 0x8);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_NORTH");
 
     luaSL_pushnativeinteger(L, 0x10000);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_PADDLE1");
@@ -742,23 +817,101 @@
     luaSL_pushnativeinteger(L, 0x80000);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_PADDLE4");
 
+    luaSL_pushnativeinteger(L, 0x4);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_PAN_LEFT");
+
+    luaSL_pushnativeinteger(L, 0x2);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_PAN_RIGHT");
+
+    luaSL_pushnativeinteger(L, 0x80);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_RESET");
+
     luaSL_pushnativeinteger(L, 0x400);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_RIGHTSHOULDER");
 
     luaSL_pushnativeinteger(L, 0x100);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_RIGHTSTICK");
 
+    luaSL_pushnativeinteger(L, 0x200);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ROLL_CCW");
+
+    luaSL_pushnativeinteger(L, 0x400);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ROLL_CW");
+
+    luaSL_pushnativeinteger(L, 0x10);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_SELECT");
+
+    luaSL_pushnativeinteger(L, 0x4);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_SIT");
+
+    luaSL_pushnativeinteger(L, 0x1);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_SOUTH");
+
     luaSL_pushnativeinteger(L, 0x40);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_START");
 
+    luaSL_pushnativeinteger(L, 0x2000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_STRAFE_LEFT");
+
+    luaSL_pushnativeinteger(L, 0x4000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_STRAFE_RIGHT");
+
+    luaSL_pushnativeinteger(L, 0x10);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM");
+
+    luaSL_pushnativeinteger(L, 0x10);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_CURSOR");
+
+    luaSL_pushnativeinteger(L, 0x100);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_FLYCAM");
+
+    luaSL_pushnativeinteger(L, 0x40);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_FOLLOW");
+
+    luaSL_pushnativeinteger(L, 0x40);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK");
+
+    luaSL_pushnativeinteger(L, 0x20);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TOGGLE_SPEAK");
+
     luaSL_pushnativeinteger(L, 0x100000);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_TOUCHPAD");
+
+    luaSL_pushnativeinteger(L, 0x2000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TRUCK_LEFT");
+
+    luaSL_pushnativeinteger(L, 0x4000);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_TRUCK_RIGHT");
+
+    luaSL_pushnativeinteger(L, 0x4);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_WEST");
 
     luaSL_pushnativeinteger(L, 0x4);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_X");
 
     luaSL_pushnativeinteger(L, 0x8);
     lua_setglobal(L, "GAME_CONTROL_BUTTON_Y");
+
+    luaSL_pushnativeinteger(L, 0x8);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ZOOM_IN");
+
+    luaSL_pushnativeinteger(L, 0x1);
+    lua_setglobal(L, "GAME_CONTROL_BUTTON_ZOOM_OUT");
+
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "GAME_CONTROL_MODE_AVATAR");
+
+    luaSL_pushnativeinteger(L, 3);
+    lua_setglobal(L, "GAME_CONTROL_MODE_CAPTIVE");
+
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "GAME_CONTROL_MODE_FLYCAM");
+
+    luaSL_pushnativeinteger(L, 4);
+    lua_setglobal(L, "GAME_CONTROL_MODE_CURSOR");
+
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "GAME_CONTROL_MODE_MOUSELOOK");
 
     luaSL_pushnativeinteger(L, 2);
     lua_setglobal(L, "GCNP_GET_WALKABILITY");
@@ -1575,6 +1728,9 @@
 
     luaSL_pushnativeinteger(L, 0x80000);
     lua_setglobal(L, "PERMISSION_PRIVILEGED_LAND_ACCESS");
+
+    luaSL_pushnativeinteger(L, 0x100000);
+    lua_setglobal(L, "PERMISSION_GAME_CONTROL");
 
     luaSL_pushnativeinteger(L, 0x7FFFFFFF);
     lua_setglobal(L, "PERM_ALL");

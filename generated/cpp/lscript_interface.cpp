@@ -8,6 +8,9 @@ void task_lscript_init_generated()
     gScriptLibrary.assignExec("llFindNotecardTextCount", find_notecard_text_count_func);
     gScriptLibrary.assignExec("llFindNotecardTextSync", find_notecard_text_sync_func);
     gScriptLibrary.assignExec("llGetAttachedListFiltered", get_attached_list_filtered_func);
+    gScriptLibrary.assignExec("llGetGameControlMode", get_game_control_mode_func);
+    gScriptLibrary.assignExec("llGetGameControlModeAxes", get_game_control_mode_axes_func);
+    gScriptLibrary.assignExec("llGetGameControlModeButtons", get_game_control_mode_buttons_func);
     gScriptLibrary.assignExec("llGetHealth", get_health_func);
     gScriptLibrary.assignExec("llGetStartString", get_start_string_func);
     gScriptLibrary.assignExec("llGiveAgentInventory", give_agent_inventory_func);

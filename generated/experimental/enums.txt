@@ -408,20 +408,20 @@ enum GLTFOverride {
   EMISSIVE_FACTOR = 8
 };
 enum GameControlAxis {
-  LEFTX = 0
-  LEFTY = 1
-  RIGHTX = 2
-  RIGHTY = 3
-  TRIGGERLEFT = 4
-  TRIGGERRIGHT = 5
 };
 enum GameControlButton {
-  A = 0x1
-  B = 0x2
-  X = 0x4
-  Y = 0x8
-  BACK = 0x10
-  GUIDE = 0x20
+  A = 0x1 // deprecated
+  SOUTH = 0x1
+  B = 0x2 // deprecated
+  EAST = 0x2
+  WEST = 0x4
+  X = 0x4 // deprecated
+  NORTH = 0x8
+  Y = 0x8 // deprecated
+  BACK = 0x10 // deprecated
+  SELECT = 0x10
+  GUIDE = 0x20 // deprecated
+  HOME = 0x20
   START = 0x40
   LEFTSTICK = 0x80
   RIGHTSTICK = 0x100
@@ -437,6 +437,13 @@ enum GameControlButton {
   PADDLE3 = 0x40000
   PADDLE4 = 0x80000
   TOUCHPAD = 0x100000
+};
+enum GameControlMode {
+  AVATAR = 0
+  MOUSELOOK = 1
+  FLYCAM = 2
+  CAPTIVE = 3
+  CURSOR = 4
 };
 enum GetClosestNavPointParam {
   RADIUS = 0
@@ -1096,6 +1103,7 @@ enum ScriptPermission {
   OVERRIDE_ANIMATIONS = 0x8000
   RETURN_OBJECTS = 0x10000
   PRIVILEGED_LAND_ACCESS = 0x80000
+  GAME_CONTROL = 0x100000
 };
 enum ScriptProfileMode {
   NONE = 0
@@ -1238,6 +1246,52 @@ const integer DEBUG_CHANNEL = 2147483647
 const float DEG_TO_RAD = 0.017453293
 const string EOF = "\n\n\n"
 const integer FALSE = 0
+const integer GAME_CONTROL_AXIS_ADVANCE = 1
+const integer GAME_CONTROL_AXIS_BOOM = 4
+const integer GAME_CONTROL_AXIS_DOLLY = 1
+const integer GAME_CONTROL_AXIS_LEFTX = 0
+const integer GAME_CONTROL_AXIS_LEFTY = 1
+const integer GAME_CONTROL_AXIS_LEFT_TRIGGER = 4
+const integer GAME_CONTROL_AXIS_LOOK = 3
+const integer GAME_CONTROL_AXIS_PAN = 2
+const integer GAME_CONTROL_AXIS_RIGHTX = 2
+const integer GAME_CONTROL_AXIS_RIGHTY = 3
+const integer GAME_CONTROL_AXIS_RIGHT_TRIGGER = 5
+const integer GAME_CONTROL_AXIS_RISE = 4
+const integer GAME_CONTROL_AXIS_ROLL = 5
+const integer GAME_CONTROL_AXIS_STRAFE = 0
+const integer GAME_CONTROL_AXIS_TILT = 3
+const integer GAME_CONTROL_AXIS_TRIGGERLEFT = 4 // deprecated
+const integer GAME_CONTROL_AXIS_TRIGGERRIGHT = 5 // deprecated
+const integer GAME_CONTROL_AXIS_TRUCK = 0
+const integer GAME_CONTROL_AXIS_TURN = 2
+const integer GAME_CONTROL_AXIS_ZOOM = 6
+const integer GAME_CONTROL_BUTTON_ADVANCE_BACK = 0x1000
+const integer GAME_CONTROL_BUTTON_ADVANCE_FORWARD = 0x800
+const integer GAME_CONTROL_BUTTON_CROUCH = 0x2
+const integer GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT = 0x200
+const integer GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT = 0x400
+const integer GAME_CONTROL_BUTTON_DOLLY_BACK = 0x1000
+const integer GAME_CONTROL_BUTTON_DOLLY_FORWARD = 0x800
+const integer GAME_CONTROL_BUTTON_JUMP = 0x1
+const integer GAME_CONTROL_BUTTON_PAN_LEFT = 0x4
+const integer GAME_CONTROL_BUTTON_PAN_RIGHT = 0x2
+const integer GAME_CONTROL_BUTTON_RESET = 0x80
+const integer GAME_CONTROL_BUTTON_ROLL_CCW = 0x200
+const integer GAME_CONTROL_BUTTON_ROLL_CW = 0x400
+const integer GAME_CONTROL_BUTTON_SIT = 0x4
+const integer GAME_CONTROL_BUTTON_STRAFE_LEFT = 0x2000
+const integer GAME_CONTROL_BUTTON_STRAFE_RIGHT = 0x4000
+const integer GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM = 0x10
+const integer GAME_CONTROL_BUTTON_TOGGLE_CURSOR = 0x10
+const integer GAME_CONTROL_BUTTON_TOGGLE_FLYCAM = 0x100
+const integer GAME_CONTROL_BUTTON_TOGGLE_FOLLOW = 0x40
+const integer GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK = 0x40
+const integer GAME_CONTROL_BUTTON_TOGGLE_SPEAK = 0x20
+const integer GAME_CONTROL_BUTTON_TRUCK_LEFT = 0x2000
+const integer GAME_CONTROL_BUTTON_TRUCK_RIGHT = 0x4000
+const integer GAME_CONTROL_BUTTON_ZOOM_IN = 0x8
+const integer GAME_CONTROL_BUTTON_ZOOM_OUT = 0x1
 const string IMG_USE_BAKED_AUX1 = "9742065b-19b5-297c-858a-29711d539043"
 const string IMG_USE_BAKED_AUX2 = "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"
 const string IMG_USE_BAKED_AUX3 = "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"

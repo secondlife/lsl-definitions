@@ -119,6 +119,9 @@ dangerousAddFunction(410, "llGetExperienceList", "l", "k", 10.0f, 0.0f, 0.0f, fa
 dangerousAddFunction(65, "llGetForce", "v", nullptr, 10.0f, 0.0f, 0.0f, false);
 dangerousAddFunction(225, "llGetFreeMemory", "i", nullptr, 10.0f, 0.0f, 0.0f, false);
 dangerousAddFunction(344, "llGetFreeURLs", "i", nullptr, 10.0f, 0.0f, 0.0f, false);
+dangerousAddFunction(804, "llGetGameControlMode", "i", "k", 10.0f, 0.0f, 0.0f, false);
+dangerousAddFunction(806, "llGetGameControlModeAxes", "l", "k", 10.0f, 0.0f, 0.0f, false);
+dangerousAddFunction(805, "llGetGameControlModeButtons", "i", "k", 10.0f, 0.0f, 0.0f, false);
 dangerousAddFunction(282, "llGetGMTclock", "f", nullptr, 10.0f, 0.0f, 0.0f, false);
 dangerousAddFunction(278, "llGetGeometricCenter", "v", nullptr, 10.0f, 0.0f, 0.0f, false);
 dangerousAddFunction(349, "llGetHTTPHeader", "s", "ks", 10.0f, 0.0f, 0.0f, false);

@@ -121,6 +121,9 @@ vector llGetForce(  )
 integer llGetFreeMemory(  )
 integer llGetFreeURLs(  )
 float llGetGMTclock(  )
+integer llGetGameControlMode( key id )
+list llGetGameControlModeAxes( key id )
+integer llGetGameControlModeButtons( key id )
 vector llGetGeometricCenter(  )
 string llGetHTTPHeader( key HTTPRequestID, string Header )
 float llGetHealth( key ID )
@@ -753,33 +756,84 @@ const integer FILTER_FLAG_HUDS = 0x0001
 const integer FILTER_INCLUDE = 1
 const integer FORCE_DIRECT_PATH = 1
 const integer FRICTION = 2
+const integer GAME_CONTROL_AXIS_ADVANCE = 1
+const integer GAME_CONTROL_AXIS_BOOM = 4
+const integer GAME_CONTROL_AXIS_DOLLY = 1
 const integer GAME_CONTROL_AXIS_LEFTX = 0
 const integer GAME_CONTROL_AXIS_LEFTY = 1
+const integer GAME_CONTROL_AXIS_LEFT_TRIGGER = 4
+const integer GAME_CONTROL_AXIS_LOOK = 3
+const integer GAME_CONTROL_AXIS_PAN = 2
 const integer GAME_CONTROL_AXIS_RIGHTX = 2
 const integer GAME_CONTROL_AXIS_RIGHTY = 3
+const integer GAME_CONTROL_AXIS_RIGHT_TRIGGER = 5
+const integer GAME_CONTROL_AXIS_RISE = 4
+const integer GAME_CONTROL_AXIS_ROLL = 5
+const integer GAME_CONTROL_AXIS_STRAFE = 0
+const integer GAME_CONTROL_AXIS_TILT = 3
 const integer GAME_CONTROL_AXIS_TRIGGERLEFT = 4
 const integer GAME_CONTROL_AXIS_TRIGGERRIGHT = 5
+const integer GAME_CONTROL_AXIS_TRUCK = 0
+const integer GAME_CONTROL_AXIS_TURN = 2
+const integer GAME_CONTROL_AXIS_ZOOM = 6
 const integer GAME_CONTROL_BUTTON_A = 0x1
+const integer GAME_CONTROL_BUTTON_ADVANCE_BACK = 0x1000
+const integer GAME_CONTROL_BUTTON_ADVANCE_FORWARD = 0x800
 const integer GAME_CONTROL_BUTTON_B = 0x2
 const integer GAME_CONTROL_BUTTON_BACK = 0x10
+const integer GAME_CONTROL_BUTTON_CROUCH = 0x2
+const integer GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT = 0x200
+const integer GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT = 0x400
+const integer GAME_CONTROL_BUTTON_DOLLY_BACK = 0x1000
+const integer GAME_CONTROL_BUTTON_DOLLY_FORWARD = 0x800
 const integer GAME_CONTROL_BUTTON_DPAD_DOWN = 0x1000
 const integer GAME_CONTROL_BUTTON_DPAD_LEFT = 0x2000
 const integer GAME_CONTROL_BUTTON_DPAD_RIGHT = 0x4000
 const integer GAME_CONTROL_BUTTON_DPAD_UP = 0x800
+const integer GAME_CONTROL_BUTTON_EAST = 0x2
 const integer GAME_CONTROL_BUTTON_GUIDE = 0x20
+const integer GAME_CONTROL_BUTTON_HOME = 0x20
+const integer GAME_CONTROL_BUTTON_JUMP = 0x1
 const integer GAME_CONTROL_BUTTON_LEFTSHOULDER = 0x200
 const integer GAME_CONTROL_BUTTON_LEFTSTICK = 0x80
 const integer GAME_CONTROL_BUTTON_MISC1 = 0x8000
+const integer GAME_CONTROL_BUTTON_NORTH = 0x8
 const integer GAME_CONTROL_BUTTON_PADDLE1 = 0x10000
 const integer GAME_CONTROL_BUTTON_PADDLE2 = 0x20000
 const integer GAME_CONTROL_BUTTON_PADDLE3 = 0x40000
 const integer GAME_CONTROL_BUTTON_PADDLE4 = 0x80000
+const integer GAME_CONTROL_BUTTON_PAN_LEFT = 0x4
+const integer GAME_CONTROL_BUTTON_PAN_RIGHT = 0x2
+const integer GAME_CONTROL_BUTTON_RESET = 0x80
 const integer GAME_CONTROL_BUTTON_RIGHTSHOULDER = 0x400
 const integer GAME_CONTROL_BUTTON_RIGHTSTICK = 0x100
+const integer GAME_CONTROL_BUTTON_ROLL_CCW = 0x200
+const integer GAME_CONTROL_BUTTON_ROLL_CW = 0x400
+const integer GAME_CONTROL_BUTTON_SELECT = 0x10
+const integer GAME_CONTROL_BUTTON_SIT = 0x4
+const integer GAME_CONTROL_BUTTON_SOUTH = 0x1
 const integer GAME_CONTROL_BUTTON_START = 0x40
+const integer GAME_CONTROL_BUTTON_STRAFE_LEFT = 0x2000
+const integer GAME_CONTROL_BUTTON_STRAFE_RIGHT = 0x4000
+const integer GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM = 0x10
+const integer GAME_CONTROL_BUTTON_TOGGLE_CURSOR = 0x10
+const integer GAME_CONTROL_BUTTON_TOGGLE_FLYCAM = 0x100
+const integer GAME_CONTROL_BUTTON_TOGGLE_FOLLOW = 0x40
+const integer GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK = 0x40
+const integer GAME_CONTROL_BUTTON_TOGGLE_SPEAK = 0x20
 const integer GAME_CONTROL_BUTTON_TOUCHPAD = 0x100000
+const integer GAME_CONTROL_BUTTON_TRUCK_LEFT = 0x2000
+const integer GAME_CONTROL_BUTTON_TRUCK_RIGHT = 0x4000
+const integer GAME_CONTROL_BUTTON_WEST = 0x4
 const integer GAME_CONTROL_BUTTON_X = 0x4
 const integer GAME_CONTROL_BUTTON_Y = 0x8
+const integer GAME_CONTROL_BUTTON_ZOOM_IN = 0x8
+const integer GAME_CONTROL_BUTTON_ZOOM_OUT = 0x1
+const integer GAME_CONTROL_MODE_AVATAR = 0
+const integer GAME_CONTROL_MODE_CAPTIVE = 3
+const integer GAME_CONTROL_MODE_CURSOR = 4
+const integer GAME_CONTROL_MODE_FLYCAM = 2
+const integer GAME_CONTROL_MODE_MOUSELOOK = 1
 const integer GCNP_GET_WALKABILITY = 2
 const integer GCNP_RADIUS = 0
 const integer GCNP_STATIC = 1
@@ -1042,6 +1096,7 @@ const integer PERMISSION_CHANGE_LINKS = 0x00080
 const integer PERMISSION_CHANGE_PERMISSIONS = 0x00200
 const integer PERMISSION_CONTROL_CAMERA = 0x00800
 const integer PERMISSION_DEBIT = 0x00002
+const integer PERMISSION_GAME_CONTROL = 0x100000
 const integer PERMISSION_OVERRIDE_ANIMATIONS = 0x08000
 const integer PERMISSION_PRIVILEGED_LAND_ACCESS = 0x80000
 const integer PERMISSION_RELEASE_OWNERSHIP = 0x00040
@@ -1566,7 +1621,7 @@ event email( string Time, string Address, string Subject, string Body, integer N
 event experience_permissions( key agent_id )
 event experience_permissions_denied( key agent_id, integer Reason )
 event final_damage( integer count )
-event game_control( key id, integer buttons, list axes )
+event game_control( key id, integer button_levels, list axes )
 event http_request( key HTTPRequestID, string HTTPMethod, string Body )
 event http_response( key HTTPRequestID, integer Status, list Metadata, string Body )
 event land_collision( vector Position )
