@@ -249,6 +249,11 @@ type-aliases:
   export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: KeyframedMotionParams
+  comment: Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
 - name: ParticleParams
   comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true
@@ -2134,6 +2139,14 @@ modules:
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
   functions:
+  - name: keyframedMotion
+    comment: Smoothly moves a non-physical object along a path.
+    parameters:
+    - name: keyframes
+      type: "{number | vector | quaternion}"
+    - name: options
+      type: KeyframedMotionParams?
+    return-type: number
   - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
