@@ -85,6 +85,13 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type KeyframedMotionParams = {
+  command: number?,
+  mode: number?,
+  data: number?,
+  rotation: boolean?,
+  translation: boolean?,
+}
 export type ParticleParams = {
   flags: number?,
   color_begin: vector?,
@@ -504,6 +511,7 @@ declare lljson: {
 
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
+  keyframedMotion: (keyframes: {number | vector | quaternion}, options: KeyframedMotionParams?) -> number,
   setParticleSystem: (params: ParticleParams?, link: number?) -> (),
   setMedia: (face: number, params: MediaParams?, link: number?) -> number,
 }
@@ -1118,7 +1126,7 @@ declare ll: {
   SetGroundTexture: (changes: list) -> number,
   SetHoverHeight: (height: number, water: boolean | number, tau: number) -> (),
   SetInventoryPermMask: (item: string, group: number, flags: number) -> (),
-  SetKeyframedMotion: (keyframes: list, options: list) -> (),
+  SetKeyframedMotion: (keyframes: list, options: list | KeyframedMotionParams) -> (),
   SetLinkAlpha: (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
@@ -1643,7 +1651,7 @@ declare llcompat: {
   SetGroundTexture: @deprecated (changes: list) -> number,
   SetHoverHeight: @deprecated (height: number, water: boolean | number, tau: number) -> (),
   SetInventoryPermMask: @deprecated (item: string, group: number, flags: number) -> (),
-  SetKeyframedMotion: @deprecated (keyframes: list, options: list) -> (),
+  SetKeyframedMotion: @deprecated (keyframes: list, options: list | KeyframedMotionParams) -> (),
   SetLinkAlpha: @deprecated (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
