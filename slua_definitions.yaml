@@ -249,6 +249,11 @@ type-aliases:
   export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: GiveAgentInventoryParams
+  comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
 - name: HttpRequestParams
   comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
   export: true

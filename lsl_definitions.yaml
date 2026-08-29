@@ -220,6 +220,10 @@ enums:
     type: param-dict
     prefix: TRANSFER_
     tooltip: ''
+  GiveAgentInventoryFlag:
+    type: flag
+    prefix: TRANSFER_
+    tooltip: 'No flags yet'
   GLTFAlphaMode:
     type: enum
     prefix: PRIM_GLTF_ALPHA_MODE_
@@ -12693,6 +12697,7 @@ functions:
         tooltip: A list of options to configure the inventory transfer.
         type: list
         param-semantics: GiveAgentInventoryParam
+        ruleset: give-agent-inventory-params
     energy: 10.0
     func-id: 517
     return: integer
@@ -18963,6 +18968,13 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  give-agent-inventory-params:
+    type: table
+    enum: GiveAgentInventoryParam
+    flag-enum: GiveAgentInventoryFlag
+    flag-field: flags
+    lua-type: GiveAgentInventoryParams
 
   http-request-params:
     type: table

@@ -218,6 +218,15 @@ export type DateTypeResult = {
   isdst: boolean?,
 }</string>
          </map>
+         <key>GiveAgentInventoryParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Give inventory parameter table. Pass to ll.GiveAgentInventory().
+export type GiveAgentInventoryParams = {
+  dest: string?,
+  flags: number?,
+}</string>
+         </map>
          <key>HttpRequestParams</key>
          <map>
             <key>tooltip</key>
@@ -229,8 +238,8 @@ export type DateTypeResult = {
             <string>Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
 export type KeyframedMotionParams = {
   command: number?,
-  mode: number?,
   data: number?,
+  mode: number?,
   rotation: boolean?,
   translation: boolean?,
 }</string>
