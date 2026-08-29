@@ -1,4 +1,18 @@
-// http-params
+// give-agent-inventory-params
+static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
+    {"dest", 's', 0},
+    {"flags", 'i', 1},
+};
+static const RulesetFlagDescriptor kGiveAgentInventoryParamFlagDescs[] = {
+
+};
+RulesetBuilderDef* kGiveAgentInventoryParamsDef = []() {
+    auto* d = ruleset_builder_def_build(kGiveAgentInventoryParamsDescs, std::size(kGiveAgentInventoryParamsDescs));
+    ruleset_builder_def_add_flags(d, kGiveAgentInventoryParamFlagDescs, std::size(kGiveAgentInventoryParamFlagDescs));
+    return d;
+}();
+
+// http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
     {"mimetype", 's', 1},

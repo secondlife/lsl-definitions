@@ -216,6 +216,10 @@ enums:
     type: param-dict
     prefix: TRANSFER_
     tooltip: ''
+  GiveAgentInventoryFlag:
+    type: flag
+    prefix: TRANSFER_
+    tooltip: 'No flags yet'
   GLTFAlphaMode:
     type: enum
     prefix: PRIM_GLTF_ALPHA_MODE_
@@ -7357,6 +7361,7 @@ constants:
     type: integer
     value: 1
     value-type: integer
+    enum: GiveAgentInventoryFlag
   TRANSFER_FLAG_COPY:
     member-of: [TransferOwnershipFlag]
     tooltip: Inventory transfer flag that copies the transferred object and places
@@ -12331,6 +12336,7 @@ functions:
         tooltip: A list of options to configure the inventory transfer.
         type: list
         param-semantics: GiveAgentInventoryParam
+        ruleset: give-agent-inventory-params
     energy: 10.0
     func-id: 517
     return: integer
@@ -12540,7 +12546,7 @@ functions:
           or an HTTPRequestParams dictionary.
         type: list
         param-semantics: HTTPRequestParam
-        ruleset: http-params
+        ruleset: http-request-params
     - body:
         tooltip: String contents of the request body.
         type: string
@@ -18598,7 +18604,14 @@ builder-rulesets:
           - [ asset, sound ]
           - [ float, volume ]
 
-  http-params:
+  give-agent-inventory-params:
+    type: table
+    enum: GiveAgentInventoryParam
+    flag-enum: GiveAgentInventoryFlag
+    flag-field: flags
+    lua-type: GiveAgentInventoryParams
+
+  http-request-params:
     type: table
     enum: HTTPRequestParam
     filler-tokens: [http]
@@ -18621,5 +18634,5 @@ builder-rulesets:
     enum: PrimMediaParam
     lua-module: llprim
     lua-fn: setMedia
-    lua-type: MediaParams
+    lua-type: PrimMediaParams
     dispatch-fn: SetLinkMedia

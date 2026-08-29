@@ -510,62 +510,65 @@ class SLuaDefinitions:
             return type
 
         for event in lsl.events.values():
-            if event.slua_removed:
-                continue
-            event_func = SLuaFunction(
-                name=event.name,
-                comment=event.tooltip,
-                private=event.private,
-                deprecated=event.deprecated or event.slua_deprecated,
-                parameters=[
-                    SLuaParameter(
-                        name=a.name,
-                        comment=a.tooltip,
-                        type=self.validate_type(replace_list(a.compute_slua_type(event=True))),
-                    )
-                    for a in event.arguments
-                ],
-            )
-            if event.detected_semantics:
-                LLDetectedEventName_alias.selene_type.append(event.name)
-                type_def = "LLDetectedEventHandler?"
-            else:
-                LLNonDetectedEventName_alias.selene_type.append(event.name)
-                type_def = event_func.type_def_string
-                overload_parameters = [
-                    SLuaParameter("self", type="LLEvents"),
-                    SLuaParameter("event", type=f'"{event.name}"'),
-                    SLuaParameter("callback", type=type_def),
-                ]
-                if not solverV2:
-                    for register_func in LLEvents_class.methods:
-                        if register_func.name in {"on", "once"}:
-                            register_func.overloads.append(
-                                SLuaFunctionOverload(
-                                    name=register_func.name,
-                                    comment=event.tooltip,
-                                    parameters=overload_parameters,
-                                    return_type=type_def,
+            try:
+                if event.slua_removed:
+                    continue
+                event_func = SLuaFunction(
+                    name=event.name,
+                    comment=event.tooltip,
+                    private=event.private,
+                    deprecated=event.deprecated or event.slua_deprecated,
+                    parameters=[
+                        SLuaParameter(
+                            name=a.name,
+                            comment=a.tooltip,
+                            type=self.validate_type(replace_list(a.compute_slua_type(event=True))),
+                        )
+                        for a in event.arguments
+                    ],
+                )
+                if event.detected_semantics:
+                    LLDetectedEventName_alias.selene_type.append(event.name)
+                    type_def = "LLDetectedEventHandler?"
+                else:
+                    LLNonDetectedEventName_alias.selene_type.append(event.name)
+                    type_def = event_func.type_def_string
+                    overload_parameters = [
+                        SLuaParameter("self", type="LLEvents"),
+                        SLuaParameter("event", type=f'"{event.name}"'),
+                        SLuaParameter("callback", type=type_def),
+                    ]
+                    if not solverV2:
+                        for register_func in LLEvents_class.methods:
+                            if register_func.name in {"on", "once"}:
+                                register_func.overloads.append(
+                                    SLuaFunctionOverload(
+                                        name=register_func.name,
+                                        comment=event.tooltip,
+                                        parameters=overload_parameters,
+                                        return_type=type_def,
+                                    )
                                 )
-                            )
-                        elif register_func.name == "off":
-                            register_func.overloads.append(
-                                SLuaFunctionOverload(
-                                    name=register_func.name,
-                                    comment=event.tooltip,
-                                    parameters=overload_parameters,
-                                    return_type=register_func.return_type,
+                            elif register_func.name == "off":
+                                register_func.overloads.append(
+                                    SLuaFunctionOverload(
+                                        name=register_func.name,
+                                        comment=event.tooltip,
+                                        parameters=overload_parameters,
+                                        return_type=register_func.return_type,
+                                    )
                                 )
-                            )
-                type_def = f"({type_def})?"
-            event_prop = SLuaProperty(
-                name=event.name,
-                comment=event.tooltip,
-                type=type_def,
-                modifiable="override-fields",
-                private=event.private,
-            )
-            LLEvents_class.properties[event_prop.name] = event_prop
+                    type_def = f"({type_def})?"
+                event_prop = SLuaProperty(
+                    name=event.name,
+                    comment=event.tooltip,
+                    type=type_def,
+                    modifiable="override-fields",
+                    private=event.private,
+                )
+                LLEvents_class.properties[event_prop.name] = event_prop
+            except Exception as e:
+                raise ValueError(f"In ll event {event.name!r}: {e}") from e
 
         LLDetectedEventName_alias.definition = " | ".join(
             f'"{name}"' for name in LLDetectedEventName_alias.selene_type
@@ -606,73 +609,81 @@ class SLuaDefinitions:
         DetectedEvent_class = self.base_classes["DetectedEvent"]
 
         for func in lsl.functions.values():
-            semantic_prefix = (
-                "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
-            )
-            known_types = self.validate_type_params(func.type_arguments)
-            ll_func = SLuaFunction(
-                name=func.compute_slua_name(with_module=False),
-                comment=func.compute_slua_tooltip(),
-                deprecated=func.deprecated or func.slua_deprecated,
-                private=func.private,
-                type_parameters=func.type_arguments,
-                parameters=[
-                    SLuaParameter(
-                        name=a.name,
-                        comment=a.tooltip,
-                        type=self.validate_type(
-                            a.compute_slua_type(builder_rulesets=lsl.builder_rulesets),
-                            known_types,
-                        ),
-                    )
-                    for a in func.arguments
-                ],
-                return_type=self.validate_type(replace_list(func.compute_slua_type()), known_types),
-                must_use=func.must_use or func.pure,
-            )
-            llcompat_func = SLuaFunction(
-                name=ll_func.name,
-                comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
-                deprecated=Deprecated(),
-                private=ll_func.private,
-                type_parameters=ll_func.type_parameters,
-                parameters=ll_func.parameters,
-                return_type=self.validate_type(
-                    replace_list(func.compute_slua_type(llcompat=True)), known_types
-                ),
-                must_use=ll_func.must_use,
-            )
-            if not func.slua_removed:
-                ll_module.functions[ll_func.name] = ll_func
-            llcompat_module.functions[llcompat_func.name] = llcompat_func
-            if func.detected_semantics:
-                name = ll_func.name.replace("Detected", "Get")
-                name = name[0].lower() + name[1:]
-                ll_func.deprecated = Deprecated(use=name)
-                detected_func = SLuaFunction(
-                    name=name,
-                    comment=ll_func.comment,
-                    deprecated=None,
+            try:
+                semantic_prefix = (
+                    "(Index semantics) " if func.index_semantics or func.detected_semantics else ""
+                )
+                known_types = self.validate_type_params(func.type_arguments)
+                ll_func = SLuaFunction(
+                    name=func.compute_slua_name(with_module=False),
+                    comment=func.compute_slua_tooltip(),
+                    deprecated=func.deprecated or func.slua_deprecated,
+                    private=func.private,
+                    type_parameters=func.type_arguments,
+                    parameters=[
+                        SLuaParameter(
+                            name=a.name,
+                            comment=a.tooltip,
+                            type=self.validate_type(
+                                a.compute_slua_type(builder_rulesets=lsl.builder_rulesets),
+                                known_types,
+                            ),
+                        )
+                        for a in func.arguments
+                    ],
+                    return_type=self.validate_type(
+                        replace_list(func.compute_slua_type()), known_types
+                    ),
+                    must_use=func.must_use or func.pure,
+                )
+                llcompat_func = SLuaFunction(
+                    name=ll_func.name,
+                    comment=semantic_prefix + func.compute_slua_tooltip(llcompat=True),
+                    deprecated=Deprecated(),
                     private=ll_func.private,
                     type_parameters=ll_func.type_parameters,
-                    parameters=ll_func.parameters[:],
-                    return_type=ll_func.return_type,
+                    parameters=ll_func.parameters,
+                    return_type=self.validate_type(
+                        replace_list(func.compute_slua_type(llcompat=True)), known_types
+                    ),
                     must_use=ll_func.must_use,
                 )
-                detected_func.parameters[0] = SLuaParameter(name="self")
-                DetectedEvent_class.methods[detected_func.name] = detected_func
+                if not func.slua_removed:
+                    ll_module.functions[ll_func.name] = ll_func
+                llcompat_module.functions[llcompat_func.name] = llcompat_func
+                if func.detected_semantics:
+                    name = ll_func.name.replace("Detected", "Get")
+                    name = name[0].lower() + name[1:]
+                    ll_func.deprecated = Deprecated(use=name)
+                    detected_func = SLuaFunction(
+                        name=name,
+                        comment=ll_func.comment,
+                        deprecated=None,
+                        private=ll_func.private,
+                        type_parameters=ll_func.type_parameters,
+                        parameters=ll_func.parameters[:],
+                        return_type=ll_func.return_type,
+                        must_use=ll_func.must_use,
+                    )
+                    detected_func.parameters[0] = SLuaParameter(name="self")
+                    DetectedEvent_class.methods[detected_func.name] = detected_func
+            except Exception as e:
+                raise ValueError(f"In ll function {func.name!r}: {e}") from e
 
         for const in lsl.constants.values():
-            if const.slua_removed:
-                continue
-            prop = SLuaProperty(
-                name=const.name,
-                comment=const.tooltip,
-                type=self.validate_type(const.slua_type or const.type.meta.slua_name),
-                value=const.slua_literal,
-                private=const.private,
-            )
-            self.global_constants[prop.name] = prop
+            try:
+                if const.slua_removed:
+                    continue
+                prop = SLuaProperty(
+                    name=const.name,
+                    comment=const.tooltip,
+                    type=self.validate_type(const.slua_type or const.type.meta.slua_name),
+                    value=const.slua_literal,
+                    private=const.private,
+                )
+                self.global_constants[prop.name] = prop
+            except Exception as e:
+                raise ValueError(f"In ll constant {const.name!r}: {e}") from e
 
     def _generate_spp_builder_class(self, lsl: LSLDefinitions) -> None:
         """Expand the `prim-params` ruleset into the fluent SPP builder class and attach it to self."""
@@ -709,76 +720,79 @@ class SLuaDefinitions:
         builder_class.methods.update(methods)
 
     def _generate_ruleset_builder_classes(self, lsl: LSLDefinitions) -> None:
-        """Inject typed properties into fluent builder classes or type aliases.
+        """Inject typed properties into table-type functions.
 
-        For each table-type builder ruleset that names a lua-type, finds the matching
+        For each table-type function ruleset that names a lua-type, finds the matching
         SLuaClassDeclaration in self.classes (and populates its properties list) OR a
         SLuaTypeAlias in self.type_aliases (and rebuilds its definition string) from
         expand_table_ruleset() plus any flag enum members.
         """
         for ruleset_name, ruleset_data in lsl.builder_rulesets.items():
-            if ruleset_data.get("type") != "table":
-                continue
-            lua_type = ruleset_data.get("lua-type")
-            if not lua_type:
-                continue
+            try:
+                if ruleset_data.get("type") != "table":
+                    continue
+                lua_type = ruleset_data.get("lua-type")
+                if not lua_type:
+                    continue
 
-            cls = self.classes.get(lua_type, None)
-            alias = self.type_aliases.get(lua_type, None)
-            if cls is None and alias is None:
-                continue
+                cls = self.classes.get(lua_type, None)
+                alias = self.type_aliases.get(lua_type, None)
+                if cls is None and alias is None:
+                    raise KeyError(f"No such class or alias {lua_type!r}")
 
-            # Collect (prop_name, luau_type) pairs
-            props: list[tuple[str, str]] = []
+                # Collect (prop_name, luau_type) pairs
+                props: list[tuple[str, str]] = []
 
-            # Regular properties from expand_table_ruleset
-            for desc in expand_table_ruleset(lsl, ruleset_name):
-                prop_name = desc.pretty_name if desc.pretty_name else desc.strict_name
-                luau_base = _TABLE_RULESET_TYPE_MAP.get(desc.value_type, "any")
-                props.append((prop_name, f"{luau_base}?"))
+                # Regular properties from expand_table_ruleset
+                for desc in expand_table_ruleset(lsl, ruleset_name):
+                    prop_name = desc.pretty_name if desc.pretty_name else desc.strict_name
+                    luau_base = _TABLE_RULESET_TYPE_MAP.get(desc.value_type, "any")
+                    props.append((prop_name, f"{luau_base}?"))
 
-            # Flag enum boolean properties
-            flag_enum_name = ruleset_data.get("flag-enum")
-            if flag_enum_name:
-                flag_enum = lsl.enums[flag_enum_name]
-                prefix = flag_enum.prefix
-                flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
-                filler_tokens = set(ruleset_data.get("filler-tokens", []))
-                flag_consts = sorted(
-                    (
-                        c
-                        for c in lsl.constants.values()
-                        if any(e.name == flag_enum_name for e in c.member_of) and not c.private
-                    ),
-                    key=lambda c: int(c.value, 0),
-                )
-                for const in flag_consts:
-                    if const.pretty_name:
-                        prop_name = const.pretty_name
-                    else:
-                        strict = (
-                            const.name[len(prefix) :]
-                            if const.name.startswith(prefix)
-                            else const.name
-                        ).lower()
-                        if flag_suffix and strict.endswith(flag_suffix):
-                            strict = strict[: -len(flag_suffix)]
-                        tokens = [t for t in strict.split("_") if t not in filler_tokens]
-                        prop_name = "_".join(tokens) if tokens else strict
-                    props.append((prop_name, "boolean?"))
-
-            if cls is not None:
-                for prop_name, prop_type in props:
-                    cls.properties.append(
-                        SLuaProperty(name=prop_name, type=prop_type, modifiable="full-write")
+                # Flag enum boolean properties
+                flag_enum_name = ruleset_data.get("flag-enum")
+                if flag_enum_name:
+                    flag_enum = lsl.enums[flag_enum_name]
+                    prefix = flag_enum.prefix
+                    flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
+                    filler_tokens = set(ruleset_data.get("filler-tokens", []))
+                    flag_consts = sorted(
+                        (
+                            c
+                            for c in lsl.constants.values()
+                            if any(e.name == flag_enum_name for e in c.member_of) and not c.private
+                        ),
+                        key=lambda c: int(c.value, 0),
                     )
-            else:
-                # Rebuild the type alias definition as a typed table literal.
-                lines = ["{"]
-                for prop_name, prop_type in props:
-                    lines.append(f"  {prop_name}: {prop_type},")
-                lines.append("}")
-                alias.definition = "\n".join(lines)
+                    for const in flag_consts:
+                        if const.pretty_name:
+                            prop_name = const.pretty_name
+                        else:
+                            strict = (
+                                const.name[len(prefix) :]
+                                if const.name.startswith(prefix)
+                                else const.name
+                            ).lower()
+                            if flag_suffix and strict.endswith(flag_suffix):
+                                strict = strict[: -len(flag_suffix)]
+                            tokens = [t for t in strict.split("_") if t not in filler_tokens]
+                            prop_name = "_".join(tokens) if tokens else strict
+                        props.append((prop_name, "boolean?"))
+
+                if cls is not None:
+                    for prop_name, prop_type in props:
+                        cls.properties.append(
+                            SLuaProperty(name=prop_name, type=prop_type, modifiable="full-write")
+                        )
+                else:
+                    # Rebuild the type alias definition as a typed table literal.
+                    lines = ["{"]
+                    for prop_name, prop_type in props:
+                        lines.append(f"  {prop_name}: {prop_type},")
+                    lines.append("}")
+                    alias.definition = "\n".join(lines)
+            except Exception as e:
+                raise ValueError(f"In ruleset {ruleset_name!r}: {e}") from e
 
 
 class SLuaDefinitionParser:

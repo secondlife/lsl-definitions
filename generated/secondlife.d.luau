@@ -85,6 +85,22 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type GiveAgentInventoryParams = {
+  dest: string?,
+  flags: number?,
+}
+export type HttpRequestParams = {
+  method: string?,
+  mimetype: string?,
+  max_body_length: number?,
+  verify_cert: boolean?,
+  verbose_throttle: boolean?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  accept: {string}?,
+  extended_error: boolean?,
+}
 export type ParticleParams = {
   flags: number?,
   color_begin: vector?,
@@ -124,7 +140,7 @@ export type ParticleParams = {
   emissive: boolean?,
   ribbon: boolean?,
 }
-export type MediaParams = {
+export type PrimMediaParams = {
   alt_image_enable: boolean?,
   controls: number?,
   current_url: string?,
@@ -140,18 +156,6 @@ export type MediaParams = {
   whitelist: {string}?,
   perms_interact: number?,
   perms_control: number?,
-}
-export type HttpRequestParams = {
-  method: string?,
-  mimetype: string?,
-  max_body_length: number?,
-  verify_cert: boolean?,
-  verbose_throttle: boolean?,
-  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
-  pragma_no_cache: boolean?,
-  user_agent: string?,
-  accept: {string}?,
-  extended_error: boolean?,
 }
 
 declare extern type DetectedEvent with
@@ -505,7 +509,7 @@ declare lljson: {
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
   setParticleSystem: (params: ParticleParams?, link: number?) -> (),
-  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
+  setMedia: (face: number, params: PrimMediaParams?, link: number?) -> number,
 }
 
 
@@ -926,7 +930,7 @@ declare ll: {
   GetVel: () -> vector,
   GetVisualParams: (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: () -> number,
-  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: (target: uuid, item: string) -> (),
   GiveInventoryList: (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: (destination: uuid, amount: number) -> number,
@@ -1123,7 +1127,7 @@ declare ll: {
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
-  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
   SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
@@ -1139,7 +1143,7 @@ declare ll: {
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: (pos: vector) -> (),
-  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
   SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
   SetRegionPos: (position: vector) -> boolean,
@@ -1450,7 +1454,7 @@ declare llcompat: {
   GetVel: @deprecated () -> vector,
   GetVisualParams: @deprecated (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: @deprecated () -> number,
-  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: @deprecated (target: uuid, item: string) -> (),
   GiveInventoryList: @deprecated (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: @deprecated (destination: uuid, amount: number) -> number,
@@ -1648,7 +1652,7 @@ declare llcompat: {
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
-  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: @deprecated (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
   SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
@@ -1665,7 +1669,7 @@ declare llcompat: {
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: @deprecated (pos: vector) -> (),
-  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: @deprecated (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @deprecated (url: string) -> (),
   SetPrimitiveParams: @deprecated (rules: list) -> (),
   SetRegionPos: @deprecated (position: vector) -> number,
