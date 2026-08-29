@@ -463,6 +463,8 @@ enum GetClosestNavPointParam {
 enum GetStaticPathParam {
   CHARACTER_TYPE = 6
 };
+enum GiveAgentInventoryFlag {
+};
 enum GiveAgentInventoryParam {
   DEST = 0
   FLAGS = 1
