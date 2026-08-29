@@ -293,11 +293,10 @@ class LSLArgument:
         # If this argument has a ruleset annotation and we have rulesets data,
         # create a union type: <original type> | RulesetType
         if self.ruleset and builder_rulesets:
-            ruleset_data = builder_rulesets.get(self.ruleset)
-            if ruleset_data:
-                lua_type = ruleset_data.get("lua-type")
-                if lua_type:
-                    return f"{base_type} | {lua_type}"
+            ruleset_data = builder_rulesets[self.ruleset]
+            lua_type = ruleset_data.get("lua-type")
+            if lua_type:
+                return f"{base_type} | {lua_type}"
         return base_type
 
 
