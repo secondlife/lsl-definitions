@@ -86,20 +86,20 @@ type LLJsonDecodeOptionsWithPath = {
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
 export type CameraParams = {
-  pitch: number?,
-  focus_offset: vector?,
-  position_lag: number?,
-  focus_lag: number?,
-  distance: number?,
+  active: boolean?,
   behindness_angle: number?,
   behindness_lag: number?,
-  position_threshold: number?,
-  focus_threshold: number?,
-  active: boolean?,
-  position: vector?,
+  distance: number?,
   focus: vector?,
-  position_locked: boolean?,
+  focus_lag: number?,
   focus_locked: boolean?,
+  focus_offset: vector?,
+  focus_threshold: number?,
+  pitch: number?,
+  position: vector?,
+  position_lag: number?,
+  position_locked: boolean?,
+  position_threshold: number?,
 }
 export type HttpRequestParams = {
   accept: {string}?,
