@@ -85,6 +85,22 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type CameraParams = {
+  pitch: number?,
+  focus_offset: vector?,
+  position_lag: number?,
+  focus_lag: number?,
+  distance: number?,
+  behindness_angle: number?,
+  behindness_lag: number?,
+  position_threshold: number?,
+  focus_threshold: number?,
+  active: boolean?,
+  position: vector?,
+  focus: vector?,
+  position_locked: boolean?,
+  focus_locked: boolean?,
+}
 export type HttpRequestParams = {
   accept: {string}?,
   custom_header: {[string]: string | number | boolean | vector | quaternion}?,
@@ -1107,7 +1123,7 @@ declare ll: {
   SetBuoyancy: (buoyancy: number) -> (),
   SetCameraAtOffset: (offset: vector) -> (),
   SetCameraEyeOffset: (offset: vector) -> (),
-  SetCameraParams: (rules: list) -> (),
+  SetCameraParams: (rules: list | CameraParams) -> (),
   SetClickAction: (action: number) -> (),
   SetColor: (color: vector, face: number) -> (),
   SetContentType: (request_id: uuid, content_type: number) -> (),
@@ -1632,7 +1648,7 @@ declare llcompat: {
   SetBuoyancy: @deprecated (buoyancy: number) -> (),
   SetCameraAtOffset: @deprecated (offset: vector) -> (),
   SetCameraEyeOffset: @deprecated (offset: vector) -> (),
-  SetCameraParams: @deprecated (rules: list) -> (),
+  SetCameraParams: @deprecated (rules: list | CameraParams) -> (),
   SetClickAction: @deprecated (action: number) -> (),
   SetColor: @deprecated (color: vector, face: number) -> (),
   SetContentType: @deprecated (request_id: uuid, content_type: number) -> (),

@@ -247,6 +247,11 @@ type-aliases:
   comment: Configuration options for lljson decoding
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: CameraParams
+  comment: Camera parameter table. Pass to ll.SetCameraParams().
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
 - name: HttpRequestParams
   comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
   export: true

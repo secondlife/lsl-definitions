@@ -1282,7 +1282,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>\b(nil|any|boolean|buffer|integer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult|HttpRequestParams|ParticleParams|PrimMediaParams)\b</string>
+            <string>\b(nil|any|boolean|buffer|integer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult|CameraParams|HttpRequestParams|ParticleParams|PrimMediaParams)\b</string>
             <key>name</key>
             <string>support.type.primitive.luau</string>
           </dict>
