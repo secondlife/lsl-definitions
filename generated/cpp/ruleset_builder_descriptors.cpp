@@ -1,4 +1,4 @@
-// http-params
+// http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
     {"mimetype", 's', 1},
