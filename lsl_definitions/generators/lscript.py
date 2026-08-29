@@ -1162,111 +1162,112 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
     function_body_lines = []
 
     for ruleset_name, ruleset_data in definitions.builder_rulesets.items():
-        if ruleset_data.get("type", "builder") != "table":
-            continue
+        try:
+            if ruleset_data.get("type", "builder") != "table":
+                continue
 
-        enum_name = ruleset_data["enum"]
-        dispatch_fn = ruleset_data.get("dispatch-fn")
+            enum_name = ruleset_data["enum"]
+            dispatch_fn = ruleset_data.get("dispatch-fn")
 
-        # Descriptor array/def names derived from the enum name.
-        # e.g. ParticleParam -> kParticleParamsDescs, kParticleParamsDef
-        array_name = f"k{enum_name}sDescs"
-        def_name = f"k{enum_name}sDef"
+            # Descriptor array/def names derived from the enum name.
+            # e.g. ParticleParam -> kParticleParamsDescs, kParticleParamsDef
+            array_name = f"k{enum_name}sDescs"
+            def_name = f"k{enum_name}sDef"
 
-        desc_lines = []
-        for desc in expand_table_ruleset(definitions, ruleset_name):
-            name = desc.pretty_name if desc.pretty_name else desc.strict_name
-            sem = _semantic_map[desc.value_type]
-            desc_lines.append(f"    {{\"{name}\", '{sem}', {desc.tag}}},")
-
-        param_body = "\n".join(desc_lines)
-        file_scope = (
-            f"// {ruleset_name}\n"
-            f"static const RulesetParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
-        )
-
-        flag_enum_name = ruleset_data.get("flag-enum")
-        flag_field = ruleset_data.get("flag-field")
-        if flag_enum_name and flag_field:
-            flag_enum = definitions.enums[flag_enum_name]
-            filler_tokens = set(ruleset_data.get("filler-tokens", []))
-            prefix = flag_enum.prefix
-
-            # Find field_tag from the already-computed param descriptors.
-            field_tag = None
+            desc_lines = []
             for desc in expand_table_ruleset(definitions, ruleset_name):
-                eff_name = desc.pretty_name if desc.pretty_name else desc.strict_name
-                if eff_name == flag_field:
-                    field_tag = desc.tag
-                    break
-            if field_tag is None:
-                raise ValueError(
-                    f"{ruleset_name}: flag-field '{flag_field}' not found in descriptor list"
+                name = desc.pretty_name if desc.pretty_name else desc.strict_name
+                sem = _semantic_map[desc.value_type]
+                desc_lines.append(f"    {{\"{name}\", '{sem}', {desc.tag}}},")
+
+            param_body = "\n".join(desc_lines)
+            file_scope = (
+                f"// {ruleset_name}\n"
+                f"static const RulesetParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
+            )
+
+            flag_enum_name = ruleset_data.get("flag-enum")
+            flag_field = ruleset_data.get("flag-field")
+            if flag_enum_name and flag_field:
+                flag_enum = definitions.enums[flag_enum_name]
+                filler_tokens = set(ruleset_data.get("filler-tokens", []))
+                prefix = flag_enum.prefix
+
+                # Find field_tag from the already-computed param descriptors.
+                field_tag = None
+                for desc in expand_table_ruleset(definitions, ruleset_name):
+                    eff_name = desc.pretty_name if desc.pretty_name else desc.strict_name
+                    if eff_name == flag_field:
+                        field_tag = desc.tag
+                        break
+                if field_tag is None:
+                    raise ValueError(
+                        f"{ruleset_name}: flag-field '{flag_field}' not found in descriptor list"
+                    )
+
+                # Enumerate flag constants sorted by numeric value.
+                flag_consts = sorted(
+                    (
+                        c
+                        for c in definitions.constants.values()
+                        if any(e.name == flag_enum_name for e in c.member_of) and not c.private
+                    ),
+                    key=lambda c: int(c.value, 0),
                 )
 
-            # Enumerate flag constants sorted by numeric value.
-            flag_consts = sorted(
-                (
-                    c
-                    for c in definitions.constants.values()
-                    if any(e.name == flag_enum_name for e in c.member_of) and not c.private
-                ),
-                key=lambda c: int(c.value, 0),
-            )
+                flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
+                flag_array_name = f"k{enum_name}FlagDescs"
+                flag_lines = []
+                for const in flag_consts:
+                    if const.pretty_name:
+                        prop_name = const.pretty_name
+                    else:
+                        name = const.name
+                        strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
+                        if flag_suffix and strict.endswith(flag_suffix):
+                            strict = strict[: -len(flag_suffix)]
+                        tokens = [t for t in strict.split("_") if t not in filler_tokens]
+                        prop_name = "_".join(tokens) if tokens else strict
+                    mask = int(const.value, 0)
+                    flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
 
-            flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
-            flag_array_name = f"k{enum_name}FlagDescs"
-            flag_lines = []
-            for const in flag_consts:
-                if const.pretty_name:
-                    prop_name = const.pretty_name
-                else:
-                    name = const.name
-                    strict = (name[len(prefix) :] if name.startswith(prefix) else name).lower()
-                    if flag_suffix and strict.endswith(flag_suffix):
-                        strict = strict[: -len(flag_suffix)]
-                    tokens = [t for t in strict.split("_") if t not in filler_tokens]
-                    prop_name = "_".join(tokens) if tokens else strict
-                mask = int(const.value, 0)
-                flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
+                flag_body = "\n".join(flag_lines)
+                file_scope += f"static const RulesetFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
 
-            flag_body = "\n".join(flag_lines)
-            file_scope += (
-                f"static const RulesetFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
-            )
+                # Build def with flags in a single static initializer (file scope, NOT static).
+                file_scope += (
+                    f"RulesetBuilderDef* {def_name} = []() {{\n"
+                    f"    auto* d = ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
+                    f"    ruleset_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
+                    f"    return d;\n"
+                    f"}}();\n"
+                )
+            else:
+                # Simple def pointer (file scope, NOT static).
+                file_scope += (
+                    f"RulesetBuilderDef* {def_name} = "
+                    f"ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
+                )
 
-            # Build def with flags in a single static initializer (file scope, NOT static).
-            file_scope += (
-                f"RulesetBuilderDef* {def_name} = []() {{\n"
-                f"    auto* d = ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
-                f"    ruleset_builder_def_add_flags(d, {flag_array_name}, std::size({flag_array_name}));\n"
-                f"    return d;\n"
-                f"}}();\n"
-            )
-        else:
-            # Simple def pointer (file scope, NOT static).
-            file_scope += (
-                f"RulesetBuilderDef* {def_name} = "
-                f"ruleset_builder_def_build({array_name}, std::size({array_name}));\n"
-            )
+            file_scope_sections.append(file_scope)
 
-        file_scope_sections.append(file_scope)
+            # Build lambda and registration (inside function body)
+            if dispatch_fn is not None:
+                lua_module = ruleset_data["lua-module"]
+                lua_fn = ruleset_data["lua-fn"]
+                prefix_args, suffix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
+                cpp_name = _lua_fn_to_cpp_name(lua_fn)
 
-        # Build lambda and registration (inside function body)
-        if dispatch_fn is not None:
-            lua_module = ruleset_data["lua-module"]
-            lua_fn = ruleset_data["lua-fn"]
-            prefix_args, suffix_args, has_link, ret_type = _inspect_dispatch_fn(dispatch_fn)
-            cpp_name = _lua_fn_to_cpp_name(lua_fn)
-
-            wrapper = _build_wrapper(
-                cpp_name, dispatch_fn, prefix_args, suffix_args, has_link, ret_type
-            )
-            function_body_lines.append(f"    {wrapper}")
-            function_body_lines.append(
-                f'    slua_register_ruleset_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
-            )
-            function_body_lines.append("")
+                wrapper = _build_wrapper(
+                    cpp_name, dispatch_fn, prefix_args, suffix_args, has_link, ret_type
+                )
+                function_body_lines.append(f"    {wrapper}")
+                function_body_lines.append(
+                    f'    slua_register_ruleset_fn(L, "{lua_module}", "{lua_fn}", {cpp_name}, {def_name});'
+                )
+                function_body_lines.append("")
+        except Exception as e:
+            raise ValueError(f"In ruleset {ruleset_name!r}: {e}") from e
 
     # Combine: file scope declarations, then the function
     result = "\n".join(file_scope_sections)

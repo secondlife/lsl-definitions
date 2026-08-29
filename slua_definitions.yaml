@@ -249,6 +249,11 @@ type-aliases:
   export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: HttpRequestParams
+  comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
+  selene-type: table
 - name: KeyframedMotionParams
   comment: Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
   export: true
@@ -259,15 +264,10 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
-- name: MediaParams
+- name: PrimMediaParams
   comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
-  selene-type: table
-- name: HttpRequestParams
-  comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
-  export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
   selene-type: table
 classes:
 - name: LLEvents
@@ -2153,7 +2153,7 @@ modules:
     - name: face
       type: number
     - name: params
-      type: MediaParams?
+      type: PrimMediaParams?
     - name: link
       type: number?
     return-type: number

@@ -85,6 +85,18 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type HttpRequestParams = {
+  method: string?,
+  mimetype: string?,
+  max_body_length: number?,
+  verify_cert: boolean?,
+  verbose_throttle: boolean?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  accept: {string}?,
+  extended_error: boolean?,
+}
 export type KeyframedMotionParams = {
   command: number?,
   mode: number?,
@@ -131,7 +143,7 @@ export type ParticleParams = {
   emissive: boolean?,
   ribbon: boolean?,
 }
-export type MediaParams = {
+export type PrimMediaParams = {
   alt_image_enable: boolean?,
   controls: number?,
   current_url: string?,
@@ -147,18 +159,6 @@ export type MediaParams = {
   whitelist: {string}?,
   perms_interact: number?,
   perms_control: number?,
-}
-export type HttpRequestParams = {
-  method: string?,
-  mimetype: string?,
-  max_body_length: number?,
-  verify_cert: boolean?,
-  verbose_throttle: boolean?,
-  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
-  pragma_no_cache: boolean?,
-  user_agent: string?,
-  accept: {string}?,
-  extended_error: boolean?,
 }
 
 declare extern type DetectedEvent with
@@ -512,7 +512,7 @@ declare lljson: {
 declare llprim: {
   ParamSetter: PrimParamSetterTypeMeta,
   setParticleSystem: (params: ParticleParams?, link: number?) -> (),
-  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
+  setMedia: (face: number, params: PrimMediaParams?, link: number?) -> number,
 }
 
 
@@ -1134,7 +1134,7 @@ declare ll: {
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
-  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
   SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
@@ -1150,7 +1150,7 @@ declare ll: {
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: (pos: vector) -> (),
-  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
   SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
   SetRegionPos: (position: vector) -> boolean,
@@ -1662,7 +1662,7 @@ declare llcompat: {
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
   SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
-  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkMedia: @deprecated (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
   SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
@@ -1679,7 +1679,7 @@ declare llcompat: {
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: @deprecated (pos: vector) -> (),
-  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: @deprecated (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @deprecated (url: string) -> (),
   SetPrimitiveParams: @deprecated (rules: list) -> (),
   SetRegionPos: @deprecated (position: vector) -> number,
