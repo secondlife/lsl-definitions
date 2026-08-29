@@ -471,7 +471,7 @@ class SLuaDefinitions:
         """
         self.generate_ll_modules(lsl)
         self._generate_spp_builder_class(lsl)
-        self._generate_ruleset_builder_classes(lsl)
+        self._generate_ruleset_type_structs(lsl)
 
     def generate_ll_modules(self, lsl: LSLDefinitions, solverV2: bool = True) -> None:
         """
@@ -719,7 +719,7 @@ class SLuaDefinitions:
         builder_class = self.classes[spec.class_name]
         builder_class.methods.update(methods)
 
-    def _generate_ruleset_builder_classes(self, lsl: LSLDefinitions) -> None:
+    def _generate_ruleset_type_structs(self, lsl: LSLDefinitions) -> None:
         """Inject typed properties into table-type functions.
 
         For each table-type function ruleset that names a lua-type, finds the matching
@@ -779,6 +779,7 @@ class SLuaDefinitions:
                             prop_name = "_".join(tokens) if tokens else strict
                         props.append((prop_name, "boolean?"))
 
+                props.sort()
                 if cls is not None:
                     for prop_name, prop_type in props:
                         cls.properties.append(
