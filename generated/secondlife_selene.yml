@@ -5803,12 +5803,6 @@ globals:
   llprim.ParamsSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.keyframedMotion:
-    args:
-    - type: table
-    - type: table
-      required: false
-    description: Smoothly moves a non-physical object along a path.
   llprim.setParticleSystem:
     args:
     - type: table

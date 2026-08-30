@@ -511,7 +511,6 @@ declare lljson: {
 
 declare llprim: {
   ParamsSetter: PrimParamsSetterTypeMeta,
-  keyframedMotion: (keyframes: {number | vector | quaternion}, options: KeyframedMotionParams?) -> number,
   setParticleSystem: (params: ParticleParams?, link: number?) -> (),
   setMedia: (face: number, params: MediaParams?, link: number?) -> number,
 }

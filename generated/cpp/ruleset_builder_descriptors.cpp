@@ -98,19 +98,6 @@ static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
 RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
 
 inline void init_ruleset_builders(lua_State* L) {
-    auto keyframed_motion = [](lua_State* L) -> int {
-        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-        slua_ruleset_serialize(L, 1, def);
-        int rules_idx = lua_gettop(L);
-        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-        lua_rawgetfield(L, -1, "SetKeyframedMotion");
-        lua_pushvalue(L, rules_idx);
-        lua_pushvalue(L, 2);
-        lua_call(L, 2, 0);
-        return 0;
-    };
-    slua_register_ruleset_fn(L, "llprim", "keyframedMotion", keyframed_motion, kKeyframedMotionParamsDef);
-
     auto set_particle_system = [](lua_State* L) -> int {
         const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
         int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);

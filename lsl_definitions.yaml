@@ -18610,10 +18610,7 @@ builder-rulesets:
     enum: KeyframedMotionParam
     flag-enum: KeyframedMotionData
     flag-field: data
-    lua-module: llprim
-    lua-fn: keyframedMotion
     lua-type: KeyframedMotionParams
-    dispatch-fn: SetKeyframedMotion
 
   particle-params:
     type: table

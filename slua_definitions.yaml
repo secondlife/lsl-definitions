@@ -2137,14 +2137,6 @@ modules:
     type: PrimParamsSetterTypeMeta
     value: PrimParamsSetterTypeMeta
   functions:
-  - name: keyframedMotion
-    comment: Smoothly moves a non-physical object along a path.
-    parameters:
-    - name: keyframes
-      type: "{number | vector | quaternion}"
-    - name: options
-      type: KeyframedMotionParams?
-    return-type: number
   - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
