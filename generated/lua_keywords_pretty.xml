@@ -23891,6 +23891,8 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   </map>
                </map>
             </array>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>

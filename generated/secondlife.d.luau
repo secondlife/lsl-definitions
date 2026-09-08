@@ -942,7 +942,7 @@ declare ll: {
   Hash: (val: string) -> number,
   InsertString: (dst: string, index: number, src: string) -> string,
   InstantMessage: (agent: uuid, msg: string) -> (),
-  IntegerToBase64: (number: number) -> string,
+  IntegerToBase64: @[deprecated {reason="Use 'llbase64.encode' and 'string.pack' or 'buffer.writei32' instead."}](number: number) -> string,
   IsFriend: (agent_id: uuid) -> boolean,
   IsLinkGLTFMaterial: (link: number, face: number) -> boolean,
   Json2List: @[deprecated {use='lljson.decode'}](src: string) -> {any},
