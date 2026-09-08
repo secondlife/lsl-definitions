@@ -831,7 +831,7 @@
           "name": "constant.language.boolean.true.luau"
         },
         {
-          "match": "\\b(nil|any|boolean|buffer|integer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult|ParticleParams|MediaParams|HttpRequestParams)\\b",
+          "match": "\\b(nil|any|boolean|buffer|integer|never|number|string|thread|unknown|quaternion|uuid|vector|DetectedEvent|rotation|list|DateTypeArg|DateTypeResult|CameraParams|HttpRequestParams|ParticleParams|PrimMediaParams)\\b",
           "name": "support.type.primitive.luau"
         },
         {

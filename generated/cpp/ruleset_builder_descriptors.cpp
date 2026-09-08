@@ -1,4 +1,23 @@
-// http-params
+// camera-params
+static const RulesetParamDescriptor kCameraParamsDescs[] = {
+    {"pitch", 'f', 0},
+    {"focus_offset", 'v', 1},
+    {"position_lag", 'f', 5},
+    {"focus_lag", 'f', 6},
+    {"distance", 'f', 7},
+    {"behindness_angle", 'f', 8},
+    {"behindness_lag", 'f', 9},
+    {"position_threshold", 'f', 10},
+    {"focus_threshold", 'f', 11},
+    {"active", 'b', 12},
+    {"position", 'v', 13},
+    {"focus", 'v', 17},
+    {"position_locked", 'b', 21},
+    {"focus_locked", 'b', 22},
+};
+RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
+
+// http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
     {"mimetype", 's', 1},
