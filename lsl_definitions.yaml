@@ -12632,6 +12632,9 @@ functions:
     - number:
         tooltip: Integer number to encode.
         type: integer
+    slua-deprecated:
+      reason: Use 'llbase64.encode' and 'string.pack' or 'buffer.writei32' instead.
+      selene-replace: ['llbase64.encode(string.pack(">i", i))']
     energy: 10.0
     func-id: 280
     pure: true

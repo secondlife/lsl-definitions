@@ -8394,6 +8394,10 @@ globals:
     description: Sends an instant message containing msg to the agent identified by
       their key.
   ll.IntegerToBase64:
+    deprecated:
+      message: Use 'llbase64.encode' and 'string.pack' or 'buffer.writei32' instead.
+      replace:
+      - llbase64.encode(string.pack(">i", i))
     args:
     - type: number
     must_use: true
