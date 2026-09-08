@@ -16268,6 +16268,7 @@ functions:
         tooltip: A list of options (KFM_* constants) to modify playback behavior.
         type: list
         param-semantics: KeyframedMotionParam
+        ruleset: keyframed-motion-params
     energy: 10.0
     func-id: 394
     return: void
@@ -18606,6 +18607,13 @@ builder-rulesets:
     enum: HTTPRequestParam
     filler-tokens: [http]
     lua-type: HttpRequestParams
+
+  keyframed-motion-params:
+    type: table
+    enum: KeyframedMotionParam
+    flag-enum: KeyframedMotionData
+    flag-field: data
+    lua-type: KeyframedMotionParams
 
   particle-params:
     type: table

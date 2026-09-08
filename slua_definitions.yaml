@@ -247,6 +247,11 @@ type-aliases:
   comment: Configuration options for lljson decoding
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: KeyframedMotionParams
+  comment: Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+  export: true
+  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  selene-type: table
 - name: ParticleParams
   comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true

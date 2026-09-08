@@ -223,6 +223,18 @@ export type DateTypeResult = {
             <key>tooltip</key>
             <string>HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.</string>
          </map>
+         <key>KeyframedMotionParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+export type KeyframedMotionParams = {
+  command: number?,
+  mode: number?,
+  data: number?,
+  rotation: boolean?,
+  translation: boolean?,
+}</string>
+         </map>
          <key>MediaParams</key>
          <map>
             <key>tooltip</key>
