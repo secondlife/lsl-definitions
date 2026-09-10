@@ -69,7 +69,7 @@ export type DateTypeResult = {
   yday: number?,
   isdst: boolean?,
 }
-type LLJsonEncodeOptions = {
+export type LLJsonEncodeOptions = {
   tight: boolean?,
   skip_tojson: boolean?,
   allow_sparse: boolean?,
@@ -84,7 +84,7 @@ type LLJsonDecodeOptionsWithPath = {
   track_path: true,
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
-type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
 export type ParticleParams = {
   flags: number?,
   color_begin: vector?,
