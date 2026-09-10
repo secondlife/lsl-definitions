@@ -223,6 +223,23 @@ export type DateTypeResult = {
             <key>tooltip</key>
             <string>HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.</string>
          </map>
+         <key>LLJsonDecodeOptions</key>
+         <map>
+            <key>tooltip</key>
+            <string>Configuration options for lljson decoding
+export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath</string>
+         </map>
+         <key>LLJsonEncodeOptions</key>
+         <map>
+            <key>tooltip</key>
+            <string>Configuration options for lljson encoding
+export type LLJsonEncodeOptions = {
+  tight: boolean?,
+  skip_tojson: boolean?,
+  allow_sparse: boolean?,
+  replacer: ((key: any, value: any, parent: {}?) -&gt; any)?,
+}</string>
+         </map>
          <key>MediaParams</key>
          <map>
             <key>tooltip</key>

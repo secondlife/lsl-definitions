@@ -218,6 +218,7 @@ type-aliases:
   selene-type: {display: "DateTypeResult"}
 - name: LLJsonEncodeOptions
   comment: Configuration options for lljson encoding
+  export: true
   definition: |-
     {
       tight: boolean?,
@@ -245,6 +246,7 @@ type-aliases:
   selene-type: table
 - name: LLJsonDecodeOptions
   comment: Configuration options for lljson decoding
+  export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
 - name: ParticleParams
