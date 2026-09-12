@@ -315,6 +315,8 @@ class LSLFunctionBase(abc.ABC):
 
 @dataclasses.dataclass
 class LSLEvent(LSLFunctionBase):
+    # 1-based, bit (event_id - 1) in handled-event bitfields
+    event_id: int
     private: bool
     deprecated: Deprecated | None
     slua_deprecated: Deprecated | None
@@ -586,6 +588,15 @@ class LSLDefinitionParser:
             self._handle_enum(enum_name, enum_data)
         for event_name, event_data in def_dict["events"].items():
             self._handle_event(event_name, event_data)
+        # Event IDs pack into a bitfield by position, so they have to be exactly
+        # 1..N with nothing missing or doubled up. Events are also listed in ID
+        # order, so comparing against the range checks both at once.
+        event_ids = [event.event_id for event in self._definitions.events.values()]
+        if event_ids != list(range(1, len(event_ids) + 1)):
+            raise ValueError(
+                f"Events must be listed in event-id order with IDs 1..{len(event_ids)} "
+                f"and no gaps or repeats, got {event_ids}"
+            )
         for func_name, func_data in def_dict["functions"].items():
             func = self._handle_function(func_name, func_data)
             if func.func_id in seen_func_ids:
@@ -658,6 +669,7 @@ class LSLDefinitionParser:
             self._validate_identifier(event_name)
             event = LSLEvent(
                 name=event_name,
+                event_id=event_data["event-id"],
                 tooltip=event_data.get("tooltip", ""),
                 categories=event_data["categories"],
                 arguments=[

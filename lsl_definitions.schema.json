@@ -610,11 +610,17 @@
                             "markdownDescription": "A brief description of this event.",
                             "type": "string"
                         },
+                        "event-id": {
+                            "markdownDescription": "The event's 1-based index in handled-event bitfields, matching the server's LSCRIPTStateEventType. IDs must be contiguous from 1.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
                         "categories": { "$ref": "#/$defs/functionCategories" },
                         "uses-enum": { "$ref": "#/$defs/usesEnum" }
                     },
                     "required": [
                         "tooltip",
+                        "event-id",
                         "categories"
                     ]
                 }

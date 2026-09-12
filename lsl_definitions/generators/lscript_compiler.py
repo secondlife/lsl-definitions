@@ -138,7 +138,7 @@ def gen_lexer_file(definitions: LSLDefinitions, template_path: str) -> str:
         lexer_template = f.read()
 
     generated_events = ""
-    for event in definitions.events.values():
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.name in _LEXER_BLACKLIST:
             continue
         generated_events += f'"{event.name}" {{ count(); return({event.name.upper()}); }}\n'
@@ -223,7 +223,7 @@ def gen_parser_file(definitions: LSLDefinitions, template_path: str) -> str:
     generated_event_definitions = ""
     generated_event_switch = ""
 
-    for event in definitions.events.values():
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.name not in _PARSER_TYPES_BLACKLIST:
             generated_event_tokens += f"%token    {event.name.upper()}\n"
             generated_event_types += f"%type<event>    {event.name}\n"
@@ -367,7 +367,7 @@ public:
 def gen_tree_header_file(definitions: LSLDefinitions) -> str:
     """Generate event node class declarations for lscript_tree.h"""
     generated_tree_header = ""
-    for event in definitions.events.values():
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.name in _TREE_BLACKLIST:
             continue
         constructor_args = "".join(
@@ -458,7 +458,7 @@ _RECURSE_BOILERPLATE = (
 def gen_tree_source_file(definitions: LSLDefinitions) -> str:
     """Generate event node implementations for lscript_tree.cpp"""
     generated_tree_source = ""
-    for event in definitions.events.values():
+    for event in sorted(definitions.events.values(), key=lambda x: x.name):
         if event.name in _TREE_BLACKLIST:
             continue
 

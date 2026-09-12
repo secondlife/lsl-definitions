@@ -29,7 +29,10 @@ def gen_builtins_txt(definitions: LSLDefinitions) -> str:
             builtins_str += const.value
         builtins_str += "\n"
 
-    for event in sorted(definitions.events.values(), key=lambda x: x.name):
+    # Sorted by event ID rather than name so that line position conveys the
+    # event handler index. We don't explicitly list the index so as to keep
+    # backwards compat with older builtins.txt consumers.
+    for event in sorted(definitions.events.values(), key=lambda x: x.event_id):
         builtins_str += f"event {event.name}{event.args_str}\n"
 
     return builtins_str

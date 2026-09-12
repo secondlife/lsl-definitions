@@ -227,7 +227,7 @@ def gen_textmate_lsl(definitions: LSLDefinitions, template_path: str) -> str:
     inserts = dict(
         LSL_FLOW_CONTROL_REGEX=crunch_regex_strings(list(definitions.controls.keys())),
         LSL_TYPES_REGEX=crunch_regex_strings(list(definitions.types.keys())),
-        LSL_EVENTS_REGEX=crunch_regex_strings(list(definitions.events.keys())),
+        LSL_EVENTS_REGEX=crunch_regex_strings(sorted(definitions.events.keys())),
         LSL_FUNCTIONS_REGEX=crunch_regex_strings(
             [
                 name

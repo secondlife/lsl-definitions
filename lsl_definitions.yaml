@@ -8032,69 +8032,81 @@ constants:
     type: vector
     value: <0.0, 0.0, 0.0>
 events:
-  at_rot_target:
+  state_entry:
+    event-id: 1
+    arguments: []
+    tooltip: Triggered immediately whenever a new state is entered (including at
+      script start). It is always the first event handled.
+    slua-removed: true
+    categories:
+      - script
+  state_exit:
+    event-id: 2
+    arguments: []
+    slua-removed: true
+    tooltip: Triggered when the state command is used to transition out of the
+      current state. Handled before entering the new state's state_entry.
+    categories:
+      - script
+  touch_start:
+    event-id: 3
     arguments:
-    - handle:
-        tooltip: Integer handle returned by the llRotTarget call.
+    - num_detected:
+        tooltip: Total number of touching agents detected (usable with llDetected*
+          functions).
         type: integer
-    - targetrot:
-        tooltip: Target rotation specified in the llRotTarget call.
-        type: rotation
-    - ourrot:
-        tooltip: Current rotation of the object (similar to llGetRot).
-        type: rotation
-    tooltip: Triggered when the script's rotation (ourrot) comes within a defined
-      angle (error) of the target rotation (targetrot) set by a call to
-      llRotTarget (which returns the associated handle).
+    detected-semantics: true
+    tooltip: Triggered when an avatar first touches the object. Passes num_detected,
+      representing the number of touching agents.
     categories:
-      - movement
-  at_target:
+      - detected
+      - touch
+      - user_interface
+  touch:
+    event-id: 4
     arguments:
-    - tnum:
-        tooltip: Integer target handle returned by the llTarget call.
+    - num_detected:
+        tooltip: Total number of touching agents detected (usable with llDetected*
+          functions).
         type: integer
-    - targetpos:
-        tooltip: Target position vector specified in the llTarget call.
-        type: vector
-    - ourpos:
-        tooltip: Current position vector of the object (similar to llGetPos).
-        type: vector
-    tooltip: Triggered when the scripted object's position (ourpos) comes within the
-      defined range of the target position (targetpos) set by llTarget (which
-      returns the associated handle tnum).
+    detected-semantics: true
+    tooltip: Triggered continuously while an avatar touches the object. Passes
+      num_detected, representing the number of touching agents.
     categories:
-      - movement
-  attach:
+      - detected
+      - touch
+      - user_interface
+  touch_end:
+    event-id: 5
     arguments:
-    - avatar:
-        tooltip: UUID of the avatar the object is attached to, or NULL_KEY if
-          detached.
-        type: key
-    tooltip: Triggered whenever the object is attached to or detached from an
-      avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if
-      detached.
-    categories:
-      - attachments
-  changed:
-    arguments:
-    - changes:
-        tooltip: A bitfield of CHANGED_* flags representing what changed.
+    - num_detected:
+        tooltip: Total number of touching agents detected (usable with llDetected*
+          functions).
         type: integer
-        enum-semantics: ChangeType
-    tooltip: Triggered when various properties of the object change. The parameter
-      changes is a bitfield of CHANGED_* flags.
+    detected-semantics: true
+    tooltip: Triggered when an avatar stops touching the object. Passes
+      num_detected, representing the number of touching agents.
     categories:
-      - asset_permissions
-      - linkset
-      - media
-      - prim_appearance
-      - prim_inventory
-      - prim_media
-      - region
-      - teleport
-      - script  # TODO: move all but "script" to the constants
-      - sit
+      - detected
+      - touch
+      - user_interface
+  collision_start:
+    event-id: 6
+    arguments:
+    - num_detected:
+        tooltip: Total number of detected colliders (usable with llDetected*
+          functions).
+        type: integer
+    detected-semantics: true
+    tooltip: Triggered when an avatar or another object first begins colliding with
+      the object containing the script. Passes num_detected, representing the
+      number of detected collisions.
+    categories:
+      - detected
+      - physics
+      - sensor
   collision:
+    event-id: 7
     arguments:
     - num_detected:
         tooltip: Total number of detected colliders (usable with llDetected*
@@ -8109,6 +8121,7 @@ events:
       - physics
       - sensor
   collision_end:
+    event-id: 8
     arguments:
     - num_detected:
         tooltip: Total number of detected colliders (usable with llDetected*
@@ -8122,178 +8135,18 @@ events:
       - detected
       - physics
       - sensor
-  collision_start:
+  land_collision_start:
+    event-id: 9
     arguments:
-    - num_detected:
-        tooltip: Total number of detected colliders (usable with llDetected*
-          functions).
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered when an avatar or another object first begins colliding with
-      the object containing the script. Passes num_detected, representing the
-      number of detected collisions.
+    - pos:
+        tooltip: Vector position of collision with the ground.
+        type: vector
+    tooltip: Triggered in the root prim when a physical object or attached avatar
+      first begins colliding with the ground at position pos.
     categories:
-      - detected
       - physics
-      - sensor
-  control:
-    arguments:
-    - id:
-        tooltip: UUID of the avatar whose inputs are captured.
-        type: key
-    - level:
-        tooltip: A bitfield of CONTROL_* constants representing currently held controls.
-        type: integer
-        enum-semantics: ControlButton
-    - edge:
-        tooltip: A bitfield of CONTROL_* constants representing controls that just
-          changed state.
-        type: integer
-        enum-semantics: ControlButton
-    tooltip: Triggered to pass captured avatar control inputs into the script. The
-      parameter level indicates held controls, and edge indicates change in
-      controls (both are bitfields of CONTROL_* constants).
-    categories:
-      - avatar
-      - input
-  dataserver:
-    arguments:
-    - queryid:
-        tooltip: Key identifying the asynchronous request (matches the handle
-          returned by the requesting function).
-        type: key
-    - data:
-        tooltip: String containing the requested data.
-        type: string
-    tooltip: Triggered when requested data is returned to the script (e.g., from
-      llRequestAgentData, llRequestInventoryData, or llGetNotecardLine).
-    categories:
-      - dataserver
-  email:
-    arguments:
-    - time:
-        tooltip: Timestamp of when the email was received, in (string)llGetUnixTime() format.
-        type: string
-    - address:
-        tooltip: Email address of the sender.
-        type: string
-    - subject:
-        tooltip: Subject of the email.
-        type: string
-    - msg:
-        tooltip: Body text of the email.
-        type: string
-    - num_left:
-        tooltip: Number of emails still waiting in the queue.
-        type: integer
-    tooltip: Receive an email requested by llGetNextEmail(). NumberRemaining
-      indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.
-    categories:
-      - script_communication
-  experience_permissions:
-    arguments:
-    - agent_id:
-        tooltip: UUID of the avatar approving experience permissions.
-        type: key
-    tooltip: Triggered when the agent specified by agent_id approves an experience
-      permissions request (interactively or automatically if previously
-      approved).
-    categories:
-      - avatar
-      - experience
-      - permissions
-  experience_permissions_denied:
-    arguments:
-    - agent_id:
-        tooltip: UUID of the avatar who denied or was blocked from granting
-          permissions.
-        type: key
-    - reason:
-        tooltip: XP_ERROR_* error constant describing why permissions were denied.
-        type: integer
-        enum-semantics: ExperienceError
-    tooltip: Triggered when the agent specified by agent_id denies experience
-      permissions, or when permission is blocked for other reasons (specified by
-      the error code reason).
-    categories:
-      - avatar
-      - experience
-      - permissions
-  final_damage:
-    arguments:
-    - num_detected:
-        tooltip: Number of damage events applied to the avatar or task.
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered after all on_damage events across all scripts have completed
-      and damage is actively applied to the avatar or distributed among seated
-      avatars. Collision detected functions (llDetected*) and llDetectedDamage
-      are available.
-    categories:
-      - combat
-      - detected
-  game_control:
-    arguments:
-    - id:
-        tooltip: UUID of the avatar supplying controller input.
-        type: key
-    - button_levels:
-        tooltip: A 32-bit mask representing the buttons currently held down on the
-          controller.
-        type: integer
-        enum-semantics: GameControlButton
-    - axes:
-        tooltip: A list of six float values in the range [-1.0, 1.0] representing
-          controller axes.
-        type: list
-        slua-type: "{number}"
-    tooltip: Triggered when a compatible viewer sends game controller input changes
-      for the avatar specified by id. Only triggers for scripts in attachments
-      or seats.
-    categories:
-      - avatar
-      - input
-    uses-enum: GameControlAxis
-  http_request:
-    arguments:
-    - request_id:
-        tooltip: Unique key identifying the incoming HTTP request (used with
-          llHTTPResponse).
-        type: key
-    - method:
-        tooltip: HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request
-          status constants.
-        type: string
-    - body:
-        tooltip: String payload of the incoming request body.
-        type: string
-    tooltip: Triggered when the script's registered URL receives an incoming HTTP
-      request identified by request_id.
-    categories:
-      - script_communication
-      - web
-  http_response:
-    arguments:
-    - request_id:
-        tooltip: Key matching the handle returned by the initiating llHTTPRequest
-          call.
-        type: key
-    - status:
-        tooltip: Integer HTTP status code returned (such as 200 or 404).
-        type: integer
-    - metadata:
-        tooltip: A list of HTTP_* constants and response headers metadata.
-        type: list
-        param-semantics: HTTPResponseError
-    - body:
-        tooltip: String payload of the received response body.
-        type: string
-    tooltip: Triggered when an HTTP response body is received for a pending
-      request_id, or if the request fails or times out.
-    categories:
-      - script_communication
-      - web
   land_collision:
+    event-id: 10
     arguments:
     - pos:
         tooltip: Vector position of collision with the ground.
@@ -8303,6 +8156,7 @@ events:
     categories:
       - physics
   land_collision_end:
+    event-id: 11
     arguments:
     - pos:
         tooltip: Vector position of the last ground collision.
@@ -8311,56 +8165,17 @@ events:
       stops colliding with the ground at position pos.
     categories:
       - physics
-  land_collision_start:
-    arguments:
-    - pos:
-        tooltip: Vector position of collision with the ground.
-        type: vector
-    tooltip: Triggered in the root prim when a physical object or attached avatar
-      first begins colliding with the ground at position pos.
+  timer:
+    event-id: 12
+    arguments: []
+    slua-deprecated:
+      use: LLTimers
+    tooltip: Triggered at regular periodic intervals configured by llSetTimerEvent.
     categories:
-      - physics
-  link_message:
-    arguments:
-    - sender_num:
-        tooltip: Link index of the prim containing the script that sent the message.
-        type: integer
-    - num:
-        tooltip: An integer value passed from the sending script.
-        type: integer
-    - str:
-        tooltip: A text string value passed from the sending script.
-        type: string
-    - id:
-        tooltip: A key value passed from the sending script.
-        type: key
-        slua-type: string
-    tooltip: Triggered when the script receives a link message from sender_num,
-      containing the parameters num, str, and id sent via llMessageLinked.
-    categories:
-      - script_communication
-  linkset_data:
-    arguments:
-    - action:
-        tooltip: An integer constant representing the action taken (e.g.,
-          LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-        type: integer
-        enum-semantics: LinksetDataAction
-    - name:
-        tooltip: Key name of the modified key-value pair.
-        type: string
-    - value:
-        tooltip: New string value of the pair (empty if the pair was deleted or is
-          password-protected).
-        type: string
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been
-      modified via an llLinksetData function. Passes the action taken, the
-      affected key name, and the new value.
-    categories:
-      - data_storage
-      - linkset
-      - linkset_data
+      - script
+      - time
   listen:
+    event-id: 13
     arguments:
     - channel:
         tooltip: Chat channel where the message appeared.
@@ -8382,80 +8197,8 @@ events:
       - avatar_communication
       - chat
       - script_communication
-  money:
-    arguments:
-    - id:
-        tooltip: UUID of the paying resident.
-        type: key
-    - amount:
-        tooltip: Quantity of L$ paid to the prim.
-        type: integer
-    tooltip: Triggered when a resident specified by id pays an amount of Linden
-      dollars (L$) to the prim.
-    categories:
-      - money
-  moving_end:
-    arguments: []
-    tooltip: Triggered whenever the physical or moving object containing the script
-      stops moving.
-    categories:
-      - movement
-      - pathfinding
-  moving_start:
-    arguments: []
-    tooltip: Triggered whenever the physical or moving object containing the script
-      starts moving.
-    categories:
-      - movement
-      - pathfinding
-  no_sensor:
-    arguments: []
-    tooltip: Triggered when active sensors (from llSensor or llSensorRepeat)
-      complete a scan without finding any matching targets.
-    categories:
-      - detected
-      - sensor
-  not_at_rot_target:
-    arguments: []
-    tooltip: Triggered continuously while the object's rotation is outside the
-      leeway angle of targets set via llRotTarget.
-    categories:
-      - movement
-  not_at_target:
-    arguments: []
-    tooltip: Triggered continuously while the object's position has not yet reached
-      the range of targets set via llTarget.
-    categories:
-      - movement
-  object_rez:
-    arguments:
-    - id:
-        tooltip: UUID of the newly rezzed object.
-        type: key
-    tooltip: Triggered when this object successfully rezzes another object from its
-      inventory. Passes the key (UUID) id of the newly rezzed object.
-    categories:
-      - rez
-  on_damage:
-    arguments:
-    - num_detected:
-        tooltip: Number of pending damage events.
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered when damage has been inflicted on an avatar or task, but
-      before it is applied or distributed. Collision detected functions
-      (llDetected*), llDetectedDamage, and llAdjustDamage are available. Passes
-      num_detected, representing the number of pending damage events.
-    categories:
-      - combat
-      - detected
-  on_death:
-    arguments: []
-    tooltip: Triggered on all worn attachments when the wearing avatar's health
-      reaches 0.
-    categories:
-      - combat
   on_rez:
+    event-id: 14
     arguments:
     - start_param:
         tooltip: Integer start parameter passed from the rezzing call.
@@ -8467,20 +8210,238 @@ events:
     categories:
       - rez
       - script
-  path_update:
+  sensor:
+    event-id: 15
     arguments:
-    - type:
-        tooltip: Path update status or failure code constant (PU_* flag).
+    - num_detected:
+        tooltip: Total number of detected targets found (usable with llDetected*
+          functions).
         type: integer
-        enum-semantics: CharacterPathUpdateType
-    - reserved:
-        tooltip: Reserved parameter (currently unused).
-        type: list
-    tooltip: Triggered to inform the script of changes or failures in the
-      pathfinding character's status.
+    detected-semantics: true
+    tooltip: Triggered when objects matching constraints of llSensor or
+      llSensorRepeat are successfully detected. Passes num_detected,
+      representing the number of detected targets.
     categories:
+      - detected
+      - sensor
+  no_sensor:
+    event-id: 16
+    arguments: []
+    tooltip: Triggered when active sensors (from llSensor or llSensorRepeat)
+      complete a scan without finding any matching targets.
+    categories:
+      - detected
+      - sensor
+  control:
+    event-id: 17
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose inputs are captured.
+        type: key
+    - level:
+        tooltip: A bitfield of CONTROL_* constants representing currently held controls.
+        type: integer
+        enum-semantics: ControlButton
+    - edge:
+        tooltip: A bitfield of CONTROL_* constants representing controls that just
+          changed state.
+        type: integer
+        enum-semantics: ControlButton
+    tooltip: Triggered to pass captured avatar control inputs into the script. The
+      parameter level indicates held controls, and edge indicates change in
+      controls (both are bitfields of CONTROL_* constants).
+    categories:
+      - avatar
+      - input
+  money:
+    event-id: 18
+    arguments:
+    - id:
+        tooltip: UUID of the paying resident.
+        type: key
+    - amount:
+        tooltip: Quantity of L$ paid to the prim.
+        type: integer
+    tooltip: Triggered when a resident specified by id pays an amount of Linden
+      dollars (L$) to the prim.
+    categories:
+      - money
+  email:
+    event-id: 19
+    arguments:
+    - time:
+        tooltip: Timestamp of when the email was received, in (string)llGetUnixTime() format.
+        type: string
+    - address:
+        tooltip: Email address of the sender.
+        type: string
+    - subject:
+        tooltip: Subject of the email.
+        type: string
+    - msg:
+        tooltip: Body text of the email.
+        type: string
+    - num_left:
+        tooltip: Number of emails still waiting in the queue.
+        type: integer
+    tooltip: Receive an email requested by llGetNextEmail(). NumberRemaining
+      indicates the number of emails remaining in the queue for llGetNextEmail() to retrieve.
+    categories:
+      - script_communication
+  at_target:
+    event-id: 20
+    arguments:
+    - tnum:
+        tooltip: Integer target handle returned by the llTarget call.
+        type: integer
+    - targetpos:
+        tooltip: Target position vector specified in the llTarget call.
+        type: vector
+    - ourpos:
+        tooltip: Current position vector of the object (similar to llGetPos).
+        type: vector
+    tooltip: Triggered when the scripted object's position (ourpos) comes within the
+      defined range of the target position (targetpos) set by llTarget (which
+      returns the associated handle tnum).
+    categories:
+      - movement
+  not_at_target:
+    event-id: 21
+    arguments: []
+    tooltip: Triggered continuously while the object's position has not yet reached
+      the range of targets set via llTarget.
+    categories:
+      - movement
+  at_rot_target:
+    event-id: 22
+    arguments:
+    - handle:
+        tooltip: Integer handle returned by the llRotTarget call.
+        type: integer
+    - targetrot:
+        tooltip: Target rotation specified in the llRotTarget call.
+        type: rotation
+    - ourrot:
+        tooltip: Current rotation of the object (similar to llGetRot).
+        type: rotation
+    tooltip: Triggered when the script's rotation (ourrot) comes within a defined
+      angle (error) of the target rotation (targetrot) set by a call to
+      llRotTarget (which returns the associated handle).
+    categories:
+      - movement
+  not_at_rot_target:
+    event-id: 23
+    arguments: []
+    tooltip: Triggered continuously while the object's rotation is outside the
+      leeway angle of targets set via llRotTarget.
+    categories:
+      - movement
+  run_time_permissions:
+    event-id: 24
+    arguments:
+    - perm:
+        tooltip: Bitfield of currently granted permissions (PERMISSION_* flags).
+        type: integer
+        enum-semantics: ScriptPermission
+    tooltip: Triggered when an agent grants or denies runtime permissions requested
+      by llRequestPermissions. Passes the active integer permissions bitfield
+      perm (returns 0 if no permissions are currently granted).
+    categories:
+      - permissions
+  changed:
+    event-id: 25
+    arguments:
+    - changes:
+        tooltip: A bitfield of CHANGED_* flags representing what changed.
+        type: integer
+        enum-semantics: ChangeType
+    tooltip: Triggered when various properties of the object change. The parameter
+      changes is a bitfield of CHANGED_* flags.
+    categories:
+      - asset_permissions
+      - linkset
+      - media
+      - prim_appearance
+      - prim_inventory
+      - prim_media
+      - region
+      - teleport
+      - script  # TODO: move all but "script" to the constants
+      - sit
+  attach:
+    event-id: 26
+    arguments:
+    - avatar:
+        tooltip: UUID of the avatar the object is attached to, or NULL_KEY if
+          detached.
+        type: key
+    tooltip: Triggered whenever the object is attached to or detached from an
+      avatar. Passes the UUID key of the avatar if attached, or NULL_KEY if
+      detached.
+    categories:
+      - attachments
+  dataserver:
+    event-id: 27
+    arguments:
+    - queryid:
+        tooltip: Key identifying the asynchronous request (matches the handle
+          returned by the requesting function).
+        type: key
+    - data:
+        tooltip: String containing the requested data.
+        type: string
+    tooltip: Triggered when requested data is returned to the script (e.g., from
+      llRequestAgentData, llRequestInventoryData, or llGetNotecardLine).
+    categories:
+      - dataserver
+  link_message:
+    event-id: 28
+    arguments:
+    - sender_num:
+        tooltip: Link index of the prim containing the script that sent the message.
+        type: integer
+    - num:
+        tooltip: An integer value passed from the sending script.
+        type: integer
+    - str:
+        tooltip: A text string value passed from the sending script.
+        type: string
+    - id:
+        tooltip: A key value passed from the sending script.
+        type: key
+        slua-type: string
+    tooltip: Triggered when the script receives a link message from sender_num,
+      containing the parameters num, str, and id sent via llMessageLinked.
+    categories:
+      - script_communication
+  moving_start:
+    event-id: 29
+    arguments: []
+    tooltip: Triggered whenever the physical or moving object containing the script
+      starts moving.
+    categories:
+      - movement
       - pathfinding
+  moving_end:
+    event-id: 30
+    arguments: []
+    tooltip: Triggered whenever the physical or moving object containing the script
+      stops moving.
+    categories:
+      - movement
+      - pathfinding
+  object_rez:
+    event-id: 31
+    arguments:
+    - id:
+        tooltip: UUID of the newly rezzed object.
+        type: key
+    tooltip: Triggered when this object successfully rezzes another object from its
+      inventory. Passes the key (UUID) id of the newly rezzed object.
+    categories:
+      - rez
   remote_data:
+    event-id: 32
     arguments:
     - event_type:
         tooltip: Integer constant representing the type of XML-RPC event.
@@ -8506,92 +8467,62 @@ events:
       channel, message_id, sender, idata, and sdata.
     categories:
       - script_communication
-  run_time_permissions:
+  http_response:
+    event-id: 33
     arguments:
-    - perm:
-        tooltip: Bitfield of currently granted permissions (PERMISSION_* flags).
+    - request_id:
+        tooltip: Key matching the handle returned by the initiating llHTTPRequest
+          call.
+        type: key
+    - status:
+        tooltip: Integer HTTP status code returned (such as 200 or 404).
         type: integer
-        enum-semantics: ScriptPermission
-    tooltip: Triggered when an agent grants or denies runtime permissions requested
-      by llRequestPermissions. Passes the active integer permissions bitfield
-      perm (returns 0 if no permissions are currently granted).
+    - metadata:
+        tooltip: A list of HTTP_* constants and response headers metadata.
+        type: list
+        param-semantics: HTTPResponseError
+    - body:
+        tooltip: String payload of the received response body.
+        type: string
+    tooltip: Triggered when an HTTP response body is received for a pending
+      request_id, or if the request fails or times out.
     categories:
+      - script_communication
+      - web
+  http_request:
+    event-id: 34
+    arguments:
+    - request_id:
+        tooltip: Unique key identifying the incoming HTTP request (used with
+          llHTTPResponse).
+        type: key
+    - method:
+        tooltip: HTTP method string ('GET', 'POST', 'PUT', 'DELETE') or URL request
+          status constants.
+        type: string
+    - body:
+        tooltip: String payload of the incoming request body.
+        type: string
+    tooltip: Triggered when the script's registered URL receives an incoming HTTP
+      request identified by request_id.
+    categories:
+      - script_communication
+      - web
+  experience_permissions:
+    event-id: 35
+    arguments:
+    - agent_id:
+        tooltip: UUID of the avatar approving experience permissions.
+        type: key
+    tooltip: Triggered when the agent specified by agent_id approves an experience
+      permissions request (interactively or automatically if previously
+      approved).
+    categories:
+      - avatar
+      - experience
       - permissions
-  sensor:
-    arguments:
-    - num_detected:
-        tooltip: Total number of detected targets found (usable with llDetected*
-          functions).
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered when objects matching constraints of llSensor or
-      llSensorRepeat are successfully detected. Passes num_detected,
-      representing the number of detected targets.
-    categories:
-      - detected
-      - sensor
-  state_entry:
-    arguments: []
-    tooltip: Triggered immediately whenever a new state is entered (including at
-      script start). It is always the first event handled.
-    slua-removed: true
-    categories:
-      - script
-  state_exit:
-    arguments: []
-    slua-removed: true
-    tooltip: Triggered when the state command is used to transition out of the
-      current state. Handled before entering the new state's state_entry.
-    categories:
-      - script
-  timer:
-    arguments: []
-    slua-deprecated:
-      use: LLTimers
-    tooltip: Triggered at regular periodic intervals configured by llSetTimerEvent.
-    categories:
-      - script
-      - time
-  touch:
-    arguments:
-    - num_detected:
-        tooltip: Total number of touching agents detected (usable with llDetected*
-          functions).
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered continuously while an avatar touches the object. Passes
-      num_detected, representing the number of touching agents.
-    categories:
-      - detected
-      - touch
-      - user_interface
-  touch_end:
-    arguments:
-    - num_detected:
-        tooltip: Total number of touching agents detected (usable with llDetected*
-          functions).
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered when an avatar stops touching the object. Passes
-      num_detected, representing the number of touching agents.
-    categories:
-      - detected
-      - touch
-      - user_interface
-  touch_start:
-    arguments:
-    - num_detected:
-        tooltip: Total number of touching agents detected (usable with llDetected*
-          functions).
-        type: integer
-    detected-semantics: true
-    tooltip: Triggered when an avatar first touches the object. Passes num_detected,
-      representing the number of touching agents.
-    categories:
-      - detected
-      - touch
-      - user_interface
   transaction_result:
+    event-id: 36
     arguments:
     - id:
         tooltip: Key matching the handle returned by the initiating llTransfer*
@@ -8610,6 +8541,118 @@ events:
       status, and CSV or error data.
     categories:
       - money
+  path_update:
+    event-id: 37
+    arguments:
+    - type:
+        tooltip: Path update status or failure code constant (PU_* flag).
+        type: integer
+        enum-semantics: CharacterPathUpdateType
+    - reserved:
+        tooltip: Reserved parameter (currently unused).
+        type: list
+    tooltip: Triggered to inform the script of changes or failures in the
+      pathfinding character's status.
+    categories:
+      - pathfinding
+  experience_permissions_denied:
+    event-id: 38
+    arguments:
+    - agent_id:
+        tooltip: UUID of the avatar who denied or was blocked from granting
+          permissions.
+        type: key
+    - reason:
+        tooltip: XP_ERROR_* error constant describing why permissions were denied.
+        type: integer
+        enum-semantics: ExperienceError
+    tooltip: Triggered when the agent specified by agent_id denies experience
+      permissions, or when permission is blocked for other reasons (specified by
+      the error code reason).
+    categories:
+      - avatar
+      - experience
+      - permissions
+  linkset_data:
+    event-id: 39
+    arguments:
+    - action:
+        tooltip: An integer constant representing the action taken (e.g.,
+          LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
+        type: integer
+        enum-semantics: LinksetDataAction
+    - name:
+        tooltip: Key name of the modified key-value pair.
+        type: string
+    - value:
+        tooltip: New string value of the pair (empty if the pair was deleted or is
+          password-protected).
+        type: string
+    tooltip: Fires in all scripts in the linkset whenever the datastore has been
+      modified via an llLinksetData function. Passes the action taken, the
+      affected key name, and the new value.
+    categories:
+      - data_storage
+      - linkset
+      - linkset_data
+  game_control:
+    event-id: 40
+    arguments:
+    - id:
+        tooltip: UUID of the avatar supplying controller input.
+        type: key
+    - button_levels:
+        tooltip: A 32-bit mask representing the buttons currently held down on the
+          controller.
+        type: integer
+        enum-semantics: GameControlButton
+    - axes:
+        tooltip: A list of six float values in the range [-1.0, 1.0] representing
+          controller axes.
+        type: list
+        slua-type: "{number}"
+    tooltip: Triggered when a compatible viewer sends game controller input changes
+      for the avatar specified by id. Only triggers for scripts in attachments
+      or seats.
+    categories:
+      - avatar
+      - input
+    uses-enum: GameControlAxis
+  on_death:
+    event-id: 41
+    arguments: []
+    tooltip: Triggered on all worn attachments when the wearing avatar's health
+      reaches 0.
+    categories:
+      - combat
+  on_damage:
+    event-id: 42
+    arguments:
+    - num_detected:
+        tooltip: Number of pending damage events.
+        type: integer
+    detected-semantics: true
+    tooltip: Triggered when damage has been inflicted on an avatar or task, but
+      before it is applied or distributed. Collision detected functions
+      (llDetected*), llDetectedDamage, and llAdjustDamage are available. Passes
+      num_detected, representing the number of pending damage events.
+    categories:
+      - combat
+      - detected
+  final_damage:
+    event-id: 43
+    arguments:
+    - num_detected:
+        tooltip: Number of damage events applied to the avatar or task.
+        type: integer
+    detected-semantics: true
+    tooltip: Triggered after all on_damage events across all scripts have completed
+      and damage is actively applied to the avatar or distributed among seated
+      avatars. Collision detected functions (llDetected*) and llDetectedDamage
+      are available.
+    categories:
+      - combat
+      - detected
 functions:
 
 #  <key>: is the LSL name for the function.
@@ -8623,6 +8666,8 @@ functions:
 #    arguments: An array of maps of maps describing the parameters to this function.
 #    tooltip: A brief description of this function. Map of maps is used to retain ordering.
 #    func-id: The LSO function identifier, (See comment at the top of this file.)
+#    event-id: The event's numeric index, 1-based and contiguous. Bit (event-id - 1) in handled-event
+#              bitfields; must match LSCRIPTStateEventType in the server. builtins.txt orders events by it.
 #    private: Should this function be omitted from the generated documentation.
 #    deprecated: Has this function been deprecated.
 #    slua-deprecated: Has this function or event been deprecated in SLua.

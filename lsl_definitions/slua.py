@@ -509,7 +509,7 @@ class SLuaDefinitions:
                 return "{any}"
             return type
 
-        for event in lsl.events.values():
+        for event in sorted(lsl.events.values(), key=lambda x: x.name):
             if event.slua_removed:
                 continue
             event_func = SLuaFunction(
