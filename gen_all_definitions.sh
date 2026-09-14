@@ -42,6 +42,7 @@ $CMD $DEFS gen_tree_source_file "$outdir/cpp/lscript_tree.cpp"
 $CMD $DEFS gen_lexer_file ./templates/indra.in.l "$outdir/templated/indra.l"
 $CMD $DEFS gen_parser_file ./templates/indra.in.y "$outdir/templated/indra.y"
 $CMD $DEFS gen_mono_library_defs ./templates/LslLibrary.cs "$outdir/templated/LslLibrary.cs"
+$CMD $DEFS gen_slua_embedded_defs ./templates/EmbeddedBuiltinDefinitions.in.cpp $SLUA "$outdir/cpp/EmbeddedBuiltinDefinitions.cpp"
 
 # Experimental generators
 $CMD $DEFS gen_enums_txt "$outdir/experimental/enums.txt"

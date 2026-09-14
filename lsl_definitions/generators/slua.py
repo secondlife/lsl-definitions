@@ -60,6 +60,12 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
     for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue
+        defs.write(f"""
+---------------------------
+-- Global Table: {module.name}
+---------------------------
+
+""")
         if module.name == "string":
             defs.write(
                 "--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match\n"
@@ -67,12 +73,27 @@ def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinit
         module.write_luau_def(defs)
         if module.name == "string":
             defs.write("--]]\n")
+        defs.write("\n")
     for var in slua_definitions.global_variables.values():
         defs.write("declare ")
         defs.write(var.to_luau_def())
         defs.write("\n")
+    defs.write("""
+---------------------------
+-- Global Table: ll
+---------------------------
+
+""")
     ll_module.write_luau_def(defs)
+    defs.write("""
+
+---------------------------
+-- Global Table: llcompat
+---------------------------
+
+""")
     llcompat_module.write_luau_def(defs)
+    defs.write("\n")
     for const in sorted(slua_definitions.global_constants.values(), key=lambda x: x.name):
         if const.private:
             continue
