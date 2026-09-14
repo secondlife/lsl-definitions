@@ -124,14 +124,14 @@ def gen_selene_yml(definitions: LSLDefinitions, slua_definitions: SLuaDefinition
             "uuid": {"display": "uuid"},
             "vector": {"display": "vector"},
             "quaternion": {"display": "quaternion"},
-            "list": "table",
+            "ROList": "table",
             "thread": {"display": "thread"},
         }
         if type_str in type_map:
             return type_map[type_str]
         if type_str in slua_definitions.type_aliases:
             return slua_definitions.type_aliases[type_str].selene_type
-        if (type_str.startswith("{") and type_str.endswith("}")) or type_str.startswith("list |"):
+        if (type_str.startswith("{") and type_str.endswith("}")) or type_str.startswith("ROList |"):
             return "table"
         if "|" in type_str:
             return default

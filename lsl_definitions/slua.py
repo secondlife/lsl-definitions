@@ -505,7 +505,7 @@ class SLuaDefinitions:
             But don't replace parameters. The typechecker should still
             prevent you from passing nil to llSetLinkPrimitiveParamsFast, and such.
             """
-            if type == "list":
+            if type == "ROList":
                 return "{any}"
             return type
 
@@ -1031,7 +1031,7 @@ class SLuaDefinitionParser:
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
+        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|\bread|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
     )
 
     def _validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
