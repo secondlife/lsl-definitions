@@ -6598,6 +6598,13 @@ constants:
     type: integer
     value: 0
     value-type: vector
+  SKY_AMBIENT_SKY_SATURATION:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting controlling the saturation of ambient sky lighting.
+    type: integer
+    value: 25
+    value-type: float
+    range: [0, 1]
   SKY_BLUE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the colors used to calculate blue
@@ -6654,6 +6661,14 @@ constants:
       texture used for the clouds.
     type: integer
     value: 19
+    value-type: asset
+    access: write
+  SKY_COLORGRADE_LUT:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting containing the UUID of the color grading LUT
+      texture applied when SKY_HDR_TONEMAPPER is 2.
+    type: integer
+    value: 33
     value-type: asset
     access: write
   SKY_DENSITY_PROFILE_COUNTS:
@@ -6713,6 +6728,40 @@ constants:
         value-type: float
       - name: distance_multiplier
         value-type: float
+  SKY_HDR_MAX:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting for the maximum HDR exposure value.
+    type: integer
+    value: 28
+    value-type: float
+  SKY_HDR_MIN:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting for the minimum HDR exposure value.
+    type: integer
+    value: 29
+    value-type: float
+  SKY_HDR_OFFSET:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting for the HDR exposure offset.
+    type: integer
+    value: 27
+    value-type: float
+  SKY_HDR_TONEMAPPER:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: "Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral,
+      1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT)."
+    type: integer
+    value: 30
+    value-type: integer
+    range: [0, 2]
+  SKY_HDR_TONEMAPPER_AMOUNT:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting for the mix between linear tonemapping (0) and the
+      selected tonemapper (1).
+    type: integer
+    value: 31
+    value-type: float
+    range: [0, 1]
   SKY_LIGHT:
     member-of: [EnvironmentParamReadOnly]
     tooltip: "Environmental setting containing lighting parameters: dominant light
@@ -6866,6 +6915,12 @@ constants:
         value-type: vector
         details: The diffuse color applied to the sun.
         access: read
+  SKY_SUN_BRIGHTNESS:
+    member-of: [EnvironmentParamReadOnly, EnvironmentParam]
+    tooltip: Environmental setting for the brightness of the sun in lux.
+    type: integer
+    value: 26
+    value-type: float
   SKY_SUN_TEXTURE:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the inventory name or UUID of the
@@ -6901,6 +6956,14 @@ constants:
         value-type: float
       - name: sky4
         value-type: float
+    access: read
+  SKY_VERSION:
+    member-of: [EnvironmentParamReadOnly]
+    tooltip: Environmental setting containing the sky settings version. Read-only;
+      cannot be changed by scripts.
+    type: integer
+    value: 32
+    value-type: integer
     access: read
   SMOOTH:
     member-of: [TextureAnimMode]
