@@ -8058,6 +8058,15 @@ float falloff – ranges from 0.01 to 2.0
             <key>value</key>
             <string>0</string>
          </map>
+         <key>SKY_AMBIENT_SKY_SATURATION</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting controlling the saturation of ambient sky lighting.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>25</string>
+         </map>
          <key>SKY_BLUE</key>
          <map>
             <key>tooltip</key>
@@ -8084,6 +8093,15 @@ float falloff – ranges from 0.01 to 2.0
             <string>number</string>
             <key>value</key>
             <string>19</string>
+         </map>
+         <key>SKY_COLORGRADE_LUT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is 2.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>33</string>
          </map>
          <key>SKY_DOME</key>
          <map>
@@ -8120,6 +8138,51 @@ float falloff – ranges from 0.01 to 2.0
             <string>number</string>
             <key>value</key>
             <string>23</string>
+         </map>
+         <key>SKY_HDR_MAX</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting for the maximum HDR exposure value.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>28</string>
+         </map>
+         <key>SKY_HDR_MIN</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting for the minimum HDR exposure value.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>29</string>
+         </map>
+         <key>SKY_HDR_OFFSET</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting for the HDR exposure offset.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>27</string>
+         </map>
+         <key>SKY_HDR_TONEMAPPER</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT).</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>30</string>
+         </map>
+         <key>SKY_HDR_TONEMAPPER_AMOUNT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting for the mix between linear tonemapping (0) and the selected tonemapper (1).</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>31</string>
          </map>
          <key>SKY_LIGHT</key>
          <map>
@@ -8193,6 +8256,15 @@ float falloff – ranges from 0.01 to 2.0
             <key>value</key>
             <string>14</string>
          </map>
+         <key>SKY_SUN_BRIGHTNESS</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting for the brightness of the sun in lux.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>26</string>
+         </map>
          <key>SKY_SUN_TEXTURE</key>
          <map>
             <key>tooltip</key>
@@ -8219,6 +8291,15 @@ float falloff – ranges from 0.01 to 2.0
             <string>number</string>
             <key>value</key>
             <string>15</string>
+         </map>
+         <key>SKY_VERSION</key>
+         <map>
+            <key>tooltip</key>
+            <string>Environmental setting containing the sky settings version. Read-only; cannot be changed by scripts.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>32</string>
          </map>
          <key>SMOOTH</key>
          <map>

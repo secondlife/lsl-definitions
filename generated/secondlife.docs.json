@@ -7692,6 +7692,9 @@
     "@sl-slua/global/SKY_AMBIENT": {
         "documentation": "Value: 0<br>Environmental setting for the ambient color used in the scene."
     },
+    "@sl-slua/global/SKY_AMBIENT_SKY_SATURATION": {
+        "documentation": "Value: 25<br>Environmental setting controlling the saturation of ambient sky lighting."
+    },
     "@sl-slua/global/SKY_BLUE": {
         "documentation": "Value: 22<br>Environmental setting containing the colors used to calculate blue density and blue horizon in the sky."
     },
@@ -7700,6 +7703,9 @@
     },
     "@sl-slua/global/SKY_CLOUD_TEXTURE": {
         "documentation": "Value: 19<br>Environmental setting containing the inventory name or UUID of the texture used for the clouds."
+    },
+    "@sl-slua/global/SKY_COLORGRADE_LUT": {
+        "documentation": "Value: 33<br>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is 2."
     },
     "@sl-slua/global/SKY_DOME": {
         "documentation": "Value: 4<br>Environmental setting containing sky dome parameters: offset, radius, and maximum altitude."
@@ -7712,6 +7718,21 @@
     },
     "@sl-slua/global/SKY_HAZE": {
         "documentation": "Value: 23<br>Environmental setting containing the values used to calculate the light scattering impact of blue density and blue horizon on the scene."
+    },
+    "@sl-slua/global/SKY_HDR_MAX": {
+        "documentation": "Value: 28<br>Environmental setting for the maximum HDR exposure value."
+    },
+    "@sl-slua/global/SKY_HDR_MIN": {
+        "documentation": "Value: 29<br>Environmental setting for the minimum HDR exposure value."
+    },
+    "@sl-slua/global/SKY_HDR_OFFSET": {
+        "documentation": "Value: 27<br>Environmental setting for the HDR exposure offset."
+    },
+    "@sl-slua/global/SKY_HDR_TONEMAPPER": {
+        "documentation": "Value: 30<br>Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT)."
+    },
+    "@sl-slua/global/SKY_HDR_TONEMAPPER_AMOUNT": {
+        "documentation": "Value: 31<br>Environmental setting for the mix between linear tonemapping (0) and the selected tonemapper (1)."
     },
     "@sl-slua/global/SKY_LIGHT": {
         "documentation": "Value: 8<br>Environmental setting containing lighting parameters: dominant light direction (unit vector), current light color (fade_color in sRGB), and total ambient color (sRGB)."
@@ -7737,6 +7758,9 @@
     "@sl-slua/global/SKY_SUN": {
         "documentation": "Value: 14<br>Environmental sun parameters: rotation, scale, color, is_default_texture, direction vector, ambient color, and diffuse color."
     },
+    "@sl-slua/global/SKY_SUN_BRIGHTNESS": {
+        "documentation": "Value: 26<br>Environmental setting for the brightness of the sun in lux."
+    },
     "@sl-slua/global/SKY_SUN_TEXTURE": {
         "documentation": "Value: 21<br>Environmental setting containing the inventory name or UUID of the texture used for the sun."
     },
@@ -7745,6 +7769,9 @@
     },
     "@sl-slua/global/SKY_TRACKS": {
         "documentation": "Value: 15<br>Environmental setting containing the track altitudes used for sky transitions in the region."
+    },
+    "@sl-slua/global/SKY_VERSION": {
+        "documentation": "Value: 32<br>Environmental setting containing the sky settings version. Read-only; cannot be changed by scripts."
     },
     "@sl-slua/global/SMOOTH": {
         "documentation": "Value: 0x10<br>Used with texture animation functions to cause the animation to slide smoothly in the X direction (or transition smoothly in SCALE/ROTATE modes) instead of making instant frame changes."

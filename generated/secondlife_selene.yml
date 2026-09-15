@@ -3998,6 +3998,10 @@ globals:
     property: read-only
     type: number
     description: Environmental setting for the ambient color used in the scene.
+  SKY_AMBIENT_SKY_SATURATION:
+    property: read-only
+    type: number
+    description: Environmental setting controlling the saturation of ambient sky lighting.
   SKY_BLUE:
     property: read-only
     type: number
@@ -4014,6 +4018,11 @@ globals:
     type: number
     description: Environmental setting containing the inventory name or UUID of the
       texture used for the clouds.
+  SKY_COLORGRADE_LUT:
+    property: read-only
+    type: number
+    description: Environmental setting containing the UUID of the color grading LUT
+      texture applied when SKY_HDR_TONEMAPPER is 2.
   SKY_DOME:
     property: read-only
     type: number
@@ -4034,6 +4043,28 @@ globals:
     type: number
     description: Environmental setting containing the values used to calculate the
       light scattering impact of blue density and blue horizon on the scene.
+  SKY_HDR_MAX:
+    property: read-only
+    type: number
+    description: Environmental setting for the maximum HDR exposure value.
+  SKY_HDR_MIN:
+    property: read-only
+    type: number
+    description: Environmental setting for the minimum HDR exposure value.
+  SKY_HDR_OFFSET:
+    property: read-only
+    type: number
+    description: Environmental setting for the HDR exposure offset.
+  SKY_HDR_TONEMAPPER:
+    property: read-only
+    type: number
+    description: 'Environmental setting selecting the tonemapper: 0 = Khronos PBR
+      Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT).'
+  SKY_HDR_TONEMAPPER_AMOUNT:
+    property: read-only
+    type: number
+    description: Environmental setting for the mix between linear tonemapping (0)
+      and the selected tonemapper (1).
   SKY_LIGHT:
     property: read-only
     type: number
@@ -4075,6 +4106,10 @@ globals:
     type: number
     description: 'Environmental sun parameters: rotation, scale, color, is_default_texture,
       direction vector, ambient color, and diffuse color.'
+  SKY_SUN_BRIGHTNESS:
+    property: read-only
+    type: number
+    description: Environmental setting for the brightness of the sun in lux.
   SKY_SUN_TEXTURE:
     property: read-only
     type: number
@@ -4090,6 +4125,11 @@ globals:
     type: number
     description: Environmental setting containing the track altitudes used for sky
       transitions in the region.
+  SKY_VERSION:
+    property: read-only
+    type: number
+    description: Environmental setting containing the sky settings version. Read-only;
+      cannot be changed by scripts.
   SMOOTH:
     property: read-only
     type: number
