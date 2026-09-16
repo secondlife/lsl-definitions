@@ -2614,6 +2614,15 @@
     luaSL_pushnativeinteger(L, 1);
     lua_setglobal(L, "SKY_TEXTURE_DEFAULTS");
 
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "SKY_TONEMAPPER_ACES");
+
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "SKY_TONEMAPPER_LUT");
+
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "SKY_TONEMAPPER_PBR_NEUTRAL");
+
     luaSL_pushnativeinteger(L, 15);
     lua_setglobal(L, "SKY_TRACKS");
 

@@ -4022,7 +4022,7 @@ globals:
     property: read-only
     type: number
     description: Environmental setting containing the UUID of the color grading LUT
-      texture applied when SKY_HDR_TONEMAPPER is 2.
+      texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.
   SKY_DOME:
     property: read-only
     type: number
@@ -4058,8 +4058,8 @@ globals:
   SKY_HDR_TONEMAPPER:
     property: read-only
     type: number
-    description: 'Environmental setting selecting the tonemapper: 0 = Khronos PBR
-      Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT).'
+    description: Environmental setting selecting the tonemapper, one of SKY_TONEMAPPER_PBR_NEUTRAL,
+      SKY_TONEMAPPER_ACES, or SKY_TONEMAPPER_LUT.
   SKY_HDR_TONEMAPPER_AMOUNT:
     property: read-only
     type: number
@@ -4120,6 +4120,20 @@ globals:
     type: number
     description: Environmental check returning 1 if the sky textures are set to their
       default values, or 0 if they use custom textures.
+  SKY_TONEMAPPER_ACES:
+    property: read-only
+    type: number
+    description: Tonemapper setting for SKY_HDR_TONEMAPPER selecting the ACES tonemapper.
+  SKY_TONEMAPPER_LUT:
+    property: read-only
+    type: number
+    description: Tonemapper setting for SKY_HDR_TONEMAPPER applying the color grading
+      LUT texture set by SKY_COLORGRADE_LUT.
+  SKY_TONEMAPPER_PBR_NEUTRAL:
+    property: read-only
+    type: number
+    description: Tonemapper setting for SKY_HDR_TONEMAPPER selecting the Khronos PBR
+      Neutral tonemapper.
   SKY_TRACKS:
     property: read-only
     type: number

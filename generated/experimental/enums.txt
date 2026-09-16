@@ -1235,6 +1235,11 @@ enum SitFlag {
   NO_COLLIDE = 0x10
   NO_DAMAGE = 0x20
 };
+enum SkyTonemapper {
+  PBR_NEUTRAL = 0
+  ACES = 1
+  LUT = 2
+};
 enum StringTrimType {
   HEAD = 1
   TAIL = 2

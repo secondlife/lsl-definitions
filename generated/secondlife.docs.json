@@ -7705,7 +7705,7 @@
         "documentation": "Value: 19<br>Environmental setting containing the inventory name or UUID of the texture used for the clouds."
     },
     "@sl-slua/global/SKY_COLORGRADE_LUT": {
-        "documentation": "Value: 33<br>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is 2."
+        "documentation": "Value: 33<br>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT."
     },
     "@sl-slua/global/SKY_DOME": {
         "documentation": "Value: 4<br>Environmental setting containing sky dome parameters: offset, radius, and maximum altitude."
@@ -7729,7 +7729,7 @@
         "documentation": "Value: 27<br>Environmental setting for the HDR exposure offset."
     },
     "@sl-slua/global/SKY_HDR_TONEMAPPER": {
-        "documentation": "Value: 30<br>Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT)."
+        "documentation": "Value: 30<br>Environmental setting selecting the tonemapper, one of SKY_TONEMAPPER_PBR_NEUTRAL, SKY_TONEMAPPER_ACES, or SKY_TONEMAPPER_LUT."
     },
     "@sl-slua/global/SKY_HDR_TONEMAPPER_AMOUNT": {
         "documentation": "Value: 31<br>Environmental setting for the mix between linear tonemapping (0) and the selected tonemapper (1)."
@@ -7766,6 +7766,15 @@
     },
     "@sl-slua/global/SKY_TEXTURE_DEFAULTS": {
         "documentation": "Value: 1<br>Environmental check returning 1 if the sky textures are set to their default values, or 0 if they use custom textures."
+    },
+    "@sl-slua/global/SKY_TONEMAPPER_ACES": {
+        "documentation": "Value: 1<br>Tonemapper setting for SKY_HDR_TONEMAPPER selecting the ACES tonemapper."
+    },
+    "@sl-slua/global/SKY_TONEMAPPER_LUT": {
+        "documentation": "Value: 2<br>Tonemapper setting for SKY_HDR_TONEMAPPER applying the color grading LUT texture set by SKY_COLORGRADE_LUT."
+    },
+    "@sl-slua/global/SKY_TONEMAPPER_PBR_NEUTRAL": {
+        "documentation": "Value: 0<br>Tonemapper setting for SKY_HDR_TONEMAPPER selecting the Khronos PBR Neutral tonemapper."
     },
     "@sl-slua/global/SKY_TRACKS": {
         "documentation": "Value: 15<br>Environmental setting containing the track altitudes used for sky transitions in the region."

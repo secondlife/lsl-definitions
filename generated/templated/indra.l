@@ -876,6 +876,9 @@
 "SKY_SUN_BRIGHTNESS" { count(); yylval.ival = 26; return(INTEGER_CONSTANT); }
 "SKY_SUN_TEXTURE" { count(); yylval.ival = 21; return(INTEGER_CONSTANT); }
 "SKY_TEXTURE_DEFAULTS" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
+"SKY_TONEMAPPER_ACES" { count(); yylval.ival = 1; return(INTEGER_CONSTANT); }
+"SKY_TONEMAPPER_LUT" { count(); yylval.ival = 2; return(INTEGER_CONSTANT); }
+"SKY_TONEMAPPER_PBR_NEUTRAL" { count(); yylval.ival = 0; return(INTEGER_CONSTANT); }
 "SKY_TRACKS" { count(); yylval.ival = 15; return(INTEGER_CONSTANT); }
 "SKY_VERSION" { count(); yylval.ival = 32; return(INTEGER_CONSTANT); }
 "SMOOTH" { count(); yylval.ival = 0x10; return(INTEGER_CONSTANT); }

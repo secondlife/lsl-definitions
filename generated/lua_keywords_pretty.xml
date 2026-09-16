@@ -8097,7 +8097,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_COLORGRADE_LUT</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is 2.</string>
+            <string>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -8169,7 +8169,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_HDR_TONEMAPPER</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral, 1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT).</string>
+            <string>Environmental setting selecting the tonemapper, one of SKY_TONEMAPPER_PBR_NEUTRAL, SKY_TONEMAPPER_ACES, or SKY_TONEMAPPER_LUT.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -8282,6 +8282,33 @@ float falloff – ranges from 0.01 to 2.0
             <string>number</string>
             <key>value</key>
             <string>1</string>
+         </map>
+         <key>SKY_TONEMAPPER_ACES</key>
+         <map>
+            <key>tooltip</key>
+            <string>Tonemapper setting for SKY_HDR_TONEMAPPER selecting the ACES tonemapper.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1</string>
+         </map>
+         <key>SKY_TONEMAPPER_LUT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Tonemapper setting for SKY_HDR_TONEMAPPER applying the color grading LUT texture set by SKY_COLORGRADE_LUT.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2</string>
+         </map>
+         <key>SKY_TONEMAPPER_PBR_NEUTRAL</key>
+         <map>
+            <key>tooltip</key>
+            <string>Tonemapper setting for SKY_HDR_TONEMAPPER selecting the Khronos PBR Neutral tonemapper.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0</string>
          </map>
          <key>SKY_TRACKS</key>
          <map>

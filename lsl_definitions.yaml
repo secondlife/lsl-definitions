@@ -516,6 +516,10 @@ enums:
     type: flag
     prefix: SIT_FLAG_
     tooltip: ''
+  SkyTonemapper:
+    type: enum
+    prefix: SKY_TONEMAPPER_
+    tooltip: ''
   StringTrimType:
     type: enum
     prefix: STRING_TRIM_
@@ -6666,7 +6670,7 @@ constants:
   SKY_COLORGRADE_LUT:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting containing the UUID of the color grading LUT
-      texture applied when SKY_HDR_TONEMAPPER is 2.
+      texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.
     type: integer
     value: 33
     value-type: asset
@@ -6748,12 +6752,12 @@ constants:
     value-type: float
   SKY_HDR_TONEMAPPER:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: "Environmental setting selecting the tonemapper: 0 = Khronos PBR Neutral,
-      1 = ACES, 2 = LUT (uses the texture set by SKY_COLORGRADE_LUT)."
+    tooltip: Environmental setting selecting the tonemapper, one of
+      SKY_TONEMAPPER_PBR_NEUTRAL, SKY_TONEMAPPER_ACES, or SKY_TONEMAPPER_LUT.
     type: integer
     value: 30
     value-type: integer
-    range: [0, 2]
+    enum: SkyTonemapper
   SKY_HDR_TONEMAPPER_AMOUNT:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
     tooltip: Environmental setting for the mix between linear tonemapping (0) and the
@@ -6943,6 +6947,23 @@ constants:
       - name: rainbow_is_default
         value-type: boolean
     access: read
+  SKY_TONEMAPPER_ACES:
+    member-of: [SkyTonemapper]
+    tooltip: Tonemapper setting for SKY_HDR_TONEMAPPER selecting the ACES tonemapper.
+    type: integer
+    value: 1
+  SKY_TONEMAPPER_LUT:
+    member-of: [SkyTonemapper]
+    tooltip: Tonemapper setting for SKY_HDR_TONEMAPPER applying the color grading LUT
+      texture set by SKY_COLORGRADE_LUT.
+    type: integer
+    value: 2
+  SKY_TONEMAPPER_PBR_NEUTRAL:
+    member-of: [SkyTonemapper]
+    tooltip: Tonemapper setting for SKY_HDR_TONEMAPPER selecting the Khronos PBR Neutral
+      tonemapper.
+    type: integer
+    value: 0
   SKY_TRACKS:
     member-of: [EnvironmentParamReadOnly]
     tooltip: Environmental setting containing the track altitudes used for sky

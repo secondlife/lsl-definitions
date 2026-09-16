@@ -2606,6 +2606,9 @@ declare SKY_SUN: number
 declare SKY_SUN_BRIGHTNESS: number
 declare SKY_SUN_TEXTURE: number
 declare SKY_TEXTURE_DEFAULTS: number
+declare SKY_TONEMAPPER_ACES: number
+declare SKY_TONEMAPPER_LUT: number
+declare SKY_TONEMAPPER_PBR_NEUTRAL: number
 declare SKY_TRACKS: number
 declare SKY_VERSION: number
 declare SMOOTH: number
