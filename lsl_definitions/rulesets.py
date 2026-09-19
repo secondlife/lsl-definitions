@@ -161,7 +161,7 @@ def expand_builder(lsl: LSLDefinitions, ruleset_name: str, class_name: str) -> B
 
 def expand_spp_builder(lsl: LSLDefinitions) -> BuilderSpec:
     """Compatibility wrapper. Expands the prim-params ruleset into the SPP builder."""
-    return expand_builder(lsl, "prim-params", "PrimParamsSetterType")
+    return expand_builder(lsl, "prim-params", "PrimParamSetterType")
 
 
 def expand_member_params(

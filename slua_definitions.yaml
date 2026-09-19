@@ -355,21 +355,21 @@ classes:
       comment: "Function reference to remove."
       type: LLTimerCallback
     return-type: boolean
-- name: PrimParamsSetterType
+- name: PrimParamSetterType
   comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   instance-type: '{any}'
   export: true
   functions:
   - name: new
-    comment: Create an empty list with PrimParamsSetterTypeMeta as metatable
+    comment: Create an empty list with PrimParamSetterTypeMeta as metatable
     parameters: []
-    return-type: PrimParamsSetterType
+    return-type: PrimParamSetterType
   methods: # This class is currently populated dynamically
   - name: apply
     comment: Call ll.SetLinkPrimitiveParamsFast with my instance list
     parameters:
     - name: self
-      type: PrimParamsSetterType
+      type: PrimParamSetterType
     - name: link
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
@@ -2129,10 +2129,10 @@ modules:
 - name: llprim
   comment: Utilities for working with prims / objects
   constants:
-  - name: ParamsSetter
+  - name: ParamSetter
     comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-    type: PrimParamsSetterTypeMeta
-    value: PrimParamsSetterTypeMeta
+    type: PrimParamSetterTypeMeta
+    value: PrimParamSetterTypeMeta
   functions:
   - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.

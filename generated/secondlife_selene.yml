@@ -5800,7 +5800,7 @@ globals:
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises
       an error if JSON is invalid.
-  llprim.ParamsSetter:
+  llprim.ParamSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   llprim.setParticleSystem:
@@ -16570,7 +16570,7 @@ structs:
       description: Stops and removes a timer. If the same function was added multiple
         times, only the last one added is removed, regardless of its interval. Returns
         true if the timer was found and removed, false otherwise.
-  PrimParamsSetterType:
+  PrimParamSetterType:
     apply:
       method: true
       args:
@@ -16965,4 +16965,4 @@ structs:
       - type: number
     new:
       args: []
-      description: Create an empty list with PrimParamsSetterTypeMeta as metatable
+      description: Create an empty list with PrimParamSetterTypeMeta as metatable

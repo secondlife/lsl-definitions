@@ -271,7 +271,7 @@ export type rotation = quaternion</string>
             <key>tooltip</key>
             <string>Timer management class for scheduling periodic and one-time callbacks. Note: Do not mix LLTimers with old LSL timer functions (e.g., llcompat.SetTimerEvent), as they share the same underlying event and will interfere with each other.</string>
          </map>
-         <key>PrimParamsSetterType</key>
+         <key>PrimParamSetterType</key>
          <map>
             <key>tooltip</key>
             <string>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast</string>
@@ -374,14 +374,14 @@ export type rotation = quaternion</string>
             <key>type</key>
             <string>any</string>
          </map>
-         <key>llprim.ParamsSetter</key>
+         <key>llprim.ParamSetter</key>
          <map>
             <key>tooltip</key>
             <string>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast</string>
             <key>type</key>
-            <string>PrimParamsSetterTypeMeta</string>
+            <string>PrimParamSetterTypeMeta</string>
             <key>value</key>
-            <string>PrimParamsSetterTypeMeta</string>
+            <string>PrimParamSetterTypeMeta</string>
          </map>
          <key>math.e</key>
          <map>
