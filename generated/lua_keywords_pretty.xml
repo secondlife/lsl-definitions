@@ -16999,7 +16999,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                      <key>tooltip</key>
                      <string>Value to prefill elements with (optional, defaults to nil).</string>
                      <key>type</key>
-                     <string>V?</string>
+                     <string>V</string>
                   </map>
                </map>
             </array>
