@@ -20,7 +20,12 @@ from lsl_definitions.utils import Deprecated, remove_nones
 
 
 @register("slua_lsp_defs")
-def gen_luau_lsp_defs(definitions: LSLDefinitions, slua_definitions: SLuaDefinitions) -> str:
+def gen_luau_lsp_defs(
+    definitions: LSLDefinitions,
+    slua_definitions: SLuaDefinitions,
+    *,
+    newsolver: bool = False,
+) -> str:
     """Generate SLua definitions for Luau Language Server"""
     ll_module = slua_definitions.modules["ll"]
     llcompat_module = slua_definitions.modules["llcompat"]
