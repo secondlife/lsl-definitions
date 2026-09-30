@@ -39,6 +39,55 @@ if TYPE_CHECKING:
 
 
 @dataclasses.dataclass
+class SLuaTypecheckerFlags:
+    """Flags specific to the internals of luau-analyze and luau-lsp."""
+
+    builtin: bool = False
+    """This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp."""
+    magic: bool = False
+    """
+    The typechecker has custom logic for this function.
+    For examples of each magic type function, see the comments of
+    https://github.com/secondlife/lsl-definitions/pull/130
+    """
+    checked: bool = False
+    """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
+    new_type: str | None = None
+    """More appropriate type when FFlag::LuauSolverV2 is active."""
+    new_type_parameters: str | None = None
+    """More appropriate type parameters when FFlag::LuauSolverV2 is active."""
+
+    @classmethod
+    def from_definition(cls, definition: dict) -> SLuaTypecheckerFlags:
+        if definition is None:
+            return SLuaTypecheckerFlags()
+        else:
+            return SLuaTypecheckerFlags(
+                builtin=definition.get("builtin", False),
+                magic=definition.get("magic", False),
+                checked=definition.get("checked", False),
+                new_type=definition.get("new-type", None),
+                new_type_parameters=definition.get("new-type-parameters", None),
+            )
+
+    def fully_defined(self, newsolver: bool = False) -> bool:
+        """True if this function is fully defined and won't cause issues for the typechecker."""
+        if newsolver and self.new_type:
+            return True
+        return not self.builtin and not self.magic
+
+    def comment_string(self, newsolver: bool = False) -> str:
+        if newsolver and self.new_type:
+            return ""
+        comments = []
+        if self.builtin:
+            comments.append("builtin")
+        if self.magic:
+            comments.append("magic type")
+        return " -- " + ", ".join(comments) if comments else ""
+
+
+@dataclasses.dataclass
 class SLuaProperty:
     """Property definition"""
 
@@ -82,19 +131,25 @@ class SLuaParameter:
     observes: Literal["read-write", "read", "write"] | None = None
     """See https://kampfkarren.github.io/selene/usage/std.html#observes."""
     default_value: Any = None
+    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
+        default_factory=SLuaTypecheckerFlags
+    )
 
-    def to_luau_def(self, declaration: bool = False) -> str:
+    def to_luau_def(self, declaration: bool = False, newsolver: bool = False) -> str:
+        type = self.type
+        if newsolver and self.typechecker_flags.new_type:
+            type = self.typechecker_flags.new_type
         if self.type is None:
             return self.name
         elif self.name == "...":
             if not declaration:
-                return self.type
+                return type
             elif self.type.startswith("..."):
-                return f"...: {self.type[3:]}"
+                return f"...: {type[3:]}"
             else:
-                return f"...: {self.type}"
+                return f"...: {type}"
         else:
-            return f"{sanitize_luau_param_name(self.name)}: {self.type}"
+            return f"{sanitize_luau_param_name(self.name)}: {type}"
 
     @property
     def formatted_comment(self) -> str:
@@ -112,55 +167,35 @@ class SLuaParameter:
 
 
 @dataclasses.dataclass
-class SLuaTypecheckerFlags:
-    """Flags specific to the internals of luau-analyze and luau-lsp."""
-
-    builtin: bool = False
-    """This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp."""
-    magic: bool = False
-    """
-    The typechecker has custom logic for this function.
-    For examples of each magic type function, see the comments of
-    https://github.com/secondlife/lsl-definitions/pull/130
-    """
-    checked: bool = False
-    """Raises an error if types are incorrect. Causes !nonstrict to behave like !strict."""
-
-    @property
-    def fully_defined(self) -> bool:
-        """True if this function is fully defined and won't cause issues for the typechecker."""
-        return not self.builtin and not self.magic
-
-    @property
-    def comment_string(self) -> str:
-        comments = []
-        if self.builtin:
-            comments.append("builtin")
-        if self.magic:
-            comments.append("magic type")
-        return " -- " + ", ".join(comments) if comments else ""
-
-
-@dataclasses.dataclass
 class SLuaFunctionBase(abc.ABC):
     name: str = ""
     type_parameters: list[str] = dataclasses.field(default_factory=list)
     parameters: list[SLuaParameter] = dataclasses.field(default_factory=list)
     return_type: str = "()"
     comment: str = ""
+    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
+        default_factory=SLuaTypecheckerFlags
+    )
+    """Flags specific to the internals of luau-analyze and luau-lsp."""
 
-    @property
-    def type_parameters_string(self) -> str:
-        if not self.type_parameters:
+    def type_parameters_string(self, newsolver: bool = False) -> str:
+        type_parameters = self.type_parameters
+        if not type_parameters:
             return ""
-        return "<" + ", ".join(self.type_parameters) + ">"
+        if newsolver and self.typechecker_flags.new_type_parameters:
+            type_parameters = self.typechecker_flags.new_type_parameters
+        return "<" + ", ".join(type_parameters) + ">"
 
-    def parameters_string(self, declaration: bool = False) -> str:
-        return "(" + ", ".join(p.to_luau_def(declaration) for p in self.parameters) + ")"
+    def parameters_string(self, declaration: bool = False, newsolver: bool = False) -> str:
+        return "(" + ", ".join(p.to_luau_def(declaration, newsolver) for p in self.parameters) + ")"
 
-    @property
-    def type_def_string(self) -> str:
-        return self.type_parameters_string + self.parameters_string() + " -> " + self.return_type
+    def type_def_string(self, newsolver: bool = False) -> str:
+        return (
+            self.type_parameters_string()
+            + self.parameters_string(newsolver=newsolver)
+            + " -> "
+            + self.return_type
+        )
 
 
 @dataclasses.dataclass
@@ -180,10 +215,6 @@ class SLuaFunction(SLuaFunctionBase):
     must_use: bool = False
     """Emit a warning if the return value is not used.
     See https://kampfkarren.github.io/selene/usage/std.html#must_use."""
-    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
-        default_factory=SLuaTypecheckerFlags
-    )
-    """Flags specific to the internals of luau-analyze and luau-lsp."""
     overloads: list[SLuaFunctionOverload] = dataclasses.field(default_factory=list)
 
     @property
@@ -224,40 +255,45 @@ class SLuaFunction(SLuaFunctionBase):
             }
         )
 
-    def write_luau_global_def(self, f: TextIO, indent: int = 0) -> None:
+    def write_luau_global_def(self, f: TextIO, indent: int = 0, newsolver: bool = False) -> None:
         """For declaring global functions and class/extern type methods"""
         if self.slua_removed:
             f.write(f"declare {self.name}: nil\n")
         elif self.overloads:
             # the function format can't handle overloads
-            self.write_luau_table_def(f, indent, suffix="")
+            self.write_luau_table_def(f, indent, suffix="", newsolver=newsolver)
         else:
             f.write(f"{'  ' * indent}")
             f.write(self.annotation_string)
             if indent == 0:
                 f.write("declare ")
             f.write(f"function {self.name}")
-            f.write(self.type_parameters_string)
-            f.write(self.parameters_string(declaration=True))
-            f.write(f": {self.return_type}")
-            f.write(self.typechecker_flags.comment_string)
+            f.write(self.type_parameters_string(newsolver=newsolver))
+            f.write(self.parameters_string(declaration=True, newsolver=newsolver))
+            if newsolver and self.typechecker_flags.new_type:
+                f.write(f": {self.typechecker_flags.new_type}")
+            else:
+                f.write(f": {self.return_type}")
+            f.write(self.typechecker_flags.comment_string(newsolver=newsolver))
             f.write("\n")
 
-    def write_luau_table_def(self, f: TextIO, indent: int = 0, suffix=",") -> None:
+    def write_luau_table_def(
+        self, f: TextIO, indent: int = 0, suffix=",", *, newsolver: bool = False
+    ) -> None:
         """For declaring functions within a table/module"""
         f.write(f"{'  ' * indent}{self.name}: ")
         f.write(self.annotation_string)
         if not self.overloads:
-            f.write(self.type_def_string)
+            f.write(self.type_def_string(newsolver=newsolver))
         else:
             f.write("(")
-            f.write(self.type_def_string)
+            f.write(self.type_def_string(newsolver=newsolver))
             for overload in self.overloads:
                 f.write(f")\n{'  ' * (indent + 1)}& (")
-                f.write(overload.type_def_string)
+                f.write(overload.type_def_string(newsolver=newsolver))
             f.write(")")
         f.write(suffix)
-        f.write(self.typechecker_flags.comment_string)
+        f.write(self.typechecker_flags.comment_string(newsolver=newsolver))
         f.write("\n")
 
 
@@ -271,6 +307,9 @@ class SLuaTypeAlias:
     comment: str = ""
     export: bool = False
     """Whether this type is available to users"""
+    typechecker_flags: SLuaTypecheckerFlags = dataclasses.field(
+        default_factory=SLuaTypecheckerFlags
+    )
 
     def to_keywords_dict(self) -> dict:
         definition = self.to_luau_def()
@@ -280,9 +319,12 @@ class SLuaTypeAlias:
             "tooltip": f"{self.comment}\n{definition}".strip(),
         }
 
-    def to_luau_def(self) -> str:
+    def to_luau_def(self, newsolver: bool = False) -> str:
+        definition = self.definition
+        if newsolver and self.typechecker_flags.new_type:
+            definition = self.typechecker_flags.new_type
         export_str = "export " if self.export else ""
-        return f"{export_str}type {self.name} = {self.definition}"
+        return f"{export_str}type {self.name} = {definition}"
 
 
 @dataclasses.dataclass
@@ -387,7 +429,7 @@ class SLuaModule:
         for func in self.functions.values():
             func.typechecker_flags.checked = False
 
-    def write_luau_def(self, f: TextIO) -> None:
+    def write_luau_def(self, f: TextIO, newsolver: bool = False) -> None:
         self._workaround_annotated_callable_bug()
         f.write(f"""
 ---------------------------
@@ -398,7 +440,7 @@ declare {self.name}: """)
         if self.callable:
             f.write("(")
             f.write(self.callable.annotation_string)
-            f.write(self.callable.type_def_string)
+            f.write(self.callable.type_def_string(newsolver=newsolver))
             f.write(") & ")
         f.write("{\n")
         for prop in self.constants.values():
@@ -406,7 +448,7 @@ declare {self.name}: """)
         for func in self.functions.values():
             if func.private or func.local_only:
                 continue
-            func.write_luau_table_def(f, indent=1)
+            func.write_luau_table_def(f, indent=1, newsolver=newsolver)
         f.write("}\n\n")
 
 
@@ -508,7 +550,7 @@ class SLuaDefinitions:
                     type_def = "LLDetectedEventHandler?"
                 else:
                     LLNonDetectedEventName_alias.selene_type.append(event.name)
-                    type_def = event_func.type_def_string
+                    type_def = event_func.type_def_string()
                     overload_parameters = [
                         SLuaParameter("self", type="LLEvents"),
                         SLuaParameter("event", type=f'"{event.name}"'),
@@ -925,6 +967,9 @@ class SLuaDefinitionParser:
                     SLuaParameter(
                         selene_type=p.pop("selene-type", None),
                         default_value=p.pop("default-value", None),
+                        typechecker_flags=SLuaTypecheckerFlags.from_definition(
+                            p.pop("typechecker", {})
+                        ),
                         **p,
                     )
                     for p in data.get("parameters", [])
@@ -935,7 +980,7 @@ class SLuaDefinitionParser:
                 local_only=data.get("local-only", False),
                 slua_removed=data.get("slua-removed", False),
                 must_use=data.get("must-use", False),
-                typechecker_flags=SLuaTypecheckerFlags(**data.get("typechecker", {})),
+                typechecker_flags=SLuaTypecheckerFlags.from_definition(data.get("typechecker", {})),
             )
             self.validate_identifier(func.name)
             self.validate_scope(func.name, scope)
@@ -964,7 +1009,11 @@ class SLuaDefinitionParser:
             raise ValueError(f"In function {data['name']}: {e}") from e
 
     def _validate_type_alias(self, data: dict) -> SLuaTypeAlias:
-        alias = SLuaTypeAlias(selene_type=data.pop("selene-type"), **data)
+        alias = SLuaTypeAlias(
+            selene_type=data.pop("selene-type"),
+            typechecker_flags=SLuaTypecheckerFlags.from_definition(data.pop("typechecker", {})),
+            **data,
+        )
         try:
             self.validate_identifier(alias.name)
             self._validate_type(alias.definition)

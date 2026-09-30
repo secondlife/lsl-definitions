@@ -42,7 +42,7 @@ end
 export type rotation = quaternion
 export type LSLTypes = string | number | vector | uuid | quaternion
 export type LSLReadableTypes = LSLTypes | boolean
-export type list = {LSLReadableTypes}
+export type list = {read LSLReadableTypes}
 type LLDetectedEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
 type LLNonDetectedEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
 type LLEventName = LLDetectedEventName | LLNonDetectedEventName
@@ -332,22 +332,22 @@ declare function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 declare function error<T>(message: T, level: number?): never
 declare function gcinfo(): number
 declare getfenv: nil
--- declare function getmetatable<T>(obj: T): getmetatable<T> -- builtin
-declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
+declare function getmetatable<T>(obj: T): getmetatable<T>
+declare function ipairs<V>(tab: {read V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
 @checked declare function newproxy(mt: boolean?): any
--- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
--- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
+declare function next<K, V>(t: {read [K]: V}, i: K?): (K?, V)
+declare function pairs<K, V>(t: {read [K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K)
 -- declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...) -- magic type
 declare function print<T...>(...: T...): ()
 declare function rawequal<T1, T2>(a: T1, b: T2): boolean
-declare function rawget<K, V>(t: {[K]: V}, k: K): V?
-declare function rawlen<K, V>(t: {[K]: V} | string): number
+declare function rawget<T, K>(t: T, k: K): rawget<T, K>
+declare function rawlen<K, V>(t: {read [K]: V} | string): number
 declare function rawset<K, V>(t: {[K]: V}, k: K, v: V): {[K]: V}
 -- @checked declare function require(target: any): any -- magic type
 -- declare function select<A...>(i: string | number, ...: A...): ...any -- magic type
 declare setfenv: nil
--- declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT> -- builtin, magic type
+declare function setmetatable<T, MT>(t: T, mt: MT): setmetatable<T, MT>
 declare function tonumber(value: string? | number, base: number?): number?
 declare function toquaternion(value: string? | quaternion): quaternion?
 declare function torotation(value: string? | quaternion): quaternion?
@@ -356,7 +356,7 @@ declare function touuid(val: string? | buffer | uuid): uuid?
 declare function tovector(val: string? | vector): vector?
 declare function type<T>(obj: T): string
 declare function typeof<T>(obj: T): string
-declare function unpack<V>(tab: {V}, i: number?, j: number?): ...V
+declare function unpack<V>(tab: {read V}, i: number?, j: number?): ...V
 declare function xpcall<E, A..., R1..., R2...>(f: (A...) -> R1..., err: (E) -> R2..., ...: A...): (boolean, R1...)
 
 ---------------------------
@@ -654,9 +654,9 @@ declare string: {
 ---------------------------
 
 declare table: {
-  concat: (a: {string | number}, sep: string?, i: number?, j: number?) -> string,
-  foreach: @[deprecated {reason='Use a for loop instead'}]<K, V, R>(t: {[K]: V}, f: (key: K, value: V) -> R?) -> R?,
-  foreachi: @[deprecated {reason='Use a for loop instead'}]<V, R>(a: {V}, f: (index: number, value: V) -> R?) -> R?,
+  concat: (a: {read string | number}, sep: string?, i: number?, j: number?) -> string,
+  foreach: @[deprecated {reason='Use a for loop instead'}]<K, V, R>(t: {read [K]: V}, f: (key: K, value: V) -> R?) -> R?,
+  foreachi: @[deprecated {reason='Use a for loop instead'}]<V, R>(a: {read V}, f: (index: number, value: V) -> R?) -> R?,
   getn: @[deprecated {use='#'}](a: {any}) -> number,
   maxn: (t: {any}) -> number,
   insert: (<V>(a: {V}, i: number, value: V) -> ())
@@ -666,11 +666,11 @@ declare table: {
   remove: <V>(a: {V}, i: number?) -> V?,
   sort: <V>(a: {V}, f: ((a: V, b: V) -> boolean)?) -> (),
   pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
-  unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
+  unpack: <V>(a: {read V}, i: number?, j: number?) -> ...V,
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
   create: (<V>(n: number, v: V) -> {V})
     & ((n: number) -> {any}),
-  find: <V>(t: {V}, v: V, i: number?) -> number?,
+  find: <V>(t: {read V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
   freeze: <table>(t: table) -> table, -- magic type
