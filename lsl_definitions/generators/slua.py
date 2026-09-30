@@ -48,7 +48,7 @@ def gen_luau_lsp_defs(
         class_.write_luau_def(defs)
     defs.write("\n")
     for alias in slua_definitions.type_aliases.values():
-        defs.write(alias.to_luau_def())
+        defs.write(alias.to_luau_def(newsolver=newsolver))
         defs.write("\n")
     defs.write("\n")
 
@@ -59,9 +59,9 @@ def gen_luau_lsp_defs(
     for func in slua_definitions.functions.values():
         if func.private or func.local_only:
             continue
-        if not func.typechecker_flags.fully_defined:
+        if not func.typechecker_flags.fully_defined(newsolver=newsolver):
             defs.write("-- ")
-        func.write_luau_global_def(defs)
+        func.write_luau_global_def(defs, newsolver=newsolver)
     for module in sorted(slua_definitions.modules.values(), key=lambda x: x.name):
         if module.name in {"ll", "llcompat"}:
             continue
@@ -69,7 +69,7 @@ def gen_luau_lsp_defs(
             defs.write(
                 "--[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match\n"
             )
-        module.write_luau_def(defs)
+        module.write_luau_def(defs, newsolver=newsolver)
         if module.name == "string":
             defs.write("--]]\n")
     for var in slua_definitions.global_variables.values():
