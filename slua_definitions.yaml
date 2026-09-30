@@ -2698,7 +2698,11 @@ modules:
     return-type: number?
     overloads:
     - comment: Returns the current Unix timestamp.
-      parameters: []
+      parameters:
+      - name: time
+        comment: Return the corresponding Unix timestamp.
+        type: nil
+        optional: true
       return-type: number
     must-use: true
 - name: quaternion
