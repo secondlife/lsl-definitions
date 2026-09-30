@@ -42,6 +42,9 @@ avatar:
 - llGetCameraPos(  ) -> vector
 - llGetCameraRot(  ) -> rotation
 - llGetDisplayName( key id ) -> string
+- llGetGameControlMode( key id ) -> integer
+- llGetGameControlModeAxes( key id ) -> list
+- llGetGameControlModeButtons( key id ) -> integer
 - llGetPermissionsKey(  ) -> key
 - llGetUsername( key id ) -> string
 - llGetVisualParams( key agentid, list params ) -> list
@@ -289,6 +292,9 @@ experience_data:
 input:
 - control( key id, integer level, integer edge )
 - game_control( key id, integer button_levels, list axes )
+- llGetGameControlMode( key id ) -> integer
+- llGetGameControlModeAxes( key id ) -> list
+- llGetGameControlModeButtons( key id ) -> integer
 - llReleaseControls(  ) -> void
 - llSetClickAction( integer action ) -> void
 - llTakeControls( integer controls, integer accept, integer pass_on ) -> void

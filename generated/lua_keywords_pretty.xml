@@ -2529,10 +2529,37 @@ export type rotation = quaternion</string>
             <key>value</key>
             <string>2</string>
          </map>
+         <key>GAME_CONTROL_AXIS_ADVANCE</key>
+         <map>
+            <key>tooltip</key>
+            <string>Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK, and CAPTIVE modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_BOOM</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera up/down movement. Modal axis index 4 for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>4</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_DOLLY</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera forward/backward movement. Modal axis index 1 for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1</string>
+         </map>
          <key>GAME_CONTROL_AXIS_LEFTX</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Left stick X axis. Canonical axis index 0.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2541,16 +2568,43 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_AXIS_LEFTY</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Left stick Y axis. Canonical axis index 1.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>1</string>
          </map>
+         <key>GAME_CONTROL_AXIS_LEFT_TRIGGER</key>
+         <map>
+            <key>tooltip</key>
+            <string>Left trigger. Canonical axis index 4.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>4</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_LOOK</key>
+         <map>
+            <key>tooltip</key>
+            <string>Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>3</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_PAN</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera pan left/right. Modal axis index 2 for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2</string>
+         </map>
          <key>GAME_CONTROL_AXIS_RIGHTX</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Right stick X axis. Canonical axis index 2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2559,7 +2613,52 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_AXIS_RIGHTY</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Right stick Y axis. Canonical axis index 3.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>3</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_RIGHT_TRIGGER</key>
+         <map>
+            <key>tooltip</key>
+            <string>Right trigger. Canonical axis index 5.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>5</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_RISE</key>
+         <map>
+            <key>tooltip</key>
+            <string>Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>4</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_ROLL</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera roll. Modal axis index 5 for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>5</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_STRAFE</key>
+         <map>
+            <key>tooltip</key>
+            <string>Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and CAPTIVE modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_TILT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera tilt up/down. Modal axis index 3 for FLYCAM mode.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2567,8 +2666,10 @@ export type rotation = quaternion</string>
          </map>
          <key>GAME_CONTROL_AXIS_TRIGGERLEFT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string></string>
+            <string>Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2576,26 +2677,77 @@ export type rotation = quaternion</string>
          </map>
          <key>GAME_CONTROL_AXIS_TRIGGERRIGHT</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string></string>
+            <string>Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>5</string>
          </map>
-         <key>GAME_CONTROL_BUTTON_A</key>
+         <key>GAME_CONTROL_AXIS_TRUCK</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_TURN</key>
+         <map>
+            <key>tooltip</key>
+            <string>Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2</string>
+         </map>
+         <key>GAME_CONTROL_AXIS_ZOOM</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE, and FLYCAM modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>6</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_A</key>
+         <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x1</string>
          </map>
-         <key>GAME_CONTROL_BUTTON_B</key>
+         <key>GAME_CONTROL_BUTTON_ADVANCE_BACK</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_ADVANCE_FORWARD</key>
+         <map>
+            <key>tooltip</key>
+            <string>Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x800</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_B</key>
+         <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2603,17 +2755,64 @@ export type rotation = quaternion</string>
          </map>
          <key>GAME_CONTROL_BUTTON_BACK</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
             <key>tooltip</key>
-            <string></string>
+            <string>Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x10</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_CROUCH</key>
+         <map>
+            <key>tooltip</key>
+            <string>Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x2</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Left mouse button click. Modal button for MOUSELOOK and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x200</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Right mouse button click. Modal button for MOUSELOOK and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x400</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_DOLLY_BACK</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera dolly backward. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_DOLLY_FORWARD</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera dolly forward. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x800</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_DPAD_DOWN</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>D-pad down.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2622,7 +2821,7 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_DPAD_LEFT</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>D-pad left.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2631,7 +2830,7 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_DPAD_RIGHT</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>D-pad right.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2640,25 +2839,54 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_DPAD_UP</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>D-pad up.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x800</string>
          </map>
-         <key>GAME_CONTROL_BUTTON_GUIDE</key>
+         <key>GAME_CONTROL_BUTTON_EAST</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Right face button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x2</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_GUIDE</key>
+         <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x20</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_HOME</key>
+         <map>
+            <key>tooltip</key>
+            <string>Home/guide button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x20</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_JUMP</key>
+         <map>
+            <key>tooltip</key>
+            <string>Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_LEFTSHOULDER</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Left shoulder/bumper button.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2667,7 +2895,7 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_LEFTSTICK</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Left analog stick click.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2676,16 +2904,25 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_MISC1</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Miscellaneous button 1.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x8000</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_NORTH</key>
+         <map>
+            <key>tooltip</key>
+            <string>Top face button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x8</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_PADDLE1</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Paddle button 1.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2694,7 +2931,7 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_PADDLE2</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Paddle button 2.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2703,7 +2940,7 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_PADDLE3</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Paddle button 3.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2712,16 +2949,43 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_PADDLE4</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Paddle button 4.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x80000</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_PAN_LEFT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera pan left. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x4</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_PAN_RIGHT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera pan right. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x2</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_RESET</key>
+         <map>
+            <key>tooltip</key>
+            <string>Reset camera to default view. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x80</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_RIGHTSHOULDER</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Right shoulder/bumper button.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2730,34 +2994,180 @@ export type rotation = quaternion</string>
          <key>GAME_CONTROL_BUTTON_RIGHTSTICK</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Right analog stick click.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x100</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_ROLL_CCW</key>
+         <map>
+            <key>tooltip</key>
+            <string>Roll camera counter-clockwise. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x200</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_ROLL_CW</key>
+         <map>
+            <key>tooltip</key>
+            <string>Roll camera clockwise. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x400</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_SELECT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Select/back button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x10</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_SIT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x4</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_SOUTH</key>
+         <map>
+            <key>tooltip</key>
+            <string>Bottom face button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_START</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Start/menu button.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x40</string>
          </map>
+         <key>GAME_CONTROL_BUTTON_STRAFE_LEFT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x2000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_STRAFE_RIGHT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x4000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle alt-zoom. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x10</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_CURSOR</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x10</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_FLYCAM</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle flycam mode. Modal button for all modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x100</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_FOLLOW</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle camera follow mode. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x40</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x40</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TOGGLE_SPEAK</key>
+         <map>
+            <key>tooltip</key>
+            <string>Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x20</string>
+         </map>
          <key>GAME_CONTROL_BUTTON_TOUCHPAD</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Touchpad click.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
             <string>0x100000</string>
          </map>
-         <key>GAME_CONTROL_BUTTON_X</key>
+         <key>GAME_CONTROL_BUTTON_TRUCK_LEFT</key>
          <map>
             <key>tooltip</key>
-            <string></string>
+            <string>Camera truck left. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x2000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_TRUCK_RIGHT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Camera truck right. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x4000</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_WEST</key>
+         <map>
+            <key>tooltip</key>
+            <string>Left face button.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x4</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_X</key>
+         <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST).</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -2765,12 +3175,77 @@ export type rotation = quaternion</string>
          </map>
          <key>GAME_CONTROL_BUTTON_Y</key>
          <map>
+            <key>deprecated</key>
+            <boolean>true</boolean>
+            <key>tooltip</key>
+            <string>Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH).</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x8</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_ZOOM_IN</key>
+         <map>
+            <key>tooltip</key>
+            <string>Zoom camera in. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x8</string>
+         </map>
+         <key>GAME_CONTROL_BUTTON_ZOOM_OUT</key>
+         <map>
+            <key>tooltip</key>
+            <string>Zoom camera out. Modal button for FLYCAM mode.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1</string>
+         </map>
+         <key>GAME_CONTROL_MODE_AVATAR</key>
+         <map>
             <key>tooltip</key>
             <string></string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
-            <string>0x8</string>
+            <string>0</string>
+         </map>
+         <key>GAME_CONTROL_MODE_CAPTIVE</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>3</string>
+         </map>
+         <key>GAME_CONTROL_MODE_CURSOR</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>4</string>
+         </map>
+         <key>GAME_CONTROL_MODE_FLYCAM</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>2</string>
+         </map>
+         <key>GAME_CONTROL_MODE_MOUSELOOK</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>1</string>
          </map>
          <key>GCNP_RADIUS</key>
          <map>
@@ -5123,6 +5598,15 @@ export type rotation = quaternion</string>
             <string>number</string>
             <key>value</key>
             <string>0x00002</string>
+         </map>
+         <key>PERMISSION_GAME_CONTROL</key>
+         <map>
+            <key>tooltip</key>
+            <string></string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x100000</string>
          </map>
          <key>PERMISSION_OVERRIDE_ANIMATIONS</key>
          <map>
@@ -10058,7 +10542,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>button_levels</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A 32-bit mask representing the buttons currently held down on the controller.</string>
+                     <string>A 32-bit mask representing the canonical buttons currently held down on the controller.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -10067,7 +10551,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>axes</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of six float values in the range [-1.0, 1.0] representing controller axes.</string>
+                     <string>A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.</string>
                      <key>type</key>
                      <string>{number}</string>
                   </map>
@@ -21248,6 +21732,75 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <real>0.0</real>
             <key>tooltip</key>
             <string>Returns a float representing the time in seconds since midnight GMT (truncated to whole seconds).</string>
+         </map>
+         <key>ll.GetGameControlMode</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>id</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>UUID of the avatar whose game-controller state to query.</string>
+                     <key>type</key>
+                     <string>uuid</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>number</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.</string>
+         </map>
+         <key>ll.GetGameControlModeAxes</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>id</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>UUID of the avatar whose game-controller state to query.</string>
+                     <key>type</key>
+                     <string>uuid</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>{number}</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.</string>
+         </map>
+         <key>ll.GetGameControlModeButtons</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>id</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>UUID of the avatar whose game-controller state to query.</string>
+                     <key>type</key>
+                     <string>uuid</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>number</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as masks.</string>
          </map>
          <key>ll.GetGeometricCenter</key>
          <map>
