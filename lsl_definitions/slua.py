@@ -435,7 +435,7 @@ class SLuaDefinitions:
     type_names: set[str] = dataclasses.field(default_factory=set)
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
+        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|(?:read +)?[\[\]a-zA-Z0-9_]+:|\"[^\"]*\""
     )
 
     def validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
@@ -1031,7 +1031,7 @@ class SLuaDefinitionParser:
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
+        r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|(?:read +)?[\[\]a-zA-Z0-9_]+:|\"[^\"]*\""
     )
 
     def _validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
