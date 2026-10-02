@@ -20618,7 +20618,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                      <key>tooltip</key>
                      <string>Source list to convert.</string>
                      <key>type</key>
-                     <string>list</string>
+                     <string>{LSLTypes}</string>
                   </map>
                </map>
                <map>
