@@ -10262,7 +10262,6 @@ functions:
     - src:
         tooltip: Source list to convert.
         type: list
-        slua-type: "{LSLTypes}"
     - separator:
         tooltip: Separator string to place between list entries.
         type: string
