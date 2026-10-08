@@ -229,8 +229,8 @@ export type DateTypeResult = {
             <string>Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
 export type KeyframedMotionParams = {
   command: number?,
-  mode: number?,
   data: number?,
+  mode: number?,
   rotation: boolean?,
   translation: boolean?,
 }</string>

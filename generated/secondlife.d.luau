@@ -99,8 +99,8 @@ export type HttpRequestParams = {
 }
 export type KeyframedMotionParams = {
   command: number?,
-  mode: number?,
   data: number?,
+  mode: number?,
   rotation: boolean?,
   translation: boolean?,
 }
