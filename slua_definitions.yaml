@@ -3283,9 +3283,17 @@ modules:
       type: number
     - name: v
       comment: Value to prefill elements with.
-      type: V?
+      type: V
+      optional: true
       default-value: nil
     return-type: '{V}'
+    overloads:
+    - comment: Creates a new unfilled table with pre-allocated array capacity.
+      parameters:
+      - name: "n"
+        comment: Number of elements to allocate.
+        type: number
+      return-type: '{any}'
     must-use: true
   - name: find
     comment: Finds the first occurrence of a value in the array and returns its index. Traversal stops at the first nil.

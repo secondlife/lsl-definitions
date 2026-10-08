@@ -646,7 +646,8 @@ declare table: {
   pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
   unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
-  create: <V>(n: number, v: V?) -> {V},
+  create: (<V>(n: number, v: V) -> {V})
+    & ((n: number) -> {any}),
   find: <V>(t: {V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
