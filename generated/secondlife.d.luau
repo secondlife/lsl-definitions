@@ -85,6 +85,10 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type GiveAgentInventoryParams = {
+  dest: string?,
+  flags: number?,
+}
 export type HttpRequestParams = {
   accept: {string}?,
   custom_header: {[string]: string | number | boolean | vector | quaternion}?,
@@ -937,7 +941,7 @@ declare ll: {
   GetVel: () -> vector,
   GetVisualParams: (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: () -> number,
-  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: (target: uuid, item: string) -> (),
   GiveInventoryList: (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: (destination: uuid, amount: number) -> number,
@@ -1464,7 +1468,7 @@ declare llcompat: {
   GetVel: @deprecated () -> vector,
   GetVisualParams: @deprecated (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: @deprecated () -> number,
-  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: @deprecated (target: uuid, item: string) -> (),
   GiveInventoryList: @deprecated (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: @deprecated (destination: uuid, amount: number) -> number,
