@@ -63,8 +63,8 @@ avatar:
     tooltip: Triggered when the agent specified by agent_id denies experience permissions, or when permission is blocked for other reasons (specified by the error code reason).
   game_control( key id, integer button_levels, list axes ):
     id: UUID of the avatar supplying controller input.
-    button_levels: A 32-bit mask representing the buttons currently held down on the controller.
-    axes: A list of six float values in the range [-1.0, 1.0] representing controller axes.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
     tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
   llAgentInExperience( key agent ) -> integer:
     agent: UUID of the avatar in the same region to query.
@@ -134,6 +134,17 @@ avatar:
   llGetDisplayName( key id ) -> string:
     id: UUID of the avatar in the same region or otherwise known to the region.
     tooltip: Returns the display name string of the avatar specified by id if they are in the region or cached; returns an empty string otherwise (use llRequestDisplayName if the avatar is absent).
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
   llGetPermissionsKey(  ) -> key:
     tooltip: Returns the key (UUID) of the avatar that last granted or declined permissions to the script, or NULL_KEY if the permissions request was ignored or cancelled.
   llGetUsername( key id ) -> string:
@@ -1105,9 +1116,20 @@ input:
     tooltip: Triggered to pass captured avatar control inputs into the script. The parameter level indicates held controls, and edge indicates change in controls (both are bitfields of CONTROL_* constants).
   game_control( key id, integer button_levels, list axes ):
     id: UUID of the avatar supplying controller input.
-    button_levels: A 32-bit mask representing the buttons currently held down on the controller.
-    axes: A list of six float values in the range [-1.0, 1.0] representing controller axes.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
     tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
   llReleaseControls(  ) -> void:
     tooltip: Stops taking inputs (previously acquired via llTakeControls) from the avatar, dequeuing any remaining control events and revoking the PERMISSION_TAKE_CONTROLS permission.
   llSetClickAction( integer action ) -> void:

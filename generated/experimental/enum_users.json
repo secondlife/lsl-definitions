@@ -162,6 +162,7 @@
   "GameControlButton": [
     "game_control"
   ],
+  "GameControlMode": [],
   "GetClosestNavPointParam": [
     "llGetClosestNavPoint"
   ],
