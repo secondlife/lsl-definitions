@@ -2530,6 +2530,9 @@
     luaSL_pushnativeinteger(L, 0);
     lua_setglobal(L, "SKY_AMBIENT");
 
+    luaSL_pushnativeinteger(L, 25);
+    lua_setglobal(L, "SKY_AMBIENT_SKY_SATURATION");
+
     luaSL_pushnativeinteger(L, 22);
     lua_setglobal(L, "SKY_BLUE");
 
@@ -2538,6 +2541,9 @@
 
     luaSL_pushnativeinteger(L, 19);
     lua_setglobal(L, "SKY_CLOUD_TEXTURE");
+
+    luaSL_pushnativeinteger(L, 33);
+    lua_setglobal(L, "SKY_COLORGRADE_LUT");
 
     luaSL_pushnativeinteger(L, 3);
     lua_setglobal(L, "SKY_DENSITY_PROFILE_COUNTS");
@@ -2553,6 +2559,21 @@
 
     luaSL_pushnativeinteger(L, 23);
     lua_setglobal(L, "SKY_HAZE");
+
+    luaSL_pushnativeinteger(L, 28);
+    lua_setglobal(L, "SKY_HDR_MAX");
+
+    luaSL_pushnativeinteger(L, 29);
+    lua_setglobal(L, "SKY_HDR_MIN");
+
+    luaSL_pushnativeinteger(L, 27);
+    lua_setglobal(L, "SKY_HDR_OFFSET");
+
+    luaSL_pushnativeinteger(L, 30);
+    lua_setglobal(L, "SKY_HDR_TONEMAPPER");
+
+    luaSL_pushnativeinteger(L, 31);
+    lua_setglobal(L, "SKY_HDR_TONEMAPPER_AMOUNT");
 
     luaSL_pushnativeinteger(L, 8);
     lua_setglobal(L, "SKY_LIGHT");
@@ -2584,14 +2605,29 @@
     luaSL_pushnativeinteger(L, 14);
     lua_setglobal(L, "SKY_SUN");
 
+    luaSL_pushnativeinteger(L, 26);
+    lua_setglobal(L, "SKY_SUN_BRIGHTNESS");
+
     luaSL_pushnativeinteger(L, 21);
     lua_setglobal(L, "SKY_SUN_TEXTURE");
 
     luaSL_pushnativeinteger(L, 1);
     lua_setglobal(L, "SKY_TEXTURE_DEFAULTS");
 
+    luaSL_pushnativeinteger(L, 1);
+    lua_setglobal(L, "SKY_TONEMAPPER_ACES");
+
+    luaSL_pushnativeinteger(L, 2);
+    lua_setglobal(L, "SKY_TONEMAPPER_LUT");
+
+    luaSL_pushnativeinteger(L, 0);
+    lua_setglobal(L, "SKY_TONEMAPPER_PBR_NEUTRAL");
+
     luaSL_pushnativeinteger(L, 15);
     lua_setglobal(L, "SKY_TRACKS");
+
+    luaSL_pushnativeinteger(L, 32);
+    lua_setglobal(L, "SKY_VERSION");
 
     luaSL_pushnativeinteger(L, 0x10);
     lua_setglobal(L, "SMOOTH");
