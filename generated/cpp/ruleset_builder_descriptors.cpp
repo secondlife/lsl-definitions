@@ -13,6 +13,22 @@ static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
 };
 RulesetBuilderDef* kHTTPRequestParamsDef = ruleset_builder_def_build(kHTTPRequestParamsDescs, std::size(kHTTPRequestParamsDescs));
 
+// keyframed-motion-params
+static const RulesetParamDescriptor kKeyframedMotionParamsDescs[] = {
+    {"command", 'i', 0},
+    {"mode", 'i', 1},
+    {"data", 'i', 2},
+};
+static const RulesetFlagDescriptor kKeyframedMotionParamFlagDescs[] = {
+    {"rotation", 0x1, 2},
+    {"translation", 0x2, 2},
+};
+RulesetBuilderDef* kKeyframedMotionParamsDef = []() {
+    auto* d = ruleset_builder_def_build(kKeyframedMotionParamsDescs, std::size(kKeyframedMotionParamsDescs));
+    ruleset_builder_def_add_flags(d, kKeyframedMotionParamFlagDescs, std::size(kKeyframedMotionParamFlagDescs));
+    return d;
+}();
+
 // particle-params
 static const RulesetParamDescriptor kParticleParamsDescs[] = {
     {"flags", 'i', 0},
