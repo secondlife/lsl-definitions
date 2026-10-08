@@ -434,35 +434,11 @@ class SLuaDefinitions:
     # All known type names, populated by parser
     type_names: set[str] = dataclasses.field(default_factory=set)
 
-    _TYPE_SEPERATORS_RE = re.compile(
-        r"[ \n?&|,{}\[\]()]|\.\.\.|typeof|->|[a-zA-Z0-9_]*:|\"[a-zA-Z0-9_]*\""
-    )
-
     def validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
-        """Validate that a type string only references known types."""
-        if not type_str:
-            raise ValueError("Type may not be empty")
-        if known_type_names is None:
-            known_type_names = self.type_names
-        if type_str in known_type_names:
-            return type_str
-        subtypes = self._TYPE_SEPERATORS_RE.split(type_str)
-        unknown_subtypes = set(subtypes) - known_type_names - {""}
-        if not unknown_subtypes:
-            return type_str
-        raise ValueError(f"Unknown types {unknown_subtypes} in definition {type_str!r}")
+        return SLuaDefinitionParser.validate_type(type_str, known_type_names or self.type_names)
 
     def validate_type_params(self, type_params: list[str]) -> set[str]:
-        """Validate type parameters and return the set of known types including them."""
-        known_types = set(self.type_names)
-        for type_param in type_params:
-            type_param = type_param.replace("...", "", 1)
-            if not re.match(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z", type_param):
-                raise ValueError(f"{type_param!r} is not a valid identifier")
-            if type_param in known_types:
-                raise ValueError(f"{type_param!r} is already defined")
-            known_types.add(type_param)
-        return known_types
+        return SLuaDefinitionParser.validate_type_params(type_params, set(self.type_names))
 
     def finalize(self, lsl: LSLDefinitions) -> None:
         """Enrich this SLuaDefinitions with content derived from the LSL definitions.
@@ -884,8 +860,8 @@ class SLuaDefinitionParser:
             functions={},
         )
         try:
-            self._validate_identifier(module.name)
-            self._validate_scope(module.name, self._global_scope)
+            self.validate_identifier(module.name)
+            self.validate_scope(module.name, self._global_scope)
             module_scope: set[str] = set()
             callable = data.get("callable")
             if callable is not None:
@@ -916,10 +892,10 @@ class SLuaDefinitionParser:
             methods={},
         )
         try:
-            self._validate_identifier(class_.name)
-            self._validate_scope(class_.name, self._type_names)
+            self.validate_identifier(class_.name)
+            self.validate_scope(class_.name, self._type_names)
             if class_.instance_type is not None:
-                self._validate_scope(f"{class_.name}Meta", self._type_names)
+                self.validate_scope(f"{class_.name}Meta", self._type_names)
                 self._validate_type(class_.instance_type)
             class_scope: set[str] = set()
             class_.properties = {
@@ -961,8 +937,8 @@ class SLuaDefinitionParser:
                 must_use=data.get("must-use", False),
                 typechecker_flags=SLuaTypecheckerFlags(**data.get("typechecker", {})),
             )
-            self._validate_identifier(func.name)
-            self._validate_scope(func.name, scope)
+            self.validate_identifier(func.name)
+            self.validate_scope(func.name, scope)
             self._validate_function_signature(func, class_name)
             known_types = self._validate_type_params(func.type_parameters)
             self._validate_type(func.return_type, known_types)
@@ -990,10 +966,10 @@ class SLuaDefinitionParser:
     def _validate_type_alias(self, data: dict) -> SLuaTypeAlias:
         alias = SLuaTypeAlias(selene_type=data.pop("selene-type"), **data)
         try:
-            self._validate_identifier(alias.name)
+            self.validate_identifier(alias.name)
             self._validate_type(alias.definition)
             # add it to scope only after validating type, to ensure it isn't recursive
-            self._validate_scope(alias.name, self._type_names)
+            self.validate_scope(alias.name, self._type_names)
         except Exception as e:
             raise ValueError(f"In type alias {alias.name}: {e}") from e
         return alias
@@ -1006,8 +982,8 @@ class SLuaDefinitionParser:
             comment=data.get("comment", ""),
             modifiable=data.get("modifiable", "read-only"),
         )
-        self._validate_identifier(prop.name)
-        self._validate_scope(prop.name, scope)
+        self.validate_identifier(prop.name)
+        self.validate_scope(prop.name, scope)
         if const and prop.type != "any" and prop.value is None:
             raise ValueError(f"Constant {prop.name} must have a value")
         self._validate_type(prop.type)
@@ -1033,42 +1009,49 @@ class SLuaDefinitionParser:
             self._validate_type(params[-1].type, known_types)
             params = params[:-1]
         for param in params:
-            self._validate_identifier(param.name)
-            self._validate_scope(param.name, params_scope)
+            self.validate_identifier(param.name)
+            self.validate_scope(param.name, params_scope)
             self._validate_type(param.type, known_types)
 
     def _validate_type_params(self, type_params: list[str]) -> set[str]:
-        known_types = set(self._type_names)
+        return self.validate_type_params(type_params, set(self._type_names))
+
+    def _validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
+        return self.validate_type(type_str, known_type_names or self._type_names)
+
+    @classmethod
+    def validate_type_params(cls, type_params: list[str], known_types: set[str]) -> set[str]:
         for type_param in type_params:
             type_param = type_param.replace("...", "", 1)
-            self._validate_identifier(type_param)
-            self._validate_scope(type_param, known_types)
+            cls.validate_identifier(type_param)
+            cls.validate_scope(type_param, known_types)
         return known_types
 
     _TYPE_SEPERATORS_RE = re.compile(
         r"[ \n?&|,{}\[\]()<>]|\.\.\.|typeof|setmetatable|getmetatable|->|[a-zA-Z0-9_]*:|\"[^\"]*\""
     )
 
-    def _validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
+    @classmethod
+    def validate_type(cls, type_str: str, known_type_names: set[str]) -> str:
         if not type_str:
             raise ValueError("Type may not be empty")
-        if known_type_names is None:
-            known_type_names = self._type_names
         if type_str in known_type_names:
             return type_str
-        subtypes = self._TYPE_SEPERATORS_RE.split(type_str)
+        subtypes = cls._TYPE_SEPERATORS_RE.split(type_str)
         unknown_subtypes = set(subtypes) - known_type_names - {""}
         if not unknown_subtypes:
             return type_str
         raise ValueError(f"Unknown types {unknown_subtypes} in definition {type_str!r}")
 
-    def _validate_scope(self, name: str, scope: set[str]) -> None:
+    @classmethod
+    def validate_scope(cls, name: str, scope: set[str]) -> None:
         if name in scope:
             raise ValueError(f"{name!r} is already defined in this scope")
         scope.add(name)
 
     _IDENTIFIER_RE = re.compile(r"\A[_a-zA-Z][_a-zA-Z0-9]*\Z")
 
-    def _validate_identifier(self, name: str) -> None:
-        if not re.match(self._IDENTIFIER_RE, name):
+    @classmethod
+    def validate_identifier(cls, name: str) -> None:
+        if not re.match(cls._IDENTIFIER_RE, name):
             raise ValueError(f"{name!r} is not a valid identifier")
