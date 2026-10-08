@@ -578,7 +578,7 @@ declare os: {
     & ((formatString: "*t" | "!*t", t: number?) -> DateTypeResult),
   difftime: @[deprecated {reason='Same as a - b'}](a: number, b: number) -> number,
   time: ((time: DateTypeArg) -> number?)
-    & (() -> number),
+    & ((time: nil) -> number),
 }
 
 

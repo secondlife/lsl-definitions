@@ -191,13 +191,13 @@ type-aliases:
   export: true
   definition: |-
     {
-      year: number,
-      month: number,
-      day: number,
-      hour: number?,
-      min: number?,
-      sec: number?,
-      isdst: boolean?,
+      read year: number,
+      read month: number,
+      read day: number,
+      read hour: number?,
+      read min: number?,
+      read sec: number?,
+      read isdst: boolean?,
     }
   selene-type: {display: "DateTypeArg"}
 - name: DateTypeResult
@@ -2703,7 +2703,11 @@ modules:
     return-type: number?
     overloads:
     - comment: Returns the current Unix timestamp.
-      parameters: []
+      parameters:
+      - name: time
+        comment: Return the corresponding Unix timestamp.
+        type: nil
+        optional: true
       return-type: number
     must-use: true
 - name: quaternion
