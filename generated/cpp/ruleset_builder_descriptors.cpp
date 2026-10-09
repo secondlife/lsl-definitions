@@ -62,6 +62,14 @@ RulesetBuilderDef* kKeyframedMotionParamsDef = []() {
     return d;
 }();
 
+// parcel-sale
+static const RulesetParamDescriptor kParcelSaleParamsDescs[] = {
+    {"price", 'i', 1},
+    {"agent", 'k', 2},
+    {"objects", 'b', 3},
+};
+RulesetBuilderDef* kParcelSaleParamsDef = ruleset_builder_def_build(kParcelSaleParamsDescs, std::size(kParcelSaleParamsDescs));
+
 // particle-params
 static const RulesetParamDescriptor kParticleParamsDescs[] = {
     {"flags", 'i', 0},
