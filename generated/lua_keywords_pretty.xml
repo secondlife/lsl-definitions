@@ -3980,7 +3980,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_DELETE</key>
          <map>
             <key>tooltip</key>
-            <string>Event or flag indicating a key-value pair has been removed from the linkset datastore, either via llLinksetDataDelete or by writing an empty value.</string>
+            <string>Action indicating a key was deleted from the linkset datastore via llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty value.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -3989,7 +3989,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_EMEMORY</key>
          <map>
             <key>tooltip</key>
-            <string>Error code indicating a key-value pair was too large to write to the linkset datastore.</string>
+            <string>Error code indicating the key and value were too large to write to the linkset datastore.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -4007,7 +4007,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_EPROTECTED</key>
          <map>
             <key>tooltip</key>
-            <string>Error code indicating the key-value pair is protected from being deleted or overwritten in the linkset datastore.</string>
+            <string>Error code indicating the key is protected from being deleted or overwritten in the linkset datastore.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -4016,7 +4016,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_MULTIDELETE</key>
          <map>
             <key>tooltip</key>
-            <string>Flag or value indicating a comma-separated list of keys has been deleted from the linkset datastore via llLinksetDataDeleteFound.</string>
+            <string>Action indicating keys were deleted from the linkset datastore via llLinksetDataDeleteFound. The event's name is a comma-separated list of the deleted keys.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -4052,7 +4052,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_RESET</key>
          <map>
             <key>tooltip</key>
-            <string>Event or flag indicating the linkset datastore has been cleared/reset via llLinksetDataReset.</string>
+            <string>Action indicating all keys were deleted from the linkset datastore via llLinksetDataReset.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -4061,7 +4061,7 @@ export type rotation = quaternion</string>
          <key>LINKSETDATA_UPDATE</key>
          <map>
             <key>tooltip</key>
-            <string>Event or flag indicating a key in the linkset datastore has been created or updated with a new value via llLinksetDataWrite.</string>
+            <string>Action indicating a key was created or updated in the linkset datastore via llLinksetDataWrite or llLinksetDataWriteProtected.</string>
             <key>type</key>
             <string>number</string>
             <key>value</key>
@@ -10780,7 +10780,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>action</key>
                   <map>
                      <key>tooltip</key>
-                     <string>An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).</string>
+                     <string>Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -10789,7 +10789,7 @@ float falloff – ranges from 0.01 to 2.0
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key name of the modified key-value pair.</string>
+                     <string>Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -10798,14 +10798,14 @@ float falloff – ranges from 0.01 to 2.0
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>New string value of the pair (empty if the pair was deleted or is password-protected).</string>
+                     <string>New value of the key (empty if the key was deleted or is protected).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
                </map>
             </array>
             <key>tooltip</key>
-            <string>Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.</string>
+            <string>Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.</string>
          </map>
          <key>listen</key>
          <map>
@@ -25047,7 +25047,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the number of bytes available/remaining in the linkset's datastore.</string>
+            <string>Returns the number of bytes remaining in the linkset datastore.</string>
          </map>
          <key>ll.LinksetDataCountFound</key>
          <map>
@@ -25057,7 +25057,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A regular expression (regex) search string used to match keys.</string>
+                     <string>Regular expression (regex) matching the keys to count.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25070,7 +25070,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns the total count of keys in the linkset datastore that match the regular expression pattern.</string>
+            <string>Returns the number of keys in the linkset datastore that match the regular expression pattern.</string>
          </map>
          <key>ll.LinksetDataCountKeys</key>
          <map>
@@ -25084,7 +25084,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an integer representing the total number of unique keys stored in the linkset's datastore.</string>
+            <string>Returns the number of keys in the linkset datastore.</string>
          </map>
          <key>ll.LinksetDataDelete</key>
          <map>
@@ -25094,7 +25094,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key name of the key-value pair to delete.</string>
+                     <string>Name of the key to delete.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25107,7 +25107,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.</string>
+            <string>Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>ll.LinksetDataDeleteFound</key>
          <map>
@@ -25117,7 +25117,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A regular expression (regex) specifying which keys to delete.</string>
+                     <string>Regular expression (regex) matching the keys to delete.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25139,7 +25139,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.</string>
+            <string>Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].</string>
          </map>
          <key>ll.LinksetDataDeleteProtected</key>
          <map>
@@ -25149,7 +25149,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key name of the protected key-value pair to delete.</string>
+                     <string>Name of the protected key to delete.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25171,7 +25171,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.</string>
+            <string>Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>ll.LinksetDataFindKeys</key>
          <map>
@@ -25181,7 +25181,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>pattern</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A regular expression (regex) describing which keys to search for.</string>
+                     <string>Regular expression (regex) matching the keys to return.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25190,7 +25190,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based start index of the matching keys to return.</string>
+                     <string>Index of the first matching key to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25212,7 +25212,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count &lt; 1).</string>
+            <string>Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count &lt; 1).</string>
          </map>
          <key>ll.LinksetDataListKeys</key>
          <map>
@@ -25222,7 +25222,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based start index of the keys to return.</string>
+                     <string>Index of the first key to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -25244,7 +25244,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count &lt; 1).</string>
+            <string>Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count &lt; 1).</string>
          </map>
          <key>ll.LinksetDataRead</key>
          <map>
@@ -25254,7 +25254,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key of the key-value pair to read.</string>
+                     <string>Name of the key to read.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25267,7 +25267,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Reads and returns the string value corresponding to key name from the linkset's datastore.</string>
+            <string>Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.</string>
          </map>
          <key>ll.LinksetDataReadProtected</key>
          <map>
@@ -25277,7 +25277,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key of the protected key-value pair to read.</string>
+                     <string>Name of the protected key to read.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25299,7 +25299,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.</string>
+            <string>Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.</string>
          </map>
          <key>ll.LinksetDataReset</key>
          <map>
@@ -25313,7 +25313,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.</string>
+            <string>Deletes all keys from the linkset datastore, triggering a linkset_data event.</string>
          </map>
          <key>ll.LinksetDataWrite</key>
          <map>
@@ -25323,7 +25323,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key name of the key-value pair.</string>
+                     <string>Name of the key to write.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25332,7 +25332,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>String value to write to the datastore.</string>
+                     <string>Value to write to the key (an empty string deletes the key).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25345,7 +25345,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.</string>
+            <string>Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>ll.LinksetDataWriteProtected</key>
          <map>
@@ -25355,7 +25355,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Key name of the protected key-value pair.</string>
+                     <string>Name of the protected key to write.</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25364,7 +25364,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>value</key>
                   <map>
                      <key>tooltip</key>
-                     <string>String value to write to the datastore.</string>
+                     <string>Value to write to the key (an empty string deletes the key).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -25386,7 +25386,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.</string>
+            <string>Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>ll.List2CSV</key>
          <map>
