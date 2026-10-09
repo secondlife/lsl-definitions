@@ -14689,6 +14689,7 @@ functions:
           FORCE_DIRECT_PATH is supported).
         type: list
         param-semantics: CharacterNavigateParam
+        ruleset: character-navigate-params
     energy: 10.0
     func-id: 398
     return: void
@@ -18989,6 +18990,11 @@ builder-rulesets:
     type: table
     enum: CameraParam
     lua-type: CameraParams
+
+  character-navigate-params:
+    type: table
+    enum: CharacterNavigateParam
+    lua-type: CharacterNavigateParams
 
   give-agent-inventory-params:
     type: table
