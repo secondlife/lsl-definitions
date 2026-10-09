@@ -153,9 +153,19 @@ type-aliases:
   export: true
   definition: quaternion
   selene-type: {display: "quaternion"}
+- name: LSLTypes
+  comment: LSL list functions return these types.
+  export: true
+  definition: "string | number | vector | uuid | quaternion"
+  selene-type: "any"
+- name: LSLReadableTypes
+  comment: LSL list functions can read these types as input.
+  export: true
+  definition: "LSLTypes | boolean"
+  selene-type: "any"
 - name: list
   export: true
-  definition: "{string | number | vector | uuid | quaternion | boolean}"
+  definition: "{LSLReadableTypes}"
   selene-type: "table"
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml

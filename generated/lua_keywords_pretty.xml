@@ -266,6 +266,18 @@ export type LLJsonEncodeOptions = {
   replacer: ((key: any, value: any, parent: {}?) -&gt; any)?,
 }</string>
          </map>
+         <key>LSLReadableTypes</key>
+         <map>
+            <key>tooltip</key>
+            <string>LSL list functions can read these types as input.
+export type LSLReadableTypes = LSLTypes | boolean</string>
+         </map>
+         <key>LSLTypes</key>
+         <map>
+            <key>tooltip</key>
+            <string>LSL list functions return these types.
+export type LSLTypes = string | number | vector | uuid | quaternion</string>
+         </map>
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>
@@ -279,7 +291,7 @@ export type LLJsonEncodeOptions = {
          <key>list</key>
          <map>
             <key>tooltip</key>
-            <string>export type list = {string | number | vector | uuid | quaternion | boolean}</string>
+            <string>export type list = {LSLReadableTypes}</string>
          </map>
          <key>rotation</key>
          <map>
