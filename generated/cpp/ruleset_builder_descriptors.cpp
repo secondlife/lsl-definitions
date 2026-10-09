@@ -42,6 +42,12 @@ static const RulesetParamDescriptor kCharacterNavigateParamsDescs[] = {
 };
 RulesetBuilderDef* kCharacterNavigateParamsDef = ruleset_builder_def_build(kCharacterNavigateParamsDescs, std::size(kCharacterNavigateParamsDescs));
 
+// character-patrol-points-params
+static const RulesetParamDescriptor kCharacterPatrolPointsParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterPatrolPointsParamsDef = ruleset_builder_def_build(kCharacterPatrolPointsParamsDescs, std::size(kCharacterPatrolPointsParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},

@@ -14953,6 +14953,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterPatrolPointsParam
+        ruleset: character-patrol-points-params
     energy: 10.0
     func-id: 403
     return: void
@@ -19002,6 +19003,11 @@ builder-rulesets:
     type: table
     enum: CharacterNavigateParam
     lua-type: CharacterNavigateParams
+
+  character-patrol-points-params:
+    type: table
+    enum: CharacterPatrolPointsParam
+    lua-type: CharacterPatrolPointsParams
 
   give-agent-inventory-params:
     type: table

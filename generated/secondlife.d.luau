@@ -122,6 +122,9 @@ export type CharacterParams = {
 export type CharacterNavigateParams = {
   force_direct_path: boolean?,
 }
+export type CharacterPatrolPointsParams = {
+  pause_at_waypoints: boolean?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
@@ -1083,7 +1086,7 @@ declare ll: {
   ParticleSystem: (rules: list | ParticleParams) -> (),
   PassCollisions: (pass: number) -> (),
   PassTouches: (pass: number) -> (),
-  PatrolPoints: (patrolPoints: {vector}, options: list) -> (),
+  PatrolPoints: (patrolPoints: {vector}, options: list | CharacterPatrolPointsParams) -> (),
   PlaySound: (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: (sound: string | uuid, volume: number) -> (),
   Pow: @[deprecated {use='^', reason='Double precision; operator.'}](base: number, exponent: number) -> number,
@@ -1610,7 +1613,7 @@ declare llcompat: {
   ParticleSystem: @deprecated (rules: list | ParticleParams) -> (),
   PassCollisions: @deprecated (pass: number) -> (),
   PassTouches: @deprecated (pass: number) -> (),
-  PatrolPoints: @deprecated (patrolPoints: {vector}, options: list) -> (),
+  PatrolPoints: @deprecated (patrolPoints: {vector}, options: list | CharacterPatrolPointsParams) -> (),
   PlaySound: @deprecated (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
   Pow: @deprecated (base: number, exponent: number) -> number,
