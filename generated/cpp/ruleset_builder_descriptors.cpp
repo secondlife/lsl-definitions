@@ -31,6 +31,19 @@ RulesetBuilderDef* kGiveAgentInventoryParamsDef = []() {
     return d;
 }();
 
+// gltf-overrides
+static const RulesetParamDescriptor kGLTFOverridesDescs[] = {
+    {"color", 'v', 1},
+    {"alpha", 'f', 2},
+    {"alpha_mode", 'i', 3},
+    {"alpha_mask", 'f', 4},
+    {"double_sided", 'b', 5},
+    {"metalness", 'f', 6},
+    {"roughness", 'f', 7},
+    {"emmissive_color", 'v', 8},
+};
+RulesetBuilderDef* kGLTFOverridesDef = ruleset_builder_def_build(kGLTFOverridesDescs, std::size(kGLTFOverridesDescs));
+
 // http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
@@ -131,6 +144,22 @@ static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
 RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
 
 inline void init_ruleset_builders(lua_State* L) {
+    auto set_gltf_overrides = [](lua_State* L) -> int {
+        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
+        int face = luaL_checkinteger(L, 1);
+        int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
+        slua_ruleset_serialize(L, 2, def);
+        int rules_idx = lua_gettop(L);
+        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
+        lua_rawgetfield(L, -1, "SetLinkGLTFOverrides");
+        lua_pushinteger(L, link);
+        lua_pushinteger(L, face);
+        lua_pushvalue(L, rules_idx);
+        lua_call(L, 3, 0);
+        return 0;
+    };
+    slua_register_ruleset_fn(L, "llprim", "setGltfOverrides", set_gltf_overrides, kGLTFOverridesDef);
+
     auto set_particle_system = [](lua_State* L) -> int {
         const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
         int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);

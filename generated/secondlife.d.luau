@@ -107,6 +107,16 @@ export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
 }
+export type GltfOverrides = {
+  alpha: number?,
+  alpha_mask: number?,
+  alpha_mode: number?,
+  color: vector?,
+  double_sided: boolean?,
+  emmissive_color: vector?,
+  metalness: number?,
+  roughness: number?,
+}
 export type HttpRequestParams = {
   accept: {string}?,
   custom_header: {[string]: string | number | boolean | vector | quaternion}?,
@@ -533,6 +543,7 @@ declare lljson: {
 
 declare llprim: {
   ParamSetter: PrimParamSetterTypeMeta,
+  setGltfOverrides: (face: number, params: GltfOverrides?, link: number?) -> number,
   setParticleSystem: (params: ParticleParams?, link: number?) -> (),
   setMedia: (face: number, params: PrimMediaParams?, link: number?) -> number,
 }
@@ -1155,7 +1166,7 @@ declare ll: {
   SetLinkAlpha: (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
-  SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
+  SetLinkGLTFOverrides: (link: number, face: number, params: list | GltfOverrides) -> (),
   SetLinkMedia: (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
@@ -1683,7 +1694,7 @@ declare llcompat: {
   SetLinkAlpha: @deprecated (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
-  SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
+  SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list | GltfOverrides) -> (),
   SetLinkMedia: @deprecated (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),

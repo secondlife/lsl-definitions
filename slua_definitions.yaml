@@ -260,34 +260,39 @@ type-aliases:
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
 - name: CameraParams
-  comment: Camera parameter table. Pass to ll.SetCameraParams().
+  comment: Camera parameter table. Pass to ll.SetCameraParams() to configure the camera.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GltfOverrides
+  comment: GLTF overrides parameter table. Pass to llprim.setGltfOverrides() to configure material.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: HttpRequestParams
   comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: KeyframedMotionParams
-  comment: Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+  comment: Keyframed motion parameter table. Pass to ll.SetKeyframedMotion() to animate.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: ParticleParams
   comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: PrimMediaParams
   comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 classes:
 - name: LLEvents
@@ -2159,6 +2164,17 @@ modules:
     type: PrimParamSetterTypeMeta
     value: PrimParamSetterTypeMeta
   functions:
+  - name: setGltfOverrides
+    comment: Sets or removes individual GLTF override parameters specified by params
+      on face of the linked prim link.
+    parameters:
+    - name: face
+      type: number
+    - name: params
+      type: GltfOverrides?
+    - name: link
+      type: number?
+    return-type: number
   - name: setParticleSystem
     comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
     parameters:
