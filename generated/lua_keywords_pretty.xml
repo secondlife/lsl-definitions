@@ -20864,10 +20864,10 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>arguments</key>
             <array>
                <map>
-                  <key>notecardname</key>
+                  <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the target notecard.</string>
+                     <string>Name of the notecard in the prim's inventory, or a UUID.</string>
                      <key>type</key>
                      <string>string | uuid</string>
                   </map>
@@ -20898,7 +20898,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.</string>
+            <string>Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.</string>
          </map>
          <key>ll.FindNotecardTextSync</key>
          <map>
@@ -20908,7 +20908,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of a notecard in the prim's inventory, or a UUID.</string>
+                     <string>Name of the notecard in the prim's inventory, or a UUID.</string>
                      <key>type</key>
                      <string>string | uuid</string>
                   </map>
@@ -20926,7 +20926,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>start</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Number of match results to skip before returning (0 to start at the first match).</string>
+                     <string>Index of the first match to return.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -20944,7 +20944,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>options</key>
                   <map>
                      <key>tooltip</key>
-                     <string>A list of options for future expansion (unused, should be []).</string>
+                     <string>A list of options to control the search (currently unused, should be []).</string>
                      <key>type</key>
                      <string>list</string>
                   </map>
@@ -20957,7 +20957,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an empty list if no matches are found.</string>
+            <string>Synchronously searches the notecard name from the region's cache for matches of pattern, without raising a dataserver event. Returns a list of [line, column, length] for each match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.</string>
          </map>
          <key>ll.FleeFrom</key>
          <map>
@@ -22552,7 +22552,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>line</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based line number to request.</string>
+                     <string>Index of the line to read.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -22565,7 +22565,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end of the notecard.</string>
+            <string>Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.</string>
          </map>
          <key>ll.GetNotecardLineSync</key>
          <map>
@@ -22584,7 +22584,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   <key>line</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Zero-based line number to request.</string>
+                     <string>Index of the line to read.</string>
                      <key>type</key>
                      <string>number</string>
                   </map>
@@ -22597,7 +22597,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.</string>
+            <string>Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the end of the notecard.</string>
          </map>
          <key>ll.GetNumberOfNotecardLines</key>
          <map>
@@ -22620,7 +22620,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.1</real>
             <key>tooltip</key>
-            <string>Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.</string>
+            <string>Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.</string>
          </map>
          <key>ll.GetNumberOfPrims</key>
          <map>

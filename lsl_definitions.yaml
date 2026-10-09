@@ -10418,8 +10418,8 @@ functions:
       - math
   llFindNotecardTextCount:
     arguments:
-    - notecardname:
-        tooltip: Name of the target notecard.
+    - name:
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - pattern:
@@ -10435,9 +10435,8 @@ functions:
     must-use: true
     return: key
     sleep: 0.0
-    tooltip: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver
-      event.
+    tooltip: Asynchronously requests the number of matches of pattern in the
+      notecard name. Returns a key query handle for the dataserver event.
     categories:
       - data_storage
       - dataserver
@@ -10445,15 +10444,14 @@ functions:
   llFindNotecardTextSync:
     arguments:
     - name:
-        tooltip: Name of a notecard in the prim's inventory, or a UUID.
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - pattern:
         tooltip: Regular expression pattern to search for.
         type: string
     - start:
-        tooltip: Number of match results to skip before returning (0 to start at the
-          first match).
+        tooltip: Index of the first match to return.
         type: integer
         index-semantics: true
     - count:
@@ -10461,7 +10459,8 @@ functions:
           matches).
         type: integer
     - options:
-        tooltip: A list of options for future expansion (unused, should be []).
+        tooltip: A list of options to control the search (currently unused, should be
+          []).
         type: list
         param-semantics: FindNotecardTextParam
     energy: 10.0
@@ -10471,10 +10470,10 @@ functions:
     # There are list indices in the return value!
     index-semantics: true
     sleep: 0.0
-    tooltip: Synchronously searches a cached notecard name for lines containing
-      pattern, returning a list of line and column numbers. Returns a list
-      containing 'NAK' if the notecard is not cached, or an empty list if no
-      matches are found.
+    tooltip: Synchronously searches the notecard name from the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a list of
+      [line, column, length] for each match, a list containing NAK if the
+      notecard is not cached, or an empty list if there are no matches.
     categories:
       - data_storage
       - notecard
@@ -11646,16 +11645,16 @@ functions:
         type: string
         asset-semantics: true
     - line:
-        tooltip: Zero-based line number to request.
+        tooltip: Index of the line to read.
         type: integer
         index-semantics: true
     energy: 10.0
     func-id: 217
     return: key
     sleep: 0.1
-    tooltip: Asynchronously requests the line index line of the notecard name from
-      the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is
+      past the end of the notecard.
     categories:
       - data_storage
       - dataserver
@@ -11667,7 +11666,7 @@ functions:
         type: string
         asset-semantics: true
     - line:
-        tooltip: Zero-based line number to request.
+        tooltip: Index of the line to read.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -11675,9 +11674,9 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Synchronously reads the line index line of the notecard name from the
-      region's cache, immediately returning its text without raising a
-      dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    tooltip: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the
+      notecard is not cached, or EOF if line is past the end of the notecard.
     categories:
       - data_storage
       - notecard
@@ -11691,7 +11690,7 @@ functions:
     func-id: 276
     return: key
     sleep: 0.1
-    tooltip: Asynchronously requests the total line count of the notecard name.
+    tooltip: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
     categories:
       - data_storage
