@@ -135,6 +135,11 @@ export type CharacterPursueParams = {
 export type CharacterWanderWithinParams = {
   pause_at_waypoints: boolean?,
 }
+export type GetClosestNavPointParams = {
+  character_type: number?,
+  radius: number?,
+  static: boolean?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
@@ -868,7 +873,7 @@ declare ll: {
   GetCameraPos: () -> vector,
   GetCameraRot: () -> quaternion,
   GetCenterOfMass: () -> vector,
-  GetClosestNavPoint: (point: vector, options: list) -> {vector},
+  GetClosestNavPoint: (point: vector, options: list | GetClosestNavPointParams) -> {vector},
   GetColor: (face: number) -> vector,
   GetCreator: () -> uuid,
   GetDate: () -> string,
@@ -1395,7 +1400,7 @@ declare llcompat: {
   GetCameraPos: @deprecated () -> vector,
   GetCameraRot: @deprecated () -> quaternion,
   GetCenterOfMass: @deprecated () -> vector,
-  GetClosestNavPoint: @deprecated (point: vector, options: list) -> {vector},
+  GetClosestNavPoint: @deprecated (point: vector, options: list | GetClosestNavPointParams) -> {vector},
   GetColor: @deprecated (face: number) -> vector,
   GetCreator: @deprecated () -> uuid,
   GetDate: @deprecated () -> string,

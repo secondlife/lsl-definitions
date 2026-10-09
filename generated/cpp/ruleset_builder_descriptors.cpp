@@ -64,6 +64,14 @@ static const RulesetParamDescriptor kCharacterWanderWithinParamsDescs[] = {
 };
 RulesetBuilderDef* kCharacterWanderWithinParamsDef = ruleset_builder_def_build(kCharacterWanderWithinParamsDescs, std::size(kCharacterWanderWithinParamsDescs));
 
+// get-closest-nav-point-params
+static const RulesetParamDescriptor kGetClosestNavPointParamsDescs[] = {
+    {"radius", 'f', 0},
+    {"static", 'b', 1},
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetClosestNavPointParamsDef = ruleset_builder_def_build(kGetClosestNavPointParamsDescs, std::size(kGetClosestNavPointParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},

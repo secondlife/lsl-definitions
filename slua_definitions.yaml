@@ -289,6 +289,11 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
+- name: GetClosestNavPointParams
+  comment: Get closest nav point parameter table. Pass to ll.GetClosestNavPoint to find the navmesh.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
   export: true

@@ -264,6 +264,16 @@ export type DateTypeResult = {
   isdst: boolean?,
 }</string>
          </map>
+         <key>GetClosestNavPointParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Get closest nav point parameter table. Pass to ll.GetClosestNavPoint to find the navmesh.
+export type GetClosestNavPointParams = {
+  character_type: number?,
+  radius: number?,
+  static: boolean?,
+}</string>
+         </map>
          <key>GiveAgentInventoryParams</key>
          <map>
             <key>tooltip</key>
