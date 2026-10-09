@@ -264,6 +264,11 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
+- name: GetStaticPathParams
+  comment: Get static path parameter table. Pass to ll.GetStaticPath() to find a path.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
   export: true

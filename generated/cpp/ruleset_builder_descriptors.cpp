@@ -17,6 +17,12 @@ static const RulesetParamDescriptor kCameraParamsDescs[] = {
 };
 RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
 
+// get-static-path-params
+static const RulesetParamDescriptor kGetStaticPathParamsDescs[] = {
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetStaticPathParamsDef = ruleset_builder_def_build(kGetStaticPathParamsDescs, std::size(kGetStaticPathParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},
