@@ -12418,6 +12418,7 @@ functions:
           CHARACTER_TYPE_NONE).
         type: list
         param-semantics: GetStaticPathParam
+        ruleset: get-static-path-params
     energy: 10.0
     func-id: 413
     must-use: true
