@@ -214,6 +214,18 @@ export type CharacterPatrolPointsParams = {
   pause_at_waypoints: boolean?,
 }</string>
          </map>
+         <key>CharacterPursueParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Pathfinding character pursue parameter table. Pass to ll.Pursue() to configure the pursuit.
+export type CharacterPursueParams = {
+  fuzz_factor: number?,
+  goal_tolerance: number?,
+  intercept: boolean?,
+  offset: vector?,
+  require_line_of_sight: boolean?,
+}</string>
+         </map>
          <key>DateTypeArg</key>
          <map>
             <key>tooltip</key>
