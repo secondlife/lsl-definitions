@@ -10338,7 +10338,7 @@ If another state is defined before the default state, the compiler will report a
                   <key>name</key>
                   <map>
                      <key>tooltip</key>
-                     <string>Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE).</string>
+                     <string>Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).</string>
                      <key>type</key>
                      <string>string</string>
                   </map>
@@ -17053,7 +17053,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event. Returns an integer success or failure code.</string>
+            <string>Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>llLinksetDataDeleteFound</key>
          <map>
@@ -17085,7 +17085,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].</string>
+            <string>Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].</string>
          </map>
          <key>llLinksetDataDeleteProtected</key>
          <map>
@@ -17117,7 +17117,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.</string>
+            <string>Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>llLinksetDataFindKeys</key>
          <map>
@@ -17291,7 +17291,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event. Returns an integer success or failure code.</string>
+            <string>Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>llLinksetDataWriteProtected</key>
          <map>
@@ -17332,7 +17332,7 @@ If another state is defined before the default state, the compiler will report a
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.</string>
+            <string>Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.</string>
          </map>
          <key>llList2CSV</key>
          <map>

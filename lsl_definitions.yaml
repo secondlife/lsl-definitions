@@ -8871,7 +8871,7 @@ events:
         enum-semantics: LinksetDataAction
     - name:
         tooltip: Name of the modified key (a comma-separated list of keys for
-          LINKSETDATA_MULTIDELETE).
+          LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
         type: string
     - value:
         tooltip: New value of the key (empty if the key was deleted or is
@@ -13433,8 +13433,8 @@ functions:
     enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes the unprotected key name from the linkset datastore,
-      triggering a linkset_data event. Returns an integer success or failure
-      code.
+      triggering a linkset_data event if the datastore changes. Returns an
+      integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13453,9 +13453,9 @@ functions:
     slua-return: "{number}"
     sleep: 0.0
     tooltip: Deletes all keys in the linkset datastore that match the regular
-      expression pattern, triggering a linkset_data event. Protected keys are
-      only deleted if their passphrase matches pass. Returns a list
-      [num_deleted, num_failed_protected].
+      expression pattern, triggering a linkset_data event if the datastore
+      changes. Protected keys are only deleted if their passphrase matches pass.
+      Returns a list [num_deleted, num_failed_protected].
     categories:
       - data_storage
       - linkset
@@ -13474,8 +13474,8 @@ functions:
     enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Deletes the protected key name from the linkset datastore using the
-      passphrase pass, triggering a linkset_data event. Returns an integer
-      success or failure code.
+      passphrase pass, triggering a linkset_data event if the datastore changes.
+      Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13592,8 +13592,8 @@ functions:
     enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Creates or updates the unprotected key name in the linkset datastore
-      with value, triggering a linkset_data event. Returns an integer success or
-      failure code.
+      with value, triggering a linkset_data event if the datastore changes.
+      Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13615,8 +13615,8 @@ functions:
     enum-semantics: LinksetDataError
     sleep: 0.0
     tooltip: Creates or updates the protected key name in the linkset datastore
-      with value using the passphrase pass, triggering a linkset_data event.
-      Returns an integer success or failure code.
+      with value using the passphrase pass, triggering a linkset_data event if
+      the datastore changes. Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
