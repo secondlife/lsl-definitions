@@ -507,9 +507,6 @@
     "@sl-slua/global/llprim.setParticleSystem": {
         "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
     },
-    "@sl-slua/global/llprim.setMedia": {
-        "documentation": "Configure media on a specific face. Omit link to apply to the current prim."
-    },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
         "learn_more_link": "https://luau.org/library/#math-library"
