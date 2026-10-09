@@ -9693,6 +9693,7 @@ functions:
           options.
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 399
     return: void
@@ -18350,6 +18351,7 @@ functions:
           options (takes same constants as llCreateCharacter).
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 406
     return: void
@@ -18999,6 +19001,11 @@ builder-rulesets:
     type: table
     enum: CameraParam
     lua-type: CameraParams
+
+  character-params:
+    type: table
+    enum: CharacterParam
+    lua-type: CharacterParams
 
   give-agent-inventory-params:
     type: table

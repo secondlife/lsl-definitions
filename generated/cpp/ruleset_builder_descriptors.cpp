@@ -17,6 +17,25 @@ static const RulesetParamDescriptor kCameraParamsDescs[] = {
 };
 RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
 
+// character-params
+static const RulesetParamDescriptor kCharacterParamsDescs[] = {
+    {"desired_speed", 'f', 1},
+    {"radius", 'f', 2},
+    {"length", 'f', 3},
+    {"orientation", 'i', 4},
+    {"avoidance_mode", 'i', 5},
+    {"type", 'i', 6},
+    {"traversal_type", 'i', 7},
+    {"max_accel", 'f', 8},
+    {"max_decel", 'f', 9},
+    {"max_turn_radius", 'f', 10},
+    {"desired_turn_speed", 'f', 12},
+    {"max_speed", 'f', 13},
+    {"account_for_skipped_frames", 'b', 14},
+    {"stay_within_parcel", 'b', 15},
+};
+RulesetBuilderDef* kCharacterParamsDef = ruleset_builder_def_build(kCharacterParamsDescs, std::size(kCharacterParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},
