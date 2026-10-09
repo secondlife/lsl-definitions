@@ -1041,6 +1041,7 @@ constants:
       camera on or off.
     type: integer
     value: 12
+    value-type: boolean
     values:
       - name: isActive
         value-type: boolean
@@ -1051,6 +1052,7 @@ constants:
       changes in target rotation.
     type: integer
     value: 8
+    value-type: float
     values:
       - name: degrees
         value-type: float
@@ -1062,6 +1064,7 @@ constants:
       outside of the behindness angle.
     type: integer
     value: 9
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1072,6 +1075,7 @@ constants:
     tooltip: Sets how far away the camera wants to be from its target.
     type: integer
     value: 7
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -1082,6 +1086,7 @@ constants:
     tooltip: Sets camera focus (target position) in region coordinates.
     type: integer
     value: 17
+    value-type: vector
     values:
       - name: position
         value-type: vector
@@ -1090,6 +1095,7 @@ constants:
     tooltip: Sets how much the camera lags as it aims toward the target.
     type: integer
     value: 6
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1101,6 +1107,7 @@ constants:
       does not move.
     type: integer
     value: 22
+    value-type: boolean
     values:
       - name: isLocked
         value-type: boolean
@@ -1110,6 +1117,7 @@ constants:
     tooltip: Adjusts the camera focus position relative to the target.
     type: integer
     value: 1
+    value-type: vector
     values:
       - name: meters
         value-type: vector
@@ -1121,6 +1129,7 @@ constants:
       which its focus is not affected by target motion.
     type: integer
     value: 11
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -1132,6 +1141,7 @@ constants:
       straight down, maintaining the same distance (analogous to 'incidence').
     type: integer
     value: 0
+    value-type: float
     values:
       - name: degrees
         value-type: float
@@ -1142,6 +1152,7 @@ constants:
     tooltip: Sets camera position in region coordinates.
     type: integer
     value: 13
+    value-type: vector
     values:
       - name: position
         value-type: vector
@@ -1150,6 +1161,7 @@ constants:
     tooltip: Sets how much the camera lags as it moves toward its ideal position.
     type: integer
     value: 5
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1161,6 +1173,7 @@ constants:
       it does not move.
     type: integer
     value: 21
+    value-type: boolean
     values:
       - name: isLocked
         value-type: boolean
@@ -1171,6 +1184,7 @@ constants:
       which it is not affected by target motion.
     type: integer
     value: 10
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -16400,6 +16414,7 @@ functions:
         tooltip: A strided list of rules and data pairs configuring the camera.
         type: list
         param-semantics: CameraParam
+        ruleset: camera-params
     energy: 10.0
     func-id: 313
     return: void
@@ -18969,6 +18984,11 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  camera-params:
+    type: table
+    enum: CameraParam
+    lua-type: CameraParams
 
   give-agent-inventory-params:
     type: table
