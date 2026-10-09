@@ -278,6 +278,16 @@ export type LSLReadableTypes = LSLTypes | boolean</string>
             <string>LSL list functions return these types.
 export type LSLTypes = string | number | vector | uuid | quaternion</string>
          </map>
+         <key>ParcelSaleParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Parcel sale parameter table. Pass to ll.SetParcelForSale() to configure the sale of a parcel.
+export type ParcelSaleParams = {
+  agent: (string | uuid)?,
+  objects: boolean?,
+  price: number?,
+}</string>
+         </map>
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>

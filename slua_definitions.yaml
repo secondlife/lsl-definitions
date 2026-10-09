@@ -279,6 +279,11 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
+- name: ParcelSaleParams
+  comment: Parcel sale parameter table. Pass to ll.SetParcelForSale() to configure the sale of a parcel.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: ParticleParams
   comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
   export: true
