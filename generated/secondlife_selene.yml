@@ -1722,12 +1722,12 @@ globals:
   LINKSETDATA_DELETE:
     property: read-only
     type: number
-    description: Event or flag indicating a key-value pair has been removed from the
-      linkset datastore, either via llLinksetDataDelete or by writing an empty value.
+    description: Action indicating a key was deleted from the linkset datastore via
+      llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty value.
   LINKSETDATA_EMEMORY:
     property: read-only
     type: number
-    description: Error code indicating a key-value pair was too large to write to
+    description: Error code indicating the key and value were too large to write to
       the linkset datastore.
   LINKSETDATA_ENOKEY:
     property: read-only
@@ -1737,13 +1737,14 @@ globals:
   LINKSETDATA_EPROTECTED:
     property: read-only
     type: number
-    description: Error code indicating the key-value pair is protected from being
-      deleted or overwritten in the linkset datastore.
+    description: Error code indicating the key is protected from being deleted or
+      overwritten in the linkset datastore.
   LINKSETDATA_MULTIDELETE:
     property: read-only
     type: number
-    description: Flag or value indicating a comma-separated list of keys has been
-      deleted from the linkset datastore via llLinksetDataDeleteFound.
+    description: Action indicating keys were deleted from the linkset datastore via
+      llLinksetDataDeleteFound. The event's name is a comma-separated list of the
+      deleted keys.
   LINKSETDATA_NOTFOUND:
     property: read-only
     type: number
@@ -1762,13 +1763,13 @@ globals:
   LINKSETDATA_RESET:
     property: read-only
     type: number
-    description: Event or flag indicating the linkset datastore has been cleared/reset
+    description: Action indicating all keys were deleted from the linkset datastore
       via llLinksetDataReset.
   LINKSETDATA_UPDATE:
     property: read-only
     type: number
-    description: Event or flag indicating a key in the linkset datastore has been
-      created or updated with a new value via llLinksetDataWrite.
+    description: Action indicating a key was created or updated in the linkset datastore
+      via llLinksetDataWrite or llLinksetDataWriteProtected.
   LINK_ALL_CHILDREN:
     property: read-only
     type: number

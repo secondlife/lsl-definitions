@@ -6355,19 +6355,19 @@
         "documentation": "Value: 3<br>Action used with llModifyLand to smooth the land."
     },
     "@sl-slua/global/LINKSETDATA_DELETE": {
-        "documentation": "Value: 2<br>Event or flag indicating a key-value pair has been removed from the linkset datastore, either via llLinksetDataDelete or by writing an empty value."
+        "documentation": "Value: 2<br>Action indicating a key was deleted from the linkset datastore via llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty value."
     },
     "@sl-slua/global/LINKSETDATA_EMEMORY": {
-        "documentation": "Value: 1<br>Error code indicating a key-value pair was too large to write to the linkset datastore."
+        "documentation": "Value: 1<br>Error code indicating the key and value were too large to write to the linkset datastore."
     },
     "@sl-slua/global/LINKSETDATA_ENOKEY": {
         "documentation": "Value: 2<br>Error code indicating the key name supplied to a linkset datastore operation was empty."
     },
     "@sl-slua/global/LINKSETDATA_EPROTECTED": {
-        "documentation": "Value: 3<br>Error code indicating the key-value pair is protected from being deleted or overwritten in the linkset datastore."
+        "documentation": "Value: 3<br>Error code indicating the key is protected from being deleted or overwritten in the linkset datastore."
     },
     "@sl-slua/global/LINKSETDATA_MULTIDELETE": {
-        "documentation": "Value: 3<br>Flag or value indicating a comma-separated list of keys has been deleted from the linkset datastore via llLinksetDataDeleteFound."
+        "documentation": "Value: 3<br>Action indicating keys were deleted from the linkset datastore via llLinksetDataDeleteFound. The event's name is a comma-separated list of the deleted keys."
     },
     "@sl-slua/global/LINKSETDATA_NOTFOUND": {
         "documentation": "Value: 4<br>Error code indicating the specified key could not be found in the linkset datastore."
@@ -6379,10 +6379,10 @@
         "documentation": "Value: 0<br>Status code indicating the linkset datastore operation completed successfully."
     },
     "@sl-slua/global/LINKSETDATA_RESET": {
-        "documentation": "Value: 0<br>Event or flag indicating the linkset datastore has been cleared/reset via llLinksetDataReset."
+        "documentation": "Value: 0<br>Action indicating all keys were deleted from the linkset datastore via llLinksetDataReset."
     },
     "@sl-slua/global/LINKSETDATA_UPDATE": {
-        "documentation": "Value: 1<br>Event or flag indicating a key in the linkset datastore has been created or updated with a new value via llLinksetDataWrite."
+        "documentation": "Value: 1<br>Action indicating a key was created or updated in the linkset datastore via llLinksetDataWrite or llLinksetDataWriteProtected."
     },
     "@sl-slua/global/LINK_ALL_CHILDREN": {
         "documentation": "Value: -3<br>Refers to all child prims in the linkset (every prim except the root)."
