@@ -670,32 +670,31 @@ data_storage:
   llDeleteKeyValue( string k ) -> key:
     k: Key of the key-value pair to delete.
     tooltip: Starts an asynchronous transaction to delete the key-value pair associated with key k in the experience. Returns a key query handle for the dataserver event.
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list:
-    name: Name of a notecard in the prim's inventory, or a UUID.
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
-    start: Number of match results to skip before returning (0 to start at the first match).
+    start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
-    options: A list of options for future expansion (unused, should be []).
-    tooltip: Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an
-      empty list if no matches are found.
+    options: A list of options to control the search (currently unused, should be []).
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNotecardLineSync( string name, integer line ) -> string:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF'
-      if out of bounds.
+    line: Index of the line to read.
+    tooltip: Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the
+      end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
   llKeyCountKeyValue(  ) -> key:
     tooltip: Starts an asynchronous transaction requesting the total count of keys in the experience data store. Returns a key query handle for the dataserver event.
   llKeysKeyValue( integer first, integer count ) -> key:
@@ -774,19 +773,18 @@ dataserver:
   llDeleteKeyValue( string k ) -> key:
     k: Key of the key-value pair to delete.
     tooltip: Starts an asynchronous transaction to delete the key-value pair associated with key k in the experience. Returns a key query handle for the dataserver event.
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
   llKeyCountKeyValue(  ) -> key:
     tooltip: Starts an asynchronous transaction requesting the total count of keys in the experience data store. Returns a key query handle for the dataserver event.
   llKeysKeyValue( integer first, integer count ) -> key:
@@ -1991,32 +1989,31 @@ movement:
     handle: Integer target handle returned by llTarget to remove.
     tooltip: Removes the positional target specified by the integer handle registered with llTarget.
 notecard:
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list:
-    name: Name of a notecard in the prim's inventory, or a UUID.
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
-    start: Number of match results to skip before returning (0 to start at the first match).
+    start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
-    options: A list of options for future expansion (unused, should be []).
-    tooltip: Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an
-      empty list if no matches are found.
+    options: A list of options to control the search (currently unused, should be []).
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNotecardLineSync( string name, integer line ) -> string:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF'
-      if out of bounds.
+    line: Index of the line to read.
+    tooltip: Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the
+      end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
 object:
   llGetBoundingBox( key object ) -> list:
     object: UUID of the avatar or prim in the same region.

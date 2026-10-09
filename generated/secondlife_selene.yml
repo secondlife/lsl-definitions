@@ -977,9 +977,9 @@ globals:
   EOF:
     property: read-only
     type: string
-    description: A value equal to three newline characters ("\n\n\n") returned by
-      the dataserver event, indicating that the requested line is past the end of
-      the notecard.
+    description: Value returned by llGetNotecardLine (through the dataserver event)
+      and llGetNotecardLineSync when the requested line is past the end of the notecard.
+      Equal to three newline characters ("\n\n\n").
   ERR_GENERIC:
     property: read-only
     type: number
@@ -1875,9 +1875,9 @@ globals:
   NAK:
     property: read-only
     type: string
-    description: Value returned by llGetNotecardLineSync (ASCII NAK surrounded by
-      newlines, i.e., codes 10, 21, 10) when requested notecard data is not in the
-      region's cache.
+    description: Value returned by llGetNotecardLineSync and llFindNotecardTextSync
+      (as a single-entry list) when the notecard is not in the region's cache. Equal
+      to an ASCII NAK surrounded by newlines (codes 10, 21, 10).
   NULL_KEY:
     struct: uuid
     description: A special string constant used as a null or empty key value.
@@ -7598,8 +7598,8 @@ globals:
     - type: string
     - type: table
     must_use: true
-    description: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver event.
+    description: Asynchronously requests the number of matches of pattern in the notecard
+      name. Returns a key query handle for the dataserver event.
   ll.FindNotecardTextSync:
     args:
     - type: string
@@ -7608,9 +7608,10 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: Synchronously searches a cached notecard name for lines containing
-      pattern, returning a list of line and column numbers. Returns a list containing
-      'NAK' if the notecard is not cached, or an empty list if no matches are found.
+    description: Synchronously searches the notecard name in the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a strided list
+      of the form [line, column, length, ...] with one stride per match, a list containing
+      NAK if the notecard is not cached, or an empty list if there are no matches.
   ll.FleeFrom:
     args:
     - type:
@@ -8098,21 +8099,21 @@ globals:
     args:
     - type: string
     - type: number
-    description: Asynchronously requests the line index line of the notecard name
-      from the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    description: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is past
+      the end of the notecard.
   ll.GetNotecardLineSync:
     args:
     - type: string
     - type: number
     must_use: true
-    description: Synchronously reads the line index line of the notecard name from
-      the region's cache, immediately returning its text without raising a dataserver
-      event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    description: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the notecard
+      is not cached, or EOF if line is past the end of the notecard.
   ll.GetNumberOfNotecardLines:
     args:
     - type: string
-    description: Asynchronously requests the total line count of the notecard name.
+    description: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
   ll.GetNumberOfPrims:
     args: []
@@ -11635,21 +11636,22 @@ globals:
     description: Returns the absolute (positive) value of val.
   llcompat.FindNotecardTextCount:
     deprecated:
-      message: Searches the text of a cached notecard for lines containing the given
-        pattern and returns the number of matches found through a dataserver event.
+      message: Asynchronously requests the number of matches of pattern in the notecard
+        name. Returns a key query handle for the dataserver event.
     args:
     - type: string
     - type: string
     - type: table
     must_use: true
-    description: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver event.
+    description: Asynchronously requests the number of matches of pattern in the notecard
+      name. Returns a key query handle for the dataserver event.
   llcompat.FindNotecardTextSync:
     deprecated:
-      message: (Index semantics) Synchronously searches a cached notecard name for
-        lines containing pattern, returning a list of line and column numbers. Returns
-        a list containing 'NAK' if the notecard is not cached, or an empty list if
-        no matches are found.
+      message: (Index semantics) Synchronously searches the notecard name in the region's
+        cache for matches of pattern, without raising a dataserver event. Returns
+        a strided list of the form [line, column, length, ...] with one stride per
+        match, a list containing NAK if the notecard is not cached, or an empty list
+        if there are no matches.
     args:
     - type: string
     - type: string
@@ -11657,10 +11659,11 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: (Index semantics) Synchronously searches a cached notecard name for
-      lines containing pattern, returning a list of line and column numbers. Returns
-      a list containing 'NAK' if the notecard is not cached, or an empty list if no
-      matches are found.
+    description: (Index semantics) Synchronously searches the notecard name in the
+      region's cache for matches of pattern, without raising a dataserver event. Returns
+      a strided list of the form [line, column, length, ...] with one stride per match,
+      a list containing NAK if the notecard is not cached, or an empty list if there
+      are no matches.
   llcompat.FleeFrom:
     deprecated:
       message: Directs a pathfinding character to keep the specified distance from
@@ -12385,34 +12388,34 @@ globals:
       3. Have the specified subject Subject (or any subject if blank)'
   llcompat.GetNotecardLine:
     deprecated:
-      message: Asynchronously requests the line index line of the notecard name from
-        the dataserver. Returns a key query handle for the dataserver event, which
-        will return 'EOF' when reaching past the end of the notecard.
+      message: Asynchronously requests the text of line in the notecard name. Returns
+        a key query handle for the dataserver event, which receives EOF if line is
+        past the end of the notecard.
     args:
     - type: string
     - type: number
-    description: Asynchronously requests the line index line of the notecard name
-      from the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    description: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is past
+      the end of the notecard.
   llcompat.GetNotecardLineSync:
     deprecated:
-      message: Synchronously reads the line index line of the notecard name from the
-        region's cache, immediately returning its text without raising a dataserver
-        event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+      message: Synchronously reads the text of line in the notecard name from the
+        region's cache, without raising a dataserver event. Returns NAK if the notecard
+        is not cached, or EOF if line is past the end of the notecard.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Synchronously reads the line index line of the notecard name from
-      the region's cache, immediately returning its text without raising a dataserver
-      event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    description: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the notecard
+      is not cached, or EOF if line is past the end of the notecard.
   llcompat.GetNumberOfNotecardLines:
     deprecated:
-      message: Asynchronously requests the total line count of the notecard name.
-        Returns a key query handle for the dataserver event.
+      message: Asynchronously requests the number of lines in the notecard name. Returns
+        a key query handle for the dataserver event.
     args:
     - type: string
-    description: Asynchronously requests the total line count of the notecard name.
+    description: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
   llcompat.GetNumberOfPrims:
     deprecated:
