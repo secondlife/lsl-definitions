@@ -17,6 +17,12 @@ static const RulesetParamDescriptor kCameraParamsDescs[] = {
 };
 RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
 
+// character-patrol-points-params
+static const RulesetParamDescriptor kCharacterPatrolPointsParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterPatrolPointsParamsDef = ruleset_builder_def_build(kCharacterPatrolPointsParamsDescs, std::size(kCharacterPatrolPointsParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},
