@@ -36,6 +36,12 @@ static const RulesetParamDescriptor kCharacterParamsDescs[] = {
 };
 RulesetBuilderDef* kCharacterParamsDef = ruleset_builder_def_build(kCharacterParamsDescs, std::size(kCharacterParamsDescs));
 
+// character-navigate-params
+static const RulesetParamDescriptor kCharacterNavigateParamsDescs[] = {
+    {"force_direct_path", 'b', 1},
+};
+RulesetBuilderDef* kCharacterNavigateParamsDef = ruleset_builder_def_build(kCharacterNavigateParamsDescs, std::size(kCharacterNavigateParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},
