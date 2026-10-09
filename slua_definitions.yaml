@@ -264,6 +264,11 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
+- name: CharacterParams
+  comment: Pathfinding character parameter table. Pass to ll.CreateCharacter() to configure a character.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
   export: true
