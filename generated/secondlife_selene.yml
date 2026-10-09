@@ -8802,37 +8802,36 @@ globals:
   ll.LinksetDataAvailable:
     args: []
     must_use: true
-    description: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    description: Returns the number of bytes remaining in the linkset datastore.
   ll.LinksetDataCountFound:
     args:
     - type: string
     must_use: true
-    description: Returns the total count of keys in the linkset datastore that match
-      the regular expression pattern.
+    description: Returns the number of keys in the linkset datastore that match the
+      regular expression pattern.
   ll.LinksetDataCountKeys:
     args: []
     must_use: true
-    description: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    description: Returns the number of keys in the linkset datastore.
   ll.LinksetDataDelete:
     args:
     - type: string
-    description: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
+    description: Deletes the unprotected key name from the linkset datastore, triggering
+      a linkset_data event. Returns an integer success or failure code.
   ll.LinksetDataDeleteFound:
     args:
     - type: string
     - type: string
-    description: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes
-      protected keys if matching pass is provided.
+    description: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event. Protected keys are only
+      deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].
   ll.LinksetDataDeleteProtected:
     args:
     - type: string
     - type: string
-    description: Deletes the protected key-value pair specified by name from the linkset's
-      datastore using the passphrase pass, triggering a linkset_data event.
+    description: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event. Returns an integer success
+      or failure code.
   ll.LinksetDataFindKeys:
     args:
     - type: string
@@ -8840,46 +8839,48 @@ globals:
     - type: number
     must_use: true
     description: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index start
-      (returns all matching keys if count < 1).
+      linkset datastore that match the regular expression pattern, starting at index
+      start (returns all matching keys if count < 1).
   ll.LinksetDataListKeys:
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
+      linkset datastore, starting at index start (returns all keys if count < 1).
   ll.LinksetDataRead:
     args:
     - type: string
     must_use: true
-    description: Reads and returns the string value corresponding to key name from
-      the linkset's datastore.
+    description: Returns the value of the unprotected key name from the linkset datastore.
+      Returns an empty string if the key is not found or is protected.
   ll.LinksetDataReadProtected:
     args:
     - type: string
     - type: string
     must_use: true
-    description: Reads and returns the string value of the protected key name from
-      the linkset's datastore using the passphrase pass.
+    description: Returns the value of the protected key name from the linkset datastore
+      using the passphrase pass. Returns an empty string if the key is not found or
+      pass does not match.
   ll.LinksetDataReset:
     args: []
-    description: Erases all key-value pairs stored in the linkset's datastore, triggering
-      a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    description: Deletes all keys from the linkset datastore, triggering a linkset_data
+      event.
   ll.LinksetDataWrite:
     args:
     - type: string
     - type: string
-    description: Creates or updates an unprotected key-value pair (name and value)
-      in the linkset's datastore. Returns an integer success or failure code.
+    description: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event. Returns an integer success or failure
+      code.
   ll.LinksetDataWriteProtected:
     args:
     - type: string
     - type: string
     - type: string
-    description: Creates or updates a protected key-value pair (name and value) in
-      the linkset's datastore using the passphrase pass. Returns an integer success
-      or failure code.
+    description: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event. Returns
+      an integer success or failure code.
   ll.List2CSV:
     args:
     - type: table
@@ -13434,127 +13435,129 @@ globals:
       linked prim link.
   llcompat.LinksetDataAvailable:
     deprecated:
-      message: Returns an integer representing the number of bytes available/remaining
-        in the linkset's datastore.
+      message: Returns the number of bytes remaining in the linkset datastore.
     args: []
     must_use: true
-    description: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    description: Returns the number of bytes remaining in the linkset datastore.
   llcompat.LinksetDataCountFound:
     deprecated:
-      message: Returns the total count of keys in the linkset datastore that match
-        the regular expression pattern.
+      message: Returns the number of keys in the linkset datastore that match the
+        regular expression pattern.
     args:
     - type: string
     must_use: true
-    description: Returns the total count of keys in the linkset datastore that match
-      the regular expression pattern.
+    description: Returns the number of keys in the linkset datastore that match the
+      regular expression pattern.
   llcompat.LinksetDataCountKeys:
     deprecated:
-      message: Returns an integer representing the total number of unique keys stored
-        in the linkset's datastore.
+      message: Returns the number of keys in the linkset datastore.
     args: []
     must_use: true
-    description: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    description: Returns the number of keys in the linkset datastore.
   llcompat.LinksetDataDelete:
     deprecated:
-      message: Deletes the unprotected key-value pair specified by name from the linkset's
-        datastore, triggering a linkset_data event.
+      message: Deletes the unprotected key name from the linkset datastore, triggering
+        a linkset_data event. Returns an integer success or failure code.
     args:
     - type: string
-    description: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
+    description: Deletes the unprotected key name from the linkset datastore, triggering
+      a linkset_data event. Returns an integer success or failure code.
   llcompat.LinksetDataDeleteFound:
     deprecated:
-      message: Deletes all keys in the datastore matching the regular expression pattern.
-        Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected
-        keys if matching pass is provided.
+      message: Deletes all keys in the linkset datastore that match the regular expression
+        pattern, triggering a linkset_data event. Protected keys are only deleted
+        if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].
     args:
     - type: string
     - type: string
-    description: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes
-      protected keys if matching pass is provided.
+    description: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event. Protected keys are only
+      deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].
   llcompat.LinksetDataDeleteProtected:
     deprecated:
-      message: Deletes the protected key-value pair specified by name from the linkset's
-        datastore using the passphrase pass, triggering a linkset_data event.
-    args:
-    - type: string
-    - type: string
-    description: Deletes the protected key-value pair specified by name from the linkset's
-      datastore using the passphrase pass, triggering a linkset_data event.
-  llcompat.LinksetDataFindKeys:
-    deprecated:
-      message: Returns an alphabetically sorted list of up to count keys from the
-        datastore that match the regular expression pattern, starting at index start
-        (returns all matching keys if count < 1).
-    args:
-    - type: string
-    - type: number
-    - type: number
-    must_use: true
-    description: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index start
-      (returns all matching keys if count < 1).
-  llcompat.LinksetDataListKeys:
-    deprecated:
-      message: Returns an alphabetically sorted list of up to count keys from the
-        datastore, starting at index start (returns all keys if count < 1).
-    args:
-    - type: number
-    - type: number
-    must_use: true
-    description: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
-  llcompat.LinksetDataRead:
-    deprecated:
-      message: Reads and returns the string value corresponding to key name from the
-        linkset's datastore.
-    args:
-    - type: string
-    must_use: true
-    description: Reads and returns the string value corresponding to key name from
-      the linkset's datastore.
-  llcompat.LinksetDataReadProtected:
-    deprecated:
-      message: Reads and returns the string value of the protected key name from the
-        linkset's datastore using the passphrase pass.
-    args:
-    - type: string
-    - type: string
-    must_use: true
-    description: Reads and returns the string value of the protected key name from
-      the linkset's datastore using the passphrase pass.
-  llcompat.LinksetDataReset:
-    deprecated:
-      message: Erases all key-value pairs stored in the linkset's datastore, triggering
-        a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
-    args: []
-    description: Erases all key-value pairs stored in the linkset's datastore, triggering
-      a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
-  llcompat.LinksetDataWrite:
-    deprecated:
-      message: Creates or updates an unprotected key-value pair (name and value) in
-        the linkset's datastore. Returns an integer success or failure code.
-    args:
-    - type: string
-    - type: string
-    description: Creates or updates an unprotected key-value pair (name and value)
-      in the linkset's datastore. Returns an integer success or failure code.
-  llcompat.LinksetDataWriteProtected:
-    deprecated:
-      message: Creates or updates a protected key-value pair (name and value) in the
-        linkset's datastore using the passphrase pass. Returns an integer success
+      message: Deletes the protected key name from the linkset datastore using the
+        passphrase pass, triggering a linkset_data event. Returns an integer success
         or failure code.
     args:
     - type: string
     - type: string
-    - type: string
-    description: Creates or updates a protected key-value pair (name and value) in
-      the linkset's datastore using the passphrase pass. Returns an integer success
+    description: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event. Returns an integer success
       or failure code.
+  llcompat.LinksetDataFindKeys:
+    deprecated:
+      message: Returns an alphabetically sorted list of up to count keys from the
+        linkset datastore that match the regular expression pattern, starting at index
+        start (returns all matching keys if count < 1).
+    args:
+    - type: string
+    - type: number
+    - type: number
+    must_use: true
+    description: Returns an alphabetically sorted list of up to count keys from the
+      linkset datastore that match the regular expression pattern, starting at index
+      start (returns all matching keys if count < 1).
+  llcompat.LinksetDataListKeys:
+    deprecated:
+      message: Returns an alphabetically sorted list of up to count keys from the
+        linkset datastore, starting at index start (returns all keys if count < 1).
+    args:
+    - type: number
+    - type: number
+    must_use: true
+    description: Returns an alphabetically sorted list of up to count keys from the
+      linkset datastore, starting at index start (returns all keys if count < 1).
+  llcompat.LinksetDataRead:
+    deprecated:
+      message: Returns the value of the unprotected key name from the linkset datastore.
+        Returns an empty string if the key is not found or is protected.
+    args:
+    - type: string
+    must_use: true
+    description: Returns the value of the unprotected key name from the linkset datastore.
+      Returns an empty string if the key is not found or is protected.
+  llcompat.LinksetDataReadProtected:
+    deprecated:
+      message: Returns the value of the protected key name from the linkset datastore
+        using the passphrase pass. Returns an empty string if the key is not found
+        or pass does not match.
+    args:
+    - type: string
+    - type: string
+    must_use: true
+    description: Returns the value of the protected key name from the linkset datastore
+      using the passphrase pass. Returns an empty string if the key is not found or
+      pass does not match.
+  llcompat.LinksetDataReset:
+    deprecated:
+      message: Deletes all keys from the linkset datastore, triggering a linkset_data
+        event.
+    args: []
+    description: Deletes all keys from the linkset datastore, triggering a linkset_data
+      event.
+  llcompat.LinksetDataWrite:
+    deprecated:
+      message: Creates or updates the unprotected key name in the linkset datastore
+        with value, triggering a linkset_data event. Returns an integer success or
+        failure code.
+    args:
+    - type: string
+    - type: string
+    description: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event. Returns an integer success or failure
+      code.
+  llcompat.LinksetDataWriteProtected:
+    deprecated:
+      message: Creates or updates the protected key name in the linkset datastore
+        with value using the passphrase pass, triggering a linkset_data event. Returns
+        an integer success or failure code.
+    args:
+    - type: string
+    - type: string
+    - type: string
+    description: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event. Returns
+      an integer success or failure code.
   llcompat.List2CSV:
     deprecated:
       message: Returns a string of comma-separated values taken in order from the
@@ -16739,9 +16742,9 @@ structs:
     linkset_data:
       property: override-fields
       type: function
-      description: Fires in all scripts in the linkset whenever the datastore has
-        been modified via an llLinksetData function. Passes the action taken, the
-        affected key name, and the new value.
+      description: Fires in all scripts in the linkset whenever the linkset datastore
+        is modified via an llLinksetData function. Passes the action taken, the affected
+        key name, and the new value.
     listen:
       property: override-fields
       type: function

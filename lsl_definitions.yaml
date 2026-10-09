@@ -8865,18 +8865,19 @@ events:
     event-id: 39
     arguments:
     - action:
-        tooltip: An integer constant representing the action taken (e.g.,
-          LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
+        tooltip: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE,
+          LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
         type: integer
         enum-semantics: LinksetDataAction
     - name:
-        tooltip: Key name of the modified key-value pair.
+        tooltip: Name of the modified key (a comma-separated list of keys for
+          LINKSETDATA_MULTIDELETE).
         type: string
     - value:
-        tooltip: New string value of the pair (empty if the pair was deleted or is
-          password-protected).
+        tooltip: New value of the key (empty if the key was deleted or is
+          protected).
         type: string
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is
       modified via an llLinksetData function. Passes the action taken, the
       affected key name, and the new value.
     categories:
@@ -13388,8 +13389,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
     categories:
       - data_storage
       - linkset
@@ -13397,14 +13397,14 @@ functions:
   llLinksetDataCountFound:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) search string used to match keys.
+        tooltip: Regular expression (regex) matching the keys to count.
         type: string
     energy: 10.0
     func-id: 661
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the total count of keys in the linkset datastore that match the
+    tooltip: Returns the number of keys in the linkset datastore that match the
       regular expression pattern.
     categories:
       - data_storage
@@ -13417,8 +13417,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
     categories:
       - data_storage
       - linkset
@@ -13426,15 +13425,16 @@ functions:
   llLinksetDataDelete:
     arguments:
     - name:
-        tooltip: Key name of the key-value pair to delete.
+        tooltip: Name of the key to delete.
         type: string
     energy: 10.0
     func-id: 652
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
+    tooltip: Deletes the unprotected key name from the linkset datastore,
+      triggering a linkset_data event. Returns an integer success or failure
+      code.
     categories:
       - data_storage
       - linkset
@@ -13442,7 +13442,7 @@ functions:
   llLinksetDataDeleteFound:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) specifying which keys to delete.
+        tooltip: Regular expression (regex) matching the keys to delete.
         type: string
     - pass:
         tooltip: Optional passphrase required to delete matching protected keys.
@@ -13452,9 +13452,10 @@ functions:
     return: list
     slua-return: "{number}"
     sleep: 0.0
-    tooltip: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and
-      deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event. Protected keys are
+      only deleted if their passphrase matches pass. Returns a list
+      [num_deleted, num_failed_protected].
     categories:
       - data_storage
       - linkset
@@ -13462,7 +13463,7 @@ functions:
   llLinksetDataDeleteProtected:
     arguments:
     - name:
-        tooltip: Key name of the protected key-value pair to delete.
+        tooltip: Name of the protected key to delete.
         type: string
     - pass:
         tooltip: Passphrase required to delete the protected key.
@@ -13472,9 +13473,9 @@ functions:
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Deletes the protected key-value pair specified by name from the
-      linkset's datastore using the passphrase pass, triggering a linkset_data
-      event.
+    tooltip: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event. Returns an integer
+      success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13482,10 +13483,10 @@ functions:
   llLinksetDataFindKeys:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) describing which keys to search for.
+        tooltip: Regular expression (regex) matching the keys to return.
         type: string
     - start:
-        tooltip: Zero-based start index of the matching keys to return.
+        tooltip: Index of the first matching key to return.
         type: integer
         index-semantics: true
     - count:
@@ -13499,8 +13500,8 @@ functions:
     slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index
-      start (returns all matching keys if count < 1).
+      linkset datastore that match the regular expression pattern, starting at
+      index start (returns all matching keys if count < 1).
     categories:
       - data_storage
       - linkset
@@ -13508,7 +13509,7 @@ functions:
   llLinksetDataListKeys:
     arguments:
     - start:
-        tooltip: Zero-based start index of the keys to return.
+        tooltip: Index of the first key to return.
         type: integer
         index-semantics: true
     - count:
@@ -13522,7 +13523,8 @@ functions:
     slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
+      linkset datastore, starting at index start (returns all keys if
+      count < 1).
     categories:
       - data_storage
       - linkset
@@ -13530,15 +13532,16 @@ functions:
   llLinksetDataRead:
     arguments:
     - name:
-        tooltip: Key of the key-value pair to read.
+        tooltip: Name of the key to read.
         type: string
     energy: 10.0
     func-id: 651
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Reads and returns the string value corresponding to key name from the
-      linkset's datastore.
+    tooltip: Returns the value of the unprotected key name from the linkset
+      datastore. Returns an empty string if the key is not found or is
+      protected.
     categories:
       - data_storage
       - linkset
@@ -13546,7 +13549,7 @@ functions:
   llLinksetDataReadProtected:
     arguments:
     - name:
-        tooltip: Key of the protected key-value pair to read.
+        tooltip: Name of the protected key to read.
         type: string
     - pass:
         tooltip: Passphrase required to read the protected key.
@@ -13556,8 +13559,9 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Reads and returns the string value of the protected key name from the
-      linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset
+      datastore using the passphrase pass. Returns an empty string if the key is
+      not found or pass does not match.
     categories:
       - data_storage
       - linkset
@@ -13568,9 +13572,8 @@ functions:
     func-id: 655
     return: void
     sleep: 0.0
-    tooltip: Erases all key-value pairs stored in the linkset's datastore,
-      triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in
-      the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a
+      linkset_data event.
     categories:
       - data_storage
       - linkset
@@ -13578,18 +13581,19 @@ functions:
   llLinksetDataWrite:
     arguments:
     - name:
-        tooltip: Key name of the key-value pair.
+        tooltip: Name of the key to write.
         type: string
     - value:
-        tooltip: String value to write to the datastore.
+        tooltip: Value to write to the key (an empty string deletes the key).
         type: string
     energy: 10.0
     func-id: 650
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in
-      the linkset's datastore. Returns an integer success or failure code.
+    tooltip: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event. Returns an integer success or
+      failure code.
     categories:
       - data_storage
       - linkset
@@ -13597,10 +13601,10 @@ functions:
   llLinksetDataWriteProtected:
     arguments:
     - name:
-        tooltip: Key name of the protected key-value pair.
+        tooltip: Name of the protected key to write.
         type: string
     - value:
-        tooltip: String value to write to the datastore.
+        tooltip: Value to write to the key (an empty string deletes the key).
         type: string
     - pass:
         tooltip: Passphrase used to protect or update the key.
@@ -13610,9 +13614,9 @@ functions:
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Creates or updates a protected key-value pair (name and value) in the
-      linkset's datastore using the passphrase pass. Returns an integer success
-      or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event.
+      Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset

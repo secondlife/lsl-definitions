@@ -2091,55 +2091,55 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinkStopSound"
     },
     "@sl-slua/global/ll.LinksetDataAvailable": {
-        "documentation": "Returns an integer representing the number of bytes available/remaining in the linkset's datastore.",
+        "documentation": "Returns the number of bytes remaining in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataAvailable"
     },
     "@sl-slua/global/ll.LinksetDataCountFound": {
-        "documentation": "Returns the total count of keys in the linkset datastore that match the regular expression pattern.",
+        "documentation": "Returns the number of keys in the linkset datastore that match the regular expression pattern.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountFound"
     },
     "@sl-slua/global/ll.LinksetDataCountKeys": {
-        "documentation": "Returns an integer representing the total number of unique keys stored in the linkset's datastore.",
+        "documentation": "Returns the number of keys in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountKeys"
     },
     "@sl-slua/global/ll.LinksetDataDelete": {
-        "documentation": "Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.",
+        "documentation": "Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDelete"
     },
     "@sl-slua/global/ll.LinksetDataDeleteFound": {
-        "documentation": "Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.",
+        "documentation": "Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteFound"
     },
     "@sl-slua/global/ll.LinksetDataDeleteProtected": {
-        "documentation": "Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.",
+        "documentation": "Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteProtected"
     },
     "@sl-slua/global/ll.LinksetDataFindKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataFindKeys"
     },
     "@sl-slua/global/ll.LinksetDataListKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataListKeys"
     },
     "@sl-slua/global/ll.LinksetDataRead": {
-        "documentation": "Reads and returns the string value corresponding to key name from the linkset's datastore.",
+        "documentation": "Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataRead"
     },
     "@sl-slua/global/ll.LinksetDataReadProtected": {
-        "documentation": "Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.",
+        "documentation": "Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReadProtected"
     },
     "@sl-slua/global/ll.LinksetDataReset": {
-        "documentation": "Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.",
+        "documentation": "Deletes all keys from the linkset datastore, triggering a linkset_data event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReset"
     },
     "@sl-slua/global/ll.LinksetDataWrite": {
-        "documentation": "Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWrite"
     },
     "@sl-slua/global/ll.LinksetDataWriteProtected": {
-        "documentation": "Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWriteProtected"
     },
     "@sl-slua/global/ll.List2CSV": {
@@ -4170,55 +4170,55 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinkStopSound"
     },
     "@sl-slua/global/llcompat.LinksetDataAvailable": {
-        "documentation": "Returns an integer representing the number of bytes available/remaining in the linkset's datastore.",
+        "documentation": "Returns the number of bytes remaining in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataAvailable"
     },
     "@sl-slua/global/llcompat.LinksetDataCountFound": {
-        "documentation": "Returns the total count of keys in the linkset datastore that match the regular expression pattern.",
+        "documentation": "Returns the number of keys in the linkset datastore that match the regular expression pattern.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountFound"
     },
     "@sl-slua/global/llcompat.LinksetDataCountKeys": {
-        "documentation": "Returns an integer representing the total number of unique keys stored in the linkset's datastore.",
+        "documentation": "Returns the number of keys in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataDelete": {
-        "documentation": "Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.",
+        "documentation": "Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDelete"
     },
     "@sl-slua/global/llcompat.LinksetDataDeleteFound": {
-        "documentation": "Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.",
+        "documentation": "Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteFound"
     },
     "@sl-slua/global/llcompat.LinksetDataDeleteProtected": {
-        "documentation": "Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.",
+        "documentation": "Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteProtected"
     },
     "@sl-slua/global/llcompat.LinksetDataFindKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataFindKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataListKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataListKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataRead": {
-        "documentation": "Reads and returns the string value corresponding to key name from the linkset's datastore.",
+        "documentation": "Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataRead"
     },
     "@sl-slua/global/llcompat.LinksetDataReadProtected": {
-        "documentation": "Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.",
+        "documentation": "Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReadProtected"
     },
     "@sl-slua/global/llcompat.LinksetDataReset": {
-        "documentation": "Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.",
+        "documentation": "Deletes all keys from the linkset datastore, triggering a linkset_data event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReset"
     },
     "@sl-slua/global/llcompat.LinksetDataWrite": {
-        "documentation": "Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWrite"
     },
     "@sl-slua/global/llcompat.LinksetDataWriteProtected": {
-        "documentation": "Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWriteProtected"
     },
     "@sl-slua/global/llcompat.List2CSV": {
