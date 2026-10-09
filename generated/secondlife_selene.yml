@@ -977,9 +977,9 @@ globals:
   EOF:
     property: read-only
     type: string
-    description: A value equal to three newline characters ("\n\n\n") returned by
-      the dataserver event, indicating that the requested line is past the end of
-      the notecard.
+    description: Value returned by llGetNotecardLine (through the dataserver event)
+      and llGetNotecardLineSync when the requested line is past the end of the notecard.
+      Equal to three newline characters ("\n\n\n").
   ERR_GENERIC:
     property: read-only
     type: number
@@ -1875,9 +1875,9 @@ globals:
   NAK:
     property: read-only
     type: string
-    description: Value returned by llGetNotecardLineSync (ASCII NAK surrounded by
-      newlines, i.e., codes 10, 21, 10) when requested notecard data is not in the
-      region's cache.
+    description: Value returned by llGetNotecardLineSync and llFindNotecardTextSync
+      (as a single-entry list) when the notecard is not in the region's cache. Equal
+      to an ASCII NAK surrounded by newlines (codes 10, 21, 10).
   NULL_KEY:
     struct: uuid
     description: A special string constant used as a null or empty key value.
@@ -7608,10 +7608,10 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: Synchronously searches the notecard name from the region's cache
-      for matches of pattern, without raising a dataserver event. Returns a list of
-      [line, column, length] for each match, a list containing NAK if the notecard
-      is not cached, or an empty list if there are no matches.
+    description: Synchronously searches the notecard name in the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a strided list
+      of the form [line, column, length, ...] with one stride per match, a list containing
+      NAK if the notecard is not cached, or an empty list if there are no matches.
   ll.FleeFrom:
     args:
     - type:
@@ -11647,10 +11647,11 @@ globals:
       name. Returns a key query handle for the dataserver event.
   llcompat.FindNotecardTextSync:
     deprecated:
-      message: (Index semantics) Synchronously searches the notecard name from the
-        region's cache for matches of pattern, without raising a dataserver event.
-        Returns a list of [line, column, length] for each match, a list containing
-        NAK if the notecard is not cached, or an empty list if there are no matches.
+      message: (Index semantics) Synchronously searches the notecard name in the region's
+        cache for matches of pattern, without raising a dataserver event. Returns
+        a strided list of the form [line, column, length, ...] with one stride per
+        match, a list containing NAK if the notecard is not cached, or an empty list
+        if there are no matches.
     args:
     - type: string
     - type: string
@@ -11658,10 +11659,11 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: (Index semantics) Synchronously searches the notecard name from the
+    description: (Index semantics) Synchronously searches the notecard name in the
       region's cache for matches of pattern, without raising a dataserver event. Returns
-      a list of [line, column, length] for each match, a list containing NAK if the
-      notecard is not cached, or an empty list if there are no matches.
+      a strided list of the form [line, column, length, ...] with one stride per match,
+      a list containing NAK if the notecard is not cached, or an empty list if there
+      are no matches.
   llcompat.FleeFrom:
     deprecated:
       message: Directs a pathfinding character to keep the specified distance from

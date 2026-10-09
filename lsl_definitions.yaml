@@ -1874,9 +1874,9 @@ constants:
     type: integer
     value: -6
   EOF:
-    tooltip: A value equal to three newline characters ("\n\n\n") returned by the
-      dataserver event, indicating that the requested line is past the end of
-      the notecard.
+    tooltip: Value returned by llGetNotecardLine (through the dataserver event) and
+      llGetNotecardLineSync when the requested line is past the end of the
+      notecard. Equal to three newline characters ("\n\n\n").
     type: string
     value: '\n\n\n'
   ERR_GENERIC:
@@ -3060,9 +3060,9 @@ constants:
     type: integer
     value: 1
   NAK:
-    tooltip: Value returned by llGetNotecardLineSync (ASCII NAK surrounded by
-      newlines, i.e., codes 10, 21, 10) when requested notecard data is not in
-      the region's cache.
+    tooltip: Value returned by llGetNotecardLineSync and llFindNotecardTextSync (as
+      a single-entry list) when the notecard is not in the region's cache. Equal
+      to an ASCII NAK surrounded by newlines (codes 10, 21, 10).
     type: string
     value: '\n\x15\n'
   NAVIGATE_TO_GOAL_REACHED_DIST:
@@ -10470,10 +10470,11 @@ functions:
     # There are list indices in the return value!
     index-semantics: true
     sleep: 0.0
-    tooltip: Synchronously searches the notecard name from the region's cache for
-      matches of pattern, without raising a dataserver event. Returns a list of
-      [line, column, length] for each match, a list containing NAK if the
-      notecard is not cached, or an empty list if there are no matches.
+    tooltip: Synchronously searches the notecard name in the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a strided
+      list of the form [line, column, length, ...] with one stride per match, a
+      list containing NAK if the notecard is not cached, or an empty list if
+      there are no matches.
     categories:
       - data_storage
       - notecard

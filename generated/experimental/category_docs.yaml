@@ -681,8 +681,8 @@ data_storage:
     start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Synchronously searches the notecard name from the region's cache for matches of pattern, without raising a dataserver event. Returns a list of [line, column, length] for each match, a list
-      containing NAK if the notecard is not cached, or an empty list if there are no matches.
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
     line: Index of the line to read.
@@ -2000,8 +2000,8 @@ notecard:
     start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Synchronously searches the notecard name from the region's cache for matches of pattern, without raising a dataserver event. Returns a list of [line, column, length] for each match, a list
-      containing NAK if the notecard is not cached, or an empty list if there are no matches.
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
     line: Index of the line to read.
