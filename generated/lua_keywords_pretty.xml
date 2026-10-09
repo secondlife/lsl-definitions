@@ -240,7 +240,7 @@ export type GiveAgentInventoryParams = {
          <key>KeyframedMotionParams</key>
          <map>
             <key>tooltip</key>
-            <string>Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+            <string>Keyframed motion parameter table. Pass to ll.SetKeyframedMotion() to animate.
 export type KeyframedMotionParams = {
   command: number?,
   data: number?,

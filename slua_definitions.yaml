@@ -262,7 +262,7 @@ type-aliases:
 - name: CameraParams
   comment: Camera parameter table. Pass to ll.SetCameraParams() to configure the camera.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
@@ -275,7 +275,7 @@ type-aliases:
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: KeyframedMotionParams
-  comment: Keyframed motion parameter table. Pass to llprim.keyframedMotion() to animate.
+  comment: Keyframed motion parameter table. Pass to ll.SetKeyframedMotion() to animate.
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
