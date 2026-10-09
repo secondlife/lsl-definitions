@@ -145,6 +145,7 @@ enums:
     tooltip: ''
   CharacterWanderWithinParam:
     type: param-dict
+    prefix: WANDER_
     tooltip: ''
   ClickAction:
     type: enum
@@ -9687,6 +9688,7 @@ functions:
           options.
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 399
     return: void
@@ -10875,6 +10877,7 @@ functions:
         tooltip: A list of GCNP_* flags and parameters to configure the search limits.
         type: list
         param-semantics: GetClosestNavPointParam
+        ruleset: get-closest-nav-point-params
     energy: 10.0
     func-id: 408
     must-use: true
@@ -12418,6 +12421,7 @@ functions:
           CHARACTER_TYPE_NONE).
         type: list
         param-semantics: GetStaticPathParam
+        ruleset: get-static-path-params
     energy: 10.0
     func-id: 413
     must-use: true
@@ -14689,6 +14693,7 @@ functions:
           FORCE_DIRECT_PATH is supported).
         type: list
         param-semantics: CharacterNavigateParam
+        ruleset: character-navigate-params
     energy: 10.0
     func-id: 398
     return: void
@@ -14951,6 +14956,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterPatrolPointsParam
+        ruleset: character-patrol-points-params
     energy: 10.0
     func-id: 403
     return: void
@@ -15055,6 +15061,7 @@ functions:
         tooltip: A list of options to configure pursuit behavior.
         type: list
         param-semantics: CharacterPursueParam
+        ruleset: character-pursue-params
     energy: 10.0
     func-id: 400
     return: void
@@ -18340,6 +18347,7 @@ functions:
           options (takes same constants as llCreateCharacter).
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 406
     return: void
@@ -18497,6 +18505,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterWanderWithinParam
+        ruleset: character-wander-within-params
     energy: 10.0
     func-id: 401
     return: void
@@ -18989,6 +18998,41 @@ builder-rulesets:
     type: table
     enum: CameraParam
     lua-type: CameraParams
+
+  character-params:
+    type: table
+    enum: CharacterParam
+    lua-type: CharacterParams
+
+  character-navigate-params:
+    type: table
+    enum: CharacterNavigateParam
+    lua-type: CharacterNavigateParams
+
+  character-patrol-points-params:
+    type: table
+    enum: CharacterPatrolPointsParam
+    lua-type: CharacterPatrolPointsParams
+
+  character-pursue-params:
+    type: table
+    enum: CharacterPursueParam
+    lua-type: CharacterPursueParams
+
+  character-wander-within-params:
+    type: table
+    enum: CharacterWanderWithinParam
+    lua-type: CharacterWanderWithinParams
+
+  get-closest-nav-point-params:
+    type: table
+    enum: GetClosestNavPointParam
+    lua-type: GetClosestNavPointParams
+
+  get-static-path-params:
+    type: table
+    enum: GetStaticPathParam
+    lua-type: GetStaticPathParams
 
   give-agent-inventory-params:
     type: table
