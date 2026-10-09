@@ -259,6 +259,11 @@ type-aliases:
   export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
+- name: AttachedListFilterParams
+  comment: Attached list filer table. Pass to ll.GetAttachedListFiltered to get attachments.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: CameraParams
   comment: Camera parameter table. Pass to ll.SetCameraParams() to configure the camera.
   export: true
