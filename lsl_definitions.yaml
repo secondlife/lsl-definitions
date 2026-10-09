@@ -10875,6 +10875,7 @@ functions:
         tooltip: A list of GCNP_* flags and parameters to configure the search limits.
         type: list
         param-semantics: GetClosestNavPointParam
+        ruleset: get-closest-nav-point-params
     energy: 10.0
     func-id: 408
     must-use: true
@@ -18989,6 +18990,11 @@ builder-rulesets:
     type: table
     enum: CameraParam
     lua-type: CameraParams
+
+  get-closest-nav-point-params:
+    type: table
+    enum: GetClosestNavPointParam
+    lua-type: GetClosestNavPointParams
 
   give-agent-inventory-params:
     type: table
