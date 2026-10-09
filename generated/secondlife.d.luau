@@ -119,6 +119,9 @@ export type CharacterParams = {
   traversal_type: number?,
   type: number?,
 }
+export type CharacterNavigateParams = {
+  force_direct_path: boolean?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
@@ -1066,7 +1069,7 @@ declare ll: {
   ModifyLand: (action: number, brush: number) -> (),
   MoveToTarget: (target: vector, tau: number) -> (),
   Name2Key: (name: string) -> uuid,
-  NavigateTo: (pos: vector, options: list) -> (),
+  NavigateTo: (pos: vector, options: list | CharacterNavigateParams) -> (),
   OffsetTexture: (u: number, v: number, face: number) -> (),
   OpenFloater: (floater_name: string, url: string, params: list) -> number,
   OpenRemoteDataChannel: @deprecated () -> (),
@@ -1593,7 +1596,7 @@ declare llcompat: {
   ModifyLand: @deprecated (action: number, brush: number) -> (),
   MoveToTarget: @deprecated (target: vector, tau: number) -> (),
   Name2Key: @deprecated (name: string) -> uuid,
-  NavigateTo: @deprecated (pos: vector, options: list) -> (),
+  NavigateTo: @deprecated (pos: vector, options: list | CharacterNavigateParams) -> (),
   OffsetTexture: @deprecated (u: number, v: number, face: number) -> (),
   OpenFloater: @deprecated (floater_name: string, url: string, params: list) -> number,
   OpenRemoteDataChannel: @deprecated () -> (),
