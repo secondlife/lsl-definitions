@@ -16742,6 +16742,7 @@ functions:
         tooltip: A list of overrides and their corresponding values to set.
         type: list
         param-semantics: GLTFOverride
+        ruleset: gltf-overrides
     energy: 10.0
     func-id: 560
     return: void
@@ -18996,6 +18997,14 @@ builder-rulesets:
     flag-enum: GiveAgentInventoryFlag
     flag-field: flags
     lua-type: GiveAgentInventoryParams
+
+  gltf-overrides:
+    type: table
+    enum: GLTFOverride
+    lua-module: llprim
+    lua-fn: setGltfOverrides
+    lua-type: GltfOverrides
+    dispatch-fn: SetLinkGLTFOverrides
 
   http-request-params:
     type: table

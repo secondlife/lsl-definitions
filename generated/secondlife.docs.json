@@ -504,6 +504,9 @@
     "@sl-slua/global/llprim.ParamSetter": {
         "documentation": "Value: PrimParamSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
     },
+    "@sl-slua/global/llprim.setGltfOverrides": {
+        "documentation": "Sets or removes individual GLTF override parameters specified by params on face of the linked prim link."
+    },
     "@sl-slua/global/llprim.setParticleSystem": {
         "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
     },
