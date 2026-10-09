@@ -206,6 +206,14 @@ export type CharacterNavigateParams = {
             <key>tooltip</key>
             <string>Pathfinding character parameter table. Pass to ll.CreateCharacter() to configure a character.</string>
          </map>
+         <key>CharacterPatrolPointsParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Pathfinding character patrol points parameter table. Pass to ll.PatrolPoints() to configure the route.
+export type CharacterPatrolPointsParams = {
+  pause_at_waypoints: boolean?,
+}</string>
+         </map>
          <key>DateTypeArg</key>
          <map>
             <key>tooltip</key>
