@@ -106,6 +106,13 @@ export type CameraParams = {
 export type CharacterPatrolPointsParams = {
   pause_at_waypoints: boolean?,
 }
+export type CharacterPursueParams = {
+  fuzz_factor: number?,
+  goal_tolerance: number?,
+  intercept: boolean?,
+  offset: vector?,
+  require_line_of_sight: boolean?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
@@ -1072,7 +1079,7 @@ declare ll: {
   PlaySoundSlave: (sound: string | uuid, volume: number) -> (),
   Pow: @[deprecated {use='^', reason='Double precision; operator.'}](base: number, exponent: number) -> number,
   PreloadSound: (sound: string | uuid) -> (),
-  Pursue: (target: uuid, options: list) -> (),
+  Pursue: (target: uuid, options: list | CharacterPursueParams) -> (),
   PushObject: (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
   ReadKeyValue: (k: string) -> uuid,
   RefreshPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}]() -> (),
@@ -1599,7 +1606,7 @@ declare llcompat: {
   PlaySoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
   Pow: @deprecated (base: number, exponent: number) -> number,
   PreloadSound: @deprecated (sound: string | uuid) -> (),
-  Pursue: @deprecated (target: uuid, options: list) -> (),
+  Pursue: @deprecated (target: uuid, options: list | CharacterPursueParams) -> (),
   PushObject: @deprecated (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
   ReadKeyValue: @deprecated (k: string) -> uuid,
   RefreshPrimURL: @deprecated () -> (),

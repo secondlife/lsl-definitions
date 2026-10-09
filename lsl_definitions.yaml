@@ -15056,6 +15056,7 @@ functions:
         tooltip: A list of options to configure pursuit behavior.
         type: list
         param-semantics: CharacterPursueParam
+        ruleset: character-persue-params
     energy: 10.0
     func-id: 400
     return: void
@@ -18995,6 +18996,11 @@ builder-rulesets:
     type: table
     enum: CharacterPatrolPointsParam
     lua-type: CharacterPatrolPointsParams
+
+  character-persue-params:
+    type: table
+    enum: CharacterPursueParam
+    lua-type: CharacterPursueParams
 
   give-agent-inventory-params:
     type: table
