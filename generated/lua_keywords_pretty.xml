@@ -286,7 +286,7 @@ export type LSLTypes = string | number | vector | uuid | quaternion</string>
          <key>PrimMediaParams</key>
          <map>
             <key>tooltip</key>
-            <string>Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.</string>
+            <string>Prim face media parameter table. Pass to ll.SetLinkMediaParams() to configure media on a face.</string>
          </map>
          <key>list</key>
          <map>
@@ -15269,47 +15269,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <real>-1.0</real>
             <key>tooltip</key>
             <string>Utilities for working with prims / objects</string>
-         </map>
-         <key>llprim.setMedia</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>face</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>number</string>
-                  </map>
-               </map>
-               <map>
-                  <key>params</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>PrimMediaParams?</string>
-                  </map>
-               </map>
-               <map>
-                  <key>link</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>number?</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>number</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Configure media on a specific face. Omit link to apply to the current prim.</string>
          </map>
          <key>llprim.setParticleSystem</key>
          <map>
