@@ -167,6 +167,7 @@ type-aliases:
   export: true
   definition: "{LSLReadableTypes}"
   selene-type: "table"
+  typechecker: {"new-type": "{read LSLReadableTypes}"}
 - name: LLDetectedEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
@@ -478,7 +479,7 @@ functions:
     type: T
     selene-type: table
   return-type: getmetatable<T>
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauSolverV2
+  typechecker: {builtin: true, "new-type": "getmetatable<T>"}  # builtin due to FFlag::LuauSolverV2
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -501,6 +502,7 @@ functions:
   - name: tab
     comment: Table to iterate over.
     type: "{V}"
+    typechecker: {"new-type": "{read V}"}
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
 - name: loadstring
   comment: Compile Luau code into a function.
@@ -528,12 +530,12 @@ functions:
   - name: t
     comment: Table to traverse.
     type: "{[K]: V}"
+    typechecker: {"new-type": "{read [K]: V}"}
   - name: i
     comment: Key to start traversal after. Omit or pass nil to fetch the first key-value pair.
     type: K?
     default-value: nil
   return-type: (K?, V)
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -541,8 +543,8 @@ functions:
   - name: t
     comment: Table to iterate over.
     type: "{[K]: V}"
+    typechecker: {"new-type": "{read [K]: V}"}
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pcall
   comment: Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message.
   type-parameters: [A..., R...]
@@ -584,10 +586,12 @@ functions:
   - name: t
     comment: Table to perform the lookup on.
     type: "{[K]: V}"
+    typechecker: {"new-type": "T"}
   - name: k
     comment: Key to look up in the table.
     type: K
   return-type: V?
+  typechecker: {"new-type": "rawget<T, K>", "new-type-parameters": [T, K]}
   fastcall: true
 - name: rawlen
   comment: Returns the length of a table or string, bypassing the __len metamethod..
@@ -596,6 +600,7 @@ functions:
   - name: t
     comment: Table or string to compute the length of.
     type: "{[K]: V} | string"
+    typechecker: {"new-type": "{read [K]: V} | string"}
   return-type: number
   fastcall: true
 - name: rawset
@@ -659,7 +664,7 @@ functions:
     selene-type: table
   return-type: setmetatable<T, MT>
   fastcall: true
-  typechecker: {builtin: true, magic: true}  # builtin due to FFlag::LuauSolverV2
+  typechecker: {builtin: true, magic: true, "new-type": "setmetatable<T, MT>"}  # builtin due to FFlag::LuauSolverV2
 - name: tonumber
   comment: Converts the input string to a number in the specified base. Returns nil if invalid.
   parameters:
@@ -748,6 +753,7 @@ functions:
   - name: tab
     comment: Array from which to extract values.
     type: "{V}"
+    typechecker: {"new-type": "{read V}"}
   - name: i
     comment: Starting index.
     type: number?
@@ -3104,6 +3110,7 @@ modules:
     - name: a
       comment: Array of strings.
       type: '{string | number}'
+      typechecker: {"new-type": "{read string | number}"}
     - name: sep
       comment: Separator string.
       type: string?
@@ -3127,6 +3134,7 @@ modules:
     - name: t
       comment: Table to iterate over.
       type: '{[K]: V}'
+      typechecker: {"new-type": "{read [K]: V}"}
     - name: f
       comment: Function applied to each key-value pair.
       type: '(key: K, value: V) -> R?'
@@ -3141,6 +3149,7 @@ modules:
     - name: a
       comment: Array to iterate over.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: f
       comment: Function applied to each index-value pair.
       type: '(index: number, value: V) -> R?'
@@ -3261,6 +3270,7 @@ modules:
     - name: a
       comment: Array to unpack.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: i
       comment: Starting index.
       type: number?
@@ -3322,6 +3332,7 @@ modules:
     - name: t
       comment: Table to search in.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: v
       comment: Value to search for.
       type: V
