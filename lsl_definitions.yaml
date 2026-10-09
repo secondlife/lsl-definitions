@@ -19028,6 +19028,11 @@ builder-rulesets:
     enum: GetClosestNavPointParam
     lua-type: GetClosestNavPointParams
 
+  get-static-path-params:
+    type: table
+    enum: GetStaticPathParam
+    lua-type: GetStaticPathParams
+
   give-agent-inventory-params:
     type: table
     enum: GiveAgentInventoryParam

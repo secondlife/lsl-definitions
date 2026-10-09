@@ -140,6 +140,9 @@ export type GetClosestNavPointParams = {
   radius: number?,
   static: boolean?,
 }
+export type GetStaticPathParams = {
+  character_type: number?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,

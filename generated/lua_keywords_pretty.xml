@@ -274,6 +274,14 @@ export type GetClosestNavPointParams = {
   static: boolean?,
 }</string>
          </map>
+         <key>GetStaticPathParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Get static path parameter table. Pass to ll.GetStaticPath() to find a path.
+export type GetStaticPathParams = {
+  character_type: number?,
+}</string>
+         </map>
          <key>GiveAgentInventoryParams</key>
          <map>
             <key>tooltip</key>
