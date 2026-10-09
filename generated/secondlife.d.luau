@@ -87,6 +87,11 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
+export type AttachedListFilterParams = {
+  flags: number?,
+  huds: boolean?,
+  include: number?,
+}
 export type CameraParams = {
   active: boolean?,
   behindness_angle: number?,
@@ -829,7 +834,7 @@ declare ll: {
   GetAnimationOverride: (anim_state: string) -> string,
   GetAttached: () -> number,
   GetAttachedList: (avatar: uuid) -> {uuid} | {string},
-  GetAttachedListFiltered: (avatar: uuid, options: list) -> {uuid} | {string},
+  GetAttachedListFiltered: (avatar: uuid, options: list | AttachedListFilterParams) -> {uuid} | {string},
   GetBoundingBox: (object: uuid) -> {vector},
   GetCameraAspect: () -> number,
   GetCameraFOV: () -> number,
@@ -1356,7 +1361,7 @@ declare llcompat: {
   GetAnimationOverride: @deprecated (anim_state: string) -> string,
   GetAttached: @deprecated () -> number,
   GetAttachedList: @deprecated (avatar: uuid) -> {uuid} | {string},
-  GetAttachedListFiltered: @deprecated (avatar: uuid, options: list) -> {uuid} | {string},
+  GetAttachedListFiltered: @deprecated (avatar: uuid, options: list | AttachedListFilterParams) -> {uuid} | {string},
   GetBoundingBox: @deprecated (object: uuid) -> {vector},
   GetCameraAspect: @deprecated () -> number,
   GetCameraFOV: @deprecated () -> number,
