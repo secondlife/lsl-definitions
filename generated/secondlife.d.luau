@@ -108,14 +108,14 @@ export type GiveAgentInventoryParams = {
   flags: number?,
 }
 export type GltfOverrides = {
-  base_alpha: number?,
-  base_alpha_mask: number?,
-  base_alpha_mode: number?,
-  base_color_factor: vector?,
-  base_double_sided: boolean?,
-  emissive_factor: vector?,
-  metallic_factor: number?,
-  roughness_factor: number?,
+  alpha: number?,
+  alpha_mask: number?,
+  alpha_mode: number?,
+  color: vector?,
+  double_sided: boolean?,
+  emmissive_color: vector?,
+  metalness: number?,
+  roughness: number?,
 }
 export type HttpRequestParams = {
   accept: {string}?,

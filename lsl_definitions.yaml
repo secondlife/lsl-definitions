@@ -3675,6 +3675,7 @@ constants:
     enum: GLTFAlphaMode
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: color
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the
       tinting color (specified in linear RGB) used for the base color. Use
       llsRGB2Linear to convert colors from Blinn-Phong to PBR.
@@ -3690,6 +3691,7 @@ constants:
     value-type: boolean
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: emmissive_color
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the tint
       (specified in linear RGB) used for the emissive texture on the face(s).
     type: integer
@@ -3697,6 +3699,7 @@ constants:
     value-type: vector
   OVERRIDE_GLTF_METALLIC_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: metalness
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       metallic factor on the specified face(s) to a value between 0 and 1.
     type: integer
@@ -3705,6 +3708,7 @@ constants:
     range: [0, 1]
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: roughness
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       roughness factor on the specified face(s) to a value between 0 and 1.
     type: integer
@@ -19001,6 +19005,7 @@ builder-rulesets:
   gltf-overrides:
     type: table
     enum: GLTFOverride
+    filler-tokens: [base]
     lua-module: llprim
     lua-fn: setGltfOverrides
     lua-type: GltfOverrides
