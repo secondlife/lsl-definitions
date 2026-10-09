@@ -23,7 +23,7 @@ static const RulesetParamDescriptor kCharacterPatrolPointsParamsDescs[] = {
 };
 RulesetBuilderDef* kCharacterPatrolPointsParamsDef = ruleset_builder_def_build(kCharacterPatrolPointsParamsDescs, std::size(kCharacterPatrolPointsParamsDescs));
 
-// character-persue-params
+// character-pursue-params
 static const RulesetParamDescriptor kCharacterPursueParamsDescs[] = {
     {"offset", 'v', 1},
     {"require_line_of_sight", 'b', 2},
@@ -32,6 +32,12 @@ static const RulesetParamDescriptor kCharacterPursueParamsDescs[] = {
     {"goal_tolerance", 'f', 5},
 };
 RulesetBuilderDef* kCharacterPursueParamsDef = ruleset_builder_def_build(kCharacterPursueParamsDescs, std::size(kCharacterPursueParamsDescs));
+
+// character-wander-within-params
+static const RulesetParamDescriptor kCharacterWanderWithinParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterWanderWithinParamsDef = ruleset_builder_def_build(kCharacterWanderWithinParamsDescs, std::size(kCharacterWanderWithinParamsDescs));
 
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {

@@ -213,6 +213,14 @@ export type CharacterPursueParams = {
   require_line_of_sight: boolean?,
 }</string>
          </map>
+         <key>CharacterWanderWithinParams</key>
+         <map>
+            <key>tooltip</key>
+            <string>Pathfinding character wander within parameter table. Pass to ll.WanderWithin() to configure the route.
+export type CharacterWanderWithinParams = {
+  pause_at_waypoints: boolean?,
+}</string>
+         </map>
          <key>DateTypeArg</key>
          <map>
             <key>tooltip</key>

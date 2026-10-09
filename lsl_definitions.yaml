@@ -145,6 +145,7 @@ enums:
     tooltip: ''
   CharacterWanderWithinParam:
     type: param-dict
+    prefix: WANDER_
     tooltip: ''
   ClickAction:
     type: enum
@@ -15056,7 +15057,7 @@ functions:
         tooltip: A list of options to configure pursuit behavior.
         type: list
         param-semantics: CharacterPursueParam
-        ruleset: character-persue-params
+        ruleset: character-pursue-params
     energy: 10.0
     func-id: 400
     return: void
@@ -18499,6 +18500,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterWanderWithinParam
+        ruleset: character-wander-within-params
     energy: 10.0
     func-id: 401
     return: void
@@ -18997,10 +18999,15 @@ builder-rulesets:
     enum: CharacterPatrolPointsParam
     lua-type: CharacterPatrolPointsParams
 
-  character-persue-params:
+  character-pursue-params:
     type: table
     enum: CharacterPursueParam
     lua-type: CharacterPursueParams
+
+  character-wander-within-params:
+    type: table
+    enum: CharacterWanderWithinParam
+    lua-type: CharacterWanderWithinParams
 
   give-agent-inventory-params:
     type: table
