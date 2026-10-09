@@ -132,6 +132,9 @@ export type CharacterPursueParams = {
   offset: vector?,
   require_line_of_sight: boolean?,
 }
+export type CharacterWanderWithinParams = {
+  pause_at_waypoints: boolean?,
+}
 export type GiveAgentInventoryParams = {
   dest: string?,
   flags: number?,
@@ -1281,7 +1284,7 @@ declare ll: {
   VecNorm: @[deprecated {use='vector.normalize', reason="It's a fastcall."}](vec: vector) -> vector,
   VerifyRSA: (public_key: string, msg: string, signature: string, algorithm: string) -> boolean,
   VolumeDetect: (detect: boolean | number) -> (),
-  WanderWithin: (origin: vector, dist: vector, options: list) -> (),
+  WanderWithin: (origin: vector, dist: vector, options: list | CharacterWanderWithinParams) -> (),
   Water: (offset: vector) -> number,
   Whisper: (channel: number, msg: string) -> (),
   Wind: (offset: vector) -> vector,
@@ -1811,7 +1814,7 @@ declare llcompat: {
   VecNorm: @deprecated (vec: vector) -> vector,
   VerifyRSA: @deprecated (public_key: string, msg: string, signature: string, algorithm: string) -> number,
   VolumeDetect: @deprecated (detect: boolean | number) -> (),
-  WanderWithin: @deprecated (origin: vector, dist: vector, options: list) -> (),
+  WanderWithin: @deprecated (origin: vector, dist: vector, options: list | CharacterWanderWithinParams) -> (),
   Water: @deprecated (offset: vector) -> number,
   Whisper: @deprecated (channel: number, msg: string) -> (),
   Wind: @deprecated (offset: vector) -> vector,

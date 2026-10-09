@@ -245,7 +245,7 @@ enum CharacterType {
   NONE = 4
 };
 enum CharacterWanderWithinParam {
-  WANDER_PAUSE_AT_WAYPOINTS = 0
+  PAUSE_AT_WAYPOINTS = 0
 };
 enum ClickAction {
   NONE = 0
