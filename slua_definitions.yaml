@@ -292,7 +292,7 @@ type-aliases:
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: PrimMediaParams
-  comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
+  comment: Prim face media parameter table. Pass to ll.SetLinkMediaParams() to configure media on a face.
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
@@ -2179,16 +2179,6 @@ modules:
     - name: link
       type: number?
     return-type: '()'
-  - name: setMedia
-    comment: Configure media on a specific face. Omit link to apply to the current prim.
-    parameters:
-    - name: face
-      type: number
-    - name: params
-      type: PrimMediaParams?
-    - name: link
-      type: number?
-    return-type: number
 - name: math
   comment: Mathematical functions library.
   functions:
