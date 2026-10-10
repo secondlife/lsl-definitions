@@ -182,7 +182,7 @@ type-aliases:
   definition: (...any) -> ()
   selene-type: "function"
 - name: LLDetectedEventHandler
-  definition: "(detected: {DetectedEvent}) -> ()"
+  definition: "(events: {DetectedEvent}) -> ()"
   selene-type: "function"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
