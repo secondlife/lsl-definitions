@@ -593,7 +593,7 @@
                         "arguments": { "$ref": "#/$defs/arguments" },
                         "detected-semantics": {
                             "const": true,
-                            "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
+                            "markdownDescription": "Uses llDetected* in LSL and {SingleEvent} in SLua.",
                             "type": "boolean"
                         },
                         "deprecated": { "$ref": "#/$defs/deprecated" },
@@ -661,7 +661,7 @@
                         "deprecated": { "$ref": "#/$defs/deprecated" },
                         "detected-semantics": {
                             "const": true,
-                            "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
+                            "markdownDescription": "Uses llDetected* in LSL and {SingleEvent} in SLua.",
                             "type": "boolean"
                         },
                         "energy": {

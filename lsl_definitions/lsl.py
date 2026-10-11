@@ -346,7 +346,7 @@ class LSLEvent(LSLFunctionBase):
                     {
                         "detected": {
                             "tooltip": "Array of detected events.",
-                            "type": slua.validate_type("{DetectedEvent}"),
+                            "type": slua.validate_type("{SingleEvent}"),
                         }
                     }
                 ]
