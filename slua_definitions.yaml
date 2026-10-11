@@ -280,7 +280,7 @@ type-aliases:
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
 - name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
+  comment: Particle system parameter table. Pass to ll.LinkParticleSystem() to emit particles.
   export: true
   definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
   selene-type: table
@@ -2159,14 +2159,6 @@ modules:
     type: PrimParamSetterTypeMeta
     value: PrimParamSetterTypeMeta
   functions:
-  - name: setParticleSystem
-    comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
-    parameters:
-    - name: params
-      type: ParticleParams?
-    - name: link
-      type: number?
-    return-type: '()'
   - name: setMedia
     comment: Configure media on a specific face. Omit link to apply to the current prim.
     parameters:

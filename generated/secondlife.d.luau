@@ -533,7 +533,6 @@ declare lljson: {
 
 declare llprim: {
   ParamSetter: PrimParamSetterTypeMeta,
-  setParticleSystem: (params: ParticleParams?, link: number?) -> (),
   setMedia: (face: number, params: PrimMediaParams?, link: number?) -> number,
 }
 
