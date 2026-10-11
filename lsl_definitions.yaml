@@ -19006,10 +19006,7 @@ builder-rulesets:
     type: table
     enum: GLTFOverride
     filler-tokens: [base]
-    lua-module: llprim
-    lua-fn: setGltfOverrides
     lua-type: GltfOverrides
-    dispatch-fn: SetLinkGLTFOverrides
 
   http-request-params:
     type: table
