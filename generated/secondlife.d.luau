@@ -43,11 +43,11 @@ export type rotation = quaternion
 export type LSLTypes = string | number | vector | uuid | quaternion
 export type LSLReadableTypes = LSLTypes | boolean
 export type list = {LSLReadableTypes}
-type LLDetectedEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
-type LLNonDetectedEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
-type LLEventName = LLDetectedEventName | LLNonDetectedEventName
+type LLMultiEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
+type LLSingleEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
+type LLEventName = LLMultiEventName | LLSingleEventName
 type LLEventHandler = (...any) -> ()
-type LLDetectedEventHandler = (events: {DetectedEvent}) -> ()
+type LLMultiEventHandler = (events: {DetectedEvent}) -> ()
 type LLTimerEveryCallback = (scheduled: number, interval: number) -> ()
 type LLTimerOnceCallback = (scheduled: number) -> ()
 type LLTimerCallback = LLTimerEveryCallback | LLTimerOnceCallback
@@ -213,15 +213,15 @@ declare extern type LLEvents with
   at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
   attach: ((avatar: uuid) -> ())?
   changed: ((changes: number) -> ())?
-  collision: LLDetectedEventHandler?
-  collision_end: LLDetectedEventHandler?
-  collision_start: LLDetectedEventHandler?
+  collision: LLMultiEventHandler?
+  collision_end: LLMultiEventHandler?
+  collision_start: LLMultiEventHandler?
   control: ((id: uuid, level: number, edge: number) -> ())?
   dataserver: ((queryid: uuid, data: string) -> ())?
   email: ((time: string, address: string, subject: string, msg: string, num_left: number) -> ())?
   experience_permissions: ((agent_id: uuid) -> ())?
   experience_permissions_denied: ((agent_id: uuid, reason: number) -> ())?
-  final_damage: LLDetectedEventHandler?
+  final_damage: LLMultiEventHandler?
   game_control: ((id: uuid, button_levels: number, axes: {number}) -> ())?
   http_request: ((request_id: uuid, method: string, body: string) -> ())?
   http_response: ((request_id: uuid, status: number, metadata: {any}, body: string) -> ())?
@@ -238,24 +238,24 @@ declare extern type LLEvents with
   not_at_rot_target: (() -> ())?
   not_at_target: (() -> ())?
   object_rez: ((id: uuid) -> ())?
-  on_damage: LLDetectedEventHandler?
+  on_damage: LLMultiEventHandler?
   on_death: (() -> ())?
   on_rez: ((start_param: number) -> ())?
   path_update: ((type: number, reserved: {any}) -> ())?
   remote_data: ((event_type: number, channel: uuid, message_id: uuid, sender: string, idata: number, sdata: string) -> ())?
   run_time_permissions: ((perm: number) -> ())?
-  sensor: LLDetectedEventHandler?
+  sensor: LLMultiEventHandler?
   timer: (() -> ())?
-  touch: LLDetectedEventHandler?
-  touch_end: LLDetectedEventHandler?
-  touch_start: LLDetectedEventHandler?
+  touch: LLMultiEventHandler?
+  touch_end: LLMultiEventHandler?
+  touch_start: LLMultiEventHandler?
   transaction_result: ((id: uuid, success: boolean, data: string) -> ())?
-  on: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
-  off: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> boolean)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> boolean)
-  once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
+  on: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> LLMultiEventHandler)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> LLEventHandler)
+  off: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> boolean)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> boolean)
+  once: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> LLMultiEventHandler)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> LLEventHandler)
   function handlers(self, event: LLEventName): {LLEventHandler}
   function eventNames(self): {string}
 end

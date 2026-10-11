@@ -167,21 +167,21 @@ type-aliases:
   export: true
   definition: "{LSLReadableTypes}"
   selene-type: "table"
-- name: LLDetectedEventName
+- name: LLMultiEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
   selene-type: []
-- name: LLNonDetectedEventName
+- name: LLSingleEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
   selene-type: []
 - name: LLEventName
-  definition: LLDetectedEventName | LLNonDetectedEventName
+  definition: LLMultiEventName | LLSingleEventName
   selene-type: []
 - name: LLEventHandler
   definition: (...any) -> ()
   selene-type: "function"
-- name: LLDetectedEventHandler
+- name: LLMultiEventHandler
   definition: "(events: {DetectedEvent}) -> ()"
   selene-type: "function"
 - name: LLTimerEveryCallback

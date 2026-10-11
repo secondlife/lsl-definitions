@@ -459,8 +459,8 @@ class SLuaDefinitions:
 
         If solverV2 is False, generate an overload for each event. (more correct)
         """
-        LLDetectedEventName_alias = self.type_aliases["LLDetectedEventName"]
-        LLNonDetectedEventName_alias = self.type_aliases["LLNonDetectedEventName"]
+        LLMultiEventName_alias = self.type_aliases["LLMultiEventName"]
+        LLSingleEventName_alias = self.type_aliases["LLSingleEventName"]
         LLEventName_alias = self.type_aliases["LLEventName"]
         LLEvents_class = self.classes["LLEvents"]
 
@@ -504,10 +504,10 @@ class SLuaDefinitions:
                     ],
                 )
                 if event.detected_semantics:
-                    LLDetectedEventName_alias.selene_type.append(event.name)
-                    type_def = "LLDetectedEventHandler?"
+                    LLMultiEventName_alias.selene_type.append(event.name)
+                    type_def = "LLMultiEventHandler?"
                 else:
-                    LLNonDetectedEventName_alias.selene_type.append(event.name)
+                    LLSingleEventName_alias.selene_type.append(event.name)
                     type_def = event_func.type_def_string
                     overload_parameters = [
                         SLuaParameter("self", type="LLEvents"),
@@ -546,21 +546,21 @@ class SLuaDefinitions:
             except Exception as e:
                 raise ValueError(f"In ll event {event.name!r}: {e}") from e
 
-        LLDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in LLDetectedEventName_alias.selene_type
+        LLMultiEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in LLMultiEventName_alias.selene_type
         )
-        LLNonDetectedEventName_alias.definition = " | ".join(
-            f'"{name}"' for name in LLNonDetectedEventName_alias.selene_type
+        LLSingleEventName_alias.definition = " | ".join(
+            f'"{name}"' for name in LLSingleEventName_alias.selene_type
         )
         LLEventName_alias.selene_type = (
-            LLDetectedEventName_alias.selene_type + LLNonDetectedEventName_alias.selene_type
+            LLMultiEventName_alias.selene_type + LLSingleEventName_alias.selene_type
         )
         for register_func in LLEvents_class.methods.values():
             if register_func.name in {"off", "on", "once"}:
                 register_func.parameters = [
                     SLuaParameter("self", type="LLEvents"),
-                    SLuaParameter("event", type="LLDetectedEventName"),
-                    SLuaParameter("callback", type="LLDetectedEventHandler"),
+                    SLuaParameter("event", type="LLMultiEventName"),
+                    SLuaParameter("callback", type="LLMultiEventHandler"),
                 ]
                 if solverV2:
                     register_func.overloads.append(
@@ -569,14 +569,14 @@ class SLuaDefinitions:
                             comment=register_func.comment,
                             parameters=[
                                 SLuaParameter("self", type="LLEvents"),
-                                SLuaParameter("event", type="LLNonDetectedEventName"),
+                                SLuaParameter("event", type="LLSingleEventName"),
                                 SLuaParameter("callback", type="LLEventHandler"),
                             ],
                             return_type=register_func.return_type,
                         )
                     )
             if register_func.name in {"on", "once"}:
-                register_func.return_type = "LLDetectedEventHandler"
+                register_func.return_type = "LLMultiEventHandler"
                 if solverV2:
                     register_func.overloads[0].return_type = "LLEventHandler"
 
