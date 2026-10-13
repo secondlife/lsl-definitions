@@ -133,7 +133,7 @@ base-classes:
   - name: z
     type: number
     comment: "Z coordinate component of the vector. Typically represents blue color, altitude/upward position, or yaw."
-- name: SingleEvent
+- name: DetectedEvent
   comment: Event detection class providing access to detected object/avatar information
   # auto-generated from lsl_definitions.yaml
   methods: []
@@ -182,7 +182,7 @@ type-aliases:
   definition: (...any) -> ()
   selene-type: "function"
 - name: LLMultiEventHandler
-  definition: "(events: {SingleEvent}) -> ()"
+  definition: "(events: {DetectedEvent}) -> ()"
   selene-type: "function"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval

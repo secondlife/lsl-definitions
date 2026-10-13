@@ -16278,7 +16278,7 @@ structs:
       type: number
       description: Z coordinate component of the vector. Typically represents blue
         color, altitude/upward position, or yaw.
-  SingleEvent:
+  DetectedEvent:
     adjustDamage:
       method: true
       args:

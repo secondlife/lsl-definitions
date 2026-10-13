@@ -47,7 +47,7 @@ type LLMultiEventName = "collision" | "collision_end" | "collision_start" | "fin
 type LLSingleEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
 type LLEventName = LLMultiEventName | LLSingleEventName
 type LLEventHandler = (...any) -> ()
-type LLMultiEventHandler = (events: {SingleEvent}) -> ()
+type LLMultiEventHandler = (events: {DetectedEvent}) -> ()
 type LLTimerEveryCallback = (scheduled: number, interval: number) -> ()
 type LLTimerOnceCallback = (scheduled: number) -> ()
 type LLTimerCallback = LLTimerEveryCallback | LLTimerOnceCallback
@@ -183,6 +183,31 @@ export type PrimMediaParams = {
   width: number?,
 }
 
+declare extern type DetectedEvent with
+  read index: number
+  read valid: boolean
+  read canAdjustDamage: boolean
+  function adjustDamage(self, new_damage: number): ()
+  function getDamage(self): {any}
+  function getGrab(self): vector
+  function getGroup(self): boolean
+  function getKey(self): uuid
+  function getLinkNumber(self): number
+  function getName(self): string
+  function getOwner(self): uuid
+  function getPos(self): vector
+  function getRezzer(self): uuid
+  function getRot(self): quaternion
+  function getTouchBinormal(self): vector
+  function getTouchFace(self): number
+  function getTouchNormal(self): vector
+  function getTouchPos(self): vector
+  function getTouchST(self): vector
+  function getTouchUV(self): vector
+  function getType(self): number
+  function getVel(self): vector
+end
+
 declare extern type LLEvents with
   at_rot_target: ((handle: number, targetrot: quaternion, ourrot: quaternion) -> ())?
   at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
@@ -300,31 +325,6 @@ export type PrimParamSetterTypeMeta = {
 export type PrimParamSetterType = typeof(
   setmetatable((nil :: any) :: {any}, (nil :: any) :: PrimParamSetterTypeMeta)
 )
-
-declare extern type SingleEvent with
-  read index: number
-  read valid: boolean
-  read canAdjustDamage: boolean
-  function adjustDamage(self, new_damage: number): ()
-  function getDamage(self): {any}
-  function getGrab(self): vector
-  function getGroup(self): boolean
-  function getKey(self): uuid
-  function getLinkNumber(self): number
-  function getName(self): string
-  function getOwner(self): uuid
-  function getPos(self): vector
-  function getRezzer(self): uuid
-  function getRot(self): quaternion
-  function getTouchBinormal(self): vector
-  function getTouchFace(self): number
-  function getTouchNormal(self): vector
-  function getTouchPos(self): vector
-  function getTouchST(self): vector
-  function getTouchUV(self): vector
-  function getType(self): number
-  function getVel(self): vector
-end
 
 
 -- declare function assert<T>(value: T?, errorMessage: string?): T -- magic type

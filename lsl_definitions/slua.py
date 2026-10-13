@@ -582,7 +582,7 @@ class SLuaDefinitions:
 
         ll_module = self.modules["ll"]
         llcompat_module = self.modules["llcompat"]
-        DetectedEvent_class = self.base_classes["SingleEvent"]
+        DetectedEvent_class = self.base_classes["DetectedEvent"]
 
         for func in lsl.functions.values():
             try:
