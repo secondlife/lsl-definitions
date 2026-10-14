@@ -858,7 +858,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
-        "documentation": "Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.",
+        "documentation": "Decodes a binary string using a pack format, starting from index start and returns a tuple of the decoded values, followed by a number representing the index of the first unread byte. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
