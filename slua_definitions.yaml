@@ -3069,7 +3069,8 @@ modules:
     fastcall: true
     typechecker: {builtin: true, checked: true}
   - name: unpack
-    comment: Decodes a binary string using a pack format, starting from index start.
+    comment: Decodes a binary string using a pack format, starting from index start and returns a tuple of the
+      decoded values, followed by a number representing the index of the first unread byte.
       Negative indices count backward from the end of the string.
     parameters:
     - name: format_string

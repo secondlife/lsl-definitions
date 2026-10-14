@@ -17330,7 +17330,7 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>sleep</key>
             <real>0.0</real>
             <key>tooltip</key>
-            <string>Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.</string>
+            <string>Decodes a binary string using a pack format, starting from index start and returns a tuple of the decoded values, followed by a number representing the index of the first unread byte. Negative indices count backward from the end of the string.</string>
          </map>
          <key>string.upper</key>
          <map>
