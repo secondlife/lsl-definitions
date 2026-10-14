@@ -504,6 +504,7 @@ class SLuaDefinitions:
         LLMultiEventName_alias = self.type_aliases["LLMultiEventName"]
         LLSingleEventName_alias = self.type_aliases["LLSingleEventName"]
         LLEventName_alias = self.type_aliases["LLEventName"]
+        LSLEventName_alias = self.type_aliases["LSLEventName"]
         LLEvents_class = self.classes["LLEvents"]
 
         def replace_list(type: str) -> str:
@@ -597,6 +598,7 @@ class SLuaDefinitions:
         LLEventName_alias.selene_type = (
             LLMultiEventName_alias.selene_type + LLSingleEventName_alias.selene_type
         )
+        LSLEventName_alias.selene_type.extend(LLEventName_alias.selene_type)
         for register_func in LLEvents_class.methods.values():
             if register_func.name in {"off", "on", "once"}:
                 register_func.parameters = [

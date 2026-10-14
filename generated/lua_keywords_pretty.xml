@@ -254,6 +254,11 @@ export type KeyframedMotionParams = {
   translation: boolean?,
 }</string>
          </map>
+         <key>LLEventName</key>
+         <map>
+            <key>tooltip</key>
+            <string>export type LLEventName = LLMultiEventName | LLSingleEventName</string>
+         </map>
          <key>LLJsonDecodeOptions</key>
          <map>
             <key>tooltip</key>
@@ -270,6 +275,11 @@ export type LLJsonEncodeOptions = {
   allow_sparse: boolean?,
   replacer: ((key: any, value: any, parent: {}?) -&gt; any)?,
 }</string>
+         </map>
+         <key>LSLEventName</key>
+         <map>
+            <key>tooltip</key>
+            <string>export type LSLEventName = LLEventName | "state_entry" | "state_exit" | "timer"</string>
          </map>
          <key>LSLReadableTypes</key>
          <map>
