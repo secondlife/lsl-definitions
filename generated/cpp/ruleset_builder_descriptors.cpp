@@ -1,3 +1,17 @@
+// attached-list-filter-params
+static const RulesetParamDescriptor kAttachedListFilterParamsDescs[] = {
+    {"include", 'i', 1},
+    {"flags", 'i', 2},
+};
+static const RulesetFlagDescriptor kAttachedListFilterParamFlagDescs[] = {
+    {"huds", 0x1, 2},
+};
+RulesetBuilderDef* kAttachedListFilterParamsDef = []() {
+    auto* d = ruleset_builder_def_build(kAttachedListFilterParamsDescs, std::size(kAttachedListFilterParamsDescs));
+    ruleset_builder_def_add_flags(d, kAttachedListFilterParamFlagDescs, std::size(kAttachedListFilterParamFlagDescs));
+    return d;
+}();
+
 // camera-params
 static const RulesetParamDescriptor kCameraParamsDescs[] = {
     {"pitch", 'f', 0},

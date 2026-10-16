@@ -10762,6 +10762,7 @@ functions:
         tooltip: A list of options to filter the returned attachments.
         type: list
         param-semantics: AttachedListFilterParam
+        ruleset: attached-list-filter-params
     energy: 10.0
     func-id: 518
     must-use: true
@@ -18984,6 +18985,13 @@ builder-rulesets:
         params:
           - [ asset, sound ]
           - [ float, volume ]
+
+  attached-list-filter-params:
+    type: table
+    enum: AttachedListFilterParam
+    lua-type: AttachedListFilterParams
+    flag-enum: AttachedListFilterFlag
+    flag-field: flags
 
   camera-params:
     type: table
