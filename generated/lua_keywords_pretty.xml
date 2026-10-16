@@ -249,6 +249,11 @@ export type KeyframedMotionParams = {
   translation: boolean?,
 }</string>
          </map>
+         <key>LLEventName</key>
+         <map>
+            <key>tooltip</key>
+            <string>export type LLEventName = LLMultiEventName | LLSingleEventName</string>
+         </map>
          <key>LLJsonDecodeOptions</key>
          <map>
             <key>tooltip</key>

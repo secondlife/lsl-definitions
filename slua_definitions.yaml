@@ -176,6 +176,7 @@ type-aliases:
   definition: "{}"
   selene-type: []
 - name: LLEventName
+  export: true
   definition: LLMultiEventName | LLSingleEventName
   selene-type: []
 - name: LLEventHandler
