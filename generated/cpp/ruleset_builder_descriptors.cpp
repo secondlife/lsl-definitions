@@ -144,20 +144,4 @@ inline void init_ruleset_builders(lua_State* L) {
         return 0;
     };
     slua_register_ruleset_fn(L, "llprim", "setParticleSystem", set_particle_system, kParticleParamsDef);
-
-    auto set_media = [](lua_State* L) -> int {
-        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-        int face = luaL_checkinteger(L, 1);
-        int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
-        slua_ruleset_serialize(L, 2, def);
-        int rules_idx = lua_gettop(L);
-        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-        lua_rawgetfield(L, -1, "SetLinkMedia");
-        lua_pushinteger(L, link);
-        lua_pushinteger(L, face);
-        lua_pushvalue(L, rules_idx);
-        lua_call(L, 3, 1);
-        return 1;
-    };
-    slua_register_ruleset_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);
 }

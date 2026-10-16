@@ -19025,7 +19025,4 @@ builder-rulesets:
   prim-media-params:
     type: table
     enum: PrimMediaParam
-    lua-module: llprim
-    lua-fn: setMedia
     lua-type: PrimMediaParams
-    dispatch-fn: SetLinkMedia
