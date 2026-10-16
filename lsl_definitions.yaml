@@ -17020,6 +17020,7 @@ functions:
           and object inclusion).
         type: list
         param-semantics: ParcelSaleParam
+        ruleset: parcel-sale
     energy: 10.0
     func-id: 561
     return: integer
@@ -19009,6 +19010,11 @@ builder-rulesets:
     flag-enum: KeyframedMotionData
     flag-field: data
     lua-type: KeyframedMotionParams
+
+  parcel-sale:
+    type: table
+    enum: ParcelSaleParam
+    lua-type: ParcelSaleParams
 
   particle-params:
     type: table

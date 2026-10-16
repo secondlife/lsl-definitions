@@ -126,6 +126,11 @@ export type KeyframedMotionParams = {
   rotation: boolean?,
   translation: boolean?,
 }
+export type ParcelSaleParams = {
+  agent: (string | uuid)?,
+  objects: boolean?,
+  price: number?,
+}
 export type ParticleParams = {
   accel: vector?,
   alpha_begin: number?,
@@ -1167,7 +1172,7 @@ declare ll: {
   SetObjectDesc: (description: string) -> (),
   SetObjectName: (name: string) -> (),
   SetObjectPermMask: (group: number, flags: number) -> (),
-  SetParcelForSale: (ForSale: boolean | number, Options: list) -> number,
+  SetParcelForSale: (ForSale: boolean | number, Options: list | ParcelSaleParams) -> number,
   SetParcelMusicURL: (url: string) -> (),
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
@@ -1696,7 +1701,7 @@ declare llcompat: {
   SetObjectDesc: @deprecated (description: string) -> (),
   SetObjectName: @deprecated (name: string) -> (),
   SetObjectPermMask: @deprecated (group: number, flags: number) -> (),
-  SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list) -> number,
+  SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list | ParcelSaleParams) -> number,
   SetParcelMusicURL: @deprecated (url: string) -> (),
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
