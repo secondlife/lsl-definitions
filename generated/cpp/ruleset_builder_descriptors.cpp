@@ -17,6 +17,67 @@ static const RulesetParamDescriptor kCameraParamsDescs[] = {
 };
 RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
 
+// character-params
+static const RulesetParamDescriptor kCharacterParamsDescs[] = {
+    {"desired_speed", 'f', 1},
+    {"radius", 'f', 2},
+    {"length", 'f', 3},
+    {"orientation", 'i', 4},
+    {"avoidance_mode", 'i', 5},
+    {"type", 'i', 6},
+    {"traversal_type", 'i', 7},
+    {"max_accel", 'f', 8},
+    {"max_decel", 'f', 9},
+    {"max_turn_radius", 'f', 10},
+    {"desired_turn_speed", 'f', 12},
+    {"max_speed", 'f', 13},
+    {"account_for_skipped_frames", 'b', 14},
+    {"stay_within_parcel", 'b', 15},
+};
+RulesetBuilderDef* kCharacterParamsDef = ruleset_builder_def_build(kCharacterParamsDescs, std::size(kCharacterParamsDescs));
+
+// character-navigate-params
+static const RulesetParamDescriptor kCharacterNavigateParamsDescs[] = {
+    {"force_direct_path", 'b', 1},
+};
+RulesetBuilderDef* kCharacterNavigateParamsDef = ruleset_builder_def_build(kCharacterNavigateParamsDescs, std::size(kCharacterNavigateParamsDescs));
+
+// character-patrol-points-params
+static const RulesetParamDescriptor kCharacterPatrolPointsParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterPatrolPointsParamsDef = ruleset_builder_def_build(kCharacterPatrolPointsParamsDescs, std::size(kCharacterPatrolPointsParamsDescs));
+
+// character-pursue-params
+static const RulesetParamDescriptor kCharacterPursueParamsDescs[] = {
+    {"offset", 'v', 1},
+    {"require_line_of_sight", 'b', 2},
+    {"fuzz_factor", 'f', 3},
+    {"intercept", 'b', 4},
+    {"goal_tolerance", 'f', 5},
+};
+RulesetBuilderDef* kCharacterPursueParamsDef = ruleset_builder_def_build(kCharacterPursueParamsDescs, std::size(kCharacterPursueParamsDescs));
+
+// character-wander-within-params
+static const RulesetParamDescriptor kCharacterWanderWithinParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterWanderWithinParamsDef = ruleset_builder_def_build(kCharacterWanderWithinParamsDescs, std::size(kCharacterWanderWithinParamsDescs));
+
+// get-closest-nav-point-params
+static const RulesetParamDescriptor kGetClosestNavPointParamsDescs[] = {
+    {"radius", 'f', 0},
+    {"static", 'b', 1},
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetClosestNavPointParamsDef = ruleset_builder_def_build(kGetClosestNavPointParamsDescs, std::size(kGetClosestNavPointParamsDescs));
+
+// get-static-path-params
+static const RulesetParamDescriptor kGetStaticPathParamsDescs[] = {
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetStaticPathParamsDef = ruleset_builder_def_build(kGetStaticPathParamsDescs, std::size(kGetStaticPathParamsDescs));
+
 // give-agent-inventory-params
 static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
     {"dest", 's', 0},
