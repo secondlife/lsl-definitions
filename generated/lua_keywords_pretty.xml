@@ -276,11 +276,6 @@ export type LLJsonEncodeOptions = {
   replacer: ((key: any, value: any, parent: {}?) -&gt; any)?,
 }</string>
          </map>
-         <key>LSLEventName</key>
-         <map>
-            <key>tooltip</key>
-            <string>export type LSLEventName = LLEventName | "state_entry" | "state_exit" | "timer"</string>
-         </map>
          <key>LSLReadableTypes</key>
          <map>
             <key>tooltip</key>

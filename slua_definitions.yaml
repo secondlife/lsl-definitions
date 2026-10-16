@@ -180,10 +180,6 @@ type-aliases:
   export: true
   definition: LLMultiEventName | LLSingleEventName
   selene-type: []
-- name: LSLEventName
-  export: true
-  definition: LLEventName | "state_entry" | "state_exit" | "timer"
-  selene-type: ["state_entry", "state_exit", "timer"]
 - name: LLEventHandler
   definition: (...any) -> ()
   selene-type: "function"
