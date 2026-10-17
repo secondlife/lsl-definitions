@@ -31,6 +31,19 @@ RulesetBuilderDef* kGiveAgentInventoryParamsDef = []() {
     return d;
 }();
 
+// gltf-overrides
+static const RulesetParamDescriptor kGLTFOverridesDescs[] = {
+    {"color", 'v', 1},
+    {"alpha", 'f', 2},
+    {"alpha_mode", 'i', 3},
+    {"alpha_mask", 'f', 4},
+    {"double_sided", 'b', 5},
+    {"metalness", 'f', 6},
+    {"roughness", 'f', 7},
+    {"emmissive_color", 'v', 8},
+};
+RulesetBuilderDef* kGLTFOverridesDef = ruleset_builder_def_build(kGLTFOverridesDescs, std::size(kGLTFOverridesDescs));
+
 // http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
