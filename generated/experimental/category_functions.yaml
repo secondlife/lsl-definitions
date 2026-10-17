@@ -179,7 +179,7 @@ data_storage:
 - llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
 - llDeleteKeyValue( string k ) -> key
-- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llFindNotecardTextCount( string name, string pattern, list options ) -> key
 - llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list
 - llGetNotecardLine( string name, integer line ) -> key
 - llGetNotecardLineSync( string name, integer line ) -> string
@@ -206,7 +206,7 @@ dataserver:
 - llCreateKeyValue( string k, string v ) -> key
 - llDataSizeKeyValue(  ) -> key
 - llDeleteKeyValue( string k ) -> key
-- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llFindNotecardTextCount( string name, string pattern, list options ) -> key
 - llGetNotecardLine( string name, integer line ) -> key
 - llGetNumberOfNotecardLines( string name ) -> key
 - llKeyCountKeyValue(  ) -> key
@@ -537,7 +537,7 @@ movement:
 - llTargetOmega( vector axis, float spinrate, float gain ) -> void
 - llTargetRemove( integer handle ) -> void
 notecard:
-- llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key
+- llFindNotecardTextCount( string name, string pattern, list options ) -> key
 - llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list
 - llGetNotecardLine( string name, integer line ) -> key
 - llGetNotecardLineSync( string name, integer line ) -> string

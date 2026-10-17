@@ -1363,11 +1363,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/ll.FindNotecardTextCount": {
-        "documentation": "Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.",
+        "documentation": "Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextCount"
     },
     "@sl-slua/global/ll.FindNotecardTextSync": {
-        "documentation": "Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an empty list if no matches are found.",
+        "documentation": "Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextSync"
     },
     "@sl-slua/global/ll.FleeFrom": {
@@ -1667,15 +1667,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/ll.GetNotecardLine": {
-        "documentation": "Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end of the notecard.",
+        "documentation": "Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLine"
     },
     "@sl-slua/global/ll.GetNotecardLineSync": {
-        "documentation": "Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.",
+        "documentation": "Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLineSync"
     },
     "@sl-slua/global/ll.GetNumberOfNotecardLines": {
-        "documentation": "Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.",
+        "documentation": "Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfNotecardLines"
     },
     "@sl-slua/global/ll.GetNumberOfPrims": {
@@ -3438,11 +3438,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/llcompat.FindNotecardTextCount": {
-        "documentation": "Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.",
+        "documentation": "Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextCount"
     },
     "@sl-slua/global/llcompat.FindNotecardTextSync": {
-        "documentation": "(Index semantics) Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an empty list if no matches are found.",
+        "documentation": "(Index semantics) Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextSync"
     },
     "@sl-slua/global/llcompat.FleeFrom": {
@@ -3746,15 +3746,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/llcompat.GetNotecardLine": {
-        "documentation": "Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end of the notecard.",
+        "documentation": "Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLine"
     },
     "@sl-slua/global/llcompat.GetNotecardLineSync": {
-        "documentation": "Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.",
+        "documentation": "Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLineSync"
     },
     "@sl-slua/global/llcompat.GetNumberOfNotecardLines": {
-        "documentation": "Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.",
+        "documentation": "Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfNotecardLines"
     },
     "@sl-slua/global/llcompat.GetNumberOfPrims": {
@@ -5848,7 +5848,7 @@
         "documentation": "Value: -6<br>Could not validate the environmental settings or values passed."
     },
     "@sl-slua/global/EOF": {
-        "documentation": "Value: \"\\n\\n\\n\"<br>A value equal to three newline characters (\"<br><br><br>\") returned by the dataserver event, indicating that the requested line is past the end of the notecard."
+        "documentation": "Value: \"\\n\\n\\n\"<br>Value returned by llGetNotecardLine (through the dataserver event) and llGetNotecardLineSync when the requested line is past the end of the notecard. Equal to three newline characters (\"<br><br><br>\")."
     },
     "@sl-slua/global/ERR_GENERIC": {
         "documentation": "Value: -1<br>An inexplicable and generic error where nothing is known about the cause."
@@ -6451,7 +6451,7 @@
         "documentation": "Value: 1<br>Permissions mask option representing current owner permissions."
     },
     "@sl-slua/global/NAK": {
-        "documentation": "Value: \"\\n\\x15\\n\"<br>Value returned by llGetNotecardLineSync (ASCII NAK surrounded by newlines, i.e., codes 10, 21, 10) when requested notecard data is not in the region's cache."
+        "documentation": "Value: \"\\n\\x15\\n\"<br>Value returned by llGetNotecardLineSync and llFindNotecardTextSync (as a single-entry list) when the notecard is not in the region's cache. Equal to an ASCII NAK surrounded by newlines (codes 10, 21, 10)."
     },
     "@sl-slua/global/NULL_KEY": {
         "documentation": "Value: uuid(\"00000000-0000-0000-0000-000000000000\")<br>A special string constant used as a null or empty key value."
