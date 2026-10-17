@@ -5693,6 +5693,14 @@ globals:
         display: thread
     description: Closes a coroutine, returning true if successful or false and an
       error.
+  coroutine.finally:
+    args:
+    - type:
+        display: thread
+    - type: any
+    description: Registers a callback on coroutine co that will be called when co
+      reaches a terminal state. The callback is called with a status "finished", "error",
+      or "cancelled", along with any return values.
   debug.info:
     args:
     - type: any

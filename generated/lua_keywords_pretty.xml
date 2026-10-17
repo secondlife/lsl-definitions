@@ -13655,6 +13655,38 @@ Returns 0 if i &lt; -31, or all sign bits if i &gt; 31.</string>
             <key>tooltip</key>
             <string>Returns a new coroutine that, when resumed, will run function f.</string>
          </map>
+         <key>coroutine.finally</key>
+         <map>
+            <key>arguments</key>
+            <array>
+               <map>
+                  <key>co</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>Coroutine to join.</string>
+                     <key>type</key>
+                     <string>thread</string>
+                  </map>
+               </map>
+               <map>
+                  <key>callback</key>
+                  <map>
+                     <key>tooltip</key>
+                     <string>A function to be executed by the new coroutine.</string>
+                     <key>type</key>
+                     <string>(status: "finished" | "error" | "cancelled", ...any) -&gt; ()</string>
+                  </map>
+               </map>
+            </array>
+            <key>energy</key>
+            <real>10.0</real>
+            <key>return</key>
+            <string>()</string>
+            <key>sleep</key>
+            <real>0.0</real>
+            <key>tooltip</key>
+            <string>Registers a callback on coroutine co that will be called when co reaches a terminal state. The callback is called with a status "finished", "error", or "cancelled", along with any return values.</string>
+         </map>
          <key>coroutine.isyieldable</key>
          <map>
             <key>arguments</key>
