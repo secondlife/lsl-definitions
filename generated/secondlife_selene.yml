@@ -6048,14 +6048,6 @@ globals:
   llprim.ParamSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.setParticleSystem:
-    args:
-    - type: table
-      required: false
-    - type: number
-      required: false
-    description: Emit a particle system from a ParticleParams table. Omit link to
-      apply to the current prim.
   llprim.setMedia:
     args:
     - type: number
