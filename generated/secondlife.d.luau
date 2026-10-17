@@ -336,8 +336,8 @@ declare getfenv: nil
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
 @checked declare function newproxy(mt: boolean?): any
--- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
--- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
+declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V)
+declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K)
 -- declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...) -- magic type
 declare function print<T...>(...: T...): ()
 declare function rawequal<T1, T2>(a: T1, b: T2): boolean
