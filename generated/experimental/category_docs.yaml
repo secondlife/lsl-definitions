@@ -656,10 +656,10 @@ data_conversion:
     tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 data_storage:
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llCreateKeyValue( string k, string v ) -> key:
     k: Unique key name for the key-value pair.
     v: Value for the key-value pair (maximum 2047 characters, or 4095 characters if using Mono).
@@ -704,50 +704,53 @@ data_storage:
     tooltip: Starts an asynchronous transaction to retrieve count keys from the experience data store starting at the zero-based index first. Returns a key query handle for the dataserver event. Fails with
       XP_ERROR_KEY_NOT_FOUND if out of bounds.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
   llReadKeyValue( string k ) -> key:
     k: Key of the key-value pair to read.
     tooltip: Starts an asynchronous transaction to read the value associated with key k in the experience. Returns a key query handle for the dataserver event. Fails with XP_ERROR_KEY_NOT_FOUND if the key
@@ -1208,10 +1211,10 @@ linkset:
     changes: A bitfield of CHANGED_* flags representing what changed.
     tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llAvatarOnLinkSitTarget( integer link ) -> key:
     link: Index of the prim in the linkset (1 for root, >1 for children), or a LINK_* flag.
     tooltip: Returns the UUID of the avatar seated on the specified link's sit target, or NULL_KEY if no avatar is sitting there.
@@ -1282,50 +1285,53 @@ linkset:
     rot: Rotation relative to the prim's rotation.
     tooltip: Sets the sit target position (offset) and orientation (rot) for the linked prim link, relative to the prim's own position and rotation. Clear by setting offset to <0.0, 0.0, 0.0>.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
   llScaleByFactor( float scaling_factor ) -> integer:
     scaling_factor: Multiplier scale factor to apply to the prim sizes and their local positions.
     tooltip: Attempts to uniformly resize the entire object by scaling_factor, maintaining size-position ratios of the prims. Fails if the linkset is physical, a pathfinding character, in keyframed motion,
@@ -1393,55 +1399,58 @@ linkset:
     tooltip: Sets the object status attributes specified by status to value.
 linkset_data:
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
 list:
   llDeleteSubList( list src, integer start_index, integer end_index ) -> list:
     src: Source list to copy and modify.
