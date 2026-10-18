@@ -266,6 +266,41 @@ type-aliases:
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
+- name: CharacterParams
+  comment: Pathfinding character parameter table. Pass to ll.CreateCharacter() to configure a character.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterNavigateParams
+  comment: Pathfinding character navigate parameter table. Pass to ll.NavigateTo() to navigate.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterPatrolPointsParams
+  comment: Pathfinding character patrol points parameter table. Pass to ll.PatrolPoints() to configure the route.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterPursueParams
+  comment: Pathfinding character pursue parameter table. Pass to ll.Pursue() to configure the pursuit.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterWanderWithinParams
+  comment: Pathfinding character wander within parameter table. Pass to ll.WanderWithin() to configure the route.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GetClosestNavPointParams
+  comment: Get closest nav point parameter table. Pass to ll.GetClosestNavPoint to find the navmesh.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GetStaticPathParams
+  comment: Get static path parameter table. Pass to ll.GetStaticPath() to find a path.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
 - name: GiveAgentInventoryParams
   comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
   export: true
