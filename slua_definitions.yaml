@@ -322,7 +322,7 @@ type-aliases:
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
+  comment: Particle system parameter table. Pass to ll.LinkParticleSystem() to emit particles.
   export: true
   definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
@@ -2205,15 +2205,7 @@ modules:
     comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
     type: PrimParamSetterTypeMeta
     value: PrimParamSetterTypeMeta
-  functions:
-  - name: setParticleSystem
-    comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
-    parameters:
-    - name: params
-      type: ParticleParams?
-    - name: link
-      type: number?
-    return-type: '()'
+  functions: []
 - name: math
   comment: Mathematical functions library.
   functions:

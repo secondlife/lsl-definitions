@@ -19077,10 +19077,7 @@ builder-rulesets:
     flag-enum: ParticleFlag
     flag-field: flags
     flag-mask: _MASK
-    lua-module: llprim
-    lua-fn: setParticleSystem
     lua-type: ParticleParams
-    dispatch-fn: LinkParticleSystem
 
   prim-media-params:
     type: table

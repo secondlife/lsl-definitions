@@ -350,7 +350,7 @@ export type LSLTypes = string | number | vector | uuid | quaternion</string>
          <key>ParticleParams</key>
          <map>
             <key>tooltip</key>
-            <string>Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.</string>
+            <string>Particle system parameter table. Pass to ll.LinkParticleSystem() to emit particles.</string>
          </map>
          <key>PrimMediaParams</key>
          <map>
@@ -15338,38 +15338,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <real>-1.0</real>
             <key>tooltip</key>
             <string>Utilities for working with prims / objects</string>
-         </map>
-         <key>llprim.setParticleSystem</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>params</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>ParticleParams?</string>
-                  </map>
-               </map>
-               <map>
-                  <key>link</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string></string>
-                     <key>type</key>
-                     <string>number?</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>()</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.</string>
          </map>
          <key>math</key>
          <map>
