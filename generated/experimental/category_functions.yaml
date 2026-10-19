@@ -289,6 +289,11 @@ experience_data:
 - llKeysKeyValue( integer first, integer count ) -> key
 - llReadKeyValue( string k ) -> key
 - llUpdateKeyValue( string k, string v, integer checked, string original_value ) -> key
+game_control:
+- game_control( key id, integer button_levels, list axes )
+- llGetGameControlMode( key id ) -> integer
+- llGetGameControlModeAxes( key id ) -> list
+- llGetGameControlModeButtons( key id ) -> integer
 input:
 - control( key id, integer level, integer edge )
 - game_control( key id, integer button_levels, list axes )
