@@ -425,6 +425,14 @@ enum GLTFOverride {
   EMISSIVE_FACTOR = 8
 };
 enum GameControlAxis {
+  LEFTX = 0
+  LEFTY = 1
+  RIGHTX = 2
+  RIGHTY = 3
+  LEFT_TRIGGER = 4
+  TRIGGERLEFT = 4 // deprecated
+  RIGHT_TRIGGER = 5
+  TRIGGERRIGHT = 5 // deprecated
 };
 enum GameControlButton {
   A = 0x1 // deprecated
@@ -1317,20 +1325,12 @@ const integer FALSE = 0
 const integer GAME_CONTROL_AXIS_ADVANCE = 1
 const integer GAME_CONTROL_AXIS_BOOM = 4
 const integer GAME_CONTROL_AXIS_DOLLY = 1
-const integer GAME_CONTROL_AXIS_LEFTX = 0
-const integer GAME_CONTROL_AXIS_LEFTY = 1
-const integer GAME_CONTROL_AXIS_LEFT_TRIGGER = 4
 const integer GAME_CONTROL_AXIS_LOOK = 3
 const integer GAME_CONTROL_AXIS_PAN = 2
-const integer GAME_CONTROL_AXIS_RIGHTX = 2
-const integer GAME_CONTROL_AXIS_RIGHTY = 3
-const integer GAME_CONTROL_AXIS_RIGHT_TRIGGER = 5
 const integer GAME_CONTROL_AXIS_RISE = 4
 const integer GAME_CONTROL_AXIS_ROLL = 5
 const integer GAME_CONTROL_AXIS_STRAFE = 0
 const integer GAME_CONTROL_AXIS_TILT = 3
-const integer GAME_CONTROL_AXIS_TRIGGERLEFT = 4 // deprecated
-const integer GAME_CONTROL_AXIS_TRIGGERRIGHT = 5 // deprecated
 const integer GAME_CONTROL_AXIS_TRUCK = 0
 const integer GAME_CONTROL_AXIS_TURN = 2
 const integer GAME_CONTROL_AXIS_ZOOM = 6
