@@ -1515,6 +1515,17 @@ modules:
       type: thread
     return-type: (boolean, string?)
     typechecker: {checked: true}
+  - name: finally
+    comment: Registers a callback on coroutine co that will be called when co reaches a terminal state.
+      The callback is called with a status "finished", "error", or "cancelled", along with any return values.
+    parameters:
+    - name: co
+      comment: Coroutine to join.
+      type: thread
+    - name: callback
+      comment: A function to be executed by the new coroutine.
+      type: '(status: "finished" | "error" | "cancelled", ...any) -> ()'
+    return-type: ()
 - name: debug
   comment: Debug library for introspection.
   functions:

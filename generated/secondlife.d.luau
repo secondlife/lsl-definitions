@@ -493,6 +493,7 @@ declare coroutine: {
   yield: (...any) -> ...any,
   isyieldable: () -> boolean,
   close: @checked (co: thread) -> (boolean, string?),
+  finally: (co: thread, callback: (status: "finished" | "error" | "cancelled", ...any) -> ()) -> (),
 }
 
 

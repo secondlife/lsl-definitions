@@ -307,6 +307,10 @@
         "documentation": "Closes a coroutine, returning true if successful or false and an error.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#close"
     },
+    "@sl-slua/global/coroutine.finally": {
+        "documentation": "Registers a callback on coroutine co that will be called when co reaches a terminal state. The callback is called with a status \"finished\", \"error\", or \"cancelled\", along with any return values.",
+        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/coroutine#finally"
+    },
     "@sl-slua/global/debug": {
         "documentation": "Debug library for introspection.",
         "learn_more_link": "https://luau.org/library/#debug-library"
