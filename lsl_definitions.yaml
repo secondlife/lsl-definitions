@@ -8911,6 +8911,7 @@ events:
       or seats.
     categories:
       - avatar
+      - game_control
       - input
     uses-enum: GameControlAxis
   on_death:
@@ -11121,6 +11122,7 @@ functions:
         type: key
     categories:
     - avatar
+    - game_control
     - input
     energy: 10.0
     func-id: 804
@@ -11136,6 +11138,7 @@ functions:
         type: key
     categories:
     - avatar
+    - game_control
     - input
     energy: 10.0
     func-id: 806
@@ -11153,6 +11156,7 @@ functions:
         type: key
     categories:
     - avatar
+    - game_control
     - input
     energy: 10.0
     func-id: 805
