@@ -2002,17 +2002,17 @@ constants:
     type: integer
     value: 1
   GAME_CONTROL_AXIS_LEFTX:
-
+    member-of: [GameControlAxis]
     tooltip: Left stick X axis. Canonical axis index 0.
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
-
+    member-of: [GameControlAxis]
     tooltip: Left stick Y axis. Canonical axis index 1.
     type: integer
     value: 1
   GAME_CONTROL_AXIS_LEFT_TRIGGER:
-
+    member-of: [GameControlAxis]
     tooltip: Left trigger. Canonical axis index 4.
     type: integer
     value: 4
@@ -2028,17 +2028,17 @@ constants:
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTX:
-
+    member-of: [GameControlAxis]
     tooltip: Right stick X axis. Canonical axis index 2.
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
-
+    member-of: [GameControlAxis]
     tooltip: Right stick Y axis. Canonical axis index 3.
     type: integer
     value: 3
   GAME_CONTROL_AXIS_RIGHT_TRIGGER:
-
+    member-of: [GameControlAxis]
     tooltip: Right trigger. Canonical axis index 5.
     type: integer
     value: 5
@@ -2067,14 +2067,14 @@ constants:
   GAME_CONTROL_AXIS_TRIGGERLEFT:
     deprecated:
       use: GAME_CONTROL_AXIS_LEFT_TRIGGER
-
+    member-of: [GameControlAxis]
     tooltip: Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
     deprecated:
       use: GAME_CONTROL_AXIS_RIGHT_TRIGGER
-
+    member-of: [GameControlAxis]
     tooltip: Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).
     type: integer
     value: 5
