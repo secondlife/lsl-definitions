@@ -51,6 +51,7 @@
                     "effects",
                     "experience",
                     "experience_data",
+                    "game_control",
                     "input",
                     "json",
                     "land_moderation",

@@ -1109,6 +1109,23 @@ experience_data:
     original_value: String value to compare against the existing value in the datastore.
     tooltip: Starts an asynchronous transaction to update the key k to value v inside the experience datastore. If checked is TRUE, the update fails with XP_ERROR_RETRY_UPDATE unless the existing value
       matches original_value.
+game_control:
+  game_control( key id, integer button_levels, list axes ):
+    id: UUID of the avatar supplying controller input.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
+    tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
 input:
   control( key id, integer level, integer edge ):
     id: UUID of the avatar whose inputs are captured.
