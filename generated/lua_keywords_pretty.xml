@@ -16733,75 +16733,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
             <key>tooltip</key>
             <string>Spherical linear interpolation from start_q to end_q using factor t.</string>
          </map>
-         <key>quaternion.tofwd</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>q</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string>Quaternion to convert.</string>
-                     <key>type</key>
-                     <string>quaternion</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>vector</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Returns the unit vector pointing toward positive X direction (forward) in the coordinate space of rotation q. Equivalent to vector(1, 0, 0) * q.</string>
-         </map>
-         <key>quaternion.toleft</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>q</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string>Quaternion to convert.</string>
-                     <key>type</key>
-                     <string>quaternion</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>vector</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Returns the unit vector pointing toward positive Y direction (left) in the coordinate space of rotation q. Equivalent to vector(0, 1, 0) * q.</string>
-         </map>
-         <key>quaternion.toup</key>
-         <map>
-            <key>arguments</key>
-            <array>
-               <map>
-                  <key>q</key>
-                  <map>
-                     <key>tooltip</key>
-                     <string>Quaternion to convert.</string>
-                     <key>type</key>
-                     <string>quaternion</string>
-                  </map>
-               </map>
-            </array>
-            <key>energy</key>
-            <real>10.0</real>
-            <key>return</key>
-            <string>vector</string>
-            <key>sleep</key>
-            <real>0.0</real>
-            <key>tooltip</key>
-            <string>Returns the unit vector pointing toward positive Z direction (up) in the coordinate space of rotation q. Equivalent to vector(0, 0, 1) * q.</string>
-         </map>
          <key>string</key>
          <map>
             <key>energy</key>
@@ -29066,8 +28997,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   </map>
                </map>
             </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -29091,8 +29020,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   </map>
                </map>
             </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
@@ -29116,8 +29043,6 @@ Does an arithmetic shift: The most significant bit of n is propagated during the
                   </map>
                </map>
             </array>
-            <key>deprecated</key>
-            <boolean>true</boolean>
             <key>energy</key>
             <real>10.0</real>
             <key>return</key>
