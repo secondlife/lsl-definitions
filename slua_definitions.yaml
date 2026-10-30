@@ -2862,36 +2862,6 @@ modules:
     return-type: quaternion
     must-use: true
     typechecker: {checked: true}
-  - name: tofwd
-    comment: Returns the unit vector pointing toward positive X direction (forward)
-      in the coordinate space of rotation q. Equivalent to vector(1, 0, 0) * q.
-    parameters:
-    - name: q
-      comment: Quaternion to convert.
-      type: quaternion
-    return-type: vector
-    must-use: true
-    typechecker: {checked: true}
-  - name: toleft
-    comment: Returns the unit vector pointing toward positive Y direction (left)
-      in the coordinate space of rotation q. Equivalent to vector(0, 1, 0) * q.
-    parameters:
-    - name: q
-      comment: Quaternion to convert.
-      type: quaternion
-    return-type: vector
-    must-use: true
-    typechecker: {checked: true}
-  - name: toup
-    comment: Returns the unit vector pointing toward positive Z direction (up)
-      in the coordinate space of rotation q. Equivalent to vector(0, 0, 1) * q.
-    parameters:
-    - name: q
-      comment: Quaternion to convert.
-      type: quaternion
-    return-type: vector
-    must-use: true
-    typechecker: {checked: true}
   constants:
   - name: identity
     comment: Identity quaternion constant. Causes no change when rotated.

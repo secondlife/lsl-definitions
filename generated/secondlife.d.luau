@@ -674,9 +674,6 @@ declare quaternion: ((x: number, y: number, z: number, s: number) -> quaternion)
   dot: (q1: quaternion, q2: quaternion) -> number,
   slerp: (start_q: quaternion, end_q: quaternion, t: number) -> quaternion,
   conjugate: (q: quaternion) -> quaternion,
-  tofwd: (q: quaternion) -> vector,
-  toleft: (q: quaternion) -> vector,
-  toup: (q: quaternion) -> vector,
 }
 
 --[[ commented out to avoid shadowing magic type functions find, format, gmatch, and match
@@ -1169,9 +1166,9 @@ declare ll: {
   Rot2Angle: (q: quaternion) -> number,
   Rot2Axis: (q: quaternion) -> vector,
   Rot2Euler: (q: quaternion) -> vector,
-  Rot2Fwd: @[deprecated {use='quaternion.tofwd'}](q: quaternion) -> vector,
-  Rot2Left: @[deprecated {use='quaternion.toleft'}](q: quaternion) -> vector,
-  Rot2Up: @[deprecated {use='quaternion.toup'}](q: quaternion) -> vector,
+  Rot2Fwd: (q: quaternion) -> vector,
+  Rot2Left: (q: quaternion) -> vector,
+  Rot2Up: (q: quaternion) -> vector,
   RotBetween: (start_vec: vector, end_vec: vector) -> quaternion,
   RotLookAt: (target_direction: quaternion, strength: number, damping: number) -> (),
   RotTarget: (rot: quaternion, error: number) -> number,
