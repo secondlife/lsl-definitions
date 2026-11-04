@@ -1186,6 +1186,7 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
                 f"static const RulesetParamDescriptor {array_name}[] = {{\n{param_body}\n}};\n"
             )
 
+            flag_lines = []
             flag_enum_name = ruleset_data.get("flag-enum")
             flag_field = ruleset_data.get("flag-field")
             if flag_enum_name and flag_field:
@@ -1217,7 +1218,6 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
 
                 flag_suffix = (ruleset_data.get("flag-mask") or "").lower()
                 flag_array_name = f"k{enum_name}FlagDescs"
-                flag_lines = []
                 for const in flag_consts:
                     if const.pretty_name:
                         prop_name = const.pretty_name
@@ -1231,6 +1231,8 @@ def gen_ruleset_builder_descriptors(definitions: LSLDefinitions) -> str:
                     mask = int(const.value, 0)
                     flag_lines.append(f'    {{"{prop_name}", 0x{mask:x}, {field_tag}}},')
 
+            # A flag enum with no members yet must not produce a zero-length array.
+            if flag_lines:
                 flag_body = "\n".join(flag_lines)
                 file_scope += f"static const RulesetFlagDescriptor {flag_array_name}[] = {{\n{flag_body}\n}};\n"
 
