@@ -16252,6 +16252,11 @@ structs:
       - type: any
       description: 'Division: vector / number -> vector (Scale), vector / quaternion
         -> vector (Rotation by inverse)'
+    __idiv:
+      method: true
+      args:
+      - type: any
+      description: 'Floor division: vector // number -> vector (Quantized scale)'
     __mod:
       method: true
       args:

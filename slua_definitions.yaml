@@ -112,6 +112,13 @@ base-classes:
     - name: other
       type: number | vector | quaternion
     return-type: vector
+  - name: __idiv
+    comment: 'Floor division: vector // number -> vector (Quantized scale)'
+    parameters:
+    - name: self
+    - name: other
+      type: number | vector
+    return-type: vector
   - name: __mod
     comment: 'LSL-style modulo: vector % vector -> vector (Cross Product)'
     parameters:

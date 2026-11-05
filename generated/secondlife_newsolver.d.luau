@@ -34,6 +34,7 @@ declare extern type vector with
   function __unm(self): vector
   function __mul(self, other: number | vector | quaternion): vector
   function __div(self, other: number | vector | quaternion): vector
+  function __idiv(self, other: number | vector): vector
   function __mod(self, other: vector): vector
   function __tostring(self): string
 end
