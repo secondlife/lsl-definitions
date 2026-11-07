@@ -3358,6 +3358,7 @@ modules:
       optional: true
       default-value: nil
     return-type: '{V}'
+    fastcall: true
     overloads:
     - comment: Creates a new unfilled table with pre-allocated array capacity.
       parameters:
@@ -3391,6 +3392,7 @@ modules:
       type: '{}'
       observes: write
     return-type: ()
+    fastcall: true
   - name: shrink
     comment: Reduces the memory usage of the table to the minimum necessary.
     type-parameters: [V]
