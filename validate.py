@@ -84,6 +84,9 @@ def validate_no_keyword_params() -> None:
 def main():
     validate_definitions_via_jsonschema("lsl_definitions.schema.json", "lsl_definitions.yaml")
     validate_definitions_via_jsonschema("slua_definitions.schema.json", "slua_definitions.yaml")
+    validate_definitions_via_jsonschema(
+        "slua_definitions.schema.json", "generated/slua_definitions.yaml"
+    )
     validate_no_keyword_params()
 
 
