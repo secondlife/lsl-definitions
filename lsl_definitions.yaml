@@ -6502,6 +6502,11 @@ constants:
       unauthorized parcel.
     type: integer
     value: '0x0010'
+  REZ_FLAG_DIE_ON_NO_REZZER:
+    member-of: [RezFlag]
+    tooltip: Rez flag causing the object to die if the rezzing object or agent is not present.
+    type: integer
+    value: '0x0100'
   REZ_FLAG_NO_COLLIDE_FAMILY:
     member-of: [RezFlag]
     tooltip: Rez flag preventing collision events from triggering when colliding
@@ -7275,6 +7280,11 @@ constants:
       this setting and remain in-world.
     type: integer
     value: '0x800'
+  STATUS_DIE_ON_NO_REZZER:
+    member-of: [ObjectStatusParam]
+    tooltip: Status flag (default FALSE) that causes the object to be deleted if the rezzing object or agent is not present.
+    type: integer
+    value: '0x1000'
   STATUS_INTERNAL_ERROR:
     member-of: [PrimMediaError]
     tooltip: Status code indicating an internal error occurred.

@@ -2506,6 +2506,9 @@
     luaSL_pushnativeinteger(L, 0x0010);
     lua_setglobal(L, "REZ_FLAG_DIE_ON_NOENTRY");
 
+    luaSL_pushnativeinteger(L, 0x0100);
+    lua_setglobal(L, "REZ_FLAG_DIE_ON_NO_REZZER");
+
     luaSL_pushnativeinteger(L, 0x0040);
     lua_setglobal(L, "REZ_FLAG_NO_COLLIDE_FAMILY");
 
@@ -2784,6 +2787,9 @@
 
     luaSL_pushnativeinteger(L, 0x800);
     lua_setglobal(L, "STATUS_DIE_AT_NO_ENTRY");
+
+    luaSL_pushnativeinteger(L, 0x1000);
+    lua_setglobal(L, "STATUS_DIE_ON_NO_REZZER");
 
     luaSL_pushnativeinteger(L, 1999);
     lua_setglobal(L, "STATUS_INTERNAL_ERROR");
