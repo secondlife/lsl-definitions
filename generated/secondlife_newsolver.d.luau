@@ -2670,6 +2670,7 @@ declare REZ_FLAGS: number
 declare REZ_FLAG_BLOCK_GRAB_OBJECT: number
 declare REZ_FLAG_DIE_ON_COLLIDE: number
 declare REZ_FLAG_DIE_ON_NOENTRY: number
+declare REZ_FLAG_DIE_ON_NO_REZZER: number
 declare REZ_FLAG_NO_COLLIDE_FAMILY: number
 declare REZ_FLAG_NO_COLLIDE_OWNER: number
 declare REZ_FLAG_PHANTOM: number
@@ -2758,6 +2759,7 @@ declare STATUS_BOUNDS_ERROR: number
 declare STATUS_CAST_SHADOWS: number
 declare STATUS_DIE_AT_EDGE: number
 declare STATUS_DIE_AT_NO_ENTRY: number
+declare STATUS_DIE_ON_NO_REZZER: number
 declare STATUS_INTERNAL_ERROR: number
 declare STATUS_MALFORMED_PARAMS: number
 declare STATUS_NOT_FOUND: number
