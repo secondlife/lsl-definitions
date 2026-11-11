@@ -840,6 +840,7 @@
 "REZ_FLAG_BLOCK_GRAB_OBJECT" { count(); yylval.ival = 0x0080; return(INTEGER_CONSTANT); }
 "REZ_FLAG_DIE_ON_COLLIDE" { count(); yylval.ival = 0x0008; return(INTEGER_CONSTANT); }
 "REZ_FLAG_DIE_ON_NOENTRY" { count(); yylval.ival = 0x0010; return(INTEGER_CONSTANT); }
+"REZ_FLAG_DIE_ON_NO_REZZER" { count(); yylval.ival = 0x0100; return(INTEGER_CONSTANT); }
 "REZ_FLAG_NO_COLLIDE_FAMILY" { count(); yylval.ival = 0x0040; return(INTEGER_CONSTANT); }
 "REZ_FLAG_NO_COLLIDE_OWNER" { count(); yylval.ival = 0x0020; return(INTEGER_CONSTANT); }
 "REZ_FLAG_PHANTOM" { count(); yylval.ival = 0x0004; return(INTEGER_CONSTANT); }
@@ -933,6 +934,7 @@
 "STATUS_CAST_SHADOWS" { count(); yylval.ival = 0x200; return(INTEGER_CONSTANT); }
 "STATUS_DIE_AT_EDGE" { count(); yylval.ival = 0x80; return(INTEGER_CONSTANT); }
 "STATUS_DIE_AT_NO_ENTRY" { count(); yylval.ival = 0x800; return(INTEGER_CONSTANT); }
+"STATUS_DIE_ON_NO_REZZER" { count(); yylval.ival = 0x1000; return(INTEGER_CONSTANT); }
 "STATUS_INTERNAL_ERROR" { count(); yylval.ival = 1999; return(INTEGER_CONSTANT); }
 "STATUS_MALFORMED_PARAMS" { count(); yylval.ival = 1000; return(INTEGER_CONSTANT); }
 "STATUS_NOT_FOUND" { count(); yylval.ival = 1003; return(INTEGER_CONSTANT); }

@@ -7692,6 +7692,9 @@
     "@sl-slua/global/REZ_FLAG_DIE_ON_NOENTRY": {
         "documentation": "Value: 0x0010<br>Rez flag causing the object to die/delete if it attempts to enter an unauthorized parcel."
     },
+    "@sl-slua/global/REZ_FLAG_DIE_ON_NO_REZZER": {
+        "documentation": "Value: 0x0100<br>Rez flag causing the object to die if the rezzing object or agent is not present."
+    },
     "@sl-slua/global/REZ_FLAG_NO_COLLIDE_FAMILY": {
         "documentation": "Value: 0x0040<br>Rez flag preventing collision events from triggering when colliding with other objects created by the same rezzer."
     },
@@ -7955,6 +7958,9 @@
     },
     "@sl-slua/global/STATUS_DIE_AT_NO_ENTRY": {
         "documentation": "Value: 0x800<br>Status flag (default FALSE) that causes the object to be deleted if it attempts to enter an unauthorized or full parcel. No-copy objects ignore this setting and remain in-world."
+    },
+    "@sl-slua/global/STATUS_DIE_ON_NO_REZZER": {
+        "documentation": "Value: 0x1000<br>Status flag (default FALSE) that causes the object to be deleted if the rezzing object or agent is not present."
     },
     "@sl-slua/global/STATUS_INTERNAL_ERROR": {
         "documentation": "Value: 1999<br>Status code indicating an internal error occurred."

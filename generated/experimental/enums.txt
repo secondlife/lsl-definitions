@@ -714,6 +714,7 @@ enum ObjectStatusParam {
   CAST_SHADOWS = 0x200 // deprecated
   BLOCK_GRAB_OBJECT = 0x400
   DIE_AT_NO_ENTRY = 0x800
+  DIE_ON_NO_REZZER = 0x1000
 };
 enum ParcelDetailsParam {
   NAME = 0
@@ -1146,6 +1147,7 @@ enum RezFlag {
   NO_COLLIDE_OWNER = 0x20
   NO_COLLIDE_FAMILY = 0x40
   BLOCK_GRAB_OBJECT = 0x80
+  DIE_ON_NO_REZZER = 0x100
 };
 enum RezParam {
   PARAM = 0

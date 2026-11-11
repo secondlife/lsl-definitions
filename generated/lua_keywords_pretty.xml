@@ -8147,6 +8147,15 @@ float falloff – ranges from 0.01 to 2.0
             <key>value</key>
             <string>0x0010</string>
          </map>
+         <key>REZ_FLAG_DIE_ON_NO_REZZER</key>
+         <map>
+            <key>tooltip</key>
+            <string>Rez flag causing the object to die if the rezzing object or agent is not present.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x0100</string>
+         </map>
          <key>REZ_FLAG_NO_COLLIDE_FAMILY</key>
          <map>
             <key>tooltip</key>
@@ -8942,6 +8951,15 @@ float falloff – ranges from 0.01 to 2.0
             <string>number</string>
             <key>value</key>
             <string>0x800</string>
+         </map>
+         <key>STATUS_DIE_ON_NO_REZZER</key>
+         <map>
+            <key>tooltip</key>
+            <string>Status flag (default FALSE) that causes the object to be deleted if the rezzing object or agent is not present.</string>
+            <key>type</key>
+            <string>number</string>
+            <key>value</key>
+            <string>0x1000</string>
          </map>
          <key>STATUS_INTERNAL_ERROR</key>
          <map>

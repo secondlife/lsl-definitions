@@ -3968,6 +3968,11 @@ globals:
     type: number
     description: Rez flag causing the object to die/delete if it attempts to enter
       an unauthorized parcel.
+  REZ_FLAG_DIE_ON_NO_REZZER:
+    property: read-only
+    type: number
+    description: Rez flag causing the object to die if the rezzing object or agent
+      is not present.
   REZ_FLAG_NO_COLLIDE_FAMILY:
     property: read-only
     type: number
@@ -4399,6 +4404,11 @@ globals:
     description: Status flag (default FALSE) that causes the object to be deleted
       if it attempts to enter an unauthorized or full parcel. No-copy objects ignore
       this setting and remain in-world.
+  STATUS_DIE_ON_NO_REZZER:
+    property: read-only
+    type: number
+    description: Status flag (default FALSE) that causes the object to be deleted
+      if the rezzing object or agent is not present.
   STATUS_INTERNAL_ERROR:
     property: read-only
     type: number
