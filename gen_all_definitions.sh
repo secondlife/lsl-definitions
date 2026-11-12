@@ -19,6 +19,7 @@ $CMD $DEFS slua_lsp_defs --newsolver $SLUA "$outdir/secondlife_newsolver.d.luau"
 $CMD $DEFS slua_lsp_docs $SLUA "$outdir/secondlife.docs.json"
 $CMD $DEFS gen_builtins_txt "$outdir/builtins.txt"
 $CMD $DEFS slua_selene $SLUA "$outdir/secondlife_selene.yml"
+$CMD $DEFS slua_definitions $SLUA "$outdir/slua_definitions.yaml"
 
 # Syntax highlighting
 $CMD $DEFS syntax_textmate_slua ./templates/syntax/slua.tmLanguage $SLUA "$outdir/syntax/slua.tmLanguage"
