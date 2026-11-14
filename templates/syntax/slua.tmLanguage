@@ -640,7 +640,7 @@
             <string>(?&lt;![^.]\.|:)\b($SLUA_GLOBAL_LL_VARIABLE_FUNCTIONS_REGEX)\b</string>
           </dict>
           <dict>
-<key>name</key>
+            <key>name</key>
             <string>support.constant.luau</string>
             <key>match</key>
             <string>(?&lt;![^.]\.|:)\b$SLUA_GLOBAL_CONSTANTS_REGEX\b</string>
