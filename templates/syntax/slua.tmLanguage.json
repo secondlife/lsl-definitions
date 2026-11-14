@@ -317,15 +317,11 @@
       "patterns": [
         {
           "name": "constant.numeric.hex.luau",
-          "match": "\\b0_*[xX]_*[\\da-fA-F][\\da-fA-F_]*i?"
+          "match": "\\b0_*[xX]_*[\\da-fA-F][\\da-fA-F_]*"
         },
         {
           "name": "constant.numeric.binary.luau",
-          "match": "\\b0_*[bB]_*[01][01_]*i?"
-        },
-        {
-          "name": "constant.numeric.decimal.luau",
-          "match": "\\d[\\d_]*i"
+          "match": "\\b0_*[bB]_*[01][01_]*"
         },
         {
           "name": "constant.numeric.decimal.luau",
