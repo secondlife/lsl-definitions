@@ -147,7 +147,7 @@
             <string>storage.modifier.const.luau</string>
           </dict>
           <key>3</key>
-          <dict>
+                    <dict>
             <key>name</key>
             <string>keyword.control.luau</string>
           </dict>
@@ -259,7 +259,7 @@
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
-          <dict>
+                    <dict>
             <key>name</key>
             <string>storage.modifier.local.luau</string>
           </dict>
@@ -318,7 +318,7 @@
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
-          <dict>
+                    <dict>
             <key>name</key>
             <string>storage.modifier.const.luau</string>
           </dict>
@@ -486,19 +486,13 @@
             <key>name</key>
             <string>constant.numeric.hex.luau</string>
             <key>match</key>
-            <string>\b0_*[xX]_*[\da-fA-F][\da-fA-F_]*i?</string>
+            <string>\b0_*[xX]_*[\da-fA-F][\da-fA-F_]*</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.binary.luau</string>
             <key>match</key>
-            <string>\b0_*[bB]_*[01][01_]*i?</string>
-          </dict>
-          <dict>
-            <key>name</key>
-            <string>constant.numeric.decimal.luau</string>
-            <key>match</key>
-            <string>\d[\d_]*i</string>
+            <string>\b0_*[bB]_*[01][01_]*</string>
           </dict>
           <dict>
             <key>name</key>
@@ -646,7 +640,7 @@
             <string>(?&lt;![^.]\.|:)\b($SLUA_GLOBAL_LL_VARIABLE_FUNCTIONS_REGEX)\b</string>
           </dict>
           <dict>
-            <key>name</key>
+<key>name</key>
             <string>support.constant.luau</string>
             <key>match</key>
             <string>(?&lt;![^.]\.|:)\b$SLUA_GLOBAL_CONSTANTS_REGEX\b</string>
@@ -1368,7 +1362,7 @@
             <string>\}</string>
             <key>patterns</key>
             <array>
-              <dict>
+                            <dict>
                 <key>begin</key>
                 <string>\[</string>
                 <key>end</key>
