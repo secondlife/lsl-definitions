@@ -147,7 +147,7 @@
             <string>storage.modifier.const.luau</string>
           </dict>
           <key>3</key>
-                    <dict>
+          <dict>
             <key>name</key>
             <string>keyword.control.luau</string>
           </dict>
@@ -259,7 +259,7 @@
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
-                    <dict>
+          <dict>
             <key>name</key>
             <string>storage.modifier.local.luau</string>
           </dict>
@@ -318,7 +318,7 @@
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
-                    <dict>
+          <dict>
             <key>name</key>
             <string>storage.modifier.const.luau</string>
           </dict>
@@ -1362,7 +1362,7 @@
             <string>\}</string>
             <key>patterns</key>
             <array>
-                            <dict>
+              <dict>
                 <key>begin</key>
                 <string>\[</string>
                 <key>end</key>

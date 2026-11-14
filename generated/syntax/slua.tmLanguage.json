@@ -106,7 +106,7 @@
           "name": "storage.modifier.const.luau"
         },
         "3": {
-                    "name": "keyword.control.luau"
+          "name": "keyword.control.luau"
         }
       },
       "end": "(?<=[\\)\\-{}\\[\\]\"'])",
@@ -179,7 +179,7 @@
       "end": "(?=\\s*do\\b|\\s*[=;]|\\s*$)",
       "beginCaptures": {
         "1": {
-                    "name": "storage.modifier.local.luau"
+          "name": "storage.modifier.local.luau"
         }
       },
       "patterns": [
@@ -218,7 +218,7 @@
       "end": "(?=\\s*[=;]|\\s*$)",
       "beginCaptures": {
         "1": {
-                    "name": "storage.modifier.const.luau"
+          "name": "storage.modifier.const.luau"
         }
       },
       "patterns": [
@@ -289,7 +289,7 @@
         }
       ]
     },
-        "string_escape": {
+    "string_escape": {
       "patterns": [
         {
           "name": "constant.character.escape.luau",
@@ -883,7 +883,7 @@
           "begin": "\\{",
           "end": "\\}",
           "patterns": [
-                        {
+            {
               "begin": "\\[",
               "end": "\\]",
               "patterns": [
