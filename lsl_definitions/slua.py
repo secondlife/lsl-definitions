@@ -16,7 +16,12 @@ from lsl_definitions.rulesets import (
     expand_spp_builder,
     expand_table_ruleset,
 )
-from lsl_definitions.utils import Deprecated, remove_worthless, sanitize_luau_param_name
+from lsl_definitions.utils import (
+    Deprecated,
+    remove_nones,
+    remove_worthless,
+    sanitize_luau_param_name,
+)
 
 _TABLE_RULESET_TYPE_MAP: dict[str, str] = {
     "float": "number",
@@ -112,6 +117,16 @@ class SLuaProperty:
         attributes = "read " if extern and self.modifiable == "read-only" else ""
         return f"{attributes}{self.name}: {self.type}"
 
+    def to_definition_dict(self) -> dict:
+        result = {"name": self.name, "type": self.type}
+        if self.value is not None:
+            result["value"] = self.value
+        if self.comment:
+            result["comment"] = self.comment
+        if self.modifiable != "read-only":
+            result["modifiable"] = self.modifiable
+        return result
+
 
 @dataclasses.dataclass
 class SLuaParameter:
@@ -150,6 +165,22 @@ class SLuaParameter:
                 return f"...: {type}"
         else:
             return f"{sanitize_luau_param_name(self.name)}: {type}"
+
+    def to_definition_dict(self) -> dict:
+        result = {"name": self.name}
+        if self.type is not None:
+            result["type"] = self.type
+        if self.comment:
+            result["comment"] = self.comment
+        if self.optional is not None:
+            result["optional"] = self.optional
+        if self.observes is not None:
+            result["observes"] = self.observes
+        if self.selene_type is not None:
+            result["selene-type"] = self.selene_type
+        if self.default_value is not None:
+            result["default-value"] = self.default_value
+        return result
 
     @property
     def formatted_comment(self) -> str:
@@ -201,6 +232,31 @@ class SLuaFunctionBase(abc.ABC):
 @dataclasses.dataclass
 class SLuaFunctionOverload(SLuaFunctionBase):
     pass
+
+
+def _deprecated_to_definition(deprecated: Deprecated | None) -> bool | dict | None:
+    if deprecated is None:
+        return None
+    if deprecated.reason is None and deprecated.use is None and deprecated.selene_replace is None:
+        return True
+    return remove_nones(
+        reason=deprecated.reason,
+        use=deprecated.use,
+        **({"selene-replace": deprecated.selene_replace} if deprecated.selene_replace else {}),
+    )
+
+
+def _function_signature_to_definition(func: SLuaFunctionBase) -> dict:
+    result: dict = {}
+    if func.type_parameters:
+        result["type-parameters"] = func.type_parameters
+    if func.parameters:
+        result["parameters"] = [p.to_definition_dict() for p in func.parameters]
+    if func.return_type != "()":
+        result["return-type"] = func.return_type
+    if func.comment:
+        result["comment"] = func.comment
+    return result
 
 
 @dataclasses.dataclass
@@ -296,6 +352,28 @@ class SLuaFunction(SLuaFunctionBase):
         f.write(self.typechecker_flags.comment_string(newsolver=newsolver))
         f.write("\n")
 
+    def to_definition_dict(self) -> dict:
+        result = {"name": self.name, **_function_signature_to_definition(self)}
+        if self.overloads:
+            result["overloads"] = [_function_signature_to_definition(o) for o in self.overloads]
+        deprecated = _deprecated_to_definition(self.deprecated)
+        if deprecated is not None:
+            result["deprecated"] = deprecated
+        if self.local_only:
+            result["local-only"] = True
+        if self.slua_removed:
+            result["slua-removed"] = True
+        if self.must_use:
+            result["must-use"] = True
+        typechecker: dict = {}
+        if self.typechecker_flags.builtin:
+            typechecker["builtin"] = True
+        if self.typechecker_flags.magic:
+            typechecker["magic"] = True
+        if typechecker:
+            result["typechecker"] = typechecker
+        return result
+
 
 @dataclasses.dataclass
 class SLuaTypeAlias:
@@ -325,6 +403,18 @@ class SLuaTypeAlias:
             definition = self.typechecker_flags.new_type
         export_str = "export " if self.export else ""
         return f"{export_str}type {self.name} = {definition}"
+
+    def to_definition_dict(self) -> dict:
+        result = {
+            "name": self.name,
+            "definition": self.definition,
+            "selene-type": self.selene_type,
+        }
+        if self.comment:
+            result["comment"] = self.comment
+        if self.export:
+            result["export"] = True
+        return result
 
 
 @dataclasses.dataclass
@@ -385,6 +475,22 @@ class SLuaClassDeclaration:
             f"  setmetatable((nil :: any) :: {self.instance_type}, (nil :: any) :: {mt_name})\n"
         )
         f.write(")\n\n")
+
+    def to_definition_dict(self) -> dict:
+        result = {"name": self.name}
+        if self.comment:
+            result["comment"] = self.comment
+        if self.instance_type is not None:
+            result["instance-type"] = self.instance_type
+        if self.export:
+            result["export"] = True
+        if self.properties:
+            result["properties"] = [p.to_definition_dict() for p in self.properties.values()]
+        if self.functions:
+            result["functions"] = [f.to_definition_dict() for f in self.functions.values()]
+        if self.methods:
+            result["methods"] = [f.to_definition_dict() for f in self.methods.values()]
+        return result
 
 
 @dataclasses.dataclass
@@ -451,6 +557,18 @@ declare {self.name}: """)
             func.write_luau_table_def(f, indent=1, newsolver=newsolver)
         f.write("}\n\n")
 
+    def to_definition_dict(self) -> dict:
+        result = {"name": self.name}
+        if self.comment:
+            result["comment"] = self.comment
+        if self.callable is not None:
+            result["callable"] = self.callable.to_definition_dict()
+        if self.constants:
+            result["constants"] = [c.to_definition_dict() for c in self.constants.values()]
+        if self.functions:
+            result["functions"] = [f.to_definition_dict() for f in self.functions.values()]
+        return result
+
 
 @dataclasses.dataclass
 class SLuaDefinitions:
@@ -475,6 +593,22 @@ class SLuaDefinitions:
 
     # All known type names, populated by parser
     type_names: set[str] = dataclasses.field(default_factory=set)
+
+    def to_definition_dict(self) -> dict:
+        return {
+            "version": "1.0.0",
+            "base-classes": [c.to_definition_dict() for c in self.base_classes.values()],
+            "type-aliases": [a.to_definition_dict() for a in self.type_aliases.values()],
+            "classes": [c.to_definition_dict() for c in self.classes.values()],
+            "global-variables": [v.to_definition_dict() for v in self.global_variables.values()],
+            "functions": [f.to_definition_dict() for f in self.functions.values()],
+            "modules": [m.to_definition_dict() for m in self.modules.values()],
+            "constants": [c.to_definition_dict() for c in self.global_constants.values()],
+            "controls": self.controls,
+            "builtin-types": self.builtin_types,
+            "metamethods": list(self.metamethods.values()),
+            "builtin-constants": [c.to_definition_dict() for c in self.builtin_constants.values()],
+        }
 
     def validate_type(self, type_str: str, known_type_names: set[str] | None = None) -> str:
         return SLuaDefinitionParser.validate_type(type_str, known_type_names or self.type_names)
