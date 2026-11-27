@@ -6669,8 +6669,9 @@ constants:
     access: write
   SKY_COLORGRADE_LUT:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: Environmental setting containing the UUID of the color grading LUT
-      texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.
+    tooltip: Environmental setting containing the inventory name or UUID of the
+      color grading LUT texture applied when SKY_HDR_TONEMAPPER is
+      SKY_TONEMAPPER_LUT.
     type: integer
     value: 33
     value-type: asset
@@ -6734,19 +6735,19 @@ constants:
         value-type: float
   SKY_HDR_MAX:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: Environmental setting for the maximum HDR exposure value.
+    tooltip: Environmental setting for the maximum HDR exposure, in EV.
     type: integer
     value: 28
     value-type: float
   SKY_HDR_MIN:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: Environmental setting for the minimum HDR exposure value.
+    tooltip: Environmental setting for the minimum HDR exposure, in EV.
     type: integer
     value: 29
     value-type: float
   SKY_HDR_OFFSET:
     member-of: [EnvironmentParamReadOnly, EnvironmentParam]
-    tooltip: Environmental setting for the HDR exposure offset.
+    tooltip: Environmental setting for the HDR exposure offset, in EV.
     type: integer
     value: 27
     value-type: float
