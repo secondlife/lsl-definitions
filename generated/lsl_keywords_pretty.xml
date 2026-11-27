@@ -8198,7 +8198,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_COLORGRADE_LUT</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting containing the UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.</string>
+            <string>Environmental setting containing the inventory name or UUID of the color grading LUT texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>
@@ -8243,7 +8243,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_HDR_MAX</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting for the maximum HDR exposure value.</string>
+            <string>Environmental setting for the maximum HDR exposure, in EV.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>
@@ -8252,7 +8252,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_HDR_MIN</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting for the minimum HDR exposure value.</string>
+            <string>Environmental setting for the minimum HDR exposure, in EV.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>
@@ -8261,7 +8261,7 @@ float falloff – ranges from 0.01 to 2.0
          <key>SKY_HDR_OFFSET</key>
          <map>
             <key>tooltip</key>
-            <string>Environmental setting for the HDR exposure offset.</string>
+            <string>Environmental setting for the HDR exposure offset, in EV.</string>
             <key>type</key>
             <string>integer</string>
             <key>value</key>

@@ -4271,8 +4271,8 @@ globals:
   SKY_COLORGRADE_LUT:
     property: read-only
     type: number
-    description: Environmental setting containing the UUID of the color grading LUT
-      texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.
+    description: Environmental setting containing the inventory name or UUID of the
+      color grading LUT texture applied when SKY_HDR_TONEMAPPER is SKY_TONEMAPPER_LUT.
   SKY_DOME:
     property: read-only
     type: number
@@ -4296,15 +4296,15 @@ globals:
   SKY_HDR_MAX:
     property: read-only
     type: number
-    description: Environmental setting for the maximum HDR exposure value.
+    description: Environmental setting for the maximum HDR exposure, in EV.
   SKY_HDR_MIN:
     property: read-only
     type: number
-    description: Environmental setting for the minimum HDR exposure value.
+    description: Environmental setting for the minimum HDR exposure, in EV.
   SKY_HDR_OFFSET:
     property: read-only
     type: number
-    description: Environmental setting for the HDR exposure offset.
+    description: Environmental setting for the HDR exposure offset, in EV.
   SKY_HDR_TONEMAPPER:
     property: read-only
     type: number
