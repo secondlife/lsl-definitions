@@ -63,8 +63,8 @@ avatar:
     tooltip: Triggered when the agent specified by agent_id denies experience permissions, or when permission is blocked for other reasons (specified by the error code reason).
   game_control( key id, integer button_levels, list axes ):
     id: UUID of the avatar supplying controller input.
-    button_levels: A 32-bit mask representing the buttons currently held down on the controller.
-    axes: A list of six float values in the range [-1.0, 1.0] representing controller axes.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
     tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
   llAgentInExperience( key agent ) -> integer:
     agent: UUID of the avatar in the same region to query.
@@ -134,6 +134,17 @@ avatar:
   llGetDisplayName( key id ) -> string:
     id: UUID of the avatar in the same region or otherwise known to the region.
     tooltip: Returns the display name string of the avatar specified by id if they are in the region or cached; returns an empty string otherwise (use llRequestDisplayName if the avatar is absent).
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
   llGetPermissionsKey(  ) -> key:
     tooltip: Returns the key (UUID) of the avatar that last granted or declined permissions to the script, or NULL_KEY if the permissions request was ignored or cancelled.
   llGetUsername( key id ) -> string:
@@ -645,10 +656,10 @@ data_conversion:
     tooltip: Returns a linear RGB colorspace vector converted from the sRGB colorspace argument.
 data_storage:
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llCreateKeyValue( string k, string v ) -> key:
     k: Unique key name for the key-value pair.
     v: Value for the key-value pair (maximum 2047 characters, or 4095 characters if using Mono).
@@ -659,32 +670,31 @@ data_storage:
   llDeleteKeyValue( string k ) -> key:
     k: Key of the key-value pair to delete.
     tooltip: Starts an asynchronous transaction to delete the key-value pair associated with key k in the experience. Returns a key query handle for the dataserver event.
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list:
-    name: Name of a notecard in the prim's inventory, or a UUID.
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
-    start: Number of match results to skip before returning (0 to start at the first match).
+    start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
-    options: A list of options for future expansion (unused, should be []).
-    tooltip: Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an
-      empty list if no matches are found.
+    options: A list of options to control the search (currently unused, should be []).
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNotecardLineSync( string name, integer line ) -> string:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF'
-      if out of bounds.
+    line: Index of the line to read.
+    tooltip: Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the
+      end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
   llKeyCountKeyValue(  ) -> key:
     tooltip: Starts an asynchronous transaction requesting the total count of keys in the experience data store. Returns a key query handle for the dataserver event.
   llKeysKeyValue( integer first, integer count ) -> key:
@@ -693,50 +703,53 @@ data_storage:
     tooltip: Starts an asynchronous transaction to retrieve count keys from the experience data store starting at the zero-based index first. Returns a key query handle for the dataserver event. Fails with
       XP_ERROR_KEY_NOT_FOUND if out of bounds.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
   llReadKeyValue( string k ) -> key:
     k: Key of the key-value pair to read.
     tooltip: Starts an asynchronous transaction to read the value associated with key k in the experience. Returns a key query handle for the dataserver event. Fails with XP_ERROR_KEY_NOT_FOUND if the key
@@ -763,19 +776,18 @@ dataserver:
   llDeleteKeyValue( string k ) -> key:
     k: Key of the key-value pair to delete.
     tooltip: Starts an asynchronous transaction to delete the key-value pair associated with key k in the experience. Returns a key query handle for the dataserver event.
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
   llKeyCountKeyValue(  ) -> key:
     tooltip: Starts an asynchronous transaction requesting the total count of keys in the experience data store. Returns a key query handle for the dataserver event.
   llKeysKeyValue( integer first, integer count ) -> key:
@@ -1097,6 +1109,23 @@ experience_data:
     original_value: String value to compare against the existing value in the datastore.
     tooltip: Starts an asynchronous transaction to update the key k to value v inside the experience datastore. If checked is TRUE, the update fails with XP_ERROR_RETRY_UPDATE unless the existing value
       matches original_value.
+game_control:
+  game_control( key id, integer button_levels, list axes ):
+    id: UUID of the avatar supplying controller input.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
+    tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
 input:
   control( key id, integer level, integer edge ):
     id: UUID of the avatar whose inputs are captured.
@@ -1105,9 +1134,20 @@ input:
     tooltip: Triggered to pass captured avatar control inputs into the script. The parameter level indicates held controls, and edge indicates change in controls (both are bitfields of CONTROL_* constants).
   game_control( key id, integer button_levels, list axes ):
     id: UUID of the avatar supplying controller input.
-    button_levels: A 32-bit mask representing the buttons currently held down on the controller.
-    axes: A list of six float values in the range [-1.0, 1.0] representing controller axes.
+    button_levels: A 32-bit mask representing the canonical buttons currently held down on the controller.
+    axes: A list of six float values in the range [-1.0, 1.0] representing canonical controller axes.
     tooltip: Triggered when a compatible viewer sends game controller input changes for the avatar specified by id. Only triggers for scripts in attachments or seats.
+  llGetGameControlMode( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.
+  llGetGameControlModeAxes( key id ) -> list:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_*
+      constants as indices.
+  llGetGameControlModeButtons( key id ) -> integer:
+    id: UUID of the avatar whose game-controller state to query.
+    tooltip: Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as
+      masks.
   llReleaseControls(  ) -> void:
     tooltip: Stops taking inputs (previously acquired via llTakeControls) from the avatar, dequeuing any remaining control events and revoking the PERMISSION_TAKE_CONTROLS permission.
   llSetClickAction( integer action ) -> void:
@@ -1186,10 +1226,10 @@ linkset:
     changes: A bitfield of CHANGED_* flags representing what changed.
     tooltip: Triggered when various properties of the object change. The parameter changes is a bitfield of CHANGED_* flags.
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llAvatarOnLinkSitTarget( integer link ) -> key:
     link: Index of the prim in the linkset (1 for root, >1 for children), or a LINK_* flag.
     tooltip: Returns the UUID of the avatar seated on the specified link's sit target, or NULL_KEY if no avatar is sitting there.
@@ -1260,50 +1300,53 @@ linkset:
     rot: Rotation relative to the prim's rotation.
     tooltip: Sets the sit target position (offset) and orientation (rot) for the linked prim link, relative to the prim's own position and rotation. Clear by setting offset to <0.0, 0.0, 0.0>.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
   llScaleByFactor( float scaling_factor ) -> integer:
     scaling_factor: Multiplier scale factor to apply to the prim sizes and their local positions.
     tooltip: Attempts to uniformly resize the entire object by scaling_factor, maintaining size-position ratios of the prims. Fails if the linkset is physical, a pathfinding character, in keyframed motion,
@@ -1371,55 +1414,58 @@ linkset:
     tooltip: Sets the object status attributes specified by status to value.
 linkset_data:
   linkset_data( integer action, string name, string value ):
-    action: An integer constant representing the action taken (e.g., LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
-    name: Key name of the modified key-value pair.
-    value: New string value of the pair (empty if the pair was deleted or is password-protected).
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
+    action: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
+    name: Name of the modified key (a comma-separated list of keys for LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
+    value: New value of the key (empty if the key was deleted or is protected).
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is modified via an llLinksetData function. Passes the action taken, the affected key name, and the new value.
   llLinksetDataAvailable(  ) -> integer:
-    tooltip: Returns an integer representing the number of bytes available/remaining in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
   llLinksetDataCountFound( string pattern ) -> integer:
-    pattern: A regular expression (regex) search string used to match keys.
-    tooltip: Returns the total count of keys in the linkset datastore that match the regular expression pattern.
+    pattern: Regular expression (regex) matching the keys to count.
+    tooltip: Returns the number of keys in the linkset datastore that match the regular expression pattern.
   llLinksetDataCountKeys(  ) -> integer:
-    tooltip: Returns an integer representing the total number of unique keys stored in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
   llLinksetDataDelete( string name ) -> integer:
-    name: Key name of the key-value pair to delete.
-    tooltip: Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.
+    name: Name of the key to delete.
+    tooltip: Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataDeleteFound( string pattern, string pass ) -> list:
-    pattern: A regular expression (regex) specifying which keys to delete.
+    pattern: Regular expression (regex) matching the keys to delete.
     pass: Optional passphrase required to delete matching protected keys.
-    tooltip: Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase
+      matches pass. Returns a list [num_deleted, num_failed_protected].
   llLinksetDataDeleteProtected( string name, string pass ) -> integer:
-    name: Key name of the protected key-value pair to delete.
+    name: Name of the protected key to delete.
     pass: Passphrase required to delete the protected key.
-    tooltip: Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.
+    tooltip: Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataFindKeys( string pattern, integer start, integer count ) -> list:
-    pattern: A regular expression (regex) describing which keys to search for.
-    start: Zero-based start index of the matching keys to return.
+    pattern: Regular expression (regex) matching the keys to return.
+    start: Index of the first matching key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all matching keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count <
+      1).
   llLinksetDataListKeys( integer start, integer count ) -> list:
-    start: Zero-based start index of the keys to return.
+    start: Index of the first key to return.
     count: Maximum number of keys to return (or less than 1 to retrieve all keys).
-    tooltip: Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).
+    tooltip: Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).
   llLinksetDataRead( string name ) -> string:
-    name: Key of the key-value pair to read.
-    tooltip: Reads and returns the string value corresponding to key name from the linkset's datastore.
+    name: Name of the key to read.
+    tooltip: Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.
   llLinksetDataReadProtected( string name, string pass ) -> string:
-    name: Key of the protected key-value pair to read.
+    name: Name of the protected key to read.
     pass: Passphrase required to read the protected key.
-    tooltip: Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.
   llLinksetDataReset(  ) -> void:
-    tooltip: Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a linkset_data event.
   llLinksetDataWrite( string name, string value ) -> integer:
-    name: Key name of the key-value pair.
-    value: String value to write to the datastore.
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.
+    name: Name of the key to write.
+    value: Value to write to the key (an empty string deletes the key).
+    tooltip: Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.
   llLinksetDataWriteProtected( string name, string value, string pass ) -> integer:
-    name: Key name of the protected key-value pair.
-    value: String value to write to the datastore.
+    name: Name of the protected key to write.
+    value: Value to write to the key (an empty string deletes the key).
     pass: Passphrase used to protect or update the key.
-    tooltip: Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success
+      or failure code.
 list:
   llDeleteSubList( list src, integer start_index, integer end_index ) -> list:
     src: Source list to copy and modify.
@@ -1969,32 +2015,31 @@ movement:
     handle: Integer target handle returned by llTarget to remove.
     tooltip: Removes the positional target specified by the integer handle registered with llTarget.
 notecard:
-  llFindNotecardTextCount( string notecardname, string pattern, list options ) -> key:
-    notecardname: Name of the target notecard.
+  llFindNotecardTextCount( string name, string pattern, list options ) -> key:
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
     options: A list of options to control the search (currently unused, should be []).
-    tooltip: Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.
+    tooltip: Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.
   llFindNotecardTextSync( string name, string pattern, integer start, integer count, list options ) -> list:
-    name: Name of a notecard in the prim's inventory, or a UUID.
+    name: Name of the notecard in the prim's inventory, or a UUID.
     pattern: Regular expression pattern to search for.
-    start: Number of match results to skip before returning (0 to start at the first match).
+    start: Index of the first match to return.
     count: Maximum number of matches to return (if 0, returns the first 64 matches).
-    options: A list of options for future expansion (unused, should be []).
-    tooltip: Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an
-      empty list if no matches are found.
+    options: A list of options to control the search (currently unused, should be []).
+    tooltip: Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with
+      one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.
   llGetNotecardLine( string name, integer line ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end
-      of the notecard.
+    line: Index of the line to read.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.
   llGetNotecardLineSync( string name, integer line ) -> string:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    line: Zero-based line number to request.
-    tooltip: Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF'
-      if out of bounds.
+    line: Index of the line to read.
+    tooltip: Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the
+      end of the notecard.
   llGetNumberOfNotecardLines( string name ) -> key:
     name: Name of the notecard in the prim's inventory, or a UUID.
-    tooltip: Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.
+    tooltip: Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.
 object:
   llGetBoundingBox( key object ) -> list:
     object: UUID of the avatar or prim in the same region.

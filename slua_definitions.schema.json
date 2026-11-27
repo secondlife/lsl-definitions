@@ -46,6 +46,40 @@
                 }
             ]
         },
+        "typechecker-flags": {
+            "type": "object",
+            "description": "Flags specific to the internals of luau-analyze and luau-lsp.",
+            "additionalProperties": false,
+            "properties": {
+                "builtin": {
+                    "const": true,
+                    "description": "This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp.",
+                    "type": "boolean"
+                },
+                "magic": {
+                    "const": true,
+                    "description": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
+                    "type": "boolean"
+                },
+                "checked": {
+                    "const": true,
+                    "markdownDescription": "This function's run-time type checks match the typechecker. Functions with checked types report the same errors in --!strict and --!nonstrict modes.",
+                    "type": "boolean"
+                },
+                "new-type": {
+                    "description": "More appropriate type when FFlag::LuauSolverV2 is active.",
+                    "$ref": "#/$defs/type"
+                },
+                "new-type-parameters": {
+                    "description": "More appropriate type parameters when FFlag::LuauSolverV2 is active.",
+                    "items": {
+                        "pattern": "^(\\.\\.\\.)?[_a-zA-Z][_a-zA-Z0-9]*(\\.\\.\\.)?$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            }
+        },
         "property": {
             "markdownDescription": "A property or constant.",
             "additionalProperties": false,
@@ -85,7 +119,8 @@
                     "const": true,
                     "markdownDescription": "Whether this type is available to users.",
                     "type": "boolean"
-                }
+                },
+                "typechecker": { "$ref": "#/$defs/typechecker-flags" }
             },
             "required": ["name", "definition", "selene-type"],
             "type": "object"
@@ -118,7 +153,8 @@
                 "default-value": {
                     "markdownDescription": "The default value of this parameter when omitted.",
                     "type": ["string", "number", "boolean", "null"]
-                }
+                },
+                "typechecker": { "$ref": "#/$defs/typechecker-flags" }
             },
             "required": ["name"],
             "type": "object"
@@ -215,28 +251,7 @@
                     "markdownDescription": "A brief description of this function.",
                     "type": "string"
                 },
-                "typechecker": {
-                    "type": "object",
-                    "description": "Flags specific to the internals of luau-analyze and luau-lsp.",
-                    "additionalProperties": false,
-                    "properties": {
-                        "builtin": {
-                            "const": true,
-                            "description": "This function is defined in BuiltinDefinitions.cpp, rather than EmbeddedBuiltinDefinitions.cpp.",
-                            "type": "boolean"
-                        },
-                        "magic": {
-                            "const": true,
-                            "description": "The typechecker has custom logic for this function. Look for attachMagicFunction in the source code.",
-                            "type": "boolean"
-                        },
-                        "checked": {
-                            "const": true,
-                            "markdownDescription": "This function's run-time type checks match the typechecker. Functions with checked types report the same errors in --!strict and --!nonstrict modes.",
-                            "type": "boolean"
-                        }
-                    }
-                }
+                "typechecker": { "$ref": "#/$defs/typechecker-flags" }
             },
             "required": ["name"],
             "type": "object"

@@ -191,10 +191,6 @@
         "documentation": "Reads a signed 32-bit integer from the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readi32"
     },
-    "@sl-slua/global/buffer.readinteger": {
-        "documentation": "Reads a signed or unsigned 64-bit integer from the buffer at the given offset.",
-        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readinteger"
-    },
     "@sl-slua/global/buffer.readu32": {
         "documentation": "Reads an unsigned 32-bit integer from the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#readu32"
@@ -226,10 +222,6 @@
     "@sl-slua/global/buffer.writei32": {
         "documentation": "Writes a signed 32-bit integer to the buffer at the given offset.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#writei32"
-    },
-    "@sl-slua/global/buffer.writeinteger": {
-        "documentation": "Writes a signed or unsigned 64-bit integer to the buffer at the given offset.",
-        "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/buffer#writeinteger"
     },
     "@sl-slua/global/buffer.writeu32": {
         "documentation": "Writes an unsigned 32-bit integer to the buffer at the given offset.",
@@ -319,132 +311,6 @@
         "documentation": "Returns a human-readable call stack starting from the specified level.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/debug#traceback"
     },
-    "@sl-slua/global/integer": {
-        "documentation": "64-bit integer operations library."
-    },
-    "@sl-slua/global/integer.maxsigned": {
-        "documentation": "Value: 9_223_372_036_854_775_807i<br>The most positive signed int64 (2^63-1)."
-    },
-    "@sl-slua/global/integer.minsigned": {
-        "documentation": "Value: -9_223_372_036_854_775_808i<br>The most negative signed int64 (-2^63)."
-    },
-    "@sl-slua/global/integer.add": {
-        "documentation": "Returns the sum of two 64-bit integers (signed or unsigned), wrapping on overflow."
-    },
-    "@sl-slua/global/integer.arshift": {
-        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed.<br>Does an arithmetic shift: The most significant bit of n is propagated during the shift."
-    },
-    "@sl-slua/global/integer.band": {
-        "documentation": "Returns the bitwise AND of the given integers."
-    },
-    "@sl-slua/global/integer.bnot": {
-        "documentation": "Returns the bitwise negation of val."
-    },
-    "@sl-slua/global/integer.bor": {
-        "documentation": "Returns the bitwise OR of the given integers."
-    },
-    "@sl-slua/global/integer.bxor": {
-        "documentation": "Returns the bitwise XOR of the given integers."
-    },
-    "@sl-slua/global/integer.bswap": {
-        "documentation": "Returns val with its bytes swapped to the reverse order."
-    },
-    "@sl-slua/global/integer.btest": {
-        "documentation": "Returns true if the bitwise AND of the given integers is non-zero."
-    },
-    "@sl-slua/global/integer.clamp": {
-        "documentation": "Returns val clamped between min and max. Raises an error if min is greater than max."
-    },
-    "@sl-slua/global/integer.countlz": {
-        "documentation": "Returns the count of val's leading zeros."
-    },
-    "@sl-slua/global/integer.countrz": {
-        "documentation": "Returns the count of val's trailing zeros."
-    },
-    "@sl-slua/global/integer.create": {
-        "documentation": "Returns number val converted to an integer. Returns nil if it has a fractional part, is out of range, or is NaN."
-    },
-    "@sl-slua/global/integer.div": {
-        "documentation": "Returns dividend / divisor (signed), rounding toward zero. Raises an error if divisor is zero."
-    },
-    "@sl-slua/global/integer.extract": {
-        "documentation": "Returns width bits from src, starting from bit index field. Raises an error if the selected bit range is goes outside the range [0, 63]."
-    },
-    "@sl-slua/global/integer.fromstring": {
-        "documentation": "Converts the input string to an integer in the specified base. Returns nil if not an integer."
-    },
-    "@sl-slua/global/integer.ge": {
-        "documentation": "Returns true if int1 >= int2 (signed)."
-    },
-    "@sl-slua/global/integer.gt": {
-        "documentation": "Returns true if int1 > int2 (signed)."
-    },
-    "@sl-slua/global/integer.idiv": {
-        "documentation": "Returns dividend / divisor (signed), rounding toward negative infinity. Raises an error if divisor is zero."
-    },
-    "@sl-slua/global/integer.le": {
-        "documentation": "Returns true if int1 <= int2 (signed)."
-    },
-    "@sl-slua/global/integer.lt": {
-        "documentation": "Returns true if int1 < int2 (signed)."
-    },
-    "@sl-slua/global/integer.lrotate": {
-        "documentation": "Returns val rotated by i bits to the left. If i is negative, a right rotate is performed."
-    },
-    "@sl-slua/global/integer.lshift": {
-        "documentation": "Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-63, 63] range."
-    },
-    "@sl-slua/global/integer.max": {
-        "documentation": "Returns the maximum value from the given integers (signed)."
-    },
-    "@sl-slua/global/integer.min": {
-        "documentation": "Returns the minimum value from the given integers (signed)."
-    },
-    "@sl-slua/global/integer.mod": {
-        "documentation": "Returns the remainder of dividend / divisor (signed). The result always has the same sign as the divisor. Raises an error if divisor is zero."
-    },
-    "@sl-slua/global/integer.mul": {
-        "documentation": "Returns the product of two 64-bit integers (signed or unsigned), wrapping on overflow."
-    },
-    "@sl-slua/global/integer.neg": {
-        "documentation": "Returns the negation of val. integer.neg(integer.minsigned) == integer.minsigned due to overflow."
-    },
-    "@sl-slua/global/integer.rem": {
-        "documentation": "Returns the remainder of dividend / divisor (signed). The result always has the same sign as the dividend. Raises an error if divisor is zero."
-    },
-    "@sl-slua/global/integer.replace": {
-        "documentation": "Returns dst with width bits replaced from src, starting from bit index field. Raises an error if the selected bit range goes outside the range [0, 63]."
-    },
-    "@sl-slua/global/integer.rrotate": {
-        "documentation": "Returns val rotated by i bits to the right. If i is negative, a left rotate is performed."
-    },
-    "@sl-slua/global/integer.rshift": {
-        "documentation": "Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-63, 63] range."
-    },
-    "@sl-slua/global/integer.sub": {
-        "documentation": "Returns the difference between two 64-bit integers (signed or unsigned), wrapping on overflow."
-    },
-    "@sl-slua/global/integer.tonumber": {
-        "documentation": "Returns the nearest float64 to the given int64. Is inexact above 2^53."
-    },
-    "@sl-slua/global/integer.udiv": {
-        "documentation": "Returns dividend / divisor (unsigned), rounding toward negative infinity. Raises an error if divisor is zero."
-    },
-    "@sl-slua/global/integer.uge": {
-        "documentation": "Returns true if int1 >= int2 (unsigned)."
-    },
-    "@sl-slua/global/integer.ugt": {
-        "documentation": "Returns true if int1 > int2 (unsigned)."
-    },
-    "@sl-slua/global/integer.ule": {
-        "documentation": "Returns true if int1 <= int2 (unsigned)."
-    },
-    "@sl-slua/global/integer.ult": {
-        "documentation": "Returns true if int1 < int2 (unsigned)."
-    },
-    "@sl-slua/global/integer.urem": {
-        "documentation": "Returns the remainder of dividend / divisor (unsigned). Raises an error if divisor is zero."
-    },
     "@sl-slua/global/llbase64": {
         "documentation": "Base64 encoding/decoding library."
     },
@@ -501,14 +367,8 @@
     "@sl-slua/global/llprim": {
         "documentation": "Utilities for working with prims / objects"
     },
-    "@sl-slua/global/llprim.ParamsSetter": {
-        "documentation": "Value: PrimParamsSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
-    },
-    "@sl-slua/global/llprim.setParticleSystem": {
-        "documentation": "Emit a particle system from a ParticleParams table. Omit link to apply to the current prim."
-    },
-    "@sl-slua/global/llprim.setMedia": {
-        "documentation": "Configure media on a specific face. Omit link to apply to the current prim."
+    "@sl-slua/global/llprim.ParamSetter": {
+        "documentation": "Value: PrimParamSetterTypeMeta<br>Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast"
     },
     "@sl-slua/global/math": {
         "documentation": "Mathematical functions library.",
@@ -858,7 +718,7 @@
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#sub"
     },
     "@sl-slua/global/string.unpack": {
-        "documentation": "Decodes a binary string using a pack format, starting from index start. Negative indices count backward from the end of the string.",
+        "documentation": "Decodes a binary string using a pack format, starting from index start and returns a tuple of the decoded values, followed by a number representing the index of the first unread byte. Negative indices count backward from the end of the string.",
         "learn_more_link": "https://create.roblox.com/docs/reference/engine/libraries/string#unpack"
     },
     "@sl-slua/global/string.upper": {
@@ -1363,11 +1223,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/ll.FindNotecardTextCount": {
-        "documentation": "Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.",
+        "documentation": "Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextCount"
     },
     "@sl-slua/global/ll.FindNotecardTextSync": {
-        "documentation": "Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an empty list if no matches are found.",
+        "documentation": "Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextSync"
     },
     "@sl-slua/global/ll.FleeFrom": {
@@ -1526,6 +1386,18 @@
         "documentation": "Returns a float representing the time in seconds since midnight GMT (truncated to whole seconds).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGMTclock"
     },
+    "@sl-slua/global/ll.GetGameControlMode": {
+        "documentation": "Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlMode"
+    },
+    "@sl-slua/global/ll.GetGameControlModeAxes": {
+        "documentation": "Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlModeAxes"
+    },
+    "@sl-slua/global/ll.GetGameControlModeButtons": {
+        "documentation": "Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as masks.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlModeButtons"
+    },
     "@sl-slua/global/ll.GetGeometricCenter": {
         "documentation": "Returns a vector representing the geometric center of the object relative to its root prim.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGeometricCenter"
@@ -1655,15 +1527,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/ll.GetNotecardLine": {
-        "documentation": "Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end of the notecard.",
+        "documentation": "Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLine"
     },
     "@sl-slua/global/ll.GetNotecardLineSync": {
-        "documentation": "Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.",
+        "documentation": "Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLineSync"
     },
     "@sl-slua/global/ll.GetNumberOfNotecardLines": {
-        "documentation": "Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.",
+        "documentation": "Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfNotecardLines"
     },
     "@sl-slua/global/ll.GetNumberOfPrims": {
@@ -2079,55 +1951,55 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinkStopSound"
     },
     "@sl-slua/global/ll.LinksetDataAvailable": {
-        "documentation": "Returns an integer representing the number of bytes available/remaining in the linkset's datastore.",
+        "documentation": "Returns the number of bytes remaining in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataAvailable"
     },
     "@sl-slua/global/ll.LinksetDataCountFound": {
-        "documentation": "Returns the total count of keys in the linkset datastore that match the regular expression pattern.",
+        "documentation": "Returns the number of keys in the linkset datastore that match the regular expression pattern.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountFound"
     },
     "@sl-slua/global/ll.LinksetDataCountKeys": {
-        "documentation": "Returns an integer representing the total number of unique keys stored in the linkset's datastore.",
+        "documentation": "Returns the number of keys in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountKeys"
     },
     "@sl-slua/global/ll.LinksetDataDelete": {
-        "documentation": "Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.",
+        "documentation": "Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDelete"
     },
     "@sl-slua/global/ll.LinksetDataDeleteFound": {
-        "documentation": "Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.",
+        "documentation": "Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteFound"
     },
     "@sl-slua/global/ll.LinksetDataDeleteProtected": {
-        "documentation": "Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.",
+        "documentation": "Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteProtected"
     },
     "@sl-slua/global/ll.LinksetDataFindKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataFindKeys"
     },
     "@sl-slua/global/ll.LinksetDataListKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataListKeys"
     },
     "@sl-slua/global/ll.LinksetDataRead": {
-        "documentation": "Reads and returns the string value corresponding to key name from the linkset's datastore.",
+        "documentation": "Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataRead"
     },
     "@sl-slua/global/ll.LinksetDataReadProtected": {
-        "documentation": "Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.",
+        "documentation": "Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReadProtected"
     },
     "@sl-slua/global/ll.LinksetDataReset": {
-        "documentation": "Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.",
+        "documentation": "Deletes all keys from the linkset datastore, triggering a linkset_data event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReset"
     },
     "@sl-slua/global/ll.LinksetDataWrite": {
-        "documentation": "Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWrite"
     },
     "@sl-slua/global/ll.LinksetDataWriteProtected": {
-        "documentation": "Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWriteProtected"
     },
     "@sl-slua/global/ll.List2CSV": {
@@ -3426,11 +3298,11 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFabs"
     },
     "@sl-slua/global/llcompat.FindNotecardTextCount": {
-        "documentation": "Searches the text of a cached notecard for lines containing the given pattern and returns the number of matches found through a dataserver event.",
+        "documentation": "Asynchronously requests the number of matches of pattern in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextCount"
     },
     "@sl-slua/global/llcompat.FindNotecardTextSync": {
-        "documentation": "(Index semantics) Synchronously searches a cached notecard name for lines containing pattern, returning a list of line and column numbers. Returns a list containing 'NAK' if the notecard is not cached, or an empty list if no matches are found.",
+        "documentation": "(Index semantics) Synchronously searches the notecard name in the region's cache for matches of pattern, without raising a dataserver event. Returns a strided list of the form [line, column, length, ...] with one stride per match, a list containing NAK if the notecard is not cached, or an empty list if there are no matches.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlFindNotecardTextSync"
     },
     "@sl-slua/global/llcompat.FleeFrom": {
@@ -3593,6 +3465,18 @@
         "documentation": "Returns a float representing the time in seconds since midnight GMT (truncated to whole seconds).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGMTclock"
     },
+    "@sl-slua/global/llcompat.GetGameControlMode": {
+        "documentation": "Returns a GAME_CONTROL_MODE_* integer indicating the current game-control mode for the avatar specified by id.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlMode"
+    },
+    "@sl-slua/global/llcompat.GetGameControlModeAxes": {
+        "documentation": "Returns a list of floats representing the modal axes for the current game-control mode of the avatar specified by id. Element count and index meanings vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlModeAxes"
+    },
+    "@sl-slua/global/llcompat.GetGameControlModeButtons": {
+        "documentation": "Returns a bitmask of the modal buttons currently active for the current game-control mode of the avatar specified by id. Bit meanings vary by mode; use the GAME_CONTROL_BUTTON_* constants as masks.",
+        "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGameControlModeButtons"
+    },
     "@sl-slua/global/llcompat.GetGeometricCenter": {
         "documentation": "Returns a vector representing the geometric center of the object relative to its root prim.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetGeometricCenter"
@@ -3722,15 +3606,15 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNextEmail"
     },
     "@sl-slua/global/llcompat.GetNotecardLine": {
-        "documentation": "Asynchronously requests the line index line of the notecard name from the dataserver. Returns a key query handle for the dataserver event, which will return 'EOF' when reaching past the end of the notecard.",
+        "documentation": "Asynchronously requests the text of line in the notecard name. Returns a key query handle for the dataserver event, which receives EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLine"
     },
     "@sl-slua/global/llcompat.GetNotecardLineSync": {
-        "documentation": "Synchronously reads the line index line of the notecard name from the region's cache, immediately returning its text without raising a dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.",
+        "documentation": "Synchronously reads the text of line in the notecard name from the region's cache, without raising a dataserver event. Returns NAK if the notecard is not cached, or EOF if line is past the end of the notecard.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNotecardLineSync"
     },
     "@sl-slua/global/llcompat.GetNumberOfNotecardLines": {
-        "documentation": "Asynchronously requests the total line count of the notecard name. Returns a key query handle for the dataserver event.",
+        "documentation": "Asynchronously requests the number of lines in the notecard name. Returns a key query handle for the dataserver event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlGetNumberOfNotecardLines"
     },
     "@sl-slua/global/llcompat.GetNumberOfPrims": {
@@ -4146,55 +4030,55 @@
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinkStopSound"
     },
     "@sl-slua/global/llcompat.LinksetDataAvailable": {
-        "documentation": "Returns an integer representing the number of bytes available/remaining in the linkset's datastore.",
+        "documentation": "Returns the number of bytes remaining in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataAvailable"
     },
     "@sl-slua/global/llcompat.LinksetDataCountFound": {
-        "documentation": "Returns the total count of keys in the linkset datastore that match the regular expression pattern.",
+        "documentation": "Returns the number of keys in the linkset datastore that match the regular expression pattern.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountFound"
     },
     "@sl-slua/global/llcompat.LinksetDataCountKeys": {
-        "documentation": "Returns an integer representing the total number of unique keys stored in the linkset's datastore.",
+        "documentation": "Returns the number of keys in the linkset datastore.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataCountKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataDelete": {
-        "documentation": "Deletes the unprotected key-value pair specified by name from the linkset's datastore, triggering a linkset_data event.",
+        "documentation": "Deletes the unprotected key name from the linkset datastore, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDelete"
     },
     "@sl-slua/global/llcompat.LinksetDataDeleteFound": {
-        "documentation": "Deletes all keys in the datastore matching the regular expression pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected keys if matching pass is provided.",
+        "documentation": "Deletes all keys in the linkset datastore that match the regular expression pattern, triggering a linkset_data event if the datastore changes. Protected keys are only deleted if their passphrase matches pass. Returns a list [num_deleted, num_failed_protected].",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteFound"
     },
     "@sl-slua/global/llcompat.LinksetDataDeleteProtected": {
-        "documentation": "Deletes the protected key-value pair specified by name from the linkset's datastore using the passphrase pass, triggering a linkset_data event.",
+        "documentation": "Deletes the protected key name from the linkset datastore using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataDeleteProtected"
     },
     "@sl-slua/global/llcompat.LinksetDataFindKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore that match the regular expression pattern, starting at index start (returns all matching keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataFindKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataListKeys": {
-        "documentation": "Returns an alphabetically sorted list of up to count keys from the datastore, starting at index start (returns all keys if count < 1).",
+        "documentation": "Returns an alphabetically sorted list of up to count keys from the linkset datastore, starting at index start (returns all keys if count < 1).",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataListKeys"
     },
     "@sl-slua/global/llcompat.LinksetDataRead": {
-        "documentation": "Reads and returns the string value corresponding to key name from the linkset's datastore.",
+        "documentation": "Returns the value of the unprotected key name from the linkset datastore. Returns an empty string if the key is not found or is protected.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataRead"
     },
     "@sl-slua/global/llcompat.LinksetDataReadProtected": {
-        "documentation": "Reads and returns the string value of the protected key name from the linkset's datastore using the passphrase pass.",
+        "documentation": "Returns the value of the protected key name from the linkset datastore using the passphrase pass. Returns an empty string if the key is not found or pass does not match.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReadProtected"
     },
     "@sl-slua/global/llcompat.LinksetDataReset": {
-        "documentation": "Erases all key-value pairs stored in the linkset's datastore, triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.",
+        "documentation": "Deletes all keys from the linkset datastore, triggering a linkset_data event.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataReset"
     },
     "@sl-slua/global/llcompat.LinksetDataWrite": {
-        "documentation": "Creates or updates an unprotected key-value pair (name and value) in the linkset's datastore. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the unprotected key name in the linkset datastore with value, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWrite"
     },
     "@sl-slua/global/llcompat.LinksetDataWriteProtected": {
-        "documentation": "Creates or updates a protected key-value pair (name and value) in the linkset's datastore using the passphrase pass. Returns an integer success or failure code.",
+        "documentation": "Creates or updates the protected key name in the linkset datastore with value using the passphrase pass, triggering a linkset_data event if the datastore changes. Returns an integer success or failure code.",
         "learn_more_link": "https://wiki.secondlife.com/wiki/LlLinksetDataWriteProtected"
     },
     "@sl-slua/global/llcompat.List2CSV": {
@@ -5824,7 +5708,7 @@
         "documentation": "Value: -6<br>Could not validate the environmental settings or values passed."
     },
     "@sl-slua/global/EOF": {
-        "documentation": "Value: \"\\n\\n\\n\"<br>A value equal to three newline characters (\"<br><br><br>\") returned by the dataserver event, indicating that the requested line is past the end of the notecard."
+        "documentation": "Value: \"\\n\\n\\n\"<br>Value returned by llGetNotecardLine (through the dataserver event) and llGetNotecardLineSync when the requested line is past the end of the notecard. Equal to three newline characters (\"<br><br><br>\")."
     },
     "@sl-slua/global/ERR_GENERIC": {
         "documentation": "Value: -1<br>An inexplicable and generic error where nothing is known about the cause."
@@ -5874,86 +5758,239 @@
     "@sl-slua/global/FRICTION": {
         "documentation": "Value: 2<br>Used with llSetPhysicsMaterial to enable the friction override. The value must be between 0.0 and 255.0."
     },
+    "@sl-slua/global/GAME_CONTROL_AXIS_ADVANCE": {
+        "documentation": "Value: 1<br>Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK, and CAPTIVE modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_BOOM": {
+        "documentation": "Value: 4<br>Camera up/down movement. Modal axis index 4 for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_DOLLY": {
+        "documentation": "Value: 1<br>Camera forward/backward movement. Modal axis index 1 for FLYCAM mode."
+    },
     "@sl-slua/global/GAME_CONTROL_AXIS_LEFTX": {
-        "documentation": "Value: 0"
+        "documentation": "Value: 0<br>Left stick X axis. Canonical axis index 0."
     },
     "@sl-slua/global/GAME_CONTROL_AXIS_LEFTY": {
-        "documentation": "Value: 1"
+        "documentation": "Value: 1<br>Left stick Y axis. Canonical axis index 1."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_LEFT_TRIGGER": {
+        "documentation": "Value: 4<br>Left trigger. Canonical axis index 4."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_LOOK": {
+        "documentation": "Value: 3<br>Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_PAN": {
+        "documentation": "Value: 2<br>Camera pan left/right. Modal axis index 2 for FLYCAM mode."
     },
     "@sl-slua/global/GAME_CONTROL_AXIS_RIGHTX": {
-        "documentation": "Value: 2"
+        "documentation": "Value: 2<br>Right stick X axis. Canonical axis index 2."
     },
     "@sl-slua/global/GAME_CONTROL_AXIS_RIGHTY": {
-        "documentation": "Value: 3"
+        "documentation": "Value: 3<br>Right stick Y axis. Canonical axis index 3."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_RIGHT_TRIGGER": {
+        "documentation": "Value: 5<br>Right trigger. Canonical axis index 5."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_RISE": {
+        "documentation": "Value: 4<br>Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_ROLL": {
+        "documentation": "Value: 5<br>Camera roll. Modal axis index 5 for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_STRAFE": {
+        "documentation": "Value: 0<br>Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and CAPTIVE modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_TILT": {
+        "documentation": "Value: 3<br>Camera tilt up/down. Modal axis index 3 for FLYCAM mode."
     },
     "@sl-slua/global/GAME_CONTROL_AXIS_TRIGGERLEFT": {
-        "documentation": "Value: 4"
+        "documentation": "Value: 4<br>Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER)."
     },
     "@sl-slua/global/GAME_CONTROL_AXIS_TRIGGERRIGHT": {
-        "documentation": "Value: 5"
+        "documentation": "Value: 5<br>Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER)."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_TRUCK": {
+        "documentation": "Value: 0<br>Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_TURN": {
+        "documentation": "Value: 2<br>Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_AXIS_ZOOM": {
+        "documentation": "Value: 6<br>Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE, and FLYCAM modes."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_A": {
-        "documentation": "Value: 0x1"
+        "documentation": "Value: 0x1<br>Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH)."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ADVANCE_BACK": {
+        "documentation": "Value: 0x1000<br>Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ADVANCE_FORWARD": {
+        "documentation": "Value: 0x800<br>Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_B": {
-        "documentation": "Value: 0x2"
+        "documentation": "Value: 0x2<br>Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST)."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_BACK": {
-        "documentation": "Value: 0x10"
+        "documentation": "Value: 0x10<br>Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT)."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_CROUCH": {
+        "documentation": "Value: 0x2<br>Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT": {
+        "documentation": "Value: 0x200<br>Left mouse button click. Modal button for MOUSELOOK and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT": {
+        "documentation": "Value: 0x400<br>Right mouse button click. Modal button for MOUSELOOK and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DOLLY_BACK": {
+        "documentation": "Value: 0x1000<br>Camera dolly backward. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_DOLLY_FORWARD": {
+        "documentation": "Value: 0x800<br>Camera dolly forward. Modal button for FLYCAM mode."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_DOWN": {
-        "documentation": "Value: 0x1000"
+        "documentation": "Value: 0x1000<br>D-pad down."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_LEFT": {
-        "documentation": "Value: 0x2000"
+        "documentation": "Value: 0x2000<br>D-pad left."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_RIGHT": {
-        "documentation": "Value: 0x4000"
+        "documentation": "Value: 0x4000<br>D-pad right."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_DPAD_UP": {
-        "documentation": "Value: 0x800"
+        "documentation": "Value: 0x800<br>D-pad up."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_EAST": {
+        "documentation": "Value: 0x2<br>Right face button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_GUIDE": {
-        "documentation": "Value: 0x20"
+        "documentation": "Value: 0x20<br>Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME)."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_HOME": {
+        "documentation": "Value: 0x20<br>Home/guide button."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_JUMP": {
+        "documentation": "Value: 0x1<br>Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_LEFTSHOULDER": {
-        "documentation": "Value: 0x200"
+        "documentation": "Value: 0x200<br>Left shoulder/bumper button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_LEFTSTICK": {
-        "documentation": "Value: 0x80"
+        "documentation": "Value: 0x80<br>Left analog stick click."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_MISC1": {
-        "documentation": "Value: 0x8000"
+        "documentation": "Value: 0x8000<br>Miscellaneous button 1."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_NORTH": {
+        "documentation": "Value: 0x8<br>Top face button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE1": {
-        "documentation": "Value: 0x10000"
+        "documentation": "Value: 0x10000<br>Paddle button 1."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE2": {
-        "documentation": "Value: 0x20000"
+        "documentation": "Value: 0x20000<br>Paddle button 2."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE3": {
-        "documentation": "Value: 0x40000"
+        "documentation": "Value: 0x40000<br>Paddle button 3."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_PADDLE4": {
-        "documentation": "Value: 0x80000"
+        "documentation": "Value: 0x80000<br>Paddle button 4."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PAN_LEFT": {
+        "documentation": "Value: 0x4<br>Camera pan left. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_PAN_RIGHT": {
+        "documentation": "Value: 0x2<br>Camera pan right. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_RESET": {
+        "documentation": "Value: 0x80<br>Reset camera to default view. Modal button for FLYCAM mode."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_RIGHTSHOULDER": {
-        "documentation": "Value: 0x400"
+        "documentation": "Value: 0x400<br>Right shoulder/bumper button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_RIGHTSTICK": {
-        "documentation": "Value: 0x100"
+        "documentation": "Value: 0x100<br>Right analog stick click."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ROLL_CCW": {
+        "documentation": "Value: 0x200<br>Roll camera counter-clockwise. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ROLL_CW": {
+        "documentation": "Value: 0x400<br>Roll camera clockwise. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_SELECT": {
+        "documentation": "Value: 0x10<br>Select/back button."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_SIT": {
+        "documentation": "Value: 0x4<br>Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_SOUTH": {
+        "documentation": "Value: 0x1<br>Bottom face button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_START": {
-        "documentation": "Value: 0x40"
+        "documentation": "Value: 0x40<br>Start/menu button."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_STRAFE_LEFT": {
+        "documentation": "Value: 0x2000<br>Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_STRAFE_RIGHT": {
+        "documentation": "Value: 0x4000<br>Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM": {
+        "documentation": "Value: 0x10<br>Toggle alt-zoom. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_CURSOR": {
+        "documentation": "Value: 0x10<br>Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_FLYCAM": {
+        "documentation": "Value: 0x100<br>Toggle flycam mode. Modal button for all modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_FOLLOW": {
+        "documentation": "Value: 0x40<br>Toggle camera follow mode. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK": {
+        "documentation": "Value: 0x40<br>Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TOGGLE_SPEAK": {
+        "documentation": "Value: 0x20<br>Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_TOUCHPAD": {
-        "documentation": "Value: 0x100000"
+        "documentation": "Value: 0x100000<br>Touchpad click."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TRUCK_LEFT": {
+        "documentation": "Value: 0x2000<br>Camera truck left. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_TRUCK_RIGHT": {
+        "documentation": "Value: 0x4000<br>Camera truck right. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_WEST": {
+        "documentation": "Value: 0x4<br>Left face button."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_X": {
-        "documentation": "Value: 0x4"
+        "documentation": "Value: 0x4<br>Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST)."
     },
     "@sl-slua/global/GAME_CONTROL_BUTTON_Y": {
-        "documentation": "Value: 0x8"
+        "documentation": "Value: 0x8<br>Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH)."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ZOOM_IN": {
+        "documentation": "Value: 0x8<br>Zoom camera in. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_BUTTON_ZOOM_OUT": {
+        "documentation": "Value: 0x1<br>Zoom camera out. Modal button for FLYCAM mode."
+    },
+    "@sl-slua/global/GAME_CONTROL_MODE_AVATAR": {
+        "documentation": "Value: 0"
+    },
+    "@sl-slua/global/GAME_CONTROL_MODE_CAPTIVE": {
+        "documentation": "Value: 3"
+    },
+    "@sl-slua/global/GAME_CONTROL_MODE_CURSOR": {
+        "documentation": "Value: 4"
+    },
+    "@sl-slua/global/GAME_CONTROL_MODE_FLYCAM": {
+        "documentation": "Value: 2"
+    },
+    "@sl-slua/global/GAME_CONTROL_MODE_MOUSELOOK": {
+        "documentation": "Value: 1"
     },
     "@sl-slua/global/GCNP_RADIUS": {
         "documentation": "Value: 0<br>Used with llGetClosestNavPoint to limit how far out to search for a navigation point."
@@ -6178,19 +6215,19 @@
         "documentation": "Value: 3<br>Action used with llModifyLand to smooth the land."
     },
     "@sl-slua/global/LINKSETDATA_DELETE": {
-        "documentation": "Value: 2<br>Event or flag indicating a key-value pair has been removed from the linkset datastore, either via llLinksetDataDelete or by writing an empty value."
+        "documentation": "Value: 2<br>Action indicating a key was deleted from the linkset datastore via llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty value."
     },
     "@sl-slua/global/LINKSETDATA_EMEMORY": {
-        "documentation": "Value: 1<br>Error code indicating a key-value pair was too large to write to the linkset datastore."
+        "documentation": "Value: 1<br>Error code indicating the key and value were too large to write to the linkset datastore."
     },
     "@sl-slua/global/LINKSETDATA_ENOKEY": {
         "documentation": "Value: 2<br>Error code indicating the key name supplied to a linkset datastore operation was empty."
     },
     "@sl-slua/global/LINKSETDATA_EPROTECTED": {
-        "documentation": "Value: 3<br>Error code indicating the key-value pair is protected from being deleted or overwritten in the linkset datastore."
+        "documentation": "Value: 3<br>Error code indicating the key is protected from being deleted or overwritten in the linkset datastore."
     },
     "@sl-slua/global/LINKSETDATA_MULTIDELETE": {
-        "documentation": "Value: 3<br>Flag or value indicating a comma-separated list of keys has been deleted from the linkset datastore via llLinksetDataDeleteFound."
+        "documentation": "Value: 3<br>Action indicating keys were deleted from the linkset datastore via llLinksetDataDeleteFound. The event's name is a comma-separated list of the deleted keys."
     },
     "@sl-slua/global/LINKSETDATA_NOTFOUND": {
         "documentation": "Value: 4<br>Error code indicating the specified key could not be found in the linkset datastore."
@@ -6202,10 +6239,10 @@
         "documentation": "Value: 0<br>Status code indicating the linkset datastore operation completed successfully."
     },
     "@sl-slua/global/LINKSETDATA_RESET": {
-        "documentation": "Value: 0<br>Event or flag indicating the linkset datastore has been cleared/reset via llLinksetDataReset."
+        "documentation": "Value: 0<br>Action indicating all keys were deleted from the linkset datastore via llLinksetDataReset."
     },
     "@sl-slua/global/LINKSETDATA_UPDATE": {
-        "documentation": "Value: 1<br>Event or flag indicating a key in the linkset datastore has been created or updated with a new value via llLinksetDataWrite."
+        "documentation": "Value: 1<br>Action indicating a key was created or updated in the linkset datastore via llLinksetDataWrite or llLinksetDataWriteProtected."
     },
     "@sl-slua/global/LINK_ALL_CHILDREN": {
         "documentation": "Value: -3<br>Refers to all child prims in the linkset (every prim except the root)."
@@ -6274,7 +6311,7 @@
         "documentation": "Value: 1<br>Permissions mask option representing current owner permissions."
     },
     "@sl-slua/global/NAK": {
-        "documentation": "Value: \"\\n\\x15\\n\"<br>Value returned by llGetNotecardLineSync (ASCII NAK surrounded by newlines, i.e., codes 10, 21, 10) when requested notecard data is not in the region's cache."
+        "documentation": "Value: \"\\n\\x15\\n\"<br>Value returned by llGetNotecardLineSync and llFindNotecardTextSync (as a single-entry list) when the notecard is not in the region's cache. Equal to an ASCII NAK surrounded by newlines (codes 10, 21, 10)."
     },
     "@sl-slua/global/NULL_KEY": {
         "documentation": "Value: uuid(\"00000000-0000-0000-0000-000000000000\")<br>A special string constant used as a null or empty key value."
@@ -6728,6 +6765,9 @@
     },
     "@sl-slua/global/PERMISSION_DEBIT": {
         "documentation": "Value: 0x00002<br>Runtime permission that allows the script to successfully call llGiveMoney or llTransferLindenDollars to debit the owner's account."
+    },
+    "@sl-slua/global/PERMISSION_GAME_CONTROL": {
+        "documentation": "Value: 0x100000"
     },
     "@sl-slua/global/PERMISSION_OVERRIDE_ANIMATIONS": {
         "documentation": "Value: 0x08000<br>Runtime permission that allows the script to configure and override default animations on the agent."
@@ -7518,6 +7558,9 @@
     "@sl-slua/global/REZ_FLAG_DIE_ON_NOENTRY": {
         "documentation": "Value: 0x0010<br>Rez flag causing the object to die/delete if it attempts to enter an unauthorized parcel."
     },
+    "@sl-slua/global/REZ_FLAG_DIE_ON_NO_REZZER": {
+        "documentation": "Value: 0x0100<br>Rez flag causing the object to die if the rezzing object or agent is not present."
+    },
     "@sl-slua/global/REZ_FLAG_NO_COLLIDE_FAMILY": {
         "documentation": "Value: 0x0040<br>Rez flag preventing collision events from triggering when colliding with other objects created by the same rezzer."
     },
@@ -7817,6 +7860,9 @@
     },
     "@sl-slua/global/STATUS_DIE_AT_NO_ENTRY": {
         "documentation": "Value: 0x800<br>Status flag (default FALSE) that causes the object to be deleted if it attempts to enter an unauthorized or full parcel. No-copy objects ignore this setting and remain in-world."
+    },
+    "@sl-slua/global/STATUS_DIE_ON_NO_REZZER": {
+        "documentation": "Value: 0x1000<br>Status flag (default FALSE) that causes the object to be deleted if the rezzing object or agent is not present."
     },
     "@sl-slua/global/STATUS_INTERNAL_ERROR": {
         "documentation": "Value: 1999<br>Status code indicating an internal error occurred."

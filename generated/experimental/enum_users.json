@@ -162,12 +162,14 @@
   "GameControlButton": [
     "game_control"
   ],
+  "GameControlMode": [],
   "GetClosestNavPointParam": [
     "llGetClosestNavPoint"
   ],
   "GetStaticPathParam": [
     "llGetStaticPath"
   ],
+  "GiveAgentInventoryFlag": [],
   "GiveAgentInventoryParam": [
     "llGiveAgentInventory"
   ],

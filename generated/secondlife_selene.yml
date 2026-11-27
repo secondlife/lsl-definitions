@@ -977,9 +977,9 @@ globals:
   EOF:
     property: read-only
     type: string
-    description: A value equal to three newline characters ("\n\n\n") returned by
-      the dataserver event, indicating that the requested line is past the end of
-      the notecard.
+    description: Value returned by llGetNotecardLine (through the dataserver event)
+      and llGetNotecardLineSync when the requested line is past the end of the notecard.
+      Equal to three newline characters ("\n\n\n").
   ERR_GENERIC:
     property: read-only
     type: number
@@ -1058,85 +1058,326 @@ globals:
     type: number
     description: Used with llSetPhysicsMaterial to enable the friction override. The
       value must be between 0.0 and 255.0.
+  GAME_CONTROL_AXIS_ADVANCE:
+    property: read-only
+    type: number
+    description: Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK,
+      and CAPTIVE modes.
+  GAME_CONTROL_AXIS_BOOM:
+    property: read-only
+    type: number
+    description: Camera up/down movement. Modal axis index 4 for FLYCAM mode.
+  GAME_CONTROL_AXIS_DOLLY:
+    property: read-only
+    type: number
+    description: Camera forward/backward movement. Modal axis index 1 for FLYCAM mode.
   GAME_CONTROL_AXIS_LEFTX:
     property: read-only
     type: number
+    description: Left stick X axis. Canonical axis index 0.
   GAME_CONTROL_AXIS_LEFTY:
     property: read-only
     type: number
+    description: Left stick Y axis. Canonical axis index 1.
+  GAME_CONTROL_AXIS_LEFT_TRIGGER:
+    property: read-only
+    type: number
+    description: Left trigger. Canonical axis index 4.
+  GAME_CONTROL_AXIS_LOOK:
+    property: read-only
+    type: number
+    description: Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_AXIS_PAN:
+    property: read-only
+    type: number
+    description: Camera pan left/right. Modal axis index 2 for FLYCAM mode.
   GAME_CONTROL_AXIS_RIGHTX:
     property: read-only
     type: number
+    description: Right stick X axis. Canonical axis index 2.
   GAME_CONTROL_AXIS_RIGHTY:
     property: read-only
     type: number
+    description: Right stick Y axis. Canonical axis index 3.
+  GAME_CONTROL_AXIS_RIGHT_TRIGGER:
+    property: read-only
+    type: number
+    description: Right trigger. Canonical axis index 5.
+  GAME_CONTROL_AXIS_RISE:
+    property: read-only
+    type: number
+    description: Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE
+      modes.
+  GAME_CONTROL_AXIS_ROLL:
+    property: read-only
+    type: number
+    description: Camera roll. Modal axis index 5 for FLYCAM mode.
+  GAME_CONTROL_AXIS_STRAFE:
+    property: read-only
+    type: number
+    description: Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and
+      CAPTIVE modes.
+  GAME_CONTROL_AXIS_TILT:
+    property: read-only
+    type: number
+    description: Camera tilt up/down. Modal axis index 3 for FLYCAM mode.
   GAME_CONTROL_AXIS_TRIGGERLEFT:
     property: read-only
     type: number
+    description: Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
     property: read-only
     type: number
+    description: Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).
+  GAME_CONTROL_AXIS_TRUCK:
+    property: read-only
+    type: number
+    description: Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM
+      mode.
+  GAME_CONTROL_AXIS_TURN:
+    property: read-only
+    type: number
+    description: Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_AXIS_ZOOM:
+    property: read-only
+    type: number
+    description: Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE,
+      and FLYCAM modes.
   GAME_CONTROL_BUTTON_A:
     property: read-only
     type: number
+    description: Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH).
+  GAME_CONTROL_BUTTON_ADVANCE_BACK:
+    property: read-only
+    type: number
+    description: Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_ADVANCE_FORWARD:
+    property: read-only
+    type: number
+    description: Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
   GAME_CONTROL_BUTTON_B:
     property: read-only
     type: number
+    description: Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST).
   GAME_CONTROL_BUTTON_BACK:
     property: read-only
     type: number
+    description: Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT).
+  GAME_CONTROL_BUTTON_CROUCH:
+    property: read-only
+    type: number
+    description: Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT:
+    property: read-only
+    type: number
+    description: Left mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT:
+    property: read-only
+    type: number
+    description: Right mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+  GAME_CONTROL_BUTTON_DOLLY_BACK:
+    property: read-only
+    type: number
+    description: Camera dolly backward. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_DOLLY_FORWARD:
+    property: read-only
+    type: number
+    description: Camera dolly forward. Modal button for FLYCAM mode.
   GAME_CONTROL_BUTTON_DPAD_DOWN:
     property: read-only
     type: number
+    description: D-pad down.
   GAME_CONTROL_BUTTON_DPAD_LEFT:
     property: read-only
     type: number
+    description: D-pad left.
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
     property: read-only
     type: number
+    description: D-pad right.
   GAME_CONTROL_BUTTON_DPAD_UP:
     property: read-only
     type: number
+    description: D-pad up.
+  GAME_CONTROL_BUTTON_EAST:
+    property: read-only
+    type: number
+    description: Right face button.
   GAME_CONTROL_BUTTON_GUIDE:
     property: read-only
     type: number
+    description: Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME).
+  GAME_CONTROL_BUTTON_HOME:
+    property: read-only
+    type: number
+    description: Home/guide button.
+  GAME_CONTROL_BUTTON_JUMP:
+    property: read-only
+    type: number
+    description: Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
     property: read-only
     type: number
+    description: Left shoulder/bumper button.
   GAME_CONTROL_BUTTON_LEFTSTICK:
     property: read-only
     type: number
+    description: Left analog stick click.
   GAME_CONTROL_BUTTON_MISC1:
     property: read-only
     type: number
+    description: Miscellaneous button 1.
+  GAME_CONTROL_BUTTON_NORTH:
+    property: read-only
+    type: number
+    description: Top face button.
   GAME_CONTROL_BUTTON_PADDLE1:
     property: read-only
     type: number
+    description: Paddle button 1.
   GAME_CONTROL_BUTTON_PADDLE2:
     property: read-only
     type: number
+    description: Paddle button 2.
   GAME_CONTROL_BUTTON_PADDLE3:
     property: read-only
     type: number
+    description: Paddle button 3.
   GAME_CONTROL_BUTTON_PADDLE4:
     property: read-only
     type: number
+    description: Paddle button 4.
+  GAME_CONTROL_BUTTON_PAN_LEFT:
+    property: read-only
+    type: number
+    description: Camera pan left. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_PAN_RIGHT:
+    property: read-only
+    type: number
+    description: Camera pan right. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_RESET:
+    property: read-only
+    type: number
+    description: Reset camera to default view. Modal button for FLYCAM mode.
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
     property: read-only
     type: number
+    description: Right shoulder/bumper button.
   GAME_CONTROL_BUTTON_RIGHTSTICK:
     property: read-only
     type: number
+    description: Right analog stick click.
+  GAME_CONTROL_BUTTON_ROLL_CCW:
+    property: read-only
+    type: number
+    description: Roll camera counter-clockwise. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_ROLL_CW:
+    property: read-only
+    type: number
+    description: Roll camera clockwise. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_SELECT:
+    property: read-only
+    type: number
+    description: Select/back button.
+  GAME_CONTROL_BUTTON_SIT:
+    property: read-only
+    type: number
+    description: Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and
+      CURSOR modes.
+  GAME_CONTROL_BUTTON_SOUTH:
+    property: read-only
+    type: number
+    description: Bottom face button.
   GAME_CONTROL_BUTTON_START:
     property: read-only
     type: number
+    description: Start/menu button.
+  GAME_CONTROL_BUTTON_STRAFE_LEFT:
+    property: read-only
+    type: number
+    description: Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_STRAFE_RIGHT:
+    property: read-only
+    type: number
+    description: Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+  GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM:
+    property: read-only
+    type: number
+    description: Toggle alt-zoom. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TOGGLE_CURSOR:
+    property: read-only
+    type: number
+    description: Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_BUTTON_TOGGLE_FLYCAM:
+    property: read-only
+    type: number
+    description: Toggle flycam mode. Modal button for all modes.
+  GAME_CONTROL_BUTTON_TOGGLE_FOLLOW:
+    property: read-only
+    type: number
+    description: Toggle camera follow mode. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK:
+    property: read-only
+    type: number
+    description: Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+  GAME_CONTROL_BUTTON_TOGGLE_SPEAK:
+    property: read-only
+    type: number
+    description: Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
   GAME_CONTROL_BUTTON_TOUCHPAD:
     property: read-only
     type: number
+    description: Touchpad click.
+  GAME_CONTROL_BUTTON_TRUCK_LEFT:
+    property: read-only
+    type: number
+    description: Camera truck left. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_TRUCK_RIGHT:
+    property: read-only
+    type: number
+    description: Camera truck right. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_WEST:
+    property: read-only
+    type: number
+    description: Left face button.
   GAME_CONTROL_BUTTON_X:
     property: read-only
     type: number
+    description: Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST).
   GAME_CONTROL_BUTTON_Y:
+    property: read-only
+    type: number
+    description: Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH).
+  GAME_CONTROL_BUTTON_ZOOM_IN:
+    property: read-only
+    type: number
+    description: Zoom camera in. Modal button for FLYCAM mode.
+  GAME_CONTROL_BUTTON_ZOOM_OUT:
+    property: read-only
+    type: number
+    description: Zoom camera out. Modal button for FLYCAM mode.
+  GAME_CONTROL_MODE_AVATAR:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_CAPTIVE:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_CURSOR:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_FLYCAM:
+    property: read-only
+    type: number
+  GAME_CONTROL_MODE_MOUSELOOK:
     property: read-only
     type: number
   GCNP_RADIUS:
@@ -1481,12 +1722,12 @@ globals:
   LINKSETDATA_DELETE:
     property: read-only
     type: number
-    description: Event or flag indicating a key-value pair has been removed from the
-      linkset datastore, either via llLinksetDataDelete or by writing an empty value.
+    description: Action indicating a key was deleted from the linkset datastore via
+      llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty value.
   LINKSETDATA_EMEMORY:
     property: read-only
     type: number
-    description: Error code indicating a key-value pair was too large to write to
+    description: Error code indicating the key and value were too large to write to
       the linkset datastore.
   LINKSETDATA_ENOKEY:
     property: read-only
@@ -1496,13 +1737,14 @@ globals:
   LINKSETDATA_EPROTECTED:
     property: read-only
     type: number
-    description: Error code indicating the key-value pair is protected from being
-      deleted or overwritten in the linkset datastore.
+    description: Error code indicating the key is protected from being deleted or
+      overwritten in the linkset datastore.
   LINKSETDATA_MULTIDELETE:
     property: read-only
     type: number
-    description: Flag or value indicating a comma-separated list of keys has been
-      deleted from the linkset datastore via llLinksetDataDeleteFound.
+    description: Action indicating keys were deleted from the linkset datastore via
+      llLinksetDataDeleteFound. The event's name is a comma-separated list of the
+      deleted keys.
   LINKSETDATA_NOTFOUND:
     property: read-only
     type: number
@@ -1521,13 +1763,13 @@ globals:
   LINKSETDATA_RESET:
     property: read-only
     type: number
-    description: Event or flag indicating the linkset datastore has been cleared/reset
+    description: Action indicating all keys were deleted from the linkset datastore
       via llLinksetDataReset.
   LINKSETDATA_UPDATE:
     property: read-only
     type: number
-    description: Event or flag indicating a key in the linkset datastore has been
-      created or updated with a new value via llLinksetDataWrite.
+    description: Action indicating a key was created or updated in the linkset datastore
+      via llLinksetDataWrite or llLinksetDataWriteProtected.
   LINK_ALL_CHILDREN:
     property: read-only
     type: number
@@ -1634,9 +1876,9 @@ globals:
   NAK:
     property: read-only
     type: string
-    description: Value returned by llGetNotecardLineSync (ASCII NAK surrounded by
-      newlines, i.e., codes 10, 21, 10) when requested notecard data is not in the
-      region's cache.
+    description: Value returned by llGetNotecardLineSync and llFindNotecardTextSync
+      (as a single-entry list) when the notecard is not in the region's cache. Equal
+      to an ASCII NAK surrounded by newlines (codes 10, 21, 10).
   NULL_KEY:
     struct: uuid
     description: A special string constant used as a null or empty key value.
@@ -2414,6 +2656,9 @@ globals:
     type: number
     description: Runtime permission that allows the script to successfully call llGiveMoney
       or llTransferLindenDollars to debit the owner's account.
+  PERMISSION_GAME_CONTROL:
+    property: read-only
+    type: number
   PERMISSION_OVERRIDE_ANIMATIONS:
     property: read-only
     type: number
@@ -3723,6 +3968,11 @@ globals:
     type: number
     description: Rez flag causing the object to die/delete if it attempts to enter
       an unauthorized parcel.
+  REZ_FLAG_DIE_ON_NO_REZZER:
+    property: read-only
+    type: number
+    description: Rez flag causing the object to die if the rezzing object or agent
+      is not present.
   REZ_FLAG_NO_COLLIDE_FAMILY:
     property: read-only
     type: number
@@ -4208,6 +4458,11 @@ globals:
     description: Status flag (default FALSE) that causes the object to be deleted
       if it attempts to enter an unauthorized or full parcel. No-copy objects ignore
       this setting and remain in-world.
+  STATUS_DIE_ON_NO_REZZER:
+    property: read-only
+    type: number
+    description: Status flag (default FALSE) that causes the object to be deleted
+      if the rezzing object or agent is not present.
   STATUS_INTERNAL_ERROR:
     property: read-only
     type: number
@@ -5288,14 +5543,6 @@ globals:
     - type: number
     must_use: true
     description: Reads a signed 32-bit integer from the buffer at the given offset.
-  buffer.readinteger:
-    args:
-    - type:
-        display: buffer
-    - type: number
-    must_use: true
-    description: Reads a signed or unsigned 64-bit integer from the buffer at the
-      given offset.
   buffer.readu32:
     args:
     - type:
@@ -5359,15 +5606,6 @@ globals:
     - type: number
     - type: number
     description: Writes a signed 32-bit integer to the buffer at the given offset.
-  buffer.writeinteger:
-    args:
-    - type:
-        display: buffer
-      observes: write
-    - type: number
-    - type: any
-    description: Writes a signed or unsigned 64-bit integer to the buffer at the given
-      offset.
   buffer.writeu32:
     args:
     - type:
@@ -5523,269 +5761,6 @@ globals:
       required: false
     must_use: true
     description: Returns a human-readable call stack starting from the specified level.
-  integer.maxsigned:
-    property: read-only
-    description: The most positive signed int64 (2^63-1).
-  integer.minsigned:
-    property: read-only
-    description: The most negative signed int64 (-2^63).
-  integer.add:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the sum of two 64-bit integers (signed or unsigned), wrapping
-      on overflow.
-  integer.arshift:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: 'Returns val shifted by i bits to the right. If i is negative, a
-      left shift is performed.
-
-      Does an arithmetic shift: The most significant bit of n is propagated during
-      the shift.'
-  integer.band:
-    args:
-    - type: '...'
-    must_use: true
-    description: Returns the bitwise AND of the given integers.
-  integer.bnot:
-    args:
-    - type: any
-    must_use: true
-    description: Returns the bitwise negation of val.
-  integer.bor:
-    args:
-    - type: '...'
-    must_use: true
-    description: Returns the bitwise OR of the given integers.
-  integer.bxor:
-    args:
-    - type: '...'
-    must_use: true
-    description: Returns the bitwise XOR of the given integers.
-  integer.bswap:
-    args:
-    - type: any
-    must_use: true
-    description: Returns val with its bytes swapped to the reverse order.
-  integer.btest:
-    args:
-    - type: '...'
-    must_use: true
-    description: Returns true if the bitwise AND of the given integers is non-zero.
-  integer.clamp:
-    args:
-    - type: any
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns val clamped between min and max. Raises an error if min is
-      greater than max.
-  integer.countlz:
-    args:
-    - type: any
-    must_use: true
-    description: Returns the count of val's leading zeros.
-  integer.countrz:
-    args:
-    - type: any
-    must_use: true
-    description: Returns the count of val's trailing zeros.
-  integer.create:
-    args:
-    - type: number
-    must_use: true
-    description: Returns number val converted to an integer. Returns nil if it has
-      a fractional part, is out of range, or is NaN.
-  integer.div:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns dividend / divisor (signed), rounding toward zero. Raises
-      an error if divisor is zero.
-  integer.extract:
-    args:
-    - type: any
-    - type: any
-    - type: any
-      required: false
-    must_use: true
-    description: Returns width bits from src, starting from bit index field. Raises
-      an error if the selected bit range is goes outside the range [0, 63].
-  integer.fromstring:
-    args:
-    - type: string
-    - type: number
-      required: false
-    must_use: true
-    description: Converts the input string to an integer in the specified base. Returns
-      nil if not an integer.
-  integer.ge:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 >= int2 (signed).
-  integer.gt:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 > int2 (signed).
-  integer.idiv:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns dividend / divisor (signed), rounding toward negative infinity.
-      Raises an error if divisor is zero.
-  integer.le:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 <= int2 (signed).
-  integer.lt:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 < int2 (signed).
-  integer.lrotate:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns val rotated by i bits to the left. If i is negative, a right
-      rotate is performed.
-  integer.lshift:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns val shifted by i bits to the left. If i is negative, a right
-      shift is performed. Returns 0 if i is outside the [-63, 63] range.
-  integer.max:
-    args:
-    - type: any
-    - type: '...'
-      required: true
-    must_use: true
-    description: Returns the maximum value from the given integers (signed).
-  integer.min:
-    args:
-    - type: any
-    - type: '...'
-      required: true
-    must_use: true
-    description: Returns the minimum value from the given integers (signed).
-  integer.mod:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the remainder of dividend / divisor (signed). The result
-      always has the same sign as the divisor. Raises an error if divisor is zero.
-  integer.mul:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the product of two 64-bit integers (signed or unsigned),
-      wrapping on overflow.
-  integer.neg:
-    args:
-    - type: any
-    must_use: true
-    description: Returns the negation of val. integer.neg(integer.minsigned) == integer.minsigned
-      due to overflow.
-  integer.rem:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the remainder of dividend / divisor (signed). The result
-      always has the same sign as the dividend. Raises an error if divisor is zero.
-  integer.replace:
-    args:
-    - type: any
-    - type: any
-    - type: any
-    - type: any
-      required: false
-    must_use: true
-    description: Returns dst with width bits replaced from src, starting from bit
-      index field. Raises an error if the selected bit range goes outside the range
-      [0, 63].
-  integer.rrotate:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns val rotated by i bits to the right. If i is negative, a left
-      rotate is performed.
-  integer.rshift:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns val shifted by i bits to the right. If i is negative, a left
-      shift is performed. Returns 0 if i is outside the [-63, 63] range.
-  integer.sub:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the difference between two 64-bit integers (signed or unsigned),
-      wrapping on overflow.
-  integer.tonumber:
-    args:
-    - type: any
-    must_use: true
-    description: Returns the nearest float64 to the given int64. Is inexact above
-      2^53.
-  integer.udiv:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns dividend / divisor (unsigned), rounding toward negative infinity.
-      Raises an error if divisor is zero.
-  integer.uge:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 >= int2 (unsigned).
-  integer.ugt:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 > int2 (unsigned).
-  integer.ule:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 <= int2 (unsigned).
-  integer.ult:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns true if int1 < int2 (unsigned).
-  integer.urem:
-    args:
-    - type: any
-    - type: any
-    must_use: true
-    description: Returns the remainder of dividend / divisor (unsigned). Raises an
-      error if divisor is zero.
   llbase64.encode:
     args:
     - type: string
@@ -5854,26 +5829,9 @@ globals:
     must_use: true
     description: Decodes a JSON string to a Lua value, preserving SL types. Raises
       an error if JSON is invalid.
-  llprim.ParamsSetter:
+  llprim.ParamSetter:
     property: read-only
     description: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-  llprim.setParticleSystem:
-    args:
-    - type: table
-      required: false
-    - type: number
-      required: false
-    description: Emit a particle system from a ParticleParams table. Omit link to
-      apply to the current prim.
-  llprim.setMedia:
-    args:
-    - type: number
-    - type: table
-      required: false
-    - type: number
-      required: false
-    description: Configure media on a specific face. Omit link to apply to the current
-      prim.
   math.e:
     property: read-only
     type: number
@@ -6447,7 +6405,9 @@ globals:
       required: false
     must_use: true
     description: Decodes a binary string using a pack format, starting from index
-      start. Negative indices count backward from the end of the string.
+      start and returns a tuple of the decoded values, followed by a number representing
+      the index of the first unread byte. Negative indices count backward from the
+      end of the string.
   string.upper:
     args:
     - type: string
@@ -7408,8 +7368,8 @@ globals:
     - type: string
     - type: table
     must_use: true
-    description: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver event.
+    description: Asynchronously requests the number of matches of pattern in the notecard
+      name. Returns a key query handle for the dataserver event.
   ll.FindNotecardTextSync:
     args:
     - type: string
@@ -7418,9 +7378,10 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: Synchronously searches a cached notecard name for lines containing
-      pattern, returning a list of line and column numbers. Returns a list containing
-      'NAK' if the notecard is not cached, or an empty list if no matches are found.
+    description: Synchronously searches the notecard name in the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a strided list
+      of the form [line, column, length, ...] with one stride per match, a list containing
+      NAK if the notecard is not cached, or an empty list if there are no matches.
   ll.FleeFrom:
     args:
     - type:
@@ -7675,6 +7636,29 @@ globals:
     must_use: true
     description: Returns a float representing the time in seconds since midnight GMT
       (truncated to whole seconds).
+  ll.GetGameControlMode:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control
+      mode for the avatar specified by id.
+  ll.GetGameControlModeAxes:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a list of floats representing the modal axes for the current
+      game-control mode of the avatar specified by id. Element count and index meanings
+      vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.
+  ll.GetGameControlModeButtons:
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a bitmask of the modal buttons currently active for the current
+      game-control mode of the avatar specified by id. Bit meanings vary by mode;
+      use the GAME_CONTROL_BUTTON_* constants as masks.
   ll.GetGeometricCenter:
     args: []
     must_use: true
@@ -7885,21 +7869,21 @@ globals:
     args:
     - type: string
     - type: number
-    description: Asynchronously requests the line index line of the notecard name
-      from the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    description: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is past
+      the end of the notecard.
   ll.GetNotecardLineSync:
     args:
     - type: string
     - type: number
     must_use: true
-    description: Synchronously reads the line index line of the notecard name from
-      the region's cache, immediately returning its text without raising a dataserver
-      event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    description: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the notecard
+      is not cached, or EOF if line is past the end of the notecard.
   ll.GetNumberOfNotecardLines:
     args:
     - type: string
-    description: Asynchronously requests the total line count of the notecard name.
+    description: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
   ll.GetNumberOfPrims:
     args: []
@@ -8589,37 +8573,38 @@ globals:
   ll.LinksetDataAvailable:
     args: []
     must_use: true
-    description: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    description: Returns the number of bytes remaining in the linkset datastore.
   ll.LinksetDataCountFound:
     args:
     - type: string
     must_use: true
-    description: Returns the total count of keys in the linkset datastore that match
-      the regular expression pattern.
+    description: Returns the number of keys in the linkset datastore that match the
+      regular expression pattern.
   ll.LinksetDataCountKeys:
     args: []
     must_use: true
-    description: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    description: Returns the number of keys in the linkset datastore.
   ll.LinksetDataDelete:
     args:
     - type: string
-    description: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
+    description: Deletes the unprotected key name from the linkset datastore, triggering
+      a linkset_data event if the datastore changes. Returns an integer success or
+      failure code.
   ll.LinksetDataDeleteFound:
     args:
     - type: string
     - type: string
-    description: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes
-      protected keys if matching pass is provided.
+    description: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event if the datastore changes.
+      Protected keys are only deleted if their passphrase matches pass. Returns a
+      list [num_deleted, num_failed_protected].
   ll.LinksetDataDeleteProtected:
     args:
     - type: string
     - type: string
-    description: Deletes the protected key-value pair specified by name from the linkset's
-      datastore using the passphrase pass, triggering a linkset_data event.
+    description: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event if the datastore changes. Returns
+      an integer success or failure code.
   ll.LinksetDataFindKeys:
     args:
     - type: string
@@ -8627,46 +8612,48 @@ globals:
     - type: number
     must_use: true
     description: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index start
-      (returns all matching keys if count < 1).
+      linkset datastore that match the regular expression pattern, starting at index
+      start (returns all matching keys if count < 1).
   ll.LinksetDataListKeys:
     args:
     - type: number
     - type: number
     must_use: true
     description: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
+      linkset datastore, starting at index start (returns all keys if count < 1).
   ll.LinksetDataRead:
     args:
     - type: string
     must_use: true
-    description: Reads and returns the string value corresponding to key name from
-      the linkset's datastore.
+    description: Returns the value of the unprotected key name from the linkset datastore.
+      Returns an empty string if the key is not found or is protected.
   ll.LinksetDataReadProtected:
     args:
     - type: string
     - type: string
     must_use: true
-    description: Reads and returns the string value of the protected key name from
-      the linkset's datastore using the passphrase pass.
+    description: Returns the value of the protected key name from the linkset datastore
+      using the passphrase pass. Returns an empty string if the key is not found or
+      pass does not match.
   ll.LinksetDataReset:
     args: []
-    description: Erases all key-value pairs stored in the linkset's datastore, triggering
-      a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
+    description: Deletes all keys from the linkset datastore, triggering a linkset_data
+      event.
   ll.LinksetDataWrite:
     args:
     - type: string
     - type: string
-    description: Creates or updates an unprotected key-value pair (name and value)
-      in the linkset's datastore. Returns an integer success or failure code.
+    description: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event if the datastore changes. Returns
+      an integer success or failure code.
   ll.LinksetDataWriteProtected:
     args:
     - type: string
     - type: string
     - type: string
-    description: Creates or updates a protected key-value pair (name and value) in
-      the linkset's datastore using the passphrase pass. Returns an integer success
-      or failure code.
+    description: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event if the
+      datastore changes. Returns an integer success or failure code.
   ll.List2CSV:
     args:
     - type: table
@@ -11422,21 +11409,22 @@ globals:
     description: Returns the absolute (positive) value of val.
   llcompat.FindNotecardTextCount:
     deprecated:
-      message: Searches the text of a cached notecard for lines containing the given
-        pattern and returns the number of matches found through a dataserver event.
+      message: Asynchronously requests the number of matches of pattern in the notecard
+        name. Returns a key query handle for the dataserver event.
     args:
     - type: string
     - type: string
     - type: table
     must_use: true
-    description: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver event.
+    description: Asynchronously requests the number of matches of pattern in the notecard
+      name. Returns a key query handle for the dataserver event.
   llcompat.FindNotecardTextSync:
     deprecated:
-      message: (Index semantics) Synchronously searches a cached notecard name for
-        lines containing pattern, returning a list of line and column numbers. Returns
-        a list containing 'NAK' if the notecard is not cached, or an empty list if
-        no matches are found.
+      message: (Index semantics) Synchronously searches the notecard name in the region's
+        cache for matches of pattern, without raising a dataserver event. Returns
+        a strided list of the form [line, column, length, ...] with one stride per
+        match, a list containing NAK if the notecard is not cached, or an empty list
+        if there are no matches.
     args:
     - type: string
     - type: string
@@ -11444,10 +11432,11 @@ globals:
     - type: number
     - type: table
     must_use: true
-    description: (Index semantics) Synchronously searches a cached notecard name for
-      lines containing pattern, returning a list of line and column numbers. Returns
-      a list containing 'NAK' if the notecard is not cached, or an empty list if no
-      matches are found.
+    description: (Index semantics) Synchronously searches the notecard name in the
+      region's cache for matches of pattern, without raising a dataserver event. Returns
+      a strided list of the form [line, column, length, ...] with one stride per match,
+      a list containing NAK if the notecard is not cached, or an empty list if there
+      are no matches.
   llcompat.FleeFrom:
     deprecated:
       message: Directs a pathfinding character to keep the specified distance from
@@ -11838,6 +11827,40 @@ globals:
     must_use: true
     description: Returns a float representing the time in seconds since midnight GMT
       (truncated to whole seconds).
+  llcompat.GetGameControlMode:
+    deprecated:
+      message: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control
+        mode for the avatar specified by id.
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control
+      mode for the avatar specified by id.
+  llcompat.GetGameControlModeAxes:
+    deprecated:
+      message: Returns a list of floats representing the modal axes for the current
+        game-control mode of the avatar specified by id. Element count and index meanings
+        vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a list of floats representing the modal axes for the current
+      game-control mode of the avatar specified by id. Element count and index meanings
+      vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.
+  llcompat.GetGameControlModeButtons:
+    deprecated:
+      message: Returns a bitmask of the modal buttons currently active for the current
+        game-control mode of the avatar specified by id. Bit meanings vary by mode;
+        use the GAME_CONTROL_BUTTON_* constants as masks.
+    args:
+    - type:
+        display: uuid
+    must_use: true
+    description: Returns a bitmask of the modal buttons currently active for the current
+      game-control mode of the avatar specified by id. Bit meanings vary by mode;
+      use the GAME_CONTROL_BUTTON_* constants as masks.
   llcompat.GetGeometricCenter:
     deprecated:
       message: Returns a vector representing the geometric center of the object relative
@@ -12138,34 +12161,34 @@ globals:
       3. Have the specified subject Subject (or any subject if blank)'
   llcompat.GetNotecardLine:
     deprecated:
-      message: Asynchronously requests the line index line of the notecard name from
-        the dataserver. Returns a key query handle for the dataserver event, which
-        will return 'EOF' when reaching past the end of the notecard.
+      message: Asynchronously requests the text of line in the notecard name. Returns
+        a key query handle for the dataserver event, which receives EOF if line is
+        past the end of the notecard.
     args:
     - type: string
     - type: number
-    description: Asynchronously requests the line index line of the notecard name
-      from the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    description: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is past
+      the end of the notecard.
   llcompat.GetNotecardLineSync:
     deprecated:
-      message: Synchronously reads the line index line of the notecard name from the
-        region's cache, immediately returning its text without raising a dataserver
-        event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+      message: Synchronously reads the text of line in the notecard name from the
+        region's cache, without raising a dataserver event. Returns NAK if the notecard
+        is not cached, or EOF if line is past the end of the notecard.
     args:
     - type: string
     - type: number
     must_use: true
-    description: Synchronously reads the line index line of the notecard name from
-      the region's cache, immediately returning its text without raising a dataserver
-      event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    description: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the notecard
+      is not cached, or EOF if line is past the end of the notecard.
   llcompat.GetNumberOfNotecardLines:
     deprecated:
-      message: Asynchronously requests the total line count of the notecard name.
-        Returns a key query handle for the dataserver event.
+      message: Asynchronously requests the number of lines in the notecard name. Returns
+        a key query handle for the dataserver event.
     args:
     - type: string
-    description: Asynchronously requests the total line count of the notecard name.
+    description: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
   llcompat.GetNumberOfPrims:
     deprecated:
@@ -13187,127 +13210,133 @@ globals:
       linked prim link.
   llcompat.LinksetDataAvailable:
     deprecated:
-      message: Returns an integer representing the number of bytes available/remaining
-        in the linkset's datastore.
+      message: Returns the number of bytes remaining in the linkset datastore.
     args: []
     must_use: true
-    description: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    description: Returns the number of bytes remaining in the linkset datastore.
   llcompat.LinksetDataCountFound:
     deprecated:
-      message: Returns the total count of keys in the linkset datastore that match
-        the regular expression pattern.
+      message: Returns the number of keys in the linkset datastore that match the
+        regular expression pattern.
     args:
     - type: string
     must_use: true
-    description: Returns the total count of keys in the linkset datastore that match
-      the regular expression pattern.
+    description: Returns the number of keys in the linkset datastore that match the
+      regular expression pattern.
   llcompat.LinksetDataCountKeys:
     deprecated:
-      message: Returns an integer representing the total number of unique keys stored
-        in the linkset's datastore.
+      message: Returns the number of keys in the linkset datastore.
     args: []
     must_use: true
-    description: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    description: Returns the number of keys in the linkset datastore.
   llcompat.LinksetDataDelete:
     deprecated:
-      message: Deletes the unprotected key-value pair specified by name from the linkset's
-        datastore, triggering a linkset_data event.
-    args:
-    - type: string
-    description: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
-  llcompat.LinksetDataDeleteFound:
-    deprecated:
-      message: Deletes all keys in the datastore matching the regular expression pattern.
-        Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes protected
-        keys if matching pass is provided.
-    args:
-    - type: string
-    - type: string
-    description: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and deletes
-      protected keys if matching pass is provided.
-  llcompat.LinksetDataDeleteProtected:
-    deprecated:
-      message: Deletes the protected key-value pair specified by name from the linkset's
-        datastore using the passphrase pass, triggering a linkset_data event.
-    args:
-    - type: string
-    - type: string
-    description: Deletes the protected key-value pair specified by name from the linkset's
-      datastore using the passphrase pass, triggering a linkset_data event.
-  llcompat.LinksetDataFindKeys:
-    deprecated:
-      message: Returns an alphabetically sorted list of up to count keys from the
-        datastore that match the regular expression pattern, starting at index start
-        (returns all matching keys if count < 1).
-    args:
-    - type: string
-    - type: number
-    - type: number
-    must_use: true
-    description: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index start
-      (returns all matching keys if count < 1).
-  llcompat.LinksetDataListKeys:
-    deprecated:
-      message: Returns an alphabetically sorted list of up to count keys from the
-        datastore, starting at index start (returns all keys if count < 1).
-    args:
-    - type: number
-    - type: number
-    must_use: true
-    description: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
-  llcompat.LinksetDataRead:
-    deprecated:
-      message: Reads and returns the string value corresponding to key name from the
-        linkset's datastore.
-    args:
-    - type: string
-    must_use: true
-    description: Reads and returns the string value corresponding to key name from
-      the linkset's datastore.
-  llcompat.LinksetDataReadProtected:
-    deprecated:
-      message: Reads and returns the string value of the protected key name from the
-        linkset's datastore using the passphrase pass.
-    args:
-    - type: string
-    - type: string
-    must_use: true
-    description: Reads and returns the string value of the protected key name from
-      the linkset's datastore using the passphrase pass.
-  llcompat.LinksetDataReset:
-    deprecated:
-      message: Erases all key-value pairs stored in the linkset's datastore, triggering
-        a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
-    args: []
-    description: Erases all key-value pairs stored in the linkset's datastore, triggering
-      a linkset_data event (with LINKSETDATA_RESET) in all scripts in the linkset.
-  llcompat.LinksetDataWrite:
-    deprecated:
-      message: Creates or updates an unprotected key-value pair (name and value) in
-        the linkset's datastore. Returns an integer success or failure code.
-    args:
-    - type: string
-    - type: string
-    description: Creates or updates an unprotected key-value pair (name and value)
-      in the linkset's datastore. Returns an integer success or failure code.
-  llcompat.LinksetDataWriteProtected:
-    deprecated:
-      message: Creates or updates a protected key-value pair (name and value) in the
-        linkset's datastore using the passphrase pass. Returns an integer success
+      message: Deletes the unprotected key name from the linkset datastore, triggering
+        a linkset_data event if the datastore changes. Returns an integer success
         or failure code.
     args:
     - type: string
+    description: Deletes the unprotected key name from the linkset datastore, triggering
+      a linkset_data event if the datastore changes. Returns an integer success or
+      failure code.
+  llcompat.LinksetDataDeleteFound:
+    deprecated:
+      message: Deletes all keys in the linkset datastore that match the regular expression
+        pattern, triggering a linkset_data event if the datastore changes. Protected
+        keys are only deleted if their passphrase matches pass. Returns a list [num_deleted,
+        num_failed_protected].
+    args:
     - type: string
     - type: string
-    description: Creates or updates a protected key-value pair (name and value) in
-      the linkset's datastore using the passphrase pass. Returns an integer success
-      or failure code.
+    description: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event if the datastore changes.
+      Protected keys are only deleted if their passphrase matches pass. Returns a
+      list [num_deleted, num_failed_protected].
+  llcompat.LinksetDataDeleteProtected:
+    deprecated:
+      message: Deletes the protected key name from the linkset datastore using the
+        passphrase pass, triggering a linkset_data event if the datastore changes.
+        Returns an integer success or failure code.
+    args:
+    - type: string
+    - type: string
+    description: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event if the datastore changes. Returns
+      an integer success or failure code.
+  llcompat.LinksetDataFindKeys:
+    deprecated:
+      message: Returns an alphabetically sorted list of up to count keys from the
+        linkset datastore that match the regular expression pattern, starting at index
+        start (returns all matching keys if count < 1).
+    args:
+    - type: string
+    - type: number
+    - type: number
+    must_use: true
+    description: Returns an alphabetically sorted list of up to count keys from the
+      linkset datastore that match the regular expression pattern, starting at index
+      start (returns all matching keys if count < 1).
+  llcompat.LinksetDataListKeys:
+    deprecated:
+      message: Returns an alphabetically sorted list of up to count keys from the
+        linkset datastore, starting at index start (returns all keys if count < 1).
+    args:
+    - type: number
+    - type: number
+    must_use: true
+    description: Returns an alphabetically sorted list of up to count keys from the
+      linkset datastore, starting at index start (returns all keys if count < 1).
+  llcompat.LinksetDataRead:
+    deprecated:
+      message: Returns the value of the unprotected key name from the linkset datastore.
+        Returns an empty string if the key is not found or is protected.
+    args:
+    - type: string
+    must_use: true
+    description: Returns the value of the unprotected key name from the linkset datastore.
+      Returns an empty string if the key is not found or is protected.
+  llcompat.LinksetDataReadProtected:
+    deprecated:
+      message: Returns the value of the protected key name from the linkset datastore
+        using the passphrase pass. Returns an empty string if the key is not found
+        or pass does not match.
+    args:
+    - type: string
+    - type: string
+    must_use: true
+    description: Returns the value of the protected key name from the linkset datastore
+      using the passphrase pass. Returns an empty string if the key is not found or
+      pass does not match.
+  llcompat.LinksetDataReset:
+    deprecated:
+      message: Deletes all keys from the linkset datastore, triggering a linkset_data
+        event.
+    args: []
+    description: Deletes all keys from the linkset datastore, triggering a linkset_data
+      event.
+  llcompat.LinksetDataWrite:
+    deprecated:
+      message: Creates or updates the unprotected key name in the linkset datastore
+        with value, triggering a linkset_data event if the datastore changes. Returns
+        an integer success or failure code.
+    args:
+    - type: string
+    - type: string
+    description: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event if the datastore changes. Returns
+      an integer success or failure code.
+  llcompat.LinksetDataWriteProtected:
+    deprecated:
+      message: Creates or updates the protected key name in the linkset datastore
+        with value using the passphrase pass, triggering a linkset_data event if the
+        datastore changes. Returns an integer success or failure code.
+    args:
+    - type: string
+    - type: string
+    - type: string
+    description: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event if the
+      datastore changes. Returns an integer success or failure code.
   llcompat.List2CSV:
     deprecated:
       message: Returns a string of comma-separated values taken in order from the
@@ -16007,6 +16036,11 @@ structs:
       - type: any
       description: 'Division: vector / number -> vector (Scale), vector / quaternion
         -> vector (Rotation by inverse)'
+    __idiv:
+      method: true
+      args:
+      - type: any
+      description: 'Floor division: vector // number -> vector (Quantized scale)'
     __mod:
       method: true
       args:
@@ -16492,9 +16526,9 @@ structs:
     linkset_data:
       property: override-fields
       type: function
-      description: Fires in all scripts in the linkset whenever the datastore has
-        been modified via an llLinksetData function. Passes the action taken, the
-        affected key name, and the new value.
+      description: Fires in all scripts in the linkset whenever the linkset datastore
+        is modified via an llLinksetData function. Passes the action taken, the affected
+        key name, and the new value.
     listen:
       property: override-fields
       type: function
@@ -16624,7 +16658,7 @@ structs:
       description: Stops and removes a timer. If the same function was added multiple
         times, only the last one added is removed, regardless of its interval. Returns
         true if the timer was found and removed, false otherwise.
-  PrimParamsSetterType:
+  PrimParamSetterType:
     apply:
       method: true
       args:
@@ -17019,4 +17053,4 @@ structs:
       - type: number
     new:
       args: []
-      description: Create an empty list with PrimParamsSetterTypeMeta as metatable
+      description: Create an empty list with PrimParamSetterTypeMeta as metatable

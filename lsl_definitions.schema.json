@@ -51,6 +51,7 @@
                     "effects",
                     "experience",
                     "experience_data",
+                    "game_control",
                     "input",
                     "json",
                     "land_moderation",
@@ -661,7 +662,7 @@
                         "deprecated": { "$ref": "#/$defs/deprecated" },
                         "detected-semantics": {
                             "const": true,
-                            "markdownDescription": "This function is wrapped in the DetectedEvent class.",
+                            "markdownDescription": "Uses llDetected* in LSL and {DetectedEvent} in SLua.",
                             "type": "boolean"
                         },
                         "energy": {

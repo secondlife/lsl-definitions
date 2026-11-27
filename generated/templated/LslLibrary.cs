@@ -27,10 +27,10 @@ namespace LindenLab.SecondLife
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern static Key llFindNotecardTextCountInternal(string notecardname, string pattern, object[] options, int options_len);
+        public extern static Key llFindNotecardTextCountInternal(string name, string pattern, object[] options, int options_len);
 
-        public static Key llFindNotecardTextCount(string notecardname, string pattern, ArrayList options) {
-            return llFindNotecardTextCountInternal(notecardname, pattern, ToArrayNoCopy(options), options.Count);
+        public static Key llFindNotecardTextCount(string name, string pattern, ArrayList options) {
+            return llFindNotecardTextCountInternal(name, pattern, ToArrayNoCopy(options), options.Count);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -47,6 +47,17 @@ namespace LindenLab.SecondLife
             return ToArrayListNoCopy(llGetAttachedListFilteredInternal(avatar, ToArrayNoCopy(options), options.Count));
         }
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static int llGetGameControlMode(Key id);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static object[] llGetGameControlModeAxesInternal(Key id);
+
+        public static ArrayList llGetGameControlModeAxes(Key id) {
+            return ToArrayListNoCopy(llGetGameControlModeAxesInternal(id));
+        }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public extern static int llGetGameControlModeButtons(Key id);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern static float llGetHealth(Key id);
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

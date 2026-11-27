@@ -145,6 +145,7 @@ enums:
     tooltip: ''
   CharacterWanderWithinParam:
     type: param-dict
+    prefix: WANDER_
     tooltip: ''
   ClickAction:
     type: enum
@@ -205,6 +206,10 @@ enums:
     type: flag
     prefix: GAME_CONTROL_BUTTON_
     tooltip: ''
+  GameControlMode:
+    type: enum
+    prefix: GAME_CONTROL_MODE_
+    tooltip: ''
   GetClosestNavPointParam:
     type: param-dict
     prefix: GCNP_
@@ -216,6 +221,10 @@ enums:
     type: param-dict
     prefix: TRANSFER_
     tooltip: ''
+  GiveAgentInventoryFlag:
+    type: flag
+    prefix: TRANSFER_
+    tooltip: 'No flags yet'
   GLTFAlphaMode:
     type: enum
     prefix: PRIM_GLTF_ALPHA_MODE_
@@ -1037,6 +1046,7 @@ constants:
       camera on or off.
     type: integer
     value: 12
+    value-type: boolean
     values:
       - name: isActive
         value-type: boolean
@@ -1047,6 +1057,7 @@ constants:
       changes in target rotation.
     type: integer
     value: 8
+    value-type: float
     values:
       - name: degrees
         value-type: float
@@ -1058,6 +1069,7 @@ constants:
       outside of the behindness angle.
     type: integer
     value: 9
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1068,6 +1080,7 @@ constants:
     tooltip: Sets how far away the camera wants to be from its target.
     type: integer
     value: 7
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -1078,6 +1091,7 @@ constants:
     tooltip: Sets camera focus (target position) in region coordinates.
     type: integer
     value: 17
+    value-type: vector
     values:
       - name: position
         value-type: vector
@@ -1086,6 +1100,7 @@ constants:
     tooltip: Sets how much the camera lags as it aims toward the target.
     type: integer
     value: 6
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1097,6 +1112,7 @@ constants:
       does not move.
     type: integer
     value: 22
+    value-type: boolean
     values:
       - name: isLocked
         value-type: boolean
@@ -1106,6 +1122,7 @@ constants:
     tooltip: Adjusts the camera focus position relative to the target.
     type: integer
     value: 1
+    value-type: vector
     values:
       - name: meters
         value-type: vector
@@ -1117,6 +1134,7 @@ constants:
       which its focus is not affected by target motion.
     type: integer
     value: 11
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -1128,6 +1146,7 @@ constants:
       straight down, maintaining the same distance (analogous to 'incidence').
     type: integer
     value: 0
+    value-type: float
     values:
       - name: degrees
         value-type: float
@@ -1138,6 +1157,7 @@ constants:
     tooltip: Sets camera position in region coordinates.
     type: integer
     value: 13
+    value-type: vector
     values:
       - name: position
         value-type: vector
@@ -1146,6 +1166,7 @@ constants:
     tooltip: Sets how much the camera lags as it moves toward its ideal position.
     type: integer
     value: 5
+    value-type: float
     values:
       - name: seconds
         value-type: float
@@ -1157,6 +1178,7 @@ constants:
       it does not move.
     type: integer
     value: 21
+    value-type: boolean
     values:
       - name: isLocked
         value-type: boolean
@@ -1167,6 +1189,7 @@ constants:
       which it is not affected by target motion.
     type: integer
     value: 10
+    value-type: float
     values:
       - name: meters
         value-type: float
@@ -1856,9 +1879,9 @@ constants:
     type: integer
     value: -6
   EOF:
-    tooltip: A value equal to three newline characters ("\n\n\n") returned by the
-      dataserver event, indicating that the requested line is past the end of
-      the notecard.
+    tooltip: Value returned by llGetNotecardLine (through the dataserver event) and
+      llGetNotecardLineSync when the requested line is past the end of the
+      notecard. Equal to three newline characters ("\n\n\n").
     type: string
     value: '\n\n\n'
   ERR_GENERIC:
@@ -1966,141 +1989,401 @@ constants:
       value must be between 0.0 and 255.0.
     type: integer
     value: 2
+  GAME_CONTROL_AXIS_ADVANCE:
+
+    tooltip: Forward/backward movement. Modal axis index 1 for AVATAR, MOUSELOOK,
+      and CAPTIVE modes.
+    type: integer
+    value: 1
+  GAME_CONTROL_AXIS_BOOM:
+
+    tooltip: Camera up/down movement. Modal axis index 4 for FLYCAM mode.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_DOLLY:
+
+    tooltip: Camera forward/backward movement. Modal axis index 1 for FLYCAM mode.
+    type: integer
+    value: 1
   GAME_CONTROL_AXIS_LEFTX:
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Left stick X axis. Canonical axis index 0.
     type: integer
     value: 0
   GAME_CONTROL_AXIS_LEFTY:
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Left stick Y axis. Canonical axis index 1.
     type: integer
     value: 1
+  GAME_CONTROL_AXIS_LEFT_TRIGGER:
+    member-of: [GameControlAxis]
+    tooltip: Left trigger. Canonical axis index 4.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_LOOK:
+
+    tooltip: Looking up/down. Modal axis index 3 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: 3
+  GAME_CONTROL_AXIS_PAN:
+
+    tooltip: Camera pan left/right. Modal axis index 2 for FLYCAM mode.
+    type: integer
+    value: 2
   GAME_CONTROL_AXIS_RIGHTX:
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Right stick X axis. Canonical axis index 2.
     type: integer
     value: 2
   GAME_CONTROL_AXIS_RIGHTY:
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Right stick Y axis. Canonical axis index 3.
+    type: integer
+    value: 3
+  GAME_CONTROL_AXIS_RIGHT_TRIGGER:
+    member-of: [GameControlAxis]
+    tooltip: Right trigger. Canonical axis index 5.
+    type: integer
+    value: 5
+  GAME_CONTROL_AXIS_RISE:
+
+    tooltip: Up/down movement. Modal axis index 4 for AVATAR, MOUSELOOK, and CAPTIVE
+      modes.
+    type: integer
+    value: 4
+  GAME_CONTROL_AXIS_ROLL:
+
+    tooltip: Camera roll. Modal axis index 5 for FLYCAM mode.
+    type: integer
+    value: 5
+  GAME_CONTROL_AXIS_STRAFE:
+
+    tooltip: Left/right movement. Modal axis index 0 for AVATAR, MOUSELOOK, and
+      CAPTIVE modes.
+    type: integer
+    value: 0
+  GAME_CONTROL_AXIS_TILT:
+
+    tooltip: Camera tilt up/down. Modal axis index 3 for FLYCAM mode.
     type: integer
     value: 3
   GAME_CONTROL_AXIS_TRIGGERLEFT:
+    deprecated:
+      use: GAME_CONTROL_AXIS_LEFT_TRIGGER
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Left trigger. Canonical axis index 4 (deprecated, use GAME_CONTROL_AXIS_LEFT_TRIGGER).
     type: integer
     value: 4
   GAME_CONTROL_AXIS_TRIGGERRIGHT:
+    deprecated:
+      use: GAME_CONTROL_AXIS_RIGHT_TRIGGER
     member-of: [GameControlAxis]
-    tooltip: ''
+    tooltip: Right trigger. Canonical axis index 5 (deprecated, use GAME_CONTROL_AXIS_RIGHT_TRIGGER).
     type: integer
     value: 5
+  GAME_CONTROL_AXIS_TRUCK:
+
+    tooltip: Camera lateral (left/right) movement. Modal axis index 0 for FLYCAM
+      mode.
+    type: integer
+    value: 0
+  GAME_CONTROL_AXIS_TURN:
+
+    tooltip: Turning left/right. Modal axis index 2 for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: 2
+  GAME_CONTROL_AXIS_ZOOM:
+
+    tooltip: Camera zoom in/out. Modal axis index 6 for AVATAR, MOUSELOOK, CAPTIVE,
+      and FLYCAM modes.
+    type: integer
+    value: 6
   GAME_CONTROL_BUTTON_A:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_SOUTH
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Bottom face button (deprecated, use GAME_CONTROL_BUTTON_SOUTH).
     type: integer
     value: '0x1'
+  GAME_CONTROL_BUTTON_ADVANCE_BACK:
+    tooltip: Move backward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x1000'
+  GAME_CONTROL_BUTTON_ADVANCE_FORWARD:
+    tooltip: Move forward. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x800'
   GAME_CONTROL_BUTTON_B:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_EAST
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right face button (deprecated, use GAME_CONTROL_BUTTON_EAST).
     type: integer
     value: '0x2'
   GAME_CONTROL_BUTTON_BACK:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_SELECT
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Select/back button (deprecated, use GAME_CONTROL_BUTTON_SELECT).
     type: integer
     value: '0x10'
+  GAME_CONTROL_BUTTON_CROUCH:
+    tooltip: Crouch. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT:
+    tooltip: Left mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+    type: integer
+    value: '0x200'
+  GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT:
+    tooltip: Right mouse button click. Modal button for MOUSELOOK and CURSOR modes.
+    type: integer
+    value: '0x400'
+  GAME_CONTROL_BUTTON_DOLLY_BACK:
+    tooltip: Camera dolly backward. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x1000'
+  GAME_CONTROL_BUTTON_DOLLY_FORWARD:
+    tooltip: Camera dolly forward. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x800'
   GAME_CONTROL_BUTTON_DPAD_DOWN:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad down.
     type: integer
     value: '0x1000'
   GAME_CONTROL_BUTTON_DPAD_LEFT:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad left.
     type: integer
     value: '0x2000'
   GAME_CONTROL_BUTTON_DPAD_RIGHT:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad right.
     type: integer
     value: '0x4000'
   GAME_CONTROL_BUTTON_DPAD_UP:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: D-pad up.
     type: integer
     value: '0x800'
-  GAME_CONTROL_BUTTON_GUIDE:
+  GAME_CONTROL_BUTTON_EAST:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right face button.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_GUIDE:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_HOME
+    member-of: [GameControlButton]
+    tooltip: Home/guide button (deprecated, use GAME_CONTROL_BUTTON_HOME).
     type: integer
     value: '0x20'
+  GAME_CONTROL_BUTTON_HOME:
+    member-of: [GameControlButton]
+    tooltip: Home/guide button.
+    type: integer
+    value: '0x20'
+  GAME_CONTROL_BUTTON_JUMP:
+    tooltip: Jump. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR modes.
+    type: integer
+    value: '0x1'
   GAME_CONTROL_BUTTON_LEFTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left shoulder/bumper button.
     type: integer
     value: '0x200'
   GAME_CONTROL_BUTTON_LEFTSTICK:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left analog stick click.
     type: integer
     value: '0x80'
   GAME_CONTROL_BUTTON_MISC1:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Miscellaneous button 1.
     type: integer
     value: '0x8000'
+  GAME_CONTROL_BUTTON_NORTH:
+    member-of: [GameControlButton]
+    tooltip: Top face button.
+    type: integer
+    value: '0x8'
   GAME_CONTROL_BUTTON_PADDLE1:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 1.
     type: integer
     value: '0x10000'
   GAME_CONTROL_BUTTON_PADDLE2:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 2.
     type: integer
     value: '0x20000'
   GAME_CONTROL_BUTTON_PADDLE3:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 3.
     type: integer
     value: '0x40000'
   GAME_CONTROL_BUTTON_PADDLE4:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Paddle button 4.
     type: integer
     value: '0x80000'
+  GAME_CONTROL_BUTTON_PAN_LEFT:
+    tooltip: Camera pan left. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_PAN_RIGHT:
+    tooltip: Camera pan right. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x2'
+  GAME_CONTROL_BUTTON_RESET:
+    tooltip: Reset camera to default view. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x80'
   GAME_CONTROL_BUTTON_RIGHTSHOULDER:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right shoulder/bumper button.
     type: integer
     value: '0x400'
   GAME_CONTROL_BUTTON_RIGHTSTICK:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Right analog stick click.
     type: integer
     value: '0x100'
+  GAME_CONTROL_BUTTON_ROLL_CCW:
+    tooltip: Roll camera counter-clockwise. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x200'
+  GAME_CONTROL_BUTTON_ROLL_CW:
+    tooltip: Roll camera clockwise. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x400'
+  GAME_CONTROL_BUTTON_SELECT:
+    member-of: [GameControlButton]
+    tooltip: Select/back button.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_SIT:
+    tooltip: Toggle sitting. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_SOUTH:
+    member-of: [GameControlButton]
+    tooltip: Bottom face button.
+    type: integer
+    value: '0x1'
   GAME_CONTROL_BUTTON_START:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Start/menu button.
     type: integer
     value: '0x40'
+  GAME_CONTROL_BUTTON_STRAFE_LEFT:
+    tooltip: Strafe left. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x2000'
+  GAME_CONTROL_BUTTON_STRAFE_RIGHT:
+    tooltip: Strafe right. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and CURSOR
+      modes.
+    type: integer
+    value: '0x4000'
+  GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM:
+    tooltip: Toggle alt-zoom. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_TOGGLE_CURSOR:
+    tooltip: Toggle cursor mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: '0x10'
+  GAME_CONTROL_BUTTON_TOGGLE_FLYCAM:
+    tooltip: Toggle flycam mode. Modal button for all modes.
+    type: integer
+    value: '0x100'
+  GAME_CONTROL_BUTTON_TOGGLE_FOLLOW:
+    tooltip: Toggle camera follow mode. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x40'
+  GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK:
+    tooltip: Toggle mouselook mode. Modal button for AVATAR, MOUSELOOK, CAPTIVE,
+      and CURSOR modes.
+    type: integer
+    value: '0x40'
+  GAME_CONTROL_BUTTON_TOGGLE_SPEAK:
+    tooltip: Toggle voice speak. Modal button for AVATAR, MOUSELOOK, CAPTIVE, and
+      CURSOR modes.
+    type: integer
+    value: '0x20'
   GAME_CONTROL_BUTTON_TOUCHPAD:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Touchpad click.
     type: integer
     value: '0x100000'
-  GAME_CONTROL_BUTTON_X:
+  GAME_CONTROL_BUTTON_TRUCK_LEFT:
+    tooltip: Camera truck left. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x2000'
+  GAME_CONTROL_BUTTON_TRUCK_RIGHT:
+    tooltip: Camera truck right. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x4000'
+  GAME_CONTROL_BUTTON_WEST:
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Left face button.
+    type: integer
+    value: '0x4'
+  GAME_CONTROL_BUTTON_X:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_WEST
+    member-of: [GameControlButton]
+    tooltip: Left face button (deprecated, use GAME_CONTROL_BUTTON_WEST).
     type: integer
     value: '0x4'
   GAME_CONTROL_BUTTON_Y:
+    deprecated:
+      use: GAME_CONTROL_BUTTON_NORTH
     member-of: [GameControlButton]
-    tooltip: ''
+    tooltip: Top face button (deprecated, use GAME_CONTROL_BUTTON_NORTH).
     type: integer
     value: '0x8'
+  GAME_CONTROL_BUTTON_ZOOM_IN:
+    tooltip: Zoom camera in. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x8'
+  GAME_CONTROL_BUTTON_ZOOM_OUT:
+    tooltip: Zoom camera out. Modal button for FLYCAM mode.
+    type: integer
+    value: '0x1'
+  GAME_CONTROL_MODE_AVATAR:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 0
+  GAME_CONTROL_MODE_CAPTIVE:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 3
+  GAME_CONTROL_MODE_CURSOR:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 4
+  GAME_CONTROL_MODE_FLYCAM:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 2
+  GAME_CONTROL_MODE_MOUSELOOK:
+    member-of: [GameControlMode]
+    tooltip: ''
+    type: integer
+    value: 1
   GCNP_GET_WALKABILITY:
     member-of: [GetClosestNavPointParam]
     private: true
@@ -2599,14 +2882,14 @@ constants:
     value: '0.01'
   LINKSETDATA_DELETE:
     member-of: [LinksetDataAction]
-    tooltip: Event or flag indicating a key-value pair has been removed from the
-      linkset datastore, either via llLinksetDataDelete or by writing an empty
+    tooltip: Action indicating a key was deleted from the linkset datastore via
+      llLinksetDataDelete, llLinksetDataDeleteProtected, or by writing an empty
       value.
     type: integer
     value: 2
   LINKSETDATA_EMEMORY:
     member-of: [LinksetDataError]
-    tooltip: Error code indicating a key-value pair was too large to write to the
+    tooltip: Error code indicating the key and value were too large to write to the
       linkset datastore.
     type: integer
     value: 1
@@ -2618,14 +2901,15 @@ constants:
     value: 2
   LINKSETDATA_EPROTECTED:
     member-of: [LinksetDataError]
-    tooltip: Error code indicating the key-value pair is protected from being
-      deleted or overwritten in the linkset datastore.
+    tooltip: Error code indicating the key is protected from being deleted or
+      overwritten in the linkset datastore.
     type: integer
     value: 3
   LINKSETDATA_MULTIDELETE:
     member-of: [LinksetDataAction]
-    tooltip: Flag or value indicating a comma-separated list of keys has been
-      deleted from the linkset datastore via llLinksetDataDeleteFound.
+    tooltip: Action indicating keys were deleted from the linkset datastore via
+      llLinksetDataDeleteFound. The event's name is a comma-separated list of
+      the deleted keys.
     type: integer
     value: 3
   LINKSETDATA_NOTFOUND:
@@ -2648,14 +2932,14 @@ constants:
     value: 0
   LINKSETDATA_RESET:
     member-of: [LinksetDataAction]
-    tooltip: Event or flag indicating the linkset datastore has been cleared/reset
+    tooltip: Action indicating all keys were deleted from the linkset datastore
       via llLinksetDataReset.
     type: integer
     value: 0
   LINKSETDATA_UPDATE:
     member-of: [LinksetDataAction]
-    tooltip: Event or flag indicating a key in the linkset datastore has been
-      created or updated with a new value via llLinksetDataWrite.
+    tooltip: Action indicating a key was created or updated in the linkset
+      datastore via llLinksetDataWrite or llLinksetDataWriteProtected.
     type: integer
     value: 1
   LINK_ALL_CHILDREN:
@@ -2782,9 +3066,9 @@ constants:
     type: integer
     value: 1
   NAK:
-    tooltip: Value returned by llGetNotecardLineSync (ASCII NAK surrounded by
-      newlines, i.e., codes 10, 21, 10) when requested notecard data is not in
-      the region's cache.
+    tooltip: Value returned by llGetNotecardLineSync and llFindNotecardTextSync (as
+      a single-entry list) when the notecard is not in the region's cache. Equal
+      to an ASCII NAK surrounded by newlines (codes 10, 21, 10).
     type: string
     value: '\n\x15\n'
   NAVIGATE_TO_GOAL_REACHED_DIST:
@@ -3397,6 +3681,7 @@ constants:
     enum: GLTFAlphaMode
   OVERRIDE_GLTF_BASE_COLOR_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: color
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the
       tinting color (specified in linear RGB) used for the base color. Use
       llsRGB2Linear to convert colors from Blinn-Phong to PBR.
@@ -3412,6 +3697,7 @@ constants:
     value-type: boolean
   OVERRIDE_GLTF_EMISSIVE_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: emmissive_color
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to set the tint
       (specified in linear RGB) used for the emissive texture on the face(s).
     type: integer
@@ -3419,6 +3705,7 @@ constants:
     value-type: vector
   OVERRIDE_GLTF_METALLIC_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: metalness
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       metallic factor on the specified face(s) to a value between 0 and 1.
     type: integer
@@ -3427,6 +3714,7 @@ constants:
     range: [0, 1]
   OVERRIDE_GLTF_ROUGHNESS_FACTOR:
     member-of: [GLTFOverride]
+    pretty-name: roughness
     tooltip: GLTF override setting used with llSetLinkGLTFOverrides to adjust the
       roughness factor on the specified face(s) to a value between 0 and 1.
     type: integer
@@ -4004,6 +4292,11 @@ constants:
       parcel functions, which is required to use llSetParcelForSale.
     type: integer
     value: '0x80000'
+  PERMISSION_GAME_CONTROL:
+    member-of: [ScriptPermission]
+    tooltip: ''
+    type: integer
+    value: '0x100000'
   PERM_ALL:
     member-of: [AssetPermission]
     tooltip: Permissions mask representing a combination of move, modify, copy, and
@@ -6213,6 +6506,11 @@ constants:
       unauthorized parcel.
     type: integer
     value: '0x0010'
+  REZ_FLAG_DIE_ON_NO_REZZER:
+    member-of: [RezFlag]
+    tooltip: Rez flag causing the object to die if the rezzing object or agent is not present.
+    type: integer
+    value: '0x0100'
   REZ_FLAG_NO_COLLIDE_FAMILY:
     member-of: [RezFlag]
     tooltip: Rez flag preventing collision events from triggering when colliding
@@ -7067,6 +7365,11 @@ constants:
       this setting and remain in-world.
     type: integer
     value: '0x800'
+  STATUS_DIE_ON_NO_REZZER:
+    member-of: [ObjectStatusParam]
+    tooltip: Status flag (default FALSE) that causes the object to be deleted if the rezzing object or agent is not present.
+    type: integer
+    value: '0x1000'
   STATUS_INTERNAL_ERROR:
     member-of: [PrimMediaError]
     tooltip: Status code indicating an internal error occurred.
@@ -7442,6 +7745,7 @@ constants:
     type: integer
     value: 1
     value-type: integer
+    enum: GiveAgentInventoryFlag
   TRANSFER_FLAG_COPY:
     member-of: [TransferOwnershipFlag]
     tooltip: Inventory transfer flag that copies the transferred object and places
@@ -8662,18 +8966,19 @@ events:
     event-id: 39
     arguments:
     - action:
-        tooltip: An integer constant representing the action taken (e.g.,
-          LINKSETDATA_UPDATE, LINKSETDATA_DELETE, LINKSETDATA_RESET).
+        tooltip: Action taken (LINKSETDATA_UPDATE, LINKSETDATA_DELETE,
+          LINKSETDATA_MULTIDELETE, or LINKSETDATA_RESET).
         type: integer
         enum-semantics: LinksetDataAction
     - name:
-        tooltip: Key name of the modified key-value pair.
+        tooltip: Name of the modified key (a comma-separated list of keys for
+          LINKSETDATA_MULTIDELETE, or empty for LINKSETDATA_RESET).
         type: string
     - value:
-        tooltip: New string value of the pair (empty if the pair was deleted or is
-          password-protected).
+        tooltip: New value of the key (empty if the key was deleted or is
+          protected).
         type: string
-    tooltip: Fires in all scripts in the linkset whenever the datastore has been
+    tooltip: Fires in all scripts in the linkset whenever the linkset datastore is
       modified via an llLinksetData function. Passes the action taken, the
       affected key name, and the new value.
     categories:
@@ -8687,13 +8992,13 @@ events:
         tooltip: UUID of the avatar supplying controller input.
         type: key
     - button_levels:
-        tooltip: A 32-bit mask representing the buttons currently held down on the
-          controller.
+        tooltip: A 32-bit mask representing the canonical buttons currently held down
+          on the controller.
         type: integer
         enum-semantics: GameControlButton
     - axes:
         tooltip: A list of six float values in the range [-1.0, 1.0] representing
-          controller axes.
+          canonical controller axes.
         type: list
         slua-type: "{number}"
     tooltip: Triggered when a compatible viewer sends game controller input changes
@@ -8701,6 +9006,7 @@ events:
       or seats.
     categories:
       - avatar
+      - game_control
       - input
     uses-enum: GameControlAxis
   on_death:
@@ -9484,6 +9790,7 @@ functions:
           options.
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 399
     return: void
@@ -10215,8 +10522,8 @@ functions:
       - math
   llFindNotecardTextCount:
     arguments:
-    - notecardname:
-        tooltip: Name of the target notecard.
+    - name:
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - pattern:
@@ -10232,9 +10539,8 @@ functions:
     must-use: true
     return: key
     sleep: 0.0
-    tooltip: Searches the text of a cached notecard for lines containing the given
-      pattern and returns the number of matches found through a dataserver
-      event.
+    tooltip: Asynchronously requests the number of matches of pattern in the
+      notecard name. Returns a key query handle for the dataserver event.
     categories:
       - data_storage
       - dataserver
@@ -10242,15 +10548,14 @@ functions:
   llFindNotecardTextSync:
     arguments:
     - name:
-        tooltip: Name of a notecard in the prim's inventory, or a UUID.
+        tooltip: Name of the notecard in the prim's inventory, or a UUID.
         type: string
         asset-semantics: true
     - pattern:
         tooltip: Regular expression pattern to search for.
         type: string
     - start:
-        tooltip: Number of match results to skip before returning (0 to start at the
-          first match).
+        tooltip: Index of the first match to return.
         type: integer
         index-semantics: true
     - count:
@@ -10258,7 +10563,8 @@ functions:
           matches).
         type: integer
     - options:
-        tooltip: A list of options for future expansion (unused, should be []).
+        tooltip: A list of options to control the search (currently unused, should be
+          []).
         type: list
         param-semantics: FindNotecardTextParam
     energy: 10.0
@@ -10268,10 +10574,11 @@ functions:
     # There are list indices in the return value!
     index-semantics: true
     sleep: 0.0
-    tooltip: Synchronously searches a cached notecard name for lines containing
-      pattern, returning a list of line and column numbers. Returns a list
-      containing 'NAK' if the notecard is not cached, or an empty list if no
-      matches are found.
+    tooltip: Synchronously searches the notecard name in the region's cache for
+      matches of pattern, without raising a dataserver event. Returns a strided
+      list of the form [line, column, length, ...] with one stride per match, a
+      list containing NAK if the notecard is not cached, or an empty list if
+      there are no matches.
     categories:
       - data_storage
       - notecard
@@ -10559,6 +10866,7 @@ functions:
         tooltip: A list of options to filter the returned attachments.
         type: list
         param-semantics: AttachedListFilterParam
+        ruleset: attached-list-filter-params
     energy: 10.0
     func-id: 518
     must-use: true
@@ -10672,6 +10980,7 @@ functions:
         tooltip: A list of GCNP_* flags and parameters to configure the search limits.
         type: list
         param-semantics: GetClosestNavPointParam
+        ruleset: get-closest-nav-point-params
     energy: 10.0
     func-id: 408
     must-use: true
@@ -10902,6 +11211,57 @@ functions:
       (truncated to whole seconds).
     categories:
       - time
+  llGetGameControlMode:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    categories:
+    - avatar
+    - game_control
+    - input
+    energy: 10.0
+    func-id: 804
+    must-use: true
+    return: integer
+    sleep: 0.0
+    tooltip: Returns a GAME_CONTROL_MODE_* integer indicating the current game-control
+      mode for the avatar specified by id.
+  llGetGameControlModeAxes:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    categories:
+    - avatar
+    - game_control
+    - input
+    energy: 10.0
+    func-id: 806
+    must-use: true
+    return: list
+    slua-return: "{number}"
+    sleep: 0.0
+    tooltip: Returns a list of floats representing the modal axes for the current
+      game-control mode of the avatar specified by id. Element count and index
+      meanings vary by mode; use the GAME_CONTROL_AXIS_* constants as indices.
+  llGetGameControlModeButtons:
+    arguments:
+    - id:
+        tooltip: UUID of the avatar whose game-controller state to query.
+        type: key
+    categories:
+    - avatar
+    - game_control
+    - input
+    energy: 10.0
+    func-id: 805
+    must-use: true
+    return: integer
+    sleep: 0.0
+    tooltip: Returns a bitmask of the modal buttons currently active for the current
+      game-control mode of the avatar specified by id. Bit meanings vary by mode;
+      use the GAME_CONTROL_BUTTON_* constants as masks.
   llGetGeometricCenter:
     arguments: []
     energy: 10.0
@@ -11395,16 +11755,16 @@ functions:
         type: string
         asset-semantics: true
     - line:
-        tooltip: Zero-based line number to request.
+        tooltip: Index of the line to read.
         type: integer
         index-semantics: true
     energy: 10.0
     func-id: 217
     return: key
     sleep: 0.1
-    tooltip: Asynchronously requests the line index line of the notecard name from
-      the dataserver. Returns a key query handle for the dataserver event, which
-      will return 'EOF' when reaching past the end of the notecard.
+    tooltip: Asynchronously requests the text of line in the notecard name. Returns
+      a key query handle for the dataserver event, which receives EOF if line is
+      past the end of the notecard.
     categories:
       - data_storage
       - dataserver
@@ -11416,7 +11776,7 @@ functions:
         type: string
         asset-semantics: true
     - line:
-        tooltip: Zero-based line number to request.
+        tooltip: Index of the line to read.
         type: integer
         index-semantics: true
     energy: 10.0
@@ -11424,9 +11784,9 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Synchronously reads the line index line of the notecard name from the
-      region's cache, immediately returning its text without raising a
-      dataserver event. Returns 'NAK' if not cached or 'EOF' if out of bounds.
+    tooltip: Synchronously reads the text of line in the notecard name from the
+      region's cache, without raising a dataserver event. Returns NAK if the
+      notecard is not cached, or EOF if line is past the end of the notecard.
     categories:
       - data_storage
       - notecard
@@ -11440,7 +11800,7 @@ functions:
     func-id: 276
     return: key
     sleep: 0.1
-    tooltip: Asynchronously requests the total line count of the notecard name.
+    tooltip: Asynchronously requests the number of lines in the notecard name.
       Returns a key query handle for the dataserver event.
     categories:
       - data_storage
@@ -12167,6 +12527,7 @@ functions:
           CHARACTER_TYPE_NONE).
         type: list
         param-semantics: GetStaticPathParam
+        ruleset: get-static-path-params
     energy: 10.0
     func-id: 413
     must-use: true
@@ -12461,6 +12822,7 @@ functions:
         tooltip: A list of options to configure the inventory transfer.
         type: list
         param-semantics: GiveAgentInventoryParam
+        ruleset: give-agent-inventory-params
     energy: 10.0
     func-id: 517
     return: integer
@@ -12670,7 +13032,7 @@ functions:
           or an HTTPRequestParams dictionary.
         type: list
         param-semantics: HTTPRequestParam
-        ruleset: http-params
+        ruleset: http-request-params
     - body:
         tooltip: String contents of the request body.
         type: string
@@ -13136,8 +13498,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the number of bytes available/remaining
-      in the linkset's datastore.
+    tooltip: Returns the number of bytes remaining in the linkset datastore.
     categories:
       - data_storage
       - linkset
@@ -13145,14 +13506,14 @@ functions:
   llLinksetDataCountFound:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) search string used to match keys.
+        tooltip: Regular expression (regex) matching the keys to count.
         type: string
     energy: 10.0
     func-id: 661
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns the total count of keys in the linkset datastore that match the
+    tooltip: Returns the number of keys in the linkset datastore that match the
       regular expression pattern.
     categories:
       - data_storage
@@ -13165,8 +13526,7 @@ functions:
     must-use: true
     return: integer
     sleep: 0.0
-    tooltip: Returns an integer representing the total number of unique keys stored
-      in the linkset's datastore.
+    tooltip: Returns the number of keys in the linkset datastore.
     categories:
       - data_storage
       - linkset
@@ -13174,15 +13534,16 @@ functions:
   llLinksetDataDelete:
     arguments:
     - name:
-        tooltip: Key name of the key-value pair to delete.
+        tooltip: Name of the key to delete.
         type: string
     energy: 10.0
     func-id: 652
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Deletes the unprotected key-value pair specified by name from the
-      linkset's datastore, triggering a linkset_data event.
+    tooltip: Deletes the unprotected key name from the linkset datastore,
+      triggering a linkset_data event if the datastore changes. Returns an
+      integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13190,7 +13551,7 @@ functions:
   llLinksetDataDeleteFound:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) specifying which keys to delete.
+        tooltip: Regular expression (regex) matching the keys to delete.
         type: string
     - pass:
         tooltip: Optional passphrase required to delete matching protected keys.
@@ -13200,9 +13561,10 @@ functions:
     return: list
     slua-return: "{number}"
     sleep: 0.0
-    tooltip: Deletes all keys in the datastore matching the regular expression
-      pattern. Returns a list [num_deleted, num_failed_protected]. Decrypts and
-      deletes protected keys if matching pass is provided.
+    tooltip: Deletes all keys in the linkset datastore that match the regular
+      expression pattern, triggering a linkset_data event if the datastore
+      changes. Protected keys are only deleted if their passphrase matches pass.
+      Returns a list [num_deleted, num_failed_protected].
     categories:
       - data_storage
       - linkset
@@ -13210,7 +13572,7 @@ functions:
   llLinksetDataDeleteProtected:
     arguments:
     - name:
-        tooltip: Key name of the protected key-value pair to delete.
+        tooltip: Name of the protected key to delete.
         type: string
     - pass:
         tooltip: Passphrase required to delete the protected key.
@@ -13220,9 +13582,9 @@ functions:
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Deletes the protected key-value pair specified by name from the
-      linkset's datastore using the passphrase pass, triggering a linkset_data
-      event.
+    tooltip: Deletes the protected key name from the linkset datastore using the
+      passphrase pass, triggering a linkset_data event if the datastore changes.
+      Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13230,10 +13592,10 @@ functions:
   llLinksetDataFindKeys:
     arguments:
     - pattern:
-        tooltip: A regular expression (regex) describing which keys to search for.
+        tooltip: Regular expression (regex) matching the keys to return.
         type: string
     - start:
-        tooltip: Zero-based start index of the matching keys to return.
+        tooltip: Index of the first matching key to return.
         type: integer
         index-semantics: true
     - count:
@@ -13247,8 +13609,8 @@ functions:
     slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
-      datastore that match the regular expression pattern, starting at index
-      start (returns all matching keys if count < 1).
+      linkset datastore that match the regular expression pattern, starting at
+      index start (returns all matching keys if count < 1).
     categories:
       - data_storage
       - linkset
@@ -13256,7 +13618,7 @@ functions:
   llLinksetDataListKeys:
     arguments:
     - start:
-        tooltip: Zero-based start index of the keys to return.
+        tooltip: Index of the first key to return.
         type: integer
         index-semantics: true
     - count:
@@ -13270,7 +13632,8 @@ functions:
     slua-return: "{string}"
     sleep: 0.0
     tooltip: Returns an alphabetically sorted list of up to count keys from the
-      datastore, starting at index start (returns all keys if count < 1).
+      linkset datastore, starting at index start (returns all keys if
+      count < 1).
     categories:
       - data_storage
       - linkset
@@ -13278,15 +13641,16 @@ functions:
   llLinksetDataRead:
     arguments:
     - name:
-        tooltip: Key of the key-value pair to read.
+        tooltip: Name of the key to read.
         type: string
     energy: 10.0
     func-id: 651
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Reads and returns the string value corresponding to key name from the
-      linkset's datastore.
+    tooltip: Returns the value of the unprotected key name from the linkset
+      datastore. Returns an empty string if the key is not found or is
+      protected.
     categories:
       - data_storage
       - linkset
@@ -13294,7 +13658,7 @@ functions:
   llLinksetDataReadProtected:
     arguments:
     - name:
-        tooltip: Key of the protected key-value pair to read.
+        tooltip: Name of the protected key to read.
         type: string
     - pass:
         tooltip: Passphrase required to read the protected key.
@@ -13304,8 +13668,9 @@ functions:
     must-use: true
     return: string
     sleep: 0.0
-    tooltip: Reads and returns the string value of the protected key name from the
-      linkset's datastore using the passphrase pass.
+    tooltip: Returns the value of the protected key name from the linkset
+      datastore using the passphrase pass. Returns an empty string if the key is
+      not found or pass does not match.
     categories:
       - data_storage
       - linkset
@@ -13316,9 +13681,8 @@ functions:
     func-id: 655
     return: void
     sleep: 0.0
-    tooltip: Erases all key-value pairs stored in the linkset's datastore,
-      triggering a linkset_data event (with LINKSETDATA_RESET) in all scripts in
-      the linkset.
+    tooltip: Deletes all keys from the linkset datastore, triggering a
+      linkset_data event.
     categories:
       - data_storage
       - linkset
@@ -13326,18 +13690,19 @@ functions:
   llLinksetDataWrite:
     arguments:
     - name:
-        tooltip: Key name of the key-value pair.
+        tooltip: Name of the key to write.
         type: string
     - value:
-        tooltip: String value to write to the datastore.
+        tooltip: Value to write to the key (an empty string deletes the key).
         type: string
     energy: 10.0
     func-id: 650
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Creates or updates an unprotected key-value pair (name and value) in
-      the linkset's datastore. Returns an integer success or failure code.
+    tooltip: Creates or updates the unprotected key name in the linkset datastore
+      with value, triggering a linkset_data event if the datastore changes.
+      Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -13345,10 +13710,10 @@ functions:
   llLinksetDataWriteProtected:
     arguments:
     - name:
-        tooltip: Key name of the protected key-value pair.
+        tooltip: Name of the protected key to write.
         type: string
     - value:
-        tooltip: String value to write to the datastore.
+        tooltip: Value to write to the key (an empty string deletes the key).
         type: string
     - pass:
         tooltip: Passphrase used to protect or update the key.
@@ -13358,9 +13723,9 @@ functions:
     return: integer
     enum-semantics: LinksetDataError
     sleep: 0.0
-    tooltip: Creates or updates a protected key-value pair (name and value) in the
-      linkset's datastore using the passphrase pass. Returns an integer success
-      or failure code.
+    tooltip: Creates or updates the protected key name in the linkset datastore
+      with value using the passphrase pass, triggering a linkset_data event if
+      the datastore changes. Returns an integer success or failure code.
     categories:
       - data_storage
       - linkset
@@ -14437,6 +14802,7 @@ functions:
           FORCE_DIRECT_PATH is supported).
         type: list
         param-semantics: CharacterNavigateParam
+        ruleset: character-navigate-params
     energy: 10.0
     func-id: 398
     return: void
@@ -14699,6 +15065,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterPatrolPointsParam
+        ruleset: character-patrol-points-params
     energy: 10.0
     func-id: 403
     return: void
@@ -14803,6 +15170,7 @@ functions:
         tooltip: A list of options to configure pursuit behavior.
         type: list
         param-semantics: CharacterPursueParam
+        ruleset: character-pursue-params
     energy: 10.0
     func-id: 400
     return: void
@@ -16162,6 +16530,7 @@ functions:
         tooltip: A strided list of rules and data pairs configuring the camera.
         type: list
         param-semantics: CameraParam
+        ruleset: camera-params
     energy: 10.0
     func-id: 313
     return: void
@@ -16398,6 +16767,7 @@ functions:
         tooltip: A list of options (KFM_* constants) to modify playback behavior.
         type: list
         param-semantics: KeyframedMotionParam
+        ruleset: keyframed-motion-params
     energy: 10.0
     func-id: 394
     return: void
@@ -16488,6 +16858,7 @@ functions:
         tooltip: A list of overrides and their corresponding values to set.
         type: list
         param-semantics: GLTFOverride
+        ruleset: gltf-overrides
     energy: 10.0
     func-id: 560
     return: void
@@ -16766,6 +17137,7 @@ functions:
           and object inclusion).
         type: list
         param-semantics: ParcelSaleParam
+        ruleset: parcel-sale
     energy: 10.0
     func-id: 561
     return: integer
@@ -18086,6 +18458,7 @@ functions:
           options (takes same constants as llCreateCharacter).
         type: list
         param-semantics: CharacterParam
+        ruleset: character-params
     energy: 10.0
     func-id: 406
     return: void
@@ -18243,6 +18616,7 @@ functions:
           behavior.
         type: list
         param-semantics: CharacterWanderWithinParam
+        ruleset: character-wander-within-params
     energy: 10.0
     func-id: 401
     return: void
@@ -18731,11 +19105,83 @@ builder-rulesets:
           - [ asset, sound ]
           - [ float, volume ]
 
-  http-params:
+  attached-list-filter-params:
+    type: table
+    enum: AttachedListFilterParam
+    lua-type: AttachedListFilterParams
+    flag-enum: AttachedListFilterFlag
+    flag-field: flags
+
+  camera-params:
+    type: table
+    enum: CameraParam
+    lua-type: CameraParams
+
+  character-params:
+    type: table
+    enum: CharacterParam
+    lua-type: CharacterParams
+
+  character-navigate-params:
+    type: table
+    enum: CharacterNavigateParam
+    lua-type: CharacterNavigateParams
+
+  character-patrol-points-params:
+    type: table
+    enum: CharacterPatrolPointsParam
+    lua-type: CharacterPatrolPointsParams
+
+  character-pursue-params:
+    type: table
+    enum: CharacterPursueParam
+    lua-type: CharacterPursueParams
+
+  character-wander-within-params:
+    type: table
+    enum: CharacterWanderWithinParam
+    lua-type: CharacterWanderWithinParams
+
+  get-closest-nav-point-params:
+    type: table
+    enum: GetClosestNavPointParam
+    lua-type: GetClosestNavPointParams
+
+  get-static-path-params:
+    type: table
+    enum: GetStaticPathParam
+    lua-type: GetStaticPathParams
+
+  give-agent-inventory-params:
+    type: table
+    enum: GiveAgentInventoryParam
+    flag-enum: GiveAgentInventoryFlag
+    flag-field: flags
+    lua-type: GiveAgentInventoryParams
+
+  gltf-overrides:
+    type: table
+    enum: GLTFOverride
+    filler-tokens: [base]
+    lua-type: GltfOverrides
+
+  http-request-params:
     type: table
     enum: HTTPRequestParam
     filler-tokens: [http]
     lua-type: HttpRequestParams
+
+  keyframed-motion-params:
+    type: table
+    enum: KeyframedMotionParam
+    flag-enum: KeyframedMotionData
+    flag-field: data
+    lua-type: KeyframedMotionParams
+
+  parcel-sale:
+    type: table
+    enum: ParcelSaleParam
+    lua-type: ParcelSaleParams
 
   particle-params:
     type: table
@@ -18744,15 +19190,9 @@ builder-rulesets:
     flag-enum: ParticleFlag
     flag-field: flags
     flag-mask: _MASK
-    lua-module: llprim
-    lua-fn: setParticleSystem
     lua-type: ParticleParams
-    dispatch-fn: LinkParticleSystem
 
   prim-media-params:
     type: table
     enum: PrimMediaParam
-    lua-module: llprim
-    lua-fn: setMedia
-    lua-type: MediaParams
-    dispatch-fn: SetLinkMedia
+    lua-type: PrimMediaParams

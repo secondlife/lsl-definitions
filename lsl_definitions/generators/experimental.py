@@ -11,7 +11,7 @@ import io
 import yaml
 
 from lsl_definitions.generators.base import register
-from lsl_definitions.lsl import LSLDefinitions, LSLEnumType
+from lsl_definitions.lsl import LSLDefinitions, LSLEnumType, LSLFunction, LSLType
 
 
 def lsl_annotations(member) -> str:
@@ -95,4 +95,42 @@ def gen_category_docs(definitions: LSLDefinitions) -> str:
 
     categories = {k: categories[k] for k in sorted(categories.keys())}
     yaml.safe_dump(categories, file, sort_keys=False, width=200)
+    return file.getvalue()
+
+
+@register("gen_boolean_list_test")
+def gen_boolean_list_test(definitions: LSLDefinitions) -> str:
+    file = io.StringIO()
+    file.write(
+        "-- Try to call every lsl list function with boolean arguments and see what happens\n"
+    )
+
+    def gen_call(func: LSLFunction) -> str:
+        args = []
+        for arg in func.arguments:
+            if arg.type == LSLType.INTEGER:
+                args.append("1")
+            elif arg.type == LSLType.FLOAT:
+                args.append("1.0")
+            elif arg.type == LSLType.STRING:
+                args.append('"test"')
+            elif arg.type == LSLType.KEY:
+                args.append("NULL_KEY")
+            elif arg.type == LSLType.VECTOR:
+                args.append("ZERO_VECTOR")
+            elif arg.type == LSLType.ROTATION:
+                args.append("ZERO_ROTATION")
+            elif arg.type == LSLType.LIST:
+                args.append("{true, false}")
+            else:
+                args.append("nil")
+        if func.ret_type == LSLType.LIST:
+            return f'print("ll.{func.name[2:]}", pcall(function() return lljson.slencode(ll.{func.name[2:]}({", ".join(args)})) end))\n'
+        else:
+            return f'print("ll.{func.name[2:]}", pcall(ll.{func.name[2:]}, {", ".join(args)}))\n'
+
+    for func in sorted(definitions.functions.values(), key=lambda x: x.name):
+        if any(arg.type == LSLType.LIST for arg in func.arguments):
+            file.write(gen_call(func))
+
     return file.getvalue()

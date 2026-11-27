@@ -1,4 +1,118 @@
-// http-params
+// attached-list-filter-params
+static const RulesetParamDescriptor kAttachedListFilterParamsDescs[] = {
+    {"include", 'i', 1},
+    {"flags", 'i', 2},
+};
+static const RulesetFlagDescriptor kAttachedListFilterParamFlagDescs[] = {
+    {"huds", 0x1, 2},
+};
+RulesetBuilderDef* kAttachedListFilterParamsDef = []() {
+    auto* d = ruleset_builder_def_build(kAttachedListFilterParamsDescs, std::size(kAttachedListFilterParamsDescs));
+    ruleset_builder_def_add_flags(d, kAttachedListFilterParamFlagDescs, std::size(kAttachedListFilterParamFlagDescs));
+    return d;
+}();
+
+// camera-params
+static const RulesetParamDescriptor kCameraParamsDescs[] = {
+    {"pitch", 'f', 0},
+    {"focus_offset", 'v', 1},
+    {"position_lag", 'f', 5},
+    {"focus_lag", 'f', 6},
+    {"distance", 'f', 7},
+    {"behindness_angle", 'f', 8},
+    {"behindness_lag", 'f', 9},
+    {"position_threshold", 'f', 10},
+    {"focus_threshold", 'f', 11},
+    {"active", 'b', 12},
+    {"position", 'v', 13},
+    {"focus", 'v', 17},
+    {"position_locked", 'b', 21},
+    {"focus_locked", 'b', 22},
+};
+RulesetBuilderDef* kCameraParamsDef = ruleset_builder_def_build(kCameraParamsDescs, std::size(kCameraParamsDescs));
+
+// character-params
+static const RulesetParamDescriptor kCharacterParamsDescs[] = {
+    {"desired_speed", 'f', 1},
+    {"radius", 'f', 2},
+    {"length", 'f', 3},
+    {"orientation", 'i', 4},
+    {"avoidance_mode", 'i', 5},
+    {"type", 'i', 6},
+    {"traversal_type", 'i', 7},
+    {"max_accel", 'f', 8},
+    {"max_decel", 'f', 9},
+    {"max_turn_radius", 'f', 10},
+    {"desired_turn_speed", 'f', 12},
+    {"max_speed", 'f', 13},
+    {"account_for_skipped_frames", 'b', 14},
+    {"stay_within_parcel", 'b', 15},
+};
+RulesetBuilderDef* kCharacterParamsDef = ruleset_builder_def_build(kCharacterParamsDescs, std::size(kCharacterParamsDescs));
+
+// character-navigate-params
+static const RulesetParamDescriptor kCharacterNavigateParamsDescs[] = {
+    {"force_direct_path", 'b', 1},
+};
+RulesetBuilderDef* kCharacterNavigateParamsDef = ruleset_builder_def_build(kCharacterNavigateParamsDescs, std::size(kCharacterNavigateParamsDescs));
+
+// character-patrol-points-params
+static const RulesetParamDescriptor kCharacterPatrolPointsParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterPatrolPointsParamsDef = ruleset_builder_def_build(kCharacterPatrolPointsParamsDescs, std::size(kCharacterPatrolPointsParamsDescs));
+
+// character-pursue-params
+static const RulesetParamDescriptor kCharacterPursueParamsDescs[] = {
+    {"offset", 'v', 1},
+    {"require_line_of_sight", 'b', 2},
+    {"fuzz_factor", 'f', 3},
+    {"intercept", 'b', 4},
+    {"goal_tolerance", 'f', 5},
+};
+RulesetBuilderDef* kCharacterPursueParamsDef = ruleset_builder_def_build(kCharacterPursueParamsDescs, std::size(kCharacterPursueParamsDescs));
+
+// character-wander-within-params
+static const RulesetParamDescriptor kCharacterWanderWithinParamsDescs[] = {
+    {"pause_at_waypoints", 'b', 0},
+};
+RulesetBuilderDef* kCharacterWanderWithinParamsDef = ruleset_builder_def_build(kCharacterWanderWithinParamsDescs, std::size(kCharacterWanderWithinParamsDescs));
+
+// get-closest-nav-point-params
+static const RulesetParamDescriptor kGetClosestNavPointParamsDescs[] = {
+    {"radius", 'f', 0},
+    {"static", 'b', 1},
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetClosestNavPointParamsDef = ruleset_builder_def_build(kGetClosestNavPointParamsDescs, std::size(kGetClosestNavPointParamsDescs));
+
+// get-static-path-params
+static const RulesetParamDescriptor kGetStaticPathParamsDescs[] = {
+    {"character_type", 'i', 6},
+};
+RulesetBuilderDef* kGetStaticPathParamsDef = ruleset_builder_def_build(kGetStaticPathParamsDescs, std::size(kGetStaticPathParamsDescs));
+
+// give-agent-inventory-params
+static const RulesetParamDescriptor kGiveAgentInventoryParamsDescs[] = {
+    {"dest", 's', 0},
+    {"flags", 'i', 1},
+};
+RulesetBuilderDef* kGiveAgentInventoryParamsDef = ruleset_builder_def_build(kGiveAgentInventoryParamsDescs, std::size(kGiveAgentInventoryParamsDescs));
+
+// gltf-overrides
+static const RulesetParamDescriptor kGLTFOverridesDescs[] = {
+    {"color", 'v', 1},
+    {"alpha", 'f', 2},
+    {"alpha_mode", 'i', 3},
+    {"alpha_mask", 'f', 4},
+    {"double_sided", 'b', 5},
+    {"metalness", 'f', 6},
+    {"roughness", 'f', 7},
+    {"emmissive_color", 'v', 8},
+};
+RulesetBuilderDef* kGLTFOverridesDef = ruleset_builder_def_build(kGLTFOverridesDescs, std::size(kGLTFOverridesDescs));
+
+// http-request-params
 static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"method", 's', 0},
     {"mimetype", 's', 1},
@@ -12,6 +126,30 @@ static const RulesetParamDescriptor kHTTPRequestParamsDescs[] = {
     {"extended_error", 'b', 9},
 };
 RulesetBuilderDef* kHTTPRequestParamsDef = ruleset_builder_def_build(kHTTPRequestParamsDescs, std::size(kHTTPRequestParamsDescs));
+
+// keyframed-motion-params
+static const RulesetParamDescriptor kKeyframedMotionParamsDescs[] = {
+    {"command", 'i', 0},
+    {"mode", 'i', 1},
+    {"data", 'i', 2},
+};
+static const RulesetFlagDescriptor kKeyframedMotionParamFlagDescs[] = {
+    {"rotation", 0x1, 2},
+    {"translation", 0x2, 2},
+};
+RulesetBuilderDef* kKeyframedMotionParamsDef = []() {
+    auto* d = ruleset_builder_def_build(kKeyframedMotionParamsDescs, std::size(kKeyframedMotionParamsDescs));
+    ruleset_builder_def_add_flags(d, kKeyframedMotionParamFlagDescs, std::size(kKeyframedMotionParamFlagDescs));
+    return d;
+}();
+
+// parcel-sale
+static const RulesetParamDescriptor kParcelSaleParamsDescs[] = {
+    {"price", 'i', 1},
+    {"agent", 'k', 2},
+    {"objects", 'b', 3},
+};
+RulesetBuilderDef* kParcelSaleParamsDef = ruleset_builder_def_build(kParcelSaleParamsDescs, std::size(kParcelSaleParamsDescs));
 
 // particle-params
 static const RulesetParamDescriptor kParticleParamsDescs[] = {
@@ -82,33 +220,4 @@ static const RulesetParamDescriptor kPrimMediaParamsDescs[] = {
 RulesetBuilderDef* kPrimMediaParamsDef = ruleset_builder_def_build(kPrimMediaParamsDescs, std::size(kPrimMediaParamsDescs));
 
 inline void init_ruleset_builders(lua_State* L) {
-    auto set_particle_system = [](lua_State* L) -> int {
-        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-        int link = lua_isnoneornil(L, 2) ? SLUA_LINK_THIS : luaL_checkinteger(L, 2);
-        slua_ruleset_serialize(L, 1, def);
-        int rules_idx = lua_gettop(L);
-        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-        lua_rawgetfield(L, -1, "LinkParticleSystem");
-        lua_pushinteger(L, link);
-        lua_pushvalue(L, rules_idx);
-        lua_call(L, 2, 0);
-        return 0;
-    };
-    slua_register_ruleset_fn(L, "llprim", "setParticleSystem", set_particle_system, kParticleParamsDef);
-
-    auto set_media = [](lua_State* L) -> int {
-        const auto* def = (const RulesetBuilderDef*)lua_tolightuserdata(L, lua_upvalueindex(1));
-        int face = luaL_checkinteger(L, 1);
-        int link = lua_isnoneornil(L, 3) ? SLUA_LINK_THIS : luaL_checkinteger(L, 3);
-        slua_ruleset_serialize(L, 2, def);
-        int rules_idx = lua_gettop(L);
-        lua_rawgetfield(L, LUA_BASEGLOBALSINDEX, "ll");
-        lua_rawgetfield(L, -1, "SetLinkMedia");
-        lua_pushinteger(L, link);
-        lua_pushinteger(L, face);
-        lua_pushvalue(L, rules_idx);
-        lua_call(L, 3, 1);
-        return 1;
-    };
-    slua_register_ruleset_fn(L, "llprim", "setMedia", set_media, kPrimMediaParamsDef);
 }

@@ -486,19 +486,13 @@
             <key>name</key>
             <string>constant.numeric.hex.luau</string>
             <key>match</key>
-            <string>\b0_*[xX]_*[\da-fA-F][\da-fA-F_]*i?</string>
+            <string>\b0_*[xX]_*[\da-fA-F][\da-fA-F_]*</string>
           </dict>
           <dict>
             <key>name</key>
             <string>constant.numeric.binary.luau</string>
             <key>match</key>
-            <string>\b0_*[bB]_*[01][01_]*i?</string>
-          </dict>
-          <dict>
-            <key>name</key>
-            <string>constant.numeric.decimal.luau</string>
-            <key>match</key>
-            <string>\d[\d_]*i</string>
+            <string>\b0_*[bB]_*[01][01_]*</string>
           </dict>
           <dict>
             <key>name</key>

@@ -34,18 +34,21 @@ declare extern type vector with
   function __unm(self): vector
   function __mul(self, other: number | vector | quaternion): vector
   function __div(self, other: number | vector | quaternion): vector
+  function __idiv(self, other: number | vector): vector
   function __mod(self, other: vector): vector
   function __tostring(self): string
 end
 
 
 export type rotation = quaternion
-export type list = {string | number | vector | uuid | quaternion | boolean}
-type LLDetectedEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
-type LLNonDetectedEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
-type LLEventName = LLDetectedEventName | LLNonDetectedEventName
+export type LSLTypes = string | number | vector | uuid | quaternion
+export type LSLReadableTypes = LSLTypes | boolean
+export type list = {LSLReadableTypes}
+type LLMultiEventName = "collision" | "collision_end" | "collision_start" | "final_damage" | "on_damage" | "sensor" | "touch" | "touch_end" | "touch_start"
+type LLSingleEventName = "at_rot_target" | "at_target" | "attach" | "changed" | "control" | "dataserver" | "email" | "experience_permissions" | "experience_permissions_denied" | "game_control" | "http_request" | "http_response" | "land_collision" | "land_collision_end" | "land_collision_start" | "link_message" | "linkset_data" | "listen" | "money" | "moving_end" | "moving_start" | "no_sensor" | "not_at_rot_target" | "not_at_target" | "object_rez" | "on_death" | "on_rez" | "path_update" | "remote_data" | "run_time_permissions" | "timer" | "transaction_result"
+export type LLEventName = LLMultiEventName | LLSingleEventName
 type LLEventHandler = (...any) -> ()
-type LLDetectedEventHandler = (detected: {DetectedEvent}) -> ()
+type LLMultiEventHandler = (events: {DetectedEvent}) -> ()
 type LLTimerEveryCallback = (scheduled: number, interval: number) -> ()
 type LLTimerOnceCallback = (scheduled: number) -> ()
 type LLTimerCallback = LLTimerEveryCallback | LLTimerOnceCallback
@@ -85,73 +88,160 @@ type LLJsonDecodeOptionsWithPath = {
   reviver: (key: string | number, value: any, parent: {}?, ctx: {path: {string | number}}) -> any
 }
 export type LLJsonDecodeOptions = LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath
-export type ParticleParams = {
+export type AttachedListFilterParams = {
   flags: number?,
-  color_begin: vector?,
-  alpha_begin: number?,
-  color_end: vector?,
-  alpha_end: number?,
-  scale_begin: vector?,
-  scale_end: vector?,
-  part_max_age: number?,
+  huds: boolean?,
+  include: number?,
+}
+export type CameraParams = {
+  active: boolean?,
+  behindness_angle: number?,
+  behindness_lag: number?,
+  distance: number?,
+  focus: vector?,
+  focus_lag: number?,
+  focus_locked: boolean?,
+  focus_offset: vector?,
+  focus_threshold: number?,
+  pitch: number?,
+  position: vector?,
+  position_lag: number?,
+  position_locked: boolean?,
+  position_threshold: number?,
+}
+export type CharacterParams = {
+  account_for_skipped_frames: boolean?,
+  avoidance_mode: number?,
+  desired_speed: number?,
+  desired_turn_speed: number?,
+  length: number?,
+  max_accel: number?,
+  max_decel: number?,
+  max_speed: number?,
+  max_turn_radius: number?,
+  orientation: number?,
+  radius: number?,
+  stay_within_parcel: boolean?,
+  traversal_type: number?,
+  type: number?,
+}
+export type CharacterNavigateParams = {
+  force_direct_path: boolean?,
+}
+export type CharacterPatrolPointsParams = {
+  pause_at_waypoints: boolean?,
+}
+export type CharacterPursueParams = {
+  fuzz_factor: number?,
+  goal_tolerance: number?,
+  intercept: boolean?,
+  offset: vector?,
+  require_line_of_sight: boolean?,
+}
+export type CharacterWanderWithinParams = {
+  pause_at_waypoints: boolean?,
+}
+export type GetClosestNavPointParams = {
+  character_type: number?,
+  radius: number?,
+  static: boolean?,
+}
+export type GetStaticPathParams = {
+  character_type: number?,
+}
+export type GiveAgentInventoryParams = {
+  dest: string?,
+  flags: number?,
+}
+export type GltfOverrides = {
+  alpha: number?,
+  alpha_mask: number?,
+  alpha_mode: number?,
+  color: vector?,
+  double_sided: boolean?,
+  emmissive_color: vector?,
+  metalness: number?,
+  roughness: number?,
+}
+export type HttpRequestParams = {
+  accept: {string}?,
+  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
+  extended_error: boolean?,
+  max_body_length: number?,
+  method: string?,
+  mimetype: string?,
+  pragma_no_cache: boolean?,
+  user_agent: string?,
+  verbose_throttle: boolean?,
+  verify_cert: boolean?,
+}
+export type KeyframedMotionParams = {
+  command: number?,
+  data: number?,
+  mode: number?,
+  rotation: boolean?,
+  translation: boolean?,
+}
+export type ParcelSaleParams = {
+  agent: (string | uuid)?,
+  objects: boolean?,
+  price: number?,
+}
+export type ParticleParams = {
   accel: vector?,
-  pattern: number?,
-  angle_inner: number?,
-  angle_outer: number?,
-  texture: (string | uuid)?,
-  burst_rate: number?,
-  burst_count: number?,
-  burst_radius: number?,
-  burst_speed_min: number?,
-  burst_speed_max: number?,
-  src_max_age: number?,
-  target_key: (string | uuid)?,
-  omega: vector?,
+  alpha_begin: number?,
+  alpha_end: number?,
   angle_begin: number?,
   angle_end: number?,
-  blend_func_source: number?,
+  angle_inner: number?,
+  angle_outer: number?,
   blend_func_dest: number?,
-  glow_begin: number?,
-  glow_end: number?,
-  color_interp: boolean?,
-  scale_interp: boolean?,
+  blend_func_source: number?,
   bounce: boolean?,
-  wind: boolean?,
+  burst_count: number?,
+  burst_radius: number?,
+  burst_rate: number?,
+  burst_speed_max: number?,
+  burst_speed_min: number?,
+  color_begin: vector?,
+  color_end: vector?,
+  color_interp: boolean?,
+  emissive: boolean?,
+  flags: number?,
   follow: boolean?,
   follow_velocity: boolean?,
-  target_pos: boolean?,
-  target_linear: boolean?,
-  emissive: boolean?,
+  glow_begin: number?,
+  glow_end: number?,
+  omega: vector?,
+  part_max_age: number?,
+  pattern: number?,
   ribbon: boolean?,
+  scale_begin: vector?,
+  scale_end: vector?,
+  scale_interp: boolean?,
+  src_max_age: number?,
+  target_key: (string | uuid)?,
+  target_linear: boolean?,
+  target_pos: boolean?,
+  texture: (string | uuid)?,
+  wind: boolean?,
 }
-export type MediaParams = {
+export type PrimMediaParams = {
   alt_image_enable: boolean?,
-  controls: number?,
-  current_url: string?,
-  home_url: string?,
   auto_loop: boolean?,
   auto_play: boolean?,
   auto_scale: boolean?,
   auto_zoom: boolean?,
+  controls: number?,
+  current_url: string?,
   first_click_interact: boolean?,
-  width: number?,
   height: number?,
-  whitelist_enable: boolean?,
-  whitelist: {string}?,
-  perms_interact: number?,
+  home_url: string?,
   perms_control: number?,
-}
-export type HttpRequestParams = {
-  method: string?,
-  mimetype: string?,
-  max_body_length: number?,
-  verify_cert: boolean?,
-  verbose_throttle: boolean?,
-  custom_header: {[string]: string | number | boolean | vector | quaternion}?,
-  pragma_no_cache: boolean?,
-  user_agent: string?,
-  accept: {string}?,
-  extended_error: boolean?,
+  perms_interact: number?,
+  whitelist: {string}?,
+  whitelist_enable: boolean?,
+  width: number?,
 }
 
 declare extern type DetectedEvent with
@@ -184,15 +274,15 @@ declare extern type LLEvents with
   at_target: ((tnum: number, targetpos: vector, ourpos: vector) -> ())?
   attach: ((avatar: uuid) -> ())?
   changed: ((changes: number) -> ())?
-  collision: LLDetectedEventHandler?
-  collision_end: LLDetectedEventHandler?
-  collision_start: LLDetectedEventHandler?
+  collision: LLMultiEventHandler?
+  collision_end: LLMultiEventHandler?
+  collision_start: LLMultiEventHandler?
   control: ((id: uuid, level: number, edge: number) -> ())?
   dataserver: ((queryid: uuid, data: string) -> ())?
   email: ((time: string, address: string, subject: string, msg: string, num_left: number) -> ())?
   experience_permissions: ((agent_id: uuid) -> ())?
   experience_permissions_denied: ((agent_id: uuid, reason: number) -> ())?
-  final_damage: LLDetectedEventHandler?
+  final_damage: LLMultiEventHandler?
   game_control: ((id: uuid, button_levels: number, axes: {number}) -> ())?
   http_request: ((request_id: uuid, method: string, body: string) -> ())?
   http_response: ((request_id: uuid, status: number, metadata: {any}, body: string) -> ())?
@@ -209,24 +299,24 @@ declare extern type LLEvents with
   not_at_rot_target: (() -> ())?
   not_at_target: (() -> ())?
   object_rez: ((id: uuid) -> ())?
-  on_damage: LLDetectedEventHandler?
+  on_damage: LLMultiEventHandler?
   on_death: (() -> ())?
   on_rez: ((start_param: number) -> ())?
   path_update: ((type: number, reserved: {any}) -> ())?
   remote_data: ((event_type: number, channel: uuid, message_id: uuid, sender: string, idata: number, sdata: string) -> ())?
   run_time_permissions: ((perm: number) -> ())?
-  sensor: LLDetectedEventHandler?
+  sensor: LLMultiEventHandler?
   timer: (() -> ())?
-  touch: LLDetectedEventHandler?
-  touch_end: LLDetectedEventHandler?
-  touch_start: LLDetectedEventHandler?
+  touch: LLMultiEventHandler?
+  touch_end: LLMultiEventHandler?
+  touch_start: LLMultiEventHandler?
   transaction_result: ((id: uuid, success: boolean, data: string) -> ())?
-  on: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
-  off: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> boolean)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> boolean)
-  once: ((self: LLEvents, event: LLDetectedEventName, callback: LLDetectedEventHandler) -> LLDetectedEventHandler)
-    & ((self: LLEvents, event: LLNonDetectedEventName, callback: LLEventHandler) -> LLEventHandler)
+  on: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> LLMultiEventHandler)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> LLEventHandler)
+  off: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> boolean)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> boolean)
+  once: ((self: LLEvents, event: LLMultiEventName, callback: LLMultiEventHandler) -> LLMultiEventHandler)
+    & ((self: LLEvents, event: LLSingleEventName, callback: LLEventHandler) -> LLEventHandler)
   function handlers(self, event: LLEventName): {LLEventHandler}
   function eventNames(self): {string}
 end
@@ -237,64 +327,64 @@ declare extern type LLTimers with
   function off(self, callback: LLTimerCallback): boolean
 end
 
-export type PrimParamsSetterTypeMeta = {
-  __index: PrimParamsSetterTypeMeta,
-  new: () -> PrimParamsSetterType,
-  apply: (self: PrimParamsSetterType, link: number?) -> (),
-  targetLink: <T>(self: T & PrimParamsSetterType, link_target: number) -> T,
-  physicsMaterial: <T>(self: T & PrimParamsSetterType, flag: number) -> T,
-  physical: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
-  temporary: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
-  phantom: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
-  pos: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
-  size: <T>(self: T & PrimParamsSetterType, size: vector) -> T,
-  rot: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
-  primTypeBox: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
-  primTypeCylinder: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
-  primTypePrism: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
-  primTypeSphere: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, dimple: vector) -> T,
-  primTypeTorus: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
-  primTypeTube: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
-  primTypeRing: <T>(self: T & PrimParamsSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
-  primTypeSculpt: <T>(self: T & PrimParamsSetterType, texture: (string | uuid), sculpt_type: number) -> T,
-  texture: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
-  color: <T>(self: T & PrimParamsSetterType, face: number, color: vector, alpha: number) -> T,
-  shinyBump: <T>(self: T & PrimParamsSetterType, face: number, shiny: number, bump: number) -> T,
-  fullbright: <T>(self: T & PrimParamsSetterType, face: number, enabled: boolean) -> T,
-  flexible: <T>(self: T & PrimParamsSetterType, enabled: boolean, softness: number, gravity: number, friction: number, wind: number, tension: number, force: vector) -> T,
-  texgen: <T>(self: T & PrimParamsSetterType, face: number, mode: number) -> T,
-  pointLight: <T>(self: T & PrimParamsSetterType, enabled: boolean, linear_color: vector, intensity: number, radius: number, falloff: number) -> T,
-  glow: <T>(self: T & PrimParamsSetterType, face: number, intensity: number) -> T,
-  text: <T>(self: T & PrimParamsSetterType, text: string, color: vector, alpha: number) -> T,
-  name: <T>(self: T & PrimParamsSetterType, name: string) -> T,
-  description: <T>(self: T & PrimParamsSetterType, description: string) -> T,
-  rotLocal: <T>(self: T & PrimParamsSetterType, rot: quaternion) -> T,
-  physicsShapeType: <T>(self: T & PrimParamsSetterType, shape_type: number) -> T,
-  omega: <T>(self: T & PrimParamsSetterType, axis: vector, spinrate: number, gain: number) -> T,
-  posLocal: <T>(self: T & PrimParamsSetterType, position: vector) -> T,
-  slice: <T>(self: T & PrimParamsSetterType, slice: vector) -> T,
-  specular: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number, color: vector, glossiness: number, environment: number) -> T,
-  normal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
-  alphaMode: <T>(self: T & PrimParamsSetterType, face: number, alpha_mode: number, mask_cutoff: number) -> T,
-  allowUnsit: <T>(self: T & PrimParamsSetterType, allowed: boolean) -> T,
-  scriptedSitOnly: <T>(self: T & PrimParamsSetterType, enabled: boolean) -> T,
-  sitTarget: <T>(self: T & PrimParamsSetterType, active: boolean, offset: vector, rot: quaternion) -> T,
-  projector: <T>(self: T & PrimParamsSetterType, texture: string, fov: number, focus: number, ambiance: number) -> T,
-  clickAction: <T>(self: T & PrimParamsSetterType, action: number) -> T,
-  reflectionProbe: <T>(self: T & PrimParamsSetterType, enabled: boolean, ambiance: number, clip_distance: number, flags: number) -> T,
-  gltfNormal: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "") -> T,
-  gltfEmissive: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_emissive_tint: vector | "") -> T,
-  gltfMetallicRoughness: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", metallic_factor: number | "", roughness_factor: number | "") -> T,
-  gltfBaseColor: <T>(self: T & PrimParamsSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_color: vector | "", alpha: number | "", gltf_alpha_mode: number | "", alpha_mask_cutoff: number | "", double_sided: boolean | "") -> T,
-  renderMaterial: <T>(self: T & PrimParamsSetterType, face: number, render_material: (string | uuid)) -> T,
-  sitFlags: <T>(self: T & PrimParamsSetterType, flags: number) -> T,
-  damage: <T>(self: T & PrimParamsSetterType, damage: number, damage_type: number) -> T,
-  health: <T>(self: T & PrimParamsSetterType, health: number) -> T,
-  collisionSound: <T>(self: T & PrimParamsSetterType, sound: (string | uuid), volume: number) -> T,
+export type PrimParamSetterTypeMeta = {
+  __index: PrimParamSetterTypeMeta,
+  new: () -> PrimParamSetterType,
+  apply: (self: PrimParamSetterType, link: number?) -> (),
+  targetLink: <T>(self: T & PrimParamSetterType, link_target: number) -> T,
+  physicsMaterial: <T>(self: T & PrimParamSetterType, flag: number) -> T,
+  physical: <T>(self: T & PrimParamSetterType, enabled: boolean) -> T,
+  temporary: <T>(self: T & PrimParamSetterType, enabled: boolean) -> T,
+  phantom: <T>(self: T & PrimParamSetterType, enabled: boolean) -> T,
+  pos: <T>(self: T & PrimParamSetterType, position: vector) -> T,
+  size: <T>(self: T & PrimParamSetterType, size: vector) -> T,
+  rot: <T>(self: T & PrimParamSetterType, rot: quaternion) -> T,
+  primTypeBox: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeCylinder: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypePrism: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, top_size: vector, top_shear: vector) -> T,
+  primTypeSphere: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, dimple: vector) -> T,
+  primTypeTorus: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeTube: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeRing: <T>(self: T & PrimParamSetterType, hole_type: number, cut: vector, hollow: number, twist: vector, hole_size: vector, top_shear: vector, advanced_cut: vector, taper: vector, revolutions: number, radius_offset: number, skew: number) -> T,
+  primTypeSculpt: <T>(self: T & PrimParamSetterType, texture: (string | uuid), sculpt_type: number) -> T,
+  texture: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  color: <T>(self: T & PrimParamSetterType, face: number, color: vector, alpha: number) -> T,
+  shinyBump: <T>(self: T & PrimParamSetterType, face: number, shiny: number, bump: number) -> T,
+  fullbright: <T>(self: T & PrimParamSetterType, face: number, enabled: boolean) -> T,
+  flexible: <T>(self: T & PrimParamSetterType, enabled: boolean, softness: number, gravity: number, friction: number, wind: number, tension: number, force: vector) -> T,
+  texgen: <T>(self: T & PrimParamSetterType, face: number, mode: number) -> T,
+  pointLight: <T>(self: T & PrimParamSetterType, enabled: boolean, linear_color: vector, intensity: number, radius: number, falloff: number) -> T,
+  glow: <T>(self: T & PrimParamSetterType, face: number, intensity: number) -> T,
+  text: <T>(self: T & PrimParamSetterType, text: string, color: vector, alpha: number) -> T,
+  name: <T>(self: T & PrimParamSetterType, name: string) -> T,
+  description: <T>(self: T & PrimParamSetterType, description: string) -> T,
+  rotLocal: <T>(self: T & PrimParamSetterType, rot: quaternion) -> T,
+  physicsShapeType: <T>(self: T & PrimParamSetterType, shape_type: number) -> T,
+  omega: <T>(self: T & PrimParamSetterType, axis: vector, spinrate: number, gain: number) -> T,
+  posLocal: <T>(self: T & PrimParamSetterType, position: vector) -> T,
+  slice: <T>(self: T & PrimParamSetterType, slice: vector) -> T,
+  specular: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number, color: vector, glossiness: number, environment: number) -> T,
+  normal: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid), repeats: vector, offsets: vector, rotation_in_radians: number) -> T,
+  alphaMode: <T>(self: T & PrimParamSetterType, face: number, alpha_mode: number, mask_cutoff: number) -> T,
+  allowUnsit: <T>(self: T & PrimParamSetterType, allowed: boolean) -> T,
+  scriptedSitOnly: <T>(self: T & PrimParamSetterType, enabled: boolean) -> T,
+  sitTarget: <T>(self: T & PrimParamSetterType, active: boolean, offset: vector, rot: quaternion) -> T,
+  projector: <T>(self: T & PrimParamSetterType, texture: string, fov: number, focus: number, ambiance: number) -> T,
+  clickAction: <T>(self: T & PrimParamSetterType, action: number) -> T,
+  reflectionProbe: <T>(self: T & PrimParamSetterType, enabled: boolean, ambiance: number, clip_distance: number, flags: number) -> T,
+  gltfNormal: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "") -> T,
+  gltfEmissive: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_emissive_tint: vector | "") -> T,
+  gltfMetallicRoughness: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", metallic_factor: number | "", roughness_factor: number | "") -> T,
+  gltfBaseColor: <T>(self: T & PrimParamSetterType, face: number, texture: (string | uuid) | "", repeats: vector | "", offsets: vector | "", rotation_in_radians: number | "", linear_color: vector | "", alpha: number | "", gltf_alpha_mode: number | "", alpha_mask_cutoff: number | "", double_sided: boolean | "") -> T,
+  renderMaterial: <T>(self: T & PrimParamSetterType, face: number, render_material: (string | uuid)) -> T,
+  sitFlags: <T>(self: T & PrimParamSetterType, flags: number) -> T,
+  damage: <T>(self: T & PrimParamSetterType, damage: number, damage_type: number) -> T,
+  health: <T>(self: T & PrimParamSetterType, health: number) -> T,
+  collisionSound: <T>(self: T & PrimParamSetterType, sound: (string | uuid), volume: number) -> T,
 }
 
-export type PrimParamsSetterType = typeof(
-  setmetatable((nil :: any) :: {any}, (nil :: any) :: PrimParamsSetterTypeMeta)
+export type PrimParamSetterType = typeof(
+  setmetatable((nil :: any) :: {any}, (nil :: any) :: PrimParamSetterTypeMeta)
 )
 
 
@@ -307,8 +397,8 @@ declare getfenv: nil
 declare function ipairs<V>(tab: {V}): (({V}, number) -> (number?, V), {V}, number)
 declare loadstring: nil
 @checked declare function newproxy(mt: boolean?): any
--- declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V) -- builtin
--- declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K) -- builtin
+declare function next<K, V>(t: {[K]: V}, i: K?): (K?, V)
+declare function pairs<K, V>(t: {[K]: V}): (({[K]: V}, K?) -> (K?, V), {[K]: V}, K)
 -- declare function pcall<A..., R...>(f: (A...) -> R..., ...: A...): (boolean, R...) -- magic type
 declare function print<T...>(...: T...): ()
 declare function rawequal<T1, T2>(a: T1, b: T2): boolean
@@ -368,7 +458,6 @@ declare buffer: {
   readi16: @checked (b: buffer, offset: number) -> number,
   readu16: @checked (b: buffer, offset: number) -> number,
   readi32: @checked (b: buffer, offset: number) -> number,
-  readinteger: @checked (b: buffer, offset: number) -> integer,
   readu32: @checked (b: buffer, offset: number) -> number,
   readf32: @checked (b: buffer, offset: number) -> number,
   readf64: @checked (b: buffer, offset: number) -> number,
@@ -377,7 +466,6 @@ declare buffer: {
   writei16: @checked (b: buffer, offset: number, value: number) -> (),
   writeu16: @checked (b: buffer, offset: number, value: number) -> (),
   writei32: @checked (b: buffer, offset: number, value: number) -> (),
-  writeinteger: @checked (b: buffer, offset: number, value: integer) -> (),
   writeu32: @checked (b: buffer, offset: number, value: number) -> (),
   writef32: @checked (b: buffer, offset: number, value: number) -> (),
   writef64: @checked (b: buffer, offset: number, value: number) -> (),
@@ -421,55 +509,6 @@ declare debug: {
 
 
 ---------------------------
--- Global Table: integer
----------------------------
-
-declare integer: {
-  maxsigned: integer,
-  minsigned: integer,
-  add: @checked (int1: integer, int2: integer) -> integer,
-  arshift: @checked (val: integer, i: integer) -> integer,
-  band: @checked (...integer) -> integer,
-  bnot: @checked (val: integer) -> integer,
-  bor: @checked (...integer) -> integer,
-  bxor: @checked (...integer) -> integer,
-  bswap: @checked (val: integer) -> integer,
-  btest: @checked (...integer) -> boolean,
-  clamp: @checked (val: integer, min: integer, max: integer) -> integer,
-  countlz: @checked (val: integer) -> integer,
-  countrz: @checked (val: integer) -> integer,
-  create: @checked (val: number) -> integer?,
-  div: @checked (dividend: integer, divisor: integer) -> integer,
-  extract: @checked (src: integer, field: integer, width: integer?) -> integer,
-  fromstring: (value: string, base: number?) -> integer?,
-  ge: @checked (int1: integer, int2: integer) -> boolean,
-  gt: @checked (int1: integer, int2: integer) -> boolean,
-  idiv: @checked (dividend: integer, divisor: integer) -> integer,
-  le: @checked (int1: integer, int2: integer) -> boolean,
-  lt: @checked (int1: integer, int2: integer) -> boolean,
-  lrotate: @checked (val: integer, i: integer) -> integer,
-  lshift: @checked (val: integer, i: integer) -> integer,
-  max: @checked (val: integer, ...integer) -> integer,
-  min: @checked (val: integer, ...integer) -> integer,
-  mod: @checked (dividend: integer, divisor: integer) -> integer,
-  mul: @checked (int1: integer, int2: integer) -> integer,
-  neg: @checked (val: integer) -> integer,
-  rem: @checked (dividend: integer, divisor: integer) -> integer,
-  replace: @checked (dst: integer, src: integer, field: integer, width: integer?) -> integer,
-  rrotate: @checked (val: integer, i: integer) -> integer,
-  rshift: @checked (val: integer, i: integer) -> integer,
-  sub: @checked (int1: integer, int2: integer) -> integer,
-  tonumber: (val: integer) -> number,
-  udiv: @checked (dividend: integer, divisor: integer) -> integer,
-  uge: @checked (int1: integer, int2: integer) -> boolean,
-  ugt: @checked (int1: integer, int2: integer) -> boolean,
-  ule: @checked (int1: integer, int2: integer) -> boolean,
-  ult: @checked (int1: integer, int2: integer) -> boolean,
-  urem: @checked (dividend: integer, divisor: integer) -> integer,
-}
-
-
----------------------------
 -- Global Table: llbase64
 ---------------------------
 
@@ -503,9 +542,7 @@ declare lljson: {
 ---------------------------
 
 declare llprim: {
-  ParamsSetter: PrimParamsSetterTypeMeta,
-  setParticleSystem: (params: ParticleParams?, link: number?) -> (),
-  setMedia: (face: number, params: MediaParams?, link: number?) -> number,
+  ParamSetter: PrimParamSetterTypeMeta,
 }
 
 
@@ -639,7 +676,8 @@ declare table: {
   pack: <V>(...V) -> { n: number, [number]: V }, -- magic type
   unpack: <V>(a: {V}, i: number?, j: number?) -> ...V,
   move: <V>(src: {V}, i: number, j: number, d: number, dest: {V}?) -> {V},
-  create: <V>(n: number, v: V?) -> {V},
+  create: (<V>(n: number, v: V) -> {V})
+    & ((n: number) -> {any}),
   find: <V>(t: {V}, v: V, i: number?) -> number?,
   clear: (t: {}) -> (),
   shrink: <V>(t: {V}, shrink_sparse: boolean?) -> {V},
@@ -741,7 +779,7 @@ declare ll: {
   CollisionSprite: @deprecated (impact_sprite: string | uuid) -> (),
   ComputeHash: (message: string, algorithm: string) -> string,
   Cos: @[deprecated {use='math.cos', reason='Double precision; fastcall.'}](theta: number) -> number,
-  CreateCharacter: (options: list) -> (),
+  CreateCharacter: (options: list | CharacterParams) -> (),
   CreateKeyValue: (k: string, v: string) -> uuid,
   CreateLink: (target: uuid, parent: boolean | number) -> (),
   Damage: (target: uuid, damage: number, damage_type: number) -> (),
@@ -781,7 +819,7 @@ declare ll: {
   Evade: (target: uuid, options: list) -> (),
   ExecCharacterCmd: (command: number, options: list) -> (),
   Fabs: @[deprecated {use='math.abs', reason='Double precision; fastcall.'}](val: number) -> number,
-  FindNotecardTextCount: (notecardname: string | uuid, pattern: string, options: list) -> uuid,
+  FindNotecardTextCount: (name: string | uuid, pattern: string, options: list) -> uuid,
   FindNotecardTextSync: (name: string | uuid, pattern: string, start: number, count: number, options: list) -> {any},
   FleeFrom: (position: vector, distance: number, options: list) -> (),
   Floor: @[deprecated {use='math.floor', reason='Fastcall.'}](val: number) -> number,
@@ -799,14 +837,14 @@ declare ll: {
   GetAnimationOverride: (anim_state: string) -> string,
   GetAttached: () -> number,
   GetAttachedList: (avatar: uuid) -> {uuid} | {string},
-  GetAttachedListFiltered: (avatar: uuid, options: list) -> {uuid} | {string},
+  GetAttachedListFiltered: (avatar: uuid, options: list | AttachedListFilterParams) -> {uuid} | {string},
   GetBoundingBox: (object: uuid) -> {vector},
   GetCameraAspect: () -> number,
   GetCameraFOV: () -> number,
   GetCameraPos: () -> vector,
   GetCameraRot: () -> quaternion,
   GetCenterOfMass: () -> vector,
-  GetClosestNavPoint: (point: vector, options: list) -> {vector},
+  GetClosestNavPoint: (point: vector, options: list | GetClosestNavPointParams) -> {vector},
   GetColor: (face: number) -> vector,
   GetCreator: () -> uuid,
   GetDate: () -> string,
@@ -822,6 +860,9 @@ declare ll: {
   GetFreeMemory: () -> number,
   GetFreeURLs: () -> number,
   GetGMTclock: () -> number,
+  GetGameControlMode: (id: uuid) -> number,
+  GetGameControlModeAxes: (id: uuid) -> {number},
+  GetGameControlModeButtons: (id: uuid) -> number,
   GetGeometricCenter: () -> vector,
   GetHTTPHeader: (request_id: uuid, header: string) -> string,
   GetHealth: (id: uuid) -> number,
@@ -907,7 +948,7 @@ declare ll: {
   GetSimulatorHostname: () -> string,
   GetStartParameter: () -> number,
   GetStartString: () -> string,
-  GetStaticPath: (start_pos: vector, end_pos: vector, radius: number, params: list) -> {any},
+  GetStaticPath: (start_pos: vector, end_pos: vector, radius: number, params: list | GetStaticPathParams) -> {any},
   GetStatus: (status: number) -> boolean,
   GetSubString: (src: string, start_index: number, end_index: number) -> string,
   GetSunDirection: () -> vector,
@@ -926,7 +967,7 @@ declare ll: {
   GetVel: () -> vector,
   GetVisualParams: (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: () -> number,
-  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: (target: uuid, item: string) -> (),
   GiveInventoryList: (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: (destination: uuid, amount: number) -> number,
@@ -1017,7 +1058,7 @@ declare ll: {
   ModifyLand: (action: number, brush: number) -> (),
   MoveToTarget: (target: vector, tau: number) -> (),
   Name2Key: (name: string) -> uuid,
-  NavigateTo: (pos: vector, options: list) -> (),
+  NavigateTo: (pos: vector, options: list | CharacterNavigateParams) -> (),
   OffsetTexture: (u: number, v: number, face: number) -> (),
   OpenFloater: (floater_name: string, url: string, params: list) -> number,
   OpenRemoteDataChannel: @deprecated () -> (),
@@ -1031,12 +1072,12 @@ declare ll: {
   ParticleSystem: (rules: list | ParticleParams) -> (),
   PassCollisions: (pass: number) -> (),
   PassTouches: (pass: number) -> (),
-  PatrolPoints: (patrolPoints: {vector}, options: list) -> (),
+  PatrolPoints: (patrolPoints: {vector}, options: list | CharacterPatrolPointsParams) -> (),
   PlaySound: (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: (sound: string | uuid, volume: number) -> (),
   Pow: @[deprecated {use='^', reason='Double precision; operator.'}](base: number, exponent: number) -> number,
   PreloadSound: (sound: string | uuid) -> (),
-  Pursue: (target: uuid, options: list) -> (),
+  Pursue: (target: uuid, options: list | CharacterPursueParams) -> (),
   PushObject: (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
   ReadKeyValue: (k: string) -> uuid,
   RefreshPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}]() -> (),
@@ -1107,7 +1148,7 @@ declare ll: {
   SetBuoyancy: (buoyancy: number) -> (),
   SetCameraAtOffset: (offset: vector) -> (),
   SetCameraEyeOffset: (offset: vector) -> (),
-  SetCameraParams: (rules: list) -> (),
+  SetCameraParams: (rules: list | CameraParams) -> (),
   SetClickAction: (action: number) -> (),
   SetColor: (color: vector, face: number) -> (),
   SetContentType: (request_id: uuid, content_type: number) -> (),
@@ -1118,12 +1159,12 @@ declare ll: {
   SetGroundTexture: (changes: list) -> number,
   SetHoverHeight: (height: number, water: boolean | number, tau: number) -> (),
   SetInventoryPermMask: (item: string, group: number, flags: number) -> (),
-  SetKeyframedMotion: (keyframes: list, options: list) -> (),
+  SetKeyframedMotion: (keyframes: list, options: list | KeyframedMotionParams) -> (),
   SetLinkAlpha: (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: (link: number, color: vector, face: number) -> (),
-  SetLinkGLTFOverrides: (link: number, face: number, params: list) -> (),
-  SetLinkMedia: (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkGLTFOverrides: (link: number, face: number, params: list | GltfOverrides) -> (),
+  SetLinkMedia: (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: (link: number, rules: list) -> (),
   SetLinkRenderMaterial: (link: number, material: string | uuid, face: number) -> (),
@@ -1134,12 +1175,12 @@ declare ll: {
   SetObjectDesc: (description: string) -> (),
   SetObjectName: (name: string) -> (),
   SetObjectPermMask: (group: number, flags: number) -> (),
-  SetParcelForSale: (ForSale: boolean | number, Options: list) -> number,
+  SetParcelForSale: (ForSale: boolean | number, Options: list | ParcelSaleParams) -> number,
   SetParcelMusicURL: (url: string) -> (),
   SetPayPrice: (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: (pos: vector) -> (),
-  SetPrimMediaParams: (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @[deprecated {use='ll.SetPrimMediaParams'}](url: string) -> (),
   SetPrimitiveParams: @[deprecated {use='ll.SetLinkPrimitiveParamsFast'}](rules: list) -> (),
   SetRegionPos: (position: vector) -> boolean,
@@ -1203,14 +1244,14 @@ declare ll: {
   TriggerSoundLimited: (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
   UnSit: (id: uuid) -> (),
   UnescapeURL: (url: string) -> string,
-  UpdateCharacter: (options: list) -> (),
+  UpdateCharacter: (options: list | CharacterParams) -> (),
   UpdateKeyValue: (k: string, v: string, checked: boolean | number, original_value: string) -> uuid,
   VecDist: @[deprecated {use='vector.magnitude', reason="It's a fastcall."}](vec_a: vector, vec_b: vector) -> number,
   VecMag: @[deprecated {use='vector.magnitude', reason="It's a fastcall."}](vec: vector) -> number,
   VecNorm: @[deprecated {use='vector.normalize', reason="It's a fastcall."}](vec: vector) -> vector,
   VerifyRSA: (public_key: string, msg: string, signature: string, algorithm: string) -> boolean,
   VolumeDetect: (detect: boolean | number) -> (),
-  WanderWithin: (origin: vector, dist: vector, options: list) -> (),
+  WanderWithin: (origin: vector, dist: vector, options: list | CharacterWanderWithinParams) -> (),
   Water: (offset: vector) -> number,
   Whisper: (channel: number, msg: string) -> (),
   Wind: (offset: vector) -> vector,
@@ -1264,7 +1305,7 @@ declare llcompat: {
   CollisionSprite: @deprecated (impact_sprite: string | uuid) -> (),
   ComputeHash: @deprecated (message: string, algorithm: string) -> string,
   Cos: @deprecated (theta: number) -> number,
-  CreateCharacter: @deprecated (options: list) -> (),
+  CreateCharacter: @deprecated (options: list | CharacterParams) -> (),
   CreateKeyValue: @deprecated (k: string, v: string) -> uuid,
   CreateLink: @deprecated (target: uuid, parent: boolean | number) -> (),
   Damage: @deprecated (target: uuid, damage: number, damage_type: number) -> (),
@@ -1304,7 +1345,7 @@ declare llcompat: {
   Evade: @deprecated (target: uuid, options: list) -> (),
   ExecCharacterCmd: @deprecated (command: number, options: list) -> (),
   Fabs: @deprecated (val: number) -> number,
-  FindNotecardTextCount: @deprecated (notecardname: string | uuid, pattern: string, options: list) -> uuid,
+  FindNotecardTextCount: @deprecated (name: string | uuid, pattern: string, options: list) -> uuid,
   FindNotecardTextSync: @deprecated (name: string | uuid, pattern: string, start: number, count: number, options: list) -> {any},
   FleeFrom: @deprecated (position: vector, distance: number, options: list) -> (),
   Floor: @deprecated (val: number) -> number,
@@ -1323,14 +1364,14 @@ declare llcompat: {
   GetAnimationOverride: @deprecated (anim_state: string) -> string,
   GetAttached: @deprecated () -> number,
   GetAttachedList: @deprecated (avatar: uuid) -> {uuid} | {string},
-  GetAttachedListFiltered: @deprecated (avatar: uuid, options: list) -> {uuid} | {string},
+  GetAttachedListFiltered: @deprecated (avatar: uuid, options: list | AttachedListFilterParams) -> {uuid} | {string},
   GetBoundingBox: @deprecated (object: uuid) -> {vector},
   GetCameraAspect: @deprecated () -> number,
   GetCameraFOV: @deprecated () -> number,
   GetCameraPos: @deprecated () -> vector,
   GetCameraRot: @deprecated () -> quaternion,
   GetCenterOfMass: @deprecated () -> vector,
-  GetClosestNavPoint: @deprecated (point: vector, options: list) -> {vector},
+  GetClosestNavPoint: @deprecated (point: vector, options: list | GetClosestNavPointParams) -> {vector},
   GetColor: @deprecated (face: number) -> vector,
   GetCreator: @deprecated () -> uuid,
   GetDate: @deprecated () -> string,
@@ -1346,6 +1387,9 @@ declare llcompat: {
   GetFreeMemory: @deprecated () -> number,
   GetFreeURLs: @deprecated () -> number,
   GetGMTclock: @deprecated () -> number,
+  GetGameControlMode: @deprecated (id: uuid) -> number,
+  GetGameControlModeAxes: @deprecated (id: uuid) -> {number},
+  GetGameControlModeButtons: @deprecated (id: uuid) -> number,
   GetGeometricCenter: @deprecated () -> vector,
   GetHTTPHeader: @deprecated (request_id: uuid, header: string) -> string,
   GetHealth: @deprecated (id: uuid) -> number,
@@ -1431,7 +1475,7 @@ declare llcompat: {
   GetSimulatorHostname: @deprecated () -> string,
   GetStartParameter: @deprecated () -> number,
   GetStartString: @deprecated () -> string,
-  GetStaticPath: @deprecated (start_pos: vector, end_pos: vector, radius: number, params: list) -> {any},
+  GetStaticPath: @deprecated (start_pos: vector, end_pos: vector, radius: number, params: list | GetStaticPathParams) -> {any},
   GetStatus: @deprecated (status: number) -> number,
   GetSubString: @deprecated (src: string, start_index: number, end_index: number) -> string,
   GetSunDirection: @deprecated () -> vector,
@@ -1450,7 +1494,7 @@ declare llcompat: {
   GetVel: @deprecated () -> vector,
   GetVisualParams: @deprecated (agentid: uuid, params: {number | string}) -> {number | ""},
   GetWallclock: @deprecated () -> number,
-  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list) -> number,
+  GiveAgentInventory: @deprecated (agent: uuid, folder: string, items: {string}, options: list | GiveAgentInventoryParams) -> number,
   GiveInventory: @deprecated (target: uuid, item: string) -> (),
   GiveInventoryList: @deprecated (target: uuid, folder: string, items: {string}) -> (),
   GiveMoney: @deprecated (destination: uuid, amount: number) -> number,
@@ -1541,7 +1585,7 @@ declare llcompat: {
   ModifyLand: @deprecated (action: number, brush: number) -> (),
   MoveToTarget: @deprecated (target: vector, tau: number) -> (),
   Name2Key: @deprecated (name: string) -> uuid,
-  NavigateTo: @deprecated (pos: vector, options: list) -> (),
+  NavigateTo: @deprecated (pos: vector, options: list | CharacterNavigateParams) -> (),
   OffsetTexture: @deprecated (u: number, v: number, face: number) -> (),
   OpenFloater: @deprecated (floater_name: string, url: string, params: list) -> number,
   OpenRemoteDataChannel: @deprecated () -> (),
@@ -1555,12 +1599,12 @@ declare llcompat: {
   ParticleSystem: @deprecated (rules: list | ParticleParams) -> (),
   PassCollisions: @deprecated (pass: number) -> (),
   PassTouches: @deprecated (pass: number) -> (),
-  PatrolPoints: @deprecated (patrolPoints: {vector}, options: list) -> (),
+  PatrolPoints: @deprecated (patrolPoints: {vector}, options: list | CharacterPatrolPointsParams) -> (),
   PlaySound: @deprecated (sound: string | uuid, volume: number) -> (),
   PlaySoundSlave: @deprecated (sound: string | uuid, volume: number) -> (),
   Pow: @deprecated (base: number, exponent: number) -> number,
   PreloadSound: @deprecated (sound: string | uuid) -> (),
-  Pursue: @deprecated (target: uuid, options: list) -> (),
+  Pursue: @deprecated (target: uuid, options: list | CharacterPursueParams) -> (),
   PushObject: @deprecated (target: uuid, impulse: vector, ang_impulse: vector, is_local: boolean | number) -> (),
   ReadKeyValue: @deprecated (k: string) -> uuid,
   RefreshPrimURL: @deprecated () -> (),
@@ -1632,7 +1676,7 @@ declare llcompat: {
   SetBuoyancy: @deprecated (buoyancy: number) -> (),
   SetCameraAtOffset: @deprecated (offset: vector) -> (),
   SetCameraEyeOffset: @deprecated (offset: vector) -> (),
-  SetCameraParams: @deprecated (rules: list) -> (),
+  SetCameraParams: @deprecated (rules: list | CameraParams) -> (),
   SetClickAction: @deprecated (action: number) -> (),
   SetColor: @deprecated (color: vector, face: number) -> (),
   SetContentType: @deprecated (request_id: uuid, content_type: number) -> (),
@@ -1643,12 +1687,12 @@ declare llcompat: {
   SetGroundTexture: @deprecated (changes: list) -> number,
   SetHoverHeight: @deprecated (height: number, water: boolean | number, tau: number) -> (),
   SetInventoryPermMask: @deprecated (item: string, group: number, flags: number) -> (),
-  SetKeyframedMotion: @deprecated (keyframes: list, options: list) -> (),
+  SetKeyframedMotion: @deprecated (keyframes: list, options: list | KeyframedMotionParams) -> (),
   SetLinkAlpha: @deprecated (link: number, alpha: number, face: number) -> (),
   SetLinkCamera: @deprecated (link: number, eye: vector, at: vector) -> (),
   SetLinkColor: @deprecated (link: number, color: vector, face: number) -> (),
-  SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list) -> (),
-  SetLinkMedia: @deprecated (link: number, face: number, params: list | MediaParams) -> number,
+  SetLinkGLTFOverrides: @deprecated (link: number, face: number, params: list | GltfOverrides) -> (),
+  SetLinkMedia: @deprecated (link: number, face: number, params: list | PrimMediaParams) -> number,
   SetLinkPrimitiveParams: @deprecated (link: number, rules: list) -> (),
   SetLinkPrimitiveParamsFast: @deprecated (link: number, rules: list) -> (),
   SetLinkRenderMaterial: @deprecated (link: number, material: string | uuid, face: number) -> (),
@@ -1660,12 +1704,12 @@ declare llcompat: {
   SetObjectDesc: @deprecated (description: string) -> (),
   SetObjectName: @deprecated (name: string) -> (),
   SetObjectPermMask: @deprecated (group: number, flags: number) -> (),
-  SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list) -> number,
+  SetParcelForSale: @deprecated (ForSale: boolean | number, Options: list | ParcelSaleParams) -> number,
   SetParcelMusicURL: @deprecated (url: string) -> (),
   SetPayPrice: @deprecated (price: number, quick_pay_buttons: {number}) -> (),
   SetPhysicsMaterial: @deprecated (mask: number, gravity_multiplier: number, restitution: number, friction: number, density: number) -> (),
   SetPos: @deprecated (pos: vector) -> (),
-  SetPrimMediaParams: @deprecated (face: number, params: list | MediaParams) -> number,
+  SetPrimMediaParams: @deprecated (face: number, params: list | PrimMediaParams) -> number,
   SetPrimURL: @deprecated (url: string) -> (),
   SetPrimitiveParams: @deprecated (rules: list) -> (),
   SetRegionPos: @deprecated (position: vector) -> number,
@@ -1730,14 +1774,14 @@ declare llcompat: {
   TriggerSoundLimited: @deprecated (sound: string | uuid, volume: number, top_north_east: vector, bottom_south_west: vector) -> (),
   UnSit: @deprecated (id: uuid) -> (),
   UnescapeURL: @deprecated (url: string) -> string,
-  UpdateCharacter: @deprecated (options: list) -> (),
+  UpdateCharacter: @deprecated (options: list | CharacterParams) -> (),
   UpdateKeyValue: @deprecated (k: string, v: string, checked: boolean | number, original_value: string) -> uuid,
   VecDist: @deprecated (vec_a: vector, vec_b: vector) -> number,
   VecMag: @deprecated (vec: vector) -> number,
   VecNorm: @deprecated (vec: vector) -> vector,
   VerifyRSA: @deprecated (public_key: string, msg: string, signature: string, algorithm: string) -> number,
   VolumeDetect: @deprecated (detect: boolean | number) -> (),
-  WanderWithin: @deprecated (origin: vector, dist: vector, options: list) -> (),
+  WanderWithin: @deprecated (origin: vector, dist: vector, options: list | CharacterWanderWithinParams) -> (),
   Water: @deprecated (offset: vector) -> number,
   Whisper: @deprecated (channel: number, msg: string) -> (),
   Wind: @deprecated (offset: vector) -> vector,
@@ -1975,33 +2019,84 @@ declare FILTER_FLAG_HUDS: number
 declare FILTER_INCLUDE: number
 declare FORCE_DIRECT_PATH: number
 declare FRICTION: number
+declare GAME_CONTROL_AXIS_ADVANCE: number
+declare GAME_CONTROL_AXIS_BOOM: number
+declare GAME_CONTROL_AXIS_DOLLY: number
 declare GAME_CONTROL_AXIS_LEFTX: number
 declare GAME_CONTROL_AXIS_LEFTY: number
+declare GAME_CONTROL_AXIS_LEFT_TRIGGER: number
+declare GAME_CONTROL_AXIS_LOOK: number
+declare GAME_CONTROL_AXIS_PAN: number
 declare GAME_CONTROL_AXIS_RIGHTX: number
 declare GAME_CONTROL_AXIS_RIGHTY: number
+declare GAME_CONTROL_AXIS_RIGHT_TRIGGER: number
+declare GAME_CONTROL_AXIS_RISE: number
+declare GAME_CONTROL_AXIS_ROLL: number
+declare GAME_CONTROL_AXIS_STRAFE: number
+declare GAME_CONTROL_AXIS_TILT: number
 declare GAME_CONTROL_AXIS_TRIGGERLEFT: number
 declare GAME_CONTROL_AXIS_TRIGGERRIGHT: number
+declare GAME_CONTROL_AXIS_TRUCK: number
+declare GAME_CONTROL_AXIS_TURN: number
+declare GAME_CONTROL_AXIS_ZOOM: number
 declare GAME_CONTROL_BUTTON_A: number
+declare GAME_CONTROL_BUTTON_ADVANCE_BACK: number
+declare GAME_CONTROL_BUTTON_ADVANCE_FORWARD: number
 declare GAME_CONTROL_BUTTON_B: number
 declare GAME_CONTROL_BUTTON_BACK: number
+declare GAME_CONTROL_BUTTON_CROUCH: number
+declare GAME_CONTROL_BUTTON_CURSOR_BUTTON_LEFT: number
+declare GAME_CONTROL_BUTTON_CURSOR_BUTTON_RIGHT: number
+declare GAME_CONTROL_BUTTON_DOLLY_BACK: number
+declare GAME_CONTROL_BUTTON_DOLLY_FORWARD: number
 declare GAME_CONTROL_BUTTON_DPAD_DOWN: number
 declare GAME_CONTROL_BUTTON_DPAD_LEFT: number
 declare GAME_CONTROL_BUTTON_DPAD_RIGHT: number
 declare GAME_CONTROL_BUTTON_DPAD_UP: number
+declare GAME_CONTROL_BUTTON_EAST: number
 declare GAME_CONTROL_BUTTON_GUIDE: number
+declare GAME_CONTROL_BUTTON_HOME: number
+declare GAME_CONTROL_BUTTON_JUMP: number
 declare GAME_CONTROL_BUTTON_LEFTSHOULDER: number
 declare GAME_CONTROL_BUTTON_LEFTSTICK: number
 declare GAME_CONTROL_BUTTON_MISC1: number
+declare GAME_CONTROL_BUTTON_NORTH: number
 declare GAME_CONTROL_BUTTON_PADDLE1: number
 declare GAME_CONTROL_BUTTON_PADDLE2: number
 declare GAME_CONTROL_BUTTON_PADDLE3: number
 declare GAME_CONTROL_BUTTON_PADDLE4: number
+declare GAME_CONTROL_BUTTON_PAN_LEFT: number
+declare GAME_CONTROL_BUTTON_PAN_RIGHT: number
+declare GAME_CONTROL_BUTTON_RESET: number
 declare GAME_CONTROL_BUTTON_RIGHTSHOULDER: number
 declare GAME_CONTROL_BUTTON_RIGHTSTICK: number
+declare GAME_CONTROL_BUTTON_ROLL_CCW: number
+declare GAME_CONTROL_BUTTON_ROLL_CW: number
+declare GAME_CONTROL_BUTTON_SELECT: number
+declare GAME_CONTROL_BUTTON_SIT: number
+declare GAME_CONTROL_BUTTON_SOUTH: number
 declare GAME_CONTROL_BUTTON_START: number
+declare GAME_CONTROL_BUTTON_STRAFE_LEFT: number
+declare GAME_CONTROL_BUTTON_STRAFE_RIGHT: number
+declare GAME_CONTROL_BUTTON_TOGGLE_ALT_ZOOM: number
+declare GAME_CONTROL_BUTTON_TOGGLE_CURSOR: number
+declare GAME_CONTROL_BUTTON_TOGGLE_FLYCAM: number
+declare GAME_CONTROL_BUTTON_TOGGLE_FOLLOW: number
+declare GAME_CONTROL_BUTTON_TOGGLE_MOUSELOOK: number
+declare GAME_CONTROL_BUTTON_TOGGLE_SPEAK: number
 declare GAME_CONTROL_BUTTON_TOUCHPAD: number
+declare GAME_CONTROL_BUTTON_TRUCK_LEFT: number
+declare GAME_CONTROL_BUTTON_TRUCK_RIGHT: number
+declare GAME_CONTROL_BUTTON_WEST: number
 declare GAME_CONTROL_BUTTON_X: number
 declare GAME_CONTROL_BUTTON_Y: number
+declare GAME_CONTROL_BUTTON_ZOOM_IN: number
+declare GAME_CONTROL_BUTTON_ZOOM_OUT: number
+declare GAME_CONTROL_MODE_AVATAR: number
+declare GAME_CONTROL_MODE_CAPTIVE: number
+declare GAME_CONTROL_MODE_CURSOR: number
+declare GAME_CONTROL_MODE_FLYCAM: number
+declare GAME_CONTROL_MODE_MOUSELOOK: number
 declare GCNP_RADIUS: number
 declare GCNP_STATIC: number
 declare GRAVITY_MULTIPLIER: number
@@ -2260,6 +2355,7 @@ declare PERMISSION_CHANGE_LINKS: number
 declare PERMISSION_CHANGE_PERMISSIONS: number
 declare PERMISSION_CONTROL_CAMERA: number
 declare PERMISSION_DEBIT: number
+declare PERMISSION_GAME_CONTROL: number
 declare PERMISSION_OVERRIDE_ANIMATIONS: number
 declare PERMISSION_PRIVILEGED_LAND_ACCESS: number
 declare PERMISSION_RELEASE_OWNERSHIP: number
@@ -2523,6 +2619,7 @@ declare REZ_FLAGS: number
 declare REZ_FLAG_BLOCK_GRAB_OBJECT: number
 declare REZ_FLAG_DIE_ON_COLLIDE: number
 declare REZ_FLAG_DIE_ON_NOENTRY: number
+declare REZ_FLAG_DIE_ON_NO_REZZER: number
 declare REZ_FLAG_NO_COLLIDE_FAMILY: number
 declare REZ_FLAG_NO_COLLIDE_OWNER: number
 declare REZ_FLAG_PHANTOM: number
@@ -2623,6 +2720,7 @@ declare STATUS_BOUNDS_ERROR: number
 declare STATUS_CAST_SHADOWS: number
 declare STATUS_DIE_AT_EDGE: number
 declare STATUS_DIE_AT_NO_ENTRY: number
+declare STATUS_DIE_ON_NO_REZZER: number
 declare STATUS_INTERNAL_ERROR: number
 declare STATUS_MALFORMED_PARAMS: number
 declare STATUS_NOT_FOUND: number

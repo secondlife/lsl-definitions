@@ -112,6 +112,13 @@ base-classes:
     - name: other
       type: number | vector | quaternion
     return-type: vector
+  - name: __idiv
+    comment: 'Floor division: vector // number -> vector (Quantized scale)'
+    parameters:
+    - name: self
+    - name: other
+      type: number | vector
+    return-type: vector
   - name: __mod
     comment: 'LSL-style modulo: vector % vector -> vector (Cross Product)'
     parameters:
@@ -153,26 +160,38 @@ type-aliases:
   export: true
   definition: quaternion
   selene-type: {display: "quaternion"}
+- name: LSLTypes
+  comment: LSL list functions return these types.
+  export: true
+  definition: "string | number | vector | uuid | quaternion"
+  selene-type: "any"
+- name: LSLReadableTypes
+  comment: LSL list functions can read these types as input.
+  export: true
+  definition: "LSLTypes | boolean"
+  selene-type: "any"
 - name: list
   export: true
-  definition: "{string | number | vector | uuid | quaternion | boolean}"
+  definition: "{LSLReadableTypes}"
   selene-type: "table"
-- name: LLDetectedEventName
+  typechecker: {"new-type": "{read LSLReadableTypes}"}
+- name: LLMultiEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
   selene-type: []
-- name: LLNonDetectedEventName
+- name: LLSingleEventName
   # auto-generated from lsl_definitions.yaml
   definition: "{}"
   selene-type: []
 - name: LLEventName
-  definition: LLDetectedEventName | LLNonDetectedEventName
+  export: true
+  definition: LLMultiEventName | LLSingleEventName
   selene-type: []
 - name: LLEventHandler
   definition: (...any) -> ()
   selene-type: "function"
-- name: LLDetectedEventHandler
-  definition: "(detected: {DetectedEvent}) -> ()"
+- name: LLMultiEventHandler
+  definition: "(events: {DetectedEvent}) -> ()"
   selene-type: "function"
 - name: LLTimerEveryCallback
   comment: Callback type for LLTimers.every() - receives scheduled time and interval
@@ -249,20 +268,85 @@ type-aliases:
   export: true
   definition: "LLJsonDecodeOptionsWithoutPath | LLJsonDecodeOptionsWithPath"
   selene-type: any
-- name: ParticleParams
-  comment: Particle system parameter table. Pass to llprim.setParticleSystem() to emit particles.
+- name: AttachedListFilterParams
+  comment: Attached list filer table. Pass to ll.GetAttachedListFiltered to get attachments.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("particle-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
-- name: MediaParams
-  comment: Prim face media parameter table. Pass to llprim.setMedia() to configure media on a face.
+- name: CameraParams
+  comment: Camera parameter table. Pass to ll.SetCameraParams() to configure the camera.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("prim-media-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterParams
+  comment: Pathfinding character parameter table. Pass to ll.CreateCharacter() to configure a character.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterNavigateParams
+  comment: Pathfinding character navigate parameter table. Pass to ll.NavigateTo() to navigate.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterPatrolPointsParams
+  comment: Pathfinding character patrol points parameter table. Pass to ll.PatrolPoints() to configure the route.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterPursueParams
+  comment: Pathfinding character pursue parameter table. Pass to ll.Pursue() to configure the pursuit.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: CharacterWanderWithinParams
+  comment: Pathfinding character wander within parameter table. Pass to ll.WanderWithin() to configure the route.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GetClosestNavPointParams
+  comment: Get closest nav point parameter table. Pass to ll.GetClosestNavPoint to find the navmesh.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GetStaticPathParams
+  comment: Get static path parameter table. Pass to ll.GetStaticPath() to find a path.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GiveAgentInventoryParams
+  comment: Give inventory parameter table. Pass to ll.GiveAgentInventory().
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: GltfOverrides
+  comment: GLTF overrides parameter table. Pass to ll.SetLinkGLTFOverrides() to configure material.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 - name: HttpRequestParams
   comment: HTTP request parameter table. Pass to ll.HTTPRequest() to configure an HTTP request.
   export: true
-  definition: '{[string]: any}'  # rebuilt at generation time from expand_table_ruleset("http-params")
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: KeyframedMotionParams
+  comment: Keyframed motion parameter table. Pass to ll.SetKeyframedMotion() to animate.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: ParcelSaleParams
+  comment: Parcel sale parameter table. Pass to ll.SetParcelForSale() to configure the sale of a parcel.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: ParticleParams
+  comment: Particle system parameter table. Pass to ll.LinkParticleSystem() to emit particles.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
+  selene-type: table
+- name: PrimMediaParams
+  comment: Prim face media parameter table. Pass to ll.SetLinkMediaParams() to configure media on a face.
+  export: true
+  definition: '{[string]: any}'  # auto-generated from lsl_definitions.yaml
   selene-type: table
 classes:
 - name: LLEvents
@@ -355,21 +439,21 @@ classes:
       comment: "Function reference to remove."
       type: LLTimerCallback
     return-type: boolean
-- name: PrimParamsSetterType
+- name: PrimParamSetterType
   comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
   instance-type: '{any}'
   export: true
   functions:
   - name: new
-    comment: Create an empty list with PrimParamsSetterTypeMeta as metatable
+    comment: Create an empty list with PrimParamSetterTypeMeta as metatable
     parameters: []
-    return-type: PrimParamsSetterType
+    return-type: PrimParamSetterType
   methods: # This class is currently populated dynamically
   - name: apply
     comment: Call ll.SetLinkPrimitiveParamsFast with my instance list
     parameters:
     - name: self
-      type: PrimParamsSetterType
+      type: PrimParamSetterType
     - name: link
       type: number?
       comment: Link number to target, or LINK_THIS if not specified
@@ -453,7 +537,7 @@ functions:
     type: T
     selene-type: table
   return-type: getmetatable<T>
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauSolverV2
+  typechecker: {builtin: true, "new-type": "getmetatable<T>"}  # builtin due to FFlag::LuauSolverV2
   fastcall: true
 - name: graphheap
   comment: Writes the contents of heap to the given file in JSON format.
@@ -476,6 +560,7 @@ functions:
   - name: tab
     comment: Table to iterate over.
     type: "{V}"
+    typechecker: {"new-type": "{read V}"}
   return-type: "(({V}, number) -> (number?, V), {V}, number)"
 - name: loadstring
   comment: Compile Luau code into a function.
@@ -503,12 +588,12 @@ functions:
   - name: t
     comment: Table to traverse.
     type: "{[K]: V}"
+    typechecker: {"new-type": "{read [K]: V}"}
   - name: i
     comment: Key to start traversal after. Omit or pass nil to fetch the first key-value pair.
     type: K?
     default-value: nil
   return-type: (K?, V)
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pairs
   comment: Returns an iterator for all key-value pairs in the table.
   type-parameters: [K, V]
@@ -516,8 +601,8 @@ functions:
   - name: t
     comment: Table to iterate over.
     type: "{[K]: V}"
+    typechecker: {"new-type": "{read [K]: V}"}
   return-type: "(({[K]: V}, K?) -> (K?, V), {[K]: V}, K)"
-  typechecker: {builtin: true}  # builtin due to FFlag::LuauStorePolarityInline
 - name: pcall
   comment: Executes function f in protected mode, calling it with the provided arguments. Returns a boolean indicating success. If true, it also returns the function's results. If false, it returns the error message.
   type-parameters: [A..., R...]
@@ -559,10 +644,12 @@ functions:
   - name: t
     comment: Table to perform the lookup on.
     type: "{[K]: V}"
+    typechecker: {"new-type": "T"}
   - name: k
     comment: Key to look up in the table.
     type: K
   return-type: V?
+  typechecker: {"new-type": "rawget<T, K>", "new-type-parameters": [T, K]}
   fastcall: true
 - name: rawlen
   comment: Returns the length of a table or string, bypassing the __len metamethod..
@@ -571,6 +658,7 @@ functions:
   - name: t
     comment: Table or string to compute the length of.
     type: "{[K]: V} | string"
+    typechecker: {"new-type": "{read [K]: V} | string"}
   return-type: number
   fastcall: true
 - name: rawset
@@ -634,7 +722,7 @@ functions:
     selene-type: table
   return-type: setmetatable<T, MT>
   fastcall: true
-  typechecker: {builtin: true, magic: true}  # builtin due to FFlag::LuauSolverV2
+  typechecker: {builtin: true, magic: true, "new-type": "setmetatable<T, MT>"}  # builtin due to FFlag::LuauSolverV2
 - name: tonumber
   comment: Converts the input string to a number in the specified base. Returns nil if invalid.
   parameters:
@@ -723,6 +811,7 @@ functions:
   - name: tab
     comment: Array from which to extract values.
     type: "{V}"
+    typechecker: {"new-type": "{read V}"}
   - name: i
     comment: Starting index.
     type: number?
@@ -1056,19 +1145,6 @@ modules:
     must-use: true
     fastcall: true
     typechecker: {checked: true}
-  - name: readinteger
-    comment: Reads a signed or unsigned 64-bit integer from the buffer at the given offset.
-    parameters:
-    - name: b
-      comment: Buffer to read from.
-      type: buffer
-    - name: offset
-      comment: Byte offset to read from.
-      type: number
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
   - name: readu32
     comment: Reads an unsigned 32-bit integer from the buffer at the given offset.
     parameters:
@@ -1185,22 +1261,6 @@ modules:
     - name: value
       comment: Value to write.
       type: number
-    return-type: ()
-    fastcall: true
-    typechecker: {checked: true}
-  - name: writeinteger
-    comment: Writes a signed or unsigned 64-bit integer to the buffer at the given offset.
-    parameters:
-    - name: b
-      comment: Buffer to write to.
-      type: buffer
-      observes: write
-    - name: offset
-      comment: Byte offset to write at.
-      type: number
-    - name: value
-      comment: Value to write.
-      type: integer
     return-type: ()
     fastcall: true
     typechecker: {checked: true}
@@ -1499,517 +1559,6 @@ modules:
       default-value: 1
     return-type: string
     must-use: true
-- name: integer
-  comment: 64-bit integer operations library.
-  functions:
-  - name: add
-    comment: Returns the sum of two 64-bit integers (signed or unsigned), wrapping on overflow.
-    parameters:
-    - name: int1
-      comment: Left integer addend.
-      type: integer
-    - name: int2
-      comment: Right integer addend.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: arshift
-    comment: |-
-      Returns val shifted by i bits to the right. If i is negative, a left shift is performed.
-      Does an arithmetic shift: The most significant bit of n is propagated during the shift.
-    parameters:
-    - name: val
-      comment: Integer to shift.
-      type: integer
-    - name: i
-      comment: Number of bits to shift.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: band
-    comment: Returns the bitwise AND of the given integers.
-    parameters:
-    - name: ...
-      comment: Integers to perform bitwise AND on.
-      type: ...integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: bnot
-    comment: Returns the bitwise negation of val.
-    parameters:
-    - name: val
-      comment: Integer to negate.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: bor
-    comment: Returns the bitwise OR of the given integers.
-    parameters:
-    - name: ...
-      comment: Integers to perform bitwise OR on.
-      type: ...integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: bxor
-    comment: Returns the bitwise XOR of the given integers.
-    parameters:
-    - name: ...
-      comment: Integers to perform bitwise XOR on.
-      type: ...integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: bswap
-    comment: Returns val with its bytes swapped to the reverse order.
-    parameters:
-    - name: val
-      comment: Integer whose byte order will be swapped.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: btest
-    comment: Returns true if the bitwise AND of the given integers is non-zero.
-    parameters:
-    - name: ...
-      comment: Integers to perform bitwise AND on.
-      type: ...integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: clamp
-    comment: Returns val clamped between min and max. Raises an error if min is greater than max.
-    parameters:
-    - name: val
-      comment: Integer to clamp.
-      type: integer
-    - name: min
-      comment: Minimum allowable integer.
-      type: integer
-    - name: max
-      comment: Maximum allowable integer.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: countlz
-    comment: Returns the count of val's leading zeros.
-    parameters:
-    - name: val
-      comment: Integer to count leading zeros in.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: countrz
-    comment: Returns the count of val's trailing zeros.
-    parameters:
-    - name: val
-      comment: Integer to count trailing zeros in.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: create
-    comment: Returns number val converted to an integer. Returns nil if
-      it has a fractional part, is out of range, or is NaN.
-    parameters:
-    - name: val
-      comment: Number to convert to an integer.
-      type: number
-    return-type: integer?
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: div
-    comment: Returns dividend / divisor (signed), rounding toward zero. Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: extract
-    comment: Returns width bits from src, starting from bit index field.
-      Raises an error if the selected bit range is goes outside the range [0, 63].
-    parameters:
-    - name: src
-      comment: Integer to extract from.
-      type: integer
-    - name: field
-      comment: Starting bit index, zero-based
-      type: integer
-    - name: width
-      comment: Number of bits to extract, or 1 if omitted.
-      type: integer?
-      default-value: 1
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: fromstring
-    comment: Converts the input string to an integer in the specified base. Returns nil if not an integer.
-    parameters:
-    - name: value
-      comment: String to convert to an integer.
-      type: string
-    - name: base
-      comment: Base for the conversion.
-      type: number?
-      default-value: 10
-    return-type: integer?
-    must-use: true
-  - name: ge
-    comment: Returns true if int1 >= int2 (signed).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: gt
-    comment: Returns true if int1 > int2 (signed).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: idiv
-    comment: Returns dividend / divisor (signed), rounding toward negative infinity. Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: le
-    comment: Returns true if int1 <= int2 (signed).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: lt
-    comment: Returns true if int1 < int2 (signed).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: lrotate
-    comment: Returns val rotated by i bits to the left. If i is negative, a right rotate is performed.
-    parameters:
-    - name: val
-      comment: Integer to rotate.
-      type: integer
-    - name: i
-      comment: Number of bits to rotate.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: lshift
-    comment: Returns val shifted by i bits to the left. If i is negative, a right shift is performed. Returns 0 if i is outside the [-63, 63] range.
-    parameters:
-    - name: val
-      comment: Integer to shift.
-      type: integer
-    - name: i
-      comment: Number of bits to shift.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: max
-    comment: Returns the maximum value from the given integers (signed).
-    parameters:
-    - name: val
-      comment: Integer to find the maximum from.
-      type: integer
-    - name: ...
-      comment: Integers to find the maximum from.
-      type: ...integer
-      optional: false
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: min
-    comment: Returns the minimum value from the given integers (signed).
-    parameters:
-    - name: val
-      comment: Integer to find the minimum from.
-      type: integer
-    - name: ...
-      comment: Integers to find the minimum from.
-      type: ...integer
-      optional: false
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: mod
-    comment: Returns the remainder of dividend / divisor (signed).
-      The result always has the same sign as the divisor.
-      Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: mul
-    comment: Returns the product of two 64-bit integers (signed or unsigned), wrapping on overflow.
-    parameters:
-    - name: int1
-      comment: Left integer factor.
-      type: integer
-    - name: int2
-      comment: Right integer factor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: neg
-    comment: Returns the negation of val.
-      integer.neg(integer.minsigned) == integer.minsigned due to overflow.
-    parameters:
-    - name: val
-      comment: Integer to negate.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: rem
-    comment: Returns the remainder of dividend / divisor (signed).
-      The result always has the same sign as the dividend.
-      Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: replace
-    comment: Returns dst with width bits replaced from src, starting from bit index field.
-      Raises an error if the selected bit range goes outside the range [0, 63].
-    parameters:
-    - name: dst
-      comment: Integer to replace bits in.
-      type: integer
-    - name: src
-      comment: Integer containing the replacement bits.
-      type: integer
-    - name: field
-      comment: Starting bit index, zero-based
-      type: integer
-    - name: width
-      comment: Number of bits to replace, or 1 if omitted.
-      type: integer?
-      default-value: 1
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: rrotate
-    comment: Returns val rotated by i bits to the right. If i is negative, a left rotate is performed.
-    parameters:
-    - name: val
-      comment: Integer to rotate.
-      type: integer
-    - name: i
-      comment: Number of bits to rotate.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: rshift
-    comment: Returns val shifted by i bits to the right. If i is negative, a left shift is performed. Returns 0 if i is outside the [-63, 63] range.
-    parameters:
-    - name: val
-      comment: Integer to shift.
-      type: integer
-    - name: i
-      comment: Number of bits to shift.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: sub
-    comment: Returns the difference between two 64-bit integers (signed or unsigned), wrapping on overflow.
-    parameters:
-    - name: int1
-      comment: Integer to subtract from.
-      type: integer
-    - name: int2
-      comment: Integer to subtract.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: tonumber
-    comment: Returns the nearest float64 to the given int64. Is inexact above 2^53.
-    parameters:
-    - name: val
-      comment: Integer to convert to a number.
-      type: integer
-    return-type: number
-    fastcall: true
-    must-use: true
-  - name: udiv
-    comment: Returns dividend / divisor (unsigned), rounding toward negative infinity. Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: uge
-    comment: Returns true if int1 >= int2 (unsigned).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: ugt
-    comment: Returns true if int1 > int2 (unsigned).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: ule
-    comment: Returns true if int1 <= int2 (unsigned).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: ult
-    comment: Returns true if int1 < int2 (unsigned).
-    parameters:
-    - name: int1
-      comment: Left integer to compare.
-      type: integer
-    - name: int2
-      comment: Right integer to compare.
-      type: integer
-    return-type: boolean
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  - name: urem
-    comment: Returns the remainder of dividend / divisor (unsigned).
-      Raises an error if divisor is zero.
-    parameters:
-    - name: dividend
-      comment: Integer dividend.
-      type: integer
-    - name: divisor
-      comment: Integer divisor.
-      type: integer
-    return-type: integer
-    must-use: true
-    fastcall: true
-    typechecker: {checked: true}
-  constants:
-  - name: maxsigned
-    comment: The most positive signed int64 (2^63-1).
-    type: integer
-    value: 9_223_372_036_854_775_807i
-  - name: minsigned
-    comment: The most negative signed int64 (-2^63).
-    type: integer
-    value: -9_223_372_036_854_775_808i
 - name: llbase64
   comment: Base64 encoding/decoding library.
   functions:
@@ -2129,29 +1678,11 @@ modules:
 - name: llprim
   comment: Utilities for working with prims / objects
   constants:
-  - name: ParamsSetter
+  - name: ParamSetter
     comment: Metatable for building lists to pass to ll.SetLinkPrimitiveParamsFast
-    type: PrimParamsSetterTypeMeta
-    value: PrimParamsSetterTypeMeta
-  functions:
-  - name: setParticleSystem
-    comment: Emit a particle system from a ParticleParams table. Omit link to apply to the current prim.
-    parameters:
-    - name: params
-      type: ParticleParams?
-    - name: link
-      type: number?
-    return-type: '()'
-  - name: setMedia
-    comment: Configure media on a specific face. Omit link to apply to the current prim.
-    parameters:
-    - name: face
-      type: number
-    - name: params
-      type: MediaParams?
-    - name: link
-      type: number?
-    return-type: number
+    type: PrimParamSetterTypeMeta
+    value: PrimParamSetterTypeMeta
+  functions: []
 - name: math
   comment: Mathematical functions library.
   functions:
@@ -3044,7 +2575,8 @@ modules:
     fastcall: true
     typechecker: {builtin: true, checked: true}
   - name: unpack
-    comment: Decodes a binary string using a pack format, starting from index start.
+    comment: Decodes a binary string using a pack format, starting from index start and returns a tuple of the
+      decoded values, followed by a number representing the index of the first unread byte.
       Negative indices count backward from the end of the string.
     parameters:
     - name: format_string
@@ -3079,6 +2611,7 @@ modules:
     - name: a
       comment: Array of strings.
       type: '{string | number}'
+      typechecker: {"new-type": "{read string | number}"}
     - name: sep
       comment: Separator string.
       type: string?
@@ -3102,6 +2635,7 @@ modules:
     - name: t
       comment: Table to iterate over.
       type: '{[K]: V}'
+      typechecker: {"new-type": "{read [K]: V}"}
     - name: f
       comment: Function applied to each key-value pair.
       type: '(key: K, value: V) -> R?'
@@ -3116,6 +2650,7 @@ modules:
     - name: a
       comment: Array to iterate over.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: f
       comment: Function applied to each index-value pair.
       type: '(index: number, value: V) -> R?'
@@ -3236,6 +2771,7 @@ modules:
     - name: a
       comment: Array to unpack.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: i
       comment: Starting index.
       type: number?
@@ -3278,9 +2814,18 @@ modules:
       type: number
     - name: v
       comment: Value to prefill elements with.
-      type: V?
+      type: V
+      optional: true
       default-value: nil
     return-type: '{V}'
+    fastcall: true
+    overloads:
+    - comment: Creates a new unfilled table with pre-allocated array capacity.
+      parameters:
+      - name: "n"
+        comment: Number of elements to allocate.
+        type: number
+      return-type: '{any}'
     must-use: true
   - name: find
     comment: Finds the first occurrence of a value in the array and returns its index. Traversal stops at the first nil.
@@ -3289,6 +2834,7 @@ modules:
     - name: t
       comment: Table to search in.
       type: '{V}'
+      typechecker: {"new-type": "{read V}"}
     - name: v
       comment: Value to search for.
       type: V
@@ -3306,6 +2852,7 @@ modules:
       type: '{}'
       observes: write
     return-type: ()
+    fastcall: true
   - name: shrink
     comment: Reduces the memory usage of the table to the minimum necessary.
     type-parameters: [V]
@@ -3735,8 +3282,6 @@ builtin-types:
     tooltip: "Boolean: represents a true or false value."
   buffer:
     tooltip: Read-write binary data.
-  integer:
-    tooltip: 64-bit integer.
   never:
     tooltip: The empty type that contains no values.
   number:
