@@ -357,6 +357,7 @@
   "SitFlag": [
     "llSetLinkSitFlags"
   ],
+  "SkyTonemapper": [],
   "StringTrimType": [
     "llStringTrim"
   ],
